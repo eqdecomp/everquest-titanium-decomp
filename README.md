@@ -1,15 +1,17 @@
-# everquest-titanium-decomp
+# Everquest Titanium Decomp
 
+> [!CAUTION]
 > **Legal warning:** This is an unofficial, unaffiliated reverse-engineering project. It contains no game
 > files, and you need your own legally obtained copy of the client to use it. EverQuest is a trademark of its
 > owners. For research and preservation only: do not use it with official servers or to break any agreement
 > you are bound by.
 
-> **AI notice:** Most of the code and documentation was written with AI tools. Every function is checked
+> [!NOTE]
+> **AI notice:** Most of the code and documentation was written with AI tools (Claude, Codex, Deepseek). Every function is checked
 > against the original by the tests and compare tools, not taken on trust, but names, comments and notes can
 > still be wrong.
 
-A decompilation of the EverQuest Titanium client (2005). The goal is readable C++ that behaves exactly like
+A decompilation of the **EverQuest Titanium client** (2005). The goal is readable C++ that behaves exactly like
 the original and, with Visual C++ .NET 2003 (7.1), compiles to the same machine code. The client is three
 binaries: `eqgame.exe` (the game), `eqmain.dll` (login and server select) and `EQGraphicsDX9.dll` (the
 renderer). This repository covers `eqgame.exe`; the two DLLs are not started yet.
@@ -18,7 +20,7 @@ renderer). This repository covers `eqgame.exe`; the two DLLs are not started yet
 
 | Binary | Functions in scope | Decompiled | Tested by fixtures | Byte-identical |
 |---|---:|---:|---:|---:|
-| `eqgame.exe` | 5,522 | 5,520 (99.9%) | 999 (18.0%) | 4,551 (82.4%) |
+| `eqgame.exe` | 5,522 | 5,520 (99.9%) | 999 (18.0%) | 4,551 **(82.4%)** |
 | `eqmain.dll` | 982 | 0 | 0 | 0 |
 | `EQGraphicsDX9.dll` | 3,015 | 0 | 0 | 0 |
 
