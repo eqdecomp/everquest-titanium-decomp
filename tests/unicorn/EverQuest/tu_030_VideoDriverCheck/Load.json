@@ -1,0 +1,122 @@
+{
+  "function": "?GetWindowsVersion_guess@VideoDriverCheck_guess@@QAEHXZ",
+  "rewrite": "?GetWindowsVersion_guess@VideoDriverCheck_guess@@QAEHXZ",
+  "original": "0x00445b00",
+  "sources": [
+    "src/EverQuest/tu_030_VideoDriverCheck.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@version",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "version": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"}
+  ],
+  "callees": {
+    "kernel32.dll!GetVersionExA": {
+      "name": "GetVersionExA",
+      "conv": "stdcall",
+      "args": ["ignore"],
+      "ret": 1,
+      "writes": [{"arg": 0, "offset": 4, "hex": "05000000000000009308000002000000"}]
+    }
+  },
+  "cases": [
+    {
+      "name": "win2k-5.0",
+      "args": []
+    },
+    {
+      "name": "xp-5.1",
+      "args": [],
+      "callees": {"kernel32.dll!GetVersionExA": {"name": "GetVersionExA", "conv": "stdcall", "args": ["ignore"], "ret": 1,
+        "writes": [{"arg": 0, "offset": 4, "hex": "05000000010000009308000002000000"}]}}
+    },
+    {
+      "name": "2003-5.2",
+      "args": [],
+      "callees": {"kernel32.dll!GetVersionExA": {"name": "GetVersionExA", "conv": "stdcall", "args": ["ignore"], "ret": 1,
+        "writes": [{"arg": 0, "offset": 4, "hex": "05000000020000009308000002000000"}]}}
+    },
+    {
+      "name": "nt-major4",
+      "args": [],
+      "callees": {"kernel32.dll!GetVersionExA": {"name": "GetVersionExA", "conv": "stdcall", "args": ["ignore"], "ret": 1,
+        "writes": [{"arg": 0, "offset": 4, "hex": "04000000000000009308000002000000"}]}}
+    },
+    {
+      "name": "nt-minor3",
+      "args": [],
+      "callees": {"kernel32.dll!GetVersionExA": {"name": "GetVersionExA", "conv": "stdcall", "args": ["ignore"], "ret": 1,
+        "writes": [{"arg": 0, "offset": 4, "hex": "05000000030000009308000002000000"}]}}
+    },
+    {
+      "name": "win98-4.90",
+      "args": [],
+      "callees": {"kernel32.dll!GetVersionExA": {"name": "GetVersionExA", "conv": "stdcall", "args": ["ignore"], "ret": 1,
+        "writes": [{"arg": 0, "offset": 4, "hex": "040000005a0000000000000001000000"}]}}
+    },
+    {
+      "name": "win9x-4.0",
+      "args": [],
+      "callees": {"kernel32.dll!GetVersionExA": {"name": "GetVersionExA", "conv": "stdcall", "args": ["ignore"], "ret": 1,
+        "writes": [{"arg": 0, "offset": 4, "hex": "04000000000000000000000001000000"}]}}
+    },
+    {
+      "name": "win9x-4.10",
+      "args": [],
+      "callees": {"kernel32.dll!GetVersionExA": {"name": "GetVersionExA", "conv": "stdcall", "args": ["ignore"], "ret": 1,
+        "writes": [{"arg": 0, "offset": 4, "hex": "040000000a0000000000000001000000"}]}}
+    },
+    {
+      "name": "win9x-4.5",
+      "args": [],
+      "callees": {"kernel32.dll!GetVersionExA": {"name": "GetVersionExA", "conv": "stdcall", "args": ["ignore"], "ret": 1,
+        "writes": [{"arg": 0, "offset": 4, "hex": "04000000050000000000000001000000"}]}}
+    },
+    {
+      "name": "win9x-3.90",
+      "args": [],
+      "callees": {"kernel32.dll!GetVersionExA": {"name": "GetVersionExA", "conv": "stdcall", "args": ["ignore"], "ret": 1,
+        "writes": [{"arg": 0, "offset": 4, "hex": "030000005a0000000000000001000000"}]}}
+    },
+    {
+      "name": "win32s-3.1",
+      "args": [],
+      "callees": {"kernel32.dll!GetVersionExA": {"name": "GetVersionExA", "conv": "stdcall", "args": ["ignore"], "ret": 1,
+        "writes": [{"arg": 0, "offset": 4, "hex": "03000000010000000000000000000000"}]}}
+    },
+    {
+      "name": "unknown-platform",
+      "args": [],
+      "callees": {"kernel32.dll!GetVersionExA": {"name": "GetVersionExA", "conv": "stdcall", "args": ["ignore"], "ret": 1,
+        "writes": [{"arg": 0, "offset": 4, "hex": "05000000000000000000000003000000"}]}}
+    },
+    {
+      "name": "first-call-fails-second-ok",
+      "args": [],
+      "callees": {"kernel32.dll!GetVersionExA": {"name": "GetVersionExA", "conv": "stdcall", "args": ["ignore"], "ret": [0, 1],
+        "writes": [{"call": 1, "arg": 0, "offset": 4, "hex": "05000000000000009308000002000000"}]}}
+    },
+    {
+      "name": "both-calls-fail",
+      "args": [],
+      "callees": {"kernel32.dll!GetVersionExA": {"name": "GetVersionExA", "conv": "stdcall", "args": ["ignore"], "ret": [0, 0]}}
+    }
+  ],
+  "fuzz": {
+    "seed": 4479744,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "0x0079ac74", "type": "u32", "range": [0, 4294967295]}
+    ]
+  },
+  "_survivors": "L198: the GetVersionExA stub never reads dwOSVersionInfoSize, so deleting the size store is unobservable; L201: same for the 0x94 retry size; L208: result_guess is already 0 on the Win32s path (set at L195), so deleting that store is equivalent"
+}

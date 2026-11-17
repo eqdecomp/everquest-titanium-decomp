@@ -1,0 +1,170 @@
+{
+  "function": "FindItemsById_guess",
+  "original": "0x004b85ae",
+  "sources": [
+    "src/EverQuest/tu_077_ItemMoveQueue.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "ctx_guess", "type": "ptr"},
+    {"name": "param_2_guess", "type": "int"},
+    {"name": "count_guess", "type": "int"},
+    {"name": "flags_guess", "type": "u32"},
+    {"name": "p5_guess", "type": "int"},
+    {"name": "p6_guess", "type": "ptr"}
+  ],
+  "ret": "bool",
+  "objects": {
+    "ctx": {"size": "0x80", "fill": "zero"},
+    "link": {"size": "0x8", "fill": "zero"},
+    "p6": {"size": "0x4", "fill": "zero"},
+    "gate": {"size": "0x40", "fill": "zero"},
+    "child": {"size": "0x40", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@ctx", "offset": "0x8", "u32": "@link"},
+    {"addr": "@link", "offset": "0x4", "u32": "0x20"},
+    {"addr": "@p6", "u32": 7}
+  ],
+  "callees": {
+    "0x0040cc50": {"name": "Holder_guess::Get_guess", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x005e0f30": {"name": "Gate_guess::GetItemId_guess", "conv": "thiscall", "args": [], "ret": [1, 99]},
+    "0x004b8091": {"name": "CollectItemCount_guess", "conv": "cdecl", "args": ["ptr", "int", "u32", "ignore", "int", "ptr"], "ret": [0]},
+    "0x005dfc40": {"name": "Gate_guess::IsReady_guess", "conv": "thiscall", "args": [], "ret": [1]},
+    "0x005ecc30": {"name": "Gate_guess::GetLimit_guess", "conv": "thiscall", "args": [], "ret": [1]},
+    "0x005ec630": {"name": "Gate_guess::GetChild_guess", "conv": "thiscall", "args": ["u32"], "ret": "@child"}
+  },
+  "cases": [
+    {
+      "name": "zero count, ordinary range",
+      "args": ["@ctx", 1, 0, 0, 5, "@p6"],
+      "expect": {"ret": true}
+    },
+    {
+      "name": "negative count with range flag",
+      "args": ["@ctx", 1, -1, 256, 5, "@p6"],
+      "expect": {"ret": true}
+    },
+    {
+      "name": "all roots null",
+      "args": ["@ctx", 1, 1, 0, 5, "@p6"],
+      "callees": {
+        "0x0040cc50": {"name": "Holder_guess::Get_guess", "conv": "thiscall", "args": ["u32"], "ret": 0}
+      },
+      "expect": {"ret": false}
+    },
+    {
+      "name": "direct match at first slot consumes count",
+      "args": ["@ctx", 1, 1, 0, 5, "@p6"],
+      "callees": {
+        "0x0040cc50": {"name": "Holder_guess::Get_guess", "conv": "thiscall", "args": ["u32"], "ret": "@gate"},
+        "0x005e0f30": {"name": "Gate_guess::GetItemId_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x004b8091": {"name": "FUN_004b8091_guess", "conv": "cdecl", "args": ["ptr", "int", "u32", "ignore", "int", "ptr"], "ret": 0}
+      },
+      "expect": {"ret": true}
+    },
+    {
+      "name": "direct match at last ordinary slot retains count",
+      "args": ["@ctx", 1, 1, 0, 5, "@p6"],
+      "callees": {
+        "0x0040cc50": {"name": "Holder_guess::Get_guess", "conv": "thiscall", "args": ["u32"], "ret": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "@gate"]},
+        "0x005e0f30": {"name": "Gate_guess::GetItemId_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x004b8091": {"name": "FUN_004b8091_guess", "conv": "cdecl", "args": ["ptr", "int", "u32", "ignore", "int", "ptr"], "ret": 1}
+      },
+      "expect": {"ret": false}
+    },
+    {
+      "name": "direct match at last flagged slot",
+      "args": ["@ctx", 1, 1, 256, 5, "@p6"],
+      "callees": {
+        "0x0040cc50": {"name": "Holder_guess::Get_guess", "conv": "thiscall", "args": ["u32"], "ret": [0, 0, 0, 0, 0, 0, 0, "@gate"]},
+        "0x005e0f30": {"name": "Gate_guess::GetItemId_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x004b8091": {"name": "FUN_004b8091_guess", "conv": "cdecl", "args": ["ptr", "int", "u32", "ignore", "int", "ptr"], "ret": 0}
+      },
+      "expect": {"ret": true}
+    },
+    {
+      "name": "root id mismatch and not ready",
+      "args": ["@ctx", 1, 1, 0, 5, "@p6"],
+      "callees": {
+        "0x0040cc50": {"name": "Holder_guess::Get_guess", "conv": "thiscall", "args": ["u32"], "ret": "@gate"},
+        "0x005e0f30": {"name": "Gate_guess::GetItemId_guess", "conv": "thiscall", "args": [], "ret": 99},
+        "0x005dfc40": {"name": "Gate_guess::IsReady_guess", "conv": "thiscall", "args": [], "ret": 0}
+      },
+      "expect": {"ret": false}
+    },
+    {
+      "name": "ready root with zero limit",
+      "args": ["@ctx", 1, 1, 0, 5, "@p6"],
+      "callees": {
+        "0x0040cc50": {"name": "Holder_guess::Get_guess", "conv": "thiscall", "args": ["u32"], "ret": "@gate"},
+        "0x005e0f30": {"name": "Gate_guess::GetItemId_guess", "conv": "thiscall", "args": [], "ret": 99},
+        "0x005dfc40": {"name": "Gate_guess::IsReady_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ecc30": {"name": "Gate_guess::GetLimit_guess", "conv": "thiscall", "args": [], "ret": 0}
+      },
+      "expect": {"ret": false}
+    },
+    {
+      "name": "ready root with negative limit",
+      "args": ["@ctx", 1, 1, 0, 5, "@p6"],
+      "callees": {
+        "0x0040cc50": {"name": "Holder_guess::Get_guess", "conv": "thiscall", "args": ["u32"], "ret": "@gate"},
+        "0x005e0f30": {"name": "Gate_guess::GetItemId_guess", "conv": "thiscall", "args": [], "ret": 99},
+        "0x005dfc40": {"name": "Gate_guess::IsReady_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ecc30": {"name": "Gate_guess::GetLimit_guess", "conv": "thiscall", "args": [], "ret": -1}
+      },
+      "expect": {"ret": false}
+    },
+    {
+      "name": "child lookup null",
+      "args": ["@ctx", 1, 1, 0, 5, "@p6"],
+      "callees": {
+        "0x0040cc50": {"name": "Holder_guess::Get_guess", "conv": "thiscall", "args": ["u32"], "ret": ["@gate", 0]},
+        "0x005e0f30": {"name": "Gate_guess::GetItemId_guess", "conv": "thiscall", "args": [], "ret": 99},
+        "0x005dfc40": {"name": "Gate_guess::IsReady_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ecc30": {"name": "Gate_guess::GetLimit_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ec630": {"name": "Gate_guess::GetChild_guess", "conv": "thiscall", "args": ["u32"], "ret": 0}
+      },
+      "expect": {"ret": false}
+    },
+    {
+      "name": "child mismatch and null second child",
+      "args": ["@ctx", 1, 1, 0, 5, "@p6"],
+      "callees": {
+        "0x0040cc50": {"name": "Holder_guess::Get_guess", "conv": "thiscall", "args": ["u32"], "ret": ["@gate", 0]},
+        "0x005e0f30": {"name": "Gate_guess::GetItemId_guess", "conv": "thiscall", "args": [], "ret": 99},
+        "0x005dfc40": {"name": "Gate_guess::IsReady_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ecc30": {"name": "Gate_guess::GetLimit_guess", "conv": "thiscall", "args": [], "ret": 2},
+        "0x005ec630": {"name": "Gate_guess::GetChild_guess", "conv": "thiscall", "args": ["u32"], "ret": ["@child", 0]}
+      },
+      "expect": {"ret": false}
+    },
+    {
+      "name": "child match stops inner loop after count reaches zero",
+      "args": ["@ctx", 1, 1, 0, 5, "@p6"],
+      "callees": {
+        "0x0040cc50": {"name": "Holder_guess::Get_guess", "conv": "thiscall", "args": ["u32"], "ret": "@gate"},
+        "0x005e0f30": {"name": "Gate_guess::GetItemId_guess", "conv": "thiscall", "args": [], "ret": [99, 1]},
+        "0x005dfc40": {"name": "Gate_guess::IsReady_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ecc30": {"name": "Gate_guess::GetLimit_guess", "conv": "thiscall", "args": [], "ret": 2},
+        "0x005ec630": {"name": "Gate_guess::GetChild_guess", "conv": "thiscall", "args": ["u32"], "ret": "@child"},
+        "0x004b8091": {"name": "FUN_004b8091_guess", "conv": "cdecl", "args": ["ptr", "int", "u32", "ignore", "int", "ptr"], "ret": 0}
+      },
+      "expect": {"ret": true}
+    }
+  ],
+  "fuzz": {
+    "seed": 4949422,
+    "count": 100,
+    "args": [
+      {"choices": ["@ctx"]},
+      {"choices": [1, 2]},
+      {"range": [-2, 3]},
+      {"choices": [0, 1, 256, 257, 512]},
+      {"choices": [3, 5]},
+      {"choices": ["@p6"]}
+    ],
+    "memory": []
+  },
+  "_survivors": "L1095: 0x004B8091 is scripted and the caller's stack record is ignored, so this field cannot affect these cases; L1098: 0x004B8091 is scripted and the caller's stack record is ignored, so this field cannot affect these cases; L1099: 0x004B8091 is scripted and the caller's stack record is ignored, so the record copy cannot affect these cases; L1113: 0x004B8091 is scripted and the caller's stack record is ignored, so this field cannot affect these cases; L1117: 0x004B8091 is scripted and the caller's stack record is ignored, so the record copy cannot affect these cases; L1121: slot_guess was assigned from i_guess before the call, so restoring that unchanged value is equivalent"
+}

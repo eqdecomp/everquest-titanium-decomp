@@ -1,0 +1,149 @@
+{
+  "function": "SlideShowEventAudio_guess::SlideShowEventAudio_guess",
+  "original": "0x004c48fe",
+  "sources": ["src/EverQuest/tu_087_SoundManager.cpp"],
+  "size": "0xcd",
+  "conv": "thiscall",
+  "this": "@audionodeowner",
+  "args": [
+    {"name": "name_guess", "type": "cstr"},
+    {"name": "first_guess", "type": "int"},
+    {"name": "second_guess", "type": "int"},
+    {"name": "third_guess", "type": "int"},
+    {"name": "fourth_guess", "type": "int"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "audionodeowner": {
+      "size": "0x34",
+      "fill": "random"
+    },
+    "manager": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [{"offset": "0x4", "u32": "@service"}]
+    },
+    "service": {
+      "size": "0xa4",
+      "fill": "random",
+      "init": [
+        {"offset": "0x14", "u32": 0},
+        {"offset": "0x9c", "u32": 0},
+        {"offset": "0xa0", "u32": 0}
+      ]
+    },
+    "name_buffer": {"size": "0x100", "fill": "random"},
+    "sound_data": {"size": "0x220", "fill": "random"},
+    "sample_node": {"size": "0x30", "fill": "random"},
+    "fn_slot1": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00851390", "u32": "@manager"},
+    {"addr": "0x0064c0f8", "u32": "@fn_slot1"}
+  ],
+  "callees": {
+    "0x004c464e": {
+      "name": "CallbackChildBase_guess::CallbackChildBase_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "int", "int", "int"],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x0060e985": {
+      "name": "operator_new_array",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": "@name_buffer"
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": ["@sound_data", "@sample_node"]
+    },
+    "0x0060e450": {
+      "name": "CopyText_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr"],
+      "passthrough": true
+    },
+    "0x004c596f": {
+      "name": "SoundData_guess::SoundData_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "cstr", "ptr", "u32"],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x004c52f9": {
+      "name": "WaveInstance2D_guess::WaveInstance2D_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "this",
+      "passthrough": true
+    },
+    "kernel32.dll!GetTickCount": {
+      "conv": "stdcall",
+      "args": [],
+      "ret": 100
+    },
+    "kernel32.dll!HeapAlloc": {
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": 0
+    },
+    "kernel32.dll!GetLastError": {
+      "conv": "stdcall",
+      "args": [],
+      "ret": 2
+    },
+    "@fn_slot1": {
+      "name": "Sample2DObject_guess::Detach_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071",
+    "??_U@YAPAXI@Z": "0x0060e985"
+  },
+  "cases": [
+    {
+      "name": "both allocations succeed",
+      "args": ["missing_audio", 1, 2, 3, 4]
+    },
+    {
+      "name": "sound data allocation fails",
+      "args": ["missing_audio", 1, 2, 3, 4],
+      "callees": {
+        "0x0060d071": {"ret": [0, "@sample_node"]}
+      }
+    },
+    {
+      "name": "sample allocation fails",
+      "args": ["missing_audio", 1, 2, 3, 4],
+      "callees": {
+        "0x0060d071": {"ret": ["@sound_data", 0]}
+      }
+    },
+    {
+      "name": "both allocations fail",
+      "args": ["missing_audio", 1, 2, 3, 4],
+      "callees": {
+        "0x0060d071": {"ret": [0, 0]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4999422,
+    "count": 80,
+    "args": [
+      {"choices": ["", "a", "music", "missing_audio"]},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "memory": []
+  }
+}

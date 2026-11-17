@@ -1,0 +1,122 @@
+{
+  "function": "SpellBookWndView_guess::ConfirmDeleteSpell_guess",
+  "original": "0x00556b11",
+  "sources": [
+    "src/EverQuest/tu_215_SpellBookWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@callback_00556b11",
+  "args": [
+    {
+      "name": "type_guess",
+      "type": "int"
+    },
+    {
+      "name": "flags_guess",
+      "type": "u8"
+    },
+    {
+      "name": "data_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "callback_00556b11": {
+      "size": "0x294",
+      "fill": "random"
+    },
+    "data": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00556ad9": {
+      "name": "SendDeleteSpell_guess",
+      "conv": "stdcall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0060d0d5": {
+      "name": "operator delete",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    }
+  },
+  "_callee_note": "0x00556ad9 is the landed __stdcall helper; its implementation ignores ECX and reads only its stack int.",
+  "cases": [
+    {
+      "name": "type below",
+      "args": [99, 5, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": "0x12345678"}
+      ]
+    },
+    {
+      "name": "type match but no mask bits",
+      "args": [100, 0, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": "0x00000000"}
+      ]
+    },
+    {
+      "name": "unselected mask bit",
+      "args": [100, 2, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": "0x00000002"}
+      ]
+    },
+    {
+      "name": "first selected mask bit",
+      "args": [100, 1, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": "0x00000001"}
+      ]
+    },
+    {
+      "name": "second selected mask bit",
+      "args": [100, 4, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": "0x89abcdef"}
+      ]
+    },
+    {
+      "name": "both selected mask bits",
+      "args": [100, 5, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": "0xffffffff"}
+      ]
+    },
+    {
+      "name": "type above",
+      "args": [101, 5, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": "0x87654321"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5597969,
+    "count": 100,
+    "args": [
+      {"range": [98, 102]},
+      {"choices": [0, 1, 2, 4, 5, 7, 255]},
+      {"choices": ["@data"]}
+    ],
+    "memory": [
+      {
+        "addr": "@data",
+        "offset": "0x0",
+        "type": "u32",
+        "choices": [0, 1, "0xffffffff", "0x12345678", "0x87654321"]
+      }
+    ]
+  }
+}

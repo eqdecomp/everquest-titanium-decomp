@@ -1,0 +1,881 @@
+{
+  "function": "CharacterMagicSystem_guess::RemovePCAffectex_guess",
+  "original": "0x00411161",
+  "sources": [
+    "src/EverQuest/tu_012_CharacterMagicSystem.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@system",
+  "args": [
+    {
+      "name": "entry_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "send_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "system": {
+      "size": "0x138ac",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@offset_holder"
+        },
+        {
+          "offset": "0x8",
+          "u32": "@state"
+        }
+      ]
+    },
+    "offset_holder": {
+      "size": "0x8",
+      "fill": "zero"
+    },
+    "state": {
+      "size": "0x264",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@state_b"
+        }
+      ]
+    },
+    "state_b": {
+      "size": "0x160",
+      "fill": "zero"
+    },
+    "lookup": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "check": {
+      "size": "0x180",
+      "fill": "zero"
+    },
+    "result": {
+      "size": "0x1200",
+      "fill": "zero"
+    },
+    "manager": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "world": {
+      "size": "0x264",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@world_b"
+        }
+      ]
+    },
+    "world_b": {
+      "size": "0x160",
+      "fill": "zero"
+    },
+    "linked": {
+      "size": "0x264",
+      "fill": "zero"
+    },
+    "slot_value": {
+      "size": "0x44",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00985cc8",
+      "u32": "@lookup"
+    },
+    {
+      "addr": "0x0063fda4",
+      "from_image": "0x0063FDA4",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00905d04",
+      "u32": 0
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": "@world"
+    },
+    {
+      "addr": "0x00905cf8",
+      "u32": 0
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@manager"
+    },
+    {
+      "addr": "0x00850ccc",
+      "u32": 0
+    },
+    {
+      "addr": "0x009254fc",
+      "u32": "@slot_value"
+    }
+  ],
+  "callees": {
+    "0x0044d0d0": {
+      "name": "FUN_0044d0d0",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x0040cbd6": {
+      "name": "GetSpell_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@check"
+    },
+    "0x0040d933": {
+      "name": "GetMaxBuffs_guess",
+      "conv": "fastcall",
+      "args": [],
+      "ret": 28
+    },
+    "0x0040e7ac": {
+      "name": "GetEntry_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@system+0x9c64"
+    },
+    "0x0040e6ce": {
+      "name": "GetBuffCasterId_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0044e77b": {
+      "name": "FindAffectSlot_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005ec220": {
+      "name": "Resolve_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@result"
+    },
+    "0x0047a7f3": {
+      "name": "CanFitIllusionRace_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "u8",
+        "float"
+      ],
+      "ret": 1
+    },
+    "0x0040e6eb": {
+      "name": "SetBuffCasterId_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x004106a3": {
+      "name": "TotalSpellAffects_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "bool",
+        "int",
+        "bool"
+      ],
+      "ret": 0
+    },
+    "0x004805e9": {
+      "name": "UpdateAllPlayersVisibility_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 0
+    },
+    "0x0047e7ee": {
+      "name": "IsInvisibleToMe_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x0047cf4c": {
+      "name": "FUN_0047cf4c",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0047a64d": {
+      "name": "SetLevitate_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00483439": {
+      "name": "headEnvironmentChange_guess",
+      "conv": "thiscall",
+      "args": [
+        "u8"
+      ],
+      "ret": 0
+    },
+    "0x00439e0f": {
+      "name": "SetViewActorByName_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x0041bf92": {
+      "name": "FUN_0041bf92",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "u8"
+      ],
+      "ret": 0
+    },
+    "0x0040e75c": {
+      "name": "Write1100_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00439afb": {
+      "name": "TurnInfravisionEffectOff_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00440f51": {
+      "name": "FUN_00440f51",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0041a44a": {
+      "name": "UpdateInvisibility_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00410fdb": {
+      "name": "ApplyMovementModifier_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "ptr",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "coverage_ok": {
+    "00411330-00411333": "The byte offset advances by four through twelve entries, so the out-of-range INT3 block is unreachable."
+  },
+  "cases": [
+    {
+      "name": "null-entry",
+      "args": [
+        0,
+        1
+      ]
+    },
+    {
+      "name": "lookup-miss",
+      "args": [
+        "@system+0x9c64",
+        0
+      ],
+      "callees": {
+        "0x0044d0d0": {
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "lookup-hit-empty-events",
+      "args": [
+        "@system+0x9c64",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@system",
+          "offset": "0x9c68",
+          "u32": 123
+        },
+        {
+          "addr": "@check",
+          "offset": "0x120",
+          "u32": 23
+        }
+      ]
+    },
+    {
+      "name": "feature-3a-reject",
+      "args": [
+        "@system+0x9c64",
+        0
+      ],
+      "callees": {
+        "0x0044e77b": {
+          "name": "FUN_0044e77b",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1,
+            0
+          ]
+        },
+        "0x0047a7f3": {
+          "name": "FUN_0047a7f3",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "u8",
+            "float"
+          ],
+          "ret": 0
+        }
+      },
+      "memory": [
+        {
+          "addr": "@system",
+          "offset": "0x9c68",
+          "u32": 123
+        },
+        {
+          "addr": "@check",
+          "offset": "0x120",
+          "u32": 23
+        }
+      ]
+    },
+    {
+      "name": "feature-9c-pass-and-send",
+      "args": [
+        "@system+0x9c64",
+        1
+      ],
+      "callees": {
+        "0x0044e77b": {
+          "name": "FUN_0044e77b",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x0047a7f3": {
+          "name": "FUN_0047a7f3",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "u8",
+            "float"
+          ],
+          "ret": 1
+        }
+      },
+      "memory": [
+        {
+          "addr": "@system",
+          "offset": "0x9c68",
+          "u32": 123
+        },
+        {
+          "addr": "@check",
+          "offset": "0x120",
+          "u32": 23
+        }
+      ]
+    },
+    {
+      "name": "event-branches",
+      "args": [
+        "@system+0x9c64",
+        0
+      ],
+      "callees": {
+        "0x0047cf4c": {
+          "name": "FUN_0047cf4c",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        },
+        "0x004106a3": {
+          "name": "TotalSpellAffects_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "bool",
+            "int",
+            "bool"
+          ],
+          "ret": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "0x0047e7ee": {
+          "name": "FUN_0047e7ee",
+          "conv": "thiscall",
+          "args": [
+            "ptr"
+          ],
+          "ret": 0
+        }
+      },
+      "memory": [
+        {
+          "addr": "@system",
+          "offset": "0x9c68",
+          "u32": 123
+        },
+        {
+          "addr": "@check",
+          "offset": "0x120",
+          "u32": 57
+        },
+        {
+          "addr": "@check",
+          "offset": "0x124",
+          "u32": 13
+        },
+        {
+          "addr": "@check",
+          "offset": "0x128",
+          "u32": 20
+        },
+        {
+          "addr": "@check",
+          "offset": "0x12c",
+          "u32": 31
+        },
+        {
+          "addr": "@check",
+          "offset": "0x130",
+          "u32": 65
+        },
+        {
+          "addr": "@check",
+          "offset": "0x134",
+          "u32": 67
+        },
+        {
+          "addr": "@check",
+          "offset": "0x138",
+          "u32": 73
+        },
+        {
+          "addr": "@check",
+          "offset": "0x13c",
+          "u32": 87
+        },
+        {
+          "addr": "@check",
+          "offset": "0x140",
+          "u32": 99
+        },
+        {
+          "addr": "@check",
+          "offset": "0x144",
+          "u32": 314
+        },
+        {
+          "addr": "@check",
+          "offset": "0x148",
+          "u32": 12
+        }
+      ]
+    },
+    {
+      "name": "search-slot-one",
+      "args": [
+        "@system+0x9c78",
+        0
+      ],
+      "callees": {
+        "0x0040e7ac": {
+          "name": "GetEntry_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@system+0x9c64",
+            "@system+0x9c78"
+          ]
+        }
+      },
+      "memory": [
+        {
+          "addr": "@system",
+          "offset": "0x9c7c",
+          "u32": 124
+        },
+        {
+          "addr": "@check",
+          "offset": "0x120",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "event-three",
+      "args": [
+        "@system+0x9c64",
+        0
+      ],
+      "callees": {
+        "0x004106a3": {
+          "name": "TotalSpellAffects_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "bool",
+            "int",
+            "bool"
+          ],
+          "ret": [
+            0,
+            0
+          ]
+        }
+      },
+      "memory": [
+        {
+          "addr": "@system",
+          "offset": "0x9c68",
+          "u32": 123
+        },
+        {
+          "addr": "@check",
+          "offset": "0x120",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "event-39-linked",
+      "args": [
+        "@system+0x9c64",
+        0
+      ],
+      "callees": {
+        "0x0047cf4c": {
+          "name": "FUN_0047cf4c",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "objects": {
+        "state_b": {
+          "size": "0x160",
+          "fill": "zero",
+          "init": [
+            {
+              "offset": "0x15c",
+              "u32": "@linked"
+            }
+          ]
+        }
+      },
+      "memory": [
+        {
+          "addr": "@system",
+          "offset": "0x9c68",
+          "u32": 123
+        },
+        {
+          "addr": "@check",
+          "offset": "0x120",
+          "u32": 57
+        }
+      ]
+    },
+    {
+      "name": "event-0d-current-target",
+      "args": [
+        "@system+0x9c64",
+        0
+      ],
+      "callees": {
+        "0x0047e7ee": {
+          "name": "FUN_0047e7ee",
+          "conv": "thiscall",
+          "args": [
+            "ptr"
+          ],
+          "ret": 1
+        }
+      },
+      "objects": {
+        "current": {
+          "size": "0x264",
+          "fill": "zero"
+        }
+      },
+      "memory": [
+        {
+          "addr": "0x00905d04",
+          "u32": "@current"
+        },
+        {
+          "addr": "@system",
+          "offset": "0x9c68",
+          "u32": 123
+        },
+        {
+          "addr": "@check",
+          "offset": "0x120",
+          "u32": 13
+        }
+      ]
+    },
+    {
+      "name": "event-43-linked",
+      "args": [
+        "@system+0x9c64",
+        0
+      ],
+      "objects": {
+        "state_b": {
+          "size": "0x160",
+          "fill": "zero",
+          "init": [
+            {
+              "offset": "0x15c",
+              "u32": "@linked"
+            }
+          ]
+        }
+      },
+      "memory": [
+        {
+          "addr": "0x00905cf8",
+          "u32": "@linked"
+        },
+        {
+          "addr": "@system",
+          "offset": "0x9c68",
+          "u32": 123
+        },
+        {
+          "addr": "@check",
+          "offset": "0x120",
+          "u32": 67
+        }
+      ]
+    },
+    {
+      "name": "event-43-refresh",
+      "args": [
+        "@system+0x9c64",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905cf8",
+          "u32": 0
+        },
+        {
+          "addr": "@system",
+          "offset": "0x9c68",
+          "u32": 123
+        },
+        {
+          "addr": "@check",
+          "offset": "0x120",
+          "u32": 67
+        }
+      ]
+    },
+    {
+      "name": "event-99-affected",
+      "args": [
+        "@system+0x9c64",
+        0
+      ],
+      "callees": {
+        "0x004106a3": {
+          "name": "TotalSpellAffects_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "bool",
+            "int",
+            "bool"
+          ],
+          "ret": [
+            1
+          ]
+        }
+      },
+      "memory": [
+        {
+          "addr": "@system",
+          "offset": "0x9c68",
+          "u32": 123
+        },
+        {
+          "addr": "@check",
+          "offset": "0x120",
+          "u32": 99
+        }
+      ]
+    },
+    {
+      "name": "event-three-positive-first",
+      "args": [
+        "@system+0x9c64",
+        0
+      ],
+      "callees": {
+        "0x004106a3": {
+          "name": "TotalSpellAffects_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "bool",
+            "int",
+            "bool"
+          ],
+          "ret": [
+            1,
+            0
+          ]
+        }
+      },
+      "memory": [
+        {
+          "addr": "@system",
+          "offset": "0x9c68",
+          "u32": 123
+        },
+        {
+          "addr": "@check",
+          "offset": "0x120",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "event-three-positive-second",
+      "args": [
+        "@system+0x9c64",
+        0
+      ],
+      "callees": {
+        "0x004106a3": {
+          "name": "TotalSpellAffects_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "bool",
+            "int",
+            "bool"
+          ],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x00410fdb": {
+          "name": "FUN_00410fdb",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "addr": "@state_b",
+              "offset": 200,
+              "hex": "00000040"
+            }
+          ]
+        }
+      },
+      "memory": [
+        {
+          "addr": "@system",
+          "offset": "0x9c68",
+          "u32": 123
+        },
+        {
+          "addr": "@check",
+          "offset": "0x120",
+          "u32": 3
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4264289,
+    "count": 50,
+    "args": [
+      {
+        "choices": [
+          0,
+          "@system+0x9c64"
+        ]
+      },
+      {
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

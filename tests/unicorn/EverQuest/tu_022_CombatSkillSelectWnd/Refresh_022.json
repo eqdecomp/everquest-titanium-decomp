@@ -1,0 +1,453 @@
+{
+  "function": "TimerText_guess::AddAbilityRow_guess",
+  "original": "0x0042d827",
+  "sources": [
+    "src/EverQuest/tu_022_CombatSkillSelectWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@timertext",
+  "args": [
+    {
+      "name": "key_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "timertext": {
+      "size": "0x16c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x168",
+          "u32": "@host"
+        }
+      ]
+    },
+    "host": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "pcview": {
+      "size": "0xc388",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@vbtable"
+        }
+      ]
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 4294967288
+        },
+        {
+          "offset": "0x4",
+          "u32": 50044
+        }
+      ]
+    },
+    "manager2": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "stringtable": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "record": {
+      "size": "0x20c",
+      "fill": "random"
+    },
+    "charinfo": {
+      "size": "0x11a8",
+      "fill": "random"
+    },
+    "text": {
+      "size": "0x40",
+      "fill": "random"
+    },
+    "vectorraw": {
+      "size": "0x1000",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d00",
+      "u32": "@pcview"
+    },
+    {
+      "addr": "0x00985cc8",
+      "u32": "@manager2"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@stringtable"
+    },
+    {
+      "addr": "@record",
+      "offset": "0x1c",
+      "u32": 3723000
+    },
+    {
+      "addr": "@record",
+      "offset": "0x180",
+      "u8": 6
+    },
+    {
+      "addr": "@record",
+      "offset": "0x1bc",
+      "u32": 17
+    },
+    {
+      "addr": "@record",
+      "offset": "0x1c8",
+      "u32": 29
+    },
+    {
+      "addr": "@record",
+      "offset": "0x208",
+      "u32": "@text"
+    },
+    {
+      "addr": "@charinfo",
+      "offset": "0x119c",
+      "u8": 11
+    },
+    {
+      "addr": "@charinfo",
+      "offset": "0x11a4",
+      "u32": 42
+    },
+    {
+      "addr": "@text",
+      "cstr": "fixture text"
+    }
+  ],
+  "callees": {
+    "0x005f0a00": {
+      "name": "FirstManager_guess::GetValue_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 1
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": "@vectorraw"
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    },
+    "0x0040cbd6": {
+      "name": "SecondManager_guess::GetSpell_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@record"
+    },
+    "0x0042d3b0": {
+      "name": "GetCombatAbilitySpell_guess",
+      "conv": "stdcall",
+      "args": [
+        "int"
+      ],
+      "ret": "@record"
+    },
+    "0x00571fc0": {
+      "name": "CXStr_construct_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x005ec220": {
+      "name": "EQ_CharacterProfile_guess::GetCharInfo2",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@charinfo"
+    },
+    "0x0044e755": {
+      "name": "Record_022_guess::Compute_guess",
+      "conv": "thiscall",
+      "args": [
+        "u8"
+      ],
+      "ret": 2
+    },
+    "0x005738b0": {
+      "name": "FormatString_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "ptr"
+      ],
+      "ret": "@text"
+    },
+    "0x0040ebc3": {
+      "name": "CharLookup_022_guess::SpellDuration_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "int"
+      ],
+      "ret": 13
+    },
+    "0x0042d3da": {
+      "name": "TimerText_guess::FormatDuration_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x00571f70": {
+      "name": "CXStr_copy_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "CXStr_release_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x0042d7a7": {
+      "name": "BufferOwner_guess::SetElement_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "0x0059b800": {
+      "name": "RowHost_022_guess::Fill_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:28"
+      ],
+      "ret": 0
+    },
+    "0x004482fb": {
+      "name": "CXStr_destruct_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0042d7e5": {
+      "name": "BufferOwner_guess::Clear_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "no_host",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@timertext",
+          "offset": "0x168",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "no_manager_value",
+      "args": [
+        -1
+      ],
+      "callees": {
+        "0x0042d3b0": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "type_6",
+      "args": [
+        100
+      ]
+    },
+    {
+      "name": "type_29",
+      "args": [
+        101
+      ],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x180",
+          "u8": 41
+        }
+      ]
+    },
+    {
+      "name": "other_type",
+      "args": [
+        102
+      ],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x180",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "zero_find_result",
+      "args": [
+        103
+      ],
+      "callees": {
+        "0x0040ebc3": {
+          "name": "CharLookup_022_guess::Find_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "long_find_duration",
+      "args": [
+        104
+      ],
+      "callees": {
+        "0x0040ebc3": {
+          "name": "CharLookup_022_guess::Find_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int",
+            "int"
+          ],
+          "ret": 360000
+        }
+      },
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1c",
+          "u32": 4294967295
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4380711,
+    "count": 80,
+    "args": [
+      {
+        "range": [
+          -10000,
+          10000
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@timertext",
+        "offset": "0x168",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@host"
+        ],
+        "p": 0.15
+      },
+      {
+        "addr": "@record",
+        "offset": "0x180",
+        "type": "u8",
+        "choices": [
+          6,
+          41,
+          0,
+          255
+        ]
+      },
+      {
+        "addr": "@record",
+        "offset": "0x1c",
+        "type": "u32",
+        "range": [
+          0,
+          4294967295
+        ]
+      },
+      {
+        "addr": "@charinfo",
+        "offset": "0x119c",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          127,
+          255
+        ]
+      },
+      {
+        "addr": "@charinfo",
+        "offset": "0x11a4",
+        "type": "int",
+        "range": [
+          -1000,
+          1000
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,259 @@
+{
+  "function": "do_dynamiclights_guess",
+  "original": "0x0046af9b",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "unused_guess",
+      "type": "int"
+    },
+    {
+      "name": "text_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "text_lookup": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "global_context": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "lookup_text": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905cb0",
+      "u32": "@text_lookup"
+    },
+    {
+      "addr": "0x00924818",
+      "u32": 0
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@global_context"
+    },
+    {
+      "addr": "@lookup_text",
+      "cstr": "lookup"
+    }
+  ],
+  "callees": {
+    "0x005dfa00": {
+      "name": "FindText_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "@lookup_text"
+    },
+    "0x00574990": {
+      "name": "CompareText_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "int"
+      ],
+      "ret": [
+        1,
+        1
+      ]
+    },
+    "0x0060beb0": {
+      "name": "WriteIni_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x004982c6": {
+      "name": "SetText_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "first_match_off",
+      "args": [
+        0,
+        "FALSE"
+      ],
+      "callees": {
+        "0x00574990": {
+          "name": "CompareText_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "second_match_on",
+      "args": [
+        1,
+        "TRUE"
+      ],
+      "callees": {
+        "0x00574990": {
+          "name": "CompareText_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "toggle_one_to_off",
+      "args": [
+        2,
+        "toggle"
+      ],
+      "memory": [
+        {
+          "addr": "0x00924818",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x00574990": {
+          "name": "CompareText_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "toggle_zero_to_on",
+      "args": [
+        3,
+        "toggle"
+      ],
+      "memory": [
+        {
+          "addr": "0x00924818",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00574990": {
+          "name": "CompareText_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "toggle_other_value_to_on",
+      "args": [
+        4,
+        "toggle"
+      ],
+      "memory": [
+        {
+          "addr": "0x00924818",
+          "u32": -1
+        }
+      ],
+      "callees": {
+        "0x00574990": {
+          "name": "CompareText_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            1,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4632475,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -10,
+          10
+        ]
+      },
+      {
+        "choices": [
+          "",
+          "FALSE",
+          "TRUE",
+          "on",
+          "off",
+          "dynamic lights"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x00924818",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  }
+}

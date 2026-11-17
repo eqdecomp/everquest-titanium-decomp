@@ -1,0 +1,366 @@
+{
+  "function": "CostOwner_guess::TakeFallDamage_guess",
+  "original": "0x00420dec",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@costowner",
+  "args": [
+    {
+      "name": "value_guess",
+      "type": "float"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "costowner": {
+      "size": "0x120",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@offset_holder"
+        },
+        {
+          "offset": "0x8",
+          "u32": "@entity"
+        }
+      ]
+    },
+    "offset_holder": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 256
+        }
+      ]
+    },
+    "entity": {
+      "size": "0x260",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@threshold"
+        },
+        {
+          "offset": "0x258",
+          "u32": 4660
+        }
+      ]
+    },
+    "threshold": {
+      "size": "0x160",
+      "fill": "zero"
+    },
+    "status": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "info": {
+      "size": "0x1010",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00640038",
+      "from_image": "0x00640038",
+      "image_size": 4
+    },
+    {
+      "addr": "0x006410d0",
+      "from_image": "0x006410d0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x006410cc",
+      "from_image": "0x006410cc",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0063f4cc",
+      "from_image": "0x0063f4cc",
+      "image_size": 4
+    },
+    {
+      "addr": "0x006410c8",
+      "from_image": "0x006410c8",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00924470",
+      "u32": 7
+    },
+    {
+      "addr": "0x00905cc0",
+      "u32": "@status"
+    },
+    {
+      "addr": "0x00905ca0",
+      "from_image": "0x00905ca0",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x005f6dc0": {
+      "name": "FUN_005f6dc0",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x0041c905": {
+      "name": "FUN_0041c905",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "mem:32",
+        "char",
+        "int",
+        "char",
+        "int"
+      ],
+      "ret": "arg0"
+    },
+    "0x0041b0de": {
+      "name": "FUN_0041b0de",
+      "conv": "thiscall",
+      "args": [
+        "u8"
+      ],
+      "ret": 0
+    },
+    "0x005ec220": {
+      "name": "GetCharInfo2",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@info"
+    },
+    "0x004106a3": {
+      "name": "FUN_004106a3",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "bool",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x004912b1": {
+      "name": "EQSendMessage",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr",
+        "u32",
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "negative-adjusted",
+      "args": [
+        -4.0
+      ]
+    },
+    {
+      "name": "zero-adjusted-and-null-entity",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@costowner",
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "small-positive-adjusted",
+      "args": [
+        2.5
+      ]
+    },
+    {
+      "name": "below-nine-linked-under-limit",
+      "args": [
+        9.5
+      ],
+      "memory": [
+        {
+          "addr": "@threshold",
+          "offset": "0x15c",
+          "u32": "@entity"
+        }
+      ]
+    },
+    {
+      "name": "linked-exactly-200",
+      "args": [
+        5.972136
+      ],
+      "memory": [
+        {
+          "addr": "@threshold",
+          "offset": "0x15c",
+          "u32": "@entity"
+        }
+      ],
+      "expect": {
+        "ret": 200
+      }
+    },
+    {
+      "name": "below-nine-unlinked",
+      "args": [
+        9.5
+      ]
+    },
+    {
+      "name": "below-nine-maximum-unlinked",
+      "args": [
+        10.49
+      ]
+    },
+    {
+      "name": "exact-nine-linked-high-amount",
+      "args": [
+        10.5
+      ],
+      "memory": [
+        {
+          "addr": "@threshold",
+          "offset": "0x15c",
+          "u32": "@entity"
+        }
+      ]
+    },
+    {
+      "name": "threshold-pointer-null",
+      "args": [
+        9.5
+      ],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x1a8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "dispatch-and-send-message",
+      "args": [
+        9.5
+      ],
+      "callees": {
+        "0x0041b0de": {
+          "conv": "thiscall",
+          "args": [
+            "u8"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "dispatch-reduces-amount-to-zero",
+      "args": [
+        9.5
+      ],
+      "memory": [
+        {
+          "addr": "@info",
+          "offset": "0x100c",
+          "u32": 100000
+        }
+      ],
+      "callees": {
+        "0x0041b0de": {
+          "conv": "thiscall",
+          "args": [
+            "u8"
+          ],
+          "ret": 1
+        },
+        "0x004106a3": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "bool",
+            "int",
+            "int"
+          ],
+          "ret": 50
+        }
+      }
+    },
+    {
+      "name": "global-status-blocks-damage",
+      "args": [
+        9.5
+      ],
+      "callees": {
+        "0x005f6dc0": {
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 1
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4328940,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -4.0,
+          30.0
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@costowner",
+        "offset": "0x48",
+        "type": "int",
+        "range": [
+          -100,
+          1000
+        ]
+      },
+      {
+        "addr": "@threshold",
+        "offset": "0x15c",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@entity"
+        ]
+      },
+      {
+        "addr": "@info",
+        "offset": "0x100c",
+        "type": "int",
+        "range": [
+          -500,
+          500
+        ]
+      }
+    ]
+  },
+  "_survivors": "L6089: the flags field is at stack offset 0x1e, and the emulator starts stack memory zeroed; L6123: the source field is at stack offset 0x2, already zero; L6126: the float field is at stack offset 0xa, already zero"
+}

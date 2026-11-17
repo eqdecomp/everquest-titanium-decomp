@@ -1,0 +1,56 @@
+{
+  "function": "CPetitionQWndView_guess::SetPriorityDisplay_guess",
+  "original": "0x005435b5",
+  "sources": [
+    "src/EverQuest/tu_195_PlayerNotesWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x300",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x188", "u32": "@slot188"},
+        {"offset": "0x18c", "u32": "@colortext"},
+        {"offset": "0x190", "u32": "@slot190"}
+      ]
+    },
+    "slot188": {"size": "0x140", "fill": "zero"},
+    "slot190": {"size": "0x140", "fill": "zero"},
+    "colortext": {"size": "0x100", "fill": "zero", "init": [{"offset": "0", "u32": "@colortext_vtbl"}]},
+    "colortext_vtbl": {"size": "0x100", "fill": "zero", "init": [{"offset": "0xfc", "u32": "@fn_slot63"}]},
+    "stringtable": {"size": "0x10", "fill": "zero"},
+    "strobj": {"size": "0x10", "fill": "zero"},
+    "fn_slot63": {"size": "4"}
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@stringtable"}
+  ],
+  "callees": {
+    "0x005dfa00": {"name": "GetString_guess", "conv": "thiscall", "args": ["u32", "u32"], "ret": "@strobj"},
+    "0x00571fc0": {"name": "AssignText_guess", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x00571d00": {"name": "FreeRep_guess", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "@fn_slot63": {"name": "Slot63_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0}
+  },
+  "cases": [
+    {"name": "state 0", "args": [], "memory": [{"addr": "@owner", "offset": "0x1e4", "u32": 0}]},
+    {"name": "state 1", "args": [], "memory": [{"addr": "@owner", "offset": "0x1e4", "u32": 1}]},
+    {"name": "state 2", "args": [], "memory": [{"addr": "@owner", "offset": "0x1e4", "u32": 2}]},
+    {"name": "state 3", "args": [], "memory": [{"addr": "@owner", "offset": "0x1e4", "u32": 3}]},
+    {"name": "state -1", "args": [], "memory": [{"addr": "@owner", "offset": "0x1e4", "u32": "0xffffffff"}]}
+  ],
+  "coverage_ok": {
+    "00543688-00543693": "FreeRep runs only when the CXStr operator= stub stores a rep in the caller's local text; a stub cannot write that stack slot"
+  },
+  "fuzz": {
+    "seed": 5518773,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@owner", "offset": "0x1e4", "type": "int", "choices": [-1, 0, 1, 2, 3, 4]}
+    ]
+  }
+}

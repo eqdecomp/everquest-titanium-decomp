@@ -1,0 +1,160 @@
+{
+  "function": "CastSpellWnd_guess::CastSpellWnd_guess",
+  "original": "0x004ec8b4",
+  "sources": [
+    "src/EverQuest/tu_140_CastSpellWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@castspellwnd",
+  "args": [
+    {
+      "name": "parent",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "castspellwnd": {
+      "size": "0x1b4",
+      "fill": "random"
+    },
+    "parent": {
+      "size": "0x11c",
+      "fill": "random"
+    },
+    "windowdata": {
+      "size": "0x64",
+      "fill": "random"
+    },
+    "cxrep": {
+      "size": "0x1000",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "@castspellwnd", "offset": "0x124", "u32": "@windowdata"},
+    {"addr": "@castspellwnd", "offset": "0x64", "u32": 512},
+    {"addr": "@windowdata", "offset": "0x60", "u32": 4098}
+  ],
+  "callees": {
+    "0x00571e00": {
+      "name": "CXStr::CXStr",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "passthrough": true
+    },
+    "0x005a3850": {
+      "name": "CSidlScreenWnd::CSidlScreenWnd",
+      "conv": "thiscall",
+      "args": ["ptr", "ignore", "int", "int", "ptr"],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x005a25b0": {
+      "name": "CSidlScreenWnd::CreateChildrenFromSidl",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "435350575f5370656c6c3000", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "435350575f5370656c6c3100", "call": 1},
+        {"arg": 0, "offset": 0, "hex": "435350575f5370656c6c3200", "call": 2},
+        {"arg": 0, "offset": 0, "hex": "435350575f5370656c6c3300", "call": 3},
+        {"arg": 0, "offset": 0, "hex": "435350575f5370656c6c3400", "call": 4},
+        {"arg": 0, "offset": 0, "hex": "435350575f5370656c6c3500", "call": 5},
+        {"arg": 0, "offset": 0, "hex": "435350575f5370656c6c3600", "call": 6},
+        {"arg": 0, "offset": 0, "hex": "435350575f5370656c6c3700", "call": 7},
+        {"arg": 0, "offset": 0, "hex": "435350575f5370656c6c3800", "call": 8}
+      ],
+      "ret": 0
+    },
+    "0x005a1e10": {
+      "name": "CSidlScreenWnd::GetChildItem",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": [
+        "0x60002000", "0x60002004", "0x60002008", "0x6000200c", "0x60002010",
+        "0x60002014", "0x60002018", "0x6000201c", "0x60002020", "0x60002024"
+      ]
+    },
+    "0x004ec7d8": {
+      "name": "Callback_guess::Rebuild_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004eb5ea": {
+      "name": "Panel_guess::Build_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": "@cxrep"
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "data present",
+      "args": [
+        "@parent"
+      ]
+    },
+    {
+      "name": "data absent",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {"addr": "@castspellwnd", "offset": "0x124", "u32": 0},
+        {"addr": "@castspellwnd", "offset": "0x64", "u32": 0}
+      ]
+    },
+    {
+      "name": "data flags and style set",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {"addr": "@castspellwnd", "offset": "0x124", "u32": "@windowdata"},
+        {"addr": "@castspellwnd", "offset": "0x64", "u32": 2147487744},
+        {"addr": "@windowdata", "offset": "0x60", "u32": 2147483650}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5163188,
+    "count": 75,
+    "args": [
+      {
+        "choices": [
+          "@parent"
+        ]
+      }
+    ],
+    "memory": [
+      {"addr": "@castspellwnd", "offset": "0x124", "type": "u32", "choices": [0, "@windowdata"]},
+      {"addr": "@castspellwnd", "offset": "0x64", "type": "u32", "choices": [0, 512, 2147487744, 4294967295]},
+      {"addr": "@windowdata", "offset": "0x60", "type": "u32", "choices": [0, 1, 2048, 4098, 2147483650]}
+    ]
+  }
+}

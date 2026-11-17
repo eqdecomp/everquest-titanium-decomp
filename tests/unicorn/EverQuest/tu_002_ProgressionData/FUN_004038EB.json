@@ -1,0 +1,63 @@
+{
+  "function": "FUN_004038EB_guess",
+  "original": "0x004038eb",
+  "sources": [
+    "src/EverQuest/tu_002_ProgressionData.cpp"
+  ],
+  "conv": "stdcall",
+  "args": [
+    {"name": "first_guess", "type": "int"},
+    {"name": "second_guess", "type": "int"},
+    {"name": "third_guess", "type": "int"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "node": {"size": "0x88", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": "@node"
+    },
+    "0x00403842": {
+      "name": "LargeConstructed_guess::LargeConstructed_guess",
+      "conv": "thiscall",
+      "args": ["u32", "u32", "u32"],
+      "ret": "keep"
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [1, 1, 1]
+    },
+    {
+      "name": "zeros",
+      "args": [0, 0, 0]
+    },
+    {
+      "name": "negative",
+      "args": [-1, -2147483648, 2147483647]
+    },
+    {
+      "name": "allocation fails: no constructor, returns null",
+      "args": [1, 2, 3],
+      "callees": {
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}
+      },
+      "expect": {"ret": 0}
+    }
+  ],
+  "fuzz": {
+    "seed": 4208875,
+    "count": 100,
+    "args": [{}, {}, {}],
+    "memory": []
+  }
+}

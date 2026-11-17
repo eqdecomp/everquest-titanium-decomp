@@ -1,0 +1,271 @@
+{
+  "function": "SegmentOwner_guess::Clip_guess",
+  "original": "0x00533b57",
+  "sources": [
+    "src/EverQuest/tu_187_MapViewWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@segmentowner",
+  "args": [
+    {"name": "rect_guess", "type": "ptr"},
+    {"name": "value_guess", "type": "u32"},
+    {"name": "first_guess", "type": "int"},
+    {"name": "second_guess", "type": "int"},
+    {"name": "third_guess", "type": "int"},
+    {"name": "fourth_guess", "type": "int"}
+  ],
+  "ret": "char",
+  "objects": {
+    "segmentowner": {"size": "0x1", "fill": "zero"},
+    "rect": {
+      "size": "0x18",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x00", "f32": 20.0},
+        {"offset": "0x04", "f32": 30.0},
+        {"offset": "0x08", "f32": 0.0},
+        {"offset": "0x0c", "f32": 80.0},
+        {"offset": "0x10", "f32": 90.0},
+        {"offset": "0x14", "f32": 0.0}
+      ]
+    },
+    "draw_target": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0x00", "u32": "@vtbl"}]
+    },
+    "fn": {"size": "0x1", "fill": "random"},
+    "vtbl": {
+      "size": "0x74",
+      "fill": "zero",
+      "init": [{"offset": "0x70", "u32": "@fn"}]
+    }
+  },
+  "memory": [
+    {"addr": "0x0099e364", "u32": "@draw_target"}
+  ],
+  "callees": {
+    "0x0060f60d": {
+      "name": "_fabs",
+      "conv": "cdecl",
+      "args": ["double"],
+      "passthrough": true
+    },
+    "@fn": {
+      "name": "DrawSegment_guess",
+      "conv": "thiscall",
+      "args": ["mem:24", "mem:24", "u32"],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "_fabs": "0x0060f60d"
+  },
+  "cases": [
+    {
+      "name": "miss-left",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [
+        {"addr": "@rect", "offset": "0x00", "f32": -20.0},
+        {"addr": "@rect", "offset": "0x0c", "f32": -10.0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "miss-right",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [
+        {"addr": "@rect", "offset": "0x00", "f32": 110.0},
+        {"addr": "@rect", "offset": "0x0c", "f32": 120.0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "miss-above",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [
+        {"addr": "@rect", "offset": "0x04", "f32": -20.0},
+        {"addr": "@rect", "offset": "0x10", "f32": -10.0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "miss-below",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [
+        {"addr": "@rect", "offset": "0x04", "f32": 110.0},
+        {"addr": "@rect", "offset": "0x10", "f32": 120.0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "inside",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "first-x-min",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [{"addr": "@rect", "offset": "0x00", "f32": -10.0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "first-x-max",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [{"addr": "@rect", "offset": "0x00", "f32": 110.0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "second-x-min",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [{"addr": "@rect", "offset": "0x0c", "f32": -10.0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "second-x-max",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [{"addr": "@rect", "offset": "0x0c", "f32": 110.0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "first-y-min",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [{"addr": "@rect", "offset": "0x04", "f32": -10.0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "first-y-max",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [{"addr": "@rect", "offset": "0x04", "f32": 110.0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "second-y-min",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [{"addr": "@rect", "offset": "0x10", "f32": -10.0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "second-y-max",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [{"addr": "@rect", "offset": "0x10", "f32": 110.0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "x-clip-reject-below",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [
+        {"addr": "@rect", "offset": "0x00", "f32": -100.0},
+        {"addr": "@rect", "offset": "0x04", "f32": 0.0},
+        {"addr": "@rect", "offset": "0x0c", "f32": 10.0},
+        {"addr": "@rect", "offset": "0x10", "f32": 1000.0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "x-clip-reject-above",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [
+        {"addr": "@rect", "offset": "0x00", "f32": -100.0},
+        {"addr": "@rect", "offset": "0x04", "f32": 1000.0},
+        {"addr": "@rect", "offset": "0x0c", "f32": 10.0},
+        {"addr": "@rect", "offset": "0x10", "f32": -1000.0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "left-boundary-with-outside-endpoint",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [
+        {"addr": "@rect", "offset": "0x00", "f32": 0.0},
+        {"addr": "@rect", "offset": "0x0c", "f32": -10.0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "right-boundary-with-outside-endpoint",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [
+        {"addr": "@rect", "offset": "0x00", "f32": 110.0},
+        {"addr": "@rect", "offset": "0x0c", "f32": 100.0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "bottom-boundary-with-outside-endpoint",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [
+        {"addr": "@rect", "offset": "0x04", "f32": 110.0},
+        {"addr": "@rect", "offset": "0x10", "f32": 100.0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "top-boundary-with-outside-endpoint",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [
+        {"addr": "@rect", "offset": "0x04", "f32": 100.0},
+        {"addr": "@rect", "offset": "0x10", "f32": 110.0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "first-x-at-max",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [{"addr": "@rect", "offset": "0x00", "f32": 100.0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "first-y-at-min-second-below",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [
+        {"addr": "@rect", "offset": "0x04", "f32": 0.0},
+        {"addr": "@rect", "offset": "0x10", "f32": -10.0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "second-y-at-min",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [{"addr": "@rect", "offset": "0x10", "f32": 0.0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "all-boundaries",
+      "args": ["@rect", 1, 0, 0, 100, 100],
+      "memory": [
+        {"addr": "@rect", "offset": "0x00", "f32": 0.0},
+        {"addr": "@rect", "offset": "0x04", "f32": 0.0},
+        {"addr": "@rect", "offset": "0x0c", "f32": 100.0},
+        {"addr": "@rect", "offset": "0x10", "f32": 100.0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "point-segment",
+      "args": ["@rect", 4294967295, 0, 0, 100, 100],
+      "memory": [
+        {"addr": "@rect", "offset": "0x00", "f32": 50.0},
+        {"addr": "@rect", "offset": "0x04", "f32": 50.0},
+        {"addr": "@rect", "offset": "0x0c", "f32": 50.0},
+        {"addr": "@rect", "offset": "0x10", "f32": 50.0}
+      ],
+      "expect": {"ret": 1}
+    }
+  ],
+  "fuzz": {
+    "seed": 5454679,
+    "count": 150,
+    "args": [
+      {"choices": ["@rect"]},
+      {"choices": [0, 1, 4294967295]},
+      {"range": [-100, 100]},
+      {"range": [-100, 100]},
+      {"range": [-100, 100]},
+      {"range": [-100, 100]}
+    ],
+    "memory": [
+      {"addr": "@rect", "offset": "0x00", "type": "float", "count": 6, "range": [-200.0, 200.0]}
+    ]
+  }
+}

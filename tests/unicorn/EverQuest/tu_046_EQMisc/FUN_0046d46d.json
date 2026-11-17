@@ -1,0 +1,171 @@
+{
+  "function": "ConvertItemTags",
+  "original": "0x0046d46d",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "source_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "expand_guess",
+      "type": "char"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "rep": {
+      "size": "0x40",
+      "fill": "random",
+      "init": [
+        {"offset": "0x8", "u32": 8}
+      ]
+    },
+    "source": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@rep"}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "0x00905F00", "size": 128, "fill": "random"},
+    {"addr": "0x00905F08", "u32": 3}
+  ],
+  "callees": {
+    "0x005715d0": {
+      "name": "CXStr::GetAt_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": [18, 65, 18, 49, 65, 18, 65, 66, 18, 50, 65]
+    },
+    "0x004647e6": {
+      "name": "W_guess::F_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "int", "int"],
+      "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "405f9000", "call": [0, 3]},
+        {"arg": 0, "offset": 0, "hex": "00000000", "call": [1, 2]},
+        {"arg": 0, "offset": 0, "hex": "405f9000", "call": [4, 5, 6, 7, 8, 9]}
+      ]
+    },
+    "0x005a4190": {
+      "name": "FUN_005a4190",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "mem:4", "mem:4"],
+      "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "005f9000", "call": [0, 2, 3, 4, 5]},
+        {"arg": 0, "offset": 0, "hex": "00000000", "call": 1}
+      ]
+    },
+    "0x00572300": {
+      "name": "CXStr::operator char*",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00572130": {
+      "name": "CXStr::Delete_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"]
+    },
+    "0x00572f20": {
+      "name": "CXStr::Insert_guess",
+      "conv": "thiscall",
+      "args": ["int", "mem:4"]
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "null rep: empty string",
+      "args": ["@source", 1],
+      "memory": [{"addr": "@source", "offset": "0x0", "u32": 0}]
+    },
+    {
+      "name": "no markers",
+      "args": ["@source", 1],
+      "callees": {
+        "0x005715d0": {"name": "GetAt", "conv": "thiscall", "args": ["int"], "ret": 65}
+      }
+    },
+    {
+      "name": "marker without closing, length 4",
+      "args": ["@source", 0],
+      "memory": [{"addr": "@rep", "offset": "0x8", "u32": 4}],
+      "callees": {
+        "0x005715d0": {"name": "GetAt", "conv": "thiscall", "args": ["int"], "ret": [18, 65, 65, 65]}
+      }
+    },
+    {
+      "name": "marker at end-1: search starts past length",
+      "args": ["@source", 1],
+      "memory": [{"addr": "@rep", "offset": "0x8", "u32": 2}],
+      "callees": {
+        "0x005715d0": {"name": "GetAt", "conv": "thiscall", "args": ["int"], "ret": [65, 18, 65]}
+      }
+    },
+    {
+      "name": "closed marker, no expand",
+      "args": ["@source", 0],
+      "callees": {
+        "0x005715d0": {"name": "GetAt", "conv": "thiscall", "args": ["int"], "ret": [18, 65, 18, 49, 65]}
+      }
+    },
+    {
+      "name": "closed marker, expand, then a second with null reps",
+      "args": ["@source", 1],
+      "memory": [{"addr": "@rep", "offset": "0x8", "u32": 12}],
+      "callees": {
+        "0x005715d0": {"name": "GetAt", "conv": "thiscall", "args": ["int"], "ret": [18, 65, 18, 49, 18, 65, 66, 18, 50, 65]}
+      }
+    },
+    {
+      "name": "expand, replacement length 0",
+      "args": ["@source", 1],
+      "memory": [{"addr": "0x00905F08", "u32": 0}],
+      "callees": {
+        "0x005715d0": {"name": "GetAt", "conv": "thiscall", "args": ["int"], "ret": [18, 18, 51, 65]}
+      }
+    },
+    {
+      "name": "rep released inside GetAt: inner search sees null rep",
+      "args": ["@source", 1],
+      "callees": {
+        "0x005715d0": {"name": "GetAt", "conv": "thiscall", "args": ["int"], "ret": [18, 65],
+                       "writes": [{"addr": "@source", "offset": 0, "hex": "00000000", "call": 0}]}
+      }
+    },
+    {
+      "name": "expand, digit 0",
+      "args": ["@source", 1],
+      "memory": [{"addr": "0x00905F08", "u32": 5}],
+      "callees": {
+        "0x005715d0": {"name": "GetAt", "conv": "thiscall", "args": ["int"], "ret": [65, 18, 65, 65, 18, 48, 65]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4641901,
+    "count": 120,
+    "args": [
+      {"choices": ["@source"]},
+      {"choices": [0, 1, 2, -1]}
+    ],
+    "memory": [
+      {"addr": "@rep", "offset": "0x8", "type": "int", "range": [0, 14]},
+      {"addr": "0x00905F08", "type": "int", "range": [0, 6]}
+    ]
+  }
+}

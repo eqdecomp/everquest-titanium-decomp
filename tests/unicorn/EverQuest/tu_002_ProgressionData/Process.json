@@ -1,0 +1,134 @@
+{
+  "function": "Holder1C_guess::Process_guess",
+  "original": "0x004041c2",
+  "sources": [
+    "src/EverQuest/tu_002_ProgressionData.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@holder1c",
+  "args": [
+    {"name": "source", "type": "ptr"},
+    {"name": "b", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "holder1c": {
+      "size": "0x28",
+      "fill": "random",
+      "init": [{"offset": "0x20", "u32": "@sentinel"}]
+    },
+    "sentinel": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@sentinel"}, {"offset": "0x4", "u32": "@sentinel"}]
+    },
+    "source": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "@source", "offset": "0x0", "u32": 1},
+    {"addr": "@source", "offset": "0x4", "cstr": "1 2 3 4"}
+  ],
+  "callees": {
+    "0x00403631": {"name": "ListString_ctor", "conv": "thiscall", "args": ["cstr"], "ret": "keep"},
+    "0x00403317": {"name": "StringStream_ctor", "conv": "thiscall", "args": ["ignore", "int", "int"], "ret": "keep"},
+    "0x0040291e": {"name": "String_Tidy", "conv": "thiscall", "args": ["int", "int"]},
+    "0x00402505": {"name": "ParserString_Eos", "conv": "thiscall", "args": ["int"]},
+    "0x004035af": {"name": "MatchSectionTag_guess", "conv": "cdecl",
+                   "args": ["ignore", "mem:28", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "int"],
+                   "ret": [1, 0]},
+    "0x00403085": {"name": "StringOwner_ctor", "conv": "thiscall", "args": []},
+    "0x004030ac": {"name": "StringOwner_dtor", "conv": "thiscall", "args": []},
+    "0x00403448": {"name": "FUN_00403448", "conv": "cdecl", "args": ["ignore", "ignore", "int"],
+                   "writes": [
+                     {"arg": 1, "offset": 4, "hex": "3500", "call": 0},
+                     {"arg": 1, "offset": 4, "hex": "3700", "call": 3},
+                     {"arg": 1, "offset": 4, "hex": "3800", "call": 4},
+                     {"arg": 1, "offset": 4, "hex": "3900", "call": 7}
+                   ]},
+    "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [5, 7, 8, 9]},
+    "0x00403b24": {"name": "StringPairList_RemoveEqual", "conv": "thiscall", "args": ["ignore"]},
+    "0x004039f4": {"name": "StringPairList_Insert", "conv": "thiscall", "args": ["u32", "ignore"]},
+    "0x00404001": {"name": "StringPairList_Clear", "conv": "thiscall", "args": []},
+    "0x00574110": {"name": "FUN_00574110", "conv": "cdecl", "args": ["cstr", "int", "int"], "ret": 0},
+    "0x00402d37": {"name": "Finish", "conv": "thiscall", "args": ["mem:4"]},
+    "0x0040271a": {"name": "StreamClose", "conv": "thiscall", "args": []},
+    "0x00623d8d": {"name": "ios_base_dtor", "conv": "thiscall", "args": []}
+  },
+  "rewrite_aliases": {
+    "_Tidy": "0x0040291e",
+    "_Eos": "0x00402505"
+  },
+  "cases": [
+    {
+      "name": "no records, count matches",
+      "args": ["@source", 0],
+      "memory": [{"addr": "@source", "offset": "0x0", "u32": 0}],
+      "callees": {
+        "0x004035af": {"name": "FUN_004035af", "conv": "cdecl",
+                       "args": ["ignore", "mem:28", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "int"],
+                       "ret": [0]},
+        "0x00403448": {"name": "FUN_00403448", "conv": "cdecl", "args": ["ignore", "ignore", "int"], "writes": []},
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [0]}
+      }
+    },
+    {
+      "name": "one record",
+      "args": ["@source", 7]
+    },
+    {
+      "name": "two records",
+      "args": ["@source", 0],
+      "memory": [{"addr": "@source", "offset": "0x0", "u32": 2}],
+      "callees": {
+        "0x004035af": {"name": "FUN_004035af", "conv": "cdecl",
+                       "args": ["ignore", "mem:28", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "int"],
+                       "ret": [1, 1, 0]},
+        "0x00403448": {"name": "FUN_00403448", "conv": "cdecl", "args": ["ignore", "ignore", "int"],
+                       "writes": [
+                         {"arg": 1, "offset": 4, "hex": "3500", "call": 0},
+                         {"arg": 1, "offset": 4, "hex": "3700", "call": 3},
+                         {"arg": 1, "offset": 4, "hex": "3800", "call": 4},
+                         {"arg": 1, "offset": 4, "hex": "3900", "call": 7},
+                         {"arg": 1, "offset": 4, "hex": "3600", "call": 8},
+                         {"arg": 1, "offset": 4, "hex": "313000", "call": 11},
+                         {"arg": 1, "offset": 4, "hex": "313100", "call": 12},
+                         {"arg": 1, "offset": 4, "hex": "313200", "call": 15}
+                       ]},
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [5, 7, 8, 9, 6, 10, 11, 12]}
+      }
+    },
+    {
+      "name": "one record, count mismatch",
+      "args": ["@source", 0],
+      "memory": [{"addr": "@source", "offset": "0x0", "u32": 3}]
+    },
+    {
+      "name": "one record, token storage on the heap (capacity 16)",
+      "args": ["@source", 0],
+      "callees": {
+        "0x00403448": {"name": "FUN_00403448", "conv": "cdecl", "args": ["ignore", "ignore", "int"],
+                       "writes": [
+                         {"arg": 1, "offset": 4, "hex": "00000000", "call": 0},
+                         {"arg": 1, "offset": 24, "hex": "10000000", "call": 0},
+                         {"arg": 1, "offset": 4, "hex": "00000000", "call": 3},
+                         {"arg": 1, "offset": 24, "hex": "10000000", "call": 3},
+                         {"arg": 1, "offset": 4, "hex": "00000000", "call": 4},
+                         {"arg": 1, "offset": 24, "hex": "10000000", "call": 4},
+                         {"arg": 1, "offset": 4, "hex": "00000000", "call": 7},
+                         {"arg": 1, "offset": 24, "hex": "10000000", "call": 7}
+                       ]},
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["u32"], "ret": [5, 7, 8, 9]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4211138,
+    "count": 60,
+    "args": [{"choices": ["@source"]}, {"range": [-4, 30]}],
+    "memory": [{"addr": "@source", "offset": "0x0", "type": "int", "range": [0, 3]}]
+  },
+  "_survivors": "L2122: the stream close and destroy stubs (0x40271A, 0x623D8D) take no arguments, so the receiver ECX (state+0 vs state+4) is not visible to any case"
+}

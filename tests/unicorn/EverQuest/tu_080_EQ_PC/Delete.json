@@ -1,0 +1,101 @@
+{
+  "function": "PcCharacter_guess::Delete_guess",
+  "original": "0x004bf5a5",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "0x6000c384",
+  "args": [
+    {
+      "name": "flags",
+      "type": "int"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "pccharacter": {
+      "size": "0xc4d0",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@pccharacter",
+      "offset": "0xc380",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x004bf9ad": {
+      "name": "EQ_PC_guess::~EQ_PC_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005fa2c0": {
+      "name": "PcCharacter_guess::~PcCharacter_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0060d0d5": {
+      "name": "operator delete",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x0060d5a8": {
+      "name": "PcCharacterList_guess::~PcCharacterList_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "no-delete",
+      "args": [
+        0
+      ]
+    },
+    {
+      "name": "delete",
+      "args": [
+        1
+      ]
+    },
+    {
+      "name": "other-bit-only",
+      "args": [
+        2
+      ]
+    },
+    {
+      "name": "all-bits",
+      "args": [
+        -1
+      ]
+    },
+    {
+      "name": "high-bit-only",
+      "args": [
+        -2147483648
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4978085,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -2147483648,
+          2147483647
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,955 @@
+{
+  "function": "r3dCreateActorEx_guess",
+  "original": "0x0043a8b6",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "size": "0x2e2",
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "value0_guess",
+      "type": "int"
+    },
+    {
+      "name": "position_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "value2_guess",
+      "type": "int"
+    },
+    {
+      "name": "value3_guess",
+      "type": "int"
+    },
+    {
+      "name": "value4_guess",
+      "type": "float"
+    },
+    {
+      "name": "value5_guess",
+      "type": "float"
+    },
+    {
+      "name": "value6_guess",
+      "type": "float"
+    },
+    {
+      "name": "value7_guess",
+      "type": "int"
+    },
+    {
+      "name": "value8_guess",
+      "type": "int"
+    },
+    {
+      "name": "value9_guess",
+      "type": "int"
+    },
+    {
+      "name": "owner_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "position": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "f32": 10.0
+        },
+        {
+          "offset": "0x4",
+          "f32": 20.0
+        },
+        {
+          "offset": "0x8",
+          "f32": 30.0
+        }
+      ]
+    },
+    "owner": {
+      "size": "0x21c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x218",
+          "u32": "@binding"
+        }
+      ]
+    },
+    "fn_lookup": {
+      "size": "0x4"
+    },
+    "lookup_vtbl": {
+      "size": "0x48",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x44",
+          "u32": "@fn_lookup"
+        }
+      ]
+    },
+    "lookup_service": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@lookup_vtbl"
+        }
+      ]
+    },
+    "fn_release": {
+      "size": "0x4"
+    },
+    "result_vtbl": {
+      "size": "0x34",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x30",
+          "u32": "@fn_release"
+        }
+      ]
+    },
+    "binding": {
+      "size": "0x70",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@offset"
+        }
+      ]
+    },
+    "offset": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 36
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0099e368",
+      "u32": "@lookup_service"
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@result_vtbl"
+    },
+    {
+      "addr": "0x00640e58",
+      "from_image": "0x00640E58",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0063f4d0",
+      "from_image": "0x0063F4D0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00923bcc",
+      "f32": 100.0
+    },
+    {
+      "addr": "0x00923bd0",
+      "f32": 200.0
+    },
+    {
+      "addr": "0x00923bd4",
+      "f32": 300.0
+    }
+  ],
+  "callees": {
+    "@fn_lookup": {
+      "name": "PositionLookup_guess::Lookup_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "mem:12",
+        "int",
+        "int",
+        "float",
+        "float",
+        "float",
+        "int",
+        "int",
+        "int",
+        "int",
+        "ignore"
+      ],
+      "ret": [
+        -1
+      ]
+    },
+    "@fn_release": {
+      "name": "LookupResult_guess::Release_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "initial_success",
+      "args": [
+        1,
+        "@position",
+        2,
+        3,
+        1.5,
+        2.5,
+        3.5,
+        4,
+        5,
+        6,
+        "@owner"
+      ],
+      "callees": {
+        "@fn_lookup": {
+          "name": "PositionLookup_guess::Lookup_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "mem:12",
+            "int",
+            "int",
+            "float",
+            "float",
+            "float",
+            "int",
+            "int",
+            "int",
+            "int",
+            "ignore"
+          ],
+          "ret": [
+            0
+          ],
+          "writes": [
+            {
+              "arg": 11,
+              "offset": 0,
+              "hex": "00 5d 90 00",
+              "call": 0
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": "0x00905d00"
+      }
+    },
+    {
+      "name": "x_first_try_success",
+      "args": [
+        1,
+        "@position",
+        2,
+        3,
+        1.5,
+        2.5,
+        3.5,
+        4,
+        5,
+        6,
+        "@owner"
+      ],
+      "callees": {
+        "@fn_lookup": {
+          "name": "PositionLookup_guess::Lookup_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "mem:12",
+            "int",
+            "int",
+            "float",
+            "float",
+            "float",
+            "int",
+            "int",
+            "int",
+            "int",
+            "ignore"
+          ],
+          "ret": [
+            -1,
+            0
+          ],
+          "writes": [
+            {
+              "arg": 11,
+              "offset": 0,
+              "hex": "00 5d 90 00",
+              "call": 1
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": "0x00905d00"
+      }
+    },
+    {
+      "name": "x_tenth_try_success",
+      "args": [
+        1,
+        "@position",
+        2,
+        3,
+        1.5,
+        2.5,
+        3.5,
+        4,
+        5,
+        6,
+        "@owner"
+      ],
+      "callees": {
+        "@fn_lookup": {
+          "name": "PositionLookup_guess::Lookup_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "mem:12",
+            "int",
+            "int",
+            "float",
+            "float",
+            "float",
+            "int",
+            "int",
+            "int",
+            "int",
+            "ignore"
+          ],
+          "ret": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            0
+          ],
+          "writes": [
+            {
+              "arg": 11,
+              "offset": 0,
+              "hex": "00 5d 90 00",
+              "call": 10
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": "0x00905d00"
+      }
+    },
+    {
+      "name": "x_exhaust_y_first_success",
+      "args": [
+        1,
+        "@position",
+        2,
+        3,
+        1.5,
+        2.5,
+        3.5,
+        4,
+        5,
+        6,
+        "@owner"
+      ],
+      "callees": {
+        "@fn_lookup": {
+          "name": "PositionLookup_guess::Lookup_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "mem:12",
+            "int",
+            "int",
+            "float",
+            "float",
+            "float",
+            "int",
+            "int",
+            "int",
+            "int",
+            "ignore"
+          ],
+          "ret": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            0
+          ],
+          "writes": [
+            {
+              "arg": 11,
+              "offset": 0,
+              "hex": "00 5d 90 00",
+              "call": 11
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": "0x00905d00"
+      }
+    },
+    {
+      "name": "x_y_exhaust_z_first_success",
+      "args": [
+        1,
+        "@position",
+        2,
+        3,
+        1.5,
+        2.5,
+        3.5,
+        4,
+        5,
+        6,
+        "@owner"
+      ],
+      "callees": {
+        "@fn_lookup": {
+          "name": "PositionLookup_guess::Lookup_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "mem:12",
+            "int",
+            "int",
+            "float",
+            "float",
+            "float",
+            "int",
+            "int",
+            "int",
+            "int",
+            "ignore"
+          ],
+          "ret": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            0
+          ],
+          "writes": [
+            {
+              "arg": 11,
+              "offset": 0,
+              "hex": "00 5d 90 00",
+              "call": 21
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": "0x00905d00"
+      }
+    },
+    {
+      "name": "x_y_z_exhaust_diagonal_first_success",
+      "args": [
+        1,
+        "@position",
+        2,
+        3,
+        1.5,
+        2.5,
+        3.5,
+        4,
+        5,
+        6,
+        "@owner"
+      ],
+      "callees": {
+        "@fn_lookup": {
+          "name": "PositionLookup_guess::Lookup_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "mem:12",
+            "int",
+            "int",
+            "float",
+            "float",
+            "float",
+            "int",
+            "int",
+            "int",
+            "int",
+            "ignore"
+          ],
+          "ret": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            0
+          ],
+          "writes": [
+            {
+              "arg": 11,
+              "offset": 0,
+              "hex": "00 5d 90 00",
+              "call": 31
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": "0x00905d00"
+      }
+    },
+    {
+      "name": "fallback_global_success",
+      "args": [
+        1,
+        "@position",
+        2,
+        3,
+        1.5,
+        2.5,
+        3.5,
+        4,
+        5,
+        6,
+        "@owner"
+      ],
+      "callees": {
+        "@fn_lookup": {
+          "name": "PositionLookup_guess::Lookup_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "mem:12",
+            "int",
+            "int",
+            "float",
+            "float",
+            "float",
+            "int",
+            "int",
+            "int",
+            "int",
+            "ignore"
+          ],
+          "ret": [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            0
+          ],
+          "writes": [
+            {
+              "arg": 11,
+              "offset": 0,
+              "hex": "00 5d 90 00",
+              "call": 41
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": "0x00905d00"
+      }
+    },
+    {
+      "name": "every_lookup_fails",
+      "args": [
+        1,
+        "@position",
+        2,
+        3,
+        1.5,
+        2.5,
+        3.5,
+        4,
+        5,
+        6,
+        "@owner"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "adjusted_with_null_owner",
+      "args": [
+        1,
+        "@position",
+        2,
+        3,
+        1.5,
+        2.5,
+        3.5,
+        4,
+        5,
+        6,
+        0
+      ],
+      "callees": {
+        "@fn_lookup": {
+          "name": "PositionLookup_guess::Lookup_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "mem:12",
+            "int",
+            "int",
+            "float",
+            "float",
+            "float",
+            "int",
+            "int",
+            "int",
+            "int",
+            "ignore"
+          ],
+          "ret": [
+            -1,
+            0
+          ],
+          "writes": [
+            {
+              "arg": 11,
+              "offset": 0,
+              "hex": "00 5d 90 00",
+              "call": 1
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": "0x00905d00"
+      }
+    },
+    {
+      "name": "adjusted_with_null_binding",
+      "args": [
+        1,
+        "@position",
+        2,
+        3,
+        1.5,
+        2.5,
+        3.5,
+        4,
+        5,
+        6,
+        "@owner"
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x218",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "@fn_lookup": {
+          "name": "PositionLookup_guess::Lookup_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "mem:12",
+            "int",
+            "int",
+            "float",
+            "float",
+            "float",
+            "int",
+            "int",
+            "int",
+            "int",
+            "ignore"
+          ],
+          "ret": [
+            -1,
+            0
+          ],
+          "writes": [
+            {
+              "arg": 11,
+              "offset": 0,
+              "hex": "00 5d 90 00",
+              "call": 1
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": "0x00905d00"
+      }
+    },
+    {
+      "name": "success_without_result",
+      "args": [
+        1,
+        "@position",
+        2,
+        3,
+        1.5,
+        2.5,
+        3.5,
+        4,
+        5,
+        6,
+        "@owner"
+      ],
+      "callees": {
+        "@fn_lookup": {
+          "name": "PositionLookup_guess::Lookup_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "mem:12",
+            "int",
+            "int",
+            "float",
+            "float",
+            "float",
+            "int",
+            "int",
+            "int",
+            "int",
+            "ignore"
+          ],
+          "ret": [
+            0
+          ],
+          "writes": []
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4434102,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -10,
+          10
+        ]
+      },
+      {
+        "choices": [
+          "@position"
+        ]
+      },
+      {
+        "range": [
+          -10,
+          10
+        ]
+      },
+      {
+        "range": [
+          -10,
+          10
+        ]
+      },
+      {
+        "range": [
+          -10.0,
+          10.0
+        ]
+      },
+      {
+        "range": [
+          -10.0,
+          10.0
+        ]
+      },
+      {
+        "range": [
+          -10.0,
+          10.0
+        ]
+      },
+      {
+        "range": [
+          -10,
+          10
+        ]
+      },
+      {
+        "range": [
+          -10,
+          10
+        ]
+      },
+      {
+        "range": [
+          -10,
+          10
+        ]
+      },
+      {
+        "choices": [
+          "@owner",
+          0
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@position",
+        "offset": "0x0",
+        "type": "float",
+        "count": 3,
+        "range": [
+          -20.0,
+          20.0
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x218",
+        "type": "ptr",
+        "choices": [
+          "@binding",
+          0
+        ]
+      },
+      {
+        "addr": "@offset",
+        "offset": "0x4",
+        "type": "int",
+        "choices": [
+          36,
+          40,
+          44
+        ]
+      },
+      {
+        "addr": "0x00923bcc",
+        "type": "float",
+        "count": 3,
+        "range": [
+          -100.0,
+          100.0
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,281 @@
+{
+  "function": "do_melody_guess",
+  "original": "0x00472156",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "value_guess",
+      "type": "int"
+    },
+    {
+      "name": "text_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "target": {
+      "size": "0x21c",
+      "fill": "random",
+      "init": [
+        { "offset": "0x1a8", "u32": "@target_data" },
+        { "offset": "0x218", "u32": "@action" }
+      ]
+    },
+    "target_data": {
+      "size": "0xf9c",
+      "fill": "random",
+      "init": [
+        { "offset": "0xf98", "u32": 4660 }
+      ]
+    },
+    "action": {
+      "size": "0x20",
+      "fill": "random",
+      "init": [
+        { "offset": "0x4", "u32": "@vbtable" }
+      ]
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        { "offset": "0x4", "u32": 4 }
+      ]
+    },
+    "row": {
+      "size": "0x11a0",
+      "fill": "random",
+      "init": [
+        { "offset": "0x119c", "u8": 8 }
+      ]
+    },
+    "connection": {
+      "size": "0x1ac",
+      "fill": "random",
+      "init": [
+        { "offset": "0x1a8", "u32": "@connection_data" }
+      ]
+    },
+    "connection_data": {
+      "size": "0xf9c",
+      "fill": "random",
+      "init": [
+        { "offset": "0xf98", "u32": 9029 }
+      ]
+    },
+    "keylookup": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "command_state": {
+      "size": "0xc284",
+      "fill": "random",
+      "init": [
+        { "offset": "0x8", "u32": "@vbtable" }
+      ]
+    },
+    "selector": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    { "addr": "0x00905ce4", "u32": "@connection" },
+    { "addr": "0x00985cc8", "u32": "@keylookup" },
+    { "addr": "0x00905d00", "u32": "@command_state" },
+    { "addr": "0x00850c2c", "u32": "@selector" },
+    { "addr": "0x0063f53c", "from_image": "0x0063f53c", "image_size": 3 }
+  ],
+  "callees": {
+    "0x005ec220": {
+      "name": "Find_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@row"
+    },
+    "0x0047e8e0": {
+      "name": "Prepare_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0044d0d0": {
+      "name": "Check_guess",
+      "conv": "cdecl",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x0040cbd6": {
+      "name": "GetKey_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 7
+    },
+    "0x0040db0b": {
+      "name": "Matches_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 1
+    },
+    "0x0040f8a0": {
+      "name": "Handle_guess",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x0060f3dc": {
+      "name": "_isdigit",
+      "conv": "cdecl",
+      "args": ["int"],
+      "ret": [1, 1]
+    },
+    "0x00610837": {
+      "name": "_sscanf",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr", "ignore"],
+      "ret": [1],
+      "writes": [
+        { "arg": 2, "offset": 0, "hex": "01000000" }
+      ]
+    },
+    "0x00484909": {
+      "name": "SetValue_guess",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x004828de": {
+      "name": "GetCount_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x004ecb56": {
+      "name": "Select_guess",
+      "conv": "thiscall",
+      "args": ["int"]
+    }
+  },
+  "rewrite_aliases": {
+    "_isdigit": "0x0060f3dc",
+    "_sscanf": "0x00610837"
+  },
+  "cases": [
+    {
+      "name": "null-target",
+      "args": [0, ""]
+    },
+    {
+      "name": "missing-action",
+      "args": ["@target", ""],
+      "memory": [
+        { "addr": "@target", "offset": "0x218", "u32": 0 }
+      ]
+    },
+    {
+      "name": "wrong-mode",
+      "args": ["@target", ""],
+      "memory": [
+        { "addr": "@row", "offset": "0x119c", "u8": 7 }
+      ]
+    },
+    {
+      "name": "match-handler",
+      "args": ["@target", ""],
+      "callees": {
+        "0x0044d0d0": { "name": "Check_guess", "conv": "cdecl", "args": ["int"], "ret": 1 },
+        "0x0040db0b": { "name": "Matches_guess", "conv": "thiscall", "args": ["int", "int"], "ret": 1 }
+      }
+    },
+    {
+      "name": "no-match-handler",
+      "args": ["@target", ""],
+      "callees": {
+        "0x0044d0d0": { "name": "Check_guess", "conv": "cdecl", "args": ["int"], "ret": 1 },
+        "0x0040db0b": { "name": "Matches_guess", "conv": "thiscall", "args": ["int", "int"], "ret": 0 }
+      }
+    },
+    {
+      "name": "empty-text-count-zero",
+      "args": ["@target", ""],
+      "callees": {
+        "0x004828de": { "name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 0 }
+      }
+    },
+    {
+      "name": "empty-text-count-one",
+      "args": ["@target", ""],
+      "callees": {
+        "0x004828de": { "name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 1 }
+      }
+    },
+    {
+      "name": "empty-text-count-nine",
+      "args": ["@target", ""],
+      "callees": {
+        "0x004828de": { "name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 9 }
+      }
+    },
+    {
+      "name": "empty-text-count-ten",
+      "args": ["@target", ""],
+      "callees": {
+        "0x004828de": { "name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 10 }
+      }
+    },
+    {
+      "name": "nondigit-text",
+      "args": ["@target", "abc"],
+      "callees": {
+        "0x0060f3dc": { "name": "_isdigit", "conv": "cdecl", "args": ["int"], "ret": [0, 0, 0] }
+      }
+    },
+    {
+      "name": "single-number",
+      "args": ["@target", "12"],
+      "callees": {
+        "0x0060f3dc": { "name": "_isdigit", "conv": "cdecl", "args": ["int"], "ret": [1, 1, 1] },
+        "0x00610837": { "name": "_sscanf", "conv": "cdecl", "args": ["cstr", "cstr", "ignore"], "ret": [1], "writes": [{ "arg": 2, "offset": 0, "hex": "0c000000" }] }
+      }
+    },
+    {
+      "name": "leading-nondigit-number",
+      "args": ["@target", "x3"],
+      "callees": {
+        "0x0060f3dc": { "name": "_isdigit", "conv": "cdecl", "args": ["int"], "ret": [0, 1, 1] },
+        "0x00610837": { "name": "_sscanf", "conv": "cdecl", "args": ["cstr", "cstr", "ignore"], "ret": [1], "writes": [{ "arg": 2, "offset": 0, "hex": "03000000" }] }
+      }
+    },
+    {
+      "name": "two-numbers",
+      "args": ["@target", "2x7"],
+      "callees": {
+        "0x0060f3dc": { "name": "_isdigit", "conv": "cdecl", "args": ["int"], "ret": [1, 1, 0, 0, 1, 1] },
+        "0x00610837": { "name": "_sscanf", "conv": "cdecl", "args": ["cstr", "cstr", "ignore"], "ret": [1, 1], "writes": [
+          { "arg": 2, "offset": 0, "hex": "02000000", "call": 0 },
+          { "arg": 2, "offset": 0, "hex": "07000000", "call": 1 }
+        ] }
+      }
+    },
+    {
+      "name": "sscanf-retry",
+      "args": ["@target", "1"],
+      "callees": {
+        "0x0060f3dc": { "name": "_isdigit", "conv": "cdecl", "args": ["int"], "ret": [1, 1, 1] },
+        "0x00610837": { "name": "_sscanf", "conv": "cdecl", "args": ["cstr", "cstr", "ignore"], "ret": [0, 1], "writes": [{ "arg": 2, "offset": 0, "hex": "01000000", "call": 1 }] }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4661590,
+    "count": 100,
+    "args": [
+      { "choices": [0, "@target"] },
+      { "choices": ["1"] }
+    ],
+    "memory": [
+      { "addr": "@row", "offset": "0x119c", "type": "u8", "choices": [7, 8] }
+    ]
+  }
+}

@@ -1,0 +1,2906 @@
+{
+  "function": "CDisplay_guess::InitGameUI_guess",
+  "original": "0x0043efdd",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@client",
+  "args": [],
+  "ret": "void",
+  "_notes": "Builds the game UI: one guarded `new Window(...)` per global, then loads seven icon animations. Every constructor is a stub that returns its `this`; operator new returns @blk, whose vtable slot 33 is @fn_slot33.",
+  "objects": {
+    "client": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "blk": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": 0,
+          "u32": "@vtbl"
+        }
+      ]
+    },
+    "vtbl": {
+      "size": "0x88",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x84",
+          "u32": "@fn_slot33"
+        }
+      ]
+    },
+    "fn_slot33": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "pc": {
+      "size": "0xd40",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@vbtable"
+        }
+      ]
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "0x100"
+        }
+      ]
+    },
+    "charinfo": {
+      "size": "0x11a8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x11a4",
+          "u32": 2
+        }
+      ]
+    },
+    "player": {
+      "size": "0x300",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x256",
+          "u8": 1
+        }
+      ]
+    },
+    "eq": {
+      "size": "0x3a1c8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x3a1ba",
+          "u8": 1
+        }
+      ]
+    },
+    "uimgr": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "icons": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "obj985": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "anim": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "heaprep": {
+      "size": "0x200",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00850BA0",
+      "size": 288,
+      "fill": "zero"
+    },
+    {
+      "addr": "0x0099D414",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991758",
+      "u32": 0
+    },
+    {
+      "addr": "0x009917E4",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991B88",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991E44",
+      "u32": 0
+    },
+    {
+      "addr": "0x009928DC",
+      "u32": 0
+    },
+    {
+      "addr": "0x009928E0",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991D64",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991A74",
+      "u32": 0
+    },
+    {
+      "addr": "0x009927D0",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991A58",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991AE4",
+      "size": 16,
+      "fill": "zero"
+    },
+    {
+      "addr": "0x00991930",
+      "u32": 0
+    },
+    {
+      "addr": "0x009928FC",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991E94",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991EB0",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991E28",
+      "u32": 0
+    },
+    {
+      "addr": "0x0079DBA0",
+      "u32": 0
+    },
+    {
+      "addr": "0x00985C94",
+      "u32": 0
+    },
+    {
+      "addr": "0x0098593C",
+      "u32": 0
+    },
+    {
+      "addr": "0x00985904",
+      "u32": 0
+    },
+    {
+      "addr": "0x0079C104",
+      "u32": 0
+    },
+    {
+      "addr": "0x009919C4",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991F5C",
+      "u32": 0
+    },
+    {
+      "addr": "0x009918C0",
+      "u32": 0
+    },
+    {
+      "addr": "0x00992858",
+      "u32": 0
+    },
+    {
+      "addr": "0x00992820",
+      "u32": 0
+    },
+    {
+      "addr": "0x009913D4",
+      "u32": 0
+    },
+    {
+      "addr": "0x009913F0",
+      "u32": 0
+    },
+    {
+      "addr": "0x009913B8",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991C24",
+      "u32": 0
+    },
+    {
+      "addr": "0x009927EC",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991AAC",
+      "u32": 0
+    },
+    {
+      "addr": "0x0099298C",
+      "u32": 0
+    },
+    {
+      "addr": "0x009929A8",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991AC8",
+      "u32": 0
+    },
+    {
+      "addr": "0x00985D94",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991C40",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991A90",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991608",
+      "u32": 0
+    },
+    {
+      "addr": "0x009915D0",
+      "u32": 0
+    },
+    {
+      "addr": "0x009915EC",
+      "u32": 0
+    },
+    {
+      "addr": "0x00992940",
+      "u32": 0
+    },
+    {
+      "addr": "0x0079C148",
+      "u32": 0
+    },
+    {
+      "addr": "0x009928A8",
+      "u32": 0
+    },
+    {
+      "addr": "0x0099288C",
+      "u32": 0
+    },
+    {
+      "addr": "0x0099283C",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991E78",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991BA8",
+      "u32": 0
+    },
+    {
+      "addr": "0x00991434",
+      "u32": 0
+    },
+    {
+      "addr": "0x00905D00",
+      "u32": "@pc"
+    },
+    {
+      "addr": "0x00905CE4",
+      "u32": "@player"
+    },
+    {
+      "addr": "0x00988DF0",
+      "u32": "@eq"
+    },
+    {
+      "addr": "0x0099D3EC",
+      "u32": "@uimgr"
+    },
+    {
+      "addr": "0x0099D3F4",
+      "u32": "@icons"
+    },
+    {
+      "addr": "0x00985CF0",
+      "u32": "@obj985"
+    },
+    {
+      "addr": "0x00923D65",
+      "u8": 1
+    },
+    {
+      "addr": "0x009247A0",
+      "u32": 1
+    },
+    {
+      "addr": "0x009247A4",
+      "u32": 1
+    },
+    {
+      "addr": "0x009247A8",
+      "u32": 1
+    },
+    {
+      "addr": "0x009247AC",
+      "u32": 1
+    },
+    {
+      "addr": "0x009247B0",
+      "u32": 1
+    },
+    {
+      "addr": "0x00985840",
+      "u32": 1234567
+    }
+  ],
+  "callees": {
+    "0x00574110": {
+      "name": "FUN_00574110 log",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x004ffab8": {
+      "name": "InitIconCaches_guess",
+      "conv": "cdecl",
+      "args": []
+    },
+    "0x0060d071": {
+      "name": "operator new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@blk"
+    },
+    "0x004fd26a": {
+      "name": "ctor_004fd26a",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": "this"
+    },
+    "0x004eb19d": {
+      "name": "ctor_004eb19d",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x004fd3ce": {
+      "name": "ctor_004fd3ce",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00555363": {
+      "name": "ctor_00555363",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0051a8e2": {
+      "name": "ctor_0051a8e2",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x004fa372": {
+      "name": "ctor_004fa372",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x004f60c5": {
+      "name": "ctor_004f60c5",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x0052e9c3": {
+      "name": "ctor_0052e9c3",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0052d28d": {
+      "name": "ctor_0052d28d",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0052bb96": {
+      "name": "ctor_0052bb96",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00500df3": {
+      "name": "ctor_00500df3",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0051df88": {
+      "name": "ctor_0051df88",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x00548144": {
+      "name": "ctor_00548144",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x0053ab19": {
+      "name": "ctor_0053ab19",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00564b30": {
+      "name": "ctor_00564b30",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": "this"
+    },
+    "0x004e84e8": {
+      "name": "ctor_004e84e8",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x005035ea": {
+      "name": "ctor_005035ea",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00551f98": {
+      "name": "ctor_00551f98",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00553500": {
+      "name": "ctor_00553500",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00539260": {
+      "name": "ctor_00539260",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004dbbc0": {
+      "name": "ctor_004dbbc0",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00548b9d": {
+      "name": "ctor_00548b9d",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00539810": {
+      "name": "ctor_00539810",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00539beb": {
+      "name": "FUN_00539beb",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004d7eef": {
+      "name": "ctor_004d7eef",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0052aa42": {
+      "name": "ctor_0052aa42",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00542620": {
+      "name": "ctor_00542620",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0056a4ff": {
+      "name": "ctor_0056a4ff",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x005541f4": {
+      "name": "ctor_005541f4",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00553cbd": {
+      "name": "ctor_00553cbd",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0042d707": {
+      "name": "ctor_0042d707",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004d0a8f": {
+      "name": "ctor_004d0a8f",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0050c317": {
+      "name": "ctor_0050c317",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0055b4d1": {
+      "name": "ctor_0055b4d1",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0050ac61": {
+      "name": "ctor_0050ac61",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0050876b": {
+      "name": "ctor_0050876b",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0054efb5": {
+      "name": "ctor_0054efb5",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004d53e2": {
+      "name": "ctor_004d53e2",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0054deb0": {
+      "name": "ctor_0054deb0",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004e896d": {
+      "name": "ctor_004e896d",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x005317cc": {
+      "name": "ctor_005317cc",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00535caa": {
+      "name": "ctor_00535caa",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004ff559": {
+      "name": "ctor_004ff559",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0053f8dc": {
+      "name": "ctor_0053f8dc",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004e955b": {
+      "name": "ctor_004e955b",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": "this"
+    },
+    "0x0055ba0f": {
+      "name": "ctor_0055ba0f",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004f83ac": {
+      "name": "ctor_004f83ac",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00576fa0": {
+      "name": "FUN_00576fa0 copy",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr",
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "from_image": "0x00656044",
+          "image_size": 13
+        }
+      ]
+    },
+    "0x006220e9": {
+      "name": "_itoa",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ptr",
+        "int"
+      ],
+      "ret": "arg1"
+    },
+    "0x00576fd0": {
+      "name": "FUN_00576fd0 append",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "ptr",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00513cd7": {
+      "name": "ctor_00513cd7",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "cstr"
+      ],
+      "ret": "this"
+    },
+    "0x005452f7": {
+      "name": "ctor_005452f7",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004ffc7f": {
+      "name": "ctor_004ffc7f",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004eb411": {
+      "name": "ctor_004eb411",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004ec8b4": {
+      "name": "ctor_004ec8b4",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00558521": {
+      "name": "ctor_00558521",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00516e9a": {
+      "name": "ctor_00516e9a",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00571e00": {
+      "name": "CXStr::CXStr",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this",
+      "passthrough": true
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": "@heaprep"
+    },
+    "0x004dc838": {
+      "name": "ctor_004dc838 bank",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ignore"
+      ],
+      "ret": "this"
+    },
+    "0x0054d5ac": {
+      "name": "ctor_0054d5ac",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00560a6c": {
+      "name": "ctor_00560a6c",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00501ea9": {
+      "name": "ctor_00501ea9",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0052b4c9": {
+      "name": "ctor_0052b4c9",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004d4277": {
+      "name": "ctor_004d4277",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004f9ae1": {
+      "name": "ctor_004f9ae1",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00536d26": {
+      "name": "ctor_00536d26",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0056982f": {
+      "name": "ctor_0056982f",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004e66c2": {
+      "name": "ctor_004e66c2",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004e272f": {
+      "name": "ctor_004e272f",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0050752b": {
+      "name": "ctor_0050752b",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0055279d": {
+      "name": "ctor_0055279d",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x005663a4": {
+      "name": "ctor_005663a4",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0051675e": {
+      "name": "ctor_0051675e",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x005013c9": {
+      "name": "ctor_005013c9",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004e9980": {
+      "name": "ctor_004e9980",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0056f9fa": {
+      "name": "ctor_0056f9fa",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004fa183": {
+      "name": "ctor_004fa183",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00544c73": {
+      "name": "ctor_00544c73",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00506ae5": {
+      "name": "ctor_00506ae5",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x005652c6": {
+      "name": "ctor_005652c6",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0054b068": {
+      "name": "ctor_0054b068",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0054c020": {
+      "name": "ctor_0054c020",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00545804": {
+      "name": "ctor_00545804",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0042416a": {
+      "name": "ctor_0042416a",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x004c3ab3": {
+      "name": "ctor_004c3ab3",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x004b1473": {
+      "name": "ctor_004b1473",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x004b1325": {
+      "name": "ctor_004b1325",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x00401745": {
+      "name": "ctor_00401745",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x004c7de4": {
+      "name": "ctor_004c7de4",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004c799a": {
+      "name": "ShouldAutoOpen_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005ec220": {
+      "name": "GetCharInfo2",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@charinfo"
+    },
+    "0x005031d3": {
+      "name": "ctor_005031d3",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00553747": {
+      "name": "ctor_00553747",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004fe619": {
+      "name": "ctor_004fe619",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0055fc8b": {
+      "name": "ctor_0055fc8b",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0055c2b5": {
+      "name": "ctor_0055c2b5",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004d642b": {
+      "name": "ctor_004d642b",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004084ba": {
+      "name": "FUN_004084ba",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004d7bb4": {
+      "name": "ctor_004d7bb4",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004d5770": {
+      "name": "ctor_004d5770",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00526c4f": {
+      "name": "ctor_00526c4f",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0055b772": {
+      "name": "ctor_0055b772",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004e6e5d": {
+      "name": "ctor_004e6e5d",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00510fda": {
+      "name": "ctor_00510fda",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x005259ca": {
+      "name": "ctor_005259ca",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00522fa4": {
+      "name": "ctor_00522fa4",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0056c231": {
+      "name": "ctor_0056c231",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0056e855": {
+      "name": "ctor_0056e855",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00513266": {
+      "name": "ctor_00513266",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004cbb56": {
+      "name": "ctor_004cbb56",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0052929b": {
+      "name": "ctor_0052929b",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0050cce5": {
+      "name": "ctor_0050cce5",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004e09df": {
+      "name": "ctor_004e09df",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004dd7a0": {
+      "name": "ctor_004dd7a0",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004deeb6": {
+      "name": "ctor_004deeb6",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00568bdb": {
+      "name": "ctor_00568bdb",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00407706": {
+      "name": "ctor_00407706",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x005633e9": {
+      "name": "ctor_005633e9",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004c9c3e": {
+      "name": "RefreshTicketWindow_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00560f5b": {
+      "name": "ctor_00560f5b",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0055d8ca": {
+      "name": "ctor_0055d8ca",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0054a413": {
+      "name": "ctor_0054a413",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0052201c": {
+      "name": "ctor_0052201c",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004d8ab5": {
+      "name": "ctor_004d8ab5",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00542b35": {
+      "name": "ctor_00542b35",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00555679": {
+      "name": "ctor_00555679",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004daa44": {
+      "name": "ctor_004daa44",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0046d655": {
+      "name": "FUN_0046d655 time",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 5000
+    },
+    "0x00563fbb": {
+      "name": "ctor_00563fbb",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": "this"
+    },
+    "0x005af630": {
+      "name": "FUN_005af630",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x005b44a0": {
+      "name": "FUN_005b44a0 find icon",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": [
+        "@anim",
+        0,
+        "@anim",
+        "@anim",
+        0,
+        0,
+        "@anim"
+      ]
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x005b1bb0": {
+      "name": "FUN_005b1bb0 load icon",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004ae721": {
+      "name": "GetBool",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "cstr",
+        "u8"
+      ],
+      "ret": 1
+    },
+    "0x00436156": {
+      "name": "SetState2d60",
+      "conv": "thiscall",
+      "args": [
+        "char"
+      ]
+    },
+    "0x0046c627": {
+      "name": "LoadViewportRect_guess",
+      "conv": "cdecl",
+      "args": []
+    },
+    "0x00439212": {
+      "name": "ApplyVideoMode_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "@fn_slot33": {
+      "name": "Window slot 33",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071",
+    "__itoa": "0x006220e9"
+  },
+  "coverage_ok": {
+    "0043FCC8-0043FCC9": "int3 bounds check: the bank loop index runs 8..15 and the limit is 16"
+  },
+  "cases": [
+    {
+      "name": "create_everything"
+    },
+    {
+      "name": "flags_off_small_bank",
+      "memory": [
+        {
+          "addr": "0x00923D65",
+          "u8": 0
+        },
+        {
+          "addr": "0x009247A0",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247A4",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247A8",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247AC",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247B0",
+          "u32": 0
+        },
+        {
+          "addr": "@player",
+          "offset": "0x256",
+          "u8": 0
+        },
+        {
+          "addr": "0x00985840",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "bank_slot8_big",
+      "memory": [
+        {
+          "addr": "0x009247A0",
+          "u32": 0
+        },
+        {
+          "addr": "@pc",
+          "offset": "0xd10",
+          "u32": 7
+        }
+      ]
+    },
+    {
+      "name": "bank_slot15_big",
+      "memory": [
+        {
+          "addr": "0x009247A0",
+          "u32": 0
+        },
+        {
+          "addr": "@pc",
+          "offset": "0xd2c",
+          "u32": 7
+        }
+      ]
+    },
+    {
+      "name": "bank_slot11_big",
+      "memory": [
+        {
+          "addr": "0x009247A0",
+          "u32": 0
+        },
+        {
+          "addr": "@pc",
+          "offset": "0xd1c",
+          "u32": "0x80000000"
+        }
+      ]
+    },
+    {
+      "name": "bank_slot7_small",
+      "memory": [
+        {
+          "addr": "0x009247A0",
+          "u32": 0
+        },
+        {
+          "addr": "@pc",
+          "offset": "0xd0c",
+          "u32": 7
+        }
+      ]
+    },
+    {
+      "name": "bank_slot0_small",
+      "memory": [
+        {
+          "addr": "0x009247A0",
+          "u32": 0
+        },
+        {
+          "addr": "@pc",
+          "offset": "0xcf0",
+          "u32": 7
+        }
+      ]
+    },
+    {
+      "name": "bank_past_end_small",
+      "memory": [
+        {
+          "addr": "0x009247A0",
+          "u32": 0
+        },
+        {
+          "addr": "@pc",
+          "offset": "0xd30",
+          "u32": 7
+        }
+      ]
+    },
+    {
+      "name": "bank_empty_flag_big",
+      "memory": [
+        {
+          "addr": "0x009247A0",
+          "u32": 5
+        }
+      ]
+    },
+    {
+      "name": "pc_null",
+      "memory": [
+        {
+          "addr": "0x00905D00",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247A0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "pc_null_flag",
+      "memory": [
+        {
+          "addr": "0x00905D00",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "c799a_false",
+      "callees": {
+        "0x004c799a": {
+          "name": "FUN_004c799a",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "info_one",
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x11a4",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "info_zero",
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x11a4",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "info_negative",
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x11a4",
+          "u32": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "name": "info_three",
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x11a4",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "only_a0",
+      "memory": [
+        {
+          "addr": "0x009247A4",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247A8",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247AC",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247B0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "only_a4",
+      "memory": [
+        {
+          "addr": "0x009247A0",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247A8",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247AC",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247B0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "only_a8",
+      "memory": [
+        {
+          "addr": "0x009247A0",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247A4",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247AC",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247B0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "only_ac",
+      "memory": [
+        {
+          "addr": "0x009247A0",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247A4",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247A8",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247B0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "only_b0",
+      "memory": [
+        {
+          "addr": "0x009247A0",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247A4",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247A8",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247AC",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "mail_off",
+      "memory": [
+        {
+          "addr": "0x00923D65",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "gm_only",
+      "memory": [
+        {
+          "addr": "@eq",
+          "offset": "0x3a1ba",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "guide_only",
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x256",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "a4_with_79c104_set",
+      "memory": [
+        {
+          "addr": "0x0079C104",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "no_a4_79c104_clear",
+      "memory": [
+        {
+          "addr": "0x009247A4",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "ac_with_985d94_set",
+      "memory": [
+        {
+          "addr": "0x00985D94",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "timer_zero",
+      "memory": [
+        {
+          "addr": "0x00985840",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "timer_one",
+      "memory": [
+        {
+          "addr": "0x00985840",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "timer_negative",
+      "memory": [
+        {
+          "addr": "0x00985840",
+          "u32": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "name": "timer_exact",
+      "memory": [
+        {
+          "addr": "0x00985840",
+          "u32": 6000
+        }
+      ]
+    },
+    {
+      "name": "timer_just_under",
+      "memory": [
+        {
+          "addr": "0x00985840",
+          "u32": 5999
+        }
+      ]
+    },
+    {
+      "name": "timer_window_exists",
+      "memory": [
+        {
+          "addr": "0x00850C94",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "obj985_null",
+      "memory": [
+        {
+          "addr": "0x00985CF0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "icons_all_found",
+      "callees": {
+        "0x005b44a0": {
+          "name": "FUN_005b44a0 find icon",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": "@anim"
+        }
+      }
+    },
+    {
+      "name": "icons_none_found",
+      "callees": {
+        "0x005b44a0": {
+          "name": "FUN_005b44a0 find icon",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "icons_other_pattern",
+      "callees": {
+        "0x005b44a0": {
+          "name": "FUN_005b44a0 find icon",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": [
+            0,
+            "@anim",
+            0,
+            0,
+            "@anim",
+            "@anim",
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "shadows_off",
+      "callees": {
+        "0x004ae721": {
+          "name": "GetBool",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "cstr",
+            "u8"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "new_fails",
+      "memory": [
+        {
+          "addr": "0x00985840",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        },
+        "0x004c799a": {
+          "name": "FUN_004c799a",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "new_fails_flags_off",
+      "memory": [
+        {
+          "addr": "0x00923D65",
+          "u8": 0
+        },
+        {
+          "addr": "0x009247A0",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247A4",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247A8",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247AC",
+          "u32": 0
+        },
+        {
+          "addr": "0x009247B0",
+          "u32": 0
+        },
+        {
+          "addr": "0x00985840",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        },
+        "0x004c799a": {
+          "name": "FUN_004c799a",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "new_fails_timer_faults",
+      "callees": {
+        "0x0060d071": {
+          "name": "operator new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        },
+        "0x004c799a": {
+          "name": "FUN_004c799a",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "new_fails_vcall_faults",
+      "callees": {
+        "0x0060d071": {
+          "name": "operator new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "everything_exists",
+      "memory": [
+        {
+          "addr": "0x00850BA0",
+          "size": 288,
+          "fill": "random"
+        },
+        {
+          "addr": "0x0099D414",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991758",
+          "u32": 1
+        },
+        {
+          "addr": "0x009917E4",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991B88",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991E44",
+          "u32": 1
+        },
+        {
+          "addr": "0x009928DC",
+          "u32": 1
+        },
+        {
+          "addr": "0x009928E0",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991D64",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991A74",
+          "u32": 1
+        },
+        {
+          "addr": "0x009927D0",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991A58",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991AE4",
+          "hex": "01000000020000000300000004000000"
+        },
+        {
+          "addr": "0x00991930",
+          "u32": 1
+        },
+        {
+          "addr": "0x009928FC",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991E94",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991EB0",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991E28",
+          "u32": 1
+        },
+        {
+          "addr": "0x0079DBA0",
+          "u32": 1
+        },
+        {
+          "addr": "0x00985C94",
+          "u32": 1
+        },
+        {
+          "addr": "0x0098593C",
+          "u32": 1
+        },
+        {
+          "addr": "0x00985904",
+          "u32": 1
+        },
+        {
+          "addr": "0x0079C104",
+          "u32": 1
+        },
+        {
+          "addr": "0x009919C4",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991F5C",
+          "u32": 1
+        },
+        {
+          "addr": "0x009918C0",
+          "u32": 1
+        },
+        {
+          "addr": "0x00992858",
+          "u32": 1
+        },
+        {
+          "addr": "0x00992820",
+          "u32": 1
+        },
+        {
+          "addr": "0x009913D4",
+          "u32": 1
+        },
+        {
+          "addr": "0x009913F0",
+          "u32": 1
+        },
+        {
+          "addr": "0x009913B8",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991C24",
+          "u32": 1
+        },
+        {
+          "addr": "0x009927EC",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991AAC",
+          "u32": 1
+        },
+        {
+          "addr": "0x0099298C",
+          "u32": 1
+        },
+        {
+          "addr": "0x009929A8",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991AC8",
+          "u32": 1
+        },
+        {
+          "addr": "0x00985D94",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991C40",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991A90",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991608",
+          "u32": 1
+        },
+        {
+          "addr": "0x009915D0",
+          "u32": 1
+        },
+        {
+          "addr": "0x009915EC",
+          "u32": 1
+        },
+        {
+          "addr": "0x00992940",
+          "u32": 1
+        },
+        {
+          "addr": "0x0079C148",
+          "u32": 1
+        },
+        {
+          "addr": "0x009928A8",
+          "u32": 1
+        },
+        {
+          "addr": "0x0099288C",
+          "u32": 1
+        },
+        {
+          "addr": "0x0099283C",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991E78",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991BA8",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991434",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "hotbuttons_1_and_3_exist",
+      "memory": [
+        {
+          "addr": "0x00991AE8",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991AF0",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "hotbuttons_0_and_2_exist",
+      "memory": [
+        {
+          "addr": "0x00991AE4",
+          "u32": 1
+        },
+        {
+          "addr": "0x00991AEC",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "group_heads_exist",
+      "memory": [
+        {
+          "addr": "0x00991A58",
+          "u32": 1
+        },
+        {
+          "addr": "0x00850BFC",
+          "u32": 1
+        },
+        {
+          "addr": "0x009913D4",
+          "u32": 1
+        },
+        {
+          "addr": "0x009928A8",
+          "u32": 1
+        },
+        {
+          "addr": "0x00850BE0",
+          "u32": 1
+        },
+        {
+          "addr": "0x00850CA0",
+          "u32": 1
+        },
+        {
+          "addr": "0x00850C38",
+          "u32": 1
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4452317,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x00850BA0",
+        "type": "u32",
+        "count": 72,
+        "choices": [
+          0,
+          1
+        ],
+        "p": 0.9
+      },
+      {
+        "addr": "0x0099D414",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991758",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009917E4",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991B88",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991E44",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009928DC",
+        "type": "u32",
+        "count": 2,
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991D64",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991A74",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009927D0",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991A58",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991AE4",
+        "type": "u32",
+        "count": 4,
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991930",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009928FC",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991E94",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991EB0",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991E28",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x0079DBA0",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00985C94",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x0098593C",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00985904",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x0079C104",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009919C4",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991F5C",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009918C0",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00992858",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00992820",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009913D4",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009913F0",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009913B8",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991C24",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009927EC",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991AAC",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x0099298C",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009929A8",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991AC8",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00985D94",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991C40",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991A90",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991608",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009915D0",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009915EC",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00992940",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x0079C148",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009928A8",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x0099288C",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x0099283C",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991E78",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991BA8",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00991434",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00923D65",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          255
+        ]
+      },
+      {
+        "addr": "0x009247A0",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009247A4",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009247A8",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009247AC",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009247B0",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00985840",
+        "type": "int",
+        "choices": [
+          -5,
+          0,
+          1,
+          999,
+          5000,
+          5999,
+          6000,
+          123456789
+        ]
+      },
+      {
+        "addr": "0x00905D00",
+        "type": "u32",
+        "choices": [
+          0,
+          "@pc",
+          "@pc",
+          "@pc"
+        ]
+      },
+      {
+        "addr": "0x00985CF0",
+        "type": "u32",
+        "choices": [
+          0,
+          "@obj985"
+        ]
+      },
+      {
+        "addr": "@pc",
+        "offset": "0xcf0",
+        "type": "u32",
+        "count": 18,
+        "choices": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          9
+        ],
+        "p": 0.5
+      },
+      {
+        "addr": "@charinfo",
+        "offset": "0x11a4",
+        "type": "int",
+        "range": [
+          -1,
+          4
+        ]
+      },
+      {
+        "addr": "@player",
+        "offset": "0x256",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@eq",
+        "offset": "0x3a1ba",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

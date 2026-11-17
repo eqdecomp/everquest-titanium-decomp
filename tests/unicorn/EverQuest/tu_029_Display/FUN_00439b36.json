@@ -1,0 +1,114 @@
+{
+  "function": "GetZoneTimeOfDay_guess",
+  "original": "0x00439b36",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "conv": "stdcall",
+  "args": [
+    {
+      "name": "first",
+      "type": "ptr"
+    },
+    {
+      "name": "second",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "first": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "second": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "state": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x00905cc0", "u32": "@state"},
+    {"addr": "@state", "offset": "0x4", "u8": 7},
+    {"addr": "@state", "offset": "0x5", "u8": 9},
+    {"addr": "0x00923c00", "u32": 0},
+    {"addr": "0x00923b88", "u8": 0},
+    {"addr": "0x00924470", "u32": 63}
+  ],
+  "callees": {},
+  "cases": [
+    {
+      "name": "count in range, low",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "0x00923c00", "u32": 1}]
+    },
+    {
+      "name": "count in range, high",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "0x00923c00", "u32": 24}]
+    },
+    {
+      "name": "count 25 (upper bound, not in range)",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "0x00923c00", "u32": 25}, {"addr": "0x00923b88", "u8": 2}]
+    },
+    {
+      "name": "count 0 (not in range)",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "0x00923c00", "u32": 0}, {"addr": "0x00923b88", "u8": 2}]
+    },
+    {
+      "name": "count negative",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "0x00923c00", "u32": -3}, {"addr": "0x00923b88", "u8": 0}]
+    },
+    {
+      "name": "mode 1 uses state bytes, code 0x3f",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "0x00923b88", "u8": 1}, {"addr": "0x00924470", "u32": 63}]
+    },
+    {
+      "name": "mode 5 uses state bytes, code 0x4c",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "0x00923b88", "u8": 5}, {"addr": "0x00924470", "u32": 76}]
+    },
+    {
+      "name": "mode 2 with code 0x47",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "0x00923b88", "u8": 2}, {"addr": "0x00924470", "u32": 71}]
+    },
+    {
+      "name": "mode 0 with code 0x7b",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "0x00923b88", "u8": 0}, {"addr": "0x00924470", "u32": 123}]
+    },
+    {
+      "name": "mode 3 (else zeros) with unknown code",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "0x00923b88", "u8": 3}, {"addr": "0x00924470", "u32": 16}]
+    },
+    {
+      "name": "mode 2 with unknown code returns 0",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "0x00923b88", "u8": 2}, {"addr": "0x00924470", "u32": 0}]
+    }
+  ],
+  "fuzz": {
+    "seed": 4430646,
+    "count": 200,
+    "args": [
+      {"choices": ["@first"]},
+      {"choices": ["@second"]}
+    ],
+    "memory": [
+      {"addr": "0x00923c00", "type": "int", "range": [-2, 30]},
+      {"addr": "0x00923b88", "type": "u8", "choices": [0, 1, 2, 3, 5, 7]},
+      {"addr": "0x00924470", "type": "int", "choices": [63, 71, 76, 123, 16, 0]},
+      {"addr": "@state", "offset": "0x4", "type": "u8", "range": [0, 255]},
+      {"addr": "@state", "offset": "0x5", "type": "u8", "range": [0, 255]}
+    ]
+  }
+}

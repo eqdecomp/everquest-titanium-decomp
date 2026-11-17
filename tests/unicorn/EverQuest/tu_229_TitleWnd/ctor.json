@@ -1,0 +1,138 @@
+{
+  "function": "CTitleWnd_guess::CTitleWnd_guess",
+  "original": "0x005652c6",
+  "sources": ["src/EverQuest/tu_229_TitleWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@callbackowner",
+  "args": [{"name": "parent", "type": "ptr"}],
+  "ret": "ptr",
+  "objects": {
+    "callbackowner": {"size": "0x1dc", "fill": "random"},
+    "parent": {"size": "0x11c", "fill": "random"},
+    "settings": {"size": "0x4", "fill": "random"},
+    "available": {"size": "0x170", "fill": "random"},
+    "suffixes": {"size": "0x170", "fill": "random"},
+    "notify": {"size": "0x12c", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00850ccc", "u32": 7},
+    {"addr": "0x00988df0", "u32": "@settings"}
+  ],
+  "callees": {
+    "0x00571e00": {"name": "CXStr_ctor_guess", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x005a3900": {
+      "name": "CSidlScreenWnd_ctor",
+      "conv": "thiscall",
+      "args": ["ptr", "mem:4"],
+      "ret": "this",
+      "writes": [{"addr": "@callbackowner", "offset": 292, "hex": "00000000"}]
+    },
+    "0x00571d00": {"name": "CXStr_FreeRep_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x004ae919": {
+      "name": "GetBool_guess",
+      "conv": "thiscall",
+      "args": ["cstr", "cstr", "int", "char"],
+      "ret": 1
+    },
+    "0x005a25b0": {"name": "CreateChildrenFromSidl", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005a1e10": {
+      "name": "GetChildItem",
+      "conv": "thiscall",
+      "args": ["mem:4"],
+      "ret": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    "0x005bb140": {"name": "SetCheck", "conv": "thiscall", "args": ["bool"], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "sidl disabled with null parent",
+      "args": [0]
+    },
+    {
+      "name": "sidl disabled with parent",
+      "args": ["@parent"]
+    },
+    {
+      "name": "sidl enabled with no returned controls",
+      "args": ["@parent"],
+      "callees": {
+        "0x005a3900": {
+          "name": "CSidlScreenWnd_ctor",
+          "conv": "thiscall",
+          "args": ["ptr", "mem:4"],
+          "ret": "this",
+          "writes": [{"addr": "@callbackowner", "offset": 292, "hex": "01000000"}]
+        }
+      }
+    },
+    {
+      "name": "distinct child returns",
+      "args": ["@parent"],
+      "callees": {
+        "0x005a3900": {
+          "name": "CSidlScreenWnd_ctor",
+          "conv": "thiscall",
+          "args": ["ptr", "mem:4"],
+          "ret": "this",
+          "writes": [{"addr": "@callbackowner", "offset": 292, "hex": "01000000"}]
+        },
+        "0x005a1e10": {
+          "name": "GetChildItem",
+          "conv": "thiscall",
+          "args": ["mem:4"],
+          "ret": ["@available", "@suffixes", 0, "@available", 0, "@suffixes", 0, 0, 0, 0, 0, 0]
+        }
+      }
+    },
+    {
+      "name": "all controls and notification enabled",
+      "args": ["@parent"],
+      "callees": {
+        "0x005a3900": {
+          "name": "CSidlScreenWnd_ctor",
+          "conv": "thiscall",
+          "args": ["ptr", "mem:4"],
+          "ret": "this",
+          "writes": [{"addr": "@callbackowner", "offset": 292, "hex": "01000000"}]
+        },
+        "0x005a1e10": {
+          "name": "GetChildItem",
+          "conv": "thiscall",
+          "args": ["mem:4"],
+          "ret": [0, 0, "@available", "@suffixes", 0, 0, 0, 0, "@notify", 0, 0, 0]
+        }
+      }
+    },
+    {
+      "name": "all controls with notification disabled",
+      "args": ["@parent"],
+      "callees": {
+        "0x005a3900": {
+          "name": "CSidlScreenWnd_ctor",
+          "conv": "thiscall",
+          "args": ["ptr", "mem:4"],
+          "ret": "this",
+          "writes": [{"addr": "@callbackowner", "offset": 292, "hex": "01000000"}]
+        },
+        "0x005a1e10": {
+          "name": "GetChildItem",
+          "conv": "thiscall",
+          "args": ["mem:4"],
+          "ret": [0, 0, "@available", "@suffixes", 0, 0, 0, 0, "@notify", 0, 0, 0]
+        },
+        "0x004ae919": {
+          "name": "GetBool_guess",
+          "conv": "thiscall",
+          "args": ["cstr", "cstr", "int", "char"],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5657286,
+    "count": 100,
+    "args": [{"choices": [0, "@parent"]}],
+    "memory": []
+  }
+}

@@ -1,0 +1,398 @@
+{
+  "function": "CGemsGameWndView_guess::CheckForNewHighScore_guess",
+  "original": "0x00506257",
+  "sources": [
+    "src/EverQuest/tu_160_GemsGameWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "size": "0xad",
+  "objects": {
+    "owner": {
+      "size": "0x4488",
+      "fill": "zero"
+    },
+    "lookup": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@branch"
+        }
+      ]
+    },
+    "branch": {
+      "size": "0x10",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d00",
+      "u32": "@lookup"
+    },
+    {
+      "addr": "@lookup",
+      "offset": "0x44",
+      "cstr": "HELLO"
+    }
+  ],
+  "callees": {
+    "0x005052e0": {
+      "name": "SaveHighScoresToFile_guess",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "not_found_all_zero",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x438",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "found_row0_shift_all",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x438",
+          "u32": 5
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x168",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1b0",
+          "u32": 2
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x3f0",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "found_row5",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x438",
+          "u32": 16
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x168",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1b0",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1f8",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x240",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x288",
+          "u32": 4294967295
+        }
+      ]
+    },
+    {
+      "name": "found_row9_no_shift",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x438",
+          "u32": 16
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x168",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1b0",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1f8",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x240",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x288",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x2d0",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x318",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x360",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x3a8",
+          "u32": 4294967295
+        }
+      ]
+    },
+    {
+      "name": "not_found_full",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x438",
+          "u32": 16
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x168",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1b0",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1f8",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x240",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x288",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x2d0",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x318",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x360",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x3a8",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x3f0",
+          "u32": 4294967295
+        }
+      ]
+    },
+    {
+      "name": "found_row5_no_lookup",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00905d00",
+          "u32": 0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x438",
+          "u32": 16
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x168",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1b0",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1f8",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x240",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x288",
+          "u32": 4294967295
+        }
+      ]
+    }
+    ,
+    {
+      "name": "lookup_branch_offset",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@branch",
+          "offset": "0x4",
+          "u32": 2
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x438",
+          "u32": 16
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x168",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1b0",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1f8",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x240",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x288",
+          "u32": 4294967295
+        }
+      ]
+    }
+  ],
+  "_survivors": "L569: i <= 10 is equivalent: entries[10].first aliases total_438, so total > total never breaks at i=10",
+  "fuzz": {
+    "seed": 5268055,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@owner",
+        "offset": "0x438",
+        "type": "int",
+        "choices": [0, 1, 5, 16, 2147483647, 4294967295]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x168",
+        "type": "int",
+        "choices": [0, 1, 5, 16, 4294967295]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x1b0",
+        "type": "int",
+        "choices": [0, 1, 5, 16, 4294967295]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x1f8",
+        "type": "int",
+        "choices": [0, 1, 5, 16, 4294967295]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x240",
+        "type": "int",
+        "choices": [0, 1, 5, 16, 4294967295]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x288",
+        "type": "int",
+        "choices": [0, 1, 5, 16, 4294967295]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x2d0",
+        "type": "int",
+        "choices": [0, 1, 5, 16, 4294967295]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x318",
+        "type": "int",
+        "choices": [0, 1, 5, 16, 4294967295]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x360",
+        "type": "int",
+        "choices": [0, 1, 5, 16, 4294967295]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x3a8",
+        "type": "int",
+        "choices": [0, 1, 5, 16, 4294967295]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x3f0",
+        "type": "int",
+        "choices": [0, 1, 5, 16, 4294967295]
+      }
+    ]
+  }
+}

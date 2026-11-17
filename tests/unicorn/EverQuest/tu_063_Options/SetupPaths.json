@@ -1,0 +1,73 @@
+{
+  "function": "ClientState_guess::CreateIniFilenames_guess",
+  "original": "0x004b0db5",
+  "sources": [
+    "src/EverQuest/tu_063_Options.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@clientstate",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "clientstate": {
+      "size": "0x3a300",
+      "fill": "random"
+    },
+    "root": {
+      "size": "0x100",
+      "fill": "random",
+      "init": [{"offset": "0x8", "u32": "@input"}]
+    },
+    "input": {
+      "size": "0x10",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@root"},
+    {"addr": "@input", "offset": "0x4", "u32": 32},
+    {"addr": "@root", "offset": "0x64", "cstr": "Player"},
+    {"addr": "0x00923d74", "u32": 0},
+    {"addr": "0x0079ac74", "u32": 305419896}
+  ],
+  "callees": {
+    "0x00493a10": {"name": "CreateUserDirectories_guess", "conv": "thiscall", "args": []},
+    "0x0040552d": {"name": "GetLanguageCodePage_guess", "conv": "cdecl", "args": ["int"], "ret": 1},
+    "0x005749f0": {
+      "name": "FUN_005749f0", "conv": "cdecl",
+      "args": ["int", "cstr", "ignore", "int"],
+      "writes": [{"arg": 2, "offset": 0, "hex": "426f6200"}],
+      "ret": 0
+    },
+    "0x0060d5eb": {"name": "_sprintf", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 0},
+    "0x00577000": {"name": "FUN_00577000", "conv": "cdecl", "args": ["ignore", "int", "cstr"], "varargs": "printf", "ret": 0},
+    "0x00576ed0": {"name": "FUN_00576ed0", "conv": "cdecl", "args": ["cstr"], "ret": 0},
+    "0x00493b8f": {"name": "GetServerShortName_guess", "conv": "thiscall", "args": ["ignore"]},
+    "0x00493ada": {
+      "name": "FUN_00493ada", "conv": "thiscall", "args": ["ignore"],
+      "writes": [{"arg": 0, "offset": 0, "hex": "576f726c6400"}]
+    },
+    "0x00576fd0": {"name": "FUN_00576fd0", "conv": "cdecl", "args": ["ptr", "cstr", "int"], "ret": 0},
+    "0x00576670": {"name": "FUN_00576670", "conv": "cdecl", "args": ["cstr"], "ret": [0, 1, 0, 1]},
+    "kernel32.dll!CopyFileA": {"name": "CopyFileA", "conv": "stdcall", "args": ["cstr", "cstr", "int"], "ret": [1]},
+    "0x00612662": {"name": "thunk_FUN_00612638", "conv": "cdecl", "args": ["cstr"], "ret": 0}
+  },
+  "cases": [
+    {"name": "typical", "args": []},
+    {"name": "root null", "args": [], "memory": [{"addr": "0x00905d00", "u32": 0}]},
+    {"name": "dest exists", "args": [], "callees": {"0x00576670": {"name": "FUN_00576670", "conv": "cdecl", "args": ["cstr"], "ret": 1}}},
+    {"name": "nothing exists", "args": [], "callees": {"0x00576670": {"name": "FUN_00576670", "conv": "cdecl", "args": ["cstr"], "ret": 0}}},
+    {"name": "copy fails", "args": [], "callees": {"kernel32.dll!CopyFileA": {"name": "CopyFileA", "conv": "stdcall", "args": ["cstr", "cstr", "int"], "ret": 0}}},
+    {"name": "only shared exists", "args": [], "callees": {"0x00576670": {"name": "FUN_00576670", "conv": "cdecl", "args": ["cstr"], "ret": [0, 0, 0, 1]}}},
+    {"name": "only ui exists", "args": [], "callees": {"0x00576670": {"name": "FUN_00576670", "conv": "cdecl", "args": ["cstr"], "ret": [0, 1, 0, 0]}}}
+  ],
+  "fuzz": {
+    "seed": 4918709,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "0x0079ac74", "type": "u32", "range": [0, 4294967295]},
+      {"addr": "0x00923d74", "type": "int", "range": [0, 3]}
+    ]
+  }
+}

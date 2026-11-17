@@ -1,0 +1,99 @@
+{
+  "function": "CopyList_guess::Grow_guess",
+  "original": "0x00432827",
+  "sources": [
+    "src/EverQuest/tu_026_TaskManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@copylist",
+  "args": [
+    {
+      "name": "count_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "copylist": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": 3},
+        {"offset": "0x4", "u32": "@olditems"},
+        {"offset": "0x8", "u32": 5}
+      ]
+    },
+    "olditems": {
+      "size": "0x200",
+      "fill": "random"
+    },
+    "newbuf": {
+      "size": "0x800",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "rewrite_aliases": {"??_H@YGXPAXIHP6EPAX0@Z@Z": "0x00401000"},
+  "rewrite_data_aliases": {"??0CopyItem_guess@@QAE@XZ": "0x00432061"},
+  "callees": {
+    "0x0060e985": {
+      "name": "operator new[]",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": "@newbuf"
+    },
+    "0x00401000": {
+      "name": "`vector_constructor_iterator'",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "int", "u32"],
+      "ret": 0
+    },
+    "0x0043210e": {
+      "name": "CopyData_guess::CopyFrom_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": "this"
+    },
+    "0x0060d682": {
+      "name": "operator delete[]",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {"name": "zero request", "args": [0]},
+    {"name": "fits (n == cap)", "args": [5]},
+    {"name": "fits (n < cap)", "args": [4]},
+    {"name": "grow n == cap+1, copy 3", "args": [6]},
+    {"name": "grow copy 1", "args": [7],
+     "memory": [{"addr": "@copylist", "offset": "0x0", "u32": 1}]},
+    {"name": "grow count 0", "args": [7],
+     "memory": [{"addr": "@copylist", "offset": "0x0", "u32": 0}]},
+    {"name": "grow count negative", "args": [7],
+     "memory": [{"addr": "@copylist", "offset": "0x0", "u32": "0xffffffff"}]},
+    {"name": "no items, n <= cap", "args": [2],
+     "memory": [{"addr": "@copylist", "offset": "0x4", "u32": 0}]},
+    {"name": "signed cap compare", "args": [1],
+     "memory": [{"addr": "@copylist", "offset": "0x8", "u32": "0xffffffff"}]},
+    {"name": "negative request", "args": [-1],
+     "memory": [{"addr": "@copylist", "offset": "0x8", "u32": "0xfffffffb"}]},
+    {"name": "alloc fails", "args": [6],
+     "callees": {"0x0060e985": {"name": "operator new[]", "conv": "cdecl", "args": ["u32"], "ret": 0}}},
+    {"name": "alloc fails, no items", "args": [1],
+     "memory": [{"addr": "@copylist", "offset": "0x4", "u32": 0}],
+     "callees": {"0x0060e985": {"name": "operator new[]", "conv": "cdecl", "args": ["u32"], "ret": 0}}}
+  ],
+  "fuzz": {
+    "seed": 4401191,
+    "count": 100,
+    "args": [
+      {"range": [-2, 12]}
+    ],
+    "memory": [
+      {"addr": "@copylist", "offset": "0x0", "type": "int", "range": [-1, 5]},
+      {"addr": "@copylist", "offset": "0x8", "type": "int", "range": [-1, 12]},
+      {"addr": "@copylist", "offset": "0x4", "type": "u32", "choices": [0, "@olditems"]}
+    ]
+  }
+}

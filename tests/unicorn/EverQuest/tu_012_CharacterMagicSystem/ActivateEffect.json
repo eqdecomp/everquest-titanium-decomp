@@ -1,0 +1,358 @@
+{
+  "function": "CharacterMagicSystem_guess::ActivateEffect_guess",
+  "original": "0x0040ed8c",
+  "sources": [
+    "src/EverQuest/tu_012_CharacterMagicSystem.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@charactermagicsystem",
+  "args": [
+    { "name": "caster_guess", "type": "ptr" },
+    { "name": "id_guess", "type": "int" },
+    { "name": "type_guess", "type": "int" },
+    { "name": "unused_guess", "type": "int" },
+    { "name": "extra_guess", "type": "int" }
+  ],
+  "ret": "int",
+  "objects": {
+    "charactermagicsystem": {
+      "size": "0x138ac",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x4", "u32": "@offset" },
+        { "offset": "0x8", "u32": "@state" }
+      ]
+    },
+    "offset": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x4", "u32": 4294967292 }
+      ]
+    },
+    "caster": {
+      "size": "0x90",
+      "fill": "zero"
+    },
+    "state": {
+      "size": "0x264",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x1a8", "u32": "@stateb" }
+      ]
+    },
+    "stateb": {
+      "size": "0x1050",
+      "fill": "zero"
+    },
+    "magicresult": {
+      "size": "0x1200",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    { "addr": "@charactermagicsystem", "offset": "0x10c", "u8": 0 },
+    { "addr": "@caster", "offset": "0x28", "u32": 0 },
+    { "addr": "@state", "offset": "0x120", "cstr": "Caster" },
+    { "addr": "@state", "offset": "0x258", "u32": 0 },
+    { "addr": "@stateb", "offset": "0x8", "cstr": "base" },
+    { "addr": "@magicresult", "offset": "0x1194", "u8": 8 },
+    { "addr": "@magicresult", "offset": "0x1198", "u32": 9 },
+    { "addr": "0x0079ac74", "u32": "0x12345678" }
+  ],
+  "callees": {
+    "0x005ec220": {
+      "name": "MagicList_guess::Resolve_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@magicresult"
+    },
+    "0x0044e77b": {
+      "name": "MagicCaster_guess::FindAffectSlot_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 1
+    },
+    "0x00479e02": {
+      "name": "MagicStateA_guess::LegalPlayerRace_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 1
+    },
+    "0x0047e35c": {
+      "name": "MagicStateA_guess::GetModelAtSpawnSpot_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "int"],
+      "ret": 1
+    },
+    "0x0047a741": {
+      "name": "MagicStateA_guess::SetRace_guess",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x004798d7": {
+      "name": "GetActorTag_guess",
+      "conv": "thiscall",
+      "args": ["ptr"]
+    },
+    "0x0047fa9e": {
+      "name": "MagicStateA_guess::SetHeights_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0060d674": {
+      "name": "__security_check_cookie",
+      "conv": "fastcall",
+      "args": ["u32"],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "table flag stops activation",
+      "args": ["@caster", 1, 1, 0, 7],
+      "memory": [
+        { "addr": "@charactermagicsystem", "offset": "0x10c", "u8": 1 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "null state stops activation",
+      "args": ["@caster", 1, 1, 0, 7],
+      "memory": [
+        { "addr": "@charactermagicsystem", "offset": "0x8", "u32": 0 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "ordinary type and slot value",
+      "args": ["@caster", 1, 1, 0, 7],
+      "memory": [
+        { "addr": "@caster", "offset": "0x60", "u8": 5 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "caster mode two",
+      "args": ["@caster", 1, 1, 0, 7],
+      "memory": [
+        { "addr": "@caster", "offset": "0x28", "u32": 2 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "caster mode four and rate zero",
+      "args": ["@caster", 1, 1, 0, 7],
+      "memory": [
+        { "addr": "@caster", "offset": "0x28", "u32": 4 },
+        { "addr": "@magicresult", "offset": "0x1194", "u8": 0 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "caster mode four and rate one",
+      "args": ["@caster", 1, 1, 0, 7],
+      "memory": [
+        { "addr": "@caster", "offset": "0x28", "u32": 4 },
+        { "addr": "@magicresult", "offset": "0x1194", "u8": 1 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "caster mode four and other rate",
+      "args": ["@caster", 1, 1, 0, 7],
+      "memory": [
+        { "addr": "@caster", "offset": "0x28", "u32": 4 },
+        { "addr": "@magicresult", "offset": "0x1194", "u8": 7 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "type boundary twelve",
+      "args": ["@caster", 1, 12, 0, 7],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "type boundary thirteen",
+      "args": ["@caster", 1, 13, 0, 7],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "category eight accepts",
+      "args": ["@caster", 1, 143, 0, 7],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "category seven rejects",
+      "args": ["@caster", 1, 142, 0, 7],
+      "callees": {
+        "0x0047e35c": {
+          "name": "MagicStateA_guess::Fill_guess",
+          "conv": "thiscall",
+          "args": ["ignore", "int"],
+          "ret": 0
+        }
+      },
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "form id class nine",
+      "args": ["@caster", 1431, 1, 0, 7],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "form id class eighty",
+      "args": ["@caster", 1431, 1, 0, 7],
+      "memory": [
+        { "addr": "@magicresult", "offset": "0x1198", "u32": 128 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "form id class two",
+      "args": ["@caster", 1431, 1, 0, 7],
+      "memory": [
+        { "addr": "@magicresult", "offset": "0x1198", "u32": 2 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "form id other class",
+      "args": ["@caster", 1431, 1, 0, 7],
+      "memory": [
+        { "addr": "@magicresult", "offset": "0x1198", "u32": 3 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "special id maps class nine",
+      "args": ["@caster", 4521, 1, 0, 7],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "special id maps class ten",
+      "args": ["@caster", 4522, 1, 0, 7],
+      "memory": [
+        { "addr": "@magicresult", "offset": "0x1198", "u32": 10 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "special id maps class eighty",
+      "args": ["@caster", 4523, 1, 0, 7],
+      "memory": [
+        { "addr": "@magicresult", "offset": "0x1198", "u32": 128 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "special id maps class eighty two",
+      "args": ["@caster", 4521, 1, 0, 7],
+      "memory": [
+        { "addr": "@magicresult", "offset": "0x1198", "u32": 130 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "special id leaves other class",
+      "args": ["@caster", 4523, 1, 0, 7],
+      "memory": [
+        { "addr": "@magicresult", "offset": "0x1198", "u32": 3 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "no slot and probe rejects",
+      "args": ["@caster", 1, 1, 0, 7],
+      "callees": {
+        "0x0044e77b": {
+          "name": "MagicCaster_guess::Find_guess",
+          "conv": "thiscall",
+          "args": ["int"],
+          "ret": 0
+        },
+        "0x00479e02": {
+          "name": "MagicStateA_guess::Probe_guess",
+          "conv": "thiscall",
+          "args": ["int"],
+          "ret": 0
+        }
+      },
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "last slot index eleven",
+      "args": ["@caster", 1, 1, 0, 7],
+      "callees": {
+        "0x0044e77b": {
+          "name": "MagicCaster_guess::Find_guess",
+          "conv": "thiscall",
+          "args": ["int"],
+          "ret": 12
+        }
+      },
+      "memory": [
+        { "addr": "@caster", "offset": "0x8c", "u8": 7 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "slot index twelve breaks",
+      "args": ["@caster", 1, 1, 0, 7],
+      "callees": {
+        "0x0044e77b": {
+          "name": "MagicCaster_guess::Find_guess",
+          "conv": "thiscall",
+          "args": ["int"],
+          "ret": 13
+        }
+      }
+    },
+    {
+      "name": "state field prevents refresh",
+      "args": ["@caster", 1, 1, 0, 7],
+      "memory": [
+        { "addr": "@state", "offset": "0x258", "u32": 1 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "missing state child prevents refresh",
+      "args": ["@caster", 1, 1, 0, 7],
+      "memory": [
+        { "addr": "@state", "offset": "0x1a8", "u32": 0 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "rate zero used as child offset",
+      "args": ["@caster", 1, 1, 0, 7],
+      "memory": [
+        { "addr": "@magicresult", "offset": "0x1194", "u8": 0 }
+      ],
+      "expect": { "ret": 1 }
+    }
+  ],
+  "fuzz": {
+    "seed": 4255116,
+    "count": 100,
+    "args": [
+      { "choices": ["@caster"] },
+      { "choices": [0, 1, 1431, 4521, 4522, 4523] },
+      { "choices": [-1, 0, 1, 12, 13, 70, 128, 130, 142, 143, 330, 331] },
+      { "range": [-2, 2] },
+      { "range": [-4, 16] }
+    ],
+    "memory": [
+      { "addr": "@charactermagicsystem", "offset": "0x10c", "type": "u8", "choices": [0, 1] },
+      { "addr": "@charactermagicsystem", "offset": "0x8", "type": "ptr", "choices": ["@state", 0] },
+      { "addr": "@caster", "offset": "0x28", "type": "u32", "choices": [0, 1, 2, 4, 5] },
+      { "addr": "@caster", "offset": "0x60", "type": "u8", "choices": [0, 1, 5, 255] },
+      { "addr": "@state", "offset": "0x258", "type": "u32", "choices": [0, 1] },
+      { "addr": "@state", "offset": "0x1a8", "type": "ptr", "choices": ["@stateb", 0] },
+      { "addr": "@magicresult", "offset": "0x1194", "type": "u8", "choices": [0, 1, 8, 12, 16] },
+      { "addr": "@magicresult", "offset": "0x1198", "type": "u32", "choices": [2, 3, 9, 10, 128, 130] }
+    ]
+  },
+  "_survivors": "L1132: request bytes at +0x50 are never passed to a callee or read after initialization; L1137: the request field is already zero from memset"
+}

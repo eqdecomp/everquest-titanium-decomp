@@ -1,0 +1,171 @@
+{
+  "function": "CharacterMagicSystem_guess::GetInstrumentModifier_guess",
+  "original": "0x0041167c",
+  "sources": ["src/EverQuest/tu_012_CharacterMagicSystem.cpp"],
+  "conv": "thiscall",
+  "this": "@charactermagicsystem",
+  "args": [{"name": "value_guess", "type": "int"}],
+  "ret": "int",
+  "objects": {
+    "charactermagicsystem": {
+      "size": "0x0c",
+      "fill": "zero",
+      "init": [{"offset": "0x8", "u32": "@stateA"}]
+    },
+    "stateA": {
+      "size": "0x1ac",
+      "fill": "zero",
+      "init": [{"offset": "0x1a8", "u32": "@stateB"}]
+    },
+    "stateB": {
+      "size": "0xfa8",
+      "fill": "zero",
+      "init": [{"offset": "0xfa4", "u32": 7}]
+    },
+    "entry": {
+      "size": "0x270",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xe0", "u32": 4294967295},
+        {"offset": "0x26c", "u32": 0}
+      ]
+    },
+    "magiclookup": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00985cc8", "u32": "@magiclookup"},
+    {"addr": "@entry", "offset": "0x182", "u8": 0}
+  ],
+  "callees": {
+    "0x0044d0d0": {"name": "FUN_0044d0d0", "conv": "cdecl", "args": ["int"], "ret": 1},
+    "0x0040cbd6": {"name": "GetSpell_guess", "conv": "thiscall", "args": ["int"], "ret": "@entry"},
+    "0x004106a3": {"name": "FUN_004106a3", "conv": "thiscall", "args": ["int", "bool", "int", "int"], "ret": 0},
+    "0x0040e818": {"name": "FUN_0040e818", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "0x0041c8f4": {"name": "FUN_0041c8f4", "conv": "thiscall", "args": ["u8"], "ret": 1},
+    "0x0044e77b": {"name": "FindAffectSlot_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x004649b1": {"name": "token_string_to_client_guess", "conv": "cdecl", "args": ["int", "int", "int", "int"]}
+  },
+  "cases": [
+    {
+      "name": "missing-state",
+      "args": [1],
+      "memory": [{"addr": "@charactermagicsystem", "offset": "0x8", "u32": 0}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "missing-linked-state",
+      "args": [1],
+      "memory": [{"addr": "@stateA", "offset": "0x1a8", "u32": 0}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "special-0c",
+      "args": [1],
+      "memory": [{"addr": "@entry", "offset": "0x182", "u8": 12}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "special-31-rank-zero-no-error",
+      "args": [1],
+      "memory": [
+        {"addr": "@entry", "offset": "0x182", "u8": 49},
+        {"addr": "@entry", "offset": "0xe0", "u32": 4294967295}
+      ],
+      "callees": {"0x0040e818": {"name": "FUN_0040e818", "conv": "thiscall", "args": ["int"], "ret": 0}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "special-36-rank-zero-error",
+      "args": [1],
+      "memory": [
+        {"addr": "@entry", "offset": "0x182", "u8": 54},
+        {"addr": "@entry", "offset": "0xe0", "u32": 0}
+      ],
+      "callees": {"0x0040e818": {"name": "FUN_0040e818", "conv": "thiscall", "args": ["int"], "ret": 0}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "special-46-predicate-fails",
+      "args": [1],
+      "memory": [{"addr": "@entry", "offset": "0x182", "u8": 70}],
+      "callees": {
+        "0x0040e818": {"name": "FUN_0040e818", "conv": "thiscall", "args": ["int"], "ret": 2},
+        "0x0041c8f4": {"name": "FUN_0041c8f4", "conv": "thiscall", "args": ["u8"], "ret": 0}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "special-rank-raises-base",
+      "args": [1],
+      "memory": [
+        {"addr": "@entry", "offset": "0x182", "u8": 12},
+        {"addr": "@entry", "offset": "0xe0", "u32": 4294967295}
+      ],
+      "callees": {
+        "0x004106a3": {"name": "FUN_004106a3", "conv": "thiscall", "args": ["int", "bool", "int", "int"], "ret": 20},
+        "0x0040e818": {"name": "FUN_0040e818", "conv": "thiscall", "args": ["int"], "ret": 25}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "special-31-rank-zero-error",
+      "args": [1],
+      "memory": [
+        {"addr": "@entry", "offset": "0x182", "u8": 49},
+        {"addr": "@entry", "offset": "0xe0", "u32": 0}
+      ],
+      "callees": {"0x0040e818": {"name": "FUN_0040e818", "conv": "thiscall", "args": ["int"], "ret": 0}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "generic-normal",
+      "args": [1],
+      "memory": [{"addr": "@entry", "offset": "0x182", "u8": 0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "generic-upper-clamp",
+      "args": [1],
+      "memory": [{"addr": "@entry", "offset": "0x182", "u8": 0}],
+      "callees": {
+        "0x004106a3": {"name": "FUN_004106a3", "conv": "thiscall", "args": ["int", "bool", "int", "int"], "ret": [0, 40, 0, 20]},
+        "0x0044e77b": {"name": "FUN_0044e77b", "conv": "thiscall", "args": ["int"], "ret": 1}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "generic-addition-result",
+      "args": [1],
+      "memory": [{"addr": "@entry", "offset": "0x182", "u8": 0}],
+      "callees": {
+        "0x004106a3": {"name": "FUN_004106a3", "conv": "thiscall", "args": ["int", "bool", "int", "int"], "ret": [0, 0, 0, 15]},
+        "0x0040e818": {"name": "FUN_0040e818", "conv": "thiscall", "args": ["int"], "ret": 5}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "generic-entry-cap",
+      "args": [1],
+      "memory": [
+        {"addr": "@entry", "offset": "0x182", "u8": 0},
+        {"addr": "@entry", "offset": "0x26c", "u32": 4}
+      ],
+      "expect": {"ret": 1}
+    }
+  ],
+  "fuzz": {
+    "seed": 4265596,
+    "count": 120,
+    "args": [{"choices": [-1, 0, 1, 9999, 4294967295]}],
+    "memory": [
+      {"addr": "@entry", "offset": "0x182", "type": "u8", "choices": [0, 12, 49, 54, 70]},
+      {"addr": "@entry", "offset": "0xe0", "type": "int", "choices": [-1, 0, 1]},
+      {"addr": "@entry", "offset": "0x26c", "type": "int", "choices": [-1, 0, 1, 4, 28, 40]},
+      {"addr": "@stateB", "offset": "0xfa4", "type": "int", "choices": [0, 7, 20]}
+    ]
+  },
+  "coverage_ok": {
+    "00411734-00411743": "Amount starts at 10 and only changes to a nonzero first-call result, so this zero test is unreachable."
+  },
+  "_survivors": "L2024: amount equal to rank leaves the same value whether the less-than test assigns or skips; L2043: amount equal to the computed sum leaves the same value whether the less-than test assigns or skips."
+}

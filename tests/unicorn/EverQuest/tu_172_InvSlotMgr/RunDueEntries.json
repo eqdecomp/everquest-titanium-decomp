@@ -1,0 +1,103 @@
+{
+  "function": "CInvSlotMgrView_guess::RunDueEntries_guess",
+  "_survivors": "L1490: the initial 0 of group is overwritten by the assignment inside the condition before any read; equivalent",
+  "original": "0x0051b201",
+  "sources": [
+    "src/EverQuest/tu_172_InvSlotMgr.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@cleanuplist",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "cleanuplist": {
+      "size": "0x1010",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": "@cu0"},
+        {"offset": "0x8", "u32": "@cu1"},
+        {"offset": "0xc", "u32": "@cu2"},
+        {"offset": "0x1004", "u32": 3}
+      ]
+    },
+    "cu0": {"size": "0x20", "fill": "zero", "init": [{"offset": "0x4", "u32": "@ref0"}]},
+    "cu1": {"size": "0x20", "fill": "zero", "init": [{"offset": "0x4", "u32": "@ref1"}]},
+    "cu2": {"size": "0x20", "fill": "zero", "init": [{"offset": "0x4", "u32": "@ref2"}]},
+    "ref0": {"size": "0x130", "fill": "zero", "init": [{"offset": "0x120", "u32": 5}]},
+    "ref1": {"size": "0x130", "fill": "zero", "init": [{"offset": "0x120", "u32": "0xffffffff"}]},
+    "ref2": {"size": "0x130", "fill": "zero", "init": [{"offset": "0x120", "u32": 251}]},
+    "root": {"size": "0xc280", "fill": "zero", "init": [{"offset": "0x8", "u32": "@offs"}]},
+    "offs": {"size": "0x10", "fill": "zero", "init": [{"offset": "0x4", "u32": 16}]},
+    "rank": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@root"}
+  ],
+  "callees": {
+    "0x0040cc50": {"name": "GetEntry_guess", "conv": "thiscall", "args": ["u32"], "ret": "@rank"},
+    "0x005eccc0": {"name": "IsBlocked_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x00518e5c": {"name": "Bind_guess", "conv": "thiscall", "args": ["u32"], "ret": 0}
+  },
+  "cases": [
+    {"name": "mixed_default", "args": []},
+    {"name": "count_zero", "args": [],
+     "memory": [{"addr": "@cleanuplist", "offset": "0x1004", "u32": 0}]},
+    {"name": "root_null", "args": [],
+     "memory": [{"addr": "0x00905d00", "u32": 0}]},
+    {"name": "entry_null", "args": [],
+     "memory": [{"addr": "@cleanuplist", "offset": "0x4", "u32": 0},
+                {"addr": "@cleanuplist", "offset": "0x1004", "u32": 1}]},
+    {"name": "ref_null", "args": [],
+     "memory": [{"addr": "@cu0", "offset": "0x4", "u32": 0},
+                {"addr": "@cleanuplist", "offset": "0x1004", "u32": 1}]},
+    {"name": "key_minus1", "args": [],
+     "memory": [{"addr": "@ref0", "offset": "0x120", "u32": "0xffffffff"},
+                {"addr": "@cleanuplist", "offset": "0x1004", "u32": 1}]},
+    {"name": "key_0", "args": [],
+     "memory": [{"addr": "@ref0", "offset": "0x120", "u32": 0},
+                {"addr": "@cleanuplist", "offset": "0x1004", "u32": 1}]},
+    {"name": "key_29", "args": [],
+     "memory": [{"addr": "@ref0", "offset": "0x120", "u32": 29},
+                {"addr": "@cleanuplist", "offset": "0x1004", "u32": 1}]},
+    {"name": "key_30_group0", "args": [],
+     "memory": [{"addr": "@ref0", "offset": "0x120", "u32": 30},
+                {"addr": "@cleanuplist", "offset": "0x1004", "u32": 1}]},
+    {"name": "key_neg2", "args": [],
+     "memory": [{"addr": "@ref0", "offset": "0x120", "u32": "0xfffffffe"},
+                {"addr": "@cleanuplist", "offset": "0x1004", "u32": 1}]},
+    {"name": "key_241_group21", "args": [],
+     "memory": [{"addr": "@ref0", "offset": "0x120", "u32": 241},
+                {"addr": "@cleanuplist", "offset": "0x1004", "u32": 1}]},
+    {"name": "key_251_blocked", "args": [],
+     "memory": [{"addr": "@ref0", "offset": "0x120", "u32": 251},
+                {"addr": "@cleanuplist", "offset": "0x1004", "u32": 1}]},
+    {"name": "key_251_not_blocked", "args": [],
+     "memory": [{"addr": "@ref0", "offset": "0x120", "u32": 251},
+                {"addr": "@cleanuplist", "offset": "0x1004", "u32": 1}],
+     "callees": {"0x005eccc0": {"name": "IsBlocked_guess", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "key_251_no_entry", "args": [],
+     "memory": [{"addr": "@ref0", "offset": "0x120", "u32": 251},
+                {"addr": "@cleanuplist", "offset": "0x1004", "u32": 1}],
+     "callees": {"0x0040cc50": {"name": "GetEntry_guess", "conv": "thiscall", "args": ["u32"], "ret": 0}}},
+    {"name": "key_321_group29", "args": [],
+     "memory": [{"addr": "@ref0", "offset": "0x120", "u32": 321},
+                {"addr": "@cleanuplist", "offset": "0x1004", "u32": 1}]},
+    {"name": "key_340_group30", "args": [],
+     "memory": [{"addr": "@ref0", "offset": "0x120", "u32": 340},
+                {"addr": "@cleanuplist", "offset": "0x1004", "u32": 1}]},
+    {"name": "key_341_skip", "args": [],
+     "memory": [{"addr": "@ref0", "offset": "0x120", "u32": 341},
+                {"addr": "@cleanuplist", "offset": "0x1004", "u32": 1}]}
+  ],
+  "fuzz": {
+    "seed": 5353985,
+    "count": 150,
+    "args": [],
+    "memory": [
+      {"addr": "@ref0", "offset": "0x120", "type": "int", "range": [-4, 350]},
+      {"addr": "@ref1", "offset": "0x120", "type": "int", "range": [-4, 350]},
+      {"addr": "@ref2", "offset": "0x120", "type": "int", "range": [-4, 350]},
+      {"addr": "@cleanuplist", "offset": "0x1004", "type": "int", "range": [0, 3]}
+    ]
+  }
+}

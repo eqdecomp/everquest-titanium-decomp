@@ -1,0 +1,630 @@
+{
+  "function": "DynamicPropertyOwner_guess::CalculateScaledValue_guess",
+  "original": "0x0041c7c1",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@dynamicpropertyowner",
+  "args": [
+    {
+      "name": "mode_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "value_guess",
+      "type": "int"
+    },
+    {
+      "name": "index_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "size": "0x133",
+  "objects": {
+    "dynamicpropertyowner": {
+      "size": "0x300",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@offsets"
+        },
+        {
+          "offset": "0x8",
+          "u32": "@input"
+        }
+      ]
+    },
+    "mode": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "offsets": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 256
+        }
+      ]
+    },
+    "input": {
+      "size": "0x250",
+      "fill": "zero"
+    },
+    "lookupresult": {
+      "size": "0x11a8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x11a4",
+          "u32": 50
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "@input",
+      "offset": "0x244",
+      "u8": 0
+    },
+    {
+      "addr": "0x006410a0",
+      "from_image": "0x006410a0",
+      "image_size": 8
+    }
+  ],
+  "callees": {
+    "0x005e04c0": {
+      "name": "QueryMode_guess::GetRecommendedLevel_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005ec220": {
+      "name": "LookupService_guess::Find_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@lookupresult"
+    },
+    "0x005e0aa0": {
+      "name": "QueryMode_guess::GetInputLimit_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0041ace9": {
+      "name": "CostOwner_guess::Skill_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0040e722": {
+      "name": "DynamicPropertyProxy_guess::GetSkill_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x0060fac0": {
+      "name": "SetRoundedValue_guess",
+      "conv": "cdecl",
+      "args": [
+        "double"
+      ],
+      "ret": 0
+    },
+    "0x0060e98c": {
+      "name": "GetRoundedValue_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "null input",
+      "args": [
+        "@mode",
+        100,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@dynamicpropertyowner",
+          "offset": "0x8",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 100
+      }
+    },
+    {
+      "name": "null mode",
+      "args": [
+        0,
+        100,
+        1
+      ],
+      "expect": {
+        "ret": 100
+      }
+    },
+    {
+      "name": "zero value",
+      "args": [
+        "@mode",
+        0,
+        1
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "negative value",
+      "args": [
+        "@mode",
+        -1,
+        1
+      ],
+      "expect": {
+        "ret": -1
+      }
+    },
+    {
+      "name": "flag one",
+      "args": [
+        "@mode",
+        100,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "offset": "0x244",
+          "u8": 1
+        }
+      ],
+      "expect": {
+        "ret": 100
+      }
+    },
+    {
+      "name": "lookup limit zero and input limit zero",
+      "args": [
+        "@mode",
+        100,
+        7
+      ],
+      "callees": {
+        "0x005e04c0": {
+          "name": "GetLookupLimit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x005e0aa0": {
+          "name": "GetInputLimit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 100
+      }
+    },
+    {
+      "name": "lookup at bound falls back and stops at input limit",
+      "args": [
+        "@mode",
+        100,
+        7
+      ],
+      "callees": {
+        "0x005e04c0": {
+          "name": "GetLookupLimit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            100,
+            100
+          ]
+        },
+        "0x005ec220": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": "@lookupresult"
+        },
+        "0x005e0aa0": {
+          "name": "GetInputLimit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            100,
+            100
+          ]
+        },
+        "0x0041ace9": {
+          "name": "GetKindValue_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 100
+        }
+      },
+      "memory": [
+        {
+          "addr": "@lookupresult",
+          "offset": "0x11a4",
+          "u32": 100
+        }
+      ],
+      "expect": {
+        "ret": 100
+      }
+    },
+    {
+      "name": "lookup below bound scales",
+      "args": [
+        "@mode",
+        100,
+        7
+      ],
+      "callees": {
+        "0x005e04c0": {
+          "name": "GetLookupLimit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            100,
+            100,
+            100
+          ]
+        },
+        "0x005ec220": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": "@lookupresult"
+        },
+        "0x0060e98c": {
+          "name": "GetRoundedValue_guess",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 51
+        }
+      },
+      "memory": [
+        {
+          "addr": "@lookupresult",
+          "offset": "0x11a4",
+          "u32": 99
+        }
+      ],
+      "expect": {
+        "ret": 51
+      }
+    },
+    {
+      "name": "fallback property below one clamps",
+      "args": [
+        "@mode",
+        100,
+        7
+      ],
+      "callees": {
+        "0x005e04c0": {
+          "name": "GetLookupLimit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x005e0aa0": {
+          "name": "GetInputLimit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            100,
+            100,
+            100
+          ]
+        },
+        "0x0041ace9": {
+          "name": "GetKindValue_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0040e722": {
+          "name": "GetValueById_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0060e98c": {
+          "name": "GetRoundedValue_guess",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "fallback property scales",
+      "args": [
+        "@mode",
+        100,
+        7
+      ],
+      "callees": {
+        "0x005e04c0": {
+          "name": "GetLookupLimit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x005e0aa0": {
+          "name": "GetInputLimit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            100,
+            100,
+            100
+          ]
+        },
+        "0x0041ace9": {
+          "name": "GetKindValue_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0040e722": {
+          "name": "GetValueById_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 50
+        },
+        "0x0060e98c": {
+          "name": "GetRoundedValue_guess",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 51
+        }
+      },
+      "expect": {
+        "ret": 51
+      }
+    },
+    {
+      "name": "rounded result zero clamps",
+      "args": [
+        "@mode",
+        100,
+        7
+      ],
+      "callees": {
+        "0x005e04c0": {
+          "name": "GetLookupLimit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            100,
+            100,
+            100
+          ]
+        },
+        "0x005ec220": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": "@lookupresult"
+        },
+        "0x0060e98c": {
+          "name": "GetRoundedValue_guess",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "memory": [
+        {
+          "addr": "@lookupresult",
+          "offset": "0x11a4",
+          "u32": 99
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "rounded result one",
+      "args": [
+        "@mode",
+        100,
+        7
+      ],
+      "callees": {
+        "0x005e04c0": {
+          "name": "GetLookupLimit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            100,
+            100,
+            100
+          ]
+        },
+        "0x005ec220": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": "@lookupresult"
+        },
+        "0x0060e98c": {
+          "name": "GetRoundedValue_guess",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 1
+        }
+      },
+      "memory": [
+        {
+          "addr": "@lookupresult",
+          "offset": "0x11a4",
+          "u32": 99
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "rounded result above one",
+      "args": [
+        "@mode",
+        100,
+        7
+      ],
+      "callees": {
+        "0x005e04c0": {
+          "name": "GetLookupLimit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            100,
+            100,
+            100
+          ]
+        },
+        "0x005ec220": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": "@lookupresult"
+        },
+        "0x0060e98c": {
+          "name": "GetRoundedValue_guess",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 2
+        }
+      },
+      "memory": [
+        {
+          "addr": "@lookupresult",
+          "offset": "0x11a4",
+          "u32": 99
+        }
+      ],
+      "expect": {
+        "ret": 2
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4310977,
+    "count": 120,
+    "args": [
+      {
+        "choices": [
+          "@mode",
+          0
+        ]
+      },
+      {
+        "range": [
+          -2,
+          300
+        ]
+      },
+      {
+        "range": [
+          -5,
+          50
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@dynamicpropertyowner",
+        "offset": "0x8",
+        "type": "ptr",
+        "choices": [
+          "@input",
+          0
+        ]
+      },
+      {
+        "addr": "@input",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@lookupresult",
+        "offset": "0x11a4",
+        "type": "int",
+        "range": [
+          -10,
+          200
+        ]
+      }
+    ]
+  }
+}

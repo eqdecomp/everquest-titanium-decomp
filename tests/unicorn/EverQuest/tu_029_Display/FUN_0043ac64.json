@@ -1,0 +1,130 @@
+{
+  "function": "CDisplay_guess::ShouldLoadNewPcModel_guess",
+  "original": "0x0043ac64",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@client",
+  "args": [
+    {"name": "race", "type": "int"},
+    {"name": "female", "type": "int"}
+  ],
+  "ret": "bool",
+  "objects": {
+    "client": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x00924798", "u32": 0},
+    {"addr": "0x0092479C", "u32": 0},
+    {"addr": "0x00923D74", "u32": 0}
+  ],
+  "callees": {
+    "0x0043ab98": {"name": "GetNewPCIniFlag_guess", "conv": "thiscall", "args": ["int", "int"], "ret": 0},
+    "0x004cd3c7": {"name": "ReadIniBool_guess", "conv": "cdecl", "args": ["cstr", "cstr", "cstr"], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "race 0x82, callee says 1",
+      "args": [130, 1],
+      "callees": {"0x0043ab98": {"name": "FUN_0043ab98", "conv": "thiscall", "args": ["int", "int"], "ret": [1]}}
+    },
+    {
+      "name": "race 0x82, callee says 0",
+      "args": [130, 0],
+      "callees": {"0x0043ab98": {"name": "FUN_0043ab98", "conv": "thiscall", "args": ["int", "int"], "ret": [0]}}
+    },
+    {
+      "name": "race 0x82, callee says 2 (not 1)",
+      "args": [130, 1],
+      "callees": {"0x0043ab98": {"name": "FUN_0043ab98", "conv": "thiscall", "args": ["int", "int"], "ret": [2]}}
+    },
+    {
+      "name": "all three flags zero",
+      "args": [5, 0],
+      "callees": {"0x0043ab98": {"name": "FUN_0043ab98", "conv": "thiscall", "args": ["int", "int"], "ret": [1]}}
+    },
+    {
+      "name": "flag A set, Luclin off ini",
+      "args": [5, 0],
+      "memory": [{"addr": "0x00924798", "u32": 1}],
+      "callees": {"0x004cd3c7": {"name": "FUN_004cd3c7", "conv": "cdecl", "args": ["cstr", "cstr", "cstr"], "ret": [1]}}
+    },
+    {
+      "name": "flag B set, race ret 1 on first call",
+      "args": [5, 1],
+      "memory": [{"addr": "0x0092479C", "u32": 1}],
+      "callees": {"0x0043ab98": {"name": "FUN_0043ab98", "conv": "thiscall", "args": ["int", "int"], "ret": [1]}}
+    },
+    {
+      "name": "flag C set, race 3 not set, ini ret 0",
+      "args": [3, 0],
+      "memory": [{"addr": "0x00923D74", "u32": 1}],
+      "callees": {"0x0043ab98": {"name": "FUN_0043ab98", "conv": "thiscall", "args": ["int", "int"], "ret": [0]}}
+    },
+    {
+      "name": "race 1, first call 0, group 3 call 1",
+      "args": [1, 0],
+      "memory": [{"addr": "0x00924798", "u32": 1}],
+      "callees": {"0x0043ab98": {"name": "FUN_0043ab98", "conv": "thiscall", "args": ["int", "int"], "ret": [0, 1]}}
+    },
+    {
+      "name": "race 1, both calls 0",
+      "args": [1, 0],
+      "memory": [{"addr": "0x00924798", "u32": 1}],
+      "callees": {"0x0043ab98": {"name": "FUN_0043ab98", "conv": "thiscall", "args": ["int", "int"], "ret": [0, 0]}}
+    },
+    {
+      "name": "race 4, first 0, call 6 gives 1",
+      "args": [4, 1],
+      "memory": [{"addr": "0x00924798", "u32": 1}],
+      "callees": {"0x0043ab98": {"name": "FUN_0043ab98", "conv": "thiscall", "args": ["int", "int"], "ret": [0, 1]}}
+    },
+    {
+      "name": "race 4, call 7 gives 1",
+      "args": [4, 0],
+      "memory": [{"addr": "0x00924798", "u32": 1}],
+      "callees": {"0x0043ab98": {"name": "FUN_0043ab98", "conv": "thiscall", "args": ["int", "int"], "ret": [0, 0, 1]}}
+    },
+    {
+      "name": "race 4, group 5 gives 1",
+      "args": [4, 0],
+      "memory": [{"addr": "0x00924798", "u32": 1}],
+      "callees": {"0x0043ab98": {"name": "FUN_0043ab98", "conv": "thiscall", "args": ["int", "int"], "ret": [0, 0, 0, 1]}}
+    },
+    {
+      "name": "race 4, every call 0",
+      "args": [4, 1],
+      "memory": [{"addr": "0x00924798", "u32": 1}],
+      "callees": {"0x0043ab98": {"name": "FUN_0043ab98", "conv": "thiscall", "args": ["int", "int"], "ret": [0]}}
+    },
+    {
+      "name": "race 7 not 1 or 4, call 0",
+      "args": [7, 0],
+      "memory": [{"addr": "0x00924798", "u32": 1}],
+      "callees": {"0x0043ab98": {"name": "FUN_0043ab98", "conv": "thiscall", "args": ["int", "int"], "ret": [0]}}
+    },
+    {
+      "name": "race 7, call gives 1",
+      "args": [7, 0],
+      "memory": [{"addr": "0x00924798", "u32": 1}],
+      "callees": {"0x0043ab98": {"name": "FUN_0043ab98", "conv": "thiscall", "args": ["int", "int"], "ret": [1]}}
+    }
+  ],
+  "fuzz": {
+    "seed": 4435044,
+    "count": 200,
+    "args": [
+      {"range": [0, 140]},
+      {"range": [0, 1]}
+    ],
+    "memory": [
+      {"addr": "0x00924798", "type": "int", "choices": [0, 1]},
+      {"addr": "0x0092479C", "type": "int", "choices": [0, 1]},
+      {"addr": "0x00923D74", "type": "int", "choices": [0, 1]}
+    ]
+  }
+}

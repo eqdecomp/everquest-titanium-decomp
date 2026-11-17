@@ -1,0 +1,266 @@
+{
+  "function": "CSelectorWnd_guess::OnProcessFrame_guess",
+  "original": "0x00552387",
+  "sources": [
+    "src/EverQuest/tu_207_SelectorWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@target",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "target": {
+      "size": "0x230",
+      "fill": "random"
+    },
+    "clock": {
+      "size": "0x160",
+      "fill": "random"
+    },
+    "service": {
+      "size": "0x840",
+      "fill": "random"
+    },
+    "button": {
+      "size": "0x180",
+      "fill": "random"
+    },
+    "valnode": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "flags": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "collection": {
+      "size": "0x60",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x00905D24", "u32": "@clock"},
+    {"addr": "0x00988DF0", "u32": "@service"},
+    {"addr": "0x00905CC0", "u32": "@flags"},
+    {"addr": "0x00924470", "u32": 4660},
+    {"addr": "0x009247A0", "u32": 0},
+    {"addr": "0x00850C2C", "u32": "@valnode"},
+    {"addr": "0x00850C44", "u32": "@valnode"},
+    {"addr": "0x00850C34", "u32": "@valnode"},
+    {"addr": "0x00850BAC", "u32": "@valnode"},
+    {"addr": "0x00850BC0", "u32": "@valnode"},
+    {"addr": "0x00850C14", "u32": "@valnode"},
+    {"addr": "0x00991AE4", "u32": "@valnode"},
+    {"addr": "0x00850C18", "u32": "@valnode"},
+    {"addr": "0x00850C1C", "u32": "@valnode"},
+    {"addr": "0x00991AAC", "u32": "@valnode"},
+    {"addr": "0x00850BFC", "u32": "@valnode"},
+    {"addr": "0x00850CA0", "u32": "@valnode"},
+    {"addr": "0x00850CA4", "u32": "@valnode"},
+    {"addr": "0x00850BE4", "u32": "@valnode"},
+    {"addr": "0x009928A8", "u32": "@valnode"},
+    {"addr": "0x00850C48", "u32": "@valnode"},
+    {"addr": "@target", "offset": "0x5c", "u8": 1},
+    {"addr": "@target", "offset": "0x21c", "u32": 0},
+    {"addr": "@target", "offset": "0x198", "u32": 0},
+    {"addr": "@target", "offset": "0x19c", "u32": "@button"},
+    {"addr": "@target", "offset": "0x1a0", "u32": "@button"},
+    {"addr": "@target", "offset": "0x1a4", "u32": "@button"},
+    {"addr": "@target", "offset": "0x1a8", "u32": "@button"},
+    {"addr": "@target", "offset": "0x1ac", "u32": "@button"},
+    {"addr": "@target", "offset": "0x1b0", "u32": "@button"},
+    {"addr": "@target", "offset": "0x1b4", "u32": "@button"},
+    {"addr": "@target", "offset": "0x1b8", "u32": "@button"},
+    {"addr": "@target", "offset": "0x1bc", "u32": "@button"},
+    {"addr": "@target", "offset": "0x1c0", "u32": "@button"},
+    {"addr": "@target", "offset": "0x1c4", "u32": "@button"},
+    {"addr": "@target", "offset": "0x1c8", "u32": "@button"},
+    {"addr": "@target", "offset": "0x1cc", "u32": "@button"},
+    {"addr": "@target", "offset": "0x1d0", "u32": "@button"},
+    {"addr": "@target", "offset": "0x1d4", "u32": "@button"},
+    {"addr": "@target", "offset": "0x1d8", "u32": "@button"},
+    {"addr": "@clock", "offset": "0x148", "u32": 1000},
+    {"addr": "@service", "offset": "0x834", "u32": 0},
+    {"addr": "@collection", "offset": "0x50", "u8": 0}
+  ],
+  "callees": {
+    "0x0059dd30": {
+      "name": "FUN_0059dd30",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 7
+    },
+    "0x005bb140": {
+      "name": "FUN_005bb140",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x005f6bc0": {
+      "name": "FUN_005f6bc0",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 1
+    },
+    "0x00495250": {
+      "name": "FUN_00495250",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@collection"
+    },
+    "0x005a0e50": {
+      "name": "FUN_005a0e50",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": []
+    },
+    {
+      "name": "clock_too_soon",
+      "args": [],
+      "memory": [{"addr": "@clock", "offset": "0x148", "u32": 100}]
+    },
+    {
+      "name": "clock_at_threshold",
+      "args": [],
+      "memory": [{"addr": "@clock", "offset": "0x148", "u32": 250}]
+    },
+    {
+      "name": "target_flag_off",
+      "args": [],
+      "memory": [{"addr": "@target", "offset": "0x5c", "u8": 0}]
+    },
+    {
+      "name": "service_alt_even_active1",
+      "args": [],
+      "memory": [
+        {"addr": "@service", "offset": "0x834", "u32": 1},
+        {"addr": "@target", "offset": "0x198", "u32": 0},
+        {"addr": "@collection", "offset": "0x50", "u8": 1}
+      ]
+    },
+    {
+      "name": "service_alt_odd_active0",
+      "args": [],
+      "memory": [
+        {"addr": "@service", "offset": "0x834", "u32": 1},
+        {"addr": "@target", "offset": "0x198", "u32": 3},
+        {"addr": "@collection", "offset": "0x50", "u8": 0}
+      ]
+    },
+    {
+      "name": "service_alt_odd_active1",
+      "args": [],
+      "memory": [
+        {"addr": "@service", "offset": "0x834", "u32": 1},
+        {"addr": "@target", "offset": "0x198", "u32": 3},
+        {"addr": "@collection", "offset": "0x50", "u8": 1}
+      ]
+    },
+    {
+      "name": "service_alt_even_active0",
+      "args": [],
+      "memory": [
+        {"addr": "@service", "offset": "0x834", "u32": 1},
+        {"addr": "@target", "offset": "0x198", "u32": 2},
+        {"addr": "@collection", "offset": "0x50", "u8": 0}
+      ]
+    },
+    {
+      "name": "collection_null",
+      "args": [],
+      "callees": {
+        "0x00495250": {"name": "FUN_00495250", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "selector_flag_set",
+      "args": [],
+      "memory": [{"addr": "0x009247A0", "u32": 1}]
+    },
+    {
+      "name": "flag_override_zero",
+      "args": [],
+      "callees": {
+        "0x005f6bc0": {"name": "FUN_005f6bc0", "conv": "thiscall", "args": ["u32"], "ret": 0}
+      }
+    },
+    {
+      "name": "button14_null",
+      "args": [],
+      "memory": [{"addr": "@target", "offset": "0x1d4", "u32": 0}]
+    },
+    {
+      "name": "value14_null",
+      "args": [],
+      "memory": [{"addr": "0x00850BE4", "u32": 0}]
+    },
+    {
+      "name": "service_null",
+      "args": [],
+      "memory": [{"addr": "0x00988DF0", "u32": 0}]
+    },
+    {
+      "name": "all_slots_null",
+      "args": [],
+      "memory": [
+        {"addr": "@target", "offset": "0x19c", "u32": 0},
+        {"addr": "@target", "offset": "0x1a0", "u32": 0},
+        {"addr": "@target", "offset": "0x1a4", "u32": 0},
+        {"addr": "@target", "offset": "0x1a8", "u32": 0},
+        {"addr": "@target", "offset": "0x1ac", "u32": 0},
+        {"addr": "@target", "offset": "0x1b0", "u32": 0},
+        {"addr": "@target", "offset": "0x1b4", "u32": 0},
+        {"addr": "@target", "offset": "0x1b8", "u32": 0},
+        {"addr": "@target", "offset": "0x1bc", "u32": 0},
+        {"addr": "@target", "offset": "0x1c0", "u32": 0},
+        {"addr": "@target", "offset": "0x1c4", "u32": 0},
+        {"addr": "@target", "offset": "0x1c8", "u32": 0},
+        {"addr": "@target", "offset": "0x1cc", "u32": 0},
+        {"addr": "@target", "offset": "0x1d0", "u32": 0},
+        {"addr": "@target", "offset": "0x1d4", "u32": 0},
+        {"addr": "@target", "offset": "0x1d8", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 552387,
+    "count": 200,
+    "args": [],
+    "memory": [
+      {"addr": "@target", "offset": "0x5c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@target", "offset": "0x21c", "type": "int", "range": [-100, 2000]},
+      {"addr": "@target", "offset": "0x198", "type": "int", "choices": [-1, 0, 1, 2, 3, 4]},
+      {"addr": "@target", "offset": "0x19c", "type": "u32", "choices": [0, "@button"], "count": 16, "stride": 4},
+      {"addr": "@clock", "offset": "0x148", "type": "int", "range": [0, 2000]},
+      {"addr": "@service", "offset": "0x834", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@collection", "offset": "0x50", "type": "u8", "choices": [0, 1, 2]},
+      {"addr": "0x009247A0", "type": "u32", "choices": [0, 1]},
+      {"addr": "0x00850C2C", "type": "u32", "choices": [0, "@valnode"]},
+      {"addr": "0x00850C44", "type": "u32", "choices": [0, "@valnode"]},
+      {"addr": "0x00850C34", "type": "u32", "choices": [0, "@valnode"]},
+      {"addr": "0x00850BAC", "type": "u32", "choices": [0, "@valnode"]},
+      {"addr": "0x00850BC0", "type": "u32", "choices": [0, "@valnode"]},
+      {"addr": "0x00850C14", "type": "u32", "choices": [0, "@valnode"]},
+      {"addr": "0x00991AE4", "type": "u32", "choices": [0, "@valnode"]},
+      {"addr": "0x00850C18", "type": "u32", "choices": [0, "@valnode"]},
+      {"addr": "0x00850C1C", "type": "u32", "choices": [0, "@valnode"]},
+      {"addr": "0x00991AAC", "type": "u32", "choices": [0, "@valnode"]},
+      {"addr": "0x00850BFC", "type": "u32", "choices": [0, "@valnode"]},
+      {"addr": "0x00850CA0", "type": "u32", "choices": [0, "@valnode"]},
+      {"addr": "0x00850CA4", "type": "u32", "choices": [0, "@valnode"]},
+      {"addr": "0x00850BE4", "type": "u32", "choices": [0, "@valnode"]},
+      {"addr": "0x009928A8", "type": "u32", "choices": [0, "@valnode"]},
+      {"addr": "0x00850C48", "type": "u32", "choices": [0, "@valnode"]}
+    ]
+  }
+}

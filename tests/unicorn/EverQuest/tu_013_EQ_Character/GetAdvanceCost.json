@@ -1,0 +1,304 @@
+{
+  "function": "DynamicPropertyOwner_guess::GetClassRaceACBonus_guess",
+  "original": "0x00417f8e",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@dynamicpropertyowner",
+  "args": [
+    {
+      "name": "level_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "dynamicpropertyowner": {
+      "size": "0x120",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@offset_holder"
+        }
+      ]
+    },
+    "offset_holder": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 256
+        }
+      ]
+    },
+    "lookupresult": {
+      "size": "0x11a8",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@dynamicpropertyowner",
+      "offset": "0x48",
+      "u32": 0
+    },
+    {
+      "addr": "@lookupresult",
+      "offset": "0x1198",
+      "u32": 0
+    },
+    {
+      "addr": "@lookupresult",
+      "offset": "0x119c",
+      "u8": 0
+    },
+    {
+      "addr": "@lookupresult",
+      "offset": "0x11a4",
+      "u32": 0
+    },
+    {
+      "addr": "0x00640fd0",
+      "from_image": "0x00640fd0",
+      "image_size": 8
+    },
+    {
+      "addr": "0x00640fc8",
+      "from_image": "0x00640fc8",
+      "image_size": 8
+    },
+    {
+      "addr": "0x00640fa0",
+      "from_image": "0x00640fa0",
+      "image_size": 8
+    },
+    {
+      "addr": "0x00640fc0",
+      "from_image": "0x00640fc0",
+      "image_size": 8
+    },
+    {
+      "addr": "0x00640fb8",
+      "from_image": "0x00640fb8",
+      "image_size": 8
+    },
+    {
+      "addr": "0x00640fb0",
+      "from_image": "0x00640fb0",
+      "image_size": 8
+    },
+    {
+      "addr": "0x00640fa8",
+      "from_image": "0x00640fa8",
+      "image_size": 8
+    },
+    {
+      "addr": "0x00640e40",
+      "from_image": "0x00640e40",
+      "image_size": 8
+    }
+  ],
+  "callees": {
+    "0x005ec220": {
+      "name": "LookupService_guess::Find_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@lookupresult"
+    },
+    "0x0060e98c": {
+      "name": "x87_to_int_guess",
+      "conv": "cdecl",
+      "args": [],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "state7-first-branch-low",
+      "args": [1],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 7},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 14},
+        {"addr": "@dynamicpropertyowner", "offset": "0x48", "u32": 0}
+      ]
+    },
+    {
+      "name": "state7-first-branch-scaled",
+      "args": [1],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 7},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 65},
+        {"addr": "@dynamicpropertyowner", "offset": "0x48", "u32": 25}
+      ]
+    },
+    {
+      "name": "state7-second-branch",
+      "args": [1],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 7},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 30},
+        {"addr": "@dynamicpropertyowner", "offset": "0x48", "u32": 33}
+      ]
+    },
+    {
+      "name": "state7-threshold-20-boundary",
+      "args": [1],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 7},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 55},
+        {"addr": "@dynamicpropertyowner", "offset": "0x48", "u32": 20}
+      ]
+    },
+    {
+      "name": "state7-level-50-versus-53-boundary",
+      "args": [1],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 7},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 64},
+        {"addr": "@dynamicpropertyowner", "offset": "0x48", "u32": 51}
+      ]
+    },
+    {
+      "name": "state7-equal-id-bonus-low",
+      "args": [1],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x1198", "u32": 128},
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 7},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 9},
+        {"addr": "@dynamicpropertyowner", "offset": "0x48", "u32": 0}
+      ]
+    },
+    {
+      "name": "state7-equal-id-bonus-high",
+      "args": [1],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x1198", "u32": 128},
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 7},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 65},
+        {"addr": "@dynamicpropertyowner", "offset": "0x48", "u32": 56}
+      ]
+    },
+    {
+      "name": "state9-level-too-low",
+      "args": [75],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 9},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 30}
+      ]
+    },
+    {
+      "name": "state9-level-76",
+      "args": [76],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 9},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 30}
+      ]
+    },
+    {
+      "name": "state9-level-80",
+      "args": [80],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 9},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 30}
+      ]
+    },
+    {
+      "name": "state9-level-85",
+      "args": [85],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 9},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 30}
+      ]
+    },
+    {
+      "name": "state9-level-90",
+      "args": [90],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 9},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 30}
+      ]
+    },
+    {
+      "name": "state9-level-100",
+      "args": [100],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 9},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 30}
+      ]
+    },
+    {
+      "name": "state9-value-boundary",
+      "args": [80],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 9},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 29}
+      ]
+    },
+    {
+      "name": "state15-value-boundary",
+      "args": [100],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 15},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 10}
+      ]
+    },
+    {
+      "name": "state15-level-80",
+      "args": [80],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 15},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 11}
+      ]
+    },
+    {
+      "name": "state15-level-85",
+      "args": [85],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 15},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 11}
+      ]
+    },
+    {
+      "name": "state15-level-90",
+      "args": [90],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 15},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 11}
+      ]
+    },
+    {
+      "name": "state15-level-100",
+      "args": [100],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 15},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 11}
+      ]
+    },
+    {
+      "name": "other-state-with-bonus-middle",
+      "args": [0],
+      "memory": [
+        {"addr": "@lookupresult", "offset": "0x1198", "u32": 128},
+        {"addr": "@lookupresult", "offset": "0x119c", "u8": 6},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 20}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4292494,
+    "count": 120,
+    "args": [
+      {"choices": [0, 1, 74, 75, 76, 79, 80, 84, 85, 89, 90, 99, 100, 101]}
+    ],
+    "memory": [
+      {"addr": "@lookupresult", "offset": "0x1198", "type": "u32", "choices": [0, 127, 128, 129]},
+      {"addr": "@lookupresult", "offset": "0x119c", "type": "u8", "choices": [0, 6, 7, 8, 9, 14, 15, 16]},
+      {"addr": "@lookupresult", "offset": "0x11a4", "type": "int", "choices": [-10, -6, -5, 0, 9, 10, 11, 14, 15, 29, 30, 31, 44, 45, 50, 51, 54, 55, 59, 60, 61, 62, 63, 64, 65]},
+      {"addr": "@dynamicpropertyowner", "offset": "0x48", "type": "int", "choices": [0, 13, 14, 15, 17, 18, 20, 24, 25, 27, 28, 29, 30, 31, 32, 33, 34, 35, 40, 45, 52, 54, 55, 56]}
+    ]
+  },
+  "_survivors": "L1678: both ternary arms fetch the same value and add 5, so changing the comparison cannot change the result or call count; L1696: both ternary arms fetch the same value and add 5, so changing the constant cannot change the result or call count; L1701: when t equals the unit value, the >= mutant assigns the same value, and when it differs both comparisons take the same clamp outcome."
+}

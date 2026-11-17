@@ -1,0 +1,1423 @@
+{
+  "function": "AtlasControlOwner_guess::HandleControl_guess",
+  "original": "0x005367aa",
+  "sources": [
+    "src/EverQuest/tu_187_MapViewWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@atlascontrolowner",
+  "args": [
+    {
+      "name": "control_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "message_guess",
+      "type": "u32"
+    },
+    {
+      "name": "data_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "atlascontrolowner": {
+      "size": "0x270",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x160",
+          "u32": 0
+        },
+        {
+          "offset": "0x164",
+          "u32": 0
+        },
+        {
+          "offset": "0x168",
+          "u32": 0
+        },
+        {
+          "offset": "0x16c",
+          "u32": 0
+        },
+        {
+          "offset": "0x170",
+          "u32": 0
+        },
+        {
+          "offset": "0x174",
+          "u32": 0
+        },
+        {
+          "offset": "0x178",
+          "u32": 0
+        },
+        {
+          "offset": "0x17c",
+          "u32": 0
+        },
+        {
+          "offset": "0x1a0",
+          "u32": 0
+        },
+        {
+          "offset": "0x1a4",
+          "u32": 0
+        },
+        {
+          "offset": "0x1a8",
+          "u32": 0
+        },
+        {
+          "offset": "0x1ac",
+          "u32": 0
+        },
+        {
+          "offset": "0x1b0",
+          "u32": 0
+        },
+        {
+          "offset": "0x1b4",
+          "u32": 0
+        },
+        {
+          "offset": "0x1b8",
+          "u32": 0
+        },
+        {
+          "offset": "0x1bc",
+          "u32": 0
+        },
+        {
+          "offset": "0x1c0",
+          "u32": 0
+        },
+        {
+          "offset": "0x1c4",
+          "u32": 0
+        },
+        {
+          "offset": "0x1c8",
+          "u32": 0
+        },
+        {
+          "offset": "0x1cc",
+          "u32": 0
+        },
+        {
+          "offset": "0x1d4",
+          "u32": 0
+        },
+        {
+          "offset": "0x1d8",
+          "u32": 0
+        },
+        {
+          "offset": "0x1dc",
+          "u32": 0
+        },
+        {
+          "offset": "0x1e4",
+          "u32": 0
+        },
+        {
+          "offset": "0x1e8",
+          "u32": 0
+        },
+        {
+          "offset": "0x20c",
+          "u32": 0
+        },
+        {
+          "offset": "0x210",
+          "u32": 0
+        },
+        {
+          "offset": "0x24c",
+          "u32": 0
+        },
+        {
+          "offset": "0x250",
+          "u32": 0
+        },
+        {
+          "offset": "0x254",
+          "u32": 0
+        },
+        {
+          "offset": "0x258",
+          "u32": 0
+        },
+        {
+          "offset": "0x25c",
+          "u32": 0
+        },
+        {
+          "offset": "0x260",
+          "u8": 0
+        },
+        {
+          "offset": "0x264",
+          "f32": 1.0
+        },
+        {
+          "offset": "0x26c",
+          "u8": 0
+        },
+        {
+          "offset": "0x26d",
+          "u8": 0
+        },
+        {
+          "offset": "0x26e",
+          "u8": 1
+        }
+      ]
+    },
+    "data": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "control": {
+      "size": "0x134",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@controlvtbl"
+        },
+        {
+          "offset": "0x128",
+          "u8": 1
+        }
+      ]
+    },
+    "controlvtbl": {
+      "size": "0x134",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x130",
+          "u32": "@fn_text"
+        }
+      ]
+    },
+    "messageowner": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@messagevtbl"
+        }
+      ]
+    },
+    "messagevtbl": {
+      "size": "0x88",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x84",
+          "u32": "@fn_action"
+        }
+      ]
+    },
+    "skinmanager": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "refreshmanager": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "atlas": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "color": {
+      "size": "0x20",
+      "fill": "random"
+    },
+    "skintext": {
+      "size": "0x20",
+      "fill": "random"
+    },
+    "rep": {
+      "size": "0x30",
+      "fill": "random"
+    },
+    "fn_text": {
+      "size": "0x4"
+    },
+    "fn_action": {
+      "size": "0x4"
+    },
+    "fn_bounds": {
+      "size": "0x4"
+    },
+    "mapsource": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@mapvtbl"
+        }
+      ]
+    },
+    "mapvtbl": {
+      "size": "0x38",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x34",
+          "u32": "@fn_bounds"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905cc0",
+      "u32": "@skinmanager"
+    },
+    {
+      "addr": "0x00924470",
+      "u32": 99
+    },
+    {
+      "addr": "0x00850c00",
+      "u32": "@messageowner"
+    },
+    {
+      "addr": "0x006431a0",
+      "from_image": "0x006431A0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00642f60",
+      "from_image": "0x00642F60",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00658cd0",
+      "from_image": "0x00658CD0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00658ccc",
+      "u32": "0x3f68ba2f"
+    },
+    {
+      "addr": "0x0063f4d0",
+      "from_image": "0x0063F4D0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00991cfc",
+      "u32": 42
+    },
+    {
+      "addr": "0x00991cf8",
+      "u32": "@color"
+    },
+    {
+      "addr": "0x0099e368",
+      "u32": "@mapsource"
+    },
+    {
+      "addr": "@skintext",
+      "cstr": "Default"
+    }
+  ],
+  "callees": {
+    "0x0059dd30": {
+      "name": "Check_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        1,
+        1
+      ]
+    },
+    "0x00536741": {
+      "name": "SelectMap_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004d987a": {
+      "name": "GetText_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00000000"
+        }
+      ]
+    },
+    "0x00572300": {
+      "name": "CXStr_to_char_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@skintext"
+    },
+    "0x005f6f20": {
+      "name": "FindSkin_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "FreeRep_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x00535aa0": {
+      "name": "SetMap_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ignore",
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x00533151": {
+      "name": "ComputeBounds_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005bc460": {
+      "name": "Refresh_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00571e00": {
+      "name": "CXStr_ctor_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x0059c3b0": {
+      "name": "GetAtlasText_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00000000"
+        }
+      ]
+    },
+    "0x00572c10": {
+      "name": "AppendCXStr_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x00572e00": {
+      "name": "AppendText_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x0060c590": {
+      "name": "SetAtlasRoot_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x004da486": {
+      "name": "GetDefaultText_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00000000"
+        }
+      ]
+    },
+    "0x0060bf20": {
+      "name": "SetAtlasSetting_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x00531e41": {
+      "name": "Permit_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x00571630": {
+      "name": "StringIndex_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 17
+    },
+    "0x00531da9": {
+      "name": "UpdateScale_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ],
+      "ret": 0
+    },
+    "0x005a2230": {
+      "name": "WndNotification",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 42
+    },
+    "0x00532da1": {
+      "name": "AddColor_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "@fn_text": {
+      "name": "GetControlText_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00000000"
+        }
+      ]
+    },
+    "@fn_action": {
+      "name": "GlobalAction_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_bounds": {
+      "name": "GetMapBounds_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "ignore"
+      ],
+      "ret": 1
+    },
+    "kernel32.dll!GetProcessHeap": {
+      "name": "GetProcessHeap",
+      "conv": "stdcall",
+      "args": [],
+      "ret": 1
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": "@rep"
+    }
+  },
+  "cases": [
+    {
+      "name": "base_other_message",
+      "args": [
+        "@control",
+        3,
+        "@data"
+      ]
+    },
+    {
+      "name": "null_control",
+      "args": [
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "name": "first_gate_off",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1cc",
+          "u32": "@control"
+        }
+      ],
+      "callees": {
+        "0x0059dd30": {
+          "name": "Check_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "reset_button",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1cc",
+          "u32": "@control"
+        }
+      ]
+    },
+    {
+      "name": "skin_no_selection",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1e4",
+          "u32": "@control"
+        }
+      ]
+    },
+    {
+      "name": "skin_reset_error",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1e4",
+          "u32": "@control"
+        }
+      ],
+      "callees": {
+        "0x005f6f20": {
+          "name": "FindSkin_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 99
+        }
+      }
+    },
+    {
+      "name": "skin_change_refresh",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1e4",
+          "u32": "@control"
+        },
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1d4",
+          "u32": "@data"
+        },
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1d8",
+          "u32": "@refreshmanager"
+        }
+      ],
+      "callees": {
+        "0x005f6f20": {
+          "name": "FindSkin_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 3
+        }
+      }
+    },
+    {
+      "name": "skin_change_no_refresh",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1e4",
+          "u32": "@control"
+        }
+      ],
+      "callees": {
+        "0x005f6f20": {
+          "name": "FindSkin_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 3
+        }
+      }
+    },
+    {
+      "name": "atlas_default_skin",
+      "args": [
+        "@atlas",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1e4",
+          "u32": "@control"
+        },
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1e8",
+          "u32": "@atlas"
+        }
+      ]
+    },
+    {
+      "name": "atlas_without_control",
+      "args": [
+        "@atlas",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1e4",
+          "u32": 0
+        },
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1e8",
+          "u32": "@atlas"
+        }
+      ]
+    },
+    {
+      "name": "second_gate_off",
+      "args": [
+        "@control",
+        6,
+        "@data"
+      ],
+      "callees": {
+        "0x0059dd30": {
+          "name": "Check_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "permission_denied",
+      "args": [
+        "@control",
+        6,
+        "@data"
+      ],
+      "callees": {
+        "0x00531e41": {
+          "name": "Permit_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "message_six_returns_zero",
+      "args": [
+        "@control",
+        6,
+        "@data"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "message_fourteen_first_control",
+      "args": [
+        "@control",
+        14,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1a4",
+          "u32": "@control"
+        }
+      ]
+    },
+    {
+      "name": "message_fourteen_second_control",
+      "args": [
+        "@control",
+        14,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1a8",
+          "u32": "@control"
+        }
+      ]
+    },
+    {
+      "name": "global_action",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x17c",
+          "u32": "@control"
+        }
+      ]
+    },
+    {
+      "name": "scale_up",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x174",
+          "u32": "@control"
+        },
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x264",
+          "f32": 2.0
+        }
+      ]
+    },
+    {
+      "name": "scale_down_clamped",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x178",
+          "u32": "@control"
+        },
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x264",
+          "f32": 0.5
+        }
+      ]
+    },
+    {
+      "name": "scale_down_unclamped",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x178",
+          "u32": "@control"
+        },
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x264",
+          "f32": 2.0
+        }
+      ]
+    },
+    {
+      "name": "offset_y_plus",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x168",
+          "u32": "@control"
+        }
+      ]
+    },
+    {
+      "name": "offset_y_minus",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x16c",
+          "u32": "@control"
+        }
+      ]
+    },
+    {
+      "name": "offset_x_plus",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x160",
+          "u32": "@control"
+        }
+      ]
+    },
+    {
+      "name": "offset_x_minus",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x164",
+          "u32": "@control"
+        }
+      ]
+    },
+    {
+      "name": "offset_reset",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x170",
+          "u32": "@control"
+        }
+      ]
+    },
+    {
+      "name": "select_one",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1c0",
+          "u32": "@control"
+        }
+      ]
+    },
+    {
+      "name": "select_two",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1c4",
+          "u32": "@control"
+        }
+      ]
+    },
+    {
+      "name": "select_three",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1c8",
+          "u32": "@control"
+        }
+      ]
+    },
+    {
+      "name": "flag_one_off",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1b0",
+          "u32": "@control"
+        },
+        {
+          "addr": "@control",
+          "offset": "0x128",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "flag_one_on",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1b0",
+          "u32": "@control"
+        },
+        {
+          "addr": "@control",
+          "offset": "0x128",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "flag_two_off",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1b4",
+          "u32": "@control"
+        },
+        {
+          "addr": "@control",
+          "offset": "0x128",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "flag_two_on",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1b4",
+          "u32": "@control"
+        },
+        {
+          "addr": "@control",
+          "offset": "0x128",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "flag_three_off",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1b8",
+          "u32": "@control"
+        },
+        {
+          "addr": "@control",
+          "offset": "0x128",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "flag_three_on",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1b8",
+          "u32": "@control"
+        },
+        {
+          "addr": "@control",
+          "offset": "0x128",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "flag_four_off",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1bc",
+          "u32": "@control"
+        },
+        {
+          "addr": "@control",
+          "offset": "0x128",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "flag_four_on",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1bc",
+          "u32": "@control"
+        },
+        {
+          "addr": "@control",
+          "offset": "0x128",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "toggle_off",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1ac",
+          "u32": "@control"
+        },
+        {
+          "addr": "@control",
+          "offset": "0x128",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "toggle_on",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1ac",
+          "u32": "@control"
+        },
+        {
+          "addr": "@control",
+          "offset": "0x128",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "first_flag_off",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1a0",
+          "u32": "@control"
+        },
+        {
+          "addr": "@control",
+          "offset": "0x128",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "first_flag_on",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1a0",
+          "u32": "@control"
+        },
+        {
+          "addr": "@control",
+          "offset": "0x128",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "color_add",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1dc",
+          "u32": "@control"
+        }
+      ]
+    },
+    {
+      "name": "color_clear",
+      "args": [
+        "@control",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@atlascontrolowner",
+          "offset": "0x1dc",
+          "u32": "@control"
+        },
+        {
+          "addr": "0x00991cf8",
+          "u32": 0
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5466026,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@control",
+          0
+        ]
+      },
+      {
+        "choices": [
+          0,
+          1,
+          6,
+          14,
+          99
+        ]
+      },
+      {
+        "choices": [
+          "@data",
+          0
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@atlascontrolowner",
+        "offset": "0x160",
+        "type": "ptr",
+        "choices": [
+          "@control",
+          0
+        ],
+        "count": 8,
+        "stride": 4,
+        "p": 0.25
+      },
+      {
+        "addr": "@atlascontrolowner",
+        "offset": "0x1a0",
+        "type": "ptr",
+        "choices": [
+          "@control",
+          0
+        ],
+        "count": 12,
+        "stride": 4,
+        "p": 0.25
+      },
+      {
+        "addr": "@atlascontrolowner",
+        "offset": "0x1d8",
+        "type": "ptr",
+        "choices": [
+          "@refreshmanager",
+          0
+        ],
+        "p": 0.2
+      },
+      {
+        "addr": "@atlascontrolowner",
+        "offset": "0x1e4",
+        "type": "ptr",
+        "choices": [
+          "@control",
+          0
+        ],
+        "p": 0.2
+      },
+      {
+        "addr": "@atlascontrolowner",
+        "offset": "0x1e8",
+        "type": "ptr",
+        "choices": [
+          "@atlas",
+          0
+        ],
+        "p": 0.2
+      },
+      {
+        "addr": "@control",
+        "offset": "0x128",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00924470",
+        "type": "u32",
+        "choices": [
+          99,
+          7
+        ]
+      },
+      {
+        "addr": "0x00991cf8",
+        "type": "ptr",
+        "choices": [
+          "@color",
+          0
+        ]
+      }
+    ]
+  }
+}

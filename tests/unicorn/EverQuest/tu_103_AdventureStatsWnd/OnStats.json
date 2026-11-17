@@ -1,0 +1,164 @@
+{
+  "function": "CAdventureStatsWnd_guess::Handle_OP_AdventureStatsReply_guess",
+  "original": "0x004d743f",
+  "sources": [
+    "src/EverQuest/tu_103_AdventureStatsWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@task",
+  "args": [
+    {"name": "unused_guess", "type": "int"},
+    {"name": "code_guess", "type": "int"},
+    {"name": "stats_guess", "type": "ptr"},
+    {"name": "unused2_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "task": {
+      "size": "0x1a0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x164", "u32": "@list"}
+      ]
+    },
+    "list": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {"offset": "0", "u32": "@list_vtbl"}
+      ]
+    },
+    "list_vtbl": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x130", "u32": "@fn_deleteall"}
+      ]
+    },
+    "fn_deleteall": {"size": "0x1", "fill": "zero"},
+    "stats": {
+      "size": "0x60",
+      "fill": "random"
+    },
+    "advchar": {
+      "size": "0x1100",
+      "fill": "random"
+    },
+    "strtab": {"size": "0x10", "fill": "zero"},
+    "name_total": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "cstr": "Total"}]},
+    "n1": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "cstr": "Theme1"}]},
+    "n2": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "cstr": "Theme2"}]},
+    "n3": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "cstr": "Theme3"}]},
+    "n4": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "cstr": "Theme4"}]},
+    "n5": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "cstr": "Theme5"}]},
+    "string_storage": {"size": "0x100", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@advchar"},
+    {"addr": "0x00905cb0", "u32": "@strtab"}
+  ],
+  "callees": {
+    "0x00598580": {"name": "CListWnd_ClearAllSel", "conv": "thiscall", "args": [], "ret": 0},
+    "@fn_deleteall": {"name": "CListWnd_DeleteAll", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr"],
+      "varargs": "printf",
+      "ret": 3,
+      "writes": [
+        {"arg": 0, "offset": 0, "call": 0, "hex": "73303000"},
+        {"arg": 0, "offset": 0, "call": 1, "hex": "73303100"},
+        {"arg": 0, "offset": 0, "call": 2, "hex": "73303200"},
+        {"arg": 0, "offset": 0, "call": 3, "hex": "73303300"},
+        {"arg": 0, "offset": 0, "call": 4, "hex": "73303400"},
+        {"arg": 0, "offset": 0, "call": 5, "hex": "73303500"},
+        {"arg": 0, "offset": 0, "call": 6, "hex": "73303600"},
+        {"arg": 0, "offset": 0, "call": 7, "hex": "73303700"},
+        {"arg": 0, "offset": 0, "call": 8, "hex": "73303800"},
+        {"arg": 0, "offset": 0, "call": 9, "hex": "73303900"},
+        {"arg": 0, "offset": 0, "call": 10, "hex": "73313000"},
+        {"arg": 0, "offset": 0, "call": 11, "hex": "73313100"},
+        {"arg": 0, "offset": 0, "call": 12, "hex": "73313200"},
+        {"arg": 0, "offset": 0, "call": 13, "hex": "73313300"},
+        {"arg": 0, "offset": 0, "call": 14, "hex": "73313400"},
+        {"arg": 0, "offset": 0, "call": 15, "hex": "73313500"},
+        {"arg": 0, "offset": 0, "call": 16, "hex": "73313600"},
+        {"arg": 0, "offset": 0, "call": 17, "hex": "73313700"},
+        {"arg": 0, "offset": 0, "call": 18, "hex": "73313800"},
+        {"arg": 0, "offset": 0, "call": 19, "hex": "73313900"},
+        {"arg": 0, "offset": 0, "call": 20, "hex": "73323000"},
+        {"arg": 0, "offset": 0, "call": 21, "hex": "73323100"},
+        {"arg": 0, "offset": 0, "call": 22, "hex": "73323200"},
+        {"arg": 0, "offset": 0, "call": 23, "hex": "73323300"},
+        {"arg": 0, "offset": 0, "call": 24, "hex": "73323400"},
+        {"arg": 0, "offset": 0, "call": 25, "hex": "73323500"},
+        {"arg": 0, "offset": 0, "call": 26, "hex": "73323600"},
+        {"arg": 0, "offset": 0, "call": 27, "hex": "73323700"},
+        {"arg": 0, "offset": 0, "call": 28, "hex": "73323800"},
+        {"arg": 0, "offset": 0, "call": 29, "hex": "73323900"},
+        {"arg": 0, "offset": 0, "call": 30, "hex": "73333000"},
+        {"arg": 0, "offset": 0, "call": 31, "hex": "73333100"},
+        {"arg": 0, "offset": 0, "call": 32, "hex": "73333200"},
+        {"arg": 0, "offset": 0, "call": 33, "hex": "73333300"},
+        {"arg": 0, "offset": 0, "call": 34, "hex": "73333400"},
+        {"arg": 0, "offset": 0, "call": 35, "hex": "73333500"}
+      ]
+    },
+    "0x004d73d9": {"name": "Task_Value_guess", "conv": "thiscall", "args": ["int"], "ret": ["@n1", "@n2", "@n3", "@n4", "@n5"]},
+    "0x00571e00": {"name": "CXStr_ctor", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@string_storage"},
+    "0x0059b9d0": {"name": "CListWnd_AddString", "conv": "thiscall", "args": ["mem:4", "u32", "u32", "u32"], "ret": 0},
+    "0x00571d00": {"name": "CXStr_FreeRep", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x0059b360": {"name": "CListWnd_SetItemText", "conv": "thiscall", "args": ["int", "int", "mem:4"], "ret": 0},
+    "0x005dfa00": {"name": "StringTable_getString", "conv": "thiscall", "args": ["u32", "u32"], "ret": "@name_total"},
+    "0x004d72bd": {"name": "StatusSink_Report_guess", "conv": "thiscall", "args": []}
+  },
+  "_survivors": "L694: rank_guess row stride 10 -> 11 only moves a local stack buffer; stack args compare as <stack> and every formatted string fits either stride",
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {"name": "random stats", "args": [1, "0x56cd", "@stats", 2]},
+    {"name": "wrong code", "args": [1, "0x56cc", "@stats", 2]},
+    {"name": "wrong code high", "args": [1, "0x56ce", "@stats", 2]},
+    {"name": "no list", "args": [1, "0x56cd", "@stats", 2],
+     "memory": [{"addr": "@task", "offset": "0x164", "u32": 0}]},
+    {"name": "all zero stats", "args": [0, "0x56cd", "@stats", 0],
+     "memory": [{"addr": "@stats", "size": "0x60", "fill": "zero"}]},
+    {"name": "small stats", "args": [0, "0x56cd", "@stats", 0],
+     "memory": [
+       {"addr": "@stats", "offset": "0x00", "u32": 10}, {"addr": "@stats", "offset": "0x04", "u32": 3},
+       {"addr": "@stats", "offset": "0x08", "u32": 0}, {"addr": "@stats", "offset": "0x0c", "u32": 7},
+       {"addr": "@stats", "offset": "0x10", "u32": 1}, {"addr": "@stats", "offset": "0x14", "u32": 0},
+       {"addr": "@stats", "offset": "0x18", "u32": 5}, {"addr": "@stats", "offset": "0x1c", "u32": 1},
+       {"addr": "@stats", "offset": "0x20", "u32": 0}, {"addr": "@stats", "offset": "0x24", "u32": 2},
+       {"addr": "@stats", "offset": "0x28", "u32": 0}, {"addr": "@stats", "offset": "0x2c", "u32": 4},
+       {"addr": "@stats", "offset": "0x30", "u32": 0}, {"addr": "@stats", "offset": "0x34", "u32": 9},
+       {"addr": "@stats", "offset": "0x38", "u32": 0}, {"addr": "@stats", "offset": "0x3c", "u32": 11},
+       {"addr": "@stats", "offset": "0x40", "u32": 0}, {"addr": "@stats", "offset": "0x44", "u32": 12},
+       {"addr": "@stats", "offset": "0x48", "u32": 3}, {"addr": "@stats", "offset": "0x4c", "u32": 0},
+       {"addr": "@stats", "offset": "0x50", "u32": 21}, {"addr": "@stats", "offset": "0x54", "u32": 0},
+       {"addr": "@stats", "offset": "0x58", "u32": 22}, {"addr": "@stats", "offset": "0x5c", "u32": 0},
+       {"addr": "@advchar", "offset": "0x106c", "u32": 1}, {"addr": "@advchar", "offset": "0x1080", "u32": 2},
+       {"addr": "@advchar", "offset": "0x1094", "u32": 3}, {"addr": "@advchar", "offset": "0x10a8", "u32": 4},
+       {"addr": "@advchar", "offset": "0x10bc", "u32": 5}, {"addr": "@advchar", "offset": "0x10d0", "u32": 600}
+     ]}
+  ],
+  "fuzz": {
+    "seed": 5076031,
+    "count": 100,
+    "args": [
+      {},
+      {"choices": ["0x56cd", "0x56cd", "0x56cd", "0x56cc", 0]},
+      {"choices": ["@stats"]},
+      {}
+    ],
+    "memory": [
+      {"addr": "@stats", "offset": "0", "type": "int", "count": 24, "range": [-2, 3], "p": 0.7},
+      {"addr": "@task", "offset": "0x164", "type": "ptr", "choices": ["@list", "@list", "@list", "0x0"]},
+      {"addr": "@advchar", "offset": "0x106c", "type": "int", "range": [-5, 50]},
+      {"addr": "@advchar", "offset": "0x10a8", "type": "int", "range": [-5, 50]}
+    ]
+  }
+}

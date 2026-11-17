@@ -1,0 +1,532 @@
+{
+  "function": "LoadoutConfig_guess::Load_guess",
+  "original": "0x004b0812",
+  "sources": [
+    "src/EverQuest/tu_063_Options.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "0x0",
+  "args": [
+    {
+      "name": "unused_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "from_image": "0x0079ac74",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00923d74",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x0060c030": {
+      "name": "FUN_0060c030",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0060bfa0": {
+      "name": "FUN_0060bfa0",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "cstr",
+        "ptr",
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 3,
+          "offset": 0,
+          "hex": "2a4e554c4c2a00"
+        },
+        {
+          "arg": 3,
+          "offset": 0,
+          "hex": "4131323300",
+          "call": 0
+        },
+        {
+          "arg": 3,
+          "offset": 0,
+          "hex": "4231323300",
+          "call": 1
+        },
+        {
+          "arg": 3,
+          "offset": 0,
+          "hex": "4142434445464748494a4b4c4d4e4f5000",
+          "call": 400
+        },
+        {
+          "arg": 3,
+          "offset": 0,
+          "hex": "3700",
+          "call": 401
+        },
+        {
+          "arg": 3,
+          "offset": 0,
+          "hex": "6c696e65206f6e6500",
+          "call": 402
+        },
+        {
+          "arg": 3,
+          "offset": 0,
+          "hex": "6c696e6520746872656500",
+          "call": 404
+        },
+        {
+          "arg": 3,
+          "offset": 0,
+          "hex": "6c696e65206669766500",
+          "call": 406
+        },
+        {
+          "arg": 3,
+          "offset": 0,
+          "hex": "5365636f6e64205061676500",
+          "call": 418
+        },
+        {
+          "arg": 3,
+          "offset": 0,
+          "hex": "3100",
+          "call": [
+            532,
+            538,
+            542
+          ]
+        },
+        {
+          "arg": 3,
+          "offset": 0,
+          "hex": "48656c6c6f00",
+          "call": 550
+        }
+      ]
+    },
+    "0x00576fa0": {
+      "name": "FUN_00576fa0",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x006220e9": {
+      "name": "__itoa",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ptr",
+        "int"
+      ],
+      "ret": "0x0099db00",
+      "writes": [
+        {
+          "addr": "0x0099db00",
+          "offset": 0,
+          "hex": "3100"
+        }
+      ]
+    },
+    "0x00576fd0": {
+      "name": "FUN_00576fd0",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "ptr",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x0060e3a3": {
+      "name": "_atol",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 42
+    },
+    "0x004ae49c": {
+      "name": "IsDoubleByteLanguage_guess",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x0060e450": {
+      "name": "FUN_0060e450",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x0060d674": {
+      "name": "__security_check_cookie",
+      "conv": "fastcall",
+      "args": [
+        "u32"
+      ],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "social_long_name_truncates_and_stores",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00923d74",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "social_short_name_does_not_truncate",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "0x00923d74",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0060bfa0": {
+          "name": "FUN_0060bfa0",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "cstr",
+            "ptr",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "2a4e554c4c2a00"
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "4131323300",
+              "call": 0
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "4231323300",
+              "call": 1
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "53686f727400",
+              "call": 400
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "6c696e65206f6e6500",
+              "call": 402
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "6c696e6520746872656500",
+              "call": 404
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "6c696e65206669766500",
+              "call": 406
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "3100",
+              "call": [
+                526,
+                532,
+                536
+              ]
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "48656c6c6f00",
+              "call": 544
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "social_page_two_uses_positive_row_offset",
+      "args": [
+        4
+      ],
+      "memory": [
+        {
+          "addr": "0x00923d74",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "spell_and_hotbar_loadouts_in_use",
+      "args": [
+        2
+      ],
+      "memory": [
+        {
+          "addr": "0x00923d74",
+          "u32": 4
+        }
+      ],
+      "callees": {
+        "0x0060c030": {
+          "name": "FUN_0060c030",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            42,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "0x0060bfa0": {
+          "name": "FUN_0060bfa0",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "cstr",
+            "ptr",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "2a4e554c4c2a00"
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "4c6f616400",
+              "call": 0
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "486f7462617200",
+              "call": 1
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "4142434445464748494a4b4c4d4e4f5000",
+              "call": 402
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "3700",
+              "call": 403
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "6c696e65206f6e6500",
+              "call": 404
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "6c696e6520746872656500",
+              "call": 406
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "6c696e65206669766500",
+              "call": 408
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "inspect_second_character_is_star",
+      "args": [
+        3
+      ],
+      "memory": [
+        {
+          "addr": "0x00923d74",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0060bfa0": {
+          "name": "FUN_0060bfa0",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "cstr",
+            "ptr",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "2a4e554c4c2a00"
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "4131323300",
+              "call": 0
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "4231323300",
+              "call": 1
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "53686f727400",
+              "call": 400
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "6c696e65206f6e6500",
+              "call": 402
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "6c696e6520746872656500",
+              "call": 404
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "6c696e65206669766500",
+              "call": 406
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "546573742a00",
+              "call": 544
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4917266,
+    "count": 50,
+    "args": [
+      {
+        "range": [
+          -10,
+          10
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x00923d74",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6,
+          -1
+        ]
+      }
+    ]
+  },
+  "_survivors": "L619: text[0x18]=0 is unobservable because FUN_0060bfa0 receives size 0x18 and leaves the following zeroed stack byte unchanged; L703: when strlen(text)==next, text[next] is already the terminating NUL, so > and >= store the same byte."
+}

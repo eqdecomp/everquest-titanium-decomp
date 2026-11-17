@@ -1,0 +1,172 @@
+{
+  "function": "ChooseZoneEntry_guess::Read_guess",
+  "original": "0x00446038",
+  "sources": [
+    "src/EverQuest/tu_031_Expedition.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@copyowner",
+  "args": [
+    {
+      "name": "source_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "size_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "copyowner": {
+      "size": "0xd0",
+      "fill": "random"
+    },
+    "src": {
+      "size": "0x200",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0060ea01": {
+      "name": "__snprintf",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "u32",
+        "cstr"
+      ],
+      "ret": [
+        3,
+        2
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "__snprintf": "0x0060ea01"
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        "@src",
+        1
+      ],
+      "memory": [
+        {"addr": "@src", "offset": "0x10", "cstr": "abc"},
+        {"addr": "@src", "offset": "0x14", "cstr": "xy"}
+      ]
+    },
+    {
+      "name": "null source returns 0",
+      "args": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "empty strings",
+      "args": [
+        "@src",
+        0
+      ],
+      "callees": {
+        "0x0060ea01": {
+          "name": "__snprintf",
+          "conv": "cdecl",
+          "args": ["ptr", "u32", "cstr"],
+          "ret": [0, 0]
+        }
+      }
+    },
+    {
+      "name": "first text 126 (size check passes)",
+      "args": [
+        "@src",
+        1
+      ],
+      "memory": [
+        {"addr": "@src", "offset": "0x10", "cstr": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"},
+        {"addr": "@src", "offset": "0x8e", "u8": 0},
+        {"addr": "@src", "offset": "0x8f", "cstr": "xy"}
+      ],
+      "callees": {
+        "0x0060ea01": {
+          "name": "__snprintf",
+          "conv": "cdecl",
+          "args": ["ptr", "u32", "cstr"],
+          "ret": [126, 2]
+        }
+      }
+    },
+    {
+      "name": "first text 127 (size falls back to 0x7f)",
+      "args": [
+        "@src",
+        1
+      ],
+      "memory": [
+        {"addr": "@src", "offset": "0x10", "cstr": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"},
+        {"addr": "@src", "offset": "0x8f", "u8": 0},
+        {"addr": "@src", "offset": "0x90", "cstr": "xy"}
+      ],
+      "callees": {
+        "0x0060ea01": {
+          "name": "__snprintf",
+          "conv": "cdecl",
+          "args": ["ptr", "u32", "cstr"],
+          "ret": [127, 2]
+        }
+      }
+    },
+    {
+      "name": "second text 62 (size check passes)",
+      "args": [
+        "@src",
+        1
+      ],
+      "memory": [
+        {"addr": "@src", "offset": "0x10", "cstr": "abc"},
+        {"addr": "@src", "offset": "0x14", "cstr": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"},
+        {"addr": "@src", "offset": "0x52", "u8": 0}
+      ],
+      "callees": {
+        "0x0060ea01": {
+          "name": "__snprintf",
+          "conv": "cdecl",
+          "args": ["ptr", "u32", "cstr"],
+          "ret": [3, 62]
+        }
+      }
+    },
+    {
+      "name": "second text 63 (size falls back to 0x3f)",
+      "args": [
+        "@src",
+        1
+      ],
+      "memory": [
+        {"addr": "@src", "offset": "0x10", "cstr": "abc"},
+        {"addr": "@src", "offset": "0x14", "cstr": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"},
+        {"addr": "@src", "offset": "0x53", "u8": 0}
+      ],
+      "callees": {
+        "0x0060ea01": {
+          "name": "__snprintf",
+          "conv": "cdecl",
+          "args": ["ptr", "u32", "cstr"],
+          "ret": [3, 63]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4481080,
+    "count": 100,
+    "args": [
+      {"choices": ["@src", 0]},
+      {"range": [-4, 300]}
+    ]
+  }
+}

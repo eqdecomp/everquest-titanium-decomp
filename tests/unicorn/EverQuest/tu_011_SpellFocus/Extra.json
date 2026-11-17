@@ -1,0 +1,361 @@
+{
+  "function": "Scaler_guess::GetBuffFocus_guess",
+  "original": "0x0040d1e5",
+  "sources": [
+    "src/EverQuest/tu_011_SpellFocus.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@scaler",
+  "args": [
+    { "name": "object", "type": "ptr" },
+    { "name": "wanted", "type": "int" },
+    { "name": "outIndex", "type": "ptr" },
+    { "name": "index", "type": "int" },
+    { "name": "flag", "type": "int" }
+  ],
+  "ret": "int",
+  "objects": {
+    "scaler": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x4", "u32": "@subtable" },
+        { "offset": "0x8", "u32": "@charinfonode" },
+        { "offset": "0xc", "u32": 1 }
+      ]
+    },
+    "subtable": {
+      "size": "8",
+      "fill": "zero",
+      "init": [ { "offset": "0x4", "u32": 0 } ]
+    },
+    "criteria": { "size": "0x26a", "fill": "zero" },
+    "outindex": { "size": "4", "fill": "zero" },
+    "charinfo": { "size": "0x11a0", "fill": "zero" },
+    "charinfonode": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": 1 },
+        { "offset": "0x4", "u32": "@charinfo" }
+      ]
+    },
+    "lookup": {
+      "size": "0x138a8",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x28", "u32": "@rowa" },
+        { "offset": "0x2c", "u32": "@rowb" },
+        { "offset": "0x30", "u32": "@rowc" }
+      ]
+    },
+    "entrya": {
+      "size": "8",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u8": 1 },
+        { "offset": "0x4", "u32": 1 }
+      ]
+    },
+    "entryb": {
+      "size": "8",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u8": 1 },
+        { "offset": "0x4", "u32": 2 }
+      ]
+    },
+    "entryc": {
+      "size": "8",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u8": 1 },
+        { "offset": "0x4", "u32": 3 }
+      ]
+    },
+    "rowa": {
+      "size": "0x150",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x30", "u32": 10 },
+        { "offset": "0x120", "u32": 99 },
+        { "offset": "0x124", "u32": 254 }
+      ]
+    },
+    "rowb": {
+      "size": "0x150",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x30", "u32": 20 },
+        { "offset": "0x120", "u32": 99 },
+        { "offset": "0x124", "u32": 254 }
+      ]
+    },
+    "rowc": {
+      "size": "0x150",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x30", "u32": 500000 },
+        { "offset": "0x120", "u32": 99 },
+        { "offset": "0x124", "u32": 254 }
+      ]
+    }
+  },
+  "memory": [
+    { "addr": "0x00985cc8", "u32": "@lookup" }
+  ],
+  "callees": {
+    "0x005ec220": {
+      "name": "FUN_005ec220",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0040d933": {
+      "name": "GetMaxBuffs_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [ 1, 1 ]
+    },
+    "0x0040e7ac": {
+      "name": "FUN_0040e7ac",
+      "conv": "thiscall",
+      "args": [ "int" ],
+      "ret": "@entrya"
+    },
+    "0x0044d0d0": {
+      "name": "FUN_0044d0d0",
+      "conv": "cdecl",
+      "args": [ "int" ],
+      "ret": 1
+    },
+    "0x0040cbd6": {
+      "name": "Lookup_guess::GetSpell_guess",
+      "conv": "thiscall",
+      "args": [ "int" ],
+      "passthrough": true
+    },
+    "0x0040cec4": {
+      "name": "Searcher_guess::CheckSpellFocusLimits_guess",
+      "conv": "thiscall",
+      "args": [ "ptr", "ptr", "int" ],
+      "passthrough": true
+    },
+    "0x0044e755": {
+      "name": "CheckEntry_guess::Check_guess",
+      "conv": "thiscall",
+      "args": [ "int" ],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "null object",
+      "args": [ 0, 99, "@outindex", 0, 0 ]
+    },
+    {
+      "name": "disabled object",
+      "args": [ "@criteria", 99, "@outindex", 0, 0 ],
+      "memory": [ { "addr": "@criteria", "offset": "0x269", "u8": 1 } ]
+    },
+    {
+      "name": "guard state 8",
+      "args": [ "@criteria", 99, "@outindex", 0, 0 ],
+      "memory": [ { "addr": "@charinfo", "offset": "0x119c", "u8": 8 } ]
+    },
+    {
+      "name": "guard state 1",
+      "args": [ "@criteria", 99, "@outindex", 0, 0 ],
+      "memory": [ { "addr": "@charinfo", "offset": "0x119c", "u8": 1 } ]
+    },
+    {
+      "name": "guard state 9",
+      "args": [ "@criteria", 99, "@outindex", 0, 0 ],
+      "memory": [ { "addr": "@charinfo", "offset": "0x119c", "u8": 9 } ]
+    },
+    {
+      "name": "guard state 7",
+      "args": [ "@criteria", 99, "@outindex", 0, 0 ],
+      "memory": [ { "addr": "@charinfo", "offset": "0x119c", "u8": 7 } ]
+    },
+    {
+      "name": "guard state with field enabled",
+      "args": [ "@criteria", 99, "@outindex", 0, 0 ],
+      "memory": [
+        { "addr": "@charinfo", "offset": "0x119c", "u8": 8 },
+        { "addr": "@criteria", "offset": "0x1c4", "u8": 1 }
+      ],
+      "callees": {
+        "0x0040d933": { "ret": [ 0 ] }
+      }
+    },
+    {
+      "name": "index bypasses state guard",
+      "args": [ "@criteria", 99, "@outindex", 1, 0 ],
+      "memory": [ { "addr": "@charinfo", "offset": "0x119c", "u8": 8 } ],
+      "callees": {
+        "0x0040d933": { "ret": [ 0 ] }
+      }
+    },
+    {
+      "name": "empty entry list",
+      "args": [ "@criteria", 99, "@outindex", 0, 0 ],
+      "callees": {
+        "0x0040d933": { "ret": [ 0 ] }
+      }
+    },
+    {
+      "name": "inactive entry",
+      "args": [ "@criteria", 99, "@outindex", 0, 4 ],
+      "memory": [ { "addr": "@entrya", "offset": "0", "u8": 0 } ]
+    },
+    {
+      "name": "reject entry id",
+      "args": [ "@criteria", 99, "@outindex", 0, 4 ],
+      "callees": {
+        "0x0044d0d0": { "ret": 0 }
+      }
+    },
+    {
+      "name": "lookup returns null",
+      "args": [ "@criteria", 99, "@outindex", 0, 0 ],
+      "memory": [ { "addr": "@lookup", "offset": "0x28", "u32": 0 } ]
+    },
+    {
+      "name": "row type mismatch",
+      "args": [ "@criteria", 99, "@outindex", 0, 0 ],
+      "memory": [ { "addr": "@rowa", "offset": "0x120", "u32": 98 } ]
+    },
+    {
+      "name": "row matcher returns zero",
+      "args": [ "@criteria", 99, "@outindex", 0, 3 ],
+      "memory": [
+        { "addr": "@rowa", "offset": "0x124", "u32": 311 },
+        { "addr": "@rowa", "offset": "0x34", "u32": 1 }
+      ]
+    },
+    {
+      "name": "positive score selects candidate",
+      "args": [ "@criteria", 99, "@outindex", 0, 0 ]
+    },
+    {
+      "name": "negative score chooses minimum",
+      "args": [ "@criteria", 99, "@outindex", 0, 0 ],
+      "memory": [ { "addr": "@rowa", "offset": "0x30", "u32": "0xfffffff6" } ]
+    },
+    {
+      "name": "two entries choose maximum",
+      "args": [ "@criteria", 99, "@outindex", 0, 2 ],
+      "callees": {
+        "0x0040d933": { "ret": [ 2, 2, 2 ] },
+        "0x0040e7ac": { "conv": "thiscall", "args": [ "int" ], "ret": [ "@entrya", "@entryb" ] }
+      }
+    },
+    {
+      "name": "two entries choose negative minimum",
+      "args": [ "@criteria", 99, "@outindex", 0, 2 ],
+      "memory": [ { "addr": "@rowa", "offset": "0x30", "u32": "0xfffffff6" } ],
+      "callees": {
+        "0x0040d933": { "ret": [ 2, 2, 2 ] },
+        "0x0040e7ac": { "conv": "thiscall", "args": [ "int" ], "ret": [ "@entrya", "@entryb" ] }
+      }
+    },
+    {
+      "name": "equal scores retain first",
+      "args": [ "@criteria", 99, "@outindex", 0, 2 ],
+      "memory": [ { "addr": "@rowb", "offset": "0x30", "u32": 10 } ],
+      "callees": {
+        "0x0040d933": { "ret": [ 2, 2, 2 ] },
+        "0x0040e7ac": { "conv": "thiscall", "args": [ "int" ], "ret": [ "@entrya", "@entryb" ] }
+      }
+    },
+    {
+      "name": "second score is lower",
+      "args": [ "@criteria", 99, "@outindex", 0, 2 ],
+      "memory": [
+        { "addr": "@rowa", "offset": "0x30", "u32": "0xfffffff6" },
+        { "addr": "@rowb", "offset": "0x30", "u32": "0xffffffec" }
+      ],
+      "callees": {
+        "0x0040d933": { "ret": [ 2, 2, 2 ] },
+        "0x0040e7ac": { "conv": "thiscall", "args": [ "int" ], "ret": [ "@entrya", "@entryb" ] }
+      }
+    },
+    {
+      "name": "scaling overflow changes selected candidate",
+      "args": [ "@criteria", 99, "@outindex", 0, 3 ],
+      "memory": [
+        { "addr": "@rowa", "offset": "0x30", "u32": 250000 },
+        { "addr": "@rowb", "offset": "0x30", "u32": 400000 }
+      ],
+      "callees": {
+        "0x0040d933": { "ret": [ 3, 3, 3, 3 ] },
+        "0x0040e7ac": { "conv": "thiscall", "args": [ "int" ], "ret": [ "@entrya", "@entryb", "@entryc" ] }
+      }
+    },
+    {
+      "name": "matcher returns score one",
+      "args": [ "@criteria", 99, "@outindex", 0, 0 ],
+      "memory": [
+        { "addr": "@rowa", "offset": "0x30", "u32": 100 },
+        { "addr": "@rowa", "offset": "0x124", "u32": 134 },
+        { "addr": "@rowa", "offset": "0x128", "u32": 254 },
+        { "addr": "@rowa", "offset": "0x34", "u32": 1 },
+        { "addr": "@rowa", "offset": "0x64", "u32": 99 },
+        { "addr": "@charinfo", "offset": "0x119c", "u8": 2 },
+        { "addr": "@criteria", "offset": "0x152", "u8": 2 }
+      ]
+    },
+    {
+      "name": "score one competes with positive candidate",
+      "args": [ "@criteria", 99, "@outindex", 0, 2 ],
+      "memory": [
+        { "addr": "@rowa", "offset": "0x30", "u32": "0xffffff9c" },
+        { "addr": "@rowa", "offset": "0x124", "u32": 134 },
+        { "addr": "@rowa", "offset": "0x128", "u32": 254 },
+        { "addr": "@rowa", "offset": "0x34", "u32": 1 },
+        { "addr": "@rowa", "offset": "0x64", "u32": 99 },
+        { "addr": "@charinfo", "offset": "0x119c", "u8": 2 },
+        { "addr": "@criteria", "offset": "0x152", "u8": 2 }
+      ],
+      "callees": {
+        "0x0040d933": { "ret": [ 2, 2, 2 ] },
+        "0x0040e7ac": { "conv": "thiscall", "args": [ "int" ], "ret": [ "@entrya", "@entryb" ] }
+      }
+    },
+    {
+      "name": "lower positive candidate updates minimum",
+      "args": [ "@criteria", 99, "@outindex", 0, 2 ],
+      "memory": [
+        { "addr": "@rowa", "offset": "0x30", "u32": 20 },
+        { "addr": "@rowb", "offset": "0x30", "u32": 10 }
+      ],
+      "callees": {
+        "0x0040d933": { "ret": [ 2, 2, 2 ] },
+        "0x0040e7ac": { "conv": "thiscall", "args": [ "int" ], "ret": [ "@entrya", "@entryb" ] }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4248037,
+    "count": 100,
+    "args": [
+      { "choices": [ "@criteria", 0 ] },
+      { "choices": [ 99 ] },
+      { "choices": [ "@outindex" ] },
+      { "choices": [ 0, 1 ] },
+      { "range": [ -2, 4 ] }
+    ],
+    "memory": [
+      { "addr": "@criteria", "offset": "0x269", "type": "u8", "choices": [ 0, 1 ] },
+      { "addr": "@criteria", "offset": "0x1c4", "type": "u8", "choices": [ 0, 1 ] },
+      { "addr": "@charinfo", "offset": "0x119c", "type": "u8", "choices": [ 0, 1, 2, 7, 8, 9, 10 ] },
+      { "addr": "@entrya", "offset": "0", "type": "u8", "choices": [ 0, 1 ] },
+      { "addr": "@entrya", "offset": "4", "type": "int", "choices": [ 1, 2 ] },
+      { "addr": "@rowa", "offset": "0x30", "type": "int", "choices": [ -20, 0, 10, 20 ] },
+      { "addr": "@rowa", "offset": "0x120", "type": "u32", "choices": [ 99 ] },
+      { "addr": "@rowa", "offset": "0x124", "type": "u32", "choices": [ 254, 311 ] },
+      { "addr": "@rowa", "offset": "0x34", "type": "int", "choices": [ 0, 1 ] }
+    ]
+  }
+}

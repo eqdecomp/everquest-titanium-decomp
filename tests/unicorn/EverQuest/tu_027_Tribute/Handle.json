@@ -1,0 +1,167 @@
+{
+  "function": "MessageRouter_guess::HandleGuildTributeMessage_guess",
+  "original": "0x00435163",
+  "sources": ["src/EverQuest/tu_027_Tribute.cpp"],
+  "size": "0x494",
+  "conv": "thiscall",
+  "this": "@messagerouter",
+  "args": [
+    {"name": "message_guess", "type": "int"},
+    {"name": "data_guess", "type": "ptr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "messagerouter": {
+      "size": "0x3c", "fill": "random",
+      "init": [
+        {"offset": "0x28", "u32": 1},
+        {"offset": "0x30", "u32": 15},
+        {"offset": "0x34", "u32": 4},
+        {"offset": "0x38", "u32": "@pages"}
+      ]
+    },
+    "data": {
+      "size": "0x100", "fill": "zero",
+      "init": [
+        {"offset": "0x00", "u32": "0x10"},
+        {"offset": "0x04", "u32": "0x20"},
+        {"offset": "0x08", "u32": 1},
+        {"offset": "0x0c", "u8": 1},
+        {"offset": "0x18", "u32": "0x30"},
+        {"offset": "0x1c", "u32": "0x40"},
+        {"offset": "0x20", "u32": "0x50"},
+        {"offset": "0x24", "u32": "0x60"},
+        {"offset": "0x28", "u32": "0x70"},
+        {"offset": "0x2c", "u32": "0x80"},
+        {"offset": "0x30", "u32": "0x90"},
+        {"offset": "0x44", "u32": 1},
+        {"offset": "0x48", "u32": "0x1234"},
+        {"offset": "0x4c", "u32": "0x5678"},
+        {"offset": "0x50", "u8": 1}
+      ]
+    },
+    "candidate": {
+      "size": "0xc38d", "fill": "zero",
+      "init": [{"offset": "0xc280", "u32": "@candidateVt"}]
+    },
+    "candidateVt": {
+      "size": "0x18", "fill": "zero",
+      "init": [{"offset": "0x14", "u32": "@fn_slot5"}]
+    },
+    "fn_slot5": {"size": "0x4", "fill": "zero"},
+    "thing": {
+      "size": "0x4", "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@thingVt"}]
+    },
+    "thingVt": {
+      "size": "0x4", "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@fn_slot0"}]
+    },
+    "fn_slot0": {"size": "0x4", "fill": "zero"},
+    "notifier": {
+      "size": "0x4", "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@notifierVt"}]
+    },
+    "notifierVt": {
+      "size": "0xc4", "fill": "zero",
+      "init": [{"offset": "0xc0", "u32": "@fn_slot30"}]
+    },
+    "fn_slot30": {"size": "0x4", "fill": "zero"},
+    "pages": {
+      "size": "0x10", "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@page0"}]
+    },
+    "page0": {"size": "0x20", "fill": "zero"},
+    "settings": {"size": "0x274", "fill": "zero"},
+    "record": {"size": "0x88", "fill": "zero"},
+    "old": {"size": "0x10", "fill": "zero"},
+    "entry": {"size": "0x20", "fill": "zero"},
+    "sink": {"size": "0x4", "fill": "zero"},
+    "owner2": {"size": "0x4", "fill": "zero"},
+    "sender": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x00905d00", "u32": "@candidate"},
+    {"addr": "0x00991ac8", "u32": "@notifier"},
+    {"addr": "0x0099298c", "u32": "@sink"},
+    {"addr": "0x00991aac", "u32": "@owner2"},
+    {"addr": "0x00988df0", "u32": "@sender"},
+    {"addr": "0x00905d10", "u32": 0},
+    {"addr": "0x0091d6d8", "size": 16, "fill": "zero"}
+  ],
+  "callees": {
+    "0x00434567": {"name": "OnPlatinumDonated_guess", "conv": "thiscall", "args": ["int", "ptr", "int"]},
+    "0x005f0e20": {"name": "Refresh_guess", "conv": "thiscall", "args": ["int", "int"]},
+    "0x004347d3": {"name": "OnItemDonated_guess", "conv": "thiscall", "args": ["ptr", "ptr", "u32"]},
+    "0x0056bb51": {"name": "MarkClean_guess", "conv": "thiscall", "args": []},
+    "0x005117c3": {"name": "SetFlag_guess", "conv": "thiscall", "args": []},
+    "0x0040aa28": {"name": "Get_guess", "conv": "thiscall", "args": ["ptr"], "ret": "@settings"},
+    "0x00433dbc": {"name": "Set_guess", "conv": "thiscall", "args": ["bool", "u32", "u32", "u8"]},
+    "0x0050fb61": {"name": "Adjust_guess", "conv": "thiscall", "args": ["ptr", "int"]},
+    "0x005117cb": {"name": "Commit_guess", "conv": "thiscall", "args": []},
+    "0x0043415d": {"name": "ShowTributeDescription_guess", "conv": "thiscall", "args": ["int", "int", "int"]},
+    "0x00571fc0": {"name": "SetText_guess", "conv": "thiscall", "args": ["ptr"], "ret": "this"},
+    "0x00401b28": {"name": "Resolve_guess", "conv": "cdecl", "args": ["u32"], "ret": 1},
+    "0x00434495": {"name": "IsTributeAvailable_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x0046da4a": {"name": "BuildText_guess", "conv": "cdecl", "args": ["ignore", "int", "int", "int", "int", "int", "int", "int", "int", "int"]},
+    "0x004982c6": {"name": "Send_guess", "conv": "thiscall", "args": ["cstr", "int", "bool"]},
+    "0x004912b1": {"name": "SendMessage_guess", "conv": "cdecl", "args": ["ptr", "int", "mem:12", "int", "char"]},
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "passthrough": true},
+    "0x00433de7": {"name": "Record_ctor", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x004341cf": {"name": "Read_guess", "conv": "thiscall", "args": ["ptr", "ptr"], "passthrough": true},
+    "0x0040600c": {"name": "SetElementIdx_guess", "conv": "thiscall", "args": ["int", "ignore"]},
+    "0x00433d86": {"name": "OwnedPair_dtor", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x00433d68": {"name": "ReadBigEndian_guess", "conv": "cdecl", "args": ["ptr"], "passthrough": true},
+    "0x0060d0d5": {"name": "operator_delete", "conv": "cdecl", "args": ["u32"]},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@record"},
+    "kernel32.dll!HeapFree": {"name": "HeapFree", "conv": "stdcall", "args": ["ptr", "u32", "ptr"], "ret": 1},
+    "@fn_slot5": {"name": "CandidateSub_GetSlot", "conv": "thiscall", "args": ["int"], "ret": "@thing"},
+    "@fn_slot0": {"name": "Thing_SetFlag", "conv": "thiscall", "args": ["int"]},
+    "@fn_slot30": {"name": "Notifier_GetStatus", "conv": "thiscall", "args": ["int", "int"], "ret": -1}
+  },
+  "rewrite_aliases": {"??2@YAPAXI@Z": "0x0060d071"},
+  "cases": [
+    {"name": "unknown-low", "args": [0, "@data"]},
+    {"name": "low-boundary-4eef", "args": ["0x4eef", "@data"]},
+    {"name": "settings-lookup-miss", "args": ["0xcfc", "@data"], "callees": {"0x0040aa28": {"name": "Get_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0}}},
+    {"name": "settings-update", "args": ["0xcfc", "@data"]},
+    {"name": "slots-1a29", "args": ["0x1a29", "@data"]},
+    {"name": "route-32c0", "args": ["0x32c0", "@data"]},
+    {"name": "slots-3312-null-observers", "args": ["0x3312", "@data"], "memory": [{"addr": "0x0099298c", "u32": 0}, {"addr": "0x00991ac8", "u32": 0}]},
+    {"name": "send-44c4", "args": ["0x44c4", "@data"]},
+    {"name": "high-boundary-4ef0", "args": ["0x4ef0", "@data"]},
+    {"name": "unknown-high", "args": ["0x7fffffff", "@data"]},
+    {"name": "record-new", "args": ["0x5e3d", "@data"], "memory": [{"addr": "@data", "offset": "0x4", "u32": 0}]},
+    {"name": "record-ID-below-count", "args": ["0x5e3d", "@data"], "memory": [{"addr": "@messagerouter", "offset": "0x28", "u32": 2}, {"addr": "@data", "offset": "0x4", "u32": 0}]},
+    {"name": "record-grow-and-replace", "args": ["0x5e3d", "@data"], "memory": [{"addr": "@page0", "offset": "0x0", "u32": "@old"}, {"addr": "@page0", "offset": "0x4", "u32": "@old"}, {"addr": "@data", "offset": "0x4", "hex": "00000001"}]},
+    {"name": "record-allocation-failed", "args": ["0x5e3d", "@data"], "memory": [{"addr": "@data", "offset": "0x4", "u32": 0}], "callees": {"0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}}},
+    {"name": "request-pending-early", "args": ["0x60b6", "@data"], "callees": {"@fn_slot30": {"name": "Notifier_GetStatus", "conv": "thiscall", "args": ["int", "int"], "ret": 0}}},
+    {"name": "request-pending-send", "args": ["0x60b6", "@data"], "memory": [{"addr": "@data", "offset": "0x8", "u32": 1}]},
+    {"name": "request-pending-already-set", "args": ["0x60b6", "@data"], "memory": [{"addr": "0x00905d10", "u32": 4}, {"addr": "@data", "offset": "0x8", "u32": 1}]},
+    {"name": "cancel-response-no-id", "args": ["0x60b6", "@data"], "memory": [{"addr": "@data", "offset": "0x8", "u32": 0}], "callees": {"0x00401b28": {"name": "Resolve_guess", "conv": "cdecl", "args": ["u32"], "ret": 0}}},
+    {"name": "cancel-response-send", "args": ["0x60b6", "@data"], "memory": [{"addr": "@data", "offset": "0x8", "u32": 0}]},
+    {"name": "cancel-response-no-shouldnotify", "args": ["0x60b6", "@data"], "memory": [{"addr": "@data", "offset": "0x8", "u32": 0}], "callees": {"0x00434495": {"name": "ShouldNotify_guess", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "state-update-67ea", "args": ["0x67ea", "@data"]},
+    {"name": "dispatch-index-equals-count", "args": ["0x704f", "@data"], "memory": [{"addr": "@data", "offset": "0x8", "u32": 1}]},
+    {"name": "dispatch-null-entry", "args": ["0x704f", "@data"], "memory": [{"addr": "@data", "offset": "0x8", "u32": 0}]},
+    {"name": "dispatch-entry", "args": ["0x704f", "@data"], "memory": [{"addr": "@data", "offset": "0x8", "u32": 0}, {"addr": "@page0", "offset": "0x0", "u32": "@entry"}]}
+  ],
+  "fuzz": {
+    "seed": 435163,
+    "count": 100,
+    "args": [
+      {"choices": [0, "0x4eef", "0xcfc", "0x1a29", "0x32c0", "0x3312", "0x44c4", "0x4ef0", "0x5e3d", "0x60b6", "0x67ea", "0x704f", "0x7fffffff"]},
+      {"choices": ["@data"]}
+    ],
+    "memory": [
+      {"addr": "@data", "offset": "0x0", "type": "u32", "choices": [0, 1, "0x7fffffff"]},
+      {"addr": "@data", "offset": "0x4", "type": "u32", "choices": [0, "0x01000000"]},
+      {"addr": "@data", "offset": "0x8", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "@data", "offset": "0x44", "type": "u32", "choices": [0, 1, "0x7fffffff"]},
+      {"addr": "@data", "offset": "0x48", "type": "u32", "choices": [0, 1, "0x7fffffff"]},
+      {"addr": "@data", "offset": "0x4c", "type": "u32", "choices": [0, 1, "0x7fffffff"]},
+      {"addr": "@data", "offset": "0x50", "type": "u8", "choices": [0, 1, 255]}
+    ]
+  }
+}

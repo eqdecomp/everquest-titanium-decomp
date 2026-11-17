@@ -1,0 +1,186 @@
+{
+  "function": "CDisplay_guess::SetFogState_guess",
+  "original": "0x0044104c",
+  "sources": ["src/EverQuest/tu_029_Display.cpp"],
+  "conv": "thiscall",
+  "this": "@client",
+  "args": [
+    {"name": "one", "type": "int"},
+    {"name": "start", "type": "float"},
+    {"name": "end", "type": "float"},
+    {"name": "red", "type": "int"},
+    {"name": "green", "type": "u8"},
+    {"name": "blue", "type": "u8"}
+  ],
+  "ret": "void",
+  "size": "0x249",
+  "objects": {
+    "client": {"size": "0x2d70", "fill": "zero"},
+    "sink": {
+      "size": "0x4", "fill": "zero",
+      "init": [{"offset": "0", "u32": "@sink_vtbl"}]
+    },
+    "sink_vtbl": {
+      "size": "0x6c", "fill": "zero",
+      "init": [{"offset": "0x68", "u32": "@fn_set_color"}]
+    },
+    "fn_set_color": {"size": "0x4"},
+    "provider": {
+      "size": "0x4", "fill": "zero",
+      "init": [{"offset": "0", "u32": "@provider_vtbl"}]
+    },
+    "provider_vtbl": {
+      "size": "0x28", "fill": "zero",
+      "init": [{"offset": "0x24", "u32": "@fn_get_color"}]
+    },
+    "fn_get_color": {"size": "0x4"},
+    "color": {
+      "size": "0x4", "fill": "zero",
+      "init": [{"offset": "0", "u32": "0xaabbccdd"}]
+    }
+  },
+  "memory": [
+    {"addr": "@client", "offset": "0x4", "u8": 1},
+    {"addr": "@client", "offset": "0x8", "f32": 100.0},
+    {"addr": "@client", "offset": "0x14c", "u8": 1},
+    {"addr": "0x008503a8", "u32": "@provider"},
+    {"addr": "0x0099e364", "u32": "@sink"},
+    {"addr": "0x0085097c", "u8": 0},
+    {"addr": "0x00924964", "u32": 0},
+    {"addr": "0x00923c3c", "u8": 1},
+    {"addr": "0x00923bba", "u8": 1},
+    {"addr": "0x00923798", "u8": 0},
+    {"addr": "0x00923be0", "f32": 100.0},
+    {"addr": "0x00923be4", "f32": 2000.0},
+    {"addr": "0x009249ac", "u32": 20},
+    {"addr": "0x00640e38", "from_image": "0x00640e38", "image_size": 4},
+    {"addr": "0x0063f554", "from_image": "0x0063f554", "image_size": 4},
+    {"addr": "0x0063f4d0", "from_image": "0x0063f4d0", "image_size": 4},
+    {"addr": "0x0063f4cc", "from_image": "0x0063f4cc", "image_size": 4},
+    {"addr": "0x00642ae8", "from_image": "0x00642ae8", "image_size": 4},
+    {"addr": "0x00642ae4", "from_image": "0x00642ae4", "image_size": 4}
+  ],
+  "callees": {
+    "0x00440f42": {
+      "name": "SetYon_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "keep"
+    },
+    "@fn_get_color": {
+      "name": "GetColor_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@color"
+    },
+    "@fn_set_color": {
+      "name": "SetColor_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "int", "u32"],
+      "ret": "keep"
+    }
+  },
+  "cases": [
+    {
+      "name": "state guard",
+      "args": [1, 20.0, 30.0, 0, 0, 0],
+      "memory": [{"addr": "@client", "offset": "0x4", "u8": 0}]
+    },
+    {"name": "ordinary zone, mode off", "args": [1, 120.0, 200.0, 0, 0, 0]},
+    {
+      "name": "ordinary zone, provider path",
+      "args": [1, 120.0, 200.0, 12, 34, 56],
+      "memory": [
+        {"addr": "0x00924964", "u32": 1},
+        {"addr": "@client", "offset": "0x2d2c", "u8": 1}
+      ]
+    },
+    {
+      "name": "provider color flag C override",
+      "args": [1, 120.0, 200.0, 12, 34, 56],
+      "memory": [
+        {"addr": "0x00924964", "u32": 1},
+        {"addr": "0x00923c3c", "u8": 0},
+        {"addr": "0x00923bba", "u8": 0},
+        {"addr": "0x00923798", "u8": 1}
+      ]
+    },
+    {
+      "name": "provider pointer null",
+      "args": [1, 120.0, 200.0, 12, 34, 56],
+      "memory": [
+        {"addr": "0x008503a8", "u32": 0},
+        {"addr": "0x00924964", "u32": 1},
+        {"addr": "0x00923c3c", "u8": 1},
+        {"addr": "0x00923bba", "u8": 1}
+      ]
+    },
+    {"name": "one zero uses fixed end", "args": [0, 10.0, 20.0, 10, 20, 30]},
+    {"name": "both endpoints small", "args": [1, -1.0, 0.0, 10, 20, 30]},
+    {"name": "negative start only", "args": [1, -1.0, 0.2, 10, 20, 30]},
+    {"name": "end below start", "args": [1, 300.0, 200.0, 10, 20, 30]},
+    {"name": "end equal start", "args": [1, 100.0, 100.0, 10, 20, 30]},
+    {"name": "small threshold boundary", "args": [1, 0.1, 0.099, 10, 20, 30]},
+    {"name": "both endpoints equal small threshold", "args": [1, 0.1, 0.1, 10, 20, 30]},
+    {"name": "end exactly small threshold after lower start", "args": [1, 0.099, 0.1, 10, 20, 30]},
+    {"name": "start at next small float", "args": [1, 0.10000001, 0.099, 10, 20, 30]},
+    {"name": "start at second next small float", "args": [1, 0.10000002, 0.099, 10, 20, 30]},
+    {"name": "end at next small float", "args": [1, 0.099, 0.10000001, 10, 20, 30]},
+    {"name": "end at second next small float", "args": [1, 0.099, 0.10000002, 10, 20, 30]},
+    {"name": "high byte retained in red", "args": [1, 120.0, 200.0, "0x5c00000c", 34, 56]},
+    {"name": "high byte retained through defaults", "args": [1, 120.0, 200.0, "0xda000000", 0, 0]},
+    {"name": "end 100 resets color state", "args": [1, 20.0, 100.0, 10, 20, 30]},
+    {"name": "end 101 retains color state", "args": [1, 20.0, 101.0, 10, 20, 30]},
+    {
+      "name": "scaled fog end clamps and start clamps",
+      "args": [1, 0.0, 5000.0, 10, 20, 30],
+      "memory": [
+        {"addr": "@client", "offset": "0x14c", "u8": 0},
+        {"addr": "0x00923be0", "f32": 200.0},
+        {"addr": "0x00923be4", "f32": 100.0},
+        {"addr": "0x009249ac", "u32": 10}
+      ]
+    },
+    {
+      "name": "scaled fog end raises both endpoints",
+      "args": [1, 100.0, 500.0, 10, 20, 30],
+      "memory": [
+        {"addr": "@client", "offset": "0x14c", "u8": 0},
+        {"addr": "0x00923be0", "f32": 100.0},
+        {"addr": "0x00923be4", "f32": 2000.0},
+        {"addr": "0x009249ac", "u32": 20}
+      ]
+    },
+    {"name": "zone 4", "args": [1, 120.0, 200.0, 1, 2, 3], "memory": [{"addr": "0x0085097c", "u8": 4}]},
+    {"name": "zone 5", "args": [1, 120.0, 200.0, 1, 2, 3], "memory": [{"addr": "0x0085097c", "u8": 5}]},
+    {"name": "zone 6", "args": [1, 120.0, 200.0, 1, 2, 3], "memory": [{"addr": "0x0085097c", "u8": 6}]},
+    {"name": "zone 7", "args": [1, 120.0, 200.0, 1, 2, 3], "memory": [{"addr": "0x0085097c", "u8": 7}]},
+    {"name": "zone 8", "args": [1, 120.0, 200.0, 1, 2, 3], "memory": [{"addr": "0x0085097c", "u8": 8}]},
+    {"name": "zone 9", "args": [1, 120.0, 200.0, 1, 2, 3], "memory": [{"addr": "0x0085097c", "u8": 9}]},
+    {"name": "zone 10", "args": [1, 120.0, 200.0, 1, 2, 3], "memory": [{"addr": "0x0085097c", "u8": 10}]},
+    {"name": "zone above all special zones", "args": [1, 120.0, 200.0, 1, 2, 3], "memory": [{"addr": "0x0085097c", "u8": 11}]}
+  ],
+  "fuzz": {
+    "seed": 4460620,
+    "count": 150,
+    "args": [
+      {"choices": [0, 1, -1]},
+      {"range": [-150.0, 700.0]},
+      {"range": [-150.0, 1000.0]},
+      {"choices": [0, 1, 10, 192, 255, "0x33000000", "0xbc00000a", "0xff000000"]},
+      {"choices": [0, 1, 10, 192, 255]},
+      {"choices": [0, 1, 10, 192, 255]}
+    ],
+    "memory": [
+      {"addr": "@client", "offset": "0x4", "type": "u8", "choices": [0, 1]},
+      {"addr": "@client", "offset": "0x8", "type": "float", "choices": [-50.0, 0.0, 100.0, 600.0]},
+      {"addr": "@client", "offset": "0x14c", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x0085097c", "type": "u8", "choices": [0, 4, 5, 6, 7, 8, 9, 10, 11]},
+      {"addr": "0x00924964", "type": "int", "choices": [0, 1]},
+      {"addr": "0x00923c3c", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00923bba", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00923798", "type": "u8", "choices": [0, 1]}
+    ]
+  },
+  "_survivors": "L8469: updateRange is tested only for zero, so changing its initial value from 1 to 2 cannot change a branch or observable result."
+}

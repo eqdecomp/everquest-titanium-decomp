@@ -1,0 +1,106 @@
+{
+  "function": "Table_guess::Resolve_guess",
+  "original": "0x004eb2b9",
+  "sources": [
+    "src/EverQuest/tu_138_CascadeWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@table",
+  "args": [
+    {
+      "name": "first_guess",
+      "type": "int"
+    },
+    {
+      "name": "second_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "table": {
+      "size": "0x20",
+      "fill": "random",
+      "init": [{"offset": "0x10", "u32": 7}]
+    },
+    "wnd": {
+      "size": "0x178",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@wnd"
+    },
+    "0x004eaa99": {
+      "name": "CascadeWnd_guess::CascadeWnd_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": "@wnd"
+    },
+    "0x004eb298": {
+      "name": "Selector_guess::Select_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00447c66": {
+      "name": "Table_guess::Insert_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:4",
+        "u32"
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        1,
+        -1
+      ]
+    },
+    {
+      "name": "zeros",
+      "args": [
+        0,
+        0
+      ],
+      "memory": [{"addr": "@table", "offset": "0x10", "u32": 0}]
+    },
+    {
+      "name": "negative_counter",
+      "args": [
+        123,
+        5
+      ],
+      "memory": [{"addr": "@table", "offset": "0x10", "u32": "0xffffffff"}]
+    }
+  ],
+  "fuzz": {
+    "seed": 5157561,
+    "count": 100,
+    "args": [
+      {},
+      {}
+    ],
+    "memory": [
+      {"addr": "@table", "offset": "0x10", "type": "int", "range": [-1000, 1000]}
+    ]
+  }
+}

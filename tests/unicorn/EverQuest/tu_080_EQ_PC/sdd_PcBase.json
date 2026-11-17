@@ -1,0 +1,34 @@
+{
+  "function": "PcBase_guess::`scalar deleting destructor'",
+  "original": "0x004bf94b",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@pcbase+0xc384",
+  "args": [
+    {"name": "flags", "type": "int"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "pcbase": {"size": "0xc4d0", "fill": "random"}
+  },
+  "callees": {
+    "0x004be9dc": {"name": "PcBase_guess::~PcBase_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005fa2c0": {"name": "PcCharacter_guess::~PcCharacter_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0060d0d5": {"name": "operator delete", "conv": "cdecl", "args": ["ptr"], "ret": 0}
+  },
+  "cases": [
+    {"name": "no-delete", "args": [0]},
+    {"name": "delete", "args": [1]},
+    {"name": "other-bit-only", "args": [2]},
+    {"name": "all-bits", "args": [-1]},
+    {"name": "high-bit-only", "args": [-2147483648]},
+    {"name": "delete-high-bit", "args": [-2147483647]}
+  ],
+  "fuzz": {
+    "seed": 4978507,
+    "count": 100,
+    "args": [{"range": [-2147483648, 2147483647]}]
+  }
+}

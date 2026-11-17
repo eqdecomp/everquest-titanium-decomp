@@ -1,0 +1,230 @@
+{
+  "function": "Selector_guess::BuildItems_guess",
+  "original": "0x004eae5d",
+  "sources": ["src/EverQuest/tu_138_CascadeWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@selector",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "selector": {
+      "size": "0x168",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@selector_vtbl"}]
+    },
+    "selector_vtbl": {
+      "size": "0xe8",
+      "fill": "zero",
+      "init": [{"offset": "0xe4", "u32": "@fn_parent_bounds"}]
+    },
+    "registry": {"size": "0x4", "fill": "zero"},
+    "fn_parent_bounds": {"size": "0x4", "fill": "zero"},
+    "fn_set_record": {"size": "0x4", "fill": "zero"},
+    "child_context": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@dispatcher"}]
+    },
+    "dispatcher": {"size": "0x4", "fill": "zero"},
+    "child_one": {"size": "0x4", "fill": "zero"},
+    "child_two": {"size": "0x4", "fill": "zero"},
+    "collection": {"size": "0x4", "fill": "zero"},
+    "record": {"size": "0x8", "fill": "zero"},
+    "cxstr_rep": {"size": "0x40", "fill": "zero"},
+    "menu_item": {
+      "size": "0x170",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@item_vtbl"},
+        {"offset": "0x3c", "u32": 0},
+        {"offset": "0x40", "u32": 0},
+        {"offset": "0x44", "u32": 80},
+        {"offset": "0x48", "u32": 24}
+      ]
+    },
+    "item_vtbl": {
+      "size": "0x124",
+      "fill": "zero",
+      "init": [{"offset": "0x120", "u32": "@fn_set_record"}]
+    }
+  },
+  "memory": [
+    {"addr": "0x00991758", "u32": "@registry"},
+    {"addr": "0x0099d334", "u32": "@child_context"},
+    {"addr": "0x007915bc", "from_image": "0x007915bc", "image_size": 4},
+    {"addr": "0x007915c0", "from_image": "0x007915c0", "image_size": 4},
+    {"addr": "0x007915c4", "from_image": "0x007915c4", "image_size": 4}
+  ],
+  "callees": {
+    "0x004eadb0": {"name": "List_guess::Remove_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0059d110": {"name": "Selector_guess::FirstChild_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005aea70": {"name": "ChildDispatcher_guess::Visit_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x0059fee0": {"name": "Selector_guess::NextChild_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x004eb905": {"name": "MenuCollection_guess::GetRecord_guess", "conv": "thiscall", "args": ["int"], "ret": "@record"},
+    "0x00574110": {"name": "Report_guess", "conv": "cdecl", "args": ["cstr", "int"], "ret": 0},
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@menu_item"},
+    "0x00571e00": {"name": "CXStr::CXStr", "conv": "thiscall", "args": ["cstr"], "ret": "this", "passthrough": true},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["u32"], "ret": 0, "passthrough": true},
+    "0x004ea674": {"name": "CascadeSeparatorItemWnd_guess::CascadeSeparatorItemWnd_guess", "conv": "thiscall", "args": ["ptr", "ignore", "u32"], "ret": "this"},
+    "0x004ea7e1": {"name": "CascadeCommandItemWnd_guess::CascadeCommandItemWnd_guess", "conv": "thiscall", "args": ["ptr", "ignore", "u32"], "ret": "this"},
+    "0x004ea6be": {"name": "CascadeSubmenuItemWnd_guess::CascadeSubmenuItemWnd_guess", "conv": "thiscall", "args": ["ptr", "ignore", "u32"], "ret": "this"},
+    "@fn_set_record": {"name": "MenuVTable_guess::SetRecord_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x0059fa70": {"name": "PositionWindow_guess::SetPosition_guess", "conv": "thiscall", "args": ["mem:8"], "ret": 0},
+    "@fn_parent_bounds": {
+      "name": "MenuVTable_guess::GetParentBounds_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "05000000070000005802000090010000"}]
+    },
+    "0x0059d960": {
+      "name": "CXWnd::GetScreenRect",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "0a0000001400000080020000e0010000"}]
+    },
+    "0x0059fb00": {"name": "Selector_guess::SetBounds_guess", "conv": "thiscall", "args": ["mem:16"], "ret": 0}
+    ,"kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@cxstr_rep"}
+    ,"kernel32.dll!HeapFree": {"name": "HeapFree", "conv": "stdcall", "args": ["ptr", "u32", "ptr"], "ret": 1}
+  },
+  "rewrite_aliases": {"??2@YAPAXI@Z": "0x0060d071"},
+  "cases": [
+    {
+      "name": "null_collection_no_children",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x15c", "u32": 41},
+        {"addr": "@selector", "offset": "0x160", "u32": 0}
+      ]
+    },
+    {
+      "name": "empty_collection",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x15c", "u32": 42},
+        {"addr": "@selector", "offset": "0x160", "u32": "@collection"},
+        {"addr": "@collection", "offset": "0x0", "u32": 0}
+      ]
+    },
+    {
+      "name": "negative_collection_count",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x15c", "u32": 43},
+        {"addr": "@selector", "offset": "0x160", "u32": "@collection"},
+        {"addr": "@collection", "offset": "0x0", "u32": 4294967295}
+      ]
+    },
+    {
+      "name": "nonzero_item_top_affects_height",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x15c", "u32": 431},
+        {"addr": "@selector", "offset": "0x160", "u32": "@collection"},
+        {"addr": "@collection", "offset": "0x0", "u32": 1},
+        {"addr": "@record", "offset": "0x4", "u32": 0},
+        {"addr": "@menu_item", "offset": "0x40", "u32": 5}
+      ]
+    },
+    {
+      "name": "submenu_item_type_zero",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x15c", "u32": 44},
+        {"addr": "@selector", "offset": "0x160", "u32": "@collection"},
+        {"addr": "@collection", "offset": "0x0", "u32": 1},
+        {"addr": "@record", "offset": "0x4", "u32": 0}
+      ]
+    },
+    {
+      "name": "command_item_type_one",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x15c", "u32": 45},
+        {"addr": "@selector", "offset": "0x160", "u32": "@collection"},
+        {"addr": "@collection", "offset": "0x0", "u32": 1},
+        {"addr": "@record", "offset": "0x4", "u32": 1}
+      ]
+    },
+    {
+      "name": "separator_item_type_two",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x15c", "u32": 46},
+        {"addr": "@selector", "offset": "0x160", "u32": "@collection"},
+        {"addr": "@collection", "offset": "0x0", "u32": 1},
+        {"addr": "@record", "offset": "0x4", "u32": 2}
+      ]
+    },
+    {
+      "name": "unknown_item_type_faults_after_logging",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x15c", "u32": 47},
+        {"addr": "@selector", "offset": "0x160", "u32": "@collection"},
+        {"addr": "@collection", "offset": "0x0", "u32": 1},
+        {"addr": "@record", "offset": "0x4", "u32": 3}
+      ]
+    },
+    {
+      "name": "two_item_loop_and_child_iteration",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x15c", "u32": 48},
+        {"addr": "@selector", "offset": "0x160", "u32": "@collection"},
+        {"addr": "@collection", "offset": "0x0", "u32": 2},
+        {"addr": "@record", "offset": "0x4", "u32": 0}
+      ],
+      "callees": {
+        "0x0059d110": {"ret": "@child_one"},
+        "0x0059fee0": {"name": "Selector_guess::NextChild_guess", "conv": "thiscall", "args": ["ptr"], "ret": ["@child_two", 0]}
+      }
+    },
+    {
+      "name": "null_allocation_type_zero",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x15c", "u32": 49},
+        {"addr": "@selector", "offset": "0x160", "u32": "@collection"},
+        {"addr": "@collection", "offset": "0x0", "u32": 1},
+        {"addr": "@record", "offset": "0x4", "u32": 0}
+      ],
+      "callees": {"0x0060d071": {"ret": 0}}
+    },
+    {
+      "name": "null_allocation_type_one",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x15c", "u32": 49},
+        {"addr": "@selector", "offset": "0x160", "u32": "@collection"},
+        {"addr": "@collection", "offset": "0x0", "u32": 1},
+        {"addr": "@record", "offset": "0x4", "u32": 1}
+      ],
+      "callees": {"0x0060d071": {"ret": 0}}
+    },
+    {
+      "name": "null_allocation_type_two",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x15c", "u32": 49},
+        {"addr": "@selector", "offset": "0x160", "u32": "@collection"},
+        {"addr": "@collection", "offset": "0x0", "u32": 1},
+        {"addr": "@record", "offset": "0x4", "u32": 2}
+      ],
+      "callees": {"0x0060d071": {"ret": 0}}
+    }
+  ],
+  "fuzz": {
+    "seed": 5156445,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@selector", "offset": "0x15c", "type": "int", "choices": [-1, 0, 42, 2147483647]},
+      {"addr": "@selector", "offset": "0x160", "type": "ptr", "choices": [0, "@collection"]},
+      {"addr": "@collection", "offset": "0x0", "type": "int", "choices": [-1, 0, 1, 2]},
+      {"addr": "@record", "offset": "0x4", "type": "int", "choices": [-1, 0, 1, 2, 3]}
+    ]
+  },
+  "_survivors": "L782: position.x remains zero because the emulator starts the stack at zero and SetPosition only reads the point; L814: assigning max_width again when width is equal has no observable effect."
+}

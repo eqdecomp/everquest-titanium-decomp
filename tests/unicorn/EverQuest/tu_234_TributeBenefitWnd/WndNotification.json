@@ -1,0 +1,100 @@
+{
+  "function": "CTrainWndView_guess::WndNotification_guess",
+  "original": "0x0056b9b5",
+  "sources": [
+    "src/EverQuest/tu_234_TributeBenefitWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@sortmanager",
+  "args": [
+    { "name": "sender_guess", "type": "ptr" },
+    { "name": "message_guess", "type": "u32" },
+    { "name": "data_guess", "type": "ptr" }
+  ],
+  "ret": "int",
+  "objects": {
+    "sortmanager": {
+      "size": "0x7d4",
+      "fill": "random",
+      "init": [
+        { "offset": "0x0", "u32": "@vtbl" },
+        { "offset": "0x164", "u32": "@state" },
+        { "offset": "0x168", "u32": "@activate" },
+        { "offset": "0x18c", "u32": "@list" },
+        { "offset": "0x190", "u32": 0 },
+        { "offset": "0x19c", "u32": 100 },
+        { "offset": "0x7c8", "u32": -5 },
+        { "offset": "0x7cc", "u32": 9 }
+      ]
+    },
+    "vtbl": {
+      "size": "0x8c",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x88", "u32": "@fn_callback" }
+      ]
+    },
+    "fn_callback": { "size": "0x4", "fill": "zero" },
+    "state": { "size": "0x100", "fill": "random" },
+    "activate": { "size": "0x100", "fill": "random" },
+    "list": { "size": "0x140", "fill": "random" },
+    "other": { "size": "0x100", "fill": "random" },
+    "display_owner": { "size": "0x124", "fill": "random" },
+    "dispatch_manager": { "size": "0x20", "fill": "random" },
+    "indexed_dispatch": { "size": "0x200", "fill": "random" },
+    "indexed_value_0": { "size": "0x10", "fill": "random", "init": [{ "offset": "0x0", "u32": 273 } ] },
+    "indexed_value_99": { "size": "0x10", "fill": "random", "init": [{ "offset": "0x0", "u32": 2457 } ] }
+  },
+  "memory": [
+    { "addr": "0x0079ac74", "u32": 610800471 },
+    { "addr": "0x00905d1c", "u32": "@display_owner" },
+    { "addr": "0x00988df0", "u32": "@indexed_dispatch" },
+    { "addr": "0x00905cb0", "u32": "@dispatch_manager" },
+    { "addr": "0x00851200", "u32": "@indexed_value_0" },
+    { "addr": "0x0085138c", "u32": "@indexed_value_99" }
+  ],
+  "callees": {
+    "@fn_callback": { "name": "callback_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x0056b48e": { "name": "Train_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x00597be0": { "name": "GetCurSel_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x005dfa00": { "name": "Dispatch_guess", "conv": "thiscall", "args": ["int", "int"], "ret": 4096 },
+    "0x00492595": { "name": "DispatchIndexed_guess", "conv": "thiscall", "args": ["int"], "ret": 8192 },
+    "0x00492ec2": { "name": "GetDisplay_guess", "conv": "thiscall", "args": ["ptr"], "ret": 12288 },
+    "0x0046da4a": { "name": "FormatDisplay_guess", "conv": "cdecl", "args": ["ignore", "int", "ptr", "ptr", "ptr", "ptr", "ptr", "ptr", "ptr", "ptr", "ptr"], "ret": 0 },
+    "0x004982c6": { "name": "SetDisplay_guess", "conv": "thiscall", "args": ["ignore", "int", "bool"], "ret": 0 },
+    "0x0056ab22": { "name": "Flush_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x0056b814": { "name": "UpdateAll_guess", "conv": "thiscall", "args": ["char"], "ret": 0 },
+    "0x005a2230": { "name": "WndNotification_base_guess", "conv": "thiscall", "args": ["ptr", "u32", "ptr"], "ret": 4660 }
+  },
+  "cases": [
+    { "name": "first control vtable call", "args": ["@activate", 1, 0], "expect": { "ret": 1 } },
+    { "name": "second control handler", "args": ["@state", 1, 0], "expect": { "ret": 1 } },
+    { "name": "unknown control falls through", "args": ["@other", 1, 0], "expect": { "ret": 4660 } },
+    { "name": "list has no selection", "args": ["@list", 1, 0], "callees": { "0x00597be0": { "ret": -1 } }, "expect": { "ret": 1 } },
+    { "name": "list global is null", "args": ["@list", 1, 0], "memory": [{ "addr": "0x00905d1c", "u32": 0 }], "expect": { "ret": 1 } },
+    { "name": "low id zero", "args": ["@list", 1, 0], "memory": [{ "addr": "@sortmanager", "offset": "0x190", "u32": 0 }], "expect": { "ret": 1 } },
+    { "name": "low id boundary 99", "args": ["@list", 1, 0], "memory": [{ "addr": "@sortmanager", "offset": "0x190", "u32": 99 }], "expect": { "ret": 1 } },
+    { "name": "high id boundary 100", "args": ["@list", 1, 0], "memory": [{ "addr": "@sortmanager", "offset": "0x190", "u32": 100 }], "expect": { "ret": 1 } },
+    { "name": "high id 101", "args": ["@list", 1, 0], "memory": [{ "addr": "@sortmanager", "offset": "0x190", "u32": 101 }], "expect": { "ret": 1 } },
+    { "name": "toggle first direction", "args": ["@other", 15, 0], "expect": { "ret": 4660 } },
+    { "name": "toggle second direction one", "args": ["@other", 15, 1], "expect": { "ret": 4660 } },
+    { "name": "toggle second direction two", "args": ["@other", 15, 2], "expect": { "ret": 4660 } },
+    { "name": "invalid direction falls through", "args": ["@other", 15, 3], "expect": { "ret": 4660 } },
+    { "name": "other message falls through", "args": ["@other", 0, 0], "expect": { "ret": 4660 } }
+  ],
+  "fuzz": {
+    "seed": 5683637,
+    "count": 100,
+    "args": [
+      { "choices": ["@activate", "@state", "@list", "@other"] },
+      { "choices": [0, 1, 15, 2] },
+      { "choices": [0, 1, 2, 3] }
+    ],
+    "memory": [
+      { "addr": "@sortmanager", "offset": "0x190", "type": "int", "choices": [0, 1, 99, 100, 101] },
+      { "addr": "@sortmanager", "offset": "0x7c8", "type": "int", "choices": [-5, 0, 1] },
+      { "addr": "@sortmanager", "offset": "0x7cc", "type": "int", "choices": [-3, 0, 9] }
+    ]
+  },
+  "_survivors": "L618: the state handler return is overwritten by the security-cookie stub, so the harness cannot observe 1 versus 0."
+}

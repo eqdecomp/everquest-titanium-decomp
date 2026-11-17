@@ -1,0 +1,103 @@
+{
+  "function": "Outer_guess::Outer_guess",
+  "original": "0x004deeb6",
+  "sources": ["src/EverQuest/tu_129_BarterSearchWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@outer",
+  "args": [{"name": "parent_guess", "type": "ptr"}],
+  "ret": "ptr",
+  "objects": {
+    "outer": {"size": "0x1d8", "fill": "random"},
+    "parent": {"size": "0x4", "fill": "zero"},
+    "everquest": {"size": "0x4", "fill": "zero"},
+    "inventory": {"size": "0x180", "fill": "random"},
+    "buyline": {"size": "0x180", "fill": "random"},
+    "details": {"size": "0x180", "fill": "random"},
+    "edit": {"size": "0x180", "fill": "random"},
+    "refresh": {"size": "0x4", "fill": "zero"},
+    "welcome": {"size": "0x4", "fill": "zero"},
+    "find": {"size": "0x4", "fill": "zero"},
+    "hide": {"size": "0x4", "fill": "zero"},
+    "request": {"size": "0x4", "fill": "zero"},
+    "search": {"size": "0x4", "fill": "zero"},
+    "layout": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@receiver_vtbl"}]
+    },
+    "buyline_layout": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@receiver_vtbl"}]
+    },
+    "receiver_vtbl": {
+      "size": "0x128",
+      "fill": "zero",
+      "init": [{"offset": "0x124", "u32": "@fn_set_layout"}]
+    },
+    "fn_set_layout": {"size": "0x4"},
+    "style": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [{"addr": "0x00988df0", "u32": "@everquest"}],
+  "callees": {
+    "0x00571e00": {"name": "CXStr_ctor_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0},
+    "0x005a3850": {
+      "name": "OuterBase_ctor_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "mem:4", "int", "int", "ptr"],
+      "ret": 0
+    },
+    "0x00571d00": {"name": "CXStr_cleanup_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x0047c3af": {"name": "Expand1a0_ctor_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005a25b0": {"name": "CreateChildrenFromSidl_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005a1e10": {
+      "name": "GetChildItem_guess",
+      "conv": "thiscall",
+      "args": ["mem:4"],
+      "ret": ["@inventory", "@buyline", "@details", "@edit", "@refresh", "@welcome", "@find", "@hide", "@request", "@search", "@layout", "@buyline_layout"]
+    },
+    "0x004d7ebc": {"name": "SetMaxChars_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00597c60": {"name": "SetColors_guess", "conv": "thiscall", "args": ["u32", "u32", "u32"], "ret": 0},
+    "0x005982e0": {"name": "SetColumnJustification_guess", "conv": "thiscall", "args": ["int", "int"], "ret": 0},
+    "0x005981f0": {"name": "SetRowHeight_guess", "conv": "thiscall", "args": ["int", "int"], "ret": 0},
+    "0x004ae919": {"name": "FindSetting_guess", "conv": "thiscall", "args": ["cstr", "cstr", "int", "int"], "ret": 1},
+    "0x005bb140": {"name": "SetCheck_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005a1ef0": {"name": "Load_guess", "conv": "thiscall", "args": ["ptr", "cstr"], "ret": 0},
+    "0x00572300": {"name": "FindLayout_guess", "conv": "cdecl", "args": ["cstr"], "ret": "@style"},
+    "@fn_set_layout": {"name": "SetLayout_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x004de55a": {"name": "LoadIniInfo_guess", "conv": "thiscall", "args": [], "passthrough": true}
+  },
+  "cases": [
+    {
+      "name": "no_sidl_piece",
+      "args": ["@parent"],
+      "memory": [{"addr": "@outer", "offset": "0x124", "u32": 0}]
+    },
+    {
+      "name": "sidl_piece_without_children",
+      "args": ["@parent"],
+      "memory": [{"addr": "@outer", "offset": "0x124", "u32": 1}],
+      "callees": {
+        "0x005a1e10": {"name": "GetChildItem_guess", "conv": "thiscall", "args": ["mem:4"], "ret": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+      }
+    },
+    {
+      "name": "all_children_hide_buyers_on",
+      "args": ["@parent"],
+      "memory": [{"addr": "@outer", "offset": "0x124", "u32": 1}],
+      "callees": {"0x004ae919": {"name": "FindSetting_guess", "conv": "thiscall", "args": ["cstr", "cstr", "int", "int"], "ret": 1}}
+    },
+    {
+      "name": "all_children_hide_buyers_off",
+      "args": ["@parent"],
+      "memory": [{"addr": "@outer", "offset": "0x124", "u32": 1}],
+      "callees": {"0x004ae919": {"name": "FindSetting_guess", "conv": "thiscall", "args": ["cstr", "cstr", "int", "int"], "ret": 0}}
+    }
+  ],
+  "fuzz": {
+    "seed": 5107382,
+    "count": 100,
+    "args": [{"choices": ["@parent"]}],
+    "memory": [{"addr": "@outer", "offset": "0x124", "type": "u32", "choices": [0, 1]}]
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "function": "GrammarRules_guess::RuleEn3_guess",
+  "original": "0x004b16a0",
+  "sources": [
+    "src/EverQuest/tu_067_GrammarRules.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@cache",
+  "args": [
+    {"name": "destination", "type": "ptr"},
+    {"name": "first", "type": "cstr"},
+    {"name": "second", "type": "cstr"},
+    {"name": "third", "type": "cstr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "cache": {"size": "0x100", "fill": "random"},
+    "destination": {"size": "0x100", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x0060f329": {"name": "_isalpha", "conv": "cdecl", "args": ["int"], "ret": 1},
+    "0x0046da4a": {"name": "Report_guess", "conv": "cdecl",
+                   "args": ["ptr", "int", "cstr", "int", "int", "int", "int", "int", "int", "int", "int"], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "_isalpha": "0x0060f329",
+    "__isalpha": "0x0060f329"
+  },
+  "cases": [
+    {"name": "a vowel low", "args": ["@destination", "a", "bcd", "xyz"]},
+    {"name": "A vowel up", "args": ["@destination", "A", "bcd", "xyz"]},
+    {"name": "E vowel up", "args": ["@destination", "E", "bcd", "xyz"]},
+    {"name": "e vowel low", "args": ["@destination", "e", "bcd", "xyz"]},
+    {"name": "G consonant edge", "args": ["@destination", "G", "bcd", "xyz"]},
+    {"name": "H upper ring", "args": ["@destination", "H", "bcd", "xyz"]},
+    {"name": "I upper vowel", "args": ["@destination", "I", "bcd", "xyz"]},
+    {"name": "J consonant", "args": ["@destination", "J", "bcd", "xyz"]},
+    {"name": "O upper vowel", "args": ["@destination", "O", "bcd", "xyz"]},
+    {"name": "U upper vowel", "args": ["@destination", "U", "bcd", "xyz"]},
+    {"name": "V consonant", "args": ["@destination", "V", "bcd", "xyz"]},
+    {"name": "B consonant", "args": ["@destination", "B", "bcd", "xyz"]},
+    {"name": "b consonant low", "args": ["@destination", "b", "bcd", "xyz"]},
+    {"name": "g consonant low edge", "args": ["@destination", "g", "bcd", "xyz"]},
+    {"name": "h low ring", "args": ["@destination", "h", "bcd", "xyz"]},
+    {"name": "i low vowel", "args": ["@destination", "i", "bcd", "xyz"]},
+    {"name": "j consonant low", "args": ["@destination", "j", "bcd", "xyz"]},
+    {"name": "o low vowel", "args": ["@destination", "o", "bcd", "xyz"]},
+    {"name": "u low vowel", "args": ["@destination", "u", "bcd", "xyz"]},
+    {"name": "v consonant low", "args": ["@destination", "v", "bcd", "xyz"]},
+    {"name": "z consonant low", "args": ["@destination", "z", "bcd", "xyz"]},
+    {"name": "Z consonant up", "args": ["@destination", "Z", "bcd", "xyz"]},
+    {"name": "empty first", "args": ["@destination", "", "bcd", "xyz"]},
+    {"name": "not alpha", "args": ["@destination", "1", "bcd", "xyz"],
+     "callees": {"0x0060f329": {"name": "_isalpha", "conv": "cdecl", "args": ["int"], "ret": 0}}},
+    {"name": "not alpha punct", "args": ["@destination", "!", "bcd", "xyz"],
+     "callees": {"0x0060f329": {"name": "_isalpha", "conv": "cdecl", "args": ["int"], "ret": 0}}}
+  ],
+  "fuzz": {
+    "seed": 4920992,
+    "count": 100,
+    "args": [
+      {"choices": ["@destination"]},
+      {"choices": ["a", "A", "E", "G", "H", "I", "O", "U", "J", "b", "e", "g", "h", "i", "o", "u", "z", "B", "Z", "V"]},
+      {"choices": ["bcd", "", "hello world"]},
+      {"choices": ["xyz", "", "vowel text"]}
+    ],
+    "memory": []
+  }
+}

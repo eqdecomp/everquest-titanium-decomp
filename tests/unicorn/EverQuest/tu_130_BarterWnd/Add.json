@@ -1,0 +1,301 @@
+{
+  "function": "RefreshList_guess::Add_guess",
+  "original": "0x004e1e1e",
+  "sources": [
+    "src/EverQuest/tu_130_BarterWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@refreshlist",
+  "args": [
+    {
+      "name": "entry_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "refreshlist": {
+      "size": "0x200",
+      "fill": "random"
+    },
+    "entry": {
+      "size": "0x60",
+      "fill": "random"
+    },
+    "text": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "recs": {
+      "size": "0x140",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@refreshlist",
+      "offset": "0x1d0",
+      "u32": 2
+    },
+    {
+      "addr": "@text",
+      "cstr": "Warrior"
+    },
+    {
+      "addr": "@recs",
+      "offset": "0x00",
+      "u32": 17
+    },
+    {
+      "addr": "@recs",
+      "offset": "0x50",
+      "u32": 34
+    },
+    {
+      "addr": "@recs",
+      "offset": "0xa0",
+      "u32": 51
+    },
+    {
+      "addr": "@entry",
+      "offset": "0x48",
+      "u32": 16
+    },
+    {
+      "addr": "@entry",
+      "offset": "0x58",
+      "u32": 5
+    }
+  ],
+  "callees": {
+    "0x005dfc50": {
+      "name": "IsValid_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x004deb39": {
+      "name": "RecordPool_guess::Get_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": [
+        "@recs",
+        "@recs+0x50",
+        "@recs+0xa0",
+        "@recs+0xf0"
+      ]
+    },
+    "0x005e0f30": {
+      "name": "GetId_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 34
+    },
+    "0x005e0f60": {
+      "name": "GetKind_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 5
+    },
+    "0x005ecc90": {
+      "name": "GetTotal_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005e0ec0": {
+      "name": "GetText_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@text"
+    },
+    "0x004e16e1": {
+      "name": "RecordPool_guess::Set_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "mem:80"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "invalid entry adds nothing",
+      "args": [
+        "@entry"
+      ],
+      "callees": {
+        "0x005dfc50": {
+          "name": "IsValid_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "found at first record",
+      "args": [
+        "@entry"
+      ],
+      "callees": {
+        "0x005e0f30": {
+          "name": "GetId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 17
+        }
+      }
+    },
+    {
+      "name": "found at second record",
+      "args": [
+        "@entry"
+      ]
+    },
+    {
+      "name": "not found, total positive, Set at count 2",
+      "args": [
+        "@entry"
+      ],
+      "callees": {
+        "0x005e0f30": {
+          "name": "GetId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 153
+        }
+      }
+    },
+    {
+      "name": "not found, total zero keeps words 1",
+      "args": [
+        "@entry"
+      ],
+      "callees": {
+        "0x005e0f30": {
+          "name": "GetId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 153
+        },
+        "0x005ecc90": {
+          "name": "GetTotal_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "empty pool, total zero",
+      "args": [
+        "@entry"
+      ],
+      "memory": [
+        {
+          "addr": "@refreshlist",
+          "offset": "0x1d0",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x005e0f30": {
+          "name": "GetId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 153
+        },
+        "0x005ecc90": {
+          "name": "GetTotal_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "empty pool, total positive",
+      "args": [
+        "@entry"
+      ],
+      "memory": [
+        {
+          "addr": "@refreshlist",
+          "offset": "0x1d0",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x005e0f30": {
+          "name": "GetId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 153
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5119518,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@entry"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@refreshlist",
+        "offset": "0x1d0",
+        "type": "int",
+        "range": [
+          0,
+          3
+        ]
+      },
+      {
+        "addr": "@entry",
+        "offset": "0x48",
+        "type": "int",
+        "range": [
+          -8,
+          64
+        ]
+      },
+      {
+        "addr": "@entry",
+        "offset": "0x58",
+        "type": "int",
+        "range": [
+          -8,
+          64
+        ]
+      },
+      {
+        "addr": "@recs",
+        "offset": "0x00",
+        "type": "int",
+        "choices": [
+          17,
+          34,
+          153
+        ]
+      },
+      {
+        "addr": "@recs",
+        "offset": "0x50",
+        "type": "int",
+        "choices": [
+          17,
+          34,
+          153
+        ]
+      }
+    ]
+  }
+}

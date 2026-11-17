@@ -1,0 +1,72 @@
+{
+  "function": "CMailCompositionWndDeactivateView_guess::AboutToHide_guess",
+  "original": "0x0052d940",
+  "sources": [
+    "src/EverQuest/tu_184_MailCompositionWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@fun_0052d940_owner",
+  "args": [],
+  "ret": "char",
+  "_survivors": "L1096: 0x63F53E is also a NUL byte in the image, so the CXStr ctor's cstr arg reads the same empty text; L1103: same as L1096",
+  "objects": {
+    "fun_0052d940_owner": {
+      "size": "0x180",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@vtbl"}]
+    },
+    "c1": {"size": "0x20", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "c2": {"size": "0x20", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "c3": {"size": "0x20", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "vtbl": {"size": "0x100", "fill": "zero", "init": [{"offset": "0xfc", "u32": "@fn_slot63"}]},
+    "fn_slot63": {"size": "4"},
+    "strtbl": {"size": "0x20", "fill": "zero"},
+    "label": {"size": "0x20", "fill": "zero"},
+    "root": {"size": "0x40", "fill": "zero"},
+    "manager": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905CB0", "u32": "@strtbl"},
+    {"addr": "0x00988DF0", "u32": "@root"},
+    {"addr": "@label", "cstr": "Hello"}
+  ],
+  "callees": {
+    "0x005dfa00": {"name": "FUN_005dfa00", "conv": "thiscall", "args": ["u32", "u32"], "ret": "@label"},
+    "0x00571e00": {"name": "CXStr_ctor_guess", "conv": "thiscall", "args": ["cstr"], "ret": "keep"},
+    "0x00571d00": {"name": "CXStr_FreeRep_guess", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x00495250": {"name": "FUN_00495250", "conv": "thiscall", "args": [], "ret": "@manager"},
+    "0x00518b72": {"name": "FUN_00518b72", "conv": "thiscall", "args": ["mem:4"], "ret": 0},
+    "@fn_slot63": {"name": "Slot63_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0}
+  },
+  "cases": [
+    {"name": "typical", "args": [], "expect": {"ret": 1}},
+    {"name": "all-children", "args": [], "expect": {"ret": 1},
+     "memory": [
+       {"addr": "@fun_0052d940_owner", "offset": "0x168", "u32": "@c1"},
+       {"addr": "@fun_0052d940_owner", "offset": "0x16c", "u32": "@c2"},
+       {"addr": "@fun_0052d940_owner", "offset": "0x170", "u32": "@c3"}
+     ]},
+    {"name": "child-168-only", "args": [],
+     "memory": [{"addr": "@fun_0052d940_owner", "offset": "0x168", "u32": "@c1"}]},
+    {"name": "child-16c-only", "args": [],
+     "memory": [{"addr": "@fun_0052d940_owner", "offset": "0x16c", "u32": "@c2"}]},
+    {"name": "child-170-only", "args": [],
+     "memory": [{"addr": "@fun_0052d940_owner", "offset": "0x170", "u32": "@c3"}]},
+    {"name": "no-root", "args": [],
+     "memory": [{"addr": "0x00988DF0", "u32": 0}]},
+    {"name": "root-get-null", "args": [],
+     "callees": {"0x00495250": {"name": "FUN_00495250", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "zeros", "args": []}
+  ],
+  "fuzz": {
+    "seed": 5429568,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@fun_0052d940_owner", "offset": "0x168", "type": "ptr", "choices": [0, "@c1"]},
+      {"addr": "@fun_0052d940_owner", "offset": "0x16c", "type": "ptr", "choices": [0, "@c2"]},
+      {"addr": "@fun_0052d940_owner", "offset": "0x170", "type": "ptr", "choices": [0, "@c3"]},
+      {"addr": "0x00988DF0", "type": "ptr", "choices": [0, "@root"]}
+    ]
+  }
+}

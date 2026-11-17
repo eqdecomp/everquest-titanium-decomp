@@ -1,0 +1,214 @@
+{
+  "function": "Selector_guess::AddChatWindow_guess",
+  "original": "0x004f5e72",
+  "sources": ["src/EverQuest/tu_143_ChatManager.cpp"],
+  "conv": "thiscall",
+  "this": "@selector",
+  "args": [
+    {"name": "name_guess", "type": "cstr"},
+    {"name": "ini_guess", "type": "cstr"},
+    {"name": "tab_guess", "type": "int"},
+    {"name": "slot_guess", "type": "int"},
+    {"name": "depth_guess", "type": "int"},
+    {"name": "title_guess", "type": "cstr"},
+    {"name": "setup_guess", "type": "int"},
+    {"name": "focus_guess", "type": "char"}
+  ],
+  "ret": "void",
+  "objects": {
+    "selector": {"size": "0x240", "fill": "zero"},
+    "chat": {
+      "size": "0x268",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@chat_vtbl"},
+        {"offset": "0x164", "u32": "@window"}
+      ]
+    },
+    "chat_vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xc0", "u32": "@fn_slot_c0"},
+        {"offset": "0xfc", "u32": "@fn_slot_fc"}
+      ]
+    },
+    "window": {
+      "size": "0x1c4",
+      "fill": "zero",
+      "init": [{"offset": "0x64", "u32": 1}]
+    },
+    "receiver": {"size": "0x4", "fill": "zero"},
+    "stringtable": {"size": "0x4", "fill": "zero"},
+    "heapblock": {"size": "0x10000", "fill": "zero"},
+    "fn_slot_fc": {"size": "0x1", "fill": "zero"},
+    "fn_slot_c0": {"size": "0x1", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@stringtable"},
+    {"addr": "0x0063fe10", "from_image": "0x0063fe10", "image_size": 64}
+  ],
+  "callees": {
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": "@chat"
+    },
+    "0x004f68b3": {
+      "name": "Chat_constructor",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "this"
+    },
+    "0x005724c0": {
+      "name": "CXStr_Format",
+      "conv": "thiscall",
+      "args": ["int", "int", "int"],
+      "passthrough": true
+    },
+    "0x00571e00": {
+      "name": "CXStr_constructor",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "passthrough": true
+    },
+    "0x00407d68": {
+      "name": "CXStr_copy_constructor",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "passthrough": true
+    },
+    "0x005dfa00": {
+      "name": "StringTable_getString",
+      "conv": "thiscall",
+      "args": ["u32", "u32"],
+      "ret": 0
+    },
+    "0x0042e3d9": {
+      "name": "WrapCXStr",
+      "conv": "cdecl",
+      "args": ["ignore", "ptr", "mem:4"],
+      "passthrough": true
+    },
+    "0x004d9090": {
+      "name": "CombineCXStr",
+      "conv": "cdecl",
+      "args": ["ptr", "mem:4", "mem:4"],
+      "passthrough": true
+    },
+    "0x00571d00": {
+      "name": "CXStr_Release",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "passthrough": true
+    },
+    "0x004648a1": {
+      "name": "Chat_SetName",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "this"
+    },
+    "0x004f7fc6": {
+      "name": "Chat_Setup",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x005a1d40": {
+      "name": "EnableIniStorage",
+      "conv": "thiscall",
+      "args": ["int", "cstr"]
+    },
+    "0x004f3120": {
+      "name": "Selector_Attach",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 291
+    },
+    "0x004f6a90": {
+      "name": "Receiver_ShowText",
+      "conv": "thiscall",
+      "args": ["u32", "int"]
+    },
+    "@fn_slot_fc": {
+      "name": "Value_Slot63",
+      "conv": "thiscall",
+      "args": ["mem:4"]
+    },
+    "@fn_slot_c0": {
+      "name": "Value_Slot48",
+      "conv": "thiscall",
+      "args": ["int", "int"]
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": "@heapblock"
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 1
+    }
+  },
+  "rewrite_aliases": {"??2@YAPAXI@Z": "0x0060d071"},
+  "cases": [
+    {
+      "name": "create_and_focus_with_name",
+      "args": ["alpha", "chat.ini", 7, 3, 4, "Primary", 5, 1],
+      "memory": [{"addr": "@selector", "offset": "0x80", "u32": 0}]
+    },
+    {
+      "name": "byte_one_name_and_style_bits",
+      "args": ["\u0001", "chat.ini", 1, 1, 1, "Control", 1, 1],
+      "memory": [
+        {"addr": "@selector", "offset": "0x80", "u32": 0},
+        {"addr": "@window", "offset": "0x64", "u32": 2}
+      ]
+    },
+    {
+      "name": "reuse_hole_and_clear_focus",
+      "args": ["", "chat.ini", 9, 2, 6, "Secondary", 4, 0],
+      "memory": [
+        {"addr": "@selector", "offset": "0x80", "u32": 5},
+        {"addr": "@window", "offset": "0x64", "u32": 1}
+      ]
+    },
+    {
+      "name": "append_at_slot_31",
+      "args": ["last", "chat.ini", 11, 4, 7, "Last", 6, 1],
+      "memory": [
+        {"addr": "@selector", "offset": "0x80", "u32": 31},
+        {"addr": "@selector", "offset": "0x4", "hex": "010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000"}
+      ]
+    },
+    {
+      "name": "full_table_reports_error",
+      "args": ["", "chat.ini", 13, 8, 9, "Full", 7, 0],
+      "memory": [
+        {"addr": "@selector", "offset": "0x0", "u32": "@receiver"},
+        {"addr": "@selector", "offset": "0x80", "u32": 32},
+        {"addr": "@selector", "offset": "0x4", "hex": "01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5201522,
+    "count": 100,
+    "args": [
+      {"choices": ["", "alpha", "window"]},
+      {"choices": ["", "chat.ini", "settings.ini"]},
+      {"choices": [0, 1, 12, 31]},
+      {"choices": [0, 2, 5, 9]},
+      {"choices": [0, 1, 8, 33]},
+      {"choices": ["", "Title", "Chat"]},
+      {"choices": [0, 1, 17]},
+      {"choices": [0, 1, 2]}
+    ],
+    "memory": [
+      {"addr": "@selector", "offset": "0x80", "type": "int", "choices": [0, 1, 2, 5, 31]}
+    ]
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "function": "do_becomenpc_guess",
+  "original": "0x00472c5e",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "unused_guess",
+      "type": "int"
+    },
+    {
+      "name": "text_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "_survivors": "L7082: packet +0xA4 is a fresh stack slot; the emulator stack starts zeroed and no earlier call writes it, so deleting the zero store cannot be observed",
+  "objects": {
+    "eq": {"size": "0x40", "fill": "random"},
+    "target": {"size": "0x300", "fill": "random", "init": [
+      {"offset": "0x120", "cstr": "a_guard01"},
+      {"offset": "0x1a8", "u32": "@actor"},
+      {"offset": "0x244", "u8": 0},
+      {"offset": "0x258", "u32": 4660}
+    ]},
+    "actor": {"size": "0x1050", "fill": "random"},
+    "racestr": {"size": "0x10", "fill": "zero", "init": [{"offset": 0, "cstr": "Ogre"}]}
+  },
+  "memory": [
+    {"addr": "0x00923798", "u8": 0},
+    {"addr": "0x00923884", "u32": 0},
+    {"addr": "0x00988df0", "u32": "@eq"},
+    {"addr": "0x00905d04", "u32": "@target"}
+  ],
+  "callees": {
+    "0x00498436": {
+      "name": "dsp_chat1",
+      "conv": "thiscall",
+      "args": ["cstr"]
+    },
+    "0x004982c6": {
+      "name": "dsp_chat",
+      "conv": "thiscall",
+      "args": ["cstr", "int", "bool"]
+    },
+    "0x00574700": {
+      "name": "FUN_00574700",
+      "conv": "cdecl",
+      "args": ["cstr"],
+      "ret": "arg0"
+    },
+    "0x00574830": {
+      "name": "FUN_00574830",
+      "conv": "cdecl",
+      "args": ["cstr", "u32"],
+      "ret": 0
+    },
+    "0x0042dd82": {
+      "name": "GrabFirstWord_guess",
+      "conv": "cdecl",
+      "args": ["cstr", "ignore", "int"],
+      "passthrough": true
+    },
+    "0x0060e3a3": {
+      "name": "_atol",
+      "conv": "cdecl",
+      "args": ["cstr"],
+      "ret": [12, 3, 4, 5, 60]
+    },
+    "0x0062202c": {
+      "name": "__strnicmp",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr", "u32"],
+      "ret": [0]
+    },
+    "0x004912b1": {
+      "name": "EQSendMessage",
+      "conv": "cdecl",
+      "args": ["u32", "u32", "mem:168", "u32", "u32"],
+      "noreturn": true
+    },
+    "0x0049273d": {
+      "name": "GetRaceDesc",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@racestr"
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr"],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x0046f512": {
+      "name": "do_height_guess",
+      "conv": "cdecl",
+      "args": ["u32", "cstr"]
+    }
+  },
+  "rewrite_aliases": {
+    "__strnicmp": "0x0062202c",
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {"name": "flag_set", "args": [1, "12"], "memory": [{"addr": "0x00923798", "u8": 1}]},
+    {"name": "mode_set", "args": [1, "12"], "memory": [{"addr": "0x00923884", "u32": 2}]},
+    {"name": "empty_text", "args": [1, ""]},
+    {"name": "no_target", "args": [1, "12"], "memory": [{"addr": "0x00905d04", "u32": 0}]},
+    {"name": "npc_target", "args": [1, "12"],
+     "memory": [{"addr": "@target", "offset": "0x244", "u8": 1}],
+     "callees": {"0x00574830": {"name": "FUN_00574830", "conv": "cdecl", "args": ["cstr", "u32"], "ret": 1}}},
+    {"name": "npc_type_not_digit", "args": [1, "12"],
+     "memory": [{"addr": "@target", "offset": "0x244", "u8": 1}],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [77]}}},
+    {"name": "pc_digit_name", "args": [1, "12"],
+     "callees": {"0x00574830": {"name": "FUN_00574830", "conv": "cdecl", "args": ["cstr", "u32"], "ret": 1}}},
+    {"name": "full_male", "args": [1, "12 M 3 4 5 6.5 60"],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [12, 4611, 13316, -5, 60]}}},
+    {"name": "female", "args": [1, "12 F 3"],
+     "callees": {"0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "u32"], "ret": [1, 0]},
+                 "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [9, 200]}}},
+    {"name": "neuter", "args": [1, "12 N"],
+     "callees": {"0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "u32"], "ret": [1, 1]}}},
+    {"name": "head_face_only", "args": [1, "12 M 0 7 8"],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [33, 1, 2, 3]}}},
+    {"name": "height_level", "args": [1, "12 M 0 7 8 4.5 50"],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [33, 1, 2, 3, 50]}}},
+    {"name": "tail_default_level", "args": [1, "12 M 3"],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [12, 3]},
+                 "0x004912b1": {"name": "EQSendMessage", "conv": "cdecl", "args": ["u32", "u32", "mem:8", "u32", "u32"], "ret": 0}}},
+    {"name": "tail_height_level", "args": [1, "12 M 0 7 8 4.5 50"],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [33, 1, 2, 3, 50]},
+                 "0x004912b1": {"name": "EQSendMessage", "conv": "cdecl", "args": ["u32", "u32", "mem:8", "u32", "u32"], "ret": 0}}},
+    {"name": "tail_level_only", "args": [1, "12 M 0 7 8 4.5 -3"],
+     "memory": [{"addr": "@target", "offset": "0x258", "u32": 99}],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [33, 1, 2, 3, -3]},
+                 "0x004912b1": {"name": "EQSendMessage", "conv": "cdecl", "args": ["u32", "u32", "mem:8", "u32", "u32"], "ret": 0}}}
+  ],
+  "fuzz": {
+    "seed": 4664414,
+    "count": 100,
+    "args": [
+      {},
+      {"choices": ["", "1", "12 M", "12 F 1", "5 N 1 2", "7 m 1 2 3", "7 f 1 2 3 2.0", "128 M 10 20 30 6 65"]}
+    ],
+    "memory": [
+      {"addr": "0x00923798", "type": "u8", "choices": [0, 0, 0, 1]},
+      {"addr": "0x00923884", "type": "int", "choices": [0, 0, 0, 1]},
+      {"addr": "@target", "offset": "0x244", "type": "u8", "choices": [0, 1]}
+    ]
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "function": "Selector_guess::SaveSettings_guess",
+  "original": "0x004f21d6",
+  "sources": [
+    "src/EverQuest/tu_143_ChatManager.cpp"
+  ],
+  "size": "0x3bb",
+  "conv": "thiscall",
+  "this": "@selector",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "selector": {
+      "size": "0x240",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x00", "u32": "@chat0"},
+        {"offset": "0x80", "u32": 1},
+        {"offset": "0x8c", "u32": "@chat0"}
+      ]
+    },
+    "chat0": {
+      "size": "0x264",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x00", "u32": "@vtbl"},
+        {"offset": "0x164", "u32": "@scroll0"}
+      ]
+    },
+    "chat1": {
+      "size": "0x264",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x00", "u32": "@vtbl"},
+        {"offset": "0x164", "u32": "@scroll1"}
+      ]
+    },
+    "scroll0": {"size": "0x68", "fill": "zero"},
+    "scroll1": {"size": "0x68", "fill": "zero"},
+    "vtbl": {
+      "size": "0xc4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xc0", "u32": "@fn_slot48"}
+      ]
+    },
+    "fn_slot48": {"size": "0x4", "fill": "zero"},
+    "ini": {"size": "0x4", "fill": "zero"},
+    "name_text": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4},
+    {"addr": "0x0063f53c", "from_image": "0x0063f53c", "image_size": 3},
+    {"addr": "0x00988df0", "u32": "@ini"},
+    {"addr": "0x006529b0", "from_image": "0x006529b0", "image_size": 1},
+    {"addr": "@name_text", "cstr": "Chat"}
+  ],
+  "callees": {
+    "0x00559545": {
+      "name": "NewUIINI",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 1
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr"],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        {"arg": 0, "hex": "4100"}
+      ]
+    },
+    "0x0060bf20": {
+      "name": "WriteIniString_guess",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr", "cstr"]
+    },
+    "0x004ae848": {
+      "name": "WriteCharIniString_guess",
+      "conv": "thiscall",
+      "args": ["cstr", "cstr", "cstr"]
+    },
+    "0x004ae7de": {
+      "name": "WriteCharIniInt_guess",
+      "conv": "thiscall",
+      "args": ["int", "cstr", "cstr"]
+    },
+    "0x004d22d7": {
+      "name": "GetName_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0"
+    },
+    "0x00572300": {
+      "name": "CXStr::operator char*",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@name_text"
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": ["ptr"]
+    },
+    "@fn_slot48": {
+      "name": "Value::Slot48",
+      "conv": "thiscall",
+      "args": ["int", "int"]
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "chat_disabled",
+      "memory": [
+        {"addr": "@selector", "offset": "0x80", "u32": 0}
+      ],
+      "callees": {
+        "0x00559545": {"name": "ChatEnabled_guess", "conv": "cdecl", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "enabled_empty",
+      "memory": [
+        {"addr": "@selector", "offset": "0x80", "u32": 0}
+      ]
+    },
+    {
+      "name": "one_active_window",
+      "memory": [
+        {"addr": "@selector", "offset": "0x00", "u32": "@chat0"},
+        {"addr": "@selector", "offset": "0x80", "u32": 1},
+        {"addr": "@selector", "offset": "0x8c", "u32": "@chat0"},
+        {"addr": "@selector", "offset": "0x88", "u32": 0},
+        {"addr": "@chat0", "offset": "0x1b5", "u8": 1}
+      ]
+    },
+    {
+      "name": "one_inactive_window",
+      "memory": [
+        {"addr": "@selector", "offset": "0x00", "u32": "@chat0"},
+        {"addr": "@selector", "offset": "0x80", "u32": 1},
+        {"addr": "@selector", "offset": "0x8c", "u32": "@chat0"},
+        {"addr": "@selector", "offset": "0x88", "u32": 0},
+        {"addr": "@chat0", "offset": "0x1b5", "u8": 0},
+        {"addr": "@chat0", "offset": "0x1b0", "u32": 7},
+        {"addr": "@chat0", "offset": "0x168", "u32": 3},
+        {"addr": "@chat0", "offset": "0x16c", "u32": 4},
+        {"addr": "@scroll0", "offset": "0x64", "u32": 3},
+        {"addr": "@chat0", "offset": "0x260", "u32": 2}
+      ]
+    },
+    {
+      "name": "null_secondary_window",
+      "memory": [
+        {"addr": "@selector", "offset": "0x00", "u32": "@chat0"},
+        {"addr": "@selector", "offset": "0x04", "u32": 0},
+        {"addr": "@selector", "offset": "0x80", "u32": 2},
+        {"addr": "@selector", "offset": "0x8c", "u32": "@chat0"},
+        {"addr": "@selector", "offset": "0x90", "u32": 0},
+        {"addr": "@chat0", "offset": "0x1b5", "u8": 1}
+      ]
+    },
+    {
+      "name": "two_inactive_windows",
+      "memory": [
+        {"addr": "@selector", "offset": "0x00", "u32": "@chat0"},
+        {"addr": "@selector", "offset": "0x04", "u32": "@chat1"},
+        {"addr": "@selector", "offset": "0x80", "u32": 2},
+        {"addr": "@selector", "offset": "0x8c", "u32": "@chat0"},
+        {"addr": "@selector", "offset": "0x90", "u32": "@chat1"},
+        {"addr": "@chat0", "offset": "0x1b5", "u8": 0},
+        {"addr": "@chat1", "offset": "0x1b5", "u8": 0},
+        {"addr": "@scroll0", "offset": "0x64", "u32": 0},
+        {"addr": "@scroll1", "offset": "0x64", "u32": 1}
+      ]
+    },
+    {
+      "name": "null_first_window_fault",
+      "memory": [
+        {"addr": "@selector", "offset": "0x00", "u32": 0},
+        {"addr": "@selector", "offset": "0x80", "u32": 1}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5186006,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@selector", "offset": "0x80", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@selector", "offset": "0x00", "type": "ptr", "count": 2, "stride": 4, "choices": [0, "@chat0", "@chat1"]},
+      {"addr": "@selector", "offset": "0x8c", "type": "ptr", "count": 54, "stride": 4, "choices": [0, "@chat0", "@chat1"]},
+      {"addr": "@selector", "offset": "0x88", "type": "int", "choices": [-1, 0, 1, 2]},
+      {"addr": "@selector", "offset": "0x218", "type": "int", "count": 8, "stride": 4, "choices": [-1, 0, 1, 7]},
+      {"addr": "@chat0", "offset": "0x1b5", "type": "u8", "choices": [0, 1]},
+      {"addr": "@chat1", "offset": "0x1b5", "type": "u8", "choices": [0, 1]},
+      {"addr": "@scroll0", "offset": "0x64", "type": "int", "choices": [0, 1, 2, 3, 255]},
+      {"addr": "@scroll1", "offset": "0x64", "type": "int", "choices": [0, 1, 2, 3, 255]}
+    ]
+  },
+  "_survivors": "L414: j starts at zero, so j > -1 is always true."
+}

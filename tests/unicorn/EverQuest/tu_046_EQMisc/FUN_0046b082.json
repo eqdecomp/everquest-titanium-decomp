@@ -1,0 +1,190 @@
+{
+  "function": "do_clearchat_guess",
+  "original": "0x0046b082",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "receiver": {
+      "size": "0x168",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x164",
+          "u32": "@action"
+        }
+      ]
+    },
+    "action": {
+      "size": "0x10c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@vtbl"
+        },
+        {
+          "offset": "0x108",
+          "u32": 7
+        }
+      ]
+    },
+    "vtbl": {
+      "size": "0x104",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x100",
+          "u32": "@fn_slot64"
+        }
+      ]
+    },
+    "fn_slot64": {
+      "size": "0x4"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x009917e4",
+      "u32": "@owner"
+    }
+  ],
+  "callees": {
+    "0x004f288c": {
+      "name": "GetReceiver_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@receiver"
+    },
+    "0x00571e00": {
+      "name": "TextArgInit_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x005a8b00": {
+      "name": "FUN_005a8b00_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005ac670": {
+      "name": "thunk_FUN_005abf20",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_slot64": {
+      "name": "ActionSlot64_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "owner_null",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x009917e4",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "action_null",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@receiver",
+          "offset": "0x164",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "all_calls",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@receiver",
+          "offset": "0x164",
+          "u32": "@action"
+        },
+        {
+          "addr": "@action",
+          "offset": "0x108",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "nonzero_virtual_argument",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@receiver",
+          "offset": "0x164",
+          "u32": "@action"
+        },
+        {
+          "addr": "@action",
+          "offset": "0x108",
+          "u32": 2147483647
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4632706,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x009917e4",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@owner"
+        ]
+      },
+      {
+        "addr": "@receiver",
+        "offset": "0x164",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@action"
+        ]
+      },
+      {
+        "addr": "@action",
+        "offset": "0x108",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          7,
+          2147483647
+        ]
+      }
+    ]
+  }
+}

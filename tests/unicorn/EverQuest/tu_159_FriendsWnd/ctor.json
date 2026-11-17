@@ -1,0 +1,107 @@
+{
+  "function": "CGaugeWnd_guess::CGaugeWnd_guess",
+  "original": "0x005044f2",
+  "sources": [
+    "src/EverQuest/tu_159_FriendsWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@gaugedtor",
+  "args": [
+    {"name": "base_a", "type": "ptr"},
+    {"name": "base_b", "type": "ptr"},
+    {"name": "key_0", "type": "u32"},
+    {"name": "key_1", "type": "u32"},
+    {"name": "key_2", "type": "u32"},
+    {"name": "key_3", "type": "u32"},
+    {"name": "arg20", "type": "u32"},
+    {"name": "arg24", "type": "u32"},
+    {"name": "arg28", "type": "u32"},
+    {"name": "arg2c", "type": "u32"},
+    {"name": "arg30", "type": "u32"},
+    {"name": "arg34", "type": "u32"},
+    {"name": "arg38", "type": "u32"},
+    {"name": "arg3c", "type": "u32"},
+    {"name": "arg40", "type": "u32"},
+    {"name": "arg44", "type": "u8"},
+    {"name": "arg48", "type": "u32"},
+    {"name": "arg4c", "type": "u32"},
+    {"name": "arg50", "type": "u32"},
+    {"name": "arg54", "type": "u32"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "gaugedtor": {"size": "0x174", "fill": "random"},
+    "base_a": {"size": "0x4", "fill": "random"},
+    "base_b": {"size": "0x4", "fill": "random"},
+    "handle_manager": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@handle_vtable"}]
+    },
+    "handle_vtable": {
+      "size": "0x38",
+      "fill": "zero",
+      "init": [{"offset": "0x34", "u32": "@fn_slot13"}]
+    },
+    "fn_slot13": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0099e360", "u32": "@handle_manager"}
+  ],
+  "callees": {
+    "0x005a1290": {
+      "name": "GaugeDtorBase_guess::GaugeDtorBase_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "ptr", "u32", "u32", "u32", "u32"],
+      "ret": "keep"
+    },
+    "kernel32.dll!GetTickCount": {
+      "name": "GetTickCount",
+      "conv": "stdcall",
+      "args": [],
+      "ret": 123456789
+    },
+    "@fn_slot13": {
+      "name": "GaugeHandleManager_guess::Slot13_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 305419896
+    }
+  },
+  "cases": [
+    {
+      "name": "distinct arguments",
+      "args": [
+        "@base_a", "@base_b", 17, 29, 43, 61,
+        101, 103, 107, 109, 113, 127, 131, 137, 139, 1,
+        149, 151, 157, 163
+      ]
+    },
+    {
+      "name": "negative and byte boundary",
+      "args": [
+        "@base_b", "@base_a", -1, -2, -3, -4,
+        -5, -6, -7, -8, -9, -10, -11, -12, -13, 255,
+        -15, -16, -17, -18
+      ]
+    },
+    {
+      "name": "null base arguments",
+      "args": [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5260530,
+    "count": 100,
+    "args": [
+      {"choices": ["@base_a", "@base_b"]},
+      {"choices": ["@base_a", "@base_b"]},
+      {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}
+    ]
+  },
+  "_survivors": "L921: offset 0x158 is overwritten by arg20 before any read; L922: offset 0x15C is overwritten by arg24 before any read; L923: offset 0x160 is overwritten by arg28 before any read; L924: offset 0x164 is overwritten by arg2c before any read; L925: offset 0x168 is overwritten by arg30 before any read; L926: offset 0x16C is overwritten by arg34 before any read"
+}

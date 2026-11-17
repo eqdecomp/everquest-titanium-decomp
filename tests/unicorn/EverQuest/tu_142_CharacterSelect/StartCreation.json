@@ -1,0 +1,165 @@
+{
+  "function": "CCharacterSelectView_guess::SelectCharacter_guess",
+  "original": "0x004f1a03",
+  "sources": ["src/EverQuest/tu_142_CharacterSelect.cpp"],
+  "conv": "thiscall",
+  "this": "@charactercreate",
+  "args": [
+    {"name": "selection_guess", "type": "int"},
+    {"name": "enabled_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "charactercreate": {"size": "0x1fc", "fill": "zero", "init": [
+      {"offset": "0x168", "u32": "@child"},
+      {"offset": "0x16c", "u32": "@child"},
+      {"offset": "0x170", "u32": "@child"},
+      {"offset": "0x174", "u32": "@child"},
+      {"offset": "0x178", "u32": "@child"},
+      {"offset": "0x17c", "u32": "@child"},
+      {"offset": "0x180", "u32": "@child"},
+      {"offset": "0x184", "u32": "@child"}
+    ]},
+    "child": {"size": "0x60", "fill": "zero", "init": [
+      {"offset": "0x5d", "u8": 1}
+    ]},
+    "slots": {"size": "0x39ab6", "fill": "zero"},
+    "statechild": {"size": "0x284", "fill": "zero", "init": [
+      {"offset": "0x1a8", "u32": "@holder"}
+    ]},
+    "holder": {"size": "0x8", "fill": "zero"},
+    "slot": {"size": "0x4", "fill": "zero", "init": [
+      {"offset": "0", "u32": "@vtbl"}
+    ]},
+    "vtbl": {"size": "0x18", "fill": "zero", "init": [
+      {"offset": "0x14", "u32": "@fn_slot"}
+    ]},
+    "fn_slot": {"size": "0x1", "fill": "zero"},
+    "stringmanager": {"size": "0x4", "fill": "zero"},
+    "manager": {"size": "0x287c", "fill": "zero", "init": [
+      {"offset": "0x2878", "u32": 75}
+    ]},
+    "fallback": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@slots", "offset": "0x39810", "cstr": "<none>"},
+    {"addr": "@slots", "offset": "0x39850", "cstr": "<none>"},
+    {"addr": "@slots", "offset": "0x39890", "cstr": "<none>"},
+    {"addr": "@slots", "offset": "0x398d0", "cstr": "<none>"},
+    {"addr": "@slots", "offset": "0x39910", "cstr": "<none>"},
+    {"addr": "@slots", "offset": "0x39950", "cstr": "<none>"},
+    {"addr": "@slots", "offset": "0x39990", "cstr": "<none>"},
+    {"addr": "@slots", "offset": "0x399d0", "cstr": "<none>"},
+    {"addr": "@fallback", "cstr": "Create character"},
+    {"addr": "0x00988df0", "u32": "@slots"},
+    {"addr": "0x00905ce4", "u32": "@statechild"},
+    {"addr": "0x00905cb0", "u32": "@stringmanager"},
+    {"addr": "0x00905d24", "u32": "@manager"},
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x006410a8", "cstr": ""}
+  ],
+  "callees": {
+    "0x004f18ff": {"name": "LeaveExplorationMode_guess", "conv": "thiscall", "args": []},
+    "0x004f0e49": {"name": "IsCharacterSlotEmpty_guess", "conv": "thiscall", "args": ["int"], "passthrough": true},
+    "0x0060be50": {"name": "ReadIni_guess", "conv": "cdecl", "args": ["cstr", "cstr", "cstr", "ignore", "int", "cstr"], "ret": 0,
+      "writes": [{"arg": 3, "offset": 0, "hex": "2a 4e 55 4c 4c 2a 00"}]},
+    "0x0060beb0": {"name": "ClearIni_guess", "conv": "cdecl", "args": ["cstr", "cstr", "cstr", "cstr"]},
+    "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 0},
+    "0x005bb140": {"name": "SetValue_guess", "conv": "thiscall", "args": ["bool"]},
+    "0x004f0e33": {"name": "IsInRange_guess", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x0047c3ef": {"name": "SetName_guess", "conv": "thiscall", "args": ["cstr"]},
+    "0x00493512": {"name": "Attach_guess", "conv": "thiscall", "args": ["ptr", "int", "bool"]},
+    "0x005dfa00": {"name": "GetString_guess", "conv": "thiscall", "args": ["int", "int"], "ret": "@fallback"},
+    "0x0047a741": {"name": "SetRace_guess", "conv": "thiscall", "args": ["int"]},
+    "0x0047d776": {"name": "RefreshNameSprite_guess", "conv": "thiscall", "args": []},
+    "0x0047e619": {"name": "CreateUserLight_guess", "conv": "thiscall", "args": ["int", "int"], "ret": "@slot"},
+    "0x004f109d": {"name": "PlaceAtPreviewSpot_guess", "conv": "stdcall", "args": ["ptr", "char", "int"]},
+    "0x004f19a3": {"name": "EnterExplorationMode_guess", "conv": "thiscall", "args": []},
+    "@fn_slot": {"name": "Slot05_guess", "conv": "thiscall", "args": ["int"]}
+  },
+  "cases": [
+    {"name": "missing first child", "args": [1, 1], "memory": [
+      {"addr": "@charactercreate", "offset": "0x168", "u32": 0}
+    ]},
+    {"name": "disabled first child", "args": [1, 1], "memory": [
+      {"addr": "@child", "offset": "0x5d", "u8": 0}
+    ]},
+    {"name": "next over empty slots", "args": [1000, 1], "memory": [
+      {"addr": "@charactercreate", "offset": "0x1e8", "u32": 6}
+    ]},
+    {"name": "next to available name", "args": [1000, 1], "memory": [
+      {"addr": "@charactercreate", "offset": "0x1e8", "u32": 0},
+      {"addr": "@slots", "offset": "0x39850", "cstr": "Alice"}
+    ]},
+    {"name": "previous index out of range", "args": [1001, 1], "memory": [
+      {"addr": "@charactercreate", "offset": "0x1e8", "u32": 10}
+    ]},
+    {"name": "previous index equals eight boundary", "args": [1001, 1], "memory": [
+      {"addr": "@charactercreate", "offset": "0x1e8", "u32": 9}
+    ]},
+    {"name": "previous wraps to slot seven", "args": [1001, 1], "memory": [
+      {"addr": "@charactercreate", "offset": "0x1e8", "u32": 0},
+      {"addr": "@slots", "offset": "0x399d0", "cstr": "Seventh"}
+    ]},
+    {"name": "previous scans to slot three", "args": [1001, 1], "memory": [
+      {"addr": "@charactercreate", "offset": "0x1e8", "u32": 0},
+      {"addr": "@slots", "offset": "0x398d0", "cstr": "Third"}
+    ]},
+    {"name": "previous scans all empty slots", "args": [1001, 1], "memory": [
+      {"addr": "@charactercreate", "offset": "0x1e8", "u32": 0}
+    ]},
+    {"name": "named character match", "args": [1002, 1], "memory": [
+      {"addr": "@charactercreate", "offset": "0x19c", "cstr": "Hero"},
+      {"addr": "@slots", "offset": "0x39890", "cstr": "Hero"}
+    ]},
+    {"name": "named character miss", "args": [1002, 1], "memory": [
+      {"addr": "@charactercreate", "offset": "0x19c", "cstr": "Hero"},
+      {"addr": "@slots", "offset": "0x39890", "cstr": "Other"}
+    ]},
+    {"name": "last character default", "args": [1002, 1]},
+    {"name": "last character numeric value", "args": [1002, 1],
+      "memory": [{"addr": "@slots", "offset": "0x39890", "cstr": "Bob"}],
+      "callees": {
+        "0x0060be50": {"name": "ReadIni_guess", "conv": "cdecl", "args": ["cstr", "cstr", "cstr", "ignore", "int", "cstr"], "ret": 0,
+          "writes": [{"arg": 3, "offset": 0, "hex": "32 00"}]},
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 2}
+      }
+    },
+    {"name": "last character invalid numeric value", "args": [1002, 1],
+      "callees": {
+        "0x0060be50": {"name": "ReadIni_guess", "conv": "cdecl", "args": ["cstr", "cstr", "cstr", "ignore", "int", "cstr"], "ret": 0,
+          "writes": [{"arg": 3, "offset": 0, "hex": "38 00"}]},
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 8}
+      }
+    },
+    {"name": "selection zero and disabled transition", "args": [0, 0]},
+    {"name": "no state child", "args": [1, 1], "memory": [
+      {"addr": "0x00905ce4", "u32": 0}
+    ]},
+    {"name": "active selected transition with existing slot", "args": [1000, 1], "memory": [
+      {"addr": "@charactercreate", "offset": "0x1e2", "u8": 1},
+      {"addr": "@charactercreate", "offset": "0x1e8", "u32": 0},
+      {"addr": "@slots", "offset": "0x39850", "cstr": "Alice"},
+      {"addr": "@holder", "offset": "4", "u32": "@slot"}
+    ]},
+    {"name": "direct valid index seven", "args": [7, 1], "memory": [
+      {"addr": "@slots", "offset": "0x399d0", "cstr": "Seventh"}
+    ]},
+    {"name": "direct out of range index", "args": [9, 1]}
+  ],
+  "fuzz": {
+    "seed": 5184003,
+    "count": 100,
+    "args": [
+      {"choices": [0, 1, 7, 1000, 1001, 1002, 1003]},
+      {"choices": [0, 1]}
+    ],
+    "memory": [
+      {"addr": "@charactercreate", "offset": "0x1e2", "type": "u8", "choices": [0, 1]},
+      {"addr": "@charactercreate", "offset": "0x1e8", "type": "int", "choices": [-2, 0, 1, 6, 7, 8, 10]},
+      {"addr": "@charactercreate", "offset": "0x19c", "type": "u8", "choices": [0, 65]},
+      {"addr": "@child", "offset": "0x5d", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00905ce4", "type": "ptr", "choices": [0, "@statechild"]}
+    ]
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "function": "RehashIndex_guess::InsertIntoBucket_guess",
+  "original": "0x00405c38",
+  "sources": [
+    "src/EverQuest/tu_005_AudioTriggersWindow.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@rehashindex",
+  "args": [
+    { "name": "index", "type": "u32" },
+    { "name": "item", "type": "ptr" }
+  ],
+  "ret": "void",
+  "objects": {
+    "rehashindex": {
+      "size": "0x60",
+      "fill": "random",
+      "init": [
+        { "offset": "0x3c", "u32": "@buckets" },
+        { "offset": "0x40", "u32": 16 },
+        { "offset": "0x50", "u32": "@slots" }
+      ]
+    },
+    "buckets": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "slots": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": 4294967295 },
+        { "offset": "0x4", "u32": 4294967295 },
+        { "offset": "0x8", "u32": 4294967295 },
+        { "offset": "0xc", "u32": 4294967295 },
+        { "offset": "0x10", "u32": 4294967295 },
+        { "offset": "0x14", "u32": 4294967295 },
+        { "offset": "0x18", "u32": 4294967295 },
+        { "offset": "0x1c", "u32": 4294967295 },
+        { "offset": "0x20", "u32": 4294967295 },
+        { "offset": "0x24", "u32": 4294967295 },
+        { "offset": "0x28", "u32": 4294967295 },
+        { "offset": "0x2c", "u32": 4294967295 },
+        { "offset": "0x30", "u32": 4294967295 },
+        { "offset": "0x34", "u32": 4294967295 },
+        { "offset": "0x38", "u32": 4294967295 },
+        { "offset": "0x3c", "u32": 4294967295 }
+      ]
+    },
+    "item": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "entry": {
+      "size": "0xc",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00405719": {
+      "name": "IndexTable_guess::MarkBucketUsed_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "empty bucket, index 1",
+      "args": [1, "@item"]
+    },
+    {
+      "name": "occupied bucket, index 1",
+      "args": [1, "@item"],
+      "memory": [{ "addr": "@buckets", "offset": "0x4", "u32": "@entry" }]
+    },
+    {
+      "name": "empty bucket, index 0",
+      "args": [0, "@item"]
+    },
+    {
+      "name": "occupied bucket, index 0",
+      "args": [0, "@item"],
+      "memory": [{ "addr": "@buckets", "offset": "0x0", "u32": "@entry" }]
+    },
+    {
+      "name": "empty bucket, index 15",
+      "args": [15, "@item"]
+    },
+    {
+      "name": "occupied bucket, index 15",
+      "args": [15, "@item"],
+      "memory": [{ "addr": "@buckets", "offset": "0x3c", "u32": "@entry" }]
+    },
+    {
+      "name": "slot already taken, index 3",
+      "args": [3, "@item"],
+      "memory": [{ "addr": "@slots", "offset": "0xc", "u32": 3 }]
+    }
+  ],
+  "fuzz": {
+    "seed": 5105005,
+    "count": 120,
+    "args": [
+      { "range": [0, 15] },
+      { "choices": ["@item"] }
+    ],
+    "memory": [
+      { "addr": "@buckets", "offset": "0x0", "type": "u32", "choices": ["@entry", 0], "count": 16, "stride": 4 },
+      { "addr": "@slots", "offset": "0x0", "type": "u32", "choices": [4294967295, 0, 3], "count": 16, "stride": 4 }
+    ]
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "function": "Journal_guess::LoadJournal_guess",
+  "original": "0x0042f6cc",
+  "sources": [
+    "src/EverQuest/tu_024_Journal.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@journal",
+  "args": [
+    {
+      "name": "directory_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "journal": {
+      "size": "0x810",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x800", "u32": "@npclist"}
+      ]
+    },
+    "npclist": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "u32": "@npc"},
+        {"offset": "4", "u32": "@npc2"}
+      ]
+    },
+    "npc2": {"size": "0x60", "fill": "zero"},
+    "npclist1": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "u32": "@npc"}
+      ]
+    },
+    "npc": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4c", "u32": 2}
+      ]
+    },
+    "textfile": {"size": "0x20", "fill": "zero"},
+    "headerfile": {"size": "0x20", "fill": "zero"},
+    "lookup": {"size": "0x20", "fill": "zero"},
+    "copy1": {"size": "0x100", "fill": "zero"},
+    "copy2": {"size": "0x100", "fill": "zero"},
+    "copy3": {"size": "0x100", "fill": "zero"},
+    "hit": {"size": "0x10", "fill": "zero"},
+    "rootdir": {"size": "0x10", "fill": "zero"},
+    "heap1": {"size": "0x400", "fill": "zero"},
+    "heap2": {"size": "0x400", "fill": "zero"},
+    "heap3": {"size": "0x400", "fill": "zero"},
+    "heap4": {"size": "0x400", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x13579bdf"},
+    {"addr": "0x00923d74", "u32": "@rootdir"},
+    {"addr": "@rootdir", "cstr": "C:/eq"}
+  ],
+  "callees": {
+    "0x00574110": {"name": "LogText_guess", "conv": "cdecl", "args": ["cstr"], "ret": 0},
+    "0x00571e00": {"name": "String_ctor_guess", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "0x00571f70": {"name": "String_assign_guess", "conv": "thiscall", "args": ["ptr"], "passthrough": true},
+    "0x00571d00": {"name": "String_release_guess", "conv": "thiscall", "args": ["u32"], "passthrough": true},
+    "0x00572300": {"name": "String_copyto_guess", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x0042e3d9": {"name": "FUN_0042e3d9_guess", "conv": "cdecl", "args": ["ptr", "cstr", "ptr"], "passthrough": true},
+    "0x0042e3b4": {"name": "HashString_guess", "conv": "cdecl", "args": ["cstr"], "passthrough": true},
+    "0x0040552d": {"name": "BuildPath_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": "arg1"},
+    "0x005749f0": {"name": "FinalizePath_guess", "conv": "cdecl", "args": ["cstr", "cstr", "ptr", "int"], "ret": 0},
+    "0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": ["@textfile", "@headerfile"]},
+    "0x0060e790": {"name": "_fclose", "conv": "cdecl", "args": ["u32"], "ret": 0},
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@lookup"},
+    "0x0060e985": {"name": "operator_new_array", "conv": "cdecl", "args": ["u32"], "ret": ["@copy1", "@copy2", "@copy3"]},
+    "0x0060d682": {"name": "_free", "conv": "cdecl", "args": ["u32"], "ret": 0},
+    "0x0060fbe1": {
+      "name": "_fgets",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "u32"],
+      "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "6162630a00", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "7800", "call": 1},
+        {"arg": 0, "offset": 0, "hex": "6162630a00", "call": 2},
+        {"arg": 0, "offset": 0, "hex": "646566676800", "call": 3},
+        {"arg": 2, "offset": 12, "hex": "10000000", "call": 4},
+        {"arg": 0, "offset": 0, "hex": "2b4341540a00", "call": 5},
+        {"arg": 0, "offset": 0, "hex": "6a756e6b0a00", "call": 6},
+        {"arg": 0, "offset": 0, "hex": "2b4341540a00", "call": 7},
+        {"arg": 0, "offset": 0, "hex": "2b4e50430a00", "call": 8},
+        {"arg": 0, "offset": 0, "hex": "2b454e5452590a00", "call": 9},
+        {"arg": 0, "offset": 0, "hex": "2b4341540a00", "call": 10},
+        {"arg": 0, "offset": 0, "hex": "6a756e6b0a00", "call": 11},
+        {"arg": 0, "offset": 0, "hex": "2b4e50430a00", "call": 12},
+        {"arg": 0, "offset": 0, "hex": "6a756e6b0a00", "call": 13},
+        {"arg": 2, "offset": 12, "hex": "10000000", "call": 14}
+      ]
+    },
+    "0x004ff9c9": {"name": "Lookup_Find_guess", "conv": "thiscall", "args": ["u32"], "ret": [0, "@hit", 0]},
+    "0x00447c66": {"name": "Lookup_Insert_guess", "conv": "thiscall", "args": ["ptr", "u32"], "ret": 0},
+    "0x0042f092": {"name": "FUN_0042f092_guess", "conv": "thiscall", "args": ["int"], "ret": "this"},
+    "0x0042eb29": {"name": "FUN_0042eb29_guess", "conv": "thiscall", "args": ["ptr"], "ret": "@npc"},
+    "0x0042e979": {"name": "FUN_0042e979_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x0042ef8c": {"name": "ReadCategoryFromFile_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x0042f675": {"name": "FUN_0042f675_guess", "conv": "cdecl", "args": ["u32"], "ret": 0},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["u32", "u32", "u32"], "ret": ["@heap1", "@heap2", "@heap3", "@heap4"]},
+    "kernel32.dll!HeapFree": {"name": "HeapFree", "conv": "stdcall", "args": ["u32", "u32", "u32"], "ret": 1},
+    "kernel32.dll!GetProcessHeap": {"name": "GetProcessHeap", "conv": "stdcall", "args": [], "ret": 1}
+  },
+  "rewrite_aliases": {
+    "_fopen": "0x0060e887",
+    "_fclose": "0x0060e790",
+    "??2@YAPAXI@Z": "0x0060d071",
+    "_fgets": "0x0060fbe1"
+  },
+  "cases": [
+    {
+      "name": "full journal",
+      "args": ["C:/eq"],
+      "memory": [
+        {"addr": "@journal", "offset": "0x800", "u32": "@npclist1"},
+        {"addr": "@journal", "offset": "0x808", "u32": 1}
+      ]
+    },
+    {
+      "name": "no npcs",
+      "args": ["C:/eq"],
+      "memory": [
+        {"addr": "@journal", "offset": "0x808", "u32": 0}
+      ]
+    },
+    {
+      "name": "two npcs, one without entries",
+      "args": ["C:/eq"],
+      "memory": [
+        {"addr": "@journal", "offset": "0x808", "u32": 2}
+      ]
+    },
+    {
+      "name": "text file missing",
+      "args": ["C:/eq"],
+      "callees": {
+        "0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [0]}
+      }
+    },
+    {
+      "name": "header file missing",
+      "args": ["C:/eq"],
+      "callees": {
+        "0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": ["@textfile", 0]}
+      }
+    },
+    {
+      "name": "both files empty",
+      "args": ["C:/eq"],
+      "callees": {
+        "0x0060fbe1": {
+          "name": "_fgets",
+          "conv": "cdecl",
+          "args": ["ignore", "int", "u32"],
+          "ret": 0,
+          "writes": [
+            {"arg": 2, "offset": 12, "hex": "10000000", "call": [0, 1]}
+          ]
+        }
+      }
+    }
+  ],
+  "_survivors": "L1117: the outer header loop's `line[0] = 0` only matters when fgets returns without writing and without setting EOF; the stub never does that, and a read that writes or sets EOF makes the stale value unread; L1123: the NPC count loop only reads npc->count and its trip count has no output; no case observed a different trip count; L1128: entry-count loop has no output; L1131: entry-count loop has no output; L1135: NPC count loop trip count has no output; no case observed it",
+  "fuzz": {
+    "seed": 4388556,
+    "count": 100,
+    "args": [
+      {}
+    ],
+    "memory": [
+      {"addr": "@journal", "offset": "0x808", "type": "int", "choices": [0, 1]}
+    ]
+  }
+}

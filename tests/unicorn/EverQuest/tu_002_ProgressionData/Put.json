@@ -1,0 +1,243 @@
+{
+  "function": "BufferPosition_guess::Put_guess",
+  "original": "0x00402760",
+  "sources": [
+    "src/EverQuest/tu_002_ProgressionData.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@bufferposition",
+  "args": [
+    {
+      "name": "value_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "buffer": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "newbuf": {
+      "size": "0x200",
+      "fill": "random"
+    },
+    "base_slot": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{ "offset": "0x0", "u32": "@buffer" }]
+    },
+    "field14_slot": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{ "offset": "0x0", "u32": "@buffer" }]
+    },
+    "field20_slot": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{ "offset": "0x0", "u32": "@buffer" }]
+    },
+    "getpos_slot": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{ "offset": "0x0", "u32": "@buffer" }]
+    },
+    "field30_slot": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{ "offset": "0x0", "u32": "@buffer" }]
+    },
+    "getcount_slot": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{ "offset": "0x0", "u32": 0 }]
+    },
+    "bufferposition": {
+      "size": "0x44",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x10", "u32": "@base_slot" },
+        { "offset": "0x14", "u32": "@field14_slot" },
+        { "offset": "0x20", "u32": "@field20_slot" },
+        { "offset": "0x24", "u32": "@getpos_slot" },
+        { "offset": "0x30", "u32": "@field30_slot" },
+        { "offset": "0x34", "u32": "@getcount_slot" },
+        { "offset": "0x3c", "u32": "@newbuf" }
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004028f2": {
+      "name": "NextPut_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@buffer"
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@newbuf"
+    },
+    "0x0060d0d5": {
+      "name": "operator_delete",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071",
+    "??3@YAXPAX@Z": "0x0060d0d5"
+  },
+  "cases": [
+    {
+      "name": "minus_one_and_advance",
+      "args": [-1],
+      "memory": [
+        { "addr": "@bufferposition", "offset": "0x40", "u32": 8 },
+        { "addr": "@bufferposition", "offset": "0x3c", "u32": "@newbuf" },
+        { "addr": "@getpos_slot", "u32": "@buffer" },
+        { "addr": "@getcount_slot", "u32": 256 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "minus_one_zero_position",
+      "args": [-1],
+      "memory": [
+        { "addr": "@bufferposition", "offset": "0x40", "u32": 8 },
+        { "addr": "@getpos_slot", "u32": 0 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "minus_one_past_end",
+      "args": [-1],
+      "memory": [
+        { "addr": "@bufferposition", "offset": "0x40", "u32": 8 },
+        { "addr": "@bufferposition", "offset": "0x3c", "u32": "@buffer" },
+        { "addr": "@getpos_slot", "u32": "@newbuf" }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "existing_space",
+      "args": [65],
+      "memory": [
+        { "addr": "@bufferposition", "offset": "0x40", "u32": 0 },
+        { "addr": "@getpos_slot", "u32": "@buffer" },
+        { "addr": "@getcount_slot", "u32": 16 }
+      ],
+      "expect": { "ret": 65 }
+    },
+    {
+      "name": "locked_full",
+      "args": [65],
+      "memory": [
+        { "addr": "@bufferposition", "offset": "0x40", "u32": 2 },
+        { "addr": "@getpos_slot", "u32": "@buffer" },
+        { "addr": "@getcount_slot", "u32": 0 }
+      ],
+      "expect": { "ret": -1 }
+    },
+    {
+      "name": "empty_allocate",
+      "args": [65],
+      "memory": [
+        { "addr": "@bufferposition", "offset": "0x40", "u32": 0 },
+        { "addr": "@getpos_slot", "u32": 0 },
+        { "addr": "@getcount_slot", "u32": 0 }
+      ],
+      "expect": { "ret": 65 }
+    },
+    {
+      "name": "empty_allocate_flag4",
+      "args": [65],
+      "memory": [
+        { "addr": "@bufferposition", "offset": "0x40", "u32": 4 },
+        { "addr": "@getpos_slot", "u32": 0 },
+        { "addr": "@getcount_slot", "u32": 0 }
+      ],
+      "expect": { "ret": 65 }
+    },
+    {
+      "name": "grow_owned_buffer",
+      "args": [66],
+      "memory": [
+        { "addr": "@bufferposition", "offset": "0x40", "u32": 1 },
+        { "addr": "@getpos_slot", "u32": "@newbuf" },
+        { "addr": "@getcount_slot", "u32": 0 }
+      ],
+      "expect": { "ret": 66 }
+    },
+    {
+      "name": "grow_flag4",
+      "args": [67],
+      "memory": [
+        { "addr": "@bufferposition", "offset": "0x40", "u32": 4 },
+        { "addr": "@getpos_slot", "u32": "@newbuf" },
+        { "addr": "@getcount_slot", "u32": 0 }
+      ],
+      "expect": { "ret": 67 }
+    },
+    {
+      "name": "owned_without_append",
+      "args": [-1],
+      "memory": [
+        { "addr": "@bufferposition", "offset": "0x40", "u32": 1 },
+        { "addr": "@bufferposition", "offset": "0x3c", "u32": "@newbuf" },
+        { "addr": "@getpos_slot", "u32": "@buffer" },
+        { "addr": "@getcount_slot", "u32": 256 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "capacity_31",
+      "args": [68],
+      "memory": [
+        { "addr": "@bufferposition", "offset": "0x40", "u32": 0 },
+        { "addr": "@getpos_slot", "u32": "@newbuf" },
+        { "addr": "@getcount_slot", "u32": 4294967102 }
+      ],
+      "expect": { "ret": 68 }
+    },
+    {
+      "name": "capacity_overflow_boundary",
+      "args": [69],
+      "memory": [
+        { "addr": "@bufferposition", "offset": "0x40", "u32": 0 },
+        { "addr": "@getpos_slot", "u32": 3221225472 },
+        { "addr": "@getcount_slot", "u32": 4116010325 }
+      ]
+    },
+    {
+      "name": "capacity_halving_to_zero",
+      "args": [70],
+      "memory": [
+        { "addr": "@bufferposition", "offset": "0x40", "u32": 0 },
+        { "addr": "@getpos_slot", "u32": 3221225472 },
+        { "addr": "@getcount_slot", "u32": 2684354559 }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4204384,
+    "count": 100,
+    "args": [
+      { "choices": [-1, 0, 1, 65, 255] }
+    ],
+    "memory": [
+      { "addr": "@bufferposition", "offset": "0x40", "type": "u32", "choices": [0, 1, 2, 4, 8, 9] },
+      { "addr": "@bufferposition", "offset": "0x3c", "type": "u32", "choices": ["@buffer", "@newbuf"] },
+      { "addr": "@getpos_slot", "type": "u32", "choices": [0, "@buffer", "@newbuf"] },
+      { "addr": "@getcount_slot", "type": "u32", "choices": [0, 4, 16, 32] }
+    ]
+  },
+  "_survivors": "L611: capacity == 0x20 assigns 0x20 whether the comparison is < or <="
+}

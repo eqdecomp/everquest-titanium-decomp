@@ -1,0 +1,470 @@
+{
+  "function": "CDisplay_guess::SetSkyBackground_guess",
+  "original": "0x004439c0",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "size": "0x243",
+  "conv": "thiscall",
+  "this": "@client",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "client": {
+      "size": "0x14c",
+      "fill": "random"
+    },
+    "clock": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@clock_vtable"
+        }
+      ]
+    },
+    "clock_vtable": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x10",
+          "u32": "@fn_slot4"
+        },
+        {
+          "offset": "0x14",
+          "u32": "@fn_slot5"
+        },
+        {
+          "offset": "0x1c",
+          "u32": "@fn_slot7"
+        }
+      ]
+    },
+    "fn_slot4": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_slot5": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_slot7": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x008503a8",
+      "u32": "@clock"
+    },
+    {
+      "addr": "0x00850cd8",
+      "f32": 64.0
+    },
+    {
+      "addr": "0x00850cdc",
+      "f32": 128.0
+    },
+    {
+      "addr": "0x00850ce0",
+      "u32": 0
+    },
+    {
+      "addr": "0x00850ce4",
+      "u32": 1080000
+    },
+    {
+      "addr": "0x00698a00",
+      "from_image": "0x00698A00",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0063f4d8",
+      "from_image": "0x0063F4D8",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00641140",
+      "from_image": "0x00641140",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00850984",
+      "u32": 0
+    },
+    {
+      "addr": "0x00850cec",
+      "u32": 0
+    },
+    {
+      "addr": "0x00850cf0",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x0046d655": {
+      "name": "CreateWorker_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 123456
+    },
+    "0x00439b36": {
+      "name": "GetClock_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "ignore"
+      ],
+      "ret": "keep",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00000000"
+        },
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "00000000"
+        }
+      ]
+    },
+    "0x004365db": {
+      "name": "NormalizeAngle_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ],
+      "passthrough": true
+    },
+    "0x004437e5": {
+      "name": "UpdateTime_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "@fn_slot4": {
+      "name": "clock.GetAngle_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret_float": 42.0
+    },
+    "@fn_slot5": {
+      "name": "clock.SetAngle_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ]
+    },
+    "@fn_slot7": {
+      "name": "clock.SetTarget_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "segment_0",
+      "args": []
+    },
+    {
+      "name": "segment_14",
+      "args": [],
+      "callees": {
+        "0x00439b36": {
+          "name": "GetClock_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": "keep",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "02000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "30000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "segment_15",
+      "args": [],
+      "callees": {
+        "0x00439b36": {
+          "name": "GetClock_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": "keep",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "03000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        }
+      },
+      "memory": [
+        {
+          "addr": "0x008503a8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "segment_44",
+      "args": [],
+      "callees": {
+        "0x00439b36": {
+          "name": "GetClock_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": "keep",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "08000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "30000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "segment_45",
+      "args": [],
+      "callees": {
+        "0x00439b36": {
+          "name": "GetClock_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": "keep",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "09000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "segment_74",
+      "args": [],
+      "callees": {
+        "0x00439b36": {
+          "name": "GetClock_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": "keep",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "0e000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "30000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "segment_75",
+      "args": [],
+      "callees": {
+        "0x00439b36": {
+          "name": "GetClock_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": "keep",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "0f000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "segment_104",
+      "args": [],
+      "callees": {
+        "0x00439b36": {
+          "name": "GetClock_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": "keep",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "14000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "30000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "segment_105",
+      "args": [],
+      "callees": {
+        "0x00439b36": {
+          "name": "GetClock_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": "keep",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "15000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "segment_negative_one",
+      "args": [],
+      "callees": {
+        "0x00439b36": {
+          "name": "GetClock_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": "keep",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "ffffffff"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "30000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "negative_phase_remainder",
+      "args": [],
+      "callees": {
+        "0x00439b36": {
+          "name": "GetClock_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": "keep",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "eaffffff"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4471232,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x008503a8",
+        "type": "u32",
+        "choices": [
+          0,
+          "@clock"
+        ]
+      }
+    ]
+  },
+  "coverage_ok": {
+    "00443A71-00443A74": "the remapped segment is always between 0 and 59",
+    "00443B40-00443B45": "the normalized segment and hour always select one of the update paths"
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "_survivors": "L561: bound 0x9001f3 vs 0x9001f4 is unobservable: prefix steps 0x14 from 0x8ffbc8, so it reaches 0x9001f4 exactly and never 0x9001f3",
+  "function": "OldPlayerAnimationTracksView_guess::InitAnimationTracks_guess",
+  "original": "0x0044f319",
+  "sources": [
+    "src/EverQuest/tu_039_EQAnimate.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@fun_0044f319",
+  "args": [
+    {"name": "out", "type": "ptr"},
+    {"name": "actor", "type": "ptr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "fun_0044f319": {"size": "0x10", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@vt_this"},
+      {"offset": "0x4", "u32": "@outer"}]},
+    "outer": {"size": "0x1ac", "fill": "zero", "init": [
+      {"offset": "0x1a8", "u32": "@ref"}]},
+    "ref": {"size": "0x10", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@refobj"},
+      {"offset": "0x8", "u8": 65}, {"offset": "0x9", "u8": 66},
+      {"offset": "0xa", "u8": 67}, {"offset": "0xb", "u8": 68}]},
+    "refobj": {"size": "0x160", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@vt_ref"}]},
+    "vt_this": {"size": "0x40", "fill": "zero", "init": [
+      {"offset": "0x34", "u32": "@fn_this34"}]},
+    "vt_actor": {"size": "0x170", "fill": "zero", "init": [
+      {"offset": "0x118", "u32": "@fn_act118"},
+      {"offset": "0x168", "u32": "@fn_act168"}]},
+    "vt_ref": {"size": "0x160", "fill": "zero", "init": [
+      {"offset": "0x14c", "u32": "@fn_ref14c"},
+      {"offset": "0x154", "u32": "@fn_ref154"}]},
+    "vt_sub": {"size": "0x10", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@fn_sub00"}]},
+    "vt_obj": {"size": "0x10", "fill": "zero", "init": [
+      {"offset": "0x8", "u32": "@fn_obj08"}]},
+    "vt_mgr": {"size": "0x40", "fill": "zero", "init": [
+      {"offset": "0x3c", "u32": "@fn_mgr3c"}]},
+    "mgr": {"size": "0x10", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@vt_mgr"}]},
+    "actor": {"size": "0x180", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@vt_actor"}]},
+    "sub": {"size": "0x10", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@vt_sub"}]},
+    "subtext": {"size": "0x10", "fill": "zero", "init": [
+      {"offset": "0x0", "u8": 83}, {"offset": "0x1", "u8": 72},
+      {"offset": "0x2", "u8": 73}, {"offset": "0x3", "u8": 0}]},
+    "obj": {"size": "0x10", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@vt_obj"}]},
+    "out": {"size": "0x54", "fill": "zero", "init": [
+      {"offset": "0x2c", "u32": "@tracks"}]},
+    "tracks": {"size": "0x13c", "fill": "zero"},
+    "trk": {"size": "0x124", "fill": "zero"},
+    "fn_this34": {"size": "0x1"},
+    "fn_act118": {"size": "0x1"},
+    "fn_act168": {"size": "0x1"},
+    "fn_ref14c": {"size": "0x1"},
+    "fn_ref154": {"size": "0x1"},
+    "fn_sub00": {"size": "0x1"},
+    "fn_obj08": {"size": "0x1"},
+    "fn_mgr3c": {"size": "0x1"}
+  },
+  "memory": [
+    {"addr": "0x0099e360", "u32": "@mgr"}
+  ],
+  "callees": {
+    "0x00574110": {"name": "LogError_guess", "conv": "cdecl", "args": ["cstr"], "ret": 0},
+    "0x00464a28": {"name": "steve_strncpy_guess", "conv": "cdecl", "args": ["ignore", "mem:4", "u32"], "passthrough": true},
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@trk"},
+    "0x00451965": {"name": "Construct_guess", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 0},
+    "@fn_this34": {"conv": "thiscall", "args": ["ignore", "ignore", "u8"]},
+    "@fn_act118": {"conv": "thiscall", "args": [], "ret": 3},
+    "@fn_act168": {"conv": "thiscall", "args": ["int"], "ret": 0},
+    "@fn_ref14c": {"conv": "thiscall", "args": ["int", "ignore"]},
+    "@fn_ref154": {"conv": "thiscall", "args": ["int"], "ret": [1, 1]},
+    "@fn_sub00": {"conv": "thiscall", "args": [], "ret": "@subtext"},
+    "@fn_obj08": {"conv": "thiscall", "args": [], "ret": 0},
+    "@fn_mgr3c": {"conv": "thiscall", "args": ["ignore"], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071",
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {"name": "flag0 nothing found",
+     "args": ["@out", "@actor"],
+     "memory": [{"addr": "@out", "offset": "0x34", "u8": 0}]},
+    {"name": "flag0 found, plain",
+     "args": ["@out", "@actor"],
+     "memory": [{"addr": "@out", "offset": "0x34", "u8": 0}],
+     "callees": {"@fn_mgr3c": {"conv": "thiscall", "args": ["ignore"], "ret": "@obj"}}},
+    {"name": "flag1 keyed first slot found",
+     "args": ["@out", "@actor"],
+     "memory": [{"addr": "@out", "offset": "0x34", "u8": 1}],
+     "callees": {"@fn_mgr3c": {"conv": "thiscall", "args": ["ignore"], "ret": ["@obj", 0]}}},
+    {"name": "flag1 non-keyed found, obj08 0x40",
+     "args": ["@out", "@actor"],
+     "memory": [{"addr": "@out", "offset": "0x34", "u8": 1}],
+     "callees": {
+       "@fn_mgr3c": {"conv": "thiscall", "args": ["ignore"],
+                     "ret": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "@obj", 0]},
+       "@fn_obj08": {"conv": "thiscall", "args": [], "ret": 64}}},
+    {"name": "flag1 non-keyed found, obj08 0x10",
+     "args": ["@out", "@actor"],
+     "memory": [{"addr": "@out", "offset": "0x34", "u8": 1}],
+     "callees": {
+       "@fn_mgr3c": {"conv": "thiscall", "args": ["ignore"],
+                     "ret": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "@obj", 0]},
+       "@fn_obj08": {"conv": "thiscall", "args": [], "ret": 16}}},
+    {"name": "flag1 keyB KES",
+     "args": ["@out", "@actor"],
+     "memory": [{"addr": "@out", "offset": "0x34", "u8": 1},
+                {"addr": "@ref", "offset": "0x8", "u8": 75},
+                {"addr": "@ref", "offset": "0x9", "u8": 69},
+                {"addr": "@ref", "offset": "0xa", "u8": 83}],
+     "callees": {
+       "@fn_mgr3c": {"conv": "thiscall", "args": ["ignore"],
+                     "ret": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "@obj", 0]},
+       "@fn_obj08": {"conv": "thiscall", "args": [], "ret": 16}}},
+    {"name": "flag1 keyF GP",
+     "args": ["@out", "@actor"],
+     "memory": [{"addr": "@out", "offset": "0x34", "u8": 1},
+                {"addr": "@ref", "offset": "0x8", "u8": 71},
+                {"addr": "@ref", "offset": "0x9", "u8": 80}],
+     "callees": {
+       "@fn_mgr3c": {"conv": "thiscall", "args": ["ignore"],
+                     "ret": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "@obj", 0]},
+       "@fn_obj08": {"conv": "thiscall", "args": [], "ret": 16}}},
+    {"name": "flag1 K without E and S",
+     "args": ["@out", "@actor"],
+     "memory": [{"addr": "@out", "offset": "0x34", "u8": 1},
+                {"addr": "@ref", "offset": "0x8", "u8": 75},
+                {"addr": "@ref", "offset": "0x9", "u8": 88},
+                {"addr": "@ref", "offset": "0xa", "u8": 88}],
+     "callees": {
+       "@fn_mgr3c": {"conv": "thiscall", "args": ["ignore"],
+                     "ret": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "@obj", 0]},
+       "@fn_obj08": {"conv": "thiscall", "args": [], "ret": 16}}},
+    {"name": "flag1 only S set",
+     "args": ["@out", "@actor"],
+     "memory": [{"addr": "@out", "offset": "0x34", "u8": 1},
+                {"addr": "@ref", "offset": "0x8", "u8": 88},
+                {"addr": "@ref", "offset": "0x9", "u8": 88},
+                {"addr": "@ref", "offset": "0xa", "u8": 83}],
+     "callees": {
+       "@fn_mgr3c": {"conv": "thiscall", "args": ["ignore"],
+                     "ret": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "@obj", 0]},
+       "@fn_obj08": {"conv": "thiscall", "args": [], "ret": 16}}},
+    {"name": "actor is null",
+     "args": ["@out", 0]},
+    {"name": "actor count zero",
+     "args": ["@out", "@actor"],
+     "callees": {"@fn_act118": {"conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "no ref",
+     "args": ["@out", "@actor"],
+     "memory": [{"addr": "@outer", "offset": "0x1a8", "u32": 0}]},
+    {"name": "SHI tag with sub",
+     "args": ["@out", "@actor"],
+     "memory": [{"addr": "@ref", "offset": "0x8", "u8": 83},
+                {"addr": "@ref", "offset": "0x9", "u8": 72},
+                {"addr": "@ref", "offset": "0xa", "u8": 73}],
+     "callees": {"@fn_act168": {"conv": "thiscall", "args": ["int"], "ret": "@sub"}}},
+    {"name": "tunic name added",
+     "args": ["@out", "@actor"],
+     "memory": [{"addr": "@out", "offset": "0x34", "u8": 0}],
+     "callees": {"@fn_ref154": {"conv": "thiscall", "args": ["int"], "ret": [0, 0]}}},
+    {"name": "allocation returns null",
+     "args": ["@out", "@actor"],
+     "callees": {"0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}}}
+  ],
+  "fuzz": {
+    "seed": 4518681,
+    "count": 100,
+    "args": [
+      {"choices": ["@out"]},
+      {"choices": ["@actor"]}
+    ],
+    "memory": [
+      {"addr": "@out", "offset": "0x34", "type": "u8", "choices": [0, 1]},
+      {"addr": "@ref", "offset": "0x8", "type": "u8", "choices": [65, 75, 69, 83, 71, 80, 72, 73]},
+      {"addr": "@ref", "offset": "0x9", "type": "u8", "choices": [65, 75, 69, 83, 71, 80, 72, 73]},
+      {"addr": "@ref", "offset": "0xa", "type": "u8", "choices": [65, 75, 69, 83, 71, 80, 72, 73]}
+    ]
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "function": "Window_guess::Process_guess",
+  "original": "0x004dcf17",
+  "sources": ["src/EverQuest/tu_127_BankWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@window",
+  "args": [{"name": "flag_guess", "type": "char"}],
+  "ret": "void",
+  "objects": {
+    "window": {
+      "size": "0x1dc",
+      "fill": "random",
+      "init": [
+        {"offset": "0x168", "u32": 0}, {"offset": "0x16c", "u32": 0},
+        {"offset": "0x170", "u32": 0}, {"offset": "0x174", "u32": 0},
+        {"offset": "0x178", "u32": 0}, {"offset": "0x17c", "u32": 0},
+        {"offset": "0x1d8", "u32": 0}
+      ]
+    },
+    "pcview": {
+      "size": "0xd30",
+      "fill": "random",
+      "init": [
+        {"offset": "0x8", "u32": "@vbtable"},
+        {"offset": "0xcf0", "u32": 0}, {"offset": "0xcf4", "u32": 0},
+        {"offset": "0xcf8", "u32": 0}, {"offset": "0xcfc", "u32": 0},
+        {"offset": "0xd00", "u32": 0}, {"offset": "0xd04", "u32": 0},
+        {"offset": "0xd08", "u32": 0}, {"offset": "0xd0c", "u32": 0},
+        {"offset": "0xd10", "u32": 0}, {"offset": "0xd14", "u32": 0},
+        {"offset": "0xd18", "u32": 0}, {"offset": "0xd1c", "u32": 0},
+        {"offset": "0xd20", "u32": 0}, {"offset": "0xd24", "u32": 0},
+        {"offset": "0xd28", "u32": 0}, {"offset": "0xd2c", "u32": 0}
+      ]
+    },
+    "vbtable": {"size": "0x8", "fill": "zero"},
+    "info": {
+      "size": "0x11f4",
+      "fill": "random",
+      "init": [
+        {"offset": "0x88", "u32": 0}, {"offset": "0x11e4", "u32": 0},
+        {"offset": "0x11e8", "u32": 0}, {"offset": "0x11ec", "u32": 0},
+        {"offset": "0x11f0", "u32": 0}
+      ]
+    },
+    "emptyinfo": {"size": "0x11f4", "fill": "zero"},
+    "state": {
+      "size": "0x12",
+      "fill": "random",
+      "init": [{"offset": "0x10", "u8": 0}, {"offset": "0x11", "u8": 0}]
+    },
+    "requester": {"size": "0x4", "fill": "zero"},
+    "resource": {"size": "0x4", "fill": "zero"},
+    "game": {"size": "0x4", "fill": "zero"},
+    "dispatch": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@dispatch_vtable"}]
+    },
+    "dispatch_vtable": {
+      "size": "0xc4",
+      "fill": "zero",
+      "init": [{"offset": "0xc0", "u32": "@slot48"}]
+    },
+    "slot48": {"size": "0x4", "fill": "zero"},
+    "text": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "cstr": "fixture message"}]
+    },
+    "node": {"size": "0x4c", "fill": "zero"},
+    "slotnode": {"size": "0x4c", "fill": "zero"},
+    "child": {
+      "size": "0x4c",
+      "fill": "random",
+      "init": [{"offset": "0x48", "u32": 0}]
+    }
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@pcview"},
+    {"addr": "0x00850cb8", "u32": "@requester"},
+    {"addr": "0x00905d24", "u32": "@state"},
+    {"addr": "0x00905cb0", "u32": "@resource"},
+    {"addr": "0x00988df0", "u32": "@game"},
+    {"addr": "0x00850c24", "u32": "@dispatch"}
+  ],
+  "callees": {
+    "0x005ec220": {"name": "GetCharInfo2_guess", "conv": "thiscall", "args": [], "ret": "@info"},
+    "0x005e0a30": {"name": "Ready_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005ec760": {"name": "Flag_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005e0f30": {"name": "GetId_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x0051a9a8": {"name": "MoveItem", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 0},
+    "0x005eccc0": {"name": "Mode_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005ecc30": {"name": "Count_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005ec630": {"name": "GetChild_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005ecd50": {"name": "GetLimit_guess", "conv": "thiscall", "args": [], "ret": 10},
+    "0x005dfa00": {"name": "GetString_guess", "conv": "thiscall", "args": ["int", "int"], "ret": "@text"},
+    "0x004982c6": {"name": "Display_guess", "conv": "thiscall", "args": ["cstr", "int", "int"]},
+    "0x00495f81": {"name": "Notify_guess", "conv": "thiscall", "args": ["int", "int", "int", "int", "int", "int"]},
+    "0x004dc5aa": {"name": "UpdateMoneyLabels_guess", "conv": "thiscall", "args": []},
+    "@slot48": {"name": "Slot48_guess", "conv": "thiscall", "args": ["int", "int"]}
+  },
+  "cases": [
+    {"name": "no node inactive", "args": [0]},
+    {"name": "no node without levels", "args": [1], "memory": [{"addr": "@state", "offset": "0x11", "u8": 1}]},
+    {"name": "highest level", "args": [0], "memory": [
+      {"addr": "@state", "offset": "0x11", "u8": 1}, {"addr": "@info", "offset": "0x11f0", "u32": 5}
+    ]},
+    {"name": "second level", "args": [0], "memory": [
+      {"addr": "@state", "offset": "0x11", "u8": 1}, {"addr": "@info", "offset": "0x11ec", "u32": 5}
+    ]},
+    {"name": "third level", "args": [0], "memory": [
+      {"addr": "@state", "offset": "0x11", "u8": 1}, {"addr": "@info", "offset": "0x11e8", "u32": 5}
+    ]},
+    {"name": "lowest level", "args": [0], "memory": [
+      {"addr": "@state", "offset": "0x11", "u8": 1}, {"addr": "@info", "offset": "0x11e4", "u32": 5}
+    ]},
+    {"name": "ready message", "args": [1], "memory": [{"addr": "@info", "offset": "0x88", "u32": "@node"}],
+      "callees": {"0x005e0a30": {"conv": "thiscall", "args": ["int"], "ret": 1}}},
+    {"name": "missing slots", "args": [1], "memory": [
+      {"addr": "@info", "offset": "0x88", "u32": "@node"}, {"addr": "@window", "offset": "0x1d8", "u32": 2}
+    ], "callees": {
+      "0x005ec760": {"conv": "thiscall", "args": [], "ret": 0},
+      "0x0051a9a8": {"conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 0}
+    }},
+    {"name": "post failure", "args": [1], "memory": [
+      {"addr": "@info", "offset": "0x88", "u32": "@node"}, {"addr": "@window", "offset": "0x1d8", "u32": 1}
+    ], "callees": {
+      "0x005ec760": {"conv": "thiscall", "args": [], "ret": 0},
+      "0x0051a9a8": {"conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 1}
+    }},
+    {"name": "nested missing child", "args": [1], "memory": [
+      {"addr": "@info", "offset": "0x88", "u32": "@node"}, {"addr": "@window", "offset": "0x1d8", "u32": 1},
+      {"addr": "@pcview", "offset": "0xcf0", "u32": "@slotnode"}
+    ], "callees": {
+      "0x005ec760": {"conv": "thiscall", "args": [], "ret": 0},
+      "0x005eccc0": {"conv": "thiscall", "args": [], "ret": [1, 0]},
+      "0x005ecc30": {"conv": "thiscall", "args": [], "ret": 1},
+      "0x005ec630": {"conv": "thiscall", "args": ["int"], "ret": 0},
+      "0x0051a9a8": {"conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 0}
+    }},
+    {"name": "second nested missing child", "args": [1], "memory": [
+      {"addr": "@info", "offset": "0x88", "u32": "@node"}, {"addr": "@window", "offset": "0x1d8", "u32": 2},
+      {"addr": "@pcview", "offset": "0xcf4", "u32": "@slotnode"}
+    ], "callees": {
+      "0x005ec760": {"conv": "thiscall", "args": [], "ret": 0},
+      "0x005eccc0": {"conv": "thiscall", "args": [], "ret": [1, 0]},
+      "0x005ecc30": {"conv": "thiscall", "args": [], "ret": 2},
+      "0x005ec630": {"conv": "thiscall", "args": ["int"], "ret": 0},
+      "0x0051a9a8": {"conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 0}
+    }},
+    {"name": "direct slot match clears node", "args": [1], "memory": [
+      {"addr": "@info", "offset": "0x88", "u32": "@node"}, {"addr": "@window", "offset": "0x1d8", "u32": 1},
+      {"addr": "@pcview", "offset": "0xcf0", "u32": "@slotnode"}
+    ], "callees": {
+      "0x005ec760": {"conv": "thiscall", "args": [], "ret": 1},
+      "0x005e0f30": {"conv": "thiscall", "args": [], "ret": [7, 7]},
+      "0x005ec220": {"conv": "thiscall", "args": [], "ret": ["@info", "@emptyinfo"]},
+      "0x0051a9a8": {"conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 0}
+    }},
+    {"name": "nested child below limit", "args": [1], "memory": [
+      {"addr": "@info", "offset": "0x88", "u32": "@node"}, {"addr": "@window", "offset": "0x1d8", "u32": 1},
+      {"addr": "@pcview", "offset": "0xcf0", "u32": "@slotnode"}, {"addr": "@child", "offset": "0x48", "u32": 0}
+    ], "callees": {
+      "0x005ec760": {"conv": "thiscall", "args": [], "ret": 1},
+      "0x005e0f30": {"conv": "thiscall", "args": [], "ret": [1, 2, 2, 2]},
+      "0x005eccc0": {"conv": "thiscall", "args": [], "ret": 1},
+      "0x005ecc30": {"conv": "thiscall", "args": [], "ret": 1},
+      "0x005ec630": {"conv": "thiscall", "args": ["int"], "ret": "@child"},
+      "0x005ec220": {"conv": "thiscall", "args": [], "ret": ["@info", "@emptyinfo"]},
+      "0x0051a9a8": {"conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 0}
+    }},
+    {"name": "nested child at limit then ready", "args": [1], "memory": [
+      {"addr": "@info", "offset": "0x88", "u32": "@node"}, {"addr": "@window", "offset": "0x1d8", "u32": 1},
+      {"addr": "@pcview", "offset": "0xcf0", "u32": "@slotnode"}, {"addr": "@child", "offset": "0x48", "u32": 10}
+    ], "callees": {
+      "0x005ec760": {"conv": "thiscall", "args": [], "ret": 1},
+      "0x005e0a30": {"conv": "thiscall", "args": ["int"], "ret": [0, 1]},
+      "0x005e0f30": {"conv": "thiscall", "args": [], "ret": [1, 2, 2, 2]},
+      "0x005eccc0": {"conv": "thiscall", "args": [], "ret": 1},
+      "0x005ecc30": {"conv": "thiscall", "args": [], "ret": 1},
+      "0x005ec630": {"conv": "thiscall", "args": ["int"], "ret": "@child"},
+      "0x005dfa00": {"conv": "thiscall", "args": ["int", "int"], "ret": "@text"},
+      "0x004982c6": {"conv": "thiscall", "args": ["cstr", "int", "int"]}
+    }},
+    {"name": "third outer slot child request", "args": [1], "memory": [
+      {"addr": "@info", "offset": "0x88", "u32": "@node"}, {"addr": "@window", "offset": "0x1d8", "u32": 3},
+      {"addr": "@pcview", "offset": "0xcf8", "u32": "@slotnode"}, {"addr": "@child", "offset": "0x48", "u32": 0}
+    ], "callees": {
+      "0x005ec760": {"conv": "thiscall", "args": [], "ret": 1},
+      "0x005e0a30": {"conv": "thiscall", "args": ["int"], "ret": [0, 1]},
+      "0x005e0f30": {"conv": "thiscall", "args": [], "ret": [1, 2, 2, 2]},
+      "0x005eccc0": {"conv": "thiscall", "args": [], "ret": 1},
+      "0x005ecc30": {"conv": "thiscall", "args": [], "ret": 1},
+      "0x005ec630": {"conv": "thiscall", "args": ["int"], "ret": "@child"},
+      "0x005dfa00": {"conv": "thiscall", "args": ["int", "int"], "ret": "@text"},
+      "0x004982c6": {"conv": "thiscall", "args": ["cstr", "int", "int"]},
+      "0x0051a9a8": {"conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 0}
+    }}
+  ],
+  "fuzz": {
+    "seed": 5099287,
+    "count": 100,
+    "args": [{"choices": [0, 1]}],
+    "memory": [
+      {"addr": "@window", "offset": "0x1d8", "type": "int", "range": [0, 4]},
+      {"addr": "@state", "offset": "0x11", "type": "u8", "choices": [0, 1]},
+      {"addr": "@info", "offset": "0x11e4", "type": "int", "choices": [0, 1, 5]},
+      {"addr": "@info", "offset": "0x11e8", "type": "int", "choices": [0, 1, 5]},
+      {"addr": "@info", "offset": "0x11ec", "type": "int", "choices": [0, 1, 5]},
+      {"addr": "@info", "offset": "0x11f0", "type": "int", "choices": [0, 1, 5]}
+    ]
+  },
+  "coverage_ok": {
+    "004DCF98-004DCF99": "the first slot loop is bounded by the 16-entry slot count",
+    "004DD03B-004DD03C": "count is at most 16, so the 0x88f id guard cannot trigger",
+    "004DD188-004DD189": "the second slot loop is bounded by the 16-entry slot count",
+    "004DD1DE-004DD1DF": "count is at most 16, so the 0x88f id guard cannot trigger"
+  }
+}

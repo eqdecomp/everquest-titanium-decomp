@@ -1,0 +1,122 @@
+{
+  "function": "CDisplay_guess::ApplyVideoMode_guess",
+  "original": "0x00439212",
+  "sources": ["src/EverQuest/tu_029_Display.cpp"],
+  "conv": "thiscall",
+  "this": "@client",
+  "args": [],
+  "ret": "void",
+  "size": "0xcc",
+  "objects": {
+    "client": {
+      "size": "0x2d70",
+      "fill": "random",
+      "init": [
+        {"offset": "0x8", "f32": 1.25},
+        {"offset": "0x118", "u32": "@callback"},
+        {"offset": "0x28e4", "u32": "0x12345678"},
+        {"offset": "0x28e8", "f32": 2.5},
+        {"offset": "0x28f4", "f32": 0.75},
+        {"offset": "0x2d68", "u32": 17},
+        {"offset": "0x2d6c", "u32": 29}
+      ]
+    },
+    "callback": {
+      "size": "4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@callback_vtbl"}]
+    },
+    "fn_size": {"size": "4", "fill": "zero"},
+    "fn_scale": {"size": "4", "fill": "zero"},
+    "fn_offset": {"size": "4", "fill": "zero"},
+    "fn_hidden": {"size": "4", "fill": "zero"},
+    "fn_visible": {"size": "4", "fill": "zero"},
+    "callback_vtbl": {
+      "size": "0x24",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": "@fn_scale"},
+        {"offset": "0xc", "u32": "@fn_offset"},
+        {"offset": "0x20", "u32": "@fn_size"}
+      ]
+    },
+    "display_state": {
+      "size": "4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@display_vtbl_hidden"}]
+    },
+    "display_vtbl_hidden": {
+      "size": "0x48",
+      "fill": "zero",
+      "init": [{"offset": "0x44", "u32": "@fn_hidden"}]
+    },
+    "display_vtbl_visible": {
+      "size": "0x48",
+      "fill": "zero",
+      "init": [{"offset": "0x44", "u32": "@fn_visible"}]
+    }
+  },
+  "memory": [
+    {"addr": "0x00923780", "u32": 1280},
+    {"addr": "0x00923778", "u32": 0},
+    {"addr": "0x00923784", "u32": 720},
+    {"addr": "0x0092377c", "u32": 0},
+    {"addr": "0x0099e364", "u32": "@display_state"}
+  ],
+  "callees": {
+    "0x004360d6": {"name": "SetActorClipPlane_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00436129": {"name": "SetShadowClipPlane_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00436267": {"name": "SetRenderWindow_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "@fn_size": {"name": "SetSize_guess", "conv": "thiscall", "args": ["float", "float"], "ret": 0},
+    "@fn_scale": {"name": "SetScale_guess", "conv": "thiscall", "args": ["float"], "ret": 0},
+    "@fn_offset": {"name": "SetOffset_guess", "conv": "thiscall", "args": ["float"], "ret": 0},
+    "@fn_hidden": {"name": "IsDisplayReady_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "@fn_visible": {"name": "IsDisplayReady_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "user32.dll!ShowWindow": {"name": "ShowWindow", "conv": "stdcall", "args": ["ptr", "int"], "ret": 1},
+    "user32.dll!UpdateWindow": {"name": "UpdateWindow", "conv": "stdcall", "args": ["ptr"], "ret": 1}
+  },
+  "cases": [
+    {"name": "callback and hidden window", "args": []},
+    {
+      "name": "null callback and visible window",
+      "args": [],
+      "memory": [
+        {"addr": "@client", "offset": "0x118", "u32": 0},
+        {"addr": "@display_state", "offset": "0", "u32": "@display_vtbl_visible"}
+      ]
+    },
+    {
+      "name": "callback and visible window with zero width",
+      "args": [],
+      "memory": [
+        {"addr": "0x00923780", "u32": 0},
+        {"addr": "0x00923778", "u32": 0},
+        {"addr": "0x00923784", "u32": 720},
+        {"addr": "0x0092377c", "u32": 0},
+        {"addr": "@display_state", "offset": "0", "u32": "@display_vtbl_visible"},
+        {"addr": "@client", "offset": "0x28e8", "f32": 1.0}
+      ]
+    },
+    {
+      "name": "null callback and hidden window",
+      "args": [],
+      "memory": [{"addr": "@client", "offset": "0x118", "u32": 0}]
+    }
+  ],
+  "fuzz": {
+    "seed": 4428306,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "0x00923780", "type": "int", "choices": [0, 640, 800, 1280, 1920]},
+      {"addr": "0x00923778", "type": "int", "choices": [0, 20, 80]},
+      {"addr": "0x00923784", "type": "int", "choices": [0, 480, 720, 1080]},
+      {"addr": "0x0092377c", "type": "int", "choices": [0, 20, 50]},
+      {"addr": "@client", "offset": "0x118", "type": "u32", "choices": [0, "@callback"]},
+      {"addr": "@client", "offset": "0x8", "type": "float", "choices": [-1.0, 0.0, 1.25, 5.0]},
+      {"addr": "@client", "offset": "0x28e8", "type": "float", "choices": [-2.0, 0.0, 1.0, 2.5]},
+      {"addr": "@client", "offset": "0x28f4", "type": "float", "choices": [-1.0, 0.0, 0.75, 3.0]},
+      {"addr": "@display_state", "offset": "0", "type": "u32", "choices": ["@display_vtbl_hidden", "@display_vtbl_visible"]}
+    ]
+  }
+}

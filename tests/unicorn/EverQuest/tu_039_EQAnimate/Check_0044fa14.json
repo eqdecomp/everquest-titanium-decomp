@@ -1,0 +1,89 @@
+{
+  "function": "OldPlayerAnimationJumpView_guess::IsJumping_guess",
+  "original": "0x0044fa14",
+  "sources": [
+    "src/EverQuest/tu_039_EQAnimate.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@fun_0044fa14",
+  "args": [],
+  "ret": "u32",
+  "objects": {
+    "fun_0044fa14": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": "@mid"}
+      ]
+    },
+    "mid": {
+      "size": "0x1ac",
+      "fill": "random",
+      "init": [
+        {"offset": "0x1a8", "u32": "@state"}
+      ]
+    },
+    "state": {
+      "size": "0x138",
+      "fill": "random",
+      "init": [
+        {"offset": "0x134", "u32": 18}
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {},
+  "cases": [
+    {
+      "name": "null_state",
+      "args": [],
+      "memory": [
+        {"addr": "@mid", "offset": "0x1a8", "u32": 0}
+      ]
+    },
+    {
+      "name": "match_13",
+      "args": [],
+      "memory": [
+        {"addr": "@state", "offset": "0x134", "u32": 19}
+      ]
+    },
+    {
+      "name": "match_14",
+      "args": [],
+      "memory": [
+        {"addr": "@state", "offset": "0x134", "u32": 20}
+      ]
+    },
+    {
+      "name": "nonmatch_12",
+      "args": [],
+      "memory": [
+        {"addr": "@state", "offset": "0x134", "u32": 18}
+      ]
+    },
+    {
+      "name": "upper_bits_preserved",
+      "args": [],
+      "memory": [
+        {"addr": "@state", "offset": "0x134", "u32": "0x12340013"}
+      ]
+    },
+    {
+      "name": "upper_byte_masked",
+      "args": [],
+      "memory": [
+        {"addr": "@state", "offset": "0x134", "u32": "0x113"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4520468,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@mid", "offset": "0x1a8", "type": "u32", "choices": [0, "@state"]},
+      {"addr": "@state", "offset": "0x134", "type": "u32", "choices": [0, 1, 18, 19, 20, 21, "0x113", "0x114", "0x12340013", "0xffffffff"]}
+    ]
+  }
+}

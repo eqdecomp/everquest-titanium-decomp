@@ -1,0 +1,204 @@
+{
+  "function": "Callback_guess::Place_guess",
+  "original": "0x004ec239",
+  "sources": ["src/EverQuest/tu_140_CastSpellWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@callback",
+  "args": [
+    {"name": "value", "type": "int"},
+    {"name": "first", "type": "int"},
+    {"name": "second", "type": "int"},
+    {"name": "flag", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "callback": {"size": "0x1b4", "fill": "random", "init": [
+      {"offset": "0x188", "u32": 0},
+      {"offset": "0x18c", "u32": "@root_slots"},
+      {"offset": "0x190", "u32": 2},
+      {"offset": "0x194", "u8": 1}
+    ]},
+    "db_strings": {"size": "4", "fill": "zero"},
+    "root_slots": {"size": "0x10", "fill": "zero", "init": [
+      {"offset": "0", "u32": "@root_node"},
+      {"offset": "4", "u32": "@root_node2"},
+      {"offset": "8", "u32": "@root_node3"}
+    ]},
+    "root_node": {"size": "0x54", "fill": "random", "init": [
+      {"offset": "0", "u32": 99},
+      {"offset": "4", "hex": "5a00"},
+      {"offset": "0x44", "u32": 1},
+      {"offset": "0x48", "u32": "@child_slots"},
+      {"offset": "0x4c", "u32": 2},
+      {"offset": "0x50", "u8": 1}
+    ]},
+    "root_node2": {"size": "0x54", "fill": "random", "init": [
+      {"offset": "0", "u32": 98},
+      {"offset": "4", "hex": "5900"},
+      {"offset": "0x44", "u32": 0},
+      {"offset": "0x48", "u32": "@child_slots"},
+      {"offset": "0x4c", "u32": 2},
+      {"offset": "0x50", "u8": 1}
+    ]},
+    "root_node3": {"size": "0x54", "fill": "random", "init": [
+      {"offset": "0", "u32": 10},
+      {"offset": "4", "hex": "5800"},
+      {"offset": "0x44", "u32": 0},
+      {"offset": "0x48", "u32": "@child_slots"},
+      {"offset": "0x4c", "u32": 2},
+      {"offset": "0x50", "u8": 1}
+    ]},
+    "child_slots": {"size": "0x10", "fill": "zero", "init": [
+      {"offset": "0", "u32": "@child_node"},
+      {"offset": "4", "u32": "@child_node2"}
+    ]},
+    "child_node": {"size": "0x54", "fill": "random", "init": [
+      {"offset": "0", "u32": 99},
+      {"offset": "4", "hex": "5a00"},
+      {"offset": "0x44", "u32": 1},
+      {"offset": "0x48", "u32": "@pair_slots"},
+      {"offset": "0x4c", "u32": 2},
+      {"offset": "0x50", "u8": 1}
+    ]},
+    "child_node2": {"size": "0x54", "fill": "random", "init": [
+      {"offset": "0", "u32": 98},
+      {"offset": "4", "hex": "5900"},
+      {"offset": "0x44", "u32": 0},
+      {"offset": "0x48", "u32": "@pair_slots"},
+      {"offset": "0x4c", "u32": 2},
+      {"offset": "0x50", "u8": 1}
+    ]},
+    "pair_slots": {"size": "0x10", "fill": "zero", "init": [
+      {"offset": "0", "u32": "@old_pair"},
+      {"offset": "4", "u32": "@old_pair2"}
+    ]},
+    "old_pair": {"size": "8", "fill": "zero", "init": [
+      {"offset": "4", "u32": 2}
+    ]},
+    "old_pair2": {"size": "8", "fill": "zero", "init": [
+      {"offset": "4", "u32": 9}
+    ]},
+    "new_pair": {"size": "8", "fill": "zero"},
+    "new_root": {"size": "0x54", "fill": "zero"},
+    "new_child": {"size": "0x54", "fill": "zero"},
+    "root_string": {"size": "0x40", "fill": "zero", "init": [
+      {"offset": "0", "hex": "4100"}
+    ]},
+    "child_string": {"size": "0x40", "fill": "zero", "init": [
+      {"offset": "0", "hex": "4200"}
+    ]}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x00850398", "u32": "@db_strings"}
+  ],
+  "callees": {
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": ["@new_pair", "@new_root", "@new_child"]},
+    "0x004355f7": {"name": "GetDbString_guess", "conv": "thiscall", "args": ["int", "int", "int"], "ret": ["@root_string", "@child_string", "@child_string"]},
+    "0x004eb924": {"name": "ArraySlot_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00574460": {"name": "CompareData_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 0},
+    "0x00564487": {"name": "ArrayInsert_guess", "conv": "thiscall", "args": ["int", "mem:4"]},
+    "0x0050319b": {"name": "ArraySet_guess", "conv": "thiscall", "args": ["int", "mem:4"]}
+  },
+  "rewrite_aliases": {"??2@YAPAXI@Z": "0x0060d071"},
+  "cases": [
+    {"name": "second id zero returns", "args": [1, 10, 0, 5]},
+    {"name": "first id zero returns", "args": [1, 0, 20, 5]},
+    {"name": "empty root appends root and child", "args": [1, 10, 20, 5], "callees": {
+      "0x004eb924": {"name": "ArraySlot_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+    }},
+    {"name": "negative root count", "args": [1, 10, 20, 5], "memory": [
+      {"addr": "@callback", "offset": "0x188", "u32": -1}
+    ]},
+    {"name": "root inserts before existing root", "args": [1, 10, 20, 5], "memory": [
+      {"addr": "@callback", "offset": "0x188", "u32": 1}
+    ], "callees": {
+      "0x004eb924": {"name": "ArraySlot_guess", "conv": "thiscall", "args": ["int"], "ret": ["@root_slots", "@root_slots"]},
+      "0x00574460": {"name": "CompareData_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [-1]}
+    }},
+    {"name": "root appends after existing root", "args": [1, 10, 20, 5], "memory": [
+      {"addr": "@callback", "offset": "0x188", "u32": 1}
+    ], "callees": {
+      "0x004eb924": {"name": "ArraySlot_guess", "conv": "thiscall", "args": ["int"], "ret": ["@root_slots", "@root_slots"]},
+      "0x00574460": {"name": "CompareData_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1]}
+    }},
+    {"name": "root scan retains first insertion point", "args": [1, 10, 20, 5], "memory": [
+      {"addr": "@callback", "offset": "0x188", "u32": 2}
+    ], "callees": {
+      "0x004eb924": {"name": "ArraySlot_guess", "conv": "thiscall", "args": ["int"], "ret": ["@root_slots", "@root_slots", "@root_slots"]},
+      "0x00574460": {"name": "CompareData_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [-1]}
+    }},
+    {"name": "root scan finds match at third entry", "args": [1, 10, 20, 5], "memory": [
+      {"addr": "@callback", "offset": "0x188", "u32": 3}
+    ], "callees": {
+      "0x004eb924": {"name": "ArraySlot_guess", "conv": "thiscall", "args": ["int"], "ret": ["@root_slots", "@root_slots", "@root_slots", "@root_slots", "@root_slots"]},
+      "0x00574460": {"name": "CompareData_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [-1]}
+    }},
+    {"name": "existing root creates child", "args": [1, 10, 20, 5], "memory": [
+      {"addr": "@callback", "offset": "0x188", "u32": 1},
+      {"addr": "@root_node", "offset": "0", "u32": 10},
+      {"addr": "@root_node", "offset": "0x44", "u32": 0}
+    ], "callees": {
+      "0x004eb924": {"name": "ArraySlot_guess", "conv": "thiscall", "args": ["int"], "ret": ["@root_slots", "@root_slots"]}
+    }},
+    {"name": "child inserts before existing child", "args": [1, 10, 20, 5], "memory": [
+      {"addr": "@callback", "offset": "0x188", "u32": 1},
+      {"addr": "@root_node", "offset": "0", "u32": 10},
+      {"addr": "@child_node", "offset": "0", "u32": 99}
+    ], "callees": {
+      "0x004eb924": {"name": "ArraySlot_guess", "conv": "thiscall", "args": ["int"], "ret": ["@root_slots", "@root_slots", "@child_slots", "@child_slots"]},
+      "0x00574460": {"name": "CompareData_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [-1]}
+    }},
+    {"name": "child appends after existing child", "args": [1, 10, 20, 5], "memory": [
+      {"addr": "@callback", "offset": "0x188", "u32": 1},
+      {"addr": "@root_node", "offset": "0", "u32": 10},
+      {"addr": "@child_node", "offset": "0", "u32": 99}
+    ], "callees": {
+      "0x004eb924": {"name": "ArraySlot_guess", "conv": "thiscall", "args": ["int"], "ret": ["@root_slots", "@root_slots", "@child_slots", "@child_slots"]},
+      "0x00574460": {"name": "CompareData_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1]}
+    }},
+    {"name": "matching child inserts earlier pair", "args": [1, 10, 20, 5], "memory": [
+      {"addr": "@callback", "offset": "0x188", "u32": 1},
+      {"addr": "@root_node", "offset": "0", "u32": 10},
+      {"addr": "@child_node", "offset": "0", "u32": 20},
+      {"addr": "@child_node", "offset": "0x44", "u32": 1},
+      {"addr": "@old_pair", "offset": "4", "u32": 2}
+    ], "callees": {
+      "0x004eb924": {"name": "ArraySlot_guess", "conv": "thiscall", "args": ["int"], "ret": ["@root_slots", "@root_slots", "@child_slots", "@child_slots", "@pair_slots"]}
+    }},
+    {"name": "matching child appends later pair", "args": [1, 10, 20, 5], "memory": [
+      {"addr": "@callback", "offset": "0x188", "u32": 1},
+      {"addr": "@root_node", "offset": "0", "u32": 10},
+      {"addr": "@child_node", "offset": "0", "u32": 20},
+      {"addr": "@child_node", "offset": "0x44", "u32": 1},
+      {"addr": "@old_pair", "offset": "4", "u32": 9}
+    ], "callees": {
+      "0x004eb924": {"name": "ArraySlot_guess", "conv": "thiscall", "args": ["int"], "ret": ["@root_slots", "@root_slots", "@child_slots", "@child_slots", "@pair_slots"]}
+    }},
+    {"name": "matching child inserts after first pair", "args": [1, 10, 20, 5], "memory": [
+      {"addr": "@callback", "offset": "0x188", "u32": 1},
+      {"addr": "@root_node", "offset": "0", "u32": 10},
+      {"addr": "@child_node", "offset": "0", "u32": 20},
+      {"addr": "@child_node", "offset": "0x44", "u32": 2},
+      {"addr": "@old_pair", "offset": "4", "u32": 9},
+      {"addr": "@old_pair2", "offset": "4", "u32": 2}
+    ], "callees": {
+      "0x004eb924": {"name": "ArraySlot_guess", "conv": "thiscall", "args": ["int"], "ret": ["@root_slots", "@root_slots", "@child_slots", "@child_slots", "@pair_slots", "@pair_slots"]}
+    }},
+    {"name": "pair allocation null faults", "args": [1, 10, 20, 5], "callees": {
+      "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}
+    }},
+    {"name": "root allocation null faults", "args": [1, 10, 20, 5], "callees": {
+      "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": ["@new_pair", 0]}
+    }},
+    {"name": "child allocation null faults", "args": [1, 10, 20, 5], "callees": {
+      "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": ["@new_pair", "@new_root", 0]}
+    }}
+  ],
+  "fuzz": {
+    "seed": 5161529,
+    "count": 100,
+    "args": [{}, {}, {}, {}],
+    "memory": []
+  }
+}

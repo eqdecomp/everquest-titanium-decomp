@@ -1,0 +1,313 @@
+{
+  "function": "LeadershipManager_guess::FindPathToPlayer_guess",
+  "original": "0x004b4617",
+  "sources": [
+    "src/EverQuest/tu_073_login.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {
+      "name": "candidate",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x7c",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x34", "u32": "@element13" },
+        { "offset": "0x70", "u32": "@element28" }
+      ]
+    },
+    "element13": { "size": "0x30", "fill": "zero" },
+    "element28": { "size": "0x30", "fill": "zero" },
+    "targetCheck": { "size": "0x1a00", "fill": "zero" },
+    "candidate": { "size": "0x100", "fill": "zero" },
+    "catalog": { "size": "0x10", "fill": "zero" },
+    "display": { "size": "0x10", "fill": "zero" },
+    "mode": { "size": "0x10", "fill": "zero" },
+    "message": { "size": "0x20", "fill": "zero" }
+  },
+  "memory": [
+    { "addr": "0x00905d00", "u32": "@targetCheck" },
+    { "addr": "0x0091d708", "size": 4, "fill": "zero" },
+    { "addr": "0x00985c88", "u32": "@mode" },
+    { "addr": "0x00905cb0", "u32": "@catalog" },
+    { "addr": "0x00988df0", "u32": "@display" },
+    { "addr": "@element13", "offset": "0x2c", "u32": 1 },
+    { "addr": "@element28", "offset": "0x2c", "u32": 1 },
+    { "addr": "@targetCheck", "offset": "0x17a4", "u32": 1 },
+    { "addr": "@targetCheck", "offset": "0x191c", "u32": 1 },
+    { "addr": "@candidate", "cstr": "candidate" },
+    { "addr": "@message", "cstr": "fixture message" }
+  ],
+  "callees": {
+    "0x004b4488": {
+      "name": "HasSharedRank_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "u32", "int"],
+      "ret": [1, 1]
+    },
+    "0x004303a6": {
+      "name": "IsMember_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": 1
+    },
+    "0x004bab2f": {
+      "name": "HasRaidOfAtLeast_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 1
+    },
+    "0x004bb226": {
+      "name": "IsAGroupMember_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": 1
+    },
+    "0x004bc9f8": {
+      "name": "HasGroupOfAtLeast_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 1
+    },
+    "0x0047c88e": {
+      "name": "ResolveCandidate_guess",
+      "conv": "cdecl",
+      "args": ["ptr"],
+      "ret": 4660
+    },
+    "0x004c13d7": {
+      "name": "Notify_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004c25ae": {
+      "name": "FindRaidMember_guess",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x004b43ed": {
+      "name": "WarnRaidTooSmall_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004b437c": {
+      "name": "WarnGroupTooSmall_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004c2566": {
+      "name": "Clear_guess",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x005dfa00": {
+      "name": "Lookup_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "int", "int"],
+      "ret": "@message"
+    },
+    "0x004982c6": {
+      "name": "Show_guess",
+      "conv": "thiscall",
+      "args": ["cstr"]
+    }
+  },
+  "cases": [
+    {
+      "name": "neither check passes",
+      "args": ["@candidate"],
+      "memory": [
+        { "addr": "@targetCheck", "offset": "0x17a4", "u32": 0 },
+        { "addr": "@targetCheck", "offset": "0x191c", "u32": 0 }
+      ],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [0, 0] }
+      }
+    },
+    {
+      "name": "first check only and null candidate",
+      "args": [0],
+      "memory": [
+        { "addr": "@targetCheck", "offset": "0x191c", "u32": 0 }
+      ],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [1, 0] }
+      }
+    },
+    {
+      "name": "first check only and name rejected",
+      "args": ["@candidate"],
+      "memory": [
+        { "addr": "@targetCheck", "offset": "0x191c", "u32": 0 }
+      ],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [1, 0] },
+        "0x004bb226": { "name": "CheckName_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0 }
+      }
+    },
+    {
+      "name": "first check only and display blocked",
+      "args": ["@candidate"],
+      "memory": [
+        { "addr": "@targetCheck", "offset": "0x191c", "u32": 0 }
+      ],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [1, 0] },
+        "0x004bc9f8": { "name": "CanShow_guess", "conv": "thiscall", "args": ["int"], "ret": 0 }
+      }
+    },
+    {
+      "name": "first check only and resolve fails",
+      "args": ["@candidate"],
+      "memory": [
+        { "addr": "@targetCheck", "offset": "0x191c", "u32": 0 }
+      ],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [1, 0] },
+        "0x0047c88e": { "name": "ResolveCandidate_guess", "conv": "cdecl", "args": ["ptr"], "ret": 0 }
+      }
+    },
+    {
+      "name": "first check only and clear result",
+      "args": ["@candidate"],
+      "memory": [
+        { "addr": "@targetCheck", "offset": "0x191c", "u32": 0 }
+      ],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [1, 0] }
+      }
+    },
+    {
+      "name": "second check only and null candidate",
+      "args": [0],
+      "memory": [
+        { "addr": "@targetCheck", "offset": "0x17a4", "u32": 0 }
+      ],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [0, 1] }
+      }
+    },
+    {
+      "name": "second check only and candidate invalid",
+      "args": ["@candidate"],
+      "memory": [
+        { "addr": "@targetCheck", "offset": "0x17a4", "u32": 0 }
+      ],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [0, 1] },
+        "0x004303a6": { "name": "IsValid_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0 }
+      }
+    },
+    {
+      "name": "second check only and alternate blocked",
+      "args": ["@candidate"],
+      "memory": [
+        { "addr": "@targetCheck", "offset": "0x17a4", "u32": 0 }
+      ],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [0, 1] },
+        "0x004bab2f": { "name": "CanShowAlternate_guess", "conv": "thiscall", "args": ["int"], "ret": 0 }
+      }
+    },
+    {
+      "name": "second check only and resolve fails",
+      "args": ["@candidate"],
+      "memory": [
+        { "addr": "@targetCheck", "offset": "0x17a4", "u32": 0 }
+      ],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [0, 1] },
+        "0x0047c88e": { "name": "ResolveCandidate_guess", "conv": "cdecl", "args": ["ptr"], "ret": 0 }
+      }
+    },
+    {
+      "name": "second check only and apply result",
+      "args": ["@candidate"],
+      "memory": [
+        { "addr": "@targetCheck", "offset": "0x17a4", "u32": 0 }
+      ],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [0, 1] }
+      }
+    },
+    {
+      "name": "both checks and null candidate",
+      "args": [0],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [1, 1] }
+      }
+    },
+    {
+      "name": "both checks and apply result",
+      "args": ["@candidate"],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [1, 1] }
+      }
+    },
+    {
+      "name": "both checks and name rejected",
+      "args": ["@candidate"],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [1, 1] },
+        "0x004303a6": { "name": "IsValid_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0 },
+        "0x004bb226": { "name": "CheckName_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0 }
+      }
+    },
+    {
+      "name": "both checks and display blocked",
+      "args": ["@candidate"],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [1, 1] },
+        "0x004303a6": { "name": "IsValid_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0 },
+        "0x004bb226": { "name": "CheckName_guess", "conv": "thiscall", "args": ["cstr"], "ret": 1 },
+        "0x004bc9f8": { "name": "CanShow_guess", "conv": "thiscall", "args": ["int"], "ret": 0 }
+      }
+    },
+    {
+      "name": "both checks fallback to clear",
+      "args": ["@candidate"],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [1, 1] },
+        "0x004303a6": { "name": "IsValid_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0 },
+        "0x004bb226": { "name": "CheckName_guess", "conv": "thiscall", "args": ["cstr"], "ret": 1 },
+        "0x004bc9f8": { "name": "CanShow_guess", "conv": "thiscall", "args": ["int"], "ret": 1 }
+      }
+    },
+    {
+      "name": "both checks alternate blocked then clear",
+      "args": ["@candidate"],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [1, 1] },
+        "0x004303a6": { "name": "IsValid_guess", "conv": "thiscall", "args": ["cstr"], "ret": 1 },
+        "0x004bab2f": { "name": "CanShowAlternate_guess", "conv": "thiscall", "args": ["int"], "ret": 0 },
+        "0x004bb226": { "name": "CheckName_guess", "conv": "thiscall", "args": ["cstr"], "ret": 1 }
+      }
+    },
+    {
+      "name": "both checks alternate blocked and name rejected",
+      "args": ["@candidate"],
+      "callees": {
+        "0x004b4488": { "name": "CheckAmount_guess", "conv": "thiscall", "args": ["ptr", "u32", "int"], "ret": [1, 1] },
+        "0x004303a6": { "name": "IsValid_guess", "conv": "thiscall", "args": ["cstr"], "ret": 1 },
+        "0x004bab2f": { "name": "CanShowAlternate_guess", "conv": "thiscall", "args": ["int"], "ret": 0 },
+        "0x004bb226": { "name": "CheckName_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0 }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4933143,
+    "count": 100,
+    "args": [
+      {
+        "choices": ["@candidate", 0]
+      }
+    ],
+    "memory": []
+  }
+}

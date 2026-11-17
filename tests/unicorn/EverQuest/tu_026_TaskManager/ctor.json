@@ -1,0 +1,54 @@
+{
+  "function": "TaskManager_guess::TaskManager_guess",
+  "original": "0x0043320e",
+  "sources": [
+    "src/EverQuest/tu_026_TaskManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@table",
+  "args": [],
+  "ret": "ptr",
+  "objects": {
+    "table": {
+      "size": "0xb26bc",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0060e2b9": {
+      "name": "`eh_vector_constructor_iterator'",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32", "ignore", "ignore"],
+      "ret": 0
+    },
+    "0x00432995": {
+      "name": "FUN_00432995",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": []
+    },
+    {
+      "name": "zeros",
+      "args": [],
+      "objects": {
+        "table": {
+          "size": "0xb26bc",
+          "fill": "zero"
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4403726,
+    "count": 100,
+    "args": [],
+    "memory": []
+  }
+}

@@ -1,0 +1,326 @@
+{
+  "function": "CDisplay_guess::LoadZone_guess",
+  "original": "0x00444116",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@client",
+  "args": [
+    {"name": "zone", "type": "int"}
+  ],
+  "ret": "void",
+  "max_insns": 3000000,
+  "objects": {
+    "client": {"size": "0x2d70", "fill": "random", "init": [
+      {"offset": "0x118", "u32": "@camera"},
+      {"offset": "0x11c", "u32": "@vec1"},
+      {"offset": "0x120", "u32": "@vec2"},
+      {"offset": "0x2d20", "u32": "@sun"}
+    ]},
+    "vec1": {"size": "0x10", "fill": "random"},
+    "vec2": {"size": "0x10", "fill": "random"},
+    "camera": {"size": "0x10", "fill": "random", "init": [{"offset": 0, "u32": "@camera_vt"}]},
+    "camera_vt": {"size": "0x40", "fill": "zero", "init": [
+      {"offset": "0x34", "u32": "@fn_camloc"},
+      {"offset": "0x38", "u32": "@fn_camtarget"}
+    ]},
+    "sun": {"size": "0x10", "fill": "random", "init": [{"offset": 0, "u32": "@sun_vt"}]},
+    "sun_vt": {"size": "0x10", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@fn_sun0"},
+      {"offset": "0x4", "u32": "@fn_sun1"}
+    ]},
+    "loader": {"size": "0x10", "fill": "random", "init": [{"offset": 0, "u32": "@loader_vt"}]},
+    "loader_vt": {"size": "0x70", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@fn_load"},
+      {"offset": "0x20", "u32": "@fn_reset"},
+      {"offset": "0x24", "u32": "@fn_postload"},
+      {"offset": "0x2c", "u32": "@fn_light"},
+      {"offset": "0x64", "u32": "@fn_fog"}
+    ]},
+    "render": {"size": "0x10", "fill": "random", "init": [{"offset": 0, "u32": "@render_vt"}]},
+    "render_vt": {"size": "0xa0", "fill": "zero", "init": [
+      {"offset": "0x34", "u32": "@fn_extents"},
+      {"offset": "0x3c", "u32": "@fn_effects"},
+      {"offset": "0x50", "u32": "@fn_createsun"},
+      {"offset": "0x88", "u32": "@fn_addsun"},
+      {"offset": "0x94", "u32": "@fn_enable"}
+    ]},
+    "rs": {"size": "0x10", "fill": "random", "init": [{"offset": 0, "u32": "@rs_vt"}]},
+    "rs_vt": {"size": "0x80", "fill": "zero", "init": [{"offset": "0x6c", "u32": "@fn_gamma"}]},
+    "sky": {"size": "0x10", "fill": "random", "init": [{"offset": 0, "u32": "@sky_vt"}]},
+    "sky_vt": {"size": "0x50", "fill": "zero", "init": [{"offset": "0x48", "u32": "@fn_skyval"}]},
+    "settings": {"size": "0x40", "fill": "random"},
+    "ztable": {"size": "0x40", "fill": "random"},
+    "info": {"size": "0x40", "fill": "zero", "init": [{"offset": "0x10", "cstr": "zoneinfo"}]},
+    "display": {"size": "0x210", "fill": "random"},
+    "zonepc": {"size": "0x200", "fill": "random", "init": [{"offset": 8, "u32": "@vbt"}]},
+    "vbt": {"size": "0x8", "fill": "zero", "init": [{"offset": 4, "u32": "0x10"}]},
+    "music": {"size": "0x10", "fill": "random"},
+    "owner": {"size": "0x10", "fill": "random"},
+    "slide": {"size": "0x10", "fill": "random"},
+    "list1": {"size": "0x8", "fill": "random", "init": [{"offset": 4, "u32": 3}]},
+    "list2": {"size": "0x8", "fill": "random", "init": [{"offset": 4, "u32": 6}]},
+    "assets": {"size": "0xc", "fill": "random", "init": [{"offset": 4, "u32": "@node1"}]},
+    "node1": {"size": "0x8", "fill": "zero", "init": [{"offset": 0, "u32": "@node_vt"}, {"offset": 4, "u32": "@node2"}]},
+    "node2": {"size": "0x8", "fill": "zero", "init": [{"offset": 0, "u32": "@node_vt"}, {"offset": 4, "u32": 0}]},
+    "node_vt": {"size": "0x8", "fill": "zero", "init": [{"offset": 0, "u32": "@fn_nodeload"}]},
+    "target": {"size": "0x40", "fill": "random"},
+    "path": {"size": "0x40", "fill": "random"},
+    "precip": {"size": "0x10", "fill": "random"},
+    "fa": {"size": "0x10", "fill": "zero", "init": [{"offset": 0, "cstr": "abcfile"}]},
+    "fb": {"size": "0x10", "fill": "zero", "init": [{"offset": 0, "cstr": "xyzfile"}]},
+    "c_abc": {"size": "0x8", "fill": "zero", "init": [{"offset": 0, "cstr": "abc"}]},
+    "c_abx": {"size": "0x8", "fill": "zero", "init": [{"offset": 0, "cstr": "abx"}]},
+    "c_axc": {"size": "0x8", "fill": "zero", "init": [{"offset": 0, "cstr": "axc"}]},
+    "c_xbc": {"size": "0x8", "fill": "zero", "init": [{"offset": 0, "cstr": "xbc"}]},
+    "fn_camloc": {"size": "0x10", "fill": "zero"},
+    "fn_camtarget": {"size": "0x10", "fill": "zero"},
+    "fn_sun0": {"size": "0x10", "fill": "zero"},
+    "fn_sun1": {"size": "0x10", "fill": "zero"},
+    "fn_load": {"size": "0x10", "fill": "zero"},
+    "fn_reset": {"size": "0x10", "fill": "zero"},
+    "fn_postload": {"size": "0x10", "fill": "zero"},
+    "fn_light": {"size": "0x10", "fill": "zero"},
+    "fn_fog": {"size": "0x10", "fill": "zero"},
+    "fn_extents": {"size": "0x10", "fill": "zero"},
+    "fn_effects": {"size": "0x10", "fill": "zero"},
+    "fn_createsun": {"size": "0x10", "fill": "zero"},
+    "fn_addsun": {"size": "0x10", "fill": "zero"},
+    "fn_enable": {"size": "0x10", "fill": "zero"},
+    "fn_gamma": {"size": "0x10", "fill": "zero"},
+    "fn_skyval": {"size": "0x10", "fill": "zero"},
+    "fn_nodeload": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0085098C", "u32": 0},
+    {"addr": "0x0099E360", "u32": "@loader"},
+    {"addr": "0x0099E364", "u32": "@rs"},
+    {"addr": "0x0099E368", "u32": "@render"},
+    {"addr": "0x00905CC0", "u32": "@ztable"},
+    {"addr": "0x00988DF0", "u32": "@settings"},
+    {"addr": "0x008503A8", "u32": "@sky"},
+    {"addr": "0x00924964", "u32": 7},
+    {"addr": "0x00905D24", "u32": "@client"},
+    {"addr": "0x00905CE4", "u32": "@display"},
+    {"addr": "0x00905D00", "u32": "@zonepc"},
+    {"addr": "0x00923798", "u8": 1},
+    {"addr": "0x00923884", "u32": 0},
+    {"addr": "0x00924950", "f32": 3.0},
+    {"addr": "0x00923D74", "u32": 1},
+    {"addr": "0x00851390", "u32": "@music"},
+    {"addr": "0x00850BFC", "u32": 0},
+    {"addr": "0x00924978", "u32": 1},
+    {"addr": "0x0092497C", "u32": 0},
+    {"addr": "0x00924824", "u32": 1},
+    {"addr": "0x0092482C", "f32": 2.5},
+    {"addr": "0x009254C0", "u32": 1},
+    {"addr": "0x00924678", "u32": "0xffffffff"},
+    {"addr": "0x00924673", "u8": 9},
+    {"addr": "0x00924675", "u8": 9},
+    {"addr": "0x00924676", "u8": 9},
+    {"addr": "0x009237B9", "u8": 9},
+    {"addr": "0x009237BC", "u32": 9},
+    {"addr": "0x0095A174", "u8": 9},
+    {"addr": "0x0098580C", "u32": 9},
+    {"addr": "0x00924684", "u32": 9},
+    {"addr": "0x0092446C", "u32": 9},
+    {"addr": "0x00924828", "u32": 9},
+    {"addr": "0x00987650", "size": 32, "fill": "random"}
+  ],
+  "callees": {
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": ["@list1", "@list2", "@assets", "@target", "@path"]},
+    "0x004c4c83": {"name": "SlideShow_ctor", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x0043a6f8": {"name": "SlideShow_Start", "conv": "thiscall", "args": []},
+    "kernel32.dll!Sleep": {"name": "Sleep", "conv": "stdcall", "args": ["int"], "ret": 0},
+    "0x005f6ed0": {"name": "GetName", "conv": "thiscall", "args": ["int", "ignore"], "writes": [{"arg": 1, "hex": "7165796e6f7300"}]},
+    "0x00494285": {"name": "DoLoadScreen_guess", "conv": "thiscall", "args": ["int"]},
+    "0x00494236": {"name": "DoLoadScreenProgressBar_guess", "conv": "cdecl", "args": ["ptr", "int", "cstr"], "varargs": "printf"},
+    "0x0043a6bf": {"name": "IndexedTable_Get", "conv": "thiscall", "args": ["int"], "ret": "@info"},
+    "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 0},
+    "0x004477ab": {"name": "Emitters_Load", "conv": "thiscall", "args": ["cstr"]},
+    "0x00574110": {"name": "FUN_00574110", "conv": "cdecl", "args": ["cstr"], "varargs": "printf", "ret": 0},
+    "0x00438357": {"name": "BuildPath", "conv": "thiscall", "args": ["ignore", "cstr"], "ret": 1, "writes": [{"arg": 0, "hex": "702e73336400"}]},
+    "0x0046da4a": {"name": "FUN_0046da4a", "conv": "cdecl", "args": ["ignore", "int", "cstr", "int", "int", "int", "int", "int", "int", "int", "int"], "ret": 0},
+    "0x00576670": {"name": "FileExists", "conv": "cdecl", "args": ["cstr"], "ret": [1, 1, 0, 1, 1]},
+    "0x00438fdf": {"name": "UpdateSoundEnvironment_guess", "conv": "thiscall", "args": []},
+    "0x00465108": {"name": "msg_teleport_index_guess", "conv": "cdecl", "args": ["cstr"]},
+    "0x005f6b90": {"name": "GetType", "conv": "thiscall", "args": ["int"], "ret": 6},
+    "0x0043c187": {"name": "LoadWorld", "conv": "thiscall", "args": ["cstr", "cstr", "u8", "u8", "u8", "u8"], "ret": 1},
+    "0x0043da31": {"name": "EntryList_ctor", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x0043a636": {"name": "GetOther", "conv": "thiscall", "args": ["int"], "ret": ["@fa", 0, "@fb", "@fa", "@fa", "@fa", "@fb", 0, "@fa"]},
+    "0x0043a61d": {"name": "GetValue", "conv": "thiscall", "args": ["int"], "ret": ["@c_abc", "@c_xbc", "@c_abc", "@c_abx", "@c_axc", "@c_xbc", 0]},
+    "0x0043a3e1": {"name": "FreeAll", "conv": "thiscall", "args": []},
+    "0x0060d0d5": {"name": "free", "conv": "cdecl", "args": ["ptr"]},
+    "0x0043895f": {"name": "HasSecondChr", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "0x004387b8": {"name": "LoadNpc", "conv": "thiscall", "args": ["cstr", "cstr", "cstr"], "ret": 1},
+    "0x00405359": {"name": "AssetList_ctor", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x00405463": {"name": "AssetList_Clear", "conv": "thiscall", "args": []},
+    "0x004389a3": {"name": "FailWorldLoad", "conv": "thiscall", "args": ["cstr"]},
+    "0x0043746b": {"name": "InitCommonLights_guess", "conv": "thiscall", "args": []},
+    "0x0044d1ae": {"name": "CreatePartEffects_guess", "conv": "cdecl", "args": []},
+    "0x0046d655": {"name": "FUN_0046d655", "conv": "cdecl", "args": [], "ret": 77},
+    "0x0044c1bc": {"name": "Music_LoadZone", "conv": "thiscall", "args": ["cstr"]},
+    "0x00536741": {"name": "Owner_Reload", "conv": "thiscall", "args": []},
+    "0x005331ed": {"name": "FUN_005331ed", "conv": "cdecl", "args": ["int", "mem:12", "mem:12"]},
+    "0x00469dd7": {"name": "NoOp_guess", "conv": "cdecl", "args": ["int"]},
+    "0x00439a93": {"name": "SetPCNameSpriteState_guess", "conv": "thiscall", "args": ["int"]},
+    "0x00439ac7": {"name": "SetNPCNameSpriteState_guess", "conv": "thiscall", "args": ["int"]},
+    "0x00439afb": {"name": "TurnInfravisionEffectOff_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x004439c0": {"name": "SetSkyBackground_guess", "conv": "thiscall", "args": []},
+    "0x004c874b": {"name": "TargetIndicator_ctor", "conv": "thiscall", "args": [], "ret": "this"},
+    "0x004c8143": {"name": "TargetIndicator_SetVisible", "conv": "thiscall", "args": ["bool"]},
+    "0x004c1733": {"name": "PlayerPath_ctor", "conv": "thiscall", "args": [], "ret": "this"},
+    "0x004c32ff": {"name": "FUN_004c32ff", "conv": "stdcall", "args": ["cstr"], "ret": "@precip"},
+    "0x004c3325": {"name": "Precip_Start", "conv": "thiscall", "args": []},
+    "@fn_camloc": {"name": "Camera_SetLocation", "conv": "thiscall", "args": ["mem:12", "int"], "ret": 0},
+    "@fn_camtarget": {"name": "Camera_SetTarget", "conv": "thiscall", "args": ["mem:12"]},
+    "@fn_sun0": {"name": "Sun_Slot0", "conv": "thiscall", "args": []},
+    "@fn_sun1": {"name": "Sun_Slot1", "conv": "thiscall", "args": []},
+    "@fn_load": {"name": "ZoneLoader_Load", "conv": "thiscall", "args": ["cstr", "int", "int", "int"], "ret": [1, 0, 1]},
+    "@fn_reset": {"name": "ZoneLoader_Reset", "conv": "thiscall", "args": []},
+    "@fn_postload": {"name": "ZoneLoader_PostLoad", "conv": "thiscall", "args": []},
+    "@fn_light": {"name": "ZoneLoader_CreateLight", "conv": "thiscall", "args": ["cstr", "int", "int", "u32", "u32", "int", "int", "int", "ptr"]},
+    "@fn_fog": {"name": "ZoneLoader_SetFog", "conv": "thiscall", "args": ["cstr", "float", "u32"]},
+    "@fn_extents": {"name": "ZoneRender_GetExtents", "conv": "thiscall", "args": ["ignore", "ignore"], "ret": -1},
+    "@fn_effects": {"name": "ZoneRender_SetEffects", "conv": "thiscall", "args": ["int"]},
+    "@fn_createsun": {"name": "ZoneRender_CreateSun", "conv": "thiscall", "args": ["int", "mem:12", "ptr"]},
+    "@fn_addsun": {"name": "ZoneRender_AddSun", "conv": "thiscall", "args": ["u32"]},
+    "@fn_enable": {"name": "ZoneRender_SetEnabled", "conv": "thiscall", "args": ["int"]},
+    "@fn_gamma": {"name": "RenderSettings_SetGamma", "conv": "thiscall", "args": ["float"]},
+    "@fn_skyval": {"name": "Sky_SetValue", "conv": "thiscall", "args": ["int"]},
+    "@fn_nodeload": {"name": "AssetNode_Load", "conv": "thiscall", "args": ["int", "int"]}
+  },
+  "_survivors": "L7978: id > 1000 vs id >= 1000 is equivalent, since 1000 & 0xffff == 1000",
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {"name": "s3d_full", "args": [5]},
+    {"name": "eqg_loaded_slideshow_running", "args": [190],
+     "memory": [
+       {"addr": "0x0085098C", "u32": "@slide"},
+       {"addr": "0x00923798", "u8": 0},
+       {"addr": "0x00923884", "u32": 0},
+       {"addr": "0x00924824", "u32": 0},
+       {"addr": "0x00924978", "u32": 0},
+       {"addr": "0x0092497C", "u32": 1},
+       {"addr": "0x009254C0", "u32": 0},
+       {"addr": "0x00850BFC", "u32": "@owner"}
+     ],
+     "callees": {
+       "@fn_load": {"name": "ZoneLoader_Load", "conv": "thiscall", "args": ["cstr", "int", "int", "int"], "ret": [0, 1, 0]},
+       "0x005f6b90": {"name": "GetType", "conv": "thiscall", "args": ["int"], "ret": 3},
+       "@fn_extents": {"name": "ZoneRender_GetExtents", "conv": "thiscall", "args": ["ignore", "ignore"], "ret": 0,
+         "writes": [{"arg": 0, "hex": "0000803f0000004000004040"}, {"arg": 1, "hex": "000080400000a0400000c040"}]}
+     }},
+    {"name": "slideshow_create_highzone", "args": [65724],
+     "callees": {
+       "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": ["@slide", "@list1", "@list2", "@assets", "@target", "@path"]},
+       "@fn_load": {"name": "ZoneLoader_Load", "conv": "thiscall", "args": ["cstr", "int", "int", "int"], "ret": [0, 0, 1]}
+     }},
+    {"name": "slideshow_alloc_fail", "args": [188],
+     "callees": {
+       "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": [0, "@list1", "@list2", "@assets", 0, 0]},
+       "@fn_load": {"name": "ZoneLoader_Load", "conv": "thiscall", "args": ["cstr", "int", "int", "int"], "ret": [0, 0, 1]}
+     }},
+    {"name": "build_path_fail", "args": [5],
+     "callees": {
+       "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": ["@target", "@path"]},
+       "0x00438357": {"name": "BuildPath", "conv": "thiscall", "args": ["ignore", "cstr"], "ret": 0}
+     }},
+    {"name": "world_file_missing", "args": [6],
+     "callees": {
+       "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": ["@target", "@path"]},
+       "0x00576670": {"name": "FileExists", "conv": "cdecl", "args": ["cstr"], "ret": 0}
+     }},
+    {"name": "obj_load_fail", "args": [7],
+     "callees": {
+       "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": ["@list1", "@target", "@path"]},
+       "0x00576670": {"name": "FileExists", "conv": "cdecl", "args": ["cstr"], "ret": [1, 0, 0]},
+       "0x005f6b90": {"name": "GetType", "conv": "thiscall", "args": ["int"], "ret": 3},
+       "0x0043c187": {"name": "LoadWorld", "conv": "thiscall", "args": ["cstr", "cstr", "u8", "u8", "u8", "u8"], "ret": [1, 0]}
+     }},
+    {"name": "world_load_fail", "args": [8],
+     "callees": {
+       "0x00576670": {"name": "FileExists", "conv": "cdecl", "args": ["cstr"], "ret": [1, 0, 1, 0, 0]},
+       "0x005f6b90": {"name": "GetType", "conv": "thiscall", "args": ["int"], "ret": 5},
+       "0x0043895f": {"name": "HasSecondChr", "conv": "thiscall", "args": ["int"], "ret": 0},
+       "0x0043c187": {"name": "LoadWorld", "conv": "thiscall", "args": ["cstr", "cstr", "u8", "u8", "u8", "u8"], "ret": [1, 1, 1, 1, 1, 0]}
+     }},
+    {"name": "zone_b4", "args": [180],
+     "callees": {
+       "0x00576670": {"name": "FileExists", "conv": "cdecl", "args": ["cstr"], "ret": [0, 1, 0, 0]}
+     }},
+    {"name": "zone_82", "args": [130]},
+    {"name": "zone_ca", "args": [202],
+     "callees": {
+       "@fn_load": {"name": "ZoneLoader_Load", "conv": "thiscall", "args": ["cstr", "int", "int", "int"], "ret": [1, 0, 0, 1]}
+     }},
+    {"name": "zone_1000_kept", "args": [1000]},
+    {"name": "zone_1001_masked", "args": [1001]},
+    {"name": "no_camera_info_sky", "args": [9],
+     "objects": {"client": {"size": "0x2d70", "fill": "random", "init": [
+       {"offset": "0x118", "u32": 0},
+       {"offset": "0x11c", "u32": "@vec1"},
+       {"offset": "0x120", "u32": "@vec2"},
+       {"offset": "0x2d20", "u32": "@sun"}
+     ]}},
+     "memory": [{"addr": "0x008503A8", "u32": 0}],
+     "callees": {
+       "0x0043a6bf": {"name": "IndexedTable_Get", "conv": "thiscall", "args": ["int"], "ret": 0}
+     }},
+    {"name": "bad_camera", "args": [10],
+     "callees": {
+       "@fn_camloc": {"name": "Camera_SetLocation", "conv": "thiscall", "args": ["mem:12", "int"], "ret": 1}
+     }},
+    {"name": "lists_empty", "args": [11],
+     "objects": {
+       "list1": {"size": "0x8", "fill": "random", "init": [{"offset": 4, "u32": 0}]},
+       "list2": {"size": "0x8", "fill": "random", "init": [{"offset": 4, "u32": "0xffffffff"}]},
+       "assets": {"size": "0xc", "fill": "random", "init": [{"offset": 4, "u32": 0}]}
+     },
+     "callees": {
+       "@fn_load": {"name": "ZoneLoader_Load", "conv": "thiscall", "args": ["cstr", "int", "int", "int"], "ret": 1}
+     }},
+    {"name": "status_flag_only_no_display", "args": [12],
+     "memory": [
+       {"addr": "0x00923798", "u8": 0},
+       {"addr": "0x00923884", "u32": 1},
+       {"addr": "0x00905CE4", "u32": 0},
+       {"addr": "0x00905D00", "u32": 0}
+     ]},
+    {"name": "extents_ok_eqg_owner", "args": [13],
+     "memory": [{"addr": "0x00850BFC", "u32": "@owner"}],
+     "callees": {
+       "@fn_load": {"name": "ZoneLoader_Load", "conv": "thiscall", "args": ["cstr", "int", "int", "int"], "ret": 0},
+       "@fn_extents": {"name": "ZoneRender_GetExtents", "conv": "thiscall", "args": ["ignore", "ignore"], "ret": 5}
+     }},
+    {"name": "target_flag_high_byte", "args": [15],
+     "memory": [{"addr": "0x009254C0", "u32": "0x01000000"}, {"addr": "0x009254BC", "u32": 0}]},
+    {"name": "extents_ok_s3d_no_owner", "args": [14],
+     "callees": {
+       "@fn_extents": {"name": "ZoneRender_GetExtents", "conv": "thiscall", "args": ["ignore", "ignore"], "ret": -2,
+         "writes": [{"arg": 0, "hex": "0000803f0000004000004040"}, {"arg": 1, "hex": "000080400000a0400000c040"}]}
+     }}
+  ],
+  "fuzz": {
+    "seed": 4473110,
+    "count": 60,
+    "args": [
+      {"choices": [5, 130, 180, 190, 202, 1000, 1001, 65725]}
+    ],
+    "memory": [
+      {"addr": "0x00923798", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00923884", "type": "u32", "choices": [0, 1]},
+      {"addr": "0x00924824", "type": "u32", "choices": [0, 1]},
+      {"addr": "0x00924978", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "0x0092497C", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "0x009254C0", "type": "u32", "choices": [0, 1]},
+      {"addr": "0x00923D74", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "0x00924964", "type": "int", "range": [-3, 3]},
+      {"addr": "0x0092482C", "type": "float", "choices": [0.0, 1.5, -2.0]},
+      {"addr": "0x00924950", "type": "float", "choices": [0.0, 1.0, 5.5]}
+    ]
+  }
+}

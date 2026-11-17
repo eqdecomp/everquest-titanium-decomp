@@ -1,0 +1,106 @@
+{
+  "function": "CAAWndView_guess::CAAWndView_guess",
+  "original": "0x004d0a8f",
+  "sources": [
+    "src/EverQuest/tu_098_AAWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@book",
+  "args": [
+    {
+      "name": "parent",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "book": {"size": "0x1380", "fill": "random", "init": [{"offset": "0x124", "u32": 1}]},
+    "parent": {"size": "0x100", "fill": "random"},
+    "btn1": {"size": "0x100", "fill": "random"},
+    "btn2": {"size": "0x100", "fill": "random"},
+    "vbtn1": {"size": "0x100", "fill": "random", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "vbtn2": {"size": "0x100", "fill": "random", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "vbtn3": {"size": "0x100", "fill": "random", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "vtbl": {"size": "0x100", "fill": "random", "init": [{"offset": "0xc0", "u32": "@fn_show"}]},
+    "fn_show": {"size": "0x10", "fill": "zero"},
+    "list1": {"size": "0x180", "fill": "random"},
+    "list2": {"size": "0x180", "fill": "random"},
+    "list3": {"size": "0x180", "fill": "random"},
+    "list4": {"size": "0x180", "fill": "random"},
+    "list5": {"size": "0x180", "fill": "random"},
+    "list6": {"size": "0x180", "fill": "random"},
+    "list7": {"size": "0x180", "fill": "random"},
+    "list8": {"size": "0x180", "fill": "random"},
+    "list9": {"size": "0x180", "fill": "random"},
+    "list10": {"size": "0x180", "fill": "random"},
+    "list11": {"size": "0x180", "fill": "random"},
+    "misc": {"size": "0x200", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x00571e00": {"name": "CXStrCtor", "conv": "thiscall", "this": "ignore", "args": ["cstr"], "ret": "this"},
+    "0x005a3900": {"name": "SidlBaseCtor", "conv": "thiscall", "args": ["ptr", "ignore"], "ret": "this"},
+    "0x00571d00": {"name": "CXStrFreeRep", "conv": "thiscall", "this": "ignore", "args": ["u32"]},
+    "0x005a25b0": {"name": "CreateChildrenFromSidl", "conv": "thiscall", "args": []},
+    "0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": [
+      "@misc+0x04", "@misc+0x08", "@misc+0x0c", "@misc+0x10", "@misc+0x14", "@misc+0x18",
+      "@btn1", "@btn2", "@vbtn1", "@vbtn2", "@vbtn3", "@misc+0x1c", "@misc+0x20",
+      "@list1", "@misc+0x40", "@list2", "@misc+0x44", "@list3", "@misc+0x48", "@list4", "@misc+0x4c",
+      "@list5", "@misc+0x50", "@list6", "@misc+0x54", "@list7", "@misc+0x58", "@list8", "@misc+0x5c",
+      "@list9", "@misc+0x60", "@list10", "@misc+0x64", "@list11", "@misc+0x68",
+      "@misc+0x80", "@misc+0x84", "@misc+0x88", "@misc+0x8c", "@misc+0x90", "@misc+0x94", "@misc+0x98"]},
+    "0x005738b0": {"name": "FormatString", "conv": "cdecl", "args": ["ignore", "cstr", "int"],
+      "writes": [{"arg": 0, "offset": 0, "hex": "44332211"}]},
+    "0x00597c60": {"name": "SetColors", "conv": "thiscall", "args": ["u32", "u32", "u32"]},
+    "0x005982e0": {"name": "SetColumnJustification", "conv": "thiscall", "args": ["int", "int"]},
+    "0x004d06e9": {"name": "BuildAbilityLists_guess", "conv": "thiscall", "args": []},
+    "@fn_show": {"name": "Show", "conv": "thiscall", "args": ["int", "int"]}
+  },
+  "cases": [
+    {"name": "all children", "args": ["@parent"]},
+    {"name": "all children, parent null", "args": [0]},
+    {"name": "no sidl piece", "args": ["@parent"], "memory": [{"addr": "@book", "offset": "0x124", "u32": 0}]},
+    {"name": "no children", "args": ["@parent"], "callees": {
+      "0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": 0}}},
+    {"name": "odd calls null", "args": ["@parent"], "callees": {
+      "0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": [
+        "@misc+0x04", 0, "@misc+0x0c", 0, "@misc+0x14", 0,
+        "@btn1", 0, "@vbtn1", 0, "@vbtn3", 0, "@misc+0x20",
+        "@list1", "@misc+0x40", 0, "@misc+0x44", "@list3", 0, 0, "@misc+0x4c",
+        "@list5", 0, 0, "@misc+0x54", "@list7", 0, 0, "@misc+0x5c",
+        "@list9", 0, 0, "@misc+0x64", "@list11", 0,
+        "@misc+0x80", 0, "@misc+0x88", 0, "@misc+0x90", 0, "@misc+0x98"]}}},
+    {"name": "even calls null", "args": ["@parent"], "callees": {
+      "0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": [
+        0, "@misc+0x08", 0, "@misc+0x10", 0, "@misc+0x18",
+        0, "@btn2", 0, "@vbtn2", 0, "@misc+0x1c", 0,
+        0, "@misc+0x40", "@list2", 0, 0, "@misc+0x48", "@list4", 0,
+        0, "@misc+0x50", "@list6", 0, 0, "@misc+0x58", "@list8", 0,
+        0, "@misc+0x60", "@list10", 0, 0, "@misc+0x68",
+        0, "@misc+0x84", 0, "@misc+0x8c", 0, "@misc+0x94", 0]}}},
+    {"name": "format leaves name empty", "args": ["@parent"], "callees": {
+      "0x005738b0": {"name": "FormatString", "conv": "cdecl", "args": ["ignore", "cstr", "int"]}}}
+  ],
+  "fuzz": {
+    "seed": 5048975,
+    "count": 60,
+    "args": [
+      {"choices": ["@parent", 0]}
+    ],
+    "memory": [
+      {"addr": "@book", "offset": "0x124", "type": "u32", "choices": [0, 1, "0x12345678"]}
+    ]
+  },
+  "coverage_ok": {
+    "004D0ECC-004D0ECD": "int3 bounds check: index < 11 (count is set to 11 just before the loop)",
+    "004D0EE9-004D0EEA": "int3 bounds check, unreachable",
+    "004D0EFD-004D0EFE": "int3 bounds check, unreachable",
+    "004D0F1B-004D0F1C": "int3 bounds check, unreachable",
+    "004D0F31-004D0F32": "int3 bounds check, unreachable",
+    "004D0F47-004D0F48": "int3 bounds check, unreachable",
+    "004D0F5D-004D0F5E": "int3 bounds check, unreachable",
+    "004D0F74-004D0F75": "int3 bounds check, unreachable",
+    "004D0F88-004D0F89": "int3 bounds check, unreachable",
+    "004D0FAD-004D0FAE": "int3 bounds check, unreachable"
+  }
+}

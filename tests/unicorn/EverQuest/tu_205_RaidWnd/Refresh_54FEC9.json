@@ -1,0 +1,201 @@
+{
+  "function": "CRaidWndView_guess::Refresh_54FEC9_guess",
+  "original": "0x0054fec9",
+  "sources": [
+    "src/EverQuest/tu_205_RaidWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@raidwnd",
+  "args": [],
+  "ret": "void",
+  "size": "0x254",
+  "objects": {
+    "raidwnd": {
+      "size": "0x290",
+      "fill": "random",
+      "init": [
+        {"offset": "0x124", "u32": 1},
+        {"offset": "0x15c", "u32": "@player_list"},
+        {"offset": "0x164", "u32": "@ungrouped_list"},
+        {"offset": "0x16c", "u32": "@count_label"},
+        {"offset": "0x1e8", "u32": "@note_list"},
+        {"offset": "0x1ec", "u32": "@note_edit"},
+        {"offset": "0x1f4", "u32": "@motd_viewer"},
+        {"offset": "0x1f8", "u32": "@motd_input"}
+      ]
+    },
+    "player_list": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": 0, "u32": "@list_vtable"}]
+    },
+    "ungrouped_list": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": 0, "u32": "@list_vtable"}]
+    },
+    "note_list": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": 0, "u32": "@list_vtable"}]
+    },
+    "note_edit": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": 0, "u32": "@text_vtable"}]
+    },
+    "motd_viewer": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "motd_input": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": 0, "u32": "@text_vtable"}]
+    },
+    "count_label": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": 0, "u32": "@text_vtable"}]
+    },
+    "fn_clear_list": {"size": "0x4", "fill": "zero"},
+    "fn_set_text": {"size": "0x4", "fill": "zero"},
+    "string_table": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "placeholder_text": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [{"offset": 0, "cstr": "Player"}]
+    },
+    "str_buffer": {"size": "0x100", "fill": "zero"},
+    "list_vtable": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [{"offset": "0x130", "u32": "@fn_clear_list"}]
+    },
+    "text_vtable": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xfc", "u32": "@fn_set_text"}]
+    }
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x0063f53f", "cstr": ""},
+    {"addr": "0x006410a8", "from_image": "0x006410a8", "image_size": 64},
+    {"addr": "0x00905cb0", "u32": "@string_table"}
+  ],
+  "callees": {
+    "@fn_clear_list": {
+      "name": "clear_list_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_set_text": {
+      "name": "set_text_guess",
+      "conv": "thiscall",
+      "args": ["mem:4"]
+    },
+    "0x00571e00": {
+      "name": "Str_ctor_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x00571d00": {
+      "name": "Str_release_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x005a8b00": {
+      "name": "set_motd_viewer_guess",
+      "conv": "thiscall",
+      "args": ["mem:4", "int", "int"]
+    },
+    "0x0054e242": {
+      "name": "add_placeholder_group_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0059b9d0": {
+      "name": "add_list_string_guess",
+      "conv": "thiscall",
+      "args": ["mem:4", "int", "int", "int"],
+      "ret": 0
+    },
+    "0x006220e9": {
+      "name": "__itoa",
+      "conv": "cdecl",
+      "args": ["int", "ignore", "int"],
+      "ret": 0,
+      "passthrough": true
+    },
+    "0x00571fc0": {
+      "name": "Str_assign_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x0059b360": {
+      "name": "set_list_text_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "mem:4"]
+    },
+    "0x005dfa00": {
+      "name": "get_string_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": "@placeholder_text"
+    },
+    "0x0059b3e0": {
+      "name": "set_list_color_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "u32"]
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": "@str_buffer"
+    }
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9"
+  },
+  "cases": [
+    {"name": "full_path", "args": []},
+    {
+      "name": "missing_sidl_piece",
+      "args": [],
+      "memory": [{"addr": "@raidwnd", "offset": "0x124", "u32": 0}]
+    },
+    {
+      "name": "no_optional_widgets",
+      "args": [],
+      "memory": [
+        {"addr": "@raidwnd", "offset": "0x1e8", "u32": 0},
+        {"addr": "@raidwnd", "offset": "0x1ec", "u32": 0},
+        {"addr": "@raidwnd", "offset": "0x1f4", "u32": 0},
+        {"addr": "@raidwnd", "offset": "0x1f8", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5570249,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@raidwnd", "offset": "0x124", "type": "u32", "choices": [0, 1]},
+      {"addr": "@raidwnd", "offset": "0x1e8", "type": "u32", "choices": [0, "@note_list"]},
+      {"addr": "@raidwnd", "offset": "0x1ec", "type": "u32", "choices": [0, "@note_edit"]},
+      {"addr": "@raidwnd", "offset": "0x1f4", "type": "u32", "choices": [0, "@motd_viewer"]},
+      {"addr": "@raidwnd", "offset": "0x1f8", "type": "u32", "choices": [0, "@motd_input"]}
+    ]
+  }
+}

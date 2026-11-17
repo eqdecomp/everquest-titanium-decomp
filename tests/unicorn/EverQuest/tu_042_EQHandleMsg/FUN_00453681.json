@@ -1,0 +1,383 @@
+{
+  "function": "Handle_OP_ClickObjectAction_guess",
+  "original": "0x00453681",
+  "sources": [
+    "src/EverQuest/tu_042_EQHandleMsg.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "argument_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "argument": {
+      "size": "0x1C",
+      "fill": "random"
+    },
+    "owner": {
+      "size": "0x25C",
+      "fill": "random"
+    },
+    "manager": {
+      "size": "0x70",
+      "fill": "random"
+    },
+    "string_table": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "everquest": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "first_object": {
+      "size": "0xA8",
+      "fill": "random"
+    },
+    "second_object": {
+      "size": "0x2C4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@argument",
+      "offset": "0x0",
+      "u32": 7
+    },
+    {
+      "addr": "@argument",
+      "offset": "0x4",
+      "u32": 4660
+    },
+    {
+      "addr": "@argument",
+      "offset": "0x8",
+      "u32": 1
+    },
+    {
+      "addr": "@argument",
+      "offset": "0xC",
+      "u8": 53
+    },
+    {
+      "addr": "@argument",
+      "offset": "0x10",
+      "u8": 3
+    },
+    {
+      "addr": "@argument",
+      "offset": "0x14",
+      "u32": 4
+    },
+    {
+      "addr": "@argument",
+      "offset": "0x18",
+      "u32": 5
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x258",
+      "u32": 7
+    },
+    {
+      "addr": "@manager",
+      "offset": "0x6C",
+      "u32": 0
+    },
+    {
+      "addr": "0x009248D0",
+      "u32": 1
+    },
+    {
+      "addr": "0x00905CE4",
+      "u32": "@owner"
+    },
+    {
+      "addr": "0x00850CBC",
+      "u32": "@manager"
+    },
+    {
+      "addr": "0x00905CB0",
+      "u32": "@string_table"
+    },
+    {
+      "addr": "0x00988DF0",
+      "u32": "@everquest"
+    },
+    {
+      "addr": "0x009248D4",
+      "u32": -1
+    },
+    {
+      "addr": "0x007A0000",
+      "cstr": "fixture message"
+    }
+  ],
+  "callees": {
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": [
+        "@first_object",
+        "@second_object"
+      ]
+    },
+    "0x005ece20": {
+      "name": "FUN_005ece20",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this",
+      "writes": [
+        {
+          "addr": "@first_object",
+          "hex": "80476400"
+        }
+      ]
+    },
+    "0x00601f60": {
+      "name": "FUN_00601f60",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x004fa39a": {
+      "name": "FUN_004fa39a",
+      "conv": "thiscall",
+      "args": [
+        "u8"
+      ],
+      "ret": "0x007A0000"
+    },
+    "0x005ec620": {
+      "name": "FUN_005ec620",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x004b1cf4": {
+      "name": "FUN_004b1cf4",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004fac58": {
+      "name": "FUN_004fac58",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "FUN_005dfa00",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "0x007A0000"
+    },
+    "0x00498436": {
+      "name": "FUN_00498436",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071",
+    "??0EQ_Item_guess@@QAE@XZ": "0x005ece20"
+  },
+  "rewrite_data_aliases": {
+    "??_7EQ_Item_guess@@6B@": "0x00644780"
+  },
+  "cases": [
+    {
+      "name": "successful kind five",
+      "args": [
+        "@argument"
+      ]
+    },
+    {
+      "name": "successful other kind",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@argument",
+          "offset": "0xC",
+          "u8": 49
+        }
+      ]
+    },
+    {
+      "name": "zero counter and no request",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "0x009248D0",
+          "u32": 0
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "negative counter clamps",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "0x009248D0",
+          "u32": -1
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "null current owner",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "0x00905CE4",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "owner id mismatch",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@argument",
+          "offset": "0x0",
+          "u32": 8
+        }
+      ]
+    },
+    {
+      "name": "request absent",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@argument",
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "state manager busy",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@manager",
+          "offset": "0x6C",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "second allocation returns null",
+      "args": [
+        "@argument"
+      ],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            "@first_object",
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "_survivors": "L2295: for count == 1, decrement and zero assignment have the same final value and observable writes",
+  "fuzz": {
+    "seed": 4535937,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@argument"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x009248D0",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@argument",
+        "offset": "0x8",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@argument",
+        "offset": "0xC",
+        "type": "u8",
+        "choices": [
+          53,
+          49,
+          57
+        ]
+      },
+      {
+        "addr": "@manager",
+        "offset": "0x6C",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

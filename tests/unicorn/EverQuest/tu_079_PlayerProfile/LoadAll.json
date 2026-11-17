@@ -1,0 +1,299 @@
+{
+  "function": "Pc_guess::LoadProfile_guess",
+  "original": "0x004ba0fb",
+  "sources": [
+    "src/EverQuest/tu_079_PlayerProfile.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@pc",
+  "args": [
+    {
+      "name": "src",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "pc": {
+      "size": "0x1bb0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@pcvt"},
+        {"offset": "0x8", "u32": "@vbt"},
+        {"offset": "0x1a60", "u32": "@vbvt"},
+        {"offset": "0xcf0", "u32": "@del"},
+        {"offset": "0xcf4", "u32": 0},
+        {"offset": "0xcf8", "u32": "@del2"},
+        {"offset": "0xcfc", "u32": "@del"},
+        {"offset": "0xd00", "u32": 0},
+        {"offset": "0xd04", "u32": "@del2"},
+        {"offset": "0xd08", "u32": "@del"},
+        {"offset": "0xd0c", "u32": "@del"},
+        {"offset": "0xd10", "u32": 0},
+        {"offset": "0xd14", "u32": "@del2"},
+        {"offset": "0xd18", "u32": "@del"},
+        {"offset": "0xd1c", "u32": 0},
+        {"offset": "0xd20", "u32": "@del"},
+        {"offset": "0xd24", "u32": "@del2"},
+        {"offset": "0xd28", "u32": "@del"},
+        {"offset": "0xd2c", "u32": "@del2"},
+        {"offset": "0xd30", "u32": "@del2"},
+        {"offset": "0xd34", "u32": 0}
+      ]
+    },
+    "vbt": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [{"offset": "0x4", "u32": "0x1a58"}]
+    },
+    "pcvt": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": "@fn_s1"},
+        {"offset": "0x8", "u32": "@fn_s2"},
+        {"offset": "0xc", "u32": "@fn_s3"}
+      ]
+    },
+    "vbvt": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [{"offset": "0xc", "u32": "@fn_vb3"}]
+    },
+    "dtbl": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@fn_dtor"}]
+    },
+    "del": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@dtbl"}]
+    },
+    "del2": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@dtbl"}]
+    },
+    "fn_s1": {"size": "4"},
+    "fn_s2": {"size": "4"},
+    "fn_s3": {"size": "4"},
+    "fn_vb3": {"size": "4"},
+    "fn_dtor": {"size": "4"},
+    "mgr": {
+      "size": "0x150",
+      "fill": "random"
+    },
+    "src": {
+      "size": "0x4c80",
+      "fill": "random",
+      "init": [
+        {"offset": "0x3b00", "u32": 3},
+        {"offset": "0x33dc", "u8": 0},
+        {"offset": "0x349c", "u8": 0}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "0x00905d24", "u32": "@mgr"}
+  ],
+  "callees": {
+    "0x004b9741": {
+      "name": "FUN_004b9741",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x0040e25c": {
+      "name": "Name40_guess::Set_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x00454ea9": {
+      "name": "Text20_guess::Set_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x005ed4f0": {
+      "name": "FUN_005ed4f0",
+      "conv": "thiscall",
+      "args": [
+        "bool"
+      ]
+    },
+    "0x0045aefb": {
+      "name": "Copyable_guess::Copy_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x00434792": {
+      "name": "FUN_00434792",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ]
+    },
+    "0x005f0e20": {
+      "name": "FUN_005f0e20",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ]
+    },
+    "0x00451a65": {
+      "name": "ClearGroupMemberNames_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0045871f": {
+      "name": "FUN_0045871f",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0046484b": {
+      "name": "SetGroupMemberName_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ptr"
+      ]
+    },
+    "0x00464889": {
+      "name": "SetGroupLeaderName_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x005f0db0": {
+      "name": "FUN_005f0db0",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ptr"
+      ]
+    },
+    "0x00576e80": {
+      "name": "FUN_00576e80",
+      "conv": "cdecl",
+      "args": []
+    },
+    "0x004586bf": {
+      "name": "FUN_004586bf",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "u32"
+      ]
+    },
+    "0x00454f3f": {
+      "name": "NameList_guess::Clear_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00574890": {
+      "name": "FUN_00574890",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "ret": [7, 1234, -5, 99]
+    },
+    "0x00454ee0": {
+      "name": "NameList_guess::Add_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "u32"
+      ]
+    },
+    "@fn_vb3": {"name": "Owner_guess::VbSlot03_guess", "conv": "thiscall", "args": []},
+    "@fn_s1": {"name": "Core_guess::Slot01_guess", "conv": "thiscall", "args": ["u32"]},
+    "@fn_s2": {"name": "Core_guess::Slot02_guess", "conv": "thiscall", "args": ["u32"]},
+    "@fn_s3": {"name": "Core_guess::Slot03_guess", "conv": "thiscall", "args": ["u32"]},
+    "@fn_dtor": {"name": "Deletable_guess::scalar_deleting_dtor", "conv": "thiscall", "args": ["u32"], "ret": "this"}
+  },
+  "coverage_ok": {
+    "004BA403-004BA404": "int3 bounds check: the loop index never reaches 32",
+    "004BA4EF-004BA4F0": "int3 bounds check: the loop index never reaches 16",
+    "004BA4FF-004BA500": "int3 bounds check: the loop index never reaches 16",
+    "004BA516-004BA517": "int3 bounds check: the loop index never reaches 16",
+    "004BA52E-004BA52F": "int3 bounds check: the loop index never reaches 2",
+    "004BA53E-004BA53F": "int3 bounds check: the loop index never reaches 2",
+    "004BA555-004BA556": "int3 bounds check: the loop index never reaches 2"
+  },
+  "cases": [
+    {
+      "name": "typical: three entries, mixed owned pointers, two empty names",
+      "args": ["@src"]
+    },
+    {
+      "name": "no entries, all owned pointers null",
+      "args": ["@src"],
+      "memory": [
+        {"addr": "@src", "offset": "0x3b00", "u32": 0},
+        {"addr": "@pc", "offset": "0xcf0", "size": 72, "fill": "zero"}
+      ]
+    },
+    {
+      "name": "negative entry count, all owned pointers set, flags zero",
+      "args": ["@src"],
+      "memory": [
+        {"addr": "@src", "offset": "0x3b00", "u32": "0xffffffff"},
+        {"addr": "@src", "offset": "0x32f8", "u8": 0},
+        {"addr": "@src", "offset": "0x32fa", "u8": 0},
+        {"addr": "@src", "offset": "0x3830", "u8": 0},
+        {"addr": "@src", "offset": "0x4c70", "u8": 255},
+        {"addr": "@src", "offset": "0x4c71", "u8": 0},
+        {"addr": "@src", "offset": "0x4c72", "u8": 128},
+        {"addr": "@pc", "offset": "0xcf4", "u32": "@del"},
+        {"addr": "@pc", "offset": "0xd00", "u32": "@del"},
+        {"addr": "@pc", "offset": "0xd10", "u32": "@del"},
+        {"addr": "@pc", "offset": "0xd1c", "u32": "@del"},
+        {"addr": "@pc", "offset": "0xd34", "u32": "@del"}
+      ]
+    },
+    {
+      "name": "one entry, all names empty, flags one",
+      "args": ["@src"],
+      "memory": [
+        {"addr": "@src", "offset": "0x3b00", "u32": 1},
+        {"addr": "@src", "offset": "0x341c", "u8": 0},
+        {"addr": "@src", "offset": "0x345c", "u8": 0},
+        {"addr": "@src", "offset": "0x34dc", "u8": 0},
+        {"addr": "@src", "offset": "0x351c", "u8": 0},
+        {"addr": "@src", "offset": "0x32f8", "u8": 1},
+        {"addr": "@src", "offset": "0x32fa", "u8": 1},
+        {"addr": "@src", "offset": "0x3830", "u8": 1}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4956411,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@src"
+        ]
+      }
+    ],
+    "memory": [
+      {"addr": "@src", "offset": "0x3b00", "type": "int", "range": [-2, 6]},
+      {"addr": "@src", "offset": "0x33dc", "type": "u8", "choices": [0, 65], "count": 6, "stride": 64},
+      {"addr": "@src", "offset": "0x32f8", "type": "u8", "choices": [0, 1, 2, 255]},
+      {"addr": "@src", "offset": "0x32fa", "type": "u8", "choices": [0, 1, 2, 255]},
+      {"addr": "@src", "offset": "0x3830", "type": "u8", "choices": [0, 1, 2, 255]},
+      {"addr": "@pc", "offset": "0xcf0", "type": "ptr", "choices": [0, "@del", "@del2"], "count": 18}
+    ]
+  }
+}

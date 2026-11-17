@@ -1,0 +1,202 @@
+{
+  "function": "Owner_guess::Update_guess",
+  "original": "0x0056ffa8",
+  "sources": [
+    "src/EverQuest/tu_242_CameraState.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "owner": { "size": "0x100", "fill": "random" },
+    "sink": {
+      "size": 4,
+      "fill": "zero",
+      "init": [ { "offset": 0, "u32": "@sink_vtbl" } ]
+    },
+    "sink_vtbl": {
+      "size": "0x30",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x28", "u32": "@fn_sink10" },
+        { "offset": "0x2c", "u32": "@fn_sink11" }
+      ]
+    },
+    "mesh": {
+      "size": 4,
+      "fill": "zero",
+      "init": [ { "offset": 0, "u32": "@mesh_vtbl_hit" } ]
+    },
+    "mesh_vtbl_hit": {
+      "size": "0x34",
+      "fill": "zero",
+      "init": [ { "offset": "0x30", "u32": "@fn_mesh12_hit" } ]
+    },
+    "mesh_vtbl_miss": {
+      "size": "0x34",
+      "fill": "zero",
+      "init": [ { "offset": "0x30", "u32": "@fn_mesh12_miss" } ]
+    },
+    "cam": {
+      "size": 4,
+      "fill": "zero",
+      "init": [ { "offset": 0, "u32": "@cam_vtbl_hit" } ]
+    },
+    "cam_vtbl_hit": {
+      "size": "0x3c",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x34", "u32": "@fn_cam13_hit" },
+        { "offset": "0x38", "u32": "@fn_cam14" }
+      ]
+    },
+    "cam_vtbl_miss": {
+      "size": "0x3c",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x34", "u32": "@fn_cam13_miss" },
+        { "offset": "0x38", "u32": "@fn_cam14" }
+      ]
+    },
+    "display": {
+      "size": "0x124",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x118", "u32": "@cam" },
+        { "offset": "0x11c", "u32": "@vec_out" },
+        { "offset": "0x120", "u32": "@vec_in" }
+      ]
+    },
+    "vec_out": { "size": 12, "fill": "random" },
+    "vec_in": { "size": 12, "fill": "random" },
+    "ray": { "size": 4, "fill": "zero" },
+    "pickvec": { "size": 12, "fill": "random" },
+    "node_vtbl": {
+      "size": 12,
+      "fill": "zero",
+      "init": [ { "offset": 8, "u32": "@fn_node2" } ]
+    },
+    "node0": {
+      "size": "0x1c",
+      "fill": "random",
+      "init": [ { "offset": 0, "u32": "@node_vtbl" } ]
+    },
+    "node1": {
+      "size": "0x1c",
+      "fill": "random",
+      "init": [ { "offset": 0, "u32": "@node_vtbl" } ]
+    },
+    "fn_sink10": { "size": 4, "fill": "zero" },
+    "fn_sink11": { "size": 4, "fill": "zero" },
+    "fn_mesh12_hit": { "size": 4, "fill": "zero" },
+    "fn_mesh12_miss": { "size": 4, "fill": "zero" },
+    "fn_cam13_hit": { "size": 4, "fill": "zero" },
+    "fn_cam13_miss": { "size": 4, "fill": "zero" },
+    "fn_cam14": { "size": 4, "fill": "zero" },
+    "fn_node2": { "size": 4, "fill": "zero" }
+  },
+  "memory": [
+    { "addr": "0x0099e370", "u32": "@sink" },
+    { "addr": "0x0099e368", "u32": "@mesh" },
+    { "addr": "0x00905d24", "u32": "@display" },
+    { "addr": "0x009254fc", "u32": "@node0" },
+    { "addr": "0x00925500", "u32": "@node1" },
+    { "addr": "0x00850ccc", "u32": 0 },
+    { "addr": "0x0085097c", "u8": 0 },
+    { "addr": "0x00796230", "u8": 0 }
+  ],
+  "callees": {
+    "0x0056fc86": {
+      "name": "GetCameraShake_guess",
+      "conv": "stdcall",
+      "args": [ "mem:12" ],
+      "ret": "@ray"
+    },
+    "0x0056fcb1": {
+      "name": "Ray_guess::ApplyShake_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@pickvec"
+    },
+    "0x0043a292": {
+      "name": "GetEnvironment_guess",
+      "conv": "stdcall",
+      "args": [ "float", "float", "float", "int" ],
+      "ret": 1
+    },
+    "@fn_sink10": { "name": "Sink_guess::Slot10_guess", "conv": "thiscall", "args": [ "int", "int" ], "ret": 0 },
+    "@fn_sink11": { "name": "Sink_guess::Slot11_guess", "conv": "thiscall", "args": [ "int" ], "ret": 1 },
+    "@fn_mesh12_hit": { "name": "Mesh_guess::Slot12_guess", "conv": "thiscall", "args": [ "ptr" ], "ret": 1 },
+    "@fn_mesh12_miss": { "name": "Mesh_guess::Slot12_miss_guess", "conv": "thiscall", "args": [ "ptr" ], "ret": 0 },
+    "@fn_cam13_hit": { "name": "Cam_guess::Slot13_guess", "conv": "thiscall", "args": [ "ptr", "int" ], "ret": 1 },
+    "@fn_cam13_miss": { "name": "Cam_guess::Slot13_miss_guess", "conv": "thiscall", "args": [ "ptr", "int" ], "ret": 0 },
+    "@fn_cam14": { "name": "Cam_guess::Slot14_guess", "conv": "thiscall", "args": [ "ptr" ], "ret": 0 },
+    "@fn_node2": { "name": "Node_guess::Slot02_guess", "conv": "thiscall", "args": [ "u32" ], "ret": 0 }
+  },
+  "cases": [
+    {
+      "name": "mesh hit cam miss flag changes",
+      "args": [],
+      "memory": [
+        { "addr": "@mesh", "offset": 0, "u32": "@mesh_vtbl_hit" },
+        { "addr": "@cam", "offset": 0, "u32": "@cam_vtbl_miss" }
+      ]
+    },
+    {
+      "name": "mesh hit cam hit",
+      "args": [],
+      "memory": [
+        { "addr": "@mesh", "offset": 0, "u32": "@mesh_vtbl_hit" },
+        { "addr": "@cam", "offset": 0, "u32": "@cam_vtbl_hit" }
+      ]
+    },
+    {
+      "name": "mesh miss cam hit",
+      "args": [],
+      "memory": [
+        { "addr": "@mesh", "offset": 0, "u32": "@mesh_vtbl_miss" },
+        { "addr": "@cam", "offset": 0, "u32": "@cam_vtbl_hit" }
+      ]
+    },
+    {
+      "name": "mesh miss cam miss",
+      "args": [],
+      "memory": [
+        { "addr": "@mesh", "offset": 0, "u32": "@mesh_vtbl_miss" },
+        { "addr": "@cam", "offset": 0, "u32": "@cam_vtbl_miss" }
+      ]
+    },
+    {
+      "name": "mesh hit old flag equal",
+      "args": [],
+      "memory": [
+        { "addr": "@mesh", "offset": 0, "u32": "@mesh_vtbl_hit" },
+        { "addr": "@cam", "offset": 0, "u32": "@cam_vtbl_miss" },
+        { "addr": "0x00796230", "u8": 1 }
+      ]
+    },
+    {
+      "name": "node 1 mesh hit",
+      "args": [],
+      "memory": [
+        { "addr": "0x00850ccc", "u32": 1 },
+        { "addr": "@mesh", "offset": 0, "u32": "@mesh_vtbl_hit" },
+        { "addr": "@cam", "offset": 0, "u32": "@cam_vtbl_miss" }
+      ]
+    }
+  ],
+  "_survivors": "L394: g_pickFlag = 0 is overwritten by Blend's return on the next line before any read; equivalent.",
+  "fuzz": {
+    "seed": 5701544,
+    "count": 120,
+    "args": [],
+    "memory": [
+      { "addr": "@mesh", "offset": 0, "type": "u32", "choices": [ "@mesh_vtbl_hit", "@mesh_vtbl_miss" ] },
+      { "addr": "@cam", "offset": 0, "type": "u32", "choices": [ "@cam_vtbl_hit", "@cam_vtbl_miss" ] },
+      { "addr": "0x00850ccc", "type": "u32", "choices": [ 0, 1 ] },
+      { "addr": "0x0085097c", "type": "u8", "choices": [ 0, 1 ] },
+      { "addr": "0x00796230", "type": "u8", "choices": [ 0, 1 ] }
+    ]
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "function": "CBarterMerchantWnd_guess::WndNotification_guess",
+  "original": "0x004de10b",
+  "sources": [
+    "src/EverQuest/tu_128_BarterMerchantWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@controller",
+  "args": [
+    {"name": "sender", "type": "ptr"},
+    {"name": "message", "type": "u32"},
+    {"name": "data", "type": "ptr"}
+  ],
+  "ret": "int",
+  "objects": {
+    "controller": {
+      "size": "0x1a0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x160", "u32": "@listB"},
+        {"offset": "0x164", "u32": "@listA"},
+        {"offset": "0x168", "u32": "@sell"},
+        {"offset": "0x180", "u32": 3},
+        {"offset": "0x184", "u32": 2},
+        {"offset": "0x188", "u32": "@blocks"},
+        {"offset": "0x19c", "u32": 7}
+      ]
+    },
+    "blocks": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@blk0"},
+        {"offset": "0x4", "u32": "@blk1"}
+      ]
+    },
+    "blk0": {
+      "size": "0x1c0",
+      "fill": "random",
+      "init": [{"offset": "0x1c", "u32": 3}]
+    },
+    "blk1": {
+      "size": "0x1c0",
+      "fill": "random",
+      "init": [{"offset": "0x1c", "u32": 2}]
+    },
+    "fn_slot57": {"size": "4"},
+    "vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xe4", "u32": "@fn_slot57"}]
+    },
+    "listA": {"size": "0x100", "fill": "random", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "listB": {"size": "0x100", "fill": "random", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "sell": {"size": "0x100", "fill": "random", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "other": {"size": "0x100", "fill": "random", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "srcrect": {"size": "0x10", "fill": "random"},
+    "row": {"size": "0x40", "fill": "random"},
+    "text": {"size": "0x40", "fill": "zero"},
+    "data": {"size": "0x100", "fill": "random"},
+    "busy": {"size": "0x200", "fill": "zero"},
+    "ever": {"size": "0x10", "fill": "zero"},
+    "pane": {"size": "0x10", "fill": "zero"},
+    "wndmgr": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079AC74", "u32": 305419896},
+    {"addr": "0x009248D0", "u32": 0},
+    {"addr": "0x00905D10", "u32": "@busy"},
+    {"addr": "0x00988DF0", "u32": "@ever"},
+    {"addr": "0x00850C3C", "u32": "@pane"},
+    {"addr": "0x0099D3EC", "u32": "@wndmgr"},
+    {"addr": "@busy", "offset": "0x120", "cstr": "Iron Sword"},
+    {"addr": "@text", "cstr": "Iron Sword"},
+    {"addr": "@data", "offset": "0", "u32": 5}
+  ],
+  "callees": {
+    "0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": 1},
+    "0x00597ed0": {"name": "GetItemData", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x004ddb80": {"name": "Update", "conv": "thiscall", "args": ["int"]},
+    "0x00492ec2": {"name": "TextStore_Store", "conv": "thiscall", "args": ["cstr"], "ret": "@text"},
+    "0x0046da4a": {
+      "name": "FormatText", "conv": "cdecl",
+      "args": ["ignore", "int", "cstr", "u32", "u32", "u32", "u32", "u32", "u32", "u32", "u32"],
+      "writes": [{"arg": 0, "offset": 0, "hex": "41424300"}]
+    },
+    "0x004982c6": {"name": "dsp_chat", "conv": "thiscall", "args": ["cstr", "int", "bool"]},
+    "0x004d9160": {"name": "Rect_Assign", "conv": "thiscall", "args": ["ignore", "ptr"]},
+    "0x004dc02d": {
+      "name": "Rect_Center", "conv": "thiscall", "args": ["ignore"],
+      "writes": [{"arg": 0, "offset": 0, "hex": "1000000020000000"}], "ret": "arg0"
+    },
+    "0x0054d976": {"name": "Pane_Show", "conv": "thiscall", "args": ["ptr", "int", "int", "int", "int", "int"]},
+    "0x00409340": {"name": "Group_GetEntry", "conv": "thiscall", "args": ["u32"], "ret": "@row"},
+    "0x005adf60": {"name": "GetKeyboardFlags", "conv": "thiscall", "args": [], "ret": 0},
+    "0x004912b1": {"name": "Send", "conv": "cdecl", "args": ["u32", "u32", "mem:24", "int", "int"]},
+    "0x005e4020": {
+      "name": "RowPack_Pack", "conv": "thiscall", "args": ["ignore", "int"], "ret": 32,
+      "writes": [{"arg": 0, "offset": 0, "hex": "01020304"}]
+    },
+    "0x005a2230": {"name": "CSidlScreenWnd_WndNotification", "conv": "thiscall", "args": ["u32", "u32", "u32"], "ret": 7},
+    "@fn_slot57": {"name": "sender_Slot57", "conv": "thiscall", "args": ["ignore"], "ret": "@srcrect"}
+  },
+  "cases": [
+    {"name": "list A update", "args": ["@listA", 1, "@data"]},
+    {"name": "sell, not busy, selection", "args": ["@sell", 1, "@data"]},
+    {
+      "name": "sell, not busy, no selection",
+      "args": ["@sell", 1, "@data"],
+      "callees": {"0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": -1}}
+    },
+    {"name": "sell, busy", "args": ["@sell", 1, "@data"], "memory": [{"addr": "0x009248D0", "u32": 1}]},
+    {"name": "sell, no list A", "args": ["@sell", 1, "@data"], "memory": [{"addr": "@controller", "offset": "0x164", "u32": 0}]},
+    {"name": "sell, count clamped", "args": ["@sell", 1, "@data"], "memory": [{"addr": "@blk0", "offset": "0x1c", "u32": 40}]},
+    {"name": "sell, count 0x14", "args": ["@sell", 1, "@data"], "memory": [{"addr": "@blk0", "offset": "0x1c", "u32": 20}]},
+    {"name": "detail list, selection", "args": ["@listB", 3, "@data"]},
+    {
+      "name": "detail list, shift flag",
+      "args": ["@listB", 3, "@data"],
+      "callees": {"0x005adf60": {"name": "GetKeyboardFlags", "conv": "thiscall", "args": [], "ret": 1}}
+    },
+    {"name": "detail list, no list A", "args": ["@listB", 3, "@data"], "memory": [{"addr": "@controller", "offset": "0x164", "u32": 0}]},
+    {"name": "pack row", "args": ["@listA", 31, "@data"]},
+    {
+      "name": "pack row, no selection",
+      "args": ["@listA", 31, "@data"],
+      "callees": {"0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": -1}}
+    },
+    {"name": "pack row, no list A", "args": ["@listA", 31, "@data"], "memory": [{"addr": "@controller", "offset": "0x164", "u32": 0}]},
+    {"name": "other sender", "args": ["@other", 1, "@data"]},
+    {"name": "message 15 does nothing", "args": ["@other", 15, "@data"]}
+  ],
+  "_survivors": "L992: the third dsp_chat argument is a C++ bool, so 2 converts to the same true (equivalent); L999: count == 0x14 clamps to 0x14 either way (equivalent); L1002: the rect zeros reach only the Center and Assign stubs, which never read this, so no case can observe them",
+  "fuzz": {
+    "seed": 5103883,
+    "count": 100,
+    "args": [
+      {"choices": ["@listA", "@listB", "@sell", "@other"]},
+      {"choices": [1, 3, 15, 31, 2]},
+      {"choices": ["@data"]}
+    ],
+    "memory": [
+      {"addr": "0x009248D0", "type": "int", "choices": [0, 0, 1]},
+      {"addr": "@blk0", "offset": "0x1c", "type": "int", "range": [0, 40]},
+      {"addr": "@data", "offset": "0", "type": "int", "range": [-3, 40]},
+      {"addr": "@data", "offset": "0x4", "type": "int", "range": [0, 4]}
+    ]
+  }
+}

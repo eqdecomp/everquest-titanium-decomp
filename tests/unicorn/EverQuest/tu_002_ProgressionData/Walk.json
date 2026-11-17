@@ -1,0 +1,136 @@
+{
+  "function": "RangeOperation_guess::Walk_guess",
+  "original": "0x00403aac",
+  "sources": [
+    "src/EverQuest/tu_002_ProgressionData.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@rangeoperation",
+  "args": [
+    {
+      "name": "context_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "first_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "last_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "unused_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "rangeoperation": {
+      "size": "0x20",
+      "fill": "random"
+    },
+    "context": {
+      "size": "0x20",
+      "fill": "random"
+    },
+    "node1": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@node2"}]
+    },
+    "node2": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@node3"}]
+    },
+    "node3": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": 0}]
+    },
+    "unused": {
+      "size": "0x20",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004039c5": {
+      "name": "FUN_004039c5",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "three nodes, first to last",
+      "args": [
+        "@context",
+        "@node1",
+        "@node3",
+        "@unused"
+      ]
+    },
+    {
+      "name": "two nodes",
+      "args": [
+        "@context",
+        "@node2",
+        "@node3",
+        "@unused"
+      ]
+    },
+    {
+      "name": "empty range (first == last)",
+      "args": [
+        "@context",
+        "@node3",
+        "@node3",
+        "@unused"
+      ]
+    },
+    {
+      "name": "equal null pointers",
+      "args": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4209324,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@context"
+        ]
+      },
+      {
+        "choices": [
+          "@node1",
+          "@node2",
+          "@node3"
+        ]
+      },
+      {
+        "choices": [
+          "@node3"
+        ]
+      },
+      {
+        "choices": [
+          "@unused"
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

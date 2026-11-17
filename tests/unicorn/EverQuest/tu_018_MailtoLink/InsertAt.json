@@ -1,0 +1,305 @@
+{
+  "function": "Tree_guess::InsertAt_guess",
+  "original": "0x0042bbb2",
+  "sources": [
+    "src/EverQuest/tu_018_MailtoLink.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@tree",
+  "args": [
+    {
+      "name": "result_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "hint_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "value_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "tree": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@head"
+        },
+        {
+          "offset": "0x8",
+          "u32": 4
+        }
+      ]
+    },
+    "head": {
+      "size": "0x30",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@left"
+        },
+        {
+          "offset": "0x4",
+          "u32": "@root"
+        },
+        {
+          "offset": "0x8",
+          "u32": "@right"
+        },
+        {
+          "offset": "0x2d",
+          "u8": 1
+        }
+      ]
+    },
+    "root": {
+      "size": "0x30",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@left"
+        },
+        {
+          "offset": "0x4",
+          "u32": "@head"
+        },
+        {
+          "offset": "0x8",
+          "u32": "@right"
+        },
+        {
+          "offset": "0xc",
+          "u32": 50
+        }
+      ]
+    },
+    "left": {
+      "size": "0x30",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@head"
+        },
+        {
+          "offset": "0x4",
+          "u32": "@root"
+        },
+        {
+          "offset": "0x8",
+          "u32": "@middle"
+        },
+        {
+          "offset": "0xc",
+          "u32": 30
+        }
+      ]
+    },
+    "middle": {
+      "size": "0x30",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@head"
+        },
+        {
+          "offset": "0x4",
+          "u32": "@left"
+        },
+        {
+          "offset": "0x8",
+          "u32": "@head"
+        },
+        {
+          "offset": "0xc",
+          "u32": 40
+        }
+      ]
+    },
+    "right": {
+      "size": "0x30",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@head"
+        },
+        {
+          "offset": "0x4",
+          "u32": "@root"
+        },
+        {
+          "offset": "0x8",
+          "u32": "@head"
+        },
+        {
+          "offset": "0xc",
+          "u32": 70
+        }
+      ]
+    },
+    "result": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "value": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0042ac08": {
+      "name": "Tree_guess::InsertNode_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "bool",
+        "ptr",
+        "mem:4"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "78563412"
+        }
+      ]
+    },
+    "0x004252fb": {
+      "name": "TreeIter_guess::operator--",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0042533a": {
+      "name": "TreeIter_guess::operator++",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0042b887": {
+      "name": "Tree_guess::Insert_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "mem:4"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "78563412"
+        }
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "empty tree",
+      "args": ["@result", "@head", "@value"],
+      "memory": [
+        {"addr": "@tree", "offset": "0x8", "u32": 0},
+        {"addr": "@value", "offset": "0x0", "u32": 10}
+      ]
+    },
+    {
+      "name": "leftmost before",
+      "args": ["@result", "@left", "@value"],
+      "memory": [{"addr": "@value", "offset": "0x0", "u32": 20}]
+    },
+    {
+      "name": "leftmost equal",
+      "args": ["@result", "@left", "@value"],
+      "memory": [{"addr": "@value", "offset": "0x0", "u32": 30}]
+    },
+    {
+      "name": "leftmost after",
+      "args": ["@result", "@left", "@value"],
+      "memory": [{"addr": "@value", "offset": "0x0", "u32": 31}]
+    },
+    {
+      "name": "end after",
+      "args": ["@result", "@head", "@value"],
+      "memory": [{"addr": "@value", "offset": "0x0", "u32": 80}]
+    },
+    {
+      "name": "end equal",
+      "args": ["@result", "@head", "@value"],
+      "memory": [{"addr": "@value", "offset": "0x0", "u32": 70}]
+    },
+    {
+      "name": "end before",
+      "args": ["@result", "@head", "@value"],
+      "memory": [{"addr": "@value", "offset": "0x0", "u32": 69}]
+    },
+    {
+      "name": "previous right is nil",
+      "args": ["@result", "@root", "@value"],
+      "memory": [{"addr": "@value", "offset": "0x0", "u32": 45}]
+    },
+    {
+      "name": "previous right is nonnil",
+      "args": ["@result", "@right", "@value"],
+      "memory": [{"addr": "@value", "offset": "0x0", "u32": 60}]
+    },
+    {
+      "name": "previous boundary",
+      "args": ["@result", "@root", "@value"],
+      "memory": [{"addr": "@value", "offset": "0x0", "u32": 40}]
+    },
+    {
+      "name": "next right is nonnil",
+      "args": ["@result", "@root", "@value"],
+      "memory": [{"addr": "@value", "offset": "0x0", "u32": 60}]
+    },
+    {
+      "name": "next right is nil",
+      "args": ["@result", "@middle", "@value"],
+      "memory": [{"addr": "@value", "offset": "0x0", "u32": 45}]
+    },
+    {
+      "name": "increment reaches header",
+      "args": ["@result", "@right", "@value"],
+      "memory": [{"addr": "@value", "offset": "0x0", "u32": 80}]
+    },
+    {
+      "name": "next boundary",
+      "args": ["@result", "@root", "@value"],
+      "memory": [{"addr": "@value", "offset": "0x0", "u32": 70}]
+    },
+    {
+      "name": "hint equal",
+      "args": ["@result", "@root", "@value"],
+      "memory": [{"addr": "@value", "offset": "0x0", "u32": 50}]
+    },
+    {
+      "name": "next outside",
+      "args": ["@result", "@root", "@value"],
+      "memory": [{"addr": "@value", "offset": "0x0", "u32": 75}]
+    }
+  ],
+  "fuzz": {
+    "seed": 4373426,
+    "count": 100,
+    "args": [
+      {"choices": ["@result"]},
+      {"choices": ["@head", "@left", "@middle", "@root", "@right"]},
+      {"choices": ["@value"]}
+    ],
+    "memory": [
+      {"addr": "@tree", "offset": "0x8", "type": "u32", "choices": [0, 4]},
+      {"addr": "@value", "offset": "0x0", "type": "u32", "range": [20, 80]}
+    ]
+  }
+}

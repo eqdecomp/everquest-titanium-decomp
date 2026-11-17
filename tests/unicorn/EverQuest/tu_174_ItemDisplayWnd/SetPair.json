@@ -1,0 +1,189 @@
+{
+  "function": "PickEntry_guess::SetItem",
+  "original": "0x00521827",
+  "sources": [
+    "src/EverQuest/tu_174_ItemDisplayWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@pickentry",
+  "args": [
+    {"name": "first_guess", "type": "u32"},
+    {"name": "second_guess", "type": "u32"}
+  ],
+  "ret": "void",
+  "objects": {
+    "pickentry": {
+      "size": "0x180",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x164", "u32": "@child"},
+        {"offset": "0x17c", "u32": "@valueslot"}
+      ]
+    },
+    "child": {"size": "0x170", "fill": "zero"},
+    "valueslot": {"size": "0x10", "fill": "zero"},
+    "source": {
+      "size": "0x200",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@source_vtbl"}]
+    },
+    "source_vtbl": {
+      "size": "0x30",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": "@fn_src_slot1"},
+        {"offset": "0x28", "u32": "@fn_src_slot10"}
+      ]
+    },
+    "text": {"size": "0x40", "fill": "zero"},
+    "strobj": {"size": "0x40", "fill": "zero"},
+    "stringtable": {"size": "0x4", "fill": "zero"},
+    "release": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@rel_vtbl"}]
+    },
+    "oldrel": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@rel_vtbl"}]
+    },
+    "rel_vtbl": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@fn_rel0"}]
+    },
+    "sink": {"size": "0x10", "fill": "zero"},
+    "fn_src_slot1": {"size": "0x10", "fill": "zero"},
+    "fn_src_slot10": {"size": "0x10", "fill": "zero"},
+    "fn_rel0": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@pickentry", "offset": "0x184", "u32": 42},
+    {"addr": "@text", "cstr": "Iron sword"},
+    {"addr": "@strobj", "cstr": "Lorem"},
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x00905cb0", "u32": "@stringtable"}
+  ],
+  "callees": {
+    "0x005e0ec0": {"name": "GetText_guess", "conv": "thiscall", "args": [], "ret": "@text"},
+    "0x0051c0da": {"name": "HasAnyAugment_guess", "conv": "cdecl", "args": ["ptr"], "ret": 0},
+    "0x005dfa00": {"name": "StringTable::getString", "conv": "thiscall", "args": ["u32", "u32"], "ret": "@strobj"},
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr"],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "4c6f72656d00"}]
+    },
+    "0x00571f70": {"name": "CXStr::operator=", "conv": "thiscall", "args": ["ptr"], "ret": "this"},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["u32"], "ret": "keep"},
+    "0x005eccc0": {"name": "CheckA_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005ecc00": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 16},
+    "0x005e10b0": {"name": "GetFlag_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005e0f60": {"name": "GetValue_guess", "conv": "thiscall", "args": [], "ret": 1000},
+    "0x004b1db0": {"name": "ItemSink_guess::SendReadBook_guess", "conv": "thiscall", "args": [], "ret": "keep"},
+    "0x005b1ab0": {"name": "ValueSlot_guess::Set_guess", "conv": "thiscall", "args": ["int"], "ret": "keep"},
+    "0x004912b1": {"name": "SendPacket_guess", "conv": "cdecl", "args": ["u32", "int", "mem:72", "int", "char"], "ret": "keep"},
+    "0x0051c035": {"name": "UpdateObject_guess::Update_guess", "conv": "thiscall", "args": [], "ret": "keep"},
+    "0x004482fb": {"name": "Ref_guess::Clear_guess", "conv": "thiscall", "args": [], "ret": "keep"},
+    "0x00572e00": {"name": "CXStr::operator+=", "conv": "thiscall", "args": ["cstr"], "ret": "keep"},
+    "0x0051ea25": {
+      "name": "BuildItemDescription_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "u32", "u32"],
+      "ret": "arg0"
+    },
+    "@fn_src_slot1": {"name": "ItemSource_guess::Slot01_guess", "conv": "thiscall", "args": [], "ret": "@release"},
+    "@fn_src_slot10": {"name": "ItemSource_guess::Slot10_guess", "conv": "thiscall", "args": ["int"], "ret": "@sink"},
+    "@fn_rel0": {"name": "ReleaseTarget_guess::Release_guess", "conv": "thiscall", "args": ["int"], "ret": "keep"}
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "coverage_ok": {
+    "005219CF-005219E0": "dead temp release: the original never stores into the local at ebp-0x45C, so its release never runs"
+  },
+  "cases": [
+    {
+      "name": "typical-no-send",
+      "args": ["@source", 5]
+    },
+    {
+      "name": "pct-branch-appends-string",
+      "args": ["@source", 5],
+      "callees": {
+        "0x0051c0da": {"name": "FUN_0051c0da", "conv": "cdecl", "args": ["ptr"], "ret": 1}
+      }
+    },
+    {
+      "name": "checka-two-skips-show",
+      "args": ["@source", 5],
+      "callees": {
+        "0x005eccc0": {"name": "CheckA_guess", "conv": "thiscall", "args": [], "ret": 2}
+      }
+    },
+    {
+      "name": "state-0x36-no-flag",
+      "args": ["@source", 5],
+      "callees": {
+        "0x005ecc00": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 54}
+      }
+    },
+    {
+      "name": "state-0x36-flag-sends-packet",
+      "args": ["@source", 5],
+      "callees": {
+        "0x005ecc00": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 54},
+        "0x005e10b0": {"name": "GetFlag_guess", "conv": "thiscall", "args": [], "ret": 7}
+      }
+    },
+    {
+      "name": "replace-old-release",
+      "args": ["@source", 5],
+      "memory": [{"addr": "@pickentry", "offset": "0x170", "u32": "@oldrel"}]
+    },
+    {
+      "name": "sret-handle-nonzero-is-freed",
+      "args": ["@source", 5],
+      "callees": {
+        "0x0051ea25": {
+          "name": "FUN_0051ea25_guess",
+          "conv": "cdecl",
+          "args": ["ignore", "u32", "u32"],
+          "ret": "arg0",
+          "writes": [{"arg": 0, "offset": 0, "hex": "78563412"}]
+        }
+      }
+    },
+    {
+      "name": "value-below-500",
+      "args": ["@source", 5],
+      "callees": {
+        "0x005e0f60": {"name": "GetValue_guess", "conv": "thiscall", "args": [], "ret": 100}
+      }
+    },
+    {
+      "name": "second-all-ones",
+      "args": ["@source", 4294967295],
+      "callees": {
+        "0x005ecc00": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 54},
+        "0x005e10b0": {"name": "GetFlag_guess", "conv": "thiscall", "args": [], "ret": 7},
+        "0x005eccc0": {"name": "CheckA_guess", "conv": "thiscall", "args": [], "ret": 2}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5380135,
+    "count": 100,
+    "args": [
+      {"choices": ["@source"]},
+      {"range": [0, 4294967295]}
+    ],
+    "memory": [
+      {"addr": "@pickentry", "offset": "0x170", "type": "u32", "choices": [0, "@oldrel"]},
+      {"addr": "@pickentry", "offset": "0x184", "type": "int", "range": [-64, 64]}
+    ]
+  }
+}

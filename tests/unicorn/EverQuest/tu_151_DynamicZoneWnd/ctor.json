@@ -1,0 +1,133 @@
+{
+  "function": "PanelOwner_guess::PanelOwner_guess",
+  "original": "0x004fe619",
+  "sources": [
+    "src/EverQuest/tu_151_DynamicZoneWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@panelowner",
+  "args": [
+    {
+      "name": "parent_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "panelowner": {
+      "size": "0x1a0",
+      "fill": "random"
+    },
+    "parent": {
+      "size": "0x11c",
+      "fill": "random"
+    }
+  },
+  "callees": {
+    "0x00571e00": {
+      "name": "CXStr::CXStr",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this"
+    },
+    "0x005a3900": {
+      "name": "CSidlScreenWnd::CSidlScreenWnd",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ignore"
+      ],
+      "ret": "this"
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x005a25b0": {
+      "name": "CSidlScreenWnd::CreateChildrenFromSidl",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005a1e10": {
+      "name": "CSidlScreenWnd::GetChildItem",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": [
+        "0x60010000",
+        "0x60010004",
+        "0x60010008",
+        "0x6001000c",
+        "0x60010010",
+        "0x60010014",
+        "0x60010018",
+        "0x6001001c",
+        "0x60010020",
+        "0x60010024",
+        "0x60010028",
+        "0x6001002c",
+        "0x60010030"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "no SIDL piece",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {
+          "addr": "@panelowner",
+          "offset": "0x124",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "has SIDL piece",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {
+          "addr": "@panelowner",
+          "offset": "0x124",
+          "u32": 1
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5236249,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@parent"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@panelowner",
+        "offset": "0x124",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          2,
+          4294967295
+        ]
+      }
+    ]
+  }
+}

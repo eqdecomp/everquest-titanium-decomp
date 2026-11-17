@@ -1,0 +1,438 @@
+{
+  "function": "EQ_PCView_guess::PrepareForRepop_guess",
+  "original": "0x004bca2c",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [
+    {
+      "name": "value",
+      "type": "int"
+    },
+    {
+      "name": "unused",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "object": {
+      "size": "0xc34c",
+      "fill": "random",
+      "init": [
+        { "offset": "0x8", "u32": "@holder" },
+        { "offset": "0xc280", "u32": "@inner_vtbl" }
+      ]
+    },
+    "holder": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [{ "offset": "0x4", "u32": 0 }]
+    },
+    "lookup": { "size": "0x11f4", "fill": "random" },
+    "display": { "size": "0x14", "fill": "random" },
+    "engine": {
+      "size": "0x1ac",
+      "fill": "random",
+      "init": [{ "offset": "0x1a8", "u32": "@subengine" }]
+    },
+    "subengine": { "size": "0xf94", "fill": "random" },
+    "floatholder": { "size": "0x44", "fill": "random" },
+    "effect": { "size": "0x10", "fill": "random" },
+    "entry": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{ "offset": "0x0", "u32": "@rank_vtbl" }]
+    },
+    "child": { "size": "0x4", "fill": "random" },
+    "rank_vtbl": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{ "offset": "0x0", "u32": "@fn_rank_slot0" }]
+    },
+    "fn_rank_slot0": { "size": "0x4" },
+    "inner_vtbl": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [{ "offset": "0x8", "u32": "@fn_inner_slot2" }]
+    },
+    "fn_inner_slot2": { "size": "0x4" },
+    "message": { "size": "0x25c", "fill": "random" }
+  },
+  "memory": [
+    { "addr": "@lookup", "offset": "0x11a4", "u32": 0 },
+    { "addr": "@object", "offset": "0x114", "u8": 0 },
+    { "addr": "@object", "offset": "0xfa0", "u8": 0 },
+    { "addr": "0x0063f53f", "cstr": "" },
+    { "addr": "0x00850ccc", "u32": 0 },
+    { "addr": "0x009254fc", "u32": "@floatholder" },
+    { "addr": "@floatholder", "offset": "0x40", "u32": 0 },
+    { "addr": "0x00905d24", "u32": "@display" },
+    { "addr": "0x009043a4", "u8": 0 },
+    { "addr": "0x00905ce4", "u32": "@engine" },
+    { "addr": "0x00985808", "u8": 1 },
+    { "addr": "0x00905ca9", "u8": 0 },
+    { "addr": "0x00900478", "u32": 0 },
+    { "addr": "0x00905d18", "u32": 0 },
+    { "addr": "0x009238e0", "u8": 1 },
+    { "addr": "0x009238d8", "u32": 1 },
+    { "addr": "0x009238dc", "u32": 1 }
+  ],
+  "callees": {
+    "0x0040e25c": {
+      "name": "FUN_0040e25c",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x00440f51": {
+      "name": "FUN_00440f51",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x00438fdf": {
+      "name": "UpdateSoundEnvironment_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00479eb0": {
+      "name": "FUN_00479eb0",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x0042fcc2": {
+      "name": "IsInRaid_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004307a4": {
+      "name": "SetTargetRaidPlayer_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x0042fcd9": {
+      "name": "ClearPendingInvite_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0040d933": {
+      "name": "GetMaxBuffs_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0040e7ac": {
+      "name": "FUN_0040e7ac",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@effect"
+    },
+    "0x004bb574": {
+      "name": "ResetPlayerVitals_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005ed570": {
+      "name": "FUN_005ed570",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x005ec220": {
+      "name": "FUN_005ec220",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@lookup"
+    },
+    "0x005ed8a0": {
+      "name": "FUN_005ed8a0",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x005ed8e0": {
+      "name": "FUN_005ed8e0",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x004586a5": {
+      "name": "FUN_004586a5",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ]
+    },
+    "0x005f0a80": {
+      "name": "FUN_005f0a80",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x005f06b0": {
+      "name": "FUN_005f06b0",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x004b96c3": {
+      "name": "FUN_004b96c3",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ]
+    },
+    "0x0040cc50": {
+      "name": "GetInventorySlot_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x005eccc0": {
+      "name": "FUN_005eccc0",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005ecc30": {
+      "name": "FUN_005ecc30",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005ec630": {
+      "name": "FUN_005ec630",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": "@child"
+    },
+    "0x005e0a30": {
+      "name": "FUN_005e0a30",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x005ec660": {
+      "name": "FUN_005ec660",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x0041aa84": {
+      "name": "FUN_0041aa84",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "int"
+      ]
+    },
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "ptr",
+        "int",
+        "char"
+      ],
+      "ret": 0
+    },
+    "0x00416963": {
+      "name": "Max_HP_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 1
+    },
+    "0x00417cc8": {
+      "name": "FUN_00417cc8",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x0040e293": {
+      "name": "FUN_0040e293",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x00417cb3": {
+      "name": "FUN_00417cb3",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x00416a40": {
+      "name": "Max_Endurance",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "@fn_inner_slot2": {
+      "name": "inner slot 2",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "@fn_rank_slot0": {
+      "name": "rank slot 0",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "below-threshold",
+      "args": [1, 1]
+    },
+    {
+      "name": "threshold-9",
+      "args": [1, 1],
+      "memory": [{ "addr": "@lookup", "offset": "0x11a4", "u32": 9 }]
+    },
+    {
+      "name": "threshold-10",
+      "args": [1, 1],
+      "memory": [{ "addr": "@lookup", "offset": "0x11a4", "u32": 10 }]
+    },
+    {
+      "name": "limit-80-below",
+      "args": [1, 1],
+      "memory": [
+        { "addr": "@lookup", "offset": "0x11a4", "u32": 79 },
+        { "addr": "0x00905ca9", "u8": 1 }
+      ]
+    },
+    {
+      "name": "limit-80-equal-state-engine-message-effect-loop",
+      "args": [0, 1],
+      "memory": [
+        { "addr": "@lookup", "offset": "0x11a4", "u32": 80 },
+        { "addr": "0x00905ca9", "u8": 1 },
+        { "addr": "0x009043a4", "u8": 1 },
+        { "addr": "0x00905d18", "u32": "@message" }
+      ],
+      "callees": {
+        "0x0042fcc2": { "conv": "thiscall", "args": [], "ret": 1 },
+        "0x0040d933": { "conv": "thiscall", "args": [], "ret": 2 }
+      }
+    },
+    {
+      "name": "zero-limit",
+      "args": [1, 1],
+      "memory": [{ "addr": "0x00900478", "u32": 6 }]
+    },
+    {
+      "name": "blocked-entry-release-and-virtual-slot",
+      "args": [1, 1],
+      "memory": [{ "addr": "@object", "offset": "0x114", "u8": 1 }],
+      "callees": {
+        "0x0040cc50": { "conv": "thiscall", "args": ["int"], "ret": "@entry" },
+        "0x005eccc0": { "conv": "thiscall", "args": [], "ret": 1 },
+        "0x005ecc30": { "conv": "thiscall", "args": [], "ret": 1 },
+        "0x005ec630": { "conv": "thiscall", "args": ["int"], "ret": "@child" },
+        "0x005e0a30": { "conv": "thiscall", "args": ["int"], "ret": 0 }
+      }
+    },
+    {
+      "name": "blocked-empty-active-entry",
+      "args": [1, 1],
+      "memory": [{ "addr": "@object", "offset": "0x114", "u8": 1 }],
+      "callees": {
+        "0x0040cc50": { "conv": "thiscall", "args": ["int"], "ret": "@entry" },
+        "0x005eccc0": { "conv": "thiscall", "args": [], "ret": 1 },
+        "0x005ecc30": { "conv": "thiscall", "args": [], "ret": 0 },
+        "0x005e0a30": { "conv": "thiscall", "args": ["int"], "ret": 1 }
+      }
+    },
+    {
+      "name": "unblocked-inactive-entry",
+      "args": [1, 1],
+      "memory": [{ "addr": "@object", "offset": "0x114", "u8": 1 }],
+      "callees": {
+        "0x0040cc50": { "conv": "thiscall", "args": ["int"], "ret": "@entry" },
+        "0x005eccc0": { "conv": "thiscall", "args": [], "ret": 0 },
+        "0x005e0a30": { "conv": "thiscall", "args": ["int"], "ret": 0 }
+      }
+    },
+    {
+      "name": "object-limit-80-below",
+      "args": [1, 1],
+      "memory": [
+        { "addr": "@lookup", "offset": "0x11a4", "u32": 79 },
+        { "addr": "@object", "offset": "0xfa0", "u8": 1 }
+      ]
+    },
+    {
+      "name": "limit-80-above",
+      "args": [1, 1],
+      "memory": [
+        { "addr": "@lookup", "offset": "0x11a4", "u32": 81 },
+        { "addr": "0x00905ca9", "u8": 1 }
+      ]
+    },
+    {
+      "name": "effect-initialization-loop",
+      "args": [1, 1],
+      "callees": {
+        "0x0040d933": { "conv": "thiscall", "args": [], "ret": 2 }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4966956,
+    "count": 100,
+    "args": [
+      { "choices": [0, 1, 10] },
+      { "choices": [-1, 0, 1] }
+    ],
+    "memory": [
+      { "addr": "@lookup", "offset": "0x11a4", "type": "int", "choices": [-1, 0, 9, 10, 11, 79, 80, 81, 100] },
+      { "addr": "@object", "offset": "0x114", "type": "u8", "choices": [0, 1] },
+      { "addr": "@object", "offset": "0xfa0", "type": "u8", "choices": [0, 1] },
+      { "addr": "0x00905ca9", "type": "u8", "choices": [0, 1] },
+      { "addr": "0x009043a4", "type": "u8", "choices": [0, 1] },
+      { "addr": "0x00900478", "type": "int", "choices": [0, 6] }
+    ]
+  }
+}

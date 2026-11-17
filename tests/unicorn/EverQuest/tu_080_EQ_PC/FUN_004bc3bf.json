@@ -1,0 +1,235 @@
+{
+  "function": "EQ_PCView_guess::MaxAirSupply_guess",
+  "original": "0x004bc3bf",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "object": {
+      "size": "0xc34c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@holder"
+        }
+      ]
+    },
+    "holder": {
+      "size": "0x8",
+      "fill": "zero"
+    },
+    "lookup": {
+      "size": "0x11a8",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "@object", "offset": "0xc294", "u32": 80}
+  ],
+  "callees": {
+    "0x004106a3": {
+      "name": "PcCharacter1View_guess::TotalSpellAffects_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "int", "int"],
+      "ret": 50
+    },
+    "0x005ec220": {
+      "name": "ValueEntryMethod_guess::GetObject_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@lookup"
+    }
+  },
+  "cases": [
+    {
+      "name": "typical-scale-50",
+      "args": []
+    },
+    {
+      "name": "value-below-ten-gives-ten",
+      "args": [],
+      "memory": [
+        {"addr": "@object", "offset": "0xc294", "u32": 35}
+      ]
+    },
+    {
+      "name": "value-at-ten-edge",
+      "args": [],
+      "memory": [
+        {"addr": "@object", "offset": "0xc294", "u32": 50}
+      ]
+    },
+    {
+      "name": "value-equals-scale",
+      "args": [],
+      "memory": [
+        {"addr": "@object", "offset": "0xc294", "u32": 130}
+      ]
+    },
+    {
+      "name": "value-above-scale-clamps",
+      "args": [],
+      "callees": {
+        "0x004106a3": {"name": "PcCharacter1View_guess::TotalSpellAffects_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 30},
+        "0x005ec220": {"name": "ValueEntryMethod_guess::GetObject_guess", "conv": "thiscall", "args": [], "ret": "@lookup"}
+      },
+      "memory": [
+        {"addr": "@object", "offset": "0xc294", "u32": 256}
+      ]
+    },
+    {
+      "name": "scale-zero-becomes-100",
+      "args": [],
+      "callees": {
+        "0x004106a3": {"name": "PcCharacter1View_guess::TotalSpellAffects_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 0},
+        "0x005ec220": {"name": "ValueEntryMethod_guess::GetObject_guess", "conv": "thiscall", "args": [], "ret": "@lookup"}
+      },
+      "memory": [
+        {"addr": "@object", "offset": "0xc294", "u32": 100}
+      ]
+    },
+    {
+      "name": "scale-negative-becomes-100",
+      "args": [],
+      "callees": {
+        "0x004106a3": {"name": "PcCharacter1View_guess::TotalSpellAffects_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": -5},
+        "0x005ec220": {"name": "ValueEntryMethod_guess::GetObject_guess", "conv": "thiscall", "args": [], "ret": "@lookup"}
+      },
+      "memory": [
+        {"addr": "@object", "offset": "0xc294", "u32": 100}
+      ]
+    },
+    {
+      "name": "negative-value-truncates-toward-zero",
+      "args": [],
+      "callees": {
+        "0x004106a3": {"name": "PcCharacter1View_guess::TotalSpellAffects_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 33},
+        "0x005ec220": {"name": "ValueEntryMethod_guess::GetObject_guess", "conv": "thiscall", "args": [], "ret": "@lookup"}
+      },
+      "memory": [
+        {"addr": "@object", "offset": "0xc294", "u32": 0}
+      ]
+    },
+    {
+      "name": "rounding-truncation",
+      "args": [],
+      "callees": {
+        "0x004106a3": {"name": "PcCharacter1View_guess::TotalSpellAffects_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 33},
+        "0x005ec220": {"name": "ValueEntryMethod_guess::GetObject_guess", "conv": "thiscall", "args": [], "ret": "@lookup"}
+      },
+      "memory": [
+        {"addr": "@object", "offset": "0xc294", "u32": 70}
+      ]
+    },
+    {
+      "name": "lookup-0x80-gives-0x7f",
+      "args": [],
+      "memory": [
+        {"addr": "@lookup", "offset": "0x1198", "u32": 128}
+      ]
+    },
+    {
+      "name": "lookup-0x14a-gives-0x100",
+      "args": [],
+      "memory": [
+        {"addr": "@lookup", "offset": "0x1198", "u32": 330}
+      ]
+    },
+    {
+      "name": "lookup-0x80-ignores-zero-scale",
+      "args": [],
+      "callees": {
+        "0x004106a3": {"name": "PcCharacter1View_guess::TotalSpellAffects_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 0},
+        "0x005ec220": {"name": "ValueEntryMethod_guess::GetObject_guess", "conv": "thiscall", "args": [], "ret": "@lookup"}
+      },
+      "memory": [
+        {"addr": "@lookup", "offset": "0x1198", "u32": 128}
+      ]
+    },
+    {
+      "name": "lookup-0x7f-is-ordinary",
+      "args": [],
+      "memory": [
+        {"addr": "@lookup", "offset": "0x1198", "u32": 127},
+        {"addr": "@object", "offset": "0xc294", "u32": 80}
+      ]
+    },
+    {
+      "name": "lookup-0x14b-is-ordinary",
+      "args": [],
+      "memory": [
+        {"addr": "@lookup", "offset": "0x1198", "u32": 331},
+        {"addr": "@object", "offset": "0xc294", "u32": 80}
+      ]
+    },
+    {
+      "name": "value-ten-scale-ten",
+      "args": [],
+      "callees": {
+        "0x004106a3": {"name": "PcCharacter1View_guess::TotalSpellAffects_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 10},
+        "0x005ec220": {"name": "ValueEntryMethod_guess::GetObject_guess", "conv": "thiscall", "args": [], "ret": "@lookup"}
+      },
+      "memory": [
+        {"addr": "@object", "offset": "0xc294", "u32": 130}
+      ]
+    },
+    {
+      "name": "scale-one-stays-one",
+      "args": [],
+      "callees": {
+        "0x004106a3": {"name": "PcCharacter1View_guess::TotalSpellAffects_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 1},
+        "0x005ec220": {"name": "ValueEntryMethod_guess::GetObject_guess", "conv": "thiscall", "args": [], "ret": "@lookup"}
+      },
+      "memory": [
+        {"addr": "@object", "offset": "0xc294", "u32": 80}
+      ]
+    },
+    {
+      "name": "value-99-scale-100-divides-by-100",
+      "args": [],
+      "callees": {
+        "0x004106a3": {"name": "PcCharacter1View_guess::TotalSpellAffects_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 100},
+        "0x005ec220": {"name": "ValueEntryMethod_guess::GetObject_guess", "conv": "thiscall", "args": [], "ret": "@lookup"}
+      },
+      "memory": [
+        {"addr": "@object", "offset": "0xc294", "u32": 129}
+      ]
+    },
+    {
+      "name": "value-ten-above-small-scale-clamps",
+      "args": [],
+      "callees": {
+        "0x004106a3": {"name": "PcCharacter1View_guess::TotalSpellAffects_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 5},
+        "0x005ec220": {"name": "ValueEntryMethod_guess::GetObject_guess", "conv": "thiscall", "args": [], "ret": "@lookup"}
+      },
+      "memory": [
+        {"addr": "@object", "offset": "0xc294", "u32": 230}
+      ]
+    }
+  ],
+  "_survivors": "L1788: the second ValueBase_guess() reload returns the same pointer (holder and offset do not change between the two calls), so no input can tell it apart",
+  "fuzz": {
+    "seed": 4965311,
+    "count": 200,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@object",
+        "offset": "0xc294",
+        "type": "int",
+        "choices": [0, 1, 20, 29, 30, 31, 40, 50, 70, 100, 130, 131, 200, 256, 1000]
+      },
+      {
+        "addr": "@lookup",
+        "offset": "0x1198",
+        "type": "int",
+        "choices": [0, 1, 127, 128, 330, 331, 255, 9999]
+      }
+    ]
+  }
+}

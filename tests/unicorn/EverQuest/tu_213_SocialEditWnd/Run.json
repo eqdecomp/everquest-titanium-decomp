@@ -1,0 +1,139 @@
+{
+  "function": "CSkillsWndListView_guess::AboutToShow_guess",
+  "original": "0x00554d7c",
+  "sources": ["src/EverQuest/tu_213_SocialEditWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@fun_00554d7c",
+  "args": [],
+  "ret": "char",
+  "objects": {
+    "fun_00554d7c": {
+      "size": "0x16c",
+      "fill": "random",
+      "init": [{"offset": "0x168", "u32": "@subobject"}]
+    },
+    "subobject": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": "0", "u32": "@sub_vtable"}]
+    },
+    "sub_vtable": {
+      "size": "0x13c",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x130", "u32": "@fn_slot_130"},
+        {"offset": "0x138", "u32": "@fn_slot_138"}
+      ]
+    },
+    "fn_slot_130": {"size": "0x4", "fill": "zero"},
+    "fn_slot_138": {"size": "0x4", "fill": "zero"},
+    "global_root": {
+      "size": "0xc2b4",
+      "fill": "random",
+      "init": [{"offset": "0x8", "u32": "@flag_header"}]
+    },
+    "flag_header": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [{"offset": "0x4", "u32": 0}]
+    }
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@global_root"},
+    {"addr": "@global_root", "offset": "0x14", "size": 64, "fill": "zero"}
+  ],
+  "callees": {
+    "0x0041b0de": {
+      "name": "FUN_0041b0de",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x00554b07": {
+      "name": "FUN_00554b07",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "@fn_slot_130": {
+      "name": "subobject_slot_130",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_slot_138": {
+      "name": "subobject_slot_138",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "coverage_ok": {
+    "00554DD3-00554DD4": "the int3 branch is unreachable: the flag loop exits when its index reaches 32"
+  },
+  "cases": [
+    {
+      "name": "queries_false_flags_clear",
+      "args": [],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "query_first_true_and_flag_boundaries",
+      "args": [],
+      "callees": {
+        "0x0041b0de": {
+          "name": "FUN_0041b0de",
+          "conv": "thiscall",
+          "args": ["int"],
+          "ret": [1, 0]
+        }
+      },
+      "memory": [
+        {"addr": "@global_root", "offset": "0x14", "u8": 1},
+        {"addr": "@global_root", "offset": "0x33", "u8": 1}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "query_last_true",
+      "args": [],
+      "callees": {
+        "0x0041b0de": {
+          "name": "FUN_0041b0de",
+          "conv": "thiscall",
+          "args": ["int"],
+          "ret": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+        }
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "null_subobject",
+      "args": [],
+      "memory": [
+        {"addr": "@fun_00554d7c", "offset": "0x168", "u32": 0},
+        {"addr": "@global_root", "offset": "0x33", "u8": 1}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "offset_flag_boundaries",
+      "args": [],
+      "memory": [
+        {"addr": "@flag_header", "offset": "0x4", "u32": 31},
+        {"addr": "@global_root", "offset": "0x33", "u8": 1},
+        {"addr": "@global_root", "offset": "0x52", "u8": 1}
+      ],
+      "expect": {"ret": 1}
+    }
+  ],
+  "fuzz": {
+    "seed": 5590396,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@fun_00554d7c", "offset": "0x168", "type": "ptr", "choices": [0, "@subobject"]},
+      {"addr": "@flag_header", "offset": "0x4", "type": "u32", "choices": [0, 1, 31]},
+      {"addr": "@global_root", "offset": "0x14", "type": "u8", "count": 64, "choices": [0, 1]}
+    ]
+  }
+}

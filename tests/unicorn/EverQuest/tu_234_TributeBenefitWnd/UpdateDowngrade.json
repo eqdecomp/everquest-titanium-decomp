@@ -1,0 +1,160 @@
+{
+  "function": "CTributeBenefitWnd_guess::UpdateDowngrade_guess",
+  "original": "0x0056bc4d",
+  "sources": ["src/EverQuest/tu_234_TributeBenefitWnd.cpp"],
+  "size": "0xf9",
+  "conv": "thiscall",
+  "this": "@benefitowner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "benefitowner": {"size": "0x1c4", "fill": "zero"},
+    "target": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@target_vtable"}]
+    },
+    "target_vtable": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xfc", "u32": "@fn_slot63"}]
+    },
+    "dispatch": {"size": "4", "fill": "zero"},
+    "dispatch_text": {"size": "0x20", "fill": "zero"},
+    "threshold": {"size": "0xe88", "fill": "zero"},
+    "statusowner": {"size": "4", "fill": "zero"},
+    "fn_slot63": {"size": "4"}
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@dispatch"},
+    {"addr": "0x00850350", "u32": 0},
+    {"addr": "0x00850375", "u8": 0},
+    {"addr": "0x00905d00", "u32": "@threshold"},
+    {"addr": "0x009929a8", "u32": 0},
+    {"addr": "@benefitowner", "offset": "0x164", "u32": "@target"},
+    {"addr": "@dispatch_text", "cstr": "Downgrade status"},
+    {"addr": "@threshold", "offset": "0xe80", "hex": "0600000000000000"}
+  ],
+  "callees": {
+    "0x005dfa00": {"name": "DispatchText_guess", "conv": "thiscall", "args": ["int", "int"], "ret": "@dispatch_text"},
+    "0x00571e00": {"name": "BenefitName_ctor_guess", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x00571d00": {"name": "BenefitName_release_guess", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x00434495": {"name": "Eligibility_check_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x00435150": {"name": "Eligibility_value_guess", "conv": "thiscall", "args": [], "ret": [1, 5]},
+    "0x0059dd30": {"name": "StatusOwner_ready_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "@fn_slot63": {
+      "name": "TextTarget_setText_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]
+    }
+  },
+  "cases": [
+    {
+      "name": "null target",
+      "args": [],
+      "memory": [{"addr": "@benefitowner", "offset": "0x164", "u32": 0}]
+    },
+    {
+      "name": "eligibility unavailable",
+      "args": [],
+      "memory": [
+        {"addr": "0x00850375", "u8": 0},
+        {"addr": "@threshold", "offset": "0xe80", "hex": "0700000000000000"}
+      ],
+      "callees": {
+        "0x00434495": {"name": "Eligibility_check_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x00435150": {"name": "Eligibility_value_guess", "conv": "thiscall", "args": [], "ret": 6}
+      }
+    },
+    {
+      "name": "eligibility value zero",
+      "args": [],
+      "memory": [{"addr": "@threshold", "offset": "0xe80", "hex": "0700000000000000"}],
+      "callees": {
+        "0x00434495": {"name": "Eligibility_check_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x00435150": {"name": "Eligibility_value_guess", "conv": "thiscall", "args": [], "ret": [0, 6]}
+      }
+    },
+    {
+      "name": "positive value below high threshold",
+      "args": [],
+      "memory": [{"addr": "@threshold", "offset": "0xe80", "hex": "0000000001000000"}],
+      "callees": {
+        "0x00434495": {"name": "Eligibility_check_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x00435150": {"name": "Eligibility_value_guess", "conv": "thiscall", "args": [], "ret": [1, 5]}
+      }
+    },
+    {
+      "name": "positive value equals threshold",
+      "args": [],
+      "memory": [{"addr": "@threshold", "offset": "0xe80", "hex": "0500000000000000"}],
+      "callees": {
+        "0x00434495": {"name": "Eligibility_check_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x00435150": {"name": "Eligibility_value_guess", "conv": "thiscall", "args": [], "ret": [1, 5]}
+      }
+    },
+    {
+      "name": "positive value above negative threshold",
+      "args": [],
+      "memory": [{"addr": "@threshold", "offset": "0xe80", "hex": "ffffffffffffffff"}],
+      "callees": {
+        "0x00434495": {"name": "Eligibility_check_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x00435150": {"name": "Eligibility_value_guess", "conv": "thiscall", "args": [], "ret": [1, 5]}
+      }
+    },
+    {
+      "name": "negative eligibility value",
+      "args": [],
+      "memory": [{"addr": "@threshold", "offset": "0xe80", "hex": "0600000000000000"}],
+      "callees": {
+        "0x00434495": {"name": "Eligibility_check_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x00435150": {"name": "Eligibility_value_guess", "conv": "thiscall", "args": [], "ret": [-1, 5]}
+      }
+    },
+    {
+      "name": "ready status owner masks value",
+      "args": [],
+      "memory": [
+        {"addr": "0x009929a8", "u32": "@statusowner"},
+        {"addr": "@threshold", "offset": "0xe80", "hex": "0600000000000000"}
+      ],
+      "callees": {
+        "0x00434495": {"name": "Eligibility_check_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x00435150": {"name": "Eligibility_value_guess", "conv": "thiscall", "args": [], "ret": [1, 4]},
+        "0x0059dd30": {"name": "StatusOwner_ready_guess", "conv": "thiscall", "args": [], "ret": 1}
+      }
+    },
+    {
+      "name": "not ready status owner preserves value",
+      "args": [],
+      "memory": [
+        {"addr": "0x009929a8", "u32": "@statusowner"},
+        {"addr": "@threshold", "offset": "0xe80", "hex": "0600000000000000"}
+      ],
+      "callees": {
+        "0x00434495": {"name": "Eligibility_check_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x00435150": {"name": "Eligibility_value_guess", "conv": "thiscall", "args": [], "ret": [1, 4]},
+        "0x0059dd30": {"name": "StatusOwner_ready_guess", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "selector one",
+      "args": [],
+      "memory": [{"addr": "0x00850375", "u8": 1}]
+    }
+  ],
+  "fuzz": {
+    "seed": 5684301,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@benefitowner", "offset": "0x164", "type": "ptr", "choices": [0, "@target"]},
+      {"addr": "0x00850375", "type": "u8", "choices": [0, 1]},
+      {"addr": "@threshold", "offset": "0xe80", "type": "i64", "choices": [-1, 0, 1, 5, 6, 4294967296]},
+      {"addr": "0x009929a8", "type": "ptr", "choices": [0, "@statusowner"]}
+    ]
+  },
+  "_survivors": "L1458: removing this zero store is unobservable because fixture stack locals start zeroed; L1461: same for the unavailable-status branch"
+}

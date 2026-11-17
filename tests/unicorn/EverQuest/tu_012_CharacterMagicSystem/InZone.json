@@ -1,0 +1,1072 @@
+{
+  "function": "CharacterMagicSystem_guess::IsInRestrictedArea_guess",
+  "original": "0x0040dd2e",
+  "sources": [
+    "src/EverQuest/tu_012_CharacterMagicSystem.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@charactermagicsystem",
+  "args": [
+    {
+      "name": "pos_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "charactermagicsystem": {
+      "size": "0x108",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@offsetholder"
+        }
+      ]
+    },
+    "offsetholder": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 0
+        }
+      ]
+    },
+    "pos": {
+      "size": "0x3c",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00640E1C",
+      "from_image": "0x00640E1C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640E18",
+      "from_image": "0x00640E18",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640E14",
+      "from_image": "0x00640E14",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640E10",
+      "from_image": "0x00640E10",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640E0C",
+      "from_image": "0x00640E0C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640E08",
+      "from_image": "0x00640E08",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640E04",
+      "from_image": "0x00640E04",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640E00",
+      "from_image": "0x00640E00",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DFC",
+      "from_image": "0x00640DFC",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DF8",
+      "from_image": "0x00640DF8",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DF4",
+      "from_image": "0x00640DF4",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DF0",
+      "from_image": "0x00640DF0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DEC",
+      "from_image": "0x00640DEC",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DE8",
+      "from_image": "0x00640DE8",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DE4",
+      "from_image": "0x00640DE4",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DE0",
+      "from_image": "0x00640DE0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DDC",
+      "from_image": "0x00640DDC",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DD8",
+      "from_image": "0x00640DD8",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DD4",
+      "from_image": "0x00640DD4",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DD0",
+      "from_image": "0x00640DD0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DCC",
+      "from_image": "0x00640DCC",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DC8",
+      "from_image": "0x00640DC8",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DC4",
+      "from_image": "0x00640DC4",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DC0",
+      "from_image": "0x00640DC0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DBC",
+      "from_image": "0x00640DBC",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DB8",
+      "from_image": "0x00640DB8",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DB4",
+      "from_image": "0x00640DB4",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DB0",
+      "from_image": "0x00640DB0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DAC",
+      "from_image": "0x00640DAC",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DA8",
+      "from_image": "0x00640DA8",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DA4",
+      "from_image": "0x00640DA4",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640DA0",
+      "from_image": "0x00640DA0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D9C",
+      "from_image": "0x00640D9C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D98",
+      "from_image": "0x00640D98",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D94",
+      "from_image": "0x00640D94",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D90",
+      "from_image": "0x00640D90",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D8C",
+      "from_image": "0x00640D8C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D88",
+      "from_image": "0x00640D88",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D84",
+      "from_image": "0x00640D84",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D80",
+      "from_image": "0x00640D80",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D7C",
+      "from_image": "0x00640D7C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D78",
+      "from_image": "0x00640D78",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D74",
+      "from_image": "0x00640D74",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D70",
+      "from_image": "0x00640D70",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D6C",
+      "from_image": "0x00640D6C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D68",
+      "from_image": "0x00640D68",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D64",
+      "from_image": "0x00640D64",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D60",
+      "from_image": "0x00640D60",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D5C",
+      "from_image": "0x00640D5C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D58",
+      "from_image": "0x00640D58",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D54",
+      "from_image": "0x00640D54",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D50",
+      "from_image": "0x00640D50",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D4C",
+      "from_image": "0x00640D4C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D48",
+      "from_image": "0x00640D48",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D44",
+      "from_image": "0x00640D44",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D40",
+      "from_image": "0x00640D40",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D3C",
+      "from_image": "0x00640D3C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D38",
+      "from_image": "0x00640D38",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D34",
+      "from_image": "0x00640D34",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640D30",
+      "from_image": "0x00640D30",
+      "image_size": 4
+    }
+  ],
+  "cases": [
+    {
+      "name": "null position",
+      "args": [
+        0
+      ]
+    },
+    {
+      "name": "zone e0",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 224
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": 1500.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": -100.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 6e",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 110
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": 5310.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": 400.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 5c",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 92
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": -2175.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": 1300.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 4e",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 78
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": -1700.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": -800.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone d",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 13
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": -600.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": -400.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 54",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 84
+        }
+      ]
+    },
+    {
+      "name": "zone 5d",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 93
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": 2800.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": 2500.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 72 first rectangle",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 114
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": 0.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": -500.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 72 second rectangle",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 114
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": 700.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": -500.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 71 first rectangle",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 113
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": -80.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": -630.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 71 second rectangle",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 113
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": -200.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": 3160.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 16",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 22
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": -1450.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": -200.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 22",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 34
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": 2750.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": 890.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 44",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 68
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": -1120.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": -2525.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 1e",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 30
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": 1775.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": -5040.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 23",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 35
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": -1420.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": 1000.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "unknown zone",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "zone e0 outside",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 224
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": 1200.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": -100.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 6e y outside",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 110
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": 5310.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": 600.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 72 second z lower edge",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 114
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": 700.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": -500.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": -10.0
+        }
+      ]
+    },
+    {
+      "name": "zone 22 y outside",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 34
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": 2750.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": 1000.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 22 y lower edge",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 34
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": 2750.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": 790.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "zone 5d y above range",
+      "args": [
+        "@pos"
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x104",
+          "u32": 93
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x30",
+          "f32": 2800.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x34",
+          "f32": 3900.0
+        },
+        {
+          "addr": "@pos",
+          "offset": "0x38",
+          "f32": 0.0
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4250926,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@pos"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@charactermagicsystem",
+        "offset": "0x104",
+        "type": "u32",
+        "choices": [
+          224,
+          110,
+          92,
+          78,
+          13,
+          84,
+          93,
+          114,
+          113,
+          22,
+          34,
+          68,
+          30,
+          35,
+          1
+        ]
+      },
+      {
+        "addr": "@pos",
+        "offset": "0x30",
+        "type": "float",
+        "choices": [
+          -2250.0,
+          -1610.0,
+          -1520.0,
+          -1220.0,
+          -720.0,
+          -320.0,
+          -287.0,
+          -176.0,
+          -10.0,
+          0.0,
+          17.0,
+          535.0,
+          1000.0,
+          1230.0,
+          1740.0,
+          2344.0,
+          2650.0,
+          3538.0,
+          5270.0,
+          5365.0
+        ]
+      },
+      {
+        "addr": "@pos",
+        "offset": "0x34",
+        "type": "float",
+        "choices": [
+          -5140.0,
+          -2625.0,
+          -930.0,
+          -800.0,
+          -657.0,
+          -603.0,
+          -550.0,
+          -450.0,
+          -300.0,
+          -260.0,
+          -200.0,
+          -100.0,
+          230.0,
+          275.0,
+          325.0,
+          510.0,
+          790.0,
+          900.0,
+          1100.0,
+          1180.0,
+          1560.0,
+          2011.0,
+          3139.0,
+          3196.0,
+          3852.0
+        ]
+      },
+      {
+        "addr": "@pos",
+        "offset": "0x38",
+        "type": "float",
+        "choices": [
+          -10.0,
+          0.0,
+          60.0,
+          66.0,
+          120.0
+        ]
+      }
+    ]
+  }
+}

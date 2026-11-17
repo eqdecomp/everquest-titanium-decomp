@@ -1,0 +1,565 @@
+{
+  "function": "MailtoLink_guess::Quote_guess",
+  "original": "0x0042a5df",
+  "sources": [
+    "src/EverQuest/tu_018_MailtoLink.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@mailtolink",
+  "args": [
+    {
+      "name": "result",
+      "type": "ptr"
+    },
+    {
+      "name": "address_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "mailtolink": {
+      "size": "0x80",
+      "fill": "random"
+    },
+    "result": {
+      "size": "0x1c",
+      "fill": "random"
+    },
+    "address": {
+      "size": "0x1c",
+      "fill": "random"
+    },
+    "heapText": {
+      "size": "0x20",
+      "fill": "random"
+    },
+    "record": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "entries": {
+      "size": "0x38",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x00641688",
+      "from_image": "0x00641688",
+      "image_size": 3
+    },
+    {
+      "addr": "0x0063fe10",
+      "cstr": " <"
+    },
+    {
+      "addr": "0x0063fde4",
+      "from_image": "0x0063FDE4",
+      "image_size": 3
+    },
+    {
+      "addr": "0x00641684",
+      "from_image": "0x00641684",
+      "image_size": 2
+    },
+    {
+      "addr": "0x0063f9ec",
+      "from_image": "0x0063F9EC",
+      "image_size": 2
+    },
+    {
+      "addr": "@address",
+      "offset": "0x4",
+      "cstr": "a,b"
+    },
+    {
+      "addr": "@address",
+      "offset": "0x14",
+      "u32": 3
+    },
+    {
+      "addr": "@address",
+      "offset": "0x18",
+      "u32": 15
+    }
+  ],
+  "callees": {
+    "0x00427663": {
+      "name": "FUN_00427663",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x00425370": {
+      "name": "FindChar_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "ptr",
+        "ignore"
+      ],
+      "ret": 0,
+      "passthrough": true
+    },
+    "0x00426ac9": {
+      "name": "FUN_00426ac9",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [
+        "ptr",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x00425491": {
+      "name": "FUN_00425491",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [
+        "ignore",
+        "u32",
+        "u32"
+      ],
+      "ret": -1
+    },
+    "0x00428534": {
+      "name": "MailtoLookup_guess::Find_guess",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x0040ab88": {
+      "name": "PathVector_guess::Size_guess",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [],
+      "ret": 1
+    },
+    "0x00426786": {
+      "name": "FUN_00426786",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x0042650a": {
+      "name": "FUN_0042650a",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x004263d1": {
+      "name": "FUN_004263d1",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "char"
+      ],
+      "ret": 0
+    },
+    "0x004276d4": {
+      "name": "FUN_004276d4",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    "0x00403174": {
+      "name": "basic_string::assign",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [
+        "ignore",
+        "u32",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x0040291e": {
+      "name": "basic_string::_Tidy",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [
+        "bool",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x00425a76": {
+      "name": "FUN_00425a76",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [],
+      "ret": 0
+    },
+    "0x00623d8d": {
+      "name": "std::ios_base::~ios_base",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [],
+      "ret": 0
+    },
+    "0x0042a439": {
+      "name": "QualifyChannelName_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x00426afa": {
+      "name": "FUN_00426afa",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [
+        "ignore",
+        "ignore",
+        "char"
+      ],
+      "ret": 0
+    },
+    "0x00425a32": {
+      "name": "FUN_00425a32",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [
+        "ignore",
+        "u32"
+      ],
+      "ret": -1
+    }
+  },
+  "rewrite_aliases": {
+    "?_Tidy@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@IAEX_NI@Z": "0x0040291e"
+  },
+  "cases": [
+    {
+      "name": "empty",
+      "args": [
+        "@result",
+        "@address"
+      ],
+      "memory": [
+        {
+          "addr": "@address",
+          "offset": "0x4",
+          "cstr": ""
+        },
+        {
+          "addr": "@address",
+          "offset": "0x14",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "angle token",
+      "args": [
+        "@result",
+        "@address"
+      ],
+      "memory": [
+        {
+          "addr": "@address",
+          "offset": "0x4",
+          "cstr": "<a>"
+        },
+        {
+          "addr": "@address",
+          "offset": "0x14",
+          "u32": 3
+        }
+      ],
+      "callees": {
+        "0x00425491": {
+          "name": "find angle",
+          "conv": "thiscall",
+          "this": "ignore",
+          "args": [
+            "ignore",
+            "u32",
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "leading spaces and minus",
+      "args": [
+        "@result",
+        "@address"
+      ],
+      "memory": [
+        {
+          "addr": "@address",
+          "offset": "0x4",
+          "cstr": "  -a"
+        },
+        {
+          "addr": "@address",
+          "offset": "0x14",
+          "u32": 4
+        }
+      ]
+    },
+    {
+      "name": "multiple tokens",
+      "args": [
+        "@result",
+        "@address"
+      ],
+      "memory": [
+        {
+          "addr": "@address",
+          "offset": "0x4",
+          "cstr": "a,b"
+        },
+        {
+          "addr": "@address",
+          "offset": "0x14",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "heap-backed input",
+      "args": [
+        "@result",
+        "@address"
+      ],
+      "memory": [
+        {
+          "addr": "@heapText",
+          "cstr": "<a>"
+        },
+        {
+          "addr": "@address",
+          "offset": "0x4",
+          "u32": "@heapText"
+        },
+        {
+          "addr": "@address",
+          "offset": "0x14",
+          "u32": 3
+        },
+        {
+          "addr": "@address",
+          "offset": "0x18",
+          "u32": 16
+        }
+      ],
+      "callees": {
+        "0x00425491": {
+          "name": "find angle",
+          "conv": "thiscall",
+          "this": "ignore",
+          "args": [
+            "ignore",
+            "u32",
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "duplicate token",
+      "args": [
+        "@result",
+        "@address"
+      ],
+      "memory": [
+        {
+          "addr": "@address",
+          "offset": "0x4",
+          "cstr": "a,b"
+        },
+        {
+          "addr": "@address",
+          "offset": "0x14",
+          "u32": 3
+        }
+      ],
+      "callees": {
+        "0x00425a32": {
+          "name": "dedupe",
+          "conv": "thiscall",
+          "this": "ignore",
+          "args": [
+            "ignore",
+            "u32"
+          ],
+          "ret": [
+            -1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "record with an address",
+      "args": [
+        "@result",
+        "@address"
+      ],
+      "memory": [
+        {
+          "addr": "@address",
+          "offset": "0x4",
+          "cstr": "a"
+        },
+        {
+          "addr": "@address",
+          "offset": "0x14",
+          "u32": 1
+        },
+        {
+          "addr": "@record",
+          "offset": "0x20",
+          "u32": "@entries"
+        },
+        {
+          "addr": "@record",
+          "offset": "0x24",
+          "u32": "@entries+0x38"
+        },
+        {
+          "addr": "@record",
+          "offset": "0x48",
+          "hex": "01"
+        }
+      ],
+      "callees": {
+        "0x00428534": {
+          "name": "record lookup",
+          "conv": "thiscall",
+          "this": "ignore",
+          "args": [
+            "ptr"
+          ],
+          "ret": "@record"
+        }
+      }
+    },
+    {
+      "name": "negative record addresses",
+      "args": [
+        "@result",
+        "@address"
+      ],
+      "memory": [
+        {
+          "addr": "@address",
+          "offset": "0x4",
+          "cstr": "-a"
+        },
+        {
+          "addr": "@address",
+          "offset": "0x14",
+          "u32": 2
+        },
+        {
+          "addr": "@record",
+          "offset": "0x20",
+          "u32": "@entries"
+        },
+        {
+          "addr": "@record",
+          "offset": "0x24",
+          "u32": "@entries+0x38"
+        },
+        {
+          "addr": "@record",
+          "offset": "0x48",
+          "hex": "00"
+        }
+      ],
+      "callees": {
+        "0x00428534": {
+          "name": "record lookup",
+          "conv": "thiscall",
+          "this": "ignore",
+          "args": [
+            "ptr"
+          ],
+          "ret": "@record"
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4367839,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@result"
+        ]
+      },
+      {
+        "choices": [
+          "@address"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@address",
+        "offset": "0x4",
+        "type": "u8",
+        "choices": [
+          97,
+          45,
+          60
+        ]
+      },
+      {
+        "addr": "@address",
+        "offset": "0x14",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@address",
+        "offset": "0x18",
+        "type": "u32",
+        "choices": [
+          15
+        ]
+      }
+    ]
+  },
+  "_survivors": "L1299: first_guess == commaPosition_guess points at the comma delimiter, so the space comparison is false; <= cannot change the loop."
+}

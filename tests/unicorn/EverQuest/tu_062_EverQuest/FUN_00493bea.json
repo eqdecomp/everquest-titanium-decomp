@@ -1,0 +1,218 @@
+{
+  "function": "GlobalState_guess::SendSystemInfo_guess",
+  "original": "0x00493bea",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@globalstate",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "globalstate": {"size": "0x100", "fill": "random"},
+    "provider": {"size": "0x100", "fill": "random", "init": [{"offset": "0x0", "u32": "@vtbl"}]},
+    "vtbl": {"size": "0xc0", "fill": "zero", "init": [
+      {"offset": "0x00", "u32": "@fn_slot00"}, {"offset": "0x04", "u32": "@fn_slot01"},
+      {"offset": "0x08", "u32": "@fn_slot02"}, {"offset": "0x0c", "u32": "@fn_slot03"},
+      {"offset": "0x10", "u32": "@fn_slot04"}, {"offset": "0x14", "u32": "@fn_slot05"},
+      {"offset": "0x18", "u32": "@fn_slot06"}, {"offset": "0x1c", "u32": "@fn_slot07"},
+      {"offset": "0x20", "u32": "@fn_slot08"}, {"offset": "0x24", "u32": "@fn_slot09"},
+      {"offset": "0x28", "u32": "@fn_slot10"}, {"offset": "0x2c", "u32": "@fn_slot11"},
+      {"offset": "0x30", "u32": "@fn_slot12"}, {"offset": "0x34", "u32": "@fn_slot13"},
+      {"offset": "0x38", "u32": "@fn_slot14"}, {"offset": "0x3c", "u32": "@fn_slot15"},
+      {"offset": "0x40", "u32": "@fn_slot16"}, {"offset": "0x44", "u32": "@fn_slot17"},
+      {"offset": "0x48", "u32": "@fn_slot18"}, {"offset": "0x4c", "u32": "@fn_slot19"},
+      {"offset": "0x50", "u32": "@fn_slot20"}, {"offset": "0x54", "u32": "@fn_slot21"},
+      {"offset": "0x58", "u32": "@fn_slot22"}, {"offset": "0x5c", "u32": "@fn_slot23"},
+      {"offset": "0x60", "u32": "@fn_slot24"}, {"offset": "0x64", "u32": "@fn_slot25"},
+      {"offset": "0x68", "u32": "@fn_slot26"}, {"offset": "0x6c", "u32": "@fn_slot27"},
+      {"offset": "0x70", "u32": "@fn_slot28"}, {"offset": "0x74", "u32": "@fn_slot29"},
+      {"offset": "0x78", "u32": "@fn_slot30"}, {"offset": "0x7c", "u32": "@fn_slot31"},
+      {"offset": "0x80", "u32": "@fn_slot32"}, {"offset": "0x84", "u32": "@fn_slot33"},
+      {"offset": "0x88", "u32": "@fn_slot34"}, {"offset": "0x8c", "u32": "@fn_slot35"},
+      {"offset": "0x90", "u32": "@fn_slot36"}, {"offset": "0x94", "u32": "@fn_slot37"},
+      {"offset": "0x98", "u32": "@fn_slot38"}, {"offset": "0x9c", "u32": "@fn_slot39"},
+      {"offset": "0xa0", "u32": "@fn_slot40"}, {"offset": "0xa4", "u32": "@fn_slot41"},
+      {"offset": "0xa8", "u32": "@fn_slot42"}, {"offset": "0xac", "u32": "@fn_slot43"},
+      {"offset": "0xb0", "u32": "@fn_slot44"}, {"offset": "0xb4", "u32": "@fn_slot45"},
+      {"offset": "0xb8", "u32": "@fn_slot46"}, {"offset": "0xbc", "u32": "@fn_slot47"}
+    ]},
+    "source": {"size": "0x40", "fill": "zero", "init": [
+      {"offset": "0x14", "u32": 4096}, {"offset": "0x18", "u32": 8192},
+      {"offset": "0x1c", "u32": 12288}, {"offset": "0x20", "u32": 16384},
+      {"offset": "0x24", "u32": 20480},
+      {"offset": "0x28", "u8": 1}, {"offset": "0x29", "u8": 2}, {"offset": "0x2a", "u8": 3},
+      {"offset": "0x2b", "u8": 4}, {"offset": "0x2c", "u8": 5},
+      {"offset": "0x30", "u32": "@srcstr"}
+    ]},
+    "srcstr": {"size": "0x20", "fill": "zero"},
+    "sysstr": {"size": "0x20", "fill": "zero"},
+    "fn_slot00": {"size": "0x4"}, "fn_slot01": {"size": "0x4"}, "fn_slot02": {"size": "0x4"}, "fn_slot03": {"size": "0x4"},
+    "fn_slot04": {"size": "0x4"}, "fn_slot05": {"size": "0x4"}, "fn_slot06": {"size": "0x4"}, "fn_slot07": {"size": "0x4"},
+    "fn_slot08": {"size": "0x4"}, "fn_slot09": {"size": "0x4"}, "fn_slot10": {"size": "0x4"}, "fn_slot11": {"size": "0x4"},
+    "fn_slot12": {"size": "0x4"}, "fn_slot13": {"size": "0x4"}, "fn_slot14": {"size": "0x4"}, "fn_slot15": {"size": "0x4"},
+    "fn_slot16": {"size": "0x4"}, "fn_slot17": {"size": "0x4"}, "fn_slot18": {"size": "0x4"}, "fn_slot19": {"size": "0x4"},
+    "fn_slot20": {"size": "0x4"}, "fn_slot21": {"size": "0x4"}, "fn_slot22": {"size": "0x4"}, "fn_slot23": {"size": "0x4"},
+    "fn_slot24": {"size": "0x4"}, "fn_slot25": {"size": "0x4"}, "fn_slot26": {"size": "0x4"}, "fn_slot27": {"size": "0x4"},
+    "fn_slot28": {"size": "0x4"}, "fn_slot29": {"size": "0x4"}, "fn_slot30": {"size": "0x4"}, "fn_slot31": {"size": "0x4"},
+    "fn_slot32": {"size": "0x4"}, "fn_slot33": {"size": "0x4"}, "fn_slot34": {"size": "0x4"}, "fn_slot35": {"size": "0x4"},
+    "fn_slot36": {"size": "0x4"}, "fn_slot37": {"size": "0x4"}, "fn_slot38": {"size": "0x4"}, "fn_slot39": {"size": "0x4"},
+    "fn_slot40": {"size": "0x4"}, "fn_slot41": {"size": "0x4"}, "fn_slot42": {"size": "0x4"}, "fn_slot43": {"size": "0x4"},
+    "fn_slot44": {"size": "0x4"}, "fn_slot45": {"size": "0x4"}, "fn_slot46": {"size": "0x4"}, "fn_slot47": {"size": "0x4"}
+  },
+  "memory": [
+    {"addr": "@srcstr", "cstr": "EQ-SOURCE"},
+    {"addr": "@sysstr", "cstr": "Pentium"},
+    {"addr": "0x0079AC74", "u32": 322420023},
+    {"addr": "0x0099E364", "u32": "@provider"},
+    {"addr": "0x0099E354", "u32": "@source"}
+  ],
+  "callees": {
+    "kernel32.dll!GetVersionExA": {
+      "name": "GetVersionExA", "conv": "stdcall", "args": ["mem:156"], "ret": 1,
+      "writes": [
+        {"arg": 0, "offset": 4, "hex": "05000000"},
+        {"arg": 0, "offset": 8, "hex": "01000000"},
+        {"arg": 0, "offset": 16, "hex": "02000000"},
+        {"arg": 0, "offset": 20, "hex": "53503200"},
+        {"arg": 0, "offset": 148, "hex": "0200"},
+        {"arg": 0, "offset": 150, "hex": "0000"}
+      ]
+    },
+    "kernel32.dll!GlobalMemoryStatus": {
+      "name": "GlobalMemoryStatus", "conv": "stdcall", "args": ["mem:32"], "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 8, "hex": "00000020"},
+        {"arg": 0, "offset": 24, "hex": "00000040"}
+      ]
+    },
+    "0x004ae64c": {"name": "ReadClientIniInt_guess", "conv": "thiscall", "args": ["cstr", "cstr", "int"], "ret": 0},
+    "0x00576e80": {"name": "FUN_00576e80", "conv": "cdecl", "args": [], "ret": 2097152},
+    "0x006093aa": {"name": "Ordinal_11", "conv": "stdcall", "args": ["ignore", "ignore"], "ret": 0},
+    "0x004912b1": {"name": "FUN_004912b1", "conv": "cdecl", "args": ["ptr", "int", "mem:344", "int", "char"], "ret": 0},
+    "0x004ae514": {"name": "FUN_004ae514", "conv": "thiscall", "args": ["int", "cstr", "cstr"], "ret": 0},
+    "@fn_slot00": {"name": "Slot00", "conv": "thiscall", "args": [], "ret": 4096},
+    "@fn_slot01": {"name": "Slot01", "conv": "thiscall", "args": [], "ret": 4097},
+    "@fn_slot02": {"name": "Slot02", "conv": "thiscall", "args": [], "ret": 4098},
+    "@fn_slot03": {"name": "Slot03", "conv": "thiscall", "args": [], "ret": 4099},
+    "@fn_slot04": {"name": "Slot04", "conv": "thiscall", "args": [], "ret": 4100},
+    "@fn_slot05": {"name": "Slot05", "conv": "thiscall", "args": [], "ret": 4101},
+    "@fn_slot06": {"name": "Slot06", "conv": "thiscall", "args": [], "ret": 4102},
+    "@fn_slot07": {"name": "Slot07", "conv": "thiscall", "args": [], "ret": 4103},
+    "@fn_slot08": {"name": "Slot08", "conv": "thiscall", "args": [], "ret": 4104},
+    "@fn_slot09": {"name": "Slot09", "conv": "thiscall", "args": [], "ret": 4105},
+    "@fn_slot10": {"name": "Slot10", "conv": "thiscall", "args": [], "ret": 4106},
+    "@fn_slot11": {"name": "Slot11", "conv": "thiscall", "args": [], "ret": 4107},
+    "@fn_slot12": {"name": "Slot12", "conv": "thiscall", "args": [], "ret": 17},
+    "@fn_slot13": {"name": "Slot13", "conv": "thiscall", "args": [], "ret": 18},
+    "@fn_slot14": {"name": "Slot14", "conv": "thiscall", "args": [], "ret": 19},
+    "@fn_slot15": {"name": "Slot15", "conv": "thiscall", "args": [], "ret": 4111},
+    "@fn_slot16": {"name": "Slot16", "conv": "thiscall", "args": [], "ret": 4112},
+    "@fn_slot17": {"name": "Slot17", "conv": "thiscall", "args": [], "ret": 4113},
+    "@fn_slot18": {"name": "Slot18", "conv": "thiscall", "args": [], "ret": 4114},
+    "@fn_slot19": {"name": "Slot19", "conv": "thiscall", "args": [], "ret": 4115},
+    "@fn_slot20": {"name": "Slot20", "conv": "thiscall", "args": [], "ret": 4116},
+    "@fn_slot21": {"name": "Slot21", "conv": "thiscall", "args": [], "ret": 4117},
+    "@fn_slot22": {"name": "Slot22", "conv": "thiscall", "args": [], "ret": 4118},
+    "@fn_slot23": {"name": "Slot23", "conv": "thiscall", "args": [], "ret": 4119},
+    "@fn_slot24": {"name": "Slot24", "conv": "thiscall", "args": [], "ret": 4120},
+    "@fn_slot25": {"name": "Slot25", "conv": "thiscall", "args": [], "ret": 4121},
+    "@fn_slot26": {"name": "Slot26", "conv": "thiscall", "args": [], "ret": 4122},
+    "@fn_slot27": {"name": "Slot27", "conv": "thiscall", "args": [], "ret": 4123},
+    "@fn_slot28": {"name": "Slot28", "conv": "thiscall", "args": [], "ret": 4124},
+    "@fn_slot29": {"name": "Slot29", "conv": "thiscall", "args": [], "ret": 4125},
+    "@fn_slot30": {"name": "Slot30", "conv": "thiscall", "args": [], "ret": 4126},
+    "@fn_slot31": {"name": "Slot31", "conv": "thiscall", "args": [], "ret": 4127},
+    "@fn_slot32": {"name": "Slot32", "conv": "thiscall", "args": [], "ret": 4128},
+    "@fn_slot33": {"name": "Slot33", "conv": "thiscall", "args": [], "ret": 4129},
+    "@fn_slot34": {"name": "Slot34", "conv": "thiscall", "args": [], "ret": 4130},
+    "@fn_slot35": {"name": "Slot35", "conv": "thiscall", "args": [], "ret": 4131},
+    "@fn_slot36": {"name": "Slot36", "conv": "thiscall", "args": [], "ret": 4132},
+    "@fn_slot37": {"name": "Slot37", "conv": "thiscall", "args": [], "ret": 4133},
+    "@fn_slot38": {"name": "Slot38", "conv": "thiscall", "args": [], "ret": 4134},
+    "@fn_slot39": {"name": "Slot39", "conv": "thiscall", "args": [], "ret": 4135},
+    "@fn_slot40": {"name": "Slot40", "conv": "thiscall", "args": [], "ret": 4136},
+    "@fn_slot41": {"name": "Slot41", "conv": "thiscall", "args": [], "ret": 4137},
+    "@fn_slot42": {"name": "Slot42", "conv": "thiscall", "args": [], "ret": 4138},
+    "@fn_slot43": {"name": "Slot43", "conv": "thiscall", "args": [], "ret": 4139},
+    "@fn_slot44": {"name": "Slot44", "conv": "thiscall", "args": [], "ret": 4140},
+    "@fn_slot45": {"name": "Slot45", "conv": "thiscall", "args": [], "ret": 4141},
+    "@fn_slot46": {"name": "Slot46", "conv": "thiscall", "args": [], "ret": 4142},
+    "@fn_slot47": {"name": "Slot47", "conv": "thiscall", "args": [], "ret": "@sysstr"}
+  },
+  "cases": [
+    {"name": "taken_typical", "args": [],
+     "callees": {
+       "0x004ae64c": {"name": "FUN_004ae64c", "conv": "thiscall", "args": ["cstr", "cstr", "int"], "ret": 0},
+       "0x00576e80": {"name": "FUN_00576e80", "conv": "cdecl", "args": [], "ret": 2097152}}},
+    {"name": "not_taken", "args": [],
+     "callees": {
+       "0x004ae64c": {"name": "FUN_004ae64c", "conv": "thiscall", "args": ["cstr", "cstr", "int"], "ret": 0},
+       "0x00576e80": {"name": "FUN_00576e80", "conv": "cdecl", "args": [], "ret": 4096}}},
+    {"name": "boundary_taken", "args": [],
+     "callees": {
+       "0x004ae64c": {"name": "FUN_004ae64c", "conv": "thiscall", "args": ["cstr", "cstr", "int"], "ret": 0},
+       "0x00576e80": {"name": "FUN_00576e80", "conv": "cdecl", "args": [], "ret": 604800}}},
+    {"name": "boundary_not", "args": [],
+     "callees": {
+       "0x004ae64c": {"name": "FUN_004ae64c", "conv": "thiscall", "args": ["cstr", "cstr", "int"], "ret": 0},
+       "0x00576e80": {"name": "FUN_00576e80", "conv": "cdecl", "args": [], "ret": 604799}}},
+    {"name": "wrap_taken", "args": [],
+     "callees": {
+       "0x004ae64c": {"name": "FUN_004ae64c", "conv": "thiscall", "args": ["cstr", "cstr", "int"], "ret": 4096},
+       "0x00576e80": {"name": "FUN_00576e80", "conv": "cdecl", "args": [], "ret": 0}}},
+    {"name": "version_retry", "args": [],
+     "callees": {
+       "kernel32.dll!GetVersionExA": {
+         "name": "GetVersionExA", "conv": "stdcall", "args": ["mem:156"], "ret": [0, 1],
+         "writes": [
+           {"arg": 0, "offset": 4, "hex": "05000000"},
+           {"arg": 0, "offset": 8, "hex": "01000000"},
+           {"arg": 0, "offset": 16, "hex": "02000000"},
+           {"arg": 0, "offset": 20, "hex": "53503200"},
+           {"arg": 0, "offset": 148, "hex": "0200"},
+           {"arg": 0, "offset": 150, "hex": "0000"}
+         ]},
+       "0x004ae64c": {"name": "FUN_004ae64c", "conv": "thiscall", "args": ["cstr", "cstr", "int"], "ret": 0},
+       "0x00576e80": {"name": "FUN_00576e80", "conv": "cdecl", "args": [], "ret": 2097152}}},
+    {"name": "version_both_fail", "args": [],
+     "callees": {
+       "kernel32.dll!GetVersionExA": {
+         "name": "GetVersionExA", "conv": "stdcall", "args": ["mem:156"], "ret": [0, 0],
+         "writes": [
+           {"arg": 0, "offset": 4, "hex": "05000000"},
+           {"arg": 0, "offset": 8, "hex": "01000000"}
+         ]},
+       "0x004ae64c": {"name": "FUN_004ae64c", "conv": "thiscall", "args": ["cstr", "cstr", "int"], "ret": 0},
+       "0x00576e80": {"name": "FUN_00576e80", "conv": "cdecl", "args": [], "ret": 2097152}}},
+    {"name": "memory_rounding", "args": [],
+     "callees": {
+       "kernel32.dll!GlobalMemoryStatus": {
+         "name": "GlobalMemoryStatus", "conv": "stdcall", "args": ["mem:32"], "ret": 0,
+         "writes": [
+           {"arg": 0, "offset": 8, "hex": "ffffff01"},
+           {"arg": 0, "offset": 24, "hex": "01000080"}
+         ]},
+       "0x004ae64c": {"name": "FUN_004ae64c", "conv": "thiscall", "args": ["cstr", "cstr", "int"], "ret": 0},
+       "0x00576e80": {"name": "FUN_00576e80", "conv": "cdecl", "args": [], "ret": 2097152}}},
+    {"name": "memory_zero", "args": [],
+     "callees": {
+       "kernel32.dll!GlobalMemoryStatus": {
+         "name": "GlobalMemoryStatus", "conv": "stdcall", "args": ["mem:32"], "ret": 0,
+         "writes": [
+           {"arg": 0, "offset": 8, "hex": "00000000"},
+           {"arg": 0, "offset": 24, "hex": "00000000"}
+         ]},
+       "0x004ae64c": {"name": "FUN_004ae64c", "conv": "thiscall", "args": ["cstr", "cstr", "int"], "ret": 0},
+       "0x00576e80": {"name": "FUN_00576e80", "conv": "cdecl", "args": [], "ret": 2097152}}}
+  ],
+  "fuzz": {
+    "seed": 4799466,
+    "count": 60,
+    "args": [],
+    "memory": [
+      {"addr": "@source", "offset": "0x14", "type": "u32", "count": 5},
+      {"addr": "@source", "offset": "0x28", "type": "u8", "count": 5}
+    ]
+  }
+}

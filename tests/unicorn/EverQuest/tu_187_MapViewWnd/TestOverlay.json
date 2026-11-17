@@ -1,0 +1,307 @@
+{
+  "function": "TestOverlay_guess",
+  "original": "0x0053374b",
+  "sources": [
+    "src/EverQuest/tu_187_MapViewWnd.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    { "name": "mode_guess", "type": "int" },
+    { "name": "first_guess", "type": "int" },
+    { "name": "second_guess", "type": "int" },
+    { "name": "width_guess", "type": "int" },
+    { "name": "height_guess", "type": "int" },
+    { "name": "bounds_left_guess", "type": "int" },
+    { "name": "bounds_top_guess", "type": "int" },
+    { "name": "bounds_right_guess", "type": "int" },
+    { "name": "bounds_bottom_guess", "type": "int" },
+    { "name": "entry_guess", "type": "ptr" },
+    { "name": "flag_guess", "type": "int" }
+  ],
+  "ret": "int",
+  "size": "0x186",
+  "objects": {
+    "entry": {
+      "size": "0x34",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0053264a": {
+      "name": "BuildBlock_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "int", "int", "int", "int"],
+      "ret": "arg0",
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "00000000" },
+        { "arg": 0, "offset": 4, "hex": "00000000" },
+        { "arg": 0, "offset": 8, "hex": "0a000000" },
+        { "arg": 0, "offset": 12, "hex": "0a000000" }
+      ]
+    },
+    "0x0050445a": {
+      "name": "Convert_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "mem:16"],
+      "ret": 0,
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "00000000" },
+        { "arg": 0, "offset": 4, "hex": "00000000" },
+        { "arg": 0, "offset": 8, "hex": "0a000000" },
+        { "arg": 0, "offset": 12, "hex": "0a000000" }
+      ]
+    },
+    "0x00531c4a": {
+      "name": "Equal_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "0x0053255f": {
+      "name": "CountMatchingEntries_guess",
+      "conv": "cdecl",
+      "args": ["int", "int", "int", "int"],
+      "ret": [0]
+    },
+    "0x005336bb": {
+      "name": "AddOverlay_guess",
+      "conv": "cdecl",
+      "args": ["int", "int", "int", "int", "ptr"],
+      "ret": 0
+    },
+    "0x0053374b": {
+      "name": "TestOverlay_guess_recursive",
+      "conv": "cdecl",
+      "args": ["int", "int", "int", "int", "int", "int", "int", "int", "int", "ptr", "int"],
+      "ret": -7
+    },
+    "0x004d9160": {
+      "name": "CopyTo_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "ignore"],
+      "ret": 0,
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "00000000" },
+        { "arg": 0, "offset": 4, "hex": "00000000" },
+        { "arg": 0, "offset": 8, "hex": "0a000000" },
+        { "arg": 0, "offset": 12, "hex": "0a000000" }
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "strict success",
+      "args": [1, 5, 7, 10, 10, 1, 2, 3, 4, "@entry", 1],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "non-strict valid bounds",
+      "args": [1, 5, 7, 10, 10, 1, 2, 3, 4, "@entry", 0],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "byte flag is zero",
+      "args": [22, 5, 7, 10, 10, 1, 2, 3, 4, "@entry", 256],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "mode 22 recurses after a conflict",
+      "args": [22, 5, 7, 10, 10, 1, 2, 3, 4, "@entry", 1],
+      "callees": {
+        "0x0053255f": {
+          "name": "CountMatchingEntries_guess",
+          "conv": "cdecl",
+          "args": ["int", "int", "int", "int"],
+          "ret": [1]
+        }
+      },
+      "expect": { "ret": -1 }
+    },
+    {
+      "name": "mode 23 full loop without an improvement",
+      "args": [23, 5, 7, 10, 10, 1, 2, 3, 4, "@entry", 1],
+      "callees": {
+        "0x0053255f": {
+          "name": "CountMatchingEntries_guess",
+          "conv": "cdecl",
+          "args": ["int", "int", "int", "int"],
+          "ret": [1, 50]
+        }
+      },
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "mode 23 loop updates and finds zero",
+      "args": [23, 5, 7, 10, 10, 1, 2, 3, 4, "@entry", 1],
+      "callees": {
+        "0x0053255f": {
+          "name": "CountMatchingEntries_guess",
+          "conv": "cdecl",
+          "args": ["int", "int", "int", "int"],
+          "ret": [1, 5, 4, 0]
+        }
+      },
+      "expect": { "ret": -3 }
+    },
+    {
+      "name": "converted width mismatch",
+      "args": [23, 5, 7, 10, 10, 1, 2, 3, 4, "@entry", 0],
+      "callees": {
+        "0x0050445a": {
+          "name": "Convert_guess",
+          "conv": "thiscall",
+          "args": ["ignore", "mem:16"],
+          "ret": 0,
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "00000000" },
+            { "arg": 0, "offset": 4, "hex": "00000000" },
+            { "arg": 0, "offset": 8, "hex": "09000000" },
+            { "arg": 0, "offset": 12, "hex": "0a000000" }
+          ]
+        }
+      },
+      "expect": { "ret": -1 }
+    },
+    {
+      "name": "converted height mismatch",
+      "args": [23, 5, 7, 10, 10, 1, 2, 3, 4, "@entry", 0],
+      "callees": {
+        "0x0050445a": {
+          "name": "Convert_guess",
+          "conv": "thiscall",
+          "args": ["ignore", "mem:16"],
+          "ret": 0,
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "00000000" },
+            { "arg": 0, "offset": 4, "hex": "00000000" },
+            { "arg": 0, "offset": 8, "hex": "0a000000" },
+            { "arg": 0, "offset": 12, "hex": "09000000" }
+          ]
+        }
+      },
+      "expect": { "ret": -1 }
+    },
+    {
+      "name": "converted rect equals invalid rect",
+      "args": [23, 5, 7, 10, 10, 1, 2, 3, 4, "@entry", 0],
+      "callees": {
+        "0x00531c4a": {
+          "name": "Equal_guess",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": 1
+        }
+      },
+      "expect": { "ret": -1 }
+    },
+    {
+      "name": "invalid sentinel fields are compared",
+      "args": [23, 1, 1, 0, 0, 1, 2, 3, 4, "@entry", 0],
+      "callees": {
+        "0x0053264a": {
+          "name": "BuildBlock_guess",
+          "conv": "cdecl",
+          "args": ["ignore", "int", "int", "int", "int", "int"],
+          "ret": "arg0",
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "05000000" },
+            { "arg": 0, "offset": 4, "hex": "07000000" },
+            { "arg": 0, "offset": 8, "hex": "05000000" },
+            { "arg": 0, "offset": 12, "hex": "07000000" }
+          ]
+        },
+        "0x0050445a": {
+          "name": "Convert_guess",
+          "conv": "thiscall",
+          "args": ["ignore", "mem:16"],
+          "ret": 0,
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "ffffffff" },
+            { "arg": 0, "offset": 4, "hex": "ffffffff" },
+            { "arg": 0, "offset": 8, "hex": "ffffffff" },
+            { "arg": 0, "offset": 12, "hex": "ffffffff" }
+          ]
+        },
+        "0x00531c4a": {
+          "name": "Equal_guess",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "passthrough": true
+        }
+      },
+      "expect": { "ret": -1 }
+    },
+    {
+      "name": "width and height preserve translated dimensions",
+      "args": [23, 1, 1, 10, 10, 1, 2, 3, 4, "@entry", 0],
+      "callees": {
+        "0x0053264a": {
+          "name": "BuildBlock_guess",
+          "conv": "cdecl",
+          "args": ["ignore", "int", "int", "int", "int", "int"],
+          "ret": "arg0",
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "05000000" },
+            { "arg": 0, "offset": 4, "hex": "07000000" },
+            { "arg": 0, "offset": 8, "hex": "0f000000" },
+            { "arg": 0, "offset": 12, "hex": "11000000" }
+          ]
+        },
+        "0x0050445a": {
+          "name": "Convert_guess",
+          "conv": "thiscall",
+          "args": ["ignore", "mem:16"],
+          "ret": 0,
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "64000000" },
+            { "arg": 0, "offset": 4, "hex": "c8000000" },
+            { "arg": 0, "offset": 8, "hex": "6e000000" },
+            { "arg": 0, "offset": 12, "hex": "d2000000" }
+          ]
+        },
+        "0x00531c4a": {
+          "name": "Equal_guess",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "passthrough": true
+        }
+      },
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "best count starts at 50",
+      "args": [23, 5, 7, 10, 10, 1, 2, 3, 4, "@entry", 1],
+      "callees": {
+        "0x0053255f": {
+          "name": "CountMatchingEntries_guess",
+          "conv": "cdecl",
+          "args": ["int", "int", "int", "int"],
+          "ret": [1, 49]
+        }
+      },
+      "expect": { "ret": -1 }
+    }
+  ],
+  "fuzz": {
+    "seed": 5453643,
+    "count": 100,
+    "args": [
+      { "range": [-2, 28] },
+      { "range": [-50, 50] },
+      { "range": [-50, 50] },
+      { "range": [-10, 40] },
+      { "range": [-10, 40] },
+      { "range": [-30, 30] },
+      { "range": [-30, 30] },
+      { "range": [-30, 30] },
+      { "range": [-30, 30] },
+      { "choices": ["@entry"] },
+      { "choices": [0, 1, 256] }
+    ],
+    "memory": [
+      { "addr": "@entry", "offset": "0x2c", "type": "int", "range": [-1000, 1000] },
+      { "addr": "@entry", "offset": "0x30", "type": "int", "range": [-1000, 1000] }
+    ]
+  }
+}

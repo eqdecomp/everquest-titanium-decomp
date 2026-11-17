@@ -1,0 +1,68 @@
+{
+  "function": "CBarterMerchantWnd_guess::UpdateBuyLine_guess",
+  "original": "0x004de41a",
+  "sources": ["src/EverQuest/tu_128_BarterMerchantWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@controller",
+  "args": [{"name": "source", "type": "ptr"}],
+  "ret": "void",
+  "objects": {
+    "controller": {"size": "0x1a0", "fill": "random"},
+    "source": {"size": "0x70", "fill": "random"},
+    "blocks": {"size": "8", "fill": "zero", "init": [{"offset": "0", "u32": "@elems0"}, {"offset": "4", "u32": "@elems1"}]},
+    "elems0": {"size": "0x380", "fill": "zero"},
+    "elems1": {"size": "0x380", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@controller", "offset": "0x170", "u8": 0},
+    {"addr": "@controller", "offset": "0x178", "u32": 3},
+    {"addr": "@controller", "offset": "0x180", "u32": 7},
+    {"addr": "@controller", "offset": "0x184", "u32": 3},
+    {"addr": "@controller", "offset": "0x188", "u32": "@blocks"},
+    {"addr": "@elems0", "offset": "0x20", "u32": 10},
+    {"addr": "@elems0", "offset": "0x90", "u32": 20},
+    {"addr": "@elems0", "offset": "0x100", "u32": 30},
+    {"addr": "@elems0", "offset": "0x170", "u32": 40},
+    {"addr": "@elems0", "offset": "0x1e0", "u32": 50},
+    {"addr": "@elems0", "offset": "0x250", "u32": 60},
+    {"addr": "@elems0", "offset": "0x2c0", "u32": 70},
+    {"addr": "@elems0", "offset": "0x330", "u32": 80},
+    {"addr": "@elems1", "offset": "0x20", "u32": 90},
+    {"addr": "@elems1", "offset": "0x90", "u32": 100},
+    {"addr": "@elems1", "offset": "0x100", "u32": 110},
+    {"addr": "@elems1", "offset": "0x170", "u32": 120},
+    {"addr": "@elems1", "offset": "0x1e0", "u32": 130},
+    {"addr": "@elems1", "offset": "0x250", "u32": 140},
+    {"addr": "@elems1", "offset": "0x2c0", "u32": 150},
+    {"addr": "@elems1", "offset": "0x330", "u32": 160},
+    {"addr": "@source", "offset": "0x20", "u32": 20},
+    {"addr": "@source", "offset": "0x24", "u8": 1}
+  ],
+  "callees": {
+    "0x004dd754": {"name": "FUN_004dd754", "conv": "thiscall", "args": ["int", "ptr"]},
+    "0x004dd6f5": {"name": "FUN_004dd6f5", "conv": "thiscall", "args": ["int"]},
+    "0x00409bfd": {"name": "FUN_00409bfd", "conv": "thiscall", "args": ["ptr"], "ret": 0}
+  },
+  "cases": [
+    {"name": "empty_table_store", "args": ["@source"], "memory": [{"addr": "@controller", "offset": "0x178", "u32": 0}]},
+    {"name": "negative_count_store", "args": ["@source"], "memory": [{"addr": "@controller", "offset": "0x178", "u32": -1}]},
+    {"name": "found_first_copy", "args": ["@source"], "memory": [{"addr": "@source", "offset": "0x20", "u32": 10}]},
+    {"name": "found_middle_copy", "args": ["@source"]},
+    {"name": "found_middle_remove", "args": ["@source"], "memory": [{"addr": "@source", "offset": "0x24", "u8": 0}]},
+    {"name": "found_second_block_copy", "args": ["@source"], "memory": [{"addr": "@controller", "offset": "0x178", "u32": 10}, {"addr": "@source", "offset": "0x20", "u32": 100}]},
+    {"name": "found_second_block_remove", "args": ["@source"], "memory": [{"addr": "@controller", "offset": "0x178", "u32": 10}, {"addr": "@source", "offset": "0x20", "u32": 100}, {"addr": "@source", "offset": "0x24", "u8": 0}]},
+    {"name": "not_found_store", "args": ["@source"], "memory": [{"addr": "@source", "offset": "0x20", "u32": 999}]},
+    {"name": "not_found_full_store", "args": ["@source"], "memory": [{"addr": "@controller", "offset": "0x178", "u32": 16}, {"addr": "@source", "offset": "0x20", "u32": 999}]},
+    {"name": "key_beyond_count_store", "args": ["@source"], "memory": [{"addr": "@controller", "offset": "0x178", "u32": 10}, {"addr": "@source", "offset": "0x20", "u32": 160}]}
+  ],
+  "fuzz": {
+    "seed": 5104666,
+    "count": 100,
+    "args": [{"choices": ["@source"]}],
+    "memory": [
+      {"addr": "@controller", "offset": "0x178", "type": "int", "choices": [-1, 0, 1, 2, 3, 9, 10, 16]},
+      {"addr": "@source", "offset": "0x20", "type": "int", "choices": [10, 20, 30, 100, 160, 999]},
+      {"addr": "@source", "offset": "0x24", "type": "int", "choices": [0, 1]}
+    ]
+  }
+}

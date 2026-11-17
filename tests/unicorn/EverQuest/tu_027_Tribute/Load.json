@@ -1,0 +1,121 @@
+{
+  "function": "DatabaseTable_guess::Load_guess",
+  "original": "0x004356cc",
+  "sources": ["src/EverQuest/tu_027_Tribute.cpp"],
+  "conv": "thiscall",
+  "this": "@databasetable",
+  "args": [{"name": "path_guess", "type": "cstr"}],
+  "ret": "void",
+  "objects": {
+    "databasetable": {
+      "size": "0x100", "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@buckets"}, {"offset": "0x4", "u32": 4}]
+    },
+    "buckets": {"size": "0x10", "fill": "zero"},
+    "node": {
+      "size": "0x20", "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@nestedtbl"}, {"offset": "0x4", "u32": 5}]
+    },
+    "nestedtbl": {
+      "size": "0x100", "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@nbuckets"}, {"offset": "0x4", "u32": 4}]
+    },
+    "nbuckets": {"size": "0x10", "fill": "zero"},
+    "file": {"size": "0x20", "fill": "zero"},
+    "blk": {"size": "0x40", "fill": "zero"},
+    "blk2": {"size": "0x40", "fill": "zero"},
+    "blk3": {"size": "0x40", "fill": "zero"},
+    "blk4": {"size": "0x40", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"}
+  ],
+  "callees": {
+    "0x004999d8": {"name": "printf_guess", "conv": "cdecl", "args": ["cstr"], "varargs": "printf", "ret": 0},
+    "0x00574110": {"name": "Log_guess", "conv": "cdecl", "args": ["cstr"], "varargs": "printf", "ret": 0},
+    "0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": "@file"},
+    "0x0060e790": {"name": "_fclose", "conv": "cdecl", "args": ["u32"], "ret": 0},
+    "0x0060fbe1": {
+      "name": "_fgets", "conv": "cdecl", "args": ["ptr", "int", "u32"], "ret": 0,
+      "writes": [
+        {"call": 0, "arg": 0, "hex": "335e355e616200"},
+        {"call": 0, "arg": 2, "offset": 12, "hex": "10"}
+      ]
+    },
+    "0x004b2056": {
+      "name": "ParseLong_guess", "conv": "cdecl", "args": ["cstr", "ptr", "int"], "ret": [2, 2],
+      "writes": [
+        {"call": 0, "arg": 1, "hex": "03000000"},
+        {"call": 1, "arg": 1, "hex": "05000000"}
+      ]
+    },
+    "0x005769e0": {
+      "name": "ParseBuffer_guess", "conv": "cdecl", "args": ["cstr", "ptr", "u32", "int", "int"], "ret": 0,
+      "writes": [{"arg": 1, "hex": "616200"}]
+    },
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "passthrough": true},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": ["@blk", "@blk2", "@blk3", "@blk4"]},
+    "0x00571e00": {"name": "CXStr_ctor", "conv": "thiscall", "args": ["cstr"]},
+    "0x00571d00": {"name": "CXStr_dtor", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x00571f70": {"name": "SetKey_guess", "conv": "thiscall", "args": ["ptr"]},
+    "0x00490c98": {"name": "Initialize_guess", "conv": "thiscall", "args": ["u32"]},
+    "0x00435652": {"name": "Reset_guess", "conv": "thiscall", "args": ["u32"], "passthrough": true},
+    "0x00435671": {"name": "HashInsert_guess", "conv": "thiscall", "args": ["ptr", "u32"], "passthrough": true},
+    "0x004ff9c9": {"name": "Find_guess", "conv": "thiscall", "args": ["u32"], "passthrough": true},
+    "0x00447c66": {"name": "Insert_guess", "conv": "thiscall", "args": ["ptr", "u32"], "passthrough": true}
+  },
+  "rewrite_aliases": {
+    "_fopen": "0x0060e887",
+    "_fgets": "0x0060fbe1",
+    "??2@YAPAXI@Z": "0x0060d071",
+    "_fclose": "0x0060e790"
+  },
+  "cases": [
+    {"name": "one-line-new-type", "args": ["strings.txt"]},
+    {"name": "one-line-existing-type", "args": ["strings.txt"],
+     "memory": [{"addr": "@buckets", "offset": "0x4", "u32": "@node"}]},
+    {"name": "missing-file", "args": ["missing.txt"],
+     "callees": {"0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 0}}},
+    {"name": "empty-file", "args": ["empty.txt"],
+     "memory": [{"addr": "@file", "offset": "0xc", "u8": 16}],
+     "callees": {"0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": "@file"}}},
+    {"name": "negative-type", "args": ["bad.txt"],
+     "callees": {"0x004b2056": {
+       "name": "ParseLong_guess", "conv": "cdecl", "args": ["cstr", "ptr", "int"], "ret": [2, 2],
+       "writes": [{"call": 0, "arg": 1, "hex": "03000000"}, {"call": 1, "arg": 1, "hex": "ffffffff"}]}}},
+    {"name": "zero-type", "args": ["zero.txt"],
+     "callees": {"0x004b2056": {
+       "name": "ParseLong_guess", "conv": "cdecl", "args": ["cstr", "ptr", "int"], "ret": [2, 2],
+       "writes": [{"call": 0, "arg": 1, "hex": "03000000"}, {"call": 1, "arg": 1, "hex": "00000000"}]}}},
+    {"name": "new-table-alloc-failed", "args": ["oom.txt"],
+     "callees": {"0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}}},
+    {"name": "two-lines-second-existing", "args": ["two.txt"],
+     "memory": [{"addr": "@buckets", "offset": "0x4", "u32": "@node"}],
+     "callees": {
+       "0x0060fbe1": {
+         "name": "_fgets", "conv": "cdecl", "args": ["ptr", "int", "u32"], "ret": 0,
+         "writes": [
+           {"call": 0, "arg": 0, "hex": "335e355e616200"},
+           {"call": 1, "arg": 0, "hex": "375e355e6364"},
+           {"call": 1, "arg": 2, "offset": 12, "hex": "10"}
+         ]
+       },
+       "0x004b2056": {
+         "name": "ParseLong_guess", "conv": "cdecl", "args": ["cstr", "ptr", "int"], "ret": [2, 2, 2, 2],
+         "writes": [
+           {"call": 0, "arg": 1, "hex": "03000000"},
+           {"call": 1, "arg": 1, "hex": "05000000"},
+           {"call": 2, "arg": 1, "hex": "07000000"},
+           {"call": 3, "arg": 1, "hex": "05000000"}
+         ]
+       }
+     }}
+  ],
+  "_survivors": "L1674: line[0] = 0 before fgets is unobservable: the stub overwrites bytes 0..6 and the stack starts zeroed; L1679: the last byte of line is never written by fgets in any case, and the stack starts zeroed, so the terminator is unobservable",
+  "fuzz": {
+    "seed": 4413132,
+    "count": 60,
+    "args": [{}],
+    "memory": []
+  }
+}

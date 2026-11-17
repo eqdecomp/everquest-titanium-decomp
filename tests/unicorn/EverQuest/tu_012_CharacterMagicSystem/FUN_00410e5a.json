@@ -1,0 +1,97 @@
+{
+  "function": "CharacterMagicSystem_guess::GetSpellDuration_guess",
+  "original": "0x00410e5a",
+  "sources": [
+    "src/EverQuest/tu_012_CharacterMagicSystem.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@charactermagicsystem",
+  "args": [
+    { "name": "check_guess", "type": "ptr" },
+    { "name": "amount_guess", "type": "u8" },
+    { "name": "flag_guess", "type": "char" }
+  ],
+  "ret": "int",
+  "objects": {
+    "charactermagicsystem": {
+      "size": "0x138ac",
+      "fill": "random",
+      "init": [ { "offset": "0x8", "u32": "@state" } ]
+    },
+    "state": {
+      "size": "0x264",
+      "fill": "random",
+      "init": [ { "offset": "0x1a8", "u32": 1 } ]
+    },
+    "check": {
+      "size": "0x270",
+      "fill": "random",
+      "init": [
+        { "offset": "0x17d", "u8": 0 },
+        { "offset": "0x1ec", "u32": 0 },
+        { "offset": "0x1f0", "u32": 0 }
+      ]
+    }
+  },
+  "callees": {
+    "0x004106a3": {
+      "name": "TotalSpellAffects_guess",
+      "conv": "thiscall",
+      "args": [ "int", "bool", "int", "int" ],
+      "ret": 1
+    },
+    "0x0044e77b": {
+      "name": "FindAffectSlot_guess",
+      "conv": "thiscall",
+      "args": [ "int" ],
+      "ret": 1
+    }
+  },
+  "cases": [
+    { "name": "null check", "args": [ 0, 0, 0 ], "expect": { "ret": 0 } },
+    { "name": "zero type", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 0 }, { "addr": "@check", "offset": "0x17d", "u8": 1 } ], "expect": { "ret": 0 } },
+    { "name": "type 1 low", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 1 } ], "expect": { "ret": 1 } },
+    { "name": "type 1 high", "args": [ "@check", 4, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 1 } ], "expect": { "ret": 2 } },
+    { "name": "type 2 low", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 2 } ], "expect": { "ret": 6 } },
+    { "name": "type 2 high", "args": [ "@check", 4, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 2 } ], "expect": { "ret": 7 } },
+    { "name": "type 3", "args": [ "@check", 2, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 3 } ], "expect": { "ret": 60 } },
+    { "name": "type 4 unclamped", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 4 } ], "expect": { "ret": 50 } },
+    { "name": "type 4 clamped", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 4 }, { "addr": "@check", "offset": "0x1f0", "u32": 25 } ], "expect": { "ret": 25 } },
+    { "name": "type 4 cap equal", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 4 }, { "addr": "@check", "offset": "0x1f0", "u32": 50 } ], "expect": { "ret": 50 } },
+    { "name": "type 5", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 5 } ], "expect": { "ret": 2 } },
+    { "name": "type 6", "args": [ "@check", 4, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 6 } ], "expect": { "ret": 4 } },
+    { "name": "type 7", "args": [ "@check", 99, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 7 } ], "expect": { "ret": 99 } },
+    { "name": "type 8", "args": [ "@check", 3, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 8 } ], "expect": { "ret": 13 } },
+    { "name": "type 9", "args": [ "@check", 3, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 9 } ], "expect": { "ret": 16 } },
+    { "name": "type 10", "args": [ "@check", 3, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 10 } ], "expect": { "ret": 19 } },
+    { "name": "type 11", "args": [ "@check", 2, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 11 } ], "expect": { "ret": 150 } },
+    { "name": "type 12 low", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 12 } ], "expect": { "ret": 1 } },
+    { "name": "type 12 high", "args": [ "@check", 12, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 12 } ], "expect": { "ret": 3 } },
+    { "name": "type 13 default zero flag", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 13 } ], "expect": { "ret": 0 } },
+    { "name": "type 13 default set flag", "args": [ "@check", 0, 1 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 13 } ], "expect": { "ret": -2 } },
+    { "name": "type 50", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 50 } ], "expect": { "ret": -1 } },
+    { "name": "type 51 below 200", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 51 } ], "expect": { "ret": 0 } },
+    { "name": "type 51 flag", "args": [ "@check", 0, 1 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 51 } ], "expect": { "ret": -2 } },
+    { "name": "type 199", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 199 } ], "expect": { "ret": 0 } },
+    { "name": "type 200 exact", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 200 } ], "expect": { "ret": 200 } },
+    { "name": "type 200 cap", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x1ec", "u32": 200 }, { "addr": "@check", "offset": "0x1f0", "u32": 99 } ], "expect": { "ret": 99 } },
+    { "name": "special gate disabled", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x17d", "u8": 0 }, { "addr": "@check", "offset": "0x1ec", "u32": 4 } ], "expect": { "ret": 50 } },
+    { "name": "special gate enabled and first callee false", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x17d", "u8": 1 }, { "addr": "@check", "offset": "0x1ec", "u32": 4 } ], "callees": { "0x004106a3": { "name": "TotalSpellAffects_guess", "conv": "thiscall", "args": [ "int", "bool", "int", "int" ], "ret": 0 } }, "expect": { "ret": 50 } },
+    { "name": "special gate enabled and second callee false", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x17d", "u8": 1 }, { "addr": "@check", "offset": "0x1ec", "u32": 4 } ], "callees": { "0x0044e77b": { "name": "FUN_0044e77b_guess", "conv": "thiscall", "args": [ "int" ], "ret": 0 } }, "expect": { "ret": 50 } },
+    { "name": "special override", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x17d", "u8": 1 }, { "addr": "@check", "offset": "0x1ec", "u32": 4 } ], "expect": { "ret": 10000 } },
+    { "name": "special no state", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x17d", "u8": 1 }, { "addr": "@check", "offset": "0x1ec", "u32": 4 }, { "addr": "@charactermagicsystem", "offset": "0x8", "u32": 0 } ], "expect": { "ret": 50 } },
+    { "name": "special state without link", "args": [ "@check", 0, 0 ], "memory": [ { "addr": "@check", "offset": "0x17d", "u8": 1 }, { "addr": "@check", "offset": "0x1ec", "u32": 4 }, { "addr": "@state", "offset": "0x1a8", "u32": 0 } ], "expect": { "ret": 50 } }
+  ],
+  "fuzz": {
+    "seed": 4263514,
+    "count": 100,
+    "args": [ { "choices": [ "@check" ] }, {}, {} ],
+    "memory": [
+      { "addr": "@check", "offset": "0x17d", "type": "u8", "choices": [ 0, 1 ] },
+      { "addr": "@check", "offset": "0x1ec", "type": "u32", "choices": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 49, 50, 51, 199, 200, 201 ] },
+      { "addr": "@check", "offset": "0x1f0", "type": "u32", "choices": [ 0, 1, 2, 49, 50, 51, 99, 199, 200, 10000 ] },
+      { "addr": "@state", "offset": "0x1a8", "type": "u32", "choices": [ 0, 1 ] }
+    ]
+  },
+  "_survivors": "L1767: amount & 0xfe is always even, so <2 and <1 are equivalent; L1775: when amount & 0xfe is 2, both branches produce 6, so >=2 and >2 are equivalent"
+}

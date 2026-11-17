@@ -1,0 +1,122 @@
+{
+  "function": "Handle_OP_RezzComplete_guess",
+  "original": "0x004564ba",
+  "sources": ["src/EverQuest/tu_042_EQHandleMsg.cpp"],
+  "size": "0x3b4",
+  "conv": "cdecl",
+  "args": [{"name": "request_guess", "type": "ptr"}],
+  "ret": "void",
+  "objects": {
+    "request": {"size": "0xe4", "fill": "zero"},
+    "root": {"size": "0xc349", "fill": "zero", "init": [
+      {"offset": "0x8", "u32": "@offset_holder"},
+      {"offset": "0xc280", "u32": "@vtable"}
+    ]},
+    "offset_holder": {"size": "0x8", "fill": "zero", "init": [
+      {"offset": "0x4", "u32": 256}
+    ]},
+    "current": {"size": "0x23c", "fill": "zero", "init": [
+      {"offset": "0x4c", "f32": 12.5},
+      {"offset": "0x1a8", "u32": "@current_state"},
+      {"offset": "0x204", "u32": 7},
+      {"offset": "0x238", "f32": 3.5}
+    ]},
+    "current_state": {"size": "0x15c", "fill": "zero"},
+    "property": {"size": "0x11ac", "fill": "zero", "init": [
+      {"offset": "0x1198", "u32": 10}
+    ]},
+    "entry0": {"size": "0x10", "fill": "random"},
+    "entry1": {"size": "0x10", "fill": "random"},
+    "string_manager": {"size": "0x4", "fill": "zero"},
+    "display": {"size": "0x4", "fill": "zero"},
+    "resurrect_text": {"size": "0x20", "fill": "zero"},
+    "vtable": {"size": "0xc", "fill": "zero", "init": [
+      {"offset": "0x8", "u32": "@fn_get_value"}
+    ]},
+    "fn_get_value": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@string_manager"},
+    {"addr": "0x00988df0", "u32": "@display"},
+    {"addr": "0x00905d00", "u32": "@root"},
+    {"addr": "0x00905ce4", "u32": "@current"},
+    {"addr": "@resurrect_text", "cstr": "fixture string"},
+    {"addr": "@request", "offset": "0x4", "u32": 7},
+    {"addr": "@request", "offset": "0x8", "f32": 1.25},
+    {"addr": "@request", "offset": "0xc", "f32": 2.5},
+    {"addr": "@request", "offset": "0x10", "f32": 3.75},
+    {"addr": "@request", "offset": "0x14", "u32": 99},
+    {"addr": "@request", "offset": "0xe0", "u32": 1}
+  ],
+  "callees": {
+    "0x005dfa00": {"name": "GetString_guess", "conv": "thiscall", "args": ["int", "int"], "ret": "@resurrect_text"},
+    "0x004982c6": {"name": "Display_guess", "conv": "thiscall", "args": ["cstr", "int", "int"]},
+    "0x0040d933": {"name": "GetMaxBuffs_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x0040e7ac": {"name": "GetOption_guess", "conv": "thiscall", "args": ["int"], "ret": "@entry0"},
+    "0x005ec220": {"name": "Find_guess", "conv": "thiscall", "args": [], "ret": "@property"},
+    "0x00416963": {"name": "GetValue_guess", "conv": "thiscall", "args": ["int"], "ret": 6},
+    "0x00417cc8": {"name": "Update_guess", "conv": "thiscall", "args": ["int"]},
+    "0x0040e293": {"name": "Set11a8_guess", "conv": "thiscall", "args": ["int"]},
+    "0x0040e25c": {"name": "Clear_guess", "conv": "thiscall", "args": ["ptr"]},
+    "0x0048c130": {"name": "SetPosition_guess", "conv": "thiscall", "args": ["mem:12", "int"]},
+    "0x0048a0fc": {"name": "GetFloorHeightAt_guess", "conv": "thiscall", "args": ["float", "float", "float", "int"], "ret_float": 42.0},
+    "0x0048a945": {"name": "Refresh_guess", "conv": "thiscall", "args": []},
+    "0x004ab056": {"name": "MoveToZone_guess", "conv": "thiscall", "args": ["int", "cstr", "int", "int", "float", "float", "float", "int"]},
+    "@fn_get_value": {"name": "GetVirtualValue_guess", "conv": "thiscall", "args": [], "ret": 23}
+  },
+  "cases": [
+    {"name": "state is not ready", "args": ["@request"], "memory": [
+      {"addr": "@request", "offset": "0xe0", "u32": 0}
+    ]},
+    {"name": "empty options, type 10, current ID, height updates", "args": ["@request"], "callees": {
+      "0x0040d933": {"name": "GetOptionCount_guess", "conv": "thiscall", "args": [], "ret": 0},
+      "0x0048a0fc": {"name": "GetHeight_guess", "conv": "thiscall", "args": ["float", "float", "float", "int"], "ret_float": 42.0}
+    }},
+    {"name": "type 9 short-circuit", "args": ["@request"], "memory": [
+      {"addr": "@property", "offset": "0x1198", "u32": 9}
+    ]},
+    {"name": "type 2 short-circuit", "args": ["@request"], "memory": [
+      {"addr": "@property", "offset": "0x1198", "u32": 2}
+    ]},
+    {"name": "type 8 short-circuit", "args": ["@request"], "memory": [
+      {"addr": "@property", "offset": "0x1198", "u32": 8}
+    ]},
+    {"name": "other type selects alternate option", "args": ["@request"], "memory": [
+      {"addr": "@property", "offset": "0x1198", "u32": 11}
+    ]},
+    {"name": "two loop iterations", "args": ["@request"], "callees": {
+      "0x0040d933": {"name": "GetOptionCount_guess", "conv": "thiscall", "args": [], "ret": [2, 2, 2]},
+      "0x0040e7ac": {"name": "GetOption_guess", "conv": "thiscall", "args": ["int"], "ret": ["@entry0", "@entry1", "@entry0"]}
+    }, "memory": [
+      {"addr": "@property", "offset": "0x1198", "u32": 11}
+    ]},
+    {"name": "level 100, different ID, error display", "args": ["@request"], "memory": [
+      {"addr": "@request", "offset": "0x4", "u32": 8},
+      {"addr": "@request", "offset": "0x14", "u32": 100}
+    ]},
+    {"name": "matching ID and sentinel height", "args": ["@request"], "callees": {
+      "0x0040d933": {"name": "GetOptionCount_guess", "conv": "thiscall", "args": [], "ret": 0},
+      "0x0048a0fc": {"name": "GetHeight_guess", "conv": "thiscall", "args": ["float", "float", "float", "int"], "ret_float": -1.0e27}
+    }},
+    {"name": "level 99, different ID", "args": ["@request"], "memory": [
+      {"addr": "@request", "offset": "0x4", "u32": 8},
+      {"addr": "@request", "offset": "0x14", "u32": 99}
+    ]}
+  ],
+  "fuzz": {
+    "seed": 4547770,
+    "count": 120,
+    "args": [{"choices": ["@request"]}],
+    "memory": [
+      {"addr": "@request", "offset": "0xe0", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "@request", "offset": "0x14", "type": "int", "choices": [0, 99, 100, 101]},
+      {"addr": "@request", "offset": "0x4", "type": "int", "choices": [7, 8]},
+      {"addr": "@request", "offset": "0x8", "type": "float", "choices": [-5.0, 0.0, 1.25, 100.5]},
+      {"addr": "@request", "offset": "0xc", "type": "float", "choices": [-5.0, 0.0, 2.5, 100.5]},
+      {"addr": "@request", "offset": "0x10", "type": "float", "choices": [-5.0, 0.0, 3.75, 100.5]},
+      {"addr": "@property", "offset": "0x1198", "type": "int", "choices": [10, 9, 2, 8, 11]},
+      {"addr": "@current", "offset": "0x204", "type": "int", "choices": [7, 8]},
+      {"addr": "@current", "offset": "0x4c", "type": "float", "choices": [0.0, 12.5, 33.8]}
+    ]
+  }
+}

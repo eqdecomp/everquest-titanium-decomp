@@ -1,0 +1,72 @@
+{
+  "function": "Callback_guess::Dispatch_guess",
+  "original": "0x004ebf26",
+  "sources": [
+    "src/EverQuest/tu_140_CastSpellWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@callback",
+  "args": [
+    {"name": "index", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "callback": {"size": "0x200", "fill": "zero",
+                 "init": [{"offset": "0x160", "u32": "@entry"}, {"offset": "0x164", "u32": "@entry"},
+                          {"offset": "0x168", "u32": "@entry"}, {"offset": "0x16c", "u32": "@entry"},
+                          {"offset": "0x170", "u32": "@entry"}, {"offset": "0x174", "u32": "@entry"},
+                          {"offset": "0x178", "u32": "@entry"}, {"offset": "0x17c", "u32": "@entry"},
+                          {"offset": "0x180", "u32": "@entry"}]},
+    "entry": {"size": "0x100", "fill": "zero"},
+    "root": {"size": "0x10", "fill": "zero", "init": [{"offset": "0x8", "u32": "@route"}]},
+    "route": {"size": "0x8", "fill": "zero", "init": [{"offset": "0x4", "u32": 16}]},
+    "dispatcher": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@root"},
+    {"addr": "0x0099d414", "u32": "@dispatcher"}
+  ],
+  "callees": {
+    "0x0040e705": {"name": "FUN_0040e705", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x0044d0d0": {"name": "FUN_0044d0d0", "conv": "cdecl", "args": ["int"], "ret": 0},
+    "0x0059d960": {"name": "FUN_0059d960", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                   "writes": [{"arg": 0, "offset": 0, "hex": "000000000a0000000700000014000000"}]},
+    "0x005adc20": {"name": "FUN_005adc20", "conv": "thiscall", "args": ["int", "mem:8", "u32"], "ret": 0},
+    "0x004ebeae": {"name": "FUN_004ebeae", "conv": "cdecl", "args": ["int"]}
+  },
+  "cases": [
+    {
+      "name": "ready calls Notify",
+      "args": [3],
+      "callees": {
+        "0x0044d0d0": {"name": "FUN_0044d0d0", "conv": "cdecl", "args": ["int"], "ret": 1}
+      }
+    },
+    {
+      "name": "not ready, field 198 negative",
+      "args": [2],
+      "memory": [{"addr": "@callback", "offset": "0x198", "hex": "ffffffff"}]
+    },
+    {
+      "name": "not ready, field 198 zero",
+      "args": [0],
+      "memory": [{"addr": "@callback", "offset": "0x198", "u32": 0}]
+    },
+    {
+      "name": "odd negative difference rounds toward zero",
+      "args": [5],
+      "memory": [{"addr": "@callback", "offset": "0x198", "u32": 4}],
+      "callees": {
+        "0x0059d960": {"name": "FUN_0059d960", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "0000000015000000090000000a000000"}]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5160742,
+    "count": 100,
+    "args": [{"range": [0, 8]}],
+    "memory": [{"addr": "@callback", "offset": "0x198", "type": "int", "choices": [-1, 0, 1, 4]}]
+  },
+  "_survivors": "L691: frame.message[0] = 0 is overwritten on the only path that reads the message (both slots are set before the call to Apply), so the zeroing is unobservable; L692: frame.message[1] = 0 is the same dead store."
+}

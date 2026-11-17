@@ -1,0 +1,147 @@
+{
+  "function": "SpellBookWndView_guess::WndNotification_guess",
+  "original": "0x00556472",
+  "sources": ["src/EverQuest/tu_215_SpellBookWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@obj",
+  "args": [
+    {"name": "sender", "type": "ptr"},
+    {"name": "msg", "type": "u32"},
+    {"name": "data", "type": "ptr"}
+  ],
+  "ret": "int",
+  "objects": {
+    "rep": {"size": "0x40", "fill": "zero", "init": [
+      {"offset": "0x8", "u32": 5},
+      {"offset": "0x14", "cstr": "Alpha"}
+    ]},
+    "obj": {"size": "0x600", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@objvtbl"},
+      {"offset": "0x15c", "u32": "@list"},
+      {"offset": "0x174", "u32": "@button174"},
+      {"offset": "0x178", "u32": "@button178"},
+      {"offset": "0x180", "u32": "@edit"},
+      {"offset": "0x184", "u32": "@control184"},
+      {"offset": "0x188", "u32": "@control188"},
+      {"offset": "0x18c", "u32": "@button18c"}
+    ]},
+    "objvtbl": {"size": "0x90", "fill": "zero", "init": [
+      {"offset": "0x84", "u32": "@fn_slot84"},
+      {"offset": "0x88", "u32": "@fn_slot88"}
+    ]},
+    "fn_slot84": {"size": "0x4", "fill": "zero"},
+    "fn_slot88": {"size": "0x4", "fill": "zero"},
+    "edit": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "u32": "@editvtbl"}]},
+    "editvtbl": {"size": "0x134", "fill": "zero", "init": [{"offset": "0x130", "u32": "@fn_slot130"}]},
+    "fn_slot130": {"size": "0x4", "fill": "zero"},
+    "list": {"size": "0x100", "fill": "zero"},
+    "control184": {"size": "0x100", "fill": "zero"},
+    "control188": {"size": "0x100", "fill": "zero"},
+    "button174": {"size": "0x4", "fill": "zero"},
+    "button178": {"size": "0x4", "fill": "zero"},
+    "button18c": {"size": "0x4", "fill": "zero"},
+    "other": {"size": "0x100", "fill": "zero"},
+    "data": {"size": "0x4", "fill": "zero"},
+    "source": {"size": "0x4", "fill": "zero"},
+    "stringtable": {"size": "0x4", "fill": "zero"},
+    "emptytext": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "cstr": ""}]},
+    "buffer": {"size": "0x100", "fill": "zero"},
+    "localized": {"size": "0x20", "fill": "zero", "init": [{"offset": "0x0", "cstr": "Ready"}]}
+  },
+  "memory": [
+    {"addr": "0x00850c80", "u32": "@source"},
+    {"addr": "0x00905cb0", "u32": "@stringtable"}
+  ],
+  "callees": {
+    "0x005a1cd0": {"name": "SpellBookWndView_guess::Update_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "@fn_slot130": {"name": "WndText_guess::Slot76_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0", "writes": [{"arg": 0, "offset": 0, "hex": "00000060"}]},
+    "@fn_slot84": {"name": "SpellBookWndView_guess::Slot33_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "@fn_slot88": {"name": "SpellBookWndView_guess::Slot34_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0059dd30": {"name": "SpellBookWndView_guess::FUN_0059dd30_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x00597be0": {"name": "CListWnd::GetCurSel", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00597ed0": {"name": "CListWnd::GetItemData", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00560d80": {"name": "WndTextSource_guess::GetEntryText_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0", "writes": [{"arg": 0, "offset": 0, "hex": "00000060"}]},
+    "0x0060e985": {"name": "operator new[]", "conv": "cdecl", "args": ["u32"], "ret": "@buffer"},
+    "0x00572300": {"name": "CXStr::operator const char*", "conv": "thiscall", "args": [], "ret": "@rep+0x14"},
+    "0x00574a30": {"name": "FUN_00574a30_guess", "conv": "cdecl", "args": ["cstr"], "ret": 0},
+    "0x00571e00": {"name": "CXStr::CXStr(const char*)", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x00560d9e": {"name": "WndTextSource_guess::SetText_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x0060d682": {"name": "operator delete[]", "conv": "cdecl", "args": ["ptr"], "ret": 0},
+    "0x00555bac": {"name": "SpellBookWndView_guess::FUN_00555bac_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00555c1e": {"name": "SpellBookWndView_guess::FillFields_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005b7ed0": {"name": "WndText_guess::GetText_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0", "writes": [{"arg": 0, "offset": 0, "hex": "00000060"}]},
+    "0x0055611c": {"name": "SpellBookWndView_guess::AddSoulmark_guess", "conv": "thiscall", "args": ["int", "ptr", "ptr", "cstr"], "ret": 0},
+    "0x005dfa00": {"name": "StringTableView_guess::GetWithBuffer_guess", "conv": "thiscall", "args": ["u32", "u32", "u32", "u32", "ptr"], "ret": "@localized", "writes": [{"arg": 4, "offset": 0, "hex": "52656c6f6164656400"}]},
+    "0x00560e32": {"name": "WndTextSource_guess::Activate_guess", "conv": "thiscall", "args": ["ptr", "int", "cstr"], "ret": 0},
+    "0x005a2230": {"name": "CSidlScreenWnd::WndNotification", "conv": "thiscall", "args": ["ptr", "u32", "ptr"], "ret": 73}
+  },
+  "cases": [
+    {"name": "message 10 resets", "args": ["@other", 10, 0]},
+    {"name": "message 6 matching edit", "args": ["@edit", 6, "@data"]},
+    {"name": "message 6 other sender", "args": ["@other", 6, 0]},
+    {"name": "message 14 matching edit", "args": ["@edit", 14, 0]},
+    {"name": "message 14 empty text", "args": ["@edit", 14, 0], "callees": {
+      "@fn_slot130": {"name": "WndText_guess::Slot76_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0", "writes": [{"arg": 0, "offset": 0, "hex": "00000060"}]}
+    }, "memory": [{"addr": "@rep", "offset": "0x8", "u32": 0}, {"addr": "@rep", "offset": "0x14", "cstr": ""}]},
+    {"name": "message 14 null text", "args": ["@edit", 14, 0], "callees": {
+      "@fn_slot130": {"name": "WndText_guess::Slot76_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0", "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]}
+    }},
+    {"name": "message 14 other sender", "args": ["@other", 14, 0]},
+    {"name": "message 33 gate closed", "args": ["@other", 33, "@data"], "callees": {
+      "0x0059dd30": {"name": "SpellBookWndView_guess::FUN_0059dd30_guess", "conv": "thiscall", "args": [], "ret": 0}
+    }},
+    {"name": "message 33 null data", "args": ["@other", 33, 0]},
+    {"name": "message 33 no selection", "args": ["@other", 33, "@data"], "callees": {
+      "0x00597be0": {"name": "CListWnd::GetCurSel", "conv": "thiscall", "args": [], "ret": -1}
+    }},
+    {"name": "message 33 allocation fails", "args": ["@other", 33, "@data"], "callees": {
+      "0x0060e985": {"name": "operator new[]", "conv": "cdecl", "args": ["u32"], "ret": 0}
+    }},
+    {"name": "message 33 copies search text", "args": ["@other", 33, "@data"]},
+    {"name": "message 33 null search text", "args": ["@other", 33, "@data"], "callees": {
+      "0x00560d80": {"name": "WndTextSource_guess::GetEntryText_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0", "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]},
+      "0x00572300": {"name": "CXStr::operator const char*", "conv": "thiscall", "args": [], "ret": "@emptytext"}
+    }},
+    {"name": "message 1 list command", "args": ["@list", 1, 0]},
+    {"name": "message 1 first input empty", "args": ["@control188", 1, "@data"], "callees": {
+      "0x005b7ed0": {"name": "WndText_guess::GetText_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0", "writes": [{"arg": 0, "offset": 0, "hex": "00000060"}]}
+    }, "memory": [{"addr": "@rep", "offset": "0x8", "u32": 0}, {"addr": "@rep", "offset": "0x14", "cstr": ""}]},
+    {"name": "message 1 first input null", "args": ["@control188", 1, "@data"], "callees": {
+      "0x005b7ed0": {"name": "WndText_guess::GetText_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0", "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]}
+    }},
+    {"name": "message 1 first input text", "args": ["@control188", 1, "@data"]},
+    {"name": "message 1 second input text", "args": ["@control184", 1, "@data"]},
+    {"name": "message 1 second input null", "args": ["@control184", 1, "@data"], "callees": {
+      "0x005b7ed0": {"name": "WndText_guess::GetText_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0", "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]}
+    }},
+    {"name": "message 1 row reset no selection", "args": ["@button174", 1, 0], "callees": {
+      "0x00597be0": {"name": "CListWnd::GetCurSel", "conv": "thiscall", "args": [], "ret": -1}
+    }},
+    {"name": "message 1 row reset selected", "args": ["@button174", 1, 0]},
+    {"name": "message 1 string reset no selection", "args": ["@button178", 1, 0], "callees": {
+      "0x00597be0": {"name": "CListWnd::GetCurSel", "conv": "thiscall", "args": [], "ret": -1}
+    }},
+    {"name": "message 1 string reset selected", "args": ["@button178", 1, 0]},
+    {"name": "message 1 last button", "args": ["@button18c", 1, 0]},
+    {"name": "message 1 unmatched sender", "args": ["@other", 1, 0]},
+    {"name": "other message delegates", "args": ["@other", 7, 0]}
+  ],
+  "fuzz": {
+    "seed": 5596274,
+    "count": 100,
+    "args": [
+      {"choices": ["@edit", "@list", "@control188", "@control184", "@button174", "@button178", "@button18c", "@other"]},
+      {"range": [-1, 34]},
+      {"choices": [0, "@data"]}
+    ],
+    "memory": [
+      {"addr": "@obj", "offset": "0x174", "type": "ptr", "choices": ["@button174", "@other"]},
+      {"addr": "@obj", "offset": "0x178", "type": "ptr", "choices": ["@button178", "@other"]},
+      {"addr": "@obj", "offset": "0x180", "type": "ptr", "choices": ["@edit", "@other"]},
+      {"addr": "@obj", "offset": "0x184", "type": "ptr", "choices": ["@control184", "@other"]},
+      {"addr": "@obj", "offset": "0x188", "type": "ptr", "choices": ["@control188", "@other"]},
+      {"addr": "@obj", "offset": "0x18c", "type": "ptr", "choices": ["@button18c", "@other"]}
+    ]
+  }
+}

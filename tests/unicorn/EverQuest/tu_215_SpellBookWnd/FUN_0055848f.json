@@ -1,0 +1,67 @@
+{
+  "function": "SpellBookWndView_guess::HandleKeyboardMsg_guess",
+  "original": "0x0055848f",
+  "sources": ["src/EverQuest/tu_215_SpellBookWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@obj",
+  "args": [
+    {"name": "opcode", "type": "int"},
+    {"name": "unused_guess", "type": "int"},
+    {"name": "flag", "type": "char"}
+  ],
+  "ret": "int",
+  "objects": {
+    "obj": {"size": "0x294", "fill": "zero"},
+    "left": {"size": "0x100", "fill": "zero"},
+    "right": {"size": "0x100", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@obj", "offset": "0x160", "u32": 10},
+    {"addr": "@obj", "offset": "0x164", "u32": 5},
+    {"addr": "@obj", "offset": "0x24c", "u32": "@left"},
+    {"addr": "@obj", "offset": "0x250", "u32": "@right"},
+    {"addr": "@left", "offset": "0x5d", "u8": 1},
+    {"addr": "@right", "offset": "0x5d", "u8": 1}
+  ],
+  "callees": {
+    "0x0059dd30": {"name": "SpellBookWndView_guess::FUN_0059dd30_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005578bc": {"name": "PromptDeleteSpell_guess", "conv": "stdcall", "args": ["int"]},
+    "0x00558361": {"name": "SetPage_guess", "conv": "thiscall", "args": ["int"]}
+  },
+  "cases": [
+    {"name": "cb_left_page", "args": [203, 0, 1],
+     "callees": {"0x00558361": {"name": "FUN_00558361", "conv": "thiscall", "args": ["int"]}}},
+    {"name": "cb_flag_zero", "args": [203, 0, 0]},
+    {"name": "cb_no_left_wnd", "args": [203, 0, 1], "memory": [{"addr": "@obj", "offset": "0x24c", "u32": 0}]},
+    {"name": "cb_left_wnd_flag_clear", "args": [203, 0, 1], "memory": [{"addr": "@left", "offset": "0x5d", "u8": 0}]},
+    {"name": "cb_boundary_page_two", "args": [203, 0, 1], "memory": [{"addr": "@obj", "offset": "0x160", "u32": 2}]},
+    {"name": "cd_right_page", "args": [205, 0, 1]},
+    {"name": "cd_flag_zero", "args": [205, 0, 0]},
+    {"name": "cd_no_right_wnd", "args": [205, 0, 1], "memory": [{"addr": "@obj", "offset": "0x250", "u32": 0}]},
+    {"name": "cd_right_flag_clear", "args": [205, 0, 1], "memory": [{"addr": "@right", "offset": "0x5d", "u8": 0}]},
+    {"name": "cd_negative_page", "args": [205, 0, 1], "memory": [{"addr": "@obj", "offset": "0x160", "u32": -3}]},
+    {"name": "d3_select", "args": [211, 0, 1],
+     "callees": {"0x005578bc": {"name": "FUN_005578bc", "conv": "stdcall", "args": ["int"]}}},
+    {"name": "d3_flag_zero", "args": [211, 0, 0]},
+    {"name": "unknown_opcode", "args": [16, 0, 1]},
+    {"name": "gate_closed_cb", "args": [203, 0, 1], "callees": {"0x0059dd30": {"name": "SpellBookWndView_guess::FUN_0059dd30_guess", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "gate_closed_d3", "args": [211, 0, 1], "callees": {"0x0059dd30": {"name": "SpellBookWndView_guess::FUN_0059dd30_guess", "conv": "thiscall", "args": [], "ret": 0}}}
+  ],
+  "fuzz": {
+    "seed": 5604495,
+    "count": 120,
+    "args": [
+      {"choices": [203, 205, 211, 16, 0]},
+      {},
+      {"choices": [0, 1]}
+    ],
+    "memory": [
+      {"addr": "@obj", "offset": "0x160", "type": "int", "choices": [-3, -2, 0, 1, 2, 10, 48]},
+      {"addr": "@obj", "offset": "0x164", "type": "int", "choices": [-1, 0, 5]},
+      {"addr": "@obj", "offset": "0x24c", "type": "ptr", "choices": ["@left", 0]},
+      {"addr": "@obj", "offset": "0x250", "type": "ptr", "choices": ["@right", 0]},
+      {"addr": "@left", "offset": "0x5d", "type": "u8", "choices": [0, 1]},
+      {"addr": "@right", "offset": "0x5d", "type": "u8", "choices": [0, 1]}
+    ]
+  }
+}

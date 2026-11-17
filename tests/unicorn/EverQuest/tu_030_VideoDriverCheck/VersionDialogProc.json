@@ -1,0 +1,306 @@
+{
+  "function": "VersionDialogProc_guess",
+  "original": "0x00445d71",
+  "sources": [
+    "src/EverQuest/tu_030_VideoDriverCheck.cpp"
+  ],
+  "conv": "stdcall",
+  "args": [
+    {
+      "name": "hwnd",
+      "type": "ptr"
+    },
+    {
+      "name": "msg",
+      "type": "u32"
+    },
+    {
+      "name": "wParam",
+      "type": "u32"
+    },
+    {
+      "name": "lParam",
+      "type": "ptr"
+    }
+  ],
+  "ret": "bool",
+  "objects": {
+    "window": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "version": {
+      "size": "0x24",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00850dac",
+      "u32": "@version"
+    },
+    {
+      "addr": "0x007a0000",
+      "size": 64,
+      "fill": "zero"
+    },
+    {
+      "addr": "0x007a0014",
+      "cstr": "fixture driver message"
+    }
+  ],
+  "callees": {
+    "0x00445a71": {
+      "name": "OpenDownloadPage_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "user32.dll!IsDlgButtonChecked": {
+      "name": "IsDlgButtonChecked",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00445ce8": {
+      "name": "SaveShowForCard_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00445c36": {
+      "name": "Message_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00007a00"
+        }
+      ]
+    },
+    "0x00572300": {
+      "name": "Get_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "0x007a0014"
+    },
+    "user32.dll!GetDlgItem": {
+      "name": "GetDlgItem",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": "arg0"
+    },
+    "user32.dll!SetWindowTextA": {
+      "name": "SetWindowTextA",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "ret": 1
+    },
+    "0x00571d00": {
+      "name": "ReleaseData_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "user32.dll!EndDialog": {
+      "name": "EndDialog",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "close",
+      "args": [
+        "@window",
+        16,
+        0,
+        "@version"
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "initialize and release message",
+      "args": [
+        "@window",
+        272,
+        0,
+        "@version"
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "initialize with empty message",
+      "args": [
+        "@window",
+        272,
+        0,
+        "@version"
+      ],
+      "callees": {
+        "0x00445c36": {
+          "name": "Message_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": "arg0",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "command close with high word ignored",
+      "args": [
+        "@window",
+        273,
+        "0xabcd03e8",
+        "@version"
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "show for unchecked",
+      "args": [
+        "@window",
+        273,
+        1005,
+        "@version"
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "show for checked",
+      "args": [
+        "@window",
+        273,
+        1005,
+        "@version"
+      ],
+      "callees": {
+        "user32.dll!IsDlgButtonChecked": {
+          "name": "IsDlgButtonChecked",
+          "conv": "stdcall",
+          "args": [
+            "ptr",
+            "int"
+          ],
+          "ret": 1
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "refresh and dismiss",
+      "args": [
+        "@window",
+        273,
+        1007,
+        "@version"
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "unknown command",
+      "args": [
+        "@window",
+        273,
+        1006,
+        "@version"
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "unknown message",
+      "args": [
+        "@window",
+        32,
+        0,
+        "@version"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4480369,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@window"
+        ]
+      },
+      {
+        "choices": [
+          16,
+          272,
+          273,
+          32
+        ]
+      },
+      {
+        "choices": [
+          0,
+          1000,
+          1005,
+          1006,
+          1007,
+          "0xabcd03e8"
+        ]
+      },
+      {
+        "choices": [
+          "@version"
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

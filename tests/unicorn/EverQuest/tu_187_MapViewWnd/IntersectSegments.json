@@ -1,0 +1,93 @@
+{
+  "function": "IntersectSegments_guess",
+  "original": "0x00532ece",
+  "sources": [
+    "src/EverQuest/tu_187_MapViewWnd.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    { "name": "x1_guess", "type": "double" },
+    { "name": "y1_guess", "type": "double" },
+    { "name": "x2_guess", "type": "double" },
+    { "name": "y2_guess", "type": "double" },
+    { "name": "x3_guess", "type": "double" },
+    { "name": "y3_guess", "type": "double" },
+    { "name": "x4_guess", "type": "double" },
+    { "name": "y4_guess", "type": "double" },
+    { "name": "x_out_guess", "type": "ptr" },
+    { "name": "y_out_guess", "type": "ptr" }
+  ],
+  "ret": "char",
+  "objects": {
+    "x_out": { "size": "0x4", "fill": "random" },
+    "y_out": { "size": "0x4", "fill": "random" }
+  },
+  "memory": [
+    { "addr": "0x006588e8", "from_image": "0x006588e8", "image_size": 8 }
+  ],
+  "callees": {
+    "0x0060f60d": {
+      "name": "_fabs",
+      "conv": "cdecl",
+      "args": [ "double" ],
+      "passthrough": true
+    }
+  },
+  "rewrite_aliases": {
+    "_fabs": "0x0060f60d"
+  },
+  "cases": [
+    {
+      "name": "parallel",
+      "args": [ 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 2.0, "@x_out", "@y_out" ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "below threshold",
+      "args": [ 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.00005, "@x_out", "@y_out" ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "at threshold",
+      "args": [ 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0001, "@x_out", "@y_out" ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "above threshold",
+      "args": [ 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0002, "@x_out", "@y_out" ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "crossing diagonals",
+      "args": [ 0.0, 0.0, 2.0, 2.0, 0.0, 2.0, 2.0, 0.0, "@x_out", "@y_out" ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "vertical and horizontal",
+      "args": [ 2.0, -3.0, 2.0, 4.0, -5.0, 1.0, 7.0, 1.0, "@x_out", "@y_out" ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "intersection outside both segments",
+      "args": [ 0.0, 0.0, 1.0, 0.0, 2.0, 1.0, 2.0, 2.0, "@x_out", "@y_out" ],
+      "expect": { "ret": 1 }
+    }
+  ],
+  "fuzz": {
+    "seed": 5451470,
+    "count": 150,
+    "args": [
+      { "range": [ -10.0, 10.0 ] },
+      { "range": [ -10.0, 10.0 ] },
+      { "range": [ -10.0, 10.0 ] },
+      { "range": [ -10.0, 10.0 ] },
+      { "range": [ -10.0, 10.0 ] },
+      { "range": [ -10.0, 10.0 ] },
+      { "range": [ -10.0, 10.0 ] },
+      { "range": [ -10.0, 10.0 ] },
+      { "choices": [ "@x_out" ] },
+      { "choices": [ "@y_out" ] }
+    ],
+    "memory": []
+  }
+}

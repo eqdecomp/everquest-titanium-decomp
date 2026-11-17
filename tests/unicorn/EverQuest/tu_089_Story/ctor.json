@@ -1,0 +1,81 @@
+{
+  "function": "SpellManager_guess::SpellManager_guess",
+  "original": "0x004c7481",
+  "sources": [
+    "src/EverQuest/tu_089_Story.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@pool",
+  "args": [
+    {
+      "name": "path",
+      "type": "cstr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "pool": {"size": "0x139b0", "fill": "random"},
+    "tail": {"size": "0x270", "fill": "random"},
+    "reader": {"size": "0x1000c", "fill": "random"},
+    "itemA": {"size": "0x270", "fill": "random"},
+    "itemB": {"size": "0x270", "fill": "random"},
+    "itemC": {"size": "0x270", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x006104f0": {"name": "_stat", "conv": "cdecl", "args": ["cstr", "ptr"], "ret": 0},
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"],
+                   "ret": ["@tail", "@reader", "@itemA", "@itemB", "@itemC"]},
+    "0x0044dbf0": {"name": "PoolItem_ctor", "conv": "thiscall", "args": ["ignore"], "ret": "this"},
+    "0x004b6c04": {"name": "Checksum", "conv": "cdecl", "args": ["ptr", "int"],
+                   "ret": ["0x11223344", "0xa1b2c3d4", "0x55667788", "0x99aabbcc"]},
+    "0x004c7458": {"name": "Reorder", "conv": "cdecl", "args": ["ptr"], "passthrough": true},
+    "0x00576bd0": {"name": "Reader_ctor", "conv": "thiscall", "args": ["cstr", "char"], "ret": "this"},
+    "0x00576d10": {"name": "IsOpen", "conv": "thiscall", "args": [], "ret": 1},
+    "0x00576cf0": {"name": "Line", "conv": "thiscall", "args": ["ignore", "int"], "ret": 0,
+                   "writes": [{"arg": 0, "offset": 0, "hex": "375e6162635e00"}]},
+    "0x00574830": {"name": "IsEntry", "conv": "cdecl", "args": ["cstr", "int"], "ret": [1, 0, 1]},
+    "0x00576d80": {"name": "ParseInt", "conv": "cdecl", "args": ["ignore", "char"], "ret": [5, 9999]},
+    "0x00576c60": {"name": "Next", "conv": "thiscall", "args": [], "ret": [1, 1, 1, 0]},
+    "0x00576c50": {"name": "Close", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0060d0d5": {"name": "free", "conv": "cdecl", "args": ["ptr"], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "__stat": "0x006104f0",
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {"name": "typical", "args": ["items.txt"]},
+    {"name": "break_at_10000", "args": ["a"],
+     "callees": {"0x00576c60": {"name": "Next", "conv": "thiscall", "args": [], "ret": [1, 1, 1, 0]},
+                 "0x00574830": {"name": "IsEntry", "conv": "cdecl", "args": ["cstr", "int"], "ret": 1},
+                 "0x00576d80": {"name": "ParseInt", "conv": "cdecl", "args": ["ignore", "char"], "ret": [0, 10000, 3]}}},
+    {"name": "id_9999_and_0", "args": ["b"],
+     "callees": {"0x00576c60": {"name": "Next", "conv": "thiscall", "args": [], "ret": [2, 1, 0]},
+                 "0x00574830": {"name": "IsEntry", "conv": "cdecl", "args": ["cstr", "int"], "ret": 1},
+                 "0x00576d80": {"name": "ParseInt", "conv": "cdecl", "args": ["ignore", "char"], "ret": [9999, 0]}}},
+    {"name": "next_negative", "args": ["c"],
+     "callees": {"0x00576c60": {"name": "Next", "conv": "thiscall", "args": [], "ret": [-1]}}},
+    {"name": "not_open", "args": ["d"],
+     "callees": {"0x00576d10": {"name": "IsOpen", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "tail_new_fails", "args": ["e"],
+     "callees": {"0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"],
+                                "ret": [0, "@reader", "@itemA", "@itemB"]}}},
+    {"name": "reader_new_fails", "args": ["f"],
+     "callees": {"0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"],
+                                "ret": ["@tail", 0]},
+                 "0x00576d10": {"name": "IsOpen", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "item_new_fails", "args": ["g"],
+     "callees": {"0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"],
+                                "ret": ["@tail", "@reader", 0, "@itemB"]}}}
+  ],
+  "fuzz": {
+    "seed": 5010561,
+    "count": 50,
+    "args": [{}],
+    "memory": [
+      {"addr": "@pool", "offset": "0x24", "size": 64},
+      {"addr": "@pool", "offset": "0x138a4", "size": 8}
+    ]
+  }
+}

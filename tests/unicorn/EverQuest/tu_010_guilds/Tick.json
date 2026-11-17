@@ -1,0 +1,194 @@
+{
+  "function": "Reporter_guess::GiveTime_guess",
+  "original": "0x0040c544",
+  "sources": [
+    "src/EverQuest/tu_010_guilds.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@reporter",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "reporter": {
+      "size": "0x100",
+      "fill": "random",
+      "init": [
+        {"offset": "0x08", "u32": "@pump"},
+        {"offset": "0x18", "u32": "@owner"}
+      ]
+    },
+    "owner": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "pump": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "@reporter", "offset": "0x15", "u8": 0},
+    {"addr": "@reporter", "offset": "0x16", "u8": 7},
+    {"addr": "@reporter", "offset": "0x17", "u8": 9},
+    {"addr": "@reporter", "offset": "0x1c", "cstr": "abc"},
+    {"addr": "@reporter", "offset": "0x4c", "cstr": "defg"},
+    {"addr": "@reporter", "offset": "0xac", "cstr": "hi"},
+    {"addr": "@reporter", "offset": "0xc0", "u32": 0},
+    {"addr": "@reporter", "offset": "0xc4", "u32": 0}
+  ],
+  "callees": {
+    "0x0040be8b": {
+      "name": "FUN_0040be8b",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005e6ec0": {
+      "name": "FUN_005e6ec0",
+      "conv": "thiscall",
+      "args": ["u32", "mem:0xc0", "u32"],
+      "ret": 0
+    },
+    "0x0040c1e2": {
+      "name": "ClockElapsed_guess",
+      "conv": "cdecl",
+      "args": ["i64"],
+      "ret": 100
+    },
+    "0x0040c194": {
+      "name": "GetClockStamp_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 4660,
+      "ret_edx": 0
+    },
+    "0x005e5a60": {
+      "name": "FUN_005e5a60",
+      "conv": "thiscall",
+      "args": ["u32", "ignore"],
+      "ret": 0,
+      "writes": [{"arg": 1, "offset": 20, "hex": "64000000"}]
+    },
+    "0x0040beae": {
+      "name": "FUN_0040beae",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x005eb890": {
+      "name": "FUN_005eb890",
+      "conv": "thiscall",
+      "args": ["u32", "u32"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "first tick, owner ready, query not due",
+      "args": []
+    },
+    {
+      "name": "owner null: only the pump wait",
+      "args": [],
+      "memory": [{"addr": "@reporter", "offset": "0x18", "u32": 0}],
+      "callees": {
+        "0x005e6ec0": {"name": "FUN_005e6ec0", "conv": "thiscall", "args": ["u32", "mem:0xc0", "u32"], "ret": 0},
+        "0x0040be8b": {"name": "FUN_0040be8b", "conv": "thiscall", "args": [], "ret": 1}
+      }
+    },
+    {
+      "name": "owner not in state 1",
+      "args": [],
+      "callees": {
+        "0x0040be8b": {"name": "FUN_0040be8b", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "owner state 2",
+      "args": [],
+      "callees": {
+        "0x0040be8b": {"name": "FUN_0040be8b", "conv": "thiscall", "args": [], "ret": 2}
+      }
+    },
+    {
+      "name": "append already sent",
+      "args": [],
+      "memory": [{"addr": "@reporter", "offset": "0x15", "u8": 1}]
+    },
+    {
+      "name": "empty strings",
+      "args": [],
+      "memory": [
+        {"addr": "@reporter", "offset": "0x1c", "cstr": ""},
+        {"addr": "@reporter", "offset": "0x4c", "cstr": ""},
+        {"addr": "@reporter", "offset": "0xac", "cstr": ""}
+      ]
+    },
+    {
+      "name": "full-length strings",
+      "args": [],
+      "memory": [
+        {"addr": "@reporter", "offset": "0x1c", "cstr": "0123456789abcdefghijklmnopqrstu"},
+        {"addr": "@reporter", "offset": "0x4c", "cstr": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"},
+        {"addr": "@reporter", "offset": "0xac", "cstr": "0123456789abcdefghi"}
+      ]
+    },
+    {
+      "name": "elapsed exactly 5000: no query",
+      "args": [],
+      "callees": {
+        "0x0040c1e2": {"name": "FUN_0040c1e2", "conv": "cdecl", "args": ["i64"], "ret": 5000}
+      }
+    },
+    {
+      "name": "elapsed 5001: query, small value, no flush",
+      "args": [],
+      "callees": {
+        "0x0040c1e2": {"name": "FUN_0040c1e2", "conv": "cdecl", "args": ["i64"], "ret": 5001}
+      }
+    },
+    {
+      "name": "elapsed due, value 30000: no flush",
+      "args": [],
+      "callees": {
+        "0x0040c1e2": {"name": "FUN_0040c1e2", "conv": "cdecl", "args": ["i64"], "ret": 6000},
+        "0x005e5a60": {"name": "FUN_005e5a60", "conv": "thiscall", "args": ["u32", "ignore"], "ret": 0, "writes": [{"arg": 1, "offset": 20, "hex": "30750000"}]}
+      }
+    },
+    {
+      "name": "elapsed due, value 30001: flush",
+      "args": [],
+      "callees": {
+        "0x0040c1e2": {"name": "FUN_0040c1e2", "conv": "cdecl", "args": ["i64"], "ret": 6000},
+        "0x005e5a60": {"name": "FUN_005e5a60", "conv": "thiscall", "args": ["u32", "ignore"], "ret": 0, "writes": [{"arg": 1, "offset": 20, "hex": "31750000"}]}
+      }
+    },
+    {
+      "name": "flag set, elapsed due, value 40000: flush",
+      "args": [],
+      "memory": [{"addr": "@reporter", "offset": "0x15", "u8": 1}],
+      "callees": {
+        "0x0040c1e2": {"name": "FUN_0040c1e2", "conv": "cdecl", "args": ["i64"], "ret": 6000},
+        "0x005e5a60": {"name": "FUN_005e5a60", "conv": "thiscall", "args": ["u32", "ignore"], "ret": 0, "writes": [{"arg": 1, "offset": 20, "hex": "409c0000"}]}
+      }
+    },
+    {
+      "name": "flag set, elapsed small: no query",
+      "args": [],
+      "memory": [{"addr": "@reporter", "offset": "0x15", "u8": 1}],
+      "callees": {
+        "0x0040c1e2": {"name": "FUN_0040c1e2", "conv": "cdecl", "args": ["i64"], "ret": 0}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4244804,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@reporter", "offset": "0x15", "type": "u8", "choices": [0, 1]},
+      {"addr": "@reporter", "offset": "0x16", "type": "u8", "range": [0, 255]},
+      {"addr": "@reporter", "offset": "0x17", "type": "u8", "range": [0, 255]},
+      {"addr": "@reporter", "offset": "0x18", "type": "u32", "choices": ["@owner", 0]}
+    ]
+  }
+}

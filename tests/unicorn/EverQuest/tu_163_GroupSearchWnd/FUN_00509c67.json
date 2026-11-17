@@ -1,0 +1,126 @@
+{
+  "function": "CGroupSearchWndView_guess::UpdatePlayerInfoLabel_guess",
+  "original": "0x00509c67",
+  "sources": ["src/EverQuest/tu_163_GroupSearchWnd.cpp"],
+  "size": "0x22c",
+  "conv": "thiscall",
+  "this": "@bigobject",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "bigobject": {"size": "0x278", "fill": "zero"},
+    "source": {
+      "size": "0xe10",
+      "fill": "zero",
+      "init": [{"offset": "0x8", "u32": "@offsettable"}]
+    },
+    "offsettable": {"size": "0x8", "fill": "zero"},
+    "lookupvalue": {"size": "0x11a8", "fill": "zero"},
+    "everquest": {"size": "0x10", "fill": "zero"},
+    "target": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@target_vtable"}]
+    },
+    "target_vtable": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xfc", "u32": "@fn_slot63"}]
+    },
+    "fn_slot63": {"size": "0x4", "fill": "zero"},
+    "fixedtext": {"size": "0x40", "fill": "zero"},
+    "formattext": {"size": "0x40", "fill": "zero"},
+    "localized": {"size": "0x40", "fill": "zero"},
+    "heap": {"size": "0x1000", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x5a5a1234"},
+    {"addr": "0x00905d00", "u32": "@source"},
+    {"addr": "0x00988df0", "u32": "@everquest"},
+    {"addr": "0x0099db00", "cstr": ""},
+    {"addr": "@offsettable", "offset": "0x4", "u32": "0x10"},
+    {"addr": "@source", "offset": "0xe0c", "u32": 7},
+    {"addr": "@lookupvalue", "offset": "0x119c", "u8": 4},
+    {"addr": "@lookupvalue", "offset": "0x11a4", "u32": 100},
+    {"addr": "@fixedtext", "cstr": "fixed"},
+    {"addr": "@formattext", "cstr": "wrapped"},
+    {"addr": "@localized", "cstr": "localized"}
+  ],
+  "callees": {
+    "0x005ec220": {"name": "EQ_CharacterProfileView_guess::Find_guess", "conv": "thiscall", "args": [], "ret": "@lookupvalue"},
+    "0x0040ac55": {"name": "FixedObject_guess::ReadValue_guess", "conv": "thiscall", "args": ["int"], "ret": "@fixedtext"},
+    "0x005738b0": {
+      "name": "FormatCXStr_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr", "cstr"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "78563412"}]
+    },
+    "0x00572300": {"name": "CXStr_to_char_guess", "conv": "thiscall", "args": [], "ret": "@formattext"},
+    "0x00491e5b": {"name": "EverQuestText_guess::GetText_guess", "conv": "thiscall", "args": ["int"], "ret": "@localized"},
+    "0x006220e9": {"name": "_itoa", "conv": "cdecl", "args": ["int", "ptr", "int"], "passthrough": true},
+    "0x0046da4a": {
+      "name": "FormatString_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "cstr", "cstr", "cstr", "cstr", "cstr", "cstr", "cstr", "cstr", "cstr"],
+      "ret": 0,
+      "writes": [{"arg": 0, "hex": "66697874757265207465787400"}]
+    },
+    "0x00571d00": {"name": "CXStr_FreeRep_guess", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x00571e00": {"name": "CXStr_ctor_guess", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@heap"},
+    "@fn_slot63": {"name": "TextWindow_SetText_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0}
+  },
+  "rewrite_aliases": {"__itoa": "0x006220e9"},
+  "cases": [
+    {"name": "null source", "args": [], "memory": [{"addr": "0x00905d00", "u32": 0}]},
+    {
+      "name": "unchanged lookup",
+      "args": [],
+      "memory": [
+        {"addr": "@bigobject", "offset": "0x26c", "u32": 100},
+        {"addr": "@bigobject", "offset": "0x270", "u32": 4},
+        {"addr": "@bigobject", "offset": "0x274", "u32": 7}
+      ]
+    },
+    {"name": "lookup value changed", "args": [], "memory": [{"addr": "@bigobject", "offset": "0x26c", "u32": 99}]},
+    {"name": "lookup byte changed", "args": [], "memory": [{"addr": "@bigobject", "offset": "0x270", "u32": 3}]},
+    {"name": "source value changed", "args": [], "memory": [{"addr": "@bigobject", "offset": "0x274", "u32": 6}]},
+    {
+      "name": "unset source uses byte text",
+      "args": [],
+      "memory": [
+        {"addr": "@bigobject", "offset": "0x164", "u32": "@target"},
+        {"addr": "@bigobject", "offset": "0x26c", "u32": 99},
+        {"addr": "@bigobject", "offset": "0x270", "u32": 3},
+        {"addr": "@bigobject", "offset": "0x274", "u32": 7},
+        {"addr": "@source", "offset": "0xe0c", "u32": -1}
+      ]
+    },
+    {
+      "name": "set source adds wrapped text",
+      "args": [],
+      "memory": [
+        {"addr": "@bigobject", "offset": "0x164", "u32": "@target"},
+        {"addr": "@bigobject", "offset": "0x26c", "u32": 99},
+        {"addr": "@bigobject", "offset": "0x270", "u32": 3},
+        {"addr": "@bigobject", "offset": "0x274", "u32": 6},
+        {"addr": "@source", "offset": "0xe0c", "u32": 24}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5282919,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@bigobject", "offset": "0x26c", "type": "int", "choices": [0, 99, 100]},
+      {"addr": "@bigobject", "offset": "0x270", "type": "int", "choices": [0, 3, 4, 255]},
+      {"addr": "@bigobject", "offset": "0x274", "type": "int", "choices": [-1, 0, 6, 7, 24]},
+      {"addr": "@source", "offset": "0xe0c", "type": "int", "choices": [-1, 0, 7, 24]},
+      {"addr": "@lookupvalue", "offset": "0x119c", "type": "u8", "choices": [0, 4, 255]},
+      {"addr": "@lookupvalue", "offset": "0x11a4", "type": "int", "choices": [0, 99, 100]}
+    ]
+  },
+  "_survivors": "L1823: the preceding lookup already computed the same holder; the scripted Find calls do not change the source or table offset, so refreshing this local has no observable effect. L1827: the preceding Find call leaves the source and table offset unchanged, so this refresh also recomputes the same holder."
+}

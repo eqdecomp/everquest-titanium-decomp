@@ -1,0 +1,127 @@
+{
+  "function": "CoinMover_guess::MoveMoney_guess",
+  "original": "0x00495f81",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@coinmover",
+  "args": [
+    {"name": "fromType_guess", "type": "int"},
+    {"name": "toType_guess", "type": "int"},
+    {"name": "fromSlot_guess", "type": "int"},
+    {"name": "toSlot_guess", "type": "int"},
+    {"name": "amount_guess", "type": "int"},
+    {"name": "quiet_guess", "type": "char"}
+  ],
+  "ret": "int",
+  "_survivors": "L3374: diff < 0 vs <= 0 differs only at diff 0, where factor is 1 and amount/1 > 1e9-to equals (1e9-to)/1 < amount",
+  "objects": {
+    "coinmover": {"size": "0x10", "fill": "random"},
+    "vbt": {"size": "0x8", "fill": "random", "init": [{"offset": "0x4", "u32": "0x10"}]},
+    "char": {"size": "0xc300", "fill": "random", "init": [
+      {"offset": "0x8", "u32": "@vbt"},
+      {"offset": "0x144", "u32": 1}, {"offset": "0x148", "u32": 2},
+      {"offset": "0x14c", "u32": 3}, {"offset": "0x150", "u32": 4},
+      {"offset": "0x154", "u32": 5}, {"offset": "0x158", "u32": 6},
+      {"offset": "0x15c", "u32": 7}, {"offset": "0x160", "u32": 8}
+    ]},
+    "purse": {"size": "0x1200", "fill": "random", "init": [
+      {"offset": "0x11d4", "u32": 10}, {"offset": "0x11d8", "u32": 20},
+      {"offset": "0x11dc", "u32": 30}, {"offset": "0x11e0", "u32": 40},
+      {"offset": "0x11e4", "u32": 100}, {"offset": "0x11e8", "u32": 200},
+      {"offset": "0x11ec", "u32": 300}, {"offset": "0x11f0", "u32": 400}
+    ]},
+    "trade": {"size": "0x200", "fill": "random", "init": [
+      {"offset": "0x1e4", "u32": 50}, {"offset": "0x1e8", "u32": 60},
+      {"offset": "0x1ec", "u32": 70}, {"offset": "0x1f0", "u32": 80}
+    ]},
+    "player": {"size": "0x200", "fill": "random", "init": [{"offset": "0x15c", "u32": 3}]},
+    "iface": {"size": "0x40", "fill": "random"},
+    "sound": {"size": "0x40", "fill": "random"},
+    "disp": {"size": "0x20", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@char"},
+    {"addr": "0x00850c38", "u32": "@iface"},
+    {"addr": "0x00850c24", "u32": "@player"},
+    {"addr": "0x00851390", "u32": "@sound"},
+    {"addr": "0x00850c50", "u32": "@trade"},
+    {"addr": "0x00905d24", "u32": "@disp"}
+  ],
+  "callees": {
+    "0x0060f81e": {"name": "abs", "conv": "cdecl", "args": ["int"], "passthrough": true},
+    "0x004952db": {"name": "IntPow_guess", "conv": "cdecl", "args": ["double", "int"], "passthrough": true},
+    "0x0059dd30": {"name": "Interface_guess::FUN_0059dd30_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005ec220": {"name": "EQ_CharacterProfileView_guess::Find_guess", "conv": "thiscall", "args": [], "ret": "@purse"},
+    "0x004fd36c": {"name": "CoinPlayer_guess::IsOkToActivate_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "0x0044a537": {"name": "CoinSound_guess::WavePlay_guess", "conv": "thiscall", "args": ["int", "int"]},
+    "0x004912b1": {"name": "FUN_004912b1_guess", "conv": "cdecl", "args": ["u32", "int", "mem:20", "int", "char"], "ret": 1}
+  },
+  "cases": [
+    {"name": "zero amount", "args": [0, 1, 0, 0, 0, 1]},
+    {"name": "no char", "args": [0, 1, 0, 0, 5, 1], "memory": [{"addr": "0x00905d00", "u32": 0}]},
+    {"name": "factor not 1, refused", "args": [0, 0, 0, 1, 5, 1], "callees": {"0x0059dd30": {"name": "x", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "factor 1 skips check", "args": [0, 1, 0, 0, 50, 1], "callees": {"0x0059dd30": {"name": "x", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "to carried, not quiet, refused", "args": [1, 0, 0, 0, 5, 0], "callees": {"0x004fd36c": {"name": "x", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "to carried, not quiet, allowed", "args": [1, 0, 0, 0, 5, 0]},
+    {"name": "to carried quiet", "args": [1, 0, 1, 1, 5, 1]},
+    {"name": "same pointer", "args": [0, 0, 1, 1, 5, 1]},
+    {"name": "no from type", "args": [5, 0, 1, 1, 5, 1]},
+    {"name": "bad from slot", "args": [0, 1, 4, 1, 5, 1]},
+    {"name": "bad to slot", "args": [0, 1, 1, 7, 5, 1]},
+    {"name": "amount over", "args": [0, 1, 0, 0, 101, 1]},
+    {"name": "amount exact", "args": [0, 1, 0, 0, 100, 1]},
+    {"name": "plat to gold", "args": [0, 0, 0, 1, 5, 1]},
+    {"name": "plat to copper", "args": [0, 0, 0, 3, 7, 1]},
+    {"name": "copper to gold state 3", "args": [0, 0, 3, 1, 399, 1]},
+    {"name": "copper to gold state 2", "args": [0, 0, 3, 1, 399, 1], "memory": [{"addr": "@player", "offset": "0x15c", "u32": 2}]},
+    {"name": "bank copper to bank plat", "args": [1, 1, 3, 0, 40, 1]},
+    {"name": "silver to plat, not carried", "args": [1, 1, 2, 0, 30, 1]},
+    {"name": "down overflow", "args": [0, 1, 0, 1, 2, 1], "memory": [{"addr": "@purse", "offset": "0x11d8", "u32": 999999990}]},
+    {"name": "down edge", "args": [0, 1, 0, 1, 1, 1], "memory": [{"addr": "@purse", "offset": "0x11d8", "u32": 999999990}]},
+    {"name": "up overflow", "args": [0, 1, 2, 0, 300, 1], "memory": [{"addr": "@purse", "offset": "0x11d4", "u32": 999999998}]},
+    {"name": "up edge", "args": [0, 1, 2, 0, 300, 1], "memory": [{"addr": "@purse", "offset": "0x11d4", "u32": 999999997}]},
+    {"name": "negative amount", "args": [0, 1, 0, 0, -5, 1]},
+    {"name": "cursor to trade", "args": [2, 3, 2, 3, 1, 1]},
+    {"name": "trade to shared", "args": [3, 4, 1, 2, 1, 1]},
+    {"name": "shared to bank", "args": [4, 1, 3, 3, 1, 1]},
+    {"name": "bank to cursor", "args": [1, 2, 0, 2, 1, 1]},
+    {"name": "cursor0 to shared0", "args": [2, 4, 0, 0, 1, 1]},
+    {"name": "cursor1 to shared1", "args": [2, 4, 1, 1, 1, 1]},
+    {"name": "cursor3 to shared3", "args": [2, 4, 3, 3, 1, 1]},
+    {"name": "trade0 to cursor1", "args": [3, 2, 0, 1, 1, 1]},
+    {"name": "trade2 to cursor3", "args": [3, 2, 2, 3, 1, 1]},
+    {"name": "trade3 to cursor0", "args": [3, 2, 3, 0, 1, 1]},
+    {"name": "shared0 to trade0", "args": [4, 3, 0, 0, 1, 1]},
+    {"name": "shared1 to trade1", "args": [4, 3, 1, 1, 1, 1]},
+    {"name": "shared2 to trade2", "args": [4, 3, 2, 2, 1, 1]},
+    {"name": "bank1 to carried2", "args": [1, 0, 1, 2, 1, 1]},
+    {"name": "bank2 to carried3", "args": [1, 0, 2, 3, 1, 1]},
+    {"name": "bank3 to carried0", "args": [1, 0, 3, 0, 1, 1]},
+    {"name": "carried2 to bank1", "args": [0, 1, 2, 1, 1, 1]},
+    {"name": "carried3 to bank2", "args": [0, 1, 3, 2, 1, 1]},
+    {"name": "display gold", "args": [0, 1, 0, 0, 100, 1]},
+    {"name": "display silver", "args": [0, 1, 0, 0, 100, 1], "memory": [{"addr": "@purse", "offset": "0x11e8", "u32": 0}]},
+    {"name": "display copper", "args": [0, 1, 0, 0, 100, 1], "memory": [{"addr": "@purse", "offset": "0x11e8", "u32": 0}, {"addr": "@purse", "offset": "0x11ec", "u32": 0}]},
+    {"name": "display none", "args": [0, 1, 0, 0, 100, 1], "memory": [{"addr": "@purse", "offset": "0x11e8", "u32": 0}, {"addr": "@purse", "offset": "0x11ec", "u32": 0}, {"addr": "@purse", "offset": "0x11f0", "u32": 0}]}
+  ],
+  "fuzz": {
+    "seed": 4808577,
+    "count": 200,
+    "args": [
+      {"range": [-1, 5]},
+      {"range": [-1, 5]},
+      {"range": [-1, 4]},
+      {"range": [-1, 4]},
+      {"choices": [-1000, -5, -1, 0, 1, 2, 9, 10, 11, 99, 100, 101, 399, 400, 401, 1000, 1001, 12345]},
+      {"choices": [0, 1, 2]}
+    ],
+    "memory": [
+      {"addr": "@purse", "offset": "0x11d4", "type": "int", "count": 8, "stride": 4, "p": 0.6, "choices": [-3, 0, 1, 9, 10, 100, 101, 400, 1000, 999999000, 999999990, 1000000000]},
+      {"addr": "@char", "offset": "0x144", "type": "int", "count": 8, "stride": 4, "p": 0.6, "choices": [-3, 0, 1, 9, 10, 100, 400, 1000, 999999990]},
+      {"addr": "@trade", "offset": "0x1e4", "type": "int", "count": 4, "stride": 4, "p": 0.6, "choices": [-3, 0, 1, 10, 100, 1000, 999999990]},
+      {"addr": "@player", "offset": "0x15c", "type": "int", "choices": [2, 3, 4]}
+    ]
+  }
+}

@@ -1,0 +1,382 @@
+{
+  "function": "SellWindow_guess::LoadSellItems_guess",
+  "original": "0x004e63bd",
+  "sources": [
+    "src/EverQuest/tu_132_BazaarWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@sellwindow",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "sellwindow": {
+      "size": "0x5f8",
+      "fill": "zero"
+    },
+    "lookuproot": {
+      "size": "0x400",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@holder"
+        }
+      ]
+    },
+    "holder": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 0
+        }
+      ]
+    },
+    "rank_node": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "rank_item": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@rank_vtable"
+        },
+        {
+          "offset": "0x58",
+          "u32": 1
+        }
+      ]
+    },
+    "rank_vtable": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x10",
+          "u32": "@fn_slot4"
+        }
+      ]
+    },
+    "fn_slot4": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "string_table": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "message_string": {
+      "size": "0x40",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@lookuproot"
+    },
+    {
+      "addr": "0x00923d5c",
+      "u32": 1
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@string_table"
+    },
+    {
+      "addr": "0x0099db00",
+      "size": 64,
+      "fill": "zero"
+    },
+    {
+      "addr": "@message_string",
+      "cstr": "bazaar message"
+    }
+  ],
+  "callees": {
+    "0x0040cc50": {
+      "name": "IndexedAccess_guess::GetFirst_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@rank_node"
+    },
+    "0x005e0f30": {
+      "name": "RankNode_guess::GetItemId_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 17899
+    },
+    "0x005ecc30": {
+      "name": "RankNode_guess::GetCount_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005ec630": {
+      "name": "RankNode_guess::GetEntry_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@rank_item"
+    },
+    "0x005e06a0": {
+      "name": "RankNode_guess::TestFlag_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 1
+    },
+    "@fn_slot4": {
+      "name": "RankItem_guess::Slot04_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x004e4ee8": {
+      "name": "SellWindow_guess::SetItemToSell_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "int"
+      ]
+    },
+    "0x006220e9": {
+      "name": "__itoa",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ptr",
+        "int"
+      ],
+      "ret": "0x0099db00"
+    },
+    "0x0046da4a": {
+      "name": "FormatText_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "cstr",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32"
+      ]
+    },
+    "0x004e4ca6": {
+      "name": "SellWindow_guess::AddBazaarText_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int"
+      ]
+    },
+    "0x005dfa00": {
+      "name": "StringTable_guess::getString_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": "@message_string"
+    },
+    "0x0060d674": {
+      "name": "__security_check_cookie",
+      "conv": "fastcall",
+      "args": []
+    }
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9"
+  },
+  "cases": [
+    {
+      "name": "null-root",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00905d00",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "empty-first-list",
+      "args": [],
+      "callees": {
+        "0x0040cc50": {
+          "name": "IndexedAccess_guess::GetFirst_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "kind-mismatch",
+      "args": [],
+      "callees": {
+        "0x005e0f30": {
+          "name": "RankNode_guess::GetItemId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "empty-kind-list",
+      "args": [],
+      "callees": {
+        "0x005ecc30": {
+          "name": "RankNode_guess::GetCount_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "missing-entry",
+      "args": [],
+      "callees": {
+        "0x005ec630": {
+          "name": "RankNode_guess::GetEntry_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "eligibility-veto",
+      "args": [],
+      "callees": {
+        "0x005e06a0": {
+          "name": "RankNode_guess::TestFlag_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "@fn_slot4": {
+          "name": "RankItem_guess::Slot04_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      },
+      "memory": [
+        {
+          "addr": "0x00923d5c",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "eligibility-allowed",
+      "args": [],
+      "callees": {
+        "0x005e06a0": {
+          "name": "RankNode_guess::TestFlag_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "@fn_slot4": {
+          "name": "RankItem_guess::Slot04_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      },
+      "memory": [
+        {
+          "addr": "0x00923d5c",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "eligibility-disabled",
+      "args": [],
+      "callees": {
+        "0x005e06a0": {
+          "name": "RankNode_guess::TestFlag_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "@fn_slot4": {
+          "name": "RankItem_guess::Slot04_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      },
+      "memory": [
+        {
+          "addr": "0x00923d5c",
+          "u32": 0
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5137341,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x00905d00",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@lookuproot"
+        ]
+      },
+      {
+        "addr": "0x00923d5c",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

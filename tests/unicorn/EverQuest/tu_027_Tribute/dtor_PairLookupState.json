@@ -1,0 +1,116 @@
+{
+  "function": "PairLookupState_guess::~PairLookupState_guess",
+  "original": "0x00434a12",
+  "sources": [
+    "src/EverQuest/tu_027_Tribute.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@pairlookupstate",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "pairlookupstate": {
+      "size": "0x50",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x10", "u32": "@firstpages" },
+        { "offset": "0x38", "u32": "@secondpages" }
+      ]
+    },
+    "firstpages": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@firstpage0" },
+        { "offset": "0x4", "u32": "@firstpage1" }
+      ]
+    },
+    "firstpage0": { "size": "0x10", "fill": "zero" },
+    "firstpage1": { "size": "0x10", "fill": "zero" },
+    "secondpages": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@secondpage0" },
+        { "offset": "0x4", "u32": "@secondpage1" }
+      ]
+    },
+    "secondpage0": { "size": "0x10", "fill": "zero" },
+    "secondpage1": { "size": "0x10", "fill": "zero" },
+    "ownedpair": { "size": "0xc", "fill": "zero" }
+  },
+  "memory": [
+    { "addr": "@pairlookupstate", "offset": "0x8", "u32": 3 },
+    { "addr": "@pairlookupstate", "offset": "0xc", "u32": 2 },
+    { "addr": "@pairlookupstate", "offset": "0x30", "u32": 3 },
+    { "addr": "@pairlookupstate", "offset": "0x34", "u32": 2 }
+  ],
+  "callees": {
+    "0x00433d86": {
+      "name": "FUN_00433d86",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0060d0d5": {
+      "name": "operator delete",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x004b73ee": {
+      "name": "FUN_004b73ee",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "empty",
+      "args": [],
+      "memory": [
+        { "addr": "@pairlookupstate", "offset": "0x0", "u32": 0 },
+        { "addr": "@pairlookupstate", "offset": "0x28", "u32": 0 }
+      ]
+    },
+    {
+      "name": "all-null",
+      "args": [],
+      "memory": [
+        { "addr": "@pairlookupstate", "offset": "0x0", "u32": 1 },
+        { "addr": "@pairlookupstate", "offset": "0x28", "u32": 1 }
+      ]
+    },
+    {
+      "name": "mixed-cross-page",
+      "args": [],
+      "memory": [
+        { "addr": "@pairlookupstate", "offset": "0x0", "u32": 5 },
+        { "addr": "@pairlookupstate", "offset": "0x28", "u32": 5 },
+        { "addr": "@firstpage0", "offset": "0x0", "u32": "@ownedpair" },
+        { "addr": "@firstpage0", "offset": "0x4", "u32": 0 },
+        { "addr": "@firstpage0", "offset": "0x8", "u32": "@ownedpair" },
+        { "addr": "@firstpage0", "offset": "0xc", "u32": 0 },
+        { "addr": "@firstpage1", "offset": "0x0", "u32": "@ownedpair" },
+        { "addr": "@secondpage0", "offset": "0x0", "u32": 0 },
+        { "addr": "@secondpage0", "offset": "0x4", "u32": "@ownedpair" },
+        { "addr": "@secondpage0", "offset": "0x8", "u32": 0 },
+        { "addr": "@secondpage0", "offset": "0xc", "u32": "@ownedpair" },
+        { "addr": "@secondpage1", "offset": "0x0", "u32": 0 }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4409874,
+    "count": 100,
+    "args": [],
+    "memory": [
+      { "addr": "@pairlookupstate", "offset": "0x0", "type": "int", "choices": [-1, 0, 1, 3, 5, 8] },
+      { "addr": "@pairlookupstate", "offset": "0x28", "type": "int", "choices": [-1, 0, 1, 3, 5, 8] },
+      { "addr": "@firstpage0", "type": "ptr", "choices": [0, "@ownedpair"], "count": 4 },
+      { "addr": "@firstpage1", "type": "ptr", "choices": [0, "@ownedpair"], "count": 4 },
+      { "addr": "@secondpage0", "type": "ptr", "choices": [0, "@ownedpair"], "count": 4 },
+      { "addr": "@secondpage1", "type": "ptr", "choices": [0, "@ownedpair"], "count": 4 }
+    ]
+  }
+}

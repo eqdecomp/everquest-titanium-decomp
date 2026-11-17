@@ -1,0 +1,206 @@
+{
+  "function": "RefreshOwner_guess::Refresh_guess",
+  "original": "0x0052fab0",
+  "sources": [
+    "src/EverQuest/tu_185_MailWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@refreshowner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "refreshowner": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "u32": "@vtbl" }
+      ]
+    },
+    "vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        { "offset": "0xfc", "u32": "@fn" }
+      ]
+    },
+    "fn": { "size": "0x4", "fill": "zero" },
+    "heapkey": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "cstr": "heap key" }
+      ]
+    },
+    "fallback": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "cstr": "fallback" }
+      ]
+    },
+    "cxbuf": { "size": "0x1000", "fill": "zero" }
+  },
+  "memory": [
+    { "addr": "0x0079ac74", "u32": "0x12345678" },
+    { "addr": "0x00988df0", "u32": 1 },
+    { "addr": "0x00905cb0", "u32": 1 }
+  ],
+  "callees": {
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": ["ignore", "u32", "u32"],
+      "ret": "@cxbuf"
+    },
+    "0x00495250": {
+      "name": "GetKey_guess",
+      "conv": "cdecl",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [
+        { "arg": 0, "offset": 4, "hex": "6b657900", "call": 1 },
+        { "arg": 0, "offset": 20, "hex": "03000000", "call": 1 },
+        { "arg": 0, "offset": 24, "hex": "0f000000", "call": 1 }
+      ]
+    },
+    "0x0052fa04": {
+      "name": "StringKey_guess::Get_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "0x0046da4a": {
+      "name": "FormatString_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "cstr", "int", "int", "int", "int", "int", "int", "int", "int"],
+      "ret": 0,
+      "writes": [
+        { "arg": 0, "hex": "666f726d617474656400" }
+      ]
+    },
+    "0x00571e00": {
+      "name": "CXStr_guess::CXStr",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x005dfa00": {
+      "name": "StringTable_guess::getString",
+      "conv": "thiscall",
+      "args": ["u32", "u32"],
+      "ret": "@fallback"
+    },
+    "0x00571d00": {
+      "name": "CXStr_guess::~CXStr",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "0x0040291e": {
+      "name": "basic_string::_Tidy",
+      "conv": "thiscall",
+      "args": ["bool", "u32"],
+      "ret": 0
+    },
+    "@fn": {
+      "name": "RefreshOwner_guess::Slot63_guess",
+      "conv": "thiscall",
+      "args": ["mem:4"],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "?_Tidy@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@IAEX_NI@Z": "0x0040291e"
+  },
+  "cases": [
+    {
+      "name": "null service",
+      "memory": [
+        { "addr": "0x00988df0", "u32": 0 }
+      ]
+    },
+    {
+      "name": "empty service",
+      "callees": {
+        "0x00495250": {
+          "name": "GetKey_guess",
+          "conv": "cdecl",
+          "args": ["ignore"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "empty key",
+      "callees": {
+        "0x00495250": {
+          "name": "GetKey_guess",
+          "conv": "cdecl",
+          "args": ["ignore"],
+          "ret": "arg0",
+          "writes": [
+            { "arg": 0, "offset": 20, "hex": "00000000", "call": 1 },
+            { "arg": 0, "offset": 24, "hex": "0f000000", "call": 1 }
+          ]
+        }
+      }
+    },
+    {
+      "name": "inline key",
+      "callees": {
+        "0x00495250": {
+          "name": "GetKey_guess",
+          "conv": "cdecl",
+          "args": ["ignore"],
+          "ret": "arg0",
+          "writes": [
+            { "arg": 0, "offset": 4, "hex": "6b657900", "call": 1 },
+            { "arg": 0, "offset": 20, "hex": "03000000", "call": 1 },
+            { "arg": 0, "offset": 24, "hex": "0f000000", "call": 1 }
+          ]
+        }
+      }
+    },
+    {
+      "name": "capacity boundary",
+      "callees": {
+        "0x00495250": {
+          "name": "GetKey_guess",
+          "conv": "cdecl",
+          "args": ["ignore"],
+          "ret": "arg0",
+          "writes": [
+            { "arg": 0, "offset": 4, "hex": "20010060", "call": 1 },
+            { "arg": 0, "offset": 20, "hex": "08000000", "call": 1 },
+            { "arg": 0, "offset": 24, "hex": "10000000", "call": 1 }
+          ]
+        }
+      }
+    },
+    {
+      "name": "large capacity",
+      "callees": {
+        "0x00495250": {
+          "name": "GetKey_guess",
+          "conv": "cdecl",
+          "args": ["ignore"],
+          "ret": "arg0",
+          "writes": [
+            { "arg": 0, "offset": 4, "hex": "20010060", "call": 1 },
+            { "arg": 0, "offset": 20, "hex": "08000000", "call": 1 },
+            { "arg": 0, "offset": 24, "hex": "20000000", "call": 1 }
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5438128,
+    "count": 100,
+    "args": [],
+    "memory": [
+      { "addr": "0x00988df0", "type": "ptr", "choices": [0, 1] }
+    ]
+  }
+}

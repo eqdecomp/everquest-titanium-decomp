@@ -1,0 +1,1496 @@
+{
+  "function": "MapViewMap_guess::LoadMapLayer_guess",
+  "original": "0x00533e29",
+  "sources": [
+    "src/EverQuest/tu_187_MapViewWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@mapviewmap",
+  "args": [
+    {
+      "name": "map_name_guess",
+      "type": "cstr"
+    },
+    {
+      "name": "map_index_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "bool",
+  "objects": {
+    "mapviewmap": {
+      "size": "0x88",
+      "fill": "zero"
+    },
+    "file": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "line": {
+      "size": "0x28",
+      "fill": "zero"
+    },
+    "line1": {
+      "size": "0x28",
+      "fill": "zero"
+    },
+    "line2": {
+      "size": "0x28",
+      "fill": "zero"
+    },
+    "point": {
+      "size": "0x34",
+      "fill": "zero"
+    },
+    "text": {
+      "size": "0x100",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079AC74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x0063FA00",
+      "from_image": "0x0063FA00",
+      "image_size": 3
+    }
+  ],
+  "callees": {
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x0060e887": {
+      "name": "_fopen",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x0060fbe1": {
+      "name": "_fgets",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "ptr"
+      ],
+      "ret": "arg1"
+    },
+    "0x0060e963": {
+      "name": "_toupper",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x00532480": {
+      "name": "ElementList_guess::Initialize_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x00610837": {
+      "name": "_sscanf",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x0060e790": {
+      "name": "_fclose",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x00531c94": {
+      "name": "DestroyObject_guess::Apply_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0060e985": {
+      "name": "operator_new_array",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x00533644": {
+      "name": "ResourceLoader_guess::Load_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x0060e450": {
+      "name": "CopyEntryText_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb",
+    "_fopen": "0x0060e887",
+    "_fgets": "0x0060fbe1",
+    "_toupper": "0x0060e963",
+    "??2@YAPAXI@Z": "0x0060d071",
+    "_sscanf": "0x00610837",
+    "_fclose": "0x0060e790"
+  },
+  "cases": [
+    {
+      "name": "missing_file",
+      "args": [
+        "abc",
+        1
+      ]
+    },
+    {
+      "name": "line_min_first",
+      "args": [
+        "lower",
+        1
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "6d6170735c6c6f7765725f312e74787400"
+            }
+          ]
+        },
+        "0x0060e887": {
+          "name": "_fopen",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": "@file"
+        },
+        "0x0060fbe1": {
+          "name": "_fgets",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "int",
+            "ptr"
+          ],
+          "ret": "arg1",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "4c202d31302c202d32302c20312c202033302c2034302c20322c20203235382c20322c20330a00",
+              "call": 0
+            },
+            {
+              "arg": 2,
+              "offset": 12,
+              "hex": "10000000",
+              "call": 0
+            }
+          ]
+        },
+        "0x0060e963": {
+          "name": "_toupper",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            76
+          ]
+        },
+        "0x00610837": {
+          "name": "_sscanf",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ignore",
+            "ignore",
+            "ignore"
+          ],
+          "ret": [
+            9
+          ],
+          "writes": [
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "000020c1",
+              "call": 0
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "0000a0c1",
+              "call": 0
+            },
+            {
+              "arg": 4,
+              "offset": 0,
+              "hex": "0000803f",
+              "call": 0
+            },
+            {
+              "arg": 5,
+              "offset": 0,
+              "hex": "0000f041",
+              "call": 0
+            },
+            {
+              "arg": 6,
+              "offset": 0,
+              "hex": "00002042",
+              "call": 0
+            },
+            {
+              "arg": 7,
+              "offset": 0,
+              "hex": "00000040",
+              "call": 0
+            },
+            {
+              "arg": 8,
+              "offset": 0,
+              "hex": "02010000",
+              "call": 0
+            },
+            {
+              "arg": 9,
+              "offset": 0,
+              "hex": "02000000",
+              "call": 0
+            },
+            {
+              "arg": 10,
+              "offset": 0,
+              "hex": "03000000",
+              "call": 0
+            }
+          ]
+        },
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            "@line"
+          ]
+        }
+      }
+    },
+    {
+      "name": "line_zero_index",
+      "args": [
+        "world",
+        0
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "6d6170735c776f726c642e74787400"
+            }
+          ]
+        },
+        "0x0060e887": {
+          "name": "_fopen",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": "@file"
+        },
+        "0x0060fbe1": {
+          "name": "_fgets",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "int",
+            "ptr"
+          ],
+          "ret": "arg1",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "4c2031302c2032302c20312c20202d33302c202d34302c20322c2020312c20322c20330a00",
+              "call": 0
+            },
+            {
+              "arg": 2,
+              "offset": 12,
+              "hex": "10000000",
+              "call": 0
+            }
+          ]
+        },
+        "0x0060e963": {
+          "name": "_toupper",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            76
+          ]
+        },
+        "0x00610837": {
+          "name": "_sscanf",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ignore",
+            "ignore",
+            "ignore"
+          ],
+          "ret": [
+            9
+          ],
+          "writes": [
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "00002041",
+              "call": 0
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "0000a041",
+              "call": 0
+            },
+            {
+              "arg": 4,
+              "offset": 0,
+              "hex": "0000803f",
+              "call": 0
+            },
+            {
+              "arg": 5,
+              "offset": 0,
+              "hex": "0000f0c1",
+              "call": 0
+            },
+            {
+              "arg": 6,
+              "offset": 0,
+              "hex": "000020c2",
+              "call": 0
+            },
+            {
+              "arg": 7,
+              "offset": 0,
+              "hex": "00000040",
+              "call": 0
+            },
+            {
+              "arg": 8,
+              "offset": 0,
+              "hex": "01000000",
+              "call": 0
+            },
+            {
+              "arg": 9,
+              "offset": 0,
+              "hex": "02000000",
+              "call": 0
+            },
+            {
+              "arg": 10,
+              "offset": 0,
+              "hex": "03000000",
+              "call": 0
+            }
+          ]
+        },
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            "@line"
+          ]
+        }
+      }
+    },
+    {
+      "name": "point_low_level",
+      "args": [
+        "markers",
+        2
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "6d6170735c6d61726b6572735f322e74787400"
+            }
+          ]
+        },
+        "0x0060e887": {
+          "name": "_fopen",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": "@file"
+        },
+        "0x0060fbe1": {
+          "name": "_fgets",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "int",
+            "ptr"
+          ],
+          "ret": "arg1",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "5020352c20362c20372c2020312c20322c20332c2020302c2020415f506f696e740a00",
+              "call": 0
+            },
+            {
+              "arg": 2,
+              "offset": 12,
+              "hex": "10000000",
+              "call": 0
+            }
+          ]
+        },
+        "0x0060e963": {
+          "name": "_toupper",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            80
+          ]
+        },
+        "0x00610837": {
+          "name": "_sscanf",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ignore",
+            "ignore",
+            "ignore",
+            "ptr",
+            "ignore"
+          ],
+          "ret": 8,
+          "writes": [
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "0000a040"
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "0000c040"
+            },
+            {
+              "arg": 4,
+              "offset": 0,
+              "hex": "0000e040"
+            },
+            {
+              "arg": 5,
+              "offset": 0,
+              "hex": "01000000"
+            },
+            {
+              "arg": 6,
+              "offset": 0,
+              "hex": "02000000"
+            },
+            {
+              "arg": 7,
+              "offset": 0,
+              "hex": "03000000"
+            },
+            {
+              "arg": 8,
+              "offset": 0,
+              "hex": "00000000"
+            },
+            {
+              "arg": 9,
+              "offset": 0,
+              "hex": "415f506f696e7400"
+            }
+          ]
+        },
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            "@point"
+          ]
+        },
+        "0x0060e985": {
+          "name": "operator_new_array",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": "@text"
+        },
+        "0x0060e450": {
+          "name": "CopyEntryText_guess",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "point_valid_level",
+      "args": [
+        "markers",
+        2
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "6d6170735c6d61726b6572735f322e74787400"
+            }
+          ]
+        },
+        "0x0060e887": {
+          "name": "_fopen",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": "@file"
+        },
+        "0x0060fbe1": {
+          "name": "_fgets",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "int",
+            "ptr"
+          ],
+          "ret": "arg1",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "5020382c20392c2031302c202031302c2032302c2033302c2020322c2020425f506f696e740a00",
+              "call": 0
+            },
+            {
+              "arg": 2,
+              "offset": 12,
+              "hex": "10000000",
+              "call": 0
+            }
+          ]
+        },
+        "0x0060e963": {
+          "name": "_toupper",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            80
+          ]
+        },
+        "0x00610837": {
+          "name": "_sscanf",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ignore",
+            "ignore",
+            "ignore",
+            "ptr",
+            "ignore"
+          ],
+          "ret": 8,
+          "writes": [
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "00000041"
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "00001041"
+            },
+            {
+              "arg": 4,
+              "offset": 0,
+              "hex": "00002041"
+            },
+            {
+              "arg": 5,
+              "offset": 0,
+              "hex": "0a000000"
+            },
+            {
+              "arg": 6,
+              "offset": 0,
+              "hex": "14000000"
+            },
+            {
+              "arg": 7,
+              "offset": 0,
+              "hex": "1e000000"
+            },
+            {
+              "arg": 8,
+              "offset": 0,
+              "hex": "02000000"
+            },
+            {
+              "arg": 9,
+              "offset": 0,
+              "hex": "425f506f696e7400"
+            }
+          ]
+        },
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            "@point"
+          ]
+        },
+        "0x0060e985": {
+          "name": "operator_new_array",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": "@text"
+        },
+        "0x0060e450": {
+          "name": "CopyEntryText_guess",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "point_high_level",
+      "args": [
+        "markers",
+        2
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "6d6170735c6d61726b6572735f322e74787400"
+            }
+          ]
+        },
+        "0x0060e887": {
+          "name": "_fopen",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": "@file"
+        },
+        "0x0060fbe1": {
+          "name": "_fgets",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "int",
+            "ptr"
+          ],
+          "ret": "arg1",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "502031312c2031322c2031332c2020342c20352c20362c2020342c2020435f506f696e740a00",
+              "call": 0
+            },
+            {
+              "arg": 2,
+              "offset": 12,
+              "hex": "10000000",
+              "call": 0
+            }
+          ]
+        },
+        "0x0060e963": {
+          "name": "_toupper",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            80
+          ]
+        },
+        "0x00610837": {
+          "name": "_sscanf",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ignore",
+            "ignore",
+            "ignore",
+            "ptr",
+            "ignore"
+          ],
+          "ret": 8,
+          "writes": [
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "00003041"
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "00004041"
+            },
+            {
+              "arg": 4,
+              "offset": 0,
+              "hex": "00005041"
+            },
+            {
+              "arg": 5,
+              "offset": 0,
+              "hex": "04000000"
+            },
+            {
+              "arg": 6,
+              "offset": 0,
+              "hex": "05000000"
+            },
+            {
+              "arg": 7,
+              "offset": 0,
+              "hex": "06000000"
+            },
+            {
+              "arg": 8,
+              "offset": 0,
+              "hex": "04000000"
+            },
+            {
+              "arg": 9,
+              "offset": 0,
+              "hex": "435f506f696e7400"
+            }
+          ]
+        },
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            "@point"
+          ]
+        },
+        "0x0060e985": {
+          "name": "operator_new_array",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": "@text"
+        },
+        "0x0060e450": {
+          "name": "CopyEntryText_guess",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "unknown_record",
+      "args": [
+        "misc",
+        3
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "6d6170735c6d6973635f332e74787400"
+            }
+          ]
+        },
+        "0x0060e887": {
+          "name": "_fopen",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": "@file"
+        },
+        "0x0060fbe1": {
+          "name": "_fgets",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "int",
+            "ptr"
+          ],
+          "ret": "arg1",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "582069676e6f7265640a00",
+              "call": 0
+            },
+            {
+              "arg": 2,
+              "offset": 12,
+              "hex": "10000000",
+              "call": 0
+            }
+          ]
+        },
+        "0x0060e963": {
+          "name": "_toupper",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            88,
+            88
+          ]
+        },
+        "0x00610837": {
+          "name": "_sscanf",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": 0
+        },
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "two_line_records",
+      "args": [
+        "twice",
+        1
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "6d6170735c74776963655f312e74787400"
+            }
+          ]
+        },
+        "0x0060e887": {
+          "name": "_fopen",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": "@file"
+        },
+        "0x0060fbe1": {
+          "name": "_fgets",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "int",
+            "ptr"
+          ],
+          "ret": "arg1",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "4c202d31302c202d32302c20312c202033302c2034302c20322c20203235382c20322c20330a00",
+              "call": 0
+            },
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "4c2031302c2032302c20312c20202d33302c202d34302c20322c2020312c20322c20330a00",
+              "call": 1
+            },
+            {
+              "arg": 2,
+              "offset": 12,
+              "hex": "10000000",
+              "call": 1
+            }
+          ]
+        },
+        "0x0060e963": {
+          "name": "_toupper",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            76,
+            76
+          ]
+        },
+        "0x00610837": {
+          "name": "_sscanf",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ignore",
+            "ignore",
+            "ignore"
+          ],
+          "ret": [
+            9,
+            9
+          ],
+          "writes": [
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "000020c1",
+              "call": 0
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "0000a0c1",
+              "call": 0
+            },
+            {
+              "arg": 4,
+              "offset": 0,
+              "hex": "0000803f",
+              "call": 0
+            },
+            {
+              "arg": 5,
+              "offset": 0,
+              "hex": "0000f041",
+              "call": 0
+            },
+            {
+              "arg": 6,
+              "offset": 0,
+              "hex": "00002042",
+              "call": 0
+            },
+            {
+              "arg": 7,
+              "offset": 0,
+              "hex": "00000040",
+              "call": 0
+            },
+            {
+              "arg": 8,
+              "offset": 0,
+              "hex": "02010000",
+              "call": 0
+            },
+            {
+              "arg": 9,
+              "offset": 0,
+              "hex": "02000000",
+              "call": 0
+            },
+            {
+              "arg": 10,
+              "offset": 0,
+              "hex": "03000000",
+              "call": 0
+            },
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "00002041",
+              "call": 1
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "0000a041",
+              "call": 1
+            },
+            {
+              "arg": 4,
+              "offset": 0,
+              "hex": "0000803f",
+              "call": 1
+            },
+            {
+              "arg": 5,
+              "offset": 0,
+              "hex": "0000f0c1",
+              "call": 1
+            },
+            {
+              "arg": 6,
+              "offset": 0,
+              "hex": "000020c2",
+              "call": 1
+            },
+            {
+              "arg": 7,
+              "offset": 0,
+              "hex": "00000040",
+              "call": 1
+            },
+            {
+              "arg": 8,
+              "offset": 0,
+              "hex": "01000000",
+              "call": 1
+            },
+            {
+              "arg": 9,
+              "offset": 0,
+              "hex": "02000000",
+              "call": 1
+            },
+            {
+              "arg": 10,
+              "offset": 0,
+              "hex": "03000000",
+              "call": 1
+            }
+          ]
+        },
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            "@line1",
+            "@line2"
+          ]
+        }
+      }
+    },
+    {
+      "name": "empty_file_zero_index",
+      "args": [
+        "empty",
+        0
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "6d6170735c656d7074792e74787400"
+            }
+          ]
+        },
+        "0x0060e887": {
+          "name": "_fopen",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": "@file"
+        },
+        "0x0060fbe1": {
+          "name": "_fgets",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "int",
+            "ptr"
+          ],
+          "ret": "arg1",
+          "writes": [
+            {
+              "arg": 2,
+              "offset": 12,
+              "hex": "10000000",
+              "call": 0
+            }
+          ]
+        },
+        "0x0060e963": {
+          "name": "_toupper",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "line_partial_scan_resets_colors",
+      "args": [
+        "partial",
+        1
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "6d6170735c7061727469616c5f312e74787400"
+            }
+          ]
+        },
+        "0x0060e887": {
+          "name": "_fopen",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": "@file"
+        },
+        "0x0060fbe1": {
+          "name": "_fgets",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "int",
+            "ptr"
+          ],
+          "ret": "arg1",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "4c207061727469616c0a",
+              "call": 0
+            },
+            {
+              "arg": 2,
+              "offset": 12,
+              "hex": "10000000",
+              "call": 0
+            }
+          ]
+        },
+        "0x0060e963": {
+          "name": "_toupper",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            76
+          ]
+        },
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": "@line"
+        },
+        "0x00532480": {
+          "name": "ElementList_guess::Initialize_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": "this"
+        },
+        "0x00610837": {
+          "name": "_sscanf",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ptr",
+            "ignore",
+            "ignore",
+            "ignore"
+          ],
+          "ret": 7,
+          "writes": [
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "00000000"
+            },
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "00000000"
+            },
+            {
+              "arg": 4,
+              "offset": 0,
+              "hex": "00000000"
+            },
+            {
+              "arg": 5,
+              "offset": 0,
+              "hex": "00000000"
+            },
+            {
+              "arg": 6,
+              "offset": 0,
+              "hex": "00000000"
+            },
+            {
+              "arg": 7,
+              "offset": 0,
+              "hex": "00000000"
+            },
+            {
+              "arg": 8,
+              "offset": 0,
+              "hex": "05000000"
+            },
+            {
+              "arg": 10,
+              "offset": 0,
+              "hex": "07000000"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5455401,
+    "count": 50,
+    "args": [
+      {},
+      {
+        "range": [
+          -2,
+          4
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x0079AC74",
+        "type": "u32",
+        "range": [
+          1,
+          4294967295
+        ]
+      }
+    ]
+  },
+  "_survivors": "L2101: deleting the zero initializer is unobservable because fixture stacks start zeroed; L2122: deleting the pre-fgets byte reset is unobservable because fixture stacks start zeroed."
+}

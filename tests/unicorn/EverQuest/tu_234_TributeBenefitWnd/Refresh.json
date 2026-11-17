@@ -1,0 +1,111 @@
+{
+  "function": "CTrainWndView_guess::AddRow_guess",
+  "original": "0x0056b391",
+  "sources": ["src/EverQuest/tu_234_TributeBenefitWnd.cpp"],
+  "size": "0x6f",
+  "conv": "thiscall",
+  "this": "@sortmanager",
+  "args": [{"name": "id_guess", "type": "int"}],
+  "ret": "void",
+  "objects": {
+    "sortmanager": {
+      "size": "0x800",
+      "fill": "zero",
+      "init": [{"offset": "0x18c", "u32": "@listwnd"}]
+    },
+    "listwnd": {"size": "0x140", "fill": "zero"},
+    "itemname": {"size": "0x20", "fill": "zero"},
+    "emptytext": {"size": "4", "fill": "zero"},
+    "stringrep": {"size": "0x40", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@itemname", "cstr": "Skill"},
+    {"addr": "@sortmanager", "offset": "0x190", "u32": 105},
+    {"addr": "@sortmanager", "offset": "0x7c4", "f32": 1.25}
+  ],
+  "callees": {
+    "0x0056a9d3": {
+      "name": "lookup_guess",
+      "conv": "stdcall",
+      "args": ["int"],
+      "ret": "@itemname"
+    },
+    "0x00571fc0": {
+      "name": "cxstr_assign_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "keep",
+      "passthrough": true
+    },
+    "0x0059b9d0": {
+      "name": "list_add_string_guess",
+      "conv": "thiscall",
+      "args": ["mem:4", "u32", "u32", "ptr"],
+      "ret": 0
+    },
+    "0x0056af2c": {
+      "name": "remove_guess",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x00571d00": {
+      "name": "cxstr_free_rep_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": "keep",
+      "passthrough": true
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": "@stringrep"
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "null-list",
+      "args": [0],
+      "memory": [{"addr": "@sortmanager", "offset": "0x18c", "u32": 0}]
+    },
+    {"name": "nonempty-list-and-text", "args": [100]},
+    {
+      "name": "nonempty-list-empty-text",
+      "args": [100],
+      "callees": {
+        "0x0056a9d3": {
+          "name": "lookup_guess",
+          "conv": "stdcall",
+          "args": ["int"],
+          "ret": "@emptytext"
+        }
+      }
+    },
+    {
+      "name": "add-string-index-is-forwarded",
+      "args": [101],
+      "callees": {
+        "0x0059b9d0": {
+          "name": "list_add_string_guess",
+          "conv": "thiscall",
+          "args": ["mem:4", "u32", "u32", "ptr"],
+          "ret": 3
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5682065,
+    "count": 100,
+    "args": [{"range": [-4, 200]}],
+    "memory": [
+      {"addr": "@sortmanager", "offset": "0x18c", "type": "ptr", "choices": [0, "@listwnd"]}
+    ]
+  }
+}

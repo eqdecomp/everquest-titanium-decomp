@@ -1,0 +1,476 @@
+{
+  "function": "MakeNPCCorpseName_guess",
+  "original": "0x00464a48",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "type_guess",
+      "type": "int"
+    },
+    {
+      "name": "text_guess",
+      "type": "cstr"
+    },
+    {
+      "name": "id_guess",
+      "type": "u32"
+    }
+  ],
+  "ret": "int",
+  "size": "0xb3",
+  "objects": {
+    "tail_condition": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "tail_assignment": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "short_prefix": {
+      "size": "0x10",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "@tail_condition",
+      "cstr": "a!c"
+    },
+    {
+      "addr": "@tail_condition",
+      "offset": "0x5",
+      "u8": 57
+    },
+    {
+      "addr": "@tail_assignment",
+      "cstr": "a1c"
+    },
+    {
+      "addr": "@tail_assignment",
+      "offset": "0x5",
+      "u8": 88
+    },
+    {
+      "addr": "@short_prefix",
+      "u8": 57
+    },
+    {
+      "addr": "@short_prefix",
+      "offset": "0x1",
+      "cstr": "ab"
+    }
+  ],
+  "callees": {
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "hex": "27735f636f727073653132333435363738393000"
+        }
+      ]
+    },
+    "0x00574a30": {
+      "name": "FUN_00574a30",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "int"
+      ],
+      "passthrough": true
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "empty_else_format",
+      "args": [
+        1,
+        "",
+        1234567890
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "two_char_name",
+      "args": [
+        1,
+        "ab",
+        1234567890
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "three_trailing_digits",
+      "args": [
+        1,
+        "orc123",
+        1234567890
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "mixed_trailing_digits",
+      "args": [
+        1,
+        "orc1a3",
+        1234567890
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "type_62_format",
+      "args": [
+        62,
+        "player9",
+        1234567890
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "hex": "5f3132333435363738393000"
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "one_below_truncation_limit",
+      "args": [
+        1,
+        "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        1234567890
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "at_truncation_limit",
+      "args": [
+        1,
+        "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        1234567890
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "over_truncation_limit",
+      "args": [
+        1,
+        "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        1234567890
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "zero_id_smaller_suffix",
+      "args": [
+        1,
+        "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        0
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "hex": "27735f636f727073653000"
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "type_62_below_truncation_limit",
+      "args": [
+        62,
+        "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        1234567890
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "hex": "5f3132333435363738393000"
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "type_62_at_truncation_limit",
+      "args": [
+        62,
+        "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        1234567890
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "hex": "5f3132333435363738393000"
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "type_62_over_truncation_limit",
+      "args": [
+        62,
+        "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        1234567890
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "hex": "5f3132333435363738393000"
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "short_type_62_name",
+      "args": [
+        62,
+        "mob7",
+        0
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "hex": "5f3000"
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "type_62_zero_id_at_truncation_limit",
+      "args": [
+        62,
+        "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        0
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "hex": "5f3000"
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "type_62_zero_id_over_truncation_limit",
+      "args": [
+        62,
+        "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        0
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "hex": "5f3000"
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "second_position_condition_reads_past_terminator",
+      "args": [
+        1,
+        "@tail_condition",
+        1234567890
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "second_position_assignment_reads_past_terminator",
+      "args": [
+        1,
+        "@tail_assignment",
+        1234567890
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "two_char_name_with_digit_before_pointer",
+      "args": [
+        1,
+        "@short_prefix+0x1",
+        1234567890
+      ],
+      "expect": {
+        "ret": 1
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4606536,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          1
+        ]
+      },
+      {
+        "choices": [
+          "",
+          "a",
+          "ab",
+          "123",
+          "orc123",
+          "orc1a3",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        ]
+      },
+      {
+        "choices": [
+          1234567890
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

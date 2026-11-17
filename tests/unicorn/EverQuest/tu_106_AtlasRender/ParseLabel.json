@@ -1,0 +1,605 @@
+{
+  "function": "AtlasRender_guess::ParseLabel_guess",
+  "original": "0x004d9c7a",
+  "sources": [
+    "src/EverQuest/tu_106_AtlasRender.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@cleanupowner",
+  "args": [
+    {
+      "name": "result_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "element_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "cleanupowner": {
+      "size": "0x200",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x12c",
+          "u32": 0
+        }
+      ]
+    },
+    "element": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "result": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "fontmanager": {
+      "size": "0x104",
+      "fill": "zero"
+    },
+    "fontmanager2": {
+      "size": "0x104",
+      "fill": "zero"
+    },
+    "holder": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@fontmanager2"
+        }
+      ]
+    },
+    "entry": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@font"
+        }
+      ]
+    },
+    "empty_entry": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "font": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "text": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "textrep": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "label": {
+      "size": "0x124",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@labelvtbl"
+        }
+      ]
+    },
+    "labelvtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xc0",
+          "u32": "@fn_slot48"
+        },
+        {
+          "offset": "0xf8",
+          "u32": "@fn_setfont"
+        },
+        {
+          "offset": "0xfc",
+          "u32": "@fn_settext"
+        }
+      ]
+    },
+    "prefix": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "message": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_slot48": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_setfont": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_settext": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0099d3ec",
+      "u32": "@fontmanager"
+    },
+    {
+      "addr": "0x0099d334",
+      "u32": "@holder"
+    },
+    {
+      "addr": "0x00646ea8",
+      "from_image": "0x00646ea8",
+      "image_size": 16
+    },
+    {
+      "addr": "0x00646ea4",
+      "from_image": "0x00646ea4",
+      "image_size": 16
+    },
+    {
+      "addr": "0x0064eeb8",
+      "from_image": "0x0064eeb8",
+      "image_size": 16
+    },
+    {
+      "addr": "0x0064eeb4",
+      "from_image": "0x0064eeb4",
+      "image_size": 16
+    },
+    {
+      "addr": "0x0064aec0",
+      "from_image": "0x0064aec0",
+      "image_size": 8
+    },
+    {
+      "addr": "0x0064f050",
+      "from_image": "0x0064f050",
+      "image_size": 48
+    },
+    {
+      "addr": "@element",
+      "offset": "0x8",
+      "u32": 5
+    },
+    {
+      "addr": "@text",
+      "cstr": "Hello"
+    }
+  ],
+  "callees": {
+    "0x005dda20": {
+      "name": "GetIntAttribute_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "ignore"
+      ],
+      "ret": [
+        0,
+        0,
+        0
+      ],
+      "writes": [
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "0a000000",
+          "call": 0
+        },
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "14000000",
+          "call": 1
+        }
+      ]
+    },
+    "0x00572e00": {
+      "name": "Append_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this"
+    },
+    "0x005dd9f0": {
+      "name": "GetAttribute_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "@text"
+    },
+    "0x00571e00": {
+      "name": "CXStr_constructor",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x004eb924": {
+      "name": "Lookup_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": [
+        "@entry",
+        "@entry"
+      ]
+    },
+    "0x005a3a00": {
+      "name": "Width_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:4"
+      ],
+      "ret": 40
+    },
+    "0x005a3a20": {
+      "name": "Height_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 20
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@label"
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": "@textrep"
+    },
+    "0x005bd730": {
+      "name": "Label_constructor",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "mem:16"
+      ],
+      "ret": "this"
+    },
+    "0x00407d68": {
+      "name": "CXStr_copy_constructor",
+      "conv": "thiscall",
+      "args": [
+        "mem:4"
+      ],
+      "ret": "this"
+    },
+    "0x0042e3d9": {
+      "name": "LabelErrorPrefix_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr",
+        "mem:4"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "01000000"
+        }
+      ]
+    },
+    "0x004b1357": {
+      "name": "MakeText_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "ptr",
+        "cstr"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "01000000"
+        }
+      ]
+    },
+    "0x0050319b": {
+      "name": "Set_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ignore"
+      ]
+    },
+    "0x00571d00": {
+      "name": "CXStr_release",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ]
+    },
+    "@fn_settext": {
+      "name": "Label_SetText",
+      "conv": "thiscall",
+      "args": [
+        "mem:4"
+      ]
+    },
+    "@fn_setfont": {
+      "name": "Label_SetFont",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "@fn_slot48": {
+      "name": "Label_Initialize",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "valid label",
+      "args": [
+        "@result",
+        "@element"
+      ]
+    },
+    {
+      "name": "text length zero",
+      "args": [
+        "@result",
+        "@element"
+      ],
+      "memory": [
+        {
+          "addr": "@element",
+          "offset": "0x8",
+          "u32": 0
+        },
+        {
+          "addr": "@text",
+          "cstr": ""
+        }
+      ]
+    },
+    {
+      "name": "text length one",
+      "args": [
+        "@result",
+        "@element"
+      ],
+      "memory": [
+        {
+          "addr": "@element",
+          "offset": "0x8",
+          "u32": 1
+        },
+        {
+          "addr": "@text",
+          "cstr": "A"
+        }
+      ]
+    },
+    {
+      "name": "missing x",
+      "args": [
+        "@result",
+        "@element"
+      ],
+      "callees": {
+        "0x005dda20": {
+          "name": "GetIntAttribute_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": [
+            1,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "missing y",
+      "args": [
+        "@result",
+        "@element"
+      ],
+      "callees": {
+        "0x005dda20": {
+          "name": "GetIntAttribute_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": [
+            0,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "missing both coordinates",
+      "args": [
+        "@result",
+        "@element"
+      ],
+      "callees": {
+        "0x005dda20": {
+          "name": "GetIntAttribute_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": [
+            1,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "missing font",
+      "args": [
+        "@result",
+        "@element"
+      ],
+      "callees": {
+        "0x004eb924": {
+          "name": "Lookup_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@empty_entry"
+        }
+      }
+    },
+    {
+      "name": "coordinate and text errors with no font",
+      "args": [
+        "@result",
+        "@element"
+      ],
+      "memory": [
+        {
+          "addr": "@element",
+          "offset": "0x8",
+          "u32": 0
+        },
+        {
+          "addr": "@text",
+          "cstr": ""
+        }
+      ],
+      "callees": {
+        "0x005dda20": {
+          "name": "GetIntAttribute_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": [
+            1,
+            1,
+            0
+          ]
+        },
+        "0x004eb924": {
+          "name": "Lookup_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@empty_entry"
+        }
+      }
+    },
+    {
+      "name": "null text attribute",
+      "args": [
+        "@result",
+        "@element"
+      ],
+      "callees": {
+        "0x005dd9f0": {
+          "name": "GetAttribute_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "label allocation fails",
+      "args": [
+        "@result",
+        "@element"
+      ],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5086330,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@result"
+        ]
+      },
+      {
+        "choices": [
+          "@element"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@element",
+        "offset": "0x8",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          5,
+          16
+        ]
+      }
+    ]
+  },
+  "coverage_ok": {
+    "004D9D23-004D9D25": "The passthrough CXStr constructor maps a null text attribute to its empty-string representation, so the null-object arm cannot be reached through the scripted XML getter.",
+    "004D9EE4-004D9EEF": "This destructor arm requires Append_guess to create a nonempty CXStr. The callee is stubbed and the fixture schema cannot write through its ECX object pointer."
+  },
+  "_survivors": "L1009: rect.field_8 is overwritten with x+width whenever a font exists, before any label constructor uses the rectangle; without a font the rectangle is unused. L1011: rect.field_0 is overwritten with x whenever a font exists, before any label constructor uses the rectangle; without a font the rectangle is unused."
+}

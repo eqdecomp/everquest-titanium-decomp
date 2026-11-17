@@ -1,0 +1,177 @@
+{
+  "function": "BufferPosition_guess::Underflow_guess",
+  "original": "0x004021ee",
+  "sources": [
+    "src/EverQuest/tu_002_ProgressionData.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@bufferposition",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "bufferposition": {
+      "size": "0x44",
+      "fill": "random",
+      "init": [
+        {"offset": "0x20", "u32": "@cursor_cell"},
+        {"offset": "0x24", "u32": "@end_cell"},
+        {"offset": "0x30", "u32": "@count_cell"}
+      ]
+    },
+    "cursor_cell": {
+      "size": "4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@bytes+0x22"}]
+    },
+    "end_cell": {
+      "size": "4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@bytes+0x28"}]
+    },
+    "count_cell": {
+      "size": "4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": 0}]
+    },
+    "bytes": {
+      "size": "0x40",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "@bufferposition", "offset": "0x3c", "u32": "@bytes+0x28"},
+    {"addr": "@bufferposition", "offset": "0x40", "u32": 0}
+  ],
+  "callees": {},
+  "cases": [
+    {
+      "name": "null_cursor",
+      "args": [],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": 0},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 4}
+      ]
+    },
+    {
+      "name": "buffered_byte_unsigned",
+      "args": [],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": "@bytes+0x22"},
+        {"addr": "@count_cell", "u32": 1},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 4},
+        {"addr": "@bytes", "offset": "0x22", "u8": 255}
+      ]
+    },
+    {
+      "name": "empty_blocked_by_flag",
+      "args": [],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": "@bytes+0x22"},
+        {"addr": "@count_cell", "u32": 0},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 4},
+        {"addr": "@end_cell", "u32": "@bytes+0x28"},
+        {"addr": "@bufferposition", "offset": "0x3c", "u32": "@bytes+0x28"}
+      ]
+    },
+    {
+      "name": "empty_end_null",
+      "args": [],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": "@bytes+0x22"},
+        {"addr": "@count_cell", "u32": 0},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 0},
+        {"addr": "@end_cell", "u32": 0},
+        {"addr": "@bufferposition", "offset": "0x3c", "u32": "@bytes+0x22"}
+      ]
+    },
+    {
+      "name": "end_and_highwater_at_cursor",
+      "args": [],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": "@bytes+0x22"},
+        {"addr": "@count_cell", "u32": 0},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 0},
+        {"addr": "@end_cell", "u32": "@bytes+0x22"},
+        {"addr": "@bufferposition", "offset": "0x3c", "u32": "@bytes+0x22"}
+      ]
+    },
+    {
+      "name": "end_extends_highwater",
+      "args": [],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": "@bytes+0x22"},
+        {"addr": "@count_cell", "u32": 0},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 0},
+        {"addr": "@end_cell", "u32": "@bytes+0x28"},
+        {"addr": "@bufferposition", "offset": "0x3c", "u32": "@bytes+0x20"}
+      ]
+    },
+    {
+      "name": "highwater_extends_past_end",
+      "args": [],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": "@bytes+0x22"},
+        {"addr": "@count_cell", "u32": 0},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 0},
+        {"addr": "@end_cell", "u32": "@bytes+0x21"},
+        {"addr": "@bufferposition", "offset": "0x3c", "u32": "@bytes+0x24"}
+      ]
+    },
+    {
+      "name": "end_equal_highwater_ahead",
+      "args": [],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": "@bytes+0x22"},
+        {"addr": "@count_cell", "u32": 0},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 0},
+        {"addr": "@end_cell", "u32": "@bytes+0x22"},
+        {"addr": "@bufferposition", "offset": "0x3c", "u32": "@bytes+0x24"}
+      ]
+    },
+    {
+      "name": "bit0_does_not_block",
+      "args": [],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": "@bytes+0x22"},
+        {"addr": "@count_cell", "u32": 0},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 1},
+        {"addr": "@end_cell", "u32": "@bytes+0x28"},
+        {"addr": "@bufferposition", "offset": "0x3c", "u32": "@bytes+0x20"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4202990,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@cursor_cell",
+        "type": "u32",
+        "choices": [0, "@bytes+0x20", "@bytes+0x22", "@bytes+0x24", "@bytes+0x28"]
+      },
+      {
+        "addr": "@count_cell",
+        "type": "u32",
+        "choices": [0, 1, 2, 4, 4294967295]
+      },
+      {
+        "addr": "@bufferposition",
+        "offset": "0x40",
+        "type": "u32",
+        "choices": [0, 4]
+      },
+      {
+        "addr": "@end_cell",
+        "type": "u32",
+        "choices": [0, "@bytes+0x20", "@bytes+0x22", "@bytes+0x24", "@bytes+0x28"]
+      },
+      {
+        "addr": "@bufferposition",
+        "offset": "0x3c",
+        "type": "u32",
+        "choices": ["@bytes+0x20", "@bytes+0x22", "@bytes+0x24", "@bytes+0x28"]
+      }
+    ]
+  }
+}

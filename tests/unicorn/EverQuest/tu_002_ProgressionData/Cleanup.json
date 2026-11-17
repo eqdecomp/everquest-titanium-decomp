@@ -1,0 +1,129 @@
+{
+  "function": "StorageRange_guess::Cleanup_guess",
+  "original": "0x004044ba",
+  "sources": [
+    "src/EverQuest/tu_002_ProgressionData.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@storagerange",
+  "args": [
+    {
+      "name": "storage_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "first_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "last_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "unused_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "storagerange": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "storage": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "node1": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@node2"}]
+    },
+    "node2": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@node3"}]
+    },
+    "node3": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": 0}]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0040444f": {
+      "name": "InsertBefore_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "three nodes, first to last",
+      "args": [
+        "@storage",
+        "@node1",
+        "@node3",
+        1
+      ]
+    },
+    {
+      "name": "two nodes",
+      "args": [
+        "@storage",
+        "@node2",
+        "@node3",
+        1
+      ]
+    },
+    {
+      "name": "one node",
+      "args": [
+        "@storage",
+        "@node3",
+        "@node3",
+        0
+      ]
+    },
+    {
+      "name": "empty range, first equals last",
+      "args": [
+        "@storage",
+        "@node1",
+        "@node1",
+        0
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4211898,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@storage"
+        ]
+      },
+      {
+        "choices": [
+          "@node1",
+          "@node2",
+          "@node3"
+        ]
+      },
+      {
+        "choices": [
+          "@node3"
+        ]
+      },
+      {}
+    ],
+    "memory": []
+  },
+  "_survivors": "L1409: catch(...) handler runs only when FUN_0040444f throws, and the fixture stubs cannot throw; L1410: same catch handler, same reason"
+}

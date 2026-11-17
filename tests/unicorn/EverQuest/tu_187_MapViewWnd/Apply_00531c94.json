@@ -1,0 +1,85 @@
+{
+  "function": "DestroyObject_guess::Apply_guess",
+  "original": "0x00531c94",
+  "sources": [
+    "src/EverQuest/tu_187_MapViewWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@destroyobject",
+  "args": [
+    {"name": "first_value_guess", "type": "int"},
+    {"name": "second_value_guess", "type": "int"},
+    {"name": "third_value_guess", "type": "int"},
+    {"name": "fourth_value_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "destroyobject": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "@destroyobject", "offset": "0x0", "f32": 0.0},
+    {"addr": "@destroyobject", "offset": "0x8", "f32": 10.0},
+    {"addr": "@destroyobject", "offset": "0x78", "f32": 2.0}
+  ],
+  "callees": {
+    "0x0060f81e": {"name": "Span", "conv": "cdecl", "args": ["int"], "ret": 100},
+    "0x0060f60d": {"name": "_fabs", "conv": "cdecl", "args": ["double"], "passthrough": true}
+  },
+  "rewrite_aliases": {
+    "_fabs": "0x0060f60d"
+  },
+  "cases": [
+    {
+      "name": "ratio_zero",
+      "args": [0, 10, 0, 0],
+      "memory": [{"addr": "@destroyobject", "offset": "0x78", "f32": 0.0}]
+    },
+    {
+      "name": "ratio_one",
+      "args": [0, 10, 0, 0],
+      "memory": [{"addr": "@destroyobject", "offset": "0x78", "f32": 1.0}]
+    },
+    {
+      "name": "ratio_one_reversed_span",
+      "args": [10, 0, 0, 0],
+      "memory": [{"addr": "@destroyobject", "offset": "0x78", "f32": 1.0}]
+    },
+    {
+      "name": "other_ratio_quotient_below_span",
+      "args": [0, 10, 0, 0],
+      "memory": [{"addr": "@destroyobject", "offset": "0x78", "f32": 2.0}]
+    },
+    {
+      "name": "other_ratio_quotient_at_or_above_span",
+      "args": [0, 10, 0, 0],
+      "memory": [{"addr": "@destroyobject", "offset": "0x78", "f32": 2.0}],
+      "callees": {
+        "0x0060f81e": {"name": "Span", "conv": "cdecl", "args": ["int"], "ret": 1}
+      }
+    },
+    {
+      "name": "other_ratio_small_below_span_negative_span",
+      "args": [10, 0, 0, 0],
+      "memory": [{"addr": "@destroyobject", "offset": "0x78", "f32": 0.5}]
+    }
+  ],
+  "_survivors": "L1206: at quotient == span both arms give ratio 1.0 and count == span (the quotient is then an exact integer), so the < to <= change is not observable",
+  "fuzz": {
+    "seed": 5446804,
+    "count": 150,
+    "args": [
+      {"range": [-20, 40]},
+      {"range": [-20, 40]},
+      {"range": [-20, 40]},
+      {"range": [-20, 40]}
+    ],
+    "memory": [
+      {"addr": "@destroyobject", "offset": "0x0", "type": "float", "range": [-50, 50]},
+      {"addr": "@destroyobject", "offset": "0x8", "type": "float", "range": [-50, 50]},
+      {"addr": "@destroyobject", "offset": "0x78", "type": "float", "choices": [0.0, 1.0, 2.0, 0.5, -3.0, 0.0001]}
+    ]
+  }
+}

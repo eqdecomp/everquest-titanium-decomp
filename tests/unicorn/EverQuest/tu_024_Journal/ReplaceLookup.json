@@ -1,0 +1,89 @@
+{
+  "function": "ReplaceLookup_guess",
+  "original": "0x0042f675",
+  "sources": [
+    "src/EverQuest/tu_024_Journal.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "replacement",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "replacement": {"size": "0x100", "fill": "random"},
+    "table": {"size": "0x10", "fill": "zero", "init": [{"offset": 0, "u32": "@buckets"}]},
+    "buckets": {"size": "0x10", "fill": "zero"},
+    "e0": {"size": "0xc", "fill": "zero", "init": [{"offset": 0, "u32": "@v0"}]},
+    "e1": {"size": "0xc", "fill": "zero", "init": [{"offset": 0, "u32": "@v1"}]},
+    "e2": {"size": "0xc", "fill": "zero", "init": [{"offset": 0, "u32": "@v2"}]},
+    "v0": {"size": "0x10", "fill": "random"},
+    "v1": {"size": "0x10", "fill": "random"},
+    "v2": {"size": "0x10", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x0079dc44", "u32": "@table"},
+    {"addr": "@table", "offset": 4, "u32": 3},
+    {"addr": "@e1", "offset": 4, "u32": 1},
+    {"addr": "@e2", "offset": 4, "u32": 2}
+  ],
+  "callees": {
+    "0x004466fa": {"name": "HashTable_First", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x0042ec1a": {"name": "HashTable_Next", "conv": "thiscall", "args": ["u32"], "passthrough": true},
+    "0x004c9745": {"name": "HashTable_Cleanup", "conv": "thiscall", "args": []},
+    "0x0060d682": {"name": "_free", "conv": "cdecl", "args": ["u32"], "ret": 0},
+    "0x0060d0d5": {"name": "operator delete", "conv": "cdecl", "args": ["u32"], "ret": 0}
+  },
+  "cases": [
+    {"name": "empty table", "args": ["@replacement"], "memory": [
+      {"addr": "@table", "offset": 4, "u32": 0}]},
+    {"name": "one entry", "args": ["@replacement"], "memory": [
+      {"addr": "@table", "offset": 4, "u32": 1},
+      {"addr": "@buckets", "u32": "@e0"}]},
+    {"name": "two buckets", "args": ["@replacement"], "memory": [
+      {"addr": "@table", "offset": 4, "u32": 2},
+      {"addr": "@buckets", "u32": "@e0"},
+      {"addr": "@buckets", "offset": 4, "u32": "@e1"},
+      {"addr": "@e1", "offset": 4, "u32": 1}]},
+    {"name": "chain in bucket 0", "args": ["@replacement"], "memory": [
+      {"addr": "@table", "offset": 4, "u32": 2},
+      {"addr": "@buckets", "u32": "@e0"},
+      {"addr": "@buckets", "offset": 4, "u32": "@e1"},
+      {"addr": "@e0", "offset": 8, "u32": "@e2"},
+      {"addr": "@e1", "offset": 4, "u32": 1},
+      {"addr": "@e2", "offset": 4, "u32": 2}]},
+    {"name": "empty bucket in the middle", "args": ["@replacement"], "memory": [
+      {"addr": "@table", "offset": 4, "u32": 3},
+      {"addr": "@buckets", "u32": "@e0"},
+      {"addr": "@buckets", "offset": 8, "u32": "@e2"},
+      {"addr": "@e2", "offset": 4, "u32": 2}]},
+    {"name": "only last bucket", "args": ["@replacement"], "memory": [
+      {"addr": "@table", "offset": 4, "u32": 2},
+      {"addr": "@buckets", "offset": 4, "u32": "@e1"},
+      {"addr": "@e1", "offset": 4, "u32": 1}]},
+    {"name": "free clears the table", "args": ["@replacement"], "memory": [
+      {"addr": "@table", "offset": 4, "u32": 1},
+      {"addr": "@buckets", "u32": "@e0"}],
+     "callees": {
+      "0x0060d682": {"name": "_free", "conv": "cdecl", "args": ["u32"], "ret": 0,
+                     "writes": [{"addr": "0x0079dc44", "hex": "00000000"}]}}},
+    {"name": "null replacement", "args": [0], "memory": [
+      {"addr": "@table", "offset": 4, "u32": 1},
+      {"addr": "@buckets", "u32": "@e0"}]}
+  ],
+  "fuzz": {
+    "seed": 4388469,
+    "count": 100,
+    "args": [
+      {"choices": ["@replacement", 0]}
+    ],
+    "memory": [
+      {"addr": "@buckets", "offset": 0, "type": "ptr", "choices": ["@e0", 0]},
+      {"addr": "@buckets", "offset": 4, "type": "ptr", "choices": ["@e1", 0]},
+      {"addr": "@buckets", "offset": 8, "type": "ptr", "choices": ["@e2", 0]},
+      {"addr": "@e0", "offset": 8, "type": "ptr", "choices": ["@e2", 0]}
+    ]
+  }
+}

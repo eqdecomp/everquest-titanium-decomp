@@ -1,0 +1,61 @@
+{
+  "function": "do_help_guess",
+  "original": "0x00471028",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "unused_guess", "type": "ptr"},
+    {"name": "text_guess", "type": "cstr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "strtab": {"size": "0x40", "fill": "random"},
+    "eq": {"size": "0x40", "fill": "random"},
+    "msg": {"size": "0x20", "fill": "zero"},
+    "name": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@strtab"},
+    {"addr": "0x00988df0", "u32": "@eq"},
+    {"addr": "@msg", "cstr": "message"},
+    {"addr": "@name", "cstr": "cmdname"}
+  ],
+  "callees": {
+    "0x005dfa00": {"name": "StringTable::getString", "conv": "thiscall", "args": ["u32", "u32"], "ret": "@msg"},
+    "0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "u32"], "ret": 1},
+    "0x004982c6": {"name": "CEverQuest::dsp_chat", "conv": "thiscall", "args": ["cstr", "int", "bool"]},
+    "0x0046d38d": {"name": "GetCommandText_guess", "conv": "cdecl", "args": ["ptr"], "ret": "@name"},
+    "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 9,
+                   "writes": [{"arg": 0, "offset": 0, "hex": "2020636d646e616d6500"}]}
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {"name": "cat1", "args": [0, "abc"], "callees": {"0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [0]}}},
+    {"name": "cat2", "args": [0, "abc"], "callees": {"0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 0]}}},
+    {"name": "cat3", "args": [0, "abc"], "callees": {"0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 0]}}},
+    {"name": "cat4", "args": [0, "abc"], "callees": {"0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 1, 0]}}},
+    {"name": "cat6", "args": [0, "abc"], "callees": {"0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 1, 1, 0]}}},
+    {"name": "cat5 seeded", "args": [0, "abc"],
+     "memory": [{"addr": "0x0078a0c8", "offset": "0x14", "u32": 6}, {"addr": "0x0078c56c", "offset": "0x14", "u32": 6}],
+     "callees": {"0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 1, 1, 0]}}},
+    {"name": "entry past end not listed", "args": [0, "abc"],
+     "memory": [{"addr": "0x0078c588", "offset": "0x14", "u32": 1}],
+     "callees": {"0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [0]}}},
+    {"name": "usage", "args": [0, "zzz"]},
+    {"name": "negative ret", "args": [0, ""], "callees": {"0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [-1, -1, 0]}}}
+  ],
+  "fuzz": {
+    "seed": 4657192,
+    "count": 50,
+    "args": [
+      {"choices": [0]},
+      {}
+    ],
+    "memory": []
+  },
+  "_survivors": "L5769: dsp_chat's bool parameter converts 1 and 2 to the same true, so the pushed value is identical"
+}

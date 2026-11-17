@@ -1,0 +1,743 @@
+{
+  "function": "Camera_guess::UpdateChase_guess",
+  "original": "0x00570fca",
+  "sources": [
+    "src/EverQuest/tu_246_Camera.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@targetcalc",
+  "args": [
+    {
+      "name": "actor",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "targetcalc": {
+      "size": "0x48",
+      "fill": "zero"
+    },
+    "actor": {
+      "size": "0x254",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@owner"
+        }
+      ]
+    },
+    "owner": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x15c",
+          "u32": "@state"
+        }
+      ]
+    },
+    "state": {
+      "size": "0x1ac",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@holder"
+        }
+      ]
+    },
+    "holder": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@feature"
+        }
+      ]
+    },
+    "feature": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@feature_vtbl"
+        }
+      ]
+    },
+    "fn_feature_available": {
+      "size": "0x4"
+    },
+    "feature_vtbl": {
+      "size": "0x158",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x154",
+          "u32": "@fn_feature_available"
+        }
+      ]
+    },
+    "math_manager": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@math_vtbl"
+        }
+      ]
+    },
+    "fn_math_sin": {
+      "size": "0x4"
+    },
+    "fn_math_cos": {
+      "size": "0x4"
+    },
+    "math_vtbl": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@fn_math_sin"
+        },
+        {
+          "offset": "0x4",
+          "u32": "@fn_math_cos"
+        }
+      ]
+    },
+    "shape_manager": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "mode_state": {
+      "size": "0xb58",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d24",
+      "u32": "@shape_manager"
+    },
+    {
+      "addr": "0x0099e374",
+      "u32": "@math_manager"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@mode_state"
+    },
+    {
+      "addr": "0x006410d0",
+      "from_image": "0x006410D0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00642d68",
+      "from_image": "0x00642D68",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0065fb0c",
+      "from_image": "0x0065FB0C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0065fb10",
+      "f32": 0.0
+    },
+    {
+      "addr": "0x0065fb14",
+      "from_image": "0x0065FB14",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640e38",
+      "from_image": "0x00640E38",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640038",
+      "from_image": "0x00640038",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0065fb2c",
+      "from_image": "0x0065FB2C",
+      "image_size": 4
+    },
+    {
+      "addr": "@actor",
+      "offset": "0x30",
+      "f32": 10.0
+    },
+    {
+      "addr": "@actor",
+      "offset": "0x34",
+      "f32": 20.0
+    },
+    {
+      "addr": "@actor",
+      "offset": "0x38",
+      "f32": 2.0
+    },
+    {
+      "addr": "@actor",
+      "offset": "0x4c",
+      "f32": 0.5
+    },
+    {
+      "addr": "@actor",
+      "offset": "0x251",
+      "u8": 120
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x134",
+      "u32": 0
+    },
+    {
+      "addr": "@mode_state",
+      "offset": "0xb54",
+      "u32": 5
+    },
+    {
+      "addr": "@targetcalc",
+      "offset": "0x04",
+      "f32": 1.0
+    },
+    {
+      "addr": "@targetcalc",
+      "offset": "0x08",
+      "f32": 2.0
+    },
+    {
+      "addr": "@targetcalc",
+      "offset": "0x0c",
+      "f32": 3.0
+    },
+    {
+      "addr": "@targetcalc",
+      "offset": "0x2c",
+      "f32": 5.0
+    },
+    {
+      "addr": "@targetcalc",
+      "offset": "0x30",
+      "f32": 0.6
+    },
+    {
+      "addr": "@targetcalc",
+      "offset": "0x34",
+      "f32": 50.0
+    },
+    {
+      "addr": "@targetcalc",
+      "offset": "0x38",
+      "f32": 0.2
+    },
+    {
+      "addr": "@targetcalc",
+      "offset": "0x45",
+      "u8": 0
+    }
+  ],
+  "callees": {
+    "0x00489bf5": {
+      "name": "Actor_guess::GetBase_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret_float": 10.0
+    },
+    "0x0047bf6c": {
+      "name": "ReadFeature_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ptr"
+      ],
+      "ret": [
+        1,
+        1
+      ],
+      "writes": [
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "000000000000803f00000040"
+        }
+      ]
+    },
+    "0x004365db": {
+      "name": "FixHeading_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ],
+      "ret_float": 0.0
+    },
+    "0x0043a15c": {
+      "name": "s3dCollideSphereWithWorld_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "float",
+        "float",
+        "float",
+        "float",
+        "float",
+        "ptr",
+        "ptr",
+        "ptr",
+        "int"
+      ],
+      "writes": [
+        {
+          "arg": 6,
+          "offset": 0,
+          "hex": "00002041"
+        },
+        {
+          "arg": 7,
+          "offset": 0,
+          "hex": "0000a041"
+        },
+        {
+          "arg": 8,
+          "offset": 0,
+          "hex": "0000c041"
+        }
+      ]
+    },
+    "0x0046e42f": {
+      "name": "GetAngle_guess",
+      "conv": "cdecl",
+      "args": [
+        "float",
+        "float",
+        "float",
+        "float"
+      ],
+      "ret_float": 0.5
+    },
+    "0x0060f60d": {
+      "name": "fabs",
+      "conv": "cdecl",
+      "args": [
+        "double"
+      ],
+      "passthrough": true
+    },
+    "@fn_feature_available": {
+      "name": "Feature_guess::IsAvailable_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 1
+    },
+    "@fn_math_sin": {
+      "name": "Math_guess::Sin_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ],
+      "ret_float": 0.25
+    },
+    "@fn_math_cos": {
+      "name": "Math_guess::Cos_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ],
+      "ret_float": 0.5
+    }
+  },
+  "rewrite_aliases": {
+    "_fabs": "0x0060f60d"
+  },
+  "cases": [
+    {
+      "name": "type_o_scale_high_bottom_low_special_near",
+      "args": [
+        "@actor"
+      ],
+      "memory": [
+        {
+          "addr": "@actor",
+          "offset": "0x251",
+          "u8": 111
+        },
+        {
+          "addr": "@actor",
+          "offset": "0x4c",
+          "f32": 1.25
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x134",
+          "u32": 36
+        },
+        {
+          "addr": "@targetcalc",
+          "offset": "0x34",
+          "f32": 250.0
+        },
+        {
+          "addr": "@targetcalc",
+          "offset": "0x2c",
+          "f32": -2.0
+        }
+      ]
+    },
+    {
+      "name": "feature_unavailable_special_mode_one_flag_set",
+      "args": [
+        "@actor"
+      ],
+      "memory": [
+        {
+          "addr": "@actor",
+          "offset": "0x251",
+          "u8": 110
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x134",
+          "u32": 33
+        },
+        {
+          "addr": "@targetcalc",
+          "offset": "0x34",
+          "f32": 50.0
+        },
+        {
+          "addr": "@targetcalc",
+          "offset": "0x2c",
+          "f32": 35.0
+        },
+        {
+          "addr": "@targetcalc",
+          "offset": "0x45",
+          "u8": 1
+        },
+        {
+          "addr": "@mode_state",
+          "offset": "0xb54",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "@fn_feature_available": {
+          "name": "Feature_guess::IsAvailable_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0047bf6c": {
+          "name": "ReadFeature_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ptr"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "000000000000803f00000040"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "feature_read_fails_x_far",
+      "args": [
+        "@actor"
+      ],
+      "memory": [
+        {
+          "addr": "@actor",
+          "offset": "0x30",
+          "f32": 0.0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x134",
+          "u32": 0
+        },
+        {
+          "addr": "@targetcalc",
+          "offset": "0x34",
+          "f32": 150.0
+        },
+        {
+          "addr": "@targetcalc",
+          "offset": "0x2c",
+          "f32": 10.0
+        },
+        {
+          "addr": "@mode_state",
+          "offset": "0xb54",
+          "u32": 2
+        }
+      ],
+      "callees": {
+        "0x0047bf6c": {
+          "name": "ReadFeature_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ptr"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "000000000000803f00000040"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "feature_read_succeeds_y_far",
+      "args": [
+        "@actor"
+      ],
+      "memory": [
+        {
+          "addr": "@actor",
+          "offset": "0x34",
+          "f32": 0.0
+        },
+        {
+          "addr": "@actor",
+          "offset": "0x4c",
+          "f32": 1.25
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x134",
+          "u32": 0
+        },
+        {
+          "addr": "@targetcalc",
+          "offset": "0x2c",
+          "f32": 15.0
+        },
+        {
+          "addr": "@mode_state",
+          "offset": "0xb54",
+          "u32": 5
+        }
+      ]
+    },
+    {
+      "name": "state_null_owner_valid_flag_set",
+      "args": [
+        "@actor"
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x15c",
+          "u32": 0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x134",
+          "u32": 0
+        },
+        {
+          "addr": "@targetcalc",
+          "offset": "0x45",
+          "u8": 1
+        },
+        {
+          "addr": "@mode_state",
+          "offset": "0xb54",
+          "u32": 2
+        }
+      ]
+    },
+    {
+      "name": "type_n_second_feature_read_succeeds_near",
+      "args": [
+        "@actor"
+      ],
+      "memory": [
+        {
+          "addr": "@actor",
+          "offset": "0x251",
+          "u8": 110
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x15c",
+          "u32": 0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x134",
+          "u32": 0
+        },
+        {
+          "addr": "@targetcalc",
+          "offset": "0x45",
+          "u8": 0
+        },
+        {
+          "addr": "@mode_state",
+          "offset": "0xb54",
+          "u32": 1
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5705674,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@actor"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@targetcalc",
+        "offset": "0x2c",
+        "type": "float",
+        "range": [
+          -10.0,
+          40.0
+        ]
+      },
+      {
+        "addr": "@targetcalc",
+        "offset": "0x30",
+        "type": "float",
+        "range": [
+          -3.0,
+          3.0
+        ]
+      },
+      {
+        "addr": "@targetcalc",
+        "offset": "0x34",
+        "type": "float",
+        "range": [
+          -5.0,
+          250.0
+        ]
+      },
+      {
+        "addr": "@targetcalc",
+        "offset": "0x38",
+        "type": "float",
+        "range": [
+          -3.0,
+          3.0
+        ]
+      },
+      {
+        "addr": "@targetcalc",
+        "offset": "0x45",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@actor",
+        "offset": "0x30",
+        "type": "float",
+        "range": [
+          -30.0,
+          30.0
+        ]
+      },
+      {
+        "addr": "@actor",
+        "offset": "0x34",
+        "type": "float",
+        "range": [
+          -30.0,
+          30.0
+        ]
+      },
+      {
+        "addr": "@actor",
+        "offset": "0x38",
+        "type": "float",
+        "range": [
+          -5.0,
+          5.0
+        ]
+      },
+      {
+        "addr": "@actor",
+        "offset": "0x4c",
+        "type": "float",
+        "range": [
+          -3.0,
+          3.0
+        ]
+      },
+      {
+        "addr": "@actor",
+        "offset": "0x251",
+        "type": "u8",
+        "choices": [
+          111,
+          110,
+          120
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x134",
+        "type": "int",
+        "choices": [
+          36,
+          33,
+          0
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x15c",
+        "type": "ptr",
+        "choices": [
+          "@state",
+          0
+        ]
+      },
+      {
+        "addr": "@mode_state",
+        "offset": "0xb54",
+        "type": "int",
+        "choices": [
+          1,
+          5,
+          2
+        ]
+      }
+    ]
+  },
+  "_survivors": "L322: scale == 200 makes the added clamp store the existing value; L325: bottom == 0 makes the changed lower-bound test assign the existing value."
+}

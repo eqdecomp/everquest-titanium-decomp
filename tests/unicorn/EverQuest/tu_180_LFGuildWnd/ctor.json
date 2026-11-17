@@ -1,0 +1,89 @@
+{
+  "function": "LFGuildWnd_guess::LFGuildWnd_guess",
+  "original": "0x0052929b",
+  "sources": [
+    "src/EverQuest/tu_180_LFGuildWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@lfguildwnd",
+  "args": [
+    {"name": "parent", "type": "ptr"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "lfguildwnd": {
+      "size": "0x764",
+      "fill": "random",
+      "init": [
+        {"offset": "0x124", "u32": "@piece"}
+      ]
+    },
+    "piece": {"size": "0x64", "fill": "random"},
+    "parent": {"size": "0x15c", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x00571e00": {"name": "CXStr::CXStr", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x005a3850": {"name": "CSidlScreenWnd::CSidlScreenWnd", "conv": "thiscall",
+                   "args": ["ptr", "mem:4", "int", "int", "ptr"], "ret": "this"},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x00527b82": {"name": "ResetFirst_guess::ResetFirst_guess", "conv": "thiscall", "args": [], "ret": "this"},
+    "0x00527bb6": {"name": "ResetSecond_guess::ResetSecond_guess", "conv": "thiscall", "args": [], "ret": "this"},
+    "0x005a25b0": {"name": "CSidlScreenWnd::CreateChildrenFromSidl", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00528273": {"name": "LfguildPage_guess::Initialize_guess", "conv": "thiscall", "args": [], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "piece-present",
+      "args": ["@parent"],
+      "memory": [
+        {"addr": "@lfguildwnd", "offset": "0x64", "u32": "0x00000004"},
+        {"addr": "@piece", "offset": "0x60", "u32": "0x00100002"}
+      ]
+    },
+    {
+      "name": "piece-null-skips-children",
+      "args": ["@parent"],
+      "memory": [
+        {"addr": "@lfguildwnd", "offset": "0x124", "u32": 0},
+        {"addr": "@lfguildwnd", "offset": "0x64", "u32": "0x00000004"}
+      ]
+    },
+    {
+      "name": "style-zero-piece-zero",
+      "args": ["@parent"],
+      "memory": [
+        {"addr": "@lfguildwnd", "offset": "0x64", "u32": 0},
+        {"addr": "@piece", "offset": "0x60", "u32": 0}
+      ]
+    },
+    {
+      "name": "style-all-bits",
+      "args": ["@parent"],
+      "memory": [
+        {"addr": "@lfguildwnd", "offset": "0x64", "u32": "0xfffef7ff"},
+        {"addr": "@piece", "offset": "0x60", "u32": "0x80000000"}
+      ]
+    },
+    {
+      "name": "null-parent",
+      "args": [0],
+      "memory": [
+        {"addr": "@lfguildwnd", "offset": "0x64", "u32": "0x00010800"},
+        {"addr": "@piece", "offset": "0x60", "u32": "0x00000001"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5411483,
+    "count": 100,
+    "args": [
+      {"choices": ["@parent", 0]}
+    ],
+    "memory": [
+      {"addr": "@lfguildwnd", "offset": "0x124", "type": "ptr", "choices": ["@piece", 0]},
+      {"addr": "@lfguildwnd", "offset": "0x64", "type": "u32"},
+      {"addr": "@piece", "offset": "0x60", "type": "u32"}
+    ]
+  }
+}

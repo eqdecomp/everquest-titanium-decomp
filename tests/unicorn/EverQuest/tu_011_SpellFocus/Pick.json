@@ -1,0 +1,2025 @@
+{
+  "function": "Picker_guess::GetAAFocus_guess",
+  "original": "0x0040d3b1",
+  "sources": [
+    "src/EverQuest/tu_011_SpellFocus.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@picker",
+  "args": [
+    {
+      "name": "unit",
+      "type": "ptr"
+    },
+    {
+      "name": "wanted",
+      "type": "int"
+    },
+    {
+      "name": "score",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "picker": {
+      "size": "0x0c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@vtbl"
+        },
+        {
+          "offset": "0x8",
+          "u32": "@owner"
+        }
+      ]
+    },
+    "vtbl": {
+      "size": "0x44",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 0
+        },
+        {
+          "offset": "0x40",
+          "u32": "@fn_slot16"
+        }
+      ]
+    },
+    "fn_slot16": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "owner": {
+      "size": "0x245",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x244",
+          "u8": 0
+        }
+      ]
+    },
+    "unit": {
+      "size": "0x26a",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1c4",
+          "u8": 1
+        },
+        {
+          "offset": "0x269",
+          "u8": 0
+        }
+      ]
+    },
+    "score": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "registry": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "lookup": {
+      "size": "0x11a8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x119c",
+          "u8": 2
+        },
+        {
+          "offset": "0x11a4",
+          "u32": 100
+        }
+      ]
+    },
+    "manager": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "holder": {
+      "size": "0x6c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x18",
+          "u32": 1
+        },
+        {
+          "offset": "0x5c",
+          "u32": 1
+        },
+        {
+          "offset": "0x60",
+          "u32": "@node"
+        },
+        {
+          "offset": "0x68",
+          "u32": "@node"
+        }
+      ]
+    },
+    "node": {
+      "size": "0x0c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@record"
+        },
+        {
+          "offset": "0x4",
+          "u32": 0
+        },
+        {
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    },
+    "record": {
+      "size": "0x0c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 1
+        },
+        {
+          "offset": "0x4",
+          "u32": 10
+        },
+        {
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    },
+    "holder2": {
+      "size": "0x6c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x18",
+          "u32": 1
+        },
+        {
+          "offset": "0x5c",
+          "u32": 1
+        },
+        {
+          "offset": "0x60",
+          "u32": "@node2"
+        },
+        {
+          "offset": "0x68",
+          "u32": "@node2"
+        }
+      ]
+    },
+    "holder3": {
+      "size": "0x6c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x18",
+          "u32": 1
+        },
+        {
+          "offset": "0x5c",
+          "u32": 1
+        },
+        {
+          "offset": "0x60",
+          "u32": "@node3"
+        },
+        {
+          "offset": "0x68",
+          "u32": "@node3"
+        }
+      ]
+    },
+    "node2": {
+      "size": "0x0c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@record2"
+        },
+        {
+          "offset": "0x4",
+          "u32": 0
+        },
+        {
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    },
+    "node3": {
+      "size": "0x0c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@record3"
+        },
+        {
+          "offset": "0x4",
+          "u32": 0
+        },
+        {
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    },
+    "record2": {
+      "size": "0x0c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 1
+        },
+        {
+          "offset": "0x4",
+          "u32": 20
+        },
+        {
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    },
+    "record3": {
+      "size": "0x0c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 1
+        },
+        {
+          "offset": "0x4",
+          "u32": 20
+        },
+        {
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x008511d8",
+      "u32": "@manager"
+    }
+  ],
+  "callees": {
+    "@fn_slot16": {
+      "name": "RegistrySlot16_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@registry"
+    },
+    "0x005ec220": {
+      "name": "GetLookup_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@lookup"
+    },
+    "0x005f0910": {
+      "name": "Get_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x00447d07": {
+      "name": "Find_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0044791f": {
+      "name": "CanClassUse_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0040cc1f": {
+      "name": "Take_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0040cc0c": {
+      "name": "Advance_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0040cc3d": {
+      "name": "Retreat_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0044d011": {
+      "name": "Valid_guess",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x0040cf30": {
+      "name": "CheckAAFocusLimits_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x0040cea6": {
+      "name": "TakeR_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "owner null",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "memory": [
+        {
+          "addr": "@picker",
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "owner disabled",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x244",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "unit null",
+      "args": [
+        0,
+        1,
+        "@score"
+      ]
+    },
+    {
+      "name": "unit rejected",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "memory": [
+        {
+          "addr": "@unit",
+          "offset": "0x269",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "restricted state 8",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "memory": [
+        {
+          "addr": "@lookup",
+          "offset": "0x119c",
+          "u8": 8
+        },
+        {
+          "addr": "@unit",
+          "offset": "0x1c4",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "restricted state 1",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "memory": [
+        {
+          "addr": "@lookup",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@unit",
+          "offset": "0x1c4",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "restricted state 9",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "memory": [
+        {
+          "addr": "@lookup",
+          "offset": "0x119c",
+          "u8": 9
+        },
+        {
+          "addr": "@unit",
+          "offset": "0x1c4",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "restricted state 7",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "memory": [
+        {
+          "addr": "@lookup",
+          "offset": "0x119c",
+          "u8": 7
+        },
+        {
+          "addr": "@unit",
+          "offset": "0x1c4",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "allowed restricted state",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "memory": [
+        {
+          "addr": "@lookup",
+          "offset": "0x119c",
+          "u8": 8
+        },
+        {
+          "addr": "@unit",
+          "offset": "0x1c4",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "no candidate",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ]
+    },
+    {
+      "name": "bit rejected",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "callees": {
+        "0x00447d07": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@holder"
+        }
+      }
+    },
+    {
+      "name": "level too high",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "memory": [
+        {
+          "addr": "@holder",
+          "offset": "0x18",
+          "u32": 101
+        }
+      ],
+      "callees": {
+        "0x00447d07": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@holder"
+        },
+        "0x0044791f": {
+          "name": "TestBit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "empty list",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "callees": {
+        "0x00447d07": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@holder"
+        },
+        "0x0044791f": {
+          "name": "TestBit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "invalid candidate",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "callees": {
+        "0x00447d07": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@holder"
+        },
+        "0x0044791f": {
+          "name": "TestBit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x0044d011": {
+          "name": "Valid_guess",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "wanted mismatch",
+      "args": [
+        "@unit",
+        2,
+        "@score"
+      ],
+      "callees": {
+        "0x00447d07": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@holder"
+        },
+        "0x0044791f": {
+          "name": "TestBit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "nonpositive score",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "callees": {
+        "0x00447d07": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@holder"
+        },
+        "0x0044791f": {
+          "name": "TestBit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x0040cf30": {
+          "name": "Scan_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ptr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "positive score and tied weight",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "callees": {
+        "0x00447d07": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@holder"
+        },
+        "0x0044791f": {
+          "name": "TestBit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "first negative weight is accepted",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x4",
+          "u32": -20
+        }
+      ],
+      "callees": {
+        "0x00447d07": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@holder",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "0x0044791f": {
+          "name": "TestBit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x0040cf30": {
+          "name": "Scan_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ptr"
+          ],
+          "ret": [
+            100
+          ]
+        }
+      }
+    },
+    {
+      "name": "lower second weight is ignored",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x4",
+          "u32": 20
+        },
+        {
+          "addr": "@record2",
+          "offset": "0x4",
+          "u32": 20
+        }
+      ],
+      "callees": {
+        "0x00447d07": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@holder",
+            "@holder2",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "0x0044791f": {
+          "name": "TestBit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x0040cf30": {
+          "name": "Scan_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ptr"
+          ],
+          "ret": [
+            100,
+            50
+          ]
+        }
+      }
+    },
+    {
+      "name": "equal weight selects later candidate",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x4",
+          "u32": 20
+        },
+        {
+          "addr": "@record2",
+          "offset": "0x4",
+          "u32": 10
+        }
+      ],
+      "callees": {
+        "0x00447d07": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@holder",
+            "@holder2",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "0x0044791f": {
+          "name": "TestBit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x0040cf30": {
+          "name": "Scan_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ptr"
+          ],
+          "ret": [
+            50,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "name": "best weight survives a later intermediate weight",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x4",
+          "u32": 20
+        },
+        {
+          "addr": "@record2",
+          "offset": "0x4",
+          "u32": 20
+        },
+        {
+          "addr": "@record3",
+          "offset": "0x4",
+          "u32": 20
+        }
+      ],
+      "callees": {
+        "0x00447d07": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@holder",
+            "@holder2",
+            "@holder3",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "0x0044791f": {
+          "name": "TestBit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x0040cf30": {
+          "name": "Scan_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ptr"
+          ],
+          "ret": [
+            50,
+            100,
+            75
+          ]
+        }
+      }
+    },
+    {
+      "name": "iterator repeats candidate once",
+      "args": [
+        "@unit",
+        1,
+        "@score"
+      ],
+      "memory": [
+        {
+          "addr": "@node",
+          "offset": "0x8",
+          "u32": "@node2"
+        },
+        {
+          "addr": "@node2",
+          "offset": "0x4",
+          "u32": "@node"
+        },
+        {
+          "addr": "@node2",
+          "offset": "0x8",
+          "u32": 0
+        },
+        {
+          "addr": "@record2",
+          "offset": "0x0",
+          "u32": 2
+        }
+      ],
+      "callees": {
+        "0x00447d07": {
+          "name": "Find_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@holder"
+        },
+        "0x0044791f": {
+          "name": "TestBit_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x0040cf30": {
+          "name": "Scan_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ptr"
+          ],
+          "ret": 100
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4248497,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@unit"
+        ]
+      },
+      {
+        "choices": [
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "choices": [
+          "@score"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@owner",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@unit",
+        "offset": "0x1c4",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@unit",
+        "offset": "0x269",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@lookup",
+        "offset": "0x119c",
+        "type": "u8",
+        "choices": [
+          1,
+          2,
+          7,
+          8,
+          9
+        ]
+      },
+      {
+        "addr": "@holder",
+        "offset": "0x18",
+        "type": "u32",
+        "choices": [
+          0,
+          100,
+          101
+        ]
+      }
+    ]
+  }
+}
+

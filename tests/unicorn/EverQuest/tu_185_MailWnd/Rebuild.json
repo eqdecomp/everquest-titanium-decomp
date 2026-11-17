@@ -1,0 +1,165 @@
+{
+  "function": "Combined_guess::Rebuild_guess",
+  "original": "0x005309d5",
+  "sources": ["src/EverQuest/tu_185_MailWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@combined",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "combined": {
+      "size": "0x1bc",
+      "fill": "zero"
+    },
+    "first_list": {
+      "size": "0x120",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@list_vtable"}]
+    },
+    "second_list": {
+      "size": "0x120",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@list_vtable"}]
+    },
+    "list_vtable": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x100", "u32": "@fn_set_count"},
+        {"offset": "0x130", "u32": "@fn_clear"}
+      ]
+    },
+    "fn_clear": {"size": "0x4", "fill": "zero"},
+    "fn_set_count": {"size": "0x4", "fill": "zero"},
+    "first_label": {"size": "0x4", "fill": "zero"},
+    "second_label": {"size": "0x4", "fill": "zero"},
+    "service": {"size": "0x4", "fill": "zero"},
+    "string_table": {"size": "0x4", "fill": "zero"},
+    "rows": {
+      "size": "0x38",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x30", "u32": "@row_slots"},
+        {"offset": "0x34", "u32": 8}
+      ]
+    },
+    "row_slots": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@row_one"},
+        {"offset": "0x4", "u32": "@row_two"}
+      ]
+    },
+    "row_one": {"size": "0x44", "fill": "zero"},
+    "row_two": {"size": "0x44", "fill": "zero"},
+    "label_text_one": {"size": "0x20", "fill": "zero"},
+    "label_text_two": {"size": "0x20", "fill": "zero"},
+    "time_text": {"size": "0x40", "fill": "zero"},
+    "large_first": {"size": "0x40", "fill": "zero"},
+    "large_second": {"size": "0x40", "fill": "zero"},
+    "heap": {"size": "0x4", "fill": "zero"},
+    "heap_block_one": {"size": "0x100", "fill": "zero"},
+    "heap_block_two": {"size": "0x100", "fill": "zero"},
+    "heap_block_three": {"size": "0x100", "fill": "zero"},
+    "heap_block_four": {"size": "0x100", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@combined", "offset": "0x170", "u32": "@first_label"},
+    {"addr": "@combined", "offset": "0x174", "u32": "@second_label"},
+    {"addr": "@combined", "offset": "0x178", "u32": "@first_list"},
+    {"addr": "@combined", "offset": "0x194", "u32": 4369},
+    {"addr": "@combined", "offset": "0x198", "u32": "@second_list"},
+    {"addr": "@combined", "offset": "0x1b4", "u32": 8738},
+    {"addr": "@first_list", "offset": "0x108", "u32": 2},
+    {"addr": "@first_list", "offset": "0x10c", "u32": 5},
+    {"addr": "@first_list", "offset": "0x11c", "u32": 0},
+    {"addr": "@second_list", "offset": "0x108", "u32": 2},
+    {"addr": "@second_list", "offset": "0x10c", "u32": 5},
+    {"addr": "@second_list", "offset": "0x11c", "u32": 0},
+    {"addr": "@row_one", "offset": "0x0", "u32": 11},
+    {"addr": "@row_one", "offset": "0x4", "u32": 1700000000},
+    {"addr": "@row_one", "offset": "0x8", "u32": 0},
+    {"addr": "@row_one", "offset": "0x10", "cstr": "first row"},
+    {"addr": "@row_one", "offset": "0x24", "u32": 15},
+    {"addr": "@row_one", "offset": "0x2c", "cstr": "first subject"},
+    {"addr": "@row_one", "offset": "0x40", "u32": 15},
+    {"addr": "@row_two", "offset": "0x0", "u32": 22},
+    {"addr": "@row_two", "offset": "0x4", "u32": 1700000001},
+    {"addr": "@row_two", "offset": "0x8", "u32": 3},
+    {"addr": "@row_two", "offset": "0x10", "cstr": "second row"},
+    {"addr": "@row_two", "offset": "0x24", "u32": 15},
+    {"addr": "@row_two", "offset": "0x2c", "cstr": "second subject"},
+    {"addr": "@row_two", "offset": "0x40", "u32": 15},
+    {"addr": "@label_text_one", "cstr": "Inbox"},
+    {"addr": "@label_text_two", "cstr": "Trash"},
+    {"addr": "@time_text", "cstr": "Wed Nov 15 00:00:00 2023\n"},
+    {"addr": "@large_first", "cstr": "a long first row string"},
+    {"addr": "@large_second", "cstr": "a long second subject"},
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x00988df0", "u32": "@service"},
+    {"addr": "0x00905cb0", "u32": "@string_table"}
+  ],
+  "callees": {
+    "0x00530958": {"name": "FillSelected_guess", "conv": "cdecl", "args": ["ptr", "ptr"]},
+    "0x00597be0": {"name": "GetCurSel_guess", "conv": "thiscall", "args": [], "ret": [0, 0]},
+    "0x00597ed0": {"name": "GetItemData_guess", "conv": "thiscall", "args": ["int"], "ret": [11, 22, 11, 22]},
+    "0x00495250": {"name": "GetRows_guess", "conv": "thiscall", "args": [], "ret": "@rows"},
+    "0x00425170": {"name": "NextRow_guess", "conv": "thiscall", "args": [], "ret": ["@row_slots", "@row_slots+0x4"]},
+    "0x00571fc0": {"name": "CXStrFromText_guess", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x0060eca3": {"name": "_ctime", "conv": "cdecl", "args": ["ignore"], "ret": "@time_text"},
+    "0x0042d7a7": {"name": "FormatRowText_guess", "conv": "thiscall", "args": ["int", "mem:12"]},
+    "0x0052f8be": {"name": "Find_guess", "conv": "cdecl", "args": ["ignore", "ignore", "ignore", "ignore"], "ret": "arg0"},
+    "0x0059b800": {"name": "AddRow_guess", "conv": "thiscall", "args": ["mem:28"], "writes": [{"call": 0, "addr": "@first_list", "offset": 284, "hex": "01000000"}, {"call": 1, "addr": "@second_list", "offset": 284, "hex": "01000000"}]},
+    "0x004482fb": {"name": "CXStrDtor_guess", "conv": "thiscall", "args": []},
+    "0x0042d7e5": {"name": "RowTextDtor_guess", "conv": "thiscall", "args": []},
+    "0x00425196": {"name": "MoreRows_guess", "conv": "thiscall", "args": ["mem:8"], "ret": [1, 1, 0]},
+    "0x0052e770": {"name": "SendText_guess", "conv": "thiscall", "args": ["u32"]},
+    "0x00597c20": {"name": "SelectListItem_guess", "conv": "thiscall", "args": ["int"]},
+    "0x00428a6e": {"name": "SelectRow_guess", "conv": "thiscall", "args": ["u32"]},
+    "0x005dfa00": {"name": "GetString_guess", "conv": "thiscall", "args": ["u32", "u32"], "ret": ["@label_text_one", "@label_text_two"]},
+    "0x00403631": {"name": "basic_string_ctor", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ptr", "cstr"], "varargs": "printf", "ret": 0, "writes": [{"call": 0, "arg": 0, "hex": "205b315d00"}, {"call": 1, "arg": 0, "hex": "205b315d00"}]},
+    "0x00427607": {"name": "Append_guess", "conv": "thiscall", "args": ["ignore"]},
+    "0x00571e00": {"name": "CXStrCtor_guess", "passthrough": true},
+    "0x005c0cc0": {"name": "SetText_guess", "conv": "thiscall", "args": ["ignore"]},
+    "0x00571d00": {"name": "ReleaseCXStr_guess", "conv": "thiscall", "args": ["u32"]},
+    "0x0040291e": {"name": "basic_string_Tidy", "conv": "thiscall", "args": ["bool", "u32"]},
+    "0x0052f9c5": {"name": "SelectedItemsDtor_guess", "conv": "thiscall", "args": []},
+    "0x005a8b00": {"name": "SetStringTarget_guess", "conv": "thiscall", "args": ["ignore", "int", "int"]},
+    "kernel32.dll!GetProcessHeap": {"name": "GetProcessHeap", "conv": "stdcall", "args": [], "ret": "@heap"},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["u32", "u32", "u32"], "ret": ["@heap_block_one", "@heap_block_two", "@heap_block_three", "@heap_block_four"]},
+    "@fn_clear": {"name": "ClearList_guess", "conv": "thiscall", "args": []},
+    "@fn_set_count": {"name": "SetListCount_guess", "conv": "thiscall", "args": ["int"]}
+  },
+  "rewrite_aliases": {
+    "_ctime": "0x0060eca3",
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {"name": "missing-first-list", "args": [], "memory": [{"addr": "@combined", "offset": "0x178", "u32": 0}]},
+    {"name": "missing-second-list", "args": [], "memory": [{"addr": "@combined", "offset": "0x198", "u32": 0}]},
+    {"name": "no-provider", "args": [], "memory": [{"addr": "0x00988df0", "u32": 0}]},
+    {"name": "provider-no-rows", "args": [], "callees": {"0x00495250": {"name": "GetRows_guess", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "empty-rows-no-labels", "args": [], "memory": [{"addr": "@rows", "offset": "0x34", "u32": 0}, {"addr": "@combined", "offset": "0x170", "u32": 0}, {"addr": "@combined", "offset": "0x174", "u32": 0}], "callees": {"0x00425196": {"name": "MoreRows_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0}}},
+    {"name": "types-zero-and-three-selected", "args": []},
+    {"name": "types-one-and-two", "args": [], "memory": [{"addr": "@row_one", "offset": "0x8", "u32": 1}, {"addr": "@row_two", "offset": "0x8", "u32": 2}], "callees": {"0x0059b800": {"name": "AddRow_guess", "conv": "thiscall", "args": ["mem:28"], "writes": [{"call": 0, "addr": "@first_list", "offset": 284, "hex": "01000000"}, {"call": 1, "addr": "@first_list", "offset": 284, "hex": "02000000"}]}, "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ptr", "cstr"], "varargs": "printf", "ret": 0, "writes": [{"call": 0, "arg": 0, "hex": "205b315d00"}]}}},
+    {"name": "large-strings-and-unmatched-selection", "args": [], "memory": [{"addr": "@rows", "offset": "0x34", "u32": 4}, {"addr": "@row_slots", "offset": "0x4", "u32": 0}, {"addr": "@row_one", "offset": "0x8", "u32": 2}, {"addr": "@row_one", "offset": "0x10", "u32": "@large_first"}, {"addr": "@row_one", "offset": "0x24", "u32": 16}, {"addr": "@row_one", "offset": "0x2c", "u32": "@large_second"}, {"addr": "@row_one", "offset": "0x40", "u32": 16}, {"addr": "@first_list", "offset": "0x108", "u32": 6}, {"addr": "@first_list", "offset": "0x10c", "u32": 2}, {"addr": "@second_list", "offset": "0x108", "u32": 1}, {"addr": "@second_list", "offset": "0x10c", "u32": 5}], "callees": {"0x00425196": {"name": "MoreRows_guess", "conv": "thiscall", "args": ["mem:8"], "ret": [1, 0]}, "0x00425170": {"name": "NextRow_guess", "conv": "thiscall", "args": [], "ret": "@row_slots"}, "0x00597be0": {"name": "GetCurSel_guess", "conv": "thiscall", "args": [], "ret": [-1, -1]}, "0x00597ed0": {"name": "GetItemData_guess", "conv": "thiscall", "args": ["int"], "ret": [77, 88, 99, 99]}, "0x0059b800": {"name": "AddRow_guess", "conv": "thiscall", "args": ["mem:28"], "writes": [{"addr": "@first_list", "offset": 284, "hex": "01000000"}]}, "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ptr", "cstr"], "varargs": "printf", "ret": 0, "writes": []}}},
+    {"name": "count-clamp-and-no-matching-item", "args": [], "memory": [{"addr": "@first_list", "offset": "0x108", "u32": 6}, {"addr": "@first_list", "offset": "0x10c", "u32": 2}, {"addr": "@second_list", "offset": "0x108", "u32": 1}, {"addr": "@second_list", "offset": "0x10c", "u32": 5}], "callees": {"0x00597be0": {"name": "GetCurSel_guess", "conv": "thiscall", "args": [], "ret": [-1, -1]}, "0x00597ed0": {"name": "GetItemData_guess", "conv": "thiscall", "args": ["int"], "ret": [77, 88, 99, 99]}, "0x0059b800": {"name": "AddRow_guess", "conv": "thiscall", "args": ["mem:28"], "writes": [{"call": 0, "addr": "@first_list", "offset": 284, "hex": "01000000"}, {"call": 1, "addr": "@second_list", "offset": 284, "hex": "01000000"}]}}},
+    {"name": "first-label-only", "args": [], "memory": [{"addr": "@combined", "offset": "0x174", "u32": 0}], "callees": {"0x00425196": {"name": "MoreRows_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0}}}
+  ],
+  "fuzz": {
+    "seed": 5442005,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@row_one", "offset": "0x8", "type": "int", "choices": [0, 1, 2, 3, 4]},
+      {"addr": "@row_two", "offset": "0x8", "type": "int", "choices": [0, 1, 2, 3, 4]},
+      {"addr": "@first_list", "offset": "0x108", "type": "int", "range": [0, 8]},
+      {"addr": "@first_list", "offset": "0x10c", "type": "int", "range": [0, 8]},
+      {"addr": "@second_list", "offset": "0x108", "type": "int", "range": [0, 8]},
+      {"addr": "@second_list", "offset": "0x10c", "type": "int", "range": [0, 8]}
+    ]
+  },
+  "_survivors": "L1153: the stack starts zeroed and FormatRowText is stubbed without writes to this field, so deleting the zero store is unobservable in this fixture; L1154: the stack starts zeroed and FormatRowText is stubbed without writes to this field, so deleting the zero store is unobservable in this fixture; L1228: when count equals limit, either arm assigns the same count"
+}

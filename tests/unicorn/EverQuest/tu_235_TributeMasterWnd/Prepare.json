@@ -1,0 +1,289 @@
+{
+  "function": "Tick_0056e7_guess::RebuildRows_guess",
+  "original": "0x0056e3e7",
+  "sources": [
+    "src/EverQuest/tu_235_TributeMasterWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@tick",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "tick": {
+      "size": "0x1d4",
+      "fill": "random"
+    },
+    "candidate": {
+      "size": "0x0c",
+      "fill": "random"
+    },
+    "candidate_slot": {
+      "size": "0x08",
+      "fill": "random"
+    },
+    "record": {
+      "size": "0x3c",
+      "fill": "random"
+    },
+    "name": {
+      "size": "0x20",
+      "fill": "random"
+    },
+    "master_slot0": {
+      "size": "0x04",
+      "fill": "random"
+    },
+    "master_slot1": {
+      "size": "0x04",
+      "fill": "random"
+    },
+    "active_slot0": {
+      "size": "0x04",
+      "fill": "random"
+    },
+    "active_slot1": {
+      "size": "0x04",
+      "fill": "random"
+    },
+    "row_master": {
+      "size": "0x54",
+      "fill": "random"
+    },
+    "row_active": {
+      "size": "0x54",
+      "fill": "random"
+    },
+    "oldrow": {
+      "size": "0x54",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x00850350", "u32": 2},
+    {"addr": "0x00905d00", "u32": "@candidate"},
+    {"addr": "@tick", "offset": "0x184", "u32": 1},
+    {"addr": "@tick", "offset": "0x188", "u32": 0},
+    {"addr": "@tick", "offset": "0x198", "u32": 0},
+    {"addr": "@tick", "offset": "0x19c", "u32": 0},
+    {"addr": "@candidate_slot", "offset": "0x00", "u32": 7},
+    {"addr": "@candidate_slot", "offset": "0x04", "u32": 0},
+    {"addr": "@record", "offset": "0x04", "u32": "@name"},
+    {"addr": "@record", "offset": "0x10", "u32": 42},
+    {"addr": "@record", "offset": "0x38", "u32": "0x12345678"},
+    {"addr": "@name", "cstr": "Benefit"},
+    {"addr": "@master_slot0", "u32": 0},
+    {"addr": "@master_slot1", "u32": "@oldrow"},
+    {"addr": "@active_slot0", "u32": 0},
+    {"addr": "@active_slot1", "u32": "@oldrow"}
+  ],
+  "callees": {
+    "0x00434ae0": {
+      "name": "Find_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": ["@record", 0, "@record", 0, 0, 0, 0]
+    },
+    "0x0050319b": {
+      "name": "Ensure_guess",
+      "conv": "thiscall",
+      "args": ["int", "ignore"],
+      "ret": 0,
+      "writes": [
+        {"addr": "@tick", "offset": 408, "hex": "02000000", "call": 0}
+      ]
+    },
+    "0x004eb924": {
+      "name": "Lookup_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": [
+        "@master_slot0", "@master_slot0", "@master_slot0", "@master_slot0",
+        "@master_slot0", "@master_slot0", "@master_slot0", "@master_slot0",
+        "@master_slot1", "@master_slot1",
+        "@active_slot0", "@active_slot0", "@active_slot0", "@active_slot0",
+        "@active_slot0", "@active_slot0", "@active_slot0"
+      ]
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": ["@row_master", "@row_active"]
+    },
+    "0x00572300": {
+      "name": "CXStr_to_char_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@name"
+    },
+    "0x0060d0d5": {
+      "name": "operator_delete",
+      "conv": "cdecl",
+      "args": ["ptr"]
+    },
+    "0x005f0d80": {
+      "name": "GetSlot_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": [
+        "@candidate_slot", "@candidate_slot", "@candidate_slot", "@candidate_slot",
+        "@candidate_slot", "@candidate_slot", "@candidate_slot", "@candidate_slot",
+        "@candidate_slot", "@candidate_slot"
+      ]
+    },
+    "0x0056d647": {
+      "name": "MarkHeldBenefit_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "int"],
+      "ret": 0
+    },
+    "0x0056d51d": {
+      "name": "SortActive_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0056d5a6": {
+      "name": "SortMaster_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0056da41": {
+      "name": "Refresh_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "mixed_growth_and_null_cleanup",
+      "args": [],
+      "callees": {
+        "0x00434ae0": {
+          "name": "Find_guess", "conv": "thiscall", "args": ["int"],
+          "ret": ["@record", 0, "@record", 0, 0, 0, 0]
+        },
+        "0x0050319b": {
+          "name": "Ensure_guess", "conv": "thiscall", "args": ["int", "ignore"], "ret": 0,
+          "writes": [{"addr": "@tick", "offset": 408, "hex": "02000000", "call": 0}]
+        },
+        "0x004eb924": {
+          "name": "Lookup_guess", "conv": "thiscall", "args": ["int"],
+          "ret": [
+            "@master_slot0", "@master_slot0", "@master_slot0", "@master_slot0",
+            "@master_slot0", "@master_slot0", "@master_slot0", "@master_slot0",
+            "@master_slot1", "@master_slot1",
+            "@active_slot0", "@active_slot0", "@active_slot0", "@active_slot0",
+            "@active_slot0", "@active_slot0", "@active_slot0"
+          ]
+        },
+        "0x0060d071": {
+          "name": "operator_new", "conv": "cdecl", "args": ["u32"],
+          "ret": ["@row_master", "@row_active"]
+        }
+      }
+    },
+    {
+      "name": "empty_global_and_active_growth",
+      "args": [],
+      "memory": [
+        {"addr": "0x00850350", "u32": 0},
+        {"addr": "@tick", "offset": "0x184", "u32": 0},
+        {"addr": "@tick", "offset": "0x198", "u32": 0},
+        {"addr": "@master_slot0", "u32": 0},
+        {"addr": "@master_slot1", "u32": 0},
+        {"addr": "@active_slot0", "u32": 0},
+        {"addr": "@active_slot1", "u32": 0}
+      ],
+      "callees": {
+        "0x00434ae0": {
+          "name": "Find_guess", "conv": "thiscall", "args": ["int"],
+          "ret": [0, "@record", 0, 0, 0]
+        },
+        "0x0050319b": {
+          "name": "Ensure_guess", "conv": "thiscall", "args": ["int", "ignore"], "ret": 0,
+          "writes": [{"addr": "@tick", "offset": 388, "hex": "02000000", "call": 0}]
+        },
+        "0x004eb924": {
+          "name": "Lookup_guess", "conv": "thiscall", "args": ["int"],
+          "ret": [
+            "@active_slot0", "@active_slot0", "@active_slot0", "@active_slot0",
+            "@active_slot0", "@active_slot0", "@active_slot0",
+            "@active_slot1", "@active_slot1", "@active_slot1",
+            "@active_slot1", "@active_slot1", "@active_slot1"
+          ]
+        },
+        "0x0060d071": {
+          "name": "operator_new", "conv": "cdecl", "args": ["u32"],
+          "ret": ["@row_active"]
+        }
+      }
+    },
+    {
+      "name": "existing_rows_deleted_on_missing_records",
+      "args": [],
+      "memory": [
+        {"addr": "0x00850350", "u32": 1},
+        {"addr": "@tick", "offset": "0x184", "u32": 1},
+        {"addr": "@tick", "offset": "0x198", "u32": 1},
+        {"addr": "@master_slot0", "u32": "@oldrow"},
+        {"addr": "@active_slot0", "u32": "@oldrow"}
+      ],
+      "callees": {
+        "0x00434ae0": {
+          "name": "Find_guess", "conv": "thiscall", "args": ["int"],
+          "ret": [0, 0, 0, 0, 0, 0]
+        },
+        "0x004eb924": {
+          "name": "Lookup_guess", "conv": "thiscall", "args": ["int"],
+          "ret": [
+            "@master_slot0", "@master_slot0",
+            "@active_slot0", "@active_slot0", "@active_slot0", "@active_slot0",
+            "@active_slot0", "@active_slot0", "@active_slot0", "@active_slot0",
+            "@active_slot0", "@active_slot0"
+          ]
+        }
+      }
+    },
+    {
+      "name": "existing_row_reused",
+      "args": [],
+      "memory": [
+        {"addr": "0x00850350", "u32": 1},
+        {"addr": "@tick", "offset": "0x184", "u32": 0},
+        {"addr": "@tick", "offset": "0x198", "u32": 1},
+        {"addr": "@master_slot0", "u32": "@oldrow"},
+        {"addr": "@active_slot0", "u32": 0},
+        {"addr": "@active_slot1", "u32": 0}
+      ],
+      "callees": {
+        "0x00434ae0": {
+          "name": "Find_guess", "conv": "thiscall", "args": ["int"],
+          "ret": ["@record", 0, 0, 0, 0, 0]
+        },
+        "0x004eb924": {
+          "name": "Lookup_guess", "conv": "thiscall", "args": ["int"],
+          "ret": [
+            "@master_slot0", "@master_slot0", "@master_slot0", "@master_slot0",
+            "@master_slot0", "@master_slot0", "@master_slot0"
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5694439,
+    "count": 50,
+    "args": [],
+    "memory": [
+      {"addr": "@record", "offset": "0x10", "type": "u32", "range": [0, 10000]},
+      {"addr": "@record", "offset": "0x38", "type": "u32", "range": [0, 10000]},
+      {"addr": "@candidate_slot", "offset": "0x00", "type": "u32", "range": [0, 20]}
+    ]
+  }
+}

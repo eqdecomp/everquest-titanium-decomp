@@ -1,0 +1,852 @@
+{
+  "function": "TickUser_guess::ProcessFishing_guess",
+  "original": "0x004173bf",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@tickuser",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "tickuser": {
+      "size": "0x100",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@player"
+        }
+      ]
+    },
+    "player": {
+      "size": "0x348",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x30",
+          "f32": 3.0
+        },
+        {
+          "offset": "0x34",
+          "f32": 4.0
+        },
+        {
+          "offset": "0x38",
+          "f32": 10.0
+        },
+        {
+          "offset": "0x48",
+          "f32": 0.0
+        },
+        {
+          "offset": "0x4c",
+          "f32": 0.5
+        },
+        {
+          "offset": "0x1a8",
+          "u32": "@actor"
+        }
+      ]
+    },
+    "actor": {
+      "size": "0x106c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x120",
+          "u32": 0
+        },
+        {
+          "offset": "0x152",
+          "u8": 0
+        }
+      ]
+    },
+    "clock": {
+      "size": "0x14c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x148",
+          "u32": 1000
+        }
+      ]
+    },
+    "direction": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@vtbl"
+        }
+      ]
+    },
+    "vtbl": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@fn"
+        },
+        {
+          "offset": "0xc",
+          "u32": "@fn"
+        }
+      ]
+    },
+    "fn": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "stringTable": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "everquest": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905cb0",
+      "u32": "@stringTable"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@everquest"
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@clock"
+    },
+    {
+      "addr": "0x0099e374",
+      "u32": "@direction"
+    },
+    {
+      "addr": "0x00923cc4",
+      "u32": 0
+    },
+    {
+      "addr": "0x00640fa0",
+      "from_image": "0x00640FA0",
+      "image_size": 8
+    },
+    {
+      "addr": "0x00640e24",
+      "from_image": "0x00640E24",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640e20",
+      "from_image": "0x00640E20",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0063fda0",
+      "from_image": "0x0063FDA0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640ea0",
+      "from_image": "0x00640EA0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0087ad00",
+      "cstr": "Movement stopped"
+    }
+  ],
+  "callees": {
+    "0x0060f60d": {
+      "name": "fabs",
+      "conv": "cdecl",
+      "args": [
+        "double"
+      ],
+      "passthrough": true
+    },
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "ptr"
+      ],
+      "ret": 8891648
+    },
+    "0x004982c6": {
+      "name": "CEverQuest::dsp_chat",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ]
+    },
+    "0x0040cbb2": {
+      "name": "RandomRange_guess",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 20
+    },
+    "0x00439f26": {
+      "name": "GetFloorHeight_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "float",
+        "float"
+      ],
+      "ret_float": 10.0
+    },
+    "0x0043d64b": {
+      "name": "FindGroundHeight_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "float",
+        "float"
+      ],
+      "ret_float": 10.0
+    },
+    "0x0043a292": {
+      "name": "GetEnvironment_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "float",
+        "float",
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x0049ab78": {
+      "name": "DoParticleEffect_guess",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ptr",
+        "int",
+        "ptr",
+        "int",
+        "int",
+        "mem:12",
+        "int",
+        "int"
+      ]
+    },
+    "0x004395e2": {
+      "name": "PlaySoundAtLocation_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "float",
+        "float",
+        "int"
+      ]
+    },
+    "0x0046d655": {
+      "name": "GetCurrentTime_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 1000
+    },
+    "@fn": {
+      "name": "DirectionFunction_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ],
+      "ret_float": 2.0
+    }
+  },
+  "rewrite_aliases": {
+    "_fabs": "0x0060f60d"
+  },
+  "cases": [
+    {
+      "name": "typical-state-zero",
+      "args": []
+    },
+    {
+      "name": "null-player",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@tickuser",
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "null-actor",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x1a8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "speed-threshold-equal",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x48",
+          "f32": 0.01
+        },
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "speed-above-threshold-clear-mode",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x48",
+          "f32": 0.0101
+        },
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 1
+        },
+        {
+          "addr": "0x00923cc4",
+          "u32": 55
+        }
+      ]
+    },
+    {
+      "name": "speed-negative-no-mode-change",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x48",
+          "f32": -0.02
+        },
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 7
+        },
+        {
+          "addr": "0x00923cc4",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "timer-not-ready",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@actor",
+          "offset": "0x120",
+          "u32": 1000
+        },
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 1
+        },
+        {
+          "addr": "@clock",
+          "offset": "0x148",
+          "u32": 999
+        }
+      ]
+    },
+    {
+      "name": "timer-equal-ready",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@actor",
+          "offset": "0x120",
+          "u32": 1000
+        },
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 0
+        },
+        {
+          "addr": "@clock",
+          "offset": "0x148",
+          "u32": 1000
+        },
+        {
+          "addr": "0x00923cc4",
+          "u32": 55
+        }
+      ]
+    },
+    {
+      "name": "state-two",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 2
+        }
+      ]
+    },
+    {
+      "name": "state-three",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 3
+        }
+      ]
+    },
+    {
+      "name": "state-four",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 4
+        }
+      ]
+    },
+    {
+      "name": "state-five",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 5
+        }
+      ]
+    },
+    {
+      "name": "state-six-default-clear-mode",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 6
+        },
+        {
+          "addr": "0x00923cc4",
+          "u32": 55
+        }
+      ]
+    },
+    {
+      "name": "state-seven-default",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 7
+        }
+      ]
+    },
+    {
+      "name": "state-one-too-far",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x30",
+          "f32": 3.0
+        },
+        {
+          "addr": "@player",
+          "offset": "0x34",
+          "f32": 4.0
+        },
+        {
+          "addr": "@player",
+          "offset": "0x38",
+          "f32": 41.0
+        },
+        {
+          "addr": "@player",
+          "offset": "0x4c",
+          "f32": 0.5
+        },
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 1
+        },
+        {
+          "addr": "0x00923cc4",
+          "u32": 55
+        }
+      ]
+    },
+    {
+      "name": "state-one-distance-equal-30",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x30",
+          "f32": 3.0
+        },
+        {
+          "addr": "@player",
+          "offset": "0x34",
+          "f32": 4.0
+        },
+        {
+          "addr": "@player",
+          "offset": "0x38",
+          "f32": 40.0
+        },
+        {
+          "addr": "@player",
+          "offset": "0x4c",
+          "f32": 0.5
+        },
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "state-one-distance-over-30",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x30",
+          "f32": 3.0
+        },
+        {
+          "addr": "@player",
+          "offset": "0x34",
+          "f32": 4.0
+        },
+        {
+          "addr": "@player",
+          "offset": "0x38",
+          "f32": 40.01
+        },
+        {
+          "addr": "@player",
+          "offset": "0x4c",
+          "f32": 0.5
+        },
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "state-one-ground-type-zero",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x38",
+          "f32": 10.0
+        },
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x0043a292": {
+          "name": "CheckGround_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "state-one-ground-type-three",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x38",
+          "f32": 10.0
+        },
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x0043a292": {
+          "name": "CheckGround_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "int"
+          ],
+          "ret": 3
+        }
+      }
+    },
+    {
+      "name": "state-one-ground-type-seven",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x38",
+          "f32": 10.0
+        },
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x0043a292": {
+          "name": "CheckGround_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "int"
+          ],
+          "ret": 7
+        }
+      }
+    },
+    {
+      "name": "state-one-sentinel-ground",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x38",
+          "f32": -1e+27
+        },
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x0043d64b": {
+          "name": "FindGroundHeight_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": -1e+27
+        }
+      }
+    },
+    {
+      "name": "state-one-clamped-z",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x38",
+          "f32": 1000.0
+        },
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x0043d64b": {
+          "name": "FindGroundHeight_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 1000.0
+        }
+      }
+    },
+    {
+      "name": "state-one-report-and-update",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x30",
+          "f32": 3.0
+        },
+        {
+          "addr": "@player",
+          "offset": "0x34",
+          "f32": 4.0
+        },
+        {
+          "addr": "@player",
+          "offset": "0x38",
+          "f32": 10.0
+        },
+        {
+          "addr": "@player",
+          "offset": "0x4c",
+          "f32": 0.5
+        },
+        {
+          "addr": "@actor",
+          "offset": "0x152",
+          "u8": 1
+        },
+        {
+          "addr": "0x00923cc4",
+          "u32": 55
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4173,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@player",
+        "offset": "0x48",
+        "type": "float",
+        "choices": [
+          0.0,
+          0.0099,
+          0.01,
+          0.0101,
+          -0.0101
+        ]
+      },
+      {
+        "addr": "@player",
+        "offset": "0x30",
+        "type": "float",
+        "range": [
+          -100.0,
+          100.0
+        ]
+      },
+      {
+        "addr": "@player",
+        "offset": "0x34",
+        "type": "float",
+        "range": [
+          -100.0,
+          100.0
+        ]
+      },
+      {
+        "addr": "@player",
+        "offset": "0x38",
+        "type": "float",
+        "range": [
+          -100.0,
+          1000.0
+        ]
+      },
+      {
+        "addr": "@player",
+        "offset": "0x4c",
+        "type": "float",
+        "range": [
+          -3.2,
+          3.2
+        ]
+      },
+      {
+        "addr": "@actor",
+        "offset": "0x120",
+        "type": "u32",
+        "choices": [
+          0,
+          999,
+          1000,
+          1001,
+          2000
+        ]
+      },
+      {
+        "addr": "@actor",
+        "offset": "0x152",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          255
+        ]
+      },
+      {
+        "addr": "@clock",
+        "offset": "0x148",
+        "type": "u32",
+        "choices": [
+          0,
+          999,
+          1000,
+          1001,
+          2000
+        ]
+      },
+      {
+        "addr": "0x00923cc4",
+        "type": "u32",
+        "choices": [
+          0,
+          55
+        ]
+      }
+    ]
+  }
+}

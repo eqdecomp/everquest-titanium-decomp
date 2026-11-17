@@ -1,0 +1,22 @@
+{
+  "function": "GetNextToken_guess",
+  "_shape": "leaf string tokenizer: loops, quote delimiter, out-pointers",
+  "original": "0x0042510e",
+  "sources": ["src/EverQuest/tu_018_MailtoLink.cpp"],
+  "conv": "cdecl",
+  "args": [{"name": "text_guess", "type": "cstr"}, {"name": "first_guess", "type": "ptr"}, {"name": "last_guess", "type": "ptr"}],
+  "ret": "bool",
+  "objects": {"first": {"size": "0x4", "fill": "random"}, "last": {"size": "0x4", "fill": "random"}},
+  "cases": [
+    {"name": "empty", "args": ["", "@first", "@last"]},
+    {"name": "blanks only", "args": ["   ", "@first", "@last"]},
+    {"name": "word", "args": ["  hello world", "@first", "@last"]},
+    {"name": "last word", "args": ["hello", "@first", "@last"]},
+    {"name": "quoted", "args": [" \"a b\" c", "@first", "@last"]},
+    {"name": "unterminated quote", "args": ["\"abc", "@first", "@last"]},
+    {"name": "empty quotes", "args": ["\"\"", "@first", "@last"]},
+    {"name": "single char", "args": ["x", "@first", "@last"]},
+    {"name": "x then blank", "args": ["x y", "@first", "@last"]}
+  ],
+  "fuzz": {"seed": 4346126, "count": 150, "args": [{"choices": [" ", "a", "ab cd", "\"q r\"", "  \"", "\" x", "z\"", "  ab  "]}, {"choices": ["@first"]}, {"choices": ["@last"]}]}
+}

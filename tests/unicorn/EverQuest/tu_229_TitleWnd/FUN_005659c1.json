@@ -1,0 +1,407 @@
+{
+  "function": "CTitleWndView_guess::UpdateNamePreview_guess",
+  "original": "0x005659c1",
+  "sources": [
+    "src/EverQuest/tu_229_TitleWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@controlstateowner",
+  "args": [
+    {
+      "name": "mode_guess",
+      "type": "bool"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "controlstateowner": {
+      "size": "0x1dc",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x5c",
+          "u8": 0
+        },
+        {
+          "offset": "0x168",
+          "u32": "@texttarget"
+        },
+        {
+          "offset": "0x170",
+          "u32": 0
+        },
+        {
+          "offset": "0x174",
+          "u32": 0
+        },
+        {
+          "offset": "0x178",
+          "u32": 0
+        },
+        {
+          "offset": "0x17c",
+          "u32": 0
+        },
+        {
+          "offset": "0x180",
+          "u32": 0
+        },
+        {
+          "offset": "0x184",
+          "u32": 0
+        }
+      ]
+    },
+    "texttarget": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": 0,
+          "u32": "@textvtable"
+        }
+      ]
+    },
+    "textvtable": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xfc",
+          "u32": "@fn_set_window_text"
+        }
+      ]
+    },
+    "fn_set_window_text": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "controltext": {
+      "size": "0x2e4",
+      "fill": "zero"
+    },
+    "rep1": {
+      "size": "0x80",
+      "fill": "zero"
+    },
+    "rep2": {
+      "size": "0x80",
+      "fill": "zero"
+    },
+    "rep3": {
+      "size": "0x80",
+      "fill": "zero"
+    },
+    "rep4": {
+      "size": "0x80",
+      "fill": "zero"
+    },
+    "repout": {
+      "size": "0x80",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905ce4",
+      "u32": "@controltext"
+    },
+    {
+      "addr": "@controltext",
+      "offset": "0x1",
+      "cstr": "Name"
+    },
+    {
+      "addr": "@controltext",
+      "offset": "0x120",
+      "cstr": "Label"
+    },
+    {
+      "addr": "@controltext",
+      "offset": "0x2a4",
+      "cstr": "First"
+    },
+    {
+      "addr": "@controltext",
+      "offset": "0x2c4",
+      "cstr": "Second"
+    },
+    {
+      "addr": "@repout",
+      "offset": "0x0",
+      "u32": 1
+    },
+    {
+      "addr": "@repout",
+      "offset": "0x8",
+      "u32": 9
+    },
+    {
+      "addr": "@repout",
+      "offset": "0x14",
+      "cstr": "Formatted"
+    }
+  ],
+  "callees": {
+    "0x00571e00": {
+      "name": "CXStr_ctor",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x00572300": {
+      "name": "CXStr_to_char",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x005738b0": {
+      "name": "FormatString",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "f0070060"
+        }
+      ]
+    },
+    "0x00407d68": {
+      "name": "CXStr_copy_ctor",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x00571d00": {
+      "name": "CXStr_FreeRep",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x00565084": {
+      "name": "ControlStateOwner_Sync",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "@fn_set_window_text": {
+      "name": "SetWindowText",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ]
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": [
+        "@rep1",
+        "@rep2",
+        "@rep3",
+        "@rep4"
+      ]
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "inactive_returns",
+      "args": [
+        0
+      ]
+    },
+    {
+      "name": "mode_forces_empty_strings",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@controltext",
+          "offset": "0x2a4",
+          "cstr": ""
+        },
+        {
+          "addr": "@controltext",
+          "offset": "0x2c4",
+          "cstr": ""
+        }
+      ]
+    },
+    {
+      "name": "first_only",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@controltext",
+          "offset": "0x2c4",
+          "cstr": ""
+        }
+      ]
+    },
+    {
+      "name": "second_only",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@controltext",
+          "offset": "0x2a4",
+          "cstr": ""
+        }
+      ]
+    },
+    {
+      "name": "both_strings",
+      "args": [
+        1
+      ]
+    },
+    {
+      "name": "second_length_one",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@controltext",
+          "offset": "0x2c4",
+          "cstr": "S"
+        }
+      ]
+    },
+    {
+      "name": "active_forces_target_update",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@controlstateowner",
+          "offset": "0x5c",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "target_null_still_syncs",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@controlstateowner",
+          "offset": "0x168",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "first_rep_null",
+      "args": [
+        1
+      ],
+      "callees": {
+        "kernel32.dll!HeapAlloc": {
+          "name": "HeapAlloc",
+          "conv": "stdcall",
+          "args": [
+            "ptr",
+            "u32",
+            "u32"
+          ],
+          "ret": [
+            0,
+            "@rep2",
+            "@rep3",
+            "@rep4"
+          ]
+        }
+      }
+    },
+    {
+      "name": "second_rep_null",
+      "args": [
+        1
+      ],
+      "callees": {
+        "kernel32.dll!HeapAlloc": {
+          "name": "HeapAlloc",
+          "conv": "stdcall",
+          "args": [
+            "ptr",
+            "u32",
+            "u32"
+          ],
+          "ret": [
+            "@rep1",
+            0,
+            "@rep3",
+            "@rep4"
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5659073,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@controlstateowner",
+        "offset": "0x5c",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@controlstateowner",
+        "offset": "0x168",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@texttarget"
+        ]
+      }
+    ]
+  },
+  "_survivors": "L718: deleting the null-path zero assignment cannot be observed because the stack starts zeroed and the local is read only on that path."
+}

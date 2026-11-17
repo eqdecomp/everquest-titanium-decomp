@@ -1,0 +1,135 @@
+{
+  "function": "Story_guess::Refresh_guess",
+  "original": "0x004c7a51",
+  "sources": [
+    "src/EverQuest/tu_089_Story.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@story",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "story": {"size": "0x190", "fill": "random", "init": [{"offset": "0", "u32": "@vt_story"}]},
+    "vt_story": {"size": "0x124", "fill": "zero", "init": [{"offset": "0x118", "u32": "@fn_slot118"}]},
+    "list": {"size": "0x200", "fill": "random", "init": [{"offset": "0", "u32": "@vt_list"}]},
+    "vt_list": {"size": "0x134", "fill": "zero", "init": [{"offset": "0x130", "u32": "@fn_slot130"}]},
+    "btn": {"size": "0x100", "fill": "random"},
+    "file": {"size": "0x40", "fill": "random"},
+    "ent0": {"size": "0x1008", "fill": "random"},
+    "ent1": {"size": "0x1008", "fill": "random"},
+    "ent2": {"size": "0x1008", "fill": "random"},
+    "slots": {"size": "0x4", "fill": "zero", "init": [{"offset": "0", "u32": "@ent0"}]},
+    "sorted": {"size": "0x40", "fill": "zero"},
+    "tstr": {"size": "0x40", "fill": "zero"},
+    "strbuf": {"size": "0x200", "fill": "zero"},
+    "fn_slot118": {"size": "0x4", "fill": "zero"},
+    "fn_slot130": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@story", "offset": "0x15c", "u32": "@btn"},
+    {"addr": "@story", "offset": "0x164", "u32": "@list"},
+    {"addr": "@story", "offset": "0x168", "u32": 2},
+    {"addr": "@story", "offset": "0x184", "u8": 1},
+    {"addr": "@tstr", "cstr": "Thu Jan  1 00:00:00 1970\n"}
+  ],
+  "callees": {
+    "0x005bb140": {"name": "SetCheck", "conv": "thiscall", "args": ["int"], "ret": "keep"},
+    "0x0050f3f6": {"name": "MemberDtor", "conv": "thiscall", "args": [], "ret": "keep"},
+    "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 0,
+      "writes": [
+        {"call": 0, "arg": 0, "offset": 0, "hex": "73746f72796c696e655c73746f72792a2e74787400"},
+        {"call": 1, "arg": 0, "offset": 0, "hex": "73746f72796c696e655c616c7068612e74787400"},
+        {"call": 2, "arg": 0, "offset": 0, "hex": "73746f72796c696e655c626574612e74787400"},
+        {"call": 3, "arg": 0, "offset": 0, "hex": "73746f72796c696e655c67616d6d612e74787400"}
+      ]},
+    "kernel32.dll!FindFirstFileA": {"conv": "stdcall", "args": ["cstr", "ignore"], "ret": 4660,
+      "writes": [{"call": 0, "arg": 1, "offset": 44, "hex": "616c7068612e74787400"}]},
+    "kernel32.dll!FindNextFileA": {"conv": "stdcall", "args": ["int", "ignore"], "ret": [1, 1, 0],
+      "writes": [
+        {"call": 0, "arg": 1, "offset": 44, "hex": "626574612e74787400"},
+        {"call": 1, "arg": 1, "offset": 44, "hex": "67616d6d612e74787400"}
+      ]},
+    "kernel32.dll!FindClose": {"conv": "stdcall", "args": ["int"], "ret": 1},
+    "kernel32.dll!GetProcessHeap": {"conv": "stdcall", "args": [], "ret": 4096},
+    "kernel32.dll!HeapAlloc": {"conv": "stdcall", "args": ["int", "int", "int"], "ret": "@strbuf"},
+    "kernel32.dll!HeapFree": {"conv": "stdcall", "args": ["int", "int", "ignore"], "ret": 1},
+    "0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": ["@file", "@file", "@file"]},
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["int"], "ret": ["@ent0", "@ent1", "@ent2"]},
+    "0x0060fbe1": {"name": "_fgets", "conv": "cdecl", "args": ["ignore", "int", "ignore"], "ret": "arg0",
+      "writes": [
+        {"call": 0, "arg": 0, "offset": 0, "hex": "416c7068612073746f72790a00"},
+        {"call": 1, "arg": 0, "offset": 0, "hex": "426574612074616c650a00"},
+        {"call": 2, "arg": 0, "offset": 0, "hex": "47616d6d61206c6f72650a00"}
+      ]},
+    "0x00610837": {"name": "_sscanf", "conv": "cdecl", "args": ["ignore", "cstr", "ignore"], "ret": 1,
+      "writes": [
+        {"call": 0, "arg": 2, "offset": 0, "hex": "416c7068612073746f727900"},
+        {"call": 1, "arg": 2, "offset": 0, "hex": "4265746120746c6500"},
+        {"call": 2, "arg": 2, "offset": 0, "hex": "47616d6d61206c6f726500"}
+      ]},
+    "0x00574a30": {"name": "Trim", "conv": "cdecl", "args": ["ignore", "int"], "ret": "keep"},
+    "0x006104f0": {"name": "_stat", "conv": "cdecl", "args": ["cstr", "ignore"], "ret": [0, 0, 0],
+      "writes": [
+        {"call": 0, "arg": 1, "offset": 28, "hex": "e8030000"},
+        {"call": 1, "arg": 1, "offset": 28, "hex": "d0070000"},
+        {"call": 2, "arg": 1, "offset": 28, "hex": "f4010000"}
+      ]},
+    "0x0050319b": {"name": "Insert", "conv": "thiscall", "args": ["int", "ignore"], "ret": "keep"},
+    "0x004eb924": {"name": "Get", "conv": "thiscall", "args": ["int"], "ret": "@slots"},
+    "0x0060eca3": {"name": "_ctime", "conv": "cdecl", "args": ["ignore"], "ret": "@tstr"},
+    "0x00571e00": {"name": "CXStr_ctor", "conv": "thiscall", "args": ["cstr"], "ret": "keep", "passthrough": true},
+    "0x0059b9d0": {"name": "AddString", "conv": "thiscall", "args": ["ignore", "int", "ptr", "int"], "ret": [5, 6, 7]},
+    "0x0059b360": {"name": "SetItemText", "conv": "thiscall", "args": ["int", "int", "ignore"], "ret": "keep"},
+    "0x00571d00": {"name": "CXStr_dtor", "conv": "thiscall", "args": ["ignore"], "ret": "keep", "passthrough": true},
+    "0x0060e985": {"name": "operator_new_array", "conv": "cdecl", "args": ["int"], "ret": "@sorted"},
+    "0x0060ee40": {"name": "_qsort", "conv": "cdecl", "args": ["ptr", "int", "int", "ignore"], "ret": "keep"},
+    "0x0060d682": {"name": "_free", "conv": "cdecl", "args": ["ptr"], "ret": "keep"},
+    "@fn_slot118": {"name": "Slot118", "conv": "thiscall", "args": [], "ret": "keep"},
+    "@fn_slot130": {"name": "Slot130", "conv": "thiscall", "args": [], "ret": "keep"}
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb",
+    "_fopen": "0x0060e887",
+    "??2@YAPAXI@Z": "0x0060d071",
+    "??_U@YAPAXI@Z": "0x0060e985",
+    "_fgets": "0x0060fbe1",
+    "_sscanf": "0x00610837",
+    "__stat": "0x006104f0",
+    "_qsort": "0x0060ee40",
+    "_ctime": "0x0060eca3"
+  },
+  "cases": [
+    {"name": "typical", "args": []},
+    {"name": "no files", "args": [],
+      "callees": {"kernel32.dll!FindFirstFileA": {"conv": "stdcall", "args": ["cstr", "ignore"], "ret": -1}},
+      "memory": [{"addr": "@story", "offset": "0x168", "u32": 0}, {"addr": "@story", "offset": "0x15c", "u32": 0},
+                 {"addr": "@story", "offset": "0x164", "u32": 0}]},
+    {"name": "no list, no automatic, inactive", "args": [],
+      "memory": [{"addr": "@story", "offset": "0x164", "u32": 0}, {"addr": "@story", "offset": "0x15c", "u32": 0},
+                 {"addr": "@story", "offset": "0x184", "u8": 0}]},
+    {"name": "automatic only, inactive", "args": [],
+      "memory": [{"addr": "@story", "offset": "0x164", "u32": 0}, {"addr": "@story", "offset": "0x184", "u8": 0}]},
+    {"name": "fopen fails", "args": [],
+      "callees": {"0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [0, 0, 0]}}},
+    {"name": "stat fails", "args": [],
+      "callees": {"0x006104f0": {"name": "_stat", "conv": "cdecl", "args": ["cstr", "ignore"], "ret": -1}}},
+    {"name": "stat succeeds without writing on later files", "args": [],
+      "callees": {"0x006104f0": {"name": "_stat", "conv": "cdecl", "args": ["cstr", "ignore"], "ret": [0, 0, 0],
+        "writes": [{"call": 0, "arg": 1, "offset": 28, "hex": "e8030000"}]}}},
+    {"name": "no entries counted", "args": [],
+      "memory": [{"addr": "@story", "offset": "0x168", "u32": 0}]},
+    {"name": "entry allocation fails", "args": [],
+      "callees": {"0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["int"], "ret": 0}}}
+  ],
+  "fuzz": {
+    "seed": 5012049,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@story", "offset": "0x168", "type": "int", "range": [0, 3]},
+      {"addr": "@story", "offset": "0x164", "type": "ptr", "choices": [0, "@list"]},
+      {"addr": "@story", "offset": "0x15c", "type": "ptr", "choices": [0, "@btn"]},
+      {"addr": "@story", "offset": "0x184", "type": "u8", "range": [0, 1]}
+    ]
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "function": "WorldAuthenticate_guess::WorldAuthenticate",
+  "original": "0x004b624f",
+  "sources": [
+    "src/EverQuest/tu_073_login.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@worldauthenticate",
+  "args": [
+    {"name": "ignored_guess", "type": "int"},
+    {"name": "message_guess", "type": "ptr"},
+    {"name": "size_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "worldauthenticate": {
+      "size": "0x20",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": "@status"},
+        {"offset": "0x8", "u32": "@access"},
+        {"offset": "0xc", "u32": "@invalid"}
+      ]
+    },
+    "status": {"size": "0x10", "fill": "random"},
+    "access": {"size": "0x10", "fill": "zero"},
+    "invalid": {"size": "0x10", "fill": "zero"},
+    "message": {"size": "0x200", "fill": "random"},
+    "authstate": {"size": "0x10", "fill": "random"},
+    "worldstate": {"size": "0xb60", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x0079dbd8", "u32": "@authstate"},
+    {"addr": "0x00988df0", "u32": "@worldstate"},
+    {"addr": "0x00988c2c", "u8": 1},
+    {"addr": "@message", "offset": "0x22", "cstr": "EQServer"}
+  ],
+  "callees": {
+    "0x0046d655": {
+      "name": "GetTickValue",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 4660
+    },
+    "0x00574110": {
+      "name": "Log",
+      "conv": "cdecl",
+      "args": ["cstr"],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x00451e54": {
+      "name": "ApplyWorldUpdate",
+      "conv": "cdecl",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x0045386d": {
+      "name": "ReadWorldFlags",
+      "conv": "cdecl",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x0046d7d4": {
+      "name": "UpdateWorldConnection",
+      "conv": "cdecl",
+      "args": ["ptr", "int"],
+      "ret": 0
+    },
+    "0x004520e5": {
+      "name": "DispatchWorldMessage",
+      "conv": "cdecl",
+      "args": ["int", "int", "ptr", "int"],
+      "ret": 0
+    },
+    "0x0040b8cb": {
+      "name": "WorldMessageProcessor_Dispatch",
+      "conv": "thiscall",
+      "args": ["int", "int", "ptr", "int"],
+      "ret": 0
+    },
+    "0x0042500c": {
+      "name": "AuthenticationState_Reset",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x004b646e": {
+      "name": "AuthenticationError",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "user32.dll!MessageBoxA": {
+      "name": "MessageBoxA",
+      "conv": "stdcall",
+      "args": ["u32", "cstr", "cstr", "u32"],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {"name": "opcode 0x04ec ReadWorldFlags", "args": [0, "@message", 64],
+     "memory": [{"addr": "@message", "u16": 1260}]},
+    {"name": "opcode 0x0504 P Update", "args": [0, "@message", 64],
+     "memory": [{"addr": "@message", "u16": 1284}]},
+    {"name": "opcode 0x0fa6 world server", "args": [0, "@message", 64],
+     "memory": [{"addr": "@message", "u16": 4006}, {"addr": "@message", "offset": "0xf6", "u8": 1},
+                {"addr": "@message", "offset": "0xf7", "u8": 0}, {"addr": "@message", "offset": "0x106", "u8": 1},
+                {"addr": "@message", "offset": "0x107", "u8": 0}, {"addr": "@message", "offset": "0x108", "u8": 1},
+                {"addr": "@message", "offset": "0x109", "u8": 0}]},
+    {"name": "opcode 0x3c25 UpdateWorldConnection", "args": [0, "@message", 64],
+     "memory": [{"addr": "@message", "u16": 15397}]},
+    {"name": "opcode 0x4513 DispatchWorldMessage", "args": [0, "@message", 64],
+     "memory": [{"addr": "@message", "u16": 17683}]},
+    {"name": "opcode 0x52a4 access granted", "args": [0, "@message", 64],
+     "memory": [{"addr": "@message", "u16": 21156}]},
+    {"name": "opcode 0x60fa AuthenticationError", "args": [0, "@message", 64],
+     "memory": [{"addr": "@message", "u16": 24826}]},
+    {"name": "opcode 0x6957 member dispatch", "args": [0, "@message", 64],
+     "memory": [{"addr": "@message", "u16": 26967}]},
+    {"name": "opcode 0x7cba CopyErrorText", "args": [0, "@message", 64],
+     "memory": [{"addr": "@message", "u16": 31930}]},
+    {"name": "opcode 0x7d37 checksums", "args": [0, "@message", 64],
+     "memory": [{"addr": "@message", "u16": 32055}]},
+    {"name": "opcode 0x8da7 invalid login, dialog shown", "args": [0, "@message", 64],
+     "memory": [{"addr": "@message", "u16": 36263}, {"addr": "0x00988c2c", "u8": 0}]},
+    {"name": "opcode 0x8da7 invalid login, dialog suppressed", "args": [0, "@message", 64],
+     "memory": [{"addr": "@message", "u16": 36263}, {"addr": "0x00988c2c", "u8": 1}]},
+    {"name": "opcode 0x1234 unknown", "args": [0, "@message", 64],
+     "memory": [{"addr": "@message", "u16": 4660}]},
+    {"name": "opcode 0x0000 unknown low", "args": [0, "@message", 64],
+     "memory": [{"addr": "@message", "u16": 0}]},
+    {"name": "opcode 0x52a5 unknown above 0x52a4", "args": [0, "@message", 64],
+     "memory": [{"addr": "@message", "u16": 21157}]},
+    {"name": "opcode 0x8da8 unknown above 0x8da7", "args": [0, "@message", 64],
+     "memory": [{"addr": "@message", "u16": 36264}]}
+  ],
+  "fuzz": {
+    "seed": 4940367,
+    "count": 200,
+    "args": [
+      {"range": [-4, 8]},
+      {"choices": ["@message"]},
+      {"range": [0, 512]}
+    ],
+    "memory": [
+      {"addr": "@message", "type": "u16", "choices": [1260, 1284, 4006, 15397, 17683, 21156, 24826, 26967, 31930, 32055, 36263, 0, 4660, 21157, 36264]},
+      {"addr": "@message", "offset": "0x2", "type": "u32", "range": [0, 100]},
+      {"addr": "@message", "offset": "0x6", "type": "u32", "range": [0, 100]},
+      {"addr": "@message", "offset": "0xa", "type": "u32", "range": [0, 100]},
+      {"addr": "@message", "offset": "0xe", "type": "u32", "range": [0, 100]},
+      {"addr": "@message", "offset": "0x12", "type": "u32", "range": [0, 100]},
+      {"addr": "@message", "offset": "0x16", "type": "u32", "range": [0, 100]},
+      {"addr": "@message", "offset": "0xf6", "type": "u8", "range": [0, 255]},
+      {"addr": "@message", "offset": "0xf7", "type": "u8", "range": [0, 255]},
+      {"addr": "@message", "offset": "0x106", "type": "u8", "range": [0, 255]},
+      {"addr": "@message", "offset": "0x107", "type": "u8", "range": [0, 255]},
+      {"addr": "@message", "offset": "0x108", "type": "u8", "range": [0, 255]},
+      {"addr": "@message", "offset": "0x109", "type": "u8", "range": [0, 255]},
+      {"addr": "0x00988c2c", "type": "u8", "choices": [0, 1]}
+    ]
+  }
+}

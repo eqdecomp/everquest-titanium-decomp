@@ -1,0 +1,103 @@
+{
+  "function": "VideoDriverCheck_guess::IsWarningDisabled_guess",
+  "original": "0x00445ba6",
+  "sources": [
+    "src/EverQuest/tu_030_VideoDriverCheck.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@version",
+  "args": [],
+  "ret": "u8",
+  "memory": [
+    {"addr": "0x00988df0", "u32": "@settings"}
+  ],
+  "callees": {
+    "0x00445a92": {
+      "name": "ToString_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "00007a00"}]
+    },
+    "0x0042e3d9": {
+      "name": "LookupSetting_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr", "ignore"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "00007a00"}]
+    },
+    "0x00572300": {
+      "name": "Str_Get_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 7995456
+    },
+    "0x004ae721": {
+      "name": "Settings_Get_guess",
+      "conv": "thiscall",
+      "args": ["cstr", "ptr", "int"],
+      "ret": 1
+    },
+    "0x00571d00": {
+      "name": "Str_Release_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "setting_set_both_text",
+      "args": [],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "setting_zero_both_text",
+      "args": [],
+      "callees": {
+        "0x004ae721": {"name": "Settings_Get_guess", "conv": "thiscall", "args": ["cstr", "ptr", "int"], "ret": 0}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "version_text_null",
+      "args": [],
+      "callees": {
+        "0x00445a92": {"name": "ToString_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "shown_text_null",
+      "args": [],
+      "callees": {
+        "0x0042e3d9": {"name": "LookupSetting_guess", "conv": "cdecl", "args": ["ignore", "cstr", "ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "both_text_null_setting_zero",
+      "args": [],
+      "callees": {
+        "0x00445a92": {"name": "ToString_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]},
+        "0x0042e3d9": {"name": "LookupSetting_guess", "conv": "cdecl", "args": ["ignore", "cstr", "ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]},
+        "0x004ae721": {"name": "Settings_Get_guess", "conv": "thiscall", "args": ["cstr", "ptr", "int"], "ret": 0}
+      },
+      "expect": {"ret": 1}
+    }
+  ],
+  "fuzz": {
+    "seed": 4479910,
+    "count": 50,
+    "args": [],
+    "memory": []
+  },
+  "objects": {
+    "version": {"size": "0x40", "fill": "random"},
+    "settings": {"size": "0x40", "fill": "random"}
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "function": "Event_guess::AddPoint_guess",
+  "original": "0x0053354e",
+  "sources": ["src/EverQuest/tu_187_MapViewWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@event",
+  "args": [
+    {"name": "x_guess", "type": "float"},
+    {"name": "y_guess", "type": "float"},
+    {"name": "z_guess", "type": "float"}
+  ],
+  "ret": "void",
+  "objects": {
+    "event": {
+      "size": "0x86",
+      "fill": "random",
+      "init": [
+        {"offset": "0x08", "f32": 0.0},
+        {"offset": "0x0c", "f32": 0.0},
+        {"offset": "0x40", "u32": 0},
+        {"offset": "0x48", "u8": 1},
+        {"offset": "0x4c", "f32": 0.0},
+        {"offset": "0x50", "f32": 0.0},
+        {"offset": "0x54", "f32": 0.0},
+        {"offset": "0x58", "u32": 305419896},
+        {"offset": "0x68", "u32": 2596069104},
+        {"offset": "0x82", "u8": 1}
+      ]
+    },
+    "node": {"size": "0x28", "fill": "random"},
+    "existing": {"size": "0x28", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x0060f60d": {
+      "name": "_fabs",
+      "conv": "cdecl",
+      "args": ["double"],
+      "passthrough": true
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": "@node"
+    },
+    "0x00532480": {
+      "name": "ElementList_guess::Initialize_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this",
+      "passthrough": true
+    }
+  },
+  "rewrite_aliases": {
+    "_fabs": "0x0060f60d",
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "not_ready",
+      "args": [5.0, 5.0, 5.0],
+      "memory": [
+        {"addr": "@event", "offset": "0x48", "u8": 0},
+        {"addr": "@event", "offset": "0x82", "u8": 1},
+        {"addr": "@event", "offset": "0x40", "u32": 0}
+      ]
+    },
+    {
+      "name": "disabled",
+      "args": [5.0, 5.0, 5.0],
+      "memory": [
+        {"addr": "@event", "offset": "0x48", "u8": 1},
+        {"addr": "@event", "offset": "0x82", "u8": 0},
+        {"addr": "@event", "offset": "0x40", "u32": 0}
+      ]
+    },
+    {
+      "name": "both_inside_no_node",
+      "args": [0.1, 0.1, 0.1],
+      "memory": [
+        {"addr": "@event", "offset": "0x48", "u8": 1},
+        {"addr": "@event", "offset": "0x82", "u8": 1},
+        {"addr": "@event", "offset": "0x4c", "f32": 0.0},
+        {"addr": "@event", "offset": "0x50", "f32": 0.0},
+        {"addr": "@event", "offset": "0x40", "u32": 0}
+      ]
+    },
+    {
+      "name": "x_exactly_at_boundary",
+      "args": [0.9, 0.0, 0.0],
+      "memory": [
+        {"addr": "@event", "offset": "0x48", "u8": 1},
+        {"addr": "@event", "offset": "0x82", "u8": 1},
+        {"addr": "@event", "offset": "0x08", "f32": 0.0},
+        {"addr": "@event", "offset": "0x0c", "f32": 0.0},
+        {"addr": "@event", "offset": "0x4c", "f32": 0.0},
+        {"addr": "@event", "offset": "0x50", "f32": 0.0},
+        {"addr": "@event", "offset": "0x40", "u32": 0}
+      ]
+    },
+    {
+      "name": "y_exactly_at_boundary",
+      "args": [0.0, 0.9, 0.0],
+      "memory": [
+        {"addr": "@event", "offset": "0x48", "u8": 1},
+        {"addr": "@event", "offset": "0x82", "u8": 1},
+        {"addr": "@event", "offset": "0x08", "f32": 0.0},
+        {"addr": "@event", "offset": "0x0c", "f32": 0.0},
+        {"addr": "@event", "offset": "0x4c", "f32": 0.0},
+        {"addr": "@event", "offset": "0x50", "f32": 0.0},
+        {"addr": "@event", "offset": "0x40", "u32": 0}
+      ]
+    },
+    {
+      "name": "x_over_boundary",
+      "args": [1.0, 2.0, 3.0],
+      "memory": [
+        {"addr": "@event", "offset": "0x48", "u8": 1},
+        {"addr": "@event", "offset": "0x82", "u8": 1},
+        {"addr": "@event", "offset": "0x08", "f32": 0.25},
+        {"addr": "@event", "offset": "0x0c", "f32": -0.25},
+        {"addr": "@event", "offset": "0x4c", "f32": 1.1501},
+        {"addr": "@event", "offset": "0x50", "f32": 1.75},
+        {"addr": "@event", "offset": "0x54", "f32": 7.5},
+        {"addr": "@event", "offset": "0x58", "u32": 287454020},
+        {"addr": "@event", "offset": "0x68", "u32": 1432778632},
+        {"addr": "@event", "offset": "0x40", "u32": 0}
+      ]
+    },
+    {
+      "name": "y_over_boundary_with_head",
+      "args": [-1.0, 1.0, -3.0],
+      "memory": [
+        {"addr": "@event", "offset": "0x48", "u8": 1},
+        {"addr": "@event", "offset": "0x82", "u8": 1},
+        {"addr": "@event", "offset": "0x08", "f32": 0.25},
+        {"addr": "@event", "offset": "0x0c", "f32": -0.25},
+        {"addr": "@event", "offset": "0x4c", "f32": -0.75},
+        {"addr": "@event", "offset": "0x50", "f32": 0.6501},
+        {"addr": "@event", "offset": "0x54", "f32": 9.5},
+        {"addr": "@event", "offset": "0x58", "u32": 287454020},
+        {"addr": "@event", "offset": "0x68", "u32": 1432778632},
+        {"addr": "@event", "offset": "0x40", "u32": "@existing"}
+      ]
+    },
+    {
+      "name": "allocation_failure",
+      "args": [1.0, 0.0, 2.0],
+      "memory": [
+        {"addr": "@event", "offset": "0x48", "u8": 1},
+        {"addr": "@event", "offset": "0x82", "u8": 1},
+        {"addr": "@event", "offset": "0x4c", "f32": 2.0},
+        {"addr": "@event", "offset": "0x50", "f32": 0.0},
+        {"addr": "@event", "offset": "0x40", "u32": 0}
+      ],
+      "callees": {"0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}}
+    }
+  ],
+  "fuzz": {
+    "seed": 5452885,
+    "count": 100,
+    "args": [
+      {"range": [-2.0, 2.0]},
+      {"range": [-2.0, 2.0]},
+      {"range": [-2.0, 2.0]}
+    ],
+    "memory": [
+      {"addr": "@event", "offset": "0x08", "type": "float", "range": [-1.0, 1.0]},
+      {"addr": "@event", "offset": "0x0c", "type": "float", "range": [-1.0, 1.0]},
+      {"addr": "@event", "offset": "0x40", "type": "u32", "choices": [0, "@existing"]},
+      {"addr": "@event", "offset": "0x48", "type": "u8", "choices": [0, 1]},
+      {"addr": "@event", "offset": "0x4c", "type": "float", "range": [-2.0, 2.0]},
+      {"addr": "@event", "offset": "0x50", "type": "float", "range": [-2.0, 2.0]},
+      {"addr": "@event", "offset": "0x54", "type": "float", "range": [-4.0, 4.0]},
+      {"addr": "@event", "offset": "0x58", "type": "u32"},
+      {"addr": "@event", "offset": "0x68", "type": "u32"},
+      {"addr": "@event", "offset": "0x82", "type": "u8", "choices": [0, 1]}
+    ]
+  }
+}

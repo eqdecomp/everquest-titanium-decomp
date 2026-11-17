@@ -1,0 +1,266 @@
+{
+  "function": "State_48995D_guess::Update_48A7F9_guess",
+  "original": "0x0048a7f9",
+  "sources": [
+    "src/EverQuest/tu_055_Movement.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@state_48995d",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "state_48995d": {
+      "size": "0x2ec",
+      "fill": "zero"
+    },
+    "check_object": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@check_vtable"
+        }
+      ]
+    },
+    "check_vtable": {
+      "size": "0x50",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4c",
+          "u32": "@fn_check"
+        }
+      ]
+    },
+    "fn_check": {
+      "size": "0x4"
+    },
+    "bounds_object": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@bounds_vtable"
+        }
+      ]
+    },
+    "bounds_vtable": {
+      "size": "0x38",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x34",
+          "u32": "@fn_bounds"
+        }
+      ]
+    },
+    "fn_bounds": {
+      "size": "0x4"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0099e370",
+      "u32": "@check_object"
+    },
+    {
+      "addr": "0x0099e368",
+      "u32": "@bounds_object"
+    },
+    {
+      "addr": "0x00642f60",
+      "from_image": "0x00642F60",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": 0
+    },
+    {
+      "addr": "@state_48995d",
+      "offset": "0x30",
+      "f32": 0.0
+    },
+    {
+      "addr": "@state_48995d",
+      "offset": "0x34",
+      "f32": 0.0
+    },
+    {
+      "addr": "@state_48995d",
+      "offset": "0x38",
+      "f32": 0.0
+    },
+    {
+      "addr": "@state_48995d",
+      "offset": "0x3c",
+      "f32": 4.0
+    },
+    {
+      "addr": "@state_48995d",
+      "offset": "0x40",
+      "f32": 5.0
+    },
+    {
+      "addr": "@state_48995d",
+      "offset": "0x44",
+      "f32": 6.0
+    },
+    {
+      "addr": "@state_48995d",
+      "offset": "0xb0",
+      "f32": 1.0
+    },
+    {
+      "addr": "@state_48995d",
+      "offset": "0xb4",
+      "f32": 2.0
+    },
+    {
+      "addr": "@state_48995d",
+      "offset": "0xb8",
+      "f32": 3.0
+    }
+  ],
+  "callees": {
+    "@fn_check": {
+      "name": "check_bounds_enabled",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "@fn_bounds": {
+      "name": "get_world_bounds",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "ignore"
+      ],
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "000020c1000020c1000020c1"
+        },
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "000020410000204100002041"
+        }
+      ]
+    },
+    "0x00489872": {
+      "name": "Vector_48A324_guess::IsLess_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x004898a4": {
+      "name": "Vector_48A324_guess::IsGreater_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x0048c14f": {
+      "name": "State_48C_guess::UpdateIfCurrentWithPosition_guess",
+      "conv": "thiscall",
+      "args": [
+        "char"
+      ]
+    },
+    "0x0048c1a3": {
+      "name": "State_48C_guess::SendMovementHistory_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "bounds_check_disabled",
+      "args": [],
+      "callees": {
+        "@fn_check": {
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "upper_boundary_is_outside",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@state_48995d",
+          "offset": "0x30",
+          "f32": 2010.0
+        }
+      ]
+    },
+    {
+      "name": "lower_boundary_is_outside",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@state_48995d",
+          "offset": "0x30",
+          "f32": -2010.0
+        }
+      ]
+    },
+    {
+      "name": "inside_bounds",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@state_48995d",
+          "offset": "0x30",
+          "f32": 0.0
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4761593,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@state_48995d",
+        "offset": "0x30",
+        "type": "float",
+        "count": 3,
+        "range": [
+          -2020.0,
+          2020.0
+        ]
+      },
+      {
+        "addr": "@state_48995d",
+        "offset": "0x3c",
+        "type": "float",
+        "count": 3,
+        "range": [
+          -8.0,
+          8.0
+        ]
+      },
+      {
+        "addr": "@state_48995d",
+        "offset": "0xb0",
+        "type": "float",
+        "count": 3,
+        "range": [
+          -50.0,
+          50.0
+        ]
+      }
+    ]
+  }
+}

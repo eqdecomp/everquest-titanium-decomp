@@ -1,0 +1,112 @@
+{
+  "function": "CRaid_guess::CopyServerData_guess",
+  "original": "0x00431c23",
+  "sources": [
+    "src/EverQuest/tu_025_Raid.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@everquestobject",
+  "args": [
+    {
+      "name": "data",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "everquestobject": {
+      "size": "0x51b0",
+      "fill": "random"
+    },
+    "data": {
+      "size": "0xcf0",
+      "fill": "random"
+    },
+    "controller": {
+      "size": "0x20",
+      "fill": "random"
+    },
+    "owner": {
+      "size": "0x20",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x009859EC", "u32": "@controller"},
+    {"addr": "0x00905D00", "u32": "@owner"}
+  ],
+  "callees": {
+    "0x004b40d1": {
+      "name": "SetRaidLeaderRanks_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr"
+      ]
+    }
+  },
+  "coverage_ok": {
+    "00431C38-00431C39": "int3 bounds check: the loop index stays below 0x100, so it never traps"
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        "@data"
+      ]
+    },
+    {
+      "name": "zeros",
+      "args": [
+        "@data"
+      ],
+      "memory": [
+        {"addr": "@data", "offset": "0xbf0", "size": 256, "fill": "zero"}
+      ]
+    },
+    {
+      "name": "no controller",
+      "args": [
+        "@data"
+      ],
+      "memory": [
+        {"addr": "0x009859EC", "u32": 0}
+      ]
+    },
+    {
+      "name": "no owner",
+      "args": [
+        "@data"
+      ],
+      "memory": [
+        {"addr": "0x00905D00", "u32": 0}
+      ]
+    },
+    {
+      "name": "no controller, no owner",
+      "args": [
+        "@data"
+      ],
+      "memory": [
+        {"addr": "0x009859EC", "u32": 0},
+        {"addr": "0x00905D00", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4398115,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@data"
+        ]
+      }
+    ],
+    "memory": [
+      {"addr": "@data", "offset": "0xbf0", "size": 256},
+      {"addr": "0x009859EC", "type": "ptr", "choices": [0, "@controller"]},
+      {"addr": "0x00905D00", "type": "ptr", "choices": [0, "@owner"]}
+    ]
+  }
+}

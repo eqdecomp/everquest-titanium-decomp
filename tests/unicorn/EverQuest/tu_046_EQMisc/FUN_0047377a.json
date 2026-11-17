@@ -1,0 +1,144 @@
+{
+  "function": "do_spellscribe_guess",
+  "original": "0x0047377a",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "player_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "text_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "player": {
+      "size": "0x348",
+      "fill": "zero",
+      "memory": [{"offset": "0x120", "cstr": "Bob"}]
+    },
+    "self": {
+      "size": "0x348",
+      "fill": "zero",
+      "memory": [{"offset": "0x120", "cstr": "Me"}]
+    },
+    "target": {
+      "size": "0x348",
+      "fill": "zero",
+      "memory": [{"offset": "0x120", "cstr": "Tgt"}]
+    },
+    "pc": {
+      "size": "0xC400",
+      "fill": "zero",
+      "init": [{"offset": "0x8", "u32": "@vbt"}]
+    },
+    "vbt": {
+      "size": "0x8",
+      "fill": "zero",
+      "memory": [{"offset": "0x4", "u32": "0xC37C"}]
+    },
+    "tok": {
+      "size": "0x40",
+      "fill": "zero",
+      "memory": [{"offset": "0x0", "cstr": "rest"}]
+    }
+  },
+  "memory": [
+    {"addr": "0x00905CE4", "u32": "@self"},
+    {"addr": "0x00905D00", "u32": "@pc"},
+    {"addr": "0x00905D04", "u32": "@target"},
+    {"addr": "0x00923D60", "u32": 1}
+  ],
+  "callees": {
+    "0x004167e2": {
+      "name": "GetStatus",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0042dd82": {
+      "name": "GrabFirstWord_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "ignore",
+        "int"
+      ],
+      "ret": "@tok"
+    },
+    "0x0060e3a3": {
+      "name": "atoi",
+      "conv": "cdecl",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x004912b1": {
+      "name": "EQSendMessage",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "mem:136",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "typical_sends",
+      "args": ["@player", "a 5 7"]
+    },
+    {
+      "name": "gate_closed_no_send",
+      "args": ["@player", "a 5 7"],
+      "memory": [{"addr": "0x00923D60", "u32": 0}]
+    },
+    {
+      "name": "status_nonzero_no_send",
+      "args": ["@player", "a 5 7"],
+      "callees": {
+        "0x004167e2": {"name": "GetStatus", "conv": "thiscall", "args": [], "ret": 1}
+      }
+    },
+    {
+      "name": "self_null_no_send",
+      "args": ["@player", "a 5 7"],
+      "memory": [{"addr": "0x00905CE4", "u32": 0}]
+    },
+    {
+      "name": "player_null_no_send",
+      "args": [0, "a 5 7"]
+    },
+    {
+      "name": "no_target_uses_self",
+      "args": ["@player", "a 5 7"],
+      "memory": [{"addr": "0x00905D04", "u32": 0}]
+    },
+    {
+      "name": "empty_text",
+      "args": ["@player", ""]
+    }
+  ],
+  "fuzz": {
+    "seed": 4672310,
+    "count": 100,
+    "args": [
+      {"choices": ["@player", 0]},
+      {"choices": ["a 5 7", "", "x", "12 34 56"]}
+    ],
+    "memory": [
+      {"addr": "0x00905CE4", "type": "ptr", "choices": ["@self", 0]},
+      {"addr": "0x00905D04", "type": "ptr", "choices": ["@target", 0]},
+      {"addr": "0x00923D60", "type": "int", "choices": [0, 1]}
+    ]
+  }
+}

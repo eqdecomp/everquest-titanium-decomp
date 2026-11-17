@@ -1,0 +1,252 @@
+{
+  "function": "Activator_guess::Activate_guess",
+  "original": "0x0042be14",
+  "sources": ["src/EverQuest/tu_018_MailtoLink.cpp"],
+  "conv": "thiscall",
+  "this": "@activator",
+  "args": [{"name": "state_guess", "type": "ptr"}],
+  "ret": "void",
+  "objects": {
+    "activator": {
+      "size": "0x34",
+      "fill": "random",
+      "init": [{"offset": "0x2c", "u32": "@head"}]
+    },
+    "state": {"size": "0x4a", "fill": "random"},
+    "head": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@node"},
+        {"offset": "0x4", "u32": "@node"}
+      ]
+    },
+    "node": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@head"},
+        {"offset": "0x4", "u32": "@head"},
+        {"offset": "0x8", "u32": "@current"}
+      ]
+    },
+    "current": {"size": "0x4a", "fill": "random"},
+    "node2": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@head"},
+        {"offset": "0x4", "u32": "@node"},
+        {"offset": "0x8", "u32": "@current2"}
+      ]
+    },
+    "current2": {"size": "0x4a", "fill": "random"},
+    "new_value": {"size": "0x4c", "fill": "random"},
+    "owned": {"size": "0x4", "fill": "random"},
+    "heap_buffer": {"size": "0x100", "fill": "zero"},
+    "long_text": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@state", "offset": "0x18", "u32": 15},
+    {"addr": "@state", "offset": "0x14", "u32": 3},
+    {"addr": "@state", "offset": "0x20", "u32": 0},
+    {"addr": "@state", "offset": "0x24", "u32": 0},
+    {"addr": "@state", "offset": "0x28", "u32": 0},
+    {"addr": "@state+0x4", "cstr": "key"},
+    {"addr": "@state", "offset": "0x44", "u32": 15},
+    {"addr": "@state", "offset": "0x40", "u32": 0},
+    {"addr": "@state+0x30", "cstr": ""},
+    {"addr": "@state", "offset": "0x49", "u8": 0},
+    {"addr": "@current", "offset": "0x18", "u32": 15},
+    {"addr": "@current", "offset": "0x14", "u32": 3},
+    {"addr": "@current", "offset": "0x20", "u32": 0},
+    {"addr": "@current", "offset": "0x24", "u32": 0},
+    {"addr": "@current", "offset": "0x28", "u32": 0},
+    {"addr": "@current+0x4", "cstr": "key"},
+    {"addr": "@current", "offset": "0x44", "u32": 15},
+    {"addr": "@current", "offset": "0x40", "u32": 0},
+    {"addr": "@current+0x30", "cstr": ""},
+    {"addr": "@current", "offset": "0x49", "u8": 0},
+    {"addr": "@current2", "offset": "0x18", "u32": 15},
+    {"addr": "@current2", "offset": "0x14", "u32": 4},
+    {"addr": "@current2", "offset": "0x20", "u32": 0},
+    {"addr": "@current2", "offset": "0x24", "u32": 0},
+    {"addr": "@current2", "offset": "0x28", "u32": 0},
+    {"addr": "@current2+0x4", "cstr": "key2"},
+    {"addr": "@current2", "offset": "0x44", "u32": 15},
+    {"addr": "@current2", "offset": "0x40", "u32": 0},
+    {"addr": "@current2+0x30", "cstr": ""},
+    {"addr": "@current2", "offset": "0x49", "u8": 0},
+    {"addr": "@new_value", "offset": "0x18", "u32": 15},
+    {"addr": "@new_value", "offset": "0x14", "u32": 0},
+    {"addr": "@new_value", "offset": "0x20", "u32": 0},
+    {"addr": "@new_value", "offset": "0x24", "u32": 0},
+    {"addr": "@new_value", "offset": "0x28", "u32": 0},
+    {"addr": "@new_value+0x4", "cstr": ""},
+    {"addr": "@new_value", "offset": "0x44", "u32": 15},
+    {"addr": "@new_value", "offset": "0x40", "u32": 0},
+    {"addr": "@new_value+0x30", "cstr": ""},
+    {"addr": "@new_value", "offset": "0x20", "u32": 0},
+    {"addr": "@new_value", "offset": "0x24", "u32": 0},
+    {"addr": "@long_text", "cstr": "key"}
+  ],
+  "callees": {
+    "0x00574950": {
+      "name": "FUN_00574950_guess",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr"],
+      "ret": 0
+    },
+    "0x0042bb77": {
+      "name": "PurgeObject_guess::CopyFrom_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": "@current",
+      "passthrough": true
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": [0, "@owned"]
+    },
+    "0x0042baec": {
+      "name": "PurgeObject_guess copy constructor",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": "@new_value",
+      "passthrough": false
+    },
+    "0x0042926b": {
+      "name": "SortedList_guess::Insert_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "mem:4"],
+      "ret": 0
+    },
+    "0x0042b03c": {
+      "name": "Activator_guess::Update_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00402d37": {
+      "name": "Activator_guess::Attach_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x00403174": {
+      "name": "std::string::assign",
+      "conv": "thiscall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": 0
+    },
+    "0x0042b6e2": {
+      "name": "std::vector<std::string>::operator=",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x0042a5c2": {
+      "name": "EntryRange_guess::ForEach_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0,
+      "passthrough": true
+    },
+    "0x004285e1": {
+      "name": "PurgeObject_guess::Refresh_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0060d0d5": {
+      "name": "operator delete",
+      "conv": "cdecl",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": "@heap_buffer"
+    },
+    "kernel32.dll!EnterCriticalSection": {
+      "name": "EnterCriticalSection",
+      "conv": "stdcall",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "kernel32.dll!LeaveCriticalSection": {
+      "name": "LeaveCriticalSection",
+      "conv": "stdcall",
+      "args": ["ptr"],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071",
+    "??0PurgeObject_guess@@QAE@ABU0@@Z": "0x0042baec"
+  },
+  "cases": [
+    {"name": "empty list inserts at head", "args": ["@state"], "memory": [
+      {"addr": "@head", "offset": "0x0", "u32": "@head"},
+      {"addr": "@head", "offset": "0x4", "u32": "@head"}
+    ]},
+    {"name": "less than first falls back", "args": ["@state"], "callees": {
+      "0x00574950": {"ret": -1}
+    }},
+    {"name": "greater inserts before first", "args": ["@state"], "callees": {
+      "0x00574950": {"ret": 1}
+    }},
+    {"name": "equal protected entry stays", "args": ["@state"], "memory": [
+      {"addr": "@current", "offset": "0x49", "u8": 1},
+      {"addr": "@state", "offset": "0x49", "u8": 0}
+    ], "callees": {"0x00574950": {"ret": 0}}},
+    {"name": "long string representations", "args": ["@state"], "memory": [
+      {"addr": "@state", "offset": "0x18", "u32": 16},
+      {"addr": "@state", "offset": "0x4", "u32": "@long_text"},
+      {"addr": "@current", "offset": "0x18", "u32": 16},
+      {"addr": "@current", "offset": "0x4", "u32": "@long_text"},
+      {"addr": "@current", "offset": "0x49", "u8": 1},
+      {"addr": "@state", "offset": "0x49", "u8": 0}
+    ], "callees": {"0x00574950": {"ret": 0}}},
+    {"name": "equal copies when current flag is clear", "args": ["@state"], "memory": [
+      {"addr": "@current", "offset": "0x49", "u8": 0},
+      {"addr": "@state", "offset": "0x49", "u8": 0}
+    ], "callees": {"0x00574950": {"ret": 0}}},
+    {"name": "equal copies when incoming flag is set", "args": ["@state"], "memory": [
+      {"addr": "@current", "offset": "0x49", "u8": 1},
+      {"addr": "@state", "offset": "0x49", "u8": 1}
+    ], "callees": {"0x00574950": {"ret": 0}}},
+    {"name": "two node walk inserts before second", "args": ["@state"], "memory": [
+      {"addr": "@node", "offset": "0x0", "u32": "@node2"},
+      {"addr": "@node2", "offset": "0x0", "u32": "@head"},
+      {"addr": "@node2", "offset": "0x4", "u32": "@node"}
+    ], "callees": {"0x00574950": {"ret": [-1, 1]}}},
+    {"name": "two node walk reaches head", "args": ["@state"], "memory": [
+      {"addr": "@node", "offset": "0x0", "u32": "@node2"},
+      {"addr": "@node2", "offset": "0x0", "u32": "@head"},
+      {"addr": "@node2", "offset": "0x4", "u32": "@node"}
+    ], "callees": {"0x00574950": {"ret": [-1, -1]}}},
+    {"name": "nonnull allocation before first", "args": ["@state"], "callees": {
+      "0x00574950": {"ret": 1},
+      "0x0060d071": {"ret": ["@new_value", "@owned"]}
+    }},
+    {"name": "nonnull allocation at head", "args": ["@state"], "memory": [
+      {"addr": "@head", "offset": "0x0", "u32": "@head"},
+      {"addr": "@head", "offset": "0x4", "u32": "@head"}
+    ], "callees": {"0x0060d071": {"ret": ["@new_value", "@owned"]}}}
+  ],
+  "fuzz": {
+    "seed": 4374036,
+    "count": 100,
+    "args": [{"choices": ["@state"]}],
+    "memory": [
+      {"addr": "@state", "offset": "0x49", "type": "u8", "choices": [0, 1]},
+      {"addr": "@current", "offset": "0x49", "type": "u8", "choices": [0, 1]}
+    ]
+  },
+  "_survivors": "L1772: compare == 0 breaks above, so changing > to >= cannot change behavior."
+}

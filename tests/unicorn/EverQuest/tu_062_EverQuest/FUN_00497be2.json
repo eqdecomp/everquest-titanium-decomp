@@ -1,0 +1,131 @@
+{
+  "function": "GlobalState_guess::GetCurrentLanguage_guess",
+  "original": "0x00497be2",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@globalstate",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "globalstate": {"size": "0x100", "fill": "zero"},
+    "context": {"size": "0xe10", "fill": "zero", "init": [{"offset": "0x8", "u32": "@node"}]},
+    "node": {"size": "0x8", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@context"},
+    {"addr": "0x009237f0", "u32": 0},
+    {"addr": "@node", "offset": "0x4", "u32": 0}
+  ],
+  "callees": {},
+  "cases": [
+    {
+      "name": "null-context",
+      "args": [],
+      "memory": [{"addr": "0x00905d00", "u32": 0}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "no-flags-index0",
+      "args": [],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "first-flagged-index0",
+      "args": [],
+      "memory": [
+        {"addr": "@context", "offset": "0x17", "u8": 1},
+        {"addr": "@context", "offset": "0x1b", "u8": 1},
+        {"addr": "@context", "offset": "0x28", "u8": 1}
+      ],
+      "expect": {"ret": 3}
+    },
+    {
+      "name": "second-flagged-index1",
+      "args": [],
+      "memory": [
+        {"addr": "@context", "offset": "0x17", "u8": 1},
+        {"addr": "@context", "offset": "0x1b", "u8": 1},
+        {"addr": "@context", "offset": "0x28", "u8": 1},
+        {"addr": "0x009237f0", "u32": 1}
+      ],
+      "expect": {"ret": 7}
+    },
+    {
+      "name": "unset-slot-index5",
+      "args": [],
+      "memory": [
+        {"addr": "@context", "offset": "0x17", "u8": 1},
+        {"addr": "0x009237f0", "u32": 5}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "all-flagged-index31",
+      "args": [],
+      "memory": [
+        {"addr": "@context", "offset": "0x14", "hex": "0101010101010101010101010101010101010101010101010101010101010101"},
+        {"addr": "0x009237f0", "u32": 31}
+      ],
+      "expect": {"ret": 31}
+    },
+    {
+      "name": "high-bit-flag-counts",
+      "args": [],
+      "memory": [{"addr": "@context", "offset": "0x16", "u8": 128}],
+      "expect": {"ret": 2}
+    },
+    {
+      "name": "only-last-flag",
+      "args": [],
+      "memory": [{"addr": "@context", "offset": "0x33", "u8": 1}],
+      "expect": {"ret": 31}
+    },
+    {
+      "name": "index-negative",
+      "args": [],
+      "memory": [
+        {"addr": "@context", "offset": "0x17", "u8": 1},
+        {"addr": "0x009237f0", "u32": "0xffffffff"}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "index-32",
+      "args": [],
+      "memory": [
+        {"addr": "@context", "offset": "0x17", "u8": 1},
+        {"addr": "0x009237f0", "u32": 32}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "node-offset-0x20",
+      "args": [],
+      "memory": [
+        {"addr": "@node", "offset": "0x4", "u32": 32},
+        {"addr": "@context", "offset": "0x35", "u8": 1}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "node-offset-0x100-empty",
+      "args": [],
+      "memory": [{"addr": "@node", "offset": "0x4", "u32": 256}],
+      "expect": {"ret": 0}
+    }
+  ],
+  "fuzz": {
+    "seed": 4815842,
+    "count": 150,
+    "args": [],
+    "memory": [
+      {"addr": "@context", "offset": "0x14", "type": "u8", "count": 32, "stride": 1, "p": 0.7},
+      {"addr": "@node", "offset": "0x4", "type": "u32", "choices": [0, 8, 32, 128, 256], "p": 0.8},
+      {"addr": "0x009237f0", "type": "int", "range": [-2, 40]}
+    ]
+  },
+  "coverage_ok": {"00497C25-00497C26": "unreachable INT3 bounds trap: the loop index never reaches 0x20 inside its body"},
+  "_survivors": "L7069: the loop index is always below 0x20 inside the body, so the bounds check never fires; L7070: its trap is unreachable; L7082: with selected == -1 the && variant reads values[-1], a stack slot below the array that the emulator leaves zeroed, so both paths return 0; L7082: values[32] is the saved EBP, a stack address >= 0x20, so the final range check returns 0 either way; L7087: no slot can hold 32 (values are 0..31 or -1), so <= is equivalent"
+}

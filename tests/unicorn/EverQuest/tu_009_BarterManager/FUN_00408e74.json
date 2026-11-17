@@ -1,0 +1,27 @@
+{
+  "function": "ParseBoolField_guess",
+  "_shape": "/GS cookie (0x800 char buffer), cdecl, calls a client function by address and atoi",
+  "original": "0x00408e74",
+  "sources": ["src/EverQuest/tu_009_BarterManager.cpp"],
+  "conv": "cdecl",
+  "args": [{"name": "input", "type": "cstr"}, {"name": "output", "type": "ptr"}, {"name": "value", "type": "int"}],
+  "ret": "int",
+  "objects": {"output": {"size": "0x4", "fill": "random"}},
+  "memory": [],
+  "callees": {
+    "0x005769e0": {"name": "FUN_005769e0", "conv": "cdecl", "args": ["cstr", "ignore", "u32", "int", "int"],
+                   "ret": [7, -3, 0, 123456],
+                   "writes": [{"arg": 1, "offset": 0, "hex": "313200"}, {"arg": 1, "offset": 0, "hex": "3000", "call": [2, 6]}]},
+    "0x0060e3a3": {"name": "atoi", "args": ["cstr"], "ret": [12, 0, 5, 0, -1]}
+  },
+  "cases": [
+    {"name": "nonzero", "args": ["abc", "@output", 1]},
+    {"name": "zero text", "args": ["", "@output", -5],
+     "callees": {"0x005769e0": {"name": "FUN_005769e0", "conv": "cdecl", "args": ["cstr", "ignore", "u32", "int", "int"],
+                                "ret": 9, "writes": [{"arg": 1, "offset": 0, "hex": "3000"}]},
+                   "0x0060e3a3": {"name": "atoi", "args": ["cstr"], "ret": 0}}},
+    {"name": "untouched buffer", "args": ["x", "@output", 2147483647],
+     "callees": {"0x005769e0": {"name": "FUN_005769e0", "conv": "cdecl", "args": ["cstr", "ignore", "u32", "int", "int"], "ret": 1}}}
+  ],
+  "fuzz": {"seed": 4230772, "count": 60, "args": [{"choices": ["a", "", "hello"]}, {"choices": ["@output"]}, {}]}
+}

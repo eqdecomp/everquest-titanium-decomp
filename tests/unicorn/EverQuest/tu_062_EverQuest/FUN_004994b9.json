@@ -1,0 +1,249 @@
+{
+  "function": "ProcessPendingCoinsAndCursorItems_guess",
+  "original": "0x004994b9",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "context": {
+      "size": "0xc290",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x8", "u32": "@node" }
+      ]
+    },
+    "node": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x4", "u32": 0 }
+      ]
+    },
+    "clock": { "size": "0x13", "fill": "zero" },
+    "accessorState": { "size": "0x8c", "fill": "zero" },
+    "textProcessor": { "size": "0x4", "fill": "zero" },
+    "globalState": { "size": "0x4", "fill": "zero" },
+    "entry0": { "size": "0x50", "fill": "zero" },
+    "entry1": { "size": "0x50", "fill": "zero" }
+  },
+  "memory": [
+    { "addr": "0x0079ac74", "u32": "0x12345678" },
+    { "addr": "0x009248d0", "u32": 0 },
+    { "addr": "0x00905d00", "u32": "@context" },
+    { "addr": "0x00905d24", "u32": "@clock" },
+    { "addr": "0x00851390", "u32": "@textProcessor" },
+    { "addr": "0x00988df0", "u32": "@globalState" },
+    { "addr": "0x00923d08", "size": 16, "fill": "zero" },
+    { "addr": "@context", "offset": "0xd38", "size": 144, "fill": "zero" }
+  ],
+  "callees": {
+    "0x00417cf2": {
+      "name": "SetValue0_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x00417d1c": {
+      "name": "SetValue1_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x00417d46": {
+      "name": "SetValue2_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x00417d70": {
+      "name": "SetValue3_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "mem:12", "int", "char"],
+      "ret": 0
+    },
+    "0x0044a537": {
+      "name": "WavePlay_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 0
+    },
+    "0x00470d4f": {
+      "name": "BuildMoneyText_guess",
+      "conv": "cdecl",
+      "args": ["int", "int", "int", "int", "ignore"],
+      "ret": 0
+    },
+    "0x0046da4a": {
+      "name": "FUN_0046da4a",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "cstr", "ptr", "int", "int", "int", "int", "int", "int", "int"],
+      "ret": 0
+    },
+    "0x004982c6": {
+      "name": "FUN_004982c6",
+      "conv": "thiscall",
+      "args": ["cstr", "int", "bool"],
+      "ret": 0
+    },
+    "0x005ec220": {
+      "name": "Get_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@accessorState"
+    },
+    "0x0060d674": {
+      "name": "__security_check_cookie",
+      "conv": "fastcall",
+      "args": ["u32"],
+      "ret": 0
+    }
+  },
+  "coverage_ok": {
+    "00499684-00499685": "unreachable int3 bounds check; loop index is below 0x24",
+    "00499699-0049969a": "unreachable int3 bounds check; loop index is below 0x24",
+    "004996bf-004996c0": "unreachable int3 bounds check; loop index is below 0x24",
+    "00499704-00499705": "unreachable int3 bounds check; loop index is below 0x24",
+    "00499741-00499742": "unreachable int3 bounds check; loop index is below 0x24"
+  },
+  "rewrite_aliases": {
+    "?DspChat_guess@GlobalState_guess@@QAEXPBDH_N@Z": "0x004982c6"
+  },
+  "cases": [
+    {
+      "name": "outer gate positive",
+      "args": [],
+      "memory": [
+        { "addr": "0x009248d0", "u32": 1 },
+        { "addr": "0x00923d08", "u32": 7 }
+      ]
+    },
+    {
+      "name": "null context",
+      "args": [],
+      "memory": [
+        { "addr": "0x00905d00", "u32": 0 },
+        { "addr": "0x00923d0c", "u32": 7 }
+      ]
+    },
+    {
+      "name": "positive pending values and busy accessor",
+      "args": [],
+      "memory": [
+        { "addr": "0x00923d08", "u32": 11 },
+        { "addr": "0x00923d0c", "u32": 0 },
+        { "addr": "0x00923d10", "u32": -2 },
+        { "addr": "0x00923d14", "u32": 4 },
+        { "addr": "@accessorState", "offset": "0x88", "u32": 1 }
+      ],
+      "callees": {
+        "0x004912b1": {
+          "name": "FUN_004912b1",
+          "conv": "cdecl",
+          "args": ["ptr", "int", "mem:16", "int", "char"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "nonpositive pending values",
+      "args": [],
+      "memory": [
+        { "addr": "0x00923d08", "u32": -1 },
+        { "addr": "0x00923d0c", "u32": -5 },
+        { "addr": "0x00923d10", "u32": 0 },
+        { "addr": "0x00923d14", "u32": -2 },
+        { "addr": "@accessorState", "offset": "0x88", "u32": 1 }
+      ]
+    },
+    {
+      "name": "clock flag 11 blocks timer",
+      "args": [],
+      "memory": [
+        { "addr": "@clock", "offset": "0x11", "u8": 1 },
+        { "addr": "@context", "offset": "0xd38", "u32": "@entry0" },
+        { "addr": "@entry0", "offset": "0x4c", "u32": 1 }
+      ]
+    },
+    {
+      "name": "clock flag 12 blocks timer",
+      "args": [],
+      "memory": [
+        { "addr": "@clock", "offset": "0x12", "u8": 1 },
+        { "addr": "@context", "offset": "0xd38", "u32": "@entry0" },
+        { "addr": "@entry0", "offset": "0x4c", "u32": 1 }
+      ]
+    },
+    {
+      "name": "select age 29999",
+      "args": [],
+      "memory": [
+        { "addr": "@context", "offset": "0xd38", "u32": "@entry0" },
+        { "addr": "@entry0", "offset": "0x4c", "u32": 29999 }
+      ]
+    },
+    {
+      "name": "age 30000 is not selected",
+      "args": [],
+      "memory": [
+        { "addr": "@context", "offset": "0xd38", "u32": "@entry0" },
+        { "addr": "@entry0", "offset": "0x4c", "u32": 30000 }
+      ]
+    },
+    {
+      "name": "skip full entry then select second",
+      "args": [],
+      "memory": [
+        { "addr": "@context", "offset": "0xd38", "u32": "@entry0" },
+        { "addr": "@context", "offset": "0xd3c", "u32": "@entry1" },
+        { "addr": "@entry0", "offset": "0x4c", "u32": 30000 },
+        { "addr": "@entry1", "offset": "0x4c", "u32": 29999 }
+      ]
+    },
+    {
+      "name": "select first of two eligible entries",
+      "args": [],
+      "memory": [
+        { "addr": "@context", "offset": "0xd38", "u32": "@entry0" },
+        { "addr": "@context", "offset": "0xd3c", "u32": "@entry1" },
+        { "addr": "@entry0", "offset": "0x4c", "u32": 20000 },
+        { "addr": "@entry1", "offset": "0x4c", "u32": 10000 }
+      ]
+    },
+    {
+      "name": "last entry slot",
+      "args": [],
+      "memory": [
+        { "addr": "@context", "offset": "0xdc4", "u32": "@entry1" },
+        { "addr": "@entry1", "offset": "0x4c", "u32": 1 }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4822201,
+    "count": 100,
+    "args": [],
+    "memory": [
+      { "addr": "0x009248d0", "type": "int", "choices": [-1, 0, 1] },
+      { "addr": "0x00905d00", "type": "ptr", "choices": [0, "@context"] },
+      { "addr": "0x00923d08", "type": "int", "count": 4, "choices": [-3, 0, 1, 30000] },
+      { "addr": "@node", "offset": "0x4", "type": "int", "choices": [0, 1, 2, 35] },
+      { "addr": "@accessorState", "offset": "0x88", "type": "u32", "choices": [0, 1] },
+      { "addr": "@clock", "offset": "0x10", "type": "u8", "choices": [0, 1] },
+      { "addr": "@clock", "offset": "0x11", "type": "u8", "choices": [0, 1] },
+      { "addr": "@clock", "offset": "0x12", "type": "u8", "choices": [0, 1] },
+      { "addr": "@context", "offset": "0xd38", "type": "ptr", "choices": [0, "@entry0", "@entry1"] },
+      { "addr": "@context", "offset": "0xd3c", "type": "ptr", "choices": [0, "@entry0", "@entry1"] },
+      { "addr": "@entry0", "offset": "0x4c", "type": "int", "choices": [-1, 0, 29999, 30000, 30001] },
+      { "addr": "@entry1", "offset": "0x4c", "type": "int", "choices": [-1, 0, 29999, 30000, 30001] }
+    ]
+  }
+}

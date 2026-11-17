@@ -1,0 +1,643 @@
+{
+  "function": "CTaskWnd_guess::UpdateTask_guess",
+  "original": "0x0055ed77",
+  "sources": [
+    "src/EverQuest/tu_223_TaskWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@destructtarget",
+  "args": [
+    {
+      "name": "task_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "record_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "size": "0x41b",
+  "objects": {
+    "destructtarget": {
+      "size": "0x174",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x170",
+          "u32": "@taskList"
+        }
+      ]
+    },
+    "taskList": {
+      "size": "0x200",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@vtbl"
+        }
+      ]
+    },
+    "clear_fn": {
+      "size": "4"
+    },
+    "vtbl": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x130",
+          "u32": "@clear_fn"
+        }
+      ]
+    },
+    "task": {
+      "size": "0x2c88",
+      "fill": "zero"
+    },
+    "record": {
+      "size": "0x6c",
+      "fill": "zero"
+    },
+    "stringtable": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "zoneinfo": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "strings": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "cstr": "fixture"
+        }
+      ]
+    },
+    "heap": {
+      "size": "0x10000",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x0063f53f",
+      "from_image": "0x0063f53f",
+      "image_size": 1
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@stringtable"
+    },
+    {
+      "addr": "0x00905cc0",
+      "u32": "@zoneinfo"
+    }
+  ],
+  "callees": {
+    "@clear_fn": {
+      "name": "ClearTaskList_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00571e00": {
+      "name": "CXStrCtor_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x0059b9d0": {
+      "name": "AddString_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "u32",
+        "u32",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "FreeRep_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x00598620": {
+      "name": "SetItemData_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "GetString_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "ptr"
+      ],
+      "ret": "@strings"
+    },
+    "0x00432477": {
+      "name": "FormatTaskName_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ignore"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "4e 61 6d 65 00"
+        }
+      ]
+    },
+    "0x005715d0": {
+      "name": "CXStrGetAt_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 65
+    },
+    "0x006124f6": {
+      "name": "iswlower",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0061259e": {
+      "name": "towupper",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": 65
+    },
+    "0x005725e0": {
+      "name": "CXStrSetAt_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x00572f20": {
+      "name": "CXStrAppend_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x005fa1c0": {
+      "name": "GetZoneName_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ignore",
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "5a 6f 6e 65 00"
+        }
+      ]
+    },
+    "0x0059b360": {
+      "name": "SetItemText_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "34 2f 35 00"
+        }
+      ]
+    },
+    "0x0059b3e0": {
+      "name": "SetItemColor_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc_guess",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": "@heap"
+    }
+  },
+  "rewrite_aliases": {
+    "_iswlower": "0x006124f6",
+    "_towupper": "0x0061259e",
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "empty task data",
+      "args": [
+        "@task",
+        "@record"
+      ]
+    },
+    {
+      "name": "null task list",
+      "args": [
+        "@task",
+        "@record"
+      ],
+      "memory": [
+        {
+          "addr": "@destructtarget",
+          "offset": "0x170",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "null task pointer",
+      "args": [
+        0,
+        "@record"
+      ]
+    },
+    {
+      "name": "count below target",
+      "args": [
+        "@task",
+        "@record"
+      ],
+      "memory": [
+        {
+          "addr": "@task",
+          "offset": "0x940",
+          "u32": 1
+        },
+        {
+          "addr": "@task",
+          "offset": "0x9d4",
+          "u32": 5
+        },
+        {
+          "addr": "@record",
+          "offset": "0x1c",
+          "u32": 4
+        }
+      ]
+    },
+    {
+      "name": "count equals target",
+      "args": [
+        "@task",
+        "@record"
+      ],
+      "memory": [
+        {
+          "addr": "@task",
+          "offset": "0x940",
+          "u32": 1
+        },
+        {
+          "addr": "@task",
+          "offset": "0x9d4",
+          "u32": 5
+        },
+        {
+          "addr": "@record",
+          "offset": "0x1c",
+          "u32": 5
+        }
+      ]
+    },
+    {
+      "name": "count above target",
+      "args": [
+        "@task",
+        "@record"
+      ],
+      "memory": [
+        {
+          "addr": "@task",
+          "offset": "0x940",
+          "u32": 1
+        },
+        {
+          "addr": "@task",
+          "offset": "0x9d4",
+          "u32": 5
+        },
+        {
+          "addr": "@record",
+          "offset": "0x1c",
+          "u32": 6
+        }
+      ]
+    },
+    {
+      "name": "missing element gray",
+      "args": [
+        "@task",
+        "@record"
+      ],
+      "memory": [
+        {
+          "addr": "@task",
+          "offset": "0x940",
+          "u32": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "name": "group header, suffix, and zone",
+      "args": [
+        "@task",
+        "@record"
+      ],
+      "memory": [
+        {
+          "addr": "@task",
+          "offset": "0x940",
+          "u32": 1
+        },
+        {
+          "addr": "@task",
+          "offset": "0x9c8",
+          "u32": 7
+        },
+        {
+          "addr": "@task",
+          "offset": "0x9d4",
+          "u32": 10
+        },
+        {
+          "addr": "@task",
+          "offset": "0x9d8",
+          "u8": 1
+        },
+        {
+          "addr": "@task",
+          "offset": "0x9dc",
+          "u32": 1
+        },
+        {
+          "addr": "@record",
+          "offset": "0x20",
+          "u32": 2
+        }
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "32 2f 31 30 00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "lowercase first character",
+      "args": [
+        "@task",
+        "@record"
+      ],
+      "memory": [
+        {
+          "addr": "@task",
+          "offset": "0x940",
+          "u32": 1
+        },
+        {
+          "addr": "@task",
+          "offset": "0x9d4",
+          "u32": 5
+        },
+        {
+          "addr": "@record",
+          "offset": "0x1c",
+          "u32": 5
+        }
+      ],
+      "callees": {
+        "0x005715d0": {
+          "name": "CXStrGetAt_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 97
+        },
+        "0x006124f6": {
+          "name": "iswlower",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x0061259e": {
+          "name": "towupper",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": 65
+        }
+      }
+    },
+    {
+      "name": "last inner record",
+      "args": [
+        "@task",
+        "@record"
+      ],
+      "memory": [
+        {
+          "addr": "@task",
+          "offset": "0x1eec",
+          "u32": 1
+        },
+        {
+          "addr": "@task",
+          "offset": "0x1f80",
+          "u32": 5
+        },
+        {
+          "addr": "@task",
+          "offset": "0x1f88",
+          "u32": 0
+        },
+        {
+          "addr": "@record",
+          "offset": "0x68",
+          "u32": 4
+        }
+      ]
+    },
+    {
+      "name": "group index boundary 20",
+      "args": [
+        "@task",
+        "@record"
+      ],
+      "memory": [
+        {
+          "addr": "@task",
+          "offset": "0x940",
+          "u32": 1
+        },
+        {
+          "addr": "@task",
+          "offset": "0x9d4",
+          "u32": 5
+        },
+        {
+          "addr": "@task",
+          "offset": "0x9dc",
+          "u32": 20
+        },
+        {
+          "addr": "@record",
+          "offset": "0x1c",
+          "u32": 5
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5631351,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@task"
+        ]
+      },
+      {
+        "choices": [
+          "@record"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@task",
+        "offset": "0x940",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@task",
+        "offset": "0x9c8",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          7
+        ]
+      },
+      {
+        "addr": "@task",
+        "offset": "0x9d4",
+        "type": "int",
+        "range": [
+          0,
+          12
+        ]
+      },
+      {
+        "addr": "@task",
+        "offset": "0x9d8",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@task",
+        "offset": "0x9dc",
+        "type": "int",
+        "range": [
+          0,
+          19
+        ]
+      },
+      {
+        "addr": "@record",
+        "offset": "0x1c",
+        "type": "int",
+        "count": 20,
+        "range": [
+          0,
+          12
+        ]
+      }
+    ]
+  }
+}

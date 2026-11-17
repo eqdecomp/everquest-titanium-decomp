@@ -1,0 +1,707 @@
+{
+  "function": "CDisplay_guess::ProcessSky_guess",
+  "original": "0x00443c03",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@client",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "client": {
+      "size": "0x2d70",
+      "fill": "random"
+    },
+    "clock": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@clock_vtable"
+        }
+      ]
+    },
+    "clock_vtable": {
+      "size": "0x3c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x10",
+          "u32": "@slot4"
+        },
+        {
+          "offset": "0x14",
+          "u32": "@slot5"
+        },
+        {
+          "offset": "0x1c",
+          "u32": "@slot7"
+        },
+        {
+          "offset": "0x38",
+          "u32": "@slot14"
+        }
+      ]
+    },
+    "slot4": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "slot5": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "slot7": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "slot14": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0078f618",
+      "from_image": "0x0078f618",
+      "image_size": 240
+    },
+    {
+      "addr": "0x00640dac",
+      "from_image": "0x00640dac",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00642f64",
+      "from_image": "0x00642f64",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0063f4d8",
+      "from_image": "0x0063f4d8",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00642f68",
+      "from_image": "0x00642f68",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00641140",
+      "from_image": "0x00641140",
+      "image_size": 4
+    },
+    {
+      "addr": "0x008503a8",
+      "u32": "@clock"
+    },
+    {
+      "addr": "0x00850d7c",
+      "u32": 1000
+    },
+    {
+      "addr": "0x00850d80",
+      "u32": 10
+    },
+    {
+      "addr": "0x00850d84",
+      "u32": 10
+    },
+    {
+      "addr": "0x00850ce4",
+      "u32": 100
+    },
+    {
+      "addr": "0x00850ce0",
+      "u32": 1000
+    },
+    {
+      "addr": "0x00850cdc",
+      "f32": 1.0
+    },
+    {
+      "addr": "0x00850cd8",
+      "f32": 0.5
+    },
+    {
+      "addr": "0x00850cf0",
+      "u32": 0
+    },
+    {
+      "addr": "0x00850cec",
+      "u32": 1
+    },
+    {
+      "addr": "0x00698a00",
+      "u32": 2
+    },
+    {
+      "addr": "0x00850984",
+      "u32": 0
+    },
+    {
+      "addr": "@client",
+      "offset": "0x145",
+      "u8": 0
+    },
+    {
+      "addr": "@client",
+      "offset": "0x148",
+      "u32": 2000
+    }
+  ],
+  "callees": {
+    "0x00439b36": {
+      "name": "GetZoneTimeOfDay_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "ignore"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "0a000000"
+        },
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "14000000"
+        }
+      ]
+    },
+    "0x00441295": {
+      "name": "SetAmbientLight_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ]
+    },
+    "0x004437e5": {
+      "name": "SetSunLight_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0046d655": {
+      "name": "FUN_0046d655",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 1000
+    },
+    "0x004365db": {
+      "name": "FixHeading_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ],
+      "ret_float": [
+        0.25,
+        0.75
+      ]
+    },
+    "0x004439c0": {
+      "name": "SetSkyBackground_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "@slot4": {
+      "name": "clock_slot4",
+      "conv": "thiscall",
+      "args": [],
+      "ret_float": 1.0
+    },
+    "@slot5": {
+      "name": "clock_slot5",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ]
+    },
+    "@slot7": {
+      "name": "clock_slot7",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ]
+    },
+    "@slot14": {
+      "name": "clock_slot14",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "phase without clock interface",
+      "memory": [
+        {
+          "addr": "0x008503a8",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00439b36": {
+          "name": "FUN_00439b36",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "0c000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "22000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "phase with clock interface",
+      "memory": [
+        {
+          "addr": "@client",
+          "offset": "0x145",
+          "u8": 1
+        },
+        {
+          "addr": "0x008503a8",
+          "u32": "@clock"
+        }
+      ],
+      "callees": {
+        "0x00439b36": {
+          "name": "FUN_00439b36",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "0c000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "22000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "normal changed time and duration",
+      "memory": [
+        {
+          "addr": "@client",
+          "offset": "0x145",
+          "u8": 4
+        },
+        {
+          "addr": "@client",
+          "offset": "0x148",
+          "u32": 2000
+        },
+        {
+          "addr": "0x00850d7c",
+          "u32": 100
+        },
+        {
+          "addr": "0x00850d80",
+          "u32": 0
+        },
+        {
+          "addr": "0x00850d84",
+          "u32": 0
+        },
+        {
+          "addr": "0x00850ce4",
+          "u32": 60
+        },
+        {
+          "addr": "0x00850ce0",
+          "u32": 1000
+        },
+        {
+          "addr": "0x00850cf0",
+          "u32": 0
+        },
+        {
+          "addr": "0x00698a00",
+          "u32": 2
+        }
+      ],
+      "callees": {
+        "0x00439b36": {
+          "name": "FUN_00439b36",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "0a000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "14000000"
+            }
+          ]
+        },
+        "0x0046d655": {
+          "name": "FUN_0046d655",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 1000
+        }
+      }
+    },
+    {
+      "name": "normal negative deltas and state wrap",
+      "memory": [
+        {
+          "addr": "@client",
+          "offset": "0x145",
+          "u8": 59
+        },
+        {
+          "addr": "@client",
+          "offset": "0x148",
+          "u32": 4000
+        },
+        {
+          "addr": "0x00850d7c",
+          "u32": 2000
+        },
+        {
+          "addr": "0x00850d80",
+          "u32": 20
+        },
+        {
+          "addr": "0x00850d84",
+          "u32": 10
+        },
+        {
+          "addr": "0x00850ce4",
+          "u32": 60
+        },
+        {
+          "addr": "0x00850ce0",
+          "u32": 5000
+        },
+        {
+          "addr": "0x00850cf0",
+          "u32": 0
+        },
+        {
+          "addr": "0x00850cec",
+          "u32": 5
+        },
+        {
+          "addr": "0x00698a00",
+          "u32": 2
+        }
+      ],
+      "callees": {
+        "0x00439b36": {
+          "name": "FUN_00439b36",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "0a000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "14000000"
+            }
+          ]
+        },
+        "0x0046d655": {
+          "name": "FUN_0046d655",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 1000
+        }
+      }
+    },
+    {
+      "name": "normal early interval with null interface",
+      "memory": [
+        {
+          "addr": "@client",
+          "offset": "0x148",
+          "u32": 10
+        },
+        {
+          "addr": "0x008503a8",
+          "u32": 0
+        },
+        {
+          "addr": "0x00850cf0",
+          "u32": 100
+        },
+        {
+          "addr": "0x00698a00",
+          "u32": 5
+        }
+      ],
+      "callees": {
+        "0x00439b36": {
+          "name": "FUN_00439b36",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "0c000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "22000000"
+            }
+          ]
+        },
+        "0x0046d655": {
+          "name": "FUN_0046d655",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 1000
+        }
+      }
+    },
+    {
+      "name": "normal interval counter reaches zero",
+      "memory": [
+        {
+          "addr": "@client",
+          "offset": "0x145",
+          "u8": 59
+        },
+        {
+          "addr": "@client",
+          "offset": "0x148",
+          "u32": 5000
+        },
+        {
+          "addr": "0x00850d7c",
+          "u32": 0
+        },
+        {
+          "addr": "0x00850d80",
+          "u32": 0
+        },
+        {
+          "addr": "0x00850d84",
+          "u32": 0
+        },
+        {
+          "addr": "0x00850ce4",
+          "u32": 0
+        },
+        {
+          "addr": "0x00850cf0",
+          "u32": 0
+        },
+        {
+          "addr": "0x00698a00",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00439b36": {
+          "name": "FUN_00439b36",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "0a000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "14000000"
+            }
+          ]
+        },
+        "0x0046d655": {
+          "name": "FUN_0046d655",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 5000
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4471811,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@client",
+        "offset": "0x145",
+        "type": "u8",
+        "choices": [
+          0,
+          58,
+          59
+        ]
+      },
+      {
+        "addr": "@client",
+        "offset": "0x148",
+        "type": "u32",
+        "choices": [
+          0,
+          10,
+          1000,
+          4294967295
+        ]
+      },
+      {
+        "addr": "0x008503a8",
+        "type": "u32",
+        "choices": [
+          0,
+          "@clock"
+        ]
+      },
+      {
+        "addr": "0x00850d7c",
+        "type": "u32",
+        "choices": [
+          0,
+          1000,
+          4294967295
+        ]
+      },
+      {
+        "addr": "0x00850d80",
+        "type": "u32",
+        "choices": [
+          0,
+          10,
+          59
+        ]
+      },
+      {
+        "addr": "0x00850d84",
+        "type": "u32",
+        "choices": [
+          0,
+          10,
+          23
+        ]
+      },
+      {
+        "addr": "0x00850ce4",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          60
+        ]
+      },
+      {
+        "addr": "0x00850ce0",
+        "type": "u32",
+        "choices": [
+          0,
+          1000,
+          4294967295
+        ]
+      },
+      {
+        "addr": "0x00850cdc",
+        "type": "float",
+        "choices": [
+          -2.0,
+          0.0,
+          0.5,
+          2.0
+        ]
+      },
+      {
+        "addr": "0x00850cd8",
+        "type": "float",
+        "choices": [
+          -256.0,
+          0.0,
+          0.5,
+          256.0
+        ]
+      },
+      {
+        "addr": "0x00850cf0",
+        "type": "u32",
+        "choices": [
+          0,
+          10,
+          1000,
+          4294967295
+        ]
+      },
+      {
+        "addr": "0x00850cec",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          15
+        ]
+      },
+      {
+        "addr": "0x00698a00",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          4294967295
+        ]
+      }
+    ]
+  }
+}

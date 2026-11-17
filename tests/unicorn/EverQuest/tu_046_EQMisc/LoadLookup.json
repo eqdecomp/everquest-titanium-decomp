@@ -1,0 +1,275 @@
+{
+  "function": "msg_teleport_index_guess",
+  "original": "0x00465108",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "name_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {},
+  "memory": [
+    {
+      "addr": "0x009043E8",
+      "fill": "random",
+      "size": 192
+    },
+    {
+      "addr": "0x00905CAC",
+      "u32": 77
+    }
+  ],
+  "callees": {
+    "0x0060e887": {
+      "name": "_fopen",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr"
+      ],
+      "ret": 1610612736
+    },
+    "kernel32.dll!Sleep": {
+      "name": "Sleep",
+      "conv": "stdcall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x004650c8": {
+      "name": "readLineFromFile_guess",
+      "conv": "cdecl",
+      "args": [
+        "u32",
+        "ignore"
+      ],
+      "ret": [
+        5,
+        7,
+        3,
+        0
+      ]
+    },
+    "0x0060e790": {
+      "name": "_fclose",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x00611848": {
+      "name": "_exit",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "noreturn": true
+    },
+    "0x00465056": {
+      "name": "FUN_00465056",
+      "conv": "cdecl",
+      "args": [
+        "ignore"
+      ],
+      "ret": [
+        11,
+        12,
+        21,
+        22,
+        31,
+        32
+      ]
+    },
+    "0x0046508f": {
+      "name": "FUN_0046508f",
+      "conv": "cdecl",
+      "args": [
+        "ignore"
+      ],
+      "ret_float": [
+        1.5,
+        2.25,
+        -3.75,
+        4.125,
+        5.5,
+        6.25,
+        7.75,
+        8.0
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "_fopen": "0x0060e887",
+    "_fclose": "0x0060e790",
+    "_exit": "0x00611848"
+  },
+  "cases": [
+    {
+      "name": "two_entries",
+      "args": [
+        "zone"
+      ]
+    },
+    {
+      "name": "open_fails",
+      "args": [
+        "missing"
+      ],
+      "callees": {
+        "0x0060e887": {
+          "name": "_fopen",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "header_zero_exits",
+      "args": [
+        "zone"
+      ],
+      "callees": {
+        "0x004650c8": {
+          "name": "FUN_004650c8",
+          "conv": "cdecl",
+          "args": [
+            "u32",
+            "ignore"
+          ],
+          "ret": [
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "header_negative_exits",
+      "args": [
+        "zone"
+      ],
+      "callees": {
+        "0x004650c8": {
+          "name": "FUN_004650c8",
+          "conv": "cdecl",
+          "args": [
+            "u32",
+            "ignore"
+          ],
+          "ret": [
+            -1
+          ]
+        }
+      }
+    },
+    {
+      "name": "header_one_no_entries",
+      "args": [
+        "abc"
+      ],
+      "callees": {
+        "0x004650c8": {
+          "name": "FUN_004650c8",
+          "conv": "cdecl",
+          "args": [
+            "u32",
+            "ignore"
+          ],
+          "ret": [
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "one_entry_then_negative",
+      "args": [
+        "abc"
+      ],
+      "callees": {
+        "0x004650c8": {
+          "name": "FUN_004650c8",
+          "conv": "cdecl",
+          "args": [
+            "u32",
+            "ignore"
+          ],
+          "ret": [
+            2,
+            1,
+            -1
+          ]
+        }
+      }
+    },
+    {
+      "name": "three_entries",
+      "args": [
+        "qeynos"
+      ],
+      "callees": {
+        "0x004650c8": {
+          "name": "FUN_004650c8",
+          "conv": "cdecl",
+          "args": [
+            "u32",
+            "ignore"
+          ],
+          "ret": [
+            9,
+            4,
+            4,
+            4,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "empty_name",
+      "args": [
+        ""
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4608264,
+    "count": 50,
+    "args": [
+      {
+        "choices": [
+          "a",
+          "zone",
+          {
+            "from_image": "0x0066B7E4",
+            "image_size": 8,
+            "as": "cstr"
+          },
+          "",
+          {
+            "from_image": "0x0066A874",
+            "image_size": 9,
+            "as": "cstr"
+          }
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x00905CAC",
+        "type": "int"
+      }
+    ]
+  }
+}

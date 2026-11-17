@@ -1,0 +1,165 @@
+{
+  "function": "AtlasRender_guess::AtlasRender_guess",
+  "original": "0x004da867",
+  "sources": [
+    "src/EverQuest/tu_106_AtlasRender.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@cleanupowner",
+  "args": [
+    {
+      "name": "first_guess",
+      "type": "u32"
+    },
+    {
+      "name": "second_guess",
+      "type": "u32"
+    },
+    {
+      "name": "rect_0_guess",
+      "type": "u32"
+    },
+    {
+      "name": "rect_4_guess",
+      "type": "u32"
+    },
+    {
+      "name": "rect_8_guess",
+      "type": "u32"
+    },
+    {
+      "name": "rect_c_guess",
+      "type": "u32"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "cleanupowner": {
+      "size": "0x16c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x28",
+          "u32": 0
+        }
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x005a1290": {
+      "name": "CleanupBase_guess::CleanupBase_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x005a0a80": {
+      "name": "TargetCleanupBase_guess::Show_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x004d965c": {
+      "name": "AtlasRender_guess::Clear_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0,
+      "writes": [
+        {
+          "addr": "0x60000000",
+          "offset": 52,
+          "hex": "00"
+        },
+        {
+          "addr": "0x60000000",
+          "offset": 332,
+          "hex": "00"
+        },
+        {
+          "addr": "0x60000000",
+          "offset": 352,
+          "hex": "ffffffff"
+        },
+        {
+          "addr": "0x60000000",
+          "offset": 360,
+          "hex": "ffffffff"
+        }
+      ]
+    },
+    "0x00571e00": {
+      "name": "Offset184_guess::Offset184_guess(const char*)",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": 0
+    },
+    "0x004da486": {
+      "name": "AtlasRender_guess::SetFile_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 1,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00000000"
+        }
+      ]
+    },
+    "0x00571d00": {
+      "name": "Offset184_guess::Release_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [1, 2, 3, 4, 5, 6]
+    },
+    {
+      "name": "zeros",
+      "args": [0, 0, 0, 0, 0, 0]
+    },
+    {
+      "name": "nonzero temporary",
+      "args": [1, 0, 16, 32, 48, 64],
+      "callees": {
+        "0x004da486": {
+          "name": "AtlasRender_guess::Store_guess",
+          "conv": "thiscall",
+          "args": ["ptr"],
+          "ret": 1,
+          "writes": [{"arg": 0, "offset": 0, "hex": "78563412"}]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5089383,
+    "count": 100,
+    "args": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "memory": []
+  },
+  "size": "0x110"
+}

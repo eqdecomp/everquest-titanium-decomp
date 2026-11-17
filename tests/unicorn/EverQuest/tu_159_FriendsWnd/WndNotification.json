@@ -1,0 +1,201 @@
+{
+  "function": "CFriendsWnd_guess::WndNotification_guess",
+  "original": "0x00503ee0",
+  "sources": ["src/EverQuest/tu_159_FriendsWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@gaugewnd",
+  "args": [
+    {"name": "sender_guess", "type": "ptr"},
+    {"name": "message_guess", "type": "u32"},
+    {"name": "data_guess", "type": "ptr"}
+  ],
+  "ret": "int",
+  "objects": {
+    "gaugewnd": {"size": "0x188", "fill": "zero"},
+    "sender": {"size": "0x100", "fill": "zero", "init": [{"offset": 0, "u32": "@vt_empty"}]},
+    "data": {"size": "0x100", "fill": "zero"},
+    "flag": {"size": "0x100", "fill": "zero"},
+    "rows170": {"size": "0x4", "fill": "zero"},
+    "rows184": {"size": "0x4", "fill": "zero"},
+    "stringtable": {"size": "0x4", "fill": "zero"},
+    "everquest": {"size": "0x4", "fill": "zero"},
+    "ignoremgr": {"size": "0x4", "fill": "zero"},
+    "modehost": {"size": "0x4", "fill": "zero"},
+    "modeowner": {"size": "0x164", "fill": "zero", "init": [{"offset": "0x160", "u32": "@owner_edit"}]},
+    "owner_edit": {"size": "0x4", "fill": "zero", "init": [{"offset": 0, "u32": "@vt_owner"}]},
+    "vt_owner": {"size": "0x100", "fill": "zero", "init": [{"offset": "0xfc", "u32": "@fn_owner_message"}]},
+    "edit_empty": {"size": "0x4", "fill": "zero", "init": [{"offset": 0, "u32": "@vt_empty"}]},
+    "edit_full": {"size": "0x4", "fill": "zero", "init": [{"offset": 0, "u32": "@vt_full"}]},
+    "vt_empty": {"size": "0x134", "fill": "zero", "init": [{"offset": "0x130", "u32": "@fn_get_empty"}]},
+    "vt_full": {"size": "0x134", "fill": "zero", "init": [{"offset": "0x130", "u32": "@fn_get_full"}]},
+    "fn_get_empty": {"size": "0x4", "fill": "zero"},
+    "fn_get_full": {"size": "0x4", "fill": "zero"},
+    "fn_owner_message": {"size": "0x4", "fill": "zero"},
+    "item_text": {"size": "0x40", "fill": "zero"},
+    "string_text": {"size": "0x40", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4},
+    {"addr": "0x00905cb0", "u32": "@stringtable"},
+    {"addr": "0x00905ce4", "u32": "@ignoremgr"},
+    {"addr": "0x00988df0", "u32": "@everquest"},
+    {"addr": "0x009917e4", "u32": "@modehost"},
+    {"addr": "@item_text", "cstr": "friend"},
+    {"addr": "@string_text", "cstr": "text"},
+    {"addr": "0x007a0000", "size": 16, "fill": "zero"},
+    {"addr": "0x007a0000", "offset": "0x8", "u32": 1},
+    {"addr": "0x007a1000", "u32": "0x007a1010"},
+    {"addr": "0x007a1010", "u32": 5},
+    {"addr": "0x007a1014", "u32": 6}
+  ],
+  "callees": {
+    "0x00571d00": {"name": "CXStr_release_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x00571e00": {"name": "CXStr_ctor_guess", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x00406e7e": {"name": "GaugeBuffer_dtor_guess", "conv": "thiscall", "args": []},
+    "0x00503cc1": {"name": "GaugeWnd_clear_guess", "conv": "thiscall", "args": []},
+    "0x00503a0d": {"name": "GaugeWnd_rebuild170_guess", "conv": "thiscall", "args": []},
+    "0x00503aab": {"name": "GaugeWnd_rebuild184_guess", "conv": "thiscall", "args": []},
+    "0x00503b6d": {"name": "GaugeWnd_update_guess", "conv": "thiscall", "args": []},
+    "0x00503e31": {"name": "GaugeWnd_updateRows_guess", "conv": "thiscall", "args": []},
+    "0x00504341": {"name": "FUN_00504341_guess", "conv": "thiscall", "args": ["ignore", "ignore", "ignore"], "ret": 0},
+    "0x005a2230": {"name": "CSidlScreenWnd_notification_guess", "conv": "thiscall", "args": ["ptr", "u32", "ptr"], "ret": [0, 1, -1]},
+    "0x0047c3af": {"name": "GaugeBuffer_ctor_guess", "conv": "thiscall", "args": ["int"], "ret": "this"},
+    "0x005dfa00": {"name": "StringTable_getString_guess", "conv": "thiscall", "args": ["int", "int"], "ret": "@string_text"},
+    "0x0060e450": {"name": "copy_text_guess", "conv": "cdecl", "args": ["ptr", "cstr"], "passthrough": true},
+    "0x0059bb50": {
+      "name": "CListWnd_count_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "02000000"},
+        {"arg": 0, "offset": 8, "hex": "01000000"},
+        {"arg": 0, "offset": 12, "hex": "01000000"},
+        {"arg": 0, "offset": 16, "hex": "00107a00"}
+      ]
+    },
+    "0x00597f10": {
+      "name": "CListWnd_getItemText_guess", "conv": "thiscall", "args": ["ignore", "int", "int"], "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "00007a00"}]
+    },
+    "0x00572300": {"name": "CXStr_toChar_guess", "conv": "thiscall", "args": [], "ret": "@item_text"},
+    "0x0060d5eb": {
+      "name": "sprintf", "conv": "cdecl", "args": ["ptr", "cstr"], "varargs": "printf", "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "4f4b00"}]
+    },
+    "0x0049c800": {"name": "EverQuest_dispatch_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0},
+    "0x0046fefe": {"name": "AddFriend_guess", "conv": "cdecl", "args": ["ptr", "cstr"], "ret": 0},
+    "0x00472739": {"name": "do_ignore_guess", "conv": "cdecl", "args": ["ptr", "cstr"], "ret": 0},
+    "0x004f288c": {"name": "ModeHost_getOwner_guess", "conv": "thiscall", "args": [], "ret": "@modeowner"},
+    "0x00494051": {"name": "EverQuest_activate_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0059edf0": {"name": "CXWnd_setFocus_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "@fn_get_empty": {
+      "name": "EditBox_getText_empty_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]
+    },
+    "@fn_get_full": {
+      "name": "EditBox_getText_full_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "00007a00"}]
+    },
+    "@fn_owner_message": {"name": "Owner_editText_guess", "conv": "thiscall", "args": ["ignore"]}
+  },
+  "rewrite_aliases": {"_sprintf": "0x0060d5eb"},
+  "cases": [
+    {"name": "default message", "args": ["@sender", 0, "@data"]},
+    {"name": "message 14 primary empty", "args": ["@edit_empty", 14, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x15c", "u32": "@flag"},
+      {"addr": "@gaugewnd", "offset": "0x16c", "u32": "@edit_empty"}
+    ]},
+    {"name": "message 14 primary nonempty", "args": ["@edit_full", 14, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x15c", "u32": "@flag"},
+      {"addr": "@gaugewnd", "offset": "0x16c", "u32": "@edit_full"}
+    ]},
+    {"name": "message 14 secondary", "args": ["@edit_full", 14, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x178", "u32": "@flag"},
+      {"addr": "@gaugewnd", "offset": "0x180", "u32": "@edit_full"}
+    ]},
+    {"name": "message 14 disabled flag", "args": ["@edit_empty", 14, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x16c", "u32": "@edit_empty"}
+    ]},
+    {"name": "message 14 unmatched", "args": ["@sender", 14, "@data"]},
+    {"name": "message 6 primary", "args": ["@sender", 6, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x16c", "u32": "@sender"}
+    ]},
+    {"name": "message 6 secondary", "args": ["@sender", 6, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x180", "u32": "@sender"}
+    ]},
+    {"name": "message 6 unmatched", "args": ["@sender", 6, "@data"]},
+    {"name": "message 1 rebuild both", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x174", "u32": "@sender"}
+    ]},
+    {"name": "message 1 text item", "args": ["@sender", 1, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x160", "u32": "@sender"},
+      {"addr": "@gaugewnd", "offset": "0x170", "u32": "@rows170"}
+    ], "callees": {"0x0059bb50": {
+      "name": "CListWnd_count_one_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "01000000"},
+        {"arg": 0, "offset": 8, "hex": "00000000"},
+        {"arg": 0, "offset": 12, "hex": "00000000"},
+        {"arg": 0, "offset": 16, "hex": "00107a00"}
+      ]
+    }}},
+    {"name": "message 1 text item empty list", "args": ["@sender", 1, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x160", "u32": "@sender"},
+      {"addr": "@gaugewnd", "offset": "0x170", "u32": "@rows170"}
+    ], "callees": {"0x0059bb50": {
+      "name": "CListWnd_count_zero_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]
+    }}},
+    {"name": "message 1 update list", "args": ["@sender", 1, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x170", "u32": "@sender"}
+    ]},
+    {"name": "message 1 update second list", "args": ["@sender", 1, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x184", "u32": "@sender"}
+    ]},
+    {"name": "message 1 primary action", "args": ["@sender", 1, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x15c", "u32": "@sender"}
+    ]},
+    {"name": "message 1 secondary action", "args": ["@sender", 1, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x178", "u32": "@sender"}
+    ]},
+    {"name": "message 1 add friend", "args": ["@sender", 1, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x168", "u32": "@sender"},
+      {"addr": "@gaugewnd", "offset": "0x170", "u32": "@rows170"}
+    ]},
+    {"name": "message 1 add friend null list", "args": ["@sender", 1, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x168", "u32": "@sender"}
+    ]},
+    {"name": "message 1 add ignore", "args": ["@sender", 1, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x17c", "u32": "@sender"},
+      {"addr": "@gaugewnd", "offset": "0x184", "u32": "@rows184"}
+    ]},
+    {"name": "message 1 add ignore null list", "args": ["@sender", 1, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x17c", "u32": "@sender"}
+    ]},
+    {"name": "message 1 owner with no list", "args": ["@sender", 1, 0], "memory": [
+      {"addr": "@gaugewnd", "offset": "0x164", "u32": "@sender"}
+    ]}
+  ],
+  "fuzz": {
+    "seed": 5258976,
+    "count": 100,
+    "args": [
+      {"choices": ["@sender"]},
+      {"choices": [0, 1, 6, 14, 15]},
+      {"choices": [0, "@data"]}
+    ],
+    "memory": [
+      {"addr": "@gaugewnd", "offset": "0x15c", "type": "ptr", "choices": [0, "@flag"]},
+      {"addr": "@gaugewnd", "offset": "0x160", "type": "ptr", "choices": [0, "@sender"]},
+      {"addr": "@gaugewnd", "offset": "0x164", "type": "ptr", "choices": [0]},
+      {"addr": "@gaugewnd", "offset": "0x168", "type": "ptr", "choices": [0, "@sender"]},
+      {"addr": "@gaugewnd", "offset": "0x16c", "type": "ptr", "choices": [0, "@sender"]},
+      {"addr": "@gaugewnd", "offset": "0x170", "type": "ptr", "choices": [0, "@rows170"]},
+      {"addr": "@gaugewnd", "offset": "0x174", "type": "ptr", "choices": [0, "@sender"]},
+      {"addr": "@gaugewnd", "offset": "0x178", "type": "ptr", "choices": [0, "@flag"]},
+      {"addr": "@gaugewnd", "offset": "0x17c", "type": "ptr", "choices": [0, "@sender"]},
+      {"addr": "@gaugewnd", "offset": "0x180", "type": "ptr", "choices": [0, "@sender"]},
+      {"addr": "@gaugewnd", "offset": "0x184", "type": "ptr", "choices": [0, "@rows184"]},
+      {"addr": "0x009917e4", "type": "ptr", "choices": [0, "@modehost"]}
+    ]
+  },
+  "_survivors": "L886: changing the local row stride cannot be observed by callers because copied strings remain the same and helper traces compare their contents; stack-local addresses are canonicalized. L1008: the owner path cannot be driven faithfully: native 0x004f288c returns null, while stubbing the non-null owner path reaches unsupported known-start helper 0x00504341. L1017: same unreachable owner path; the activation call is after the row-count check."
+}

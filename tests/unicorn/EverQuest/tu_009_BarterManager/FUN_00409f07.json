@@ -1,0 +1,180 @@
+{
+  "function": "BarterManager_guess::ParseBuyLine_guess",
+  "original": "0x00409f07",
+  "sources": [
+    "src/EverQuest/tu_009_BarterManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@collection",
+  "args": [
+    {"name": "input", "type": "cstr"},
+    {"name": "entry", "type": "ptr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "collection": {"size": "0x10", "fill": "random"},
+    "entry": {"size": "0x70", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"}
+  ],
+  "callees": {
+    "0x005e3fe0": {"name": "Entry_Reset", "conv": "thiscall", "args": [], "ret": 0},
+    "0x004b2056": {
+      "name": "ParseInt",
+      "conv": "cdecl",
+      "args": ["cstr", "ptr", "int"],
+      "ret": [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1],
+      "writes": [
+        {"arg": 1, "offset": 0, "hex": "02000000", "call": 0},
+        {"arg": 1, "offset": 0, "hex": "05000000", "call": 1},
+        {"arg": 1, "offset": 0, "hex": "06000000", "call": 2},
+        {"arg": 1, "offset": 0, "hex": "07000000", "call": 3},
+        {"arg": 1, "offset": 0, "hex": "08000000", "call": 4},
+        {"arg": 1, "offset": 0, "hex": "09000000", "call": 5},
+        {"arg": 1, "offset": 0, "hex": "02000000", "call": 6},
+        {"arg": 1, "offset": 0, "hex": "0a000000", "call": 7},
+        {"arg": 1, "offset": 0, "hex": "0b000000", "call": 8},
+        {"arg": 1, "offset": 0, "hex": "0c000000", "call": 9},
+        {"arg": 1, "offset": 0, "hex": "0d000000", "call": 10},
+        {"arg": 1, "offset": 0, "hex": "0e000000", "call": 11},
+        {"arg": 1, "offset": 0, "hex": "0f000000", "call": 12}
+      ]
+    },
+    "0x00408e74": {
+      "name": "ParseBool",
+      "conv": "cdecl",
+      "args": ["cstr", "ptr", "int"],
+      "ret": [2, 3],
+      "writes": [{"arg": 1, "offset": 0, "hex": "01"}]
+    },
+    "0x005769e0": {
+      "name": "ParseString",
+      "conv": "cdecl",
+      "args": ["cstr", "ptr", "int", "int", "int"],
+      "ret": [4, 5, 4, 5],
+      "writes": [
+        {"arg": 1, "offset": 0, "hex": "4e616d6500", "call": 0},
+        {"arg": 1, "offset": 0, "hex": "4974656d3100", "call": 1},
+        {"arg": 1, "offset": 0, "hex": "4974656d3200", "call": 2},
+        {"arg": 1, "offset": 0, "hex": "4974656d3300", "call": 3}
+      ]
+    },
+    "0x004099fc": {
+      "name": "SetEntry",
+      "conv": "thiscall",
+      "args": ["int", "mem:76"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "plain_count0",
+      "args": ["abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", "@entry"],
+      "callees": {
+        "0x004b2056": {"name": "ParseInt", "conv": "cdecl", "args": ["cstr", "ptr", "int"],
+          "ret": [1, 2, 3, 1, 2],
+          "writes": [
+            {"arg": 1, "offset": 0, "hex": "15000000", "call": 0},
+            {"arg": 1, "offset": 0, "hex": "16000000", "call": 1},
+            {"arg": 1, "offset": 0, "hex": "17000000", "call": 2},
+            {"arg": 1, "offset": 0, "hex": "18000000", "call": 3},
+            {"arg": 1, "offset": 0, "hex": "00000000", "call": 4}
+          ]}
+      }
+    },
+    {
+      "name": "plain_count_negative",
+      "args": ["abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", "@entry"],
+      "callees": {
+        "0x004b2056": {"name": "ParseInt", "conv": "cdecl", "args": ["cstr", "ptr", "int"],
+          "ret": [1, 2, 3, 1, 2],
+          "writes": [{"arg": 1, "offset": 0, "hex": "ffffffff", "call": 4}]}
+      }
+    },
+    {
+      "name": "plain_count3",
+      "args": ["abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", "@entry"],
+      "callees": {
+        "0x004b2056": {"name": "ParseInt", "conv": "cdecl", "args": ["cstr", "ptr", "int"],
+          "ret": [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2],
+          "writes": [
+            {"arg": 1, "offset": 0, "hex": "15000000", "call": 0},
+            {"arg": 1, "offset": 0, "hex": "16000000", "call": 1},
+            {"arg": 1, "offset": 0, "hex": "17000000", "call": 2},
+            {"arg": 1, "offset": 0, "hex": "18000000", "call": 3},
+            {"arg": 1, "offset": 0, "hex": "03000000", "call": 4},
+            {"arg": 1, "offset": 0, "hex": "21000000", "call": 5},
+            {"arg": 1, "offset": 0, "hex": "22000000", "call": 6},
+            {"arg": 1, "offset": 0, "hex": "23000000", "call": 7},
+            {"arg": 1, "offset": 0, "hex": "31000000", "call": 8},
+            {"arg": 1, "offset": 0, "hex": "32000000", "call": 9},
+            {"arg": 1, "offset": 0, "hex": "33000000", "call": 10},
+            {"arg": 1, "offset": 0, "hex": "41000000", "call": 11},
+            {"arg": 1, "offset": 0, "hex": "42000000", "call": 12},
+            {"arg": 1, "offset": 0, "hex": "43000000", "call": 13}
+          ]}
+      }
+    },
+    {
+      "name": "star_version1_count1",
+      "args": ["*bcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", "@entry"],
+      "callees": {
+        "0x004b2056": {"name": "ParseInt", "conv": "cdecl", "args": ["cstr", "ptr", "int"],
+          "ret": [2, 1, 2, 3, 1, 2, 3, 1, 2],
+          "writes": [
+            {"arg": 1, "offset": 0, "hex": "01000000", "call": 0},
+            {"arg": 1, "offset": 0, "hex": "15000000", "call": 1},
+            {"arg": 1, "offset": 0, "hex": "16000000", "call": 2},
+            {"arg": 1, "offset": 0, "hex": "17000000", "call": 3},
+            {"arg": 1, "offset": 0, "hex": "18000000", "call": 4},
+            {"arg": 1, "offset": 0, "hex": "01000000", "call": 5},
+            {"arg": 1, "offset": 0, "hex": "21000000", "call": 6},
+            {"arg": 1, "offset": 0, "hex": "22000000", "call": 7},
+            {"arg": 1, "offset": 0, "hex": "23000000", "call": 8}
+          ]}
+      }
+    },
+    {
+      "name": "star_version2_disabled",
+      "args": ["*bcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", "@entry"],
+      "callees": {
+        "0x00408e74": {"name": "ParseBool", "conv": "cdecl", "args": ["cstr", "ptr", "int"],
+          "ret": [2, 3], "writes": [{"arg": 1, "offset": 0, "hex": "00", "call": 0}, {"arg": 1, "offset": 0, "hex": "01", "call": 1}]}
+      }
+    },
+    {
+      "name": "star_version2_enabled_count2",
+      "args": ["*bcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", "@entry"],
+      "callees": {
+        "0x00408e74": {"name": "ParseBool", "conv": "cdecl", "args": ["cstr", "ptr", "int"],
+          "ret": [2, 3], "writes": [{"arg": 1, "offset": 0, "hex": "01", "call": 0}, {"arg": 1, "offset": 0, "hex": "00", "call": 1}]}
+      }
+    },
+    {
+      "name": "star_version3",
+      "args": ["*bcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", "@entry"],
+      "callees": {
+        "0x004b2056": {"name": "ParseInt", "conv": "cdecl", "args": ["cstr", "ptr", "int"],
+          "ret": [1, 2, 3, 1, 2, 3, 1, 2, 3, 1],
+          "writes": [
+            {"arg": 1, "offset": 0, "hex": "03000000", "call": 0},
+            {"arg": 1, "offset": 0, "hex": "07000000", "call": 1},
+            {"arg": 1, "offset": 0, "hex": "01000000", "call": 7}
+          ]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4235015,
+    "count": 60,
+    "args": [
+      {"choices": [
+        "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+        "*bcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+      ]},
+      {"choices": ["@entry"]}
+    ],
+    "memory": []
+  }
+}

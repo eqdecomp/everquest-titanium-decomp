@@ -1,0 +1,173 @@
+{
+  "function": "FeedbackWnd_guess::WndNotification_guess",
+  "original": "0x0050157c",
+  "sources": ["src/EverQuest/tu_157_FileSelectionWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@wnd",
+  "args": [
+    { "name": "sender_guess", "type": "ptr" },
+    { "name": "message_guess", "type": "u32" },
+    { "name": "data_guess", "type": "ptr" }
+  ],
+  "ret": "int",
+  "objects": {
+    "wnd": {
+      "size": "0x16c", "fill": "random",
+      "init": [
+        { "offset": "0x0", "u32": "@wndvtbl" },
+        { "offset": "0x160", "u32": "@input" },
+        { "offset": "0x164", "u32": "@cancel" },
+        { "offset": "0x168", "u32": "@send" }
+      ]
+    },
+    "wndvtbl": { "size": "0x8c", "fill": "zero", "init": [{ "offset": "0x88", "u32": "@fn_close" }] },
+    "input": { "size": "0x100", "fill": "random", "init": [{ "offset": "0x0", "u32": "@inputvtbl" }] },
+    "inputvtbl": {
+      "size": "0x134", "fill": "zero",
+      "init": [
+        { "offset": "0xfc", "u32": "@fn_settext" },
+        { "offset": "0x130", "u32": "@fn_gettext" }
+      ]
+    },
+    "send": { "size": "0x10", "fill": "random" },
+    "cancel": { "size": "0x10", "fill": "random" },
+    "other": { "size": "0x10", "fill": "random" },
+    "data": { "size": "0x10", "fill": "random" },
+    "chardata": {
+      "size": "0x100", "fill": "random",
+      "init": [
+        { "offset": "0x8", "u32": "@vbtable" },
+        { "offset": "0x64", "cstr": "Soandso" }
+      ]
+    },
+    "vbtable": { "size": "0x8", "fill": "zero", "init": [{ "offset": "0x4", "u32": "0x20" }] },
+    "player": {
+      "size": "0x100", "fill": "random",
+      "init": [
+        { "offset": "0x30", "f32": 10.5 },
+        { "offset": "0x34", "f32": -20.25 },
+        { "offset": "0x38", "f32": 3.0 },
+        { "offset": "0x4c", "f32": 123.7 }
+      ]
+    },
+    "textbuf": { "size": "0x80", "fill": "zero", "init": [{ "offset": "0x0", "cstr": "The gnome fell through the world." }] },
+    "fn_close": { "size": "4" },
+    "fn_settext": { "size": "4" },
+    "fn_gettext": { "size": "4" }
+  },
+  "memory": [
+    { "addr": "0x00905d00", "u32": "@chardata" },
+    { "addr": "0x00905ce4", "u32": "@player" }
+  ],
+  "callees": {
+    "@fn_gettext": {
+      "name": "GetWindowText_guess", "conv": "thiscall", "args": ["u32"], "ret": "arg0",
+      "writes": [{ "arg": 0, "offset": 0, "hex": "78563412" }]
+    },
+    "@fn_settext": { "name": "SetWindowText_guess", "conv": "thiscall", "args": ["mem:4"], "ret": 0 },
+    "@fn_close": { "name": "Slot34_guess", "conv": "thiscall", "args": [], "ret": 77 },
+    "0x004d95d0": { "name": "IsEmpty_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x00571d00": { "name": "CXStr_FreeRep", "conv": "thiscall", "args": ["u32"], "ret": 0 },
+    "0x00572300": { "name": "CXStr_Text_guess", "conv": "thiscall", "args": [], "ret": "@textbuf" },
+    "0x004912b1": {
+      "name": "EQSendMessage", "conv": "cdecl",
+      "args": ["ptr", "int", "mem:0x47c", "int", "char"], "ret": 0
+    },
+    "0x00571e00": { "name": "CXStr_ctor", "conv": "thiscall", "args": ["cstr"], "ret": "this" },
+    "0x005a2230": { "name": "CSidlScreenWnd_WndNotification", "conv": "thiscall", "args": ["ptr", "u32", "ptr"], "ret": 4660 }
+  },
+  "cases": [
+    { "name": "send, text present", "args": ["@send", 1, "@data"], "expect": { "ret": 0 } },
+    {
+      "name": "send, empty text", "args": ["@send", 1, "@data"], "expect": { "ret": 0 },
+      "callees": { "0x004d95d0": { "name": "IsEmpty_guess", "conv": "thiscall", "args": [], "ret": 1 } }
+    },
+    {
+      "name": "send, IsEmpty returns AL=0 with high bits", "args": ["@send", 1, "@data"],
+      "callees": { "0x004d95d0": { "name": "IsEmpty_guess", "conv": "thiscall", "args": [], "ret": 256 } }
+    },
+    {
+      "name": "send, IsEmpty returns 0xff", "args": ["@send", 1, "@data"],
+      "callees": { "0x004d95d0": { "name": "IsEmpty_guess", "conv": "thiscall", "args": [], "ret": 255 } }
+    },
+    {
+      "name": "send, text present, null rep", "args": ["@send", 1, "@data"],
+      "callees": {
+        "@fn_gettext": {
+          "name": "GetWindowText_guess", "conv": "thiscall", "args": ["u32"], "ret": "arg0",
+          "writes": [{ "arg": 0, "offset": 0, "hex": "00000000" }]
+        }
+      }
+    },
+    {
+      "name": "send, empty, null rep", "args": ["@send", 1, "@data"],
+      "callees": {
+        "0x004d95d0": { "name": "IsEmpty_guess", "conv": "thiscall", "args": [], "ret": 1 },
+        "@fn_gettext": {
+          "name": "GetWindowText_guess", "conv": "thiscall", "args": ["u32"], "ret": "arg0",
+          "writes": [{ "arg": 0, "offset": 0, "hex": "00000000" }]
+        }
+      }
+    },
+    {
+      "name": "send, first rep set, second null", "args": ["@send", 1, "@data"],
+      "callees": {
+        "@fn_gettext": {
+          "name": "GetWindowText_guess", "conv": "thiscall", "args": ["u32"], "ret": "arg0",
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "78563412", "call": 0 },
+            { "arg": 0, "offset": 0, "hex": "00000000", "call": 1 }
+          ]
+        }
+      }
+    },
+    {
+      "name": "send, first rep null, second set", "args": ["@send", 1, "@data"],
+      "callees": {
+        "@fn_gettext": {
+          "name": "GetWindowText_guess", "conv": "thiscall", "args": ["u32"], "ret": "arg0",
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "00000000", "call": 0 },
+            { "arg": 0, "offset": 0, "hex": "44332211", "call": 1 }
+          ]
+        }
+      }
+    },
+    {
+      "name": "send, negative heading and long name", "args": ["@send", 1, 0],
+      "memory": [
+        { "addr": "@player", "offset": "0x4c", "f32": -511.5 },
+        { "addr": "@chardata", "offset": "0x64", "cstr": "Averyveryverylongcharacternamethatfillsthefield" }
+      ]
+    },
+    { "name": "send, message 0", "args": ["@send", 0, "@data"], "expect": { "ret": 4660 } },
+    { "name": "send, message 2", "args": ["@send", 2, "@data"], "expect": { "ret": 4660 } },
+    { "name": "cancel, message 1", "args": ["@cancel", 1, "@data"], "expect": { "ret": 0 } },
+    { "name": "cancel, message 0", "args": ["@cancel", 0, "@data"], "expect": { "ret": 4660 } },
+    { "name": "cancel, message 2", "args": ["@cancel", 2, "@data"], "expect": { "ret": 4660 } },
+    { "name": "other sender, message 1", "args": ["@other", 1, "@data"], "expect": { "ret": 4660 } },
+    { "name": "input as sender, message 1", "args": ["@input", 1, "@data"], "expect": { "ret": 4660 } },
+    { "name": "null sender, message 1", "args": [0, 1, 0], "expect": { "ret": 4660 } },
+    {
+      "name": "send and cancel are the same window: send wins", "args": ["@send", 1, "@data"], "expect": { "ret": 0 },
+      "memory": [{ "addr": "@wnd", "offset": "0x164", "u32": "@send" }]
+    },
+    {
+      "name": "send and cancel the same, message 2", "args": ["@send", 2, "@data"], "expect": { "ret": 4660 },
+      "memory": [{ "addr": "@wnd", "offset": "0x164", "u32": "@send" }]
+    }
+  ],
+  "fuzz": {
+    "seed": 5248380,
+    "count": 120,
+    "args": [
+      { "choices": ["@send", "@cancel", "@other", "@send"] },
+      { "choices": [1, 1, 1, 0, 2, 6] },
+      { "choices": ["@data", 0] }
+    ],
+    "memory": [
+      { "addr": "@player", "offset": "0x30", "type": "float", "count": 3, "range": [-5000.0, 5000.0] },
+      { "addr": "@player", "offset": "0x4c", "type": "float", "range": [-600.0, 600.0] }
+    ]
+  }
+}

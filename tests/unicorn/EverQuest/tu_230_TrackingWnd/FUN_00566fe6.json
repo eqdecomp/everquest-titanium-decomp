@@ -1,0 +1,1064 @@
+{
+  "function": "CTrackingWnd_guess::ApplyTrackingFilters_guess",
+  "original": "0x00566fe6",
+  "sources": [
+    "src/EverQuest/tu_230_TrackingWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@notificationpanel",
+  "args": [
+    {
+      "name": "flag_guess",
+      "type": "char"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "notificationpanel": {
+      "size": "0x3ff0",
+      "fill": "zero"
+    },
+    "target0": {
+      "size": "0x260",
+      "fill": "zero"
+    },
+    "target1": {
+      "size": "0x260",
+      "fill": "zero"
+    },
+    "moderoot": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@vbtable"
+        }
+      ]
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 8
+        }
+      ]
+    },
+    "moderecord": {
+      "size": "0x11a8",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d00",
+      "u32": 0
+    },
+    {
+      "addr": "0x00923cb0",
+      "u8": 0
+    },
+    {
+      "addr": "0x00923ca8",
+      "u32": 0
+    },
+    {
+      "addr": "0x009043a4",
+      "u8": 0
+    },
+    {
+      "addr": "0x0090424d",
+      "size": 320,
+      "fill": "zero"
+    },
+    {
+      "addr": "0x00904390",
+      "size": 20,
+      "fill": "zero"
+    }
+  ],
+  "callees": {
+    "0x005ec220": {
+      "name": "FUN_005ec220",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@moderecord"
+    },
+    "0x00401b28": {
+      "name": "FUN_00401b28",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@target1"
+    },
+    "0x00566194": {
+      "name": "FUN_00566194",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "empty_no_flush",
+      "args": [
+        0
+      ]
+    },
+    {
+      "name": "empty_with_flush",
+      "args": [
+        1
+      ]
+    },
+    {
+      "name": "severe_gap_upper_filter",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 14
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@moderoot"
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x119c",
+          "u8": 4
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x11a4",
+          "u32": 20
+        },
+        {
+          "addr": "0x00923cb0",
+          "u8": 32
+        }
+      ]
+    },
+    {
+      "name": "severe_gap_lower_level_boundary",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 0
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@moderoot"
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x119c",
+          "u8": 4
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x11a4",
+          "u32": 8
+        },
+        {
+          "addr": "0x00923cb0",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "negative_three",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 17
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@moderoot"
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x119c",
+          "u8": 4
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x11a4",
+          "u32": 20
+        },
+        {
+          "addr": "0x00923cb0",
+          "u8": 2
+        }
+      ]
+    },
+    {
+      "name": "equal_level",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 20
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@moderoot"
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x119c",
+          "u8": 4
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x11a4",
+          "u32": 20
+        },
+        {
+          "addr": "0x00923cb0",
+          "u8": 4
+        }
+      ]
+    },
+    {
+      "name": "positive_one_to_two",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 21
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@moderoot"
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x119c",
+          "u8": 4
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x11a4",
+          "u32": 20
+        },
+        {
+          "addr": "0x00923cb0",
+          "u8": 8
+        }
+      ]
+    },
+    {
+      "name": "positive_three",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 23
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@moderoot"
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x119c",
+          "u8": 4
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x11a4",
+          "u32": 20
+        },
+        {
+          "addr": "0x00923cb0",
+          "u8": 16
+        }
+      ]
+    },
+    {
+      "name": "threshold_linear_at_60",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 43
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@moderoot"
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x119c",
+          "u8": 4
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x11a4",
+          "u32": 60
+        },
+        {
+          "addr": "0x00923cb0",
+          "u8": 32
+        }
+      ]
+    },
+    {
+      "name": "threshold_linear_at_61",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 45
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@moderoot"
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x119c",
+          "u8": 4
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x11a4",
+          "u32": 61
+        },
+        {
+          "addr": "0x00923cb0",
+          "u8": 32
+        }
+      ]
+    },
+    {
+      "name": "nonfiltered_mode_and_related_target",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 0
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 20
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x25c",
+          "u32": 4660
+        },
+        {
+          "addr": "@target1",
+          "offset": "0x244",
+          "u8": 0
+        },
+        {
+          "addr": "0x00923ca8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "notify_mode_one_suppresses",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 0
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 20
+        },
+        {
+          "addr": "0x00923ca8",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "notify_mode_two_slot_match",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 0
+        },
+        {
+          "addr": "0x00923ca8",
+          "u32": 2
+        },
+        {
+          "addr": "0x009043a4",
+          "u8": 1
+        },
+        {
+          "addr": "0x0090424d",
+          "offset": "0x100",
+          "u8": 1
+        },
+        {
+          "addr": "0x00904390",
+          "offset": "0x10",
+          "u32": "@target0"
+        }
+      ]
+    },
+    {
+      "name": "notify_mode_two_no_match",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 0
+        },
+        {
+          "addr": "0x00923ca8",
+          "u32": 2
+        },
+        {
+          "addr": "0x009043a4",
+          "u8": 1
+        },
+        {
+          "addr": "0x0090424d",
+          "offset": "0x100",
+          "u8": 1
+        },
+        {
+          "addr": "0x00904390",
+          "offset": "0x10",
+          "u32": "@target1"
+        }
+      ]
+    },
+    {
+      "name": "notify_mode_default",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 0
+        },
+        {
+          "addr": "0x00923ca8",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "flush_with_populated_entry",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 23
+        }
+      ]
+    },
+    {
+      "name": "scratch_is_outside_the_1000_entries",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x3fe0",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 20
+        }
+      ]
+    },
+    {
+      "name": "gap_at_level_56",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 37
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@moderoot"
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x11a4",
+          "u32": 56
+        }
+      ]
+    },
+    {
+      "name": "gap_at_level_41",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 26
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@moderoot"
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x11a4",
+          "u32": 41
+        }
+      ]
+    },
+    {
+      "name": "gap_at_level_32",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 21
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@moderoot"
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x11a4",
+          "u32": 32
+        }
+      ]
+    },
+    {
+      "name": "gap_after_three_adjustments_is_minus_six",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 12
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@moderoot"
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x11a4",
+          "u32": 20
+        }
+      ]
+    },
+    {
+      "name": "filter_status_bit_is_zero",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 20
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@moderoot"
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x119c",
+          "u8": 4
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x11a4",
+          "u32": 20
+        },
+        {
+          "addr": "0x00923cb0",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "filter_mask_zero_status_match",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 20
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@moderoot"
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x119c",
+          "u8": 4
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x11a4",
+          "u32": 20
+        },
+        {
+          "addr": "0x00923cb0",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "filter_status_or_wrong_bit",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target0"
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@target0",
+          "offset": "0x24c",
+          "u8": 21
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@moderoot"
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x119c",
+          "u8": 4
+        },
+        {
+          "addr": "@moderecord",
+          "offset": "0x11a4",
+          "u32": 20
+        },
+        {
+          "addr": "0x00923cb0",
+          "u8": 4
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5664742,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@notificationpanel",
+        "offset": "0x160",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@target0",
+          "@target1"
+        ]
+      },
+      {
+        "addr": "@target0",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@target0",
+        "offset": "0x24c",
+        "type": "u8",
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "addr": "@target0",
+        "offset": "0x25c",
+        "type": "u32",
+        "choices": [
+          0,
+          4660
+        ]
+      },
+      {
+        "addr": "@target1",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@target1",
+        "offset": "0x24c",
+        "type": "u8",
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "addr": "@target1",
+        "offset": "0x25c",
+        "type": "u32",
+        "choices": [
+          0,
+          4660
+        ]
+      },
+      {
+        "addr": "0x00905d00",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@moderoot"
+        ]
+      },
+      {
+        "addr": "@moderecord",
+        "offset": "0x119c",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          4
+        ]
+      },
+      {
+        "addr": "@moderecord",
+        "offset": "0x11a4",
+        "type": "u32",
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "addr": "0x00923cb0",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          63
+        ]
+      },
+      {
+        "addr": "0x00923ca8",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "0x009043a4",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x0090424d",
+        "type": "u8",
+        "count": 5,
+        "stride": 64,
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00904390",
+        "type": "ptr",
+        "count": 5,
+        "stride": 4,
+        "choices": [
+          0,
+          "@target0",
+          "@target1"
+        ]
+      }
+    ]
+  },
+  "_survivors": "L713: target flag 0x244 == 0 is required to enter this mode branch, while the earlier filter can set hit_guess only when the same flag is 1; assigning false is redundant."
+}

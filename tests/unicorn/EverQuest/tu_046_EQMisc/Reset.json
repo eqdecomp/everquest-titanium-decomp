@@ -1,0 +1,36 @@
+{
+  "function": "Block_46_guess::Reset_guess",
+  "original": "0x004647a4",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@block_46",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "block_46": {
+      "size": "0x13c",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {},
+  "cases": [
+    {
+      "name": "typical",
+      "args": []
+    },
+    {
+      "name": "zeros",
+      "args": []
+    }
+  ],
+  "fuzz": {
+    "seed": 4605860,
+    "count": 100,
+    "args": [],
+    "memory": []
+  },
+  "_survivors": "L144: the extra dword at 0x100 is immediately overwritten by value_100_guess = 0, so no caller can observe the intermediate store"
+}

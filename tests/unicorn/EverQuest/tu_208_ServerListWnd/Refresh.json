@@ -1,0 +1,65 @@
+{
+  "function": "CServerListWnd_guess::FillList_guess",
+  "original": "0x00553292",
+  "sources": ["src/EverQuest/tu_208_ServerListWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@controller",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "controller": {"size": "0x180", "fill": "zero", "init": [
+      {"offset": "0x15c", "u32": "@window"},
+      {"offset": "0x168", "u32": 2},
+      {"offset": "0x16c", "u32": "@entries"}
+    ]},
+    "window": {"size": "0x140", "fill": "zero", "init": [{"offset": "0", "u32": "@window_vtbl"}]},
+    "window_vtbl": {"size": "0x134", "fill": "zero", "init": [{"offset": "0x130", "u32": "@fn_slot76"}]},
+    "fn_slot76": {"size": "4"},
+    "entries": {"size": "0xa8", "fill": "zero", "init": [
+      {"offset": "0x15", "cstr": "Alpha"},
+      {"offset": "0x3c", "u8": 1},
+      {"offset": "0x4d", "cstr": "Bravo"},
+      {"offset": "0x85", "cstr": "Charlie"}
+    ]},
+    "stringtable": {"size": "0x10", "fill": "zero"},
+    "heapblock": {"size": "0x200", "fill": "zero"},
+    "s17fc": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "cstr": "Online"}]},
+    "s17fb": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "cstr": "Offline"}]}
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@stringtable"}
+  ],
+  "callees": {
+    "@fn_slot76": {"name": "Slot76_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005dfa00": {"name": "GetString_guess", "conv": "thiscall", "args": ["int", "int"], "ret": ["@s17fc", "@s17fb"]},
+    "0x005531e4": {"name": "Get_guess", "conv": "thiscall", "args": ["int"], "passthrough": true},
+    "0x00571e00": {"name": "CXStrCtor_guess", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "0x00571d00": {"name": "CXStrDtor_guess", "conv": "thiscall", "args": ["u32"], "passthrough": true},
+    "kernel32.dll!HeapAlloc": {"conv": "stdcall", "args": ["ignore", "ignore", "int"], "ret": "@heapblock"},
+    "kernel32.dll!HeapFree": {"conv": "stdcall", "args": ["ignore", "ignore", "ignore"], "ret": 1},
+    "0x0059b9d0": {"name": "AddString_guess", "conv": "thiscall", "args": ["ignore", "u32", "int", "u32"], "ret": [0, 1, 2]},
+    "0x0059b360": {"name": "SetItemText_guess", "conv": "thiscall", "args": ["int", "int", "ignore"]},
+    "0x0059b3e0": {"name": "SetItemColor_guess", "conv": "thiscall", "args": ["int", "int", "u32"]}
+  },
+  "cases": [
+    {"name": "two entries, states 0 and 1"},
+    {"name": "empty list", "memory": [{"addr": "@controller", "offset": "0x168", "u32": 0}]},
+    {"name": "no window", "memory": [{"addr": "@controller", "offset": "0x15c", "u32": 0}]},
+    {"name": "one entry, state 0", "memory": [{"addr": "@controller", "offset": "0x168", "u32": 1}]},
+    {"name": "one entry, state 1", "memory": [{"addr": "@controller", "offset": "0x168", "u32": 1}, {"addr": "@entries", "offset": "4", "u8": 1}]},
+    {"name": "three entries, mixed", "memory": [{"addr": "@controller", "offset": "0x168", "u32": 3}]},
+    {"name": "three entries, all 1", "memory": [{"addr": "@controller", "offset": "0x168", "u32": 3}, {"addr": "@entries", "offset": "4", "u8": 1}, {"addr": "@entries", "offset": "0x74", "u8": 1}]}
+  ],
+  "fuzz": {
+    "seed": 5583506,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@controller", "offset": "0x168", "type": "u32", "choices": [0, 1, 2, 3]},
+      {"addr": "@controller", "offset": "0x15c", "type": "u32", "choices": ["@window", 0]},
+      {"addr": "@entries", "offset": "4", "type": "u8", "choices": [0, 1]},
+      {"addr": "@entries", "offset": "0x3c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@entries", "offset": "0x74", "type": "u8", "choices": [0, 1]}
+    ]
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "function": "PurgeOwner_guess::SaveAddressBook_guess",
+  "original": "0x0042b03c",
+  "sources": [
+    "src/EverQuest/tu_018_MailtoLink.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "bool",
+  "stack_exact": true,
+  "_note": "The ofstream is a stack local at 0x7F0EFF5C on both sides (entry ESP 0x7F0F0000, frame ebp-0xa0). Its constructor is a stub, so the stub writes the vbtable pointer the real constructor would store: it points at 0x0079DC00, where the fixture seeds the ios offset at +4. Offset 0x60 (the real one) reads the zeroed ios state byte (stream good); offset 0x8c reads the saved fs:[0] (-1) in the EH frame at ebp-0xc, which stands for failbit/badbit after a failed open. stack_exact so the stream and ios pointers passed to the library are compared as addresses.",
+  "objects": {
+    "owner": {
+      "size": "0x34",
+      "fill": "random",
+      "init": [
+        {"offset": "0x10", "cstr": "ab.txt"},
+        {"offset": "0x20", "u32": 6},
+        {"offset": "0x24", "u32": 15},
+        {"offset": "0x2c", "u32": "@head"}
+      ]
+    },
+    "path": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        {"offset": 0, "cstr": "userdata/addressbook_long_name.txt"}
+      ]
+    },
+    "head": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [
+        {"offset": 0, "u32": "@head"},
+        {"offset": 4, "u32": "@head"}
+      ]
+    },
+    "n1": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [
+        {"offset": 0, "u32": "@n2"},
+        {"offset": 8, "u32": "@r1"}
+      ]
+    },
+    "n2": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [
+        {"offset": 0, "u32": "@n3"},
+        {"offset": 8, "u32": "@r2"}
+      ]
+    },
+    "n3": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [
+        {"offset": 0, "u32": "@head"},
+        {"offset": 8, "u32": "@r3"}
+      ]
+    },
+    "r1": {"size": "0x4c", "fill": "random", "init": [{"offset": "0x49", "u8": 0}]},
+    "r2": {"size": "0x4c", "fill": "random", "init": [{"offset": "0x49", "u8": 1}]},
+    "r3": {"size": "0x4c", "fill": "random", "init": [{"offset": "0x49", "u8": 0}]}
+  },
+  "memory": [
+    {"addr": "0x0079DC04", "u32": "0x60"}
+  ],
+  "callees": {
+    "0x00429177": {
+      "name": "ofstream::ofstream",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": "this",
+      "writes": [
+        {"addr": "0x7F0EFF5C", "hex": "00dc7900"}
+      ]
+    },
+    "0x00427ab4": {
+      "name": "ofstream::open",
+      "conv": "thiscall",
+      "args": ["cstr", "u32", "u32"],
+      "ret": 0
+    },
+    "0x00426786": {
+      "name": "operator<<(ostream&, const string&)",
+      "conv": "cdecl",
+      "args": ["ptr", "ptr"],
+      "ret": "arg0"
+    },
+    "0x0042744e": {
+      "name": "endl",
+      "conv": "cdecl",
+      "args": ["ptr"],
+      "ret": "arg0"
+    },
+    "0x0042650a": {
+      "name": "operator<<(ostream&, const char*)",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr"],
+      "ret": "arg0"
+    },
+    "0x00427516": {
+      "name": "WriteAddressRecord_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ptr"],
+      "ret": "arg0"
+    },
+    "0x00429229": {
+      "name": "ofstream::close",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004291e3": {
+      "name": "ofstream::~ofstream",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00623d8d": {
+      "name": "std::ios_base::~ios_base",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "??0?$basic_ofstream@DU?$char_traits@D@std@@@std@@QAE@XZ": "0x00429177",
+    "?open@?$basic_ofstream@DU?$char_traits@D@std@@@std@@QAEXPBDHH@Z": "0x00427AB4",
+    "?close@?$basic_ofstream@DU?$char_traits@D@std@@@std@@QAEXXZ": "0x00429229",
+    "??1?$basic_ofstream@DU?$char_traits@D@std@@@std@@UAE@XZ": "0x004291E3",
+    "?endl@std@@YAAAV?$basic_ostream@DU?$char_traits@D@std@@@1@AAV21@@Z": "0x0042744E"
+  },
+  "cases": [
+    {
+      "name": "empty path: no file, false",
+      "args": [],
+      "memory": [{"addr": "@owner", "offset": "0x20", "u32": 0}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "short path, empty list",
+      "args": [],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "path length 1",
+      "args": [],
+      "memory": [{"addr": "@owner", "offset": "0x20", "u32": 1}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "heap path (capacity 16), three records, middle hidden",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x10", "u32": "@path"},
+        {"addr": "@owner", "offset": "0x20", "u32": 34},
+        {"addr": "@owner", "offset": "0x24", "u32": 16},
+        {"addr": "@head", "offset": 0, "u32": "@n1"}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "heap path, huge capacity (unsigned compare)",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x10", "u32": "@path"},
+        {"addr": "@owner", "offset": "0x24", "u32": "0xffffffff"},
+        {"addr": "@head", "offset": 0, "u32": "@n3"}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "one hidden record only",
+      "args": [],
+      "memory": [
+        {"addr": "@head", "offset": 0, "u32": "@n3"},
+        {"addr": "@r3", "offset": "0x49", "u8": 255}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "all three visible",
+      "args": [],
+      "memory": [
+        {"addr": "@head", "offset": 0, "u32": "@n1"},
+        {"addr": "@r2", "offset": "0x49", "u8": 0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "open failed: nothing written, false",
+      "args": [],
+      "memory": [
+        {"addr": "0x0079DC04", "u32": "0x8c"},
+        {"addr": "@head", "offset": 0, "u32": "@n1"}
+      ],
+      "expect": {"ret": 0}
+    }
+  ],
+  "fuzz": {
+    "seed": 4370492,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {"addr": "0x0079DC04", "type": "u32", "choices": [96, 96, 96, 140]},
+      {"addr": "@owner", "offset": "0x10", "type": "u32", "choices": ["@path"], "p": 0.5},
+      {"addr": "@owner", "offset": "0x20", "type": "u32", "choices": [0, 1, 6, 34, 100]},
+      {"addr": "@owner", "offset": "0x24", "type": "u32", "choices": [15, 16, 17, 31], "p": 0.5},
+      {"addr": "@head", "offset": 0, "type": "u32", "choices": ["@head", "@n1", "@n2", "@n3"]},
+      {"addr": "@r1", "offset": "0x49", "type": "u8", "choices": [0, 1, 255]},
+      {"addr": "@r2", "offset": "0x49", "type": "u8", "choices": [0, 1, 2]},
+      {"addr": "@r3", "offset": "0x49", "type": "u8", "choices": [0, 0, 128]}
+    ]
+  }
+}

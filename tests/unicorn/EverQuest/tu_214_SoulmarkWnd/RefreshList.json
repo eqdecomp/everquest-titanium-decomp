@@ -1,0 +1,771 @@
+{
+  "function": "CSoulmarkWndView_guess::UpdateList_guess",
+  "original": "0x00555a22",
+  "sources": [
+    "src/EverQuest/tu_214_SoulmarkWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@soulmarkwnd",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "soulmarkwnd": {
+      "size": "0x18f4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x15c",
+          "u32": "@list"
+        },
+        {
+          "offset": "0x450",
+          "u32": 1700000000
+        },
+        {
+          "offset": "0x454",
+          "u32": 1
+        },
+        {
+          "offset": "0x458",
+          "cstr": "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234"
+        },
+        {
+          "offset": "0x618",
+          "u32": 1700000001
+        },
+        {
+          "offset": "0x61c",
+          "u32": 2
+        },
+        {
+          "offset": "0x620",
+          "cstr": "Bob"
+        },
+        {
+          "offset": "0x7e0",
+          "u32": 1700000002
+        },
+        {
+          "offset": "0x7e4",
+          "u32": 1
+        },
+        {
+          "offset": "0x7e8",
+          "cstr": "Cecil"
+        },
+        {
+          "offset": "0x9a8",
+          "u32": 1700000003
+        },
+        {
+          "offset": "0x9ac",
+          "u32": 2
+        },
+        {
+          "offset": "0x9b0",
+          "cstr": "Dara"
+        },
+        {
+          "offset": "0xb70",
+          "u32": 1700000004
+        },
+        {
+          "offset": "0xb74",
+          "u32": 1
+        },
+        {
+          "offset": "0xb78",
+          "cstr": "Evan"
+        },
+        {
+          "offset": "0xd38",
+          "u32": 1700000005
+        },
+        {
+          "offset": "0xd3c",
+          "u32": 2
+        },
+        {
+          "offset": "0xd40",
+          "cstr": "Faye"
+        },
+        {
+          "offset": "0xf00",
+          "u32": 1700000006
+        },
+        {
+          "offset": "0xf04",
+          "u32": 1
+        },
+        {
+          "offset": "0xf08",
+          "cstr": "Galen"
+        },
+        {
+          "offset": "0x10c8",
+          "u32": 1700000007
+        },
+        {
+          "offset": "0x10cc",
+          "u32": 2
+        },
+        {
+          "offset": "0x10d0",
+          "cstr": "Hana"
+        },
+        {
+          "offset": "0x1290",
+          "u32": 1700000008
+        },
+        {
+          "offset": "0x1294",
+          "u32": 1
+        },
+        {
+          "offset": "0x1298",
+          "cstr": "Iris"
+        },
+        {
+          "offset": "0x1458",
+          "u32": 1700000009
+        },
+        {
+          "offset": "0x145c",
+          "u32": 2
+        },
+        {
+          "offset": "0x1460",
+          "cstr": "Jori"
+        },
+        {
+          "offset": "0x1620",
+          "u32": 1700000010
+        },
+        {
+          "offset": "0x1624",
+          "u32": 1
+        },
+        {
+          "offset": "0x1628",
+          "cstr": "Kara"
+        },
+        {
+          "offset": "0x17e8",
+          "u32": 1700000011
+        },
+        {
+          "offset": "0x17ec",
+          "u32": 2
+        },
+        {
+          "offset": "0x17f0",
+          "cstr": "Liam"
+        },
+        {
+          "offset": "0x18f0",
+          "u32": 0
+        }
+      ]
+    },
+    "list": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@list_vtbl"
+        }
+      ]
+    },
+    "list_vtbl": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x130",
+          "u32": "@fn_refresh"
+        }
+      ]
+    },
+    "fn_refresh": {
+      "size": "4"
+    },
+    "tm": {
+      "size": "0x24",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xc",
+          "u32": 17
+        },
+        {
+          "offset": "0x10",
+          "u32": 5
+        },
+        {
+          "offset": "0x14",
+          "u32": 126
+        }
+      ]
+    },
+    "heap": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "month_jan": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "cstr": "January"
+        }
+      ]
+    },
+    "month_feb": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "from_image": "0x0066DA40",
+          "image_size": 9
+        }
+      ]
+    },
+    "month_mar": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "cstr": "March"
+        }
+      ]
+    },
+    "month_apr": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "cstr": "April"
+        }
+      ]
+    },
+    "month_may": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "cstr": "May"
+        }
+      ]
+    },
+    "month_jun": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "cstr": "June"
+        }
+      ]
+    },
+    "month_jul": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "cstr": "July"
+        }
+      ]
+    },
+    "month_aug": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "cstr": "August"
+        }
+      ]
+    },
+    "month_sep": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "from_image": "0x0066DA0C",
+          "image_size": 10
+        }
+      ]
+    },
+    "month_oct": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "cstr": "October"
+        }
+      ]
+    },
+    "month_nov": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "from_image": "0x0066D9F8",
+          "image_size": 9
+        }
+      ]
+    },
+    "month_dec": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "from_image": "0x0066D9EC",
+          "image_size": 9
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": 305419896
+    },
+    {
+      "addr": "0x00794494",
+      "u32": "@month_jan"
+    },
+    {
+      "addr": "0x00794498",
+      "u32": "@month_feb"
+    },
+    {
+      "addr": "0x0079449c",
+      "u32": "@month_mar"
+    },
+    {
+      "addr": "0x007944a0",
+      "u32": "@month_apr"
+    },
+    {
+      "addr": "0x007944a4",
+      "u32": "@month_may"
+    },
+    {
+      "addr": "0x007944a8",
+      "u32": "@month_jun"
+    },
+    {
+      "addr": "0x007944ac",
+      "u32": "@month_jul"
+    },
+    {
+      "addr": "0x007944b0",
+      "u32": "@month_aug"
+    },
+    {
+      "addr": "0x007944b4",
+      "u32": "@month_sep"
+    },
+    {
+      "addr": "0x007944b8",
+      "u32": "@month_oct"
+    },
+    {
+      "addr": "0x007944bc",
+      "u32": "@month_nov"
+    },
+    {
+      "addr": "0x007944c0",
+      "u32": "@month_dec"
+    }
+  ],
+  "callees": {
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": "@heap"
+    },
+    "@fn_refresh": {
+      "name": "ListRefresh",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00598580": {
+      "name": "ClearAllSel",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00612227": {
+      "name": "_localtime",
+      "conv": "cdecl",
+      "args": [
+        "mem:4"
+      ],
+      "ret": "@tm"
+    },
+    "0x005738b0": {
+      "name": "FormatCXStr",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0,
+      "passthrough": true
+    },
+    "0x0059b9d0": {
+      "name": "AddString",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "u32",
+        "int",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x00571e00": {
+      "name": "CXStr(const char*)",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0,
+      "passthrough": true
+    },
+    "0x0059b360": {
+      "name": "SetItemText",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x0060e620": {
+      "name": "strncpy",
+      "args": [
+        "ignore",
+        "ptr",
+        "u32"
+      ],
+      "passthrough": true
+    }
+  },
+  "rewrite_aliases": {
+    "_localtime": "0x00612227"
+  },
+  "cases": [
+    {
+      "name": "negative count skips",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@soulmarkwnd",
+          "offset": "0x18f0",
+          "u32": 4294967295
+        }
+      ]
+    },
+    {
+      "name": "zero count skips",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@soulmarkwnd",
+          "offset": "0x18f0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "one green truncated name",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@soulmarkwnd",
+          "offset": "0x18f0",
+          "u32": 1
+        },
+        {
+          "addr": "@soulmarkwnd",
+          "offset": "0x454",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "one red",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@soulmarkwnd",
+          "offset": "0x18f0",
+          "u32": 1
+        },
+        {
+          "addr": "@soulmarkwnd",
+          "offset": "0x454",
+          "u32": 2
+        }
+      ]
+    },
+    {
+      "name": "two mixed rows",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@soulmarkwnd",
+          "offset": "0x18f0",
+          "u32": 2
+        }
+      ]
+    },
+    {
+      "name": "eleven rows",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@soulmarkwnd",
+          "offset": "0x18f0",
+          "u32": 11
+        }
+      ]
+    },
+    {
+      "name": "full twelve rows",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@soulmarkwnd",
+          "offset": "0x18f0",
+          "u32": 12
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5593634,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@soulmarkwnd",
+        "offset": "0x18f0",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          2,
+          5,
+          11,
+          12
+        ]
+      },
+      {
+        "addr": "@soulmarkwnd",
+        "offset": "0x454",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@soulmarkwnd",
+        "offset": "0x61c",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@soulmarkwnd",
+        "offset": "0x7e4",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@soulmarkwnd",
+        "offset": "0x9ac",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@soulmarkwnd",
+        "offset": "0xb74",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@soulmarkwnd",
+        "offset": "0xd3c",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@soulmarkwnd",
+        "offset": "0xf04",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@soulmarkwnd",
+        "offset": "0x10cc",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@soulmarkwnd",
+        "offset": "0x1294",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@soulmarkwnd",
+        "offset": "0x145c",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@soulmarkwnd",
+        "offset": "0x1624",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@soulmarkwnd",
+        "offset": "0x17ec",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@tm",
+        "offset": "0x10",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      {
+        "addr": "@tm",
+        "offset": "0xc",
+        "type": "int",
+        "choices": [
+          1,
+          15,
+          28,
+          31
+        ]
+      },
+      {
+        "addr": "@tm",
+        "offset": "0x14",
+        "type": "int",
+        "choices": [
+          -100,
+          0,
+          126,
+          300
+        ]
+      }
+    ]
+  },
+  "_survivors": "L342: Unicorn zeroes the local buffer, so deleting name_guess[0x1e] = 0 or moving the terminator to index 0x1f leaves the C string unchanged."
+}

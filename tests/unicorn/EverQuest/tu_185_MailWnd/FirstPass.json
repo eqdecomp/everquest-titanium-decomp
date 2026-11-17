@@ -1,0 +1,180 @@
+{
+  "function": "Pane_guess::FirstPass_guess",
+  "original": "0x0052f636",
+  "sources": [
+    "src/EverQuest/tu_185_MailWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@pane",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "pane": {
+      "size": "0x1c0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x178", "u32": "@list"},
+        {"offset": "0x17c", "u32": "@flag17c"},
+        {"offset": "0x180", "u32": "@flag180"},
+        {"offset": "0x184", "u32": "@flag184"},
+        {"offset": "0x188", "u32": "@flag188"},
+        {"offset": "0x18c", "u32": "@flag18c"},
+        {"offset": "0x190", "u32": "@flag190"}
+      ]
+    },
+    "list": {"size": "0x200", "fill": "random"},
+    "flag17c": {"size": "0x100", "fill": "random"},
+    "flag180": {"size": "0x100", "fill": "random"},
+    "flag184": {"size": "0x100", "fill": "random"},
+    "flag188": {"size": "0x100", "fill": "random"},
+    "flag18c": {"size": "0x100", "fill": "random"},
+    "flag190": {"size": "0x100", "fill": "random"},
+    "state": {"size": "0x100", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00850be8", "u32": "@state"},
+    {"addr": "@state", "offset": "0x5c", "u8": 0}
+  ],
+  "callees": {
+    "0x0047c3af": {
+      "name": "Table_guess::ctor",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "keep"
+    },
+    "0x0059bb50": {
+      "name": "ListSelect_guess::GetSelected_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]
+    },
+    "0x00406e7e": {
+      "name": "Table_guess::dtor",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "keep"
+    }
+  },
+  "cases": [
+    {
+      "name": "typical_count1",
+      "args": []
+    },
+    {
+      "name": "count_zero",
+      "args": [],
+      "callees": {
+        "0x0059bb50": {"name": "GetSelected", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]}
+      }
+    },
+    {
+      "name": "count_minus1",
+      "args": [],
+      "callees": {
+        "0x0059bb50": {"name": "GetSelected", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "ffffffff"}]}
+      }
+    },
+    {
+      "name": "count_two",
+      "args": [],
+      "callees": {
+        "0x0059bb50": {"name": "GetSelected", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "02000000"}]}
+      }
+    },
+    {
+      "name": "count_large",
+      "args": [],
+      "callees": {
+        "0x0059bb50": {"name": "GetSelected", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "00010000"}]}
+      }
+    },
+    {
+      "name": "state_active",
+      "args": [],
+      "memory": [{"addr": "@state", "offset": "0x5c", "u8": 1}]
+    },
+    {
+      "name": "state_active_count_zero",
+      "args": [],
+      "memory": [{"addr": "@state", "offset": "0x5c", "u8": 1}],
+      "callees": {
+        "0x0059bb50": {"name": "GetSelected", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]}
+      }
+    },
+    {
+      "name": "state_null",
+      "args": [],
+      "memory": [{"addr": "0x00850be8", "u32": 0}]
+    },
+    {
+      "name": "state_null_count_two",
+      "args": [],
+      "memory": [{"addr": "0x00850be8", "u32": 0}],
+      "callees": {
+        "0x0059bb50": {"name": "GetSelected", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "02000000"}]}
+      }
+    },
+    {
+      "name": "list_null",
+      "args": [],
+      "memory": [{"addr": "@pane", "offset": "0x178", "u32": 0}]
+    },
+    {
+      "name": "all_flags_null",
+      "args": [],
+      "memory": [
+        {"addr": "@pane", "offset": "0x17c", "u32": 0},
+        {"addr": "@pane", "offset": "0x180", "u32": 0},
+        {"addr": "@pane", "offset": "0x184", "u32": 0},
+        {"addr": "@pane", "offset": "0x188", "u32": 0},
+        {"addr": "@pane", "offset": "0x18c", "u32": 0},
+        {"addr": "@pane", "offset": "0x190", "u32": 0}
+      ]
+    },
+    {
+      "name": "only_180_and_190_set",
+      "args": [],
+      "memory": [
+        {"addr": "@pane", "offset": "0x17c", "u32": 0},
+        {"addr": "@pane", "offset": "0x184", "u32": 0},
+        {"addr": "@pane", "offset": "0x188", "u32": 0},
+        {"addr": "@pane", "offset": "0x18c", "u32": 0}
+      ]
+    },
+    {
+      "name": "count_two_flags_mixed",
+      "args": [],
+      "memory": [
+        {"addr": "@pane", "offset": "0x180", "u32": 0},
+        {"addr": "@pane", "offset": "0x18c", "u32": 0}
+      ],
+      "callees": {
+        "0x0059bb50": {"name": "GetSelected", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "02000000"}]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5436982,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {"addr": "0x00850be8", "type": "u32", "choices": ["@state", "0x0"]},
+      {"addr": "@state", "offset": "0x5c", "type": "u8", "range": [0, 1]},
+      {"addr": "@pane", "offset": "0x17c", "type": "u32", "choices": ["@flag17c", "0x0"]},
+      {"addr": "@pane", "offset": "0x180", "type": "u32", "choices": ["@flag180", "0x0"]},
+      {"addr": "@pane", "offset": "0x184", "type": "u32", "choices": ["@flag184", "0x0"]},
+      {"addr": "@pane", "offset": "0x188", "type": "u32", "choices": ["@flag188", "0x0"]},
+      {"addr": "@pane", "offset": "0x18c", "type": "u32", "choices": ["@flag18c", "0x0"]},
+      {"addr": "@pane", "offset": "0x190", "type": "u32", "choices": ["@flag190", "0x0"]},
+      {"addr": "@pane", "offset": "0x178", "type": "u32", "choices": ["@list", "0x0"]}
+    ]
+  }
+}

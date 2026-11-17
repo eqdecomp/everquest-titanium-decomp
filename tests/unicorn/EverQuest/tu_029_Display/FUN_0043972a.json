@@ -1,0 +1,1325 @@
+{
+  "function": "CDisplay_guess::CreateActor_guess",
+  "original": "0x0043972a",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "size": "0x31c",
+  "conv": "thiscall",
+  "this": "@client",
+  "args": [
+    {
+      "name": "name",
+      "type": "cstr"
+    },
+    {
+      "name": "x",
+      "type": "float"
+    },
+    {
+      "name": "y",
+      "type": "float"
+    },
+    {
+      "name": "z",
+      "type": "float"
+    },
+    {
+      "name": "x2",
+      "type": "float"
+    },
+    {
+      "name": "y2",
+      "type": "float"
+    },
+    {
+      "name": "height",
+      "type": "float"
+    },
+    {
+      "name": "allowFallback",
+      "type": "bool"
+    },
+    {
+      "name": "useFlag",
+      "type": "bool"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "client": {
+      "size": "0x2d70",
+      "fill": "random"
+    },
+    "fn_lookup": {
+      "size": "0x4"
+    },
+    "fn_radius": {
+      "size": "0x4"
+    },
+    "fn_acquire": {
+      "size": "0x4"
+    },
+    "fn_set_kind": {
+      "size": "0x4"
+    },
+    "fn_set_position": {
+      "size": "0x4"
+    },
+    "fn_set_second": {
+      "size": "0x4"
+    },
+    "language_service": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@language_vtbl"
+        }
+      ]
+    },
+    "language_vtbl": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@fn_lookup"
+        }
+      ]
+    },
+    "service": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@service_vtbl"
+        }
+      ]
+    },
+    "service_vtbl": {
+      "size": "0x48",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x44",
+          "u32": "@fn_acquire"
+        }
+      ]
+    },
+    "actor_def": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@actor_def_vtbl"
+        }
+      ]
+    },
+    "actor_def_vtbl": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@fn_radius"
+        }
+      ]
+    },
+    "actor_instance": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@actor_instance_vtbl"
+        }
+      ]
+    },
+    "actor_instance_vtbl": {
+      "size": "0x50",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x30",
+          "u32": "@fn_set_kind"
+        },
+        {
+          "offset": "0x48",
+          "u32": "@fn_set_position"
+        },
+        {
+          "offset": "0x4c",
+          "u32": "@fn_set_second"
+        }
+      ]
+    },
+    "world_a": {
+      "size": "0x208",
+      "fill": "zero"
+    },
+    "world_b": {
+      "size": "0x208",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0099e360",
+      "u32": "@language_service"
+    },
+    {
+      "addr": "0x0099e368",
+      "u32": "@service"
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": "@world_a"
+    },
+    {
+      "addr": "0x00905cc4",
+      "u32": "@world_b"
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@actor_def_vtbl"
+    },
+    {
+      "addr": "0x00905d10",
+      "u32": "@actor_instance_vtbl"
+    },
+    {
+      "addr": "@client",
+      "offset": "0x2cf8",
+      "u32": 1
+    },
+    {
+      "addr": "@client",
+      "offset": "0x150",
+      "u32": "0x13572468"
+    },
+    {
+      "addr": "@world_a",
+      "offset": "0x204",
+      "u32": 0
+    },
+    {
+      "addr": "@world_b",
+      "offset": "0x204",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x00621e9c": {
+      "name": "__stricmp",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr"
+      ],
+      "ret": 1
+    },
+    "0x0062202c": {
+      "name": "__strnicmp",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "u32"
+      ],
+      "ret": 1
+    },
+    "0x00574830": {
+      "name": "NumericTail_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "int"
+      ],
+      "ret": 0
+    },
+    "@fn_lookup": {
+      "name": "LanguageService_lookup",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "ignore"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "00 5d 90 00",
+          "call": 0
+        }
+      ]
+    },
+    "@fn_radius": {
+      "name": "ActorDef_radius",
+      "conv": "thiscall",
+      "args": [],
+      "ret_float": 4.0
+    },
+    "@fn_acquire": {
+      "name": "Service_acquire",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "mem:12",
+        "mem:12",
+        "int",
+        "float",
+        "float",
+        "float",
+        "int",
+        "int",
+        "int",
+        "int",
+        "ignore"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 11,
+          "offset": 0,
+          "hex": "10 5d 90 00"
+        }
+      ]
+    },
+    "@fn_set_kind": {
+      "name": "ActorInstance_set_kind",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "@fn_set_position": {
+      "name": "ActorInstance_set_position",
+      "conv": "thiscall",
+      "args": [
+        "mem:12"
+      ],
+      "ret": 0
+    },
+    "@fn_set_second": {
+      "name": "ActorInstance_set_second",
+      "conv": "thiscall",
+      "args": [
+        "mem:12"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "__stricmp": "0x00621e9c",
+    "__strnicmp": "0x0062202c"
+  },
+  "cases": [
+    {
+      "name": "inactive_client",
+      "args": [
+        "abc",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        0.0,
+        1,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@client",
+          "offset": "0x2cf8",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "player_name",
+      "args": [
+        {
+          "from_image": "0x00642510",
+          "image_size": 8,
+          "as": "cstr"
+        },
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        0.0,
+        0,
+        1
+      ],
+      "callees": {
+        "0x00621e9c": {
+          "name": "__stricmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "append_boundary_9",
+      "args": [
+        "123456789",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        0.0,
+        0,
+        0
+      ],
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "no_append_boundary_10",
+      "args": [
+        "1234567890",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        0.0,
+        0,
+        1
+      ],
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "no_fallback_definition",
+      "args": [
+        "abc",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        0.0,
+        0,
+        1
+      ],
+      "callees": {
+        "@fn_lookup": {
+          "name": "LanguageService_lookup",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": 0,
+          "writes": []
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "fallback_it63",
+      "args": [
+        "abc",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        2.0,
+        1,
+        0
+      ],
+      "callees": {
+        "@fn_lookup": {
+          "name": "LanguageService_lookup",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "00 5d 90 00",
+              "call": 1
+            }
+          ]
+        },
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "0x00574830": {
+          "name": "NumericTail_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "int"
+          ],
+          "ret": 63
+        }
+      },
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "fallback_red_blob",
+      "args": [
+        "abc",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        1.0,
+        1,
+        1
+      ],
+      "callees": {
+        "@fn_lookup": {
+          "name": "LanguageService_lookup",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "00 5d 90 00",
+              "call": 2
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "all_definitions_missing",
+      "args": [
+        "abc",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        1.0,
+        1,
+        1
+      ],
+      "callees": {
+        "@fn_lookup": {
+          "name": "LanguageService_lookup",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": 0,
+          "writes": []
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "regular_it66",
+      "args": [
+        "IT66",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        0.0,
+        0,
+        1
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": [
+            0,
+            1,
+            0,
+            0
+          ]
+        },
+        "0x00574830": {
+          "name": "NumericTail_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "int"
+          ],
+          "ret": 66
+        }
+      },
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "regular_it69",
+      "args": [
+        "IT69",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        2.0,
+        0,
+        0
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            1,
+            0
+          ]
+        },
+        "0x00574830": {
+          "name": "NumericTail_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "int"
+          ],
+          "ret": 69
+        }
+      },
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "regular_it73",
+      "args": [
+        "IT73",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        0.0,
+        0,
+        1
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": [
+            1,
+            1,
+            0,
+            1,
+            0,
+            1,
+            1,
+            0
+          ]
+        },
+        "0x00574830": {
+          "name": "NumericTail_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "int"
+          ],
+          "ret": 73
+        }
+      },
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "regular_it74",
+      "args": [
+        "IT74",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        2.0,
+        0,
+        1
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        },
+        "0x00574830": {
+          "name": "NumericTail_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "int"
+          ],
+          "ret": 74
+        }
+      },
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "regular_it76",
+      "args": [
+        "IT76",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        1.0,
+        1,
+        1
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        },
+        "0x00574830": {
+          "name": "NumericTail_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "int"
+          ],
+          "ret": 76
+        }
+      },
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "special_zone_it70",
+      "args": [
+        "IT70",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        2.0,
+        0,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@world_a",
+          "offset": "0x204",
+          "u32": 60
+        }
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            0
+          ]
+        },
+        "0x00574830": {
+          "name": "NumericTail_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "int"
+          ],
+          "ret": 70
+        }
+      },
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "special_zone_it74",
+      "args": [
+        "IT74",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        0.0,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@world_a",
+          "offset": "0x204",
+          "u32": 67
+        }
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        },
+        "0x00574830": {
+          "name": "NumericTail_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "int"
+          ],
+          "ret": 74
+        }
+      },
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "world_b_special_zone",
+      "args": [
+        "IT70",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        1.0,
+        1,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": 0
+        },
+        {
+          "addr": "0x00905cc4",
+          "u32": "@world_b"
+        },
+        {
+          "addr": "@world_b",
+          "offset": "0x204",
+          "u32": 19
+        }
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            0
+          ]
+        },
+        "0x00574830": {
+          "name": "NumericTail_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "int"
+          ],
+          "ret": 70
+        }
+      },
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "both_worlds_null",
+      "args": [
+        "IT70",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        1.0,
+        1,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": 0
+        },
+        {
+          "addr": "0x00905cc4",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            1,
+            0
+          ]
+        },
+        "0x00574830": {
+          "name": "NumericTail_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "int"
+          ],
+          "ret": 70
+        }
+      },
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "bbboard",
+      "args": [
+        "BBBOARD",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        0.0,
+        0,
+        1
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            1,
+            0,
+            1
+          ]
+        }
+      },
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "unknown_numeric_it",
+      "args": [
+        "IT99",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        3.0,
+        0,
+        0
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        },
+        "0x00574830": {
+          "name": "NumericTail_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "int"
+          ],
+          "ret": 99
+        }
+      },
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "it_without_numeric_suffix",
+      "args": [
+        "IT",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        0.0,
+        0,
+        1
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        },
+        "0x00574830": {
+          "name": "NumericTail_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "int"
+          ],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": "0x00905d10"
+      }
+    },
+    {
+      "name": "service_rejects",
+      "args": [
+        "abc",
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        5.0,
+        0.0,
+        0,
+        1
+      ],
+      "callees": {
+        "@fn_acquire": {
+          "name": "Service_acquire",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "mem:12",
+            "mem:12",
+            "int",
+            "float",
+            "float",
+            "float",
+            "int",
+            "int",
+            "int",
+            "int",
+            "ignore"
+          ],
+          "ret": -1
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4429610,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "abc",
+          {
+            "from_image": "0x00642510",
+            "image_size": 8,
+            "as": "cstr"
+          },
+          "123456789",
+          "1234567890",
+          "IT66",
+          "IT74",
+          "IT76",
+          "BBBOARD"
+        ]
+      },
+      {
+        "range": [
+          -10.0,
+          10.0
+        ]
+      },
+      {
+        "range": [
+          -10.0,
+          10.0
+        ]
+      },
+      {
+        "range": [
+          -10.0,
+          10.0
+        ]
+      },
+      {
+        "range": [
+          -10.0,
+          10.0
+        ]
+      },
+      {
+        "range": [
+          -10.0,
+          10.0
+        ]
+      },
+      {
+        "range": [
+          -1.0,
+          10.0
+        ]
+      },
+      {
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@client",
+        "offset": "0x2cf8",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00905ce4",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@world_a"
+        ]
+      },
+      {
+        "addr": "0x00905cc4",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@world_b"
+        ]
+      },
+      {
+        "addr": "@world_a",
+        "offset": "0x204",
+        "type": "int",
+        "choices": [
+          0,
+          19,
+          55,
+          60,
+          67,
+          68
+        ]
+      },
+      {
+        "addr": "@world_b",
+        "offset": "0x204",
+        "type": "int",
+        "choices": [
+          0,
+          19,
+          55,
+          60,
+          67,
+          68
+        ]
+      }
+    ]
+  }
+}

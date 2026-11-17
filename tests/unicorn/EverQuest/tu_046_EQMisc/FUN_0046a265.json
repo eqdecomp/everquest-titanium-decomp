@@ -1,0 +1,130 @@
+{
+  "function": "do_roleplay_guess",
+  "_survivors": "L2372: (x != 0) - 1 is 0 exactly when 1 - (x != 0) is 0; only the == 0 test reads state, so no input can tell them apart",
+  "original": "0x0046a265",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "opts_guess", "type": "ptr"},
+    {"name": "text_guess", "type": "cstr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "opts": {"size": "0x268", "fill": "random"},
+    "gopts": {"size": "0x268", "fill": "random"},
+    "chr": {"size": "0xE28", "fill": "random"},
+    "strtab": {"size": "0x10", "fill": "zero"},
+    "ever": {"size": "0x10", "fill": "zero"},
+    "fmt": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@fmt", "cstr": "Options on"},
+    {"addr": "0x00905CB0", "u32": "@strtab"},
+    {"addr": "0x00988DF0", "u32": "@ever"},
+    {"addr": "0x00905CE4", "u32": "@gopts"},
+    {"addr": "0x00905D00", "u32": "@chr"}
+  ],
+  "callees": {
+    "0x005dfa00": {"name": "StringTable_getString_46a265", "conv": "thiscall", "args": ["u32", "u32"], "ret": "@fmt"},
+    "0x00574990": {"name": "Match_46a265", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 0]},
+    "0x00479e97": {"name": "IsOn_46a265", "conv": "thiscall", "args": [], "ret": [0]},
+    "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ptr", "cstr"], "varargs": "printf", "ret": 0,
+                   "writes": [{"arg": 0, "hex": "4f7074696f6e73206f6e00"}]},
+    "0x004912b1": {"name": "EQSendMessage", "conv": "cdecl", "args": ["ptr", "u32", "mem:8", "u32", "int"], "ret": 0},
+    "0x004a1350": {"name": "GlobalContext_4a1350", "conv": "thiscall", "args": ["int", "int", "int"]},
+    "0x004ae514": {"name": "WriteInt_4ae514", "conv": "thiscall", "args": ["int", "cstr", "cstr"]},
+    "0x004982c6": {"name": "CEverQuest_dsp_chat", "conv": "thiscall", "args": ["cstr", "int", "bool"]},
+    "0x0047aa0b": {"name": "Refresh_47aa0b", "conv": "thiscall", "args": []}
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "phase 6 returns at once",
+      "args": ["@opts", "abc"],
+      "memory": [{"addr": "0x00923D58", "u32": 6}]
+    },
+    {
+      "name": "first match fails: off, global off",
+      "args": ["@opts", "abc"],
+      "callees": {"0x00574990": {"name": "Match_46a265", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [0]},
+                  "0x00479e97": {"name": "IsOn_46a265", "conv": "thiscall", "args": [], "ret": [0]}}
+    },
+    {
+      "name": "first match fails: off, global on",
+      "args": ["@opts", "abc"],
+      "callees": {"0x00574990": {"name": "Match_46a265", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [0]},
+                  "0x00479e97": {"name": "IsOn_46a265", "conv": "thiscall", "args": [], "ret": [1]}}
+    },
+    {
+      "name": "second match fails, flags bit0 clear: on",
+      "args": ["@opts", "abc"],
+      "memory": [{"addr": "@opts", "offset": "0x264", "u32": 2}],
+      "callees": {"0x00574990": {"name": "Match_46a265", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 0]},
+                  "0x00479e97": {"name": "IsOn_46a265", "conv": "thiscall", "args": [], "ret": [0, 1]}}
+    },
+    {
+      "name": "second match fails, flags bit0 set, opts off: message",
+      "args": ["@opts", "abc"],
+      "memory": [{"addr": "@opts", "offset": "0x264", "u32": 1}],
+      "callees": {"0x00574990": {"name": "Match_46a265", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 0]},
+                  "0x00479e97": {"name": "IsOn_46a265", "conv": "thiscall", "args": [], "ret": [0]}}
+    },
+    {
+      "name": "second match fails, opts on: global on",
+      "args": ["@opts", "abc"],
+      "callees": {"0x00574990": {"name": "Match_46a265", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 0]},
+                  "0x00479e97": {"name": "IsOn_46a265", "conv": "thiscall", "args": [], "ret": [1, 1]}}
+    },
+    {
+      "name": "both match, opts on: off",
+      "args": ["@opts", "abc"],
+      "callees": {"0x00574990": {"name": "Match_46a265", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 1]},
+                  "0x00479e97": {"name": "IsOn_46a265", "conv": "thiscall", "args": [], "ret": [1, 0]}}
+    },
+    {
+      "name": "both match, opts off, flags bit0 set: message",
+      "args": ["@opts", "abc"],
+      "memory": [{"addr": "@opts", "offset": "0x264", "u32": 3}],
+      "callees": {"0x00574990": {"name": "Match_46a265", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 1]},
+                  "0x00479e97": {"name": "IsOn_46a265", "conv": "thiscall", "args": [], "ret": [0, 0]}}
+    },
+    {
+      "name": "both match, opts off, flags bit0 clear: on, global on",
+      "args": ["@opts", "abc"],
+      "memory": [{"addr": "@opts", "offset": "0x264", "u32": 0}],
+      "callees": {"0x00574990": {"name": "Match_46a265", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 1]},
+                  "0x00479e97": {"name": "IsOn_46a265", "conv": "thiscall", "args": [], "ret": [0, 0, 1]}}
+    },
+    {
+      "name": "opts is the global object",
+      "args": ["@gopts", "abc"],
+      "memory": [{"addr": "0x00905CE4", "u32": "@gopts"}, {"addr": "@gopts", "offset": "0x264", "u32": 0}],
+      "callees": {"0x00574990": {"name": "Match_46a265", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 0]},
+                  "0x00479e97": {"name": "IsOn_46a265", "conv": "thiscall", "args": [], "ret": [0, 0]}}
+    },
+    {
+      "name": "empty text, first match fails",
+      "args": ["@opts", ""],
+      "callees": {"0x00574990": {"name": "Match_46a265", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [0]},
+                  "0x00479e97": {"name": "IsOn_46a265", "conv": "thiscall", "args": [], "ret": [1]}}
+    }
+  ],
+  "fuzz": {
+    "seed": 4629093,
+    "count": 150,
+    "args": [
+      {"choices": ["@opts"]},
+      {}
+    ],
+    "memory": [
+      {"addr": "@opts", "offset": "0x264", "type": "u32", "choices": [0, 1, 2, 3, 64, 65]},
+      {"addr": "@opts", "offset": "0x258", "type": "short", "range": [-5, 40]},
+      {"addr": "@gopts", "offset": "0x264", "type": "u32", "choices": [0, 1, 2, 3]},
+      {"addr": "0x00923D58", "type": "u32", "choices": [0, 5, 6, 7]}
+    ]
+  }
+}

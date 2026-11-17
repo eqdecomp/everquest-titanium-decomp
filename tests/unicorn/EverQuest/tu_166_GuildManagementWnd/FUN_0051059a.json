@@ -1,0 +1,342 @@
+{
+  "function": "GuildMgmtWnd_guess::AddMember_guess",
+  "original": "0x0051059a",
+  "sources": [
+    "src/EverQuest/tu_166_GuildManagementWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {
+      "name": "entry",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x40c",
+      "fill": "random"
+    },
+    "entry": {
+      "size": "0x274",
+      "fill": "random"
+    },
+    "membersList": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "notesList": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "tributeList": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "record": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "stringHeap": {
+      "size": "0x1000",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@owner",
+      "offset": "0x16c",
+      "u32": "@membersList"
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x194",
+      "u32": "@notesList"
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x1a8",
+      "u32": "@tributeList"
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x1c5",
+      "u8": 0
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x1c8",
+      "u32": 0
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x1d8",
+      "u32": 9
+    },
+    {
+      "addr": "@entry",
+      "offset": "0x4",
+      "u8": 1
+    },
+    {
+      "addr": "@entry",
+      "offset": "0x10",
+      "cstr": "Ada"
+    },
+    {
+      "addr": "@record",
+      "cstr": "saved record"
+    }
+  ],
+  "callees": {
+    "0x0050319b": {
+      "name": "Buffer_guess::Insert_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ignore"
+      ]
+    },
+    "0x0050f485": {
+      "name": "GuildMgmtWnd_guess::FindPersonalNote_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "@record"
+    },
+    "0x00571e00": {
+      "name": "CXStr::CXStr(const char*)",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x0059b9d0": {
+      "name": "CListWnd::AddString",
+      "conv": "thiscall",
+      "args": [
+        "mem:4",
+        "u32",
+        "ptr",
+        "ptr"
+      ],
+      "ret": [
+        7,
+        8,
+        9
+      ]
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true,
+      "ret": 0
+    },
+    "0x0050f5cc": {
+      "name": "GuildMgmtWnd_guess::UpdateMemberRow_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ]
+    },
+    "0x0050f9d2": {
+      "name": "GuildMgmtWnd_guess::UpdateNoteRow_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ]
+    },
+    "0x0050fb61": {
+      "name": "GuildMgmtWnd_guess::UpdateTributeRow_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ]
+    },
+    "0x0050e2d2": {
+      "name": "GuildMgmtWnd_guess::UpdateButtons_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "kernel32.dll!GetProcessHeap": {
+      "conv": "stdcall",
+      "args": [],
+      "ret": 1
+    },
+    "kernel32.dll!HeapAlloc": {
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": "@stringHeap"
+    },
+    "kernel32.dll!HeapFree": {
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "visible with lookup hit and all lists",
+      "args": [
+        "@entry"
+      ],
+      "callees": {
+        "0x0050f485": {
+          "name": "GuildMgmtWnd_guess::FUN_0050f485_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": "@record"
+        }
+      }
+    },
+    {
+      "name": "hidden offline with lookup miss",
+      "args": [
+        "@entry"
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x1c5",
+          "u8": 0
+        },
+        {
+          "addr": "@entry",
+          "offset": "0x4",
+          "u8": 0
+        }
+      ],
+      "callees": {
+        "0x0050f485": {
+          "name": "GuildMgmtWnd_guess::FUN_0050f485_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "visible offline with show flag",
+      "args": [
+        "@entry"
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x1c5",
+          "u8": 1
+        },
+        {
+          "addr": "@entry",
+          "offset": "0x4",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "visible with every list absent",
+      "args": [
+        "@entry"
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x16c",
+          "u32": 0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x194",
+          "u32": 0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1a8",
+          "u32": 0
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5309850,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@entry"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@entry",
+        "offset": "0x4",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x1c5",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x16c",
+        "type": "u32",
+        "choices": [
+          0,
+          "@membersList"
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x194",
+        "type": "u32",
+        "choices": [
+          0,
+          "@notesList"
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x1a8",
+        "type": "u32",
+        "choices": [
+          0,
+          "@tributeList"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,320 @@
+{
+  "function": "EQPlayer_guess::SwapFace_guess",
+  "original": "0x0047dec4",
+  "sources": ["src/EverQuest/tu_053_EQPlayer.cpp"],
+  "conv": "thiscall",
+  "this": "@eqplayer",
+  "args": [
+    {"name": "value", "type": "int"},
+    {"name": "oldValue", "type": "int"}
+  ],
+  "ret": "int",
+  "objects": {
+    "eqplayer": {
+      "size": "0x274",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x1a8", "u32": "@actor"},
+        {"offset": "0x246", "u8": 4},
+        {"offset": "0x24d", "u8": 1},
+        {"offset": "0x24e", "u8": 0},
+        {"offset": "0x254", "u8": 0},
+        {"offset": "0x255", "u8": 2},
+        {"offset": "0x260", "u32": 1},
+        {"offset": "0x270", "u32": 1}
+      ]
+    },
+    "actor": {
+      "size": "0x130",
+      "fill": "zero",
+      "init": [
+        {"offset": 0, "u32": "@visual"},
+        {"offset": "0x12c", "u32": "@child0"}
+      ]
+    },
+    "actor_no_visual": {
+      "size": "0x130",
+      "fill": "zero",
+      "init": [{"offset": "0x12c", "u32": "@child0"}]
+    },
+    "actor_no_child": {
+      "size": "0x130",
+      "fill": "zero",
+      "init": [{"offset": 0, "u32": "@visual"}]
+    },
+    "actor_odd": {
+      "size": "0x131",
+      "fill": "zero",
+      "init": [
+        {"offset": 1, "u32": "@visual"},
+        {"offset": "0x12d", "u32": "@child0"}
+      ]
+    },
+    "actor_special": {
+      "size": "0x130",
+      "fill": "zero",
+      "init": [
+        {"offset": 0, "u32": "@visual_odd+0x1"},
+        {"offset": "0x12c", "u32": "@child1"}
+      ]
+    },
+    "actor_82_nohair": {
+      "size": "0x130",
+      "fill": "zero",
+      "init": [
+        {"offset": 0, "u32": "@visual"},
+        {"offset": "0x12c", "u32": "@child1"}
+      ]
+    },
+    "child0": {"size": "0x35", "fill": "zero"},
+    "child1": {
+      "size": "0x35",
+      "fill": "zero",
+      "init": [{"offset": "0x34", "u8": 1}]
+    },
+    "visual": {
+      "size": 4,
+      "fill": "zero",
+      "init": [{"offset": 0, "u32": "@vtbl"}]
+    },
+    "visual_odd": {
+      "size": 5,
+      "fill": "zero",
+      "init": [{"offset": 1, "u32": "@vtbl"}]
+    },
+    "vtbl": {
+      "size": "0x158",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xb0", "u32": "@fn_slot44"},
+        {"offset": "0xec", "u32": "@fn_slot59"},
+        {"offset": "0x154", "u32": "@fn_slot85"}
+      ]
+    },
+    "fn_slot44": {"size": 4, "fill": "zero"},
+    "fn_slot59": {"size": 4, "fill": "zero"},
+    "fn_slot85": {"size": 4, "fill": "zero"},
+    "appearance": {
+      "size": "0x2d5c",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x144", "u8": 1},
+        {"offset": "0x2d58", "u32": 1}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "0x00905d24", "u32": "@appearance"},
+    {"addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4},
+    {"addr": "0x006989a0", "from_image": "0x006989a0", "image_size": 96},
+    {"addr": "0x006410a8", "from_image": "0x006410a8", "image_size": 64},
+    {"addr": "0x006974cc", "from_image": "0x006974cc", "image_size": 16}
+  ],
+  "callees": {
+    "0x0048f019": {"name": "FUN_0048f019", "conv": "thiscall", "args": [], "ret": 0},
+    "0x004798d7": {"name": "GetActorTag_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x0047a491": {
+      "name": "GetBaseFaceNbr_guess",
+      "conv": "thiscall",
+      "args": ["int", "ignore"],
+      "ret": "arg0",
+      "writes": [
+        {"arg": 1, "offset": 0, "hex": "00", "call": 0},
+        {"arg": 1, "offset": 0, "hex": "01", "call": 1}
+      ]
+    },
+    "0x0047a4e1": {"name": "GetBeardKind_guess", "conv": "thiscall", "args": [], "ret": 2},
+    "0x0047b1f1": {"name": "GetRaceOffsetForAttachmentITs_guess", "conv": "thiscall", "args": [], "ret": 3},
+    "0x0047a3d0": {"name": "GetArmorType_guess", "conv": "thiscall", "args": ["int"], "ret": "arg0"},
+    "0x00483c3c": {
+      "name": "SwapMaterial_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "int", "int", "u8"],
+      "ret": "arg4"
+    },
+    "0x0047b8d5": {"name": "FUN_0047b8d5", "conv": "thiscall", "args": ["int"]},
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr"],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x0060e450": {"name": "FUN_0060e450", "conv": "cdecl", "args": ["ignore", "ignore"], "ret": 0},
+    "@fn_slot44": {
+      "name": "ActorVisual::Slot044",
+      "conv": "thiscall",
+      "args": ["mem:16", "mem:16", "ptr", "int"],
+      "ret": "arg3"
+    },
+    "@fn_slot59": {
+      "name": "ActorVisual::Slot059",
+      "conv": "thiscall",
+      "args": ["int", "ignore"],
+      "ret": 0
+    },
+    "@fn_slot85": {"name": "ActorVisual::Slot085", "conv": "thiscall", "args": ["int"], "ret": "this"}
+  },
+  "rewrite_aliases": {"_sprintf": "0x0060d5eb"},
+  "cases": [
+    {"name": "no_actor_info", "args": [1, 1], "memory": [{"addr": "@eqplayer", "offset": "0x1a8", "u32": 0}]},
+    {"name": "no_visual", "args": [1, 1], "memory": [{"addr": "@eqplayer", "offset": "0x1a8", "u32": "@actor_no_visual"}]},
+    {"name": "no_child_state", "args": [1, 1], "memory": [{"addr": "@eqplayer", "offset": "0x1a8", "u32": "@actor_no_child"}]},
+    {
+      "name": "manager_nonzero",
+      "args": [1, 1],
+      "callees": {"0x0048f019": {"name": "FUN_0048f019", "conv": "thiscall", "args": [], "ret": 1}}
+    },
+    {"name": "negative_value", "args": [-1, 3]},
+    {"name": "negative_old_value", "args": [3, -1]},
+    {"name": "normal_face", "args": [1, 1]},
+    {"name": "normal_zero_old", "args": [1, 0]},
+    {
+      "name": "face_without_child_state",
+      "args": [7, 2],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x254", "u8": 255},
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 3}
+      ]
+    },
+    {
+      "name": "color_texture",
+      "args": [5, 2],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x1a8", "u32": "@actor_special"},
+        {"addr": "@eqplayer", "offset": "0x254", "u8": 255},
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 1}
+      ]
+    },
+    {
+      "name": "color_range_boundary",
+      "args": [5, 2],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x1a8", "u32": "@actor_special"},
+        {"addr": "@eqplayer", "offset": "0x246", "u8": 24},
+        {"addr": "@eqplayer", "offset": "0x254", "u8": 255},
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 1}
+      ]
+    },
+    {
+      "name": "race_82_hair",
+      "args": [7, 7],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x1a8", "u32": "@actor_special"},
+        {"addr": "@eqplayer", "offset": "0x254", "u8": 255},
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 130}
+      ],
+      "callees": {"@fn_slot85": {"name": "ActorVisual::Slot085", "conv": "thiscall", "args": ["int"], "ret": 1}}
+    },
+    {
+      "name": "race_82_no_hair",
+      "args": [2, 4],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x1a8", "u32": "@actor_82_nohair"},
+        {"addr": "@eqplayer", "offset": "0x254", "u8": 255},
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 130}
+      ],
+      "callees": {"@fn_slot85": {"name": "ActorVisual::Slot085", "conv": "thiscall", "args": ["int"], "ret": 0}}
+    },
+    {
+      "name": "race_14a",
+      "args": [5, 2],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x1a8", "u32": "@actor_special"},
+        {"addr": "@eqplayer", "offset": "0x254", "u8": 255},
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 330}
+      ],
+      "callees": {
+        "0x00483c3c": {
+          "name": "FUN_00483c3c",
+          "conv": "thiscall",
+          "args": ["int", "int", "int", "int", "u8"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "race_80",
+      "args": [5, 2],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x1a8", "u32": "@actor_special"},
+        {"addr": "@eqplayer", "offset": "0x254", "u8": 255},
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 128}
+      ]
+    },
+    {
+      "name": "race_3",
+      "args": [4, 2],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x1a8", "u32": "@actor_special"},
+        {"addr": "@eqplayer", "offset": "0x254", "u8": 255},
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 3}
+      ]
+    },
+    {
+      "name": "race_6_gender_zero",
+      "args": [4, 2],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x1a8", "u32": "@actor_special"},
+        {"addr": "@eqplayer", "offset": "0x24e", "u8": 0},
+        {"addr": "@eqplayer", "offset": "0x254", "u8": 255},
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 6}
+      ]
+    },
+    {
+      "name": "race_4_gender_zero",
+      "args": [4, 2],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x1a8", "u32": "@actor_special"},
+        {"addr": "@eqplayer", "offset": "0x24e", "u8": 0},
+        {"addr": "@eqplayer", "offset": "0x254", "u8": 255},
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 4}
+      ]
+    },
+    {
+      "name": "race_7_gender_one",
+      "args": [4, 2],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x1a8", "u32": "@actor_special"},
+        {"addr": "@eqplayer", "offset": "0x24e", "u8": 1},
+        {"addr": "@eqplayer", "offset": "0x254", "u8": 255},
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 7}
+      ]
+    },
+    {
+      "name": "race_8_gender_one",
+      "args": [4, 2],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x1a8", "u32": "@actor_special"},
+        {"addr": "@eqplayer", "offset": "0x24e", "u8": 1},
+        {"addr": "@eqplayer", "offset": "0x254", "u8": 255},
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 8}
+      ]
+    },
+    {
+      "name": "race_9",
+      "args": [4, 2],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x1a8", "u32": "@actor_special"},
+        {"addr": "@eqplayer", "offset": "0x254", "u8": 255},
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 9}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4710084,
+    "count": 100,
+    "args": [{"range": [-1, 12]}, {"range": [-1, 12]}],
+    "memory": [
+      {"addr": "@eqplayer", "offset": "0x254", "type": "u8", "choices": [0, 255]},
+      {"addr": "@eqplayer", "offset": "0x24e", "type": "u8", "choices": [0, 1, 2]},
+      {"addr": "@eqplayer", "offset": "0x246", "type": "u8", "choices": [0, 4, 23, 24]},
+      {"addr": "@eqplayer", "offset": "0x260", "type": "int", "choices": [1, 3, 5, 6, 8, 9, 10, 11, 128, 130, 330]},
+      {"addr": "@eqplayer", "offset": "0x270", "type": "int", "choices": [1, 3, 5, 8, 12]},
+      {"addr": "@child0", "offset": "0x34", "type": "u8", "choices": [0, 1]},
+      {"addr": "@appearance", "offset": "0x144", "type": "u8", "choices": [0, 1]},
+      {"addr": "@appearance", "offset": "0x2d58", "type": "int", "choices": [0, 1]}
+    ]
+  },
+  "_survivors": "L4856: faceHair=0 is overwritten by the saved requested value before return; scripted FUN_00483c3c does not inspect the transient field. L4914: __security_check_cookie is stubbed and overwrites EAX after the return value is set."
+}

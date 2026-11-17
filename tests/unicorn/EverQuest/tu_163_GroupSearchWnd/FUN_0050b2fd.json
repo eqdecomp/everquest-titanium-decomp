@@ -1,0 +1,289 @@
+{
+  "function": "CGroupSearchWndView_guess::FillGroupDetailList_guess",
+  "original": "0x0050b2fd",
+  "sources": [
+    "src/EverQuest/tu_163_GroupSearchWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@bigobject",
+  "args": [
+    {
+      "name": "entry_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "u32",
+  "objects": {
+    "bigobject": {
+      "size": "0xe770",
+      "fill": "random"
+    },
+    "entry": {
+      "size": "0x248",
+      "fill": "random"
+    },
+    "widget": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@vtable"
+        }
+      ]
+    },
+    "vtable": {
+      "size": "0x134",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x130",
+          "u32": "@fn_slot76"
+        }
+      ]
+    },
+    "resource": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "fn_slot76": {
+      "size": "0x1",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@bigobject",
+      "offset": "0x258",
+      "u32": "@widget"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@resource"
+    }
+  ],
+  "callees": {
+    "@fn_slot76": {
+      "name": "widget_slot76_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 305419896
+    },
+    "0x005738b0": {
+      "name": "FormatTextBuilder_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "ptr",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x004922d5": {
+      "name": "Translate_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0042d7a7": {
+      "name": "Append_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "mem:12"
+      ]
+    },
+    "0x00509738": {
+      "name": "ApplyToRow_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": [
+        0,
+        1
+      ]
+    },
+    "0x0059b800": {
+      "name": "Submit_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:28"
+      ]
+    },
+    "0x004482fb": {
+      "name": "TextData_destructor_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0042d7e5": {
+      "name": "TextAggregate_destructor_guess",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "negative_count",
+      "args": [
+        "@entry"
+      ],
+      "memory": [
+        {
+          "addr": "@entry",
+          "offset": "0x4c",
+          "u32": -1
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "args": [
+        "@entry"
+      ],
+      "memory": [
+        {
+          "addr": "@entry",
+          "offset": "0x4c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "one_row_false",
+      "args": [
+        "@entry"
+      ],
+      "memory": [
+        {
+          "addr": "@entry",
+          "offset": "0x4c",
+          "u32": 1
+        },
+        {
+          "addr": "@entry",
+          "offset": "0x90",
+          "u32": 17
+        },
+        {
+          "addr": "@entry",
+          "offset": "0x94",
+          "u32": 23
+        },
+        {
+          "addr": "@entry",
+          "offset": "0x9c",
+          "u32": 31
+        }
+      ]
+    },
+    {
+      "name": "two_rows_both_color_paths",
+      "args": [
+        "@entry"
+      ],
+      "memory": [
+        {
+          "addr": "@entry",
+          "offset": "0x4c",
+          "u32": 2
+        },
+        {
+          "addr": "@entry",
+          "offset": "0x90",
+          "u32": 37
+        },
+        {
+          "addr": "@entry",
+          "offset": "0x94",
+          "u32": 41
+        },
+        {
+          "addr": "@entry",
+          "offset": "0x9c",
+          "u32": 43
+        },
+        {
+          "addr": "@entry",
+          "offset": "0xe4",
+          "u32": 47
+        },
+        {
+          "addr": "@entry",
+          "offset": "0xe8",
+          "u32": 53
+        },
+        {
+          "addr": "@entry",
+          "offset": "0xf0",
+          "u32": 59
+        }
+      ]
+    },
+    {
+      "name": "full_six_rows",
+      "args": [
+        "@entry"
+      ],
+      "memory": [
+        {
+          "addr": "@entry",
+          "offset": "0x4c",
+          "u32": 6
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5288701,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@entry"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@entry",
+        "offset": "0x4c",
+        "type": "int",
+        "range": [
+          -1,
+          6
+        ]
+      },
+      {
+        "addr": "@entry",
+        "offset": "0x90",
+        "type": "int",
+        "range": [
+          -100,
+          100
+        ]
+      },
+      {
+        "addr": "@entry",
+        "offset": "0x94",
+        "type": "int",
+        "range": [
+          -100,
+          100
+        ]
+      },
+      {
+        "addr": "@entry",
+        "offset": "0x9c",
+        "type": "int",
+        "range": [
+          -100,
+          100
+        ]
+      }
+    ]
+  },
+  "_survivors": "L2093: flipping this branch changes only text colors, which are written after Append and cannot be observed with the scripted Append and Submit stubs; L2094: first text color is not observable after the scripted Append and Submit stubs; L2095: second text color is not observable after the scripted Append and Submit stubs; L2096: third text color is not observable after the scripted Append and Submit stubs; L2099: second text color is not observable after the scripted Append and Submit stubs; L2100: third text color is not observable after the scripted Append and Submit stubs"
+}

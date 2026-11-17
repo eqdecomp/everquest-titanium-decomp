@@ -1,0 +1,8 @@
+/original/
+/build/
+/paths.local.ini
+*.exe
+*.dll
+*.obj
+*.pdb
+*.map

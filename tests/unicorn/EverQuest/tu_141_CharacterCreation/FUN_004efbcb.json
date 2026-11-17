@@ -1,0 +1,140 @@
+{
+  "function": "CCharacterCreationView_guess::InitializeCharacterStats_guess",
+  "original": "0x004efbcb",
+  "sources": [
+    "src/EverQuest/tu_141_CharacterCreation.cpp"
+  ],
+  "size": "0x16c",
+  "_survivors": "L1614: '>=' for '>' in the 0x96 clamp only differs when max == 150, where the clamp writes 150 = max: equivalent",
+  "conv": "thiscall",
+  "this": "@transferowner",
+  "args": [
+    {
+      "name": "value",
+      "type": "bool"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "transferowner": {
+      "size": "0x424",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x160", "u32": "@destination"},
+        {"offset": "0x228", "u32": "@slots+0x0"},
+        {"offset": "0x22c", "u32": "@slots+0x4"},
+        {"offset": "0x230", "u32": "@slots+0x8"},
+        {"offset": "0x234", "u32": "@slots+0xc"},
+        {"offset": "0x238", "u32": "@slots+0x10"},
+        {"offset": "0x23c", "u32": "@slots+0x14"},
+        {"offset": "0x240", "u32": "@slots+0x18"},
+        {"offset": "0x348", "u32": "@textwnds+0x0"},
+        {"offset": "0x34c", "u32": "@textwnds+0x80"},
+        {"offset": "0x350", "u32": "@textwnds+0x100"},
+        {"offset": "0x354", "u32": "@textwnds+0x180"},
+        {"offset": "0x358", "u32": "@textwnds+0x200"},
+        {"offset": "0x35c", "u32": "@textwnds+0x280"},
+        {"offset": "0x360", "u32": "@textwnds+0x300"}
+      ]
+    },
+    "destination": {
+      "size": "0xc284",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x8", "u32": "@offsets"}
+      ]
+    },
+    "offsets": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": 0}
+      ]
+    },
+    "celldata": {
+      "size": "0x11a0",
+      "fill": "zero"
+    },
+    "slots": {
+      "size": "0x1c",
+      "fill": "zero"
+    },
+    "textwnds": {
+      "size": "0x380",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x005ec220": {
+      "name": "Cell_guess::GetData_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@celldata"
+    },
+    "0x00419dfd": {
+      "name": "SkillOwner_guess::ClassMin_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "int"],
+      "ret": [0, 3, 0, 5, 1, 0, 2]
+    },
+    "0x00417355": {
+      "name": "SkillOwner_guess::FUN_00417355_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": [200, 10, 125, 30, 255, 126, 120]
+    },
+    "0x004ef129": {
+      "name": "UpdateScreenZeroButtons_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "typical_with_refresh",
+      "args": [1],
+      "memory": [
+        {"addr": "@celldata", "offset": "0x1198", "u32": 3},
+        {"addr": "@celldata", "offset": "0x119c", "u8": 2}
+      ]
+    },
+    {
+      "name": "zeros_no_refresh",
+      "args": [0],
+      "memory": [
+        {"addr": "@celldata", "offset": "0x1198", "u32": 1},
+        {"addr": "@celldata", "offset": "0x119c", "u8": 1}
+      ]
+    },
+    {
+      "name": "no_display_windows",
+      "args": [1],
+      "memory": [
+        {"addr": "@celldata", "offset": "0x1198", "u32": 3},
+        {"addr": "@celldata", "offset": "0x119c", "u8": 2},
+        {"addr": "@transferowner", "offset": "0x348", "size": 28, "fill": "zero"}
+      ]
+    },
+    {
+      "name": "level_one_no_refresh",
+      "args": [0],
+      "memory": [
+        {"addr": "@celldata", "offset": "0x1198", "u32": 0},
+        {"addr": "@celldata", "offset": "0x119c", "u8": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5176267,
+    "count": 100,
+    "args": [
+      {}
+    ],
+    "memory": [
+      {"addr": "@celldata", "offset": "0x1198", "type": "int", "range": [0, 20]},
+      {"addr": "@celldata", "offset": "0x119c", "type": "u8", "range": [0, 20]}
+    ]
+  }
+}

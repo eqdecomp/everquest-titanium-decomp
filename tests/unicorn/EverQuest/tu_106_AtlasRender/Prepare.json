@@ -1,0 +1,204 @@
+{
+  "_survivors": "L504: initial_14.field_C zero-init is overwritten by CopyTo before any read; L507: initial_14.field_0 zero-init, likewise; L508: iterator_24.field_C zero-init, likewise; L510: iterator_24.field_4 zero-init, likewise (initial and iterator quads are fully copied by CopyTo before being read); L526: '>' vs '>=' assigns the same maximum, so the result is unchanged",
+  "function": "Owner_guess::UpdateHScrollRange_guess",
+  "original": "0x004d94f0",
+  "sources": [
+    "src/EverQuest/tu_106_AtlasRender.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x120",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@vt"}
+      ]
+    },
+    "vt": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xe4", "u32": "@fn_getquad"}
+      ]
+    },
+    "fn_getquad": {"size": "0x4", "fill": "zero"},
+    "qo": {"size": "0x10", "fill": "random"},
+    "q1": {"size": "0x10", "fill": "random"},
+    "q2": {"size": "0x10", "fill": "random"},
+    "cur1": {"size": "0x10", "fill": "zero"},
+    "cur2": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [],
+  "callees": {
+    "0x004d9160": {
+      "name": "Quad_guess::CopyTo_guess",
+      "passthrough": true
+    },
+    "@fn_getquad": {
+      "name": "owner_GetQuad_slot57",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": ["@qo", "@qo"]
+    },
+    "0x0059d110": {
+      "name": "Owner_guess::Begin_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@cur1"
+    },
+    "0x0059d860": {
+      "name": "Cursor_guess::GetQuad_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": ["@q1", "@q2"]
+    },
+    "0x0059d130": {
+      "name": "Cursor_guess::Next_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": ["@cur2", 0]
+    }
+  },
+  "cases": [
+    {
+      "name": "flag_clear",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x64", "u8": 0},
+        {"addr": "@owner", "offset": "0x110", "u32": 7},
+        {"addr": "@owner", "offset": "0x114", "u32": 9}
+      ]
+    },
+    {
+      "name": "flag_no_cursors",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x64", "u8": 2},
+        {"addr": "@owner", "offset": "0x110", "u32": 7},
+        {"addr": "@owner", "offset": "0x114", "u32": 9}
+      ],
+      "callees": {
+        "0x0059d110": {"name": "Owner_guess::Begin_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "@fn_getquad": {"name": "owner_GetQuad_slot57", "conv": "thiscall", "args": ["ignore"], "ret": ["@qo"]}
+      }
+    },
+    {
+      "name": "one_cursor_not_bigger",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x64", "u8": 2},
+        {"addr": "@owner", "offset": "0x110", "u32": 7},
+        {"addr": "@owner", "offset": "0x114", "u32": 9},
+        {"addr": "@qo", "offset": "0x0", "u32": 0},
+        {"addr": "@qo", "offset": "0x4", "u32": 0},
+        {"addr": "@qo", "offset": "0x8", "u32": 10},
+        {"addr": "@qo", "offset": "0xc", "u32": 0},
+        {"addr": "@q1", "offset": "0x0", "u32": 1},
+        {"addr": "@q1", "offset": "0x4", "u32": 2},
+        {"addr": "@q1", "offset": "0x8", "u32": 5},
+        {"addr": "@q1", "offset": "0xc", "u32": 6}
+      ],
+      "callees": {
+        "0x0059d860": {"name": "Cursor_guess::GetQuad_guess", "conv": "thiscall", "args": ["ignore"], "ret": ["@q1"]},
+        "0x0059d130": {"name": "Cursor_guess::Next_guess", "conv": "thiscall", "args": [], "ret": [0]}
+      }
+    },
+    {
+      "name": "one_cursor_bigger_store",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x64", "u8": 2},
+        {"addr": "@owner", "offset": "0x110", "u32": 7},
+        {"addr": "@owner", "offset": "0x114", "u32": 500},
+        {"addr": "@qo", "offset": "0x0", "u32": 3},
+        {"addr": "@qo", "offset": "0x4", "u32": 0},
+        {"addr": "@qo", "offset": "0x8", "u32": 10},
+        {"addr": "@qo", "offset": "0xc", "u32": 0},
+        {"addr": "@q1", "offset": "0x0", "u32": 1},
+        {"addr": "@q1", "offset": "0x4", "u32": 2},
+        {"addr": "@q1", "offset": "0x8", "u32": 20},
+        {"addr": "@q1", "offset": "0xc", "u32": 6}
+      ],
+      "callees": {
+        "0x0059d860": {"name": "Cursor_guess::GetQuad_guess", "conv": "thiscall", "args": ["ignore"], "ret": ["@q1"]},
+        "0x0059d130": {"name": "Cursor_guess::Next_guess", "conv": "thiscall", "args": [], "ret": [0]}
+      }
+    },
+    {
+      "name": "one_cursor_bigger_keep",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x64", "u8": 2},
+        {"addr": "@owner", "offset": "0x110", "u32": 7},
+        {"addr": "@owner", "offset": "0x114", "u32": 3},
+        {"addr": "@qo", "offset": "0x0", "u32": 3},
+        {"addr": "@qo", "offset": "0x4", "u32": 0},
+        {"addr": "@qo", "offset": "0x8", "u32": 10},
+        {"addr": "@qo", "offset": "0xc", "u32": 0},
+        {"addr": "@q1", "offset": "0x0", "u32": 1},
+        {"addr": "@q1", "offset": "0x4", "u32": 2},
+        {"addr": "@q1", "offset": "0x8", "u32": 20},
+        {"addr": "@q1", "offset": "0xc", "u32": 6}
+      ],
+      "callees": {
+        "0x0059d860": {"name": "Cursor_guess::GetQuad_guess", "conv": "thiscall", "args": ["ignore"], "ret": ["@q1"]},
+        "0x0059d130": {"name": "Cursor_guess::Next_guess", "conv": "thiscall", "args": [], "ret": [0]}
+      }
+    },
+    {
+      "name": "flag_bit0_only",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x64", "u8": 1},
+        {"addr": "@owner", "offset": "0x110", "u32": 7},
+        {"addr": "@owner", "offset": "0x114", "u32": 9}
+      ]
+    },
+    {
+      "name": "two_cursors",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x64", "u8": 2},
+        {"addr": "@owner", "offset": "0x110", "u32": 7},
+        {"addr": "@owner", "offset": "0x114", "u32": 9},
+        {"addr": "@qo", "offset": "0x0", "u32": 0},
+        {"addr": "@qo", "offset": "0x4", "u32": 0},
+        {"addr": "@qo", "offset": "0x8", "u32": 4},
+        {"addr": "@qo", "offset": "0xc", "u32": 0},
+        {"addr": "@q1", "offset": "0x0", "u32": 0},
+        {"addr": "@q1", "offset": "0x4", "u32": 0},
+        {"addr": "@q1", "offset": "0x8", "u32": 3},
+        {"addr": "@q1", "offset": "0xc", "u32": 0},
+        {"addr": "@q2", "offset": "0x0", "u32": 0},
+        {"addr": "@q2", "offset": "0x4", "u32": 0},
+        {"addr": "@q2", "offset": "0x8", "u32": 30},
+        {"addr": "@q2", "offset": "0xc", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5084400,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@owner", "offset": "0x64", "type": "u8", "choices": [0, 2, 3, 130]},
+      {"addr": "@owner", "offset": "0x110", "type": "int", "range": [-50, 50]},
+      {"addr": "@owner", "offset": "0x114", "type": "int", "range": [-50, 50]},
+      {"addr": "@qo", "offset": "0x0", "type": "int", "range": [-100, 100]},
+      {"addr": "@qo", "offset": "0x4", "type": "int", "range": [-100, 100]},
+      {"addr": "@qo", "offset": "0x8", "type": "int", "range": [-100, 100]},
+      {"addr": "@qo", "offset": "0xc", "type": "int", "range": [-100, 100]},
+      {"addr": "@q1", "offset": "0x0", "type": "int", "range": [-100, 100]},
+      {"addr": "@q1", "offset": "0x4", "type": "int", "range": [-100, 100]},
+      {"addr": "@q1", "offset": "0x8", "type": "int", "range": [-100, 100]},
+      {"addr": "@q1", "offset": "0xc", "type": "int", "range": [-100, 100]},
+      {"addr": "@q2", "offset": "0x0", "type": "int", "range": [-100, 100]},
+      {"addr": "@q2", "offset": "0x4", "type": "int", "range": [-100, 100]},
+      {"addr": "@q2", "offset": "0x8", "type": "int", "range": [-100, 100]},
+      {"addr": "@q2", "offset": "0xc", "type": "int", "range": [-100, 100]}
+    ]
+  }
+}

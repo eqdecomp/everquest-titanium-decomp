@@ -1,0 +1,271 @@
+{
+  "function": "do_shield_guess",
+  "original": "0x0046aa32",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "connection_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "text_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "connection": {
+      "size": "0x270",
+      "fill": "random",
+      "init": [
+        {"offset": "0x1a8", "u32": "@manager_data"},
+        {"offset": "0x251", "u8": 120},
+        {"offset": "0x258", "u32": 101}
+      ]
+    },
+    "other_connection": {
+      "size": "0x270",
+      "fill": "random",
+      "init": [
+        {"offset": "0x1a8", "u32": "@manager_data"},
+        {"offset": "0x251", "u8": 120},
+        {"offset": "0x258", "u32": 202}
+      ]
+    },
+    "manager_data": {
+      "size": "0xf9c",
+      "fill": "random",
+      "init": [
+        {"offset": "0xf98", "u32": 0}
+      ]
+    },
+    "lookup_result": {
+      "size": "0x260",
+      "fill": "random",
+      "init": [
+        {"offset": "0x258", "u32": 303}
+      ]
+    },
+    "global_context": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "text_lookup": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "returned_text": {
+      "size": "0x20",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x00905d10", "u32": 0},
+    {"addr": "0x00905d1c", "u32": 0},
+    {"addr": "0x00905d14", "u32": 0},
+    {"addr": "0x00905ce4", "u32": "@connection"},
+    {"addr": "0x00905d04", "u32": 0},
+    {"addr": "0x00905cb0", "u32": "@text_lookup"},
+    {"addr": "0x00988df0", "u32": "@global_context"},
+    {"addr": "0x0095a174", "u8": 0},
+    {"addr": "@connection", "offset": "0x24c", "u8": 30},
+    {"addr": "@connection", "offset": "0x252", "u8": 1},
+    {"addr": "@returned_text", "cstr": "fixture text"}
+  ],
+  "callees": {
+    "0x00466244": {
+      "name": "allowslashcommand_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 1
+    },
+    "0x00576fa0": {
+      "name": "FUN_00576fa0",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr", "int"],
+      "ret": 0
+    },
+    "0x00492f68": {
+      "name": "DoPercentConvert_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "int"]
+    },
+    "0x0047981d": {
+      "name": "FindPlayerByPartialDisplayName_guess",
+      "conv": "cdecl",
+      "args": ["mem:128", "int"],
+      "ret": "@lookup_result"
+    },
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "mem:4", "int", "int"],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "FUN_005dfa00",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": "@returned_text"
+    },
+    "0x004982c6": {
+      "name": "FUN_004982c6",
+      "conv": "thiscall",
+      "args": ["cstr", "int", "int"]
+    },
+    "0x0044d0d0": {
+      "name": "FUN_0044d0d0",
+      "conv": "cdecl",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x00494473": {
+      "name": "IsTransactionWindowOpen_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "initial gate returns",
+      "args": ["@connection", "abc"],
+      "callees": {
+        "0x00466244": {
+          "name": "FUN_00466244",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "first global gate",
+      "args": ["@connection", "abc"],
+      "memory": [{"addr": "0x00905d10", "u32": 1}]
+    },
+    {
+      "name": "second global gate",
+      "args": ["@connection", "abc"],
+      "memory": [{"addr": "0x00905d1c", "u32": 1}]
+    },
+    {
+      "name": "second global preceding byte",
+      "args": ["@connection", "abc"],
+      "memory": [
+        {"addr": "0x00905d1c", "u32": 0},
+        {"addr": "0x00905d1b", "u8": 1}
+      ]
+    },
+    {
+      "name": "third global gate",
+      "args": ["@connection", "abc"],
+      "memory": [{"addr": "0x00905d14", "u32": 1}]
+    },
+    {
+      "name": "byte flag below threshold",
+      "args": ["@connection", "abc"],
+      "memory": [
+        {"addr": "@connection", "offset": "0x252", "u8": 1},
+        {"addr": "@connection", "offset": "0x24c", "u8": 29}
+      ]
+    },
+    {
+      "name": "wrong byte flag",
+      "args": ["@connection", "abc"],
+      "memory": [
+        {"addr": "@connection", "offset": "0x252", "u8": 0},
+        {"addr": "@connection", "offset": "0x24c", "u8": 30}
+      ]
+    },
+    {
+      "name": "empty text and no current connection",
+      "args": ["@connection", ""],
+      "memory": [
+        {"addr": "@connection", "offset": "0x252", "u8": 1},
+        {"addr": "@connection", "offset": "0x24c", "u8": 30},
+        {"addr": "0x00905d04", "u32": 0}
+      ]
+    },
+    {
+      "name": "empty text and same current connection",
+      "args": ["@connection", ""],
+      "memory": [
+        {"addr": "@connection", "offset": "0x252", "u8": 1},
+        {"addr": "@connection", "offset": "0x24c", "u8": 30},
+        {"addr": "0x00905d04", "u32": "@connection"}
+      ]
+    },
+    {
+      "name": "empty text and different current connection",
+      "args": ["@connection", ""],
+      "memory": [
+        {"addr": "@connection", "offset": "0x252", "u8": 1},
+        {"addr": "@connection", "offset": "0x24c", "u8": 30},
+        {"addr": "0x00905d04", "u32": "@other_connection"}
+      ]
+    },
+    {
+      "name": "nonempty text and null lookup",
+      "args": ["@connection", "abc"],
+      "memory": [
+        {"addr": "@connection", "offset": "0x252", "u8": 1},
+        {"addr": "@connection", "offset": "0x24c", "u8": 30}
+      ],
+      "callees": {
+        "0x0047981d": {
+          "name": "FUN_0047981d",
+          "conv": "cdecl",
+          "args": ["mem:128", "int"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "nonempty text and current lookup",
+      "args": ["@connection", "abc"],
+      "memory": [
+        {"addr": "@connection", "offset": "0x252", "u8": 1},
+        {"addr": "@connection", "offset": "0x24c", "u8": 30}
+      ],
+      "callees": {
+        "0x0047981d": {
+          "name": "FUN_0047981d",
+          "conv": "cdecl",
+          "args": ["mem:128", "int"],
+          "ret": "@connection"
+        }
+      }
+    },
+    {
+      "name": "nonempty text and other lookup",
+      "args": ["@connection", "abc"],
+      "memory": [
+        {"addr": "@connection", "offset": "0x252", "u8": 1},
+        {"addr": "@connection", "offset": "0x24c", "u8": 30}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4631090,
+    "count": 100,
+    "args": [
+      {"choices": ["@connection"]},
+      {}
+    ],
+    "memory": [
+      {"addr": "@connection", "offset": "0x24c", "type": "u8", "range": [0, 255]},
+      {"addr": "@connection", "offset": "0x252", "type": "u8", "choices": [0, 1, 2]},
+      {"addr": "0x00905d10", "type": "u32", "choices": [0, 1]},
+      {"addr": "0x00905d1c", "type": "u32", "choices": [0, 1]},
+      {"addr": "0x00905d14", "type": "u32", "choices": [0, 1]},
+      {"addr": "0x00905d04", "type": "ptr", "choices": [0, "@connection", "@other_connection"]},
+      {"addr": "@lookup_result", "offset": "0x258", "type": "int", "range": [-1000, 1000]},
+      {"addr": "@other_connection", "offset": "0x258", "type": "int", "range": [-1000, 1000]}
+    ]
+  }
+}

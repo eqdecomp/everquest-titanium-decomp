@@ -1,0 +1,186 @@
+{
+  "function": "Secondary_guess::OnMessage_guess",
+  "original": "0x0051450a",
+  "sources": [
+    "src/EverQuest/tu_168_HotButtonWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@secondary",
+  "args": [
+    {"name": "msg", "type": "int"},
+    {"name": "flags", "type": "u32"},
+    {"name": "data", "type": "ptr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "secondary": {"size": "0x100", "fill": "random"},
+    "data": {"size": "0x10", "fill": "zero"},
+    "core": {"size": "0x100", "fill": "random", "init": [{"offset": "0x8", "u32": "@vb"}]},
+    "vb": {"size": "0x10", "fill": "zero"},
+    "ever": {"size": "0x100", "fill": "random"},
+    "strtab": {"size": "0x40", "fill": "zero"},
+    "strtext": {"size": "0x40", "fill": "zero"},
+    "pathstr": {"size": "0x40", "fill": "zero"},
+    "keystr": {"size": "0x40", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905D00", "u32": "@core"},
+    {"addr": "0x00988DF0", "u32": "@ever"},
+    {"addr": "0x00905CB0", "u32": "@strtab"},
+    {"addr": "0x0079AC74", "u32": 1597463007},
+    {"addr": "0x00984A84", "size": "0x140", "fill": "zero"},
+    {"addr": "0x00984A9D", "u8": 1},
+    {"addr": "0x00984AA0", "u32": 3},
+    {"addr": "0x00983B7C", "size": "0x320", "fill": "random"},
+    {"addr": "0x009839E5", "size": "0x64", "fill": "random"},
+    {"addr": "0x0095D3D4", "cstr": "srv"},
+    {"addr": "@core", "offset": "0x44", "cstr": "Bob"},
+    {"addr": "@strtext", "cstr": "Done"},
+    {"addr": "@pathstr", "cstr": "a.ini"},
+    {"addr": "@keystr", "cstr": "Page1.Slot1"},
+    {"addr": "@secondary", "offset": "0xa8", "u32": 2}
+  ],
+  "callees": {
+    "0x005738b0": {
+      "name": "FormatCXStr",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr"],
+      "varargs": "printf",
+      "writes": [{"arg": 0, "hex": "78563412"}],
+      "ret": 0
+    },
+    "0x00572300": {
+      "name": "CXStr::operator char*",
+      "conv": "thiscall",
+      "args": [],
+      "ret": ["@pathstr", "@keystr"]
+    },
+    "0x0060bf10": {
+      "name": "IniRead",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr", "cstr", "ignore", "int", "cstr"],
+      "writes": [
+        {"arg": 3, "call": 0, "hex": "433500"},
+        {"arg": 3, "call": 1, "hex": "4100"},
+        {"arg": 3, "call": 2, "hex": "00"},
+        {"arg": 3, "call": 3, "hex": "423700"}
+      ],
+      "ret": 0
+    },
+    "0x0060e3a3": {
+      "name": "atoi",
+      "conv": "cdecl",
+      "args": ["cstr"],
+      "ret": [5, 7]
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": ["u32", "u32"],
+      "ret": "@strtext"
+    },
+    "0x0046da4a": {
+      "name": "FormatText",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "cstr", "int", "int", "int", "int", "int", "int", "int", "int"],
+      "writes": [{"arg": 0, "hex": "5400"}],
+      "ret": 0
+    },
+    "0x004b023b": {
+      "name": "CEverQuest::Save",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004982c6": {
+      "name": "CEverQuest::dsp_chat",
+      "conv": "thiscall",
+      "args": ["cstr", "int", "bool"]
+    },
+    "0x00494ddc": {
+      "name": "SortEntries",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 0
+    },
+    "0x00513a6a": {
+      "name": "Derived::Refresh",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "0x7f flags clear",
+      "args": [127, 0, "@data"],
+      "memory": [{"addr": "@data", "u32": 0}]
+    },
+    {
+      "name": "0x7f entry disabled",
+      "args": [127, 1, "@data"],
+      "memory": [{"addr": "@data", "u32": 1}]
+    },
+    {
+      "name": "0x7f entry enabled, flag 1",
+      "args": [127, 1, "@data"],
+      "memory": [{"addr": "@data", "u32": 0}]
+    },
+    {
+      "name": "0x7f entry enabled, flag 4",
+      "args": [127, 4, "@data"],
+      "memory": [{"addr": "@data", "u32": 0}]
+    },
+    {
+      "name": "0x80 flags clear",
+      "args": [128, 0, "@data"],
+      "memory": [{"addr": "@data", "u32": 0}]
+    },
+    {
+      "name": "0x80 entry disabled",
+      "args": [128, 1, "@data"],
+      "memory": [{"addr": "@data", "u32": 1}]
+    },
+    {
+      "name": "0x80 entry enabled",
+      "args": [128, 1, "@data"],
+      "memory": [{"addr": "@data", "u32": 0}]
+    },
+    {
+      "name": "0x81 flags clear",
+      "args": [129, 0, "@data"],
+      "memory": [{"addr": "@data", "u32": 0}]
+    },
+    {
+      "name": "0x81 flags set",
+      "args": [129, 1, "@data"],
+      "memory": [{"addr": "@data", "u32": 0}]
+    },
+    {
+      "name": "unknown message",
+      "args": [16, 1, "@data"],
+      "memory": [{"addr": "@data", "u32": 0}]
+    }
+  ],
+  "fuzz": {
+    "seed": 5326090,
+    "count": 150,
+    "args": [
+      {"choices": [127, 128, 129, 16]},
+      {"range": [0, 7]},
+      {"choices": ["@data"]}
+    ],
+    "memory": [
+      {"addr": "@data", "type": "int", "range": [0, 9]},
+      {"addr": "@secondary", "offset": "0xa8", "type": "int", "range": [0, 9]},
+      {"addr": "0x00984A9D", "type": "u8", "choices": [0, 1], "count": 10, "stride": 32},
+      {"addr": "0x00984AA0", "type": "int", "range": [0, 20], "count": 10, "stride": 32}
+    ]
+  }
+}

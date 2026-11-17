@@ -1,0 +1,139 @@
+{
+  "function": "AltAbility_guess::CopyFrom_guess",
+  "original": "0x00447a14",
+  "sources": [
+    "src/EverQuest/tu_031_Expedition.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@state",
+  "args": [
+    {
+      "name": "source_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "unused_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "state": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "source": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004479a3": {
+      "name": "FUN_004479a3",
+      "conv": "thiscall",
+      "args": [
+        "mem:16"
+      ],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        "@source",
+        1
+      ],
+      "memory": [
+        {"addr": "@source", "offset": "0x4", "u32": 1},
+        {"addr": "@source", "offset": "0x54", "u32": 7},
+        {"addr": "@source", "offset": "0x58", "u32": 0},
+        {"addr": "@source", "offset": "0x5c", "u32": 2}
+      ]
+    },
+    {
+      "name": "zeros",
+      "args": [
+        "@source",
+        0
+      ],
+      "memory": [
+        {"addr": "@source", "offset": "0x4", "u32": 0},
+        {"addr": "@source", "offset": "0x54", "u32": 0},
+        {"addr": "@source", "offset": "0x58", "u32": 0},
+        {"addr": "@source", "offset": "0x5c", "u32": 0}
+      ]
+    },
+    {
+      "name": "flag4 is two, not one",
+      "args": [
+        "@source",
+        1
+      ],
+      "memory": [
+        {"addr": "@source", "offset": "0x4", "u32": 2},
+        {"addr": "@source", "offset": "0x54", "u32": 0},
+        {"addr": "@source", "offset": "0x58", "u32": 1},
+        {"addr": "@source", "offset": "0x5c", "u32": 0}
+      ]
+    },
+    {
+      "name": "one entry",
+      "args": [
+        "@source",
+        1
+      ],
+      "memory": [
+        {"addr": "@source", "offset": "0x4", "u32": 1},
+        {"addr": "@source", "offset": "0x54", "u32": 0},
+        {"addr": "@source", "offset": "0x58", "u32": 16},
+        {"addr": "@source", "offset": "0x5c", "u32": 1}
+      ]
+    },
+    {
+      "name": "negative count",
+      "args": [
+        "@source",
+        1
+      ],
+      "memory": [
+        {"addr": "@source", "offset": "0x4", "u32": 4294967295},
+        {"addr": "@source", "offset": "0x54", "u32": 4294967295},
+        {"addr": "@source", "offset": "0x58", "u32": 0},
+        {"addr": "@source", "offset": "0x5c", "u32": 4294967295}
+      ]
+    },
+    {
+      "name": "five entries",
+      "args": [
+        "@source",
+        1
+      ],
+      "memory": [
+        {"addr": "@source", "offset": "0x4", "u32": 1},
+        {"addr": "@source", "offset": "0x54", "u32": 5},
+        {"addr": "@source", "offset": "0x58", "u32": 2},
+        {"addr": "@source", "offset": "0x5c", "u32": 5}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4487700,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@source"
+        ]
+      },
+      {}
+    ],
+    "memory": [
+      {"addr": "@source", "offset": "0x4", "type": "int", "choices": [0, 1, 2, -1]},
+      {"addr": "@source", "offset": "0x54", "type": "int", "choices": [0, 1, -1, 5]},
+      {"addr": "@source", "offset": "0x58", "type": "int", "choices": [0, 1, -1, 16]},
+      {"addr": "@source", "offset": "0x5c", "type": "int", "range": [-2, 5]}
+    ]
+  }
+}

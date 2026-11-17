@@ -1,0 +1,591 @@
+{
+  "function": "Owner_guess::Function_0054dca9_guess",
+  "original": "0x0054dca9",
+  "sources": [
+    "src/EverQuest/tu_204_RaidOptionsWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {
+      "name": "color_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "type_guess",
+      "type": "int"
+    },
+    {
+      "name": "value_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "size": "0x139",
+  "objects": {
+    "owner": {
+      "size": "0x1bc",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x124",
+          "u32": 1
+        },
+        {
+          "offset": "0x170",
+          "u32": "@current"
+        },
+        {
+          "offset": "0x178",
+          "u32": "@color"
+        },
+        {
+          "offset": "0x17c",
+          "u32": "@color"
+        },
+        {
+          "offset": "0x180",
+          "u32": "@color"
+        },
+        {
+          "offset": "0x184",
+          "u32": "@color"
+        },
+        {
+          "offset": "0x188",
+          "u32": "@color"
+        },
+        {
+          "offset": "0x18c",
+          "u32": "@color"
+        },
+        {
+          "offset": "0x190",
+          "u32": "@color"
+        },
+        {
+          "offset": "0x194",
+          "u32": "@color"
+        },
+        {
+          "offset": "0x198",
+          "u32": "@color"
+        },
+        {
+          "offset": "0x19c",
+          "u32": "@color"
+        },
+        {
+          "offset": "0x1a0",
+          "u32": "@color"
+        },
+        {
+          "offset": "0x1a4",
+          "u32": "@color"
+        },
+        {
+          "offset": "0x1a8",
+          "u32": "@color"
+        },
+        {
+          "offset": "0x1ac",
+          "u32": "@color"
+        },
+        {
+          "offset": "0x1b0",
+          "u32": "@color"
+        },
+        {
+          "offset": "0x1b4",
+          "u32": "@color"
+        },
+        {
+          "offset": "0x1b8",
+          "u32": "@other"
+        }
+      ]
+    },
+    "color": {
+      "size": "0x80",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x7c",
+          "u32": 1193046
+        }
+      ]
+    },
+    "current": {
+      "size": "0x80",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x7c",
+          "u32": 2
+        }
+      ]
+    },
+    "other": {
+      "size": "0x80",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x7c",
+          "u32": 3
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x13579bdf"
+    },
+    {
+      "addr": "0x00850c0c",
+      "u32": 1
+    }
+  ],
+  "callees": {
+    "0x006220e9": {
+      "name": "__itoa",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ignore",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x00431136": {
+      "name": "GlobalConfig_guess::RequestLootType_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x004f898e": {
+      "name": "FUN_004f898e_guess",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x0060bf20": {
+      "name": "FUN_0060bf20_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x004301e4": {
+      "name": "GlobalConfig_guess::UpdateClassColor_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005a2230": {
+      "name": "Owner_guess::Forward_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "int"
+      ],
+      "ret": 305419896
+    }
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9",
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "inactive",
+      "args": [
+        "@color",
+        1,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x124",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "current_value_zero",
+      "args": [
+        "@color",
+        1,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x170",
+          "u32": "@color"
+        }
+      ],
+      "expect": {
+        "ret": 305419896
+      }
+    },
+    {
+      "name": "current_value_two",
+      "args": [
+        "@color",
+        1,
+        2
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x170",
+          "u32": "@color"
+        }
+      ],
+      "expect": {
+        "ret": 305419896
+      }
+    },
+    {
+      "name": "current_value_negative_boundary",
+      "args": [
+        "@color",
+        1,
+        -1
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x170",
+          "u32": "@color"
+        }
+      ],
+      "expect": {
+        "ret": 305419896
+      }
+    },
+    {
+      "name": "current_value_upper_boundary",
+      "args": [
+        "@color",
+        1,
+        3
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x170",
+          "u32": "@color"
+        }
+      ],
+      "expect": {
+        "ret": 305419896
+      }
+    },
+    {
+      "name": "array_color_enabled",
+      "args": [
+        "@color",
+        1,
+        7
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x170",
+          "u32": "@current"
+        },
+        {
+          "addr": "0x00850c0c",
+          "u32": 1
+        }
+      ],
+      "expect": {
+        "ret": 305419896
+      }
+    },
+    {
+      "name": "array_color_disabled",
+      "args": [
+        "@color",
+        1,
+        7
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x170",
+          "u32": "@current"
+        },
+        {
+          "addr": "0x00850c0c",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 305419896
+      }
+    },
+    {
+      "name": "array_color_miss",
+      "args": [
+        "@other",
+        1,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x170",
+          "u32": "@color"
+        },
+        {
+          "addr": "0x00850c0c",
+          "u32": 1
+        }
+      ],
+      "expect": {
+        "ret": 305419896
+      }
+    },
+    {
+      "name": "set_class_color_hit",
+      "args": [
+        "@other",
+        32,
+        123456
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x1b8",
+          "u32": "@color"
+        }
+      ],
+      "expect": {
+        "ret": 305419896
+      }
+    },
+    {
+      "name": "set_class_color_last_slot",
+      "args": [
+        "@other",
+        32,
+        654321
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x178",
+          "u32": "@other"
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x17c",
+          "u32": "@other"
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x180",
+          "u32": "@other"
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x184",
+          "u32": "@other"
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x188",
+          "u32": "@other"
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x18c",
+          "u32": "@other"
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x190",
+          "u32": "@other"
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x194",
+          "u32": "@other"
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x198",
+          "u32": "@other"
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x19c",
+          "u32": "@other"
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1a0",
+          "u32": "@other"
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1a4",
+          "u32": "@other"
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1a8",
+          "u32": "@other"
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1ac",
+          "u32": "@other"
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1b0",
+          "u32": "@other"
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1b8",
+          "u32": "@color"
+        }
+      ],
+      "expect": {
+        "ret": 305419896
+      }
+    },
+    {
+      "name": "set_class_color_miss",
+      "args": [
+        "@other",
+        32,
+        123456
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x1b8",
+          "u32": "@other"
+        }
+      ],
+      "expect": {
+        "ret": 305419896
+      }
+    },
+    {
+      "name": "unrelated_type",
+      "args": [
+        "@color",
+        2,
+        10
+      ],
+      "expect": {
+        "ret": 305419896
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5561513,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@color",
+          "@other"
+        ]
+      },
+      {
+        "choices": [
+          0,
+          1,
+          2,
+          31,
+          32,
+          33
+        ]
+      },
+      {
+        "choices": [
+          -1,
+          0,
+          1,
+          2,
+          3,
+          7,
+          -9,
+          2147483647,
+          -2147483648
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@owner",
+        "offset": "0x124",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x170",
+        "type": "ptr",
+        "choices": [
+          "@color",
+          "@current"
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x1b8",
+        "type": "ptr",
+        "choices": [
+          "@color",
+          "@other"
+        ]
+      },
+      {
+        "addr": "0x00850c0c",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "function": "ProcessPlayerPhysics_guess",
+  "original": "0x00436039",
+  "sources": ["src/EverQuest/tu_029_Display.cpp"],
+  "size": "0x9d",
+  "conv": "cdecl",
+  "args": [
+    {"name": "player", "type": "ptr"}
+  ],
+  "ret": "bool",
+  "objects": {
+    "player": {"size": "0x348", "fill": "random", "init": [{"offset": "0x1a8", "u32": "@info"}]},
+    "info": {"size": "0xec0", "fill": "random"},
+    "owner": {"size": "0x348", "fill": "random", "init": [{"offset": "0x1a8", "u32": "@owner_info"}]},
+    "owner_info": {"size": "0xec0", "fill": "random", "init": [{"offset": "0x158", "u32": "@excluded"}]},
+    "local": {"size": "0x348", "fill": "random"},
+    "excluded": {"size": "0x348", "fill": "random"},
+    "clock": {"size": "0x14c", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00905cf8", "u32": "@owner"},
+    {"addr": "0x00905ce4", "u32": "@local"},
+    {"addr": "0x00905d24", "u32": "@clock"},
+    {"addr": "0x0063f4cc", "u32": 0},
+    {"addr": "0x00923884", "u32": 1}
+  ],
+  "callees": {
+    "0x004bfe0f": {"name": "FUN_004bfe0f", "conv": "cdecl", "args": ["ptr", "int", "int"], "ret": 0},
+    "0x0048ba76": {"name": "MovePlayer_guess", "conv": "thiscall", "args": [], "ret": 0}
+  },
+  "cases": [
+    {"name": "exclude owner", "args": ["@owner"]},
+    {"name": "exclude local", "args": ["@local"]},
+    {"name": "exclude linked actor", "args": ["@excluded"]},
+    {
+      "name": "timer boundary",
+      "args": ["@player"],
+      "memory": [
+        {"addr": "@clock", "offset": "0x148", "u32": 12000},
+        {"addr": "@info", "offset": "0xebc", "u32": 0},
+        {"addr": "@player", "offset": "0x244", "u8": 1},
+        {"addr": "@player", "offset": "0x48", "f32": 0},
+        {"addr": "@player", "offset": "0x44", "f32": 0}
+      ]
+    },
+    {
+      "name": "timer over type below status return",
+      "args": ["@player"],
+      "memory": [
+        {"addr": "@clock", "offset": "0x148", "u32": 12001},
+        {"addr": "@info", "offset": "0xebc", "u32": 0},
+        {"addr": "@player", "offset": "0x244", "u8": 0},
+        {"addr": "0x00923884", "u32": 0}
+      ]
+    },
+    {
+      "name": "timer over type below status call",
+      "args": ["@player"],
+      "memory": [
+        {"addr": "@clock", "offset": "0x148", "u32": 12001},
+        {"addr": "@info", "offset": "0xebc", "u32": 0},
+        {"addr": "@player", "offset": "0x244", "u8": 0},
+        {"addr": "0x00923884", "u32": 1}
+      ]
+    },
+    {
+      "name": "type zero with zero speeds and status call",
+      "args": ["@player"],
+      "memory": [
+        {"addr": "@clock", "offset": "0x148", "u32": 12001},
+        {"addr": "@info", "offset": "0xebc", "u32": 0},
+        {"addr": "@player", "offset": "0x244", "u8": 0},
+        {"addr": "@player", "offset": "0x48", "f32": 0},
+        {"addr": "@player", "offset": "0x44", "f32": 0},
+        {"addr": "0x00923884", "u32": 1}
+      ]
+    },
+    {
+      "name": "timer over speedrun nonzero status return",
+      "args": ["@player"],
+      "memory": [
+        {"addr": "@clock", "offset": "0x148", "u32": 12001},
+        {"addr": "@info", "offset": "0xebc", "u32": 0},
+        {"addr": "@player", "offset": "0x244", "u8": 1},
+        {"addr": "@player", "offset": "0x48", "f32": 1},
+        {"addr": "0x00923884", "u32": 0}
+      ]
+    },
+    {
+      "name": "speedrun nan status call",
+      "args": ["@player"],
+      "memory": [
+        {"addr": "@clock", "offset": "0x148", "u32": 12001},
+        {"addr": "@info", "offset": "0xebc", "u32": 0},
+        {"addr": "@player", "offset": "0x244", "u8": 1},
+        {"addr": "@player", "offset": "0x48", "u32": 2143289344},
+        {"addr": "0x00923884", "u32": 1}
+      ]
+    },
+    {
+      "name": "speedrun zero speedz zero",
+      "args": ["@player"],
+      "memory": [
+        {"addr": "@clock", "offset": "0x148", "u32": 12001},
+        {"addr": "@info", "offset": "0xebc", "u32": 0},
+        {"addr": "@player", "offset": "0x244", "u8": 1},
+        {"addr": "@player", "offset": "0x48", "f32": 0},
+        {"addr": "@player", "offset": "0x44", "f32": 0}
+      ]
+    },
+    {
+      "name": "speedrun zero speedz nonzero",
+      "args": ["@player"],
+      "memory": [
+        {"addr": "@clock", "offset": "0x148", "u32": 12001},
+        {"addr": "@info", "offset": "0xebc", "u32": 0},
+        {"addr": "@player", "offset": "0x244", "u8": 1},
+        {"addr": "@player", "offset": "0x48", "f32": 0},
+        {"addr": "@player", "offset": "0x44", "f32": 1}
+      ]
+    },
+    {
+      "name": "speedz nan",
+      "args": ["@player"],
+      "memory": [
+        {"addr": "@clock", "offset": "0x148", "u32": 12001},
+        {"addr": "@info", "offset": "0xebc", "u32": 0},
+        {"addr": "@player", "offset": "0x244", "u8": 1},
+        {"addr": "@player", "offset": "0x48", "f32": 0},
+        {"addr": "@player", "offset": "0x44", "u32": 2143289344}
+      ]
+    },
+    {
+      "name": "unsigned timer wrap",
+      "args": ["@player"],
+      "memory": [
+        {"addr": "@clock", "offset": "0x148", "u32": 0},
+        {"addr": "@info", "offset": "0xebc", "u32": 1},
+        {"addr": "@player", "offset": "0x244", "u8": 0},
+        {"addr": "0x00923884", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4415545,
+    "count": 120,
+    "args": [{"choices": ["@player"]}],
+    "memory": [
+      {"addr": "@clock", "offset": "0x148", "type": "u32", "choices": [12000, 12001]},
+      {"addr": "@info", "offset": "0xebc", "type": "u32", "choices": [0, 1]},
+      {"addr": "@player", "offset": "0x244", "type": "u8", "choices": [0, 1, 255]},
+      {"addr": "@player", "offset": "0x48", "type": "u32", "choices": [0, 1065353216]},
+      {"addr": "@player", "offset": "0x44", "type": "u32", "choices": [0, 1065353216]},
+      {"addr": "0x00923884", "type": "u32", "choices": [0, 1]}
+    ]
+  }
+}

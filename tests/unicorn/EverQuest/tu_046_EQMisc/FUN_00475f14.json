@@ -1,0 +1,443 @@
+{
+  "function": "do_language_guess",
+  "original": "0x00475f14",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "unused_guess",
+      "type": "int"
+    },
+    {
+      "name": "name_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "size": "0x1e8",
+  "objects": {
+    "char_root": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@vbtable"
+        }
+      ]
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 8
+        }
+      ]
+    },
+    "lookup": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "everquest": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "mode_provider": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "mode_state": {
+      "size": "0x1b4",
+      "fill": "zero"
+    },
+    "list_text": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "label_text": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "digits_text": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d00",
+      "u32": "@char_root"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@lookup"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@everquest"
+    },
+    {
+      "addr": "0x009917e4",
+      "u32": "@mode_provider"
+    },
+    {
+      "addr": "0x0079ac74",
+      "u32": 305419896
+    },
+    {
+      "addr": "0x0099db00",
+      "size": 32,
+      "fill": "zero"
+    },
+    {
+      "addr": "@list_text",
+      "cstr": "list"
+    },
+    {
+      "addr": "@label_text",
+      "cstr": "label"
+    },
+    {
+      "addr": "@digits_text",
+      "cstr": "1"
+    }
+  ],
+  "callees": {
+    "0x005dfa00": {
+      "name": "FindText_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "@list_text"
+    },
+    "0x00621e9c": {
+      "name": "__stricmp",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr"
+      ],
+      "ret": 1
+    },
+    "0x004982c6": {
+      "name": "dsp_chat",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ]
+    },
+    "0x00492595": {
+      "name": "GetLabel_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@label_text"
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "656e74727900"
+        }
+      ]
+    },
+    "0x0060e3a3": {
+      "name": "atoi",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 1
+    },
+    "0x004f288c": {
+      "name": "GetMode_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@mode_state"
+    },
+    "0x006220e9": {
+      "name": "__itoa",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ptr",
+        "int"
+      ],
+      "ret": "@digits_text"
+    },
+    "0x0046da4a": {
+      "name": "build_token_string_PARAM_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "73656c656374656400"
+        }
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "__stricmp": "0x00621e9c",
+    "_sprintf": "0x0060d5eb",
+    "__itoa": "0x006220e9"
+  },
+  "cases": [
+    {
+      "name": "list_without_character_state",
+      "args": [
+        0,
+        "list"
+      ],
+      "memory": [
+        {
+          "addr": "0x00905d00",
+          "u32": 0
+        },
+        {
+          "addr": "0x009917e4",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00621e9c": {
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "list_all_entries_and_current_mode",
+      "args": [
+        1,
+        "list"
+      ],
+      "memory": [
+        {
+          "addr": "@char_root",
+          "offset": "0x1e",
+          "u8": 1
+        },
+        {
+          "addr": "@char_root",
+          "offset": "0x23",
+          "u8": 255
+        },
+        {
+          "addr": "@mode_state",
+          "offset": "0x1b0",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00621e9c": {
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "valid_selection_and_update",
+      "args": [
+        2,
+        "2"
+      ],
+      "memory": [
+        {
+          "addr": "@char_root",
+          "offset": "0x1e",
+          "u8": 1
+        },
+        {
+          "addr": "@char_root",
+          "offset": "0x23",
+          "u8": 255
+        },
+        {
+          "addr": "@mode_state",
+          "offset": "0x1b0",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00621e9c": {
+          "ret": 1
+        },
+        "0x0060e3a3": {
+          "ret": 2
+        }
+      }
+    },
+    {
+      "name": "empty_name_shows_current_mode",
+      "args": [
+        3,
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "@char_root",
+          "offset": "0x20",
+          "u8": 1
+        },
+        {
+          "addr": "@mode_state",
+          "offset": "0x1b0",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00621e9c": {
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "negative_number_is_rejected",
+      "args": [
+        4,
+        "negative"
+      ],
+      "memory": [
+        {
+          "addr": "0x009917e4",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00621e9c": {
+          "ret": 1
+        },
+        "0x0060e3a3": {
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "selection_equal_to_active_count_is_rejected",
+      "args": [
+        5,
+        "3"
+      ],
+      "memory": [
+        {
+          "addr": "@char_root",
+          "offset": "0x1e",
+          "u8": 1
+        },
+        {
+          "addr": "@mode_state",
+          "offset": "0x1b0",
+          "u32": 0
+        },
+        {
+          "addr": "0x009917e4",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00621e9c": {
+          "ret": 1
+        },
+        "0x0060e3a3": {
+          "ret": 3
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4677396,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -4,
+          4
+        ]
+      },
+      {
+        "choices": [
+          "",
+          "list",
+          "0",
+          "1",
+          "2",
+          "bad",
+          "99"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x00905d00",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@char_root"
+        ]
+      },
+      {
+        "addr": "0x009917e4",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@mode_provider"
+        ]
+      },
+      {
+        "addr": "@char_root",
+        "offset": "0x1c",
+        "type": "u8",
+        "count": 32,
+        "choices": [
+          0,
+          1,
+          255
+        ],
+        "p": 0.7
+      },
+      {
+        "addr": "@mode_state",
+        "offset": "0x1b0",
+        "type": "int",
+        "range": [
+          0,
+          31
+        ]
+      }
+    ]
+  },
+  "coverage_ok": {
+    "00475F59-00475F5A": "The bounds trap is unreachable because the loop only visits indices 0 through 31."
+  }
+}

@@ -1,0 +1,546 @@
+{
+  "function": "EQPlayer_guess::ApplyIllusion_guess",
+  "original": "0x00485873",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@eqplayer",
+  "args": [
+    {
+      "name": "update",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "eqplayer": {
+      "size": "0x348",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x1a8", "u32": "@actorInfo"},
+        {"offset": "0x120", "cstr": "PLAYER"},
+        {"offset": "0x1e0", "u32": 0},
+        {"offset": "0x244", "u8": 1},
+        {"offset": "0x24d", "u8": 2},
+        {"offset": "0x24e", "u8": 0},
+        {"offset": "0x252", "u8": 3},
+        {"offset": "0x254", "u8": 0},
+        {"offset": "0x260", "u32": 1},
+        {"offset": "0x30", "f32": 10.0},
+        {"offset": "0x34", "f32": 20.0},
+        {"offset": "0x38", "f32": 30.0}
+      ]
+    },
+    "update": {
+      "size": "0xa8",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x44", "u32": 1},
+        {"offset": "0x48", "u8": 1},
+        {"offset": "0x49", "u8": 0},
+        {"offset": "0x4a", "u8": 2},
+        {"offset": "0x4c", "u32": 3},
+        {"offset": "0x50", "u8": 4},
+        {"offset": "0x51", "u8": 5},
+        {"offset": "0x52", "u8": 6},
+        {"offset": "0x53", "u8": 7},
+        {"offset": "0x54", "f32": 1.0},
+        {"offset": "0x58", "u32": 10},
+        {"offset": "0x5c", "u32": 11},
+        {"offset": "0x60", "u32": 12},
+        {"offset": "0x64", "u32": 13},
+        {"offset": "0x68", "u32": 14},
+        {"offset": "0x6c", "u32": 15},
+        {"offset": "0x70", "u32": 16},
+        {"offset": "0x74", "u32": 17},
+        {"offset": "0x78", "u32": 18},
+        {"offset": "0x7c", "u32": 20},
+        {"offset": "0x80", "u32": 21},
+        {"offset": "0x84", "u32": 22},
+        {"offset": "0x88", "u32": 23},
+        {"offset": "0x8c", "u32": 24},
+        {"offset": "0x90", "u32": 25},
+        {"offset": "0x94", "u32": 26},
+        {"offset": "0x98", "u32": 27},
+        {"offset": "0x9c", "u32": 28},
+        {"offset": "0xa0", "u32": 2},
+        {"offset": "0xa4", "u32": 1}
+      ]
+    },
+    "actorInfo": {
+      "size": "0x10c0",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@actorObject"},
+        {"offset": "0x12c", "u32": "@child"},
+        {"offset": "0x15c", "u32": 0},
+        {"offset": "0x160", "u32": 0},
+        {"offset": "0x48", "f32": 0.0},
+        {"offset": "0x68", "u32": 0}
+      ]
+    },
+    "child": {
+      "size": "0x38",
+      "fill": "zero",
+      "init": [{"offset": "0x34", "u8": 0}]
+    },
+    "actorObject": {"size": "0x20", "fill": "zero"},
+    "mount": {
+      "size": "0x348",
+      "fill": "zero",
+      "init": [{"offset": "0x1a8", "u32": "@mountInfo"}]
+    },
+    "mountInfo": {
+      "size": "0x10c0",
+      "fill": "zero",
+      "init": [{"offset": "0x160", "u32": "@eqplayer"}]
+    },
+    "pcclient": {"size": "0xc4d0", "fill": "zero"},
+    "display": {"size": "0x2d60", "fill": "zero"},
+    "stringTable": {"size": "0x20", "fill": "zero"},
+    "everquest": {"size": "0x20", "fill": "zero"},
+    "message": {"size": "0x40", "fill": "zero", "init": [{"offset": "0", "cstr": "Appearance unavailable"}]},
+    "actorRegistry": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@registryVtable"}]
+    },
+    "registryVtable": {
+      "size": "0x24",
+      "fill": "zero",
+      "init": [{"offset": "0x20", "u32": "@fn_notify"}]
+    },
+    "attachment": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@attachmentVtable"}]
+    },
+    "attachmentVtable": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [{"offset": "8", "u32": "@fn_play"}]
+    },
+    "fn_notify": {"size": "0x4"},
+    "fn_play": {"size": "0x4"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4},
+    {"addr": "0x0063f4cc", "from_image": "0x0063f4cc", "image_size": 4},
+    {"addr": "0x0063fda4", "from_image": "0x0063fda4", "image_size": 4},
+    {"addr": "0x00640ea0", "from_image": "0x00640ea0", "image_size": 4},
+    {"addr": "0x00905d24", "u32": "@display"},
+    {"addr": "0x00905ce4", "u32": "@eqplayer"},
+    {"addr": "0x00905d00", "u32": "@pcclient"},
+    {"addr": "0x0099e36c", "u32": "@actorRegistry"},
+    {"addr": "0x00905cb0", "u32": "@stringTable"},
+    {"addr": "0x00988df0", "u32": "@everquest"}
+  ],
+  "callees": {
+    "0x0047a741": {
+      "name": "SetRace_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "passthrough": true
+    },
+    "0x00479e02": {
+      "name": "LegalPlayerRace_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x004798d7": {
+      "name": "GetActorTag_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "passthrough": true
+    },
+    "0x0048c879": {
+      "name": "GetRaceModelTag_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "int"],
+      "writes": [{"arg": 0, "offset": 0, "hex": "4954313800"}]
+    },
+    "0x0047a3eb": {
+      "name": "SetArmorType_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "passthrough": true
+    },
+    "0x0047a406": {
+      "name": "SetArmorTint_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "passthrough": true
+    },
+    "0x0047e35c": {
+      "name": "GetModelAtSpawnSpot_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "int"],
+      "ret": 1,
+      "writes": [{"arg": 0, "offset": 0, "hex": "5241434500000000"}]
+    },
+    "0x00464a28": {
+      "name": "steve_strncpy_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ptr", "u32"],
+      "passthrough": true
+    },
+    "0x00481dc7": {
+      "name": "Dismount_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr"],
+      "varargs": "printf",
+      "ret": 14,
+      "writes": [{"arg": 0, "offset": 0, "hex": "504c4159455273735f4d6f756e7400"}]
+    },
+    "0x0047981d": {
+      "name": "FindPlayerByPartialDisplayName_guess",
+      "conv": "cdecl",
+      "args": ["cstr", "int"],
+      "ret": "@mount"
+    },
+    "0x0047fa9e": {
+      "name": "SetHeights_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0047cc37": {
+      "name": "SetSounds_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00439f26": {
+      "name": "GetFloorHeight_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "float",
+        "float"
+      ],
+      "ret_float": 0.0
+    },
+    "0x0043c84b": {
+      "name": "FUN_0043c84b",
+      "conv": "thiscall",
+      "args": ["ptr"]
+    },
+    "0x004845d8": {
+      "name": "HandleMaterialEx_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "int", "int", "int"]
+    },
+    "0x0047fd9b": {
+      "name": "GetArmorTint_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0,
+      "passthrough": true
+    },
+    "0x0047a3d0": {
+      "name": "GetArmorType_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0,
+      "passthrough": true
+    },
+    "0x00484ca3": {
+      "name": "DisplayWeaponsAndArmor_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0048a945": {
+      "name": "FUN_0048a945",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00439e0f": {
+      "name": "SetViewActorByName_guess",
+      "conv": "thiscall",
+      "args": ["cstr"]
+    },
+    "0x0041377f": {
+      "name": "FUN_0041377f",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x0048500b": {
+      "name": "MakeRiderMountUp_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0047c08e": {
+      "name": "GetAnimation_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@attachment"
+    },
+    "0x00437464": {
+      "name": "FUN_00437464",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00439a46": {
+      "name": "DeleteActor_guess",
+      "conv": "thiscall",
+      "args": ["ptr"]
+    },
+    "0x0040e934": {
+      "name": "FindBuffWithEffect_guess",
+      "conv": "thiscall",
+      "args": ["int", "ptr"],
+      "ret": [1, 2],
+      "writes": [
+        {"arg": 1, "offset": 0, "hex": "ffffffff", "call": 0},
+        {"arg": 1, "offset": 0, "hex": "00000000", "call": 1}
+      ]
+    },
+    "0x00411f2f": {
+      "name": "RemovePCAffect_guess",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x004179aa": {
+      "name": "FUN_004179aa",
+      "conv": "thiscall",
+      "args": ["int", "int"]
+    },
+    "0x005dfa00": {
+      "name": "FUN_005dfa00",
+      "conv": "thiscall",
+      "args": ["u32", "ptr"],
+      "ret": "@message"
+    },
+    "0x004982c6": {
+      "name": "FUN_004982c6",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ]
+    },
+    "0x0060e450": {
+      "name": "strcpy",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr"],
+      "passthrough": true
+    },
+    "0x0060e460": {
+      "name": "strcat",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr"],
+      "passthrough": true
+    },
+    "@fn_play": {
+      "name": "AnimPlayer::Play_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "int", "float", "int"]
+    },
+    "@fn_notify": {
+      "name": "ActorRegistry::Notify_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "ptr"]
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "typical full update",
+      "args": [
+        "@update"
+      ]
+    },
+    {
+      "name": "no player actor",
+      "args": [
+        "@update"
+      ],
+      "memory": [{"addr": "@actorInfo", "offset": "0", "u32": 0}]
+    },
+    {
+      "name": "no actor info",
+      "args": [
+        "@update"
+      ],
+      "memory": [{"addr": "@eqplayer", "offset": "0x1a8", "u32": 0}]
+    },
+    {
+      "name": "race 0x82 male lower boundary",
+      "args": ["@update"],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 130},
+        {"addr": "@eqplayer", "offset": "0x1e0", "u32": 666},
+        {"addr": "@eqplayer", "offset": "0x24e", "u8": 0},
+        {"addr": "@update", "offset": "0x44", "u32": -1},
+        {"addr": "@update", "offset": "0x48", "u8": 255}
+      ]
+    },
+    {
+      "name": "race 0x82 female lower boundary",
+      "args": ["@update"],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 130},
+        {"addr": "@eqplayer", "offset": "0x1e0", "u32": 661},
+        {"addr": "@eqplayer", "offset": "0x24e", "u8": 1},
+        {"addr": "@update", "offset": "0x44", "u32": -1},
+        {"addr": "@update", "offset": "0x48", "u8": 255}
+      ]
+    },
+    {
+      "name": "race 0x82 male below lower boundary",
+      "args": ["@update"],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 130},
+        {"addr": "@eqplayer", "offset": "0x1e0", "u32": 665},
+        {"addr": "@eqplayer", "offset": "0x24e", "u8": 0},
+        {"addr": "@update", "offset": "0x44", "u32": -1},
+        {"addr": "@update", "offset": "0x48", "u8": 255}
+      ]
+    },
+    {
+      "name": "race 0x82 male upper boundary",
+      "args": ["@update"],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 130},
+        {"addr": "@eqplayer", "offset": "0x1e0", "u32": 668},
+        {"addr": "@eqplayer", "offset": "0x24e", "u8": 0},
+        {"addr": "@update", "offset": "0x44", "u32": -1},
+        {"addr": "@update", "offset": "0x48", "u8": 255}
+      ]
+    },
+    {
+      "name": "race 0x82 female upper boundary",
+      "args": ["@update"],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x260", "u32": 130},
+        {"addr": "@eqplayer", "offset": "0x1e0", "u32": 663},
+        {"addr": "@eqplayer", "offset": "0x24e", "u8": 1},
+        {"addr": "@update", "offset": "0x44", "u32": -1},
+        {"addr": "@update", "offset": "0x48", "u8": 255}
+      ]
+    },
+    {
+      "name": "race 0x8f actor path",
+      "args": ["@update"],
+      "memory": [{"addr": "@update", "offset": "0x44", "u32": 143}]
+    },
+    {
+      "name": "no optional values",
+      "args": ["@update"],
+      "memory": [{"addr": "@update", "offset": "0xa4", "u32": 0}]
+    },
+    {
+      "name": "race 0x8f load failure restores player state",
+      "args": ["@update"],
+      "memory": [{"addr": "@update", "offset": "0x44", "u32": 143}],
+      "callees": {
+        "0x0047e35c": {"name": "FUN_0047e35c", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0}
+      }
+    },
+    {
+      "name": "race 0x8f load failure leaves text id missing",
+      "args": ["@update"],
+      "memory": [{"addr": "@update", "offset": "0x44", "u32": 143}],
+      "callees": {
+        "0x0047e35c": {"name": "FUN_0047e35c", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0},
+        "0x0040e934": {"name": "FUN_0040e934", "conv": "thiscall", "args": ["int", "ptr"], "ret": [1, 2], "writes": [
+          {"arg": 1, "offset": 0, "hex": "ffffffff", "call": 0},
+          {"arg": 1, "offset": 0, "hex": "ffffffff", "call": 1}
+        ]}
+      }
+    },
+    {
+      "name": "race 0x8f state loop with sentinel floor",
+      "args": ["@update"],
+      "memory": [
+        {"addr": "@update", "offset": "0x44", "u32": 143},
+        {"addr": "@update", "offset": "0x49", "u8": 0},
+        {"addr": "@actorInfo", "offset": "0x15c", "u32": "@mount"}
+      ],
+      "callees": {
+        "0x00479e02": {"name": "FUN_00479e02", "conv": "thiscall", "args": ["int"], "ret": [1, 1]},
+        "0x00481dc7": {"name": "FUN_00481dc7", "conv": "thiscall", "args": [], "ret": 0},
+        "0x00437464": {"name": "FUN_00437464", "conv": "thiscall", "args": [], "ret": 1},
+        "0x00439f26": {"name": "FUN_00439f26", "conv": "thiscall", "args": ["float", "float", "float"], "ret_float": -1.0e27}
+      }
+    },
+    {
+      "name": "race 0x8f alternate state loop",
+      "args": ["@update"],
+      "memory": [
+        {"addr": "@update", "offset": "0x44", "u32": 143},
+        {"addr": "@update", "offset": "0x49", "u8": 255},
+        {"addr": "@actorInfo", "offset": "0x15c", "u32": "@mount"}
+      ],
+      "callees": {
+        "0x00479e02": {"name": "FUN_00479e02", "conv": "thiscall", "args": ["int"], "ret": [1, 1]},
+        "0x00481dc7": {"name": "FUN_00481dc7", "conv": "thiscall", "args": [], "ret": 0},
+        "0x00437464": {"name": "FUN_00437464", "conv": "thiscall", "args": [], "ret": 1}
+      }
+    },
+    {
+      "name": "race 0x8f keeps first basic race state",
+      "args": ["@update"],
+      "memory": [{"addr": "@update", "offset": "0x44", "u32": 143}],
+      "callees": {
+        "0x00479e02": {"name": "FUN_00479e02", "conv": "thiscall", "args": ["int"], "ret": [1, 0]}
+      }
+    },
+    {
+      "name": "race 0x8f without a mount",
+      "args": ["@update"],
+      "memory": [{"addr": "@update", "offset": "0x44", "u32": 143}],
+      "callees": {
+        "0x0047981d": {"name": "FUN_0047981d", "conv": "cdecl", "args": ["cstr", "int"], "ret": 0}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4741235,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@update"
+        ]
+      }
+    ],
+    "memory": [
+      {"addr": "@eqplayer", "offset": "0x1a8", "type": "ptr", "choices": ["@actorInfo", 0]},
+      {"addr": "@eqplayer", "offset": "0x260", "type": "int", "choices": [1, 12, 130, 142, 143]},
+      {"addr": "@eqplayer", "offset": "0x1e0", "type": "int", "choices": [0, 660, 661, 666, 668]},
+      {"addr": "@eqplayer", "offset": "0x24e", "type": "u8", "choices": [0, 1]},
+      {"addr": "@actorInfo", "offset": "0", "type": "ptr", "choices": ["@actorObject", 0]},
+      {"addr": "@actorInfo", "offset": "0x12c", "type": "ptr", "choices": ["@child", 0]},
+      {"addr": "@actorInfo", "offset": "0x15c", "type": "ptr", "choices": [0]},
+      {"addr": "@update", "offset": "0x44", "type": "int", "choices": [-1, 1, 142, 143]},
+      {"addr": "@update", "offset": "0x48", "type": "char", "choices": [-1, 0, 1]},
+      {"addr": "@update", "offset": "0x49", "type": "char", "choices": [-1, 0, 1]},
+      {"addr": "@update", "offset": "0x4a", "type": "char", "choices": [-1, 0, 1]},
+      {"addr": "@update", "offset": "0x4c", "type": "int", "choices": [-1, 0, 1, 5]},
+      {"addr": "@update", "offset": "0x54", "type": "float", "choices": [0.0, -1.0, 1.0]},
+      {"addr": "@update", "offset": "0xa0", "type": "int", "choices": [-1, 0, 2]},
+      {"addr": "@update", "offset": "0xa4", "type": "u32", "choices": [0, 1]}
+    ]
+  },
+  "_survivors": [
+    "L4584: normal actor-name formatting faults at 0x0048C711 in the emulator before strcat; the same-file FillName helper needs client race/resource data unavailable to this fixture",
+    "L4595: the normal value loop follows that same formatter fault at 0x0048C711, so its bound and increment cannot be observed",
+    "L4668: field_068 is reset again at 0x00485C64 before return; the only intervening call is the scripted no-op 0x0043C84B"
+  ]
+}

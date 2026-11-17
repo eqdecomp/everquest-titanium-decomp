@@ -1,0 +1,257 @@
+{
+  "function": "CostTotalOwner_guess::GetSkillBaseDamage_guess",
+  "original": "0x0041ef86",
+  "sources": ["src/EverQuest/tu_013_EQ_Character.cpp"],
+  "conv": "thiscall",
+  "this": "@costtotalowner",
+  "args": [
+    {"name": "kind_guess", "type": "u32"},
+    {"name": "context_guess", "type": "ptr"}
+  ],
+  "ret": "u8",
+  "objects": {
+    "costtotalowner": {"size": "0x30", "fill": "random", "init": [
+      {"offset": "0x4", "u32": "@offset_holder"},
+      {"offset": "0x8", "u32": "@input"}
+    ]},
+    "offset_holder": {"size": "0x48", "fill": "random", "init": [
+      {"offset": "0x4", "u32": 0},
+      {"offset": "0x40", "u32": "@fn_candidate"}
+    ]},
+    "input": {"size": "0x248", "fill": "random", "init": [
+      {"offset": "0x1a8", "u32": "@threshold"},
+      {"offset": "0x244", "u8": 0}
+    ]},
+    "threshold": {"size": "0x1080", "fill": "random", "init": [
+      {"offset": "0x107c", "u32": 0}
+    ]},
+    "context": {"size": "0x21c", "fill": "random", "init": [
+      {"offset": "0x218", "u32": "@tally"}
+    ]},
+    "tally": {"size": "0x44", "fill": "random", "init": [
+      {"offset": "0x4", "u32": "@tally_offset"}
+    ]},
+    "tally_offset": {"size": "0x8", "fill": "random", "init": [
+      {"offset": "0x4", "u32": 0}
+    ]},
+    "lookup": {"size": "0x11a8", "fill": "random", "init": [
+      {"offset": "0x40", "u32": "@rank_entry"},
+      {"offset": "0x44", "u32": "@rank_entry"},
+      {"offset": "0x48", "u32": "@rank_entry"},
+      {"offset": "0x119c", "u8": 0},
+      {"offset": "0x11a4", "u32": 0}
+    ]},
+    "rank_entry": {"size": "0x48", "fill": "random"},
+    "candidate": {"size": "0xc284", "fill": "random"},
+    "fn_candidate": {"size": "0x4"},
+    "kind_record": {"size": "0x131", "fill": "random", "init": [
+      {"offset": "0x130", "u8": 4}
+    ]}
+  },
+  "memory": [
+    {"addr": "0x00851204", "u32": "@kind_record"},
+    {"addr": "0x00851220", "u32": "@kind_record"},
+    {"addr": "0x00851228", "u32": "@kind_record"},
+    {"addr": "0x00851270", "u32": "@kind_record"},
+    {"addr": "0x00851278", "u32": "@kind_record"},
+    {"addr": "0x00851328", "u32": "@kind_record"},
+    {"addr": "0x006410b8", "hex": "0000403f"},
+    {"addr": "0x006410b4", "hex": "0000003f"}
+  ],
+  "callees": {
+    "0x0041c8f4": {"name": "CheckMode_guess", "conv": "thiscall", "args": ["u8"], "ret": 1},
+    "0x0041ace9": {"name": "Skill_guess", "conv": "thiscall", "args": ["int"], "ret": 100},
+    "0x005ec220": {"name": "Find_guess", "conv": "thiscall", "args": [], "ret": "@lookup"},
+    "0x005e0f30": {"name": "GetKey_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005ecc00": {"name": "GetValue_guess", "conv": "thiscall", "args": [], "ret": 8},
+    "0x005e2350": {"name": "GetRankValue_guess", "conv": "thiscall", "args": ["int"], "ret": 20},
+    "0x005e0aa0": {"name": "HasFlag12f_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005e04c0": {"name": "HasRankFlag_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0041c7c1": {"name": "ApplyRank_guess", "conv": "thiscall", "args": ["ptr", "int", "int"], "ret": 0},
+    "0x005e0540": {"name": "GetContextValue_guess", "conv": "thiscall", "args": ["int"], "ret": 4},
+    "0x005e0190": {"name": "HasContextFlag_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005e0230": {"name": "GetContextCount_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00416aa6": {"name": "SumScaled_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0},
+    "0x005e02d0": {"name": "HasContextValue_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005e0350": {"name": "HasAlternateContextValue_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x004185b1": {"name": "CheckQuery_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "@fn_candidate": {"name": "GetCandidate_guess", "conv": "thiscall", "args": [], "ret": "@candidate"}
+  },
+  "cases": [
+    {"name": "validation rejects", "args": [1, 0], "callees": {
+      "0x0041c8f4": {"name": "CheckMode_guess", "conv": "thiscall", "args": ["u8"], "ret": 0}
+    }},
+    {"name": "ordinary thresholds at lower edges", "args": [1, 0], "callees": {
+      "0x0041ace9": {"name": "GetKindValue_guess", "conv": "thiscall", "args": ["int"], "ret": [24, 75, 125, 175]}
+    }},
+    {"name": "ordinary thresholds above edges", "args": [1, 0], "callees": {
+      "0x0041ace9": {"name": "GetKindValue_guess", "conv": "thiscall", "args": ["int"], "ret": [25, 76, 126, 176]}
+    }},
+    {"name": "kind 0x1c state 7 clamps then applies key override", "args": [28, 0], "memory": [
+      {"addr": "@kind_record", "offset": "0x130", "u8": 10},
+      {"addr": "@lookup", "offset": "0x119c", "u8": 7},
+      {"addr": "@lookup", "offset": "0x11a4", "u32": 63},
+      {"addr": "@lookup", "offset": "0x40", "u32": "@rank_entry"}
+    ], "callees": {
+      "0x005e0f30": {"name": "GetKey_guess", "conv": "thiscall", "args": [], "ret": 10652}
+    }},
+    {"name": "kind 0x1c state 7 key mismatch", "args": [28, 0], "memory": [
+      {"addr": "@kind_record", "offset": "0x130", "u8": 4},
+      {"addr": "@lookup", "offset": "0x119c", "u8": 7},
+      {"addr": "@lookup", "offset": "0x11a4", "u32": 50},
+      {"addr": "@lookup", "offset": "0x40", "u32": "@rank_entry"}
+    ], "callees": {
+      "0x005e0f30": {"name": "GetKey_guess", "conv": "thiscall", "args": [], "ret": 0}
+    }},
+    {"name": "kind 0x1c state 7 with positive lookup offset", "args": [28, 0], "memory": [
+      {"addr": "@offset_holder", "offset": "0x4", "u32": 4},
+      {"addr": "@kind_record", "offset": "0x130", "u8": 4},
+      {"addr": "@lookup", "offset": "0x119c", "u8": 7},
+      {"addr": "@lookup", "offset": "0x11a4", "u32": 63},
+      {"addr": "@lookup", "offset": "0x40", "u32": "@rank_entry"}
+    ], "callees": {
+      "0x005e0f30": {"name": "GetKey_guess", "conv": "thiscall", "args": [], "ret": 0}
+    }},
+    {"name": "kind 0x1c state 15 boundary", "args": [28, 0], "memory": [
+      {"addr": "@kind_record", "offset": "0x130", "u8": 2},
+      {"addr": "@lookup", "offset": "0x119c", "u8": 15},
+      {"addr": "@lookup", "offset": "0x11a4", "u32": 49}
+    ]},
+    {"name": "kind 0x1c other state", "args": [28, 0], "memory": [
+      {"addr": "@lookup", "offset": "0x119c", "u8": 6},
+      {"addr": "@lookup", "offset": "0x11a4", "u32": 62}
+    ]},
+    {"name": "kind 0x4a missing rank", "args": [74, 0], "memory": [
+      {"addr": "@kind_record", "offset": "0x130", "u8": 5},
+      {"addr": "@lookup", "offset": "0x119c", "u8": 7},
+      {"addr": "@lookup", "offset": "0x44", "u32": 0},
+      {"addr": "@lookup", "offset": "0x11a4", "u32": 59}
+    ]},
+    {"name": "kind 0x4a level 15", "args": [74, 0], "memory": [
+      {"addr": "@kind_record", "offset": "0x130", "u8": 6},
+      {"addr": "@lookup", "offset": "0x44", "u32": "@rank_entry"},
+      {"addr": "@lookup", "offset": "0x11a4", "u32": 15}
+    ]},
+    {"name": "kind 0x4a level 60 caps and adds", "args": [74, 0], "memory": [
+      {"addr": "@kind_record", "offset": "0x130", "u8": 20},
+      {"addr": "@lookup", "offset": "0x44", "u32": "@rank_entry"},
+      {"addr": "@lookup", "offset": "0x11a4", "u32": 60}
+    ]},
+    {"name": "kind 0x4a state 7 with positive lookup offset", "args": [74, 0], "memory": [
+      {"addr": "@offset_holder", "offset": "0x4", "u32": 4},
+      {"addr": "@lookup", "offset": "0x119c", "u8": 7},
+      {"addr": "@lookup", "offset": "0x44", "u32": "@rank_entry"},
+      {"addr": "@lookup", "offset": "0x11a4", "u32": 60}
+    ]},
+    {"name": "kind 0x0a rank absent", "args": [10, 0], "memory": [
+      {"addr": "@lookup", "offset": "0x48", "u32": 0}
+    ]},
+    {"name": "kind 0x0a value mismatch", "args": [10, 0], "memory": [
+      {"addr": "@lookup", "offset": "0x48", "u32": "@rank_entry"}
+    ], "callees": {
+      "0x005ecc00": {"name": "GetValue_guess", "conv": "thiscall", "args": [], "ret": 7}
+    }},
+    {"name": "kind 0x0a rank comparison returns", "args": [10, 0], "memory": [
+      {"addr": "@kind_record", "offset": "0x130", "u8": 2},
+      {"addr": "@lookup", "offset": "0x48", "u32": "@rank_entry"},
+      {"addr": "@lookup", "offset": "0x11a4", "u32": 15}
+    ], "callees": {
+      "0x005ecc00": {"name": "GetValue_guess", "conv": "thiscall", "args": [], "ret": 8},
+      "0x005e2350": {"name": "GetRankValue_guess", "conv": "thiscall", "args": ["int"], "ret": 100}
+    }},
+    {"name": "kind 0x0a rank overflows to shared scaling", "args": [10, 0], "memory": [
+      {"addr": "@kind_record", "offset": "0x130", "u8": 2},
+      {"addr": "@lookup", "offset": "0x48", "u32": "@rank_entry"},
+      {"addr": "@lookup", "offset": "0x11a4", "u32": 50}
+    ], "callees": {
+      "0x005ecc00": {"name": "GetValue_guess", "conv": "thiscall", "args": [], "ret": 8},
+      "0x005e2350": {"name": "GetRankValue_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+      "0x0041ace9": {"name": "GetKindValue_guess", "conv": "thiscall", "args": ["int"], "ret": [100, 100, 100, 100, 80]}
+    }},
+    {"name": "kind 0x0a applies rank flag", "args": [10, 0], "memory": [
+      {"addr": "@kind_record", "offset": "0x130", "u8": 2},
+      {"addr": "@lookup", "offset": "0x48", "u32": "@rank_entry"},
+      {"addr": "@lookup", "offset": "0x11a4", "u32": 50}
+    ], "callees": {
+      "0x005e2350": {"name": "GetRankValue_guess", "conv": "thiscall", "args": ["int"], "ret": 20},
+      "0x005e0aa0": {"name": "HasFlag12f_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+      "0x0041c7c1": {"name": "ApplyRank_guess", "conv": "thiscall", "args": ["ptr", "int", "int"], "ret": 0}
+    }},
+    {"name": "kind 0x1e threshold active", "args": [30, 0], "memory": [
+      {"addr": "@input", "offset": "0x1a8", "u32": "@threshold"},
+      {"addr": "@threshold", "offset": "0x107c", "u32": 1}
+    ]},
+    {"name": "kind 0x1e threshold inactive", "args": [30, 0], "memory": [
+      {"addr": "@input", "offset": "0x1a8", "u32": "@threshold"},
+      {"addr": "@threshold", "offset": "0x107c", "u32": 0}
+    ]},
+    {"name": "kind 8 input is null", "args": [8, 0], "memory": [
+      {"addr": "@costtotalowner", "offset": "0x8", "u32": 0}
+    ]},
+    {"name": "kind 8 rank missing but flag one", "args": [8, 0], "memory": [
+      {"addr": "@lookup", "offset": "0x44", "u32": 0},
+      {"addr": "@input", "offset": "0x244", "u8": 1}
+    ], "callees": {
+      "0x0041ace9": {"name": "GetKindValue_guess", "conv": "thiscall", "args": ["int"], "ret": [0, 0, 0, 0, 80]}
+    }},
+    {"name": "kind 8 rank missing flag two returns", "args": [8, 0], "memory": [
+      {"addr": "@lookup", "offset": "0x44", "u32": 0},
+      {"addr": "@input", "offset": "0x244", "u8": 2}
+    ]},
+    {"name": "kind 8 rank present flag zero", "args": [8, 0], "memory": [
+      {"addr": "@lookup", "offset": "0x44", "u32": "@rank_entry"},
+      {"addr": "@input", "offset": "0x244", "u8": 0}
+    ], "callees": {
+      "0x005e0aa0": {"name": "HasFlag12f_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+      "0x005e04c0": {"name": "HasRankFlag_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+      "0x0041ace9": {"name": "GetKindValue_guess", "conv": "thiscall", "args": ["int"], "ret": [0, 0, 0, 0, 80]}
+    }},
+    {"name": "kind 8 applies candidate rank", "args": [8, "@context"], "memory": [
+      {"addr": "@lookup", "offset": "0x44", "u32": "@rank_entry"},
+      {"addr": "@input", "offset": "0x244", "u8": 0},
+      {"addr": "@context", "offset": "0x218", "u32": "@tally"}
+    ], "callees": {
+      "0x005e0aa0": {"name": "HasFlag12f_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+      "0x0041c7c1": {"name": "ApplyRank_guess", "conv": "thiscall", "args": ["ptr", "int", "int"], "ret": 12},
+      "0x005e0190": {"name": "HasContextFlag_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+      "0x005e0230": {"name": "GetContextCount_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+      "0x00416aa6": {"name": "SumScaled_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 3},
+      "0x005e02d0": {"name": "HasContextValue_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+      "0x004185b1": {"name": "CheckQuery_guess", "conv": "thiscall", "args": ["ptr"], "ret": 2},
+      "0x0041ace9": {"name": "GetKindValue_guess", "conv": "thiscall", "args": ["int"], "ret": [0, 0, 0, 0, 80]}
+    }},
+    {"name": "kind 8 context alternate flags", "args": [8, "@context"], "memory": [
+      {"addr": "@lookup", "offset": "0x44", "u32": "@rank_entry"},
+      {"addr": "@input", "offset": "0x244", "u8": 0},
+      {"addr": "@context", "offset": "0x218", "u32": "@tally"}
+    ], "callees": {
+      "0x005e0aa0": {"name": "HasFlag12f_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+      "0x005e04c0": {"name": "HasRankFlag_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+      "0x005e0190": {"name": "HasContextFlag_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+      "0x005e02d0": {"name": "HasContextValue_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+      "0x005e0350": {"name": "HasAlternateContextValue_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+      "0x004185b1": {"name": "CheckQuery_guess", "conv": "thiscall", "args": ["ptr"], "ret": 1},
+      "0x0041ace9": {"name": "GetKindValue_guess", "conv": "thiscall", "args": ["int"], "ret": [0, 0, 0, 0, 80]}
+    }}
+  ],
+  "fuzz": {
+    "seed": 4331027,
+    "count": 150,
+    "args": [
+      {"choices": [1, 8, 10, 28, 30, 74]},
+      {"choices": [0, "@context"]}
+    ],
+    "memory": [
+      {"addr": "@lookup", "offset": "0x119c", "type": "u8", "choices": [0, 7, 15, 6]},
+      {"addr": "@lookup", "offset": "0x11a4", "type": "u32", "choices": [0, 15, 16, 49, 50, 51, 59, 60, 62, 63]},
+      {"addr": "@lookup", "offset": "0x40", "type": "u32", "choices": [0, "@rank_entry"]},
+      {"addr": "@lookup", "offset": "0x44", "type": "u32", "choices": [0, "@rank_entry"]},
+      {"addr": "@lookup", "offset": "0x48", "type": "u32", "choices": [0, "@rank_entry"]},
+      {"addr": "@input", "offset": "0x1a8", "type": "u32", "choices": ["@threshold"]},
+      {"addr": "@input", "offset": "0x244", "type": "u8", "choices": [0, 0, 1, 2]},
+      {"addr": "@threshold", "offset": "0x107c", "type": "u32", "choices": [0, 1]},
+      {"addr": "@context", "offset": "0x218", "type": "u32", "choices": [0, "@tally"]},
+      {"addr": "@kind_record", "offset": "0x130", "type": "u8", "choices": [0, 1, 2, 4, 9, 12, 20]}
+    ]
+  }
+}

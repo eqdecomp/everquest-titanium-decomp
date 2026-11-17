@@ -1,0 +1,148 @@
+{
+  "function": "CGuildBankWndView_guess::RefillFirstList_guess",
+  "original": "0x0050d898",
+  "sources": ["src/EverQuest/tu_165_GuildBankWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@resetstate",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "resetstate": {
+      "size": "0xbec0",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x15c", "u32": "@itemlist"},
+        {"offset": "0x188", "u32": "@counter"},
+        {"offset": "0xbeb4", "u32": 0},
+        {"offset": "0xbebc", "u32": 0}
+      ]
+    },
+    "itemlist": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@itemlist_vtable"}]
+    },
+    "itemlist_vtable": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [{"offset": "0x130", "u32": "@fn_clear"}]
+    },
+    "counter": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@counter_vtable"}]
+    },
+    "counter_vtable": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xfc", "u32": "@fn_counter"}]
+    },
+    "fn_clear": {"size": "0x4", "fill": "zero"},
+    "fn_counter": {"size": "0x4", "fill": "zero"},
+    "heap0": {"size": "0x100", "fill": "zero"},
+    "heap1": {"size": "0x100", "fill": "zero"},
+    "heap2": {"size": "0x100", "fill": "zero"},
+    "heap3": {"size": "0x100", "fill": "zero"},
+    "heap4": {"size": "0x100", "fill": "zero"},
+    "heap5": {"size": "0x100", "fill": "zero"},
+    "heap6": {"size": "0x100", "fill": "zero"},
+    "heap7": {"size": "0x100", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x0063f53f", "cstr": ""},
+    {"addr": "0x0099db00", "cstr": "0"}
+  ],
+  "callees": {
+    "@fn_clear": {"name": "ListClear_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "@fn_counter": {"name": "SetCounterText_guess", "conv": "thiscall", "args": ["ignore"]},
+    "0x0050d6eb": {"name": "MatchesFilter_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": [0, 1]},
+    "0x00571e00": {"name": "CXStrConstruct_guess", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "0x0059b9d0": {"name": "ListAddString_guess", "conv": "thiscall", "args": ["ignore", "int", "int", "int"], "ret": 0},
+    "0x00571d00": {"name": "CXStrRelease_guess", "conv": "thiscall", "args": ["u32"], "passthrough": true},
+    "0x0050d553": {"name": "FillRow_guess", "conv": "thiscall", "args": ["ptr", "int", "ptr", "bool"]},
+    "0x006220e9": {"name": "_itoa", "conv": "cdecl", "args": ["int", "ptr", "int"], "ret": "0x0099db00"},
+    "0x0046da4a": {"name": "FormatText_guess", "conv": "cdecl", "args": ["ignore", "int", "cstr", "int", "int", "int", "int", "int", "int", "int", "int"]},
+    "0x0050c673": {"name": "IsSelectedValue_guess", "conv": "cdecl", "args": ["u32"], "ret": 0},
+    "0x0050d73e": {"name": "ApplySelection_guess", "conv": "thiscall", "args": ["u32"]},
+    "0x0050ca92": {"name": "UpdateButtons_guess", "conv": "thiscall", "args": []},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": ["@heap0", "@heap1", "@heap2", "@heap3", "@heap4", "@heap5", "@heap6", "@heap7"]},
+    "kernel32.dll!HeapFree": {"name": "HeapFree", "conv": "stdcall", "args": ["ptr", "u32", "ptr"], "ret": 1}
+  },
+  "rewrite_aliases": {"__itoa": "0x006220e9"},
+  "cases": [
+    {
+      "name": "null list and null counter",
+      "memory": [
+        {"addr": "@resetstate", "offset": "0x15c", "u32": 0},
+        {"addr": "@resetstate", "offset": "0x188", "u32": 0}
+      ]
+    },
+    {
+      "name": "empty list skips entry helpers",
+      "memory": [{"addr": "@resetstate", "offset": "0x188", "u32": 0}]
+    },
+    {
+      "name": "first byte past the 200-entry array is ignored",
+      "memory": [
+        {"addr": "@resetstate", "offset": "0x188", "u32": 0},
+        {"addr": "@resetstate", "offset": "0xbeac", "u8": 1}
+      ]
+    },
+    {
+      "name": "present but filtered out",
+      "memory": [
+        {"addr": "@resetstate", "offset": "0x188", "u32": 0},
+        {"addr": "@resetstate", "offset": "0x12cc", "u8": 1}
+      ],
+      "callees": {
+        "0x0050d6eb": {"conv": "thiscall", "args": ["ptr", "int"], "ret": 0}
+      }
+    },
+    {
+      "name": "two present entries with one included",
+      "memory": [
+        {"addr": "@resetstate", "offset": "0x188", "u32": 0},
+        {"addr": "@resetstate", "offset": "0x12cc", "u8": 1},
+        {"addr": "@resetstate", "offset": "0x13a8", "u8": 1}
+      ],
+      "callees": {
+        "0x0050d6eb": {"conv": "thiscall", "args": ["ptr", "int"], "ret": [0, 1]}
+      }
+    },
+    {
+      "name": "counter text and finalize selection",
+      "memory": [
+        {"addr": "@resetstate", "offset": "0xbeb4", "u32": "0x10000"},
+        {"addr": "@resetstate", "offset": "0xbebc", "u32": 4},
+        {"addr": "@resetstate", "offset": "0x12cc", "u8": 1}
+      ],
+      "callees": {
+        "0x0050d6eb": {"conv": "thiscall", "args": ["ptr", "int"], "ret": 1},
+        "0x0050c673": {"conv": "cdecl", "args": ["u32"], "ret": 1}
+      }
+    },
+    {
+      "name": "counter text with null list",
+      "memory": [
+        {"addr": "@resetstate", "offset": "0x15c", "u32": 0},
+        {"addr": "@resetstate", "offset": "0xbeb4", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5298328,
+    "count": 50,
+    "args": [],
+    "memory": [
+      {"addr": "@resetstate", "offset": "0x15c", "type": "ptr", "choices": [0, "@itemlist"]},
+      {"addr": "@resetstate", "offset": "0x188", "type": "ptr", "choices": [0, "@counter"]},
+      {"addr": "@resetstate", "offset": "0xbeb4", "type": "u32", "choices": [0, 1, 65536, 65537, 4294967295]},
+      {"addr": "@resetstate", "offset": "0xbebc", "type": "u32", "choices": [0, 1, 2, 3, 4, 5]},
+      {"addr": "@resetstate", "offset": "0x12cc", "type": "u8", "choices": [0, 1]},
+      {"addr": "@resetstate", "offset": "0x13a8", "type": "u8", "choices": [0, 1]},
+      {"addr": "@resetstate", "offset": "0x1484", "type": "u8", "choices": [0, 1]}
+    ]
+  },
+  "_survivors": "L983: the emulator starts the stack at zero, so deleting index_guess = 0 leaves the observed initial index unchanged."
+}

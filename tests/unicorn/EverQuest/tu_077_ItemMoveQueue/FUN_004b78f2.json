@@ -1,0 +1,118 @@
+{
+  "function": "SwapMovedItem_guess",
+  "original": "0x004B78F2",
+  "sources": ["src/EverQuest/tu_077_ItemMoveQueue.cpp"],
+  "conv": "cdecl",
+  "args": [
+    {"name": "holder_guess", "type": "ptr"},
+    {"name": "lookup_guess", "type": "ptr"},
+    {"name": "count_guess", "type": "int"}
+  ],
+  "ret": "char",
+  "size": "0x282",
+  "objects": {
+    "holder": {"size": "0xc288", "fill": "random", "init": [{"offset": "0xc284", "u32": "@offset"}]},
+    "lookup": {"size": "0x14", "fill": "random", "init": [{"offset": "0x10", "u32": "@blocks"}]},
+    "blocks": {"size": "0x4", "fill": "random", "init": [{"offset": "0x0", "u32": "@rows"}]},
+    "rows": {"size": "0xa8", "fill": "random", "init": [
+      {"offset": "0x24", "u32": "@target"},
+      {"offset": "0x5c", "u32": "@target"},
+      {"offset": "0x94", "u32": "@target"}
+    ]},
+    "offset": {"size": "0x4", "fill": "zero"},
+    "gate_argument": {"size": "0x4", "fill": "zero"},
+    "gate": {"size": "0x4", "fill": "random"},
+    "slot": {"size": "0x8", "fill": "random", "init": [{"offset": "0x4", "u32": "@offset"}]},
+    "target": {"size": "0x4", "fill": "random", "init": [{"offset": "0x0", "u32": "@vtable"}]},
+    "vtable": {"size": "0x18", "fill": "random", "init": [{"offset": "0x14", "u32": "@fn"}]},
+    "fn": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@lookup", "offset": "0x0", "u32": 3},
+    {"addr": "@lookup", "offset": "0x8", "u32": 3},
+    {"addr": "@lookup", "offset": "0xc", "u32": 2},
+    {"addr": "@rows", "offset": "0x14", "u32": 0},
+    {"addr": "@rows", "offset": "0x18", "u32": 10},
+    {"addr": "@rows", "offset": "0x1c", "u32": "0xffffffff"},
+    {"addr": "@rows", "offset": "0x28", "u32": 7},
+    {"addr": "@rows", "offset": "0x34", "u32": 1},
+    {"addr": "@rows", "offset": "0x4c", "u32": 0},
+    {"addr": "@rows", "offset": "0x50", "u32": 10},
+    {"addr": "@rows", "offset": "0x54", "u32": "0xffffffff"},
+    {"addr": "@rows", "offset": "0x60", "u32": 7},
+    {"addr": "@rows", "offset": "0x6c", "u32": 1},
+    {"addr": "@rows", "offset": "0x84", "u32": 0},
+    {"addr": "@rows", "offset": "0x88", "u32": 22},
+    {"addr": "@rows", "offset": "0x8c", "u32": "0xffffffff"},
+    {"addr": "@rows", "offset": "0x98", "u32": 7},
+    {"addr": "@rows", "offset": "0xa4", "u32": 1},
+    {"addr": "@gate_argument", "offset": "0x0", "u32": 0},
+    {"addr": "@slot", "offset": "0x0", "u32": 0}
+  ],
+  "callees": {
+    "0x004b76a6": {"name": "GetInventorySlot_guess", "conv": "thiscall", "args": ["ptr"], "ret": ["@slot", "@slot", "@slot", "@slot"]},
+    "0x004b7398": {"name": "FUN_004b7398", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x004b7422": {"name": "Probe_Check_guess", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x004b736f": {"name": "Kind_GetCode_guess", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x004b7317": {"name": "Probe_Resolve_guess", "conv": "thiscall", "args": ["ptr"], "passthrough": true},
+    "0x00434777": {"name": "SlotTable_GetSlot_guess", "conv": "thiscall", "args": ["u32"], "ret": "@gate_argument"},
+    "0x005dfc50": {"name": "Gate_IsReady_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005ecc30": {"name": "Gate_GetLimit_guess", "conv": "thiscall", "args": [], "ret": 10},
+    "0x005ec650": {"name": "Gate_GetByIndex_guess", "conv": "thiscall", "args": ["int"], "ret": "@slot"},
+    "0x004bc906": {"name": "CanEquipItem_guess", "conv": "thiscall", "args": ["ptr", "int", "int"], "ret": [0, 1]},
+    "0x004b8796": {"name": "PlaceMovedItem_guess", "conv": "cdecl", "args": ["ptr", "ptr", "int"], "ret": [0, 1]},
+    "@fn": {"name": "Target_Slot05_guess", "conv": "thiscall", "args": ["int", "int"], "ret": [1, 0]}
+  },
+  "cases": [
+    {"name": "empty", "args": ["@holder", "@lookup", 0], "expect": {"ret": 0}},
+    {"name": "no candidate flag", "args": ["@holder", "@lookup", 1], "memory": [
+      {"addr": "@rows", "offset": "0x34", "u32": 0}
+    ], "expect": {"ret": 0}},
+    {"name": "occupied candidate", "args": ["@holder", "@lookup", 1], "memory": [
+      {"addr": "@gate_argument", "offset": "0x0", "u32": "@gate"}
+    ], "expect": {"ret": 0}},
+    {"name": "different row id", "args": ["@holder", "@lookup", 1], "memory": [
+      {"addr": "@rows", "offset": "0x28", "u32": 9}
+    ], "expect": {"ret": 0}},
+    {"name": "ready row with type two", "args": ["@holder", "@lookup", 1], "memory": [
+      {"addr": "@rows", "offset": "0x70", "u32": 2}
+    ], "expect": {"ret": 0}},
+    {"name": "validation false then true", "args": ["@holder", "@lookup", 2], "memory": [
+      {"addr": "@rows", "offset": "0x70", "u32": 1},
+      {"addr": "@rows", "offset": "0x50", "u32": 10},
+      {"addr": "@rows", "offset": "0x54", "u32": "0xffffffff"},
+      {"addr": "@rows", "offset": "0x88", "u32": 10}
+    ], "expect": {"ret": 0}},
+    {"name": "not ready and restore", "args": ["@holder", "@lookup", 1], "memory": [
+      {"addr": "@rows", "offset": "0x18", "u32": 22}
+    ], "expect": {"ret": 0}},
+    {"name": "two row retry", "args": ["@holder", "@lookup", 2], "memory": [
+      {"addr": "@rows", "offset": "0x18", "u32": 22},
+      {"addr": "@rows", "offset": "0x50", "u32": 22},
+      {"addr": "@rows", "offset": "0x54", "u32": "0xffffffff"},
+      {"addr": "@rows", "offset": "0x88", "u32": 22}
+    ], "expect": {"ret": 1}},
+    {"name": "virtual slot accepts", "args": ["@holder", "@lookup", 1], "memory": [
+      {"addr": "@rows", "offset": "0x18", "u32": 22},
+      {"addr": "@rows", "offset": "0x1c", "u32": 5},
+      {"addr": "@gate_argument", "offset": "0x0", "u32": "@gate"}
+    ], "expect": {"ret": 0}},
+    {"name": "two virtual slots", "args": ["@holder", "@lookup", 2], "memory": [
+      {"addr": "@rows", "offset": "0x1c", "u32": 5},
+      {"addr": "@rows", "offset": "0x50", "u32": 22},
+      {"addr": "@rows", "offset": "0x54", "u32": 5},
+      {"addr": "@gate_argument", "offset": "0x0", "u32": "@gate"}
+    ], "expect": {"ret": 0}}
+  ],
+  "fuzz": {
+    "seed": 4946162,
+    "count": 100,
+    "args": [
+      {"choices": ["@holder"]},
+      {"choices": ["@lookup"]},
+      {"range": [-1, 0]}
+    ],
+    "memory": []
+  },
+  "_survivors": "L937: the Slot05 result only gates requested.key.field08, which the next unconditional key copy overwrites before any later call or return; L939: deleting that store has the same unobservable effect."
+}

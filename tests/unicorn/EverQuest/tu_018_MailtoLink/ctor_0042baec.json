@@ -1,0 +1,57 @@
+{
+  "function": "PurgeObject_guess::PurgeObject_guess",
+  "original": "0x0042baec",
+  "sources": ["src/EverQuest/tu_018_MailtoLink.cpp"],
+  "rewrite": "??0PurgeObject_guess@@QAE@ABU0@@Z",
+  "conv": "thiscall",
+  "this": "@compoundvalue",
+  "args": [{"name": "source_guess", "type": "ptr"}],
+  "ret": "ptr",
+  "objects": {
+    "compoundvalue": {"size": "0x4c", "fill": "random"},
+    "source": {"size": "0x4c", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x00402e5e": {"name": "string_default", "conv": "thiscall", "args": [], "ret": "this"},
+    "0x00403174": {"name": "string_assign", "conv": "thiscall", "args": ["mem:28", "u32", "u32"], "ret": "this"},
+    "0x0042b6e2": {"name": "middle_copy_from", "conv": "thiscall", "args": ["mem:16"], "ret": 0},
+    "0x0042a5c2": {"name": "for_each", "conv": "thiscall", "args": [], "ret": 0},
+    "0x004285e1": {"name": "refresh", "conv": "thiscall", "args": [], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "flags set",
+      "args": ["@source"],
+      "memory": [
+        {"addr": "@source", "offset": "0x48", "u8": 1},
+        {"addr": "@source", "offset": "0x49", "u8": 255}
+      ]
+    },
+    {
+      "name": "flags clear",
+      "args": ["@source"],
+      "memory": [
+        {"addr": "@source", "offset": "0x48", "u8": 0},
+        {"addr": "@source", "offset": "0x49", "u8": 0}
+      ]
+    },
+    {
+      "name": "mixed flags",
+      "args": ["@source"],
+      "memory": [
+        {"addr": "@source", "offset": "0x48", "u8": 255},
+        {"addr": "@source", "offset": "0x49", "u8": 1}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4373228,
+    "count": 100,
+    "args": [{"choices": ["@source"]}],
+    "memory": [
+      {"addr": "@source", "offset": "0x48", "type": "u8", "choices": [0, 1, 2, 127, 128, 255]},
+      {"addr": "@source", "offset": "0x49", "type": "u8", "choices": [0, 1, 2, 127, 128, 255]}
+    ]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "function": "CJournalNPCWndView_guess::FilterDialogList_guess",
+  "original": "0x00524a3a",
+  "sources": [
+    "src/EverQuest/tu_177_JournalNPCWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "object": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {"offset": "0x164", "u32": "@coll"},
+        {"offset": "0x16c", "u32": 4660}
+      ]
+    },
+    "coll": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4c", "u32": 3}
+      ]
+    },
+    "rec0": {"size": "0x20", "fill": "zero"},
+    "rec1": {"size": "0x20", "fill": "zero"},
+    "rec2": {"size": "0x20", "fill": "zero"},
+    "rec3": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079AC74", "u32": "0x12345678"}
+  ],
+  "callees": {
+    "0x00572300": {
+      "name": "FUN_00572300",
+      "conv": "cdecl",
+      "args": ["ignore", "int"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "6100"}]
+    },
+    "0x00574720": {
+      "name": "FUN_00574720",
+      "conv": "cdecl",
+      "args": ["cstr"],
+      "ret": 0
+    },
+    "0x0050f3f6": {
+      "name": "FUN_0050f3f6",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0042ec6c": {
+      "name": "FUN_0042ec6c",
+      "conv": "thiscall",
+      "args": ["cstr", "int", "int"],
+      "ret": [0, 1, 2, -1]
+    },
+    "0x0042e4dc": {
+      "name": "FUN_0042e4dc",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": ["@rec0", "@rec1", "@rec2", "@rec3"]
+    },
+    "0x0050319b": {
+      "name": "FUN_0050319b",
+      "conv": "thiscall",
+      "args": ["int", "mem:4"]
+    }
+  },
+  "cases": [
+    {"name": "typical_three", "args": []},
+    {"name": "zero_count", "args": [],
+     "memory": [{"addr": "@coll", "offset": "0x4c", "u32": 0}]},
+    {"name": "null_collection", "args": [],
+     "memory": [{"addr": "@object", "offset": "0x164", "u32": 0}]},
+    {"name": "one_item", "args": [],
+     "memory": [{"addr": "@coll", "offset": "0x4c", "u32": 1}]},
+    {"name": "five_stops_at_minus_one", "args": [],
+     "memory": [{"addr": "@coll", "offset": "0x4c", "u32": 5}]}
+  ],
+  "_survivors": "L683: text_guess[0] = '\\0' (deleted, or 0 -> 1): the callee writes byte 0 ('a') right after, so no input can observe the store (FIXTURES limit 6); L691: length_guess < 1 -> 1 < length_guess: the callee always writes one byte, so length is 1 and both forms are false; only length 0 tells them apart, which the fixed callee write cannot produce",
+  "fuzz": {
+    "seed": 5392954,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@coll", "offset": "0x4c", "type": "int", "range": [0, 6]}
+    ]
+  }
+}

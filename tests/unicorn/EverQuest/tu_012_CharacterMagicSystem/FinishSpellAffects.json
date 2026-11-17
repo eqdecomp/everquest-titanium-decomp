@@ -1,0 +1,307 @@
+{
+  "function": "CharacterMagicSystem_guess::FinishSpellAffects_guess",
+  "original": "0x0040f8c3",
+  "sources": [
+    "src/EverQuest/tu_012_CharacterMagicSystem.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@charactermagicsystem",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "charactermagicsystem": {
+      "size": "0x138ac",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@vtable"},
+        {"offset": "0x4", "u32": "@offset_holder"},
+        {"offset": "0x8", "u32": "@state"}
+      ]
+    },
+    "vtable": {
+      "size": "0x18",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x14", "u32": "@slot5"}
+      ]
+    },
+    "slot5": {"size": "0x1", "fill": "zero"},
+    "offset_holder": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": "0x100"}
+      ]
+    },
+    "state": {"size": "0x260", "fill": "zero"},
+    "entry": {"size": "0x6c", "fill": "zero"},
+    "spell": {"size": "0x270", "fill": "zero"},
+    "result": {"size": "0x11a8", "fill": "zero"},
+    "lookup": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00985cc8", "u32": "@lookup"},
+    {"addr": "@spell", "offset": "0x20", "u32": 1}
+  ],
+  "callees": {
+    "@slot5": {"name": "Slot05_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0040cc50": {"name": "GetFirst_guess", "conv": "thiscall", "args": ["int"], "ret": ["@entry", 0]},
+    "0x0040cc6b": {"name": "GetSecond_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005eccc0": {"name": "IsBlocked_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005e0bc0": {"name": "GetField98_guess", "conv": "thiscall", "args": [], "ret": 10},
+    "0x005ecd20": {"name": "GetCount_guess", "conv": "thiscall", "args": ["int"], "ret": [2, 2]},
+    "0x0044d0d0": {"name": "MagicIdValid_guess", "conv": "cdecl", "args": ["int"], "ret": 1},
+    "0x0040cbd6": {"name": "GetSpell_guess", "conv": "thiscall", "args": ["int"], "ret": "@spell"},
+    "0x0044e77b": {"name": "TestEffect_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005e1170": {"name": "GetRaw_guess", "conv": "thiscall", "args": ["int"], "ret": 100},
+    "0x005e0bf0": {"name": "GetField240_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0040f339": {"name": "CalcAffectChange_guess", "conv": "thiscall", "args": ["ptr", "u8", "int", "ptr"], "ret": 0},
+    "0x0060cea0": {"name": "GetPair_guess", "conv": "thiscall", "args": ["u32", "u32"], "ret": 0},
+    "0x005ec220": {"name": "Resolve_guess", "conv": "thiscall", "args": [], "ret": "@result"},
+    "0x0060cde0": {"name": "Add_guess", "conv": "thiscall", "args": ["u32", "u32", "u32"], "ret": 0},
+    "0x005ec630": {"name": "GetChild_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0060f81e": {"name": "NormalizeMagicAmount_guess", "conv": "cdecl", "args": ["int"], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "null_state",
+      "args": [],
+      "memory": [
+        {"addr": "@charactermagicsystem", "offset": "0x8", "u32": 0}
+      ]
+    },
+    {
+      "name": "state_gate_closed",
+      "args": [],
+      "memory": [
+        {"addr": "@state", "offset": "0x244", "u8": 1},
+        {"addr": "@state", "offset": "0x25c", "u32": 0}
+      ]
+    },
+    {
+      "name": "blocked_top_entry",
+      "args": [],
+      "callees": {
+        "0x0040cc50": {"name": "GetFirst_guess", "conv": "thiscall", "args": ["int"], "ret": ["@entry", 0]},
+        "0x005eccc0": {"name": "IsBlocked_guess", "conv": "thiscall", "args": [], "ret": 1}
+      }
+    },
+    {
+      "name": "negative_entry_level",
+      "args": [],
+      "callees": {
+        "0x0040cc50": {"name": "GetFirst_guess", "conv": "thiscall", "args": ["int"], "ret": ["@entry", 0]},
+        "0x005e0bc0": {"name": "GetField98_guess", "conv": "thiscall", "args": [], "ret": -1}
+      }
+    },
+    {
+      "name": "count_below_two",
+      "args": [],
+      "callees": {
+        "0x0040cc50": {"name": "GetFirst_guess", "conv": "thiscall", "args": ["int"], "ret": ["@entry", 0]},
+        "0x005e0bc0": {"name": "GetField98_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x005ecd20": {"name": "GetCount_guess", "conv": "thiscall", "args": ["int"], "ret": [2, 1]}
+      }
+    },
+    {
+      "name": "default_effects",
+      "args": [],
+      "memory": [
+        {"addr": "@spell", "offset": "0x20", "u32": 1},
+        {"addr": "@spell", "offset": "0x30", "size": 48, "fill": "zero"},
+        {"addr": "@spell", "offset": "0x60", "size": 48, "fill": "zero"},
+        {"addr": "@spell", "offset": "0xf0", "size": 48, "fill": "zero"},
+        {"addr": "@spell", "offset": "0x120", "size": 48, "fill": "zero"}
+      ],
+      "callees": {
+        "0x0040cc50": {"name": "GetFirst_guess", "conv": "thiscall", "args": ["int"], "ret": ["@entry", 0]},
+        "0x005eccc0": {"name": "IsBlocked_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x005e0bc0": {"name": "GetField98_guess", "conv": "thiscall", "args": [], "ret": 10},
+        "0x005ecd20": {"name": "GetCount_guess", "conv": "thiscall", "args": ["int"], "ret": [2, 2]},
+        "0x0040cbd6": {"name": "GetData_guess", "conv": "thiscall", "args": ["int"], "ret": "@spell"},
+        "0x005e1170": {"name": "GetRaw_guess", "conv": "thiscall", "args": ["int"], "ret": 100},
+        "0x0040f339": {"name": "FUN_0040f339_guess", "conv": "thiscall", "args": ["ptr", "u8", "int", "ptr"], "ret": 0}
+      }
+    },
+    {
+      "name": "special_entry_scaled_type_groups",
+      "args": [],
+      "memory": [
+        {"addr": "@spell", "offset": "0x120", "hex": "e3000000a9000000b7000000ba000000c5000000d8000000dc000000e0000000f700000004010000060100004a010000"},
+        {"addr": "@result", "offset": "0x11a4", "u32": 16}
+      ],
+      "callees": {
+        "0x0040cc50": {"name": "GetFirst_guess", "conv": "thiscall", "args": ["int"], "ret": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "@entry"]},
+        "0x005e1170": {"name": "GetRaw_guess", "conv": "thiscall", "args": ["int"], "ret": [80, 160]},
+        "0x005e0bf0": {"name": "GetField240_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x0044e77b": {"name": "TestEffect_guess", "conv": "thiscall", "args": ["int"], "ret": [0, 1]}
+      }
+    },
+    {
+      "name": "type_3b_negative_clamp",
+      "args": [],
+      "memory": [
+        {"addr": "@spell", "offset": "0x120", "u32": 59}
+      ],
+      "callees": {
+        "0x0060cea0": {"name": "GetPair_guess", "conv": "thiscall", "args": ["u32", "u32"], "ret": -20}
+      }
+    },
+    {
+      "name": "type_b_high_amount_clamp",
+      "args": [],
+      "memory": [
+        {"addr": "@spell", "offset": "0xf0", "hex": "6600000066000000660000006600000066000000660000006600000066000000660000006600000066000000"},
+        {"addr": "@spell", "offset": "0x120", "u32": 11},
+        {"addr": "@result", "offset": "0x11a4", "u32": 16}
+      ],
+      "callees": {
+        "0x005e1170": {"name": "GetRaw_guess", "conv": "thiscall", "args": ["int"], "ret": 200},
+        "0x0040f339": {"name": "FUN_0040f339_guess", "conv": "thiscall", "args": ["ptr", "u8", "int", "ptr"], "ret": 200}
+      }
+    },
+    {
+      "name": "type_a8_positive_amount",
+      "args": [],
+      "memory": [
+        {"addr": "@spell", "offset": "0xf0", "hex": "6600000066000000660000006600000066000000660000006600000066000000660000006600000066000000"},
+        {"addr": "@spell", "offset": "0x120", "u32": 168}
+      ],
+      "callees": {
+        "0x005e1170": {"name": "GetRaw_guess", "conv": "thiscall", "args": ["int"], "ret": 200},
+        "0x0040f339": {"name": "FUN_0040f339_guess", "conv": "thiscall", "args": ["ptr", "u8", "int", "ptr"], "ret": 200},
+        "0x0060cea0": {"name": "GetPair_guess", "conv": "thiscall", "args": ["u32", "u32"], "ret": 10}
+      }
+    },
+    {
+      "name": "second_table_last_entry",
+      "args": [],
+      "callees": {
+        "0x0040cc50": {"name": "GetFirst_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+        "0x0040cc6b": {"name": "GetSecond_guess", "conv": "thiscall", "args": ["int"], "ret": ["@entry", 0]}
+      }
+    },
+    {
+      "name": "e3_extra_value",
+      "args": [],
+      "memory": [
+        {"addr": "@spell", "offset": "0x60", "u32": 7},
+        {"addr": "@spell", "offset": "0x120", "u32": 227}
+      ]
+    },
+    {
+      "name": "f7_extra_value",
+      "args": [],
+      "memory": [
+        {"addr": "@spell", "offset": "0x60", "u32": 7},
+        {"addr": "@spell", "offset": "0x120", "u32": 247}
+      ]
+    },
+    {
+      "name": "108_extra_value",
+      "args": [],
+      "memory": [
+        {"addr": "@spell", "offset": "0x60", "u32": 7},
+        {"addr": "@spell", "offset": "0x120", "u32": 264}
+      ]
+    },
+    {
+      "name": "109_range_extra_value",
+      "args": [],
+      "memory": [
+        {"addr": "@spell", "offset": "0x60", "u32": 7},
+        {"addr": "@spell", "offset": "0x120", "u32": 265}
+      ]
+    },
+    {
+      "name": "positive_group_negative_current",
+      "args": [],
+      "memory": [
+        {"addr": "@spell", "offset": "0x120", "u32": 3}
+      ],
+      "callees": {
+        "0x0060cea0": {"name": "GetPair_guess", "conv": "thiscall", "args": ["u32", "u32"], "ret": -1}
+      }
+    },
+    {
+      "name": "a8_equal_amount_and_current",
+      "args": [],
+      "memory": [
+        {"addr": "@spell", "offset": "0xf0", "hex": "6600000066000000660000006600000066000000660000006600000066000000660000006600000066000000"},
+        {"addr": "@spell", "offset": "0x120", "u32": 168}
+      ],
+      "callees": {
+        "0x005e1170": {"name": "GetRaw_guess", "conv": "thiscall", "args": ["int"], "ret": 100},
+        "0x0040f339": {"name": "FUN_0040f339_guess", "conv": "thiscall", "args": ["ptr", "u8", "int", "ptr"], "ret": 100},
+        "0x0060cea0": {"name": "GetPair_guess", "conv": "thiscall", "args": ["u32", "u32"], "ret": 100}
+      }
+    },
+    {
+      "name": "type_3b_nonzero_amount",
+      "args": [],
+      "memory": [
+        {"addr": "@spell", "offset": "0xf0", "hex": "6600000066000000660000006600000066000000660000006600000066000000660000006600000066000000"},
+        {"addr": "@spell", "offset": "0x120", "u32": 59}
+      ],
+      "callees": {
+        "0x005e1170": {"name": "GetRaw_guess", "conv": "thiscall", "args": ["int"], "ret": 100},
+        "0x0040f339": {"name": "FUN_0040f339_guess", "conv": "thiscall", "args": ["ptr", "u8", "int", "ptr"], "ret": 100},
+        "0x0060cea0": {"name": "GetPair_guess", "conv": "thiscall", "args": ["u32", "u32"], "ret": 10}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4257987,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@charactermagicsystem", "offset": "0x8", "type": "ptr", "choices": ["@state", "0x0"]},
+      {"addr": "@state", "offset": "0x244", "type": "u8", "choices": [0, 1]},
+      {"addr": "@state", "offset": "0x25c", "type": "u32", "choices": [0, 1]},
+      {"addr": "@spell", "offset": "0x120", "type": "u32", "count": 12, "choices": [0, 3, 11, 59, 114, 163, 168, 169, 170, 171, 172, 173, 174, 175, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 227, 228, 230, 231, 232, 233, 234, 235, 236, 237, 248, 260, 262, 264, 267, 268, 330]}
+    ]
+  },
+  "coverage_ok": {
+    "0040FA5F-0040FA60": "slot index is always below 12",
+    "0040FAE0-0040FAE1": "slot index is always below 12",
+    "0040FB01-0040FB02": "slot index is always below 12",
+    "0040FB23-0040FB24": "slot index is always below 12",
+    "0040FB3C-0040FB3D": "slot index is always below 12",
+    "0040FB52-0040FB53": "slot index is always below 12",
+    "0040FB68-0040FB69": "slot index is always below 12",
+    "0040FB7E-0040FB7F": "slot index is always below 12",
+    "0040FB94-0040FB95": "slot index is always below 12",
+    "0040FBAA-0040FBAB": "slot index is always below 12",
+    "0040FBC0-0040FBC1": "slot index is always below 12",
+    "0040FBD6-0040FBD7": "slot index is always below 12",
+    "0040FBEC-0040FBED": "slot index is always below 12",
+    "0040FC02-0040FC03": "slot index is always below 12",
+    "0040FC18-0040FC19": "slot index is always below 12",
+    "0040FC2E-0040FC2F": "slot index is always below 12",
+    "0040FC44-0040FC45": "slot index is always below 12",
+    "0040FC5A-0040FC5B": "slot index is always below 12",
+    "0040FC70-0040FC71": "slot index is always below 12",
+    "0040FC86-0040FC87": "slot index is always below 12",
+    "0040FC9C-0040FC9D": "slot index is always below 12",
+    "0040FCB2-0040FCB3": "slot index is always below 12",
+    "0040FCC8-0040FCC9": "slot index is always below 12",
+    "0040FCDE-0040FCDF": "slot index is always below 12",
+    "0040FCF1-0040FCF2": "slot index is always below 12",
+    "0040FD07-0040FD08": "slot index is always below 12",
+    "0040FD1D-0040FD1E": "slot index is always below 12",
+    "0040FD33-0040FD34": "slot index is always below 12",
+    "0040FD53-0040FD54": "slot index is always below 12",
+    "0040FD5D-0040FD5E": "slot index is always below 12",
+    "0040FDA4-0040FDA5": "slot index is always below 12",
+    "0040FDBC-0040FDBD": "slot index is always below 12",
+    "0040FDCD-0040FDCE": "slot index is always below 12",
+    "0040FDDE-0040FDDF": "slot index is always below 12",
+    "0040FDE5-0040FDE6": "slot index is always below 12",
+    "0040FE07-0040FE08": "slot index is always below 12",
+    "0040FE12-0040FE13": "slot index is always below 12",
+    "0040FE1E-0040FE1F": "slot index is always below 12",
+    "0040FE30-0040FE31": "slot index is always below 12",
+    "0040FE3B-0040FE3C": "slot index is always below 12",
+    "0040FE47-0040FE48": "slot index is always below 12"
+  }
+}

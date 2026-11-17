@@ -1,0 +1,222 @@
+{
+  "function": "SpellBookWndView_guess::GetSpellMemTicksLeft_guess",
+  "original": "0x00556b72",
+  "sources": ["src/EverQuest/tu_215_SpellBookWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@obj",
+  "args": [],
+  "ret": "int",
+  "_survivors": "L549: interval == 100 assigns 100 again; L563: scale == 10 assigns 10 again",
+  "objects": {
+    "obj": {"size": "0x174", "fill": "zero"},
+    "state": {
+      "size": "0xc300",
+      "fill": "zero",
+      "init": [{"offset": "0x8", "u32": "@indexer"}]
+    },
+    "indexer": {"size": "0x8", "fill": "zero", "init": [{"offset": "0x4", "u32": "0x300"}]},
+    "node": {
+      "size": "0x11a8",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x119c", "u8": 9},
+        {"offset": "0x11a4", "u32": 14}
+      ]
+    },
+    "recordSource": {"size": "0x4", "fill": "zero"},
+    "record": {"size": "0x4", "fill": "zero"},
+    "tickSource": {"size": "0x14c", "fill": "zero", "init": [{"offset": "0x148", "u32": 1000}]},
+    "client": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "u32": "@clientVtable"}]},
+    "clientVtable": {"size": "0x8c", "fill": "zero", "init": [{"offset": "0x88", "u32": "@fn_slot34"}]},
+    "fn_slot34": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@state"},
+    {"addr": "0x00985cc8", "u32": "@recordSource"},
+    {"addr": "0x00905d24", "u32": "@tickSource"},
+    {"addr": "0x00850c24", "u32": "@client"},
+    {"addr": "0x00991ff8", "u32": 0},
+    {"addr": "0x009248d0", "u32": 0}
+  ],
+  "callees": {
+    "0x005ec220": {"name": "Query_guess::Get_guess", "conv": "thiscall", "args": [], "ret": "@node"},
+    "0x0040cbd6": {"name": "RecordSource_guess::GetSpell_guess", "conv": "thiscall", "args": ["int"], "ret": "@record"},
+    "0x0044e755": {"name": "Record_guess::Value_guess", "conv": "thiscall", "args": ["int"], "ret": 10},
+    "0x0041911e": {"name": "Event_guess::First_guess", "conv": "thiscall", "args": [], "ret": 15},
+    "0x00419081": {"name": "Event_guess::Second_guess", "conv": "thiscall", "args": [], "ret": 15},
+    "0x0041b0de": {"name": "Event_guess::Scale_guess", "conv": "thiscall", "args": ["int"], "ret": 19},
+    "0x004baaeb": {"name": "State_guess::Flag_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "0x004912b1": {"name": "Send_guess", "conv": "cdecl", "args": ["ptr", "int", "mem:16", "int", "int"], "ret": 0},
+    "@fn_slot34": {"name": "Client::Slot34_guess", "conv": "thiscall", "args": [], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "inactive returns zero",
+      "memory": [
+        {"addr": "@obj", "offset": "0x168", "u32": -1},
+        {"addr": "@obj", "offset": "0x16c", "u32": 7},
+        {"addr": "@obj", "offset": "0x170", "u32": 50}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "interval boundary does not decrement",
+      "memory": [
+        {"addr": "@obj", "offset": "0x168", "u32": 1},
+        {"addr": "@obj", "offset": "0x16c", "u32": 7},
+        {"addr": "@obj", "offset": "0x170", "u32": 50},
+        {"addr": "@node", "offset": "0x119c", "u8": 9},
+        {"addr": "@node", "offset": "0x11a4", "u32": 14},
+        {"addr": "@tickSource", "offset": "0x148", "u32": 200},
+        {"addr": "0x00991ff8", "u32": 100}
+      ],
+      "expect": {"ret": 543}
+    },
+    {
+      "name": "one tick beyond interval",
+      "memory": [
+        {"addr": "@obj", "offset": "0x168", "u32": 0},
+        {"addr": "@obj", "offset": "0x16c", "u32": 8},
+        {"addr": "@obj", "offset": "0x170", "u32": 50},
+        {"addr": "@node", "offset": "0x119c", "u8": 9},
+        {"addr": "@node", "offset": "0x11a4", "u32": 14},
+        {"addr": "@tickSource", "offset": "0x148", "u32": 201},
+        {"addr": "0x00991ff8", "u32": 100}
+      ],
+      "expect": {"ret": 500}
+    },
+    {
+      "name": "raw interval below minimum clamps",
+      "memory": [
+        {"addr": "@obj", "offset": "0x168", "u32": 1},
+        {"addr": "@obj", "offset": "0x16c", "u32": 9},
+        {"addr": "@obj", "offset": "0x170", "u32": 10},
+        {"addr": "@node", "offset": "0x119c", "u8": 9},
+        {"addr": "@node", "offset": "0x11a4", "u32": 15},
+        {"addr": "@tickSource", "offset": "0x148", "u32": 101},
+        {"addr": "0x00991ff8", "u32": 0}
+      ],
+      "expect": {"ret": 65}
+    },
+    {
+      "name": "raw interval above minimum boundary",
+      "memory": [
+        {"addr": "@obj", "offset": "0x168", "u32": 1},
+        {"addr": "@obj", "offset": "0x16c", "u32": 10},
+        {"addr": "@obj", "offset": "0x170", "u32": 51},
+        {"addr": "@node", "offset": "0x119c", "u8": 9},
+        {"addr": "@node", "offset": "0x11a4", "u32": 13},
+        {"addr": "@tickSource", "offset": "0x148", "u32": 200},
+        {"addr": "0x00991ff8", "u32": 0}
+      ],
+      "expect": {"ret": 554}
+    },
+    {
+      "name": "raw interval above boundary decrements",
+      "memory": [
+        {"addr": "@obj", "offset": "0x168", "u32": 1},
+        {"addr": "@obj", "offset": "0x16c", "u32": 11},
+        {"addr": "@obj", "offset": "0x170", "u32": 50},
+        {"addr": "@node", "offset": "0x119c", "u8": 9},
+        {"addr": "@node", "offset": "0x11a4", "u32": 13},
+        {"addr": "@tickSource", "offset": "0x148", "u32": 201},
+        {"addr": "0x00991ff8", "u32": 0}
+      ],
+      "expect": {"ret": 500}
+    },
+    {
+      "name": "non spell type scales decrement",
+      "memory": [
+        {"addr": "@obj", "offset": "0x168", "u32": 1},
+        {"addr": "@obj", "offset": "0x16c", "u32": 12},
+        {"addr": "@obj", "offset": "0x170", "u32": 6},
+        {"addr": "@node", "offset": "0x119c", "u8": 4},
+        {"addr": "@node", "offset": "0x11a4", "u32": 14},
+        {"addr": "@tickSource", "offset": "0x148", "u32": 101},
+        {"addr": "0x00991ff8", "u32": 0}
+      ],
+      "callees": {
+        "0x0041b0de": {"conv": "thiscall", "args": ["int"], "ret": 29}
+      },
+      "expect": {"ret": 10}
+    },
+    {
+      "name": "spell type doubles decrement and sends at zero",
+      "memory": [
+        {"addr": "@obj", "offset": "0x168", "u32": 1},
+        {"addr": "@obj", "offset": "0x16c", "u32": 13},
+        {"addr": "@obj", "offset": "0x170", "u32": 4},
+        {"addr": "@node", "offset": "0x119c", "u8": 8},
+        {"addr": "@node", "offset": "0x11a4", "u32": 14},
+        {"addr": "@tickSource", "offset": "0x148", "u32": 101},
+        {"addr": "0x00991ff8", "u32": 0},
+        {"addr": "0x009248d0", "u32": 7}
+      ],
+      "callees": {
+        "0x004baaeb": {"conv": "thiscall", "args": ["int"], "ret": 1}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "spell type flag false clamps negative remainder",
+      "memory": [
+        {"addr": "@obj", "offset": "0x168", "u32": 1},
+        {"addr": "@obj", "offset": "0x16c", "u32": 14},
+        {"addr": "@obj", "offset": "0x170", "u32": 4},
+        {"addr": "@node", "offset": "0x119c", "u8": 8},
+        {"addr": "@node", "offset": "0x11a4", "u32": 14},
+        {"addr": "@tickSource", "offset": "0x148", "u32": 101},
+        {"addr": "0x00991ff8", "u32": 0}
+      ],
+      "callees": {
+        "0x004baaeb": {"conv": "thiscall", "args": ["int"], "ret": 0}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "small scale clamps to ten",
+      "memory": [
+        {"addr": "@obj", "offset": "0x168", "u32": 1},
+        {"addr": "@obj", "offset": "0x16c", "u32": 15},
+        {"addr": "@obj", "offset": "0x170", "u32": 5},
+        {"addr": "@node", "offset": "0x119c", "u8": 8},
+        {"addr": "@node", "offset": "0x11a4", "u32": 14},
+        {"addr": "@tickSource", "offset": "0x148", "u32": 101},
+        {"addr": "0x00991ff8", "u32": 0}
+      ],
+      "callees": {
+        "0x0041b0de": {"conv": "thiscall", "args": ["int"], "ret": 7},
+        "0x004baaeb": {"conv": "thiscall", "args": ["int"], "ret": 1}
+      },
+      "expect": {"ret": 10}
+    },
+    {
+      "name": "wrapped tick difference",
+      "memory": [
+        {"addr": "@obj", "offset": "0x168", "u32": 1},
+        {"addr": "@obj", "offset": "0x16c", "u32": 16},
+        {"addr": "@obj", "offset": "0x170", "u32": 8},
+        {"addr": "@node", "offset": "0x119c", "u8": 4},
+        {"addr": "@node", "offset": "0x11a4", "u32": 14},
+        {"addr": "@tickSource", "offset": "0x148", "u32": 10},
+        {"addr": "0x00991ff8", "u32": 4294967205}
+      ],
+      "expect": {"ret": 43}
+    }
+  ],
+  "fuzz": {
+    "seed": 5598066,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@obj", "offset": "0x168", "type": "int", "choices": [-1, 0, 1]},
+      {"addr": "@obj", "offset": "0x16c", "type": "int", "choices": [0, 3, 9, 16]},
+      {"addr": "@obj", "offset": "0x170", "type": "int", "range": [-2, 100]},
+      {"addr": "@node", "offset": "0x119c", "type": "u8", "choices": [0, 4, 8, 9]},
+      {"addr": "@node", "offset": "0x11a4", "type": "int", "choices": [5, 13, 14, 20, 25]},
+      {"addr": "@tickSource", "offset": "0x148", "type": "u32", "choices": [0, 50, 100, 200, 1000, 4294967295]},
+      {"addr": "0x00991ff8", "type": "u32", "choices": [0, 50, 100, 200, 4294967200]},
+      {"addr": "0x009248d0", "type": "u32", "choices": [0, 1, 7]}
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "function": "HandleMessage_guess",
+  "original": "0x004fe0d0",
+  "sources": [
+    "src/EverQuest/tu_151_DynamicZoneWnd.cpp"
+  ],
+  "conv": "stdcall",
+  "args": [
+    {"name": "message_guess", "type": "int"},
+    {"name": "flags_guess", "type": "u8"},
+    {"name": "unused_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {},
+  "memory": [
+    {"addr": "0x00905ca0", "u32": 0}
+  ],
+  "callees": {
+    "0x004912b1": {
+      "name": "SendVoidMessage_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "mem:4", "int", "int"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {"name": "send flags 1", "args": [18541, 1, 0]},
+    {"name": "send flags 4", "args": [18541, 4, 0]},
+    {"name": "send flags 5", "args": [18541, 5, 0]},
+    {"name": "send flags 0xff", "args": [18541, 255, 0]},
+    {"name": "no send flags 0", "args": [18541, 0, 0]},
+    {"name": "no send flags 2", "args": [18541, 2, 0]},
+    {"name": "no send flags 0x0a", "args": [18541, 10, 0]},
+    {"name": "no send message 0x486c", "args": [18540, 5, 0]},
+    {"name": "no send message 0x486e", "args": [18542, 1, 0]},
+    {"name": "zeros", "args": [0, 0, 0]}
+  ],
+  "fuzz": {
+    "seed": 5234896,
+    "count": 200,
+    "args": [
+      {"choices": [18541, 18541, 18541, 18540, 18542, 0, 1, -1]},
+      {"choices": [0, 1, 2, 4, 5, 6, 10, 128, 255]},
+      {"choices": [0, 1, -1]}
+    ],
+    "memory": []
+  }
+}

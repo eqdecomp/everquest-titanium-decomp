@@ -1,0 +1,43 @@
+{
+  "function": "PurgeObject_guess::PurgeObject_guess",
+  "original": "0x0042ba5e",
+  "sources": ["src/EverQuest/tu_018_MailtoLink.cpp"],
+  "rewrite": "??0PurgeObject_guess@@QAE@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@0_N@Z",
+  "conv": "thiscall",
+  "this": "@compoundvalue",
+  "args": [
+    {"name": "first0", "type": "u32"}, {"name": "first1", "type": "u32"},
+    {"name": "first2", "type": "u32"}, {"name": "first3", "type": "u32"},
+    {"name": "first4", "type": "u32"}, {"name": "first5", "type": "u32"},
+    {"name": "first6", "type": "u32"}, {"name": "middle0", "type": "u32"},
+    {"name": "middle1", "type": "u32"}, {"name": "middle2", "type": "u32"},
+    {"name": "middle3", "type": "u32"}, {"name": "second0", "type": "u32"},
+    {"name": "second1", "type": "u32"}, {"name": "second2", "type": "u32"},
+    {"name": "second3", "type": "u32"}, {"name": "second4", "type": "u32"},
+    {"name": "second5", "type": "u32"}, {"name": "second6", "type": "u32"},
+    {"name": "flag", "type": "bool"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "compoundvalue": {"size": "0x4c", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x004032f1": {"name": "string_copy", "conv": "thiscall", "args": ["mem:28"], "ret": "this"},
+    "0x0040b7b2": {"name": "middle_copy", "conv": "thiscall", "args": ["mem:16"], "ret": "this"},
+    "0x0042a5c2": {"name": "for_each", "conv": "thiscall", "args": [], "ret": 0},
+    "0x004285e1": {"name": "refresh", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0040291e": {"name": "string_tidy", "conv": "thiscall", "args": ["bool", "u32"], "ret": 0},
+    "0x0040b540": {"name": "middle_destroy", "conv": "thiscall", "args": [], "ret": 0}
+  },
+  "cases": [
+    {"name": "all values and flag set", "args": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 1]},
+    {"name": "zero values and flag clear", "args": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
+    {"name": "flag clear with other values", "args": [4294967295, 17, 4294967294, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0]}
+  ],
+  "fuzz": {
+    "seed": 4373086,
+    "count": 100,
+    "args": [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+  }
+}

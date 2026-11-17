@@ -1,0 +1,172 @@
+{
+  "function": "SendExeChecksum_guess",
+  "original": "0x0046dea9",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "target_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "cmd": {"size": "0x40", "fill": "zero", "init": [{"offset": 0, "cstr": "eqgame.exe patchme"}]},
+    "buf": {"size": "0x40", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x0079AC74", "u32": "0x1234abcd"},
+    {"addr": "0x00905CA0", "u32": "0x55667788"}
+  ],
+  "callees": {
+    "kernel32.dll!GetCommandLineA": {
+      "name": "GetCommandLineA",
+      "conv": "stdcall",
+      "args": [],
+      "ret": "@cmd"
+    },
+    "0x00610837": {
+      "name": "_sscanf",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr", "ignore"],
+      "ret": 1,
+      "writes": [{"arg": 2, "offset": 0, "hex": "737363616e00"}]
+    },
+    "kernel32.dll!GetModuleFileNameA": {
+      "name": "GetModuleFileNameA",
+      "conv": "stdcall",
+      "args": ["u32", "ignore", "u32"],
+      "ret": 14,
+      "writes": [{"arg": 1, "offset": 0, "hex": "22433a5c65715c672e657865225c00"}]
+    },
+    "0x00574110": {
+      "name": "FUN_00574110",
+      "conv": "cdecl",
+      "args": ["cstr"],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "kernel32.dll!GetLastError": {
+      "name": "GetLastError",
+      "conv": "stdcall",
+      "args": [],
+      "ret": 5
+    },
+    "0x006104f0": {
+      "name": "__stat",
+      "conv": "cdecl",
+      "args": ["cstr", "ignore"],
+      "ret": 0,
+      "writes": [{"arg": 1, "offset": 20, "hex": "40000000"}]
+    },
+    "kernel32.dll!GlobalAlloc": {
+      "name": "GlobalAlloc",
+      "conv": "stdcall",
+      "args": ["u32", "u32"],
+      "ret": "@buf"
+    },
+    "0x0060e887": {
+      "name": "_fopen",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr"],
+      "ret": "0x00123450"
+    },
+    "0x00611d51": {
+      "name": "_fread",
+      "conv": "cdecl",
+      "args": ["u32", "u32", "u32", "u32"],
+      "ret": 1
+    },
+    "0x0060e790": {
+      "name": "_fclose",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x004b6c04": {
+      "name": "MemChecker0",
+      "conv": "cdecl",
+      "args": ["u32", "u32"],
+      "ret": "0xcafebabe"
+    },
+    "0x0040cbb2": {
+      "name": "RandomRange_guess",
+      "conv": "cdecl",
+      "args": ["int", "int"],
+      "ret": [3, 15, 0, 7, 9, 1, 12]
+    },
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "mem:0x808", "int", "int"],
+      "ret": 0
+    },
+    "kernel32.dll!GlobalFree": {
+      "name": "GlobalFree",
+      "conv": "stdcall",
+      "args": ["u32"],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "_sscanf": "0x00610837",
+    "__stat": "0x006104f0",
+    "_fopen": "0x0060e887",
+    "_fread": "0x00611d51",
+    "_fclose": "0x0060e790"
+  },
+  "cases": [
+    {"name": "quoted path, trailing slash, global target", "args": [0], "expect": {"ret": 1}},
+    {"name": "quoted path, own target", "args": [5], "expect": {"ret": 1}},
+    {"name": "module name fails, sscanf text kept", "args": [0],
+     "callees": {"kernel32.dll!GetModuleFileNameA": {"name": "GetModuleFileNameA", "conv": "stdcall",
+       "args": ["u32", "ignore", "u32"], "ret": 0}}, "expect": {"ret": 1}},
+    {"name": "stat fails", "args": [0],
+     "callees": {"0x006104f0": {"name": "__stat", "conv": "cdecl", "args": ["cstr", "ignore"], "ret": -1}},
+     "expect": {"ret": 0}},
+    {"name": "fopen fails", "args": [0],
+     "callees": {"0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 0}},
+     "expect": {"ret": 0}},
+    {"name": "fread short", "args": [7],
+     "callees": {"0x00611d51": {"name": "_fread", "conv": "cdecl", "args": ["u32", "u32", "u32", "u32"], "ret": 0}},
+     "expect": {"ret": 0}},
+    {"name": "unquoted plain", "args": [0],
+     "callees": {"kernel32.dll!GetModuleFileNameA": {"name": "GetModuleFileNameA", "conv": "stdcall",
+       "args": ["u32", "ignore", "u32"], "ret": 11, "writes": [{"arg": 1, "offset": 0, "hex": "433a5c65715c672e65786500"}]}}},
+    {"name": "quoted, closing quote only", "args": [0],
+     "callees": {"kernel32.dll!GetModuleFileNameA": {"name": "GetModuleFileNameA", "conv": "stdcall",
+       "args": ["u32", "ignore", "u32"], "ret": 6, "writes": [{"arg": 1, "offset": 0, "hex": "22433a5c782200"}]}}},
+    {"name": "lone quote", "args": [0],
+     "callees": {"kernel32.dll!GetModuleFileNameA": {"name": "GetModuleFileNameA", "conv": "stdcall",
+       "args": ["u32", "ignore", "u32"], "ret": 1, "writes": [{"arg": 1, "offset": 0, "hex": "2200"}]}}},
+    {"name": "empty", "args": [0],
+     "callees": {"kernel32.dll!GetModuleFileNameA": {"name": "GetModuleFileNameA", "conv": "stdcall",
+       "args": ["u32", "ignore", "u32"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "00"}]}}},
+    {"name": "lone backslash", "args": [0],
+     "callees": {"kernel32.dll!GetModuleFileNameA": {"name": "GetModuleFileNameA", "conv": "stdcall",
+       "args": ["u32", "ignore", "u32"], "ret": 1, "writes": [{"arg": 1, "offset": 0, "hex": "5c00"}]}}},
+    {"name": "unquoted trailing backslash", "args": [0],
+     "callees": {"kernel32.dll!GetModuleFileNameA": {"name": "GetModuleFileNameA", "conv": "stdcall",
+       "args": ["u32", "ignore", "u32"], "ret": 6, "writes": [{"arg": 1, "offset": 0, "hex": "433a5c65715c00"}]}}},
+    {"name": "unquoted trailing quote", "args": [0],
+     "callees": {"kernel32.dll!GetModuleFileNameA": {"name": "GetModuleFileNameA", "conv": "stdcall",
+       "args": ["u32", "ignore", "u32"], "ret": 3, "writes": [{"arg": 1, "offset": 0, "hex": "61622200"}]}}},
+    {"name": "quote then backslash only", "args": [0],
+     "callees": {"kernel32.dll!GetModuleFileNameA": {"name": "GetModuleFileNameA", "conv": "stdcall",
+       "args": ["u32", "ignore", "u32"], "ret": 2, "writes": [{"arg": 1, "offset": 0, "hex": "225c00"}]}}},
+    {"name": "big file size", "args": [0],
+     "callees": {"0x006104f0": {"name": "__stat", "conv": "cdecl", "args": ["cstr", "ignore"], "ret": 0,
+       "writes": [{"arg": 1, "offset": 20, "hex": "00040000"}]}}}
+  ],
+  "_survivors": "L7819: i <= length copies one byte past the moved terminator into a local buffer that is only read as a C string afterwards, so nothing visible changes; L7830: length is unsigned, so >= 0 only adds a read of path[-1] when length is 0, an untouched zero stack byte that never equals '\"', so the store never happens",
+  "fuzz": {
+    "seed": 4644521,
+    "count": 60,
+    "args": [
+      {"choices": [0, 1, -1, 5, 2147483647]}
+    ],
+    "memory": []
+  }
+}

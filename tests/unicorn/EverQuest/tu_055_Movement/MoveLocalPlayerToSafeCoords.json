@@ -1,0 +1,178 @@
+{
+  "function": "State_48995D_guess::CheckForUnderFloor_guess",
+  "original": "0x0048b6c5",
+  "sources": ["src/EverQuest/tu_055_Movement.cpp"],
+  "conv": "thiscall",
+  "this": "@state",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "state": {
+      "size": "0x2ec",
+      "fill": "random",
+      "init": [
+        {"offset": "0x1a8", "u32": "@data"},
+        {"offset": "0x30", "f32": 1.0},
+        {"offset": "0x34", "f32": 2.0},
+        {"offset": "0x38", "f32": 5.0},
+        {"offset": "0x44", "f32": 0.0},
+        {"offset": "0x4c", "f32": 0.0},
+        {"offset": "0x5c", "f32": 0.0},
+        {"offset": "0x204", "u32": 1},
+        {"offset": "0x238", "f32": 2.0},
+        {"offset": "0x244", "u8": 0},
+        {"offset": "0x258", "u32": 4660},
+        {"offset": "0x260", "u32": 0}
+      ]
+    },
+    "data": {
+      "size": "0x164",
+      "fill": "random",
+      "init": [
+        {"offset": "0x48", "f32": 0.0},
+        {"offset": "0x4c", "f32": -1.0e27},
+        {"offset": "0xad", "u8": 0},
+        {"offset": "0x160", "u32": "@other"}
+      ]
+    },
+    "other": {"size": "0x20", "fill": "zero"},
+    "display": {"size": "0x150", "fill": "zero"},
+    "zone": {"size": "0x20", "fill": "zero"},
+    "everquest": {"size": "0x20", "fill": "zero"},
+    "queue": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x13572468"},
+    {"addr": "0x00642d5c", "from_image": "0x00642d5c", "image_size": 4},
+    {"addr": "0x0063f4cc", "from_image": "0x0063f4cc", "image_size": 4},
+    {"addr": "0x00640ea0", "from_image": "0x00640ea0", "image_size": 4},
+    {"addr": "0x0064863c", "from_image": "0x0064863c", "image_size": 4},
+    {"addr": "0x006410c8", "from_image": "0x006410c8", "image_size": 4},
+    {"addr": "0x00923bdc", "f32": 100.0},
+    {"addr": "0x00905ce4", "u32": "@other"},
+    {"addr": "0x00923b88", "u8": 1},
+    {"addr": "0x00905d24", "u32": "@display"},
+    {"addr": "0x0064863c", "from_image": "0x0064863c", "image_size": 4},
+    {"addr": "0x00923bd8", "f32": 100.0},
+    {"addr": "0x00924470", "u32": 70},
+    {"addr": "0x00905ca0", "u32": "@everquest"},
+    {"addr": "0x0099db00", "size": 32, "fill": "zero"},
+    {"addr": "0x0099dae0", "size": 32, "fill": "zero"},
+    {"addr": "0x0099df60", "size": 32, "fill": "zero"},
+    {"addr": "0x00905cc0", "u32": "@zone"},
+    {"addr": "0x00988df0", "u32": "@everquest"},
+    {"addr": "0x00641588", "from_image": "0x00641588", "image_size": 64}
+  ],
+  "callees": {
+    "0x00479ee8": {"name": "PlaySound_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0060f60d": {"name": "fabs", "conv": "cdecl", "args": ["double"], "ret_float": 0.5},
+    "0x0047ca9d": {"name": "IHaveFallen_guess", "conv": "thiscall", "args": ["float"], "ret": 0},
+    "0x0048bb42": {"name": "IsLocalPlayer_guess", "conv": "fastcall", "args": ["u32"], "passthrough": true},
+    "0x00439f26": {"name": "GetFloorHeight", "conv": "thiscall", "args": ["float", "float", "float"], "ret_float": [100.0, 0.0]},
+    "0x00478474": {"name": "WarpToPosition_guess", "conv": "thiscall", "args": ["mem:12", "float"], "ret": 0},
+    "0x0048b42b": {"name": "FUN_0048b42b", "conv": "thiscall", "args": ["cstr", "int", "mem:4"], "ret": 0},
+    "0x004912b1": {"name": "FUN_004912b1", "conv": "cdecl", "args": ["ptr", "int", "mem:16", "int", "int"], "ret": 0, "purge_ok": "the client callee pops 8 bytes; the caller cleans the other 12"},
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr"],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "312e30303000", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "322e30303000", "call": 1},
+        {"arg": 0, "offset": 0, "hex": "332e30303000", "call": 2}
+      ]
+    },
+    "0x005fa1c0": {"name": "GetZoneName", "conv": "thiscall", "args": ["int", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "257320257320257320256420256420256420256420256400"}]},
+    "0x0046da4a": {"name": "FUN_0046da4a", "conv": "cdecl", "args": ["ignore", "int", "cstr"], "varargs": "printf", "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "66697874757265206d65737361676500"}]},
+    "0x00498436": {"name": "CEverQuest::dsp_chat", "conv": "thiscall", "args": ["cstr"], "ret": 0},
+    "0x00574110": {"name": "FUN_00574110", "conv": "cdecl", "args": ["cstr"], "varargs": "printf", "ret": 0},
+    "0x004b718d": {"name": "GetPositionQueue", "conv": "cdecl", "args": [], "ret": "@queue"},
+    "0x004b70db": {"name": "PositionQueue::Push", "conv": "thiscall", "args": ["mem:12", "int"], "ret": 0},
+    "0x0043d7c5": {"name": "ResetLocalPlayer", "conv": "thiscall", "args": [], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "_fabs": "0x0060f60d",
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {"name": "normal message", "args": []},
+    {"name": "vertical collision at doubled boundary", "args": [], "memory": [
+      {"addr": "@state", "offset": "0x38", "f32": 1.0},
+      {"addr": "@state", "offset": "0x44", "f32": -1.25},
+      {"addr": "0x00923bdc", "f32": -1.0}
+    ]},
+    {"name": "vertical collision and linked adjustment", "args": [], "memory": [
+      {"addr": "@state", "offset": "0x38", "f32": 1.0},
+      {"addr": "@state", "offset": "0x44", "f32": -3.0},
+      {"addr": "@state", "offset": "0x244", "u8": 1},
+      {"addr": "@data", "offset": "0x160", "u32": "@other"},
+      {"addr": "0x00923bdc", "f32": -1.0}
+    ]},
+    {"name": "falling onto floor sentinel", "args": [], "memory": [
+      {"addr": "@state", "offset": "0x44", "f32": -1.0},
+      {"addr": "0x00923bdc", "f32": -1.0}
+    ]},
+    {"name": "exact floor height", "args": [], "memory": [
+      {"addr": "@state", "offset": "0x38", "f32": 2.0},
+      {"addr": "0x00923bdc", "f32": -1.0}
+    ]},
+    {"name": "first floor query below limit", "args": [], "memory": [
+      {"addr": "@state", "offset": "0x244", "u8": 1},
+      {"addr": "@data", "offset": "0x160", "u32": 0}
+    ], "callees": {"0x00439f26": {"name": "GetFloorHeight", "conv": "thiscall", "args": ["float", "float", "float"], "ret_float": [0.0]}}},
+    {"name": "second floor query then correction", "args": [], "memory": [
+      {"addr": "@state", "offset": "0x244", "u8": 1},
+      {"addr": "@data", "offset": "0x160", "u32": 0}
+    ], "callees": {"0x00439f26": {"name": "GetFloorHeight", "conv": "thiscall", "args": ["float", "float", "float"], "ret_float": [100.0, 0.0]}}},
+    {"name": "second floor query returns sentinel", "args": [], "memory": [
+      {"addr": "@state", "offset": "0x244", "u8": 1},
+      {"addr": "@data", "offset": "0x160", "u32": 0}
+    ], "callees": {"0x00439f26": {"name": "GetFloorHeight", "conv": "thiscall", "args": ["float", "float", "float"], "ret_float": [100.0, -1.0e27]}}},
+    {"name": "second floor query stays high", "args": [], "memory": [
+      {"addr": "@state", "offset": "0x244", "u8": 1},
+      {"addr": "@data", "offset": "0x160", "u32": 0}
+    ], "callees": {"0x00439f26": {"name": "GetFloorHeight", "conv": "thiscall", "args": ["float", "float", "float"], "ret_float": [100.0, 100.0]}}},
+    {"name": "floor query disabled by zone flag", "args": [], "memory": [
+      {"addr": "@state", "offset": "0x244", "u8": 1},
+      {"addr": "@data", "offset": "0x160", "u32": 0},
+      {"addr": "0x00923b88", "u8": 0}
+    ]},
+    {"name": "height exactly at SOH limit", "args": [], "memory": [
+      {"addr": "0x00923bdc", "f32": 3.0}
+    ]},
+    {"name": "linked player uses message path", "args": [], "memory": [
+      {"addr": "@data", "offset": "0x160", "u32": "@other"}
+    ]},
+    {"name": "self uses message path", "args": [], "memory": [
+      {"addr": "0x00905ce4", "u32": "@state"}
+    ]},
+    {"name": "mode query returns false", "args": [], "memory": [
+      {"addr": "0x00905ce4", "u32": "@state"},
+      {"addr": "0x00924470", "u32": 71}
+    ]},
+    {"name": "mode query returns true", "args": [], "memory": [
+      {"addr": "0x00905ce4", "u32": "@state"},
+      {"addr": "0x00924470", "u32": 71}
+    ], "callees": {"0x0048b42b": {"name": "FUN_0048b42b", "conv": "thiscall", "args": ["cstr", "int", "mem:4"], "ret": 1}}}
+  ],
+  "fuzz": {
+    "seed": 4765381,
+    "count": 80,
+    "args": [],
+    "memory": [
+      {"addr": "@state", "offset": "0x38", "type": "float", "choices": [-2.0, 0.0, 1.0, 2.0, 5.0, 10.0]},
+      {"addr": "@state", "offset": "0x44", "type": "float", "choices": [-4.0, -2.5, -1.25, -1.0, 0.0, 1.0]},
+      {"addr": "@state", "offset": "0x244", "type": "u8", "choices": [0, 1]},
+      {"addr": "@state", "offset": "0x260", "type": "u32", "choices": [0, 127]},
+      {"addr": "@data", "offset": "0x48", "type": "float", "choices": [-1.0, 0.0, 3.0]},
+      {"addr": "@data", "offset": "0x4c", "type": "float", "choices": [-1.0e27, 0.0]},
+      {"addr": "@data", "offset": "0xad", "type": "u8", "choices": [0, 1]},
+      {"addr": "@data", "offset": "0x160", "type": "ptr", "choices": [0, "@other", "@state"]},
+      {"addr": "0x00923bdc", "type": "float", "choices": [-1.0, 0.0, 3.0, 100.0]},
+      {"addr": "0x00923b88", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00924470", "type": "u32", "choices": [70, 71, 126]}
+    ]
+  }
+}

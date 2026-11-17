@@ -1,0 +1,53 @@
+{
+  "function": "SharedTextPtr_guess::SharedTextPtr_guess",
+  "rewrite": "??0SharedTextPtr_guess@@QAE@I@Z",
+  "original": "0x0044b0c3",
+  "sources": ["src/EverQuest/tu_037_EQ_SoundManager.cpp"],
+  "conv": "thiscall",
+  "this": "@sharedtextptr",
+  "args": [{"name": "length", "type": "u32"}],
+  "ret": "ptr",
+  "objects": {
+    "sharedtextptr": {"size": "0x8", "fill": "random"},
+    "raw_buffer": {"size": "0x40", "fill": "random"},
+    "checked_buffer": {"size": "0x40", "fill": "random"},
+    "raw_text": {"size": "0x10", "fill": "random"},
+    "checked_text": {"size": "0x10", "fill": "random"}
+  },
+  "memory": [{"addr": "0x0099CE50", "u32": 3}],
+  "_note": "EnqueuePair runs natively: the rewrite keeps a value in EDX across it (same-file callee), which a stub would clobber. It stores each image's own file-name literal, so the entry table is not compared; the count is.",
+  "ignore_writes": [["0x0099cc50", "0x0099ce50"]],
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071",
+    "??_U@YAPAXI@Z": "0x0060e985"
+  },
+  "callees": {
+    "0x0060e985": {"name": "operator new[]", "conv": "cdecl", "args": ["u32"], "ret": "@raw_buffer"},
+    "0x0044a4ed": {"name": "EnqueuePair_guess", "conv": "cdecl", "args": ["cstr", "int"], "passthrough": true},
+    "0x0044ad61": {"name": "CheckAllocation_guess", "conv": "cdecl", "args": ["ptr", "cstr", "int"], "ret": ["@checked_buffer", "@checked_text"]},
+    "0x0060d071": {"name": "operator new", "conv": "cdecl", "args": ["u32"], "ret": "@raw_text"}
+  },
+  "cases": [
+    {"name": "length zero leaves null", "args": [0]},
+    {"name": "length one", "args": [1]},
+    {"name": "typical length", "args": [33]},
+    {"name": "large length", "args": ["0xfffffff0"]},
+    {"name": "queue one below full", "args": [4], "memory": [{"addr": "0x0099CE50", "u32": 62}]},
+    {"name": "queue full", "args": [4], "memory": [{"addr": "0x0099CE50", "u32": 64}]},
+    {"name": "checked pointers equal raw", "args": [5], "callees": {
+      "0x0044ad61": {"name": "CheckAllocation_guess", "conv": "cdecl", "args": ["ptr", "cstr", "int"], "ret": "arg0"}
+    }},
+    {"name": "object allocation fails", "args": [7], "callees": {
+      "0x0060d071": {"name": "operator new", "conv": "cdecl", "args": ["u32"], "ret": 0}
+    }},
+    {"name": "array allocation fails", "args": [9], "callees": {
+      "0x0060e985": {"name": "operator new[]", "conv": "cdecl", "args": ["u32"], "ret": 0}
+    }}
+  ],
+  "fuzz": {
+    "seed": 4501699,
+    "count": 100,
+    "args": [{"choices": [0, 0, 1, 2, 16, 255, 256, 4096, "0x7fffffff", "0x80000000", "0xffffffff"]}],
+    "memory": [{"addr": "0x0099CE50", "type": "int", "choices": [0, 1, 30, 62, 63, 64, 65]}]
+  }
+}

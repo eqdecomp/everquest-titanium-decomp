@@ -1,0 +1,237 @@
+{
+  "function": "Object4249D5_guess::ParseRest_guess",
+  "original": "0x00424824",
+  "sources": ["src/EverQuest/tu_016_AutojoinList.cpp"],
+  "conv": "thiscall",
+  "this": "@object4249d5",
+  "args": [{"name": "input_guess", "type": "cstr"}],
+  "ret": "void",
+  "objects": {
+    "object4249d5": {"size": "0x8", "fill": "zero", "init": [{"offset": "0x4", "u32": "@collection"}]},
+    "collection": {"size": "0x4", "fill": "zero"},
+    "range1": {"size": "0xc", "fill": "zero"},
+    "range2": {"size": "0xc", "fill": "zero"},
+    "value1": {"size": "0x8", "fill": "zero"},
+    "value2": {"size": "0x8", "fill": "zero"},
+    "object_predicate": {"size": "0x14", "fill": "zero"}
+  },
+  "memory": [],
+  "callees": {
+    "0x0060f3dc": {"name": "isdigit", "conv": "cdecl", "args": ["int"], "ret": 0},
+    "0x005769e0": {
+      "name": "Split_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int", "int", "int"],
+      "ret": 0
+    },
+    "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 0},
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@range1"},
+    "0x004245a0": {
+      "name": "Object4245A0_guess", "conv": "thiscall", "args": [], "ret": "keep",
+      "writes": [{"addr": "@object_predicate", "hex": "f0116400"}]
+    },
+    "0x0042f092": {"name": "Member4245A0_guess", "conv": "thiscall", "args": ["int"], "ret": "keep"},
+    "0x004242e7": {"name": "RangeParse_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0},
+    "0x00424386": {"name": "ValueParse_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0},
+    "0x004243fc": {"name": "Dispose_guess", "conv": "thiscall", "args": ["u8"], "ret": "this"},
+    "0x004247f5": {"name": "ObjectDispose_guess", "conv": "thiscall", "args": ["u8"], "ret": "this"},
+    "0x00424418": {"name": "CollectionParse_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0},
+    "0x0050319b": {"name": "Insert_guess", "conv": "stdcall", "args": ["ptr", "mem:4"]},
+    "0x00424642": {"name": "ObjectParse_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "isdigit": "0x0060f3dc",
+    "atoi": "0x0060e3a3",
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {"name": "nondigit early exit", "args": ["abc"]},
+    {
+      "name": "range insertion", "args": ["1,x"],
+      "callees": {
+        "0x0060f3dc": {"name": "isdigit", "conv": "cdecl", "args": ["int"], "ret": [1, 0]},
+        "0x005769e0": {
+          "name": "Split_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int", "int", "int"],
+          "ret": [2, 2],
+          "writes": [
+            {"arg": 1, "hex": "305e61626300", "call": 0},
+            {"arg": 1, "hex": "3000", "call": 1}
+          ]
+        },
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 0},
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@range1"},
+        "0x004242e7": {"name": "RangeParse_guess", "conv": "thiscall", "args": ["cstr"], "ret": 1}
+      }
+    },
+    {
+      "name": "range rejected", "args": ["1,x"],
+      "callees": {
+        "0x0060f3dc": {"name": "isdigit", "conv": "cdecl", "args": ["int"], "ret": [1, 0]},
+        "0x005769e0": {
+          "name": "Split_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int", "int", "int"],
+          "ret": [2, 2],
+          "writes": [
+            {"arg": 1, "hex": "305e61626300", "call": 0},
+            {"arg": 1, "hex": "3000", "call": 1}
+          ]
+        },
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 0},
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@range1"},
+        "0x004242e7": {"name": "RangeParse_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0}
+      }
+    },
+    {
+      "name": "value insertion", "args": ["1,x"],
+      "callees": {
+        "0x0060f3dc": {"name": "isdigit", "conv": "cdecl", "args": ["int"], "ret": [1, 0]},
+        "0x005769e0": {
+          "name": "Split_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int", "int", "int"],
+          "ret": [2, 2],
+          "writes": [
+            {"arg": 1, "hex": "315e61626300", "call": 0},
+            {"arg": 1, "hex": "3100", "call": 1}
+          ]
+        },
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 1},
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@value1"},
+        "0x00424386": {"name": "ValueParse_guess", "conv": "thiscall", "args": ["cstr"], "ret": 1}
+      }
+    },
+    {
+      "name": "value rejected", "args": ["1,x"],
+      "callees": {
+        "0x0060f3dc": {"name": "isdigit", "conv": "cdecl", "args": ["int"], "ret": [1, 0]},
+        "0x005769e0": {
+          "name": "Split_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int", "int", "int"],
+          "ret": [2, 2],
+          "writes": [
+            {"arg": 1, "hex": "315e61626300", "call": 0},
+            {"arg": 1, "hex": "3100", "call": 1}
+          ]
+        },
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 1},
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@value1"},
+        "0x00424386": {"name": "ValueParse_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0}
+      }
+    },
+    {
+      "name": "object insertion", "args": ["1,x"],
+      "callees": {
+        "0x0060f3dc": {"name": "isdigit", "conv": "cdecl", "args": ["int"], "ret": [1, 0]},
+        "0x005769e0": {
+          "name": "Split_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int", "int", "int"],
+          "ret": [2, 2],
+          "writes": [
+            {"arg": 1, "hex": "325e61626300", "call": 0},
+            {"arg": 1, "hex": "3200", "call": 1}
+          ]
+        },
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 2},
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@object_predicate"},
+        "0x00424418": {"name": "CollectionParse_guess", "conv": "thiscall", "args": ["cstr"], "ret": 1}
+      }
+    },
+    {
+      "name": "object rejected", "args": ["1,x"],
+      "callees": {
+        "0x0060f3dc": {"name": "isdigit", "conv": "cdecl", "args": ["int"], "ret": [1, 0]},
+        "0x005769e0": {
+          "name": "Split_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int", "int", "int"],
+          "ret": [2, 2],
+          "writes": [
+            {"arg": 1, "hex": "325e61626300", "call": 0},
+            {"arg": 1, "hex": "3200", "call": 1}
+          ]
+        },
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 2},
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@object_predicate"},
+        "0x00424418": {"name": "CollectionParse_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0}
+      }
+    },
+    {
+      "name": "unknown type", "args": ["1,x"],
+      "callees": {
+        "0x0060f3dc": {"name": "isdigit", "conv": "cdecl", "args": ["int"], "ret": [1, 0]},
+        "0x005769e0": {
+          "name": "Split_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int", "int", "int"],
+          "ret": [2, 2],
+          "writes": [
+            {"arg": 1, "hex": "335e61626300", "call": 0},
+            {"arg": 1, "hex": "3300", "call": 1}
+          ]
+        },
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 3}
+      }
+    },
+    {
+      "name": "range allocation null", "args": ["1,x"],
+      "callees": {
+        "0x0060f3dc": {"name": "isdigit", "conv": "cdecl", "args": ["int"], "ret": [1, 0]},
+        "0x005769e0": {
+          "name": "Split_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int", "int", "int"],
+          "ret": [2, 2],
+          "writes": [
+            {"arg": 1, "hex": "305e61626300", "call": 0},
+            {"arg": 1, "hex": "3000", "call": 1}
+          ]
+        },
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 0},
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}
+      }
+    },
+    {
+      "name": "value allocation null", "args": ["1,x"],
+      "callees": {
+        "0x0060f3dc": {"name": "isdigit", "conv": "cdecl", "args": ["int"], "ret": [1, 0]},
+        "0x005769e0": {
+          "name": "Split_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int", "int", "int"],
+          "ret": [2, 2],
+          "writes": [
+            {"arg": 1, "hex": "315e61626300", "call": 0},
+            {"arg": 1, "hex": "3100", "call": 1}
+          ]
+        },
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 1},
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}
+      }
+    },
+    {
+      "name": "object allocation null", "args": ["1,x"],
+      "callees": {
+        "0x0060f3dc": {"name": "isdigit", "conv": "cdecl", "args": ["int"], "ret": [1, 0]},
+        "0x005769e0": {
+          "name": "Split_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int", "int", "int"],
+          "ret": [2, 2],
+          "writes": [
+            {"arg": 1, "hex": "325e61626300", "call": 0},
+            {"arg": 1, "hex": "3200", "call": 1}
+          ]
+        },
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 2},
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}
+      }
+    },
+    {
+      "name": "two tokens", "args": ["1,1,x"],
+      "callees": {
+        "0x0060f3dc": {"name": "isdigit", "conv": "cdecl", "args": ["int"], "ret": [1, 1, 0]},
+        "0x005769e0": {
+          "name": "Split_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int", "int", "int"],
+          "ret": [2, 2, 2, 2],
+          "writes": [
+            {"arg": 1, "hex": "315e6100", "call": 0},
+            {"arg": 1, "hex": "3100", "call": 1},
+            {"arg": 1, "hex": "315e6200", "call": 2},
+            {"arg": 1, "hex": "3100", "call": 3}
+          ]
+        },
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [1, 1]},
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": ["@value1", "@value2"]},
+        "0x00424386": {"name": "ValueParse_guess", "conv": "thiscall", "args": ["cstr"], "ret": [1, 1]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 424824,
+    "count": 50,
+    "args": [{"choices": ["", "x", "hello", "7abc", "2,1"]}]
+  }
+}

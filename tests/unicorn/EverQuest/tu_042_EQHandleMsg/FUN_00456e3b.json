@@ -1,0 +1,91 @@
+{
+  "function": "FUN_00456e3b_guess",
+  "original": "0x00456e3b",
+  "sources": ["src/EverQuest/tu_042_EQHandleMsg.cpp"],
+  "conv": "cdecl",
+  "args": [{"name": "argument_guess", "type": "ptr"}],
+  "ret": "void",
+  "objects": {
+    "argument": {"size": "0x48", "fill": "zero"},
+    "root": {"size": "0x300", "fill": "zero", "init": [
+      {"offset": "0x8", "u32": "@offset_holder"}
+    ]},
+    "offset_holder": {"size": "0x8", "fill": "zero", "init": [
+      {"offset": "0x4", "u32": 256}
+    ]}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": 305419896},
+    {"addr": "0x00905d00", "u32": "@root"},
+    {"addr": "@root", "offset": "0x144", "cstr": "fixture"},
+    {"addr": "@root", "offset": "0x234", "u32": 50},
+    {"addr": "@root", "offset": "0x238", "u32": 50},
+    {"addr": "@root", "offset": "0x23c", "u32": 50},
+    {"addr": "@root", "offset": "0x240", "u32": 50},
+    {"addr": "@argument", "cstr": "fixture"},
+    {"addr": "@argument", "offset": "0x40", "u32": 1},
+    {"addr": "@argument", "offset": "0x44", "u32": 20}
+  ],
+  "callees": {
+    "0x004912b1": {"name": "SendMessage_guess", "conv": "cdecl", "args": ["ptr", "int", "mem:72", "int", "char"], "ret": 0}
+  },
+  "cases": [
+    {"name": "kind 1, amount below value", "args": ["@argument"]},
+    {"name": "kind 1, amount above value clamps", "args": ["@argument"], "memory": [
+      {"addr": "@argument", "offset": "0x44", "u32": 60}
+    ]},
+    {"name": "kind 1, amount equals value", "args": ["@argument"], "memory": [
+      {"addr": "@argument", "offset": "0x44", "u32": 50}
+    ]},
+    {"name": "kind 2, amount below value", "args": ["@argument"], "memory": [
+      {"addr": "@argument", "offset": "0x40", "u32": 2}
+    ]},
+    {"name": "kind 2, amount above value clamps", "args": ["@argument"], "memory": [
+      {"addr": "@argument", "offset": "0x40", "u32": 2},
+      {"addr": "@argument", "offset": "0x44", "u32": 60}
+    ]},
+    {"name": "kind 3, amount below value", "args": ["@argument"], "memory": [
+      {"addr": "@argument", "offset": "0x40", "u32": 3}
+    ]},
+    {"name": "kind 3, amount above value clamps", "args": ["@argument"], "memory": [
+      {"addr": "@argument", "offset": "0x40", "u32": 3},
+      {"addr": "@argument", "offset": "0x44", "u32": 60}
+    ]},
+    {"name": "kind 4, amount below value", "args": ["@argument"], "memory": [
+      {"addr": "@argument", "offset": "0x40", "u32": 4}
+    ]},
+    {"name": "kind 4, amount above value clamps", "args": ["@argument"], "memory": [
+      {"addr": "@argument", "offset": "0x40", "u32": 4},
+      {"addr": "@argument", "offset": "0x44", "u32": 60}
+    ]},
+    {"name": "kind 1, zero amount", "args": ["@argument"], "memory": [
+      {"addr": "@argument", "offset": "0x44", "u32": 0}
+    ]},
+    {"name": "kind 0 returns without sending", "args": ["@argument"], "memory": [
+      {"addr": "@argument", "offset": "0x40", "u32": 0}
+    ]},
+    {"name": "kind 5 returns without sending", "args": ["@argument"], "memory": [
+      {"addr": "@argument", "offset": "0x40", "u32": 5}
+    ]},
+    {"name": "name mismatch returns without sending", "args": ["@argument"], "memory": [
+      {"addr": "@argument", "cstr": "other"}
+    ]},
+    {"name": "no root object", "args": ["@argument"], "memory": [
+      {"addr": "0x00905d00", "u32": 0}
+    ]}
+  ],
+  "_survivors": "L4832: `>` -> `>=` is equivalent: at amount == pool the clamp branch sends amount (= pool) and sets pool to 0, the else branch sets pool to 0 and sends the same amount; L4844, L4856, L4868: same boundary in the kind 2, 3 and 4 branches",
+  "fuzz": {
+    "seed": 4550203,
+    "count": 120,
+    "args": [{"choices": ["@argument"]}],
+    "memory": [
+      {"addr": "@argument", "offset": "0x40", "type": "int", "choices": [0, 1, 2, 3, 4, 5]},
+      {"addr": "@argument", "offset": "0x44", "type": "int", "choices": [0, 10, 50, 60, 100]},
+      {"addr": "@root", "offset": "0x234", "type": "int", "choices": [0, 10, 50, 100]},
+      {"addr": "@root", "offset": "0x238", "type": "int", "choices": [0, 10, 50, 100]},
+      {"addr": "@root", "offset": "0x23c", "type": "int", "choices": [0, 10, 50, 100]},
+      {"addr": "@root", "offset": "0x240", "type": "int", "choices": [0, 10, 50, 100]}
+    ]
+  }
+}

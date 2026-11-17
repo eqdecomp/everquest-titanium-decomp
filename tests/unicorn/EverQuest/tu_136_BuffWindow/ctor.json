@@ -1,0 +1,167 @@
+{
+  "function": "CBuffWindow_guess::CBuffWindow_guess",
+  "original": "0x004e955b",
+  "sources": ["src/EverQuest/tu_136_BuffWindow.cpp"],
+  "conv": "thiscall",
+  "this": "@buffwindow",
+  "args": [
+    {"name": "parent_guess", "type": "ptr"},
+    {"name": "short_duration_guess", "type": "int"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "buffwindow": {
+      "size": "0x24c",
+      "fill": "random",
+      "init": [{"offset": "0x124", "u32": "@texture"}]
+    },
+    "parent": {"size": "0x11c", "fill": "random"},
+    "texture": {
+      "size": "0x64",
+      "fill": "random",
+      "init": [{"offset": "0x60", "u32": "0x20"}]
+    },
+    "resource_manager": {"size": "4", "fill": "random"},
+    "outer": {"size": "0xc284", "fill": "random"},
+    "child": {"size": "0x24c", "fill": "random"},
+    "gem": {"size": "0x4c", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x13572468"},
+    {"addr": "0x00905d00", "u32": "@outer"},
+    {"addr": "0x0099d3f4", "u32": "@resource_manager"}
+  ],
+  "callees": {
+    "0x00571e00": {
+      "name": "CXStr_ctor_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "this"
+    },
+    "0x005a3850": {
+      "name": "CSidlScreenWnd_ctor",
+      "conv": "thiscall",
+      "args": ["ptr", "ignore", "int", "int", "ptr"],
+      "ret": "this",
+      "writes": [{"arg": 1, "offset": 0, "hex": "01000060"}]
+    },
+    "0x00571d00": {
+      "name": "CXStr_FreeRep_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x005a25b0": {
+      "name": "Wnd_update_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005b44a0": {
+      "name": "ResourceManager_Load_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": [101, 102, 103],
+      "writes": [{"arg": 0, "offset": 0, "hex": "01000060"}]
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr"],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x005a1e10": {
+      "name": "FindChild_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": [0, "@child"],
+      "writes": [{"arg": 0, "offset": 0, "hex": "01000060"}]
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": "@gem"
+    },
+    "0x005b1d90": {
+      "name": "SpellGem_ctor_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x004dbb3b": {
+      "name": "SpellGem_SetIcon_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x004e8ba8": {
+      "name": "BuffWindow_UpdateIcon_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "int", "int"],
+      "passthrough": true
+    },
+    "0x005b1ab0": {
+      "name": "SpellGem_Update_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x0040db4e": {
+      "name": "GetBuffStart_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 8
+    },
+    "0x00410db0": {
+      "name": "GetBuffEnd_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "int"],
+      "ret": 20
+    },
+    "0x004e8ab0": {
+      "name": "BuffWindow_Layout_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb",
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {"name": "short duration with children", "args": ["@parent", 1]},
+    {"name": "normal duration with children", "args": ["@parent", 0]},
+    {
+      "name": "allocation failure",
+      "args": ["@parent", 1],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator_new_failure",
+          "conv": "cdecl",
+          "args": ["u32"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "base has no texture",
+      "args": ["@parent", 2],
+      "memory": [{"addr": "@buffwindow", "offset": "0x124", "u32": 0}]
+    }
+  ],
+  "fuzz": {
+    "seed": 5150043,
+    "count": 100,
+    "args": [{"choices": ["@parent"]}, {"choices": [0, 1, 2]}],
+    "memory": [
+      {"addr": "@buffwindow", "offset": "0x124", "type": "u32", "choices": [0, "@texture"]}
+    ]
+  },
+  "coverage_ok": {
+    "004E95FF-004E9605": "field_248 is assigned only 12 or 25 immediately before this cap check"
+  },
+  "_survivors": "L390: field_248 is only 12 or 25, so the >25, >=25, and >24 conditions have equivalent effects; L391: the cap assignment is unreachable for either initialized count"
+}

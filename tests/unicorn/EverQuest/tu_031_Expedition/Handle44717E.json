@@ -1,0 +1,197 @@
+{
+  "function": "Expedition_guess::Handle_OP_DzChooseZone_guess",
+  "original": "0x0044717e",
+  "sources": [
+    "src/EverQuest/tu_031_Expedition.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "0x0",
+  "args": [
+    {
+      "name": "first_guess",
+      "type": "cstr"
+    },
+    {
+      "name": "second_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "zone_switch": {
+      "size": "0x178",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@vtable"
+        }
+      ]
+    },
+    "fn_slot48": {
+      "size": "4",
+      "fill": "zero"
+    },
+    "vtable": {
+      "size": "0xc4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0xc0",
+          "u32": "@fn_slot48"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x009918c4",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x00446d94": {
+      "name": "HashTableWide_guess::HashTableWide_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x00446f76": {
+      "name": "HashTableWide_guess::Read_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@zone_switch"
+    },
+    "0x004feb25": {
+      "name": "ZoneSwitch_guess::ZoneSwitch_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@zone_switch"
+    },
+    "0x004fec7b": {
+      "name": "ProcessTable_guess",
+      "conv": "stdcall",
+      "args": [
+        "ignore"
+      ]
+    },
+    "0x00446db3": {
+      "name": "HashTableWide_guess::~HashTableWide_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "@fn_slot48": {
+      "name": "ZoneSwitch_guess::Slot48_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "null_input",
+      "args": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "allocate_global",
+      "args": [
+        "zone data",
+        50
+      ],
+      "memory": [
+        {
+          "addr": "0x009918c4",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "existing_global",
+      "args": [
+        "zone data",
+        64
+      ],
+      "memory": [
+        {
+          "addr": "0x009918c4",
+          "u32": "@zone_switch"
+        }
+      ]
+    },
+    {
+      "name": "allocation_failure_fault",
+      "args": [
+        "zone data",
+        64
+      ],
+      "memory": [
+        {
+          "addr": "0x009918c4",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4485502,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "",
+          "zone",
+          "zone payload"
+        ]
+      },
+      {
+        "range": [
+          -10,
+          200
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x009918c4",
+        "type": "u32",
+        "choices": [
+          0,
+          "@zone_switch"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "function": "Dispatcher_guess::WndNotification_guess",
+  "original": "0x004dd386",
+  "sources": [
+    "src/EverQuest/tu_128_BarterMerchantWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@dispatcher",
+  "args": [
+    {"name": "item", "type": "int"},
+    {"name": "action", "type": "int"},
+    {"name": "value", "type": "ptr"}
+  ],
+  "ret": "int",
+  "objects": {
+    "dispatcher": {
+      "size": "0x1e0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@vtbl"},
+        {"offset": "0x15c", "u32": 4294967295},
+        {"offset": "0x168", "u32": 256},
+        {"offset": "0x16c", "u32": 257},
+        {"offset": "0x170", "u32": 258},
+        {"offset": "0x174", "u32": 259},
+        {"offset": "0x178", "u32": 260},
+        {"offset": "0x1c8", "u32": 512},
+        {"offset": "0x1cc", "u32": 513},
+        {"offset": "0x1d0", "u32": 514},
+        {"offset": "0x1d4", "u32": 515}
+      ]
+    },
+    "vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xc0", "u32": "@fn_slot48"}]
+    },
+    "fn_slot48": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "value": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "aux": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "object": {
+      "size": "0x260",
+      "fill": "random",
+      "init": [{"offset": "0x258", "u32": 7}]
+    }
+  },
+  "memory": [
+    {"addr": "0x00991434", "u32": 0},
+    {"addr": "0x00905d14", "u32": 0},
+    {"addr": "0x009248d0", "u32": 0}
+  ],
+  "callees": {
+    "0x0059dd30": {"name": "FUN_0059dd30", "conv": "cdecl", "args": [], "ret": 1},
+    "0x004d8d48": {"name": "FUN_004d8d48", "conv": "thiscall", "args": ["int", "int"]},
+    "0x004dcf17": {"name": "FUN_004dcf17", "conv": "thiscall", "args": ["int"]},
+    "0x004912b1": {"name": "FUN_004912b1", "conv": "cdecl", "args": ["ptr", "int", "ignore", "int", "int"], "ret": 0},
+    "0x005a2230": {"name": "FUN_005a2230", "conv": "thiscall", "args": ["u32", "u32", "ptr"], "ret": 0},
+    "0x004dcd85": {"name": "OnMoneyClick_guess", "conv": "thiscall", "args": ["u32", "u32"]},
+    "@fn_slot48": {"name": "Slot48", "conv": "thiscall", "args": ["int", "int"]}
+  },
+  "cases": [
+    {"name": "not ready", "args": [513, 1, "@value"],
+     "callees": {"0x0059dd30": {"name": "FUN_0059dd30", "conv": "cdecl", "args": [], "ret": 0}}},
+    {"name": "field72 slot48", "args": [512, 1, "@value"]},
+    {"name": "field75 aux and object", "args": [515, 1, "@value"],
+     "memory": [{"addr": "0x00991434", "u32": "@aux"}, {"addr": "0x00905d14", "u32": "@object"}]},
+    {"name": "field75 aux null", "args": [515, 1, "@value"]},
+    {"name": "field75 object null", "args": [515, 1, "@value"],
+     "memory": [{"addr": "0x00991434", "u32": "@aux"}, {"addr": "0x00905d14", "u32": 0}]},
+    {"name": "field74 reset", "args": [514, 1, "@value"]},
+    {"name": "field73 send", "args": [513, 1, "@value"]},
+    {"name": "entry 0 apply", "args": [256, 1, "@value"]},
+    {"name": "entry 4 apply", "args": [260, 1, "@value"]},
+    {"name": "no match action 1", "args": [768, 1, "@value"]},
+    {"name": "action 1f pending set", "args": [768, 31, "@value"],
+     "memory": [{"addr": "@dispatcher", "offset": "0x15c", "u32": 3}]},
+    {"name": "action 1f pending none", "args": [768, 31, "@value"]},
+    {"name": "other action", "args": [515, 2, "@value"]},
+    {"name": "entry 5 is past the table", "args": [768, 1, "@value"],
+     "memory": [{"addr": "@dispatcher", "offset": "0x17c", "u32": 768}]},
+    {"name": "object global null, next bytes set", "args": [515, 1, "@value"],
+     "memory": [{"addr": "0x00991434", "u32": "@aux"}, {"addr": "0x00905d14", "u32": 0},
+                {"addr": "0x00905d18", "u8": 1}]}
+  ],
+  "fuzz": {
+    "seed": 5100422,
+    "count": 150,
+    "args": [
+      {"choices": [256, 257, 258, 259, 260, 512, 513, 514, 515, 768, -1, 0]},
+      {"choices": [1, 31, 2, 0, 3]},
+      {"choices": ["@value"]}
+    ],
+    "memory": [
+      {"addr": "0x00991434", "type": "ptr", "choices": ["@aux", 0]},
+      {"addr": "0x00905d14", "type": "ptr", "choices": ["@object", 0]},
+      {"addr": "@dispatcher", "offset": "0x15c", "type": "int", "choices": [-1, 0, 3, 256]},
+      {"addr": "@dispatcher", "offset": "0x1c8", "type": "int", "choices": [512, 513, 514, 515, 768, 0]},
+      {"addr": "@dispatcher", "offset": "0x1cc", "type": "int", "choices": [512, 513, 514, 515, 768, 0]},
+      {"addr": "@dispatcher", "offset": "0x1d0", "type": "int", "choices": [512, 513, 514, 515, 768, 0]},
+      {"addr": "@dispatcher", "offset": "0x1d4", "type": "int", "choices": [512, 513, 514, 515, 768, 0]}
+    ]
+  }
+}

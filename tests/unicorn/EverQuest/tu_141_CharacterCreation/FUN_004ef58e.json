@@ -1,0 +1,112 @@
+{
+  "function": "CCharacterCreationView_guess::CopyAppearanceToPlayer_guess",
+  "original": "0x004ef58e",
+  "sources": [
+    "src/EverQuest/tu_141_CharacterCreation.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@transferowner",
+  "args": [
+    {"name": "system", "type": "ptr"},
+    {"name": "destination", "type": "ptr"},
+    {"name": "flag", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "transferowner": {"size": "0x100", "fill": "random"},
+    "system": {"size": "0x300", "fill": "random"},
+    "destination": {"size": "0x100", "fill": "random",
+                    "init": [{"offset": "0x8", "u32": "@destoff"}]},
+    "destoff": {"size": "0x10", "fill": "random",
+                "init": [{"offset": "0x4", "u32": 16}]},
+    "celldest": {"size": "0x100", "fill": "random",
+                 "init": [{"offset": "0x8", "u32": "@celloff"}]},
+    "celloff": {"size": "0x10", "fill": "random",
+                "init": [{"offset": "0x4", "u32": 16}]},
+    "sysglobal": {"size": "0x300", "fill": "random",
+                  "init": [{"offset": "0x1a8", "u32": "@holder"}]},
+    "holder": {"size": "0x10", "fill": "random",
+               "init": [{"offset": "0x4", "u32": "@activation"}]},
+    "activation": {"size": "0x10", "fill": "random",
+                   "init": [{"offset": "0x0", "u32": "@actvtbl"}]},
+    "actvtbl": {"size": "0x20", "fill": "random",
+                "init": [{"offset": "0x14", "u32": "@fn_act"}]},
+    "settings": {"size": "0x2880", "fill": "random"},
+    "panel": {"size": "0x10", "fill": "random"},
+    "celldata": {"size": "0x11d8", "fill": "random"},
+    "fn_act": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@celldest"},
+    {"addr": "0x00905ce4", "u32": "@sysglobal"},
+    {"addr": "0x00905d24", "u32": "@settings"},
+    {"addr": "0x00850b9c", "u32": "@panel"}
+  ],
+  "callees": {
+    "0x005ec220": {"name": "GetData_guess", "conv": "thiscall", "args": [], "ret": "@celldata"},
+    "0x004b919f": {"name": "SetFace_guess", "conv": "thiscall", "args": ["u8"]},
+    "0x005ed6d0": {"name": "GetFirst_guess", "conv": "thiscall", "args": [], "ret": [17, 34]},
+    "0x005ed6f0": {"name": "SetFirst_guess", "conv": "thiscall", "args": ["u8"]},
+    "0x005ed5d0": {"name": "GetSecond_guess", "conv": "thiscall", "args": [], "ret": [51, 68]},
+    "0x005ed5f0": {"name": "SetSecond_guess", "conv": "thiscall", "args": ["u8"]},
+    "0x005ed6b0": {"name": "SetThird_guess", "conv": "thiscall", "args": ["u8"]},
+    "0x005ed690": {"name": "GetThird_guess", "conv": "thiscall", "args": [], "ret": 153},
+    "0x005ed590": {"name": "GetFourth_guess", "conv": "thiscall", "args": [], "ret": [85, 102]},
+    "0x005ed5b0": {"name": "SetFourth_guess", "conv": "thiscall", "args": ["u8"]},
+    "0x005ed610": {"name": "GetFifth_guess", "conv": "thiscall", "args": [], "ret": [119, 136]},
+    "0x005ed630": {"name": "SetFifth_guess", "conv": "thiscall", "args": ["u8"]},
+    "0x005ed670": {"name": "SetSixth_guess", "conv": "thiscall", "args": ["u8"]},
+    "0x005ed650": {"name": "GetSixth_guess", "conv": "thiscall", "args": [], "ret": 171},
+    "0x004f1733": {"name": "RebuildPlayerActor_guess", "conv": "thiscall", "args": ["ptr", "u8", "int", "int", "u8"]},
+    "0x0047e619": {"name": "CreateUserLight_guess", "conv": "thiscall", "args": ["int", "int"], "ret": "@activation"},
+    "0x0047a3eb": {"name": "SetArmorType_guess", "conv": "thiscall", "args": ["int", "int"]},
+    "0x0047a406": {"name": "SetArmorTint_guess", "conv": "thiscall", "args": ["int", "int"]},
+    "0x0047a3d0": {"name": "SysGetSlot_guess", "conv": "thiscall", "args": ["int", "int", "int"],
+                   "ret": [10, 11, 12, 13, 14, 15, 16, 17, 18]},
+    "0x005f05e0": {"name": "DestGetSlot_guess", "conv": "thiscall", "args": ["int"],
+                   "ret": [20, 21, 22, 23, 24, 25, 26, 27, 28]},
+    "0x004845d8": {"name": "HandleMaterialEx_guess", "conv": "thiscall", "args": ["int", "int", "int"]},
+    "0x0047dec4": {"name": "SetLanguage_guess", "conv": "thiscall", "args": ["u8", "int"]},
+    "0x0048083a": {"name": "AddMessage_guess", "conv": "thiscall", "args": ["int", "cstr", "int"]},
+    "@fn_act": {"name": "Activate_guess", "conv": "thiscall", "args": ["int"]}
+  },
+  "cases": [
+    {
+      "name": "typical, activation present",
+      "args": ["@system", "@destination", 1]
+    },
+    {
+      "name": "no activation yet",
+      "args": ["@system", "@destination", 1],
+      "memory": [{"addr": "@holder", "offset": "0x4", "u32": 0}]
+    },
+    {
+      "name": "system is the global",
+      "args": ["@sysglobal", "@destination", 1]
+    },
+    {
+      "name": "zero flag",
+      "args": ["@system", "@destination", 0]
+    },
+    {
+      "name": "null system",
+      "args": [0, 0, 1]
+    }
+  ],
+  "fuzz": {
+    "seed": 5174670,
+    "count": 200,
+    "args": [
+      {"choices": ["@system", "@sysglobal"]},
+      {"choices": ["@destination"]},
+      {}
+    ],
+    "memory": [
+      {"addr": "@celldata", "offset": "0x1194", "type": "u8"},
+      {"addr": "@celldata", "offset": "0x1198", "type": "int", "range": [-2, 12]},
+      {"addr": "@celldata", "offset": "0x119c", "type": "u8"},
+      {"addr": "@celldata", "offset": "0x11d0", "type": "u8"},
+      {"addr": "@holder", "offset": "0x4", "type": "ptr", "choices": [0, "@activation"]}
+    ]
+  }
+}

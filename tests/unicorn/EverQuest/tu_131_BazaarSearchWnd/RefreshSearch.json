@@ -1,0 +1,120 @@
+{
+  "function": "BazaarSearchWnd_guess::UpdateButtons_guess",
+  "original": "0x004e3809",
+  "sources": [
+    "src/EverQuest/tu_131_BazaarSearchWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@bazaarsearchwnd",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "rep0": {"size": "0x20", "fill": "zero", "init": [{"offset": "0x8", "u32": 0}]},
+    "rep1": {"size": "0x20", "fill": "zero", "init": [{"offset": "0x8", "u32": 0}]},
+    "rep2": {"size": "0x20", "fill": "zero", "init": [{"offset": "0x8", "u32": 0}]},
+    "rep3": {"size": "0x20", "fill": "zero", "init": [{"offset": "0x8", "u32": 0}]},
+    "rep4": {"size": "0x20", "fill": "zero", "init": [{"offset": "0x8", "u32": 0}]},
+    "bazaarsearchwnd": {
+      "size": "0x3d54",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x3ce0", "u32": "@list"},
+        {"offset": "0x3ce4", "u32": "@query_button"},
+        {"offset": "0x3cf0", "u32": "@request_button"},
+        {"offset": "0x3cf4", "u32": "@find_button"},
+        {"offset": "0x3d28", "u32": "@item_slot"},
+        {"offset": "0x3d2c", "u32": "@stat_slot"},
+        {"offset": "0x3d30", "u32": "@race_slot"},
+        {"offset": "0x3d34", "u32": "@class_slot"},
+        {"offset": "0x3d38", "u32": "@item_type"},
+        {"offset": "0x3d3c", "u32": "@players"},
+        {"offset": "0x3d40", "u32": "@item_name"},
+        {"offset": "0x3d44", "u32": "@max_price"},
+        {"offset": "0x3d48", "u32": "@min_price"}
+      ]
+    },
+    "list": {"size": "0x150", "fill": "zero"},
+    "request_button": {"size": "0x80", "fill": "zero", "init": [{"offset": "0x5d", "u8": 1}]},
+    "query_button": {"size": "0x80", "fill": "zero", "init": [{"offset": "0x5d", "u8": 1}]},
+    "find_button": {"size": "0x80", "fill": "zero", "init": [{"offset": "0x5d", "u8": 1}]},
+    "item_slot": {"size": "0x80", "fill": "zero"},
+    "stat_slot": {"size": "0x80", "fill": "zero"},
+    "race_slot": {"size": "0x80", "fill": "zero"},
+    "class_slot": {"size": "0x80", "fill": "zero"},
+    "item_type": {"size": "0x80", "fill": "zero"},
+    "players": {"size": "0x80", "fill": "zero"},
+    "item_name": {"size": "0x80", "fill": "zero", "init": [{"offset": "0", "u32": "@text_vtable"}]},
+    "max_price": {"size": "0x80", "fill": "zero", "init": [{"offset": "0", "u32": "@text_vtable"}]},
+    "min_price": {"size": "0x80", "fill": "zero", "init": [{"offset": "0", "u32": "@text_vtable"}]},
+    "text_vtable": {"size": "0x134", "fill": "zero", "init": [{"offset": "0x130", "u32": "@fn_gettext"}]},
+    "fn_gettext": {"size": "0x4"}
+  },
+  "memory": [],
+  "callees": {
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x0059c3a0": {"name": "ComboWnd_guess::GetCurChoice_guess", "conv": "thiscall", "args": [], "ret": [0, 0, 0, 0, 0, 0]},
+    "0x00572300": {"name": "CXStr::operator char*", "conv": "thiscall", "args": [], "ret": ["0x0063f53f", "0x0063f53f"]},
+    "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [0, 0]},
+    "0x00597be0": {"name": "CListWnd::GetCurSel", "conv": "thiscall", "args": [], "ret": -1},
+    "0x0059c390": {"name": "ComboWnd_guess::Count_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "@fn_gettext": {
+      "name": "TextWnd_guess::GetText_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "00000060", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "20000060", "call": 1},
+        {"arg": 0, "offset": 0, "hex": "40000060", "call": 2},
+        {"arg": 0, "offset": 0, "hex": "60000060", "call": 3},
+        {"arg": 0, "offset": 0, "hex": "80000060", "call": 4}
+      ]
+    }
+  },
+  "cases": [
+    {"name": "no_filters_no_selection", "args": []},
+    {"name": "combo_1_positive", "args": [], "callees": {"0x0059c3a0": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [1]}}},
+    {"name": "combo_2_positive", "args": [], "callees": {"0x0059c3a0": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [0, 1]}}},
+    {"name": "combo_3_positive", "args": [], "callees": {"0x0059c3a0": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [0, 0, 1]}}},
+    {"name": "combo_4_positive", "args": [], "callees": {"0x0059c3a0": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [0, 0, 0, 1]}}},
+    {"name": "combo_5_positive", "args": [], "callees": {"0x0059c3a0": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [0, 0, 0, 0, 1]}}},
+    {"name": "combo_6_positive", "args": [], "callees": {"0x0059c3a0": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [0, 0, 0, 0, 0, 1]}}},
+    {"name": "text_length_trigger", "args": [], "memory": [{"addr": "@rep0", "offset": "0x8", "u32": 2}]},
+    {"name": "empty_price_text", "args": [], "callees": {"0x0059c3a0": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [1]}, "0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": 0}, "0x0059c390": {"name": "Count", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "valid_equal_price_range", "args": [], "memory": [{"addr": "@rep1", "offset": "0x8", "u32": 2}, {"addr": "@rep2", "offset": "0x8", "u32": 2}], "callees": {"0x0059c3a0": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [1]}, "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [10, 10]}, "0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": 0}, "0x0059c390": {"name": "Count", "conv": "thiscall", "args": [], "ret": 2}}},
+    {"name": "low_only_reversed_range", "args": [], "memory": [{"addr": "@rep1", "offset": "0x8", "u32": 2}], "callees": {"0x0059c3a0": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [1]}, "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [10, 0]}}},
+    {"name": "reversed_price_range", "args": [], "memory": [{"addr": "@rep1", "offset": "0x8", "u32": 2}, {"addr": "@rep2", "offset": "0x8", "u32": 2}], "callees": {"0x0059c3a0": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [1]}, "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [20, 10]}}},
+    {"name": "missing_price_control", "args": [], "memory": [{"addr": "@bazaarsearchwnd", "offset": "0x3d44", "u32": 0}], "callees": {"0x0059c3a0": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [1]}}},
+    {"name": "nullable_control_guards", "args": [], "memory": [
+      {"addr": "@bazaarsearchwnd", "offset": "0x3ce0", "u32": 0},
+      {"addr": "@bazaarsearchwnd", "offset": "0x3ce4", "u32": 0},
+      {"addr": "@bazaarsearchwnd", "offset": "0x3cf0", "u32": 0},
+      {"addr": "@bazaarsearchwnd", "offset": "0x3cf4", "u32": 0},
+      {"addr": "@bazaarsearchwnd", "offset": "0x3d28", "u32": 0},
+      {"addr": "@bazaarsearchwnd", "offset": "0x3d2c", "u32": 0},
+      {"addr": "@bazaarsearchwnd", "offset": "0x3d30", "u32": 0},
+      {"addr": "@bazaarsearchwnd", "offset": "0x3d34", "u32": 0},
+      {"addr": "@bazaarsearchwnd", "offset": "0x3d38", "u32": 0},
+      {"addr": "@bazaarsearchwnd", "offset": "0x3d3c", "u32": 0},
+      {"addr": "@bazaarsearchwnd", "offset": "0x3d44", "u32": 0},
+      {"addr": "@bazaarsearchwnd", "offset": "0x3d48", "u32": 0}
+    ], "callees": {"0x0059c3a0": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [1]}, "0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": 0}, "0x0059c390": {"name": "Count", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "null_item_name_text", "args": [], "callees": {"@fn_gettext": {"name": "GetText", "conv": "thiscall", "args": ["ignore"], "ret": "arg0"}}},
+    {"name": "null_minimum_price_text", "args": [], "callees": {"0x0059c3a0": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [1]}, "@fn_gettext": {"name": "GetText", "conv": "thiscall", "args": ["ignore"], "ret": "arg0", "writes": [{"arg": 0, "offset": 0, "hex": "00000060", "call": 0}, {"arg": 0, "offset": 0, "hex": "00000000", "call": 1}, {"arg": 0, "offset": 0, "hex": "40000060", "call": 2}, {"arg": 0, "offset": 0, "hex": "60000060", "call": 3}, {"arg": 0, "offset": 0, "hex": "80000060", "call": 4}]}}},
+    {"name": "null_maximum_price_text", "args": [], "callees": {"0x0059c3a0": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [1]}, "@fn_gettext": {"name": "GetText", "conv": "thiscall", "args": ["ignore"], "ret": "arg0", "writes": [{"arg": 0, "offset": 0, "hex": "00000060", "call": 0}, {"arg": 0, "offset": 0, "hex": "20000060", "call": 1}, {"arg": 0, "offset": 0, "hex": "00000000", "call": 2}, {"arg": 0, "offset": 0, "hex": "60000060", "call": 3}, {"arg": 0, "offset": 0, "hex": "80000060", "call": 4}]}}},
+    {"name": "nonempty_price_with_zero_values", "args": [], "memory": [{"addr": "@rep1", "offset": "0x8", "u32": 2}], "callees": {"0x0059c3a0": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [1]}, "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [0, 0]}}},
+    {"name": "selected_without_filters", "args": [], "callees": {"0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": 0}}}
+  ],
+  "fuzz": {
+    "seed": 5126153,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@bazaarsearchwnd", "offset": "0x3ce0", "type": "ptr", "choices": ["@list", 0]},
+      {"addr": "@bazaarsearchwnd", "offset": "0x3ce4", "type": "ptr", "choices": ["@query_button", 0]},
+      {"addr": "@bazaarsearchwnd", "offset": "0x3cf0", "type": "ptr", "choices": ["@request_button", 0]},
+      {"addr": "@bazaarsearchwnd", "offset": "0x3cf4", "type": "ptr", "choices": ["@find_button", 0]}
+    ]
+  },
+  "_survivors": "L676: the null-length fallback only changes valueB, which only controls the redundant assignment below; L686: this condition can only repeat changed = 1 after the enclosing branch already set changed to 1, so the result cannot affect a later call or write"
+}

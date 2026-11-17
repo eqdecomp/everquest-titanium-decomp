@@ -1,0 +1,88 @@
+{
+  "function": "CDisplay_guess::GetClickedActor",
+  "original": "0x0043962a",
+  "sources": ["src/EverQuest/tu_029_Display.cpp"],
+  "conv": "thiscall",
+  "this": "@client",
+  "args": [
+    {"name": "x", "type": "int"},
+    {"name": "y", "type": "int"},
+    {"name": "type", "type": "int"},
+    {"name": "first", "type": "int"},
+    {"name": "second", "type": "int"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "client": {"size": "0x2d70", "fill": "random"},
+    "service": {"size": "0x4", "fill": "zero", "init": [{"offset": "0", "u32": "@service_vtbl"}]},
+    "fn_slot32": {"size": "0x4"},
+    "service_vtbl": {"size": "0x84", "fill": "zero", "init": [{"offset": "0x80", "u32": "@fn_slot32"}]},
+    "pick_owner": {"size": "0x1ac", "fill": "zero", "init": [{"offset": "0x1a8", "u32": "@pick_info"}]},
+    "pick_info": {"size": "0x160", "fill": "zero", "init": [{"offset": "0x15c", "u32": "@pick_owner2"}]},
+    "pick_owner2": {"size": "0x1ac", "fill": "zero", "init": [{"offset": "0x1a8", "u32": "@pick_info2"}]},
+    "pick_info2": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0099e368", "u32": "@service"},
+    {"addr": "0x00905ce4", "u32": "@pick_owner"},
+    {"addr": "0x00850cc4", "u32": "0x1234"},
+    {"addr": "0x00850ccc", "u32": 0},
+    {"addr": "0x0092377c", "u32": "0x10"},
+    {"addr": "0x00923778", "u32": "0x20"},
+    {"addr": "@pick_info", "offset": "0", "u32": "0x1234"},
+    {"addr": "@pick_info2", "offset": "0", "u32": "0x5678"},
+    {"addr": "@client", "offset": "0x2cf8", "u32": 1},
+    {"addr": "@client", "offset": "0x118", "u32": "0x00905d30"}
+  ],
+  "callees": {
+    "@fn_slot32": {"name": "Service_slot32", "conv": "thiscall",
+      "args": ["u32", "int", "int", "int", "int", "int", "ignore", "int", "int"],
+      "ret": 0, "writes": [{"arg": 6, "offset": 0, "hex": "10 5d 90 00"}]}
+  },
+  "cases": [
+    {"name": "inactive_client", "args": [100, 200, 2, 1, 0],
+      "memory": [{"addr": "@client", "offset": "0x2cf8", "u32": 0}], "expect": {"ret": 0}},
+    {"name": "disabled_pick", "args": [100, 200, 2, 1, 0],
+      "memory": [{"addr": "0x00850ccc", "u32": 1}], "expect": {"ret": "0x00905d10"}},
+    {"name": "disabled_pick_status_fail", "args": [100, 200, 2, 1, 0],
+      "memory": [{"addr": "0x00850ccc", "u32": 1}],
+      "callees": {"@fn_slot32": {"name": "Service_slot32", "conv": "thiscall",
+        "args": ["u32", "int", "int", "int", "int", "int", "ignore", "int", "int"],
+        "ret": 1, "writes": [{"arg": 6, "offset": 0, "hex": "10 5d 90 00"}]}},
+      "expect": {"ret": 0}},
+    {"name": "no_owner", "args": [100, 200, 2, 1, 0],
+      "memory": [{"addr": "0x00905ce4", "u32": 0}], "expect": {"ret": "0x00905d10"}},
+    {"name": "owner_info_null", "args": [100, 200, 2, 1, 0],
+      "memory": [{"addr": "@pick_owner", "offset": "0x1a8", "u32": 0}], "expect": {"ret": "0x00905d10"}},
+    {"name": "info_id_mismatch", "args": [100, 200, 2, 1, 0],
+      "memory": [{"addr": "@pick_info", "offset": "0", "u32": "0x9999"}], "expect": {"ret": "0x00905d10"}},
+    {"name": "owner_null", "args": [100, 200, 2, 1, 0],
+      "memory": [{"addr": "@pick_info", "offset": "0x15c", "u32": 0}], "expect": {"ret": "0x00905d10"}},
+    {"name": "owner_info2_null", "args": [100, 200, 2, 1, 0],
+      "memory": [{"addr": "@pick_owner2", "offset": "0x1a8", "u32": 0}], "expect": {"ret": "0x00905d10"}},
+    {"name": "owner_info2_id_zero", "args": [100, 200, 2, 1, 0],
+      "memory": [{"addr": "@pick_info2", "offset": "0", "u32": 0}], "expect": {"ret": "0x00905d10"}},
+    {"name": "owner_full", "args": [100, 200, 2, 1, 0], "expect": {"ret": "0x00905d10"}},
+    {"name": "pick_id_zero_chain", "args": [100, 200, 2, 1, 0],
+      "memory": [{"addr": "0x00850cc4", "u32": 0}, {"addr": "@pick_info", "offset": "0", "u32": 0}],
+      "expect": {"ret": "0x00905d10"}},
+    {"name": "actor_null_status_ok", "args": [100, 200, 2, 1, 0],
+      "callees": {"@fn_slot32": {"name": "Service_slot32", "conv": "thiscall",
+        "args": ["u32", "int", "int", "int", "int", "int", "ignore", "int", "int"],
+        "ret": 0, "writes": [{"arg": 6, "offset": 0, "hex": "00 00 00 00"}]}},
+      "expect": {"ret": 0}}
+  ],
+  "fuzz": {
+    "seed": 4429354,
+    "count": 100,
+    "args": [{}, {}, {}, {}, {}],
+    "memory": [
+      {"addr": "0x00850ccc", "type": "int", "choices": [0, 0, 1]},
+      {"addr": "0x00850cc4", "type": "int", "choices": [0, 4660, 39321]},
+      {"addr": "@pick_info", "offset": "0", "type": "int", "choices": [0, 4660, 39321]},
+      {"addr": "@pick_info2", "offset": "0", "type": "int", "choices": [0, 22136]},
+      {"addr": "0x0092377c", "type": "int", "choices": [0, 16]},
+      {"addr": "0x00923778", "type": "int", "choices": [0, 32]}
+    ]
+  }
+}

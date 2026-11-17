@@ -1,0 +1,252 @@
+{
+  "function": "CostOwner_guess::save_magic_guess",
+  "original": "0x004186ae",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@costowner",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "costowner": {
+      "size": "0x288",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@vtbl"
+        },
+        {
+          "offset": "0x4",
+          "u32": "@offset_holder"
+        },
+        {
+          "offset": "0x8",
+          "u32": "@entity"
+        }
+      ]
+    },
+    "offset_holder": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "0x100"
+        }
+      ]
+    },
+    "entity": {
+      "size": "0x288",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x244",
+          "u8": 0
+        }
+      ]
+    },
+    "lookupresult": {
+      "size": "0x128c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "offset": "0x11a4",
+          "u32": 19
+        }
+      ]
+    },
+    "vtbl": {
+      "size": "0x14",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x10",
+          "u32": "@fn_dispatch"
+        }
+      ]
+    },
+    "fn_dispatch": {
+      "size": "0x4"
+    }
+  },
+  "callees": {
+    "0x00418608": {
+      "name": "CostOwner_guess::basesave_magic_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 20
+    },
+    "0x004106a3": {
+      "name": "CostOwner_guess::TotalSpellAffects_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": [
+        5,
+        10
+      ]
+    },
+    "0x005ec220": {
+      "name": "LookupService_guess::Find_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@lookupresult"
+    },
+    "@fn_dispatch": {
+      "name": "CostOwnerDispatch_guess::Dispatch_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 309
+    }
+  },
+  "cases": [
+    {
+      "name": "null_entity",
+      "memory": [
+        {
+          "addr": "@costowner",
+          "offset": "0x8",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 309
+      }
+    },
+    {
+      "name": "entity_state_nonzero",
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x244",
+          "u8": 1
+        }
+      ],
+      "expect": {
+        "ret": 309
+      }
+    },
+    {
+      "name": "lookup_state_one_positive_odd",
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x244",
+          "u8": 0
+        },
+        {
+          "addr": "@lookupresult",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@lookupresult",
+          "offset": "0x11a4",
+          "u32": 19
+        }
+      ],
+      "expect": {
+        "ret": 309
+      }
+    },
+    {
+      "name": "lookup_state_sixteen_negative_odd",
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x244",
+          "u8": 0
+        },
+        {
+          "addr": "@lookupresult",
+          "offset": "0x119c",
+          "u8": 16
+        },
+        {
+          "addr": "@lookupresult",
+          "offset": "0x11a4",
+          "u32": -19
+        }
+      ],
+      "expect": {
+        "ret": 309
+      }
+    },
+    {
+      "name": "lookup_state_rejected",
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x244",
+          "u8": 0
+        },
+        {
+          "addr": "@lookupresult",
+          "offset": "0x119c",
+          "u8": 2
+        }
+      ],
+      "expect": {
+        "ret": 309
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4294318,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@costowner",
+        "offset": "0x8",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@entity"
+        ]
+      },
+      {
+        "addr": "@entity",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@lookupresult",
+        "offset": "0x119c",
+        "type": "u8",
+        "choices": [
+          1,
+          16,
+          2
+        ]
+      },
+      {
+        "addr": "@lookupresult",
+        "offset": "0x11a4",
+        "type": "int",
+        "range": [
+          -101,
+          101
+        ]
+      }
+    ]
+  }
+}

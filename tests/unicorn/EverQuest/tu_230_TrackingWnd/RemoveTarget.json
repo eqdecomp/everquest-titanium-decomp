@@ -1,0 +1,194 @@
+{
+  "function": "CTrackingWnd_guess::RemoveSpawn_guess",
+  "original": "0x005672f6",
+  "sources": [
+    "src/EverQuest/tu_230_TrackingWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@notificationpanel",
+  "args": [
+    {
+      "name": "target_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "notificationpanel": {
+      "size": "0x4100",
+      "fill": "zero"
+    },
+    "target": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0059dd30": {
+      "name": "IsPanelActive",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 1
+    },
+    "0x00566337": {
+      "name": "ClearEntry_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x005671ce": {
+      "name": "RemoveFromListWndByData_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "panel inactive: no scan",
+      "args": [
+        "@target"
+      ],
+      "callees": {
+        "0x0059dd30": {
+          "name": "IsPanelActive",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "no entry matches",
+      "args": [
+        "@target"
+      ]
+    },
+    {
+      "name": "match at index 0",
+      "args": [
+        "@target"
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target"
+        }
+      ]
+    },
+    {
+      "name": "match at index 5, panel off after Initialize",
+      "args": [
+        "@target"
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x210",
+          "u32": "@target"
+        }
+      ],
+      "callees": {
+        "0x0059dd30": {
+          "name": "IsPanelActive",
+          "conv": "cdecl",
+          "args": [],
+          "ret": [1, 0]
+        }
+      }
+    },
+    {
+      "name": "scratch slot 1000 holds target: not scanned",
+      "args": [
+        "@target"
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x3fe0",
+          "u32": "@target"
+        }
+      ]
+    },
+    {
+      "name": "match at last index 999",
+      "args": [
+        "@target"
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x3fd0",
+          "u32": "@target"
+        }
+      ]
+    },
+    {
+      "name": "duplicate entries: first wins",
+      "args": [
+        "@target"
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x1a0",
+          "u32": "@target"
+        },
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x230",
+          "u32": "@target"
+        }
+      ]
+    },
+    {
+      "name": "null target matches empty slot 0",
+      "args": [
+        0
+      ]
+    },
+    {
+      "name": "null target skips used slot 0",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target"
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5665526,
+    "count": 150,
+    "args": [
+      {
+        "choices": [
+          "@target",
+          0
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@notificationpanel",
+        "offset": "0x160",
+        "type": "ptr",
+        "choices": [
+          "@target",
+          0
+        ],
+        "count": 1000,
+        "stride": 16,
+        "p": 0.5
+      }
+    ]
+  }
+}

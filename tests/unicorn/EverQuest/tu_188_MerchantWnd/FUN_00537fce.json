@@ -1,0 +1,242 @@
+{
+  "function": "CMerchantWndView_guess::SelectBuySellSlot",
+  "original": "0x00537fce",
+  "sources": ["src/EverQuest/tu_188_MerchantWnd.cpp"],
+  "size": "0x29c",
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {"name": "state_id_guess", "type": "int"},
+    {"name": "context_guess", "type": "ptr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "owner": {"size": "0x2d4", "fill": "random"},
+    "context": {"size": "0x80", "fill": "random"},
+    "mapper": {"size": "0x4", "fill": "zero"},
+    "initializer": {"size": "0x4", "fill": "zero"},
+    "spawn": {"size": "0x25c", "fill": "random"},
+    "pc": {"size": "0xc388", "fill": "zero", "init": [{"offset": "0x8", "u32": "@vbtable"}]},
+    "vbtable": {"size": "0x8", "fill": "zero", "init": [{"offset": "0x4", "u32": "0xc37c"}]},
+    "active": {"size": "0x170", "fill": "zero"},
+    "controller": {"size": "0x4", "fill": "zero"},
+    "base_spell": {"size": "0x4", "fill": "zero"},
+    "item": {"size": "0x4", "fill": "zero"},
+    "slot_ref": {"size": "0x4", "fill": "zero"},
+    "item_text": {"size": "0x20", "fill": "zero"},
+    "converted": {"size": "0x4", "fill": "zero"},
+    "alloc": {"size": "0x100", "fill": "zero"},
+    "label1": {"size": "0x4", "fill": "zero", "init": [{"offset": "0", "u32": "@label_vtable"}]},
+    "label2": {"size": "0x4", "fill": "zero", "init": [{"offset": "0", "u32": "@label_vtable"}]},
+    "label_vtable": {"size": "0x100", "fill": "zero", "init": [{"offset": "0xfc", "u32": "@fn_text"}]},
+    "fn_text": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00991910", "u32": "@mapper"},
+    {"addr": "0x00850cb8", "u32": "@initializer"},
+    {"addr": "0x00905d10", "u32": "@spawn"},
+    {"addr": "0x00905d00", "u32": "@pc"},
+    {"addr": "@spawn", "offset": "0x120", "cstr": "caster"},
+    {"addr": "@spawn", "offset": "0x244", "u8": 1},
+    {"addr": "@converted", "u32": "@alloc"},
+    {"addr": "@owner", "offset": "0x2b8", "u32": 0},
+    {"addr": "@owner", "offset": "0x2bc", "u32": 0},
+    {"addr": "@owner", "offset": "0x2c0", "u32": 0},
+    {"addr": "@owner", "offset": "0x2cc", "u32": 0},
+    {"addr": "@item_text", "cstr": "item text"}
+  ],
+  "callees": {
+    "0x0053724e": {"name": "UpdateBuySellButtons_guess", "conv": "thiscall", "args": []},
+    "0x005e0f60": {"name": "FUN_005e0f60", "conv": "thiscall", "args": [], "ret": 100},
+    "0x004ffbe9": {"name": "FUN_004ffbe9", "conv": "thiscall", "args": ["int"], "ret": 200},
+    "0x0051a891": {"name": "FUN_0051a891", "conv": "thiscall", "args": ["int"]},
+    "0x0040cc50": {"name": "GetInventorySlot_guess", "conv": "thiscall", "args": ["int"], "ret": "@item"},
+    "0x00434777": {"name": "FUN_00434777", "conv": "thiscall", "args": ["int"], "ret": "@slot_ref"},
+    "0x005eccc0": {"name": "FUN_005eccc0", "conv": "thiscall", "args": [], "ret": [1, 1]},
+    "0x005ec630": {"name": "FUN_005ec630", "conv": "thiscall", "args": ["int"], "ret": ["@item", 0]},
+    "0x005ec650": {"name": "FUN_005ec650", "conv": "thiscall", "args": ["int"], "ret": "@slot_ref"},
+    "0x005ecc30": {"name": "FUN_005ecc30", "conv": "thiscall", "args": [], "ret": [1, 1]},
+    "0x005372d8": {"name": "DisplayBuyOrSellPrice", "conv": "thiscall", "args": ["char", "ptr"], "ret": 0},
+    "0x00597c20": {"name": "FUN_00597c20", "conv": "thiscall", "args": ["int"]},
+    "0x005e0ec0": {"name": "FUN_005e0ec0", "conv": "thiscall", "args": [], "ret": "@item_text"},
+    "0x00571e00": {"name": "CXStr_ctor", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "0x00571d00": {"name": "CXStr_FreeRep", "conv": "thiscall", "args": ["ptr"]},
+    "0x004090fd": {"name": "FormatCoins_guess", "conv": "cdecl", "args": ["ignore", "int"], "ret": "@converted"},
+    "0x00571f70": {"name": "CXStr_assign", "conv": "thiscall", "args": ["ignore"], "passthrough": true},
+    "@fn_text": {"name": "SetWindowText", "conv": "thiscall", "args": ["ignore"]},
+    "kernel32.dll!GetProcessHeap": {"conv": "stdcall", "args": [], "ret": 4096},
+    "kernel32.dll!HeapAlloc": {"conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@alloc"}
+  },
+  "cases": [
+    {
+      "name": "slot-null-at-first",
+      "args": [6000, "@context"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x164", "u32": 0}
+      ]
+    },
+    {
+      "name": "slot-live-at-last-with-active-and-labels",
+      "args": [6079, "@context"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x2a0", "u32": "@item"},
+        {"addr": "@owner", "offset": "0x2b8", "u32": "@label1"},
+        {"addr": "@owner", "offset": "0x2bc", "u32": "@label2"},
+        {"addr": "@owner", "offset": "0x2c0", "u32": "@active"},
+        {"addr": "@owner", "offset": "0x2cc", "u32": 0},
+        {"addr": "@owner", "offset": "0x2a4", "u32": 0}
+      ],
+      "callees": {
+        "0x005eccc0": {"name": "FUN_005eccc0", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "slot-live-with-nonzero-result",
+      "args": [6000, "@context"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x164", "u32": "@item"},
+        {"addr": "@owner", "offset": "0x2b8", "u32": 0},
+        {"addr": "@owner", "offset": "0x2bc", "u32": "@label2"},
+        {"addr": "@owner", "offset": "0x2c0", "u32": 0}
+      ],
+      "callees": {
+        "0x005eccc0": {"name": "FUN_005eccc0", "conv": "thiscall", "args": [], "ret": 0},
+        "0x005372d8": {"name": "FUN_005372d8", "conv": "thiscall", "args": ["char", "ptr"], "ret": 123}
+      }
+    },
+    {
+      "name": "direct-profile-slot",
+      "args": [30, "@context"],
+      "memory": [
+        {"addr": "0x00905d10", "u32": 0},
+        {"addr": "@owner", "offset": "0x2b8", "u32": 0},
+        {"addr": "@owner", "offset": "0x2bc", "u32": 0},
+        {"addr": "@owner", "offset": "0x2c0", "u32": 0},
+        {"addr": "@owner", "offset": "0x2cc", "u32": "@controller"}
+      ],
+      "callees": {
+        "0x005eccc0": {"name": "FUN_005eccc0", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "composite-slot-empty-list",
+      "args": [31, "@context"],
+      "memory": [
+        {"addr": "0x00905d10", "u32": 0},
+        {"addr": "@owner", "offset": "0x2b8", "u32": 0},
+        {"addr": "@owner", "offset": "0x2bc", "u32": 0},
+        {"addr": "@owner", "offset": "0x2c0", "u32": 0},
+        {"addr": "@owner", "offset": "0x2cc", "u32": 0}
+      ],
+      "callees": {
+        "0x0040cc50": {"name": "FUN_0040cc50", "conv": "thiscall", "args": ["int"], "ret": ["@base_spell", "@base_spell", "@base_spell"]},
+        "0x005eccc0": {"name": "FUN_005eccc0", "conv": "thiscall", "args": [], "ret": [1, 0]},
+        "0x005ec630": {"name": "FUN_005ec630", "conv": "thiscall", "args": ["int"], "ret": "@item"},
+        "0x005ec650": {"name": "FUN_005ec650", "conv": "thiscall", "args": ["int"], "ret": "@slot_ref"}
+      }
+    },
+    {
+      "name": "composite-slot-with-list-and-controller",
+      "args": [331, "@context"],
+      "memory": [
+        {"addr": "0x00905d10", "u32": 0},
+        {"addr": "@owner", "offset": "0x2b8", "u32": "@label1"},
+        {"addr": "@owner", "offset": "0x2bc", "u32": "@label2"},
+        {"addr": "@owner", "offset": "0x2c0", "u32": 0},
+        {"addr": "@owner", "offset": "0x2cc", "u32": "@controller"}
+      ],
+      "callees": {
+        "0x0040cc50": {"name": "FUN_0040cc50", "conv": "thiscall", "args": ["int"], "ret": ["@base_spell", "@base_spell", "@base_spell"]},
+        "0x005eccc0": {"name": "FUN_005eccc0", "conv": "thiscall", "args": [], "ret": [1, 1]},
+        "0x005ec630": {"name": "FUN_005ec630", "conv": "thiscall", "args": ["int"], "ret": ["@item", 0]},
+        "0x005ec650": {"name": "FUN_005ec650", "conv": "thiscall", "args": ["int"], "ret": "@slot_ref"},
+        "0x005ecc30": {"name": "FUN_005ecc30", "conv": "thiscall", "args": [], "ret": [1, 1]}
+      }
+    },
+    {
+      "name": "composite-slot-index-boundary",
+      "args": [40, "@context"],
+      "memory": [
+        {"addr": "0x00905d10", "u32": 0},
+        {"addr": "@owner", "offset": "0x2b8", "u32": 0},
+        {"addr": "@owner", "offset": "0x2bc", "u32": 0},
+        {"addr": "@owner", "offset": "0x2c0", "u32": 0},
+        {"addr": "@owner", "offset": "0x2cc", "u32": 0}
+      ],
+      "callees": {
+        "0x0040cc50": {"name": "FUN_0040cc50", "conv": "thiscall", "args": ["int"], "ret": ["@base_spell", "@base_spell", "@base_spell"]},
+        "0x005eccc0": {"name": "FUN_005eccc0", "conv": "thiscall", "args": [], "ret": [1, 0]},
+        "0x005ec630": {"name": "FUN_005ec630", "conv": "thiscall", "args": ["int"], "ret": "@item"},
+        "0x005ec650": {"name": "FUN_005ec650", "conv": "thiscall", "args": ["int"], "ret": "@slot_ref"}
+      }
+    },
+    {
+      "name": "composite-base-missing",
+      "args": [31, "@context"],
+      "memory": [{"addr": "0x00905d10", "u32": 0}],
+      "callees": {
+        "0x0040cc50": {"name": "FUN_0040cc50", "conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    },
+    {
+      "name": "composite-base-not-ready",
+      "args": [32, "@context"],
+      "memory": [{"addr": "0x00905d10", "u32": 0}],
+      "callees": {
+        "0x0040cc50": {"name": "FUN_0040cc50", "conv": "thiscall", "args": ["int"], "ret": "@base_spell"},
+        "0x005eccc0": {"name": "FUN_005eccc0", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "composite-item-missing",
+      "args": [33, "@context"],
+      "memory": [{"addr": "0x00905d10", "u32": 0}],
+      "callees": {
+        "0x0040cc50": {"name": "FUN_0040cc50", "conv": "thiscall", "args": ["int"], "ret": ["@base_spell", "@base_spell"]},
+        "0x005eccc0": {"name": "FUN_005eccc0", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ec630": {"name": "FUN_005ec630", "conv": "thiscall", "args": ["int"], "ret": 0},
+        "0x005ec650": {"name": "FUN_005ec650", "conv": "thiscall", "args": ["int"], "ret": "@slot_ref"}
+      }
+    },
+    {
+      "name": "spawn-flag-guard",
+      "args": [5999, "@context"],
+      "memory": [{"addr": "@spawn", "offset": "0x244", "u8": 0}]
+    },
+    {
+      "name": "above-profile-range",
+      "args": [332, "@context"],
+      "memory": [{"addr": "0x00905d10", "u32": 0}]
+    },
+    {
+      "name": "negative-profile-index",
+      "args": [-1, "@context"],
+      "memory": [{"addr": "0x00905d10", "u32": 0}],
+      "callees": {
+        "0x0040cc50": {"name": "FUN_0040cc50", "conv": "thiscall", "args": ["int"], "ret": 0},
+        "0x00434777": {"name": "FUN_00434777", "conv": "thiscall", "args": ["int"], "ret": "@slot_ref"}
+      }
+    },
+    {
+      "name": "past-buff-range",
+      "args": [6080, "@context"],
+      "memory": [{"addr": "0x00905d10", "u32": 0}]
+    }
+  ],
+  "fuzz": {
+    "seed": 5472206,
+    "count": 100,
+    "args": [
+      {"choices": [-1, 0, 30, 31, 32, 331, 332, 5999, 6000, 6079, 6080]},
+      {"choices": ["@context"]}
+    ],
+    "memory": [
+      {"addr": "@spawn", "offset": "0x244", "type": "u8", "choices": [0, 1]},
+      {"addr": "@owner", "offset": "0x2b8", "type": "ptr", "choices": [0, "@label1"]},
+      {"addr": "@owner", "offset": "0x2bc", "type": "ptr", "choices": [0, "@label2"]},
+      {"addr": "@owner", "offset": "0x2c0", "type": "ptr", "choices": [0, "@active"]},
+      {"addr": "@owner", "offset": "0x2cc", "type": "ptr", "choices": [0, "@controller"]}
+    ]
+  },
+  "_survivors": "L1448: result_guess is not read after reset; this function returns void."
+}

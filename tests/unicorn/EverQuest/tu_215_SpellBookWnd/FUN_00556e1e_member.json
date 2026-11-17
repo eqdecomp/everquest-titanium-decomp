@@ -1,0 +1,210 @@
+{
+  "function": "SpellBookWndView_guess::CanStartMemorize_guess",
+  "original": "0x00556e1e",
+  "sources": [
+    "src/EverQuest/tu_215_SpellBookWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@obj",
+  "args": [
+    {
+      "name": "value",
+      "type": "int"
+    }
+  ],
+  "ret": "char",
+  "_survivors": "L596: result = 0 is redundant; L598 sets result = 0 on the same path before the return",
+  "objects": {
+    "obj": {
+      "size": "0x300",
+      "fill": "zero"
+    },
+    "root": {
+      "size": "0xC280",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x8", "u32": "@indexer"}
+      ]
+    },
+    "indexer": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "client": {
+      "size": "0x300",
+      "fill": "zero"
+    },
+    "strtab": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "dialog": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "recsrc": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "record": {
+      "size": "0x300",
+      "fill": "zero"
+    },
+    "node": {
+      "size": "0x11A8",
+      "fill": "zero"
+    },
+    "msg": {
+      "size": "0x40",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "0x009248D0", "u32": 0},
+    {"addr": "0x00850C24", "u32": "@client"},
+    {"addr": "0x00905D00", "u32": "@root"},
+    {"addr": "0x00905CB0", "u32": "@strtab"},
+    {"addr": "0x00988DF0", "u32": "@dialog"},
+    {"addr": "0x00985CC8", "u32": "@recsrc"},
+    {"addr": "@indexer", "offset": "0x4", "hex": "20000000"},
+    {"addr": "@obj", "offset": "0x168", "hex": "ffffffff"},
+    {"addr": "@obj", "offset": "0x174", "hex": "ffffffff"},
+    {"addr": "@node", "offset": "0x11A4", "hex": "03000000"},
+    {"addr": "@node", "offset": "0x119C", "u8": 5},
+    {"addr": "@msg", "cstr": "error text"}
+  ],
+  "callees": {
+    "0x004fd36c": {
+      "name": "IsOkToActivate_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 1
+    },
+    "0x0041aa54": {
+      "name": "FUN_0041aa54",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 7
+    },
+    "0x0044d0d0": {
+      "name": "FUN_0044d0d0",
+      "conv": "cdecl",
+      "args": ["int"],
+      "ret": 1
+    },
+    "0x0040e705": {
+      "name": "FUN_0040e705",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": [0, 0, 0, 0, 0, 0, 7, 0, 0]
+    },
+    "0x005dfa00": {
+      "name": "FUN_005dfa00",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": "@msg"
+    },
+    "0x00498436": {
+      "name": "FUN_00498436",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": 0
+    },
+    "0x0040cbd6": {
+      "name": "GetSpell_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@record"
+    },
+    "0x005ec220": {
+      "name": "FUN_005ec220",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@node"
+    },
+    "0x0044e755": {
+      "name": "FUN_0044e755",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 5
+    }
+  },
+  "cases": [
+    {
+      "name": "timeout busy",
+      "args": [1],
+      "memory": [{"addr": "0x009248D0", "u32": 1}]
+    },
+    {
+      "name": "client refuses",
+      "args": [1],
+      "callees": {"0x004fd36c": {"name": "FUN_004fd36c", "conv": "thiscall", "args": ["int"], "ret": 0}}
+    },
+    {
+      "name": "168 set",
+      "args": [1],
+      "memory": [{"addr": "@obj", "offset": "0x168", "hex": "00000000"}]
+    },
+    {
+      "name": "174 set",
+      "args": [1],
+      "memory": [{"addr": "@obj", "offset": "0x174", "hex": "00000000"}]
+    },
+    {
+      "name": "not on bar",
+      "args": [1],
+      "callees": {"0x0044d0d0": {"name": "FUN_0044d0d0", "conv": "cdecl", "args": ["int"], "ret": 0}}
+    },
+    {
+      "name": "table hit, short charges",
+      "args": [1]
+    },
+    {
+      "name": "table hit, enough charges",
+      "args": [1],
+      "memory": [{"addr": "@node", "offset": "0x11A4", "hex": "06000000"}]
+    },
+    {
+      "name": "table miss, enough charges",
+      "args": [1],
+      "memory": [{"addr": "@node", "offset": "0x11A4", "hex": "06000000"}],
+      "callees": {"0x0040e705": {"name": "FUN_0040e705", "conv": "thiscall", "args": ["int"], "ret": 0}}
+    },
+    {
+      "name": "table miss, equal charges",
+      "args": [1],
+      "memory": [{"addr": "@node", "offset": "0x11A4", "hex": "05000000"}],
+      "callees": {"0x0040e705": {"name": "FUN_0040e705", "conv": "thiscall", "args": ["int"], "ret": 0}}
+    },
+    {
+      "name": "table miss, short charges",
+      "args": [1],
+      "callees": {"0x0040e705": {"name": "FUN_0040e705", "conv": "thiscall", "args": ["int"], "ret": 0}}
+    },
+    {
+      "name": "table miss, no record",
+      "args": [1],
+      "callees": {
+        "0x0040e705": {"name": "FUN_0040e705", "conv": "thiscall", "args": ["int"], "ret": 0},
+        "0x0040cbd6": {"name": "FUN_0040cbd6", "conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    },
+    {
+      "name": "table hit, no record",
+      "args": [1],
+      "callees": {"0x0040cbd6": {"name": "FUN_0040cbd6", "conv": "thiscall", "args": ["int"], "ret": 0}}
+    }
+  ],
+  "fuzz": {
+    "seed": 5598750,
+    "count": 120,
+    "args": [{"range": [-4, 30]}],
+    "memory": [
+      {"addr": "0x009248D0", "type": "int", "choices": [0, 0, 0, 1]},
+      {"addr": "@obj", "offset": "0x168", "type": "int", "choices": [-1, -1, -1, 0]},
+      {"addr": "@obj", "offset": "0x174", "type": "int", "choices": [-1, -1, -1, 0]},
+      {"addr": "@node", "offset": "0x11A4", "type": "int", "range": [0, 10]},
+      {"addr": "@node", "offset": "0x119C", "type": "u8", "range": [0, 10]}
+    ]
+  }
+}

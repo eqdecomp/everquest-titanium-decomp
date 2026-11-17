@@ -1,0 +1,1248 @@
+{
+  "function": "CTradeskillWndView_guess::SendAutoCombine_guess",
+  "original": "0x005680cc",
+  "sources": [
+    "src/EverQuest/tu_231_TradeskillWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0xb5c",
+      "fill": "random",
+      "init": [
+        {
+        "offset": "0x15c",
+          "u32": "@child"
+        },
+        {
+          "offset": "0x364",
+          "u32": "@client"
+        }
+      ]
+    },
+    "client": {
+      "size": "0x300",
+      "fill": "random"
+    },
+    "child": {
+      "size": "0x120",
+      "fill": "random"
+    },
+    "root": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@holder"
+        }
+      ]
+    },
+    "holder": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 0
+        }
+      ]
+    },
+    "record": {
+      "size": "0x11a0",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 4660
+        }
+      ]
+    },
+    "callbackService": {
+      "size": "0x70",
+      "fill": "zero"
+    },
+    "gate": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "stringtable": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "everquest": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "message": {
+      "size": "0x40",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d00",
+      "u32": "@root"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@stringtable"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@everquest"
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@gate"
+    },
+    {
+      "addr": "0x00850cbc",
+      "u32": "@callbackService"
+    },
+    {
+      "addr": "0x009248d0",
+      "u32": 0
+    },
+    {
+      "addr": "@message",
+      "cstr": "validation error"
+    }
+  ],
+  "callees": {
+    "0x005eccf0": {
+      "name": "Client_guess::GetByte_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 48
+    },
+    "0x005ec220": {
+      "name": "LookupService_guess::Find_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@record"
+    },
+    "0x005dfa00": {
+      "name": "StringTable_guess::getString_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "@message"
+    },
+    "0x004982c6": {
+      "name": "CEverQuest::dsp_chat",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ]
+    },
+    "0x0040cc50": {
+      "name": "LookupStatus_guess::Get_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0056768b": {
+      "name": "CTradeskillWndView_guess::GetValue_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@record"
+    },
+    "0x00597be0": {
+      "name": "Interface_guess::FindIndex_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00597ed0": {
+      "name": "Interface_guess::GetValue_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@record"
+    },
+    "0x005e0f30": {
+      "name": "Client_guess::GetItemId_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1110
+    },
+    "0x004912b1": {
+      "name": "SendMessage_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "mem:20",
+        "int",
+        "int"
+      ]
+    },
+    "0x0046d655": {
+      "name": "GetTime_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 1000
+    }
+  },
+  "cases": [
+    {
+      "name": "type_18_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x119c",
+          "u8": 12
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 24
+        }
+      }
+    },
+    {
+      "name": "type_18_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x119c",
+          "u8": 13
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 24
+        }
+      }
+    },
+    {
+      "name": "type_19_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x119c",
+          "u8": 13
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 25
+        }
+      }
+    },
+    {
+      "name": "type_19_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x119c",
+          "u8": 12
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 25
+        }
+      }
+    },
+    {
+      "name": "type_1a_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x119c",
+          "u8": 11
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 26
+        }
+      }
+    },
+    {
+      "name": "type_1a_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x119c",
+          "u8": 10
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 26
+        }
+      }
+    },
+    {
+      "name": "type_1b_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x119c",
+          "u8": 14
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 27
+        }
+      }
+    },
+    {
+      "name": "type_1b_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x119c",
+          "u8": 15
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 27
+        }
+      }
+    },
+    {
+      "name": "type_1f_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 5
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 31
+        }
+      }
+    },
+    {
+      "name": "type_1f_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 6
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 31
+        }
+      }
+    },
+    {
+      "name": "type_20_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 6
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 32
+        }
+      }
+    },
+    {
+      "name": "type_20_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 7
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 32
+        }
+      }
+    },
+    {
+      "name": "type_21_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 10
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 33
+        }
+      }
+    },
+    {
+      "name": "type_21_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 11
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 33
+        }
+      }
+    },
+    {
+      "name": "type_22_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 8
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 34
+        }
+      }
+    },
+    {
+      "name": "type_22_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 9
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 34
+        }
+      }
+    },
+    {
+      "name": "type_23_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 12
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 35
+        }
+      }
+    },
+    {
+      "name": "type_23_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 13
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 35
+        }
+      }
+    },
+    {
+      "name": "type_24_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 2
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 36
+        }
+      }
+    },
+    {
+      "name": "type_24_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 3
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 36
+        }
+      }
+    },
+    {
+      "name": "type_26_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 128
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 38
+        }
+      }
+    },
+    {
+      "name": "type_26_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 129
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 38
+        }
+      }
+    },
+    {
+      "name": "type_27_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 39
+        }
+      }
+    },
+    {
+      "name": "type_27_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 2
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 39
+        }
+      }
+    },
+    {
+      "name": "type_28_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 40
+        }
+      }
+    },
+    {
+      "name": "type_28_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 2
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 40
+        }
+      }
+    },
+    {
+      "name": "type_2d_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 128
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 45
+        }
+      }
+    },
+    {
+      "name": "type_2d_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 129
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 45
+        }
+      }
+    },
+    {
+      "name": "type_2a_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 3
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 42
+        }
+      }
+    },
+    {
+      "name": "type_2a_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 4
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 42
+        }
+      }
+    },
+    {
+      "name": "type_29_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 11
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 41
+        }
+      }
+    },
+    {
+      "name": "type_29_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 12
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 41
+        }
+      }
+    },
+    {
+      "name": "type_2b_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 4
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 43
+        }
+      }
+    },
+    {
+      "name": "type_2b_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 5
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 43
+        }
+      }
+    },
+    {
+      "name": "type_2c_valid",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 4
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 44
+        }
+      }
+    },
+    {
+      "name": "type_2c_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x1198",
+          "u32": 5
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 44
+        }
+      }
+    },
+    {
+      "name": "root_null",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00905d00",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "callback_null",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x364",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "record_flag_blocks",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@record",
+          "offset": "0x88",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "gate_flag_blocks",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@gate",
+          "offset": "0x11",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "no_callback_slot",
+      "args": []
+    },
+    {
+      "name": "slot_zero_stays_sentinel",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@callbackService",
+          "offset": "0x6c",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0056768b": {
+          "name": "CTradeskillWndView_guess::GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": "@record"
+        },
+        "0x0040cc50": {
+          "name": "LookupStatus_guess::Get_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@client",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "slot_one_sends",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@callbackService",
+          "offset": "0x6c",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0056768b": {
+          "name": "CTradeskillWndView_guess::GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": "@record"
+        },
+        "0x0040cc50": {
+          "name": "LookupStatus_guess::Get_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            0,
+            "@client",
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "slot_thirty_sends",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@callbackService",
+          "offset": "0x6c",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cc50": {
+          "name": "LookupStatus_guess::Get_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            "@client"
+          ]
+        }
+      }
+    },
+    {
+      "name": "callback_service_full_request",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@callbackService",
+          "offset": "0x6c",
+          "u32": "@client"
+        },
+        {
+          "addr": "@record",
+          "offset": "0x0",
+          "u32": 4660
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 48
+        },
+        "0x0056768b": {
+          "name": "CTradeskillWndView_guess::GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": "@record"
+        }
+      }
+    },
+    {
+      "name": "lookup_slot_full_request",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@callbackService",
+          "offset": "0x6c",
+          "u32": 0
+        },
+        {
+          "addr": "@record",
+          "offset": "0x0",
+          "u32": 4660
+        }
+      ],
+      "callees": {
+        "0x005eccf0": {
+          "name": "Client_guess::GetByte_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 48
+        },
+        "0x0056768b": {
+          "name": "CTradeskillWndView_guess::GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": "@record"
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5669068,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@owner",
+        "offset": "0x364",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@client"
+        ]
+      },
+      {
+        "addr": "@callbackService",
+        "offset": "0x6c",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@client"
+        ]
+      },
+      {
+        "addr": "@record",
+        "offset": "0x1198",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          8,
+          10,
+          11,
+          12,
+          128
+        ]
+      },
+      {
+        "addr": "@record",
+        "offset": "0x119c",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "addr": "@record",
+        "offset": "0x88",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@gate",
+        "offset": "0x11",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}
+

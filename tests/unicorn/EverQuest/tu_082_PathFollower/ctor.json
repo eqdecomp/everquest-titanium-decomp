@@ -1,0 +1,54 @@
+{
+  "function": "CallbackBatch_guess::CallbackBatch_guess",
+  "original": "0x004c1733",
+  "sources": [
+    "src/EverQuest/tu_082_PathFollower.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@callbackbatch",
+  "args": [],
+  "ret": "ptr",
+  "objects": {
+    "callbackbatch": {
+      "size": "0x3f0",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0047c3af": {
+      "name": "InlineArray_guess::Initialize_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x004c0af7": {
+      "name": "FloatRange_guess::Set_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "float"
+      ],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": []
+    },
+    {
+      "name": "zeroed_object",
+      "args": [],
+      "memory": [{"addr": "@callbackbatch", "size": 1008, "fill": "zero"}]
+    }
+  ],
+  "fuzz": {
+    "seed": 4986675,
+    "count": 100,
+    "args": [],
+    "memory": []
+  }
+}

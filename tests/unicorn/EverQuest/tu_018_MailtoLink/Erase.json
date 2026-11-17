@@ -1,0 +1,164 @@
+{
+  "function": "StrMap_guess::Erase_guess",
+  "original": "0x004280bf",
+  "sources": [
+    "src/EverQuest/tu_018_MailtoLink.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@tree",
+  "args": [
+    {"name": "result_guess", "type": "ptr"},
+    {"name": "where_guess", "type": "ptr"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "tree": {"size": "0xc", "fill": "zero", "init": [
+      {"offset": "0x4", "u32": "@head"},
+      {"offset": "0x8", "u32": 11}
+    ]},
+    "head": {"size": "0x30", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@n1"},
+      {"offset": "0x4", "u32": "@n4"},
+      {"offset": "0x8", "u32": "@n7"},
+      {"offset": "0x2c", "u8": 1},
+      {"offset": "0x2d", "u8": 1}
+    ]},
+    "n4": {"size": "0x30", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@n2"},
+      {"offset": "0x4", "u32": "@head"},
+      {"offset": "0x8", "u32": "@n6"},
+      {"offset": "0x2c", "u8": 1}
+    ]},
+    "n2": {"size": "0x30", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@n1"},
+      {"offset": "0x4", "u32": "@n4"},
+      {"offset": "0x8", "u32": "@n3"},
+      {"offset": "0x2c", "u8": 0}
+    ]},
+    "n6": {"size": "0x30", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@n5"},
+      {"offset": "0x4", "u32": "@n4"},
+      {"offset": "0x8", "u32": "@n7"},
+      {"offset": "0x2c", "u8": 0}
+    ]},
+    "n1": {"size": "0x30", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@head"},
+      {"offset": "0x4", "u32": "@n2"},
+      {"offset": "0x8", "u32": "@n9"},
+      {"offset": "0x2c", "u8": 1}
+    ]},
+    "n9": {"size": "0x30", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@n10"},
+      {"offset": "0x4", "u32": "@n1"},
+      {"offset": "0x8", "u32": "@head"},
+      {"offset": "0x2c", "u8": 1}
+    ]},
+    "n10": {"size": "0x30", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@head"},
+      {"offset": "0x4", "u32": "@n9"},
+      {"offset": "0x8", "u32": "@head"},
+      {"offset": "0x2c", "u8": 0}
+    ]},
+    "n3": {"size": "0x30", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@head"},
+      {"offset": "0x4", "u32": "@n2"},
+      {"offset": "0x8", "u32": "@head"},
+      {"offset": "0x2c", "u8": 1}
+    ]},
+    "n5": {"size": "0x30", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@head"},
+      {"offset": "0x4", "u32": "@n6"},
+      {"offset": "0x8", "u32": "@head"},
+      {"offset": "0x2c", "u8": 1}
+    ]},
+    "n7": {"size": "0x30", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@n11"},
+      {"offset": "0x4", "u32": "@n6"},
+      {"offset": "0x8", "u32": "@head"},
+      {"offset": "0x2c", "u8": 1}
+    ]},
+    "n11": {"size": "0x30", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@head"},
+      {"offset": "0x4", "u32": "@n7"},
+      {"offset": "0x8", "u32": "@n12"},
+      {"offset": "0x2c", "u8": 1}
+    ]},
+    "n12": {"size": "0x30", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@head"},
+      {"offset": "0x4", "u32": "@n11"},
+      {"offset": "0x8", "u32": "@head"},
+      {"offset": "0x2c", "u8": 0}
+    ]},
+    "result": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [],
+  "callees": {
+    "0x00403631": {"name": "basic_string ctor", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x0040354c": {"name": "logic_error ctor", "conv": "thiscall", "args": ["ignore"], "ret": "this"},
+    "0x0060e27f": {"name": "__CxxThrowException@8", "conv": "stdcall", "args": ["ignore", "u32"], "noreturn": true},
+    "0x0042533a": {"name": "iterator operator++", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x00425275": {"name": "Lrotate", "conv": "thiscall", "args": ["ptr"], "passthrough": true},
+    "0x004252b7": {"name": "Rrotate", "conv": "thiscall", "args": ["ptr"], "passthrough": true},
+    "0x0040291e": {"name": "string _Tidy", "conv": "thiscall", "args": ["bool", "u32"], "ret": 0},
+    "0x0060d0d5": {"name": "operator delete", "conv": "cdecl", "args": ["ptr"], "ret": 0}
+  },
+  "_survivors": "L2980: fixParent_guess and node_guess share one register, so without the copy the uninitialised fixParent still holds the successor (the 'erase n2 black' case runs the fixup from it and passes); L3013: redundant, the for-increment sets fix_guess = fixParent_guess right after",
+  "_note":"the rewrite calls the derived exception ctor out of line; the original inlines it (logic_error ctor 0x40354C + vtable store into its own frame), so that ctor is aliased to 0x40354C",
+  "rewrite_aliases": {
+    "??0ExceptionDerived_guess@@QAE@ABUBasicStringCopy_guess@@@Z": "0x0040354c",
+    "__CxxThrowException@8": "0x0060e27f",
+    "_Tidy": "0x0040291e"
+  },
+  "rewrite_data_aliases": {"__TI2?AUExceptionDerived_guess@@": "0x006754e4"},
+  "cases": [
+    {"name": "erase head throws", "args": ["@result", "@head"]},
+    {"name": "erase root, successor deep", "args": ["@result", "@n4"]},
+    {"name": "erase n2, successor is right child", "args": ["@result", "@n2"]},
+    {"name": "erase leftmost with right subtree", "args": ["@result", "@n1"]},
+    {"name": "erase rightmost with left subtree", "args": ["@result", "@n7"]},
+    {"name": "erase red leaf", "args": ["@result", "@n10"]},
+    {"name": "erase black leaf left child", "args": ["@result", "@n5"]},
+    {"name": "erase black leaf right child", "args": ["@result", "@n3"]},
+    {"name": "erase n12 red", "args": ["@result", "@n12"]},
+    {"name": "erase n6 red two children", "args": ["@result", "@n6"]},
+    {"name": "erase n9", "args": ["@result", "@n9"]},
+    {"name": "erase n11", "args": ["@result", "@n11"]},
+    {"name": "erase n2 black, successor is right child, fixup from successor", "args": ["@result", "@n2"],
+     "memory": [{"addr": "@n2", "offset": "0x2c", "u8": 1}, {"addr": "@n3", "offset": "0x2c", "u8": 1},
+                {"addr": "@n1", "offset": "0x2c", "u8": 1}, {"addr": "@n9", "offset": "0x2c", "u8": 0}]},
+    {"name": "size zero", "args": ["@result", "@n5"],
+     "memory": [{"addr": "@tree", "offset": "0x8", "u32": 0}]},
+    {"name": "red sibling left side", "args": ["@result", "@n5"],
+     "memory": [{"addr": "@n7", "offset": "0x2c", "u8": 0}, {"addr": "@n6", "offset": "0x2c", "u8": 1}]},
+    {"name": "red sibling right side", "args": ["@result", "@n3"],
+     "memory": [{"addr": "@n1", "offset": "0x2c", "u8": 0}, {"addr": "@n2", "offset": "0x2c", "u8": 1}]},
+    {"name": "only root", "args": ["@result", "@n4"],
+     "memory": [
+       {"addr": "@n4", "offset": "0x0", "u32": "@head"},
+       {"addr": "@n4", "offset": "0x8", "u32": "@head"},
+       {"addr": "@head", "offset": "0x0", "u32": "@n4"},
+       {"addr": "@head", "offset": "0x8", "u32": "@n4"}]}
+  ],
+  "fuzz": {
+    "seed": 4358335,
+    "count": 200,
+    "args": [
+      {"choices": ["@result"]},
+      {"choices": ["@head", "@n1", "@n2", "@n3", "@n4", "@n5", "@n6", "@n7", "@n9", "@n10", "@n11", "@n12"]}
+    ],
+    "memory": [
+      {"addr": "@tree", "offset": "0x8", "type": "u32", "choices": [0, 1, 11]},
+      {"addr": "@n1", "offset": "0x2c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@n2", "offset": "0x2c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@n3", "offset": "0x2c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@n4", "offset": "0x2c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@n5", "offset": "0x2c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@n6", "offset": "0x2c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@n7", "offset": "0x2c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@n9", "offset": "0x2c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@n10", "offset": "0x2c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@n11", "offset": "0x2c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@n12", "offset": "0x2c", "type": "u8", "choices": [0, 1]}
+    ]
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "function": "Pane_guess::SecondPass_guess",
+  "original": "0x0052f741",
+  "sources": [
+    "src/EverQuest/tu_185_MailWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@pane",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "pane": {
+      "size": "0x1c0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x198", "u32": "@list"},
+        {"offset": "0x19c", "u32": "@flag19c"},
+        {"offset": "0x1a0", "u32": "@flag1a0"},
+        {"offset": "0x1a4", "u32": "@flag1a4"},
+        {"offset": "0x1a8", "u32": "@flag1a8"},
+        {"offset": "0x1ac", "u32": "@flag1ac"},
+        {"offset": "0x1b0", "u32": "@flag1b0"}
+      ]
+    },
+    "list": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [{"offset": "0x11c", "u32": 1}]
+    },
+    "flag19c": {"size": "0x100", "fill": "random"},
+    "flag1a0": {"size": "0x100", "fill": "random"},
+    "flag1a4": {"size": "0x100", "fill": "random"},
+    "flag1a8": {"size": "0x100", "fill": "random"},
+    "flag1ac": {"size": "0x100", "fill": "random"},
+    "flag1b0": {"size": "0x100", "fill": "random"},
+    "state": {"size": "0x100", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00850be8", "u32": "@state"},
+    {"addr": "@state", "offset": "0x5c", "u8": 0}
+  ],
+  "callees": {
+    "0x0047c3af": {
+      "name": "Table_guess::ctor",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "keep"
+    },
+    "0x0059bb50": {
+      "name": "ListSelect_guess::GetSelected_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]
+    },
+    "0x00406e7e": {
+      "name": "Table_guess::dtor",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "keep"
+    }
+  },
+  "cases": [
+    {
+      "name": "typical_count1",
+      "args": []
+    },
+    {
+      "name": "count_zero",
+      "args": [],
+      "callees": {
+        "0x0059bb50": {"name": "GetSelected", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]}
+      }
+    },
+    {
+      "name": "count_minus1",
+      "args": [],
+      "callees": {
+        "0x0059bb50": {"name": "GetSelected", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "ffffffff"}]}
+      }
+    },
+    {
+      "name": "count_two",
+      "args": [],
+      "callees": {
+        "0x0059bb50": {"name": "GetSelected", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "02000000"}]}
+      }
+    },
+    {
+      "name": "count_large",
+      "args": [],
+      "callees": {
+        "0x0059bb50": {"name": "GetSelected", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "00010000"}]}
+      }
+    },
+    {
+      "name": "field_11c_zero",
+      "args": [],
+      "memory": [{"addr": "@list", "offset": "0x11c", "u32": 0}]
+    },
+    {
+      "name": "field_11c_negative",
+      "args": [],
+      "memory": [{"addr": "@list", "offset": "0x11c", "u32": -1}]
+    },
+    {
+      "name": "state_active",
+      "args": [],
+      "memory": [{"addr": "@state", "offset": "0x5c", "u8": 1}]
+    },
+    {
+      "name": "state_active_count_zero",
+      "args": [],
+      "memory": [{"addr": "@state", "offset": "0x5c", "u8": 1}],
+      "callees": {
+        "0x0059bb50": {"name": "GetSelected", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]}
+      }
+    },
+    {
+      "name": "state_null",
+      "args": [],
+      "memory": [{"addr": "0x00850be8", "u32": 0}]
+    },
+    {
+      "name": "state_null_count_two",
+      "args": [],
+      "memory": [{"addr": "0x00850be8", "u32": 0}],
+      "callees": {
+        "0x0059bb50": {"name": "GetSelected", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+                       "writes": [{"arg": 0, "offset": 0, "hex": "02000000"}]}
+      }
+    },
+    {
+      "name": "list_null",
+      "args": [],
+      "memory": [{"addr": "@pane", "offset": "0x198", "u32": 0}]
+    },
+    {
+      "name": "all_flags_null",
+      "args": [],
+      "memory": [
+        {"addr": "@pane", "offset": "0x19c", "u32": 0},
+        {"addr": "@pane", "offset": "0x1a0", "u32": 0},
+        {"addr": "@pane", "offset": "0x1a4", "u32": 0},
+        {"addr": "@pane", "offset": "0x1a8", "u32": 0},
+        {"addr": "@pane", "offset": "0x1ac", "u32": 0},
+        {"addr": "@pane", "offset": "0x1b0", "u32": 0}
+      ]
+    },
+    {
+      "name": "only_1a0_and_1b0_set",
+      "args": [],
+      "memory": [
+        {"addr": "@pane", "offset": "0x19c", "u32": 0},
+        {"addr": "@pane", "offset": "0x1a4", "u32": 0},
+        {"addr": "@pane", "offset": "0x1a8", "u32": 0},
+        {"addr": "@pane", "offset": "0x1ac", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5437249,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@state", "offset": "0x5c", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@list", "offset": "0x11c", "type": "int", "choices": [-1, 0, 1, 2]}
+    ]
+  }
+}

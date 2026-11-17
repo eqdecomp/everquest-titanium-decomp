@@ -1,0 +1,120 @@
+{
+  "function": "CTradeWndView_guess::TradeItemChanged_guess",
+  "original": "0x00569f63",
+  "sources": [
+    "src/EverQuest/tu_232_TradeWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [
+    {
+      "name": "param_guess",
+      "type": "int"
+    },
+    {
+      "name": "second_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "object": {
+      "size": "0x238",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x005697bb": {
+      "name": "IsMyTradeSlot_guess",
+      "conv": "stdcall",
+      "args": [
+        "int",
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "0x00569d94": {
+      "name": "SetHisReadyTrade_guess",
+      "conv": "thiscall",
+      "args": [
+        "u8"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "both_outside_range_no_call",
+      "args": [0, 0]
+    },
+    {
+      "name": "first_value_returns_one_calls",
+      "args": [3005, 0]
+    },
+    {
+      "name": "second_value_returns_one_calls",
+      "args": [0, 3005]
+    },
+    {
+      "name": "first_value_flag_only_calls",
+      "args": [3010, 0]
+    },
+    {
+      "name": "second_value_flag_only_calls",
+      "args": [0, 3010]
+    },
+    {
+      "name": "both_flagged_calls",
+      "args": [3010, 3200]
+    },
+    {
+      "name": "both_return_one_calls",
+      "args": [3005, 3005]
+    },
+    {
+      "name": "top_byte_overwritten_by_second_flag_no_call",
+      "args": [83886080, 0]
+    },
+    {
+      "name": "range_low_edge_3000_no_call",
+      "args": [3000, 0]
+    },
+    {
+      "name": "range_upper_edge_3330_flagged_calls",
+      "args": [0, 3330]
+    },
+    {
+      "name": "just_above_range_3331_no_call",
+      "args": [0, 3331]
+    },
+    {
+      "name": "negative_value_no_call",
+      "args": [-1, 0]
+    },
+    {
+      "name": "flag_window_start_3008_calls",
+      "args": [0, 3008]
+    },
+    {
+      "name": "return_one_at_3016_calls",
+      "args": [3016, 0]
+    },
+    {
+      "name": "return_one_at_3110_calls",
+      "args": [3110, 0]
+    },
+    {
+      "name": "flagged_at_3111_calls",
+      "args": [3111, 0]
+    }
+  ],
+  "fuzz": {
+    "seed": 5676899,
+    "count": 100,
+    "args": [
+      {},
+      {}
+    ],
+    "memory": []
+  }
+}

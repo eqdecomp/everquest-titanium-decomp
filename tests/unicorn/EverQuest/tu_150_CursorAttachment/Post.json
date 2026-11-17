@@ -1,0 +1,174 @@
+{
+  "function": "Gate_guess::Post_guess",
+  "original": "0x004fd91e",
+  "sources": ["src/EverQuest/tu_150_CursorAttachment.cpp"],
+  "conv": "thiscall",
+  "this": "@gate",
+  "args": [
+    {"name": "first_guess", "type": "int"},
+    {"name": "kind_guess", "type": "int"},
+    {"name": "third_guess", "type": "int"},
+    {"name": "fourth_guess", "type": "cstr"},
+    {"name": "fifth_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "gate": {"size": "0x178", "fill": "random", "init": [
+      {"offset": "0x0", "u32": "@gate_vtable"},
+      {"offset": "0x16c", "u32": "@source"},
+      {"offset": "0x170", "u32": "@state"},
+      {"offset": "0x174", "u32": "@spell_child"}
+    ]},
+    "gate_vtable": {"size": "0xc4", "fill": "zero", "init": [
+      {"offset": "0xc0", "u32": "@gate_slot48"}
+    ]},
+    "gate_slot48": {"size": "0x4"},
+    "source": {"size": "0x68", "fill": "random", "init": [
+      {"offset": "0x64", "u32": "@source_animation"}
+    ]},
+    "source_animation": {"size": "0x4c", "fill": "random"},
+    "state": {"size": "0x68", "fill": "random", "init": [
+      {"offset": "0x64", "u32": "@state_animation"}
+    ]},
+    "state_animation": {"size": "0x4c", "fill": "random"},
+    "spell_child": {"size": "0x4", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@spell_vtable"}
+    ]},
+    "spell_vtable": {"size": "0xc4", "fill": "zero", "init": [
+      {"offset": "0xc0", "u32": "@spell_slot48"}
+    ]},
+    "spell_slot48": {"size": "0x4"},
+    "ready_gate": {"size": "0x4", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@ready_vtable"}
+    ]},
+    "ready_vtable": {"size": "0x8c", "fill": "zero", "init": [
+      {"offset": "0x88", "u32": "@ready_slot34"}
+    ]},
+    "ready_slot34": {"size": "0x4"},
+    "flags": {"size": "0x12", "fill": "zero", "init": [
+      {"offset": "0x10", "u8": 1},
+      {"offset": "0x11", "u8": 1}
+    ]},
+    "pcview": {"size": "0xc390", "fill": "random", "init": [
+      {"offset": "0x8", "u32": "@vbtable"}
+    ]},
+    "vbtable": {"size": "0x8", "fill": "zero", "init": [
+      {"offset": "0x4", "u32": "0xc37c"}
+    ]},
+    "char_info": {"size": "0x11f4", "fill": "random", "init": [
+      {"offset": "0x88", "u32": "@item_state"},
+      {"offset": "0x11e4", "u32": 2},
+      {"offset": "0x11e8", "u32": 2},
+      {"offset": "0x11ec", "u32": 2},
+      {"offset": "0x11f0", "u32": 2}
+    ]},
+    "item_state": {"size": "0x4c", "fill": "random", "init": [
+      {"offset": "0x48", "u32": 77}
+    ]},
+    "slot_pos": {"size": "0x7c", "fill": "random", "init": [
+      {"offset": "0x74", "u32": 30},
+      {"offset": "0x78", "u32": 40}
+    ]},
+    "item_manager": {"size": "0x4", "fill": "random"},
+    "item_catalog": {"size": "0x4", "fill": "random"},
+    "item_record": {"size": "0x24c", "fill": "random", "init": [
+      {"offset": "0x248", "u32": 16711935}
+    ]},
+    "heap_buffer": {"size": "0x100", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00850c3c", "u32": "@ready_gate"},
+    {"addr": "0x00905d24", "u32": "@flags"},
+    {"addr": "0x00905d00", "u32": "@pcview"},
+    {"addr": "0x0099d3f4", "u32": "@item_manager"},
+    {"addr": "0x00985cc8", "u32": "@item_catalog"},
+    {"addr": "0x0099d3ec", "u32": "@slot_pos"},
+    {"addr": "@gate", "offset": "0x16c", "u32": "@source"},
+    {"addr": "@gate", "offset": "0x170", "u32": "@state"},
+    {"addr": "@gate", "offset": "0x174", "u32": "@spell_child"},
+    {"addr": "@source", "offset": "0x64", "u32": "@source_animation"},
+    {"addr": "@state", "offset": "0x64", "u32": "@state_animation"}
+  ],
+  "callees": {
+    "0x0059dd30": {"name": "Gate_guess::Ready_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x004482fb": {"name": "LabelHolder_guess::~LabelHolder_guess", "conv": "thiscall", "args": [], "ret": "keep"},
+    "0x00571fc0": {"name": "CXStr_assign_guess", "conv": "thiscall", "args": ["cstr"], "ret": "keep"},
+    "0x005ec220": {"name": "CharProfile_guess::GetCharInfo2_guess", "conv": "thiscall", "args": [], "ret": "@char_info"},
+    "0x00571e00": {"name": "CXStr_ctor_guess", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@heap_buffer"},
+    "0x005b44a0": {"name": "CSidlManager_guess::Find_guess", "conv": "thiscall", "args": ["ignore"], "ret": 101},
+    "0x00571d00": {"name": "CXStr_release_guess", "conv": "thiscall", "args": ["ignore"], "ret": "keep"},
+    "0x004dbb3b": {"name": "CTextureAnimationView_guess::Apply_guess", "conv": "thiscall", "args": ["int"], "ret": "keep"},
+    "0x005b1ab0": {"name": "CTextureAnimationView_guess::SetIndex_guess", "conv": "thiscall", "args": ["int"], "ret": "keep"},
+    "0x005e0f60": {"name": "ItemState_guess::Timer_guess", "conv": "thiscall", "args": [], "ret": 500},
+    "0x005eccc0": {"name": "ItemState_guess::GetItemClass_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005ec760": {"name": "ItemState_guess::IsStackable_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x0040cc50": {"name": "CharBase_guess::GetInventorySlot_guess", "conv": "thiscall", "args": ["int"], "ret": "@item_state"},
+    "0x0040e705": {"name": "CharBase_guess::GetMemorizedSpell_guess", "conv": "thiscall", "args": ["int"], "ret": 23},
+    "0x0044d0d0": {"name": "ItemIsValid_guess", "conv": "cdecl", "args": ["int"], "ret": 0},
+    "0x0040cbd6": {"name": "SpellManager_guess::Find_guess", "conv": "thiscall", "args": ["int"], "ret": "@item_record"},
+    "0x0044d103": {"name": "ItemRecord_guess::GetSpellColor_guess", "conv": "thiscall", "args": [], "ret": 4279383126},
+    "0x00558984": {"name": "CSpellGemWnd_guess::SetSpellIcon_guess", "conv": "thiscall", "args": ["int"], "ret": "keep"},
+    "0x005589ab": {"name": "CSpellGemWnd_guess::SetSpellGemTint_guess", "conv": "thiscall", "args": ["int"], "ret": "keep"},
+    "0x004fd8bc": {"name": "CTextureAnimationView_guess::Reset_guess", "conv": "thiscall", "args": [], "ret": "keep"},
+    "0x004dbaca": {"name": "FUN_004dbaca", "conv": "cdecl", "args": [], "ret": "keep"},
+    "0x0059d080": {"name": "Gate_guess::SetState_guess", "conv": "thiscall", "args": ["int"], "ret": "keep"},
+    "0x0059fa70": {"name": "Gate_guess::Move_guess", "conv": "thiscall", "args": ["mem:8"], "ret": "keep"},
+    "@ready_slot34": {"name": "Gate_guess::Slot34_guess", "conv": "thiscall", "args": [], "ret": "keep"},
+    "@spell_slot48": {"name": "CSpellGemWnd_guess::Slot48_guess", "conv": "thiscall", "args": ["int", "int"], "ret": "keep"},
+    "@gate_slot48": {"name": "Gate_guess::Slot48_guess", "conv": "thiscall", "args": ["int", "int"], "ret": "keep"}
+  },
+  "cases": [
+    {"name": "first animation and label", "args": [71, 1, 2, "Label text", 9]},
+    {"name": "ready callback", "args": [0, 0, 3, 0, 4], "callees": {"0x0059dd30": {"conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "null ready gate", "args": [0, 1, 2, 0, 3], "memory": [{"addr": "0x00850c3c", "u32": 0}]},
+    {"name": "kind zero", "args": [0, 0, 1, 0, 2]},
+    {"name": "kind one", "args": [0, 1, 1, 0, 2]},
+    {"name": "selector one", "args": [0, 3, 1, 0, 0], "memory": [{"addr": "@flags", "offset": "0x11", "u8": 1}, {"addr": "@gate", "offset": "0x170", "u32": "@state"}, {"addr": "@state", "offset": "0x64", "u32": "@state_animation"}]},
+    {"name": "selector two", "args": [0, 3, 1, 0, 0], "memory": [{"addr": "@flags", "offset": "0x11", "u8": 2}, {"addr": "@gate", "offset": "0x170", "u32": "@state"}, {"addr": "@state", "offset": "0x64", "u32": "@state_animation"}]},
+    {"name": "selector three", "args": [0, 3, 1, 0, 0], "memory": [{"addr": "@flags", "offset": "0x11", "u8": 3}, {"addr": "@gate", "offset": "0x170", "u32": "@state"}, {"addr": "@state", "offset": "0x64", "u32": "@state_animation"}]},
+    {"name": "selector four", "args": [0, 3, 1, 0, 0], "memory": [{"addr": "@flags", "offset": "0x11", "u8": 4}, {"addr": "@gate", "offset": "0x170", "u32": "@state"}, {"addr": "@state", "offset": "0x64", "u32": "@state_animation"}]},
+    {"name": "selector out of range", "args": [0, 3, 1, 0, 6], "memory": [{"addr": "@flags", "offset": "0x11", "u8": 5}, {"addr": "@gate", "offset": "0x170", "u32": "@state"}, {"addr": "@state", "offset": "0x64", "u32": "@state_animation"}]},
+    {"name": "selector quantity zero", "args": [0, 3, 1, 0, 6], "memory": [{"addr": "@flags", "offset": "0x11", "u8": 1}, {"addr": "@char_info", "offset": "0x11e4", "u32": 0}]},
+    {"name": "kind two no item", "args": [0, 2, 1, 0, 6], "memory": [{"addr": "@char_info", "offset": "0x88", "u32": 0}]},
+    {"name": "kind two timer below boundary", "args": [0, 2, 1, 0, 6], "callees": {"0x005e0f60": {"conv": "thiscall", "args": [], "ret": 499}}},
+    {"name": "kind two timer boundary", "args": [0, 2, 1, 0, 6], "callees": {"0x005e0f60": {"conv": "thiscall", "args": [], "ret": 500}}},
+    {"name": "kind two busy", "args": [0, 2, 1, 0, 6], "callees": {"0x005e0f60": {"conv": "thiscall", "args": [], "ret": 501}, "0x005eccc0": {"conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "kind two not ready", "args": [0, 2, 1, 0, 6], "callees": {"0x005e0f60": {"conv": "thiscall", "args": [], "ret": 501}, "0x005eccc0": {"conv": "thiscall", "args": [], "ret": 0}, "0x005ec760": {"conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "kind four", "args": [0, 4, 2, 0, 7]},
+    {"name": "kind five", "args": [0, 5, 2, 0, 7]},
+    {"name": "kind six", "args": [0, 6, 2, 0, 7]},
+    {"name": "kind seven", "args": [0, 7, 2, 0, 7]},
+    {"name": "kind eleven", "args": [0, 11, 2, 0, 7]},
+    {"name": "kind twelve", "args": [0, 12, 2, 0, 7]},
+    {"name": "kind thirteen", "args": [0, 13, 2, 0, 7]},
+    {"name": "kind eight cursor empty", "args": [0, 8, 4, 0, 7], "callees": {"0x0040cc50": {"conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "kind eight timer below boundary", "args": [45, 8, 4, 0, 7], "callees": {"0x005e0f60": {"conv": "thiscall", "args": [], "ret": 499}}},
+    {"name": "kind eight timer boundary", "args": [45, 8, 4, 0, 7], "callees": {"0x005e0f60": {"conv": "thiscall", "args": [], "ret": 500}}},
+    {"name": "kind eight timer above boundary", "args": [45, 8, 4, 0, 7], "callees": {"0x005e0f60": {"conv": "thiscall", "args": [], "ret": 501}}},
+    {"name": "kind eight no state animation", "args": [0, 8, 4, 0, 7], "memory": [{"addr": "@state", "offset": "0x64", "u32": 0}]},
+    {"name": "kind nine invalid item", "args": [0, 9, 4, 0, 7]},
+    {"name": "kind nine valid item", "args": [0, 9, 4, 0, 7], "callees": {"0x0044d0d0": {"conv": "cdecl", "args": ["int"], "ret": 1}}},
+    {"name": "kind nine valid item no child", "args": [0, 9, 4, 0, 7], "memory": [{"addr": "@gate", "offset": "0x174", "u32": 0}], "callees": {"0x0044d0d0": {"conv": "cdecl", "args": ["int"], "ret": 1}}},
+    {"name": "kind ten text", "args": [0, 10, 4, "label", 7]},
+    {"name": "kind fourteen", "args": [0, 14, 4, 0, 7]},
+    {"name": "source null", "args": [0, 1, 4, 0, 7], "memory": [{"addr": "@gate", "offset": "0x16c", "u32": 0}]},
+    {"name": "source animation null", "args": [0, 1, 4, 0, 7], "memory": [{"addr": "@source", "offset": "0x64", "u32": 0}]},
+    {"name": "state null", "args": [0, 1, 4, 0, 7], "memory": [{"addr": "@gate", "offset": "0x170", "u32": 0}]},
+    {"name": "spell child null", "args": [0, 1, 4, 0, 7], "memory": [{"addr": "@gate", "offset": "0x174", "u32": 0}]}
+  ],
+  "fuzz": {
+    "seed": 5232926,
+    "count": 120,
+    "args": [
+      {"range": [-1, 1]},
+      {"choices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]},
+      {"choices": [0, 1, 2, 3, 4, 8]},
+      {},
+      {"range": [-1, 8]}
+    ],
+    "memory": [
+      {"addr": "@flags", "offset": "0x11", "type": "u8", "choices": [0, 1, 2, 3, 4, 5]}
+    ]
+  }
+}

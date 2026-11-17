@@ -1,0 +1,195 @@
+{
+  "function": "CProgressionSelectionWndView_guess::ShowSelectedBranch_guess",
+  "original": "0x00549bc2",
+  "sources": [
+    "src/EverQuest/tu_200_ProgressionSelectionWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@progressionmanager",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "progressionmanager": {
+      "size": "0x220",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x160", "u32": "@pl160"},
+        {"offset": "0x164", "u32": "@pl164"},
+        {"offset": "0x174", "u32": "@stml"}
+      ]
+    },
+    "owner": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [{"offset": "0x14", "u32": "@outer_head"}]
+    },
+    "outer_head": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@outerA"}, {"offset": "4", "u32": "@outerB"}]
+    },
+    "outerA": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "u32": "@outerB"}, {"offset": "4", "u32": "@outer_head"},
+        {"offset": "8", "u32": 16}, {"offset": "0x50", "u32": "@innerA_head"}
+      ]
+    },
+    "outerB": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "u32": "@outer_head"}, {"offset": "4", "u32": "@outerA"},
+        {"offset": "8", "u32": 32}, {"offset": "0x50", "u32": "@innerB_head"}
+      ]
+    },
+    "innerA_head": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@innerA1"}, {"offset": "4", "u32": "@innerA2"}]
+    },
+    "innerA1": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "u32": "@innerA2"}, {"offset": "4", "u32": "@innerA_head"},
+        {"offset": "8", "u32": 48},
+        {"offset": "0x2c", "u32": 1851859273}, {"offset": "0x30", "u32": 114},
+        {"offset": "0x40", "u32": 8},
+        {"offset": "0x4c", "u32": "@leafA_head"}
+      ]
+    },
+    "innerA2": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "u32": "@innerA_head"}, {"offset": "4", "u32": "@innerA1"},
+        {"offset": "8", "u32": 64},
+        {"offset": "0x2c", "u32": "@longstr"}, {"offset": "0x40", "u32": 32},
+        {"offset": "0x4c", "u32": "@leafB_head"}
+      ]
+    },
+    "innerB_head": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@innerB1"}, {"offset": "4", "u32": "@innerB1"}]
+    },
+    "innerB1": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "u32": "@innerB_head"}, {"offset": "4", "u32": "@innerB_head"},
+        {"offset": "8", "u32": 80},
+        {"offset": "0x4c", "u32": "@leafB_head"}
+      ]
+    },
+    "leafA_head": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@leafA1"}, {"offset": "4", "u32": "@leafA2"}]
+    },
+    "leafA1": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "u32": "@leafA2"}, {"offset": "4", "u32": "@leafA_head"},
+        {"offset": "0xc", "u32": 1718774604}, {"offset": "0x10", "u32": 49}, {"offset": "0x20", "u32": 8},
+        {"offset": "0x24", "u32": "@label1"}, {"offset": "0x28", "u32": 7}, {"offset": "0x2c", "u8": 1}
+      ]
+    },
+    "leafA2": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "u32": "@leafA_head"}, {"offset": "4", "u32": "@leafA1"},
+        {"offset": "0xc", "u32": "@longstr2"}, {"offset": "0x20", "u32": 32},
+        {"offset": "0x24", "u32": "@label2"}, {"offset": "0x28", "u32": -3}, {"offset": "0x2c", "u8": 0}
+      ]
+    },
+    "leafB_head": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@leafB_head"}, {"offset": "4", "u32": "@leafB_head"}]
+    },
+    "pl160": {"size": "0x10", "fill": "zero"},
+    "pl164": {"size": "0x10", "fill": "zero"},
+    "stml": {"size": "0x4", "fill": "zero"},
+    "label1": {"size": "0x8", "fill": "zero"},
+    "label2": {"size": "0x8", "fill": "zero"},
+    "longstr": {"size": "0x20", "fill": "zero"},
+    "longstr2": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079c120", "u32": "@owner"},
+    {"addr": "@label1", "cstr": "lbl1"},
+    {"addr": "@label2", "cstr": "lbl2"},
+    {"addr": "@longstr", "cstr": "A long string value"},
+    {"addr": "@longstr2", "cstr": "Second long string text"}
+  ],
+  "callees": {
+    "0x00549501": {"name": "ClearSteps_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00597be0": {"name": "FUN_00597be0", "conv": "thiscall", "args": [], "ret": [0, 0]},
+    "0x00597ed0": {"name": "FUN_00597ed0", "conv": "thiscall", "args": ["int"], "ret": [16, 48]},
+    "0x005499cb": {"name": "FillProgressionList_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00571e00": {"name": "CXStr_ctor", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x005a8b00": {"name": "SetSTMLText", "conv": "thiscall", "args": ["ignore", "bool", "u32"], "ret": 0},
+    "0x00549064": {"name": "AddStepRow_guess", "conv": "thiscall", "args": ["int", "int", "cstr", "cstr", "char"], "ret": 0}
+  },
+  "cases": [
+    {"name": "typical_inline_and_ptr_leaves", "args": []},
+    {"name": "stml_null", "args": [],
+     "memory": [{"addr": "@progressionmanager", "offset": "0x174", "u32": 0}]},
+    {"name": "global_null", "args": [],
+     "memory": [{"addr": "0x0079c120", "u32": 0}]},
+    {"name": "field160_null", "args": [],
+     "memory": [{"addr": "@progressionmanager", "offset": "0x160", "u32": 0}]},
+    {"name": "field164_null", "args": [],
+     "memory": [{"addr": "@progressionmanager", "offset": "0x164", "u32": 0}]},
+    {"name": "index160_negative", "args": [],
+     "callees": {"0x00597be0": {"name": "FUN_00597be0", "conv": "thiscall", "args": [], "ret": [-1, 0]}}},
+    {"name": "index164_negative", "args": [],
+     "callees": {"0x00597be0": {"name": "FUN_00597be0", "conv": "thiscall", "args": [], "ret": [0, -1]}}},
+    {"name": "outer_key_not_found", "args": [],
+     "callees": {"0x00597ed0": {"name": "FUN_00597ed0", "conv": "thiscall", "args": ["int"], "ret": [119, 48]}}},
+    {"name": "inner_key_not_found", "args": [],
+     "callees": {"0x00597ed0": {"name": "FUN_00597ed0", "conv": "thiscall", "args": ["int"], "ret": [16, 153]}}},
+    {"name": "outer_list_empty", "args": [],
+     "memory": [
+       {"addr": "@outer_head", "offset": "0", "u32": "@outer_head"},
+       {"addr": "@outer_head", "offset": "4", "u32": "@outer_head"}
+     ]},
+    {"name": "inner_list_empty", "args": [],
+     "memory": [
+       {"addr": "@innerA_head", "offset": "0", "u32": "@innerA_head"},
+       {"addr": "@innerA_head", "offset": "4", "u32": "@innerA_head"}
+     ]},
+    {"name": "leaf_list_empty", "args": [],
+     "memory": [
+       {"addr": "@leafA_head", "offset": "0", "u32": "@leafA_head"},
+       {"addr": "@leafA_head", "offset": "4", "u32": "@leafA_head"}
+     ]},
+    {"name": "found_outerB_empty_leaves", "args": [],
+     "callees": {"0x00597ed0": {"name": "FUN_00597ed0", "conv": "thiscall", "args": ["int"], "ret": [32, 80]}}},
+    {"name": "inner_cap_exactly_16_is_ptr", "args": [],
+     "memory": [
+       {"addr": "@innerA1", "offset": "0x2c", "u32": "@longstr"},
+       {"addr": "@innerA1", "offset": "0x40", "u32": 16}
+     ]},
+    {"name": "found_innerA2_ptr_text", "args": [],
+     "callees": {"0x00597ed0": {"name": "FUN_00597ed0", "conv": "thiscall", "args": ["int"], "ret": [16, 64]}}},
+    {"name": "found_outerB_stml_null", "args": [],
+     "memory": [{"addr": "@progressionmanager", "offset": "0x174", "u32": 0}],
+     "callees": {"0x00597ed0": {"name": "FUN_00597ed0", "conv": "thiscall", "args": ["int"], "ret": [32, 80]}}}
+  ],
+  "fuzz": {
+    "seed": 5544898,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@outerA", "offset": "0x8", "type": "int", "choices": [16, 119]},
+      {"addr": "@innerA1", "offset": "0x8", "type": "int", "choices": [48, 153]},
+      {"addr": "@leafA1", "offset": "0x28", "type": "int", "choices": [7, -3]}
+    ]
+  }
+}

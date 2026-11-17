@@ -1,0 +1,225 @@
+{
+  "function": "IconCache_guess::GetIcon_guess",
+  "original": "0x004ffbe9",
+  "sources": [
+    "src/EverQuest/tu_152_EQMainWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@cache_004ffbe9",
+  "args": [
+    {
+      "name": "key",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "cache_004ffbe9": {
+      "size": "0x20",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@buckets"
+        },
+        {
+          "offset": "0x4",
+          "u32": 4
+        },
+        {
+          "offset": "0x10",
+          "u32": 4097
+        },
+        {
+          "offset": "0x14",
+          "u32": 5
+        },
+        {
+          "offset": "0x18",
+          "u32": 10
+        },
+        {
+          "offset": "0x1c",
+          "u32": 20
+        }
+      ]
+    },
+    "buckets": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "hit_node": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "0x12345678"
+        },
+        {
+          "offset": "0x4",
+          "u32": 14
+        },
+        {
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    },
+    "pool": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "new_obj": {
+      "size": "0x4c",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0099d3f4",
+      "u32": "@pool"
+    }
+  ],
+  "callees": {
+    "0x004ff9c9": {
+      "name": "FindNode_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "passthrough": true
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@new_obj"
+    },
+    "0x005b1d90": {
+      "name": "Obj_ctor",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x005b44a0": {
+      "name": "Pool_Lookup",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 4097
+    },
+    "0x004dbb3b": {
+      "name": "Obj_Bind",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005b1ab0": {
+      "name": "Obj_Adjust",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00447c66": {
+      "name": "Cache_Insert",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "u32"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "below_minimum",
+      "args": [
+        9
+      ]
+    },
+    {
+      "name": "lower_boundary",
+      "args": [
+        10
+      ]
+    },
+    {
+      "name": "interior_miss",
+      "args": [
+        15
+      ]
+    },
+    {
+      "name": "upper_boundary",
+      "args": [
+        20
+      ]
+    },
+    {
+      "name": "above_maximum",
+      "args": [
+        21
+      ]
+    },
+    {
+      "name": "cache_hit",
+      "args": [
+        14
+      ],
+      "memory": [
+        {
+          "addr": "@buckets",
+          "offset": "0x8",
+          "u32": "@hit_node"
+        }
+      ],
+      "expect": {
+        "ret": "0x12345678"
+      }
+    },
+    {
+      "name": "allocation_returns_null",
+      "args": [
+        15
+      ],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5241833,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -20,
+          40
+        ]
+      }
+    ],
+    "memory": []
+  },
+  "_survivors": "L192: when id equals min_18_guess, assigning min_18_guess leaves id unchanged"
+}

@@ -1,0 +1,209 @@
+{
+  "function": "CMailCompositionWnd_guess::CMailCompositionWnd_guess",
+  "original": "0x0052d28d",
+  "sources": [
+    "src/EverQuest/tu_184_MailCompositionWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@fun_0052d28d",
+  "args": [
+    {
+      "name": "parent",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "fun_0052d28d": {
+      "size": "0x188",
+      "fill": "random"
+    },
+    "parent": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "sidlpiece": {
+      "size": "0x64",
+      "fill": "random"
+    },
+    "from": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "to": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "subject": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "text": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "send": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "cancel": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "addressbook": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "sync": {
+      "size": "0x240",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@sidlpiece",
+      "offset": "0x60",
+      "u32": 32
+    }
+  ],
+  "callees": {
+    "0x00571e00": {
+      "name": "FUN_00571e00",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "this"
+    },
+    "0x005a3850": {
+      "name": "FUN_005a3850",
+      "conv": "thiscall",
+      "args": ["ptr", "ignore", "int", "int", "ptr"],
+      "ret": "this"
+    },
+    "0x00571d00": {
+      "name": "FUN_00571d00",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": "this"
+    },
+    "0x005a25b0": {
+      "name": "FUN_005a25b0",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x005a1e10": {
+      "name": "FUN_005a1e10",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": ["@from", "@to", "@subject", "@text", "@send", "@cancel", "@addressbook", "@sync"],
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00000000"
+        }
+      ]
+    },
+    "0x00571f70": {
+      "name": "FUN_00571f70",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "this"
+    },
+    "0x004d7ebc": {
+      "name": "FUN_004d7ebc",
+      "conv": "thiscall",
+      "args": ["int"]
+    }
+  },
+  "cases": [
+    {
+      "name": "no SIDL piece",
+      "args": ["@parent"],
+      "memory": [
+        {
+          "addr": "@fun_0052d28d",
+          "offset": "0x124",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "all children and CXStr cleanup",
+      "args": ["@parent"],
+      "memory": [
+        {
+          "addr": "@fun_0052d28d",
+          "offset": "0x124",
+          "u32": "@sidlpiece"
+        }
+      ],
+      "callees": {
+        "0x005a1e10": {
+          "name": "FUN_005a1e10",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": ["@from", "@to", "@subject", "@text", "@send", "@cancel", "@addressbook", "@sync"],
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "01000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "mixed null children",
+      "args": ["@parent"],
+      "memory": [
+        {
+          "addr": "@fun_0052d28d",
+          "offset": "0x124",
+          "u32": "@sidlpiece"
+        }
+      ],
+      "callees": {
+        "0x005a1e10": {
+          "name": "FUN_005a1e10",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": ["@from", 0, "@subject", 0, "@send", 0, "@addressbook", 0],
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5427853,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@parent"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@fun_0052d28d",
+        "offset": "0x124",
+        "type": "u32",
+        "choices": [0, "@sidlpiece"]
+      },
+      {
+        "addr": "@sidlpiece",
+        "offset": "0x60",
+        "type": "u32",
+        "choices": [0, 32, 67584, 4294967295]
+      }
+    ]
+  }
+}

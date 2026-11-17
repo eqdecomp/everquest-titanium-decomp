@@ -1,0 +1,125 @@
+{
+  "function": "CAudioTriggersWindow_guess::ShowSelectedTrigger_guess",
+  "original": "0x00406b57",
+  "sources": ["src/EverQuest/tu_005_AudioTriggersWindow.cpp"],
+  "conv": "thiscall",
+  "this": "@triggerwindow",
+  "args": [{"name": "force", "type": "bool"}],
+  "ret": "void",
+  "objects": {
+    "triggerwindow": {
+      "size": "0x190",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x15c", "u32": "@link"},
+        {"offset": "0x160", "u32": "@link"},
+        {"offset": "0x164", "u32": "@enable164"},
+        {"offset": "0x16c", "u32": "@enable16c"},
+        {"offset": "0x174", "u32": "@first"},
+        {"offset": "0x178", "u32": "@second"},
+        {"offset": "0x17c", "u32": "@provider"},
+        {"offset": "0x180", "u32": "@source"},
+        {"offset": "0x188", "u32": "@items"}
+      ]
+    },
+    "link": {"size": "0x14", "fill": "zero"},
+    "provider": {"size": "4", "fill": "zero", "init": [{"offset": "0", "u32": "@provider_vtbl"}]},
+    "provider_vtbl": {"size": "0x100", "fill": "zero", "init": [{"offset": "0xfc", "u32": "@fn_provider"}]},
+    "fn_provider": {"size": "4"},
+    "source": {"size": "0x120", "fill": "zero", "init": [{"offset": "0x11c", "u32": "@text_items"}]},
+    "text_items": {"size": "0x140", "fill": "zero"},
+    "items": {"size": "0x140", "fill": "zero"},
+    "enable164": {"size": "0x60", "fill": "zero"},
+    "enable16c": {"size": "0x60", "fill": "zero"},
+    "first": {"size": "0x60", "fill": "zero"},
+    "second": {"size": "0x60", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0063f53f", "from_image": "0x0063f53f", "image_size": 1}
+  ],
+  "callees": {
+    "@fn_provider": {"name": "SetProviderText", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x0059c390": {"name": "GetTextCount", "conv": "thiscall", "args": [], "ret": 2},
+    "0x00597f10": {
+      "name": "CListWnd::GetItemText",
+      "conv": "thiscall",
+      "args": ["ignore", "int", "int"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "00100060"}]
+    },
+    "0x00573b10": {"name": "CompareText", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0},
+    "0x00571d00": {"name": "ReleaseText", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x0059c360": {"name": "SetTextIndex", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00598580": {"name": "CListWnd::ClearAllSel", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00597ed0": {"name": "CListWnd::GetItemData", "conv": "thiscall", "args": ["int"], "ret": [0, "@link"]},
+    "0x00597c20": {"name": "CListWnd::SetCurSel", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00571e00": {"name": "CXStr::CXStr", "conv": "thiscall", "args": ["cstr"], "ret": "this"}
+  },
+  "cases": [
+    {"name": "null-items-list", "args": [0], "memory": [{"addr": "@triggerwindow", "offset": "0x188", "u32": 0}]},
+    {"name": "null-provider", "args": [0], "memory": [{"addr": "@triggerwindow", "offset": "0x17c", "u32": 0}]},
+    {"name": "null-source", "args": [0], "memory": [{"addr": "@triggerwindow", "offset": "0x180", "u32": 0}]},
+    {
+      "name": "no-item-clears-controls",
+      "args": [0],
+      "memory": [{"addr": "@triggerwindow", "offset": "0x15c", "u32": 0}]
+    },
+    {
+      "name": "unchanged-item-selected-at-first-row",
+      "args": [0],
+      "memory": [{"addr": "@items", "offset": "0x11c", "u32": 2}],
+      "callees": {"0x00597ed0": {"name": "CListWnd::GetItemData", "conv": "thiscall", "args": ["int"], "ret": "@link"}}
+    },
+    {
+      "name": "forced-refresh-empty-source-and-empty-list",
+      "args": [1],
+      "memory": [{"addr": "@items", "offset": "0x11c", "u32": 0}],
+      "callees": {"0x0059c390": {"name": "GetTextCount", "conv": "thiscall", "args": [], "ret": 0}}
+    },
+    {
+      "name": "refresh-one-text-no-match",
+      "args": [0],
+      "memory": [
+        {"addr": "@triggerwindow", "offset": "0x160", "u32": 0},
+        {"addr": "@items", "offset": "0x11c", "u32": 1}
+      ],
+      "callees": {
+        "0x0059c390": {"name": "GetTextCount", "conv": "thiscall", "args": [], "ret": 1},
+        "0x00573b10": {"name": "CompareText", "conv": "thiscall", "args": ["ptr", "int"], "ret": 1},
+        "0x00597ed0": {"name": "CListWnd::GetItemData", "conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    },
+    {
+      "name": "refresh-two-texts-match-second-and-select-second-row",
+      "args": [1],
+      "memory": [{"addr": "@items", "offset": "0x11c", "u32": 2}],
+      "callees": {
+        "0x0059c390": {"name": "GetTextCount", "conv": "thiscall", "args": [], "ret": 2},
+        "0x00573b10": {"name": "CompareText", "conv": "thiscall", "args": ["ptr", "int"], "ret": [1, 0]},
+        "0x00597ed0": {"name": "CListWnd::GetItemData", "conv": "thiscall", "args": ["int"], "ret": [0, "@link"]}
+      }
+    },
+    {
+      "name": "negative-text-count",
+      "args": [1],
+      "memory": [{"addr": "@items", "offset": "0x11c", "u32": 1}],
+      "callees": {
+        "0x0059c390": {"name": "GetTextCount", "conv": "thiscall", "args": [], "ret": -1},
+        "0x00597ed0": {"name": "CListWnd::GetItemData", "conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4221783,
+    "count": 100,
+    "args": [{"range": [0, 1]}],
+    "memory": [
+      {"addr": "@triggerwindow", "offset": "0x15c", "type": "ptr", "choices": [0, "@link"]},
+      {"addr": "@triggerwindow", "offset": "0x160", "type": "ptr", "choices": [0, "@link"]},
+      {"addr": "@triggerwindow", "offset": "0x17c", "type": "ptr", "choices": [0, "@provider"]},
+      {"addr": "@triggerwindow", "offset": "0x180", "type": "ptr", "choices": [0, "@source"]},
+      {"addr": "@triggerwindow", "offset": "0x188", "type": "ptr", "choices": [0, "@items"]},
+      {"addr": "@items", "offset": "0x11c", "type": "int", "choices": [-1, 0, 1, 2, 3]}
+    ]
+  }
+}

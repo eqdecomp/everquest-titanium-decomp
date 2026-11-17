@@ -1,0 +1,1138 @@
+{
+  "function": "CActionsWnd_guess::MainPageOnProcessFrame_guess",
+  "original": "0x004d4400",
+  "sources": [
+    "src/EverQuest/tu_099_ActionsWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [],
+  "ret": "int",
+  "size": "0x27f",
+  "objects": {
+    "object": {
+      "size": "0x218",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x168",
+          "u32": "@c168"
+        },
+        {
+          "offset": "0x16c",
+          "u32": "@c16c"
+        },
+        {
+          "offset": "0x170",
+          "u32": "@c170"
+        },
+        {
+          "offset": "0x174",
+          "u32": "@c174"
+        },
+        {
+          "offset": "0x178",
+          "u32": "@c178"
+        },
+        {
+          "offset": "0x180",
+          "u32": "@c180"
+        },
+        {
+          "offset": "0x184",
+          "u32": "@c184"
+        },
+        {
+          "offset": "0x188",
+          "u32": "@c188"
+        },
+        {
+          "offset": "0x18c",
+          "u32": "@c18c"
+        }
+      ]
+    },
+    "fn_setvalue": {
+      "size": "4"
+    },
+    "controlVtable": {
+      "size": "0xc4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xc0",
+        "u32": "@fn_setvalue"
+        }
+      ]
+    },
+    "c168": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@controlVtable"
+        }
+      ]
+    },
+    "c16c": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@controlVtable"
+        }
+      ]
+    },
+    "c170": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@controlVtable"
+        }
+      ]
+    },
+    "c174": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@controlVtable"
+        }
+      ]
+    },
+    "c178": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@controlVtable"
+        }
+      ]
+    },
+    "c180": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@controlVtable"
+        }
+      ]
+    },
+    "c184": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@controlVtable"
+        }
+      ]
+    },
+    "c188": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@controlVtable"
+        }
+      ]
+    },
+    "c18c": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@controlVtable"
+        }
+      ]
+    },
+    "owner": {
+      "size": "0x252",
+      "fill": "zero"
+    },
+    "flagtext": {
+      "size": "0x2",
+      "fill": "zero"
+    },
+    "stateOwner": {
+      "size": "0x245",
+      "fill": "zero"
+    },
+    "dataBlock": {
+      "size": "0x244",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@indexNode"
+        }
+      ]
+    },
+    "indexNode": {
+      "size": "0x8",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905ce4",
+      "u32": "@owner"
+    },
+    {
+      "addr": "0x009237b4",
+      "u8": 0
+    },
+    {
+      "addr": "0x00985c88",
+      "u32": "@flagtext"
+    },
+    {
+      "addr": "0x009043a4",
+      "u8": 0
+    },
+    {
+      "addr": "0x00905d04",
+      "u32": "@stateOwner"
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@dataBlock"
+    },
+    {
+      "addr": "0x0090424d",
+      "size": "0x140",
+      "fill": "zero"
+    }
+  ],
+  "callees": {
+    "0x00479ea3": {
+      "name": "FlagOwner_guess::IsGroupInvitePending_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "0x0042fcc2": {
+      "name": "ModeManager_guess::first_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        0,
+        0,
+        0
+      ]
+    },
+    "0x0042fcf9": {
+      "name": "ModeManager_guess::second_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        0,
+        0,
+        0
+      ]
+    },
+    "0x00574460": {
+      "name": "compare_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "ptr"
+      ],
+      "ret": [
+        0
+      ]
+    },
+    "@fn_setvalue": {
+      "name": "Control_guess::SetValue_guess",
+      "conv": "thiscall",
+      "args": [
+        "bool",
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "baseline",
+      "args": [],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "null-control-pointers",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "@object",
+          "offset": "0x168",
+          "u32": 0
+        },
+        {
+          "addr": "@object",
+          "offset": "0x16c",
+          "u32": 0
+        },
+        {
+          "addr": "@object",
+          "offset": "0x170",
+          "u32": 0
+        },
+        {
+          "addr": "@object",
+          "offset": "0x174",
+          "u32": 0
+        },
+        {
+          "addr": "@object",
+          "offset": "0x178",
+          "u32": 0
+        },
+        {
+          "addr": "@object",
+          "offset": "0x180",
+          "u32": 0
+        },
+        {
+          "addr": "@object",
+          "offset": "0x184",
+          "u32": 0
+        },
+        {
+          "addr": "@object",
+          "offset": "0x188",
+          "u32": 0
+        },
+        {
+          "addr": "@object",
+          "offset": "0x18c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "flag-true-selects-174",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "0x00479ea3": {
+          "name": "FlagOwner_guess::IsGroupInvitePending_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "flag-true-but-174-already-active",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "@c174",
+          "offset": "0x5c",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x00479ea3": {
+          "name": "FlagOwner_guess::IsGroupInvitePending_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "flag-false-but-170-already-active",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "@c170",
+          "offset": "0x5c",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x00479ea3": {
+          "name": "FlagOwner_guess::IsGroupInvitePending_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "owner-n-selects-184",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x251",
+          "u8": 110
+        }
+      ]
+    },
+    {
+      "name": "mode-one-selects-18c",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "0x009237b4",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "mode-other-selects-neither",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "0x009237b4",
+          "u8": 2
+        }
+      ]
+    },
+    {
+      "name": "text-nonempty",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "@flagtext",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "text-null",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "0x00985c88",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "mode-manager-both-true-then-first-false",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "0x0042fcc2": {
+          "name": "ModeManager_guess::first_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            0
+          ]
+        },
+        "0x0042fcf9": {
+          "name": "ModeManager_guess::second_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "mode-manager-first-false-global-on",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "0x009043a4",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x0042fcc2": {
+          "name": "ModeManager_guess::first_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x0042fcf9": {
+          "name": "ModeManager_guess::second_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "mode-manager-first-false-owner-flag-on",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "0x00479ea3": {
+          "name": "FlagOwner_guess::IsGroupInvitePending_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            0,
+            1
+          ]
+        },
+        "0x0042fcc2": {
+          "name": "ModeManager_guess::first_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x0042fcf9": {
+          "name": "ModeManager_guess::second_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "state-owner-null",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "0x00905d04",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0042fcc2": {
+          "name": "ModeManager_guess::first_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "state-owner-field-set",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "@stateOwner",
+          "offset": "0x244",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x0042fcc2": {
+          "name": "ModeManager_guess::first_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "state-owner-is-flag-owner",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "0x00905d04",
+          "u32": "@owner"
+        }
+      ],
+      "callees": {
+        "0x0042fcc2": {
+          "name": "ModeManager_guess::first_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "state-record-empty",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "0x009043a4",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x0042fcc2": {
+          "name": "ModeManager_guess::first_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            0
+          ]
+        },
+        "0x00574460": {
+          "name": "compare_guess",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "ptr"
+          ],
+          "ret": [
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "state-record-partial",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "0x009043a4",
+          "u8": 1
+        },
+        {
+          "addr": "0x0090424d",
+          "u8": 1
+        },
+        {
+          "addr": "0x0090428d",
+          "u8": 1
+        },
+        {
+          "addr": "0x009042cd",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x0042fcc2": {
+          "name": "ModeManager_guess::first_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            0
+          ]
+        },
+        "0x00574460": {
+          "name": "compare_guess",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "ptr"
+          ],
+          "ret": [
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "state-record-full",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "0x009043a4",
+          "u8": 1
+        },
+        {
+          "addr": "0x0090424d",
+          "u8": 1
+        },
+        {
+          "addr": "0x0090428d",
+          "u8": 1
+        },
+        {
+          "addr": "0x009042cd",
+          "u8": 1
+        },
+        {
+          "addr": "0x0090430d",
+          "u8": 1
+        },
+        {
+          "addr": "0x0090434d",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x0042fcc2": {
+          "name": "ModeManager_guess::first_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            0
+          ]
+        },
+        "0x00574460": {
+          "name": "compare_guess",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "ptr"
+          ],
+          "ret": [
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "compare-not-equal",
+      "args": [],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "0x009043a4",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x0042fcc2": {
+          "name": "ModeManager_guess::first_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            0
+          ]
+        },
+        "0x00574460": {
+          "name": "compare_guess",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "ptr"
+          ],
+          "ret": [
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5063680,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x009237b4",
+        "type": "char",
+        "choices": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "0x009043a4",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x251",
+        "type": "char",
+        "choices": [
+          0,
+          110
+        ]
+      },
+      {
+        "addr": "0x00985c88",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@flagtext"
+        ]
+      },
+      {
+        "addr": "@flagtext",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00905d04",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@stateOwner",
+          "@owner"
+        ]
+      },
+      {
+        "addr": "@stateOwner",
+        "offset": "0x244",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x0090424d",
+        "type": "char",
+        "count": 5,
+        "stride": "0x40",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@indexNode",
+        "offset": "0x4",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          255,
+          511
+        ]
+      },
+      {
+        "addr": "@object",
+        "offset": "0x168",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@c168"
+        ]
+      },
+      {
+        "addr": "@object",
+        "offset": "0x16c",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@c16c"
+        ]
+      },
+      {
+        "addr": "@object",
+        "offset": "0x170",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@c170"
+        ]
+      },
+      {
+        "addr": "@object",
+        "offset": "0x174",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@c174"
+        ]
+      },
+      {
+        "addr": "@object",
+        "offset": "0x178",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@c178"
+        ]
+      },
+      {
+        "addr": "@object",
+        "offset": "0x180",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@c180"
+        ]
+      },
+      {
+        "addr": "@object",
+        "offset": "0x184",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@c184"
+        ]
+      },
+      {
+        "addr": "@object",
+        "offset": "0x188",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@c188"
+        ]
+      },
+      {
+        "addr": "@object",
+        "offset": "0x18c",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@c18c"
+        ]
+      },
+      {
+        "addr": "@c168",
+        "offset": "0x5c",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c168",
+        "offset": "0x5d",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c16c",
+        "offset": "0x5c",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c16c",
+        "offset": "0x5d",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c170",
+        "offset": "0x5c",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c170",
+        "offset": "0x5d",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c174",
+        "offset": "0x5c",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c174",
+        "offset": "0x5d",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c178",
+        "offset": "0x5c",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c178",
+        "offset": "0x5d",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c180",
+        "offset": "0x5c",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c180",
+        "offset": "0x5d",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c184",
+        "offset": "0x5c",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c184",
+        "offset": "0x5d",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c188",
+        "offset": "0x5c",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c188",
+        "offset": "0x5d",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c18c",
+        "offset": "0x5c",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c18c",
+        "offset": "0x5d",
+        "type": "char",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,270 @@
+{
+  "function": "StringVector_guess::InsertCopies_guess",
+  "original": "0x0040b58f",
+  "sources": ["src/EverQuest/tu_010_guilds.cpp"],
+  "conv": "thiscall",
+  "this": "@stringvector",
+  "args": [
+    {"name": "position", "type": "ptr"},
+    {"name": "count", "type": "u32"},
+    {"name": "value", "type": "ptr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "stringvector": {
+      "size": "0x10",
+      "fill": 0,
+      "init": [
+        {"offset": "0x4", "u32": "@elements"},
+        {"offset": "0x8", "u32": "@elements+0x38"},
+        {"offset": "0xc", "u32": "@elements+0x8c"}
+      ]
+    },
+    "elements": {"size": "0x200", "fill": 0},
+    "value": {"size": "0x1c", "fill": 0},
+    "new_storage": {"size": "0x400", "fill": 0}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": 305419896}
+  ],
+  "callees": {
+    "0x004032f1": {
+      "name": "StringCopy_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x0040ab9e": {
+      "name": "Capacity_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 5
+    },
+    "0x0040ab88": {
+      "name": "Size_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [2, 2, 2, 2, 2]
+    },
+    "0x0040b31a": {
+      "name": "LengthError_guess",
+      "conv": "thiscall",
+      "args": [],
+      "noreturn": true
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": "@new_storage"
+    },
+    "0x0040b4a2": {
+      "name": "MoveConstructRange_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ptr", "ptr", "ptr"],
+      "ret": ["@new_storage+0x1c", "@new_storage+0x38"]
+    },
+    "0x0040b56d": {
+      "name": "FillConstruct_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "u32", "ignore"],
+      "ret": "@new_storage+0x38"
+    },
+    "0x0040b46e": {
+      "name": "DestroyStringRange_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ptr", "ptr"],
+      "ret": 0
+    },
+    "0x0060d0d5": {
+      "name": "operator_delete",
+      "conv": "cdecl",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x0040b35a": {
+      "name": "AssignStringRange_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ptr", "ignore"],
+      "ret": 0
+    },
+    "0x0040b488": {
+      "name": "CopyBackwardStrings_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ptr", "ptr"],
+      "ret": 0
+    },
+    "0x0040291e": {
+      "name": "Tidy_guess",
+      "conv": "thiscall",
+      "args": ["bool", "u32"],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "zero count",
+      "args": ["@elements+0x1c", 0, "@value"]
+    },
+    {
+      "name": "length limit exceeded",
+      "args": ["@elements", 153391688, "@value"],
+      "callees": {
+        "0x0040b31a": {
+          "name": "LengthError_guess",
+          "conv": "thiscall",
+          "args": [],
+          "noreturn": true
+        }
+      }
+    },
+    {
+      "name": "length limit boundary and growth",
+      "args": ["@elements+0x1c", 153391687, "@value"],
+      "memory": [
+        {"addr": "@stringvector", "offset": "0x4", "u32": "@elements"},
+        {"addr": "@stringvector", "offset": "0x8", "u32": "@elements+0x38"},
+        {"addr": "@stringvector", "offset": "0xc", "u32": "@elements+0x8c"}
+      ]
+    },
+    {
+      "name": "allocate with prefix and suffix",
+      "args": ["@elements+0x1c", 4, "@value"],
+      "memory": [
+        {"addr": "@stringvector", "offset": "0x4", "u32": "@elements"},
+        {"addr": "@stringvector", "offset": "0x8", "u32": "@elements+0x38"},
+        {"addr": "@stringvector", "offset": "0xc", "u32": "@elements+0x8c"}
+      ],
+      "callees": {
+        "0x0040b4a2": {
+          "name": "MoveConstructRange_guess",
+          "conv": "cdecl",
+          "args": ["ptr", "ptr", "ptr", "ptr"],
+          "ret": ["@new_storage+0x1c", "@new_storage+0x8c"]
+        },
+        "0x0040b56d": {
+          "name": "FillConstruct_guess",
+          "conv": "thiscall",
+          "args": ["ptr", "u32", "ignore"],
+          "ret": "@new_storage+0x8c"
+        }
+      }
+    },
+    {
+      "name": "capacity growth overflow fallback",
+      "args": ["@elements", 1, "@value"],
+      "memory": [
+        {"addr": "@stringvector", "offset": "0x4", "u32": "@elements"},
+        {"addr": "@stringvector", "offset": "0x8", "u32": "@elements+0x80000000"},
+        {"addr": "@stringvector", "offset": "0xc", "u32": "@elements+0x80000000"}
+      ],
+      "callees": {
+        "0x0040ab9e": {
+          "name": "Capacity_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 134217728
+        },
+        "0x0040ab88": {
+          "name": "Size_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [134217728, 134217728, 134217728, 134217728, 134217728]
+        },
+        "0x0040b4a2": {
+          "name": "MoveConstructRange_guess",
+          "conv": "cdecl",
+          "args": ["ptr", "ptr", "ptr", "ptr"],
+          "ret": ["@new_storage", "@new_storage+0x1c"]
+        },
+        "0x0040b56d": {
+          "name": "FillConstruct_guess",
+          "conv": "thiscall",
+          "args": ["ptr", "u32", "ignore"],
+          "ret": "@new_storage+0x1c"
+        }
+      }
+    },
+    {
+      "name": "capacity growth below overflow threshold",
+      "args": ["@elements", 1, "@value"],
+      "memory": [
+        {"addr": "@stringvector", "offset": "0x4", "u32": "@elements"},
+        {"addr": "@stringvector", "offset": "0x8", "u32": "@elements+0x38"},
+        {"addr": "@stringvector", "offset": "0xc", "u32": "@elements+0x8c"}
+      ],
+      "callees": {
+        "0x0040ab9e": {
+          "name": "Capacity_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 100663296
+        },
+        "0x0040ab88": {
+          "name": "Size_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [100663296, 100663296, 100663296, 100663296, 100663296]
+        }
+      }
+    },
+    {
+      "name": "capacity growth threshold constant boundary",
+      "args": ["@elements", 1, "@value"],
+      "memory": [
+        {"addr": "@stringvector", "offset": "0x4", "u32": "@elements"},
+        {"addr": "@stringvector", "offset": "0x8", "u32": "@elements+0x38"},
+        {"addr": "@stringvector", "offset": "0xc", "u32": "@elements+0x8c"}
+      ],
+      "callees": {
+        "0x0040ab9e": {
+          "name": "Capacity_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 102261127
+        },
+        "0x0040ab88": {
+          "name": "Size_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [102261127, 102261127, 102261127, 102261127, 102261127]
+        }
+      }
+    },
+    {
+      "name": "in place fill when suffix is shorter",
+      "args": ["@elements+0x1c", 3, "@value"],
+      "memory": [
+        {"addr": "@stringvector", "offset": "0x4", "u32": "@elements"},
+        {"addr": "@stringvector", "offset": "0x8", "u32": "@elements+0x38"},
+        {"addr": "@stringvector", "offset": "0xc", "u32": "@elements+0x8c"}
+      ]
+    },
+    {
+      "name": "in place shift at equal suffix count",
+      "args": ["@elements+0x38", 2, "@value"],
+      "memory": [
+        {"addr": "@stringvector", "offset": "0x4", "u32": "@elements"},
+        {"addr": "@stringvector", "offset": "0x8", "u32": "@elements+0x70"},
+        {"addr": "@stringvector", "offset": "0xc", "u32": "@elements+0x8c"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4240783,
+    "count": 100,
+    "args": [
+      {"choices": ["@elements", "@elements+0x1c", "@elements+0x38"]},
+      {"choices": [0, 1, 2, 3, 4]},
+      {"choices": ["@value"]}
+    ],
+    "memory": [
+      {"addr": "@stringvector", "offset": "0x4", "type": "u32", "choices": ["@elements"]},
+      {"addr": "@stringvector", "offset": "0x8", "type": "u32", "choices": ["@elements+0x38"]},
+      {"addr": "@stringvector", "offset": "0xc", "type": "u32", "choices": ["@elements+0x8c"]}
+    ]
+  }
+}

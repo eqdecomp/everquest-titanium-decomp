@@ -1,0 +1,351 @@
+{
+  "function": "RequestState_guess::WndNotification_guess",
+  "original": "0x005026b3",
+  "sources": ["src/EverQuest/tu_157_FileSelectionWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@requeststate",
+  "args": [
+    { "name": "item_guess", "type": "ptr" },
+    { "name": "event_guess", "type": "int" },
+    { "name": "data_guess", "type": "int" }
+  ],
+  "ret": "int",
+  "objects": {
+    "requeststate": {
+      "size": "0x800", "fill": "zero",
+      "init": [{ "offset": "0x0", "u32": "@ownervtbl" }]
+    },
+    "item": { "size": "0x100", "fill": "zero" },
+    "selected": { "size": "0x100", "fill": "zero" },
+    "primary": { "size": "0x100", "fill": "zero", "init": [{ "offset": "0x5d", "u8": 1 }] },
+    "secondary": { "size": "0x100", "fill": "zero" },
+    "view": { "size": "0x200", "fill": "zero", "init": [{ "offset": "0", "u32": "@viewvtbl" }] },
+    "viewvtbl": {
+      "size": "0x134", "fill": "zero",
+      "init": [
+        { "offset": "0xfc", "u32": "@fn_view_slot63" },
+        { "offset": "0x130", "u32": "@fn_getcxstr" }
+      ]
+    },
+    "list": { "size": "0x260", "fill": "zero", "init": [{ "offset": "0", "u32": "@listvtbl" }] },
+    "listvtbl": { "size": "0x134", "fill": "zero", "init": [{ "offset": "0x130", "u32": "@fn_list_slot76" }] },
+    "tree": { "size": "0x260", "fill": "zero", "init": [{ "offset": "0", "u32": "@listvtbl" }] },
+    "source": { "size": "0x4", "fill": "zero", "init": [{ "offset": "0", "u32": "@sourcevtbl" }] },
+    "sourcevtbl": {
+      "size": "0x30", "fill": "zero",
+      "init": [
+        { "offset": "8", "u32": "@fn_release" },
+        { "offset": "0x10", "u32": "@fn_enum" },
+        { "offset": "0x14", "u32": "@fn_acquire" },
+        { "offset": "0x24", "u32": "@fn_attrs" },
+        { "offset": "0x2c", "u32": "@fn_query" }
+      ]
+    },
+    "ownervtbl": { "size": "0x8c", "fill": "zero", "init": [{ "offset": "0x88", "u32": "@fn_slot34" }] },
+    "mallocvtbl": {
+      "size": "0x18", "fill": "zero",
+      "init": [
+        { "offset": "8", "u32": "@fn_malloc_release" },
+        { "offset": "0x14", "u32": "@fn_malloc_free" }
+      ]
+    },
+    "stringtable": { "size": "4", "fill": "zero" },
+    "selectedindex": { "size": "4", "fill": "zero", "init": [{ "offset": "0", "u32": 7 }] },
+    "fn_shgetmalloc": { "size": "4" }
+    ,"fn_view_slot63": { "size": "4" }
+    ,"fn_getcxstr": { "size": "4" }
+    ,"fn_list_slot76": { "size": "4" }
+    ,"fn_release": { "size": "4" }
+    ,"fn_enum": { "size": "4" }
+    ,"fn_acquire": { "size": "4" }
+    ,"fn_attrs": { "size": "4" }
+    ,"fn_query": { "size": "4" }
+    ,"fn_slot34": { "size": "4" }
+    ,"fn_malloc_release": { "size": "4" }
+    ,"fn_malloc_free": { "size": "4" }
+  },
+  "memory": [
+    { "addr": "0x00905cb0", "u32": "@stringtable" },
+    { "addr": "0x007a0000", "size": "0x1000", "fill": "zero" },
+    { "addr": "0x007a0000", "u32": "@mallocvtbl" },
+    { "addr": "0x007a0100", "u32": "@selectedindex" },
+    { "addr": "0x0063f22c", "u32": "@fn_shgetmalloc" }
+  ],
+  "callees": {
+    "0x00598580": { "name": "ResourceList_Clear_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x00571f70": { "name": "Tiny_SetValue_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0 },
+    "0x00571d00": { "name": "CXStr_Release_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0 },
+    "0x005017ff": { "name": "Refresh_guess", "conv": "thiscall", "args": [], "passthrough": true },
+    "0x00501a5c": { "name": "BuildFolderPath_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x00572380": { "name": "Tiny_Find_guess", "conv": "thiscall", "args": ["int", "ignore"], "ret": 0 },
+    "0x004482fb": { "name": "Tiny_Destroy_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "shell32.dll!SHGetMalloc": {
+      "name": "SHGetMalloc", "conv": "stdcall", "args": ["ignore"], "ret": 0,
+      "writes": [{ "arg": 0, "offset": 0, "hex": "00007a00" }]
+    },
+    "0x0059c3a0": { "name": "ResourceList_Count_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x005021a4": { "name": "Populate_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x0047c3af": { "name": "SelectionArray_ctor_guess", "conv": "thiscall", "args": ["int"], "ret": 0 },
+    "0x0059bb50": {
+      "name": "ResourceList_Collect_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+      "writes": [{ "arg": 0, "offset": 0, "hex": "00000000" }]
+    },
+    "0x00597f10": {
+      "name": "ResourceList_GetSelected_guess", "conv": "thiscall", "args": ["ignore", "ptr", "int"],
+      "ret": 1145324612, "writes": [{ "arg": 0, "offset": 0, "hex": "44444444" }]
+    },
+    "0x005dfa00": { "name": "StringTable_GetString_guess", "conv": "thiscall", "args": ["int", "int"], "ret": 305419896 },
+    "0x00571e00": { "name": "CXStr_ctor_guess", "conv": "thiscall", "args": ["ptr"], "passthrough": true },
+    "0x00406e7e": { "name": "SelectionArray_dtor_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x00597ed0": { "name": "ResourceList_GetItemData_guess", "conv": "thiscall", "args": ["int"], "ret": 42 },
+    "0x00501c21": { "name": "EnterFolder_guess", "conv": "thiscall", "args": ["int"], "passthrough": true },
+    "0x0059c130": { "name": "ResourceList_Commit_guess", "conv": "thiscall", "args": ["int"], "ret": 0 },
+    "0x005017d1": { "name": "Owner_Function_guess", "conv": "thiscall", "args": ["int"], "ret": 0 },
+    "0x005a2230": { "name": "Dispatch_guess", "conv": "thiscall", "args": ["ptr", "int", "int"], "ret": 85 },
+    "0x0059c3e0": { "name": "ResourceList_Reset_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x0059c8d0": { "name": "ResourceList_AddPath_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0 },
+    "0x0059c360": { "name": "ResourceList_Select_guess", "conv": "thiscall", "args": ["int"], "ret": 0 },
+    "@fn_getcxstr": {
+      "name": "EventView_Get_guess", "conv": "thiscall", "args": ["ignore"], "ret": 305419896,
+      "writes": [{ "arg": 0, "offset": 0, "hex": "78563412" }]
+    },
+    "@fn_view_slot63": { "conv": "thiscall", "args": ["ignore"], "ret": 0 },
+    "@fn_list_slot76": { "conv": "thiscall", "args": [], "ret": 0 },
+    "@fn_release": { "conv": "stdcall", "args": ["ptr"], "ret": 0 },
+    "@fn_enum": { "conv": "stdcall", "args": ["ptr", "u32", "u32", "ignore"], "ret": -1 },
+    "@fn_acquire": { "conv": "stdcall", "args": ["ptr", "int", "int", "cstr", "ignore"], "ret": -1 },
+    "@fn_attrs": { "conv": "stdcall", "args": ["ptr", "int", "ignore", "ignore"], "ret": 0 },
+    "@fn_query": { "conv": "stdcall", "args": ["ptr", "int", "u32", "ptr"], "ret": 0 },
+    "@fn_slot34": { "conv": "thiscall", "args": [], "ret": 0 },
+    "@fn_malloc_release": { "conv": "stdcall", "args": ["ptr"], "ret": 0 },
+    "@fn_malloc_free": { "conv": "stdcall", "args": ["ptr", "ptr"], "ret": 0 },
+    "kernel32.dll!HeapAlloc": { "name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "0x007a0200" },
+    "kernel32.dll!HeapFree": { "name": "HeapFree", "conv": "stdcall", "args": ["ptr", "u32", "ptr"], "ret": 1 },
+    "@fn_shgetmalloc": {
+      "name": "SHGetMalloc_rewrite", "conv": "stdcall", "args": ["ignore"], "ret": 0,
+      "writes": [{ "arg": 0, "offset": 0, "hex": "00007a00" }]
+    }
+  },
+  "rewrite_aliases": { "__imp__SHGetMalloc@4": "0x0063f22c" },
+  "cases": [
+    { "name": "dispatch unmatched", "args": ["@item", 2, 9] },
+    {
+      "name": "event 14 with no list", "args": ["@view", 14, 0],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x168", "u32": "@view" },
+        { "addr": "@requeststate", "offset": "0x164", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x174", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0 }
+      ]
+    },
+    {
+      "name": "event 14 clears list", "args": ["@view", 14, 0],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x168", "u32": "@view" },
+        { "addr": "@requeststate", "offset": "0x164", "u32": "@list" },
+        { "addr": "@requeststate", "offset": "0x174", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0 }
+      ]
+    },
+    {
+      "name": "event 6 disabled primary", "args": ["@view", 6, 0],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x168", "u32": "@view" },
+        { "addr": "@requeststate", "offset": "0x174", "u32": "@primary" },
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0 },
+        { "addr": "@primary", "offset": "0x5d", "u8": 0 }
+      ]
+    },
+    {
+      "name": "event 6 find miss", "args": ["@view", 6, 0],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x168", "u32": "@view" },
+        { "addr": "@requeststate", "offset": "0x174", "u32": "@primary" },
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0 }
+      ],
+      "callees": { "0x00572380": { "conv": "thiscall", "args": ["int", "ignore"], "ret": 0 } }
+    },
+    {
+      "name": "event 6 find hit", "args": ["@view", 6, 0],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x168", "u32": "@view" },
+        { "addr": "@requeststate", "offset": "0x174", "u32": "@primary" },
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0 }
+      ],
+      "callees": { "0x00572380": { "conv": "thiscall", "args": ["int", "ignore"], "ret": 1 } }
+    },
+    {
+      "name": "selected item empty", "args": ["@selected", 1, 0],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x170", "u32": "@selected" },
+        { "addr": "@requeststate", "offset": "0x164", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x168", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x16c", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x174", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x7f4", "u32": 0 }
+      ]
+    },
+    {
+      "name": "selected item pops one path", "args": ["@selected", 1, 0],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x170", "u32": "@selected" },
+        { "addr": "@requeststate", "offset": "0x164", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x168", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x16c", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x174", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x184", "u32": "@source" },
+        { "addr": "@requeststate", "offset": "0x1f4", "u32": "@source" },
+        { "addr": "@requeststate", "offset": "0x1f8", "u32": "@source" },
+        { "addr": "@requeststate", "offset": "0x5f8", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x7f4", "u32": 1 }
+      ]
+    },
+    {
+      "name": "tree count unchanged", "args": ["@tree", 1, 0],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x16c", "u32": "@tree" },
+        { "addr": "@requeststate", "offset": "0x164", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x168", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x174", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x7f4", "u32": 2 }
+      ],
+      "callees": { "0x0059c3a0": { "conv": "thiscall", "args": [], "ret": 2 } }
+    },
+    {
+      "name": "tree shrinks", "args": ["@tree", 1, 0],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x16c", "u32": "@tree" },
+        { "addr": "@requeststate", "offset": "0x164", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x168", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x174", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x1f8", "u32": "@source" },
+        { "addr": "@requeststate", "offset": "0x1fc", "u32": "@source" },
+        { "addr": "@requeststate", "offset": "0x5fc", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x7f4", "u32": 2 }
+      ],
+      "callees": { "0x0059c3a0": { "conv": "thiscall", "args": [], "ret": 1 } }
+    },
+    {
+      "name": "tree grows", "args": ["@tree", 1, 0],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x16c", "u32": "@tree" },
+        { "addr": "@requeststate", "offset": "0x164", "u32": 0},
+        { "addr": "@requeststate", "offset": "0x168", "u32": 0},
+        { "addr": "@requeststate", "offset": "0x174", "u32": 0},
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0},
+        { "addr": "@requeststate", "offset": "0x7f4", "u32": 1}
+      ],
+      "callees": { "0x0059c3a0": { "conv": "thiscall", "args": [], "ret": 3 } }
+    },
+    {
+      "name": "primary button", "args": ["@primary", 1, 0],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x164", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x168", "u32": "@view" },
+        { "addr": "@requeststate", "offset": "0x16c", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x174", "u32": "@primary" },
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0 }
+      ],
+      "callees": { "0x00572380": { "conv": "thiscall", "args": ["int", "ignore"], "ret": 0 } }
+    },
+    {
+      "name": "primary button find hit", "args": ["@primary", 1, 0],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x164", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x168", "u32": "@view" },
+        { "addr": "@requeststate", "offset": "0x16c", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x174", "u32": "@primary" },
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0 }
+      ],
+      "callees": { "0x00572380": { "conv": "thiscall", "args": ["int", "ignore"], "ret": 1 } }
+    },
+    {
+      "name": "secondary button", "args": ["@secondary", 1, 0],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x164", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x168", "u32": 0},
+        { "addr": "@requeststate", "offset": "0x16c", "u32": 0},
+        { "addr": "@requeststate", "offset": "0x174", "u32": 0},
+        { "addr": "@requeststate", "offset": "0x178", "u32": "@secondary" }
+      ]
+    },
+    {
+      "name": "list selection empty", "args": ["@list", 1, 0],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x164", "u32": "@list" },
+        { "addr": "@requeststate", "offset": "0x168", "u32": "@view" },
+        { "addr": "@requeststate", "offset": "0x16c", "u32": 0},
+        { "addr": "@requeststate", "offset": "0x174", "u32": 0},
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0}
+      ],
+      "callees": { "0x0059bb50": { "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [{ "arg": 0, "offset": 0, "hex": "00000000" }] } }
+    },
+    {
+      "name": "list selection one", "args": ["@list", 1, 0],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x164", "u32": "@list" },
+        { "addr": "@requeststate", "offset": "0x168", "u32": "@view" },
+        { "addr": "@requeststate", "offset": "0x16c", "u32": 0},
+        { "addr": "@requeststate", "offset": "0x174", "u32": 0},
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0}
+      ],
+      "callees": { "0x0059bb50": { "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+        { "arg": 0, "offset": 0, "hex": "01000000" },
+        { "arg": 0, "offset": 16, "hex": "00017a00" }
+      ] } }
+    },
+    {
+      "name": "list selection multiple", "args": ["@list", 1, 0],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x164", "u32": "@list" },
+        { "addr": "@requeststate", "offset": "0x168", "u32": "@view" },
+        { "addr": "@requeststate", "offset": "0x16c", "u32": 0},
+        { "addr": "@requeststate", "offset": "0x174", "u32": 0},
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0}
+      ],
+      "callees": { "0x0059bb50": { "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+        { "arg": 0, "offset": 0, "hex": "02000000" },
+        { "arg": 0, "offset": 16, "hex": "00017a00" }
+      ] } }
+    },
+    { "name": "event 4 unmatched", "args": ["@item", 4, 2] },
+    {
+      "name": "event 4 rejects attributes", "args": ["@list", 4, 2],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x164", "u32": "@list" },
+        { "addr": "@requeststate", "offset": "0x168", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x16c", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x174", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0},
+        { "addr": "@requeststate", "offset": "0x184", "u32": "@source" }
+      ],
+      "callees": { "@fn_attrs": { "conv": "stdcall", "args": ["ptr", "int", "ignore", "ignore"], "ret": 0, "writes": [{ "arg": 3, "offset": 0, "hex": "00000000" }] } }
+    },
+    {
+      "name": "event 4 accepts attributes then enumeration ends", "args": ["@list", 4, 2],
+      "memory": [
+        { "addr": "@requeststate", "offset": "0x164", "u32": "@list" },
+        { "addr": "@requeststate", "offset": "0x168", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x16c", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x174", "u32": 0 },
+        { "addr": "@requeststate", "offset": "0x178", "u32": 0},
+        { "addr": "@requeststate", "offset": "0x184", "u32": "@source" }
+      ]
+    },
+    { "name": "event 10", "args": ["@item", 10, 0] }
+  ],
+  "fuzz": {
+    "seed": 5252787,
+    "count": 100,
+    "args": [
+      { "choices": ["@item"] },
+      { "range": [-1, 15] },
+      { "range": [-4, 8] }
+    ],
+    "memory": []
+  }
+}

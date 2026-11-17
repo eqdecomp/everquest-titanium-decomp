@@ -1,0 +1,40 @@
+{
+  "function": "FadeList_guess::Remove_guess",
+  "original": "0x0040106e",
+  "sources": ["src/EverQuest/tu_000_FadeList.cpp"],
+  "conv": "thiscall",
+  "this": "@list",
+  "args": [{"name": "node", "type": "ptr"}],
+  "ret": "void",
+  "objects": {
+    "list": {"size": "0x8", "fill": "random"},
+    "node": {"size": "0x8", "fill": "random"},
+    "prev": {"size": "0x8", "fill": "random"},
+    "next": {"size": "0x8", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {},
+  "cases": [
+    {"name": "only node", "args": ["@node"], "memory": [
+      {"addr": "@list", "u32": "@node"}, {"addr": "@list", "offset": 4, "u32": "@node"},
+      {"addr": "@node", "u32": 0}, {"addr": "@node", "offset": 4, "u32": 0}]},
+    {"name": "middle", "args": ["@node"], "memory": [
+      {"addr": "@list", "u32": "@prev"}, {"addr": "@list", "offset": 4, "u32": "@next"},
+      {"addr": "@node", "u32": "@next"}, {"addr": "@node", "offset": 4, "u32": "@prev"}]},
+    {"name": "head", "args": ["@node"], "memory": [
+      {"addr": "@list", "u32": "@node"}, {"addr": "@list", "offset": 4, "u32": "@next"},
+      {"addr": "@node", "u32": "@next"}, {"addr": "@node", "offset": 4, "u32": 0}]},
+    {"name": "tail", "args": ["@node"], "memory": [
+      {"addr": "@list", "u32": "@prev"}, {"addr": "@list", "offset": 4, "u32": "@node"},
+      {"addr": "@node", "u32": 0}, {"addr": "@node", "offset": 4, "u32": "@prev"}]}
+  ],
+  "fuzz": {
+    "seed": 4198510,
+    "count": 100,
+    "args": [{"choices": ["@node"]}],
+    "memory": [
+      {"addr": "@list", "type": "ptr", "count": 2, "choices": ["@node", "@prev", "@next", 0]},
+      {"addr": "@node", "type": "ptr", "count": 2, "choices": ["@node", "@prev", "@next", 0]}
+    ]
+  }
+}

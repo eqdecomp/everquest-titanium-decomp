@@ -1,0 +1,43 @@
+{
+  "function": "GetDynamicBitMask_guess",
+  "original": "0x0041680e",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "int",
+  "objects": {},
+  "memory": [],
+  "callees": {
+    "0x005ed4b0": {
+      "name": "GetCurrentValue_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 0
+    },
+    "0x004167f9": {
+      "name": "MapDynamicValue_guess",
+      "conv": "cdecl",
+      "args": ["int"],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {"name": "map_0x18c_returns_1", "args": [], "callees": {"0x005ed4b0": {"name": "GetCurrentValue_guess", "conv": "cdecl", "args": [], "ret": 396}}},
+    {"name": "map_0x18d", "args": [], "callees": {"0x005ed4b0": {"name": "GetCurrentValue_guess", "conv": "cdecl", "args": [], "ret": 397}}},
+    {"name": "value_zero", "args": [], "callees": {"0x005ed4b0": {"name": "GetCurrentValue_guess", "conv": "cdecl", "args": [], "ret": 0}}},
+    {"name": "value_199_shift_minus1", "args": [], "callees": {"0x005ed4b0": {"name": "GetCurrentValue_guess", "conv": "cdecl", "args": [], "ret": 199}}},
+    {"name": "value_200_shift0", "args": [], "callees": {"0x005ed4b0": {"name": "GetCurrentValue_guess", "conv": "cdecl", "args": [], "ret": 200}}},
+    {"name": "value_205_shift5", "args": [], "callees": {"0x005ed4b0": {"name": "GetCurrentValue_guess", "conv": "cdecl", "args": [], "ret": 205}}},
+    {"name": "value_230_shift30", "args": [], "callees": {"0x005ed4b0": {"name": "GetCurrentValue_guess", "conv": "cdecl", "args": [], "ret": 230}}},
+    {"name": "value_231_shift31", "args": [], "callees": {"0x005ed4b0": {"name": "GetCurrentValue_guess", "conv": "cdecl", "args": [], "ret": 231}}},
+    {"name": "value_negative", "args": [], "callees": {"0x005ed4b0": {"name": "GetCurrentValue_guess", "conv": "cdecl", "args": [], "ret": -5}}}
+  ],
+  "fuzz": {
+    "seed": 4286478,
+    "count": 100,
+    "args": [],
+    "memory": []
+  }
+}

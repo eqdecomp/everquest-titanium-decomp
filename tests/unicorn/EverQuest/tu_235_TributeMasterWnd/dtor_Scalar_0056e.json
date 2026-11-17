@@ -1,0 +1,101 @@
+{
+  "function": "Scalar_0056e_guess::~Scalar_0056e_guess",
+  "original": "0x0056d9ac",
+  "sources": [
+    "src/EverQuest/tu_235_TributeMasterWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@scalar_0056e",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "scalar_0056e": {
+      "size": "0x1A8",
+      "fill": "random"
+    },
+    "slot_cell": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004eb924": {
+      "name": "FUN_004eb924",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@slot_cell"
+    },
+    "0x0060d0d5": {
+      "name": "operator delete",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x0050f3f6": {
+      "name": "List::~List",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x005a3100": {
+      "name": "ScalarBase::~ScalarBase",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "no rows",
+      "args": [],
+      "memory": [
+        {"addr": "@scalar_0056e", "offset": "0x184", "u32": 0},
+        {"addr": "@scalar_0056e", "offset": "0x198", "u32": 0}
+      ]
+    },
+    {
+      "name": "active rows only",
+      "args": [],
+      "memory": [
+        {"addr": "@scalar_0056e", "offset": "0x184", "u32": 2},
+        {"addr": "@scalar_0056e", "offset": "0x198", "u32": 0}
+      ]
+    },
+    {
+      "name": "master rows only",
+      "args": [],
+      "memory": [
+        {"addr": "@scalar_0056e", "offset": "0x184", "u32": 0},
+        {"addr": "@scalar_0056e", "offset": "0x198", "u32": 3}
+      ]
+    },
+    {
+      "name": "both lists",
+      "args": [],
+      "memory": [
+        {"addr": "@scalar_0056e", "offset": "0x184", "u32": 2},
+        {"addr": "@scalar_0056e", "offset": "0x198", "u32": 2}
+      ]
+    },
+    {
+      "name": "one active row",
+      "args": [],
+      "memory": [
+        {"addr": "@scalar_0056e", "offset": "0x184", "u32": 1},
+        {"addr": "@scalar_0056e", "offset": "0x198", "u32": 1}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5691820,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@scalar_0056e", "offset": "0x184", "type": "int", "choices": [0, 1, 2, 3, 4]},
+      {"addr": "@scalar_0056e", "offset": "0x198", "type": "int", "choices": [0, 1, 2, 3, 4]}
+    ]
+  }
+}

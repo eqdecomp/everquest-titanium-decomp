@@ -1,0 +1,217 @@
+{
+  "function": "LeadershipManager_guess::CanBuyNextRank_guess",
+  "original": "0x004b5eb1",
+  "sources": [
+    "src/EverQuest/tu_073_login.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {
+      "name": "target",
+      "type": "ptr"
+    },
+    {
+      "name": "index",
+      "type": "u32"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "owner": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@e0"},
+        {"offset": "0x4", "u32": "@e1"},
+        {"offset": "0x8", "u32": "@e2"},
+        {"offset": "0xc", "u32": "@e0"},
+        {"offset": "0xfc", "u32": "@e0"},
+        {"offset": "0x100", "u32": "@e0"}
+      ]
+    },
+    "e0": {"size": "0x40", "fill": "random"},
+    "e1": {"size": "0x40", "fill": "random"},
+    "e2": {"size": "0x40", "fill": "random"},
+    "target": {
+      "size": "0xeb0",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004b5085": {
+      "name": "GetNextRankCost_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "u32"
+      ],
+      "ret": 5
+    }
+  },
+  "cases": [
+    {
+      "name": "flag clear returns 0",
+      "args": ["@target", 0],
+      "memory": [
+        {"addr": "@e0", "offset": "0x2c", "u32": 1},
+        {"addr": "@e0", "offset": "0x34", "u32": 10},
+        {"addr": "@e0", "offset": "0x38", "u8": 0},
+        {"addr": "@target", "offset": "0xbf0", "u32": 5}
+      ]
+    },
+    {
+      "name": "value equal to threshold returns 0",
+      "args": ["@target", 0],
+      "memory": [
+        {"addr": "@e0", "offset": "0x2c", "u32": 1},
+        {"addr": "@e0", "offset": "0x34", "u32": 10},
+        {"addr": "@e0", "offset": "0x38", "u8": 1},
+        {"addr": "@target", "offset": "0xbf0", "u32": 10},
+        {"addr": "@target", "offset": "0xea0", "u32": 10}
+      ]
+    },
+    {
+      "name": "state 1 value at or above GetValue returns 1",
+      "args": ["@target", 0],
+      "memory": [
+        {"addr": "@e0", "offset": "0x2c", "u32": 1},
+        {"addr": "@e0", "offset": "0x34", "u32": 10},
+        {"addr": "@e0", "offset": "0x38", "u8": 1},
+        {"addr": "@target", "offset": "0xbf0", "u32": 5},
+        {"addr": "@target", "offset": "0xea0", "u32": 10}
+      ]
+    },
+    {
+      "name": "state 1 equal to GetValue returns 1",
+      "args": ["@target", 0],
+      "memory": [
+        {"addr": "@e0", "offset": "0x2c", "u32": 1},
+        {"addr": "@e0", "offset": "0x34", "u32": 10},
+        {"addr": "@e0", "offset": "0x38", "u8": 1},
+        {"addr": "@target", "offset": "0xbf0", "u32": 5},
+        {"addr": "@target", "offset": "0xea0", "u32": 5}
+      ]
+    },
+    {
+      "name": "state 1 below GetValue returns 0",
+      "args": ["@target", 0],
+      "memory": [
+        {"addr": "@e0", "offset": "0x2c", "u32": 1},
+        {"addr": "@e0", "offset": "0x34", "u32": 10},
+        {"addr": "@e0", "offset": "0x38", "u8": 1},
+        {"addr": "@target", "offset": "0xbf0", "u32": 5},
+        {"addr": "@target", "offset": "0xea0", "u32": 3}
+      ]
+    },
+    {
+      "name": "state 2 at or above GetValue returns 1",
+      "args": ["@target", 0],
+      "memory": [
+        {"addr": "@e0", "offset": "0x2c", "u32": 2},
+        {"addr": "@e0", "offset": "0x34", "u32": 10},
+        {"addr": "@e0", "offset": "0x38", "u8": 1},
+        {"addr": "@target", "offset": "0xbf0", "u32": 5},
+        {"addr": "@target", "offset": "0xea4", "u32": 10}
+      ]
+    },
+    {
+      "name": "state 2 equal to GetValue returns 1",
+      "args": ["@target", 0],
+      "memory": [
+        {"addr": "@e0", "offset": "0x2c", "u32": 2},
+        {"addr": "@e0", "offset": "0x34", "u32": 10},
+        {"addr": "@e0", "offset": "0x38", "u8": 1},
+        {"addr": "@target", "offset": "0xbf0", "u32": 5},
+        {"addr": "@target", "offset": "0xea4", "u32": 5}
+      ]
+    },
+    {
+      "name": "index 63 is below the 0x40 check",
+      "args": ["@target", 63],
+      "memory": [
+        {"addr": "@e0", "offset": "0x2c", "u32": 1},
+        {"addr": "@e0", "offset": "0x34", "u32": 10},
+        {"addr": "@e0", "offset": "0x38", "u8": 1},
+        {"addr": "@target", "offset": "0xcec", "u32": 5},
+        {"addr": "@target", "offset": "0xea0", "u32": 10}
+      ]
+    },
+    {
+      "name": "state 2 below GetValue returns 0",
+      "args": ["@target", 0],
+      "memory": [
+        {"addr": "@e0", "offset": "0x2c", "u32": 2},
+        {"addr": "@e0", "offset": "0x34", "u32": 10},
+        {"addr": "@e0", "offset": "0x38", "u8": 1},
+        {"addr": "@target", "offset": "0xbf0", "u32": 5},
+        {"addr": "@target", "offset": "0xea4", "u32": 3}
+      ]
+    },
+    {
+      "name": "state 0 returns 0",
+      "args": ["@target", 0],
+      "memory": [
+        {"addr": "@e0", "offset": "0x2c", "u32": 0},
+        {"addr": "@e0", "offset": "0x34", "u32": 10},
+        {"addr": "@e0", "offset": "0x38", "u8": 1},
+        {"addr": "@target", "offset": "0xbf0", "u32": 5},
+        {"addr": "@target", "offset": "0xea0", "u32": 10},
+        {"addr": "@target", "offset": "0xea4", "u32": 10}
+      ]
+    },
+    {
+      "name": "index 2 uses element 2 in state 2",
+      "args": ["@target", 2],
+      "memory": [
+        {"addr": "@e2", "offset": "0x2c", "u32": 2},
+        {"addr": "@e2", "offset": "0x34", "u32": 10},
+        {"addr": "@e2", "offset": "0x38", "u8": 1},
+        {"addr": "@target", "offset": "0xbf8", "u32": 5},
+        {"addr": "@target", "offset": "0xea4", "u32": 10}
+      ]
+    },
+    {
+      "name": "index 0x40 with flag clear returns 0",
+      "args": ["@target", 64],
+      "memory": [
+        {"addr": "@e0", "offset": "0x38", "u8": 0}
+      ]
+    },
+    {
+      "name": "index 0x40 with flag set hits int3",
+      "args": ["@target", 64],
+      "memory": [
+        {"addr": "@e0", "offset": "0x2c", "u32": 1},
+        {"addr": "@e0", "offset": "0x38", "u8": 1}
+      ]
+    },
+    {
+      "name": "null target",
+      "args": [0, 0]
+    }
+  ],
+  "fuzz": {
+    "seed": 4939441,
+    "count": 200,
+    "args": [
+      {"choices": ["@target"]},
+      {"range": [0, 3]}
+    ],
+    "memory": [
+      {"addr": "@e0", "offset": "0x2c", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@e0", "offset": "0x34", "type": "int", "range": [0, 30]},
+      {"addr": "@e0", "offset": "0x38", "type": "u8", "choices": [0, 1]},
+      {"addr": "@e1", "offset": "0x2c", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@e1", "offset": "0x34", "type": "int", "range": [0, 30]},
+      {"addr": "@e1", "offset": "0x38", "type": "u8", "choices": [0, 1]},
+      {"addr": "@e2", "offset": "0x2c", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@e2", "offset": "0x34", "type": "int", "range": [0, 30]},
+      {"addr": "@e2", "offset": "0x38", "type": "u8", "choices": [0, 1]},
+      {"addr": "@target", "offset": "0xbf0", "type": "int", "count": 4, "stride": 4, "range": [0, 30]},
+      {"addr": "@target", "offset": "0xea0", "type": "int", "range": [0, 30]},
+      {"addr": "@target", "offset": "0xea4", "type": "int", "range": [0, 30]}
+    ]
+  }
+}

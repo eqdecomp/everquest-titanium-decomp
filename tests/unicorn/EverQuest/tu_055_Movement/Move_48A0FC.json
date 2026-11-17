@@ -1,0 +1,147 @@
+{
+  "function": "State_48995D_guess::GetFloorHeightAt_guess",
+  "original": "0x0048a0fc",
+  "sources": [
+    "src/EverQuest/tu_055_Movement.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@state",
+  "args": [
+    {"name": "x_guess", "type": "float"},
+    {"name": "y_guess", "type": "float"},
+    {"name": "z_guess", "type": "float"},
+    {"name": "flag_guess", "type": "char"}
+  ],
+  "ret": "float",
+  "objects": {
+    "state": {
+      "size": "0x30c",
+      "fill": "random",
+      "init": [
+        {"offset": "0x1a8", "u32": "@data"},
+        {"offset": "0x238", "f32": 5.0},
+        {"offset": "0x2e8", "u32": 0},
+        {"offset": "0x2ec", "f32": 1.0},
+        {"offset": "0x2f0", "f32": 2.0},
+        {"offset": "0x2f4", "f32": 3.0},
+        {"offset": "0x2f8", "f32": 7.0},
+        {"offset": "0x308", "f32": 100.0}
+      ]
+    },
+    "data": {
+      "size": "0xf98",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "0x1234"},
+        {"offset": "0x158", "u32": 0},
+        {"offset": "0xf94", "u32": "0x55"}
+      ]
+    },
+    "display": {"size": "0x200", "fill": "random"},
+    "fn_isloaded": {"size": "0x4", "fill": "random"},
+    "fn_trace": {"size": "0x4", "fill": "random"},
+    "fn_getmode": {"size": "0x4", "fill": "random"},
+    "fn_setmode": {"size": "0x4", "fill": "random"},
+    "world": {"size": "0x10", "fill": "zero", "init": [{"offset": "0x0", "u32": "@world_vtbl"}]},
+    "world_vtbl": {"size": "0x40", "fill": "zero", "init": [{"offset": "0x30", "u32": "@fn_isloaded"}]},
+    "tracer": {"size": "0x10", "fill": "zero", "init": [{"offset": "0x0", "u32": "@tracer_vtbl"}]},
+    "tracer_vtbl": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x24", "u32": "@fn_trace"},
+        {"offset": "0x50", "u32": "@fn_getmode"},
+        {"offset": "0x58", "u32": "@fn_setmode"}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "0x00905d24", "u32": "@display"},
+    {"addr": "0x0099e368", "u32": "@world"},
+    {"addr": "0x0099e370", "u32": "@tracer"},
+    {"addr": "0x00905cf8", "u32": 0},
+    {"addr": "0x00923bdc", "f32": -1e30}
+  ],
+  "callees": {
+    "0x0043745d": {"name": "Display::GetValue2cf8", "conv": "thiscall", "args": [], "ret": 1},
+    "@fn_isloaded": {"name": "World::IsLoaded", "conv": "thiscall", "args": ["mem:12"], "ret": 1},
+    "@fn_getmode": {"name": "Tracer::GetMode", "conv": "thiscall", "args": [], "ret": "0x07"},
+    "@fn_setmode": {"name": "Tracer::SetMode", "conv": "thiscall", "args": ["char"]},
+    "@fn_trace": {
+      "name": "Tracer::Trace",
+      "conv": "thiscall",
+      "args": ["mem:12", "mem:12", "float", "ignore", "ignore", "ptr", "ignore", "ignore", "mem:4", "u32", "int"],
+      "ret": 0,
+      "writes": [{"arg": 6, "offset": 8, "hex": "00002041"}]
+    }
+  },
+  "cases": [
+    {"name": "null_data", "args": [1.0, 2.0, 3.0, 1],
+     "memory": [{"addr": "@state", "offset": "0x1a8", "u32": 0}]},
+    {"name": "check_off_threshold_low", "args": [1.0, 2.0, 3.0, 1],
+     "callees": {"0x0043745d": {"name": "Display::GetValue2cf8", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "check_off_threshold_high", "args": [1.0, 2.0, 3.0, 1],
+     "memory": [{"addr": "0x00923bdc", "f32": 1.0}],
+     "callees": {"0x0043745d": {"name": "Display::GetValue2cf8", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "check_off_threshold_zero", "args": [1.0, 2.0, 3.0, 1],
+     "memory": [{"addr": "0x00923bdc", "f32": 0.0}],
+     "callees": {"0x0043745d": {"name": "Display::GetValue2cf8", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "cached_count3", "args": [1.0, 2.0, 3.0, 1],
+     "memory": [{"addr": "@state", "offset": "0x2e8", "u32": 3}]},
+    {"name": "cached_count2_not_loaded", "args": [1.0, 2.0, 3.0, 1],
+     "memory": [{"addr": "@state", "offset": "0x2e8", "u32": 2}],
+     "callees": {"@fn_isloaded": {"name": "World::IsLoaded", "conv": "thiscall", "args": ["mem:12"], "ret": 0}}},
+    {"name": "x_differs_trace_hit", "args": [1.5, 2.0, 3.0, 1],
+     "memory": [{"addr": "@state", "offset": "0x2e8", "u32": 5}]},
+    {"name": "y_differs_trace_hit", "args": [1.0, 2.5, 3.0, 1],
+     "memory": [{"addr": "@state", "offset": "0x2e8", "u32": 5}]},
+    {"name": "z_below_cache", "args": [1.0, 2.0, 2.5, 0],
+     "memory": [{"addr": "@state", "offset": "0x2e8", "u32": 5}]},
+    {"name": "z_just_at_cache", "args": [1.0, 2.0, 2.9995, 0],
+     "memory": [{"addr": "@state", "offset": "0x2e8", "u32": 5}]},
+    {"name": "z_above_cache_cached", "args": [1.0, 2.0, 50.0, 0],
+     "memory": [{"addr": "@state", "offset": "0x2e8", "u32": 5}]},
+    {"name": "player_z_high_resets", "args": [1.0, 2.0, 99.5, 1],
+     "memory": [{"addr": "@state", "offset": "0x2e8", "u32": 5}, {"addr": "0x00905cf8", "u32": "@state"}]},
+    {"name": "player_z_low_cached", "args": [1.0, 2.0, 98.5, 1],
+     "memory": [{"addr": "@state", "offset": "0x2e8", "u32": 5}, {"addr": "0x00905cf8", "u32": "@state"}]},
+    {"name": "player_z_equal_cached", "args": [1.0, 2.0, 99.0, 1],
+     "memory": [{"addr": "@state", "offset": "0x2e8", "u32": 5}, {"addr": "0x00905cf8", "u32": "@state"}]},
+    {"name": "data158_resets", "args": [1.0, 2.0, 3.0, 1],
+     "memory": [{"addr": "@state", "offset": "0x2e8", "u32": 5}, {"addr": "@data", "offset": "0x158", "u32": 1}]},
+    {"name": "speed_zero_step", "args": [1.0, 2.0, 3.0, 1],
+     "memory": [{"addr": "@state", "offset": "0x238", "f32": 0.0}]},
+    {"name": "speed_negative", "args": [1.0, 2.0, 3.0, 1],
+     "memory": [{"addr": "@state", "offset": "0x238", "f32": -3.0}]},
+    {"name": "trace_miss", "args": [1.0, 2.0, 3.0, 1],
+     "callees": {"@fn_trace": {"name": "Tracer::Trace", "conv": "thiscall",
+       "args": ["mem:12", "mem:12", "float", "ignore", "ignore", "ptr", "ignore", "ignore", "mem:4", "u32", "int"],
+       "ret": 1, "writes": [{"arg": 6, "offset": 8, "hex": "00002041"}]}}},
+    {"name": "flag_zero", "args": [1.0, 2.0, 3.0, 0]},
+    {"name": "flag_zero_mode_zero", "args": [1.0, 2.0, 3.0, 0],
+     "callees": {"@fn_getmode": {"name": "Tracer::GetMode", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "hit_below_threshold", "args": [1.0, 2.0, 3.0, 1],
+     "memory": [{"addr": "0x00923bdc", "f32": 20.0}]},
+    {"name": "hit_just_above_threshold", "args": [1.0, 2.0, 3.0, 1],
+     "memory": [{"addr": "0x00923bdc", "f32": 9.5}]}
+  ],
+  "fuzz": {
+    "seed": 4759804,
+    "count": 150,
+    "args": [
+      {"choices": [1.0, 2.0, -4.0]},
+      {"choices": [2.0, 1.0, 0.5]},
+      {"choices": [3.0, 2.0, 99.5, 50.0, 2.9995]},
+      {"choices": [0, 1]}
+    ],
+    "memory": [
+      {"addr": "@state", "offset": "0x2e8", "type": "u32", "range": [0, 4]},
+      {"addr": "@state", "offset": "0x238", "type": "float", "choices": [0.0, 5.0, 2.5, -1.0]},
+      {"addr": "@state", "offset": "0x2f4", "type": "float", "choices": [3.0, 2.0, 60.0]},
+      {"addr": "@state", "offset": "0x308", "type": "float", "choices": [100.0, 50.0]},
+      {"addr": "@data", "offset": "0x158", "type": "u32", "choices": [0, 1], "p": 0.3},
+      {"addr": "0x00905cf8", "type": "ptr", "choices": [0, "@state"]},
+      {"addr": "0x00923bdc", "type": "float", "choices": [-1e30, 0.0, 9.5, 20.0]}
+    ]
+  }
+}

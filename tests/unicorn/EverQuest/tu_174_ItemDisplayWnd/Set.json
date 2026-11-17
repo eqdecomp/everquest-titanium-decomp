@@ -1,0 +1,236 @@
+{
+  "function": "PickEntry_guess::Set_guess",
+  "original": "0x0051da3b",
+  "sources": [
+    "src/EverQuest/tu_174_ItemDisplayWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@pickentry",
+  "args": [
+    {"name": "first_guess", "type": "int"},
+    {"name": "second_guess", "type": "char"},
+    {"name": "third_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "pickentry": {
+      "size": "0x180",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x164", "u32": "@child"},
+        {"offset": "0x178", "u32": "@target"}
+      ]
+    },
+    "child": {"size": "0x170", "fill": "zero"},
+    "target": {"size": "0x4", "fill": "zero"},
+    "pickdata": {
+      "size": "0x24c",
+      "fill": "zero",
+      "init": [{"offset": "0x208", "u32": "@itemname"}]
+    },
+    "itemname": {"size": "0x20", "fill": "zero"},
+    "accessor": {"size": "0x4", "fill": "zero"},
+    "stringtable": {"size": "0x4", "fill": "zero"},
+    "stringvalue": {"size": "0x40", "fill": "zero"},
+    "charSys": {
+      "size": "0xc284",
+      "fill": "zero",
+      "init": [{"offset": "0x8", "u32": "@charDataInner"}]
+    },
+    "charDataInner": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [{"offset": "0x4", "u32": "0xfffffff8"}]
+    },
+    "charInfo": {"size": "0x11a0", "fill": "zero"},
+    "skillIdPtr": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": 2980}]
+    },
+    "settarget": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@pickentry", "offset": "0x174", "u8": 1},
+    {"addr": "@pickdata", "offset": "0x14", "u32": 1000},
+    {"addr": "@pickdata", "offset": "0x2c", "u32": 0},
+    {"addr": "@pickdata", "offset": "0x17d", "u8": 6},
+    {"addr": "@pickdata", "offset": "0x182", "u8": 0},
+    {"addr": "@pickdata", "offset": "0x18c", "u32": 0},
+    {"addr": "@pickdata", "offset": "0x248", "u32": "0xffffffff"},
+    {"addr": "@charInfo", "offset": "0x119c", "u8": 0},
+    {"addr": "@itemname", "cstr": "Iron sword"},
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x00985cc8", "u32": "@accessor"},
+    {"addr": "0x00905cb0", "u32": "@stringtable"},
+    {"addr": "0x00905d00", "u32": "@charSys"},
+    {"addr": "0x00851200", "u32": "@skillIdPtr"},
+    {"addr": "0x00851204", "u32": "@skillIdPtr"},
+    {"addr": "0x00923d18", "u32": 0},
+    {"addr": "0x00850c18", "u32": "@settarget"}
+  ],
+  "callees": {
+    "0x0040cbd6": {"name": "GetPickData_guess", "conv": "thiscall", "args": ["int"], "ret": "@pickdata"},
+    "0x004482fb": {"name": "Clear_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005dfa00": {"name": "GetString_guess", "conv": "thiscall", "args": ["int", "int"], "ret": "@stringvalue"},
+    "0x00572e00": {"name": "Append_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x005ec220": {"name": "GetCharInfo_guess", "conv": "thiscall", "args": [], "ret": "@charInfo"},
+    "0x0044e755": {"name": "CheckPickData_guess", "conv": "thiscall", "args": ["u8"], "ret": 1},
+    "0x006220e9": {"name": "__itoa", "conv": "cdecl", "args": ["int", "ptr", "int"], "ret": "0x0099db00"},
+    "0x0046da4a": {"name": "Format_guess", "conv": "cdecl", "args": ["ignore", "int", "ptr", "ptr", "ptr", "ptr", "ptr", "ptr", "ptr", "ptr", "ptr"]},
+    "0x0040e2d2": {"name": "GetBaseValue_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x0040d663": {"name": "GetBonusValue_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0},
+    "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ptr", "cstr"], "varargs": "printf", "ret": 0},
+    "0x00475855": {"name": "FormatSpellDescription_guess", "conv": "cdecl", "args": ["ignore", "ptr"], "ret": 0},
+    "0x004e8ba8": {"name": "SetTarget_guess", "conv": "thiscall", "args": ["ptr", "int", "u8"], "ret": 0},
+    "0x0051c035": {"name": "Update_guess", "conv": "thiscall", "args": [], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9",
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "second-disabled-negative-index",
+      "args": [1, 0, -1]
+    },
+    {
+      "name": "all-ones-check-special-case",
+      "args": [2, 1, -1],
+      "memory": [
+        {"addr": "@pickdata", "offset": "0x248", "u32": 0},
+        {"addr": "@pickdata", "offset": "0x18c", "u32": 1},
+        {"addr": "0x00923d18", "u32": 1}
+      ],
+      "callees": {
+        "0x0044e755": {"name": "CheckPickData_guess", "conv": "thiscall", "args": ["u8"], "ret": 255}
+      }
+    },
+    {
+      "name": "empty-details-zero-stats",
+      "args": [3, 1, 0],
+      "memory": [
+        {"addr": "@pickdata", "offset": "0x14", "u32": 0},
+        {"addr": "@pickdata", "offset": "0x2c", "u32": 0},
+        {"addr": "@pickdata", "offset": "0x17d", "u8": 0},
+        {"addr": "@pickdata", "offset": "0x18c", "u32": 0},
+        {"addr": "@pickdata", "offset": "0x248", "u32": "0xffffffff"},
+        {"addr": "@charInfo", "offset": "0x119c", "u8": 0}
+      ],
+      "callees": {
+        "0x0040e2d2": {"name": "GetBaseValue_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+        "0x0040d663": {"name": "GetBonusValue_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0}
+      }
+    },
+    {
+      "name": "details-item-name-and-valid-index",
+      "args": [4, 1, 0],
+      "memory": [
+        {"addr": "@pickdata", "offset": "0x14", "u32": 1000},
+        {"addr": "@pickdata", "offset": "0x2c", "u32": 3},
+        {"addr": "@pickdata", "offset": "0x17d", "u8": 9},
+        {"addr": "@pickdata", "offset": "0x182", "u8": 1},
+        {"addr": "@pickdata", "offset": "0x18c", "u32": 1},
+        {"addr": "@pickdata", "offset": "0x248", "u32": 5},
+        {"addr": "@charInfo", "offset": "0x119c", "u8": 0},
+        {"addr": "0x00923d18", "u32": 1}
+      ],
+      "callees": {
+        "0x0040e2d2": {"name": "GetBaseValue_guess", "conv": "thiscall", "args": ["ptr"], "ret": 10},
+        "0x0040d663": {"name": "GetBonusValue_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 20}
+      }
+    },
+    {
+      "name": "state-eight-still-fills-name",
+      "args": [5, 1, 0],
+      "memory": [
+        {"addr": "@pickdata", "offset": "0x14", "u32": 500},
+        {"addr": "@pickdata", "offset": "0x2c", "u32": 0},
+        {"addr": "@pickdata", "offset": "0x18c", "u32": 1},
+        {"addr": "@pickdata", "offset": "0x248", "u32": "0xffffffff"},
+        {"addr": "@charInfo", "offset": "0x119c", "u8": 8},
+        {"addr": "0x00923d18", "u32": 1}
+      ]
+    },
+    {
+      "name": "positive-stats-no-item-info",
+      "args": [6, 1, 1],
+      "memory": [
+        {"addr": "@pickdata", "offset": "0x14", "u32": 1500},
+        {"addr": "@pickdata", "offset": "0x2c", "u32": 0},
+        {"addr": "@pickdata", "offset": "0x18c", "u32": 1},
+        {"addr": "@pickdata", "offset": "0x248", "u32": 0},
+        {"addr": "@charInfo", "offset": "0x119c", "u8": 1},
+        {"addr": "0x00923d18", "u32": 0}
+      ]
+    },
+    {
+      "name": "total-below-half-uses-half-base",
+      "args": [7, 1, 0],
+      "memory": [
+        {"addr": "@pickdata", "offset": "0x14", "u32": 1000},
+        {"addr": "@pickdata", "offset": "0x2c", "u32": 0},
+        {"addr": "@pickdata", "offset": "0x18c", "u32": 0},
+        {"addr": "@pickdata", "offset": "0x248", "u32": "0xffffffff"},
+        {"addr": "@charInfo", "offset": "0x119c", "u8": 0},
+        {"addr": "0x00923d18", "u32": 0}
+      ],
+      "callees": {
+        "0x0040e2d2": {"name": "GetBaseValue_guess", "conv": "thiscall", "args": ["ptr"], "ret": -1000},
+        "0x0040d663": {"name": "GetBonusValue_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0}
+      }
+    },
+    {
+      "name": "one-zero-stat-still-uses-bonus-format",
+      "args": [8, 1, 0],
+      "memory": [
+        {"addr": "@pickdata", "offset": "0x14", "u32": 500},
+        {"addr": "@pickdata", "offset": "0x2c", "u32": 0},
+        {"addr": "@pickdata", "offset": "0x18c", "u32": 0},
+        {"addr": "@pickdata", "offset": "0x248", "u32": "0xffffffff"},
+        {"addr": "@charInfo", "offset": "0x119c", "u8": 0},
+        {"addr": "0x00923d18", "u32": 0}
+      ],
+      "callees": {
+        "0x0040e2d2": {"name": "GetBaseValue_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+        "0x0040d663": {"name": "GetBonusValue_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 10}
+      }
+    },
+    {
+      "name": "signed-half-equality-high-bit-base",
+      "args": [9, 1, 0],
+      "memory": [
+        {"addr": "@pickdata", "offset": "0x14", "u32": "0xfffffc19"},
+        {"addr": "@pickdata", "offset": "0x2c", "u32": 0},
+        {"addr": "@pickdata", "offset": "0x18c", "u32": 0},
+        {"addr": "@pickdata", "offset": "0x248", "u32": "0xffffffff"},
+        {"addr": "@charInfo", "offset": "0x119c", "u8": 0},
+        {"addr": "0x00923d18", "u32": 0}
+      ],
+      "callees": {
+        "0x0040e2d2": {"name": "GetBaseValue_guess", "conv": "thiscall", "args": ["ptr"], "ret": -2147483398},
+        "0x0040d663": {"name": "GetBonusValue_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": -2147483398}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5364283,
+    "count": 100,
+    "args": [
+      {"range": [-4, 20]},
+      {"choices": [0, 1, 255]},
+      {"choices": [-1, 0, 1]}
+    ],
+    "memory": [
+      {"addr": "@pickdata", "offset": "0x14", "type": "int", "choices": [-1000, 0, 1000, "0x7fffffff"]},
+      {"addr": "@pickdata", "offset": "0x2c", "type": "int", "choices": [-1, 0, 1, 12]},
+      {"addr": "@pickdata", "offset": "0x17d", "type": "u8", "choices": [0, 6, 255]},
+      {"addr": "@pickdata", "offset": "0x182", "type": "u8", "choices": [0, 1]},
+      {"addr": "@pickdata", "offset": "0x18c", "type": "int", "choices": [0, 1]},
+      {"addr": "@pickdata", "offset": "0x248", "type": "int", "choices": [-1, 0, 1]},
+      {"addr": "@charInfo", "offset": "0x119c", "type": "u8", "choices": [0, 8, 255]},
+      {"addr": "0x00923d18", "type": "int", "choices": [0, 1]}
+    ]
+  },
+  "_survivors": "L1579: both comparison mutations differ only at value248 == 0, and each branch calls Update with index 0"
+}

@@ -1,0 +1,212 @@
+{
+  "function": "CapitalizeFirstLetter_guess",
+  "original": "0x00490f27",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "source_guess",
+      "type": "cstr"
+    },
+    {
+      "name": "output_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "size_guess",
+      "type": "u32"
+    }
+  ],
+  "ret": "cstr",
+  "objects": {
+    "output": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "from_image": "0x0079ac74",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x00574510": {
+      "name": "FUN_00574510",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "mem:4"
+      ],
+      "ret": 1,
+      "writes": [
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "61000000"
+        }
+      ]
+    },
+    "0x0061259e": {
+      "name": "_towupper",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": 65
+    },
+    "0x005745f0": {
+      "name": "FUN_005745f0",
+      "conv": "cdecl",
+      "args": [
+        "u32",
+        "ptr",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x00574790": {
+      "name": "FUN_00574790",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "mem:64",
+        "u32"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "42"
+        }
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "_towupper": "0x0061259e"
+  },
+  "cases": [
+    {
+      "name": "zero-capacity-zero-result",
+      "args": [
+        "abc",
+        "@output",
+        0
+      ],
+      "expect": {
+        "ret": ""
+      }
+    },
+    {
+      "name": "one-byte-zero-result",
+      "args": [
+        "abc",
+        "@output",
+        1
+      ],
+      "expect": {
+        "ret": ""
+      }
+    },
+    {
+      "name": "one-byte-result",
+      "args": [
+        "abc",
+        "@output",
+        2
+      ],
+      "callees": {
+        "0x005745f0": {
+          "name": "FUN_005745f0",
+          "conv": "cdecl",
+          "args": [
+            "u32",
+            "ptr",
+            "u32"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "41"
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": "B"
+      }
+    },
+    {
+      "name": "two-byte-result",
+      "args": [
+        "abc",
+        "@output",
+        3
+      ],
+      "callees": {
+        "0x005745f0": {
+          "name": "FUN_005745f0",
+          "conv": "cdecl",
+          "args": [
+            "u32",
+            "ptr",
+            "u32"
+          ],
+          "ret": 2,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "4142"
+            }
+          ]
+        },
+        "0x00574790": {
+          "name": "FUN_00574790",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "mem:64",
+            "u32"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "43"
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": "C"
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4788007,
+    "count": 100,
+    "args": [
+      {},
+      {
+        "choices": [
+          "@output"
+        ]
+      },
+      {
+        "range": [
+          0,
+          128
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

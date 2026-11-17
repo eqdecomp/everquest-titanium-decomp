@@ -1,0 +1,432 @@
+{
+  "function": "ActionQueue_guess::PickUpQuantity_guess",
+  "original": "0x005191e1",
+  "sources": [
+    "src/EverQuest/tu_172_InvSlotMgr.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@actionqueue",
+  "args": [
+    {
+      "name": "amount",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "size": "0x175",
+  "objects": {
+    "actionqueue": {
+      "size": "0x18",
+      "fill": "random"
+    },
+    "data": {
+      "size": "0x134",
+      "fill": "random"
+    },
+    "ref": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "element": {
+      "size": "0x4c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@vtable"
+        }
+      ]
+    },
+    "vtable": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@fn_slot1"
+        }
+      ]
+    },
+    "fn_slot1": {
+      "size": "0x4"
+    },
+    "pending": {
+      "size": "0x4c",
+      "fill": "zero"
+    },
+    "charroot": {
+      "size": "0xc290",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@vbtable"
+        }
+      ]
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "zero"
+    },
+    "charinfo": {
+      "size": "0x8c",
+      "fill": "zero"
+    },
+    "mover": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "player": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "uistate": {
+      "size": "0x11",
+      "fill": "zero"
+    },
+    "uimain": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "uisecond": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@actionqueue",
+      "offset": "0x4",
+      "u32": "@data"
+    },
+    {
+      "addr": "@actionqueue",
+      "offset": "0x10",
+      "u32": "@ref"
+    },
+    {
+      "addr": "@data",
+      "offset": "0x120",
+      "u32": 5
+    },
+    {
+      "addr": "@data",
+      "offset": "0x130",
+      "u32": 0
+    },
+    {
+      "addr": "@ref",
+      "offset": "0x0",
+      "u32": "@element"
+    },
+    {
+      "addr": "@element",
+      "offset": "0x48",
+      "u32": 5
+    },
+    {
+      "addr": "@vbtable",
+      "offset": "0x4",
+      "u32": 0
+    },
+    {
+      "addr": "0x00850cb8",
+      "u32": "@mover"
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": "@player"
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@charroot"
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@uistate"
+    },
+    {
+      "addr": "0x00850c58",
+      "u32": "@uimain"
+    },
+    {
+      "addr": "0x00992940",
+      "u32": "@uisecond"
+    }
+  ],
+  "callees": {
+    "0x0051a9a8": {
+      "name": "MoveItem",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0048127e": {
+      "name": "UpdateEquipmentDisplay_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005ecd80": {
+      "name": "PendingAction::Adjust",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "addr": "@pending+0x48",
+          "hex": "01000000"
+        }
+      ]
+    },
+    "0x005ec220": {
+      "name": "CharData::GetInfo",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@charinfo"
+    },
+    "0x004912b1": {
+      "name": "EQSendMessage",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "mem:12",
+        "int",
+        "char"
+      ],
+      "ret": 0
+    },
+    "0x0059dd30": {
+      "name": "UI::IsActive",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x004e6109": {
+      "name": "UI::Show",
+      "conv": "thiscall",
+      "args": [
+        "char"
+      ],
+      "ret": 0
+    },
+    "0x0056875d": {
+      "name": "UI::Refresh",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_slot1": {
+      "name": "Element::Pending",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@pending"
+    }
+  },
+  "cases": [
+    {
+      "name": "data pointer null",
+      "args": [1],
+      "memory": [
+        {
+          "addr": "@actionqueue",
+          "offset": "0x4",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "key sentinel",
+      "args": [1],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x120",
+          "u32": -1
+        }
+      ]
+    },
+    {
+      "name": "reference pointer null",
+      "args": [1],
+      "memory": [
+        {
+          "addr": "@actionqueue",
+          "offset": "0x10",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "element pointer null",
+      "args": [1],
+      "memory": [
+        {
+          "addr": "@ref",
+          "offset": "0x0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "zero amount",
+      "args": [0]
+    },
+    {
+      "name": "partial amount and active UI",
+      "args": [2],
+      "memory": [
+        {
+          "addr": "@element",
+          "offset": "0x48",
+          "u32": 5
+        },
+        {
+          "addr": "@charinfo",
+          "offset": "0x88",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "partial signed amount",
+      "args": [-1],
+      "memory": [
+        {
+          "addr": "@element",
+          "offset": "0x48",
+          "u32": 5
+        }
+      ],
+      "callees": {
+        "0x0059dd30": {
+          "name": "UI::IsActive",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "full amount no notification",
+      "args": [5],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x120",
+          "u32": 8000
+        },
+        {
+          "addr": "@element",
+          "offset": "0x48",
+          "u32": 5
+        }
+      ]
+    },
+    {
+      "name": "full amount first notification key",
+      "args": [6],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x120",
+          "u32": 13
+        },
+        {
+          "addr": "@element",
+          "offset": "0x48",
+          "u32": 5
+        }
+      ]
+    },
+    {
+      "name": "full amount second notification key",
+      "args": [6],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x120",
+          "u32": 14
+        },
+        {
+          "addr": "@element",
+          "offset": "0x48",
+          "u32": 5
+        }
+      ]
+    },
+    {
+      "name": "full amount third notification key",
+      "args": [6],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x120",
+          "u32": 11
+        },
+        {
+          "addr": "@element",
+          "offset": "0x48",
+          "u32": 5
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5345761,
+    "count": 100,
+    "args": [
+      {
+        "range": [-5, 15]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@actionqueue",
+        "offset": "0x4",
+        "type": "ptr",
+        "choices": ["@data", 0]
+      },
+      {
+        "addr": "@data",
+        "offset": "0x120",
+        "type": "int",
+        "choices": [-1, -2, 11, 13, 14, 77, 8000]
+      },
+      {
+        "addr": "@actionqueue",
+        "offset": "0x10",
+        "type": "ptr",
+        "choices": ["@ref", 0]
+      },
+      {
+        "addr": "@ref",
+        "offset": "0x0",
+        "type": "ptr",
+        "choices": ["@element", 0]
+      },
+      {
+        "addr": "@element",
+        "offset": "0x48",
+        "type": "int",
+        "choices": [-3, 0, 5, 10]
+      },
+      {
+        "addr": "@charinfo",
+        "offset": "0x88",
+        "type": "ptr",
+        "choices": [0, "@pending"]
+      }
+    ]
+  }
+}

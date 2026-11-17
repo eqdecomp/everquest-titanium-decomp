@@ -1,0 +1,203 @@
+{
+  "function": "EQPlayer_guess::CopyFrom_guess",
+  "original": "0x004816d7",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@eqplayer",
+  "args": [
+    {
+      "name": "source",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "eqplayer": {
+      "size": "0x2e4",
+      "fill": "random"
+    },
+    "source": {
+      "size": "0x181",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    { "addr": "@source", "offset": "0x124", "cstr": "fixture-name" },
+    { "addr": "@source", "offset": "0x73", "size": 24, "fill": "zero" },
+    { "addr": "@source", "offset": "0x11c", "u32": 5 },
+    { "addr": "@source", "offset": "0x0ed", "u8": 0 },
+    { "addr": "@source", "offset": "0x123", "u8": 1 },
+    { "addr": "@source", "offset": "0x153", "u8": 3 },
+    { "addr": "@source", "offset": "0x05e", "u32": 66 },
+    { "addr": "@source", "offset": "0x062", "u32": 34603008 },
+    { "addr": "@eqplayer", "offset": "0x260", "u32": 5 },
+    { "addr": "0x009006ac", "u32": 0 },
+    { "addr": "0x0085139c", "u32": 7 },
+    { "addr": "0x00851398", "u32": 16777216 }
+  ],
+  "callees": {
+    "0x0047a406": {
+      "name": "SetArmorTint_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x0047a3eb": {
+      "name": "SetArmorType_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x0047a741": {
+      "name": "SetRace_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        { "addr": "@eqplayer", "offset": 620, "hex": "00000000" }
+      ]
+    },
+    "0x0047e900": {
+      "name": "SetAFK_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        { "addr": "@eqplayer", "offset": 608, "hex": "05000000" },
+        { "addr": "@eqplayer", "offset": 438, "hex": "00" }
+      ]
+    },
+    "0x00465304": {
+      "name": "unpack_physics_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ptr", "ptr"],
+      "ret": 0
+    },
+    "0x00479e02": {
+      "name": "LegalPlayerRace_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0,
+      "passthrough": true
+    },
+    "0x00495cc3": {
+      "name": "SubmitEffectEmitters_guess",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "int",
+        "u32",
+        "ptr",
+        "ptr",
+        "ptr",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0047a77b": {
+      "name": "FUN_0047a77b",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x0047a7b7": {
+      "name": "SetSuffix_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "basic race appearance override",
+      "args": [
+        "@source"
+      ]
+    },
+    {
+      "name": "nonbasic race uses source appearance values",
+      "args": ["@source"],
+      "memory": [
+        { "addr": "@source", "offset": "0x11c", "u32": 13 }
+      ],
+      "callees": {
+        "0x0047a741": {
+          "name": "FUN_0047a741",
+          "conv": "thiscall",
+          "args": ["int"],
+          "ret": 0,
+          "writes": [
+            { "addr": "@eqplayer", "offset": 608, "hex": "0d000000" },
+            { "addr": "@eqplayer", "offset": 438, "hex": "00" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "negative appearance skips race helper",
+      "args": ["@source"],
+      "memory": [
+        { "addr": "@source", "offset": "0x153", "u8": 255 }
+      ]
+    },
+    {
+      "name": "boolean flag accepts one only",
+      "args": ["@source"],
+      "memory": [
+        { "addr": "@source", "offset": "0x123", "u8": 2 }
+      ]
+    },
+    {
+      "name": "actor list lookup",
+      "args": [
+        "@source"
+      ],
+      "memory": [
+        { "addr": "@source", "offset": "0x73", "u32": 1 }
+      ]
+    },
+    {
+      "name": "null source",
+      "args": [0]
+    }
+  ],
+  "fuzz": {
+    "seed": 4724439,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@source"
+        ]
+      }
+    ],
+    "memory": [
+      { "addr": "@source", "offset": "0x153", "type": "u8", "choices": [0, 1, 127, 128, 255] },
+      { "addr": "@source", "offset": "0x123", "type": "u8", "choices": [0, 1, 2, 255] },
+      { "addr": "@source", "offset": "0x11c", "type": "int", "choices": [0, 12, 13, 128, 130, 330] },
+      { "addr": "@source", "offset": "0x05e", "type": "u32", "choices": [0, 65, 66, 1023] },
+      { "addr": "@source", "offset": "0x062", "type": "u32", "choices": [0, 34603008, "0x02100001", "0xffffffff"] },
+      { "addr": "@source", "offset": "0x073", "type": "int", "count": 6, "choices": [0, 1, 7, -1] }
+    ]
+  }
+}

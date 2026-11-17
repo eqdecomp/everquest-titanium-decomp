@@ -1,0 +1,152 @@
+{
+  "function": "CVoiceMacroWnd_guess::WndNotification",
+  "original": "0x004cbe41",
+  "sources": [
+    "src/EverQuest/tu_096_VoiceMacroWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@cbb1b",
+  "args": [
+    {"name": "sender", "type": "ptr"},
+    {"name": "message", "type": "u32"},
+    {"name": "data", "type": "u32"}
+  ],
+  "ret": "int",
+  "_survivors": "L425: length > 0 needs text.Ptr to be a real CStrRep, which the stubbed CXStr never gives; the branch cannot run under the harness; L427: the dsp_chat text choice in that same unreachable branch",
+  "coverage_ok": {
+    "004CBF08-004CBF19": "CXStr locals: the stubbed string operators never give a CStrRep, so the non-null FreeRep cannot run",
+    "004CBF2B-004CBF3C": "CXStr locals: result never holds a CStrRep (stubbed operator=), FreeRep on non-null cannot run",
+    "004CC00A-004CC01B": "CXStr locals: text never holds a CStrRep on the pinstTarget==0 path, FreeRep cannot run",
+    "004CC031-004CC047": "CXStr locals: result never holds a CStrRep on the pinstTarget==0 path, FreeRep cannot run",
+    "004CC201-004CC24C": "length > 0 needs text.Ptr to be a real CStrRep; the stubbed CXStr never has one, so the compare and dsp_chat path cannot run",
+    "004CC257-004CC268": "after the length > 0 path: text.Ptr is never non-null under the stubs, FreeRep cannot run"
+  },
+  "objects": {
+    "cbb1b": {"size": "0x180", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@vtbl_cbb1b"},
+      {"offset": "0x15c", "u32": "@ctrl"},
+      {"offset": "0x160", "u32": "@btn1"},
+      {"offset": "0x164", "u32": "@btn2"},
+      {"offset": "0x168", "u32": "@btn3"},
+      {"offset": "0x16c", "u32": "@btn4"},
+      {"offset": "0x170", "u32": "@close"},
+      {"offset": "0x174", "u32": "@mute"}
+    ]},
+    "vtbl_cbb1b": {"size": "0x100", "fill": "zero", "init": [
+      {"offset": "0xc0", "u32": "@fn_slot48"}
+    ]},
+    "ctrl": {"size": "0x180", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@vtbl_ctrl"}
+    ]},
+    "vtbl_ctrl": {"size": "0x200", "fill": "zero", "init": [
+      {"offset": "0x138", "u32": "@fn_finish"}
+    ]},
+    "btn1": {"size": "0x140", "fill": "zero"},
+    "btn2": {"size": "0x140", "fill": "zero"},
+    "btn3": {"size": "0x140", "fill": "zero"},
+    "btn4": {"size": "0x140", "fill": "zero"},
+    "close": {"size": "0x140", "fill": "zero"},
+    "mute": {"size": "0x140", "fill": "zero"},
+    "other": {"size": "0x140", "fill": "zero"},
+    "player": {"size": "0x348", "fill": "zero"},
+    "stringtable": {"size": "0x20", "fill": "zero"},
+    "everq": {"size": "0x100", "fill": "zero"},
+    "iter": {"size": "0x40", "fill": "zero"},
+    "chatwnd": {"size": "0x40", "fill": "zero"},
+    "strobj": {"size": "0x40", "fill": "zero"},
+    "chars": {"size": "0x40", "fill": "zero"},
+    "itoabuf": {"size": "0x40", "fill": "zero"},
+    "fn_slot48": {"size": "0x10", "fill": "zero"},
+    "fn_finish": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": 1234567},
+    {"addr": "0x00905cb0", "u32": "@stringtable"},
+    {"addr": "0x00905d04", "u32": "@player"},
+    {"addr": "0x00988df0", "u32": "@everq"},
+    {"addr": "0x00985d90", "u32": "@iter"},
+    {"addr": "0x00905ce4", "u32": "@chatwnd"}
+  ],
+  "callees": {
+    "0x00597be0": {"name": "CListWnd::GetCurSel", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00597ed0": {"name": "CListWnd::GetItemData", "conv": "thiscall", "args": ["int"], "ret": 42},
+    "0x005a2230": {"name": "CSidlScreenWnd::WndNotification", "conv": "thiscall", "args": ["u32", "u32", "u32"], "ret": 77},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["u32"]},
+    "0x005dfa00": {"name": "StringTable::getString", "conv": "thiscall", "args": ["u32", "u32"], "ret": "@strobj"},
+    "0x00571fc0": {"name": "CXStr::operator=", "conv": "thiscall", "args": ["u32"], "ret": "this"},
+    "0x00572e00": {"name": "CXStr::operator+=", "conv": "thiscall", "args": ["u32"]},
+    "0x006220e9": {"name": "_itoa", "conv": "cdecl", "args": ["int", "u32", "int"], "ret": "@itoabuf"},
+    "0x004647e6": {"name": "CXStrExt::Format_guess", "conv": "thiscall", "args": ["mem:4", "int", "int"], "ret": "this"},
+    "0x00571f70": {"name": "CXStr::operator=(CXStr)", "conv": "thiscall", "args": ["u32"], "ret": "this"},
+    "0x00572300": {"name": "CXStr::operator char*", "conv": "thiscall", "args": [], "ret": "@chars"},
+    "0x0046bc70": {"name": "SetSocial_guess", "conv": "cdecl", "args": ["u32", "u32", "int", "int"], "ret": 0},
+    "0x00498436": {"name": "CEverQuest::dsp_chat", "conv": "thiscall", "args": ["cstr"]},
+    "0x004982c6": {"name": "CEverQuest::dsp_chat3", "conv": "thiscall", "args": ["cstr", "int", "bool"]},
+    "0x004ae82a": {"name": "CEverQuestExt::SetMacroState_guess", "conv": "thiscall", "args": ["u32", "cstr", "cstr"]},
+    "0x004cb2cb": {"name": "Iterator::HasMacro_guess", "conv": "thiscall", "args": ["u32"], "ret": 1},
+    "0x004cb42f": {"name": "Iterator::SetTarget_guess", "conv": "thiscall", "args": ["u32", "int"]},
+    "0x004cbb1b": {"name": "CVoiceMacroWnd_guess::SetButtonsEnabled_guess", "conv": "thiscall", "args": ["u8"], "passthrough": true},
+    "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ptr", "cstr"], "varargs": "printf", "ret": 0},
+    "0x0046e708": {"name": "do_vtell_guess", "conv": "cdecl", "args": ["u32", "cstr"]},
+    "0x0046e87d": {"name": "do_vgroup_guess", "conv": "cdecl", "args": ["u32", "cstr"]},
+    "0x0046e9c2": {"name": "do_vraid_guess", "conv": "cdecl", "args": ["u32", "cstr"]},
+    "@fn_finish": {"name": "Controller::Finish_guess", "conv": "thiscall", "args": []},
+    "@fn_slot48": {"name": "Cbb1b_guess::slot_48", "conv": "thiscall", "args": ["int", "int"]}
+  },
+  "cases": [
+    {"name": "ctrl toggles off", "args": ["@ctrl", 15, 5],
+     "memory": [{"addr": "@cbb1b", "offset": "0x178", "u32": 5}, {"addr": "@cbb1b", "offset": "0x17c", "u8": 0}]},
+    {"name": "ctrl new value", "args": ["@ctrl", 15, 7],
+     "memory": [{"addr": "@cbb1b", "offset": "0x178", "u32": 5}, {"addr": "@cbb1b", "offset": "0x17c", "u8": 0}]},
+    {"name": "ctrl first value", "args": ["@ctrl", 15, 3],
+     "memory": [{"addr": "@cbb1b", "offset": "0x178", "u32": 0}, {"addr": "@cbb1b", "offset": "0x17c", "u8": 0}]},
+    {"name": "ctrl zero toggles", "args": ["@ctrl", 15, 0],
+     "memory": [{"addr": "@cbb1b", "offset": "0x178", "u32": 0}, {"addr": "@cbb1b", "offset": "0x17c", "u8": 0}]},
+    {"name": "other sender 0xf", "args": ["@other", 15, 5]},
+    {"name": "list index -1", "args": ["@btn1", 23, 9],
+     "callees": {"0x00597be0": {"name": "CListWnd::GetCurSel", "conv": "thiscall", "args": [], "ret": -1}}},
+    {"name": "first with item", "args": ["@btn1", 23, 9]},
+    {"name": "first item zero", "args": ["@btn1", 23, 9],
+     "callees": {"0x00597ed0": {"name": "CListWnd::GetItemData", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "second no target", "args": ["@btn2", 23, 9],
+     "memory": [{"addr": "0x00905d04", "u32": 0}]},
+    {"name": "second with target", "args": ["@btn2", 23, 9]},
+    {"name": "third", "args": ["@btn3", 23, 9]},
+    {"name": "fourth", "args": ["@btn4", 23, 9]},
+    {"name": "other sender 0x17", "args": ["@other", 23, 9]},
+    {"name": "ctrl sender 0x17", "args": ["@ctrl", 23, 9]},
+    {"name": "message 1 ctrl", "args": ["@ctrl", 1, 0]},
+    {"name": "message 1 close", "args": ["@close", 1, 0]},
+    {"name": "message 1 mute checked", "args": ["@mute", 1, 0],
+     "memory": [{"addr": "@mute", "offset": "0x128", "u8": 1}]},
+    {"name": "message 1 mute unchecked", "args": ["@mute", 1, 0],
+     "memory": [{"addr": "@mute", "offset": "0x128", "u8": 0}]},
+    {"name": "message 1 first can target", "args": ["@btn1", 1, 0]},
+    {"name": "message 1 first cannot target", "args": ["@btn1", 1, 0],
+     "callees": {"0x004cb2cb": {"name": "Iterator::CanTarget_guess", "conv": "thiscall", "args": ["u32"], "ret": 0}}},
+    {"name": "message 1 second no target", "args": ["@btn2", 1, 0],
+     "memory": [{"addr": "0x00905d04", "u32": 0}]},
+    {"name": "message 1 second target type 0", "args": ["@btn2", 1, 0]},
+    {"name": "message 1 second target type 1", "args": ["@btn2", 1, 0],
+     "memory": [{"addr": "@player", "offset": "0x244", "u8": 1}]},
+    {"name": "message 1 third", "args": ["@btn3", 1, 0]},
+    {"name": "message 1 fourth", "args": ["@btn4", 1, 0]},
+    {"name": "message 1 other", "args": ["@other", 1, 0]},
+    {"name": "message 2", "args": ["@ctrl", 2, 0]}
+  ],
+  "fuzz": {
+    "seed": 5029441,
+    "count": 120,
+    "args": [
+      {"choices": ["@ctrl", "@btn1", "@btn2", "@btn3", "@btn4", "@close", "@mute", "@other"]},
+      {"choices": [0, 1, 2, 7, 15, 23]},
+      {"range": [-4, 30]}
+    ],
+    "memory": [
+      {"addr": "@cbb1b", "offset": "0x178", "type": "int", "range": [0, 6]},
+      {"addr": "@cbb1b", "offset": "0x17c", "type": "u8", "range": [0, 1]},
+      {"addr": "@mute", "offset": "0x128", "type": "u8", "choices": [0, 1]},
+      {"addr": "@player", "offset": "0x244", "type": "u8", "choices": [0, 1]}
+    ]
+  }
+}

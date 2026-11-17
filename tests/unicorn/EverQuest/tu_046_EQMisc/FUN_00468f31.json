@@ -1,0 +1,207 @@
+{
+  "function": "do_betabuff_guess",
+  "original": "0x00468f31",
+  "sources": ["src/EverQuest/tu_046_EQMisc.cpp"],
+  "conv": "cdecl",
+  "args": [
+    {"name": "player_guess", "type": "ptr"},
+    {"name": "text_guess", "type": "cstr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "player": {"size": "0x250", "fill": "zero"},
+    "context": {"size": "0x4", "fill": "zero"},
+    "class_name": {"size": "0x20", "fill": "zero"},
+    "cxstr_heap": {"size": "0x10000", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00923d60", "u32": 1},
+    {"addr": "0x00988df0", "u32": "@context"},
+    {"addr": "0x00905ce4", "u32": "@player"},
+    {"addr": "@player", "offset": "0x24c", "u8": 1},
+    {"addr": "@class_name", "cstr": "Warrior"}
+  ],
+  "callees": {
+    "0x004982c6": {
+      "name": "SetText_guess",
+      "conv": "thiscall",
+      "args": ["cstr", "int", "int"]
+    },
+    "0x0060e3a3": {
+      "name": "_atol",
+      "conv": "cdecl",
+      "args": ["cstr"],
+      "ret": 0
+    },
+    "0x00571fc0": {
+      "name": "FUN_00571fc0",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "passthrough": true
+    },
+    "0x00407d68": {
+      "name": "FUN_00407d68",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "passthrough": true
+    },
+    "0x00573610": {
+      "name": "MakeLower_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x00416c2c": {
+      "name": "ClassName_guess",
+      "conv": "cdecl",
+      "args": ["int"],
+      "ret": "@class_name"
+    },
+    "0x00571e00": {
+      "name": "FUN_00571e00",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "passthrough": true
+    },
+    "0x00572650": {
+      "name": "Compare_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "FUN_00571d00",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "passthrough": true
+    },
+    "0x00493f1b": {
+      "name": "ConfirmBuff_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "ignore", "int"]
+    },
+    "0x00468dd3": {
+      "name": "PrintBetaBuffUsage_guess",
+      "conv": "cdecl",
+      "args": []
+    },
+    "kernel32.dll!GetProcessHeap": {
+      "conv": "stdcall",
+      "args": [],
+      "ret": "@cxstr_heap"
+    },
+    "kernel32.dll!HeapAlloc": {
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": ["@cxstr_heap+0x0", "@cxstr_heap+0x100", "@cxstr_heap+0x200", "@cxstr_heap+0x300", "@cxstr_heap+0x400", "@cxstr_heap+0x500", "@cxstr_heap+0x600", "@cxstr_heap+0x700", "@cxstr_heap+0x800", "@cxstr_heap+0x900", "@cxstr_heap+0xa00", "@cxstr_heap+0xb00", "@cxstr_heap+0xc00", "@cxstr_heap+0xd00", "@cxstr_heap+0xe00", "@cxstr_heap+0xf00", "@cxstr_heap+0x1000", "@cxstr_heap+0x1100", "@cxstr_heap+0x1200", "@cxstr_heap+0x1300", "@cxstr_heap+0x1400", "@cxstr_heap+0x1500", "@cxstr_heap+0x1600", "@cxstr_heap+0x1700", "@cxstr_heap+0x1800", "@cxstr_heap+0x1900", "@cxstr_heap+0x1a00", "@cxstr_heap+0x1b00", "@cxstr_heap+0x1c00", "@cxstr_heap+0x1d00", "@cxstr_heap+0x1e00", "@cxstr_heap+0x1f00", "@cxstr_heap+0x2000", "@cxstr_heap+0x2100", "@cxstr_heap+0x2200", "@cxstr_heap+0x2300", "@cxstr_heap+0x2400", "@cxstr_heap+0x2500", "@cxstr_heap+0x2600", "@cxstr_heap+0x2700", "@cxstr_heap+0x2800", "@cxstr_heap+0x2900", "@cxstr_heap+0x2a00", "@cxstr_heap+0x2b00", "@cxstr_heap+0x2c00", "@cxstr_heap+0x2d00", "@cxstr_heap+0x2e00", "@cxstr_heap+0x2f00", "@cxstr_heap+0x3000", "@cxstr_heap+0x3100", "@cxstr_heap+0x3200", "@cxstr_heap+0x3300", "@cxstr_heap+0x3400", "@cxstr_heap+0x3500", "@cxstr_heap+0x3600", "@cxstr_heap+0x3700", "@cxstr_heap+0x3800", "@cxstr_heap+0x3900", "@cxstr_heap+0x3a00", "@cxstr_heap+0x3b00", "@cxstr_heap+0x3c00", "@cxstr_heap+0x3d00", "@cxstr_heap+0x3e00", "@cxstr_heap+0x3f00"]
+    },
+    "kernel32.dll!HeapFree": {
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "server disabled",
+      "args": ["@player", "Warrior 20"],
+      "memory": [{"addr": "0x00923d60", "u32": 0}],
+      "expect": {"calls": ["0x004982c6"]}
+    },
+    {
+      "name": "player level zero",
+      "args": ["@player", "Warrior 20"],
+      "memory": [{"addr": "@player", "offset": "0x24c", "u8": 0}],
+      "expect": {"calls": ["0x004982c6"]}
+    },
+    {
+      "name": "player level two",
+      "args": ["@player", "Warrior 20"],
+      "memory": [{"addr": "@player", "offset": "0x24c", "u8": 2}],
+      "expect": {"calls": ["0x004982c6"]}
+    },
+    {
+      "name": "missing level",
+      "args": ["@player", "Warrior"],
+      "callees": {
+        "0x00572650": {"name": "Compare_guess", "conv": "thiscall", "args": ["ignore"], "ret": 1}
+      }
+    },
+    {
+      "name": "bad class",
+      "args": ["@player", "Unknown 20"],
+      "callees": {
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": 20}
+      }
+    },
+    {
+      "name": "level below minimum",
+      "args": ["@player", "Warrior 19"],
+      "callees": {
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": 19},
+        "0x00572650": {"name": "Compare_guess", "conv": "thiscall", "args": ["ignore"], "ret": 1}
+      }
+    },
+    {
+      "name": "level 20",
+      "args": ["@player", "Warrior 20"],
+      "callees": {
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": 20},
+        "0x00572650": {"name": "Compare_guess", "conv": "thiscall", "args": ["ignore"], "ret": 1}
+      }
+    },
+    {
+      "name": "nonmultiple of five",
+      "args": ["@player", "Warrior 21"],
+      "callees": {
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": 21},
+        "0x00572650": {"name": "Compare_guess", "conv": "thiscall", "args": ["ignore"], "ret": 1}
+      }
+    },
+    {
+      "name": "level 65",
+      "args": ["@player", "Warrior 65"],
+      "callees": {
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": 65},
+        "0x00572650": {"name": "Compare_guess", "conv": "thiscall", "args": ["ignore"], "ret": 1}
+      }
+    },
+    {
+      "name": "level 70",
+      "args": ["@player", "Warrior 70"],
+      "callees": {
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": 70},
+        "0x00572650": {"name": "Compare_guess", "conv": "thiscall", "args": ["ignore"], "ret": 1}
+      }
+    },
+    {
+      "name": "level above maximum",
+      "args": ["@player", "Warrior 71"],
+      "callees": {
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": 71},
+        "0x00572650": {"name": "Compare_guess", "conv": "thiscall", "args": ["ignore"], "ret": 1}
+      }
+    },
+    {
+      "name": "match class sixteen",
+      "args": ["@player", "Warrior 25"],
+      "callees": {
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": 25},
+        "0x00572650": {"name": "Compare_guess", "conv": "thiscall", "args": ["ignore"], "ret": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4624177,
+    "count": 100,
+    "args": [
+      {"choices": ["@player"]},
+      {"choices": ["Warrior 20", "Unknown 45", "Warrior", "Paladin 21", "Wizard 70"]}
+    ],
+    "memory": [
+      {"addr": "0x00923d60", "type": "u32", "choices": [0, 1]},
+      {"addr": "@player", "offset": "0x24c", "type": "u8", "choices": [0, 1, 2]}
+    ]
+  },
+  "_survivors": "L3839: index_guess starts at 1 and only increments, so index_guess == 0 is unreachable; L3840: same unreachable index_guess == 0 branch."
+}

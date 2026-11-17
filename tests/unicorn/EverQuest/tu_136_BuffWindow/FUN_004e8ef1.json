@@ -1,0 +1,213 @@
+{
+  "function": "CBuffWindowView_guess::RefreshIconArrangement_guess",
+  "original": "0x004e8ef1",
+  "sources": [
+    "src/EverQuest/tu_136_BuffWindow.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@wnd",
+  "args": [],
+  "ret": "u32",
+  "objects": {
+    "wnd": {
+      "size": "0x24c",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@wnd_vtbl"},
+        {"offset": "0x15c", "u8": 0},
+        {"offset": "0x1cc", "u32": "@child0"},
+        {"offset": "0x1d0", "u32": "@child1"},
+        {"offset": "0x1d4", "u32": "@child2"},
+        {"offset": "0x1d8", "u32": "@child3"},
+        {"offset": "0x1dc", "u32": "@child4"},
+        {"offset": "0x248", "u32": 5}
+      ]
+    },
+    "child0": {
+      "size": "0x24c",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@wnd_vtbl"}]
+    },
+    "child1": {
+      "size": "0x24c",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@wnd_vtbl"}]
+    },
+    "child2": {
+      "size": "0x24c",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@wnd_vtbl"}]
+    },
+    "child3": {
+      "size": "0x24c",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@wnd_vtbl"}]
+    },
+    "child4": {
+      "size": "0x24c",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@wnd_vtbl"}]
+    },
+    "fn_get_quad": {"size": "4"},
+    "fn_slot56": {"size": "4"},
+    "fn_slot48": {"size": "4"},
+    "wnd_vtbl": {
+      "size": "0xe8",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xc0", "u32": "@fn_slot48"},
+        {"offset": "0xe0", "u32": "@fn_slot56"},
+        {"offset": "0xe4", "u32": "@fn_get_quad"}
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004d9160": {
+      "name": "FUN_004d9160",
+      "conv": "thiscall",
+      "args": ["ignore", "ignore"],
+      "passthrough": true
+    },
+    "0x004d9139": {
+      "name": "SetSize_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "ignore"],
+      "passthrough": true
+    },
+    "0x004e8dfa": {
+      "name": "GetSize_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "passthrough": true
+    },
+    "0x0059fb00": {
+      "name": "FUN_0059fb00",
+      "conv": "thiscall",
+      "args": ["mem:16"],
+      "ret": 0
+    },
+    "@fn_get_quad": {
+      "name": "GetQuad",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "00000000000000001300000013000000", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "00000000000000000900000009000000", "call": 1},
+        {"arg": 0, "offset": 0, "hex": "00000000000000000900000009000000", "call": 2},
+        {"arg": 0, "offset": 0, "hex": "00000000000000000900000009000000", "call": 3}
+      ]
+    },
+    "@fn_slot56": {
+      "name": "Slot56",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "@fn_slot48": {
+      "name": "Slot48",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 0
+    }
+  },
+  "_survivors": "L488: child rectangle bottom is overwritten by GetQuad/CopyTo before use; L492: parent rectangle bottom is overwritten by CopyTo; L493: parent rectangle right is overwritten by CopyTo; L497: initial origin is overwritten before use, and origin[2] aliases step_guess which is assigned before any read; emulator stack zeroing also masks deletion of the first x initialization.",
+  "cases": [
+    {"name": "no first child", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x1cc", "u32": 0}
+    ]},
+    {"name": "row layout and trailing cleanup", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x15c", "u8": 0}
+    ]},
+    {"name": "column layout and trailing cleanup", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x15c", "u8": 1}
+    ]},
+    {"name": "row layout fills capped list", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x248", "u32": 2}
+    ], "callees": {"@fn_get_quad": {
+      "name": "GetQuad", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "00000000000000001d0000001d000000", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "00000000000000000900000009000000", "call": 1},
+        {"arg": 0, "offset": 0, "hex": "00000000000000000900000009000000", "call": 2},
+        {"arg": 0, "offset": 0, "hex": "00000000000000000900000009000000", "call": 3}
+      ]
+    }}},
+    {"name": "column layout fills capped list", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x15c", "u8": 1}
+    ], "callees": {"@fn_get_quad": {
+      "name": "GetQuad", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "00000000000000001d0000001d000000", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "00000000000000000900000009000000", "call": 1},
+        {"arg": 0, "offset": 0, "hex": "00000000000000000900000009000000", "call": 2},
+        {"arg": 0, "offset": 0, "hex": "00000000000000000900000009000000", "call": 3}
+      ]
+    }}},
+    {"name": "zero horizontal count", "args": [], "callees": {"@fn_get_quad": {
+      "name": "GetQuad", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "00000000000000000900000013000000", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "00000000000000000900000009000000", "call": 1}
+      ]
+    }}},
+    {"name": "zero vertical count", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x15c", "u8": 1}
+    ], "callees": {"@fn_get_quad": {
+      "name": "GetQuad", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "00000000000000001300000009000000", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "00000000000000000900000009000000", "call": 1}
+      ]
+    }}},
+    {"name": "row mode zero vertical boundary", "args": [], "callees": {"@fn_get_quad": {
+      "name": "GetQuad", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "00000000000000001300000009000000", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "00000000000000000900000009000000", "call": 1}
+      ]
+    }}},
+    {"name": "offset row grid exposes step and extents", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x15c", "u8": 0},
+      {"addr": "@wnd", "offset": "0x248", "u32": 5}
+    ], "callees": {"@fn_get_quad": {
+      "name": "GetQuad", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "0a0000000a0000002700000027000000", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "02000000030000000b0000000c000000", "call": 1},
+        {"arg": 0, "offset": 0, "hex": "02000000030000000b0000000c000000", "call": 2},
+        {"arg": 0, "offset": 0, "hex": "02000000030000000b0000000c000000", "call": 3},
+        {"arg": 0, "offset": 0, "hex": "02000000030000000b0000000c000000", "call": 4},
+        {"arg": 0, "offset": 0, "hex": "02000000030000000b0000000c000000", "call": 5}
+      ]
+    }}},
+    {"name": "offset column grid exposes outer advance", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x15c", "u8": 1},
+      {"addr": "@wnd", "offset": "0x248", "u32": 5}
+    ], "callees": {"@fn_get_quad": {
+      "name": "GetQuad", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "0a0000000a0000002700000027000000", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "02000000030000000b0000000c000000", "call": 1},
+        {"arg": 0, "offset": 0, "hex": "02000000030000000b0000000c000000", "call": 2},
+        {"arg": 0, "offset": 0, "hex": "02000000030000000b0000000c000000", "call": 3},
+        {"arg": 0, "offset": 0, "hex": "02000000030000000b0000000c000000", "call": 4},
+        {"arg": 0, "offset": 0, "hex": "02000000030000000b0000000c000000", "call": 5}
+      ]
+    }}},
+    {"name": "null second child", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x1d0", "u32": 0}
+    ]}
+  ],
+  "fuzz": {
+    "seed": 5148401,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@wnd", "offset": "0x15c", "type": "u8", "choices": [0, 1, 255]},
+      {"addr": "@wnd", "offset": "0x248", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@wnd", "offset": "0x1d0", "type": "ptr", "choices": ["@child1", 0]}
+    ]
+  }
+}

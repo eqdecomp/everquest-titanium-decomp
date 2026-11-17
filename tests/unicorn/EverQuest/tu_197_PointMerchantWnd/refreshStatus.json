@@ -1,0 +1,119 @@
+{
+  "function": "Wrapper_guess::refreshStatus_guess",
+  "original": "0x00546a64",
+  "sources": [
+    "src/EverQuest/tu_197_PointMerchantWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@wrapper",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "wrapper": {
+      "size": "0x210",
+      "fill": "random",
+      "init": [
+        {"offset": "0x208", "u32": "@iface"},
+        {"offset": "0x1c8", "u32": "@presValue"},
+        {"offset": "0x1b4", "u32": "@presA"},
+        {"offset": "0x1b8", "u32": "@equip"}
+      ]
+    },
+    "iface": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@ifaceVt"}]
+    },
+    "ifaceVt": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@fn_iface0"}]
+    },
+    "fn_iface0": {"size": "0x4"},
+    "presValue": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@pvVt"}]
+    },
+    "pvVt": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xfc", "u32": "@fn_pv63"}]
+    },
+    "fn_pv63": {"size": "0x4"},
+    "presA": {
+      "size": "0x140",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@paVt"}]
+    },
+    "paVt": {
+      "size": "0x140",
+      "fill": "zero",
+      "init": [{"offset": "0x130", "u32": "@fn_pa76"}]
+    },
+    "fn_pa76": {"size": "0x4"},
+    "equip": {
+      "size": "0x130",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0054571a": {"name": "FUN_0054571a", "conv": "thiscall", "args": [], "ret": 42},
+    "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 0},
+    "0x00571e00": {"name": "FUN_00571e00", "conv": "thiscall", "args": ["ptr"], "ret": "keep"},
+    "0x00571d00": {"name": "FUN_00571d00", "conv": "thiscall", "args": ["ptr"], "ret": "keep"},
+    "0x00598580": {"name": "FUN_00598580", "conv": "thiscall", "args": [], "ret": "keep"},
+    "0x0054578f": {"name": "FUN_0054578f", "conv": "thiscall", "args": [], "ret": 3},
+    "0x0059b9d0": {"name": "FUN_0059b9d0", "conv": "thiscall", "args": ["ignore", "int", "int", "int"], "ret": "keep"},
+    "0x00545701": {"name": "FUN_00545701", "conv": "thiscall", "args": ["int", "int"], "ret": 7},
+    "0x00571fc0": {"name": "FUN_00571fc0", "conv": "thiscall", "args": ["ptr"], "ret": "keep"},
+    "0x0059b360": {"name": "FUN_0059b360", "conv": "thiscall", "args": ["int", "int", "ignore"], "ret": "keep"},
+    "0x00545731": {"name": "FUN_00545731", "conv": "thiscall", "args": ["int"], "ret": 9},
+    "0x005738b0": {"name": "FUN_005738b0", "conv": "cdecl", "args": ["ignore", "cstr", "u32"], "ret": "keep"},
+    "0x00545eee": {"name": "FUN_00545eee", "conv": "thiscall", "args": ["int", "u8", "u8"], "ret": "keep"},
+    "@fn_iface0": {"conv": "thiscall", "args": [], "ret": 0},
+    "@fn_pv63": {"conv": "thiscall", "args": ["ignore"], "ret": "keep"},
+    "@fn_pa76": {"conv": "thiscall", "args": [], "ret": "keep"}
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "coverage_ok": {
+    "00546ADC-00546AE7": "inline ~CXStr FreeRep branch: the stubbed CXStr ctor and operator= cannot store a CStrRep handle through ECX, so Ptr stays null here",
+    "00546B52-00546B5D": "inline ~CXStr FreeRep branch of the empty-string temporary: same stub limit (ctor cannot store a handle)",
+    "00546BBE-00546BC9": "inline ~CXStr FreeRep branch of itemText after operator=: same stub limit (operator= cannot store a handle)"
+  },
+  "cases": [
+    {"name": "all present, equip checked", "args": [],
+     "memory": [{"addr": "@equip", "offset": "0x128", "u8": 1}]},
+    {"name": "all present, equip unchecked", "args": [],
+     "memory": [{"addr": "@equip", "offset": "0x128", "u8": 0}]},
+    {"name": "no equip button", "args": [],
+     "memory": [{"addr": "@wrapper", "offset": "0x1b8", "u32": 0}]},
+    {"name": "no points value", "args": [],
+     "memory": [{"addr": "@wrapper", "offset": "0x1c8", "u32": 0}]},
+    {"name": "no presenter", "args": [],
+     "memory": [{"addr": "@wrapper", "offset": "0x1b4", "u32": 0}]},
+    {"name": "bare", "args": [],
+     "memory": [{"addr": "@wrapper", "offset": "0x1c8", "u32": 0},
+                {"addr": "@wrapper", "offset": "0x1b4", "u32": 0},
+                {"addr": "@wrapper", "offset": "0x1b8", "u32": 0}]},
+    {"name": "presenter, slot8 zero", "args": [],
+     "callees": {"0x0054578f": {"name": "FUN_0054578f", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "presenter, slot8 one", "args": [],
+     "callees": {"0x0054578f": {"name": "FUN_0054578f", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "presenter, slot8 two", "args": [],
+     "callees": {"0x0054578f": {"name": "FUN_0054578f", "conv": "thiscall", "args": [], "ret": 2}}}
+  ],
+  "fuzz": {
+    "seed": 5532260,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@equip", "offset": "0x128", "type": "u8", "range": [0, 1]},
+      {"addr": "@wrapper", "offset": "0x1e8", "type": "int", "range": [-5, 40]},
+      {"addr": "@wrapper", "offset": "0x1ec", "type": "u8", "range": [0, 255]}
+    ]
+  }
+}

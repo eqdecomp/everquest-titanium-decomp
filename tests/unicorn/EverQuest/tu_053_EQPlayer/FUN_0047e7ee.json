@@ -1,0 +1,345 @@
+{
+  "function": "EQPlayerCheck_guess::IsInvisibleToMe_guess",
+  "original": "0x0047e7ee",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@eqplayercheck",
+  "args": [
+    {
+      "name": "object",
+      "type": "ptr"
+    }
+  ],
+  "ret": "char",
+  "objects": {
+    "eqplayercheck": {
+      "size": "0x348",
+      "fill": "random",
+      "init": [{"offset": "0x218", "u32": "@pcinfo"}]
+    },
+    "object": {
+      "size": "0x348",
+      "fill": "random",
+      "init": [{"offset": "0x1a8", "u32": "@actorinfo"}]
+    },
+    "actorinfo": {
+      "size": "0x1100",
+      "fill": "random"
+    },
+    "pcinfo": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "gate": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "globalstate": {
+      "size": "0x1d8",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x00850C5C", "u32": "@gate"},
+    {"addr": "0x009915EC", "u32": "@globalstate"}
+  ],
+  "callees": {
+    "0x004e3eca": {"name": "IsHideTraders_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x004e3ee4": {"name": "FUN_004e3ee4", "conv": "thiscall", "args": [], "ret": 6},
+    "0x0041d3c6": {"name": "CanISeeInvis_guess", "conv": "thiscall", "args": [], "ret": 1}
+  },
+  "cases": [
+    {
+      "name": "null object",
+      "args": [0]
+    },
+    {
+      "name": "type 2 clears hide",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 2},
+        {"addr": "@object", "offset": "0x250", "u8": 1}
+      ]
+    },
+    {
+      "name": "no hp clears hide",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 0},
+        {"addr": "@object", "offset": "0x250", "u8": 1}
+      ]
+    },
+    {
+      "name": "body 0x41 returns 1",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 65}
+      ]
+    },
+    {
+      "name": "body 0x40 falls through",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 64},
+        {"addr": "@actorinfo", "offset": "0x106c", "u32": 0},
+        {"addr": "@actorinfo", "offset": "0x1074", "u32": 0},
+        {"addr": "@object", "offset": "0x250", "u8": 0}
+      ]
+    },
+    {
+      "name": "gate returns 1",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 1},
+        {"addr": "@object", "offset": "0x258", "u32": 5},
+        {"addr": "@actorinfo", "offset": "0x106c", "u32": 1}
+      ]
+    },
+    {
+      "name": "gate same spawn falls through",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 1},
+        {"addr": "@object", "offset": "0x258", "u32": 5},
+        {"addr": "@object", "offset": "0x250", "u8": 0},
+        {"addr": "@actorinfo", "offset": "0x106c", "u32": 1}
+      ],
+      "callees": {
+        "0x004e3eca": {"name": "FUN_004e3eca", "conv": "thiscall", "args": [], "ret": 1},
+        "0x004e3ee4": {"name": "FUN_004e3ee4", "conv": "thiscall", "args": [], "ret": 5},
+        "0x0041d3c6": {"name": "FUN_0041d3c6", "conv": "thiscall", "args": [], "ret": 1}
+      }
+    },
+    {
+      "name": "gate eca zero falls through",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 1},
+        {"addr": "@object", "offset": "0x258", "u32": 5},
+        {"addr": "@object", "offset": "0x250", "u8": 0},
+        {"addr": "@actorinfo", "offset": "0x106c", "u32": 1}
+      ],
+      "callees": {
+        "0x004e3eca": {"name": "FUN_004e3eca", "conv": "thiscall", "args": [], "ret": 0},
+        "0x004e3ee4": {"name": "FUN_004e3ee4", "conv": "thiscall", "args": [], "ret": 6},
+        "0x0041d3c6": {"name": "FUN_0041d3c6", "conv": "thiscall", "args": [], "ret": 1}
+      }
+    },
+    {
+      "name": "gate global null falls through",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 1},
+        {"addr": "@object", "offset": "0x258", "u32": 5},
+        {"addr": "@object", "offset": "0x250", "u8": 0},
+        {"addr": "@actorinfo", "offset": "0x106c", "u32": 1},
+        {"addr": "0x00850C5C", "u32": 0}
+      ]
+    },
+    {
+      "name": "state 1074 returns 1",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 1},
+        {"addr": "@object", "offset": "0x258", "u32": 5},
+        {"addr": "@actorinfo", "offset": "0x106c", "u32": 0},
+        {"addr": "@actorinfo", "offset": "0x1074", "u32": 1},
+        {"addr": "@globalstate", "offset": "0x1d4", "u8": 1},
+        {"addr": "@globalstate", "offset": "0x1d0", "u32": 7}
+      ]
+    },
+    {
+      "name": "state 1074 zero falls through",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 1},
+        {"addr": "@object", "offset": "0x258", "u32": 5},
+        {"addr": "@object", "offset": "0x250", "u8": 0},
+        {"addr": "@actorinfo", "offset": "0x106c", "u32": 0},
+        {"addr": "@actorinfo", "offset": "0x1074", "u32": 0}
+      ]
+    },
+    {
+      "name": "state global null falls through",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 1},
+        {"addr": "@object", "offset": "0x258", "u32": 5},
+        {"addr": "@object", "offset": "0x250", "u8": 0},
+        {"addr": "@actorinfo", "offset": "0x106c", "u32": 0},
+        {"addr": "@actorinfo", "offset": "0x1074", "u32": 1},
+        {"addr": "0x009915EC", "u32": 0}
+      ]
+    },
+    {
+      "name": "state 1d4 zero falls through",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 1},
+        {"addr": "@object", "offset": "0x258", "u32": 5},
+        {"addr": "@object", "offset": "0x250", "u8": 0},
+        {"addr": "@actorinfo", "offset": "0x106c", "u32": 0},
+        {"addr": "@actorinfo", "offset": "0x1074", "u32": 1},
+        {"addr": "@globalstate", "offset": "0x1d4", "u8": 0},
+        {"addr": "@globalstate", "offset": "0x1d0", "u32": 7}
+      ]
+    },
+    {
+      "name": "state 1d0 equal spawn falls through",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 1},
+        {"addr": "@object", "offset": "0x258", "u32": 5},
+        {"addr": "@object", "offset": "0x250", "u8": 0},
+        {"addr": "@actorinfo", "offset": "0x106c", "u32": 0},
+        {"addr": "@actorinfo", "offset": "0x1074", "u32": 1},
+        {"addr": "@globalstate", "offset": "0x1d4", "u8": 1},
+        {"addr": "@globalstate", "offset": "0x1d0", "u32": 5}
+      ]
+    },
+    {
+      "name": "hide no pcinfo returns 1",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 1},
+        {"addr": "@object", "offset": "0x258", "u32": 5},
+        {"addr": "@object", "offset": "0x250", "u8": 1},
+        {"addr": "@actorinfo", "offset": "0x106c", "u32": 0},
+        {"addr": "@actorinfo", "offset": "0x1074", "u32": 0},
+        {"addr": "@eqplayercheck", "offset": "0x218", "u32": 0}
+      ]
+    },
+    {
+      "name": "hide pcinfo zero returns 1",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 1},
+        {"addr": "@object", "offset": "0x258", "u32": 5},
+        {"addr": "@object", "offset": "0x250", "u8": 1},
+        {"addr": "@actorinfo", "offset": "0x106c", "u32": 0},
+        {"addr": "@actorinfo", "offset": "0x1074", "u32": 0}
+      ],
+      "callees": {
+        "0x004e3eca": {"name": "FUN_004e3eca", "conv": "thiscall", "args": [], "ret": 1},
+        "0x004e3ee4": {"name": "FUN_004e3ee4", "conv": "thiscall", "args": [], "ret": 6},
+        "0x0041d3c6": {"name": "FUN_0041d3c6", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "hide checked object gm this not returns 1",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 1},
+        {"addr": "@object", "offset": "0x258", "u32": 5},
+        {"addr": "@object", "offset": "0x250", "u8": 1},
+        {"addr": "@object", "offset": "0x256", "u8": 1},
+        {"addr": "@eqplayercheck", "offset": "0x256", "u8": 0},
+        {"addr": "@actorinfo", "offset": "0x106c", "u32": 0},
+        {"addr": "@actorinfo", "offset": "0x1074", "u32": 0}
+      ]
+    },
+    {
+      "name": "hide checked object not gm returns 0",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 1},
+        {"addr": "@object", "offset": "0x258", "u32": 5},
+        {"addr": "@object", "offset": "0x250", "u8": 1},
+        {"addr": "@object", "offset": "0x256", "u8": 0},
+        {"addr": "@eqplayercheck", "offset": "0x256", "u8": 0},
+        {"addr": "@actorinfo", "offset": "0x106c", "u32": 0},
+        {"addr": "@actorinfo", "offset": "0x1074", "u32": 0}
+      ]
+    },
+    {
+      "name": "hide checked both gm returns 0",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 1},
+        {"addr": "@object", "offset": "0x258", "u32": 5},
+        {"addr": "@object", "offset": "0x250", "u8": 1},
+        {"addr": "@object", "offset": "0x256", "u8": 1},
+        {"addr": "@eqplayercheck", "offset": "0x256", "u8": 1},
+        {"addr": "@actorinfo", "offset": "0x106c", "u32": 0},
+        {"addr": "@actorinfo", "offset": "0x1074", "u32": 0}
+      ]
+    },
+    {
+      "name": "hide 2 returns 0",
+      "args": ["@object"],
+      "memory": [
+        {"addr": "@object", "offset": "0x244", "u8": 0},
+        {"addr": "@object", "offset": "0x274", "u32": 5},
+        {"addr": "@object", "offset": "0x270", "u32": 1},
+        {"addr": "@object", "offset": "0x258", "u32": 5},
+        {"addr": "@object", "offset": "0x250", "u8": 2},
+        {"addr": "@object", "offset": "0x256", "u8": 1},
+        {"addr": "@eqplayercheck", "offset": "0x256", "u8": 0},
+        {"addr": "@actorinfo", "offset": "0x106c", "u32": 0},
+        {"addr": "@actorinfo", "offset": "0x1074", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4712430,
+    "count": 150,
+    "args": [
+      {
+        "choices": [
+          "@object"
+        ]
+      }
+    ],
+    "memory": [
+      {"addr": "@object", "offset": "0x244", "type": "u8", "choices": [0, 1, 2, 3]},
+      {"addr": "@object", "offset": "0x274", "type": "int", "choices": [0, 1, 5]},
+      {"addr": "@object", "offset": "0x270", "type": "int", "choices": [1, 64, 65, 66]},
+      {"addr": "@object", "offset": "0x250", "type": "u8", "choices": [0, 1, 2]},
+      {"addr": "@object", "offset": "0x256", "type": "u8", "choices": [0, 1]},
+      {"addr": "@object", "offset": "0x258", "type": "u32", "choices": [5, 6]},
+      {"addr": "@eqplayercheck", "offset": "0x256", "type": "u8", "choices": [0, 1]},
+      {"addr": "@eqplayercheck", "offset": "0x218", "type": "ptr", "choices": ["@pcinfo", 0]},
+      {"addr": "@actorinfo", "offset": "0x106c", "type": "int", "choices": [0, 1]},
+      {"addr": "@actorinfo", "offset": "0x1074", "type": "int", "choices": [0, 1]},
+      {"addr": "@globalstate", "offset": "0x1d0", "type": "u32", "choices": [5, 6]},
+      {"addr": "@globalstate", "offset": "0x1d4", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00850C5C", "type": "ptr", "choices": ["@gate", 0]},
+      {"addr": "0x009915EC", "type": "ptr", "choices": ["@globalstate", 0]}
+    ]
+  }
+}

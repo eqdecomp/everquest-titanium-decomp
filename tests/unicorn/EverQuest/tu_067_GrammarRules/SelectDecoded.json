@@ -1,0 +1,103 @@
+{
+  "function": "GrammarRules_guess::RuleFr1_guess",
+  "original": "0x004b18bf",
+  "sources": [
+    "src/EverQuest/tu_067_GrammarRules.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@cache",
+  "args": [
+    {"name": "destination", "type": "ptr"},
+    {"name": "source", "type": "cstr"},
+    {"name": "vowelArticle", "type": "cstr"},
+    {"name": "consonantArticle", "type": "cstr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "cache": {"size": "0x30", "fill": "random"},
+    "destination": {"size": "0x100", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x5a5a5a5a"}
+  ],
+  "callees": {
+    "0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "passthrough": true},
+    "0x004b181b": {"name": "IsFrenchVowel_guess", "conv": "cdecl", "args": ["u16"], "passthrough": true}
+  },
+  "cases": [
+    {"name": "A vowel", "args": ["@destination", "Apple", "an", "a"]},
+    {"name": "E vowel", "args": ["@destination", "Egg", "an", "a"]},
+    {"name": "H vowel (0x48)", "args": ["@destination", "Hour", "an", "a"]},
+    {"name": "I vowel", "args": ["@destination", "Ice", "an", "a"]},
+    {"name": "O vowel", "args": ["@destination", "Orange", "an", "a"]},
+    {"name": "U vowel", "args": ["@destination", "Umbrella", "an", "a"]},
+    {"name": "lower a", "args": ["@destination", "apple", "an", "a"]},
+    {"name": "lower e", "args": ["@destination", "egg", "an", "a"]},
+    {"name": "lower h", "args": ["@destination", "hat", "an", "a"]},
+    {"name": "lower i", "args": ["@destination", "item", "an", "a"]},
+    {"name": "lower o", "args": ["@destination", "owl", "an", "a"]},
+    {"name": "lower u", "args": ["@destination", "umbra", "an", "a"]},
+    {"name": "G below H (0x47) consonant", "args": ["@destination", "Go", "an", "a"]},
+    {"name": "J above I (0x4a) consonant", "args": ["@destination", "Jo", "an", "a"]},
+    {"name": "B consonant", "args": ["@destination", "Bee", "an", "a"]},
+    {"name": "Z top of upper (0x5a)", "args": ["@destination", "Zoo", "an", "a"]},
+    {"name": "[ above Z (0x5b)", "args": ["@destination", "[x", "an", "a"]},
+    {"name": "backtick below a (0x60)", "args": ["@destination", "`x", "an", "a"]},
+    {"name": "lower x consonant", "args": ["@destination", "xray", "an", "a"]},
+    {"name": "lower g (0x67) consonant", "args": ["@destination", "goat", "an", "a"]},
+    {"name": "lower j (0x6a) consonant", "args": ["@destination", "jam", "an", "a"]},
+    {"name": "lower { (0x7b) consonant", "args": ["@destination", "{x", "an", "a"]},
+    {"name": "T between U and Y", "args": ["@destination", "Tree", "an", "a"]},
+    {"name": "Y then consonant: vowel article", "args": ["@destination", "Yt", "an", "a"]},
+    {"name": "Y then vowel: consonant article", "args": ["@destination", "Yes", "an", "a"]},
+    {"name": "lower y then consonant", "args": ["@destination", "yt", "an", "a"]},
+    {"name": "lower y then vowel", "args": ["@destination", "yo", "an", "a"]},
+    {"name": "lone Y: vowel article", "args": ["@destination", "Y", "an", "a"]},
+    {"name": "W consonant", "args": ["@destination", "Wd", "an", "a"]},
+    {"name": "empty source: consonant", "args": ["@destination", "", "an", "a"]},
+    {"name": "digit source: consonant", "args": ["@destination", "1st", "an", "a"]},
+    {"name": "space source: consonant", "args": ["@destination", " ", "an", "a"]},
+    {"name": "A grave (0xc0) table vowel", "args": ["@destination", "Àx", "an", "a"]},
+    {"name": "A circumflex (0xc2) table vowel", "args": ["@destination", "Âx", "an", "a"]},
+    {"name": "C cedilla (0xc7) table default", "args": ["@destination", "Çx", "an", "a"]},
+    {"name": "e acute (0xe9) table vowel", "args": ["@destination", "été", "an", "a"]},
+    {"name": "u circumflex (0xfb) table vowel", "args": ["@destination", "ûx", "an", "a"]},
+    {"name": "y diaeresis (0xff) table default", "args": ["@destination", "ÿx", "an", "a"]},
+    {"name": "0xc0 vowel", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "c000"}]}}},
+    {"name": "0xc1 default", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "c100"}]}}},
+    {"name": "0xc2 vowel", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "c200"}]}}},
+    {"name": "0xc3 default", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "c300"}]}}},
+    {"name": "0xca vowel", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "ca00"}]}}},
+    {"name": "0xcb default", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "cb00"}]}}},
+    {"name": "0xce vowel", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "ce00"}]}}},
+    {"name": "0xcf default", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "cf00"}]}}},
+    {"name": "0xda default", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "da00"}]}}},
+    {"name": "0xdb vowel", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "db00"}]}}},
+    {"name": "0xdc default", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "dc00"}]}}},
+    {"name": "0xe0 vowel", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "e000"}]}}},
+    {"name": "0xe1 default", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "e100"}]}}},
+    {"name": "0xe2 vowel", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "e200"}]}}},
+    {"name": "0xe3 default", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "e300"}]}}},
+    {"name": "0xea vowel", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "ea00"}]}}},
+    {"name": "0xeb default", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "eb00"}]}}},
+    {"name": "0xee vowel", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "ee00"}]}}},
+    {"name": "0xef default", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "ef00"}]}}},
+    {"name": "0xfb vowel", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "fb00"}]}}},
+    {"name": "0xfc default", "args": ["@destination", "x", "an", "a"], "callees": {"0x00574590": {"name": "DecodeText_guess", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "fc00"}]}}}
+  ],
+  "fuzz": {
+    "seed": 4921535,
+    "count": 150,
+    "args": [
+      {"choices": ["@destination"]},
+      {"choices": [
+        "Apple", "egg", "Hour", "Ice", "Orange", "Umbrella", "apple", "eel", "hat", "item", "owl", "umbra",
+        "Go", "Jo", "Bee", "Zoo", "(x", "[x", "`x", "xray", "goat", "jam", "{x", "Tree", "Yt", "Yes", "yt", "yo",
+        "Y", "y", "Wd", "", "1st", " ", "Yo", "yes", "Yuck", "oYo", "ax", "Ux", "Ay", "zy", "~x", "Àx", "été"
+      ]},
+      {"choices": ["an", "the", ""]},
+      {"choices": ["a", "one", "x"]}
+    ],
+    "memory": []
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "function": "EQ_PCView_guess::GetArmorTint_guess",
+  "original": "0x004be271",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [
+    {
+      "name": "index",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "object": {
+      "size": "0xc34c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@holder"
+        }
+      ]
+    },
+    "holder": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 64
+        }
+      ]
+    },
+    "lookup": {
+      "size": "0x1aec",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x005ed490": {
+      "name": "FUN_005ed490",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@lookup"
+    },
+    "0x005f05e0": {
+      "name": "FUN_005f05e0",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x004bc5b5": {
+      "name": "GetBodyTint_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 73
+    }
+  },
+  "cases": [
+    {
+      "name": "negative-index",
+      "args": [
+        -1
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "index-above-nine",
+      "args": [
+        10
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "index-nine-traps-before-array-read",
+      "args": [
+        9
+      ]
+    },
+    {
+      "name": "empty-entry-falls-back",
+      "args": [
+        0
+      ],
+      "expect": {
+        "ret": 73
+      }
+    },
+    {
+      "name": "entry-with-invalid-index-falls-back",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@lookup",
+          "offset": "0x1acc",
+          "u32": 8
+        }
+      ],
+      "expect": {
+        "ret": 73
+      }
+    },
+    {
+      "name": "valid-entry-returns-lookup-value",
+      "args": [
+        2
+      ],
+      "memory": [
+        {
+          "addr": "@lookup",
+          "offset": "0x1ad0",
+          "u32": 99
+        }
+      ],
+      "callees": {
+        "0x005f05e0": {
+          "name": "FUN_005f05e0",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      },
+      "expect": {
+        "ret": 99
+      }
+    },
+    {
+      "name": "last-valid-entry-returns-lookup-value",
+      "args": [
+        8
+      ],
+      "memory": [
+        {
+          "addr": "@lookup",
+          "offset": "0x1ae8",
+          "u32": 42
+        }
+      ],
+      "callees": {
+        "0x005f05e0": {
+          "name": "FUN_005f05e0",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      },
+      "expect": {
+        "ret": 42
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4973169,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -2,
+          11
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@lookup",
+        "offset": "0x1ac8",
+        "type": "int",
+        "count": 9,
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "coverage_ok": {
+    "004BE2BB-004BE2BC": "index nine already traps at the identical earlier bounds check at 004BE295"
+  },
+  "_survivors": "L3074: changing >= to > or 9 to 10 cannot be observed because this check only receives indices 0 through 8; index 9 traps at the earlier int3 at 004BE295; L3075: deleting this int3 cannot be observed because the second bounds check is false for every reachable index"
+}

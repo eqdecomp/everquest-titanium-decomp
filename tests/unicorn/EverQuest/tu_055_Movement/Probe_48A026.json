@@ -1,0 +1,177 @@
+{
+  "function": "State_48995D_guess::IsLedgeAhead_guess",
+  "original": "0x0048a026",
+  "sources": [
+    "src/EverQuest/tu_055_Movement.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@state_48995d",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "state_48995d": {
+      "size": "0x2ec",
+      "fill": "random"
+    },
+    "trig": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@trig_vtable" }
+      ]
+    },
+    "trig_vtable": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x8", "u32": "@fn_sin" },
+        { "offset": "0xc", "u32": "@fn_cos" }
+      ]
+    },
+    "fn_sin": {
+      "size": "0x1",
+      "fill": "zero"
+    },
+    "fn_cos": {
+      "size": "0x1",
+      "fill": "zero"
+    },
+    "fn_loaded": {
+      "size": "0x1",
+      "fill": "zero"
+    },
+    "world": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@world_vtable" }
+      ]
+    },
+    "world_vtable": {
+      "size": "0x34",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x30", "u32": "@fn_loaded" }
+      ]
+    },
+    "display": {
+      "size": "0x150",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x11c", "u32": "@probe" }
+      ]
+    },
+    "probe": {
+      "size": "0xc",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    { "addr": "0x0099e374", "u32": "@trig" },
+    { "addr": "0x0099e368", "u32": "@world" },
+    { "addr": "0x00905d24", "u32": "@display" },
+    { "addr": "0x0063f4d0", "from_image": "0x0063f4d0", "image_size": 4 },
+    { "addr": "@state_48995d", "offset": "0x30", "f32": 4.0 },
+    { "addr": "@state_48995d", "offset": "0x34", "f32": -2.0 },
+    { "addr": "@state_48995d", "offset": "0x38", "f32": 11.0 },
+    { "addr": "@state_48995d", "offset": "0x4c", "f32": 0.75 },
+    { "addr": "@state_48995d", "offset": "0x238", "f32": 3.5 }
+  ],
+  "callees": {
+    "@fn_sin": {
+      "name": "sin",
+      "conv": "thiscall",
+      "args": ["float"],
+      "ret_float": 0.75
+    },
+    "@fn_cos": {
+      "name": "cos",
+      "conv": "thiscall",
+      "args": ["float"],
+      "ret_float": 0.25
+    },
+    "@fn_loaded": {
+      "name": "loaded",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x0043a292": {
+      "name": "CheckFloor",
+      "conv": "thiscall",
+      "args": ["float", "float", "float", "ptr"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "not_loaded",
+      "args": [],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "loaded_no_floor",
+      "args": [],
+      "callees": {
+        "@fn_loaded": {
+          "name": "loaded",
+          "conv": "thiscall",
+          "args": ["ptr"],
+          "ret": 1
+        }
+      },
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "loaded_floor_hit",
+      "args": [],
+      "callees": {
+        "@fn_loaded": {
+          "name": "loaded",
+          "conv": "thiscall",
+          "args": ["ptr"],
+          "ret": 1
+        },
+        "0x0043a292": {
+          "name": "CheckFloor",
+          "conv": "thiscall",
+          "args": ["float", "float", "float", "ptr"],
+          "ret": 1
+        }
+      },
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "zero_inputs_and_loaded_clear",
+      "args": [],
+      "memory": [
+        { "addr": "@state_48995d", "offset": "0x30", "f32": 0.0 },
+        { "addr": "@state_48995d", "offset": "0x34", "f32": 0.0 },
+        { "addr": "@state_48995d", "offset": "0x38", "f32": 0.0 },
+        { "addr": "@state_48995d", "offset": "0x4c", "f32": 0.0 },
+        { "addr": "@state_48995d", "offset": "0x238", "f32": 0.0 }
+      ],
+      "callees": {
+        "@fn_loaded": {
+          "name": "loaded",
+          "conv": "thiscall",
+          "args": ["ptr"],
+          "ret": 1
+        }
+      },
+      "expect": { "ret": 1 }
+    }
+  ],
+  "fuzz": {
+    "seed": 4759590,
+    "count": 100,
+    "args": [],
+    "memory": [
+      { "addr": "@state_48995d", "offset": "0x30", "type": "float", "range": [-100.0, 100.0] },
+      { "addr": "@state_48995d", "offset": "0x34", "type": "float", "range": [-100.0, 100.0] },
+      { "addr": "@state_48995d", "offset": "0x38", "type": "float", "range": [-100.0, 100.0] },
+      { "addr": "@state_48995d", "offset": "0x4c", "type": "float", "range": [-6.283185, 6.283185] },
+      { "addr": "@state_48995d", "offset": "0x238", "type": "float", "range": [-20.0, 20.0] }
+    ]
+  }
+}

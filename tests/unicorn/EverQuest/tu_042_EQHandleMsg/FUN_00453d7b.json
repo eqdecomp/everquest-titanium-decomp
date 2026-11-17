@@ -1,0 +1,261 @@
+{
+  "function": "Handle_OP_Charm_guess",
+  "original": "0x00453d7b",
+  "sources": [
+    "src/EverQuest/tu_042_EQHandleMsg.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "argument_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "argument": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "target": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@output"
+        }
+      ]
+    },
+    "output": {
+      "size": "0x200",
+      "fill": "random"
+    },
+    "node": {
+      "size": "0x300",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00850bac",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x00401b28": {
+      "name": "ResolveDispatch_guess",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": [
+        "@target",
+        "@node"
+      ]
+    },
+    "0x0047bfd0": {
+      "name": "IsHorseRace_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005422b5": {
+      "name": "Continue_guess",
+      "conv": "cdecl",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "enabled 1, node ready, output set",
+      "args": ["@argument"],
+      "memory": [
+        {"addr": "@argument", "offset": "0x8", "u8": 1},
+        {"addr": "@node", "offset": "0x1b3", "u8": 0},
+        {"addr": "@node", "offset": "0x260", "u32": 5},
+        {"addr": "@node", "offset": "0x258", "u32": 4660}
+      ]
+    },
+    {
+      "name": "node busy flag set",
+      "args": ["@argument"],
+      "memory": [
+        {"addr": "@argument", "offset": "0x8", "u8": 1},
+        {"addr": "@node", "offset": "0x1b3", "u8": 1},
+        {"addr": "@node", "offset": "0x260", "u32": 5},
+        {"addr": "@node", "offset": "0x258", "u32": 4660}
+      ]
+    },
+    {
+      "name": "node Check returns nonzero",
+      "args": ["@argument"],
+      "memory": [
+        {"addr": "@argument", "offset": "0x8", "u8": 1},
+        {"addr": "@node", "offset": "0x1b3", "u8": 0},
+        {"addr": "@node", "offset": "0x260", "u32": 5},
+        {"addr": "@node", "offset": "0x258", "u32": 4660}
+      ],
+      "callees": {
+        "0x0047bfd0": {"name": "Check_guess", "conv": "thiscall", "args": [], "ret": 1}
+      }
+    },
+    {
+      "name": "node type 0x6c",
+      "args": ["@argument"],
+      "memory": [
+        {"addr": "@argument", "offset": "0x8", "u8": 1},
+        {"addr": "@node", "offset": "0x1b3", "u8": 0},
+        {"addr": "@node", "offset": "0x260", "u32": 108},
+        {"addr": "@node", "offset": "0x258", "u32": 4660}
+      ]
+    },
+    {
+      "name": "target null",
+      "args": ["@argument"],
+      "memory": [
+        {"addr": "@argument", "offset": "0x8", "u8": 1},
+        {"addr": "@node", "offset": "0x1b3", "u8": 0},
+        {"addr": "@node", "offset": "0x260", "u32": 5},
+        {"addr": "@node", "offset": "0x258", "u32": 4660}
+      ],
+      "callees": {
+        "0x00401b28": {"name": "ResolveDispatch_guess", "conv": "cdecl", "args": ["u32"], "ret": [0, "@node"]}
+      }
+    },
+    {
+      "name": "node null",
+      "args": ["@argument"],
+      "memory": [
+        {"addr": "@argument", "offset": "0x8", "u8": 1}
+      ],
+      "callees": {
+        "0x00401b28": {"name": "ResolveDispatch_guess", "conv": "cdecl", "args": ["u32"], "ret": ["@target", 0]}
+      }
+    },
+    {
+      "name": "enabled 1, output null",
+      "args": ["@argument"],
+      "memory": [
+        {"addr": "@argument", "offset": "0x8", "u8": 1},
+        {"addr": "@node", "offset": "0x1b3", "u8": 0},
+        {"addr": "@node", "offset": "0x260", "u32": 5},
+        {"addr": "@node", "offset": "0x258", "u32": 4660},
+        {"addr": "@target", "offset": "0x1a8", "u32": 0}
+      ]
+    },
+    {
+      "name": "enabled 0, output set",
+      "args": ["@argument"],
+      "memory": [
+        {"addr": "@argument", "offset": "0x8", "u8": 0},
+        {"addr": "@node", "offset": "0x1b3", "u8": 0},
+        {"addr": "@node", "offset": "0x260", "u32": 5},
+        {"addr": "@node", "offset": "0x258", "u32": 4660}
+      ]
+    },
+    {
+      "name": "enabled 0, output null",
+      "args": ["@argument"],
+      "memory": [
+        {"addr": "@argument", "offset": "0x8", "u8": 0},
+        {"addr": "@node", "offset": "0x1b3", "u8": 0},
+        {"addr": "@node", "offset": "0x260", "u32": 5},
+        {"addr": "@node", "offset": "0x258", "u32": 4660},
+        {"addr": "@target", "offset": "0x1a8", "u32": 0}
+      ]
+    },
+    {
+      "name": "enabled 2 (not 1), output set",
+      "args": ["@argument"],
+      "memory": [
+        {"addr": "@argument", "offset": "0x8", "u8": 2},
+        {"addr": "@node", "offset": "0x1b3", "u8": 0},
+        {"addr": "@node", "offset": "0x260", "u32": 5},
+        {"addr": "@node", "offset": "0x258", "u32": 4660}
+      ]
+    },
+    {
+      "name": "enabled 1, output set, busy: Continue called",
+      "args": ["@argument"],
+      "memory": [
+        {"addr": "@argument", "offset": "0x8", "u8": 1},
+        {"addr": "@node", "offset": "0x1b3", "u8": 0},
+        {"addr": "@node", "offset": "0x260", "u32": 5},
+        {"addr": "@node", "offset": "0x258", "u32": 4660},
+        {"addr": "0x00850bac", "u32": 1}
+      ]
+    },
+    {
+      "name": "enabled 0, output set, busy: Continue called",
+      "args": ["@argument"],
+      "memory": [
+        {"addr": "@argument", "offset": "0x8", "u8": 0},
+        {"addr": "@node", "offset": "0x1b3", "u8": 0},
+        {"addr": "@node", "offset": "0x260", "u32": 5},
+        {"addr": "@node", "offset": "0x258", "u32": 4660},
+        {"addr": "0x00850bac", "u32": 1}
+      ]
+    },
+    {
+      "name": "enabled 1, output null, busy: Continue called",
+      "args": ["@argument"],
+      "memory": [
+        {"addr": "@argument", "offset": "0x8", "u8": 1},
+        {"addr": "@node", "offset": "0x1b3", "u8": 0},
+        {"addr": "@node", "offset": "0x260", "u32": 5},
+        {"addr": "@node", "offset": "0x258", "u32": 4660},
+        {"addr": "@target", "offset": "0x1a8", "u32": 0},
+        {"addr": "0x00850bac", "u32": 1}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4537723,
+    "count": 200,
+    "args": [
+      {
+        "choices": [
+          "@argument"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@argument",
+        "offset": "0x8",
+        "type": "u8",
+        "choices": [0, 1, 2]
+      },
+      {
+        "addr": "@node",
+        "offset": "0x1b3",
+        "type": "u8",
+        "choices": [0, 0, 0, 1]
+      },
+      {
+        "addr": "@node",
+        "offset": "0x260",
+        "type": "int",
+        "choices": [108, 5, 0]
+      },
+      {
+        "addr": "@node",
+        "offset": "0x258",
+        "type": "int",
+        "range": [-100, 100]
+      },
+      {
+        "addr": "0x00850bac",
+        "type": "int",
+        "choices": [0, 1]
+      },
+      {
+        "addr": "@target",
+        "offset": "0x1a8",
+        "type": "ptr",
+        "choices": ["@output", 0]
+      }
+    ]
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "function": "CreateMainMenu_guess",
+  "original": "0x00441ac6",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "ptr",
+  "objects": {
+    "root": {"size": "0x10", "fill": "random"},
+    "g1": {"size": "0x10", "fill": "random"},
+    "g2": {"size": "0x10", "fill": "random"},
+    "g3": {"size": "0x10", "fill": "random"},
+    "g4": {"size": "0x10", "fill": "random"},
+    "g5": {"size": "0x10", "fill": "random"},
+    "item": {"size": "0x18", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": ["@root", "@g1", "@item", "@item", "@item", "@item",
+              "@g2", "@item", "@item", "@item", "@item", "@item", "@item",
+              "@g3", "@item", "@item", "@item", "@item", "@item", "@item", "@item", "@item", "@item", "@item", "@item",
+              "@g4", "@item", "@item", "@item", "@item", "@item",
+              "@g5", "@item", "@item", "@item", "@item", "@item", "@item", "@item", "@item", "@item", "@item", "@item",
+              "@item", "@item", "@item", "@item", "@item", "@item", "@item", "@item", "@item", "@item"]
+    },
+    "0x0043a86c": {
+      "name": "FUN_0043a86c",
+      "conv": "thiscall",
+      "args": ["int", "cstr", "int"],
+      "ret": "@item"
+    },
+    "0x0050319b": {
+      "name": "FUN_0050319b",
+      "conv": "thiscall",
+      "args": ["int", "mem:4"]
+    },
+    "0x0043a7b1": {
+      "name": "FUN_0043a7b1",
+      "conv": "thiscall",
+      "args": ["int", "cstr", "ptr"],
+      "ret": "@item"
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "no_flags",
+      "args": [],
+      "memory": [
+        {"addr": "0x00923D66", "u8": 0},
+        {"addr": "0x00900478", "u32": 0}
+      ]
+    },
+    {
+      "name": "both_flags",
+      "args": [],
+      "memory": [
+        {"addr": "0x00923D66", "u8": 1},
+        {"addr": "0x00900478", "u32": 1}
+      ]
+    },
+    {
+      "name": "upgrade_byte_only",
+      "args": [],
+      "memory": [
+        {"addr": "0x00923D66", "u8": 255},
+        {"addr": "0x00900478", "u32": 0}
+      ]
+    },
+    {
+      "name": "pvp_dword_only",
+      "args": [],
+      "memory": [
+        {"addr": "0x00923D66", "u8": 0},
+        {"addr": "0x00900478", "u32": "0x80000000"}
+      ]
+    },
+    {
+      "name": "pvp_dword_high_byte_only",
+      "args": [],
+      "memory": [
+        {"addr": "0x00923D66", "u8": 0},
+        {"addr": "0x00900478", "u32": "0x100"}
+      ]
+    },
+    {
+      "name": "all_items_null",
+      "args": [],
+      "memory": [
+        {"addr": "0x00923D66", "u8": 1},
+        {"addr": "0x00900478", "u32": 1}
+      ],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": ["u32"],
+          "ret": ["@root", "@g1", 0, 0, 0, 0,
+                  "@g2", 0, 0, 0, 0, 0, 0,
+                  "@g3", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                  "@g4", 0, 0, 0, 0, 0,
+                  "@g5", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                  0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+      }
+    }
+  ],
+  "coverage_ok": {
+    "00441AF3-00441AF6": "root allocation null: the function then dereferences the null root, both sides fault",
+    "00441C28-00441C2A": "group allocation null: next Add reads [esi] at 0, both sides fault",
+    "00441DB8-00441DBA": "group allocation null: next Add reads [esi] at 0, both sides fault",
+    "00442080-00442082": "group allocation null: next Add reads [esi] at 0, both sides fault",
+    "004421D0-004421D2": "group allocation null: next Add reads [esi] at 0, both sides fault"
+  },
+  "fuzz": {
+    "seed": 4463302,
+    "count": 60,
+    "args": [],
+    "memory": [
+      {"addr": "0x00923D66", "type": "u8", "choices": [0, 1, 255]},
+      {"addr": "0x00900478", "type": "u32", "choices": [0, 1, 256, "0x80000000"]}
+    ]
+  }
+}

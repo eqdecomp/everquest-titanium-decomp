@@ -1,0 +1,289 @@
+{
+  "function": "EQPlayer_guess::UpdateLight_guess",
+  "original": "0x0047bce2",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@eqplayer",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "eqplayer": {
+      "size": "0x348",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x1a8", "u32": "@actorinfo"}
+      ]
+    },
+    "actorinfo": {
+      "size": "0x10c0",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@visual"}
+      ]
+    },
+    "visual": {
+      "size": "4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@visual_vtbl"}
+      ]
+    },
+    "visual_vtbl": {
+      "size": "0x158",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xc0", "u32": "@fn_get_position"},
+        {"offset": "0x154", "u32": "@fn_has_position"}
+      ]
+    },
+    "visual_vtbl_false": {
+      "size": "0x158",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xc0", "u32": "@fn_get_position"},
+        {"offset": "0x154", "u32": "@fn_has_no_position"}
+      ]
+    },
+    "attachment": {
+      "size": "4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@attachment_vtbl"}
+      ]
+    },
+    "attachment_vtbl": {
+      "size": "0x18",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x14", "u32": "@fn_attachment_update"}
+      ]
+    },
+    "angle": {
+      "size": "4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@angle_vtbl"}
+      ]
+    },
+    "angle_vtbl": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x8", "u32": "@fn_cos"},
+        {"offset": "0xc", "u32": "@fn_sin"}
+      ]
+    },
+    "fn_get_position": {"size": "4", "fill": "zero"},
+    "fn_has_position": {"size": "4", "fill": "zero"},
+    "fn_has_no_position": {"size": "4", "fill": "zero"},
+    "fn_attachment_update": {"size": "4", "fill": "zero"},
+    "fn_cos": {"size": "4", "fill": "zero"},
+    "fn_sin": {"size": "4", "fill": "zero"},
+    "display": {"size": "4", "fill": "zero"},
+    "text_sink": {"size": "4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905d24", "u32": "@display"},
+    {"addr": "0x00924818", "u32": 1},
+    {"addr": "0x0099e374", "u32": "@angle"},
+    {"addr": "0x00641138", "from_image": "0x00641138", "image_size": 4},
+    {"addr": "0x00641134", "from_image": "0x00641134", "image_size": 4},
+    {"addr": "0x00642650", "from_image": "0x00642650", "image_size": 4},
+    {"addr": "0x00905cf8", "u32": 0},
+    {"addr": "0x00988df0", "u32": "@text_sink"},
+    {"addr": "@eqplayer", "offset": "0x30", "f32": 11.25},
+    {"addr": "@eqplayer", "offset": "0x34", "f32": 22.5},
+    {"addr": "@eqplayer", "offset": "0x38", "f32": 33.75},
+    {"addr": "@eqplayer", "offset": "0x4c", "f32": 1.125}
+  ],
+  "callees": {
+    "0x0043745d": {"name": "display_ready", "conv": "thiscall", "args": [], "ret": 1},
+    "0x004395c4": {"name": "remove_attachment", "conv": "thiscall", "args": ["ptr"]},
+    "0x0048f019": {"name": "actor_supports_position", "conv": "thiscall", "args": [], "ret": 1},
+    "0x00439377": {
+      "name": "create_light",
+      "conv": "thiscall",
+      "args": ["u8", "int", "float", "float", "float"],
+      "ret": "@attachment"
+    },
+    "0x00496b08": {"name": "refresh_light", "conv": "thiscall", "args": ["ptr", "u8"]},
+    "@fn_sin": {"name": "sin", "conv": "thiscall", "args": ["float"], "ret_float": 0.5},
+    "@fn_cos": {"name": "cos", "conv": "thiscall", "args": ["float"], "ret_float": 0.25},
+    "@fn_has_position": {"name": "has_position", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "@fn_has_no_position": {"name": "has_no_position", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "@fn_get_position": {
+      "name": "get_position",
+      "conv": "thiscall",
+      "args": ["int", "ignore", "int"],
+      "writes": [
+        {"arg": 1, "offset": 0, "hex": "0000803f0000004000004040"}
+      ]
+    },
+    "@fn_attachment_update": {"name": "attachment_update", "conv": "thiscall", "args": ["int"]}
+  },
+  "cases": [
+    {
+      "name": "display unavailable",
+      "args": [],
+      "callees": {
+        "0x0043745d": {"name": "display_ready", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "appearance disabled",
+      "args": [],
+      "memory": [{"addr": "0x00924818", "u32": 0}]
+    },
+    {
+      "name": "zero light",
+      "args": [],
+      "memory": [{"addr": "@eqplayer", "offset": "0x253", "u8": 0}]
+    },
+    {
+      "name": "special state 5 attached position light 3",
+      "args": [],
+      "memory": [
+        {"addr": "0x00905cf8", "u32": "@eqplayer"},
+        {"addr": "@eqplayer", "offset": "0x253", "u8": 3},
+        {"addr": "@actorinfo", "offset": "0xad", "u8": 5}
+      ]
+    },
+    {
+      "name": "special state 9 query false light 5",
+      "args": [],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x253", "u8": 5},
+        {"addr": "@actorinfo", "offset": "0xad", "u8": 9}
+      ],
+      "callees": {
+        "0x0048f019": {"name": "actor_supports_position", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "special state 10 no position light 7",
+      "args": [],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x253", "u8": 7},
+        {"addr": "@actorinfo", "offset": "0xad", "u8": 10},
+        {"addr": "@visual", "offset": 0, "u32": "@visual_vtbl_false"}
+      ]
+    },
+    {
+      "name": "special state 6 position light 9",
+      "args": [],
+      "memory": [
+        {"addr": "0x00905cf8", "u32": "@eqplayer"},
+        {"addr": "@eqplayer", "offset": "0x253", "u8": 9},
+        {"addr": "@actorinfo", "offset": "0xad", "u8": 6}
+      ]
+    },
+    {
+      "name": "special state 7 light 8 skipped",
+      "args": [],
+      "memory": [
+        {"addr": "0x00905cf8", "u32": "@eqplayer"},
+        {"addr": "@eqplayer", "offset": "0x253", "u8": 8},
+        {"addr": "@actorinfo", "offset": "0xad", "u8": 7}
+      ]
+    },
+    {
+      "name": "special state 8 no position light 3",
+      "args": [],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x253", "u8": 3},
+        {"addr": "@actorinfo", "offset": "0xad", "u8": 8},
+        {"addr": "@visual", "offset": 0, "u32": "@visual_vtbl_false"}
+      ]
+    },
+    {
+      "name": "ordinary state null visual",
+      "args": [],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x253", "u8": 1},
+        {"addr": "@actorinfo", "offset": "0xad", "u8": 11},
+        {"addr": "@actorinfo", "offset": 0, "u32": 0}
+      ]
+    },
+    {
+      "name": "ordinary state query false",
+      "args": [],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x253", "u8": 1},
+        {"addr": "@actorinfo", "offset": "0xad", "u8": 11}
+      ],
+      "callees": {
+        "0x0048f019": {"name": "actor_supports_position", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "ordinary state no position",
+      "args": [],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x253", "u8": 1},
+        {"addr": "@actorinfo", "offset": "0xad", "u8": 11},
+        {"addr": "@visual", "offset": 0, "u32": "@visual_vtbl_false"}
+      ]
+    },
+    {
+      "name": "ordinary state gets actor position",
+      "args": [],
+      "memory": [
+        {"addr": "0x00905cf8", "u32": "@eqplayer"},
+        {"addr": "@eqplayer", "offset": "0x253", "u8": 5},
+        {"addr": "@actorinfo", "offset": "0xad", "u8": 11}
+      ]
+    },
+    {
+      "name": "remove existing attachment and refresh",
+      "args": [],
+      "memory": [
+        {"addr": "0x00905cf8", "u32": "@eqplayer"},
+        {"addr": "@actorinfo", "offset": "0x4", "u32": "@attachment"},
+        {"addr": "@eqplayer", "offset": "0x253", "u8": 0}
+      ]
+    },
+    {
+      "name": "creation returns null",
+      "args": [],
+      "memory": [
+        {"addr": "0x00905cf8", "u32": "@eqplayer"},
+        {"addr": "@actorinfo", "offset": 0, "u32": 0},
+        {"addr": "@actorinfo", "offset": "0xad", "u8": 11},
+        {"addr": "@eqplayer", "offset": "0x253", "u8": 7}
+      ],
+      "callees": {
+        "0x00439377": {
+          "name": "create_light",
+          "conv": "thiscall",
+          "args": ["u8", "int", "float", "float", "float"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "not the current player",
+      "args": [],
+      "memory": [
+        {"addr": "@actorinfo", "offset": 0, "u32": 0},
+        {"addr": "@actorinfo", "offset": "0xad", "u8": 11},
+        {"addr": "@eqplayer", "offset": "0x253", "u8": 3}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4701410,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@eqplayer", "offset": "0x253", "type": "u8", "choices": [0, 1, 2, 3, 5, 7, 8, 9, 255]},
+      {"addr": "@actorinfo", "offset": 0, "type": "u32", "choices": [0, "@visual"]},
+      {"addr": "@actorinfo", "offset": "0x4", "type": "u32", "choices": [0, "@attachment"]},
+      {"addr": "@actorinfo", "offset": "0xad", "type": "u8", "choices": [0, 5, 6, 7, 8, 9, 10, 11]},
+      {"addr": "@visual", "offset": 0, "type": "u32", "choices": ["@visual_vtbl", "@visual_vtbl_false"]},
+      {"addr": "0x00924818", "type": "u32", "choices": [0, 1]},
+      {"addr": "0x00905cf8", "type": "u32", "choices": [0, "@eqplayer"]}
+    ]
+  }
+}

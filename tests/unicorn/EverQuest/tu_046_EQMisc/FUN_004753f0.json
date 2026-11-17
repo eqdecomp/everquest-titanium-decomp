@@ -1,0 +1,204 @@
+{
+  "function": "DoMissileHit_guess",
+  "original": "0x004753f0",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "owner_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "source_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "session_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "kind_guess",
+      "type": "u32"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "owner": {"size": "0x348", "fill": "random", "init": [{"offset": "0x218", "u32": "@link"}]},
+    "source": {"size": "0x348", "fill": "random"},
+    "session": {"size": "0x200", "fill": "random"},
+    "link": {"size": "0x20", "fill": "random", "init": [{"offset": "0x4", "u32": "@vbtable"}, {"offset": "0x8", "u32": "@peer"}]},
+    "vbtable": {"size": "0x8", "fill": "random", "init": [{"offset": "0x4", "u32": 0}]},
+    "peer": {"size": "0x348", "fill": "random"},
+    "keyobj": {"size": "0x4", "fill": "random"},
+    "item": {"size": "0x180", "fill": "random", "init": [{"offset": "0x17d", "u8": 0}]},
+    "sink": {"size": "0x4", "fill": "random", "init": [{"offset": "0x0", "u32": "@vtbl"}]},
+    "vtbl": {"size": "0x30", "fill": "random", "init": [{"offset": "0x2c", "u32": "@fn_slot11"}]},
+    "fn_slot11": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@owner", "offset": "0x244", "u8": 0},
+    {"addr": "@owner", "offset": "0x24c", "u8": 1},
+    {"addr": "@owner", "offset": "0x252", "u8": 0},
+    {"addr": "@source", "offset": "0x244", "u8": 0},
+    {"addr": "@source", "offset": "0x258", "u32": 4660},
+    {"addr": "@peer", "offset": "0x244", "u8": 0},
+    {"addr": "0x00985cc8", "u32": "@keyobj"}
+  ],
+  "callees": {
+    "0x004795bc": {
+      "name": "AimAtTarget_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "u32"],
+      "ret": 0
+    },
+    "0x005e0540": {
+      "name": "FUN_005e0540",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 2
+    },
+    "0x005ecc00": {
+      "name": "FUN_005ecc00",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005e0e90": {
+      "name": "FUN_005e0e90",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x0041a877": {
+      "name": "ApplyLevelDamageCap_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "ignore", "u32"],
+      "ret": 0
+    },
+    "0x005e0770": {
+      "name": "FUN_005e0770",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 1
+    },
+    "0x0047503e": {
+      "name": "IsAttackMagical_guess",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "int",
+        "bool",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x005ecd20": {
+      "name": "FUN_005ecd20",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x0044d0d0": {
+      "name": "FUN_0044d0d0",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0040cbd6": {
+      "name": "GetSpell_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@item"
+    },
+    "0x005ec220": {
+      "name": "FUN_005ec220",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00479d99": {
+      "name": "FUN_00479d99",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x0041ebb3": {
+      "name": "offense_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x0041eab3": {
+      "name": "compute_tohit_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x0047c08e": {
+      "name": "GetAnimation_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@sink"
+    },
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "mem:12", "int", "int"],
+      "ret": 0
+    },
+    "@fn_slot11": {
+      "name": "Sink_slot11",
+      "conv": "thiscall",
+      "args": ["u32", "int", "int", "ignore", "u32"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {"name": "source-null", "args": ["@owner", 0, "@session", 11], "expect": {"ret": 0}},
+    {"name": "owner-null", "args": [0, "@source", "@session", 1], "expect": {"ret": 0}},
+    {"name": "source-type-invalid", "args": ["@owner", "@source", "@session", 1], "memory": [{"addr": "@source", "offset": "0x244", "u8": 2}], "expect": {"ret": 0}},
+    {"name": "owner-type-invalid", "args": ["@owner", "@source", "@session", 1], "memory": [{"addr": "@owner", "offset": "0x244", "u8": 2}], "expect": {"ret": 0}},
+    {"name": "link-null", "args": ["@owner", "@source", "@session", 1], "memory": [{"addr": "@owner", "offset": "0x218", "u32": 0}], "expect": {"ret": 0}},
+    {"name": "type-one-boundaries", "args": ["@owner", "@source", "@session", 1], "memory": [{"addr": "@owner", "offset": "0x244", "u8": 1}, {"addr": "@source", "offset": "0x244", "u8": 1}], "expect": {"ret": 1}},
+    {"name": "kind-11-and-other-state", "args": ["@owner", "@source", "@session", 11], "expect": {"ret": 1}},
+    {"name": "null-session-mode-2", "args": ["@owner", "@source", 0, 1], "expect": {"ret": 1}},
+    {"name": "state-9-kind-13", "args": ["@owner", "@source", "@session", 13], "callees": {"0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": 9}}, "expect": {"ret": 1}},
+    {"name": "state-22-read-28-peer-valid", "args": ["@owner", "@source", "@session", 13], "callees": {"0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": 22}, "0x005e0e90": {"name": "FUN_005e0e90", "conv": "thiscall", "args": [], "ret": 28}, "0x005e0770": {"name": "FUN_005e0770", "conv": "thiscall", "args": ["u32"], "ret": 0}}, "memory": [{"addr": "@owner", "offset": "0x252", "u8": 7}, {"addr": "@owner", "offset": "0x24c", "u8": 30}], "expect": {"ret": 1}},
+    {"name": "state-22-read-27-no-check", "args": ["@owner", "@source", "@session", 14], "callees": {"0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": 22}, "0x005e0e90": {"name": "FUN_005e0e90", "conv": "thiscall", "args": [], "ret": 27}, "0x005e0770": {"name": "FUN_005e0770", "conv": "thiscall", "args": ["u32"], "ret": 0}}, "expect": {"ret": 1}},
+    {"name": "peer-null-skips-check", "args": ["@owner", "@source", "@session", 13], "memory": [{"addr": "@link", "offset": "0x8", "u32": 0}], "expect": {"ret": 1}},
+    {"name": "peer-type-one-skips-check", "args": ["@owner", "@source", "@session", 14], "memory": [{"addr": "@peer", "offset": "0x244", "u8": 1}], "expect": {"ret": 1}},
+    {"name": "pick-false-state-other-send", "args": ["@owner", "@source", "@session", 1], "expect": {"ret": 1}},
+    {"name": "pick-true-item-flag-zero", "args": ["@owner", "@source", "@session", 13], "callees": {"0x0044d0d0": {"name": "FUN_0044d0d0", "conv": "cdecl", "args": ["int"], "ret": 1}, "0x005ecd20": {"name": "FUN_005ecd20", "conv": "thiscall", "args": ["u32"], "ret": 7}, "0x0040cbd6": {"name": "FUN_0040cbd6", "conv": "thiscall", "args": ["int"], "ret": "@item"}}, "expect": {"ret": 1}},
+    {"name": "pick-true-item-flag-one", "args": ["@owner", "@source", "@session", 14], "callees": {"0x0044d0d0": {"name": "FUN_0044d0d0", "conv": "cdecl", "args": ["int"], "ret": 1}, "0x005ecd20": {"name": "FUN_005ecd20", "conv": "thiscall", "args": ["u32"], "ret": 7}, "0x0040cbd6": {"name": "FUN_0040cbd6", "conv": "thiscall", "args": ["int"], "ret": "@item"}}, "memory": [{"addr": "@item", "offset": "0x17d", "u8": 1}], "expect": {"ret": 1}},
+    {"name": "pick-true-item-missing", "args": ["@owner", "@source", "@session", 1], "callees": {"0x0044d0d0": {"name": "FUN_0044d0d0", "conv": "cdecl", "args": ["int"], "ret": 1}, "0x005ecd20": {"name": "FUN_005ecd20", "conv": "thiscall", "args": ["u32"], "ret": 7}, "0x0040cbd6": {"name": "FUN_0040cbd6", "conv": "thiscall", "args": ["int"], "ret": 0}}, "expect": {"ret": 1}}
+  ],
+  "fuzz": {
+    "seed": 4674544,
+    "count": 100,
+    "args": [
+      {"choices": ["@owner", 0]},
+      {"choices": ["@source", 0]},
+      {"choices": ["@session", 0]},
+      {"choices": [0, 1, 11, 13, 14, 257, 269, 270]}
+    ],
+    "memory": [
+      {"addr": "@owner", "offset": "0x244", "type": "u8", "choices": [0, 1, 2]},
+      {"addr": "@source", "offset": "0x244", "type": "u8", "choices": [0, 1, 2]},
+      {"addr": "@owner", "offset": "0x218", "type": "ptr", "choices": ["@link", 0]},
+      {"addr": "@link", "offset": "0x8", "type": "ptr", "choices": ["@peer", 0]},
+      {"addr": "@peer", "offset": "0x244", "type": "u8", "choices": [0, 1, 2]}
+    ]
+  }
+}

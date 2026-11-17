@@ -1,0 +1,27 @@
+{
+  "function": "MagicCheck_guess::Check_guess",
+  "_shape": "NOT byte-identical (structural, ndiff 18): byte/dword field gates, then a bounds-checked scan of 12 dwords at +0x120",
+  "original": "0x0040e776",
+  "sources": ["src/EverQuest/tu_012_CharacterMagicSystem.cpp"],
+  "conv": "thiscall",
+  "this": "@check",
+  "args": [],
+  "ret": "char",
+  "objects": {"check": {"size": "0x194", "fill": "random"}},
+  "_survivors": "L726 `>=` -> `>`, `12` -> `13` and deleting `__debugbreak()` are equivalent: the bounds check is dead code (index < 12 in the loop), see coverage_ok",
+  "coverage_ok": {"0040E794-0040E795": "int3 of the array bounds check: the loop index never reaches 12"},
+  "cases": [
+    {"name": "gate 0x192 set", "memory": [{"addr": "@check", "offset": "0x192", "u8": 1}, {"addr": "@check", "offset": "0x17d", "u8": 0}, {"addr": "@check", "offset": "0x20", "u32": 1}, {"addr": "@check", "offset": "0x120", "u32": 0}]},
+    {"name": "gate 0x17d set", "memory": [{"addr": "@check", "offset": "0x192", "u8": 0}, {"addr": "@check", "offset": "0x17d", "u8": 1}, {"addr": "@check", "offset": "0x20", "u32": 1}, {"addr": "@check", "offset": "0x120", "u32": 0}]},
+    {"name": "field 0x20 zero", "memory": [{"addr": "@check", "offset": "0x192", "u8": 0}, {"addr": "@check", "offset": "0x17d", "u8": 0}, {"addr": "@check", "offset": "0x20", "u32": 0}, {"addr": "@check", "offset": "0x120", "u32": 0}]},
+    {"name": "no zero slot", "memory": [{"addr": "@check", "offset": "0x192", "u8": 0}, {"addr": "@check", "offset": "0x17d", "u8": 0}, {"addr": "@check", "offset": "0x20", "u32": 7}, {"addr": "@check", "offset": "0x120", "hex": "010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000"}]},
+    {"name": "only slot 0 zero", "memory": [{"addr": "@check", "offset": "0x192", "u8": 0}, {"addr": "@check", "offset": "0x17d", "u8": 0}, {"addr": "@check", "offset": "0x20", "u32": 7}, {"addr": "@check", "offset": "0x120", "hex": "010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000"}, {"addr": "@check", "offset": "0x120", "u32": 0}]},
+    {"name": "last slot zero", "memory": [{"addr": "@check", "offset": "0x192", "u8": 0}, {"addr": "@check", "offset": "0x17d", "u8": 0}, {"addr": "@check", "offset": "0x20", "u32": 7}, {"addr": "@check", "offset": "0x120", "hex": "010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000"}, {"addr": "@check", "offset": "0x14c", "u32": 0}]},
+    {"name": "zero after the 12 slots only", "memory": [{"addr": "@check", "offset": "0x192", "u8": 0}, {"addr": "@check", "offset": "0x17d", "u8": 0}, {"addr": "@check", "offset": "0x20", "u32": 7}, {"addr": "@check", "offset": "0x120", "hex": "010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000"}, {"addr": "@check", "offset": "0x150", "u32": 0}]}
+  ],
+  "fuzz": {"seed": 4253558, "count": 200,
+           "memory": [{"addr": "@check", "offset": "0x192", "type": "u8", "choices": [0, 0, 0, 1]},
+                      {"addr": "@check", "offset": "0x17d", "type": "u8", "choices": [0, 0, 0, 2]},
+                      {"addr": "@check", "offset": "0x20", "type": "u32", "choices": [0, 1, 1, 1]},
+                      {"addr": "@check", "offset": "0x120", "type": "u32", "count": 13, "choices": [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}]}
+}

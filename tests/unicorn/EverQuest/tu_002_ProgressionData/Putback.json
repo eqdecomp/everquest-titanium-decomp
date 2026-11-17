@@ -1,0 +1,137 @@
+{
+  "function": "BufferPosition_guess::Putback_guess",
+  "original": "0x004021a6",
+  "sources": [
+    "src/EverQuest/tu_002_ProgressionData.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@bufferposition",
+  "args": [
+    {
+      "name": "value_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "bufferposition": {
+      "size": "0x44",
+      "fill": "random",
+      "init": [
+        {"offset": "0x10", "u32": "@begin_cell"},
+        {"offset": "0x20", "u32": "@cursor_cell"},
+        {"offset": "0x30", "u32": "@count_cell"}
+      ]
+    },
+    "begin_cell": {
+      "size": "4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@bytes+0x20"}]
+    },
+    "cursor_cell": {
+      "size": "4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@bytes+0x22"}]
+    },
+    "count_cell": {
+      "size": "4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "3"}]
+    },
+    "bytes": {
+      "size": "0x40",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "@bufferposition", "offset": "0x40", "u32": 2},
+    {"addr": "@bytes", "offset": "0x21", "u8": 65}
+  ],
+  "callees": {},
+  "cases": [
+    {
+      "name": "null_cursor",
+      "args": [65],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": 0},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 0}
+      ]
+    },
+    {
+      "name": "cursor_below_begin",
+      "args": [65],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": "@bytes+0x1f"},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 0}
+      ]
+    },
+    {
+      "name": "cursor_at_begin",
+      "args": [65],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": "@bytes+0x20"},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 0}
+      ]
+    },
+    {
+      "name": "mismatch_blocked",
+      "args": [66],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": "@bytes+0x22"},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 2}
+      ]
+    },
+    {
+      "name": "minus_one_putback",
+      "args": [-1],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": "@bytes+0x22"},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 2}
+      ]
+    },
+    {
+      "name": "matching_character",
+      "args": [65],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": "@bytes+0x22"},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 2}
+      ]
+    },
+    {
+      "name": "mismatch_allowed",
+      "args": [66],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": "@bytes+0x22"},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 0}
+      ]
+    },
+    {
+      "name": "mismatch_bit0_allowed",
+      "args": [66],
+      "memory": [
+        {"addr": "@cursor_cell", "u32": "@bytes+0x22"},
+        {"addr": "@bufferposition", "offset": "0x40", "u32": 1}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4202918,
+    "count": 100,
+    "args": [
+      {"range": [-2, 260]}
+    ],
+    "memory": [
+      {
+        "addr": "@cursor_cell",
+        "type": "u32",
+        "choices": [0, "@bytes+0x1f", "@bytes+0x20", "@bytes+0x21", "@bytes+0x22", "@bytes+0x23"]
+      },
+      {
+        "addr": "@bufferposition",
+        "offset": "0x40",
+        "type": "u32",
+        "choices": [0, 2, 4, 6]
+      }
+    ]
+  }
+}

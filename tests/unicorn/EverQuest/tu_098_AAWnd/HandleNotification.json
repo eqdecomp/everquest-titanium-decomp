@@ -1,0 +1,177 @@
+{
+  "function": "CAAWndView_guess::SaveAbilitySet_guess",
+  "original": "0x004d1da1",
+  "sources": [
+    "src/EverQuest/tu_098_AAWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@book",
+  "args": [],
+  "ret": "void",
+  "max_insns": 3000000,
+  "objects": {
+    "book": {
+      "size": "0x1400",
+      "fill": "random",
+      "init": [{"offset": "0x17c", "u32": "@panel"}]
+    },
+    "panel": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "status": {
+      "size": "0x1000",
+      "fill": "random",
+      "init": [{"offset": "0x8", "u32": "@vbtbl"}]
+    },
+    "vbtbl": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [{"offset": "0x4", "u32": 16}]
+    },
+    "index": {
+      "size": "0x1240",
+      "fill": "random"
+    },
+    "strings": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "messages": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "text": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "file": {
+      "size": "0x40",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "0x00905D00", "u32": "@status"},
+    {"addr": "0x00905CB0", "u32": "@strings"},
+    {"addr": "0x00988DF0", "u32": "@messages"},
+    {"addr": "0x0079AC74", "u32": "0x12345678"},
+    {"addr": "@index", "offset": "0x1228", "u32": 3},
+    {"addr": "@text", "cstr": "text"},
+    {"addr": "@file", "cstr": "abilities.ini"}
+  ],
+  "callees": {
+    "0x00447cb1": {
+      "name": "IsStatusOneOrTwo",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005ed490": {
+      "name": "GetIndexTable",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@index"
+    },
+    "0x00559573": {
+      "name": "GetAbilitiesIniFilename_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": "@file"
+    },
+    "0x00577000": {
+      "name": "FormatBuf",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "cstr"],
+      "varargs": "printf",
+      "passthrough": true
+    },
+    "0x0060beb0": {
+      "name": "WriteIni",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr", "cstr", "cstr"],
+      "ret": 0
+    },
+    "0x004baaeb": {
+      "name": "Contains",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": [1, 0, 1, 0, 0, 1, 0]
+    },
+    "0x005dfa00": {
+      "name": "Lookup",
+      "conv": "thiscall",
+      "args": ["u32", "u32"],
+      "ret": "@text"
+    },
+    "0x004982c6": {
+      "name": "Show",
+      "conv": "thiscall",
+      "args": ["cstr", "int", "int"]
+    },
+    "0x004d1484": {
+      "name": "Refresh",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": []
+    },
+    {
+      "name": "not_status",
+      "args": [],
+      "callees": {
+        "0x00447cb1": {"name": "IsStatusOneOrTwo", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "count_zero",
+      "args": [],
+      "memory": [{"addr": "@index", "offset": "0x1228", "u32": 0}]
+    },
+    {
+      "name": "count_negative",
+      "args": [],
+      "memory": [{"addr": "@index", "offset": "0x1228", "hex": "ffffffff"}]
+    },
+    {
+      "name": "no_file",
+      "args": [],
+      "callees": {
+        "0x00559573": {"name": "FUN_00559573", "conv": "cdecl", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "none_owned",
+      "args": [],
+      "callees": {
+        "0x004baaeb": {"name": "Contains", "conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    },
+    {
+      "name": "all_owned",
+      "args": [],
+      "callees": {
+        "0x004baaeb": {"name": "Contains", "conv": "thiscall", "args": ["int"], "ret": 1}
+      }
+    },
+    {
+      "name": "count_one_some_owned",
+      "args": [],
+      "memory": [{"addr": "@index", "offset": "0x1228", "u32": 1}],
+      "callees": {
+        "0x004baaeb": {"name": "Contains", "conv": "thiscall", "args": ["int"], "ret": [1, 1, 0, 1, 0, 0, 0, 1]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5053857,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@index", "offset": "0x1228", "type": "int", "choices": [0, 1, 2, 3, 5, -1]}
+    ]
+  }
+}

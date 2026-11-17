@@ -1,0 +1,324 @@
+{
+  "function": "CVoiceMacroWnd_guess::CVoiceMacroWnd_guess",
+  "original": "0x004cbb56",
+  "sources": [
+    "src/EverQuest/tu_096_VoiceMacroWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@cbb1b",
+  "args": [
+    {
+      "name": "parent",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "cbb1b": {
+      "size": "0x180",
+      "fill": "random"
+    },
+    "parent": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "sidl": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "macrolist": {
+      "size": "0x180",
+      "fill": "random"
+    },
+    "play": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "tell": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "group": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "raid": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "mute": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "close": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "iter": {
+      "size": "0x20",
+      "fill": "random"
+    },
+    "macroglobal": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@cbb1b",
+      "offset": "0x124",
+      "u32": "@sidl"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@macroglobal"
+    },
+    {
+      "addr": "0x00985d90",
+      "u32": "@iter"
+    }
+  ],
+  "callees": {
+    "0x00571e00": {
+      "name": "CXStr_guess::CXStr_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "keep"
+    },
+    "0x005a3850": {
+      "name": "Cbb1bBase_guess::Cbb1bBase_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "ignore",
+        "int",
+        "int",
+        "u32"
+      ],
+      "ret": "keep"
+    },
+    "0x00571d00": {
+      "name": "CXStr_guess::Release_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": "keep"
+    },
+    "0x005a25b0": {
+      "name": "Cbb1bBase_guess::CreateChildrenFromSidl_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "keep"
+    },
+    "0x005a1e10": {
+      "name": "Cbb1bBase_guess::GetChildItem_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": [
+        "@macrolist",
+        "@play",
+        "@tell",
+        "@group",
+        "@raid",
+        "@mute",
+        "@close"
+      ]
+    },
+    "0x00597c60": {
+      "name": "Controller_guess::SetColors_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "u32",
+        "u32"
+      ],
+      "ret": "keep"
+    },
+    "0x005982e0": {
+      "name": "Controller_guess::SetColumnJustification_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "keep"
+    },
+    "0x004ae919": {
+      "name": "MacroGlobal_guess::Lookup_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "cstr",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005bb140": {
+      "name": "ButtonWnd_guess::SetCheck_guess",
+      "conv": "thiscall",
+      "args": [
+        "char"
+      ],
+      "ret": "keep"
+    },
+    "0x004cbb1b": {
+      "name": "CVoiceMacroWnd_guess::SetButtonsEnabled_guess",
+      "conv": "thiscall",
+      "args": [
+        "u8"
+      ],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "no sidl piece: only the stores",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {
+          "addr": "@cbb1b",
+          "offset": "0x124",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "sidl, mute off, all children",
+      "args": [
+        "@parent"
+      ]
+    },
+    {
+      "name": "sidl, mute on",
+      "args": [
+        "@parent"
+      ],
+      "callees": {
+        "0x004ae919": {
+          "name": "MacroGlobal_guess::Lookup_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "cstr",
+            "int",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "sidl, no macro list",
+      "args": [
+        "@parent"
+      ],
+      "callees": {
+        "0x005a1e10": {
+          "name": "Cbb1bBase_guess::GetChildItem_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": [
+            0,
+            "@play",
+            "@tell",
+            "@group",
+            "@raid",
+            "@mute",
+            "@close"
+          ]
+        }
+      }
+    },
+    {
+      "name": "sidl, no mute button",
+      "args": [
+        "@parent"
+      ],
+      "callees": {
+        "0x005a1e10": {
+          "name": "Cbb1bBase_guess::GetChildItem_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": [
+            "@macrolist",
+            "@play",
+            "@tell",
+            "@group",
+            "@raid",
+            0,
+            "@close"
+          ]
+        }
+      }
+    },
+    {
+      "name": "sidl, no children at all, mute on",
+      "args": [
+        "@parent"
+      ],
+      "callees": {
+        "0x005a1e10": {
+          "name": "Cbb1bBase_guess::GetChildItem_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "0x004ae919": {
+          "name": "MacroGlobal_guess::Lookup_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "cstr",
+            "int",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5028694,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@parent"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@cbb1b",
+        "offset": "0x124",
+        "type": "ptr",
+        "choices": [
+          "@sidl",
+          "0x0"
+        ]
+      }
+    ]
+  }
+}

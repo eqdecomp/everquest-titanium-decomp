@@ -1,0 +1,172 @@
+{
+  "function": "CGemsGameWndView_guess::PostDraw_guess",
+  "original": "0x00505EB1",
+  "sources": [
+    "src/EverQuest/tu_160_GemsGameWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "int",
+  "size": "0x220",
+  "objects": {
+    "owner": {
+      "size": "0xec0",
+      "fill": "random",
+      "init": [
+        {"offset": "0xeb4", "u32": "@next_window"},
+        {"offset": "0xeb8", "u32": "@special_window"},
+        {"offset": "0xebc", "u32": "@game_window"}
+      ]
+    },
+    "game_window": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": "0", "u32": "@game_vtable"}]
+    },
+    "next_window": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": "0", "u32": "@next_vtable"}]
+    },
+    "special_window": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": "0", "u32": "@special_vtable"}]
+    },
+    "game_vtable": {
+      "size": "0xe8",
+      "fill": "random",
+      "init": [{"offset": "0xe4", "u32": "@fn_game"}]
+    },
+    "next_vtable": {
+      "size": "0xe8",
+      "fill": "random",
+      "init": [{"offset": "0xe4", "u32": "@fn_next"}]
+    },
+    "special_vtable": {
+      "size": "0xe8",
+      "fill": "random",
+      "init": [{"offset": "0xe4", "u32": "@fn_special"}]
+    },
+    "fn_game": {"size": "0x4"},
+    "fn_next": {"size": "0x4"},
+    "fn_special": {"size": "0x4"}
+  },
+  "memory": [
+    {"addr": "@owner", "offset": "0x160", "u32": 1},
+    {"addr": "@owner", "offset": "0x5cc", "u32": 5},
+    {"addr": "@owner", "offset": "0x5e8", "u32": 15},
+    {"addr": "@owner", "offset": "0x5ec", "u32": 17},
+    {"addr": "@owner", "offset": "0x5fc", "u32": 9},
+    {"addr": "@owner", "offset": "0x608", "u32": -1},
+    {"addr": "@owner", "offset": "0x60c", "u32": 0},
+    {"addr": "@owner", "offset": "0x6a8", "u32": 4},
+    {"addr": "@owner", "offset": "0x6ac", "u32": 3},
+    {"addr": "@owner", "offset": "0x758", "u32": 51},
+    {"addr": "@owner", "offset": "0x75c", "u32": -2},
+    {"addr": "@owner", "offset": "0xde8", "u32": 20},
+    {"addr": "@owner", "offset": "0xdec", "u32": 24}
+  ],
+  "callees": {
+    "0x004d9160": {
+      "name": "Quad_guess::Copy_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "ignore"],
+      "passthrough": true
+    },
+    "0x004d9139": {
+      "name": "Quad_guess::Add_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "ignore"],
+      "passthrough": true
+    },
+    "0x00505136": {
+      "name": "CGemsGameWndView_guess::IsThreeMatchKind_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "passthrough": true
+    },
+    "0x00504fb4": {
+      "name": "CGemsGameWndView_guess::Draw_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "int", "int", "int", "int", "char"],
+      "ret": 0
+    },
+    "@fn_game": {
+      "name": "GetScreenRect_game_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "640000006400000080020000e0010000"}]
+    },
+    "@fn_next": {
+      "name": "GetScreenRect_next_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "140000001e0000002800000032000000"}]
+    },
+    "@fn_special": {
+      "name": "GetScreenRect_special_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "64000000c800000078000000dc000000"}]
+    }
+  },
+  "cases": [
+    {
+      "name": "inactive",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x160", "u32": 0},
+        {"addr": "@owner", "offset": "0x5cc", "u32": 5}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "skip_next",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x160", "u32": 1},
+        {"addr": "@owner", "offset": "0x5cc", "u32": 28}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "skip_special",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x160", "u32": 1},
+        {"addr": "@owner", "offset": "0x5cc", "u32": -1}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "both_indicators",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x160", "u32": 1},
+        {"addr": "@owner", "offset": "0x5cc", "u32": 5}
+      ],
+      "expect": {"ret": 0}
+    }
+  ],
+  "fuzz": {
+    "seed": 5267121,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@owner", "offset": "0x160", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@owner", "offset": "0x5cc", "type": "int", "choices": [-1, 28, 5]},
+      {"addr": "@owner", "offset": "0x5e8", "type": "int", "range": [-10, 30]},
+      {"addr": "@owner", "offset": "0x5ec", "type": "int", "range": [-10, 30]},
+      {"addr": "@owner", "offset": "0x5fc", "type": "int", "choices": [-1, 0, 9, 51]},
+      {"addr": "@owner", "offset": "0x608", "type": "int", "choices": [-1, 0, 153]},
+      {"addr": "@owner", "offset": "0x6a8", "type": "int", "choices": [-1, 4, 8]},
+      {"addr": "@owner", "offset": "0x758", "type": "int", "choices": [-1, 1, 51]}
+    ]
+  },
+  "_survivors": "L697: board.top_guess is overwritten by Copy_guess before any read; L698: board.left_guess is overwritten by Copy_guess before any read; L701: rect.top_guess remains zero because the emulator stack starts zeroed; L704: point.y_guess is assigned before every read."
+}

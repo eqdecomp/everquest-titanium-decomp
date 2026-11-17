@@ -1,0 +1,101 @@
+{
+  "function": "EQPlayerStatusView_guess::FindFreeIndex_guess",
+  "original": "0x0047a6a4",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@statusowner",
+  "args": [],
+  "ret": "u32",
+  "objects": {
+    "statusowner": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x0078d854", "u32": 0}
+  ],
+  "callees": {
+    "0x0047a691": {
+      "name": "FUN_0047a691",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "first-slot-free",
+      "args": [],
+      "expect": {"ret": 1},
+      "memory": [{"addr": "0x0078d854", "u32": 0}],
+      "callees": {
+        "0x0047a691": {"conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    },
+    {
+      "name": "cursor-mid-table-free",
+      "args": [],
+      "expect": {"ret": 100},
+      "memory": [{"addr": "0x0078d854", "u32": 100}],
+      "callees": {
+        "0x0047a691": {"conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    },
+    {
+      "name": "cursor-at-3000-wraps-to-1",
+      "args": [],
+      "expect": {"ret": 1},
+      "memory": [{"addr": "0x0078d854", "u32": 3000}],
+      "callees": {
+        "0x0047a691": {"conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    },
+    {
+      "name": "cursor-above-3000-wraps-to-1",
+      "args": [],
+      "expect": {"ret": 1},
+      "memory": [{"addr": "0x0078d854", "u32": 4294967295}],
+      "callees": {
+        "0x0047a691": {"conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    },
+    {
+      "name": "busy-skips-to-first-free",
+      "args": [],
+      "expect": {"ret": 5},
+      "memory": [{"addr": "0x0078d854", "u32": 0}],
+      "callees": {
+        "0x0047a691": {"conv": "thiscall", "args": ["int"], "ret": [1, 1, 1, 1, 0]}
+      }
+    },
+    {
+      "name": "busy-wraps-past-2999",
+      "args": [],
+      "expect": {"ret": 1},
+      "memory": [{"addr": "0x0078d854", "u32": 2999}],
+      "callees": {
+        "0x0047a691": {"conv": "thiscall", "args": ["int"], "ret": [1, 0]}
+      }
+    },
+    {
+      "name": "all-busy-faults-on-null-store-after-3000",
+      "args": [],
+      "memory": [{"addr": "0x0078d854", "u32": 7}],
+      "callees": {
+        "0x0047a691": {"conv": "thiscall", "args": ["int"], "ret": 1}
+      }
+    }
+  ],
+  "_survivors": "L1823: index == 0 after ++ is unreachable (index is 1..2999 before the increment); L1829: the store to address 0 faults before its value is observable (unmapped in the emulator, a crash in the original); L1830: unreachable after that fault",
+  "fuzz": {
+    "seed": 4695716,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "0x0078d854", "type": "u32", "choices": [0, 1, 2, 100, 2999, 3000, 4294967295]}
+    ]
+  }
+}

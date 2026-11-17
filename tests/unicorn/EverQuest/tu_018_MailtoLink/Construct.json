@@ -1,0 +1,23 @@
+{
+  "function": "BasicStringCopy_guess::Construct_guess",
+  "_shape": "__EH_prolog frame with try/catch(...): reserve, then append per char; the catch block (Tidy + rethrow) runs only from __CxxFrameHandler during unwinding, which the harness does not emulate",
+  "original": "0x00426a3c",
+  "sources": ["src/EverQuest/tu_018_MailtoLink.cpp"],
+  "conv": "thiscall",
+  "this": "@str",
+  "args": [{"name": "first_guess", "type": "ptr"}, {"name": "last_guess", "type": "ptr"}, {"name": "tag_guess", "type": "u32"}],
+  "ret": "void",
+  "objects": {"str": {"size": "0x1c", "fill": "random"}, "text": {"size": "0x20", "init": [{"offset": 0, "hex": "48656c6c6f2c20576f726c642100ff80"}]}},
+  "callees": {
+    "0x00425e74": {"name": "basic_string::reserve", "conv": "thiscall", "args": ["u32"]},
+    "0x00402fc6": {"name": "basic_string::append(count, ch)", "conv": "thiscall", "args": ["u32", "char"], "ret": "@str"}
+  },
+  "_survivors": "both survivors are on L602 inside catch(...), unreachable without exception unwinding (see coverage_ok)",
+  "coverage_ok": {"00426A7A-00426A8E": "catch(...) block: reached only through __CxxFrameHandler when append throws (no C++ exception unwinding in the harness)"},
+  "cases": [
+    {"name": "empty", "args": ["@text", "@text", 0]},
+    {"name": "one", "args": ["@text", "@text+1", 0]},
+    {"name": "all incl. high bytes", "args": ["@text", "@text+16", 0]}
+  ],
+  "fuzz": {"seed": 4352572, "count": 40, "args": [{"choices": ["@text", "@text+3"]}, {"choices": ["@text+3", "@text+9", "@text+16"]}, {}]}
+}

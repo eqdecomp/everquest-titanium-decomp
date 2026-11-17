@@ -1,0 +1,463 @@
+{
+  "function": "CostOwner_guess::TakeEnvironmentalDamage_guess",
+  "original": "0x0041d4ba",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@costowner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "costowner": {
+      "size": "0x288",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@entity"
+        }
+      ]
+    },
+    "entity": {
+      "size": "0x28c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@threshold"
+        }
+      ]
+    },
+    "threshold": {
+      "size": "0x1064",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@costowner",
+      "offset": "0x34",
+      "u32": 0
+    },
+    {
+      "addr": "@costowner",
+      "offset": "0x38",
+      "u32": 0
+    },
+    {
+      "addr": "@costowner",
+      "offset": "0x40",
+      "u32": 0
+    },
+    {
+      "addr": "@entity",
+      "offset": "0x204",
+      "u32": 0
+    },
+    {
+      "addr": "@entity",
+      "offset": "0x258",
+      "u32": "0x1234"
+    },
+    {
+      "addr": "@threshold",
+      "offset": "0xad",
+      "u8": 3
+    }
+  ],
+  "callees": {
+    "0x0041c905": {
+      "name": "FUN_0041c905",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "mem:31",
+        "char",
+        "int",
+        "char",
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "state-below-range",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@threshold",
+          "offset": "0xad",
+          "u8": 2
+        }
+      ]
+    },
+    {
+      "name": "state-three-default-low",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0x115"
+        }
+      ]
+    },
+    {
+      "name": "index-0x116-clamps-to-25",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0x116"
+        },
+        {
+          "addr": "@costowner",
+          "offset": "0x38",
+          "u32": 1000
+        }
+      ]
+    },
+    {
+      "name": "index-0x117-default-high",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0x117"
+        },
+        {
+          "addr": "@costowner",
+          "offset": "0x38",
+          "u32": 120
+        }
+      ]
+    },
+    {
+      "name": "index-0x6b-before-case",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0x6b"
+        }
+      ]
+    },
+    {
+      "name": "index-0x6c-case",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0x6c"
+        }
+      ]
+    },
+    {
+      "name": "index-0x6d-after-case",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0x6d"
+        }
+      ]
+    },
+    {
+      "name": "index-0xc7-before-200-case",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0xc7"
+        }
+      ]
+    },
+    {
+      "name": "index-0xc8-uses-value-40-and-type-f4",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0xc8"
+        },
+        {
+          "addr": "@costowner",
+          "offset": "0x40",
+          "u32": 30
+        }
+      ]
+    },
+    {
+      "name": "index-0xc9-after-200-case",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0xc9"
+        }
+      ]
+    },
+    {
+      "name": "index-0xd3-before-case",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0xd3"
+        }
+      ]
+    },
+    {
+      "name": "index-0xd4-case",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0xd4"
+        }
+      ]
+    },
+    {
+      "name": "index-0xd8-before-case",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0xd8"
+        }
+      ]
+    },
+    {
+      "name": "index-0xd9-case",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0xd9"
+        }
+      ]
+    },
+    {
+      "name": "index-0xda-after-case",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0xda"
+        }
+      ]
+    },
+    {
+      "name": "index-0x154-before-high-cases",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0x154"
+        }
+      ]
+    },
+    {
+      "name": "index-0x155-case",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0x155"
+        }
+      ]
+    },
+    {
+      "name": "index-0x156-case",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0x156"
+        }
+      ]
+    },
+    {
+      "name": "index-0x157-case",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0x157"
+        }
+      ]
+    },
+    {
+      "name": "index-0x158-after-high-cases",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0x158"
+        }
+      ]
+    },
+    {
+      "name": "state-four-special-clamp",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@threshold",
+          "offset": "0xad",
+          "u8": 4
+        },
+        {
+          "addr": "@costowner",
+          "offset": "0x34",
+          "u32": 150
+        }
+      ]
+    },
+    {
+      "name": "state-five-early-return",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@threshold",
+          "offset": "0xad",
+          "u8": 5
+        }
+      ]
+    },
+    {
+      "name": "state-six-no-message",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@threshold",
+          "offset": "0xad",
+          "u8": 6
+        }
+      ]
+    },
+    {
+      "name": "state-seven-special-high-id",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@threshold",
+          "offset": "0xad",
+          "u8": 7
+        },
+        {
+          "addr": "@entity",
+          "offset": "0x204",
+          "u32": "0x157"
+        }
+      ]
+    },
+    {
+      "name": "state-eight-special",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@threshold",
+          "offset": "0xad",
+          "u8": 8
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4314298,
+    "count": 150,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@threshold",
+        "offset": "0xad",
+        "type": "u8",
+        "choices": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      {
+        "addr": "@entity",
+        "offset": "0x204",
+        "type": "int",
+        "choices": [
+          107,
+          108,
+          109,
+          199,
+          200,
+          201,
+          211,
+          212,
+          213,
+          216,
+          217,
+          218,
+          277,
+          278,
+          279,
+          340,
+          341,
+          342,
+          343,
+          344
+        ]
+      },
+      {
+        "addr": "@costowner",
+        "offset": "0x38",
+        "type": "int",
+        "range": [
+          -1000,
+          1000
+        ]
+      },
+      {
+        "addr": "@costowner",
+        "offset": "0x40",
+        "type": "int",
+        "range": [
+          -1000,
+          1000
+        ]
+      },
+      {
+        "addr": "@costowner",
+        "offset": "0x34",
+        "type": "int",
+        "range": [
+          -300,
+          300
+        ]
+      }
+    ]
+  },
+  "_survivors": "L4438: clearing the local event flag is unobservable because the stack starts at zero and, on call paths, the callee sees the same zero byte; L4441: changing || to && only skips the early return for states below 3 or equal to 5, which then fall through with zero damage and make no call or external write"
+}

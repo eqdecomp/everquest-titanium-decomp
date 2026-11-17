@@ -1,0 +1,63 @@
+{
+  "function": "EQ_Item_guess::CanPlaceInContainer_guess",
+  "original": "0x004b1f6c",
+  "sources": ["src/EverQuest/tu_069_KeypressHandler.cpp"],
+  "conv": "thiscall",
+  "this": "@itemlist",
+  "args": [
+    {"name": "value", "type": "int"},
+    {"name": "option", "type": "int"}
+  ],
+  "ret": "int",
+  "objects": {
+    "itemlist": {"size": "0xa8", "fill": "random"},
+    "errorhandler": {"size": "0x4", "fill": "random"},
+    "messagewindow": {"size": "0x4", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@errorhandler"},
+    {"addr": "0x00988df0", "u32": "@messagewindow"}
+  ],
+  "callees": {
+    "0x005ece60": {
+      "name": "ItemListBase_guess::GetState_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "ErrorHandler_guess::Report_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 305419896
+    },
+    "0x00498436": {
+      "name": "MessageWindow_guess::dsp_chat",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 2271560481
+    }
+  },
+  "size": "0x64",
+  "cases": [
+    {"name": "value-0", "args": [0, 1]},
+    {"name": "value-1", "args": [1, 1]},
+    {"name": "value-2", "args": [2, 1]},
+    {"name": "value-3", "args": [3, 1]},
+    {"name": "value-4", "args": [4, 1]},
+    {"name": "value-5", "args": [5, 1]},
+    {"name": "value-6", "args": [6, 1]},
+    {"name": "value-7", "args": [7, 1]},
+    {"name": "value-8", "args": [8, 1]},
+    {"name": "value-9", "args": [9, 1]},
+    {"name": "value-2-no-report", "args": [2, 0]},
+    {"name": "value-5-no-report", "args": [5, 0]}
+  ],
+  "fuzz": {
+    "seed": 4923244,
+    "count": 50,
+    "args": [{"range": [0, 12]}, {"choices": [0, 1]}],
+    "memory": []
+  },
+  "_survivors": "L441: result is 2 here; deleting or changing its zero to 1 still returns 0 after the 0xffffff00 mask, and the option-on arm overwrites result. L445: same for result 3. L449: same for result 4. L453: same for result 5."
+}

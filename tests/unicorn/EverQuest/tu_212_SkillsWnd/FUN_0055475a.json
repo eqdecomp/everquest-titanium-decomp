@@ -1,0 +1,285 @@
+{
+  "function": "CSkillsWnd_guess::GetSkillRowInfo_guess",
+  "original": "0x0055475a",
+  "sources": ["src/EverQuest/tu_212_SkillsWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@skillswindow",
+  "args": [
+    {"name": "skillId", "type": "int"},
+    {"name": "row", "type": "ptr"}
+  ],
+  "ret": "bool",
+  "objects": {
+    "skillswindow": {"size": "0x174", "fill": "zero"},
+    "row": {"size": "0x10", "fill": "zero"},
+    "pc": {
+      "size": "0xc4d0",
+      "fill": "zero",
+      "init": [{"offset": "0x8", "u32": "@vbtable"}]
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [{"offset": "0x4", "u32": 50044}]
+    },
+    "entry": {"size": "0x264", "fill": "zero"},
+    "charinfo": {"size": "0x11a8", "fill": "zero"},
+    "stringtable": {"size": "0x4", "fill": "zero"},
+    "everquest": {"size": "0x4", "fill": "zero"},
+    "map": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@mapbuckets"},
+        {"offset": "0x4", "u32": 1}
+      ]
+    },
+    "mapbuckets": {"size": "0x4", "fill": "zero"},
+    "heap": {"size": "0x10000", "fill": "zero"},
+    "skillname": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "cstr": "Skill"}]
+    }
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4},
+    {"addr": "0x00851200", "size": 512, "fill": "zero"},
+    {"addr": "0x00851200", "u32": "@entry"},
+    {"addr": "0x0085138c", "u32": "@entry"},
+    {"addr": "0x00851390", "u32": "@entry"},
+    {"addr": "0x00905cb0", "u32": "@stringtable"},
+    {"addr": "0x00905d00", "u32": "@pc"},
+    {"addr": "0x00988df0", "u32": "@everquest"},
+    {"addr": "0x00991fa8", "u32": "@map"},
+    {"addr": "0x0065caa0", "from_image": "0x0065caa0", "image_size": 52},
+    {"addr": "0x0065cacc", "from_image": "0x0065cacc", "image_size": 44},
+    {"addr": "0x0099db00", "size": 1024, "fill": "zero"},
+    {"addr": "@charinfo", "offset": "0x119c", "u8": 50},
+    {"addr": "@charinfo", "offset": "0x11a4", "u32": 50}
+  ],
+  "callees": {
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": "@skillname"
+    },
+    "0x00571fc0": {
+      "name": "CXStr::operator=(const char*)",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "this",
+      "writes": [
+        {"addr": "@row", "offset": 0, "hex": "00000000", "call": 0},
+        {"addr": "@row", "offset": 4, "hex": "00000000", "call": 1}
+      ]
+    },
+    "0x0040e722": {
+      "name": "GetSkill_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x0041ace9": {
+      "name": "Skill_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 10
+    },
+    "0x00492595": {
+      "name": "GetSpecialSkillName_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@skillname"
+    },
+    "0x005ec220": {
+      "name": "EQ_CharacterProfile_guess::GetCharInfo2",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@charinfo"
+    },
+    "0x0044a335": {
+      "name": "GetSkillAvailability_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 1
+    },
+    "0x0044a2e4": {
+      "name": "GetSkillLimit_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": [10, 12]
+    },
+    "0x006220e9": {
+      "name": "_itoa",
+      "conv": "cdecl",
+      "args": ["int", "ptr", "int"],
+      "ret": "0x0099db00",
+      "writes": [
+        {"addr": "0x0099db00", "hex": "313200"}
+      ]
+    },
+    "0x0046da4a": {
+      "name": "FUN_0046da4a",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "cstr", "u32", "u32", "u32", "u32", "u32", "u32", "u32", "u32"],
+      "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "536b696c6c2063617000"}
+      ]
+    },
+    "0x005738b0": {
+      "name": "FormatString_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr"],
+      "ret": 0,
+      "writes": [
+        {"addr": "@row", "offset": 4, "hex": "00000000"}
+      ]
+    },
+    "0x00554557": {
+      "name": "Get_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "int", "u32"],
+      "passthrough": true
+    },
+    "0x00571f70": {
+      "name": "CXStr::operator=(const CXStr&)",
+      "conv": "thiscall",
+      "args": ["mem:4"],
+      "passthrough": true
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "passthrough": true
+    },
+    "0x00571e00": {
+      "name": "CXStr::CXStr(const char*)",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "passthrough": true
+    },
+    "0x004ff9c9": {
+      "name": "Find_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": "@heap"
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 1
+    }
+  },
+  "rewrite_aliases": {"__itoa": "0x006220e9"},
+  "coverage_ok": {
+    "0055480B-0055480C": "skillIndex is 0..31 for valid skill IDs; the bounds trap is unreachable",
+    "0055482A-0055482B": "skillIndex is 0..31 for valid skill IDs; the bounds trap is unreachable"
+  },
+  "cases": [
+    {
+      "name": "skill lower bound and status override",
+      "args": [0, "@row"],
+      "memory": [
+        {"addr": "@charinfo", "offset": "0x11a4", "u32": 0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "skill lower bound status falls through",
+      "args": [0, "@row"],
+      "memory": [
+        {"addr": "@charinfo", "offset": "0x11a4", "u32": 50}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "skill last before special table",
+      "args": [99, "@row"],
+      "memory": [
+        {"addr": "@charinfo", "offset": "0x11a4", "u32": 50}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "first special skill with value 100",
+      "args": [100, "@row"],
+      "memory": [
+        {"addr": "@pc", "offset": "0xc390", "u8": 100}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "special skill value zero skips status override",
+      "args": [100, "@row"],
+      "memory": [
+        {"addr": "@pc", "offset": "0xc390", "u8": 0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "last special skill array element",
+      "args": [131, "@row"],
+      "memory": [
+        {"addr": "@pc", "offset": "0xc3af", "u8": 101}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "first invalid skill",
+      "args": [132, "@row"],
+      "expect": {"ret": false}
+    },
+    {
+      "name": "each range threshold",
+      "args": [105, "@row"],
+      "memory": [
+        {"addr": "@pc", "offset": "0xc395", "u8": 25}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "nonempty default text handle",
+      "args": [100, "@row"],
+      "memory": [
+        {"addr": "0x0063f53f", "cstr": "X"},
+        {"addr": "@pc", "offset": "0xc390", "u8": 5}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "null result handle",
+      "args": [100, "@row"],
+      "memory": [
+        {"addr": "0x0063f53f", "cstr": ""},
+        {"addr": "@pc", "offset": "0xc390", "u8": 5}
+      ],
+      "expect": {"ret": 1}
+    }
+  ],
+  "fuzz": {
+    "seed": 5588826,
+    "count": 100,
+    "args": [
+      {"choices": [0, 99, 100, 101, 105, 110, 115, 120, 125, 130, 131, 132]},
+      {"choices": ["@row"]}
+    ],
+    "memory": [
+      {"addr": "@charinfo", "offset": "0x119c", "type": "u8", "choices": [1, 20, 50, 100]},
+      {"addr": "@charinfo", "offset": "0x11a4", "type": "u32", "choices": [0, 10, 50]},
+      {"addr": "@pc", "offset": "0xc390", "type": "u8", "count": 32, "range": [0, 101]}
+    ]
+  },
+  "_survivors": "L767: index 32 cannot occur; valid special skill IDs produce indices 0..31. L774: the function's final security-cookie check masks the stored result byte in the emulator; valid calls return 0 in the fixture. L793: the profile reload is equivalent because the same unchanged global PC pointer was loaded immediately before.",
+  "_todo": []
+}

@@ -1,0 +1,532 @@
+{
+  "function": "CJournalNPCWndView_guess::LoadJournalFiles_guess",
+  "original": "0x00525034",
+  "sources": [
+    "src/EverQuest/tu_177_JournalNPCWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [
+    {
+      "name": "mode_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "object": {
+      "size": "0x1f0",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x160",
+          "u32": "@table"
+        }
+      ]
+    },
+    "source": {
+      "size": "0x208",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x120",
+          "cstr": "Player"
+        }
+      ]
+    },
+    "table": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "buffer": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "heap": {
+      "size": "0x4000",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905CE4",
+      "u32": "@source"
+    },
+    {
+      "addr": "0x00988DF0",
+      "u32": "@buffer"
+    },
+    {
+      "addr": "0x00850CA8",
+      "u32": 1
+    }
+  ],
+  "callees": {
+    "0x00571e00": {
+      "name": "Text_guess::Text_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x00571f70": {
+      "name": "Text_guess::operator=",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "0x00571d00": {
+      "name": "Text_guess::FreeRep_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "passthrough": true
+    },
+    "0x00572c10": {
+      "name": "Text_guess::Append_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "0x00493b8f": {
+      "name": "Buffer_guess::GetName_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "7a6f6e6500"
+        }
+      ]
+    },
+    "0x00572300": {
+      "name": "Text_guess::operator char*",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "2e5c75736572646174615c434a5f506c617965725f7a6f6e652e68647200",
+          "call": 0
+        },
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "2e5c75736572646174615c434a5f506c617965725f7a6f6e652e74787400",
+          "call": 1
+        },
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "2e5c75736572646174615c434a5f506c617965725f776f726c642e68647200",
+          "call": 2
+        },
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "2e5c75736572646174615c434a5f506c617965725f776f726c642e74787400",
+          "call": 3
+        }
+      ]
+    },
+    "0x00493ada": {
+      "name": "Buffer_guess::NormalizeName_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "776f726c6400"
+        }
+      ]
+    },
+    "0x00576670": {
+      "name": "JournalFileExists_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": [
+        1
+      ]
+    },
+    "kernel32.dll!CopyFileA": {
+      "name": "CopyFileA",
+      "conv": "stdcall",
+      "args": [
+        "cstr",
+        "cstr",
+        "bool"
+      ],
+      "ret": 1
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": [
+        "@heap+0x0", "@heap+0x100", "@heap+0x200", "@heap+0x300",
+        "@heap+0x400", "@heap+0x500", "@heap+0x600", "@heap+0x700",
+        "@heap+0x800", "@heap+0x900", "@heap+0xa00", "@heap+0xb00",
+        "@heap+0xc00", "@heap+0xd00", "@heap+0xe00", "@heap+0xf00",
+        "@heap+0x1000", "@heap+0x1100", "@heap+0x1200", "@heap+0x1300",
+        "@heap+0x1400", "@heap+0x1500", "@heap+0x1600", "@heap+0x1700",
+        "@heap+0x1800", "@heap+0x1900", "@heap+0x1a00", "@heap+0x1b00",
+        "@heap+0x1c00", "@heap+0x1d00", "@heap+0x1e00", "@heap+0x1f00",
+        "@heap+0x2000", "@heap+0x2100", "@heap+0x2200", "@heap+0x2300",
+        "@heap+0x2400", "@heap+0x2500", "@heap+0x2600", "@heap+0x2700",
+        "@heap+0x2800", "@heap+0x2900", "@heap+0x2a00", "@heap+0x2b00",
+        "@heap+0x2c00", "@heap+0x2d00", "@heap+0x2e00", "@heap+0x2f00"
+      ]
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    },
+    "0x00612662": {
+      "name": "DeleteJournalFile_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x00572e00": {
+      "name": "Text_guess::AppendText_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x0042f6cc": {
+      "name": "NameTable_guess::LoadText_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x004982c6": {
+      "name": "Buffer_guess::ReportError_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "int"
+      ]
+    },
+    "0x00524f87": {
+      "name": "CJournalNPCWndView_guess::RefreshAll_guess",
+      "conv": "thiscall",
+      "args": [
+        "bool"
+      ]
+    },
+    "0x005233d8": {
+      "name": "Settings_guess::Refresh_guess",
+      "conv": "thiscall",
+      "args": [
+        "bool"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "source_disabled",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905CE4",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "header_already_exists_loader_minus_one_mode_zero",
+      "args": [
+        0
+      ],
+      "callees": {
+        "0x0042f6cc": {
+          "name": "NameTable_guess::LoadText_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "source_header_absent_negative_mode_loader_below_minus_one",
+      "args": [
+        -1
+      ],
+      "memory": [
+        {
+          "addr": "0x00850CA8",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00576670": {
+          "name": "JournalFileExists_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            0,
+            0
+          ]
+        },
+        "0x0042f6cc": {
+          "name": "NameTable_guess::LoadText_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": -2
+        }
+      }
+    },
+    {
+      "name": "migration_succeeds_positive_mode",
+      "args": [
+        1
+      ],
+      "callees": {
+        "0x00576670": {
+          "name": "JournalFileExists_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            0,
+            1,
+            1,
+            1
+          ]
+        },
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "2e5c75736572646174615c434a5f506c617965725f7a6f6e652e68647200",
+              "call": 0
+            },
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "2e5c75736572646174615c434a5f506c617965725f7a6f6e652e74787400",
+              "call": 1
+            },
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "2e5c75736572646174615c434a5f506c617965725f776f726c642e68647200",
+              "call": 2
+            },
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "2e5c75736572646174615c434a5f506c617965725f776f726c642e74787400",
+              "call": 3
+            },
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "2e5c75736572646174615c434a5f506c617965725f776f726c642e6864725f6f6c6400",
+              "call": 4
+            },
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "2e5c75736572646174615c434a5f506c617965725f776f726c642e7478745f6f6c6400",
+              "call": 5
+            },
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "3100",
+              "call": 6
+            }
+          ]
+        },
+        "0x0042f6cc": {
+          "name": "NameTable_guess::LoadText_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "migration_copy_fails_zero_mode",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00850CA8",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00576670": {
+          "name": "JournalFileExists_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            0,
+            1,
+            0,
+            0
+          ]
+        },
+        "0x0042f6cc": {
+          "name": "NameTable_guess::LoadText_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "header_copy_succeeds_text_copy_fails",
+      "args": [
+        0
+      ],
+      "callees": {
+        "0x00576670": {
+          "name": "JournalFileExists_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            0,
+            1,
+            1,
+            0
+          ]
+        },
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "2e5c75736572646174615c434a5f506c617965725f7a6f6e652e68647200",
+              "call": 0
+            },
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "2e5c75736572646174615c434a5f506c617965725f7a6f6e652e74787400",
+              "call": 1
+            },
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "2e5c75736572646174615c434a5f506c617965725f776f726c642e68647200",
+              "call": 2
+            },
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "2e5c75736572646174615c434a5f506c617965725f776f726c642e74787400",
+              "call": 3
+            },
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "2e5c75736572646174615c434a5f506c617965725f776f726c642e6864725f6f6c6400",
+              "call": 4
+            }
+          ]
+        },
+        "0x0042f6cc": {
+          "name": "NameTable_guess::LoadText_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5394484,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -2,
+          0
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,808 @@
+{
+  "function": "CharacterMagicSystem_guess::IsBlockedByStackingCommand_guess",
+  "original": "0x0040ea07",
+  "sources": [
+    "src/EverQuest/tu_012_CharacterMagicSystem.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@charactermagicsystem",
+  "args": [
+    {
+      "name": "spell_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "type_guess",
+      "type": "char"
+    }
+  ],
+  "ret": "char",
+  "objects": {
+    "charactermagicsystem": {
+      "size": "0x138ac",
+      "fill": "zero"
+    },
+    "spell": {
+      "size": "0x270",
+      "fill": "zero"
+    },
+    "entry": {
+      "size": "0x14",
+      "fill": "zero"
+    },
+    "entry1": {
+      "size": "0x14",
+      "fill": "zero"
+    },
+    "entry2": {
+      "size": "0x14",
+      "fill": "zero"
+    },
+    "data": {
+      "size": "0x270",
+      "fill": "zero"
+    },
+    "data1": {
+      "size": "0x270",
+      "fill": "zero"
+    },
+    "data2": {
+      "size": "0x270",
+      "fill": "zero"
+    },
+    "lookup": {
+      "size": "0x4c",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00985cc8",
+      "u32": "@lookup"
+    },
+    {
+      "addr": "@charactermagicsystem",
+      "offset": "0x8",
+      "u32": 1
+    },
+    {
+      "addr": "@spell",
+      "offset": "0x0",
+      "u32": 10
+    },
+    {
+      "addr": "@entry",
+      "offset": "0x4",
+      "u32": 20
+    },
+    {
+      "addr": "@entry1",
+      "offset": "0x4",
+      "u32": 20
+    },
+    {
+      "addr": "@entry2",
+      "offset": "0x4",
+      "u32": 21
+    },
+    {
+      "addr": "@data",
+      "offset": "0x120",
+      "u32": 254
+    },
+    {
+      "addr": "@data1",
+      "offset": "0x120",
+      "u32": 254
+    },
+    {
+      "addr": "@data2",
+      "offset": "0x120",
+      "u32": 254
+    }
+  ],
+  "callees": {
+    "0x0040db0b": {
+      "name": "IsBardSong_guess",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0040d933": {
+      "name": "GetMaxBuffs_guess",
+      "conv": "fastcall",
+      "args": [
+        "ptr"
+      ],
+      "ret": [
+        1
+      ]
+    },
+    "0x0040e7ac": {
+      "name": "GetEntry_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@entry"
+    },
+    "0x0040cbd6": {
+      "name": "GetSpell_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@data"
+    },
+    "0x0060f81e": {
+      "name": "NormalizeMagicAmount_guess",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": 10
+    }
+  },
+  "cases": [
+    {
+      "name": "null spell",
+      "args": [
+        0,
+        0
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "null state",
+      "args": [
+        "@spell",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x8",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "predicate rejects",
+      "args": [
+        "@spell",
+        8
+      ],
+      "callees": {
+        "0x0040db0b": {
+          "name": "IsBardSong_guess",
+          "conv": "stdcall",
+          "args": [
+            "ptr",
+            "int"
+          ],
+          "ret": 1
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "zero state count",
+      "args": [
+        "@spell",
+        0
+      ],
+      "callees": {
+        "0x0040d933": {
+          "name": "GetStateCode_guess",
+          "conv": "fastcall",
+          "args": [
+            "ptr"
+          ],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "missing data",
+      "args": [
+        "@spell",
+        0
+      ],
+      "callees": {
+        "0x0040cbd6": {
+          "name": "GetData_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "same spell id is skipped",
+      "args": [
+        "@spell",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@entry",
+          "offset": "0x4",
+          "u32": 10
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "same special spell id is checked",
+      "args": [
+        "@spell",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@spell",
+          "offset": "0x0",
+          "u32": 2751
+        },
+        {
+          "addr": "@entry",
+          "offset": "0x4",
+          "u32": 2751
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "nonmatching effect type",
+      "args": [
+        "@spell",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x120",
+          "u32": 149
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "target effect type mismatch",
+      "args": [
+        "@spell",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x120",
+          "u32": 148
+        },
+        {
+          "addr": "@data",
+          "offset": "0x30",
+          "u32": 42
+        },
+        {
+          "addr": "@data",
+          "offset": "0xf0",
+          "u32": 2
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x128",
+          "u32": 99
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "target threshold from values30 is too high",
+      "args": [
+        "@spell",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x120",
+          "u32": 148
+        },
+        {
+          "addr": "@data",
+          "offset": "0x30",
+          "u32": 42
+        },
+        {
+          "addr": "@data",
+          "offset": "0xf0",
+          "u32": 2
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x128",
+          "u32": 42
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x38",
+          "u32": 11
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "target threshold from values90 overrides values30",
+      "args": [
+        "@spell",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x120",
+          "u32": 148
+        },
+        {
+          "addr": "@data",
+          "offset": "0x30",
+          "u32": 42
+        },
+        {
+          "addr": "@data",
+          "offset": "0xf0",
+          "u32": 203
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x128",
+          "u32": 42
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x38",
+          "u32": 15
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x98",
+          "u32": 5
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "matching duplicate raises threshold",
+      "args": [
+        "@spell",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x120",
+          "u32": 148
+        },
+        {
+          "addr": "@data",
+          "offset": "0x30",
+          "u32": 42
+        },
+        {
+          "addr": "@data",
+          "offset": "0xf0",
+          "u32": 2
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x128",
+          "u32": 42
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x38",
+          "u32": 5
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x12c",
+          "u32": 148
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x3c",
+          "u32": 42
+        },
+        {
+          "addr": "@spell",
+          "offset": "0xfC",
+          "u32": 203
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x9c",
+          "u32": 11
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "matching duplicate lowers threshold and succeeds",
+      "args": [
+        "@spell",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x120",
+          "u32": 148
+        },
+        {
+          "addr": "@data",
+          "offset": "0x30",
+          "u32": 42
+        },
+        {
+          "addr": "@data",
+          "offset": "0xf0",
+          "u32": 203
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x128",
+          "u32": 42
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x38",
+          "u32": 5
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x12c",
+          "u32": 148
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x3c",
+          "u32": 42
+        },
+        {
+          "addr": "@spell",
+          "offset": "0xfc",
+          "u32": 203
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x9c",
+          "u32": 8
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "duplicate with wrong value does not override threshold",
+      "args": [
+        "@spell",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x120",
+          "u32": 148
+        },
+        {
+          "addr": "@data",
+          "offset": "0x30",
+          "u32": 42
+        },
+        {
+          "addr": "@data",
+          "offset": "0xf0",
+          "u32": 2
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x128",
+          "u32": 42
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x38",
+          "u32": 5
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x12c",
+          "u32": 148
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x3c",
+          "u32": 99
+        },
+        {
+          "addr": "@spell",
+          "offset": "0xfc",
+          "u32": 203
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x9c",
+          "u32": 11
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "slot boundary traps",
+      "args": [
+        "@spell",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x120",
+          "u32": 148
+        },
+        {
+          "addr": "@data",
+          "offset": "0x30",
+          "u32": 42
+        },
+        {
+          "addr": "@data",
+          "offset": "0xf0",
+          "u32": 12
+        }
+      ]
+    },
+    {
+      "name": "second outer entry matches",
+      "args": [
+        "@spell",
+        0
+      ],
+      "callees": {
+        "0x0040d933": {
+          "name": "GetStateCode_guess",
+          "conv": "fastcall",
+          "args": [
+            "ptr"
+          ],
+          "ret": [
+            2
+          ]
+        },
+        "0x0040e7ac": {
+          "name": "GetEntry_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@entry1",
+            "@entry2"
+          ]
+        },
+        "0x0040cbd6": {
+          "name": "GetData_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@data1",
+            "@data2"
+          ]
+        }
+      },
+      "memory": [
+        {
+          "addr": "@data1",
+          "offset": "0x120",
+          "u32": 149
+        },
+        {
+          "addr": "@data2",
+          "offset": "0x120",
+          "u32": 148
+        },
+        {
+          "addr": "@data2",
+          "offset": "0x30",
+          "u32": 42
+        },
+        {
+          "addr": "@data2",
+          "offset": "0xf0",
+          "u32": 2
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x128",
+          "u32": 42
+        },
+        {
+          "addr": "@spell",
+          "offset": "0x38",
+          "u32": 5
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4254215,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@spell"
+        ]
+      },
+      {
+        "range": [
+          0,
+          255
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@data",
+        "offset": "0x120",
+        "type": "u32",
+        "choices": [
+          0,
+          148,
+          149,
+          254
+        ],
+        "count": 12
+      },
+      {
+        "addr": "@data",
+        "offset": "0x30",
+        "type": "u32",
+        "range": [
+          0,
+          100
+        ],
+        "count": 12
+      },
+      {
+        "addr": "@data",
+        "offset": "0x90",
+        "type": "int",
+        "range": [
+          0,
+          20
+        ],
+        "count": 12
+      },
+      {
+        "addr": "@data",
+        "offset": "0xf0",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          2,
+          10,
+          11,
+          201,
+          202,
+          203,
+          210,
+          211
+        ],
+        "count": 12
+      },
+      {
+        "addr": "@spell",
+        "offset": "0x120",
+        "type": "u32",
+        "choices": [
+          0,
+          42,
+          148,
+          149,
+          254
+        ],
+        "count": 12
+      },
+      {
+        "addr": "@spell",
+        "offset": "0x30",
+        "type": "u32",
+        "range": [
+          0,
+          100
+        ],
+        "count": 12
+      },
+      {
+        "addr": "@spell",
+        "offset": "0x90",
+        "type": "int",
+        "range": [
+          0,
+          20
+        ],
+        "count": 12
+      },
+      {
+        "addr": "@spell",
+        "offset": "0xf0",
+        "type": "u32",
+        "choices": [
+          201,
+          202,
+          203,
+          210,
+          211
+        ],
+        "count": 12
+      }
+    ]
+  },
+  "coverage_ok": {
+    "0040EA8E-0040EA8F": "unreachable effect-offset bounds trap",
+    "0040EAA4-0040EAA5": "unreachable effect-offset bounds trap",
+    "0040EABA-0040EABB": "unreachable effect-offset bounds trap",
+    "0040EAC6-0040EAC7": "unreachable effect-offset bounds trap",
+    "0040EAE6-0040EAE7": "unreachable effect-offset bounds trap",
+    "0040EAFE-0040EAFF": "unreachable slot bounds trap on valid spell data",
+    "0040EB14-0040EB15": "unreachable slot bounds trap on valid spell data",
+    "0040EB1D-0040EB1E": "unreachable slot bounds trap on valid spell data",
+    "0040EB2C-0040EB2D": "unreachable slot bounds trap on valid spell data",
+    "0040EB40-0040EB41": "unreachable effect-offset bounds trap",
+    "0040EB53-0040EB54": "unreachable effect-offset bounds trap",
+    "0040EB62-0040EB63": "unreachable effect-offset bounds trap",
+    "0040EB79-0040EB7A": "unreachable effect-offset bounds trap"
+  },
+  "_survivors": "L1543: effect_guess is bounded below 12 before the array access, so this check is unreachable; L1551: at slot 200 both comparisons reach the same slot bounds int3 before any observable use; L1567: otherEffect_guess is bounded below 12 before the array access, so this check is unreachable"
+}

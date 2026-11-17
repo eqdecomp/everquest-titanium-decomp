@@ -1,0 +1,104 @@
+{
+  "function": "GuildMgmtWnd_guess::SortMembers_guess",
+  "original": "0x005101b6",
+  "sources": [
+    "src/EverQuest/tu_166_GuildManagementWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {
+      "name": "sortKey",
+      "type": "int"
+    },
+    {
+      "name": "descending",
+      "type": "char"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {"offset": "0x1cc", "u32": "@sortbuf"}
+      ]
+    },
+    "sortbuf": {
+      "size": "0x40",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "@owner", "offset": "0x1c8", "u32": 8},
+    {"addr": "@owner", "offset": "0x1d8", "u32": 5}
+  ],
+  "callees": {
+    "0x0060ee40": {
+      "name": "_qsort",
+      "conv": "cdecl",
+      "args": ["u32", "u32", "u32", "ignore"],
+      "ret": 0
+    },
+    "0x0050fe9a": {
+      "name": "RefillLists_guess",
+      "conv": "thiscall",
+      "args": ["char"]
+    },
+    "0x00405492": {
+      "name": "ThrowSelf_guess",
+      "conv": "thiscall",
+      "args": [],
+      "noreturn": true
+    }
+  },
+  "rewrite_aliases": {
+    "_qsort": "0x0060ee40"
+  },
+  "_survivors": "L1366: descending selects the compare pointer; qsort's 4th arg is ignored because the compare function is a rewrite-image address the harness cannot match to the original's; L1367: same, compare pointer for descending key 0 (rewrite-image address); L1373: same (descending key 1); L1376: same (ascending label pointer, not observed through ignored arg); L1380: same; L1388: same (descending key 2); L1390: same (ascending key 2 label pointer); L1394: same; L1397: same (ascending key 1 label pointer); L1408: same (descending key 6 and 7 choice); L1409: same (descending key 6); L1416: same (descending key 7); L1422: same; L1436: same; L1439: same (ascending key 10 label pointer)",
+  "cases": [
+    {"name": "key0-asc", "args": [0, 0]},
+    {"name": "key0-desc", "args": [0, 1]},
+    {"name": "key1-asc", "args": [1, 0]},
+    {"name": "key1-desc", "args": [1, 1]},
+    {"name": "key2-asc", "args": [2, 0]},
+    {"name": "key2-desc", "args": [2, 1]},
+    {"name": "key3-asc", "args": [3, 0]},
+    {"name": "key3-desc", "args": [3, 1]},
+    {"name": "key4-asc", "args": [4, 0]},
+    {"name": "key4-desc", "args": [4, 1]},
+    {"name": "key5-asc", "args": [5, 0]},
+    {"name": "key5-desc", "args": [5, 1]},
+    {"name": "key6-asc", "args": [6, 0]},
+    {"name": "key6-desc", "args": [6, 1]},
+    {"name": "key7-asc", "args": [7, 0]},
+    {"name": "key7-desc", "args": [7, 1]},
+    {"name": "key8-asc", "args": [8, 0]},
+    {"name": "key8-desc", "args": [8, 1]},
+    {"name": "key9-asc", "args": [9, 0]},
+    {"name": "key9-desc", "args": [9, 1]},
+    {"name": "key10-asc", "args": [10, 0]},
+    {"name": "key10-desc", "args": [10, 1]},
+    {"name": "default-11", "args": [11, 0]},
+    {"name": "default-neg", "args": [-1, 1]},
+    {"name": "count-zero", "args": [3, 0], "memory": [{"addr": "@owner", "offset": "0x1d8", "u32": 0}]},
+    {"name": "count-neg", "args": [3, 1], "memory": [{"addr": "@owner", "offset": "0x1d8", "u32": -3}]},
+    {"name": "buffer-count-zero", "args": [4, 0], "memory": [{"addr": "@owner", "offset": "0x1c8", "u32": 0}]},
+    {"name": "buffer-count-neg", "args": [4, 1], "memory": [{"addr": "@owner", "offset": "0x1c8", "u32": -1}]},
+    {"name": "buffer-data-null", "args": [4, 0], "memory": [{"addr": "@owner", "offset": "0x1cc", "u32": 0}]},
+    {"name": "default-count-zero", "args": [11, 0], "memory": [{"addr": "@owner", "offset": "0x1d8", "u32": 0}]}
+  ],
+  "fuzz": {
+    "seed": 5308854,
+    "count": 150,
+    "args": [
+      {"range": [-2, 12]},
+      {"choices": [0, 1, 2]}
+    ],
+    "memory": [
+      {"addr": "@owner", "offset": "0x1c8", "type": "int", "range": [-2, 10]},
+      {"addr": "@owner", "offset": "0x1d8", "type": "int", "range": [-3, 10]}
+    ]
+  }
+}

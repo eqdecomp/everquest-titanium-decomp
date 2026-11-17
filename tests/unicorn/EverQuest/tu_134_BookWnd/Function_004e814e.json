@@ -1,0 +1,429 @@
+{
+  "function": "CBookWndView_guess::PaginateText_guess",
+  "original": "0x004e814e",
+  "sources": [
+    "src/EverQuest/tu_134_BookWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner_004e8133",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "owner_004e8133": {
+      "size": "0x718",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x16c",
+          "u32": "@page"
+        }
+      ]
+    },
+    "page": {
+      "size": "0x11c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@pagevtbl"
+        },
+        {
+          "offset": "0x68",
+          "u32": "@layout"
+        }
+      ]
+    },
+    "pagevtbl": {
+      "size": "0xe8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xe4",
+          "u32": "@fn_screen"
+        }
+      ]
+    },
+    "layout": {
+      "size": "4",
+      "fill": "zero"
+    },
+    "fn_screen": {
+      "size": 4,
+      "fill": "zero"
+    },
+    "heaprep": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "text": {
+      "size": "0x600",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@owner_004e8133",
+      "offset": "0x7c",
+      "u32": 24
+    },
+    {
+      "addr": "@text",
+      "cstr": "x"
+    },
+    {
+      "addr": "0x00923d74",
+      "u32": 0
+    },
+    {
+      "addr": "0x00651314",
+      "cstr": "delimiter"
+    },
+    {
+      "addr": "0x0063fe10",
+      "from_image": "0x0063FE10",
+      "image_size": 2
+    },
+    {
+      "addr": "0x00641588",
+      "from_image": "0x00641588",
+      "image_size": 2
+    }
+  ],
+  "callees": {
+    "0x0059d6c0": {
+      "name": "FUN_0059d6c0",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "arg0"
+    },
+    "@fn_screen": {
+      "name": "PageScreen_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "arg0"
+    },
+    "0x004e8133": {
+      "name": "ClearPages_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00572300": {
+      "name": "FUN_00572300",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@text"
+    },
+    "0x004482fb": {
+      "name": "FUN_004482fb",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00574390": {
+      "name": "FUN_00574390",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x004ae49c": {
+      "name": "IsDoubleByteLanguage_guess",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005742b0": {
+      "name": "FUN_005742b0",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "ret": 1,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "61"
+        }
+      ]
+    },
+    "0x00571e00": {
+      "name": "FUN_00571e00",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x005a3a60": {
+      "name": "FUN_005a3a60",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "ignore",
+        "ignore",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x00571d00": {
+      "name": "FUN_00571d00",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x00572e00": {
+      "name": "FUN_00572e00",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x0060e620": {
+      "name": "strncpy",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr",
+        "u32"
+      ],
+      "ret": "arg0",
+      "passthrough": true
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": "@heaprep"
+    }
+  },
+  "cases": [
+    {
+      "name": "empty_text",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@text",
+          "cstr": ""
+        }
+      ]
+    },
+    {
+      "name": "wrap_stops_at_end",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@text",
+          "cstr": "a"
+        }
+      ],
+      "callees": {
+        "0x00574390": {
+          "name": "FUN_00574390",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": 1
+        },
+        "0x004ae49c": {
+          "name": "FUN_004ae49c",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x005a3a60": {
+          "name": "FUN_005a3a60",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore",
+            "ignore",
+            "int",
+            "int",
+            "int"
+          ],
+          "ret": 2
+        }
+      }
+    },
+    {
+      "name": "wrap_retries_then_stops",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@text",
+          "cstr": "ab"
+        }
+      ],
+      "callees": {
+        "0x00574390": {
+          "name": "FUN_00574390",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": [
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1
+          ]
+        },
+        "0x004ae49c": {
+          "name": "FUN_004ae49c",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x005a3a60": {
+          "name": "FUN_005a3a60",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore",
+            "ignore",
+            "int",
+            "int",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "separator_skip",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@text",
+          "cstr": "ab"
+        }
+      ],
+      "callees": {
+        "0x00574390": {
+          "name": "FUN_00574390",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": [
+            1,
+            0,
+            1,
+            0,
+            1,
+            0
+          ]
+        },
+        "0x004ae49c": {
+          "name": "FUN_004ae49c",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x005a3a60": {
+          "name": "FUN_005a3a60",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore",
+            "ignore",
+            "int",
+            "int",
+            "int"
+          ],
+          "ret": 2
+        }
+      }
+    },
+    {
+      "name": "row_limit",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@text",
+          "cstr": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        }
+      ],
+      "callees": {
+        "0x00574390": {
+          "name": "FUN_00574390",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5144910,
+    "count": 50,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@owner_004e8133",
+        "offset": "0x7c",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          12,
+          13,
+          24
+        ]
+      },
+      {
+        "addr": "0x00923d74",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@text",
+        "type": "char",
+        "choices": [
+          0,
+          120
+        ]
+      }
+    ]
+  }
+}

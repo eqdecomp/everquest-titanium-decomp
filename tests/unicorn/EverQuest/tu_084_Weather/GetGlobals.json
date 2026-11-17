@@ -1,0 +1,124 @@
+{
+  "function": "GetGlobals_guess",
+  "original": "0x004c398e",
+  "sources": [
+    "src/EverQuest/tu_084_Weather.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "ptr",
+  "objects": {
+    "cached": {
+      "size": "0x30",
+      "fill": "random"
+    },
+    "allocated": {
+      "size": "0x30",
+      "fill": "random"
+    },
+    "shared": {
+      "size": "0x28",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x24",
+          "u32": "0x24681357"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00985c90",
+      "u32": "@cached"
+    },
+    {
+      "addr": "0x0099e358",
+      "u32": "@shared"
+    }
+  ],
+  "callees": {
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@allocated"
+    },
+    "0x004c395d": {
+      "name": "FUN_004c395d",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "@allocated"
+    },
+    "0x004c4c08": {
+      "name": "FUN_004c4c08",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "cached",
+      "args": [],
+      "expect": {
+        "ret": "0x60000000"
+      }
+    },
+    {
+      "name": "allocation_succeeds",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00985c90",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": "0x60000030"
+      }
+    },
+    {
+      "name": "allocation_fails",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00985c90",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0060d071": {
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4995470,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x00985c90",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@cached"
+        ]
+      }
+    ]
+  },
+  "_survivors": "L607: allocation failure follows the cached-null test, so object_guess already equals zero and the deleted assignment has no observable effect"
+}

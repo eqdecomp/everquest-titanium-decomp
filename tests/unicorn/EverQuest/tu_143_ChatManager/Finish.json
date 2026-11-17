@@ -1,0 +1,1360 @@
+{
+  "function": "FinishOwner_guess::Finish_guess",
+  "original": "0x004f2ca2",
+  "sources": [
+    "src/EverQuest/tu_143_ChatManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@finishowner",
+  "args": [
+    {
+      "name": "input_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "finishowner": {
+      "size": "0x218",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1f4",
+          "u32": "@list"
+        },
+        {
+          "offset": "0x1fc",
+          "u32": "@list"
+        },
+        {
+          "offset": "0x204",
+          "u32": "@list"
+        },
+        {
+          "offset": "0x20c",
+          "u32": "@list"
+        },
+        {
+          "offset": "0x210",
+          "u32": "@list"
+        },
+        {
+          "offset": "0x214",
+          "u32": "@list"
+        }
+      ]
+    },
+    "input": {
+      "size": "0x154",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x150",
+          "u32": 7
+        }
+      ]
+    },
+    "manager": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "state": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "list": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "label": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "heap": {
+      "size": "0x20000",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0099d414",
+      "u32": "@manager"
+    },
+    {
+      "addr": "0x925920",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925960",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x9259a0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x9259e0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925a20",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925a60",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925aa0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925ae0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925b20",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925b60",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925ba0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925be0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925c20",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925c60",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925ca0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925ce0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925d20",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925d60",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925da0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925de0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925e20",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925e60",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925ea0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925ee0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925f20",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925f60",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925fa0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x925fe0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x926020",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x926060",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x9260a0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x9260e0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x926120",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x926160",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x9261a0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x9261e0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x926220",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x926260",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x9262a0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x9262e0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x926320",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x926360",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x9263a0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x9263e0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x926420",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x926460",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x9264a0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x9264e0",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x926520",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x926560",
+      "cstr": "p"
+    },
+    {
+      "addr": "0x95a1b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a1f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a234",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a274",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a2b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a2f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a334",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a374",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a3b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a3f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a434",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a474",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a4b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a4f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a534",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a574",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a5b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a5f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a634",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a674",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a6b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a6f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a734",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a774",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a7b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a7f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a834",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a874",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a8b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a8f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a934",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a974",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a9b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95a9f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95aa34",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95aa74",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95aab4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95aaf4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95ab34",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95ab74",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95abb4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95abf4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95ac34",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95ac74",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95acb4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95acf4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95ad34",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95ad74",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95adb4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95adf4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95ae34",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95ae74",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95aeb4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95aef4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95af34",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95af74",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95afb4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95aff4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b034",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b074",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b0b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b0f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b134",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b174",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b1b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b1f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b234",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b274",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b2b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b2f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b334",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b374",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b3b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b3f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b434",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b474",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b4b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b4f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b534",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b574",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b5b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b5f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b634",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b674",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b6b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b6f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b734",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b774",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b7b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b7f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b834",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b874",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b8b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b8f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b934",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b974",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b9b4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95b9f4",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95ba34",
+      "cstr": "s"
+    },
+    {
+      "addr": "0x95ba74",
+      "cstr": "s"
+    },
+    {
+      "addr": "@label",
+      "cstr": "tertiary"
+    }
+  ],
+  "callees": {
+    "0x004dafea": {
+      "name": "Manager_guess::GetMenu_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@state"
+    },
+    "0x005bfef0": {
+      "name": "FinishList_guess::BeginUpdate_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00571e00": {
+      "name": "FinishString_guess::FinishString_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x005bfcf0": {
+      "name": "FinishList_guess::SetItem_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "int",
+        "int",
+        "int"
+      ]
+    },
+    "0x00571d00": {
+      "name": "FinishString_guess::Release_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ]
+    },
+    "0x005bff10": {
+      "name": "FinishState_guess::UpdateList_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "bool"
+      ]
+    },
+    "0x004302d9": {
+      "name": "FinishStringTable_guess::Get_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@label"
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": "@heap"
+    }
+  },
+  "cases": [
+    {
+      "name": "all lists and full table bounds",
+      "args": [
+        "@input"
+      ]
+    },
+    {
+      "name": "primary table begins empty",
+      "args": [
+        "@input"
+      ],
+      "memory": [
+        {
+          "addr": "0x00925920",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "secondary table entries empty",
+      "args": [
+        "@input"
+      ],
+      "memory": [
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x40",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x80",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xc0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x100",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x140",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x180",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x200",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x240",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x280",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x2c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x300",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x340",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x380",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x3c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x400",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x440",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x480",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x4c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x500",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x540",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x580",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x5c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x600",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x640",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x680",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x6c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x700",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x740",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x780",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x7c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x800",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x840",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x880",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x8c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x900",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x940",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x980",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x9c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xa00",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xa40",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xa80",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xac0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xb00",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xb40",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xb80",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xbc0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xc00",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xc40",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xc80",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xcc0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xd00",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xd40",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xd80",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xdc0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xe00",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xe40",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xe80",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xec0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xf00",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xf40",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xf80",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0xfc0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1000",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1040",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1080",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x10c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1100",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1140",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1180",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x11c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1200",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1240",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1280",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x12c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1300",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1340",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1380",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x13c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1400",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1440",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1480",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x14c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1500",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1540",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1580",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x15c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1600",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1640",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1680",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x16c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1700",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1740",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1780",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x17c0",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1800",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1840",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x1880",
+          "u8": 0
+        },
+        {
+          "addr": "0x0095a1b4",
+          "offset": "0x18c0",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "secondary end boundary nonempty",
+      "args": [
+        "@input"
+      ],
+      "memory": [
+        {
+          "addr": "0x0095bab4",
+          "cstr": "z"
+        }
+      ]
+    },
+    {
+      "name": "primary list absent",
+      "args": [
+        "@input"
+      ],
+      "memory": [
+        {
+          "addr": "@finishowner",
+          "offset": "0x1f4",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "secondary list absent",
+      "args": [
+        "@input"
+      ],
+      "memory": [
+        {
+          "addr": "@finishowner",
+          "offset": "0x1fc",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "tertiary list absent",
+      "args": [
+        "@input"
+      ],
+      "memory": [
+        {
+          "addr": "@finishowner",
+          "offset": "0x204",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "tertiary strings absent",
+      "args": [
+        "@input"
+      ],
+      "callees": {
+        "0x004302d9": {
+          "name": "FinishStringTable_guess::Get_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5188770,
+    "count": 50,
+    "args": [
+      {
+        "choices": [
+          "@input"
+        ]
+      }
+    ]
+  }
+}

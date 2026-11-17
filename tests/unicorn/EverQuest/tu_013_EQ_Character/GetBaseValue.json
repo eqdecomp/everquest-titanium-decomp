@@ -1,0 +1,157 @@
+{
+  "function": "CostOwner_guess::defense_agility_bonus_guess",
+  "original": "0x00418424",
+  "_survivors": "L1920: level 0x28 gives 0 on both the low branch and the middle branch (the formula is (0)*25/40), so `<` vs `<=` and 0x28 vs 0x29 are the same result; L1925: difference 0 gives 0 either way, so `<` vs `<=` is equivalent; L1926: a difference of 1 or 0 gives the same /5 term (0), so clamping to 1 is equivalent",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@costowner",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "costowner": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": "@offset"},
+        {"offset": "0x24", "u32": 60}
+      ]
+    },
+    "offset": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": 256}
+      ]
+    },
+    "lookupresult": {
+      "size": "0x11a8",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x11a4", "u32": 0}
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x005ec220": {"name": "Find_guess", "conv": "thiscall", "args": [], "ret": "@lookupresult"}
+  },
+  "cases": [
+    {
+      "name": "level_zero",
+      "args": [],
+      "memory": [{"addr": "@costowner", "offset": "0x24", "u32": 0}]
+    },
+    {
+      "name": "level_38_below_forty",
+      "args": [],
+      "memory": [{"addr": "@costowner", "offset": "0x24", "u32": 38}]
+    },
+    {
+      "name": "level_39_below_forty",
+      "args": [],
+      "memory": [{"addr": "@costowner", "offset": "0x24", "u32": 39}]
+    },
+    {
+      "name": "level_forty_boundary",
+      "args": [],
+      "memory": [{"addr": "@costowner", "offset": "0x24", "u32": 40}]
+    },
+    {
+      "name": "level_sixty_boundary",
+      "args": [],
+      "memory": [{"addr": "@costowner", "offset": "0x24", "u32": 60}]
+    },
+    {
+      "name": "level_sixty_one",
+      "args": [],
+      "memory": [{"addr": "@costowner", "offset": "0x24", "u32": 61}]
+    },
+    {
+      "name": "level_seventy_four",
+      "args": [],
+      "memory": [{"addr": "@costowner", "offset": "0x24", "u32": 74}]
+    },
+    {
+      "name": "level_seventy_five_scale_0x23",
+      "args": [],
+      "memory": [
+        {"addr": "@costowner", "offset": "0x24", "u32": 75},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 0}
+      ]
+    },
+    {
+      "name": "scale_0x23_at_six",
+      "args": [],
+      "memory": [
+        {"addr": "@costowner", "offset": "0x24", "u32": 100},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 6}
+      ]
+    },
+    {
+      "name": "scale_0x37_at_seven",
+      "args": [],
+      "memory": [
+        {"addr": "@costowner", "offset": "0x24", "u32": 100},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 7}
+      ]
+    },
+    {
+      "name": "scale_0x37_at_nineteen",
+      "args": [],
+      "memory": [
+        {"addr": "@costowner", "offset": "0x24", "u32": 100},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 19}
+      ]
+    },
+    {
+      "name": "scale_0x46_at_twenty",
+      "args": [],
+      "memory": [
+        {"addr": "@costowner", "offset": "0x24", "u32": 100},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 20}
+      ]
+    },
+    {
+      "name": "scale_0x46_at_thirty_nine",
+      "args": [],
+      "memory": [
+        {"addr": "@costowner", "offset": "0x24", "u32": 100},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 39}
+      ]
+    },
+    {
+      "name": "scale_0x50_at_forty",
+      "args": [],
+      "memory": [
+        {"addr": "@costowner", "offset": "0x24", "u32": 100},
+        {"addr": "@lookupresult", "offset": "0x11a4", "u32": 40}
+      ]
+    },
+    {
+      "name": "level_two_hundred_difference_zero",
+      "args": [],
+      "memory": [{"addr": "@costowner", "offset": "0x24", "u32": 200}]
+    },
+    {
+      "name": "level_above_two_hundred_clamps_difference",
+      "args": [],
+      "memory": [{"addr": "@costowner", "offset": "0x24", "u32": 255}]
+    },
+    {
+      "name": "negative_level",
+      "args": [],
+      "memory": [{"addr": "@costowner", "offset": "0x24", "u32": -5}]
+    }
+  ],
+  "fuzz": {
+    "seed": 4293668,
+    "count": 150,
+    "args": [],
+    "memory": [
+      {"addr": "@costowner", "offset": "0x24", "type": "int", "choices": [-5, 0, 10, 38, 39, 40, 60, 61, 74, 75, 100, 199, 200, 201, 255]},
+      {"addr": "@lookupresult", "offset": "0x11a4", "type": "int", "choices": [0, 6, 7, 19, 20, 39, 40, 100, -3]}
+    ]
+  }
+}

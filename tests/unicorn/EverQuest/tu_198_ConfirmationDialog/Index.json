@@ -1,0 +1,94 @@
+{
+  "function": "CConfirmationDialogManager_guess::Index_guess",
+  "original": "0x005482d4",
+  "sources": [
+    "src/EverQuest/tu_198_ConfirmationDialog.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {"name": "action", "type": "int"},
+    {"name": "value", "type": "int"}
+  ],
+  "ret": "int",
+  "objects": {
+    "owner": {"size": "0x40", "fill": "random",
+              "init": [{"offset": "0x0", "u32": 3}, {"offset": "0x4", "u32": 4}, {"offset": "0x8", "u32": 3},
+                       {"offset": "0xc", "u32": 2}, {"offset": "0x10", "u32": "@buckets"},
+                       {"offset": "0x20", "u32": 7}]},
+    "buckets": {"size": "0x8", "fill": "zero",
+                "init": [{"offset": "0x0", "u32": "@chunk0"}, {"offset": "0x4", "u32": "@chunk1"}]},
+    "chunk0": {"size": "0x10", "fill": "zero",
+               "init": [{"offset": "0x0", "u32": "@n0"}, {"offset": "0x4", "u32": "@n1"},
+                        {"offset": "0x8", "u32": "@n2"}, {"offset": "0xc", "u32": "@n3"}]},
+    "chunk1": {"size": "0x10", "fill": "zero",
+               "init": [{"offset": "0x0", "u32": "@n4"}, {"offset": "0x4", "u32": "@n5"},
+                        {"offset": "0x8", "u32": "@n6"}, {"offset": "0xc", "u32": "@n7"}]},
+    "n0": {"size": "0x188", "fill": "random", "init": [{"offset": "0x178", "u32": "0x22"}]},
+    "n1": {"size": "0x188", "fill": "random", "init": [{"offset": "0x178", "u32": "0x22"}]},
+    "n2": {"size": "0x188", "fill": "random", "init": [{"offset": "0x178", "u32": "0x11"}]},
+    "n3": {"size": "0x188", "fill": "random", "init": [{"offset": "0x178", "u32": "0x22"}]},
+    "n4": {"size": "0x188", "fill": "random", "init": [{"offset": "0x178", "u32": "0x11"}]},
+    "n5": {"size": "0x188", "fill": "random", "init": [{"offset": "0x178", "u32": "0x22"}]},
+    "n6": {"size": "0x188", "fill": "random", "init": [{"offset": "0x178", "u32": "0x33"}]},
+    "n7": {"size": "0x188", "fill": "random", "init": [{"offset": "0x178", "u32": "0x11"}]},
+    "dlg": {"size": "0x188", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x0059dd30": {"name": "CheckEnabled", "conv": "thiscall", "args": [], "ret": 1},
+    "0x00547ed0": {"name": "Refresh", "conv": "thiscall", "args": []},
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@dlg"},
+    "0x00547c3d": {"name": "ConfirmationDialog_ctor", "conv": "thiscall", "args": ["int"], "ret": "this"},
+    "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr", "int"], "ret": 10,
+                   "writes": [{"arg": 0, "offset": 0, "hex": "506f704469616c6f673300"}]},
+    "0x0059d960": {"name": "GetScreenRect", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+                   "writes": [{"arg": 0, "offset": 0, "hex": "10000000200000003000000040000000", "call": 0},
+                              {"arg": 0, "offset": 0, "hex": "05010000070200000003000000040000", "call": 1}]},
+    "0x0059fa70": {"name": "Move", "conv": "thiscall", "args": ["mem:8"]},
+    "0x005a1d40": {"name": "EnableIniStorage", "conv": "thiscall", "args": ["int", "cstr"]},
+    "0x0040600c": {"name": "Set", "conv": "thiscall", "args": ["int", "mem:4"]}
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071",
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {"name": "empty table creates", "args": [5, 1],
+     "memory": [{"addr": "@owner", "offset": "0x0", "u32": 0}]},
+    {"name": "all enabled no flag creates", "args": ["0x11", 0]},
+    {"name": "one disabled found", "args": ["0x11", 0],
+     "callees": {"0x0059dd30": {"name": "CheckEnabled", "conv": "thiscall", "args": [], "ret": [1, 0, 1]}}},
+    {"name": "last disabled wins", "args": ["0x22", 0],
+     "memory": [{"addr": "@owner", "offset": "0x0", "u32": 6}],
+     "callees": {"0x0059dd30": {"name": "CheckEnabled", "conv": "thiscall", "args": [], "ret": [0, 1, 1, 0, 1, 1]}}},
+    {"name": "flag match across chunks", "args": ["0x11", 1],
+     "memory": [{"addr": "@owner", "offset": "0x0", "u32": 6}]},
+    {"name": "flag match first chunk only", "args": ["0x11", 1]},
+    {"name": "flag no match creates", "args": ["0x44", 1],
+     "memory": [{"addr": "@owner", "offset": "0x0", "u32": 5}]},
+    {"name": "flag low byte zero", "args": ["0x11", "0x100"],
+     "memory": [{"addr": "@owner", "offset": "0x0", "u32": 6}]},
+    {"name": "flag high bits set", "args": ["0x11", "0x201"],
+     "memory": [{"addr": "@owner", "offset": "0x0", "u32": 6}]},
+    {"name": "new fails", "args": [5, 0],
+     "memory": [{"addr": "@owner", "offset": "0x0", "u32": 2}],
+     "callees": {"0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}}},
+    {"name": "one entry match", "args": ["0x22", 1],
+     "memory": [{"addr": "@owner", "offset": "0x0", "u32": 1}]},
+    {"name": "count eight", "args": ["0x11", 1],
+     "memory": [{"addr": "@owner", "offset": "0x0", "u32": 8}, {"addr": "@owner", "offset": "0x20", "u32": 0}]}
+  ],
+  "fuzz": {
+    "seed": 5538516,
+    "count": 120,
+    "args": [
+      {"choices": ["0x11", "0x22", "0x33", "0x44"]},
+      {"choices": [0, 1, "0x100", "0x101", -1]}
+    ],
+    "memory": [
+      {"addr": "@owner", "offset": "0x0", "type": "int", "range": [-1, 8]},
+      {"addr": "@owner", "offset": "0x20", "type": "int", "range": [0, 9]}
+    ]
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "function": "CreateEffectString_guess",
+  "original": "0x0051e1cd",
+  "sources": [
+    "src/EverQuest/tu_174_ItemDisplayWnd.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "result_out", "type": "ptr"},
+    {"name": "item_guess", "type": "ptr"},
+    {"name": "count_guess", "type": "ptr"},
+    {"name": "mapA_guess", "type": "ptr"},
+    {"name": "mapB_guess", "type": "ptr"},
+    {"name": "flag_guess", "type": "char"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "result": {"size": "0x4", "fill": "zero"},
+    "item": {"size": "0x4", "fill": "random"},
+    "child": {"size": "0x4", "fill": "random"},
+    "count": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "u32": 3}]},
+    "mapa": {"size": "0x1c", "fill": "random", "init": [{"offset": "0x0", "u32": 5}]},
+    "mapb": {"size": "0x1c", "fill": "random", "init": [{"offset": "0x0", "u32": 9}]},
+    "db": {"size": "0x4", "fill": "zero"},
+    "def": {"size": "0x20c", "fill": "zero", "init": [{"offset": "0x208", "u32": "@name"}]},
+    "name": {"size": "0x20", "fill": "zero", "init": [{"offset": "0x0", "cstr": "Spell Name"}]},
+    "stringtable": {"size": "0x4", "fill": "zero"},
+    "fmt": {"size": "0x20", "fill": "zero", "init": [{"offset": "0x0", "cstr": "Cast %f"}]}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x00985cc8", "u32": "@db"},
+    {"addr": "0x00905cb0", "u32": "@stringtable"}
+  ],
+  "callees": {
+    "0x005e0bf0": {"name": "EQ_ItemView_guess::HasCharges_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005e0bc0": {"name": "EQ_ItemView_guess::GetCharges_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005ecc00": {"name": "EQ_ItemView_guess::GetItemType_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005ecd20": {"name": "EQ_ItemView_guess::GetEffectId_guess", "conv": "thiscall", "args": ["int"],
+                   "ret": [21, 22, 22, 22, 23, 23, 23, 24, 24, 24, 31, 32, 32, 32, 33, 33, 33, 34]},
+    "0x0044d0d0": {"name": "IsValidEffect_guess", "conv": "cdecl", "args": ["int"], "ret": 1},
+    "0x0040cbd6": {"name": "ItemDb_guess::GetSpell_guess", "conv": "thiscall", "args": ["int"], "ret": "@def"},
+    "0x005e1140": {"name": "EQ_ItemView_guess::GetEffectLevel_guess", "conv": "thiscall", "args": ["int"],
+                   "ret": [41, 42, 43, 44, 45]},
+    "0x005e11a0": {"name": "EQ_ItemView_guess::GetEffectType_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "0x005e11d0": {"name": "EQ_ItemView_guess::GetEffectExtra_guess", "conv": "thiscall", "args": ["int"],
+                   "ret": [77, 78]},
+    "0x0051dfda": {"name": "ResizeMap_guess::Set_guess", "conv": "thiscall", "args": ["int", "mem:16"]},
+    "0x005e0d70": {"name": "EQ_ItemView_guess::GetCastTime_guess", "conv": "thiscall", "args": [], "ret": 1500},
+    "0x005dfa00": {"name": "StringTable::getString", "conv": "thiscall", "args": ["int", "int"], "ret": "@fmt"},
+    "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf",
+                   "ret": 1, "writes": [{"arg": 0, "offset": 0, "hex": "3500"}]},
+    "0x0046da4a": {"name": "Format_guess", "conv": "cdecl",
+                   "args": ["ignore", "int", "cstr", "cstr", "cstr", "cstr", "cstr", "cstr", "cstr", "cstr", "cstr"],
+                   "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "4f757400"}]},
+    "0x00572e00": {"name": "CXStr::operator+=", "conv": "thiscall", "args": ["cstr"], "ret": 0},
+    "0x005e05b0": {"name": "EQ_ItemView_guess::GetRecastTime_guess", "conv": "thiscall", "args": [], "ret": 7},
+    "0x0046f97f": {"name": "GetTimeStringFromSeconds_guess", "conv": "cdecl", "args": ["ignore", "u32"],
+                   "writes": [{"arg": 0, "offset": 0, "hex": "376d00"}]},
+    "0x005e05f0": {"name": "EQ_ItemView_guess::GetRecastType_guess", "conv": "thiscall", "args": [], "ret": 3},
+    "0x005ec630": {"name": "EQ_ItemView_guess::GetChild_guess", "conv": "thiscall", "args": ["int"],
+                   "ret": [0, "@child", "@child", 0]},
+    "0x00572c10": {"name": "TextAppend_guess::Append_guess", "conv": "thiscall", "args": ["mem:4"], "ret": 0},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x00407d68": {"name": "CXStr::CXStr_copy", "conv": "thiscall", "args": ["ignore"], "passthrough": true}
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "_survivors": "L844: ok_guess is only compared with zero, so 1 and 2 behave the same",
+  "cases": [
+    {"name": "type1_cast_recast_children", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 1]},
+    {"name": "type3_nocast_norecast", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 1],
+     "callees": {
+       "0x005e11a0": {"name": "t", "conv": "thiscall", "args": ["int"], "ret": 3},
+       "0x005e0d70": {"name": "c", "conv": "thiscall", "args": [], "ret": 0},
+       "0x005e05b0": {"name": "r", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "type5_negcast_recasttype_none", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {
+       "0x005e11a0": {"name": "t", "conv": "thiscall", "args": ["int"], "ret": 5},
+       "0x005e0d70": {"name": "c", "conv": "thiscall", "args": [], "ret": -1},
+       "0x005e05f0": {"name": "r", "conv": "thiscall", "args": [], "ret": -1}}},
+    {"name": "type5_cast1", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {
+       "0x005e11a0": {"name": "t", "conv": "thiscall", "args": ["int"], "ret": 5},
+       "0x005e0d70": {"name": "c", "conv": "thiscall", "args": [], "ret": [1, 1]}}},
+    {"name": "type4_cast", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {
+       "0x005e11a0": {"name": "t", "conv": "thiscall", "args": ["int"], "ret": 4},
+       "0x005e0d70": {"name": "c", "conv": "thiscall", "args": [], "ret": [250, 333]},
+       "0x005e05b0": {"name": "r", "conv": "thiscall", "args": [], "ret": "0x80000001"},
+       "0x005e05f0": {"name": "r", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "type4_nocast", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {
+       "0x005e11a0": {"name": "t", "conv": "thiscall", "args": ["int"], "ret": 4},
+       "0x005e0d70": {"name": "c", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "type4_negcast", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {
+       "0x005e11a0": {"name": "t", "conv": "thiscall", "args": ["int"], "ret": 4},
+       "0x005e0d70": {"name": "c", "conv": "thiscall", "args": [], "ret": -7}}},
+    {"name": "type2_default", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {"0x005e11a0": {"name": "t", "conv": "thiscall", "args": ["int"], "ret": 2}}},
+    {"name": "type0_default", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {"0x005e11a0": {"name": "t", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "type6_default", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {"0x005e11a0": {"name": "t", "conv": "thiscall", "args": ["int"], "ret": 6}}},
+    {"name": "type_switch_differs_from_entry", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {"0x005e11a0": {"name": "t", "conv": "thiscall", "args": ["int"], "ret": [2, 4, 5]}}},
+    {"name": "invalid_effect", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {"0x0044d0d0": {"name": "v", "conv": "cdecl", "args": ["int"], "ret": 0}}},
+    {"name": "charges_zero_skips", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 1],
+     "callees": {
+       "0x005e0bf0": {"name": "h", "conv": "thiscall", "args": [], "ret": 1},
+       "0x005e0bc0": {"name": "g", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "charges_negative_skips", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {
+       "0x005e0bf0": {"name": "h", "conv": "thiscall", "args": [], "ret": 1},
+       "0x005e0bc0": {"name": "g", "conv": "thiscall", "args": [], "ret": -1}}},
+    {"name": "charges_one_runs", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {
+       "0x005e0bf0": {"name": "h", "conv": "thiscall", "args": [], "ret": 1},
+       "0x005e0bc0": {"name": "g", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "state_14_skips", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 1],
+     "callees": {"0x005ecc00": {"name": "s", "conv": "thiscall", "args": [], "ret": 20}}},
+    {"name": "state_13_runs", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {"0x005ecc00": {"name": "s", "conv": "thiscall", "args": [], "ret": 19}}},
+    {"name": "state_15_runs", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {"0x005ecc00": {"name": "s", "conv": "thiscall", "args": [], "ret": 21}}},
+    {"name": "no_extra_effects", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {"0x005ecd20": {"name": "e", "conv": "thiscall", "args": ["int"], "ret": [5, 0, 0, 0]}}},
+    {"name": "negative_extra_effects", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {"0x005ecd20": {"name": "e", "conv": "thiscall", "args": ["int"], "ret": [5, -1, -1, -1]}}},
+    {"name": "only_slot1", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {"0x005ecd20": {"name": "e", "conv": "thiscall", "args": ["int"], "ret": [5, 1, 2, 3, 0, 0]}}},
+    {"name": "only_slot2", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {"0x005ecd20": {"name": "e", "conv": "thiscall", "args": ["int"], "ret": [5, 0, 9, 8, 7, 0]}}},
+    {"name": "only_slot3", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {"0x005ecd20": {"name": "e", "conv": "thiscall", "args": ["int"], "ret": [5, 0, 0, 4, 6, 8]}}},
+    {"name": "invalid_with_slot1", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 0],
+     "callees": {
+       "0x0044d0d0": {"name": "v", "conv": "cdecl", "args": ["int"], "ret": 0},
+       "0x005ecd20": {"name": "e", "conv": "thiscall", "args": ["int"], "ret": [0, 1, 0]}}},
+    {"name": "all_children", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 1],
+     "callees": {"0x005ec630": {"name": "k", "conv": "thiscall", "args": ["int"], "ret": "@child"}}},
+    {"name": "no_children", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 1],
+     "callees": {"0x005ec630": {"name": "k", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "last_child_only", "args": ["@result", "@item", "@count", "@mapa", "@mapb", 1],
+     "callees": {"0x005ec630": {"name": "k", "conv": "thiscall", "args": ["int"], "ret": [0, 0, 0, 0, "@child", "@child", 0]}}},
+    {"name": "flag_high_byte", "args": ["@result", "@item", "@count", "@mapa", "@mapb", "0x80"]}
+  ],
+  "fuzz": {
+    "seed": 5366221,
+    "count": 100,
+    "args": [
+      {"choices": ["@result"]},
+      {"choices": ["@item"]},
+      {"choices": ["@count"]},
+      {"choices": ["@mapa"]},
+      {"choices": ["@mapb"]},
+      {"choices": [0, 1]}
+    ],
+    "memory": [
+      {"addr": "@count", "offset": "0x0", "type": "int", "range": [-5, 50]},
+      {"addr": "@mapa", "offset": "0x0", "type": "int", "range": [0, 40]},
+      {"addr": "@mapb", "offset": "0x0", "type": "int", "range": [0, 40]}
+    ]
+  }
+}

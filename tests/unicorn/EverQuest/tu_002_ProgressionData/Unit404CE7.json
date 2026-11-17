@@ -1,0 +1,120 @@
+{
+  "function": "DispatchOwner_guess::ParseProgressionData_guess",
+  "original": "0x00404ce7",
+  "sources": ["src/EverQuest/tu_002_ProgressionData.cpp"],
+  "conv": "thiscall",
+  "this": "@dispatchowner",
+  "args": [
+    {"name": "input_guess", "type": "ptr"},
+    {"name": "mode_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "dispatchowner": {"size": "0x2c", "fill": "zero"},
+    "input": {"size": "0x10", "fill": "zero"},
+    "stringmanager": {"size": "0x4", "fill": "zero"},
+    "messagemanager": {"size": "0x4", "fill": "zero"},
+    "errormessage": {"size": "0x20", "fill": "zero"},
+    "heap": {"size": "0x1000", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4},
+    {"addr": "0x00905cb0", "u32": "@stringmanager"},
+    {"addr": "0x00988df0", "u32": "@messagemanager"},
+    {"addr": "@errormessage", "cstr": "parse error"}
+  ],
+  "rewrite_aliases": {"??0StringExtended_guess@@QAE@XZ": "0x0040305f"},
+  "callees": {
+    "0x004049ce": {"name": "ProgressionMap::Clear", "conv": "thiscall", "args": [], "ret": "this"},
+    "0x005dfa00": {"name": "StringManager::Lookup", "conv": "thiscall", "args": ["int", "int"], "ret": "@errormessage"},
+    "0x004982c6": {"name": "MessageManager::Show", "conv": "thiscall", "args": ["cstr", "int", "int"]},
+    "0x00403631": {"name": "String_guess::String_guess_cstr", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x00403317": {"name": "StringStream_guess::StringStream_guess", "conv": "thiscall", "args": ["ignore", "int", "int"], "ret": "this"},
+    "0x0040291e": {"name": "String_guess::Tidy", "conv": "thiscall", "args": ["bool", "u32"]},
+    "0x00402505": {"name": "String_guess::Eos", "conv": "thiscall", "args": ["u32"], "passthrough": true},
+    "0x004035af": {"name": "MatchSectionTag_guess", "conv": "cdecl", "args": ["ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "int"], "ret": [0]},
+    "0x00404744": {"name": "StringCleanupPairInit_guess::StringCleanupPairInit_guess", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x00403448": {"name": "FUN_00403448", "conv": "cdecl", "args": ["ignore", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 24, "hex": "0f000000"}]},
+    "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [0]},
+    "0x00403c6f": {"name": "StringCleanupCtor_guess::StringCleanupCtor_guess", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x0040305f": {"name": "StringExtended_guess::StringExtended_guess", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x004039c5": {"name": "BranchTemplateList_guess::Add", "conv": "thiscall", "args": ["int", "ignore"]},
+    "0x00403ea5": {"name": "BranchTemplateList_guess::Destroy", "conv": "thiscall", "args": []},
+    "0x0040444f": {"name": "ProgressionBranches_guess::Add", "conv": "thiscall", "args": ["int", "ignore"]},
+    "0x00403cb6": {"name": "StringCleanupOwner_guess::Cleanup", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x004047de": {"name": "ProgressionBranches_guess::Destroy", "conv": "thiscall", "args": []},
+    "0x0040499f": {"name": "ProgressionMap_guess::Insert", "conv": "thiscall", "args": ["int", "ignore"]},
+    "0x0040478f": {"name": "StringCleanupPair_guess::Cleanup", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x00404b8b": {"name": "ProgressionMap_guess::Destroy", "conv": "thiscall", "args": []},
+    "0x00402d37": {"name": "DispatchOwner_guess::Send", "conv": "thiscall", "args": ["ignore"]},
+    "0x0040271a": {"name": "StreamState_guess::Close", "conv": "thiscall", "args": []},
+    "0x00623d8d": {"name": "StreamIosBase_guess::~StreamIosBase_guess", "conv": "thiscall", "args": []},
+    "0x0040269f": {"name": "String_guess::Compare", "conv": "thiscall", "args": ["ignore"], "ret": [1]},
+    "0x004030e1": {"name": "String_guess::Reset", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x00402e5e": {"name": "String_guess::String_guess", "conv": "thiscall", "args": [], "ret": "this"},
+    "0x0040313b": {"name": "StringFreeStorage_guess::StringFreeStorage_guess", "conv": "thiscall", "args": [], "ret": "this"},
+    "0x00403128": {"name": "ListContainer_guess::ListContainer_guess", "conv": "thiscall", "args": [], "ret": "this"},
+    "0x00404581": {"name": "StringFreeStorage_guess::Free", "conv": "thiscall", "args": []},
+    "0x00403b60": {"name": "FUN_00403b60", "conv": "thiscall", "args": []},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@heap"},
+    "kernel32.dll!HeapFree": {"name": "HeapFree", "conv": "stdcall", "args": ["ptr", "u32", "ptr"], "ret": 1}
+  },
+  "cases": [
+    {
+      "name": "error branch",
+      "args": ["@input", 1],
+      "memory": [{"addr": "@input", "offset": "0x4", "u32": 1}]
+    },
+    {
+      "name": "no progression",
+      "args": ["@input", 0],
+      "callees": {
+        "0x004035af": {"name": "FUN_004035af", "conv": "cdecl", "args": ["ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "int"], "ret": [0]},
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [0]}
+      }
+    },
+    {
+      "name": "progression with no branches",
+      "args": ["@input", 1],
+      "callees": {
+        "0x004035af": {"name": "FUN_004035af", "conv": "cdecl", "args": ["ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "int"], "ret": [1, 0, 0]},
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [7]}
+      }
+    },
+    {
+      "name": "string capacity at 16",
+      "args": ["@input", 0],
+      "callees": {
+        "0x004035af": {"name": "FUN_004035af", "conv": "cdecl", "args": ["ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "int"], "ret": [1, 1, 0, 0, 0]},
+        "0x00403448": {"name": "FUN_00403448", "conv": "cdecl", "args": ["ignore", "ignore", "int"], "ret": 0, "writes": [{"arg": 1, "offset": 24, "hex": "10000000"}]},
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["ptr"], "ret": [7, 3, 99]}
+      }
+    },
+    {
+      "name": "branch percentage below 100",
+      "args": ["@input", 0],
+      "callees": {
+        "0x004035af": {"name": "FUN_004035af", "conv": "cdecl", "args": ["ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "int"], "ret": [1, 1, 0, 0, 0]},
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [7, 3, 99]},
+        "0x0040499f": {"name": "ProgressionMap_guess::Insert", "conv": "thiscall", "args": ["int", "mem:76"]}
+      }
+    },
+    {
+      "name": "branch percentage 100 and template",
+      "args": ["@input", 1],
+      "callees": {
+        "0x004035af": {"name": "FUN_004035af", "conv": "cdecl", "args": ["ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "int"], "ret": [1, 1, 1, 0, 0, 0]},
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [7, 3, 100, 2, 4, 1]},
+        "0x0040499f": {"name": "ProgressionMap_guess::Insert", "conv": "thiscall", "args": ["int", "mem:76"]},
+        "0x004039c5": {"name": "BranchTemplateList_guess::Add", "conv": "thiscall", "args": ["int", "mem:40"]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4213991,
+    "count": 100,
+    "args": [{"choices": ["@input"]}, {"range": [-1, 1]}],
+    "memory": [{"addr": "@input", "offset": "0x4", "type": "int", "choices": [0, 1]}]
+  },
+  "_survivors": "L1890: moving the cleanup view by one dword keeps its this pointer inside the stack frame; the close and destructor are scripted no-ops, and stack pointers are canonicalized as <stack>."
+}

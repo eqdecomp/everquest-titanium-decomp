@@ -1,0 +1,142 @@
+{
+  "function": "Object_005117c3_guess::LeaveMaster_guess",
+  "original": "0x00511bab",
+  "sources": [
+    "src/EverQuest/tu_167_GuildTributeMasterWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object_005117c3",
+  "args": [],
+  "ret": "bool",
+  "_survivors": "L619: the packet copy starts past byte 12, and EQSendMessage compares only mem:12 because the three buffers (0x30, 0x50, 0xc) share one callee arg type; mem:80 reads other frame slots and fails 59 of 104 cases, so these packet values are not compared. L621: same packet copy, values past byte 12. L623: same copy loop. L625: same loop bound. L626: packet.value_014, past byte 12. L630: the zero store to listPacket.prefix[0] cannot be seen: the stack starts zeroed (FIXTURES item 6). L631: listPacket.value_04c, past byte 12.",
+  "objects": {
+    "object_005117c3": {
+      "size": "0x200",
+      "fill": "random"
+    },
+    "alert": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "cleanup": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "conn": {
+      "size": "0x280",
+      "fill": "random"
+    },
+    "sel": {
+      "size": "0x280",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x0079AC74", "u32": "0x5a3c6e21"},
+    {"addr": "0x00988DF0", "u32": "@alert"},
+    {"addr": "0x00850CB8", "u32": "@cleanup"},
+    {"addr": "0x00905D10", "u32": "@conn"},
+    {"addr": "0x00905CE4", "u32": "@sel"},
+    {"addr": "0x0091D6EE", "u8": 1},
+    {"addr": "0x0091D6D8", "u32": 17},
+    {"addr": "0x0091D6DC", "u32": 34},
+    {"addr": "0x0091D6E0", "u32": 51},
+    {"addr": "0x0091D6E4", "u32": 68}
+  ],
+  "callees": {
+    "0x004a1350": {
+      "name": "AlertSink_Initialize",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int"
+      ]
+    },
+    "0x004912b1": {
+      "name": "EQSendMessage",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "mem:12",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0051a891": {
+      "name": "Global_Method",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x00511a39": {
+      "name": "ResetBenefitLists",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "flag_on",
+      "args": [],
+      "memory": [
+        {"addr": "0x0091D6EE", "u8": 1},
+        {"addr": "@conn", "offset": "0x258", "u32": 4660},
+        {"addr": "@sel", "offset": "0x258", "u32": 22136}
+      ]
+    },
+    {
+      "name": "flag_off",
+      "args": [],
+      "memory": [
+        {"addr": "0x0091D6EE", "u8": 0},
+        {"addr": "@conn", "offset": "0x258", "u32": 66},
+        {"addr": "@sel", "offset": "0x258", "u32": 153}
+      ]
+    },
+    {
+      "name": "conn_cleared_by_send",
+      "args": [],
+      "memory": [
+        {"addr": "0x0091D6EE", "u8": 1},
+        {"addr": "@conn", "offset": "0x258", "u32": 4660},
+        {"addr": "@sel", "offset": "0x258", "u32": 22136}
+      ],
+      "callees": {
+        "0x004912b1": {
+          "name": "EQSendMessage",
+          "conv": "cdecl",
+          "args": ["ptr", "int", "mem:12", "int", "int"],
+          "ret": 0,
+          "writes": [{"call": 1, "addr": "0x00905D10", "hex": "00000000"}]
+        }
+      }
+    },
+    {
+      "name": "negative_values",
+      "args": [],
+      "memory": [
+        {"addr": "0x0091D6EE", "u8": 1},
+        {"addr": "@conn", "offset": "0x258", "u32": "0xffffffff"},
+        {"addr": "@sel", "offset": "0x258", "u32": "0x80000000"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5315499,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "0x0091D6EE", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x0091D6D8", "type": "u32", "range": [0, 1000]},
+      {"addr": "0x0091D6DC", "type": "u32", "range": [0, 1000]},
+      {"addr": "0x0091D6E0", "type": "u32", "range": [0, 1000]},
+      {"addr": "0x0091D6E4", "type": "u32", "range": [0, 1000]},
+      {"addr": "@conn", "offset": "0x258", "type": "int", "range": [-5, 500]},
+      {"addr": "@sel", "offset": "0x258", "type": "int", "range": [-5, 500]}
+    ]
+  }
+}

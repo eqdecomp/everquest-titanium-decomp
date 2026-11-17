@@ -1,0 +1,250 @@
+{
+  "function": "SaveSocials_guess",
+  "original": "0x004b03b1",
+  "sources": [
+    "src/EverQuest/tu_063_Options.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "void",
+  "memory": [
+    { "addr": "0x0079ac74", "u32": 305419896 },
+    { "addr": "0x00923798", "u8": 0 },
+    { "addr": "0x00923d7b", "u8": 0 },
+    { "addr": "0x00923788", "u32": 0 },
+    { "addr": "0x00923d7a", "u8": 0 },
+    { "addr": "0x0095d45c", "size": 120, "fill": "zero" },
+    { "addr": "0x0095d4d4", "size": "0x25ff8", "fill": "zero" },
+    { "addr": "0x009834cc", "u8": 0 }
+  ],
+  "callees": {
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr"],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e3100", "call": 0 },
+        { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e314e616d6500", "call": 1 },
+        { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e31436f6c6f7200", "call": 2 },
+        { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e314c696e653100", "call": 3 },
+        { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e314c696e653200", "call": 4 },
+        { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e314c696e653300", "call": 5 },
+        { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e314c696e653400", "call": 6 },
+        { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e314c696e653500", "call": 7 }
+      ]
+    },
+    "0x0060bf60": {
+      "name": "FUN_0060bf60",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr", "cstr"],
+      "ret": 0
+    },
+    "0x0060d674": {
+      "name": "__security_check_cookie",
+      "conv": "fastcall",
+      "args": ["u32"],
+      "ret": "keep"
+    }
+  },
+  "cases": [
+    {
+      "name": "guard_first_true",
+      "args": [],
+      "memory": [
+        { "addr": "0x00923798", "u8": 1 }
+      ]
+    },
+    {
+      "name": "guard_second_true_exit",
+      "args": [],
+      "memory": [
+        { "addr": "0x00923d7b", "u8": 1 },
+        { "addr": "0x00923788", "u32": 1 }
+      ]
+    },
+    {
+      "name": "guard_third_zero_exit",
+      "args": [],
+      "memory": [
+        { "addr": "0x00923788", "u32": 0 }
+      ]
+    },
+    {
+      "name": "guard_fourth_true_exit",
+      "args": [],
+      "memory": [
+        { "addr": "0x00923788", "u32": 1 },
+        { "addr": "0x00923d7a", "u8": 1 }
+      ]
+    },
+    {
+      "name": "guard_fourth_zero_enters",
+      "args": [],
+      "memory": [
+        { "addr": "0x00923788", "u32": 1 }
+      ]
+    },
+    {
+      "name": "active_empty_social",
+      "args": [],
+      "memory": [
+        { "addr": "0x00923798", "u8": 1 },
+        { "addr": "0x0095d45c", "u8": 1 }
+      ]
+    },
+    {
+      "name": "active_populated_social",
+      "args": [],
+      "memory": [
+        { "addr": "0x00923798", "u8": 1 },
+        { "addr": "0x0095d45c", "u8": 1 },
+        { "addr": "0x0095d4d4", "cstr": "Wave" },
+        { "addr": "0x0095d4d4", "offset": "0x10", "cstr": "hello" },
+        { "addr": "0x0095d4d4", "offset": "0x210", "cstr": "again" },
+        { "addr": "0x0095d4d4", "offset": "0x410", "cstr": "last" },
+        { "addr": "0x0095d4d4", "offset": "0x510", "u8": 7 }
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": ["ptr", "cstr"],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e3100", "call": 0 },
+            { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e314e616d6500", "call": 1 },
+            { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e31436f6c6f7200", "call": 2 },
+            { "arg": 0, "offset": 0, "hex": "3700", "call": 3 },
+            { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e314c696e653100", "call": 4 },
+            { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e314c696e653200", "call": 5 },
+            { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e314c696e653300", "call": 6 },
+            { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e314c696e653400", "call": 7 },
+            { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e314c696e653500", "call": 8 }
+          ]
+        }
+      }
+    },
+    {
+      "name": "guard_second_true_active",
+      "args": [],
+      "memory": [
+        { "addr": "0x00923d7b", "u8": 1 },
+        { "addr": "0x00923788", "u32": 1 },
+        { "addr": "0x0095d45c", "u8": 1 }
+      ]
+    },
+    {
+      "name": "guard_third_nonzero_active",
+      "args": [],
+      "memory": [
+        { "addr": "0x00923788", "u32": 1 },
+        { "addr": "0x0095d45c", "u8": 1 }
+      ]
+    },
+    {
+      "name": "guard_fourth_true_active",
+      "args": [],
+      "memory": [
+        { "addr": "0x00923788", "u32": 1 },
+        { "addr": "0x00923d7a", "u8": 1 },
+        { "addr": "0x0095d45c", "u8": 1 }
+      ]
+    },
+    {
+      "name": "active_last_button",
+      "args": [],
+      "memory": [
+        { "addr": "0x00923798", "u8": 1 },
+        { "addr": "0x0095d467", "u8": 1 }
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": ["ptr", "cstr"],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e313200", "call": 0 },
+            { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e31324e616d6500", "call": 1 },
+            { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e3132436f6c6f7200", "call": 2 },
+            { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e31324c696e653100", "call": 3 },
+            { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e31324c696e653200", "call": 4 },
+            { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e31324c696e653300", "call": 5 },
+            { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e31324c696e653400", "call": 6 },
+            { "arg": 0, "offset": 0, "hex": "5061676531427574746f6e31324c696e653500", "call": 7 }
+          ]
+        }
+      }
+    },
+    {
+      "name": "page_two_pointer_stride",
+      "args": [],
+      "memory": [
+        { "addr": "0x00923798", "u8": 1 },
+        { "addr": "0x0095d468", "u8": 1 },
+        { "addr": "0x0095d4d4", "cstr": "Wrong" }
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": ["ptr", "cstr"],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "5061676532427574746f6e3100", "call": 0 },
+            { "arg": 0, "offset": 0, "hex": "5061676532427574746f6e314e616d6500", "call": 1 },
+            { "arg": 0, "offset": 0, "hex": "5061676532427574746f6e31436f6c6f7200", "call": 2 },
+            { "arg": 0, "offset": 0, "hex": "5061676532427574746f6e314c696e653100", "call": 3 },
+            { "arg": 0, "offset": 0, "hex": "5061676532427574746f6e314c696e653200", "call": 4 },
+            { "arg": 0, "offset": 0, "hex": "5061676532427574746f6e314c696e653300", "call": 5 },
+            { "arg": 0, "offset": 0, "hex": "5061676532427574746f6e314c696e653400", "call": 6 },
+            { "arg": 0, "offset": 0, "hex": "5061676532427574746f6e314c696e653500", "call": 7 }
+          ]
+        }
+      }
+    },
+    {
+      "name": "extra_page_guard",
+      "args": [],
+      "memory": [
+        { "addr": "0x00923798", "u8": 1 },
+        { "addr": "0x0095d4d4", "u8": 1 }
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": ["ptr", "cstr"],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "506167653131427574746f6e3100", "call": 0 },
+            { "arg": 0, "offset": 0, "hex": "506167653131427574746f6e314e616d6500", "call": 1 },
+            { "arg": 0, "offset": 0, "hex": "506167653131427574746f6e31436f6c6f7200", "call": 2 },
+            { "arg": 0, "offset": 0, "hex": "506167653131427574746f6e314c696e653100", "call": 3 },
+            { "arg": 0, "offset": 0, "hex": "506167653131427574746f6e314c696e653200", "call": 4 },
+            { "arg": 0, "offset": 0, "hex": "506167653131427574746f6e314c696e653300", "call": 5 },
+            { "arg": 0, "offset": 0, "hex": "506167653131427574746f6e314c696e653400", "call": 6 },
+            { "arg": 0, "offset": 0, "hex": "506167653131427574746f6e314c696e653500", "call": 7 }
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4916145,
+    "count": 100,
+    "args": [],
+    "memory": [
+      { "addr": "0x00923798", "type": "u8", "choices": [0, 1] },
+      { "addr": "0x00923d7b", "type": "u8", "choices": [0, 1] },
+      { "addr": "0x00923788", "type": "u32", "choices": [0, 1] },
+      { "addr": "0x00923d7a", "type": "u8", "choices": [0, 1] }
+    ]
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "function": "MailAddressRecord_guess::Compare_guess",
+  "original": "0x0042cc75",
+  "sources": [
+    "src/EverQuest/tu_018_MailtoLink.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@self",
+  "args": [
+    {"name": "other_guess", "type": "ptr"}
+  ],
+  "ret": "int",
+  "objects": {
+    "self": {"size": "0x4c", "fill": "random"},
+    "other": {"size": "0x4c", "fill": "random"}
+  },
+  "_tree": "nodes at fixed .data scratch addresses so the Diff stub can write the head pointer as hex: head 0x988E00 (isNil), root n2 0x988E80, n2.left n1 0x988E40, n2.right n3 0x988EC0; in-order n1 n2 n3; count at +0x28",
+  "memory": [
+    {"addr": "0x00988E00", "u32": "0x00988E40"},
+    {"addr": "0x00988E04", "u32": "0x00988E80"},
+    {"addr": "0x00988E08", "u32": "0x00988EC0"},
+    {"addr": "0x00988E2D", "u8": 1},
+    {"addr": "0x00988E40", "u32": "0x00988E00"},
+    {"addr": "0x00988E44", "u32": "0x00988E80"},
+    {"addr": "0x00988E48", "u32": "0x00988E00"},
+    {"addr": "0x00988E6D", "u8": 0},
+    {"addr": "0x00988E80", "u32": "0x00988E40"},
+    {"addr": "0x00988E84", "u32": "0x00988E00"},
+    {"addr": "0x00988E88", "u32": "0x00988EC0"},
+    {"addr": "0x00988EAD", "u8": 0},
+    {"addr": "0x00988EC0", "u32": "0x00988E00"},
+    {"addr": "0x00988EC4", "u32": "0x00988E80"},
+    {"addr": "0x00988EC8", "u32": "0x00988E00"},
+    {"addr": "0x00988EED", "u8": 0},
+    {"addr": "0x00988E68", "u32": 0},
+    {"addr": "0x00988EA8", "u32": 0},
+    {"addr": "0x00988EE8", "u32": 0}
+  ],
+  "callees": {
+    "0x0040269f": {"name": "string_compare", "conv": "thiscall", "args": ["ptr"], "ret": [0, 0]},
+    "0x0042cbea": {"name": "Diff_guess", "conv": "thiscall", "args": ["ignore", "ptr"], "ret": "arg0",
+                   "writes": [{"arg": 0, "offset": 4, "hex": "008e9800"}]},
+    "0x0042533a": {"name": "tree_inc", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x0042bdbe": {"name": "map_tidy", "conv": "thiscall", "args": []}
+  },
+  "rewrite_aliases": {
+    "?compare@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEHABV12@@Z": "0x0040269F"
+  },
+  "cases": [
+    {"name": "all equal", "args": ["@other"]},
+    {"name": "name differs", "args": ["@other"],
+     "callees": {"0x0040269f": {"name": "string_compare", "conv": "thiscall", "args": ["ptr"], "ret": [-1, 0]}}},
+    {"name": "note differs", "args": ["@other"],
+     "callees": {"0x0040269f": {"name": "string_compare", "conv": "thiscall", "args": ["ptr"], "ret": [0, 1]}}},
+    {"name": "both differ", "args": ["@other"],
+     "callees": {"0x0040269f": {"name": "string_compare", "conv": "thiscall", "args": ["ptr"], "ret": [5, -3]}}},
+    {"name": "first count", "args": ["@other"], "memory": [{"addr": "0x00988E68", "u32": 1}]},
+    {"name": "middle count", "args": ["@other"], "memory": [{"addr": "0x00988EA8", "u32": "0xffffffff"}]},
+    {"name": "last count", "args": ["@other"], "memory": [{"addr": "0x00988EE8", "u32": 2}]},
+    {"name": "first and last", "args": ["@other"],
+     "memory": [{"addr": "0x00988E68", "u32": 1}, {"addr": "0x00988EE8", "u32": 1}]},
+    {"name": "empty map", "args": ["@other"], "memory": [{"addr": "0x00988E00", "u32": "0x00988E00"}]}
+  ],
+  "fuzz": {
+    "seed": 4377717,
+    "count": 80,
+    "args": [{"choices": ["@other"]}],
+    "memory": [
+      {"addr": "0x00988E68", "type": "int", "choices": [0, 0, 1, -1]},
+      {"addr": "0x00988EA8", "type": "int", "choices": [0, 0, 3]},
+      {"addr": "0x00988EE8", "type": "int", "choices": [0, 0, -2]}
+    ]
+  }
+}

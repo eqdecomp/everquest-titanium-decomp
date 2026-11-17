@@ -1,0 +1,648 @@
+{
+  "function": "RuleParser_guess::BuildDescription_guess",
+  "original": "0x004332e8",
+  "sources": [
+    "src/EverQuest/tu_026_TaskManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@ruleparser",
+  "args": [
+    {
+      "name": "state_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "context_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "ruleparser": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "state": {
+      "size": "0x2834",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x2019",
+          "cstr": "[x]"
+        }
+      ]
+    },
+    "context": {
+      "size": "0x6c",
+      "fill": "zero"
+    },
+    "arena": {
+      "size": "0x4000",
+      "fill": "zero"
+    },
+    "rep": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": 3
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "from_image": "0x0079ac74",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0063f53f",
+      "from_image": "0x0063f53f",
+      "image_size": 2048
+    }
+  ],
+  "callees": {
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ignore",
+        "u32",
+        "u32"
+      ],
+      "ret": [
+        "@arena+0x0",
+        "@arena+0x1000",
+        "@arena+0x2000",
+        "@arena+0x3000"
+      ]
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": [
+        "ignore",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 1,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "2000"
+        }
+      ]
+    },
+    "0x0060e2b9": {
+      "name": "`eh_vector_constructor_iterator'",
+      "conv": "stdcall",
+      "args": [
+        "ignore",
+        "u32",
+        "u32",
+        "ignore",
+        "ignore"
+      ]
+    },
+    "0x00571f70": {
+      "name": "FUN_00571f70",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x00571fc0": {
+      "name": "FUN_00571fc0",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x00576d80": {
+      "name": "FUN_00576d80",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0050319b": {
+      "name": "FUN_0050319b",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "0x0060f3dc": {
+      "name": "_isdigit",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00572060": {
+      "name": "FUN_00572060",
+      "conv": "thiscall",
+      "args": [
+        "char"
+      ],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x004eb924": {
+      "name": "FUN_004eb924",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x00572c10": {
+      "name": "FUN_00572c10",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x00432477": {
+      "name": "FormatActivityText_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr"
+      ],
+      "writes": [
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "2000"
+        }
+      ]
+    },
+    "0x005738b0": {
+      "name": "FUN_005738b0",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr",
+        "int"
+      ],
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "c0680060"
+        }
+      ]
+    },
+    "0x005738d0": {
+      "name": "FUN_005738d0",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x00572130": {
+      "name": "FUN_00572130",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "u32"
+      ]
+    },
+    "0x00571e00": {
+      "name": "FUN_00571e00",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x00572f20": {
+      "name": "FUN_00572f20",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr"
+      ]
+    },
+    "0x00571d00": {
+      "name": "FUN_00571d00",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x00572300": {
+      "name": "FUN_00572300",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x00574310": {
+      "name": "FUN_00574310",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "ptr",
+        "u32"
+      ],
+      "passthrough": true
+    },
+    "0x0060d6e5": {
+      "name": "`eh_vector_destructor_iterator'",
+      "conv": "stdcall",
+      "args": [
+        "ignore",
+        "u32",
+        "u32",
+        "ignore"
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "_isdigit": "0x0060f3dc"
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        "@state",
+        "@context"
+      ]
+    },
+    {
+      "name": "empty input",
+      "args": [
+        "@state",
+        "@context"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x2019",
+          "cstr": ""
+        }
+      ]
+    },
+    {
+      "name": "trailing text",
+      "args": [
+        "@state",
+        "@context"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x2019",
+          "cstr": "[x]tail"
+        }
+      ]
+    },
+    {
+      "name": "text before another bracket",
+      "args": [
+        "@state",
+        "@context"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x2019",
+          "cstr": "[x]tail[y]"
+        }
+      ]
+    },
+    {
+      "name": "missing closing bracket",
+      "args": [
+        "@state",
+        "@context"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x2019",
+          "cstr": "[x"
+        }
+      ]
+    },
+    {
+      "name": "active format record",
+      "args": [
+        "@state",
+        "@context"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x1eec",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "contains record",
+      "args": [
+        "@state",
+        "@context"
+      ],
+      "callees": {
+        "0x005738d0": {
+          "name": "Contains_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "ptr"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "contains with empty number",
+      "args": [
+        "@state",
+        "@context"
+      ],
+      "callees": {
+        "0x005738d0": {
+          "name": "Contains_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "ptr"
+          ],
+          "ret": 1
+        },
+        "0x005738b0": {
+          "name": "FormatNumber_guess",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "parsed numeric filter",
+      "args": [
+        "@state",
+        "@context"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x2019",
+          "cstr": "[1]"
+        }
+      ],
+      "callees": {
+        "0x00576d80": {
+          "name": "FindNumberEnd_guess",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "negative parsed index",
+      "args": [
+        "@state",
+        "@context"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x2019",
+          "cstr": "[x]"
+        },
+        {
+          "addr": "@state",
+          "offset": "0x6f8",
+          "u32": 1
+        },
+        {
+          "addr": "@state",
+          "offset": "0x78c",
+          "u32": 0
+        },
+        {
+          "addr": "@context",
+          "offset": "0x14",
+          "u32": -1
+        }
+      ],
+      "callees": {
+        "0x00576d80": {
+          "name": "FindNumberEnd_guess",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "int"
+          ],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "active filter threshold passes",
+      "args": [
+        "@state",
+        "@context"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x2019",
+          "cstr": "[1]"
+        },
+        {
+          "addr": "@state",
+          "offset": "0x940",
+          "u32": 1
+        },
+        {
+          "addr": "@state",
+          "offset": "0x9d4",
+          "u32": 0
+        },
+        {
+          "addr": "@context",
+          "offset": "0x1c",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x00576d80": {
+          "name": "FindNumberEnd_guess",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "active filter threshold rejects",
+      "args": [
+        "@state",
+        "@context"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x2019",
+          "cstr": "[1]"
+        },
+        {
+          "addr": "@state",
+          "offset": "0x940",
+          "u32": 1
+        },
+        {
+          "addr": "@state",
+          "offset": "0x9d4",
+          "u32": 0
+        },
+        {
+          "addr": "@context",
+          "offset": "0x1c",
+          "u32": -1
+        }
+      ],
+      "callees": {
+        "0x00576d80": {
+          "name": "FindNumberEnd_guess",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "digit recheck",
+      "args": [
+        "@state",
+        "@context"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x2019",
+          "cstr": "[12]"
+        }
+      ],
+      "callees": {
+        "0x0060f3dc": {
+          "name": "_isdigit",
+          "conv": "cdecl",
+          "args": [
+            "char"
+          ],
+          "ret": [
+            1,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4403944,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@state"
+        ]
+      },
+      {
+        "choices": [
+          "@context"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@state",
+        "offset": "0x2019",
+        "type": "u8",
+        "choices": [
+          0,
+          91
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0x1eec",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0x9d4",
+        "type": "int",
+        "count": 20,
+        "stride": "0x124",
+        "choices": [
+          -1,
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@context",
+        "offset": "0x68",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

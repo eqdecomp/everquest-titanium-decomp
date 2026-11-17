@@ -1,0 +1,73 @@
+{
+  "function": "SecondaryDeleteBase_guess::Delete_guess",
+  "original": "0x0040246c",
+  "sources": [
+    "src/EverQuest/tu_002_ProgressionData.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@completeobject+0x8",
+  "args": [
+    {
+      "name": "flags_guess",
+      "type": "u8"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "completeobject": {
+      "size": "0xc",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0040248b": {
+      "name": "FUN_0040248b",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0060d0d5": {
+      "name": "operator delete",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        1
+      ]
+    },
+    {
+      "name": "zeros",
+      "args": [
+        0
+      ]
+    },
+    {
+      "name": "bit-zero-only",
+      "args": [
+        2
+      ]
+    },
+    {
+      "name": "bit-one-and-another",
+      "args": [
+        3
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4203628,
+    "count": 100,
+    "args": [
+      {"choices": [0, 1, 2, 3, 127, 255]}
+    ],
+    "memory": []
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "function": "AudioTriggerManager_guess::AudioTriggerManager_guess",
+  "original": "0x00406a53",
+  "sources": [
+    "src/EverQuest/tu_005_AudioTriggersWindow.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner406a53",
+  "args": [],
+  "ret": "ptr",
+  "objects": {
+    "owner406a53": {
+      "size": "0x80",
+      "fill": "random"
+    },
+    "defaultsService": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x13579bdf"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@defaultsService"
+    }
+  ],
+  "callees": {
+    "0x004066fd": {
+      "name": "FUN_004066fd_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "keep"
+    },
+    "0x0047c3af": {
+      "name": "FUN_0047c3af_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "keep"
+    },
+    "0x004062d5": {
+      "name": "ListTriggerFolders_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "keep"
+    },
+    "0x004ae865": {
+      "name": "DefaultsService_guess::GetString_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "cstr",
+        "cstr",
+        "ptr",
+        "u32",
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 3,
+          "hex": "64656661756c7400"
+        }
+      ]
+    },
+    "0x00406a03": {
+      "name": "LoadFolder_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "keep"
+    }
+  },
+  "cases": [
+    {
+      "name": "default setting",
+      "args": []
+    },
+    {
+      "name": "empty setting",
+      "args": [],
+      "callees": {
+        "0x004ae865": {
+          "name": "DefaultsService_guess::GetString_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "cstr",
+            "cstr",
+            "ptr",
+            "u32",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 3,
+              "hex": "00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "alternate setting",
+      "args": [],
+      "callees": {
+        "0x004ae865": {
+          "name": "DefaultsService_guess::GetString_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "cstr",
+            "cstr",
+            "ptr",
+            "u32",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 3,
+              "hex": "437573746f6d5c5465737400"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4221523,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x0079ac74",
+        "type": "u32",
+        "range": [
+          0,
+          4294967295
+        ]
+      },
+      {
+        "addr": "0x00988df0",
+        "type": "ptr",
+        "choices": [
+          "@defaultsService",
+          "0x0"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "function": "Vector3_46_guess::Normalize_guess",
+  "original": "0x0046d66e",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@vector3_46",
+  "args": [],
+  "ret": "float",
+  "objects": {
+    "vector3_46": {
+      "size": "0xc",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0063f4cc",
+      "from_image": "0x0063f4cc",
+      "image_size": 4
+    },
+    {
+      "addr": "@vector3_46",
+      "offset": "0x0",
+      "f32": 2.0
+    },
+    {
+      "addr": "@vector3_46",
+      "offset": "0x4",
+      "f32": -4.0
+    },
+    {
+      "addr": "@vector3_46",
+      "offset": "0x8",
+      "f32": 6.0
+    }
+  ],
+  "callees": {
+    "0x00435b36": {
+      "name": "FUN_00435b36",
+      "conv": "cdecl",
+      "args": [],
+      "ret_float": 1.0
+    },
+    "0x00610884": {
+      "name": "FUN_00610884",
+      "conv": "cdecl",
+      "args": [
+        "double"
+      ],
+      "ret_float": 4.0
+    },
+    "0x00464803": {
+      "name": "IsNearlyZero_guess",
+      "conv": "cdecl",
+      "args": [
+        "float"
+      ],
+      "passthrough": true
+    },
+    "0x0046482c": {
+      "name": "Scale_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "near_zero",
+      "args": [],
+      "callees": {
+        "0x00610884": {
+          "name": "FUN_00610884",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret_float": 0.0
+        }
+      }
+    },
+    {
+      "name": "inside_threshold",
+      "args": [],
+      "callees": {
+        "0x00610884": {
+          "name": "FUN_00610884",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret_float": 1.0e-7
+        }
+      }
+    },
+    {
+      "name": "lower_boundary",
+      "args": [],
+      "callees": {
+        "0x00610884": {
+          "name": "FUN_00610884",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret_float": -1.1920928955078125e-7
+        }
+      }
+    },
+    {
+      "name": "upper_boundary",
+      "args": [],
+      "callees": {
+        "0x00610884": {
+          "name": "FUN_00610884",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret_float": 1.1920928955078125e-7
+        }
+      }
+    },
+    {
+      "name": "outside_threshold",
+      "args": [],
+      "callees": {
+        "0x00610884": {
+          "name": "FUN_00610884",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret_float": 1.5e-7
+        }
+      }
+    },
+    {
+      "name": "normal_length",
+      "args": [],
+      "callees": {
+        "0x00610884": {
+          "name": "FUN_00610884",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret_float": 4.0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4642414,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@vector3_46",
+        "offset": "0x0",
+        "type": "float",
+        "count": 3,
+        "range": [
+          -32.0,
+          32.0
+        ]
+      }
+    ]
+  }
+}

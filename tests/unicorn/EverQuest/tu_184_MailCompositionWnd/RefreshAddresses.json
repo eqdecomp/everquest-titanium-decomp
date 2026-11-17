@@ -1,0 +1,142 @@
+{
+  "function": "CMailAddressBookWndView_guess::SaveEntry_guess",
+  "original": "0x0052CC8F",
+  "sources": ["src/EverQuest/tu_184_MailCompositionWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@fun_0052c995_owner",
+  "args": [],
+  "ret": "void",
+  "size": "0x350",
+  "objects": {
+    "line_rep": {"size": "0x4", "fill": "zero"},
+    "fun_0052c995_owner": {
+      "size": "0x188",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x168", "u32": "@window"},
+        {"offset": "0x16C", "u32": "@source_text"},
+        {"offset": "0x170", "u32": "@lines_text"},
+        {"offset": "0x174", "u32": "@dest_text"}
+      ]
+    },
+    "root": {"size": "0x4", "fill": "zero"},
+    "manager": {"size": "0x70", "fill": "zero"},
+    "empty_string": {"size": "0x1", "fill": "zero"},
+    "window": {
+      "size": "0x129",
+      "fill": "zero",
+      "init": [{"offset": "0x128", "u8": 0}]
+    },
+    "source_text": {"size": "0x4", "fill": "zero", "init": [{"offset": 0, "u32": "@source_vtbl"}]},
+    "lines_text": {"size": "0x4", "fill": "zero", "init": [{"offset": 0, "u32": "@lines_vtbl"}]},
+    "lines_text_empty": {"size": "0x4", "fill": "zero", "init": [{"offset": 0, "u32": "@lines_empty_vtbl"}]},
+    "dest_text": {"size": "0x4", "fill": "zero", "init": [{"offset": 0, "u32": "@dest_vtbl"}]},
+    "source_vtbl": {"size": "0x134", "fill": "zero", "init": [{"offset": "0x130", "u32": "@fn_source"}]},
+    "lines_vtbl": {"size": "0x134", "fill": "zero", "init": [{"offset": "0x130", "u32": "@fn_lines_data"}]},
+    "lines_empty_vtbl": {"size": "0x134", "fill": "zero", "init": [{"offset": "0x130", "u32": "@fn_lines_empty"}]},
+    "dest_vtbl": {"size": "0x134", "fill": "zero", "init": [{"offset": "0x130", "u32": "@fn_dest"}]},
+    "fn_source": {"size": "0x4"},
+    "fn_lines_data": {"size": "0x4"},
+    "fn_lines_empty": {"size": "0x4"},
+    "fn_dest": {"size": "0x4"}
+  },
+  "memory": [
+    {"addr": "0x00988DF0", "u32": "@root"},
+    {"addr": "0x0079AC74", "from_image": "0x0079AC74", "image_size": 4}
+  ],
+  "callees": {
+    "0x00495250": {"name": "GetManager_guess", "conv": "thiscall", "args": [], "ret": "@manager"},
+    "0x00572300": {"name": "CXStrToChar_guess", "conv": "thiscall", "args": [], "ret": "@empty_string"},
+    "0x00403631": {"name": "StringFromChar_guess", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x00571D00": {"name": "FreeRep_guess", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x004D95D0": {"name": "IsEmpty_guess", "conv": "thiscall", "args": [], "ret": [0, 0, 0, 0, 1, 1]},
+    "0x00572380": {
+      "name": "Find_guess",
+      "conv": "thiscall",
+      "args": ["u32", "ignore"],
+      "ret": [0, 1, 1],
+      "writes": [
+        {"arg": 1, "offset": 0, "hex": "00 00 00 00", "call": [1, 2]}
+      ]
+    },
+    "0x0050176F": {
+      "name": "Left_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "u32"],
+      "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "00 00 00 60"}
+      ]
+    },
+    "0x00573370": {"name": "Erase_guess", "conv": "thiscall", "args": ["u32", "u32"], "ret": 0},
+    "0x0040B88B": {"name": "VectorPush_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x0040291E": {"name": "StringTidy_guess", "conv": "thiscall", "args": ["u32", "u32"], "ret": 0},
+    "0x004032F1": {"name": "StringCopy_guess", "conv": "thiscall", "args": ["ignore"], "ret": "this"},
+    "0x0040B7B2": {"name": "VectorCopy_guess", "conv": "thiscall", "args": ["ignore"], "ret": "this"},
+    "0x0042BA5E": {
+      "name": "RecordCtor_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "bool"],
+      "ret": 0
+    },
+    "0x0042BE14": {"name": "Insert_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x0040B867": {"name": "RecordDtor_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0040B540": {"name": "VectorDtor_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "@fn_source": {
+      "name": "GetSourceText_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "00 00 00 60"}]
+    },
+    "@fn_lines_data": {
+      "name": "GetLineText_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "00 00 00 60"}]
+    },
+    "@fn_lines_empty": {
+      "name": "GetEmptyLineText_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "00 00 00 00"}]
+    },
+    "@fn_dest": {
+      "name": "GetDestinationText_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "00 00 00 60"}]
+    }
+  },
+  "cases": [
+    {"name": "root-null", "args": [], "memory": [{"addr": "0x00988DF0", "u32": 0}]},
+    {"name": "source-null", "args": [], "memory": [{"addr": "@fun_0052c995_owner", "offset": "0x16C", "u32": 0}]},
+    {"name": "lines-null", "args": [], "memory": [{"addr": "@fun_0052c995_owner", "offset": "0x170", "u32": 0}]},
+    {"name": "destination-null", "args": [], "memory": [{"addr": "@fun_0052c995_owner", "offset": "0x174", "u32": 0}]},
+    {"name": "window-null", "args": [], "memory": [{"addr": "@fun_0052c995_owner", "offset": "0x168", "u32": 0}]},
+    {"name": "loop-branches-and-nonnull-rep", "args": []},
+    {
+      "name": "loop-branches-and-null-rep",
+      "args": [],
+      "memory": [{"addr": "@fun_0052c995_owner", "offset": "0x170", "u32": "@lines_text_empty"}]
+    }
+  ],
+  "fuzz": {
+    "seed": 5426319,
+    "count": 50,
+    "args": [],
+    "memory": [
+      {"addr": "@window", "offset": "0x128", "type": "u8", "choices": [0, 1]},
+      {"addr": "@fun_0052c995_owner", "offset": "0x168", "type": "ptr", "choices": [0, "@window"]},
+      {"addr": "@fun_0052c995_owner", "offset": "0x16C", "type": "ptr", "choices": [0, "@source_text"]},
+      {"addr": "@fun_0052c995_owner", "offset": "0x170", "type": "ptr", "choices": [0, "@lines_text", "@lines_text_empty"]},
+      {"addr": "@fun_0052c995_owner", "offset": "0x174", "type": "ptr", "choices": [0, "@dest_text"]},
+      {"addr": "0x00988DF0", "type": "ptr", "choices": [0, "@root"]}
+    ]
+  },
+  "_survivors": "",
+  "_todo": []
+}

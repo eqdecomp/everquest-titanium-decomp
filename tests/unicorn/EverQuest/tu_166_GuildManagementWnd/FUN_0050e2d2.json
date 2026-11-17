@@ -1,0 +1,167 @@
+{
+  "function": "GuildMgmtWnd_guess::UpdateButtons_guess",
+  "original": "0x0050e2d2",
+  "sources": ["src/EverQuest/tu_166_GuildManagementWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "size": "0x2e3",
+  "objects": {
+    "owner": {
+      "size": "0x40c",
+      "fill": "random",
+      "init": [
+        {"offset":"0x168","u32":"@w168"},
+        {"offset":"0x174","u32":"@w174"},
+        {"offset":"0x178","u32":"@w178"},
+        {"offset":"0x17c","u32":"@w17c"},
+        {"offset":"0x180","u32":"@w180"},
+        {"offset":"0x188","u32":"@w188"},
+        {"offset":"0x18c","u32":"@w18c"},
+        {"offset":"0x190","u32":"@w190"},
+        {"offset":"0x198","u32":"@w198"},
+        {"offset":"0x19c","u32":"@w19c"},
+        {"offset":"0x1a0","u32":"@w1a0"},
+        {"offset":"0x1a4","u32":"@w1a4"},
+        {"offset":"0x1ac","u32":"@w1ac"},
+        {"offset":"0x1dc","u32":"@record"},
+        {"offset":"0x1e0","u32":2}
+      ]
+    },
+    "record": {
+      "size": "0x270",
+      "fill": "random",
+      "init": [
+        {"offset":"0x10","cstr":"Mira"},
+        {"offset":"0x5c","u32":1},
+        {"offset":"0x64","cstr":"Public"},
+        {"offset":"0x164","cstr":"Personal"},
+        {"offset":"0x264","u8":1}
+      ]
+    },
+    "selection": {
+      "size": "0x28c",
+      "fill": "random",
+      "init": [
+        {"offset":"0x120","cstr":"Mira"},
+        {"offset":"0x288","u32":1}
+      ]
+    },
+    "vtable": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [
+        {"offset":"0xc0","u32":"@fn_enable"},
+        {"offset":"0x130","u32":"@fn_getter"}
+      ]
+    },
+    "fn_enable":{"size":"0x4"},
+    "fn_getter":{"size":"0x4"},
+    "fn_getter_zero":{"size":"0x4"},
+    "w168":{"size":"0x134","fill":"random","init":[{"offset":"0","u32":"@vtable"}]},
+    "w174":{"size":"0x134","fill":"random","init":[{"offset":"0","u32":"@vtable"}]},
+    "w178":{"size":"0x134","fill":"random","init":[{"offset":"0","u32":"@vtable"}]},
+    "w17c":{"size":"0x134","fill":"random","init":[{"offset":"0","u32":"@vtable"}]},
+    "w180":{"size":"0x134","fill":"random","init":[{"offset":"0","u32":"@vtable"}]},
+    "w188":{"size":"0x134","fill":"random","init":[{"offset":"0","u32":"@vtable"}]},
+    "w18c":{"size":"0x134","fill":"random","init":[{"offset":"0","u32":"@vtable"}]},
+    "w190":{"size":"0x134","fill":"random","init":[{"offset":"0","u32":"@vtable"}]},
+    "w198":{"size":"0x134","fill":"random","init":[{"offset":"0","u32":"@vtable"}]},
+    "w19c":{"size":"0x134","fill":"random","init":[{"offset":"0","u32":"@vtable"}]},
+    "w1a0":{"size":"0x134","fill":"random","init":[{"offset":"0","u32":"@vtable"}]},
+    "w1a4":{"size":"0x134","fill":"random","init":[{"offset":"0","u32":"@vtable"}]},
+    "w1ac":{"size":"0x134","fill":"random","init":[{"offset":"0","u32":"@vtable"}]},
+    "rep":{"size":"0x20","fill":"zero"},
+    "same_personal":{"size":"0x20","fill":"zero","init":[{"offset":"0","cstr":"Personal"}]},
+    "changed_public":{"size":"0x20","fill":"zero","init":[{"offset":"0","cstr":"New public"}]}
+  },
+  "memory": [
+    {"addr":"0x00905ce4","u32":"@selection"}
+  ],
+  "callees": {
+    "@fn_enable": {"name":"SetEnabled_guess","conv":"thiscall","args":["bool","int"],"ret":0},
+    "@fn_getter": {"name":"GetText_guess","conv":"thiscall","args":["ignore"],"ret":0,"writes":[{"arg":0,"offset":0,"hex":"01000000"}]},
+    "@fn_getter_zero": {"name":"GetTextEmpty_guess","conv":"thiscall","args":["ignore"],"ret":0,"writes":[{"arg":0,"offset":0,"hex":"00000000"}]},
+    "0x00571d00": {"name":"CXStr::FreeRep","conv":"thiscall","args":["ptr"],"ret":0},
+    "0x00572300": {"name":"CXStr::operator char*","conv":"thiscall","args":[],"ret":["@same_personal","@changed_public"]}
+  },
+  "cases": [
+    {"name":"mode2_selected","args":[]},
+    {"name":"mode2_unselected_equal","args":[],"memory":[
+      {"addr":"@selection","offset":"0x120","cstr":"Other"},
+      {"addr":"@record","offset":"0x5c","u32":2},
+      {"addr":"@record","offset":"0x264","u8":0}
+    ]},
+    {"name":"mode1","args":[],"memory":[
+      {"addr":"@owner","offset":"0x1e0","u32":1},
+      {"addr":"@record","offset":"0x5c","u32":2},
+      {"addr":"@record","offset":"0x264","u8":1}
+    ]},
+    {"name":"mode0_selected","args":[],"memory":[
+      {"addr":"@owner","offset":"0x1e0","u32":0},
+      {"addr":"@record","offset":"0x5c","u32":0}
+    ]},
+    {"name":"negative_mode","args":[],"memory":[
+      {"addr":"@owner","offset":"0x1e0","u32":-1}
+    ]},
+    {"name":"mode3","args":[],"memory":[
+      {"addr":"@owner","offset":"0x1e0","u32":3},
+      {"addr":"@record","offset":"0x5c","u32":1}
+    ]},
+    {"name":"record_null","args":[],"memory":[
+      {"addr":"@owner","offset":"0x1dc","u32":0}
+    ]},
+    {"name":"selection_null","args":[],"memory":[
+      {"addr":"0x00905ce4","u32":0}
+    ]},
+    {"name":"all_widgets_null","args":[],"memory":[
+      {"addr":"@owner","offset":"0x168","u32":0},
+      {"addr":"@owner","offset":"0x174","u32":0},
+      {"addr":"@owner","offset":"0x178","u32":0},
+      {"addr":"@owner","offset":"0x17c","u32":0},
+      {"addr":"@owner","offset":"0x180","u32":0},
+      {"addr":"@owner","offset":"0x188","u32":0},
+      {"addr":"@owner","offset":"0x18c","u32":0},
+      {"addr":"@owner","offset":"0x190","u32":0},
+      {"addr":"@owner","offset":"0x198","u32":0},
+      {"addr":"@owner","offset":"0x19c","u32":0},
+      {"addr":"@owner","offset":"0x1a0","u32":0},
+      {"addr":"@owner","offset":"0x1a4","u32":0},
+      {"addr":"@owner","offset":"0x1ac","u32":0}
+    ]},
+    {"name":"empty_getters","args":[],"memory":[
+      {"addr":"@vtable","offset":"0x130","u32":"@fn_getter_zero"}
+    ]},
+    {"name":"text_comparisons_reversed","args":[],"memory":[
+      {"addr":"@record","offset":"0x64","cstr":"Personal"},
+      {"addr":"@record","offset":"0x164","cstr":"New public"}
+    ]}
+  ],
+  "fuzz": {
+    "seed": 5300946,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr":"@owner","offset":"0x1dc","type":"ptr","choices":[0,"@record"]},
+      {"addr":"@owner","offset":"0x1e0","type":"int","choices":[-1,0,1,2,3]},
+      {"addr":"@record","offset":"0x5c","type":"int","choices":[-1,0,1,2,3]},
+      {"addr":"@record","offset":"0x264","type":"u8","choices":[0,1]},
+      {"addr":"0x00905ce4","type":"ptr","choices":[0,"@selection"]},
+      {"addr":"@selection","offset":"0x288","type":"int","choices":[-1,0,1]},
+      {"addr":"@owner","offset":"0x168","type":"ptr","choices":[0,"@w168"]},
+      {"addr":"@owner","offset":"0x174","type":"ptr","choices":[0,"@w174"]},
+      {"addr":"@owner","offset":"0x178","type":"ptr","choices":[0,"@w178"]},
+      {"addr":"@owner","offset":"0x17c","type":"ptr","choices":[0,"@w17c"]},
+      {"addr":"@owner","offset":"0x180","type":"ptr","choices":[0,"@w180"]},
+      {"addr":"@owner","offset":"0x188","type":"ptr","choices":[0,"@w188"]},
+      {"addr":"@owner","offset":"0x18c","type":"ptr","choices":[0,"@w18c"]},
+      {"addr":"@owner","offset":"0x190","type":"ptr","choices":[0,"@w190"]},
+      {"addr":"@owner","offset":"0x198","type":"ptr","choices":[0,"@w198"]},
+      {"addr":"@owner","offset":"0x19c","type":"ptr","choices":[0,"@w19c"]},
+      {"addr":"@owner","offset":"0x1a0","type":"ptr","choices":[0,"@w1a0"]},
+      {"addr":"@owner","offset":"0x1a4","type":"ptr","choices":[0,"@w1a4"]},
+      {"addr":"@owner","offset":"0x1ac","type":"ptr","choices":[0,"@w1ac"]}
+    ]
+  }
+}

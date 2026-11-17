@@ -1,0 +1,150 @@
+{
+  "function": "PcProfileView_guess::DelLoreItemDup_guess",
+  "original": "0x004bd6ce",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@rankprofile",
+  "args": [
+    {"name": "index_guess", "type": "int"},
+    {"name": "subindex_guess", "type": "int"},
+    {"name": "key_guess", "type": "int"},
+    {"name": "entry_guess", "type": "ptr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "rankprofile": {
+      "size": "0xc284",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x8", "u32": "@vbtable"}
+      ]
+    },
+    "vbtable": {"size": "0x8", "fill": "zero"},
+    "entry": {"size": "0x4", "fill": "zero"},
+    "slot": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@vtbl"}]
+    },
+    "cache": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@vtbl"}]
+    },
+    "child": {"size": "0x4", "fill": "zero"},
+    "key": {"size": "0x4", "fill": "zero"},
+    "free": {"size": "0x4", "fill": "zero"},
+    "vtbl": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@free"}]
+    }
+  },
+  "memory": [
+    {"addr": "@vbtable", "offset": "0x4", "u32": 0}
+  ],
+  "callees": {
+    "0x005ec790": {"name": "CheckB", "conv": "thiscall", "args": [], "ret": 1},
+    "0x0040cc50": {"name": "GetEntry", "conv": "thiscall", "args": ["u32"], "ret": ["@slot", "@slot", "@slot", "@slot", "@slot", "@slot", "@slot", "@slot", "@slot", 0]},
+    "0x005eccc0": {"name": "IsBlocked", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005ecc30": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005ec630": {"name": "GetEntry", "conv": "thiscall", "args": ["int"], "ret": "@child"},
+    "0x005acf60": {"name": "GetKey", "conv": "thiscall", "args": [], "ret": "@key"},
+    "0x00601f10": {"name": "Same", "conv": "thiscall", "args": ["ptr"], "ret": 1},
+    "0x004649b1": {"name": "Notify", "conv": "cdecl", "args": ["ptr", "int", "int", "int"], "ret": 0},
+    "0x005ec660": {"name": "ReleaseEntry", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0041aa84": {"name": "ClearEntry", "conv": "thiscall", "args": ["int", "int"], "ret": 0},
+    "@free": {"name": "Free", "conv": "thiscall", "args": ["int"], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "check disabled",
+      "args": [1, 1, 5, "@entry"],
+      "callees": {"0x005ec790": {"name": "CheckB", "conv": "thiscall", "args": [], "ret": 0}}
+    },
+    {
+      "name": "empty slots and cache",
+      "args": [1, 1, 5, "@entry"],
+      "memory": [{"addr": "@rankprofile", "offset": "0xcf0", "u32": 0}],
+      "callees": {"0x0040cc50": {"name": "GetEntry", "conv": "thiscall", "args": ["u32"], "ret": 0}}
+    },
+    {
+      "name": "outer match, skipped index and cache match",
+      "args": [0, 0, 5, "@entry"],
+      "memory": [{"addr": "@rankprofile", "offset": "0xcf0", "u32": "@cache"}]
+    },
+    {
+      "name": "outer slot deletion",
+      "args": [1, 1, 5, "@entry"],
+      "memory": [{"addr": "@rankprofile", "offset": "0xcf0", "u32": "@cache"}]
+    },
+    {
+      "name": "two outer children",
+      "args": [1, 1, 5, "@entry"],
+      "callees": {
+        "0x005ecc30": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": [2]}
+      }
+    },
+    {
+      "name": "cache pointer after first cell",
+      "args": [1, 1, 5, "@entry"],
+      "memory": [
+        {"addr": "@rankprofile", "offset": "0xcf0", "u32": 0},
+        {"addr": "@rankprofile", "offset": "0xd04", "u32": "@cache"}
+      ]
+    },
+    {
+      "name": "unblocked and unequal keys",
+      "args": [1, 2, 9, "@entry"],
+      "memory": [{"addr": "@rankprofile", "offset": "0xcf0", "u32": "@cache"}],
+      "callees": {
+        "0x005eccc0": {"name": "IsBlocked", "conv": "thiscall", "args": [], "ret": [0]},
+        "0x00601f10": {"name": "Same", "conv": "thiscall", "args": ["ptr"], "ret": [0]}
+      }
+    },
+    {
+      "name": "empty children and unequal keys",
+      "args": [1, 2, 9, "@entry"],
+      "memory": [{"addr": "@rankprofile", "offset": "0xcf0", "u32": "@cache"}],
+      "callees": {
+        "0x005ecc30": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": [0]},
+        "0x00601f10": {"name": "Same", "conv": "thiscall", "args": ["ptr"], "ret": [0]}
+      }
+    },
+    {
+      "name": "null child and cache key mismatch",
+      "args": [1, 2, 9, "@entry"],
+      "memory": [{"addr": "@rankprofile", "offset": "0xcf0", "u32": "@cache"}],
+      "callees": {
+        "0x005ec630": {"name": "GetEntry", "conv": "thiscall", "args": ["int"], "ret": [0]},
+        "0x00601f10": {"name": "Same", "conv": "thiscall", "args": ["ptr"], "ret": [0]}
+      }
+    }
+  ],
+  "coverage_ok": {
+    "004BD86B-004BD86C": "cache byte offsets stay below 0x40",
+    "004BD87F-004BD880": "cache byte offsets stay below 0x40",
+    "004BD89E-004BD89F": "cache byte offsets stay below 0x40",
+    "004BD8B9-004BD8BA": "cache byte offsets stay below 0x40",
+    "004BD8D2-004BD8D3": "cache byte offsets stay below 0x40",
+    "004BD921-004BD922": "cache byte offsets stay below 0x40",
+    "004BD93E-004BD93F": "cache byte offsets stay below 0x40",
+    "004BD983-004BD984": "cache byte offsets stay below 0x40",
+    "004BD99A-004BD99B": "cache byte offsets stay below 0x40"
+  },
+  "fuzz": {
+    "seed": 4970190,
+    "count": 100,
+    "args": [
+      {"range": [-2, 32]},
+      {"range": [-1, 10]},
+      {"range": [-100, 100]},
+      {"choices": ["@entry"]}
+    ],
+    "memory": [
+      {"addr": "@rankprofile", "offset": "0xcf0", "type": "ptr", "choices": [0, "@cache"]}
+    ]
+  }
+}

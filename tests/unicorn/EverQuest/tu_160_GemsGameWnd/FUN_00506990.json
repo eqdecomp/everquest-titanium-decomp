@@ -1,0 +1,69 @@
+{
+  "function": "CGemsGameWnd_guess::InitializeGame_guess",
+  "original": "0x00506990",
+  "sources": [
+    "src/EverQuest/tu_160_GemsGameWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@gemsgamewnd",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "gemsgamewnd": {
+      "size": "0xec0",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0050527d": {
+      "name": "LoadHighScoresFromFile_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00506486": {
+      "name": "Restart_guess",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "this": "@gemsgamewnd",
+      "memory": [
+        {"addr": "@gemsgamewnd", "offset": "0xde8", "u32": 40},
+        {"addr": "@gemsgamewnd", "offset": "0xdec", "u32": 24}
+      ],
+      "args": []
+    },
+    {
+      "name": "zeros",
+      "this": "@gemsgamewnd",
+      "memory": [
+        {"addr": "@gemsgamewnd", "offset": "0xde8", "u32": 0},
+        {"addr": "@gemsgamewnd", "offset": "0xdec", "u32": 0}
+      ],
+      "args": []
+    },
+    {
+      "name": "negative_sizes",
+      "this": "@gemsgamewnd",
+      "memory": [
+        {"addr": "@gemsgamewnd", "offset": "0xde8", "u32": 4294967295},
+        {"addr": "@gemsgamewnd", "offset": "0xdec", "u32": 2147483648}
+      ],
+      "args": []
+    }
+  ],
+  "_survivors": "L1470: the zeroing store before the calls feeds Reset_guess, which copies value_160 into value_164; the scripted callee 0x00506486 has no body, so that copy cannot be observed here. The store after the call (L1485) is caught by the cases.",
+  "fuzz": {
+    "seed": 5269904,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@gemsgamewnd", "offset": "0xde8", "type": "int", "range": [-64, 512]},
+      {"addr": "@gemsgamewnd", "offset": "0xdec", "type": "int", "range": [-64, 512]}
+    ]
+  }
+}

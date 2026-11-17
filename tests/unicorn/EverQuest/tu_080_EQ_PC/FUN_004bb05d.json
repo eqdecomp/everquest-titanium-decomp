@@ -1,0 +1,143 @@
+{
+  "function": "PcCharacter1View_guess::CapStat_guess",
+  "original": "0x004bb05d",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@obj+0xc280",
+  "args": [
+    {
+      "name": "value",
+      "type": "int"
+    },
+    {
+      "name": "type",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "obj": {
+      "size": "0xc400",
+      "fill": "random",
+      "init": [
+        {"offset": "0x8", "u32": "@holder"}
+      ]
+    },
+    "holder": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": 4096}
+      ]
+    },
+    "lookup": {
+      "size": "0x1280",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x005ec220": {
+      "name": "FUN_005ec220",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@lookup"
+    },
+    "0x004106a3": {
+      "name": "FUN_004106a3",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 7
+    }
+  },
+  "cases": [
+    {
+      "name": "negative_type",
+      "args": [50, -1],
+      "memory": [{"addr": "@lookup", "offset": "0x11a4", "u32": 70}]
+    },
+    {
+      "name": "type_13_default",
+      "args": [300, 13],
+      "memory": [{"addr": "@lookup", "offset": "0x11a4", "u32": 70}]
+    },
+    {
+      "name": "low_type_lookup_60_default",
+      "args": [50, 3],
+      "memory": [{"addr": "@lookup", "offset": "0x11a4", "u32": 60}]
+    },
+    {
+      "name": "low_type_lookup_61_value_below",
+      "args": [50, 3],
+      "memory": [{"addr": "@lookup", "offset": "0x11a4", "u32": 61}]
+    },
+    {
+      "name": "low_type_lookup_61_clamped_to_limit",
+      "args": [400, 3],
+      "memory": [{"addr": "@lookup", "offset": "0x11a4", "u32": 61}]
+    },
+    {
+      "name": "low_type_zero_clamped_to_one",
+      "args": [0, 3],
+      "memory": [{"addr": "@lookup", "offset": "0x11a4", "u32": 61}]
+    },
+    {
+      "name": "type_6_boundary",
+      "args": [200, 6],
+      "memory": [{"addr": "@lookup", "offset": "0x11a4", "u32": 70}]
+    },
+    {
+      "name": "type_0_default_small",
+      "args": [5, 0],
+      "memory": [{"addr": "@lookup", "offset": "0x11a4", "u32": 0}]
+    },
+    {
+      "name": "type_7_lookup_65_limit_500",
+      "args": [600, 7],
+      "memory": [{"addr": "@lookup", "offset": "0x11a4", "u32": 65}]
+    },
+    {
+      "name": "type_9_lookup_66_limit",
+      "args": [600, 9],
+      "memory": [{"addr": "@lookup", "offset": "0x11a4", "u32": 66}]
+    },
+    {
+      "name": "type_12_value_below_limit",
+      "args": [300, 12],
+      "memory": [{"addr": "@lookup", "offset": "0x11a4", "u32": 10}]
+    },
+    {
+      "name": "type_10_no_ff_clamp",
+      "args": [1000, 10],
+      "memory": [{"addr": "@lookup", "offset": "0x11a4", "u32": 0}]
+    },
+    {
+      "name": "default_over_ff_clamped",
+      "args": [1000, 2],
+      "memory": [{"addr": "@lookup", "offset": "0x11a4", "u32": 0}]
+    },
+    {
+      "name": "default_value_zero_to_one",
+      "args": [0, 2],
+      "memory": [{"addr": "@lookup", "offset": "0x11a4", "u32": 0}]
+    }
+  ],
+  "fuzz": {
+    "seed": 4960349,
+    "count": 200,
+    "args": [
+      {"range": [-4, 300]},
+      {"range": [-4, 16]}
+    ],
+    "memory": [
+      {"addr": "@lookup", "offset": "0x11a4", "type": "int", "range": [-5, 120]}
+    ]
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "function": "Callback_guess::Tail_guess",
+  "original": "0x004ec163",
+  "sources": ["src/EverQuest/tu_140_CastSpellWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@callback",
+  "args": [{"name": "start", "type": "int"}],
+  "ret": "void",
+  "objects": {
+    "callback": {"size": "0x1b4", "fill": "random", "init": [
+      {"offset": "0x160", "u32": "@entry"},
+      {"offset": "0x164", "u32": "@entry"},
+      {"offset": "0x168", "u32": "@entry"},
+      {"offset": "0x16c", "u32": "@entry"},
+      {"offset": "0x170", "u32": "@entry"},
+      {"offset": "0x174", "u32": "@entry"},
+      {"offset": "0x178", "u32": "@entry"},
+      {"offset": "0x17c", "u32": "@entry"},
+      {"offset": "0x180", "u32": "@entry"}
+    ]},
+    "entry": {"size": "0x100", "fill": "random"},
+    "root": {"size": "0x100", "fill": "random", "init": [
+      {"offset": "8", "u32": "@route"}
+    ]},
+    "route": {"size": "8", "fill": "zero", "init": [
+      {"offset": "4", "u32": 32}
+    ]},
+    "keylookup": {"size": "0x10", "fill": "zero"},
+    "key": {"size": "0x250", "fill": "random", "init": [
+      {"offset": "0x248", "u32": 4660}
+    ]}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@root"},
+    {"addr": "0x00985cc8", "u32": "@keylookup"}
+  ],
+  "callees": {
+    "0x0040e705": {"name": "Fetch_guess", "conv": "thiscall", "args": ["int"], "ret": 42},
+    "0x0044d0d0": {"name": "IsReady_guess", "conv": "cdecl", "args": ["int"], "ret": 0},
+    "0x0040cbd6": {"name": "Find_guess", "conv": "thiscall", "args": ["int"], "ret": "@key"},
+    "0x0044d103": {"name": "GetSpellColor_guess", "conv": "thiscall", "args": [], "ret": 16744448},
+    "0x00558984": {"name": "SetSpellIcon_guess", "conv": "thiscall", "args": ["int"]},
+    "0x005589ab": {"name": "SetSpellGemTint_guess", "conv": "thiscall", "args": ["u32"]},
+    "0x004ebfb5": {"name": "Fill_guess", "conv": "thiscall", "args": ["int"]}
+  },
+  "cases": [
+    {"name": "root null does nothing", "args": [-1], "memory": [
+      {"addr": "0x00905d00", "u32": 0}
+    ]},
+    {"name": "start -1 none ready", "args": [-1]},
+    {"name": "single index not ready", "args": [3]},
+    {"name": "single index ready", "args": [3], "callees": {
+      "0x0044d0d0": {"name": "IsReady_guess", "conv": "cdecl", "args": ["int"], "ret": 1}
+    }},
+    {"name": "all indexes ready", "args": [-1], "callees": {
+      "0x0044d0d0": {"name": "IsReady_guess", "conv": "cdecl", "args": ["int"], "ret": 1}
+    }},
+    {"name": "null entry stops the scan", "args": [-1], "memory": [
+      {"addr": "@callback", "offset": "0x168", "u32": 0}
+    ]},
+    {"name": "null entry at start index", "args": [4], "memory": [
+      {"addr": "@callback", "offset": "0x170", "u32": 0}
+    ]},
+    {"name": "start below -1 scans all", "args": [-7]},
+    {"name": "last index", "args": [8], "callees": {
+      "0x0044d0d0": {"name": "IsReady_guess", "conv": "cdecl", "args": ["int"], "ret": 1}
+    }}
+  ],
+  "fuzz": {
+    "seed": 5161315,
+    "count": 100,
+    "args": [{"range": [-2, 8]}],
+    "memory": [
+      {"addr": "@key", "offset": "0x248", "type": "int", "range": [-1, 500]}
+    ]
+  }
+}

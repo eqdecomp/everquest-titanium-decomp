@@ -1,0 +1,28 @@
+{
+  "function": "StringRef_guess::Equals_guess",
+  "_shape": "std::string (VC7.1 <string>) user: small-string buffer vs heap pointer by capacity >= 16, then a client compare function by address",
+  "original": "0x0042599f",
+  "sources": ["src/EverQuest/tu_018_MailtoLink.cpp"],
+  "conv": "thiscall",
+  "this": "@ref",
+  "args": [{"name": "other_guess", "type": "ptr"}],
+  "ret": "bool",
+  "objects": {
+    "ref": {"size": "0x4", "init": [{"offset": 0, "u32": "@mine"}]},
+    "mine": {"size": "0x1c", "fill": "random", "init": [{"offset": 4, "hex": "68656c6c6f00"}, {"offset": "0x18", "u32": 15}]},
+    "other": {"size": "0x1c", "fill": "random", "init": [{"offset": 4, "u32": "@heap"}, {"offset": "0x18", "u32": 31}]},
+    "heap": {"size": "0x20", "init": [{"offset": 0, "hex": "68656c6c6f00"}]}
+  },
+  "callees": {"0x00574950": {"name": "string compare", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [0, 1, -1, 0]}},
+  "cases": [
+    {"name": "small vs heap", "args": ["@other"]},
+    {"name": "both small", "args": ["@other"], "memory": [{"addr": "@other", "offset": 4, "cstr": "world"}, {"addr": "@other", "offset": "0x18", "u32": 15}]},
+    {"name": "both heap", "args": ["@other"], "memory": [{"addr": "@mine", "offset": 4, "u32": "@heap"}, {"addr": "@mine", "offset": "0x18", "u32": 16}]},
+    {"name": "capacity 16 boundary", "args": ["@other"], "memory": [{"addr": "@other", "offset": "0x18", "u32": 16}]}
+  ],
+  "fuzz": {"seed": 4348319, "count": 80, "args": [{"choices": ["@other"]}],
+           "memory": [{"addr": "@mine", "offset": "0x18", "type": "u32", "choices": [0, 15, 16, 17, 255]},
+                      {"addr": "@other", "offset": "0x18", "type": "u32", "choices": [0, 15, 16, 17, 255]},
+                      {"addr": "@mine", "offset": 4, "type": "ptr", "choices": ["@heap"], "p": 0.5},
+                      {"addr": "@other", "offset": 4, "type": "ptr", "choices": ["@heap"], "p": 0.5}]}
+}

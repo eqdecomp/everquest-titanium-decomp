@@ -1,0 +1,130 @@
+{
+  "function": "CInvSlotMgrView_guess::Refresh_guess",
+  "original": "0x0051b2ae",
+  "sources": ["src/EverQuest/tu_172_InvSlotMgr.cpp"],
+  "conv": "thiscall",
+  "this": "@cleanuplist",
+  "args": [{"name": "force", "type": "char"}],
+  "ret": "u32",
+  "objects": {
+    "cleanuplist": {
+      "size": "0x100c",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": "@cleanup"},
+        {"offset": "0x1004", "u32": 1},
+        {"offset": "0x1008", "u32": 1000}
+      ]
+    },
+    "cleanup": {"size": "0x8", "fill": "zero", "init": [{"offset": "0x4", "u32": "@referenced"}]},
+    "referenced": {"size": "0x124", "fill": "zero", "init": [{"offset": "0x120", "u32": 0}]},
+    "timer": {"size": "0x14c", "fill": "zero", "init": [{"offset": "0x148", "u32": 1050}]},
+    "client": {"size": "0x60", "fill": "zero", "init": [{"offset": "0x5c", "u8": 1}]},
+    "slot_a": {"size": "0x274", "fill": "zero", "init": [{"offset": "0x5c", "u8": 1}, {"offset": "0x1f4", "u32": "@element"}]},
+    "flag_60": {"size": "0x60", "fill": "zero", "init": [{"offset": "0x5c", "u8": 1}]},
+    "slot_c": {"size": "0x424", "fill": "zero", "init": [{"offset": "0x5c", "u8": 1}, {"offset": "0x2e4", "u32": "@element"}]},
+    "slot_d": {"size": "0x264", "fill": "zero", "init": [{"offset": "0x5c", "u8": 1}, {"offset": "0x1e8", "u32": "@element"}]},
+    "slot_e": {"size": "0x1e0", "fill": "zero", "init": [{"offset": "0x5c", "u8": 1}, {"offset": "0x164", "u32": "@element"}]},
+    "char_data": {
+      "size": "0xd38",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x8", "u32": "@vbtable"},
+        {"offset": "0xcf0", "u32": "@element"},
+        {"offset": "0xd30", "u32": "@element"}
+      ]
+    },
+    "vbtable": {"size": "0x8", "fill": "zero", "init": [{"offset": "0x4", "u32": 4}]},
+    "slot_host": {"size": "0x4", "fill": "zero"},
+    "element": {"size": "0x4", "fill": "zero"},
+    "slot_out": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905d24", "u32": "@timer"},
+    {"addr": "0x00850c38", "u32": "@client"},
+    {"addr": "0x00850c50", "u32": "@slot_a"},
+    {"addr": "0x00850c60", "u32": "@flag_60"},
+    {"addr": "0x00850c58", "u32": "@slot_c"},
+    {"addr": "0x00850c40", "u32": "@slot_d"},
+    {"addr": "0x00850c68", "u32": "@slot_e"},
+    {"addr": "0x00905d00", "u32": "@char_data"},
+    {"addr": "0x00850cbc", "u32": "@slot_host"}
+  ],
+  "callees": {
+    "0x004dc831": {"name": "GetValue_guess", "conv": "thiscall", "args": [], "ret": 8},
+    "0x0046d655": {"name": "FUN_0046d655_guess", "conv": "cdecl", "args": [], "ret": 1100},
+    "0x00434777": {"name": "GetSlot_guess", "conv": "thiscall", "args": ["int"], "ret": "@slot_out"},
+    "0x0040cc50": {"name": "Find_guess", "conv": "thiscall", "args": ["int"], "ret": "@element"},
+    "0x005eccc0": {"name": "GetKind_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005ec650": {"name": "GetSlot_guess", "conv": "thiscall", "args": ["int"], "ret": "@slot_out"},
+    "0x004fa6e6": {"name": "Wrap_guess", "conv": "thiscall", "args": ["int"], "ret": "@slot_out"},
+    "0x00518e5c": {"name": "Bind_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0}
+  },
+  "coverage_ok": {
+    "0051B475-0051B476": "bounds trap after the bank index was checked against the client level",
+    "0051B4B4-0051B4B5": "bounds trap after the bank row was checked against the client level",
+    "0051B4E4-0051B4E5": "bounds trap after the two-entry bank index check",
+    "0051B51C-0051B51D": "bounds trap after the two-entry bank row check"
+  },
+  "cases": [
+    {"name": "throttle_99", "args": [0], "memory": [{"addr": "@timer", "offset": "0x148", "u32": 1099}]},
+    {"name": "throttle_100", "args": [0], "memory": [{"addr": "@timer", "offset": "0x148", "u32": 1100}]},
+    {"name": "empty_list", "args": [1], "memory": [{"addr": "@cleanuplist", "offset": "0x1004", "u32": 0}]},
+    {"name": "missing_reference", "args": [1], "memory": [{"addr": "@cleanup", "offset": "0x4", "u32": 0}]},
+    {"name": "missing_character_data", "args": [1], "memory": [{"addr": "0x00905d00", "u32": 0}]},
+    {"name": "key_minus_one", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": "0xffffffff"}]},
+    {"name": "key_zero", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 0}]},
+    {"name": "key_29", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 29}]},
+    {"name": "key_30", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 30}]},
+    {"name": "key_31", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 31}]},
+    {"name": "row_22_start", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 251}]},
+    {"name": "row_29_end", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 340}]},
+    {"name": "key_341", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 341}]},
+    {"name": "bank_first_slot", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 2000}]},
+    {"name": "bank_level_last", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 2007}]},
+    {"name": "bank_level_limit", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 2008}]},
+    {"name": "bank_row_start", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 2031}]},
+    {"name": "bank_row_level_limit", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 2111}]},
+    {"name": "bank_row_end", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 2190}]},
+    {"name": "bank_personal_first", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 2500}]},
+    {"name": "bank_personal_limit", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 2502}]},
+    {"name": "bank_personal_row_start", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 2531}]},
+    {"name": "bank_personal_row_end", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 2550}]},
+    {"name": "trade_first_slot", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 3000}]},
+    {"name": "trade_row_first", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 3031}]},
+    {"name": "trade_row_last_valid", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 3190}]},
+    {"name": "trade_row_invalid", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 3191}]},
+    {"name": "trade_last_key", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 3340}]},
+    {"name": "cursor_first", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 4000}]},
+    {"name": "cursor_last", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 4030}]},
+    {"name": "cursor_after", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 4031}]},
+    {"name": "bank_d_first", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 5000}]},
+    {"name": "bank_d_after", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 5031}]},
+    {"name": "bank_c_first", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 7000}]},
+    {"name": "bank_c_after", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 7080}]},
+    {"name": "bank_e_first", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 8000}]},
+    {"name": "bank_e_after", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 8031}]},
+    {"name": "flag11_off", "args": [1], "memory": [{"addr": "@client", "offset": "0x5c", "u8": 0}, {"addr": "@referenced", "offset": "0x120", "u32": 2000}]},
+    {"name": "trade_flags_off", "args": [1], "memory": [{"addr": "@slot_a", "offset": "0x5c", "u8": 0}, {"addr": "@flag_60", "offset": "0x5c", "u8": 0}, {"addr": "@referenced", "offset": "0x120", "u32": 3000}]},
+    {"name": "bank_d_flag_off", "args": [1], "memory": [{"addr": "@slot_d", "offset": "0x5c", "u8": 0}, {"addr": "@referenced", "offset": "0x120", "u32": 5000}]},
+    {"name": "bank_c_flag_off", "args": [1], "memory": [{"addr": "@slot_c", "offset": "0x5c", "u8": 0}, {"addr": "@referenced", "offset": "0x120", "u32": 7000}]},
+    {"name": "bank_e_flag_off", "args": [1], "memory": [{"addr": "@slot_e", "offset": "0x5c", "u8": 0}, {"addr": "@referenced", "offset": "0x120", "u32": 8000}]},
+    {"name": "key_341_reversed_bound_visible", "args": [1], "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 341}, {"addr": "@char_data", "offset": "0x9c4", "u32": "@element"}]},
+    {"name": "trade_parameter_reset", "args": [1], "memory": [{"addr": "0x00850c50", "u32": 0}, {"addr": "@flag_60", "offset": "0x5c", "u8": 0}, {"addr": "@referenced", "offset": "0x120", "u32": 3031}]}
+  ],
+  "fuzz": {
+    "seed": 5354158,
+    "count": 200,
+    "args": [{"range": [0, 1]}],
+    "memory": [
+      {"addr": "@referenced", "offset": "0x120", "type": "int", "choices": [-1, 0, 29, 30, 31, 250, 251, 340, 341, 2000, 2007, 2008, 2031, 2111, 2190, 2191, 2500, 2501, 2502, 2531, 2550, 2551, 2999, 3000, 3031, 3190, 3191, 3340, 3341, 3999, 4000, 4030, 4031, 4999, 5000, 5030, 5031, 6999, 7000, 7079, 7080, 7999, 8000, 8030, 8031]},
+      {"addr": "@cleanuplist", "offset": "0x1004", "type": "int", "choices": [0, 1]},
+      {"addr": "@client", "offset": "0x5c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@slot_a", "offset": "0x5c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@flag_60", "offset": "0x5c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@slot_c", "offset": "0x5c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@slot_d", "offset": "0x5c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@slot_e", "offset": "0x5c", "type": "u8", "choices": [0, 1]}
+    ]
+  }
+}

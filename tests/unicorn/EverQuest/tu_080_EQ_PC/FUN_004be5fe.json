@@ -1,0 +1,400 @@
+{
+  "function": "EQ_PCView_guess::DestroyHeldItemOrMoney",
+  "original": "0x004be5fe",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "object": {
+      "size": "0xc34c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@holder"
+        }
+      ]
+    },
+    "holder": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 0
+        }
+      ]
+    },
+    "flags": {
+      "size": "0x12",
+      "fill": "zero"
+    },
+    "state": {
+      "size": "0x1200",
+      "fill": "zero"
+    },
+    "owned": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@vtable"
+        }
+      ]
+    },
+    "slot": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "vtable": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@slot"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d24",
+      "u32": "@flags"
+    }
+  ],
+  "callees": {
+    "0x005ec220": {
+      "name": "GetObject_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@state"
+    },
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "mem:20",
+        "int",
+        "char"
+      ],
+      "ret": 0
+    },
+    "@slot": {
+      "name": "Owned_guess::Slot00_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "_survivors": "L2967: the initial packet.kind_8 zero is overwritten by the selected category whenever count_10 is positive; otherwise no packet is sent.",
+  "cases": [
+    {
+      "name": "owned_pointer_and_virtual_call",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x88",
+          "u32": "@owned"
+        },
+        {
+          "addr": "@flags",
+          "offset": "0x10",
+          "u8": 1
+        },
+        {
+          "addr": "@flags",
+          "offset": "0x11",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "owned_null_flags_off",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x88",
+          "u32": 0
+        },
+        {
+          "addr": "@flags",
+          "offset": "0x10",
+          "u8": 0
+        },
+        {
+          "addr": "@flags",
+          "offset": "0x11",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "counts_all_zero",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x88",
+          "u32": 0
+        },
+        {
+          "addr": "@flags",
+          "offset": "0x11",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "counts_negative_and_zero",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x88",
+          "u32": 0
+        },
+        {
+          "addr": "@flags",
+          "offset": "0x11",
+          "u8": 1
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11e4",
+          "u32": -1
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11e8",
+          "u32": 0
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11ec",
+          "u32": -1
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11f0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "priority_first",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x88",
+          "u32": 0
+        },
+        {
+          "addr": "@flags",
+          "offset": "0x11",
+          "u8": 1
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11e4",
+          "u32": 7
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11e8",
+          "u32": 8
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11ec",
+          "u32": 9
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11f0",
+          "u32": 10
+        }
+      ]
+    },
+    {
+      "name": "priority_second",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x88",
+          "u32": 0
+        },
+        {
+          "addr": "@flags",
+          "offset": "0x11",
+          "u8": 1
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11e4",
+          "u32": 0
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11e8",
+          "u32": 5
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11ec",
+          "u32": 6
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11f0",
+          "u32": 7
+        }
+      ]
+    },
+    {
+      "name": "priority_third",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x88",
+          "u32": 0
+        },
+        {
+          "addr": "@flags",
+          "offset": "0x11",
+          "u8": 1
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11e4",
+          "u32": 0
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11e8",
+          "u32": 0
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11ec",
+          "u32": 5
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11f0",
+          "u32": 6
+        }
+      ]
+    },
+    {
+      "name": "priority_fourth",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x88",
+          "u32": 0
+        },
+        {
+          "addr": "@flags",
+          "offset": "0x11",
+          "u8": 1
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11e4",
+          "u32": 0
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11e8",
+          "u32": 0
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11ec",
+          "u32": 0
+        },
+        {
+          "addr": "@state",
+          "offset": "0x11f0",
+          "u32": 5
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4974078,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@flags",
+        "offset": "0x11",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0x11e4",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          7
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0x11e8",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          7
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0x11ec",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          7
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0x11f0",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          7
+        ]
+      }
+    ]
+  }
+}

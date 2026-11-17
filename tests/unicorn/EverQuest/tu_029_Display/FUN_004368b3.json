@@ -1,0 +1,413 @@
+{
+  "function": "StateOwner_guess::ProcessSwitches_guess",
+  "original": "0x004368b3",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@stateowner",
+  "args": [],
+  "ret": "void",
+  "_survivors": "L3178: delta x only feeds Length2D (0x435B82), which squares it, so negating it (px - y instead of y - px) gives the same length; IEEE negation is exact",
+  "coverage_ok": {"00436F4F-00436F57": "tilt case: range is 128 or 248, never negative, so the negation is dead"},
+  "objects": {
+    "stateowner": {"size": "0x150", "fill": "random"},
+    "doorlist": {"size": "0x10", "fill": "random"},
+    "player": {"size": "0x10", "fill": "random"},
+    "door": {
+      "size": "0xa0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x22", "u8": "0x3c"},
+        {"offset": "0x23", "u8": 2},
+        {"offset": "0x24", "f32": 10.0},
+        {"offset": "0x28", "f32": 20.0},
+        {"offset": "0x2c", "f32": 30.0},
+        {"offset": "0x30", "f32": 40.0},
+        {"offset": "0x34", "f32": 50.0},
+        {"offset": "0x38", "f32": 11.0},
+        {"offset": "0x3c", "f32": 21.0},
+        {"offset": "0x40", "f32": 31.0},
+        {"offset": "0x44", "f32": 0.0},
+        {"offset": "0x48", "f32": 60.0},
+        {"offset": "0x4c", "u8": 9},
+        {"offset": "0x4f", "u8": 0},
+        {"offset": "0x66", "u16": 5},
+        {"offset": "0x90", "u32": "@model"},
+        {"offset": "0x94", "u32": 0},
+        {"offset": "0x98", "u32": 1000},
+        {"offset": "0x9c", "f32": 2.0}
+      ]
+    },
+    "door2": {
+      "size": "0xa0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x22", "u8": "0x2d"},
+        {"offset": "0x23", "u8": 3},
+        {"offset": "0x24", "f32": 1.0},
+        {"offset": "0x28", "f32": 2.0},
+        {"offset": "0x2c", "f32": 3.0},
+        {"offset": "0x30", "f32": 4.0},
+        {"offset": "0x34", "f32": 5.0},
+        {"offset": "0x38", "f32": 6.0},
+        {"offset": "0x3c", "f32": 7.0},
+        {"offset": "0x40", "f32": 8.0},
+        {"offset": "0x44", "f32": 128.0},
+        {"offset": "0x48", "f32": 9.0},
+        {"offset": "0x4c", "u8": 3},
+        {"offset": "0x4f", "u8": 0},
+        {"offset": "0x66", "u16": 5},
+        {"offset": "0x90", "u32": "@model"},
+        {"offset": "0x94", "u32": 0},
+        {"offset": "0x98", "u32": 1000},
+        {"offset": "0x9c", "f32": 1.0}
+      ]
+    },
+    "model": {"size": "0x10", "fill": "random", "init": [{"offset": 0, "u32": "@mvtbl"}]},
+    "mvtbl": {
+      "size": "0x50",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x28", "u32": "@fn_scale"},
+        {"offset": "0x48", "u32": "@fn_setpos"},
+        {"offset": "0x4c", "u32": "@fn_setrot"}
+      ]
+    },
+    "actor": {"size": "0x10", "fill": "random", "init": [{"offset": 0, "u32": "@avtbl"}]},
+    "avtbl": {"size": "0x30", "fill": "zero", "init": [{"offset": "0x28", "u32": "@fn_ascale"}]},
+    "sound": {"size": "0x10", "fill": "random", "init": [{"offset": 0, "u32": "@svtbl"}]},
+    "svtbl": {"size": "0x20", "fill": "zero", "init": [{"offset": "0x10", "u32": "@fn_release"}]},
+    "sound2": {"size": "0x10", "fill": "random"},
+    "spawn1": {
+      "size": "0x2f0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x30", "f32": 15.0},
+        {"offset": "0x34", "f32": 25.0},
+        {"offset": "0x214", "u32": "@spawn2"},
+        {"offset": "0x2e6", "u8": 0}
+      ]
+    },
+    "spawn2": {
+      "size": "0x2f0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x30", "f32": -15.0},
+        {"offset": "0x34", "f32": 125.0},
+        {"offset": "0x214", "u32": 0},
+        {"offset": "0x2e6", "u8": 0}
+      ]
+    },
+    "fn_scale": {"size": "4", "fill": "zero"},
+    "fn_setpos": {"size": "4", "fill": "zero"},
+    "fn_setrot": {"size": "4", "fill": "zero"},
+    "fn_ascale": {"size": "4", "fill": "zero"},
+    "fn_release": {"size": "4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00850d0c", "u32": 1000},
+    {"addr": "0x00903e84", "u32": "@doorlist"},
+    {"addr": "0x00905ce4", "u32": "@player"},
+    {"addr": "0x00905cc4", "u32": "@spawn1"}
+  ],
+  "callees": {
+    "0x0046d655": {"name": "GetTick_guess", "conv": "cdecl", "args": [], "ret": 1100},
+    "0x004904fd": {"name": "Count_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x00490530": {"name": "Get_guess", "conv": "thiscall", "args": ["int"], "ret": "@door"},
+    "0x00436678": {"name": "Update_guess", "conv": "thiscall", "args": ["ptr"]},
+    "0x0049ab78": {"name": "DoParticleEffect_guess", "conv": "cdecl",
+                   "args": ["int", "ptr", "int", "ptr", "int", "int", "mem:12", "int", "int"], "ret": "@sound2"},
+    "0x004903d4": {"name": "IsBusy_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0048fc2e": {"name": "SetState_guess", "conv": "thiscall", "args": ["char", "int", "int"]},
+    "0x0048faa5": {"name": "RepopFrequency_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00490b20": {"name": "ToggleDoorState_guess", "conv": "thiscall", "args": []},
+    "0x004903f1": {"name": "IsReady_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x00490370": {"name": "IsSolid_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x004365db": {"name": "Wrap_guess", "conv": "thiscall", "args": ["float"], "ret_float": 10.0},
+    "0x00436628": {"name": "Diff_guess", "conv": "thiscall", "args": ["float", "float", "ptr"], "ret_float": 200.0},
+    "0x004366e8": {"name": "Motion_guess", "conv": "thiscall", "args": ["ptr", "float", "int", "float"], "ret": 1},
+    "0x0048fa18": {"name": "TopSpeed_guess", "conv": "thiscall", "args": ["ignore"], "ret_float": 5.0,
+                   "writes": [{"arg": 0, "offset": 0, "hex": "0000803f"}]},
+    "0x0049030e": {"name": "GetDistance_guess", "conv": "thiscall", "args": [], "ret_float": 6.0},
+    "0x0060f60d": {"name": "_fabs", "conv": "cdecl", "args": ["double"], "ret_float": 100.0},
+    "0x004898d6": {"name": "GetActor_guess", "conv": "thiscall", "args": [], "ret": "@actor"},
+    "0x00435b82": {"name": "Length2D_guess", "conv": "thiscall", "args": [], "ret_float": 50.0},
+    "0x00489955": {"name": "Touch_guess", "conv": "thiscall", "args": []},
+    "@fn_scale": {"name": "GetScale_guess", "conv": "thiscall", "args": [], "ret_float": 100.0},
+    "@fn_setpos": {"name": "SetPosition_guess", "conv": "thiscall", "args": ["mem:12"]},
+    "@fn_setrot": {"name": "SetRotation_guess", "conv": "thiscall", "args": ["mem:12"]},
+    "@fn_ascale": {"name": "ActorScale_guess", "conv": "thiscall", "args": [], "ret_float": 10.0},
+    "@fn_release": {"name": "Release_guess", "conv": "thiscall", "args": ["int"]}
+  },
+  "rewrite_aliases": {
+    "_fabs": "0x0060f60d"
+  },
+  "cases": [
+    {"name": "slide z open, default", "args": []},
+    {"name": "disabled", "args": [], "memory": [{"addr": "@door", "offset": "0x4f", "u8": 1}]},
+    {"name": "no doors", "args": [], "callees": {"0x004904fd": {"conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "tick wrapped", "args": [], "memory": [{"addr": "0x00850d0c", "u32": 2000}]},
+    {"name": "busy", "args": [], "callees": {"0x004903d4": {"conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "two doors", "args": [],
+     "callees": {"0x004904fd": {"conv": "thiscall", "args": [], "ret": 2},
+                 "0x00490530": {"conv": "thiscall", "args": ["int"], "ret": ["@door", "@door2"]}}},
+
+    {"name": "35 s1 make sound", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x35"}, {"addr": "@door", "offset": "0x23", "u8": 1},
+      {"addr": "@door", "offset": "0x4c", "u8": 1}]},
+    {"name": "35 s1 effect 0", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x35"}, {"addr": "@door", "offset": "0x23", "u8": 1},
+      {"addr": "@door", "offset": "0x66", "u16": 0}]},
+    {"name": "35 s1 effect 255", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x35"}, {"addr": "@door", "offset": "0x23", "u8": 1},
+      {"addr": "@door", "offset": "0x66", "u16": 255}]},
+    {"name": "35 s1 effect 256", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x35"}, {"addr": "@door", "offset": "0x23", "u8": 1},
+      {"addr": "@door", "offset": "0x66", "u16": 256}]},
+    {"name": "35 s1 effect negative", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x35"}, {"addr": "@door", "offset": "0x23", "u8": 1},
+      {"addr": "@door", "offset": "0x66", "u16": "0xffff"}]},
+    {"name": "35 s1 effect 1 no player", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x35"}, {"addr": "@door", "offset": "0x23", "u8": 1},
+      {"addr": "@door", "offset": "0x66", "u16": 1}, {"addr": "0x00905ce4", "u32": 0}]},
+    {"name": "35 s1 sound present", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x35"}, {"addr": "@door", "offset": "0x23", "u8": 1},
+      {"addr": "@door", "offset": "0x94", "u32": "@sound"}]},
+    {"name": "35 s0 release sound", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x35"}, {"addr": "@door", "offset": "0x23", "u8": 0},
+      {"addr": "@door", "offset": "0x94", "u32": "@sound"}]},
+    {"name": "35 s0 no sound", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x35"}, {"addr": "@door", "offset": "0x23", "u8": 0}]},
+    {"name": "35 s2", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x35"}, {"addr": "@door", "offset": "0x23", "u8": 2}]},
+    {"name": "35 s3", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x35"}, {"addr": "@door", "offset": "0x23", "u8": 3}]},
+    {"name": "39 s2", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x39"}, {"addr": "@door", "offset": "0x23", "u8": 2}]},
+    {"name": "3a s3", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x3a"}, {"addr": "@door", "offset": "0x23", "u8": 3}]},
+    {"name": "3a s4 same prev", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x3a"}, {"addr": "@door", "offset": "0x23", "u8": 4},
+      {"addr": "@door", "offset": "0x4c", "u8": 4}]},
+
+    {"name": "s4 elapsed 60000", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x23", "u8": 4}, {"addr": "@door", "offset": "0x4c", "u8": 2},
+      {"addr": "@door", "offset": "0x98", "u32": "0xffff19ec"}]},
+    {"name": "s4 elapsed 60001", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x23", "u8": 4}, {"addr": "@door", "offset": "0x4c", "u8": 2},
+      {"addr": "@door", "offset": "0x98", "u32": "0xffff19eb"}]},
+    {"name": "timeout fires", "args": [], "callees": {"0x0048faa5": {"conv": "thiscall", "args": [], "ret": 99}}},
+    {"name": "timeout equal", "args": [], "callees": {"0x0048faa5": {"conv": "thiscall", "args": [], "ret": 100}}},
+    {"name": "same state no timeout", "args": [], "memory": [{"addr": "@door", "offset": "0x4c", "u8": 2}],
+     "callees": {"0x0048faa5": {"conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "s0 continue", "args": [], "memory": [{"addr": "@door", "offset": "0x23", "u8": 0}]},
+    {"name": "s1 type 99 continue", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": 99}, {"addr": "@door", "offset": "0x23", "u8": 1}]},
+    {"name": "s1 type 100", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": 100}, {"addr": "@door", "offset": "0x23", "u8": 1}]},
+    {"name": "not solid not ready", "args": [], "callees": {
+      "0x004903f1": {"conv": "thiscall", "args": [], "ret": 0},
+      "0x00490370": {"conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "ready only", "args": [], "callees": {
+      "0x004903f1": {"conv": "thiscall", "args": [], "ret": 1},
+      "0x00490370": {"conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "solid only", "args": [], "callees": {
+      "0x004903f1": {"conv": "thiscall", "args": [], "ret": 0},
+      "0x00490370": {"conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "no model", "args": [], "memory": [{"addr": "@door", "offset": "0x90", "u32": 0}]},
+    {"name": "spawn far", "args": [], "callees": {"0x00435b82": {"conv": "thiscall", "args": [], "ret_float": 400.0}}},
+    {"name": "spawn at reach", "args": [], "callees": {"0x00435b82": {"conv": "thiscall", "args": [], "ret_float": 310.0}}},
+    {"name": "spawn just inside", "args": [], "callees": {"0x00435b82": {"conv": "thiscall", "args": [], "ret_float": 309.5}}},
+    {"name": "spawn no actor", "args": [], "callees": {
+      "0x004898d6": {"conv": "thiscall", "args": [], "ret": 0},
+      "0x00435b82": {"conv": "thiscall", "args": [], "ret_float": 305.0}}},
+    {"name": "spawn no actor ready", "args": [], "callees": {
+      "0x004898d6": {"conv": "thiscall", "args": [], "ret": 0},
+      "0x004903f1": {"conv": "thiscall", "args": [], "ret": 1},
+      "0x00490370": {"conv": "thiscall", "args": [], "ret": 0},
+      "0x00435b82": {"conv": "thiscall", "args": [], "ret_float": 209.0}}},
+    {"name": "no spawns", "args": [], "memory": [{"addr": "0x00905cc4", "u32": 0}]},
+
+    {"name": "angle 0 s2 done", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": 0}, {"addr": "@door", "offset": "0x23", "u8": 2}]},
+    {"name": "angle 0 s2 moving", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": 0}, {"addr": "@door", "offset": "0x23", "u8": 2}],
+     "callees": {"0x00436628": {"conv": "thiscall", "args": ["float", "float", "ptr"], "ret_float": 127.0}}},
+    {"name": "angle 4 s2 at 128", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": 4}, {"addr": "@door", "offset": "0x23", "u8": 2}],
+     "callees": {"0x00436628": {"conv": "thiscall", "args": ["float", "float", "ptr"], "ret_float": 128.0}}},
+    {"name": "angle 5 s2", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": 5}, {"addr": "@door", "offset": "0x23", "u8": 2}]},
+    {"name": "angle 7 s3 done", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": 7}, {"addr": "@door", "offset": "0x23", "u8": 3}]},
+    {"name": "angle 6 s3 moving", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": 6}, {"addr": "@door", "offset": "0x23", "u8": 3}],
+     "callees": {"0x00436628": {"conv": "thiscall", "args": ["float", "float", "ptr"], "ret_float": 1.0}}},
+    {"name": "angle 8 s3", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": 8}, {"addr": "@door", "offset": "0x23", "u8": 3}]},
+    {"name": "angle 8 s4", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": 8}, {"addr": "@door", "offset": "0x23", "u8": 4},
+      {"addr": "@door", "offset": "0x4c", "u8": 4}]},
+
+    {"name": "tilt 1e s2 done", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x1e"}, {"addr": "@door", "offset": "0x23", "u8": 2}]},
+    {"name": "tilt 23 s2 moving", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x23"}, {"addr": "@door", "offset": "0x23", "u8": 2}],
+     "callees": {"0x00436628": {"conv": "thiscall", "args": ["float", "float", "ptr"], "ret_float": 0.0}}},
+    {"name": "tilt 24 s3 done", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x24"}, {"addr": "@door", "offset": "0x23", "u8": 3}]},
+    {"name": "tilt 82 s3 moving", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x82"}, {"addr": "@door", "offset": "0x23", "u8": 3}],
+     "callees": {"0x00436628": {"conv": "thiscall", "args": ["float", "float", "ptr"], "ret_float": 247.0}}},
+    {"name": "tilt 82 s2 at 248", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x82"}, {"addr": "@door", "offset": "0x23", "u8": 2}],
+     "callees": {"0x00436628": {"conv": "thiscall", "args": ["float", "float", "ptr"], "ret_float": 248.0}}},
+    {"name": "tilt 28 s2 moving", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x28"}, {"addr": "@door", "offset": "0x23", "u8": 2}],
+     "callees": {"0x00436628": {"conv": "thiscall", "args": ["float", "float", "ptr"], "ret_float": 7.0}}},
+    {"name": "tilt 82 s1", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x82"}, {"addr": "@door", "offset": "0x23", "u8": 1}]},
+
+    {"name": "z 3c s2 small", "args": [], "callees": {"0x0060f60d": {"conv": "cdecl", "args": ["double"], "ret_float": 0.0}}},
+    {"name": "z 3e s3", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x3e"}, {"addr": "@door", "offset": "0x23", "u8": 3}]},
+    {"name": "z 41 s2", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x41"}]},
+    {"name": "z 43 s3 small", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x43"}, {"addr": "@door", "offset": "0x23", "u8": 3}],
+     "callees": {"0x0060f60d": {"conv": "cdecl", "args": ["double"], "ret_float": 1.0}}},
+    {"name": "z 46 s2", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x46"}]},
+    {"name": "z 48 s3", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x48"}, {"addr": "@door", "offset": "0x23", "u8": 3}]},
+    {"name": "z 4b s2 dist 0", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x4b"}],
+     "callees": {"0x0049030e": {"conv": "thiscall", "args": [], "ret_float": 0.0}}},
+    {"name": "z 4d s3 dist", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x4d"}, {"addr": "@door", "offset": "0x23", "u8": 3}]},
+    {"name": "z 4e s3 motion busy", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x4e"}, {"addr": "@door", "offset": "0x23", "u8": 3}],
+     "callees": {"0x004366e8": {"conv": "thiscall", "args": ["ptr", "float", "int", "float"], "ret": 0}}},
+    {"name": "z 4f s3 motion done", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x4f"}, {"addr": "@door", "offset": "0x23", "u8": 3}]},
+    {"name": "z 4e s2", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x4e"}]},
+    {"name": "z 3b s2", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x3b"}],
+     "callees": {"0x0049030e": {"conv": "thiscall", "args": [], "ret_float": -3.0}}},
+    {"name": "z 3b s3", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x3b"}, {"addr": "@door", "offset": "0x23", "u8": 3}]},
+    {"name": "z 50 s3", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x50"}, {"addr": "@door", "offset": "0x23", "u8": 3}]},
+    {"name": "z 51 s2", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x51"}],
+     "callees": {"0x004366e8": {"conv": "thiscall", "args": ["ptr", "float", "int", "float"], "ret": 0}}},
+    {"name": "z 51 s3 busy", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x51"}, {"addr": "@door", "offset": "0x23", "u8": 3}],
+     "callees": {"0x004366e8": {"conv": "thiscall", "args": ["ptr", "float", "int", "float"], "ret": 0}}},
+    {"name": "z 78 s2", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x78"}]},
+    {"name": "z 8c s3", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x8c"}, {"addr": "@door", "offset": "0x23", "u8": 3}]},
+    {"name": "z 91 s2", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x91"}]},
+    {"name": "z 92 s3", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x92"}, {"addr": "@door", "offset": "0x23", "u8": 3}]},
+    {"name": "z 92 s2", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x92"}]},
+    {"name": "z 3f s2 default", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x3f"}]},
+    {"name": "z 8e s3 default", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x8e"}, {"addr": "@door", "offset": "0x23", "u8": 3}]},
+    {"name": "z 4a s4", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x4a"}, {"addr": "@door", "offset": "0x23", "u8": 4},
+      {"addr": "@door", "offset": "0x4c", "u8": 4}]},
+    {"name": "z 52 s2 nothing", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x52"}]},
+    {"name": "z 3a-adjacent 3c 93", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x93"}]},
+    {"name": "type 8b s2", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x8b"}]},
+
+    {"name": "motion 0a", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x0a"}]},
+    {"name": "motion 1b s3", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x1b"}, {"addr": "@door", "offset": "0x23", "u8": 3}]},
+    {"name": "type 9", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": 9}]},
+    {"name": "type 1c", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x1c"}]},
+    {"name": "type 63 s2", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x63"}]},
+
+    {"name": "speed 64 s2 accel", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x64"}]},
+    {"name": "speed 64 s2 full", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x64"}, {"addr": "@door", "offset": "0x9c", "f32": 4.0}]},
+    {"name": "speed 68 s2 over", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x68"}, {"addr": "@door", "offset": "0x9c", "f32": 4.5}]},
+    {"name": "speed 69 s1", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x69"}, {"addr": "@door", "offset": "0x23", "u8": 1}]},
+    {"name": "speed 6b s3 slowing", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x6b"}, {"addr": "@door", "offset": "0x23", "u8": 3}]},
+    {"name": "speed 6a s3 stop", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x6a"}, {"addr": "@door", "offset": "0x23", "u8": 3},
+      {"addr": "@door", "offset": "0x9c", "f32": 0.5}]},
+    {"name": "speed 65 s3 exactly 0", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x65"}, {"addr": "@door", "offset": "0x23", "u8": 3},
+      {"addr": "@door", "offset": "0x9c", "f32": 1.0}]},
+    {"name": "speed 66 s4", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x66"}, {"addr": "@door", "offset": "0x23", "u8": 4},
+      {"addr": "@door", "offset": "0x4c", "u8": 4}]},
+    {"name": "type 6c s2", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x6c"}]},
+
+    {"name": "xy 2d s2 h0", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x2d"}]},
+    {"name": "xy 2d s2 h0 small", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x2d"}],
+     "callees": {"0x0060f60d": {"conv": "cdecl", "args": ["double"], "ret_float": 0.5}}},
+    {"name": "xy 6d s3 h128", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x6d"}, {"addr": "@door", "offset": "0x23", "u8": 3},
+      {"addr": "@door", "offset": "0x44", "f32": 128.0}]},
+    {"name": "xy 73 s2 h256 small", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x73"}, {"addr": "@door", "offset": "0x44", "f32": 256.0}],
+     "callees": {"0x0060f60d": {"conv": "cdecl", "args": ["double"], "ret_float": 0.0}}},
+    {"name": "xy 73 s2 h256", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x73"}, {"addr": "@door", "offset": "0x44", "f32": 256.0}]},
+    {"name": "xy 74 s3 h384", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x74"}, {"addr": "@door", "offset": "0x23", "u8": 3},
+      {"addr": "@door", "offset": "0x44", "f32": 384.0}]},
+    {"name": "xy 74 s3 h384 small", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x74"}, {"addr": "@door", "offset": "0x23", "u8": 3},
+      {"addr": "@door", "offset": "0x44", "f32": 384.0}],
+     "callees": {"0x0060f60d": {"conv": "cdecl", "args": ["double"], "ret_float": 3.0}}},
+    {"name": "xy 7d s2 h0", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x7d"}]},
+    {"name": "xy 96 s3 h128", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x96"}, {"addr": "@door", "offset": "0x23", "u8": 3},
+      {"addr": "@door", "offset": "0x44", "f32": 128.0}]},
+    {"name": "xy 97 s2 h256", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x97"}, {"addr": "@door", "offset": "0x44", "f32": 256.0}]},
+    {"name": "xy 98 s3 h7", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x98"}, {"addr": "@door", "offset": "0x23", "u8": 3},
+      {"addr": "@door", "offset": "0x44", "f32": 7.0}]},
+    {"name": "xy 7d s4", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x7d"}, {"addr": "@door", "offset": "0x23", "u8": 4},
+      {"addr": "@door", "offset": "0x4c", "u8": 4}]},
+    {"name": "type 95 s2", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x95"}]},
+    {"name": "type 99 s2", "args": [], "memory": [{"addr": "@door", "offset": "0x22", "u8": "0x99"}]},
+
+    {"name": "s1 6d close", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x6d"}, {"addr": "@door", "offset": "0x23", "u8": 1}]},
+    {"name": "s1 73 stays", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x73"}, {"addr": "@door", "offset": "0x23", "u8": 1}]},
+    {"name": "s1 74 shut", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x74"}, {"addr": "@door", "offset": "0x23", "u8": 1}]},
+    {"name": "s1 6e shut", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x6e"}, {"addr": "@door", "offset": "0x23", "u8": 1}]},
+    {"name": "s1 98 shut", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x98"}, {"addr": "@door", "offset": "0x23", "u8": 1}]},
+    {"name": "s1 99 stays", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x99"}, {"addr": "@door", "offset": "0x23", "u8": 1}]},
+    {"name": "s1 6c stays", "args": [], "memory": [
+      {"addr": "@door", "offset": "0x22", "u8": "0x6c"}, {"addr": "@door", "offset": "0x23", "u8": 1}]}
+  ],
+  "fuzz": {
+    "seed": 4417715,
+    "count": 150,
+    "args": [],
+    "memory": [
+      {"addr": "@door", "offset": "0x22", "type": "u8", "range": [0, 160]},
+      {"addr": "@door", "offset": "0x23", "type": "u8", "choices": [0, 1, 2, 2, 3, 3, 4]},
+      {"addr": "@door", "offset": "0x4c", "type": "u8", "choices": [0, 1, 2, 3, 4, 9]},
+      {"addr": "@door", "offset": "0x4f", "type": "u8", "choices": [0, 0, 0, 1]},
+      {"addr": "@door", "offset": "0x44", "type": "float", "choices": [0.0, 128.0, 256.0, 384.0, 7.0]},
+      {"addr": "@door", "offset": "0x9c", "type": "float", "range": [-2.0, 6.0]},
+      {"addr": "@door", "offset": "0x66", "type": "short", "range": [-2, 300]},
+      {"addr": "@door", "offset": "0x94", "type": "ptr", "choices": [0, "@sound"]},
+      {"addr": "@door", "offset": "0x90", "type": "ptr", "choices": [0, "@model", "@model"]},
+      {"addr": "@door", "offset": "0x98", "type": "u32", "choices": [1000, 1100, "0xffff19eb", "0xffff19ec"]},
+      {"addr": "0x00850d0c", "type": "u32", "choices": [1000, 1100, 2000]}
+    ]
+  }
+}

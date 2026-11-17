@@ -1,0 +1,625 @@
+{
+  "function": "CPetitionQWndView_guess::AddGMText_guess",
+  "original": "0x0054369f",
+  "sources": [
+    "src/EverQuest/tu_195_PlayerNotesWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0xad0",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x16c",
+          "u32": "@stml"
+        },
+        {
+          "offset": "0x170",
+          "u32": "@textwnd"
+        }
+      ]
+    },
+    "source_rep": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "stml": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "textwnd": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@textwnd_vt"
+        }
+      ]
+    },
+    "textwnd_vt": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xfc",
+          "u32": "@fn_set_text"
+        }
+      ]
+    },
+    "fn_set_text": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "globaldata": {
+      "size": "0x200",
+      "fill": "zero"
+    },
+    "stringtable": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "everquest": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "localized": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "heap_00": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_01": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_02": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_03": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_04": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_05": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_06": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_07": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_08": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_09": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_10": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_11": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_12": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_13": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_14": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_15": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_16": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_17": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_18": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_19": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_20": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_21": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_22": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_23": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_24": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_25": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_26": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_27": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_28": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_29": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_30": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "heap_31": {
+      "size": "0x1000",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@owner",
+      "offset": "0x68c",
+      "cstr": "Alice"
+    },
+    {
+      "addr": "@globaldata",
+      "offset": "0x120",
+      "cstr": "base"
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": "@globaldata"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@stringtable"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@everquest"
+    },
+    {
+      "addr": "@localized",
+      "cstr": "localized message"
+    },
+    {
+      "addr": "0x006584ec",
+      "from_image": "0x006584ec",
+      "image_size": 64
+    },
+    {
+      "addr": "0x0063f53f",
+      "from_image": "0x0063f53f",
+      "image_size": 16
+    },
+    {
+      "addr": "0x0063fe10",
+      "from_image": "0x0063fe10",
+      "image_size": 64
+    },
+    {
+      "addr": "@source_rep",
+      "u32": 100
+    },
+    {
+      "addr": "@source_rep",
+      "offset": "0x8",
+      "u32": 5
+    },
+    {
+      "addr": "@source_rep",
+      "offset": "0xc",
+      "cstr": "hello"
+    }
+  ],
+  "callees": {
+    "0x005b7ed0": {
+      "name": "TextWnd_GetText_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "d00a0060"
+        }
+      ]
+    },
+    "0x00571fc0": {
+      "name": "CXStr_assign_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x00572e00": {
+      "name": "CXStr_append_text_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x00572c10": {
+      "name": "CXStr_append_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:4"
+      ],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x00571e00": {
+      "name": "CXStr_ctor_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this",
+      "passthrough": true
+    },
+    "@fn_set_text": {
+      "name": "TextWnd_SetText_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:4"
+      ],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "CXStr_release_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0,
+      "passthrough": true
+    },
+    "0x00407d68": {
+      "name": "CXStr_copy_ctor_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:4"
+      ],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x005a8b00": {
+      "name": "CStmlWnd_SetSTMLText_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "bool",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00572300": {
+      "name": "CXStr_to_cstr_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x005dfa00": {
+      "name": "StringTable_getString_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": "@localized"
+    },
+    "0x00498436": {
+      "name": "EverQuest_dsp_chat_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x004982c6": {
+      "name": "EverQuest_dsp_chat_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ],
+      "ret": 0
+    },
+    "kernel32.dll!GetProcessHeap": {
+      "name": "GetProcessHeap",
+      "conv": "stdcall",
+      "args": [],
+      "ret": 1
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": [
+        "@heap_00",
+        "@heap_01",
+        "@heap_02",
+        "@heap_03",
+        "@heap_04",
+        "@heap_05",
+        "@heap_06",
+        "@heap_07",
+        "@heap_08",
+        "@heap_09",
+        "@heap_10",
+        "@heap_11",
+        "@heap_12",
+        "@heap_13",
+        "@heap_14",
+        "@heap_15",
+        "@heap_16",
+        "@heap_17",
+        "@heap_18",
+        "@heap_19",
+        "@heap_20",
+        "@heap_21",
+        "@heap_22",
+        "@heap_23",
+        "@heap_24",
+        "@heap_25",
+        "@heap_26",
+        "@heap_27",
+        "@heap_28",
+        "@heap_29",
+        "@heap_30",
+        "@heap_31"
+      ]
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "source-empty",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@source_rep",
+          "u32": 0,
+          "offset": "0x8"
+        }
+      ]
+    },
+    {
+      "name": "empty-name",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x68c",
+          "cstr": ""
+        },
+        {
+          "addr": "@source_rep",
+          "u32": 5,
+          "offset": "0x8"
+        }
+      ]
+    },
+    {
+      "name": "name-with-break",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x68c",
+          "cstr": "Alice"
+        },
+        {
+          "addr": "@source_rep",
+          "u32": 5,
+          "offset": "0x8"
+        }
+      ]
+    },
+    {
+      "name": "buffer-boundary-fits",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x68c",
+          "cstr": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+        },
+        {
+          "addr": "@source_rep",
+          "u32": 9,
+          "offset": "0x8"
+        }
+      ]
+    },
+    {
+      "name": "buffer-boundary-overflow",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x68c",
+          "cstr": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+        },
+        {
+          "addr": "@source_rep",
+          "u32": 10,
+          "offset": "0x8"
+        }
+      ]
+    },
+    {
+      "name": "null-source-cxstr",
+      "args": [],
+      "callees": {
+        "0x005b7ed0": {
+          "name": "TextWnd_GetText_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": "arg0",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "empty-assignment-allocation-fails",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x68c",
+          "cstr": ""
+        }
+      ],
+      "callees": {
+        "kernel32.dll!HeapAlloc": {
+          "name": "HeapAlloc",
+          "conv": "stdcall",
+          "args": [
+            "ptr",
+            "u32",
+            "u32"
+          ],
+          "ret": [
+            0,
+            "@heap_00",
+            "@heap_01",
+            "@heap_02",
+            "@heap_03",
+            "@heap_04",
+            "@heap_05",
+            "@heap_06",
+            "@heap_07",
+            "@heap_08",
+            "@heap_09",
+            "@heap_10",
+            "@heap_11",
+            "@heap_12",
+            "@heap_13",
+            "@heap_14",
+            "@heap_15",
+            "@heap_16",
+            "@heap_17",
+            "@heap_18",
+            "@heap_19",
+            "@heap_20",
+            "@heap_21",
+            "@heap_22",
+            "@heap_23",
+            "@heap_24",
+            "@heap_25",
+            "@heap_26",
+            "@heap_27",
+            "@heap_28",
+            "@heap_29",
+            "@heap_30",
+            "@heap_31"
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5519007,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@source_rep",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          5,
+          64,
+          1024
+        ],
+        "offset": "0x8"
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x68c",
+        "size": 32
+      }
+    ]
+  },
+  "size": "0x20d",
+  "coverage_ok": {
+    "005436FA-005436FD": "the same src.Ptr was proven nonnull at the earlier test and is unchanged before this duplicate null check"
+  }
+}

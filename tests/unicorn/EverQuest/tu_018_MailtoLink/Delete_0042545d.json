@@ -1,0 +1,55 @@
+{
+  "function": "OwnerPart_guess::Delete_guess",
+  "original": "0x0042545d",
+  "sources": [
+    "src/EverQuest/tu_018_MailtoLink.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner+4",
+  "args": [
+    {
+      "name": "flags_guess",
+      "type": "u8"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "owner": {
+      "size": "0x40",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0042547c": {
+      "name": "PartOwner_guess::Release_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0060d0d5": {
+      "name": "free",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {"name": "delete_bit_set", "args": [1]},
+    {"name": "no_delete", "args": [0]},
+    {"name": "other_bit_only", "args": [2]},
+    {"name": "bit_and_vector", "args": [3]},
+    {"name": "high_bits_no_delete", "args": [254]},
+    {"name": "all_bits", "args": [255]}
+  ],
+  "fuzz": {
+    "seed": 4346973,
+    "count": 100,
+    "args": [
+      {"type": "u8", "choices": [0, 1, 2, 3, 4, 5, 127, 128, 129, 254, 255]}
+    ],
+    "memory": []
+  }
+}

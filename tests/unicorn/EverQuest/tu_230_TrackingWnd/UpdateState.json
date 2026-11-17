@@ -1,0 +1,138 @@
+{
+  "function": "Thing_guess::GetEntryColor_guess",
+  "original": "0x005660ea",
+  "sources": [
+    "src/EverQuest/tu_230_TrackingWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@thing",
+  "args": [
+    {
+      "name": "index_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "thing": {
+      "size": "0x560",
+      "fill": "random"
+    },
+    "renderer": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x009917E4", "u32": "@renderer"},
+    {"addr": "0x009043A4", "u8": 1},
+    {"addr": "0x00904390", "u32": 4660},
+    {"addr": "0x00904394", "u32": 22136},
+    {"addr": "0x00904398", "u32": 0},
+    {"addr": "0x0090439C", "u32": 0},
+    {"addr": "0x009043A0", "u32": 0},
+    {"addr": "0x0090424D", "u8": 1},
+    {"addr": "0x0090428D", "u8": 1},
+    {"addr": "0x009042CD", "u8": 1},
+    {"addr": "0x0090430D", "u8": 1},
+    {"addr": "0x0090434D", "u8": 1}
+  ],
+  "callees": {
+    "0x004f2bbe": {
+      "name": "GetRGBAFromIndex",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 119
+    }
+  },
+  "cases": [
+    {
+      "name": "zeros_plain_0x0D",
+      "args": [0]
+    },
+    {
+      "name": "bit8_0x0E",
+      "args": [1],
+      "memory": [{"addr": "@thing", "offset": "0x17c", "u32": 256}]
+    },
+    {
+      "name": "bit8_with_bit0_0x0E",
+      "args": [1],
+      "memory": [{"addr": "@thing", "offset": "0x17c", "u32": 257}]
+    },
+    {
+      "name": "sign_bit7_0x10",
+      "args": [1],
+      "memory": [{"addr": "@thing", "offset": "0x17c", "u32": 128}]
+    },
+    {
+      "name": "bit9_0x12",
+      "args": [1],
+      "memory": [{"addr": "@thing", "offset": "0x17c", "u32": 512}]
+    },
+    {
+      "name": "bit6_0x0A",
+      "args": [1],
+      "memory": [{"addr": "@thing", "offset": "0x17c", "u32": 64}]
+    },
+    {
+      "name": "plain_bit5_0x0F",
+      "args": [1],
+      "memory": [{"addr": "@thing", "offset": "0x17c", "u32": 32}]
+    },
+    {
+      "name": "plain_zero_0x0D",
+      "args": [1],
+      "memory": [{"addr": "@thing", "offset": "0x17c", "u32": 0}]
+    },
+    {
+      "name": "lookup_first_match_0x0C",
+      "args": [1],
+      "memory": [{"addr": "@thing", "offset": "0x17c", "u32": 2}, {"addr": "@thing", "offset": "0x170", "u32": 4660}]
+    },
+    {
+      "name": "lookup_second_match_0x0C",
+      "args": [1],
+      "memory": [{"addr": "@thing", "offset": "0x17c", "u32": 2}, {"addr": "@thing", "offset": "0x170", "u32": 22136}]
+    },
+    {
+      "name": "lookup_no_match_0x07",
+      "args": [1],
+      "memory": [{"addr": "@thing", "offset": "0x17c", "u32": 2}, {"addr": "@thing", "offset": "0x170", "u32": 39321}]
+    },
+    {
+      "name": "lookup_zero_key_0x07",
+      "args": [1],
+      "memory": [{"addr": "@thing", "offset": "0x17c", "u32": 2}, {"addr": "@thing", "offset": "0x170", "u32": 0}]
+    },
+    {
+      "name": "lookup_disabled_0x07",
+      "args": [1],
+      "memory": [{"addr": "@thing", "offset": "0x17c", "u32": 2}, {"addr": "@thing", "offset": "0x170", "u32": 4660}, {"addr": "0x009043A4", "u8": 0}]
+    },
+    {
+      "name": "lookup_label_zero_0x07",
+      "args": [1],
+      "memory": [{"addr": "@thing", "offset": "0x17c", "u32": 2}, {"addr": "@thing", "offset": "0x170", "u32": 4660}, {"addr": "0x0090424D", "u8": 0}]
+    },
+    {
+      "name": "lookup_index2_match_0x0C",
+      "args": [2],
+      "memory": [{"addr": "@thing", "offset": "0x18c", "u32": 2}, {"addr": "@thing", "offset": "0x180", "u32": 22136}]
+    }
+  ],
+  "fuzz": {
+    "seed": 5660906,
+    "count": 200,
+    "args": [
+      {"range": [0, 63]}
+    ],
+    "memory": [
+      {"addr": "@thing", "offset": "0x160", "type": "u32", "count": 64, "stride": 16, "choices": [4660, 22136, 39321, 0, 1]},
+      {"addr": "@thing", "offset": "0x16c", "type": "u32", "count": 64, "stride": 16, "choices": [0, 2, 32, 64, 128, 256, 512, 258, 130, 34, 66, 257, 0, 2, 4660]},
+      {"addr": "0x009043A4", "type": "u8", "choices": [0, 1]}
+    ]
+  }
+}

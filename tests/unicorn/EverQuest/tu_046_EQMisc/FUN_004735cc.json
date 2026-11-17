@@ -1,0 +1,208 @@
+{
+  "function": "do_hotbutton_guess",
+  "original": "0x004735cc",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "unused_guess",
+      "type": "int"
+    },
+    {
+      "name": "input_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "size": "0x1ae",
+  "objects": {
+    "stringTable": {"size": "0x10", "fill": "zero"},
+    "everquest": {"size": "0x10", "fill": "zero"},
+    "message": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "cstr": "fixture message"}]
+    },
+    "rep0": {"size": "0x200", "fill": "zero"},
+    "rep1": {"size": "0x200", "fill": "zero"},
+    "rep2": {"size": "0x200", "fill": "zero"},
+    "rep3": {"size": "0x200", "fill": "zero"},
+    "rep4": {"size": "0x200", "fill": "zero"},
+    "rep5": {"size": "0x200", "fill": "zero"},
+    "rep6": {"size": "0x200", "fill": "zero"},
+    "rep7": {"size": "0x200", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x00905cb0", "u32": "@stringTable"},
+    {"addr": "0x00988df0", "u32": "@everquest"}
+  ],
+  "callees": {
+    "0x00571e00": {
+      "name": "FUN_00571e00",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "passthrough": true
+    },
+    "0x0046d46d": {
+      "name": "ConvertItemTags",
+      "conv": "cdecl",
+      "args": ["ignore", "int"],
+      "passthrough": true
+    },
+    "0x00572300": {
+      "name": "FUN_00572300",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0042dd82": {
+      "name": "GrabFirstWord_guess",
+      "conv": "cdecl",
+      "args": ["cstr", "ignore", "int"],
+      "passthrough": true
+    },
+    "0x005dfa00": {
+      "name": "FUN_005dfa00",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": "@message"
+    },
+    "0x00498436": {
+      "name": "FUN_00498436",
+      "conv": "thiscall",
+      "args": ["cstr"]
+    },
+    "0x00574830": {
+      "name": "FUN_00574830",
+      "conv": "cdecl",
+      "args": ["cstr", "ignore"],
+      "ret": [1],
+      "writes": [{"arg": 1, "offset": 0, "hex": "01000000"}]
+    },
+    "0x0060e3a3": {
+      "name": "atoi",
+      "conv": "cdecl",
+      "args": ["cstr"],
+      "ret": [2]
+    },
+    "0x0046bc70": {
+      "name": "SetSocial_guess",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr", "long", "int"],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "FUN_00571d00",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "passthrough": true
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": ["@rep0", "@rep1", "@rep2", "@rep3", "@rep4", "@rep5", "@rep6", "@rep7"]
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "empty-input",
+      "args": [
+        0,
+        ""
+      ]
+    },
+    {
+      "name": "first-byte-one",
+      "args": [0, "\u0001 12 omega"]
+    },
+    {
+      "name": "empty-number",
+      "args": [
+        1,
+        "alpha"
+      ],
+      "callees": {
+        "0x0060e3a3": {
+          "name": "atoi",
+          "conv": "cdecl",
+          "args": ["cstr"],
+          "ret": [0]
+        }
+      }
+    },
+    {
+      "name": "non-digit",
+      "args": [2, "alpha x omega"],
+      "callees": {
+        "0x00574830": {
+          "name": "FUN_00574830",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore"],
+          "ret": [0],
+          "writes": [{"arg": 1, "offset": 0, "hex": "01000000"}]
+        },
+        "0x0046bc70": {
+          "name": "FUN_0046bc70",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr", "long", "int"],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "digits-negative-compare",
+      "args": [0, "alpha 12 omega"],
+      "callees": {
+        "0x0060e3a3": {
+          "name": "atoi",
+          "conv": "cdecl",
+          "args": ["cstr"],
+          "ret": [12]
+        },
+        "0x0046bc70": {
+          "name": "FUN_0046bc70",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr", "long", "int"],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "digits-nonnegative-compare",
+      "args": [0, "omega 3 alpha"],
+      "callees": {
+        "0x0060e3a3": {
+          "name": "atoi",
+          "conv": "cdecl",
+          "args": ["cstr"],
+          "ret": [3]
+        },
+        "0x0046bc70": {
+          "name": "FUN_0046bc70",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr", "long", "int"],
+          "ret": 1
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4666828,
+    "count": 100,
+    "args": [
+      {"range": [0, 3]},
+      {"choices": ["", "alpha", "alpha 12 omega", "alpha x omega", "omega 3 alpha"]}
+    ],
+    "memory": []
+  }
+}

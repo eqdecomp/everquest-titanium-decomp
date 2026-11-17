@@ -1,0 +1,348 @@
+{
+  "function": "Journal_guess::SaveJournal_guess",
+  "original": "0x0042f146",
+  "sources": [
+    "src/EverQuest/tu_024_Journal.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object_0042e76b",
+  "args": [
+    {
+      "name": "fileName",
+      "type": "cstr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "object_0042e76b": {
+      "size": "0x818",
+      "fill": "random",
+      "init": [
+        { "offset": "0x800", "u32": "@npc_array" },
+        { "offset": "0x808", "u32": 1 },
+        { "offset": "0x80c", "u32": "@category_array" },
+        { "offset": "0x814", "u32": 1 }
+      ]
+    },
+    "npc_array": {
+      "size": "4",
+      "fill": "random",
+      "init": [ { "offset": "0", "u32": "@npc" } ]
+    },
+    "category_array": {
+      "size": "4",
+      "fill": "random",
+      "init": [ { "offset": "0", "u32": "@category" } ]
+    },
+    "npc": {
+      "size": "0x54",
+      "fill": "random",
+      "init": [
+        { "offset": "0", "cstr": "Orc Warrior" },
+        { "offset": "0x40", "u32": 17 },
+        { "offset": "0x4c", "u32": 1 },
+        { "offset": "0x50", "u32": "@records_array" }
+      ]
+    },
+    "records_array": {
+      "size": "4",
+      "fill": "random",
+      "init": [ { "offset": "0", "u32": "@record" } ]
+    },
+    "record": {
+      "size": "0x18",
+      "fill": "random",
+      "init": [
+        { "offset": "0", "u32": 7 },
+        { "offset": "4", "u32": 4660 },
+        { "offset": "8", "u32": 10 },
+        { "offset": "0xc", "u32": 20 },
+        { "offset": "0x10", "u32": 30 },
+        { "offset": "0x14", "u32": 40 }
+      ]
+    },
+    "category": {
+      "size": "0x15",
+      "fill": "random",
+      "init": [
+        { "offset": "0", "u32": 3 },
+        { "offset": "4", "cstr": "General" },
+        { "offset": "0x14", "cstr": "Root" }
+      ]
+    },
+    "root_path": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [ { "offset": "0", "cstr": "C:\\EverQuest\\" } ]
+    },
+    "path_text": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [ { "offset": "0", "cstr": "journal.txt" } ]
+    },
+    "header_path_text": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [ { "offset": "0", "cstr": "journal.hdr" } ]
+    },
+    "hash_table": {
+      "size": "8",
+      "fill": "random",
+      "init": [
+        { "offset": "0", "u32": 0 },
+        { "offset": "4", "u32": 2 }
+      ]
+    },
+    "hash_entry0": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [
+        { "offset": "0", "cstr": "journal line one" },
+        { "offset": "4", "u32": 0 },
+        { "offset": "8", "u32": "@hash_entry1" }
+      ]
+    },
+    "hash_entry1": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [
+        { "offset": "0", "cstr": "journal line two" },
+        { "offset": "4", "u32": 1 },
+        { "offset": "8", "u32": 0 }
+      ]
+    },
+    "export_buffer": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    { "addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4 },
+    { "addr": "0x00923d74", "u32": "@root_path" },
+    { "addr": "0x0079dc44", "u32": "@hash_table" }
+  ],
+  "callees": {
+    "0x00571e00": {
+      "name": "String_ctor",
+      "conv": "thiscall",
+      "args": [ "cstr" ],
+      "ret": "this"
+    },
+    "0x0042e3d9": {
+      "name": "String_append_suffix",
+      "conv": "cdecl",
+      "args": [ "ignore", "cstr", "ignore" ],
+      "ret": "arg0",
+      "writes": [
+        { "arg": 0, "hex": "01000000", "call": 0 },
+        { "arg": 0, "hex": "01000000", "call": 1 }
+      ]
+    },
+    "0x00571f70": {
+      "name": "String_assign",
+      "conv": "thiscall",
+      "args": [ "u32" ],
+      "ret": "this"
+    },
+    "0x00571d00": {
+      "name": "String_release",
+      "conv": "thiscall",
+      "args": [ "u32" ],
+      "ret": 0
+    },
+    "0x00572300": {
+      "name": "String_copy_to",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [ "@path_text", "@header_path_text" ]
+    },
+    "0x0040552d": {
+      "name": "BuildPath",
+      "conv": "cdecl",
+      "args": [ "cstr", "cstr" ],
+      "ret": "arg1"
+    },
+    "0x005749f0": {
+      "name": "FinalizePath",
+      "conv": "cdecl",
+      "args": [ "cstr", "cstr", "ptr", "int" ],
+      "ret": 0,
+      "writes": [
+        { "arg": 2, "hex": "6a6f75726e616c2e74787400", "call": 0 },
+        { "arg": 2, "hex": "6a6f75726e616c2e68647200", "call": 1 }
+      ]
+    },
+    "0x0060e887": {
+      "name": "_fopen",
+      "conv": "cdecl",
+      "args": [ "cstr", "cstr" ],
+      "ret": [ 1114112, 2228224 ]
+    },
+    "0x0060e790": {
+      "name": "_fclose",
+      "conv": "cdecl",
+      "args": [ "ptr" ],
+      "ret": 0
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [ "u32" ],
+      "ret": "@export_buffer"
+    },
+    "0x0042f092": {
+      "name": "Object_0042f092_initialize",
+      "conv": "thiscall",
+      "args": [ "int" ],
+      "ret": "this"
+    },
+    "0x0060ec45": {
+      "name": "_fprintf",
+      "conv": "cdecl",
+      "args": [ "ptr", "cstr" ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x0042e4dc": {
+      "name": "GetRecordAtIndex",
+      "conv": "thiscall",
+      "args": [ "int" ],
+      "ret": "@record"
+    },
+    "0x0042ec50": {
+      "name": "LookupValue",
+      "conv": "cdecl",
+      "args": [ "u32" ],
+      "ret": 0
+    },
+    "0x00447c66": {
+      "name": "InsertValue",
+      "conv": "thiscall",
+      "args": [ "ptr", "u32" ],
+      "ret": 0
+    },
+    "0x004466fa": {
+      "name": "HashFirst",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0042ec1a": {
+      "name": "HashNext",
+      "conv": "thiscall",
+      "args": [ "ptr" ],
+      "ret": 0
+    },
+    "0x004c9745": {
+      "name": "ReleaseExportBuffer",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0060d0d5": {
+      "name": "operator_delete",
+      "conv": "cdecl",
+      "args": [ "ptr" ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "_fopen": "0x0060e887",
+    "_fclose": "0x0060e790",
+    "??2@YAPAXI@Z": "0x0060d071",
+    "_fprintf": "0x0060ec45"
+  },
+  "cases": [
+    {
+      "name": "first_open_fails",
+      "args": [ "journal" ],
+      "callees": {
+        "0x0060e887": {
+          "name": "_fopen",
+          "conv": "cdecl",
+          "args": [ "cstr", "cstr" ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "second_open_fails",
+      "args": [ "journal" ],
+      "callees": {
+        "0x0060e887": {
+          "name": "_fopen",
+          "conv": "cdecl",
+          "args": [ "cstr", "cstr" ],
+          "ret": [ 1114112, 0 ]
+        }
+      }
+    },
+    {
+      "name": "empty_tables",
+      "args": [ "journal" ],
+      "memory": [
+        { "addr": "@object_0042e76b", "offset": "0x808", "u32": 0 },
+        { "addr": "@object_0042e76b", "offset": "0x814", "u32": 0 },
+        { "addr": "@npc", "offset": "0x4c", "u32": 0 }
+      ]
+    },
+    {
+      "name": "populated_export",
+      "args": [ "journal" ],
+      "callees": {
+        "0x0042ec50": {
+          "name": "LookupValue",
+          "conv": "cdecl",
+          "args": [ "u32" ],
+          "ret": 1
+        },
+        "0x004466fa": {
+          "name": "HashFirst",
+          "conv": "thiscall",
+          "args": [],
+          "ret": "@hash_entry0"
+        },
+        "0x0042ec1a": {
+          "name": "HashNext",
+          "conv": "thiscall",
+          "args": [ "ptr" ],
+          "ret": [ "@hash_entry1", 0 ]
+        }
+      }
+    },
+    {
+      "name": "allocation_fails",
+      "args": [ "journal" ],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [ "u32" ],
+          "ret": 0
+        }
+      },
+      "memory": [
+        { "addr": "@object_0042e76b", "offset": "0x808", "u32": 0 },
+        { "addr": "@object_0042e76b", "offset": "0x814", "u32": 0 }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4387142,
+    "count": 100,
+    "args": [ {} ],
+    "memory": [
+      { "addr": "@object_0042e76b", "offset": "0x808", "type": "int", "choices": [ 0, 1 ] },
+      { "addr": "@object_0042e76b", "offset": "0x814", "type": "int", "choices": [ 0, 1 ] },
+      { "addr": "@npc", "offset": "0x4c", "type": "int", "choices": [ 0, 1 ] }
+    ]
+  },
+  "coverage_ok": {
+    "0042F1E4-0042F1F5": "The string-suffix temporary is a stack-local handle; the harness cannot initialize a thiscall constructor's implicit this pointer.",
+    "0042F25B-0042F26C": "The second string-suffix cleanup depends on the same unseedable stack-local handle.",
+    "0042F310-0042F321": "This file-open cleanup requires a String assignment to write the stack-local destination handle.",
+    "0042F333-0042F344": "This file-open cleanup requires a String assignment to write the stack-local destination handle.",
+    "0042F626-0042F637": "Final String destruction requires the same unseedable destination handle.",
+    "0042F649-0042F65A": "Final String destruction requires the same unseedable destination handle."
+  }
+}

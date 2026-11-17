@@ -1,0 +1,688 @@
+{
+  "function": "Weather_guess::LightningStrike_guess",
+  "original": "0x004c3374",
+  "sources": [
+    "src/EverQuest/tu_084_Weather.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@window",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "window": {
+      "size": "0x30",
+      "fill": "random"
+    },
+    "display": {
+      "size": "0x160",
+      "fill": "random"
+    },
+    "mgr": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d24",
+      "u32": "@display"
+    },
+    {
+      "addr": "0x00851390",
+      "u32": "@mgr"
+    },
+    {
+      "addr": "0x0078f614",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x0040cbb2": {
+      "name": "RandomRange_guess",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 60
+    },
+    "0x0044a537": {
+      "name": "WavePlay_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ]
+    },
+    "0x0044b014": {
+      "name": "FUN_0044b014",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x0060f5eb": {
+      "name": "_rand",
+      "conv": "cdecl",
+      "args": [],
+      "ret": [
+        45,
+        1234
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "_rand": "0x0060f5eb"
+  },
+  "cases": [
+    {
+      "name": "tick_later_returns_early",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x0",
+          "u32": 0
+        },
+        {
+          "addr": "@window",
+          "offset": "0x18",
+          "u32": 512
+        },
+        {
+          "addr": "@window",
+          "offset": "0x20",
+          "u8": 0
+        },
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 256
+        },
+        {
+          "addr": "0x0078f614",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "tick_equal_state0_rng60_rem5",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x0",
+          "u32": 0
+        },
+        {
+          "addr": "@window",
+          "offset": "0x18",
+          "u32": 512
+        },
+        {
+          "addr": "@window",
+          "offset": "0x20",
+          "u8": 0
+        },
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 512
+        },
+        {
+          "addr": "0x0078f614",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0060f5eb": {
+          "name": "_rand",
+          "conv": "cdecl",
+          "args": [],
+          "ret": [
+            5,
+            1234
+          ]
+        }
+      }
+    },
+    {
+      "name": "state0_rng49_rem45_delay_big",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x0",
+          "u32": 0
+        },
+        {
+          "addr": "@window",
+          "offset": "0x18",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x20",
+          "u8": 0
+        },
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 256
+        },
+        {
+          "addr": "0x0078f614",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 49
+        },
+        "0x0060f5eb": {
+          "name": "_rand",
+          "conv": "cdecl",
+          "args": [],
+          "ret": [
+            45,
+            9999
+          ]
+        }
+      }
+    },
+    {
+      "name": "state0_rng50_rem29_delay_zero",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x0",
+          "u32": 0
+        },
+        {
+          "addr": "@window",
+          "offset": "0x18",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x20",
+          "u8": 0
+        },
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 256
+        },
+        {
+          "addr": "0x0078f614",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 50
+        },
+        "0x0060f5eb": {
+          "name": "_rand",
+          "conv": "cdecl",
+          "args": [],
+          "ret": [
+            29,
+            1000
+          ]
+        }
+      }
+    },
+    {
+      "name": "state0_rng49_rem30_boundary",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x0",
+          "u32": 0
+        },
+        {
+          "addr": "@window",
+          "offset": "0x18",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x20",
+          "u8": 0
+        },
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 256
+        },
+        {
+          "addr": "0x0078f614",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 49
+        },
+        "0x0060f5eb": {
+          "name": "_rand",
+          "conv": "cdecl",
+          "args": [],
+          "ret": [
+            30,
+            1234
+          ]
+        }
+      }
+    },
+    {
+      "name": "state0_mode_8f_flips_to_90",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x0",
+          "u32": 0
+        },
+        {
+          "addr": "@window",
+          "offset": "0x18",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x20",
+          "u8": 143
+        },
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 256
+        },
+        {
+          "addr": "0x0078f614",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0060f5eb": {
+          "name": "_rand",
+          "conv": "cdecl",
+          "args": [],
+          "ret": [
+            1234
+          ]
+        }
+      }
+    },
+    {
+      "name": "state0_mode_10_becomes_8f",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x0",
+          "u32": 0
+        },
+        {
+          "addr": "@window",
+          "offset": "0x18",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x20",
+          "u8": 16
+        },
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 256
+        },
+        {
+          "addr": "0x0078f614",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0060f5eb": {
+          "name": "_rand",
+          "conv": "cdecl",
+          "args": [],
+          "ret": [
+            1234
+          ]
+        }
+      }
+    },
+    {
+      "name": "state1_mode_8f_triggers",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x0",
+          "u32": 1
+        },
+        {
+          "addr": "@window",
+          "offset": "0x18",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x20",
+          "u8": 143
+        },
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 256
+        },
+        {
+          "addr": "0x0078f614",
+          "from_image": "0x0078F614",
+          "image_size": 4
+        }
+      ],
+      "callees": {
+        "0x0060f5eb": {
+          "name": "_rand",
+          "conv": "cdecl",
+          "args": [],
+          "ret": [
+            1234
+          ]
+        }
+      }
+    },
+    {
+      "name": "state1_mode20_zero_rem5_takes_g",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x0",
+          "u32": 1
+        },
+        {
+          "addr": "@window",
+          "offset": "0x18",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x20",
+          "u8": 0
+        },
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 256
+        },
+        {
+          "addr": "0x0078f614",
+          "from_image": "0x0078F614",
+          "image_size": 4
+        }
+      ],
+      "callees": {
+        "0x0060f5eb": {
+          "name": "_rand",
+          "conv": "cdecl",
+          "args": [],
+          "ret": [
+            5,
+            1234
+          ]
+        }
+      }
+    },
+    {
+      "name": "state2_rem45_mode20_stays_zero",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x0",
+          "u32": 2
+        },
+        {
+          "addr": "@window",
+          "offset": "0x18",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x20",
+          "u8": 0
+        },
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 256
+        },
+        {
+          "addr": "0x0078f614",
+          "from_image": "0x0078F614",
+          "image_size": 4
+        }
+      ],
+      "callees": {
+        "0x0060f5eb": {
+          "name": "_rand",
+          "conv": "cdecl",
+          "args": [],
+          "ret": [
+            45,
+            1234
+          ]
+        }
+      }
+    },
+    {
+      "name": "state2_mode_nonzero_cleared",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x0",
+          "u32": 2
+        },
+        {
+          "addr": "@window",
+          "offset": "0x18",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x20",
+          "u8": 66
+        },
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 256
+        },
+        {
+          "addr": "0x0078f614",
+          "from_image": "0x0078F614",
+          "image_size": 4
+        }
+      ],
+      "callees": {
+        "0x0060f5eb": {
+          "name": "_rand",
+          "conv": "cdecl",
+          "args": [],
+          "ret": [
+            1234
+          ]
+        }
+      }
+    },
+    {
+      "name": "state_ff_rem5_takes_g_90",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x0",
+          "u32": 255
+        },
+        {
+          "addr": "@window",
+          "offset": "0x18",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x20",
+          "u8": 0
+        },
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 256
+        },
+        {
+          "addr": "0x0078f614",
+          "u32": 144
+        }
+      ],
+      "callees": {
+        "0x0060f5eb": {
+          "name": "_rand",
+          "conv": "cdecl",
+          "args": [],
+          "ret": [
+            5,
+            1234
+          ]
+        }
+      }
+    },
+    {
+      "name": "state1_rem29_delay_zero",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x0",
+          "u32": 1
+        },
+        {
+          "addr": "@window",
+          "offset": "0x18",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x20",
+          "u8": 0
+        },
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 256
+        },
+        {
+          "addr": "0x0078f614",
+          "u32": 144
+        }
+      ],
+      "callees": {
+        "0x0060f5eb": {
+          "name": "_rand",
+          "conv": "cdecl",
+          "args": [],
+          "ret": [
+            29,
+            1000
+          ]
+        }
+      }
+    }
+  ],
+  "_survivors": "L291: delay_guess < 10000 vs <=: rand() % 10000 is at most 9999, so the branch never sees 10000 and no input can tell them apart",
+  "fuzz": {
+    "seed": 4993908,
+    "count": 150,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@window",
+        "offset": "0x0",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          2,
+          255
+        ]
+      },
+      {
+        "addr": "@window",
+        "offset": "0x18",
+        "type": "u32",
+        "choices": [
+          256,
+          512,
+          768
+        ]
+      },
+      {
+        "addr": "@window",
+        "offset": "0x20",
+        "type": "u8",
+        "choices": [
+          0,
+          16,
+          66,
+          143,
+          144
+        ]
+      },
+      {
+        "addr": "@display",
+        "offset": "0x148",
+        "type": "u32",
+        "choices": [
+          256,
+          512,
+          768
+        ]
+      },
+      {
+        "addr": "0x0078f614",
+        "type": "u32",
+        "choices": [
+          0,
+          143,
+          144
+        ]
+      }
+    ]
+  }
+}

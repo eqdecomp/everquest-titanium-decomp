@@ -1,0 +1,93 @@
+{
+  "function": "do_bodytint_guess",
+  "original": "0x0046c82f",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "dispatch": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        { "offset": "0x0", "u32": "@vtbl" }
+      ]
+    },
+    "vtbl": {
+      "size": "0x8c",
+      "fill": "random",
+      "init": [
+        { "offset": "0x84", "u32": "@fn_slot33" },
+        { "offset": "0x88", "u32": "@fn_slot34" }
+      ]
+    },
+    "fn_slot33": { "size": "0x4" },
+    "fn_slot34": { "size": "0x4" }
+  },
+  "memory": [
+    { "addr": "0x00850cac", "u32": 0 }
+  ],
+  "callees": {
+    "0x0059dd30": {
+      "name": "FUN_0059dd30",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_slot33": {
+      "name": "slot33",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_slot34": {
+      "name": "slot34",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "null-global",
+      "args": [],
+      "memory": [
+        { "addr": "0x00850cac", "u32": 0 }
+      ]
+    },
+    {
+      "name": "helper-true-slot-34",
+      "args": [],
+      "memory": [
+        { "addr": "0x00850cac", "u32": "@dispatch" }
+      ],
+      "callees": {
+        "0x0059dd30": { "ret": 1 }
+      }
+    },
+    {
+      "name": "helper-false-slot-33",
+      "args": [],
+      "memory": [
+        { "addr": "0x00850cac", "u32": "@dispatch" }
+      ],
+      "callees": {
+        "0x0059dd30": { "ret": 0 }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4638767,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x00850cac",
+        "type": "ptr",
+        "choices": [0, "@dispatch"]
+      }
+    ]
+  }
+}

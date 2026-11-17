@@ -1,0 +1,116 @@
+{
+  "function": "Callback_guess::AboutToShow_guess",
+  "original": "0x004ecab5",
+  "sources": [
+    "src/EverQuest/tu_140_CastSpellWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@callback",
+  "args": [],
+  "ret": "bool",
+  "size": "0x68",
+  "objects": {
+    "callback": {
+      "size": "0x1b4",
+      "fill": "random"
+    },
+    "root": {
+      "size": "0xc284",
+      "fill": "random",
+      "init": [
+        {"offset": "0x8", "u32": "@route"}
+      ]
+    },
+    "route": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": "0x100"}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@root"}
+  ],
+  "callees": {
+    "0x004167e2": {
+      "name": "Target_guess::Ready_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004ec163": {
+      "name": "Callback_guess::Tail_guess",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x004ec7d8": {
+      "name": "Callback_guess::Rebuild_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00417daf": {
+      "name": "RootContext_guess::Check_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004eb5a2": {
+      "name": "Owner_guess::Update_guess",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "ready-refreshes-and-returns-false",
+      "args": [],
+      "memory": [
+        {"addr": "@callback", "offset": "0x15c", "u32": "0x11111111"}
+      ],
+      "callees": {
+        "0x004167e2": {
+          "name": "Target_guess::Ready_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        }
+      },
+      "expect": {"ret": false}
+    },
+    {
+      "name": "not-ready-but-context-blocked",
+      "args": [],
+      "memory": [
+        {"addr": "@callback", "offset": "0x15c", "u32": "0x22222222"}
+      ],
+      "expect": {"ret": false}
+    },
+    {
+      "name": "not-ready-and-context-allows-update",
+      "args": [],
+      "memory": [
+        {"addr": "@callback", "offset": "0x15c", "u32": "0x33333333"}
+      ],
+      "callees": {
+        "0x00417daf": {
+          "name": "RootContext_guess::Check_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        }
+      },
+      "expect": {"ret": true}
+    }
+  ],
+  "fuzz": {
+    "seed": 5163701,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@callback", "offset": "0x15c", "type": "u32", "choices": [0, 1, "0x12345678", "0xffffffff"]},
+      {"addr": "@route", "offset": "0x4", "type": "u32", "choices": [0, "0x10", "0x100", "0x1000"]}
+    ]
+  },
+  "_survivors": "L1122: any nonzero return expression converts to bool true"
+}

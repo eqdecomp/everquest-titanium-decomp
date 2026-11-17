@@ -1,0 +1,369 @@
+{
+  "function": "EQPlayer_guess::UpdateItemSlot_guess",
+  "original": "0x0048083a",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@eqplayer",
+  "args": [
+    { "name": "action", "type": "u8" },
+    { "name": "text", "type": "cstr" },
+    { "name": "noReport", "type": "int" }
+  ],
+  "ret": "char",
+  "objects": {
+    "eqplayer": {
+      "size": "0x348",
+      "fill": "random",
+      "init": [
+        { "offset": "0x1a8", "u32": "@handler" },
+        { "offset": "0x260", "u32": 1 },
+        { "offset": "0x258", "u32": "0x00012345" },
+        { "offset": "0x294", "u32": 0 },
+        { "offset": "0x20c", "u32": "0xffffffff" },
+        { "offset": "0x29c", "u32": 0 },
+        { "offset": "0x2a0", "u32": 0 },
+        { "offset": "0x1bc", "u32": "0x00a1b2c3" }
+      ]
+    },
+    "handler": {
+      "size": "0x1000",
+      "fill": "random",
+      "init": [
+        { "offset": "0x0", "u32": "@target" },
+        { "offset": "0xad", "u8": 0 }
+      ]
+    },
+    "target": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{ "offset": "0x0", "u32": "@tvtbl" }]
+    },
+    "tvtbl": {
+      "size": "0x158",
+      "fill": "random",
+      "init": [
+        { "offset": "0xec", "u32": "@fn_set" },
+        { "offset": "0x154", "u32": "@fn_has" }
+      ]
+    },
+    "fn_set": { "size": "0x4", "fill": "zero" },
+    "fn_has": { "size": "0x4", "fill": "zero" },
+    "model": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{ "offset": "0x0", "u32": "@mvtbl" }]
+    },
+    "mvtbl": {
+      "size": "0xd8",
+      "fill": "random",
+      "init": [{ "offset": "0xd4", "u32": "@fn_tint" }]
+    },
+    "fn_tint": { "size": "0x4", "fill": "zero" },
+    "pc": {
+      "size": "0x40",
+      "fill": "random",
+      "init": [{ "offset": "0x8", "u32": "@vbtbl" }]
+    },
+    "vbtbl": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [{ "offset": "0x4", "u32": "0x10" }]
+    },
+    "charinfo": {
+      "size": "0x80",
+      "fill": "random",
+      "init": [
+        { "offset": "0x40", "u32": "@ammo" },
+        { "offset": "0x44", "u32": "@primary" },
+        { "offset": "0x48", "u32": "@secondary" }
+      ]
+    },
+    "ammo": { "size": "0x4", "fill": "random" },
+    "primary": { "size": "0x4", "fill": "random" },
+    "secondary": { "size": "0x4", "fill": "random" },
+    "ammotext": { "size": "0x10", "fill": "zero" },
+    "catalog": { "size": "0x4", "fill": "random" },
+    "tints": { "size": "0x4", "fill": "random" },
+    "eq": {
+      "size": "0xb60",
+      "fill": "random",
+      "init": [{ "offset": "0xb54", "u32": 0 }]
+    }
+  },
+  "memory": [
+    { "addr": "0x00905ce4", "u32": 0 },
+    { "addr": "0x00905d00", "u32": "@pc" },
+    { "addr": "0x00905d24", "u32": "@catalog" },
+    { "addr": "0x00985c54", "u32": "@tints" },
+    { "addr": "0x00988df0", "u32": "@eq" },
+    { "addr": "0x00923798", "u8": 0 },
+    { "addr": "@ammotext", "cstr": "IT10758abc" }
+  ],
+  "callees": {
+    "0x005ec220": { "name": "GetCharInfo2", "conv": "thiscall", "args": [], "ret": "@charinfo" },
+    "0x005ecc00": { "name": "ProfileText::GetState", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x005e1640": { "name": "ProfileText::IsReady", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x005e10e0": { "name": "ProfileText::GetLeftValue", "conv": "thiscall", "args": [], "ret": 7 },
+    "0x005e1110": { "name": "ProfileText::GetRightValue", "conv": "thiscall", "args": [], "ret": 9 },
+    "0x005e0f00": { "name": "ProfileText::GetText", "conv": "thiscall", "args": [], "ret": "@ammotext" },
+    "0x0062202c": { "name": "_strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": 1 },
+    "0x004912b1": { "name": "EQSendMessage", "conv": "cdecl", "args": ["u32", "int", "mem:8", "int", "int"] },
+    "0x0047c0c2": { "name": "SendState::Send", "conv": "thiscall", "args": ["int", "int", "char"] },
+    "0x004798d7": { "name": "Owner::FillName", "conv": "thiscall", "args": ["ignore"] },
+    "0x004658dd": { "name": "is_number_guess", "conv": "cdecl", "args": ["cstr"], "ret": 1 },
+    "0x0060e3a3": { "name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 36 },
+    "0x00438a42": { "name": "ItemCatalog::IsSpecial", "conv": "thiscall", "args": ["int"], "ret": 0 },
+    "0x00438af2": { "name": "ItemCatalog::GetType", "conv": "thiscall", "args": ["int"], "ret": 119 },
+    "0x0047b5ef": { "name": "Owner::GetArmorAttachSlot_guess", "conv": "thiscall", "args": ["int", "int"], "ret": 3 },
+    "0x004b8f3b": { "name": "TraitSet::GetByIndex", "conv": "thiscall", "args": ["int"], "ret": "0x1234" },
+    "0x00479a3a": { "name": "Owner::SetAnimVariation_guess", "conv": "thiscall", "args": [] },
+    "0x0047b499": { "name": "Owner::SetAttachmentTint_guess", "conv": "thiscall", "args": ["int", "mem:4"], "ret": 1 },
+    "0x0047a3eb": { "name": "ValueOwner::SetArmorType_guess", "conv": "thiscall", "args": ["int", "int"] },
+    "0x0047fd9b": { "name": "DispatchOwner::GetArmorTint_guess", "conv": "thiscall", "args": ["int"], "ret": "0x55" },
+    "@fn_has": { "name": "Target::Slot085", "conv": "thiscall", "args": ["int"], "ret": 0 },
+    "@fn_set": { "name": "Target::Slot059", "conv": "thiscall", "args": ["int", "cstr"], "ret": "@model" },
+    "@fn_tint": { "name": "Model::Slot053", "conv": "thiscall", "args": ["u32"] }
+  },
+  "rewrite_aliases": {
+    "__strnicmp": "0x0062202c"
+  },
+  "cases": [
+    { "name": "race_e", "args": [0, "IT36", 0],
+      "memory": [{ "addr": "@eqplayer", "offset": "0x260", "u32": 14 }] },
+    { "name": "race_d", "args": [0, "IT36", 0],
+      "memory": [{ "addr": "@eqplayer", "offset": "0x260", "u32": 13 }] },
+    { "name": "no_handler", "args": [0, "IT36", 0],
+      "memory": [{ "addr": "@eqplayer", "offset": "0x1a8", "u32": 0 }] },
+    { "name": "no_target", "args": [0, "IT36", 0],
+      "memory": [{ "addr": "@handler", "offset": "0x0", "u32": 0 }] },
+    { "name": "a0_plain", "args": [0, "IT36", 0] },
+    { "name": "a0_it36_alt", "args": [0, "IT36", 0],
+      "memory": [{ "addr": "@handler", "offset": "0xad", "u8": 1 }] },
+    { "name": "a0_other_alt", "args": [0, "IT37", 0],
+      "memory": [{ "addr": "@handler", "offset": "0xad", "u8": 1 }] },
+    { "name": "a0_len2", "args": [0, "IT", 0],
+      "callees": { "0x004658dd": { "name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": 0 } } },
+    { "name": "a0_len3", "args": [0, "IT7", 0] },
+    { "name": "a0_long", "args": [0, "IT1234567", 0] },
+    { "name": "a0_nonnumeric", "args": [0, "ITxx", 0],
+      "callees": { "0x004658dd": { "name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": 0 } } },
+    { "name": "a1", "args": [1, "IT5", 0] },
+    { "name": "a2_default", "args": [2, "IT5", 0] },
+    { "name": "a6_default", "args": [6, "IT5", 0] },
+    { "name": "a9_default", "args": [9, "IT5", 0] },
+    { "name": "slot_neg", "args": [1, "IT5", 0],
+      "callees": { "0x0047b5ef": { "name": "Owner::FUN_0047b5ef", "conv": "thiscall", "args": ["int", "int"], "ret": -1 } } },
+    { "name": "a8_special_has", "args": [8, "IT5", 1],
+      "callees": {
+        "0x00438a42": { "name": "ItemCatalog::IsSpecial", "conv": "thiscall", "args": ["int"], "ret": 1 },
+        "@fn_has": { "name": "Target::Slot085", "conv": "thiscall", "args": ["int"], "ret": 1 } } },
+    { "name": "a8_special_nohas", "args": [8, "IT5", 1],
+      "callees": { "0x00438a42": { "name": "ItemCatalog::IsSpecial", "conv": "thiscall", "args": ["int"], "ret": 1 } } },
+    { "name": "a8_plain_has", "args": [8, "IT5", 1],
+      "callees": { "@fn_has": { "name": "Target::Slot085", "conv": "thiscall", "args": ["int"], "ret": 1 } } },
+    { "name": "a8_plain_has_neg", "args": [8, "IT5", 1],
+      "callees": {
+        "@fn_has": { "name": "Target::Slot085", "conv": "thiscall", "args": ["int"], "ret": 1 },
+        "0x0047b5ef": { "name": "Owner::FUN_0047b5ef", "conv": "thiscall", "args": ["int", "int"], "ret": -1 } } },
+    { "name": "a7_tint", "args": [7, "IT5", 0],
+      "memory": [{ "addr": "@eqplayer", "offset": "0x29c", "u32": 3 }] },
+    { "name": "a7_tint_one", "args": [7, "IT5", 0],
+      "memory": [{ "addr": "@eqplayer", "offset": "0x29c", "u32": 1 }] },
+    { "name": "a7_tint_neg", "args": [7, "IT5", 0],
+      "memory": [{ "addr": "@eqplayer", "offset": "0x29c", "u32": "0xffffffff" }] },
+    { "name": "a7_tint_nomodel", "args": [7, "IT5", 0],
+      "memory": [{ "addr": "@eqplayer", "offset": "0x29c", "u32": 3 }],
+      "callees": { "@fn_set": { "name": "Target::Slot059", "conv": "thiscall", "args": ["int", "cstr"], "ret": 0 } } },
+    { "name": "a8_tint", "args": [8, "IT5", 0],
+      "memory": [{ "addr": "@eqplayer", "offset": "0x2a0", "u32": 2 }] },
+    { "name": "a8_tint_one", "args": [8, "IT5", 0],
+      "memory": [{ "addr": "@eqplayer", "offset": "0x2a0", "u32": 1 }] },
+    { "name": "a8_tint_nomodel", "args": [8, "IT5", 0],
+      "memory": [{ "addr": "@eqplayer", "offset": "0x2a0", "u32": 2 }],
+      "callees": { "@fn_set": { "name": "Target::Slot059", "conv": "thiscall", "args": ["int", "cstr"], "ret": 0 } } },
+
+    { "name": "ctl_a7_none", "args": [7, "IT0", 0],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": { "0x004658dd": { "name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": 0 } } },
+    { "name": "ctl_a7_set_all", "args": [7, "IT5", 1],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": {
+        "0x005ecc00": { "name": "ProfileText::GetState", "conv": "thiscall", "args": [], "ret": [23, 0] },
+        "0x005e1640": { "name": "ProfileText::IsReady", "conv": "thiscall", "args": [], "ret": 1 } } },
+    { "name": "ctl_a8_clear_all", "args": [8, "IT5", 1],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@eqplayer" },
+        { "addr": "@eqplayer", "offset": "0x294", "u32": "0xfffffff7" },
+        { "addr": "@eqplayer", "offset": "0x20c", "u32": 5 }] },
+    { "name": "ctl_a7_already_set", "args": [7, "IT5", 1],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@eqplayer" },
+        { "addr": "@eqplayer", "offset": "0x294", "u32": "0x000000d0" },
+        { "addr": "@eqplayer", "offset": "0x20c", "u32": 7 }],
+      "callees": {
+        "0x005ecc00": { "name": "ProfileText::GetState", "conv": "thiscall", "args": [], "ret": [0, 26, 0] },
+        "0x005e1640": { "name": "ProfileText::IsReady", "conv": "thiscall", "args": [], "ret": 1 } } },
+    { "name": "ctl_a7_state19", "args": [7, "IT5", 1],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": { "0x005ecc00": { "name": "ProfileText::GetState", "conv": "thiscall", "args": [], "ret": [0, 0, 25, 0] } } },
+    { "name": "ctl_a7_state18", "args": [7, "IT5", 1],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": { "0x005ecc00": { "name": "ProfileText::GetState", "conv": "thiscall", "args": [], "ret": [0, 0, 0, 24, 0] } } },
+    { "name": "ctl_a7_sec17", "args": [7, "IT5", 1],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": { "0x005ecc00": { "name": "ProfileText::GetState", "conv": "thiscall", "args": [], "ret": [0, 0, 0, 0, 23, 0] } } },
+    { "name": "ctl_a7_sec1a", "args": [7, "IT5", 1],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": { "0x005ecc00": { "name": "ProfileText::GetState", "conv": "thiscall", "args": [], "ret": [0, 0, 0, 0, 0, 26, 0] } } },
+    { "name": "ctl_a7_sec19", "args": [7, "IT5", 1],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": { "0x005ecc00": { "name": "ProfileText::GetState", "conv": "thiscall", "args": [], "ret": [0, 0, 0, 0, 0, 0, 25, 0] } } },
+    { "name": "ctl_a7_sec18", "args": [7, "IT5", 1],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": { "0x005ecc00": { "name": "ProfileText::GetState", "conv": "thiscall", "args": [], "ret": [0, 0, 0, 0, 0, 0, 0, 24, 0] } } },
+    { "name": "ctl_a7_state16", "args": [7, "IT5", 1],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": { "0x005ecc00": { "name": "ProfileText::GetState", "conv": "thiscall", "args": [], "ret": [22, 27, 0] } } },
+    { "name": "ctl_a8_ready_primary_only", "args": [8, "IT5", 1],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": { "0x005e1640": { "name": "ProfileText::IsReady", "conv": "thiscall", "args": [], "ret": [1, 0] } } },
+    { "name": "ctl_a8_ready_secondary_only", "args": [8, "IT5", 1],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@eqplayer" },
+        { "addr": "@eqplayer", "offset": "0x294", "u32": "0x00000040" }],
+      "callees": { "0x005e1640": { "name": "ProfileText::IsReady", "conv": "thiscall", "args": [], "ret": [0, 1] } } },
+    { "name": "ctl_a7_bits_only_10", "args": [7, "IT5", 1],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@eqplayer" },
+        { "addr": "@eqplayer", "offset": "0x294", "u32": "0x00000010" }] },
+    { "name": "ctl_a7_bits_only_80", "args": [7, "IT5", 1],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@eqplayer" },
+        { "addr": "@eqplayer", "offset": "0x294", "u32": "0x00000180" }] },
+    { "name": "ctl_ready_left_same", "args": [7, "IT5", 1],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@eqplayer" },
+        { "addr": "@eqplayer", "offset": "0x20c", "u32": 7 }],
+      "callees": { "0x005e1640": { "name": "ProfileText::IsReady", "conv": "thiscall", "args": [], "ret": [1, 0] } } },
+    { "name": "ctl_no_slots", "args": [7, "IT5", 0],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@eqplayer" },
+        { "addr": "@charinfo", "offset": "0x44", "u32": 0 },
+        { "addr": "@charinfo", "offset": "0x48", "u32": 0 },
+        { "addr": "@eqplayer", "offset": "0x20c", "u32": 4 }] },
+    { "name": "ctl_a8_no_slots_report", "args": [8, "IT5", 0],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@eqplayer" },
+        { "addr": "@charinfo", "offset": "0x44", "u32": 0 },
+        { "addr": "@charinfo", "offset": "0x48", "u32": 0 }] },
+    { "name": "ctl_a7_it159", "args": [7, "IT0", 0],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": {
+        "0x004658dd": { "name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": 0 },
+        "0x0062202c": { "name": "_strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [0] } } },
+    { "name": "ctl_a7_it10758", "args": [7, "IT0", 0],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": {
+        "0x004658dd": { "name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": 0 },
+        "0x0062202c": { "name": "_strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 0] } } },
+    { "name": "ctl_a7_it10742", "args": [7, "IT0", 0],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": {
+        "0x004658dd": { "name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": 0 },
+        "0x0062202c": { "name": "_strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 1, 0] } } },
+    { "name": "ctl_a7_itemid_nonzero", "args": [7, "IT5", 0],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": { "0x0062202c": { "name": "_strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": 0 } } },
+    { "name": "ctl_a7_noammo", "args": [7, "IT0", 0],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@eqplayer" },
+        { "addr": "@charinfo", "offset": "0x40", "u32": 0 }],
+      "callees": { "0x004658dd": { "name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": 0 } } },
+    { "name": "ctl_a8_it159", "args": [8, "IT0", 0],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": {
+        "0x004658dd": { "name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": 0 },
+        "0x0062202c": { "name": "_strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [0] } } },
+    { "name": "ctl_a8_it10758", "args": [8, "IT0", 0],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": {
+        "0x004658dd": { "name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": 0 },
+        "0x0062202c": { "name": "_strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 0] } } },
+    { "name": "ctl_a8_it10742", "args": [8, "IT0", 0],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": {
+        "0x004658dd": { "name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": 0 },
+        "0x0062202c": { "name": "_strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 1, 0] } } },
+    { "name": "ctl_a8_nomatch", "args": [8, "IT0", 0],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": { "0x004658dd": { "name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": 0 } } },
+    { "name": "ctl_a8_itemid_nonzero", "args": [8, "IT5", 0],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": { "0x0062202c": { "name": "_strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": 0 } } },
+    { "name": "ctl_a8_forced_it159", "args": [8, "IT5", 0],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@eqplayer" },
+        { "addr": "@eqplayer", "offset": "0x2a0", "u32": 2 }],
+      "callees": {
+        "0x00438a42": { "name": "ItemCatalog::IsSpecial", "conv": "thiscall", "args": ["int"], "ret": 1 },
+        "0x0062202c": { "name": "_strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [0] } } },
+    { "name": "ctl_a8_forced_nomatch", "args": [8, "IT5", 0],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": { "0x00438a42": { "name": "ItemCatalog::IsSpecial", "conv": "thiscall", "args": ["int"], "ret": 1 } } },
+    { "name": "ctl_a8_noammo", "args": [8, "IT0", 0],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@eqplayer" },
+        { "addr": "@charinfo", "offset": "0x40", "u32": 0 }],
+      "callees": { "0x004658dd": { "name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": 0 } } },
+    { "name": "ctl_a7_report_noreport", "args": [7, "IT5", 1],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }] },
+    { "name": "ctl_a7_report_state_flag", "args": [7, "IT5", 0],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@eqplayer" },
+        { "addr": "0x00923798", "u8": 1 }] },
+    { "name": "ctl_a7_report_b54", "args": [7, "IT5", 0],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@eqplayer" },
+        { "addr": "@eq", "offset": "0xb54", "u32": 1 }] },
+    { "name": "ctl_a7_report_b54_two", "args": [7, "IT5", 0],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@eqplayer" },
+        { "addr": "@eq", "offset": "0xb54", "u32": 2 }] },
+    { "name": "ctl_a0_report", "args": [0, "IT70000", 0],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": {
+        "0x0060e3a3": { "name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 70000 },
+        "0x004912b1": { "name": "EQSendMessage", "conv": "cdecl", "args": ["u32", "int", "mem:9", "int", "int"] } } },
+    { "name": "ctl_a1_report", "args": [1, "IT5", 0],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }],
+      "callees": {
+        "0x0060e3a3": { "name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": -2 },
+        "0x004912b1": { "name": "EQSendMessage", "conv": "cdecl", "args": ["u32", "int", "mem:9", "int", "int"] } } },
+    { "name": "ctl_a1_noreport", "args": [1, "IT5", 1],
+      "memory": [{ "addr": "0x00905ce4", "u32": "@eqplayer" }] }
+  ],
+  "fuzz": {
+    "seed": 4720698,
+    "count": 150,
+    "args": [
+      { "choices": [0, 1, 2, 7, 8, 7, 8] },
+      { "choices": ["IT36", "IT5", "IT0", "X", "IT10758", "IT"] },
+      { "choices": [0, 1] }
+    ],
+    "memory": [
+      { "addr": "0x00905ce4", "type": "u32", "choices": ["@eqplayer", 0, "@eqplayer"] },
+      { "addr": "@eqplayer", "offset": "0x294", "type": "u32", "choices": [0, 16, 64, 128, 208, "0xffffffff"] },
+      { "addr": "@eqplayer", "offset": "0x20c", "type": "int", "choices": [-1, 7, 0] },
+      { "addr": "@eqplayer", "offset": "0x29c", "type": "int", "choices": [0, 3, -1] },
+      { "addr": "@eqplayer", "offset": "0x2a0", "type": "int", "choices": [0, 3, -1] },
+      { "addr": "@charinfo", "offset": "0x40", "type": "u32", "choices": [0, "@ammo"] },
+      { "addr": "@charinfo", "offset": "0x44", "type": "u32", "choices": [0, "@primary"] },
+      { "addr": "@charinfo", "offset": "0x48", "type": "u32", "choices": [0, "@secondary"] },
+      { "addr": "@handler", "offset": "0xad", "type": "u8", "choices": [0, 1] },
+      { "addr": "0x00923798", "type": "u8", "choices": [0, 0, 1] },
+      { "addr": "@eq", "offset": "0xb54", "type": "int", "choices": [0, 1, 2] }
+    ]
+  }
+}

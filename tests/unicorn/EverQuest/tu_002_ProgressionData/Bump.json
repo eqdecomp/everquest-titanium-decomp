@@ -1,0 +1,104 @@
+{
+  "function": "StreamBufferByte_guess::Bump_guess",
+  "original": "0x0040202d",
+  "sources": ["src/EverQuest/tu_002_ProgressionData.cpp"],
+  "conv": "thiscall",
+  "this": "@streambufferbyte",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "streambufferbyte": {
+      "size": "0x34",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@vtable"},
+        {"offset": "0x20", "u32": "@cursor_slot"},
+        {"offset": "0x30", "u32": "@count"}
+      ]
+    },
+    "vtable": {
+      "size": "0x14",
+      "fill": "zero",
+      "init": [{"offset": "0x10", "u32": "@fn_underflow"}]
+    },
+    "fn_underflow": {"size": "0x4"},
+    "cursor_slot": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@buffer"}]
+    },
+    "count": {"size": "0x4", "fill": "zero"},
+    "buffer": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@count", "u32": 2},
+    {"addr": "@buffer", "u8": 127}
+  ],
+  "callees": {
+    "@fn_underflow": {
+      "name": "Underflow_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "eof-keeps-count-and-cursor",
+      "args": [],
+      "expect": {"ret": -1},
+      "memory": [
+        {"addr": "@count", "u32": 4},
+        {"addr": "@buffer", "u8": 65}
+      ],
+      "callees": {
+        "@fn_underflow": {"conv": "thiscall", "args": [], "ret": -1}
+      }
+    },
+    {
+      "name": "zero-byte-and-zero-count",
+      "args": [],
+      "expect": {"ret": 0},
+      "memory": [
+        {"addr": "@count", "u32": 0},
+        {"addr": "@buffer", "u8": 0}
+      ],
+      "callees": {
+        "@fn_underflow": {"conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "negative-non-eof-and-unsigned-byte",
+      "args": [],
+      "expect": {"ret": 255},
+      "memory": [
+        {"addr": "@count", "u32": 1},
+        {"addr": "@buffer", "u8": 255}
+      ],
+      "callees": {
+        "@fn_underflow": {"conv": "thiscall", "args": [], "ret": -2}
+      }
+    },
+    {
+      "name": "positive-non-eof-and-high-byte",
+      "args": [],
+      "expect": {"ret": 128},
+      "memory": [
+        {"addr": "@count", "u32": 4294967295},
+        {"addr": "@buffer", "u8": 128}
+      ],
+      "callees": {
+        "@fn_underflow": {"conv": "thiscall", "args": [], "ret": 1}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4202541,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@count", "type": "u32", "choices": [0, 1, 2, 4294967295]},
+      {"addr": "@buffer", "type": "u8", "choices": [0, 1, 127, 128, 255]}
+    ]
+  }
+}

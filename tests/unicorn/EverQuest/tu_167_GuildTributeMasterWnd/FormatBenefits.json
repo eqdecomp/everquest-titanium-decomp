@@ -1,0 +1,183 @@
+{
+  "function": "Object_005117c3_guess::ShowTributeValue_guess",
+  "original": "0x005118e0",
+  "sources": [
+    "src/EverQuest/tu_167_GuildTributeMasterWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object_005117c3",
+  "args": [
+    {
+      "name": "state",
+      "type": "ptr"
+    }
+  ],
+  "ret": "bool",
+  "objects": {
+    "object_005117c3": {
+      "size": "0x1e0",
+      "fill": "zero"
+    },
+    "state": {
+      "size": "0x120",
+      "fill": "zero"
+    },
+    "context": {
+      "size": "0x180",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x120",
+          "cstr": "Status text"
+        }
+      ]
+    },
+    "sink": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "format_value": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "cstr": "formatted value"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x00905d10",
+      "u32": "@context"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@sink"
+    },
+    {
+      "addr": "0x0099db00",
+      "size": 64,
+      "fill": "zero"
+    }
+  ],
+  "callees": {
+    "0x005e1080": {
+      "name": "State_00511_guess::QueryText_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005e0ec0": {
+      "name": "FormatValue_00511_guess",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": "@format_value"
+    },
+    "0x00492ec2": {
+      "name": "AlertSink_00511af8_guess::Resolve_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "arg0"
+    },
+    "0x0046da4a": {
+      "name": "FormatText_00511_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "cstr",
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x004982c6": {
+      "name": "AlertSink_00511af8_guess::ShowFormatted_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "bool"
+      ],
+      "ret": 0
+    },
+    "0x006220e9": {
+      "name": "_itoa",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ptr",
+        "int"
+      ],
+      "ret": "arg1"
+    }
+  },
+  "rewrite_aliases": {
+    "_itoa": "0x006220e9"
+  },
+  "cases": [
+    {
+      "name": "null state",
+      "args": [
+        0
+      ],
+      "expect": {
+        "ret": true
+      }
+    },
+    {
+      "name": "no status",
+      "args": [
+        "@state"
+      ],
+      "expect": {
+        "ret": false
+      }
+    },
+    {
+      "name": "status with query text",
+      "args": [
+        "@state"
+      ],
+      "callees": {
+        "0x005e1080": {
+          "ret": [
+            1,
+            42
+          ]
+        }
+      },
+      "expect": {
+        "ret": true
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5314784,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@state",
+          0
+        ]
+      }
+    ],
+    "memory": []
+  },
+  "_survivors": "L571: 0x005E1080 is both zero-argument HasStatus and three-argument caller-cleaned QueryText. One stub signature cannot record the QueryText radix without reading saved-register slots on HasStatus, so this argument mutation is not represented by the fixture."
+}

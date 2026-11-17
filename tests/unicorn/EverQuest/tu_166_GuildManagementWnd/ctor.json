@@ -1,0 +1,98 @@
+{
+  "function": "GuildMgmtWnd_guess::GuildMgmtWnd_guess",
+  "original": "0x00510fda",
+  "sources": ["src/EverQuest/tu_166_GuildManagementWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [{"name": "parent", "type": "ptr"}],
+  "ret": "ptr",
+  "objects": {
+    "owner": {"size": "0x40c", "fill": "random", "init": [{"offset": "0x124", "u32": "@piece"}]},
+    "parent": {"size": "0x11c", "fill": "random"},
+    "piece": {"size": "0x64", "fill": "random"},
+    "guildName": {"size": "0x4", "fill": "random"},
+    "dump": {"size": "0x4", "fill": "random"},
+    "memberList": {"size": "0x170", "fill": "random"},
+    "motdAuthor": {"size": "0x4", "fill": "random"},
+    "motdInput": {"size": "0x4", "fill": "random"},
+    "updateMotd": {"size": "0x4", "fill": "random"},
+    "motdViewer": {"size": "0x4", "fill": "random"},
+    "makeLeader": {"size": "0x4", "fill": "random"},
+    "promote": {"size": "0x4", "fill": "random"},
+    "demote": {"size": "0x4", "fill": "random"},
+    "remove": {"size": "0x4", "fill": "random"},
+    "banker": {"size": "0x4", "fill": "random"},
+    "noteList": {"size": "0x170", "fill": "random"},
+    "publicInput": {"size": "0x4", "fill": "random"},
+    "updatePublic": {"size": "0x4", "fill": "random"},
+    "personalInput": {"size": "0x4", "fill": "random"},
+    "updatePersonal": {"size": "0x4", "fill": "random"},
+    "tributeList": {"size": "0x170", "fill": "random"},
+    "optOut": {"size": "0x4", "fill": "random"},
+    "tributePage": {"size": "0x4", "fill": "random"},
+    "playerCount": {"size": "0x4", "fill": "random"},
+    "showOffline": {"size": "0x4", "fill": "random"},
+    "subwindows": {"size": "0x4", "fill": "random"},
+    "heap": {"size": "0x1000", "fill": "zero"}
+  },
+  "memory": [],
+  "callees": {
+    "0x00571e00": {"name": "CXStr_ctor", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "0x005a3850": {"name": "CSidlScreenWnd_ctor", "conv": "thiscall", "args": ["ptr", "ignore", "int", "int", "ptr"], "ret": "this"},
+    "0x00571d00": {"name": "CXStr_release", "conv": "thiscall", "args": ["ptr"], "passthrough": true},
+    "kernel32.dll!GetProcessHeap": {"name": "GetProcessHeap", "conv": "stdcall", "args": [], "ret": "0x12340000"},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@heap"},
+    "kernel32.dll!HeapFree": {"name": "HeapFree", "conv": "stdcall", "args": ["ptr", "u32", "ptr"], "ret": 1},
+    "0x005a25b0": {"name": "CreateChildrenFromSidl", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005a1e10": {
+      "name": "GetChildItem",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": ["@guildName", "@dump", "@memberList", "@motdAuthor", "@motdInput", "@updateMotd", "@motdViewer", "@makeLeader", "@promote", "@demote", "@remove", "@banker", "@noteList", "@publicInput", "@updatePublic", "@personalInput", "@updatePersonal", "@tributeList", "@optOut", "@tributePage", "@playerCount", "@showOffline", "@subwindows"]
+    },
+    "0x00597c60": {"name": "CListWnd::SetColors", "conv": "thiscall", "args": ["u32", "u32", "u32"], "ret": 0},
+    "0x005982e0": {"name": "CListWnd::SetColumnJustification", "conv": "thiscall", "args": ["int", "int"], "ret": 0},
+    "0x004d7ebc": {"name": "SetMaxChars", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0050f2e1": {"name": "LoadIniSettings", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00510d2f": {"name": "ResetMembers", "conv": "thiscall", "args": [], "ret": 0}
+  },
+  "cases": [
+    {"name": "sidl piece absent", "args": ["@parent"], "memory": [{"addr": "@owner", "offset": "0x124", "u32": 0}]},
+    {"name": "all child controls", "args": ["@parent"]},
+    {"name": "null parent", "args": [0]},
+    {
+      "name": "no child controls",
+      "args": ["@parent"],
+      "callees": {"0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": 0}}
+    },
+    {
+      "name": "lists absent, inputs present",
+      "args": ["@parent"],
+      "callees": {"0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": ["@guildName", "@dump", 0, "@motdAuthor", "@motdInput", "@updateMotd", "@motdViewer", "@makeLeader", "@promote", "@demote", "@remove", "@banker", 0, "@publicInput", "@updatePublic", "@personalInput", "@updatePersonal", 0, "@optOut", "@tributePage", "@playerCount", "@showOffline", "@subwindows"]}}
+    },
+    {
+      "name": "lists present, inputs absent",
+      "args": ["@parent"],
+      "callees": {"0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": ["@guildName", "@dump", "@memberList", "@motdAuthor", 0, "@updateMotd", "@motdViewer", "@makeLeader", "@promote", "@demote", "@remove", "@banker", "@noteList", 0, "@updatePublic", 0, "@updatePersonal", "@tributeList", "@optOut", "@tributePage", "@playerCount", "@showOffline", "@subwindows"]}}
+    },
+    {
+      "name": "only notes list and public input",
+      "args": ["@parent"],
+      "callees": {"0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "@noteList", "@publicInput", 0, 0, 0, 0, 0, 0, 0, 0, 0]}}
+    },
+    {
+      "name": "only tribute list and personal input",
+      "args": ["@parent"],
+      "callees": {"0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "@personalInput", 0, "@tributeList", 0, 0, 0, 0, 0]}}
+    }
+  ],
+  "fuzz": {
+    "seed": 5312474,
+    "count": 60,
+    "args": [{"choices": ["@parent", 0]}],
+    "memory": [
+      {"addr": "@owner", "offset": "0x124", "type": "ptr", "choices": ["@piece", 0]},
+      {"addr": "@owner", "offset": "0x64", "type": "u32", "range": [0, 4294967295]}
+    ]
+  }
+}

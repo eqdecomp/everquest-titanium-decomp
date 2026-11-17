@@ -1,0 +1,133 @@
+{
+  "function": "CRaid_guess::RemoveSelectedOrLeave_guess",
+  "original": "0x004310a3",
+  "sources": [
+    "src/EverQuest/tu_025_Raid.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@everquestobject",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "everquestobject": {
+      "size": "0x5600",
+      "fill": "zero"
+    },
+    "dataowner": {
+      "size": "0x200",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x8", "u32": "@dataroot"}
+      ]
+    },
+    "dataroot": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": 256}
+      ]
+    },
+    "optsvc": {
+      "size": "0x10",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@dataowner"},
+    {"addr": "0x00850bf0", "u32": "@optsvc"},
+    {"addr": "@dataowner", "offset": "0x144", "cstr": "owner"}
+  ],
+  "callees": {
+    "0x0043060e": {
+      "name": "SendRaidCommand_guess",
+      "conv": "thiscall",
+      "args": ["int", "cstr", "cstr", "int"]
+    },
+    "0x00551dcf": {
+      "name": "OptionalService_ClearEntry_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "int", "int", "int"]
+    }
+  },
+  "cases": [
+    {
+      "name": "flag clear: else branch, owner text sent",
+      "args": [],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e9", "u8": 0},
+        {"addr": "@everquestobject", "offset": "0x55ec", "u32": 2},
+        {"addr": "@everquestobject", "offset": "0x3cc", "cstr": "abc"},
+        {"addr": "@everquestobject", "offset": "0x4e0", "u32": 4660}
+      ]
+    },
+    {
+      "name": "active but index -1: else branch",
+      "args": [],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e9", "u8": 1},
+        {"addr": "@everquestobject", "offset": "0x55ec", "u32": 4294967295}
+      ]
+    },
+    {
+      "name": "active, row 2 text empty: else branch",
+      "args": [],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e9", "u8": 1},
+        {"addr": "@everquestobject", "offset": "0x55ec", "u32": 2}
+      ]
+    },
+    {
+      "name": "active, row 2 has text: sends row text, clears it, index -1",
+      "args": [],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e9", "u8": 1},
+        {"addr": "@everquestobject", "offset": "0x55ec", "u32": 2},
+        {"addr": "@everquestobject", "offset": "0x3cc", "cstr": "abc"},
+        {"addr": "@everquestobject", "offset": "0x4e0", "u32": 4660}
+      ]
+    },
+    {
+      "name": "active, row 0 has text",
+      "args": [],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e9", "u8": 1},
+        {"addr": "@everquestobject", "offset": "0x55ec", "u32": 0},
+        {"addr": "@everquestobject", "offset": "0x19c", "cstr": "zero"},
+        {"addr": "@everquestobject", "offset": "0x2b0", "u32": 9}
+      ]
+    },
+    {
+      "name": "active, row 3 has text, key 77",
+      "args": [],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e9", "u8": 1},
+        {"addr": "@everquestobject", "offset": "0x55ec", "u32": 3},
+        {"addr": "@everquestobject", "offset": "0x4f0", "cstr": "x"},
+        {"addr": "@everquestobject", "offset": "0x604", "u32": 77}
+      ]
+    },
+    {
+      "name": "active, row 71 has text (last row)",
+      "args": [],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e9", "u8": 1},
+        {"addr": "@everquestobject", "offset": "0x55ec", "u32": 71},
+        {"addr": "@everquestobject", "offset": "0x5144", "cstr": "far"},
+        {"addr": "@everquestobject", "offset": "0x5258", "u32": 5}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4310163,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {"addr": "@everquestobject", "offset": "0x55e9", "type": "u8", "choices": [0, 1]},
+      {"addr": "@everquestobject", "offset": "0x55ec", "type": "int", "choices": [-1, 0, 2, 3, 71]},
+      {"addr": "@everquestobject", "offset": "0x19c", "type": "u8", "choices": [0, 65]},
+      {"addr": "@everquestobject", "offset": "0x3cc", "type": "u8", "choices": [0, 65]},
+      {"addr": "@everquestobject", "offset": "0x4f0", "type": "u8", "choices": [0, 65]},
+      {"addr": "@everquestobject", "offset": "0x5144", "type": "u8", "choices": [0, 65]}
+    ]
+  }
+}

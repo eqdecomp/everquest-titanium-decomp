@@ -1,0 +1,140 @@
+{
+  "function": "TextureFrameView_guess::TextureFrameView_guess",
+  "original": "0x004d95e7",
+  "sources": [
+    "src/EverQuest/tu_106_AtlasRender.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@rectstate",
+  "args": [
+    {
+      "name": "value_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "rectstate": {
+      "size": "0x28",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0xc",
+          "u32": 13
+        },
+        {
+          "offset": "0x10",
+          "u32": 4294967292
+        }
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00435a54": {
+      "name": "Set_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x004d90f1": {
+      "name": "FUN_004d90f1",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x004d9160": {
+      "name": "FUN_004d9160",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr"
+      ],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        1
+      ]
+    },
+    {
+      "name": "zero-fields",
+      "args": [
+        0
+      ],
+      "objects": {
+        "rectstate": {
+          "init": [
+            {
+              "offset": "0xc",
+              "u32": 0
+            },
+            {
+              "offset": "0x10",
+              "u32": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "coordinate-edges",
+      "args": [
+        -2147483648
+      ],
+      "objects": {
+        "rectstate": {
+          "init": [
+            {
+              "offset": "0xc",
+              "u32": 2147483648
+            },
+            {
+              "offset": "0x10",
+              "u32": 2147483647
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "argument-edge",
+      "args": [
+        2147483647
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5084647,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -2147483648,
+          2147483647
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@rectstate",
+        "offset": "0xc",
+        "type": "int",
+        "count": 2,
+        "range": [
+          -100000,
+          100000
+        ]
+      }
+    ]
+  },
+  "_survivors": "L775: the origin local starts on the fixture's zeroed stack, so deleting its zero store is unobservable."
+}

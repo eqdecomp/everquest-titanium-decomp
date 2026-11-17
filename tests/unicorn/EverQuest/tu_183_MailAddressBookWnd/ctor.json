@@ -1,0 +1,426 @@
+{
+  "function": "CMailAddressBookWnd_guess::CMailAddressBookWnd_guess",
+  "original": "0x0052BB96",
+  "sources": [
+    "src/EverQuest/tu_183_MailAddressBookWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@book",
+  "args": [
+    {
+      "name": "parent",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "book": {
+      "size": "0x188",
+      "fill": "random"
+    },
+    "parent": {
+      "size": "0x11c",
+      "fill": "random"
+    },
+    "sidlpiece": {
+      "size": "0x64",
+      "fill": "random"
+    },
+    "list": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "name": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "private": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "addresses": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "note": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "add": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "delete": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "clear": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "top": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "bottom": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "info": {
+      "size": "0x240",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@sidlpiece",
+      "offset": "0x60",
+      "u32": 32
+    }
+  ],
+  "callees": {
+    "0x00571e00": {
+      "name": "FUN_00571e00",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this"
+    },
+    "0x005a3850": {
+      "name": "FUN_005a3850",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ignore",
+        "int",
+        "int",
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00571d00": {
+      "name": "FUN_00571d00",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": "this"
+    },
+    "0x005a25b0": {
+      "name": "FUN_005a25b0",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x005a1e10": {
+      "name": "FUN_005a1e10",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": [
+        "@list",
+        "@name",
+        "@private",
+        "@addresses",
+        "@note",
+        "@add",
+        "@delete",
+        "@clear",
+        "@top",
+        "@bottom",
+        "@info"
+      ],
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00000000"
+        }
+      ]
+    },
+    "0x00571f70": {
+      "name": "FUN_00571f70",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "this"
+    },
+    "0x004d7ebc": {
+      "name": "FUN_004d7ebc",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x00597c60": {
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32",
+        "u32"
+      ],
+      "ret": "this"
+    }
+  },
+  "cases": [
+    {
+      "name": "no SIDL piece",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {
+          "addr": "@book",
+          "offset": "0x124",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "all children and cleanup",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {
+          "addr": "@book",
+          "offset": "0x124",
+          "u32": "@sidlpiece"
+        }
+      ],
+      "callees": {
+        "0x005a1e10": {
+          "name": "FUN_005a1e10",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": [
+            "@list",
+            "@name",
+            "@private",
+            "@addresses",
+            "@note",
+            "@add",
+            "@delete",
+            "@clear",
+            "@top",
+            "@bottom",
+            "@info"
+          ],
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "01000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "all children without cleanup",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {
+          "addr": "@book",
+          "offset": "0x124",
+          "u32": "@sidlpiece"
+        }
+      ],
+      "callees": {
+        "0x005a1e10": {
+          "name": "FUN_005a1e10",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": [
+            "@list",
+            "@name",
+            "@private",
+            "@addresses",
+            "@note",
+            "@add",
+            "@delete",
+            "@clear",
+            "@top",
+            "@bottom",
+            "@info"
+          ],
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "no children",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {
+          "addr": "@book",
+          "offset": "0x124",
+          "u32": "@sidlpiece"
+        }
+      ],
+      "callees": {
+        "0x005a1e10": {
+          "name": "FUN_005a1e10",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "alternating children",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {
+          "addr": "@book",
+          "offset": "0x124",
+          "u32": "@sidlpiece"
+        }
+      ],
+      "callees": {
+        "0x005a1e10": {
+          "name": "FUN_005a1e10",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": [
+            0,
+            "@name",
+            0,
+            "@addresses",
+            0,
+            "@add",
+            0,
+            "@clear",
+            0,
+            "@bottom",
+            0
+          ],
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "01000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "other alternating children",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {
+          "addr": "@book",
+          "offset": "0x124",
+          "u32": "@sidlpiece"
+        }
+      ],
+      "callees": {
+        "0x005a1e10": {
+          "name": "FUN_005a1e10",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": [
+            "@list",
+            0,
+            "@private",
+            0,
+            "@note",
+            0,
+            "@delete",
+            0,
+            "@top",
+            0,
+            "@info"
+          ],
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "01000000"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5421974,
+    "count": 50,
+    "args": [
+      {
+        "choices": [
+          "@parent"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@book",
+        "offset": "0x124",
+        "type": "u32",
+        "choices": [
+          0,
+          "@sidlpiece"
+        ]
+      },
+      {
+        "addr": "@sidlpiece",
+        "offset": "0x60",
+        "type": "u32",
+        "choices": [
+          0,
+          32,
+          67584,
+          4294967295
+        ]
+      }
+    ]
+  }
+}

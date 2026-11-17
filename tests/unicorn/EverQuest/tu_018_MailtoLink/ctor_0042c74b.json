@@ -1,0 +1,231 @@
+{
+  "function": "ParsedText_guess::ParsedText_guess",
+  "original": "0x0042c74b",
+  "sources": [
+    "src/EverQuest/tu_018_MailtoLink.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@parsedtext",
+  "args": [
+    {
+      "name": "text_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "parsedtext": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "text": {
+      "size": "0x1c",
+      "fill": "random"
+    },
+    "vbt": {
+      "size": "0x8",
+      "init": [
+        {"offset": "0x0", "u32": 0},
+        {"offset": "0x4", "u32": 16}
+      ]
+    },
+    "sgood": {
+      "size": "0x20",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@vbt"},
+        {"offset": "0x18", "u32": 0}
+      ]
+    },
+    "sbad": {
+      "size": "0x20",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@vbt"},
+        {"offset": "0x18", "u32": 2}
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00402e5e": {
+      "name": "string::string",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x00425491": {
+      "name": "string::find",
+      "conv": "thiscall",
+      "args": ["mem:1", "u32", "u32"],
+      "ret": [5, 10]
+    },
+    "0x004255b3": {
+      "name": "string::find_first_of",
+      "conv": "thiscall",
+      "args": ["mem:1", "u32", "u32"],
+      "ret": [-1, 2]
+    },
+    "0x0042561d": {
+      "name": "string::find_last_of",
+      "conv": "thiscall",
+      "args": ["mem:1", "u32", "u32"],
+      "ret": 7
+    },
+    "0x00427645": {
+      "name": "string::substr",
+      "conv": "thiscall",
+      "args": ["u32", "u32", "u32"],
+      "ret": "arg0"
+    },
+    "0x00403174": {
+      "name": "string::assign",
+      "conv": "thiscall",
+      "args": ["u32", "u32", "u32"],
+      "ret": "this"
+    },
+    "0x0040291e": {
+      "name": "string::_Tidy",
+      "conv": "thiscall",
+      "args": ["u32", "u32"],
+      "ret": 0
+    },
+    "0x00403317": {
+      "name": "istringstream::istringstream",
+      "conv": "thiscall",
+      "args": ["u32", "u32", "u32"],
+      "ret": "this"
+    },
+    "0x00402505": {
+      "name": "string::_Eos",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x00426654": {
+      "name": "operator>>(istream&, string&)",
+      "conv": "cdecl",
+      "args": ["u32", "u32"],
+      "ret": ["@sgood", "@sgood", "@sbad"]
+    },
+    "0x0040b88b": {
+      "name": "vector::push_back",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x0040ab88": {
+      "name": "vector::size",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 2
+    },
+    "0x0060e27f": {
+      "name": "__CxxThrowException@8",
+      "conv": "stdcall",
+      "args": ["mem:1", "u32"],
+      "ret": 0,
+      "noreturn": true
+    },
+    "0x0042a5c2": {
+      "name": "FUN_0042a5c2",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0040271a": {
+      "name": "istringstream::~istringstream",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00623d8d": {
+      "name": "std::ios_base::~ios_base",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "_survivors": "L1785: re-store of ' ' into the delimiter already holding ' ' (find_first_of takes const char*, never writes it); L1790: same re-store before find_last_of",
+  "coverage_ok": {"0042C8B8-0042C8BC": "null side of the istream& to basic_ios conversion; operator>> returns a reference, never null"},
+  "rewrite_data_aliases": {
+    "__TI1?AUParseError_guess@@": "0x00675e24"
+  },
+  "cases": [
+    {
+      "name": "full parse, two words",
+      "args": ["@text"]
+    },
+    {
+      "name": "no open bracket",
+      "args": ["@text"],
+      "callees": {"0x00425491": {"name": "string::find", "conv": "thiscall", "args": ["mem:1", "u32", "u32"], "ret": [-1]}}
+    },
+    {
+      "name": "open bracket at 0",
+      "args": ["@text"],
+      "callees": {"0x00425491": {"name": "string::find", "conv": "thiscall", "args": ["mem:1", "u32", "u32"], "ret": [0, 3]},
+                  "0x004255b3": {"name": "string::find_first_of", "conv": "thiscall", "args": ["mem:1", "u32", "u32"], "ret": [-1, 0]},
+                  "0x0042561d": {"name": "string::find_last_of", "conv": "thiscall", "args": ["mem:1", "u32", "u32"], "ret": 0}}
+    },
+    {
+      "name": "no close bracket",
+      "args": ["@text"],
+      "callees": {"0x00425491": {"name": "string::find", "conv": "thiscall", "args": ["mem:1", "u32", "u32"], "ret": [5, -1]}}
+    },
+    {
+      "name": "space after close bracket",
+      "args": ["@text"],
+      "callees": {"0x004255b3": {"name": "string::find_first_of", "conv": "thiscall", "args": ["mem:1", "u32", "u32"], "ret": [12]}}
+    },
+    {
+      "name": "space right after close bracket at 0",
+      "args": ["@text"],
+      "callees": {"0x004255b3": {"name": "string::find_first_of", "conv": "thiscall", "args": ["mem:1", "u32", "u32"], "ret": [0]}}
+    },
+    {
+      "name": "prefix has no space",
+      "args": ["@text"],
+      "callees": {"0x004255b3": {"name": "string::find_first_of", "conv": "thiscall", "args": ["mem:1", "u32", "u32"], "ret": [-1, -1]}}
+    },
+    {
+      "name": "no words in brackets",
+      "args": ["@text"],
+      "callees": {"0x00426654": {"name": "operator>>", "conv": "cdecl", "args": ["u32", "u32"], "ret": ["@sbad"]},
+                  "0x0040ab88": {"name": "vector::size", "conv": "thiscall", "args": [], "ret": 0}}
+    },
+    {
+      "name": "one word, size 1",
+      "args": ["@text"],
+      "callees": {"0x00426654": {"name": "operator>>", "conv": "cdecl", "args": ["u32", "u32"], "ret": ["@sgood", "@sbad"]},
+                  "0x0040ab88": {"name": "vector::size", "conv": "thiscall", "args": [], "ret": 1}}
+    },
+    {
+      "name": "words read but size 0",
+      "args": ["@text"],
+      "callees": {"0x0040ab88": {"name": "vector::size", "conv": "thiscall", "args": [], "ret": 0}}
+    },
+    {
+      "name": "eof only keeps reading",
+      "args": ["@text"],
+      "memory": [{"addr": "@sgood", "offset": "0x18", "u32": 1}]
+    },
+    {
+      "name": "bad bit stops",
+      "args": ["@text"],
+      "memory": [{"addr": "@sbad", "offset": "0x18", "u32": 4}]
+    }
+  ],
+  "fuzz": {
+    "seed": 4376395,
+    "count": 60,
+    "args": [
+      {
+        "choices": ["@text"]
+      }
+    ],
+    "memory": [
+      {"addr": "@sgood", "offset": "0x18", "type": "int", "choices": [0, 1, 8, 9]},
+      {"addr": "@sbad", "offset": "0x18", "type": "int", "choices": [2, 4, 6, 7]}
+    ]
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "function": "do_duel_guess",
+  "original": "0x00472a67",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "message": {
+      "size": "0x25c",
+      "fill": "random"
+    },
+    "connection": {
+      "size": "0x25c",
+      "fill": "random"
+    },
+    "string_table": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "everquest": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "lookup_result": {
+      "size": "0x20",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x00905d04",
+      "u32": "@message"
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": "@connection"
+    },
+    {
+      "addr": "0x009238e0",
+      "u8": 0
+    },
+    {
+      "addr": "0x009238d8",
+      "u32": 0
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@string_table"
+    },
+    {
+      "addr": "0x009238dc",
+      "u32": 0
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@everquest"
+    },
+    {
+      "addr": "@message",
+      "offset": "0x120",
+      "cstr": "Target"
+    },
+    {
+      "addr": "@message",
+      "offset": "0x244",
+      "u8": 0
+    },
+    {
+      "addr": "@message",
+      "offset": "0x258",
+      "u32": 12
+    },
+    {
+      "addr": "@connection",
+      "offset": "0x120",
+      "cstr": "Local"
+    },
+    {
+      "addr": "@connection",
+      "offset": "0x244",
+      "u8": 0
+    },
+    {
+      "addr": "@connection",
+      "offset": "0x258",
+      "u32": 20
+    },
+    {
+      "addr": "@lookup_result",
+      "cstr": "Lookup text"
+    }
+  ],
+  "callees": {
+    "0x0046da4a": {
+      "name": "build_token_string_PARAM_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "cstr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x004982c6": {
+      "name": "CEverQuest::dsp_chat",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ]
+    },
+    "0x004912b1": {
+      "name": "EQSendMessage",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "mem:8",
+        "int",
+        "int"
+      ]
+    },
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "ptr"
+      ],
+      "ret": "@lookup_result"
+    }
+  },
+  "cases": [
+    {
+      "name": "null-message",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00905d04",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "nonzero-message-flag",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@message",
+          "offset": "0x244",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "message-is-connection",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00905d04",
+          "u32": "@connection"
+        }
+      ]
+    },
+    {
+      "name": "held-value-equal",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x009238e0",
+          "u8": 1
+        },
+        {
+          "addr": "0x009238d8",
+          "u32": 12
+        }
+      ]
+    },
+    {
+      "name": "held-value-different",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x009238e0",
+          "u8": 1
+        },
+        {
+          "addr": "0x009238d8",
+          "u32": 11
+        }
+      ]
+    },
+    {
+      "name": "marker-equal",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x009238dc",
+          "u32": 12
+        }
+      ]
+    },
+    {
+      "name": "marker-nonzero-different",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x009238dc",
+          "u32": 13
+        }
+      ]
+    },
+    {
+      "name": "marker-zero-different",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@message",
+          "offset": "0x258",
+          "u32": 1
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4663911,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x00905d04",
+        "type": "ptr",
+        "choices": [
+          "@message",
+          "@connection",
+          0
+        ]
+      },
+      {
+        "addr": "@message",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          255
+        ]
+      },
+      {
+        "addr": "@message",
+        "offset": "0x258",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          11,
+          12,
+          13
+        ]
+      },
+      {
+        "addr": "@connection",
+        "offset": "0x258",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          20
+        ]
+      },
+      {
+        "addr": "0x009238e0",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          255
+        ]
+      },
+      {
+        "addr": "0x009238d8",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          11,
+          12,
+          13
+        ]
+      },
+      {
+        "addr": "0x009238dc",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          11,
+          12,
+          13
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "function": "CPvPStatsWnd_guess::Refresh_guess",
+  "original": "0x0054c4cc",
+  "sources": [
+    "src/EverQuest/tu_202_PvPStatsWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@pvpstatswnd",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "pvpstatswnd": {
+      "size": "0x1a0",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x15c", "u32": 2},
+        {"offset": "0x160", "u32": "@slots"},
+        {"offset": "0x164", "u32": 2},
+        {"offset": "0x16c", "u32": "@killlist"},
+        {"offset": "0x170", "u32": "@deathlist"},
+        {"offset": "0x174", "u32": "@leaderlist"},
+        {"offset": "0x178", "u32": "@lbl_streak"},
+        {"offset": "0x17c", "u32": "@lbl_best"},
+        {"offset": "0x180", "u32": "@lbl_worst"},
+        {"offset": "0x184", "u32": "@lbl_avail"},
+        {"offset": "0x188", "u32": "@lbl_points"},
+        {"offset": "0x18c", "u32": "@lbl_kills"},
+        {"offset": "0x190", "u32": "@lbl_deaths"},
+        {"offset": "0x194", "u32": "@lbl_infamy"},
+        {"offset": "0x198", "u32": "@lbl_vitality"}
+      ]
+    },
+    "vtbl": {"size": "0x134", "fill": "zero", "init": [
+      {"offset": "0xfc", "u32": "@fn_settext"},
+      {"offset": "0x130", "u32": "@fn_deleteall"}
+    ]},
+    "fn_settext": {"size": "4"},
+    "fn_deleteall": {"size": "4"},
+    "killlist": {"size": "0x170", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "deathlist": {"size": "0x170", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "leaderlist": {"size": "0x170", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "lbl_streak": {"size": "0x60", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "lbl_best": {"size": "0x60", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "lbl_worst": {"size": "0x60", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "lbl_avail": {"size": "0x60", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "lbl_points": {"size": "0x60", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "lbl_kills": {"size": "0x60", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "lbl_deaths": {"size": "0x60", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "lbl_infamy": {"size": "0x60", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "lbl_vitality": {"size": "0x60", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "chardata": {
+      "size": "0xf90",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xeac", "u32": 11},
+        {"offset": "0xeb0", "u32": 12},
+        {"offset": "0xeb4", "u32": 13},
+        {"offset": "0xeb8", "u32": 14},
+        {"offset": "0xebc", "u32": 15},
+        {"offset": "0xec0", "u32": -16},
+        {"offset": "0xec4", "u32": 17},
+        {"offset": "0xec8", "cstr": "Killer"},
+        {"offset": "0xf08", "u32": 21},
+        {"offset": "0xf0c", "u32": 22},
+        {"offset": "0xf10", "u32": 23},
+        {"offset": "0xf14", "u32": 24},
+        {"offset": "0xf18", "u32": 25},
+        {"offset": "0xf1c", "u32": 26},
+        {"offset": "0xf20", "cstr": "Victim"},
+        {"offset": "0xf60", "u32": 31},
+        {"offset": "0xf64", "u32": 32},
+        {"offset": "0xf68", "u32": 33},
+        {"offset": "0xf6c", "u32": 34},
+        {"offset": "0xf70", "u32": 35},
+        {"offset": "0xf74", "u32": 36},
+        {"offset": "0xf88", "u32": 41},
+        {"offset": "0xf8c", "u32": 42}
+      ]
+    },
+    "entry1": {"size": "0x60", "fill": "zero", "init": [
+      {"offset": "0", "cstr": "Alpha"},
+      {"offset": "0x40", "u32": 51},
+      {"offset": "0x44", "u32": 52},
+      {"offset": "0x48", "u32": 53},
+      {"offset": "0x4c", "u32": 54},
+      {"offset": "0x54", "u32": 55}
+    ]},
+    "entry2": {"size": "0x60", "fill": "zero", "init": [
+      {"offset": "0", "cstr": "Beta"},
+      {"offset": "0x40", "u32": 61},
+      {"offset": "0x44", "u32": 62},
+      {"offset": "0x48", "u32": 63},
+      {"offset": "0x4c", "u32": 64},
+      {"offset": "0x54", "u32": 65}
+    ]},
+    "slots": {"size": "8", "fill": "zero", "init": [
+      {"offset": "0", "u32": "@entry1"},
+      {"offset": "4", "u32": "@entry2"}
+    ]},
+    "eq": {"size": "0x10", "fill": "zero"},
+    "zonemgr": {"size": "0x10", "fill": "zero"},
+    "race_str": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "cstr": "Gnome"}]},
+    "class_str": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "cstr": "Wizard"}]},
+    "time_str": {"size": "0x20", "fill": "zero", "init": [{"offset": "0", "cstr": "Mon Jan 1 2005"}]},
+    "heap": {"size": "0x1000", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x13579bdf"},
+    {"addr": "0x0063f53f", "cstr": ""},
+    {"addr": "0x00905d00", "u32": "@chardata"},
+    {"addr": "0x00988df0", "u32": "@eq"},
+    {"addr": "0x00905cc0", "u32": "@zonemgr"}
+  ],
+  "callees": {
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr"],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "41 42 00"}]
+    },
+    "0x00571e00": {"name": "CXStr_ctor", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "0x00571d00": {"name": "CXStr_FreeRep", "conv": "thiscall", "args": ["u32"], "passthrough": true},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@heap"},
+    "kernel32.dll!HeapFree": {"name": "HeapFree", "conv": "stdcall", "args": ["ptr", "u32", "ptr"], "ret": 1},
+    "@fn_settext": {"name": "SetWindowText_vt", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "@fn_deleteall": {"name": "DeleteAll_vt", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0060f81e": {"name": "abs", "conv": "cdecl", "args": ["int"], "ret": [7, 8]},
+    "0x0059b9d0": {"name": "CListWnd::AddString", "conv": "thiscall", "args": ["ignore", "int", "int", "int"], "ret": 0},
+    "0x0059b360": {"name": "CListWnd::SetItemText", "conv": "thiscall", "args": ["int", "int", "ignore"]},
+    "0x006220e9": {"name": "_itoa", "conv": "cdecl", "args": ["int", "ignore", "int"], "ret": "arg1",
+      "writes": [{"arg": 1, "offset": 0, "hex": "39 00"}]},
+    "0x0049273d": {"name": "RaceName", "conv": "thiscall", "args": ["int"], "ret": "@race_str"},
+    "0x00491e5b": {"name": "ClassName", "conv": "thiscall", "args": ["int"], "ret": "@class_str"},
+    "0x005f6ed0": {"name": "ZoneName", "conv": "thiscall", "args": ["u32", "ignore"],
+      "writes": [{"arg": 1, "offset": 0, "hex": "5a 6f 6e 65 00"}]},
+    "0x0060eca3": {"name": "ctime", "conv": "cdecl", "args": ["ptr"], "ret": "@time_str"},
+    "0x0050f3f6": {"name": "Array_Reset", "conv": "thiscall", "args": []},
+    "0x004466fa": {"name": "Hash_First", "conv": "thiscall", "args": [], "ret": "@entry1"},
+    "0x0050319b": {"name": "Array_Insert", "conv": "thiscall", "args": ["int", "mem:4"]},
+    "0x0054bfea": {"name": "Hash_Next", "conv": "thiscall", "args": ["ptr"], "ret": ["@entry2", 0]},
+    "0x0060ee40": {"name": "qsort", "conv": "cdecl", "args": ["ptr", "int", "int", "u32"], "ret": 0},
+    "0x004eb924": {"name": "Array_At", "conv": "thiscall", "args": ["int"],
+      "ret": ["@slots", "@slots", "@slots", "@slots", "@slots", "@slots", "@slots",
+              "@slots+4", "@slots+4", "@slots+4", "@slots+4", "@slots+4", "@slots+4", "@slots+4"]},
+    "0x00405492": {"name": "ThrowRange", "conv": "cdecl", "args": [], "noreturn": true}
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb",
+    "__itoa": "0x006220e9",
+    "_ctime": "0x0060eca3",
+    "_qsort": "0x0060ee40",
+    "??1PointerArray_guess@@QAE@XZ": "0x0050f3f6",
+    "?Next_guess@HashTable_guess@@QAEPAUHashEntry_guess@@PAU2@@Z": "0x0054bfea"
+  },
+  "_survivors": "L596: the inner count > 0 test sits inside an identical outer count > 0 test, so >= cannot change the path; L600: 0x0063F53E is the NUL ending \"%d\" at 0x0063F53C, so it is the same empty string as 0x0063F53F and the CXStr built from it is identical",
+  "rewrite_data_aliases": {
+    "?CompareEntry_guess@@YAHPBX0@Z": "0x0054bf48"
+  },
+  "cases": [
+    {"name": "full", "args": []},
+    {"name": "no_windows", "args": [], "memory": [
+      {"addr": "@pvpstatswnd", "offset": "0x16c", "fill": "zero", "size": "0x30"}
+    ]},
+    {"name": "negative_streak_empty_names_no_entries", "args": [], "memory": [
+      {"addr": "@chardata", "offset": "0xec4", "u32": -3},
+      {"addr": "@chardata", "offset": "0xec8", "u8": 0},
+      {"addr": "@chardata", "offset": "0xf20", "u8": 0}
+    ], "callees": {"0x004466fa": {"name": "Hash_First", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "streak_zero", "args": [], "memory": [{"addr": "@chardata", "offset": "0xec4", "u32": 0}]},
+    {"name": "streak_minus_one", "args": [], "memory": [{"addr": "@chardata", "offset": "0xec4", "u32": -1}]},
+    {"name": "one_entry", "args": [], "memory": [{"addr": "@pvpstatswnd", "offset": "0x15c", "u32": 1}],
+      "callees": {"0x0054bfea": {"name": "Hash_Next", "conv": "thiscall", "args": ["ptr"], "ret": 0}}},
+    {"name": "three_entries", "args": [], "memory": [{"addr": "@pvpstatswnd", "offset": "0x15c", "u32": 3}],
+      "callees": {"0x0054bfea": {"name": "Hash_Next", "conv": "thiscall", "args": ["ptr"], "ret": ["@entry2", "@entry1", 0]}}},
+    {"name": "array_count_zero_throws", "args": [], "memory": [{"addr": "@pvpstatswnd", "offset": "0x15c", "u32": 0}]},
+    {"name": "array_count_negative_throws", "args": [], "memory": [{"addr": "@pvpstatswnd", "offset": "0x15c", "u32": -1}]},
+    {"name": "array_data_null_throws", "args": [], "memory": [{"addr": "@pvpstatswnd", "offset": "0x160", "u32": 0}]},
+    {"name": "only_leader_list", "args": [], "memory": [
+      {"addr": "@pvpstatswnd", "offset": "0x16c", "fill": "zero", "size": "8"},
+      {"addr": "@pvpstatswnd", "offset": "0x178", "fill": "zero", "size": "0x24"}
+    ]},
+    {"name": "only_kill_list_empty_name", "args": [], "memory": [
+      {"addr": "@pvpstatswnd", "offset": "0x170", "fill": "zero", "size": "0x2c"},
+      {"addr": "@chardata", "offset": "0xec8", "u8": 0}
+    ]},
+    {"name": "only_death_list_empty_name", "args": [], "memory": [
+      {"addr": "@pvpstatswnd", "offset": "0x16c", "u32": 0},
+      {"addr": "@pvpstatswnd", "offset": "0x174", "fill": "zero", "size": "0x28"},
+      {"addr": "@chardata", "offset": "0xf20", "u8": 0}
+    ]}
+  ],
+  "fuzz": {
+    "seed": 5455052,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {"addr": "@pvpstatswnd", "offset": "0x16c", "type": "ptr", "choices": ["@killlist", 0]},
+      {"addr": "@pvpstatswnd", "offset": "0x170", "type": "ptr", "choices": ["@deathlist", 0]},
+      {"addr": "@pvpstatswnd", "offset": "0x174", "type": "ptr", "choices": ["@leaderlist", 0]},
+      {"addr": "@pvpstatswnd", "offset": "0x178", "type": "ptr", "choices": ["@lbl_streak", 0]},
+      {"addr": "@pvpstatswnd", "offset": "0x17c", "type": "ptr", "choices": ["@lbl_best", 0]},
+      {"addr": "@pvpstatswnd", "offset": "0x180", "type": "ptr", "choices": ["@lbl_worst", 0]},
+      {"addr": "@pvpstatswnd", "offset": "0x184", "type": "ptr", "choices": ["@lbl_avail", 0]},
+      {"addr": "@pvpstatswnd", "offset": "0x188", "type": "ptr", "choices": ["@lbl_points", 0]},
+      {"addr": "@pvpstatswnd", "offset": "0x18c", "type": "ptr", "choices": ["@lbl_kills", 0]},
+      {"addr": "@pvpstatswnd", "offset": "0x190", "type": "ptr", "choices": ["@lbl_deaths", 0]},
+      {"addr": "@pvpstatswnd", "offset": "0x194", "type": "ptr", "choices": ["@lbl_infamy", 0]},
+      {"addr": "@pvpstatswnd", "offset": "0x198", "type": "ptr", "choices": ["@lbl_vitality", 0]},
+      {"addr": "@pvpstatswnd", "offset": "0x15c", "type": "int", "choices": [-1, 0, 1, 2, 5]},
+      {"addr": "@chardata", "offset": "0xec4", "type": "int", "choices": [-100, -1, 0, 1, 100]},
+      {"addr": "@chardata", "offset": "0xec8", "type": "u8", "choices": [0, 75]},
+      {"addr": "@chardata", "offset": "0xf20", "type": "u8", "choices": [0, 86]}
+    ]
+  }
+}

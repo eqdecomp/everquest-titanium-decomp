@@ -1,0 +1,125 @@
+{
+  "function": "SplitStringIdPacket_guess",
+  "original": "0x00453cf1",
+  "sources": [
+    "src/EverQuest/tu_042_EQHandleMsg.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "source_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "length_guess",
+      "type": "int"
+    },
+    {
+      "name": "output_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "_survivors": "L2425: index == length only reads one more byte (inside the 0x100 object) and adds nothing, since index < length-1 fails; no observable change; L2426: count == 10 fills zero slots, so count > 10 writes nothing either (equivalent)",
+  "objects": {
+    "src": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "output": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {},
+  "cases": [
+    {
+      "name": "length 6, no tail",
+      "args": ["@src", 6, "@output"],
+      "memory": [{"addr": "@src", "hex": "4142434445464748"}]
+    },
+    {
+      "name": "length 7, zero tail byte (no separator)",
+      "args": ["@src", 7, "@output"],
+      "memory": [{"addr": "@src", "hex": "414243444546474800"}]
+    },
+    {
+      "name": "length 7, nonzero tail byte",
+      "args": ["@src", 7, "@output"],
+      "memory": [{"addr": "@src", "hex": "414243444546474841"}]
+    },
+    {
+      "name": "length 8, zero first tail byte (separator)",
+      "args": ["@src", 8, "@output"],
+      "memory": [{"addr": "@src", "hex": "41424344454647480041"}]
+    },
+    {
+      "name": "length 8, zero second tail byte (last byte never separates)",
+      "args": ["@src", 8, "@output"],
+      "memory": [{"addr": "@src", "hex": "41424344454647484100"}]
+    },
+    {
+      "name": "length 15, nine zero tail bytes: count 9 then fill one slot",
+      "args": ["@src", 15, "@output"],
+      "memory": [{"addr": "@src", "hex": "4142434445464748000000000000000000"}]
+    },
+    {
+      "name": "length 15, alternating separators",
+      "args": ["@src", 15, "@output"],
+      "memory": [{"addr": "@src", "hex": "4142434445464748004100420043004400"}]
+    },
+    {
+      "name": "length 16, ten zero tail bytes: count 10 returns early",
+      "args": ["@src", 16, "@output"],
+      "memory": [{"addr": "@src", "hex": "41424344454647480000000000000000000000"}]
+    },
+    {
+      "name": "length 20, mixed separators",
+      "args": ["@src", 20, "@output"],
+      "memory": [{"addr": "@src", "hex": "4142434445464748414200434400450046474800494A"}]
+    },
+    {
+      "name": "length 25, all zero tail: count runs past 10",
+      "args": ["@src", 25, "@output"],
+      "memory": [{"addr": "@src", "hex": "4142434445464748000000000000000000000000000000000000000000"}]
+    },
+    {
+      "name": "length 46, no separators",
+      "args": ["@src", 46, "@output"],
+      "memory": [{"addr": "@src", "hex": "41424344454647484141414141414141414141414141414141414141414141414141414141414141414141414141"}]
+    }
+  ],
+  "fuzz": {
+    "seed": 4537585,
+    "count": 200,
+    "args": [
+      {
+        "choices": [
+          "@src"
+        ]
+      },
+      {
+        "range": [
+          6,
+          40
+        ]
+      },
+      {
+        "choices": [
+          "@output"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@src",
+        "offset": "0x8",
+        "type": "u8",
+        "choices": [0, 0, 0, 65, 66],
+        "count": 40,
+        "stride": 1
+      }
+    ]
+  }
+}

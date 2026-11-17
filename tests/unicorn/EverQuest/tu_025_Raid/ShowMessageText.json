@@ -1,0 +1,406 @@
+{
+  "function": "CRaid_guess::DeleteRaidMember_guess",
+  "original": "0x00431a2c",
+  "sources": [
+    "src/EverQuest/tu_025_Raid.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@everquestobject",
+  "args": [
+    {
+      "name": "message",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "everquestobject": {
+      "size": "0x5ac0",
+      "fill": "zero"
+    },
+    "message": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "owner": {
+      "size": "0x200",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@ownerlink"
+        }
+      ]
+    },
+    "ownerlink": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 256
+        }
+      ]
+    },
+    "optionalservice": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "lookupservice": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "messageservice": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "lookupresult": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "cstr": "entry not found"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@owner"
+    },
+    {
+      "addr": "0x00850bf0",
+      "u32": "@optionalservice"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@lookupservice"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@messageservice"
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x144",
+      "cstr": "Owner"
+    },
+    {
+      "addr": "@message",
+      "offset": "0x44",
+      "cstr": "Player"
+    },
+    {
+      "addr": "@everquestobject",
+      "offset": "0x154",
+      "u8": 1
+    },
+    {
+      "addr": "@everquestobject",
+      "offset": "0x155",
+      "u8": 1
+    },
+    {
+      "addr": "@everquestobject",
+      "offset": "0x19c",
+      "cstr": "Player"
+    },
+    {
+      "addr": "@everquestobject",
+      "offset": "0x21c",
+      "cstr": "15"
+    },
+    {
+      "addr": "@everquestobject",
+      "offset": "0x2b0",
+      "u32": 42
+    },
+    {
+      "addr": "@everquestobject",
+      "offset": "0x2b4",
+      "cstr": "Second"
+    },
+    {
+      "addr": "@everquestobject",
+      "offset": "0x334",
+      "cstr": "7"
+    },
+    {
+      "addr": "@everquestobject",
+      "offset": "0x3c8",
+      "u32": 84
+    },
+    {
+      "addr": "@everquestobject",
+      "offset": "0x5060",
+      "u32": 1
+    },
+    {
+      "addr": "@everquestobject",
+      "offset": "0x5ab4",
+      "u32": 15
+    }
+  ],
+  "callees": {
+    "0x00574950": {
+      "name": "CompareRecord_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr"
+      ],
+      "ret": 1
+    },
+    "0x004315f6": {
+      "name": "ResetRaid_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0054fec9": {
+      "name": "Clear_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x005dfa00": {
+      "name": "Lookup_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "@lookupresult"
+    },
+    "0x004982c6": {
+      "name": "ShowWithOptions_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "int"
+      ]
+    },
+    "0x00430366": {
+      "name": "FindMemberIndex_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": -1
+    },
+    "0x00550fd4": {
+      "name": "RemovePlayerFromList_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int"
+      ]
+    },
+    "0x0054e1d9": {
+      "name": "SetEntryCount_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x0060e3a3": {
+      "name": "atol",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 15
+    },
+    "0x0043074f": {
+      "name": "UpdateAverageLevel_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0046da4a": {
+      "name": "FormatText_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "cstr",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32"
+      ]
+    },
+    "0x00430680": {
+      "name": "UpdateOptionsWindow_guess",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "owner match resets state",
+      "args": [
+        "@message"
+      ],
+      "callees": {
+        "0x00574950": {
+          "name": "CompareRecord_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "non-owner without matching entry",
+      "args": [
+        "@message"
+      ],
+      "callees": {
+        "0x00574950": {
+          "name": "CompareRecord_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": 1
+        },
+        "0x00430366": {
+          "name": "FindTextIndex_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "non-owner removes entry",
+      "args": [
+        "@message"
+      ],
+      "callees": {
+        "0x00574950": {
+          "name": "CompareRecord_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": 1
+        },
+        "0x00430366": {
+          "name": "FindTextIndex_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "non-owner removes second entry",
+      "args": [
+        "@message"
+      ],
+      "memory": [
+        {
+          "addr": "@everquestobject",
+          "offset": "0x5060",
+          "u32": 2
+        },
+        {
+          "addr": "@everquestobject",
+          "offset": "0x5ab4",
+          "u32": 22
+        }
+      ],
+      "callees": {
+        "0x00574950": {
+          "name": "CompareRecord_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": 1
+        },
+        "0x00430366": {
+          "name": "FindTextIndex_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        },
+        "0x0060e3a3": {
+          "name": "atol",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 7
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4397612,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@message"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@everquestobject",
+        "offset": "0x5060",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          71
+        ]
+      },
+      {
+        "addr": "@everquestobject",
+        "offset": "0x5ab4",
+        "type": "int",
+        "choices": [
+          -15,
+          0,
+          15,
+          2147483647
+        ]
+      },
+      {
+        "addr": "@everquestobject",
+        "offset": "0x2b0",
+        "type": "u32",
+        "choices": [
+          0,
+          42,
+          2147483647
+        ]
+      }
+    ]
+  }
+}

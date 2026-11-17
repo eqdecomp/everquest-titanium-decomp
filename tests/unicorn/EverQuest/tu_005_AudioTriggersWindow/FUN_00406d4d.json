@@ -1,0 +1,232 @@
+{
+  "function": "TriggerRoot_guess::UpdateButtons_guess",
+  "original": "0x00406d4d",
+  "sources": [
+    "src/EverQuest/tu_005_AudioTriggersWindow.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@triggerroot",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "triggerroot": {
+      "size": "0x184",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x164", "u32": "@enable164" },
+        { "offset": "0x168", "u32": "@enable168" },
+        { "offset": "0x16c", "u32": "@enable16c" },
+        { "offset": "0x170", "u32": "@enable170" },
+        { "offset": "0x174", "u32": "@first" },
+        { "offset": "0x178", "u32": "@second" },
+        { "offset": "0x17c", "u32": "@key_source" },
+        { "offset": "0x180", "u32": "@text_source" }
+      ]
+    },
+    "key_source": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "u32": "@key_vtbl" }
+      ]
+    },
+    "key_vtbl": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x130", "u32": "@fn_get_key" }
+      ]
+    },
+    "fn_get_key": { "size": "4" },
+    "text_source": { "size": "0x4", "fill": "zero" },
+    "search": { "size": "0x8", "fill": "zero" },
+    "found": { "size": "0x4", "fill": "zero" },
+    "enable164": { "size": "0x60", "fill": "zero" },
+    "enable168": { "size": "0x60", "fill": "zero" },
+    "enable16c": { "size": "0x60", "fill": "zero" },
+    "enable170": { "size": "0x60", "fill": "zero" },
+    "first": { "size": "0x60", "fill": "zero" },
+    "second": { "size": "0x60", "fill": "zero" }
+  },
+  "memory": [
+    { "addr": "0x007a0000", "size": "0x20", "fill": "zero" },
+    { "addr": "0x007a0000", "offset": "0x8", "u32": 2 },
+    { "addr": "0x007a0010", "offset": "0x8", "u32": 1 }
+  ],
+  "callees": {
+    "@fn_get_key": {
+      "name": "GetKeyText",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "00007a00" }
+      ]
+    },
+    "0x0059c3b0": {
+      "name": "GetText",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "10007a00" }
+      ]
+    },
+    "0x00406aef": {
+      "name": "GetSearchOwner",
+      "conv": "cdecl",
+      "args": [],
+      "ret": "@search"
+    },
+    "0x00405ad9": {
+      "name": "FindEntry",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "ReleaseString",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "null-17c",
+      "args": [],
+      "memory": [
+        { "addr": "@triggerroot", "offset": "0x17c", "u32": 0 }
+      ]
+    },
+    {
+      "name": "null-168",
+      "args": [],
+      "memory": [
+        { "addr": "@triggerroot", "offset": "0x168", "u32": 0 }
+      ]
+    },
+    {
+      "name": "null-164",
+      "args": [],
+      "memory": [
+        { "addr": "@triggerroot", "offset": "0x164", "u32": 0 }
+      ]
+    },
+    {
+      "name": "null-16c",
+      "args": [],
+      "memory": [
+        { "addr": "@triggerroot", "offset": "0x16c", "u32": 0 }
+      ]
+    },
+    {
+      "name": "null-174",
+      "args": [],
+      "memory": [
+        { "addr": "@triggerroot", "offset": "0x174", "u32": 0 }
+      ]
+    },
+    {
+      "name": "null-178",
+      "args": [],
+      "memory": [
+        { "addr": "@triggerroot", "offset": "0x178", "u32": 0 }
+      ]
+    },
+    {
+      "name": "null-key-string",
+      "args": [],
+      "callees": {
+        "@fn_get_key": {
+          "name": "GetKeyText",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": 0,
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "00000000" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "null-node-string",
+      "args": [],
+      "callees": {
+        "0x0059c3b0": {
+          "name": "GetText",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": 0,
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "00000000" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "key-count-0",
+      "args": [],
+      "memory": [
+        { "addr": "0x007a0000", "offset": "0x8", "u32": 0 },
+        { "addr": "0x007a0010", "offset": "0x8", "u32": 1 }
+      ]
+    },
+    {
+      "name": "key-count-1",
+      "args": [],
+      "memory": [
+        { "addr": "0x007a0000", "offset": "0x8", "u32": 1 },
+        { "addr": "0x007a0010", "offset": "0x8", "u32": 1 }
+      ]
+    },
+    {
+      "name": "node-count-0",
+      "args": [],
+      "memory": [
+        { "addr": "0x007a0000", "offset": "0x8", "u32": 2 },
+        { "addr": "0x007a0010", "offset": "0x8", "u32": 0 }
+      ]
+    },
+    {
+      "name": "node-count-1-no-match",
+      "args": [],
+      "memory": [
+        { "addr": "0x007a0000", "offset": "0x8", "u32": 2 },
+        { "addr": "0x007a0010", "offset": "0x8", "u32": 1 }
+      ]
+    },
+    {
+      "name": "node-count-1-match",
+      "args": [],
+      "memory": [
+        { "addr": "0x007a0000", "offset": "0x8", "u32": 2 },
+        { "addr": "0x007a0010", "offset": "0x8", "u32": 1 }
+      ],
+      "callees": {
+        "0x00405ad9": {
+          "name": "FindEntry",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": "@found"
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4222285,
+    "count": 100,
+    "args": [],
+    "memory": [
+      { "addr": "0x007a0000", "offset": "0x8", "type": "int", "choices": [-1, 0, 1, 2, 3] },
+      { "addr": "0x007a0010", "offset": "0x8", "type": "int", "choices": [-1, 0, 1, 2, 3] },
+      { "addr": "@triggerroot", "offset": "0x17c", "type": "ptr", "choices": [0, "@key_source"] },
+      { "addr": "@triggerroot", "offset": "0x168", "type": "ptr", "choices": [0, "@enable168"] },
+      { "addr": "@triggerroot", "offset": "0x164", "type": "ptr", "choices": [0, "@enable164"] },
+      { "addr": "@triggerroot", "offset": "0x16c", "type": "ptr", "choices": [0, "@enable16c"] },
+      { "addr": "@triggerroot", "offset": "0x174", "type": "ptr", "choices": [0, "@first"] },
+      { "addr": "@triggerroot", "offset": "0x178", "type": "ptr", "choices": [0, "@second"] }
+    ]
+  },
+  "_survivors": "L2290: null key data maps to count 0 or 1; both satisfy keyCount < 2 and produce the same writes."
+}

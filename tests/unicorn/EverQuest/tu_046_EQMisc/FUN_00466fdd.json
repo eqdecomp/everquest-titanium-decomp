@@ -1,0 +1,63 @@
+{
+  "function": "do_adriver_guess",
+  "original": "0x00466fdd",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "string_table": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "everquest": {
+      "size": "0x3a1c8",
+      "fill": "random"
+    },
+    "chat_text": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "cstr": "fixture message" }
+      ]
+    }
+  },
+  "memory": [
+    { "addr": "0x00905cb0", "u32": "@string_table" },
+    { "addr": "0x00988df0", "u32": "@everquest" }
+  ],
+  "callees": {
+    "0x005dfa00": {
+      "name": "FUN_005dfa00",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": "@chat_text"
+    },
+    "0x004982c6": {
+      "name": "FUN_004982c6",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "chat_message",
+      "args": []
+    }
+  ],
+  "fuzz": {
+    "seed": 4616157,
+    "count": 100,
+    "args": [],
+    "memory": []
+  }
+}

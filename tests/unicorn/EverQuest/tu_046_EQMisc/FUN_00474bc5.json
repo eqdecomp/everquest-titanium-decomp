@@ -1,0 +1,261 @@
+{
+  "function": "ContainsMatchingItem_guess",
+  "original": "0x00474bc5",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    { "name": "root", "type": "ptr" },
+    { "name": "match", "type": "ptr" },
+    { "name": "node", "type": "ptr" }
+  ],
+  "ret": "int",
+  "objects": {
+    "root": {
+      "size": "0xd38",
+      "fill": "random",
+      "init": [
+        { "offset": "0xd30", "u32": "@slot" },
+        { "offset": "0xd34", "u32": 0 }
+      ]
+    },
+    "root_second": {
+      "size": "0xd38",
+      "fill": "random",
+      "init": [
+        { "offset": "0xd30", "u32": 0 },
+        { "offset": "0xd34", "u32": "@equal" }
+      ]
+    },
+    "root_third": {
+      "size": "0xd3c",
+      "fill": "random",
+      "init": [
+        { "offset": "0xd30", "u32": 0 },
+        { "offset": "0xd34", "u32": 0 },
+        { "offset": "0xd38", "u32": "@equal" }
+      ]
+    },
+    "match": { "size": "0xdc", "fill": "random" },
+    "node": {
+      "size": "0xdc",
+      "fill": "random",
+      "init": [{ "offset": "0xd8", "u32": 1 }]
+    },
+    "slot": {
+      "size": "0xdc",
+      "fill": "random",
+      "init": [{ "offset": "0xd8", "u32": 2 }]
+    },
+    "equal": {
+      "size": "0xdc",
+      "fill": "random",
+      "init": [{ "offset": "0xd8", "u32": 1 }]
+    },
+    "child": {
+      "size": "0xdc",
+      "fill": "random",
+      "init": [{ "offset": "0xd8", "u32": 1 }]
+    },
+    "child_other": {
+      "size": "0xdc",
+      "fill": "random",
+      "init": [{ "offset": "0xd8", "u32": 3 }]
+    },
+    "nested": { "size": "0xdc", "fill": "random" }
+  },
+  "callees": {
+    "0x005eccc0": { "name": "Mode_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x005ecc30": { "name": "Count_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x005ec630": { "name": "At_guess", "conv": "thiscall", "args": ["int"], "ret": 0 },
+    "0x005e0f30": { "name": "Nested_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x005ec790": { "name": "HasItems_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x005acf60": { "name": "Identity_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x00601f10": { "name": "Matches_guess", "conv": "thiscall", "args": ["ptr"], "passthrough": true }
+  },
+  "coverage_ok": {
+    "00474C4F-00474C50": "offset is only 0 or 4",
+    "00474C63-00474C64": "offset is only 0 or 4",
+    "00474C8F-00474C90": "offset is only 0 or 4",
+    "00474CA6-00474CA7": "offset is only 0 or 4"
+  },
+  "cases": [
+    {
+      "name": "null node",
+      "args": ["@root", "@match", 0],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "recursive child, no match",
+      "args": ["@root", "@match", "@node"],
+      "expect": { "ret": 0 },
+      "callees": {
+        "0x005eccc0": { "name": "Mode_guess", "conv": "thiscall", "args": [], "ret": [1, 0] },
+        "0x005ecc30": { "name": "Count_guess", "conv": "thiscall", "args": [], "ret": [1] },
+        "0x005ec630": { "name": "At_guess", "conv": "thiscall", "args": ["int"], "ret": ["@child", "@child", "@child"] },
+        "0x005e0f30": { "name": "Nested_guess", "conv": "thiscall", "args": [], "ret": "@nested" },
+        "0x005ec790": { "name": "HasItems_guess", "conv": "thiscall", "args": [], "ret": [0, 0] }
+      }
+    },
+    {
+      "name": "recursive child finds match",
+      "args": ["@root", "@match", "@node"],
+      "memory": [{ "addr": "@root", "offset": "0xd30", "u32": "@equal" }],
+      "expect": { "ret": 1 },
+      "callees": {
+        "0x005eccc0": { "name": "Mode_guess", "conv": "thiscall", "args": [], "ret": [1, 0] },
+        "0x005ecc30": { "name": "Count_guess", "conv": "thiscall", "args": [], "ret": [1] },
+        "0x005ec630": { "name": "At_guess", "conv": "thiscall", "args": ["int"], "ret": ["@child", "@child", "@child"] },
+        "0x005e0f30": { "name": "Nested_guess", "conv": "thiscall", "args": [], "ret": "@nested" },
+        "0x005ec790": { "name": "HasItems_guess", "conv": "thiscall", "args": [], "ret": [1] },
+        "0x005acf60": { "name": "Identity_guess", "conv": "thiscall", "args": [], "ret": ["@child", "@equal"] }
+      }
+    },
+    {
+      "name": "first slot identity matches",
+      "args": ["@root", "@match", "@node"],
+      "memory": [{ "addr": "@root", "offset": "0xd30", "u32": "@equal" }],
+      "expect": { "ret": 1 },
+      "callees": {
+        "0x005eccc0": { "name": "Mode_guess", "conv": "thiscall", "args": [], "ret": 0 },
+        "0x005ec790": { "name": "HasItems_guess", "conv": "thiscall", "args": [], "ret": 1 },
+        "0x005acf60": { "name": "Identity_guess", "conv": "thiscall", "args": [], "ret": ["@node", "@equal"] }
+      }
+    },
+    {
+      "name": "first slot differs and has no children",
+      "args": ["@root", "@match", "@node"],
+      "expect": { "ret": 0 },
+      "callees": {
+        "0x005eccc0": { "name": "Mode_guess", "conv": "thiscall", "args": [], "ret": [0, 0] },
+        "0x005ec790": { "name": "HasItems_guess", "conv": "thiscall", "args": [], "ret": 1 },
+        "0x005acf60": { "name": "Identity_guess", "conv": "thiscall", "args": [], "ret": ["@node", "@slot"] }
+      }
+    },
+    {
+      "name": "nested item identity matches",
+      "args": ["@root", "@match", "@node"],
+      "expect": { "ret": 1 },
+      "callees": {
+        "0x005eccc0": { "name": "Mode_guess", "conv": "thiscall", "args": [], "ret": [0, 1] },
+        "0x005ecc30": { "name": "Count_guess", "conv": "thiscall", "args": [], "ret": [1] },
+        "0x005ec630": { "name": "At_guess", "conv": "thiscall", "args": ["int"], "ret": ["@child", "@child"] },
+        "0x005ec790": { "name": "HasItems_guess", "conv": "thiscall", "args": [], "ret": 1 },
+        "0x005acf60": { "name": "Identity_guess", "conv": "thiscall", "args": [], "ret": ["@node", "@slot", "@node", "@child"] }
+      }
+    },
+    {
+      "name": "nested item identity differs",
+      "args": ["@root", "@match", "@node"],
+      "expect": { "ret": 0 },
+      "callees": {
+        "0x005eccc0": { "name": "Mode_guess", "conv": "thiscall", "args": [], "ret": [0, 1] },
+        "0x005ecc30": { "name": "Count_guess", "conv": "thiscall", "args": [], "ret": [1, 1] },
+        "0x005ec630": { "name": "At_guess", "conv": "thiscall", "args": ["int"], "ret": ["@child_other", "@child_other"] },
+        "0x005ec790": { "name": "HasItems_guess", "conv": "thiscall", "args": [], "ret": 1 },
+        "0x005acf60": { "name": "Identity_guess", "conv": "thiscall", "args": [], "ret": ["@node", "@slot", "@node", "@child_other"] }
+      }
+    },
+    {
+      "name": "nested item is null",
+      "args": ["@root", "@match", "@node"],
+      "expect": { "ret": 0 },
+      "callees": {
+        "0x005eccc0": { "name": "Mode_guess", "conv": "thiscall", "args": [], "ret": [0, 1] },
+        "0x005ecc30": { "name": "Count_guess", "conv": "thiscall", "args": [], "ret": [1, 1] },
+        "0x005ec630": { "name": "At_guess", "conv": "thiscall", "args": ["int"], "ret": [0] },
+        "0x005ec790": { "name": "HasItems_guess", "conv": "thiscall", "args": [], "ret": 1 },
+        "0x005acf60": { "name": "Identity_guess", "conv": "thiscall", "args": [], "ret": ["@node", "@slot"] }
+      }
+    },
+    {
+      "name": "nested list empty",
+      "args": ["@root", "@match", "@node"],
+      "expect": { "ret": 0 },
+      "callees": {
+        "0x005eccc0": { "name": "Mode_guess", "conv": "thiscall", "args": [], "ret": [0, 1] },
+        "0x005ecc30": { "name": "Count_guess", "conv": "thiscall", "args": [], "ret": [0] },
+        "0x005ec790": { "name": "HasItems_guess", "conv": "thiscall", "args": [], "ret": 1 },
+        "0x005acf60": { "name": "Identity_guess", "conv": "thiscall", "args": [], "ret": ["@node", "@slot"] }
+      }
+    },
+    {
+      "name": "second slot identity matches",
+      "args": ["@root_second", "@match", "@node"],
+      "expect": { "ret": 1 },
+      "callees": {
+        "0x005eccc0": { "name": "Mode_guess", "conv": "thiscall", "args": [], "ret": 0 },
+        "0x005ec790": { "name": "HasItems_guess", "conv": "thiscall", "args": [], "ret": 1 },
+        "0x005acf60": { "name": "Identity_guess", "conv": "thiscall", "args": [], "ret": ["@node", "@equal"] }
+      }
+    },
+    {
+      "name": "zero top-level count",
+      "args": ["@root", "@match", "@node"],
+      "expect": { "ret": 0 },
+      "callees": {
+        "0x005eccc0": { "name": "Mode_guess", "conv": "thiscall", "args": [], "ret": [1, 0] },
+        "0x005ecc30": { "name": "Count_guess", "conv": "thiscall", "args": [], "ret": [0, 0] },
+        "0x005ec630": { "name": "At_guess", "conv": "thiscall", "args": ["int"], "ret": ["@child", "@child", "@child"] },
+        "0x005e0f30": { "name": "Nested_guess", "conv": "thiscall", "args": [], "ret": "@nested" },
+        "0x005ec790": { "name": "HasItems_guess", "conv": "thiscall", "args": [], "ret": [0, 0] }
+      }
+    },
+    {
+      "name": "two top-level children",
+      "args": ["@root", "@match", "@node"],
+      "expect": { "ret": 0 },
+      "callees": {
+        "0x005eccc0": { "name": "Mode_guess", "conv": "thiscall", "args": [], "ret": [1, 0, 0] },
+        "0x005ecc30": { "name": "Count_guess", "conv": "thiscall", "args": [], "ret": [2, 2, 2] },
+        "0x005ec630": { "name": "At_guess", "conv": "thiscall", "args": ["int"], "ret": ["@child", "@child", "@child", "@child_other", "@child_other", "@child_other"] },
+        "0x005e0f30": { "name": "Nested_guess", "conv": "thiscall", "args": [], "ret": ["@nested", "@nested"] },
+        "0x005ec790": { "name": "HasItems_guess", "conv": "thiscall", "args": [], "ret": [0, 0, 0] }
+      }
+    },
+    {
+      "name": "two nested items, second matches",
+      "args": ["@root", "@match", "@node"],
+      "expect": { "ret": 1 },
+      "callees": {
+        "0x005eccc0": { "name": "Mode_guess", "conv": "thiscall", "args": [], "ret": [0, 1] },
+        "0x005ecc30": { "name": "Count_guess", "conv": "thiscall", "args": [], "ret": [2, 2] },
+        "0x005ec630": { "name": "At_guess", "conv": "thiscall", "args": ["int"], "ret": ["@child_other", "@child_other", "@child", "@child"] },
+        "0x005ec790": { "name": "HasItems_guess", "conv": "thiscall", "args": [], "ret": 1 },
+        "0x005acf60": { "name": "Identity_guess", "conv": "thiscall", "args": [], "ret": ["@node", "@slot", "@node", "@child_other", "@node", "@child"] }
+      }
+    },
+    {
+      "name": "second slot nested list empty",
+      "args": ["@root_second", "@match", "@node"],
+      "memory": [{ "addr": "@root_second", "offset": "0xd34", "u32": "@slot" }],
+      "expect": { "ret": 0 },
+      "callees": {
+        "0x005eccc0": { "name": "Mode_guess", "conv": "thiscall", "args": [], "ret": [0, 1] },
+        "0x005ecc30": { "name": "Count_guess", "conv": "thiscall", "args": [], "ret": 0 },
+        "0x005ec790": { "name": "HasItems_guess", "conv": "thiscall", "args": [], "ret": 1 },
+        "0x005acf60": { "name": "Identity_guess", "conv": "thiscall", "args": [], "ret": ["@node", "@slot"] }
+      }
+    },
+    {
+      "name": "third slot is not visited",
+      "args": ["@root_third", "@match", "@node"],
+      "expect": { "ret": 0 },
+      "callees": {
+        "0x005eccc0": { "name": "Mode_guess", "conv": "thiscall", "args": [], "ret": 0 },
+        "0x005ec790": { "name": "HasItems_guess", "conv": "thiscall", "args": [], "ret": 1 }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4672453,
+    "count": 100,
+    "args": [
+      { "choices": ["@root"] },
+      { "choices": ["@match"] },
+      { "choices": ["@node"] }
+    ]
+  },
+  "_survivors": "L6555: offsets are only 0 and 4, so /3 and /4 choose the same slot; L6560: offsets are only 0 and 4, so /3 and /4 choose the same slot"
+}

@@ -1,0 +1,123 @@
+{
+  "function": "CMailCompositionWndFromView_guess::UpdateFromAddress_guess",
+  "original": "0x0052d7d7",
+  "sources": ["src/EverQuest/tu_184_MailCompositionWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x168",
+      "fill": "random",
+      "init": [{"offset": "0x164", "u32": "@widget"}]
+    },
+    "widget": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@vtable"}]
+    },
+    "vtable": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xfc", "u32": "@fn_slot63"}]
+    },
+    "root": {"size": "0x4", "fill": "zero"},
+    "selected": {"size": "0x4", "fill": "zero"},
+    "fn_slot63": {"size": "0x4", "fill": "zero"},
+    "heapbuf": {"size": "0x1000", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00988df0", "u32": "@root"},
+    {"addr": "0x60001000", "cstr": "heap text"}
+  ],
+  "callees": {
+    "0x00495250": {
+      "name": "Get_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": ["@selected", "@selected"]
+    },
+    "0x0052d7bd": {
+      "name": "Get_string_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 4, "hex": "68690000000000000000000000000000"},
+        {"arg": 0, "offset": 20, "hex": "02000000"},
+        {"arg": 0, "offset": 24, "hex": "0f000000"}
+      ]
+    },
+    "0x00571e00": {
+      "name": "Text_ctor",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "passthrough": true
+    },
+    "0x00571d00": {
+      "name": "Text_release",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "passthrough": true
+    },
+    "0x0040291e": {
+      "name": "String_Tidy",
+      "conv": "thiscall",
+      "args": ["bool", "u32"],
+      "ret": 0
+    },
+    "@fn_slot63": {
+      "name": "Slot63",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "kernel32.dll!HeapAlloc": {
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": "@heapbuf"
+    },
+    "kernel32.dll!HeapFree": {
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {"name": "null-widget", "args": [], "memory": [{"addr": "@owner", "offset": "0x164", "u32": 0}]},
+    {"name": "null-root", "args": [], "memory": [{"addr": "0x00988df0", "u32": 0}]},
+    {
+      "name": "no-selection",
+      "args": [],
+      "callees": {"0x00495250": {"name": "Get_guess", "conv": "thiscall", "args": [], "ret": 0}}
+    },
+    {"name": "inline-capacity-15", "args": []},
+    {
+      "name": "heap-capacity-16",
+      "args": [],
+      "callees": {
+        "0x0052d7bd": {
+          "name": "Get_string_guess",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": "arg0",
+          "writes": [
+            {"arg": 0, "offset": 4, "hex": "00100060000000000000000000000000"},
+            {"arg": 0, "offset": 20, "hex": "09000000"},
+            {"arg": 0, "offset": 24, "hex": "10000000"}
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5429207,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@owner", "offset": "0x164", "type": "ptr", "choices": [0, "@widget"]},
+      {"addr": "0x00988df0", "type": "ptr", "choices": [0, "@root"]}
+    ]
+  }
+}

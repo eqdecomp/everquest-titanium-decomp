@@ -1,0 +1,151 @@
+{
+  "function": "GuildMgmtWnd_guess::LoadPersonalNotes_guess",
+  "original": "0x00510373",
+  "sources": ["src/EverQuest/tu_166_GuildManagementWnd.cpp"],
+  "size": "0x189",
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x40c",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x1e4", "u32": 0},
+        {"offset": "0x1e8", "u32": 0},
+        {"offset": "0x1ec", "u32": 0},
+        {"offset": "0x1f4", "u32": 17},
+        {"offset": "0x1f8", "cstr": "guild.txt"},
+        {"offset": "0x3f8", "u8": 0}
+      ]
+    },
+    "file": {"size": "0x20", "fill": "zero"},
+    "slot0": {"size": "4", "fill": "zero", "init": [{"offset": "0", "u32": "@old0"}]},
+    "slot1": {"size": "4", "fill": "zero", "init": [{"offset": "0", "u32": "@old1"}]},
+    "old0": {"size": "4", "fill": "zero"},
+    "old1": {"size": "4", "fill": "zero"},
+    "new_entry": {"size": "0x148", "fill": "random"},
+    "heap": {"size": "0x1000", "fill": "zero"},
+    "lookup": {"size": "4", "fill": "zero"},
+    "selection": {
+      "size": "0x28c",
+      "fill": "zero",
+      "init": [{"offset": "0x120", "cstr": "server"}]
+    }
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x00988df0", "u32": "@lookup"},
+    {"addr": "0x00905ce4", "u32": "@selection"}
+  ],
+  "callees": {
+    "0x0050e747": {"name": "BuildNotesFileName_guess", "conv": "thiscall", "args": [], "ret": 0, "passthrough": true},
+    "0x004eb924": {"name": "Slot_guess", "conv": "thiscall", "args": ["int"], "ret": ["@slot0", "@slot1"]},
+    "0x0060d0d5": {"name": "operator_delete", "conv": "cdecl", "args": ["ptr"], "ret": 0},
+    "0x0050f3f6": {"name": "FUN_0050f3f6", "conv": "thiscall", "args": [], "ret": 0, "passthrough": true},
+    "0x0060e887": {"name": "fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 0},
+    "0x0060fbe1": {
+      "name": "fgets",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "ptr"],
+      "ret": "arg0",
+      "writes": [{"call": 0, "arg": 2, "offset": 12, "hex": "10000000"}]
+    },
+    "0x00610837": {
+      "name": "sscanf",
+      "conv": "cdecl",
+      "args": ["mem:340", "cstr", "ptr", "ptr", "ptr"],
+      "ret": 3,
+      "writes": [
+        {"call": 0, "arg": 2, "hex": "2a000000"},
+        {"call": 0, "arg": 3, "hex": "416c69636500"},
+        {"call": 0, "arg": 4, "hex": "4e6f746500"}
+      ]
+    },
+    "0x00574a30": {"name": "FUN_00574a30", "conv": "cdecl", "args": ["cstr", "int"], "ret": 0},
+    "0x0050f485": {"name": "FindPersonalNote_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0},
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@new_entry"},
+    "0x00574890": {"name": "FUN_00574890", "conv": "cdecl", "args": ["cstr"], "ret": "0x12345678"},
+    "0x0050319b": {"name": "Insert_guess", "conv": "thiscall", "args": ["int", "mem:4"], "ret": 0},
+    "0x0060e790": {"name": "fclose", "conv": "cdecl", "args": ["ptr"], "ret": 0},
+    "0x0060e450": {"name": "copy_string", "conv": "cdecl", "args": ["ptr", "cstr"], "ret": "arg0"},
+    "0x00493b8f": {
+      "name": "FillName_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 0,
+      "writes": [{"arg": 0, "hex": "4e616d6500"}]
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr", "cstr", "cstr", "cstr"],
+      "ret": 0,
+      "writes": [{"arg": 0, "hex": "2e5c75736572646174615c474e5f7365727665725f4e616d652e74787400"}]
+    },
+    "kernel32.dll!GetLastError": {"name": "GetLastError", "conv": "stdcall", "args": [], "ret": 0},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@heap"},
+    "kernel32.dll!HeapFree": {"name": "HeapFree", "conv": "stdcall", "args": ["ptr", "u32", "ptr"], "ret": 1},
+    "kernel32.dll!WideCharToMultiByte": {"name": "WideCharToMultiByte", "conv": "stdcall", "args": ["u32", "u32", "ptr", "int", "ptr", "int", "ptr", "ptr"], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "fopen": "0x0060e887",
+    "fgets": "0x0060fbe1",
+    "sscanf": "0x00610837",
+    "??2@YAPAXI@Z": "0x0060d071",
+    "fclose": "0x0060e790"
+  },
+  "cases": [
+    {"name": "open fails after deleting old entries", "args": [], "memory": [{"addr": "@owner", "offset": "0x1e4", "u32": 2}]},
+    {
+      "name": "load and insert record after deleting old entries",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x1e4", "u32": 0},
+        {"addr": "@file", "offset": "0xc", "u32": 0}
+      ],
+      "callees": {
+        "0x0060e887": {"name": "fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": "@file"},
+        "0x0060fbe1": {
+          "name": "fgets", "conv": "cdecl", "args": ["ptr", "int", "ptr"], "ret": "arg0",
+          "writes": [{"call": 0, "arg": 2, "offset": 12, "hex": "10000000"}]
+        },
+        "0x00610837": {
+          "name": "sscanf", "conv": "cdecl", "args": ["mem:340", "cstr", "ptr", "ptr", "ptr"], "ret": 3,
+          "writes": [
+            {"call": 0, "arg": 2, "hex": "2a000000"},
+            {"call": 0, "arg": 3, "hex": "416c69636500"},
+            {"call": 0, "arg": 4, "hex": "4e6f746500"}
+          ]
+        }
+      }
+    },
+    {
+      "name": "malformed line",
+      "args": [],
+      "callees": {
+        "0x0060e887": {"name": "fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": "@file"},
+        "0x00610837": {"name": "sscanf", "conv": "cdecl", "args": ["cstr", "cstr", "ptr", "ptr", "ptr"], "ret": 2}
+      }
+    },
+    {
+      "name": "already at EOF",
+      "args": [],
+      "memory": [{"addr": "@file", "offset": "0xc", "u32": 16}],
+      "callees": {"0x0060e887": {"name": "fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": "@file"}}
+    },
+    {
+      "name": "generate filename",
+      "args": [],
+      "memory": [{"addr": "@owner", "offset": "0x1f8", "cstr": ""}]
+    }
+  ],
+  "fuzz": {
+    "seed": 5309299,
+    "count": 60,
+    "args": [],
+    "memory": [{"addr": "@owner", "offset": "0x1e4", "type": "int", "choices": [0, 1, 2]}]
+  },
+  "_survivors": "L1430: deleting line[0] = 0 is unobservable because the emulator starts stack memory at zero; L1430: changing the index to line[1] = 0 is also unobservable because the scripted _fgets does not write the line buffer."
+}

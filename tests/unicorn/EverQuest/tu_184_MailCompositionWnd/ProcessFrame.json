@@ -1,0 +1,159 @@
+{
+  "function": "CMailCompositionWndFrameView_guess::OnProcessFrame_guess",
+  "original": "0x0052d5ed",
+  "sources": [
+    "src/EverQuest/tu_184_MailCompositionWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "owner": {
+      "size": "0x178",
+      "fill": "random",
+      "init": [
+        {"offset": "0x124", "u32": "@piece"},
+        {"offset": "0x168", "u32": "@first_text"},
+        {"offset": "0x16c", "u32": "@second_text"},
+        {"offset": "0x174", "u32": "@button"}
+      ]
+    },
+    "piece": {"size": "0x4", "fill": "random"},
+    "first_text": {"size": "0x4", "fill": "random"},
+    "second_text": {"size": "0x4", "fill": "random"},
+    "button": {"size": "0x64", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x005b7ed0": {
+      "name": "GetText_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "00010060"}
+      ]
+    },
+    "0x004d95d0": {
+      "name": "IsEmpty_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [0, 1]
+    },
+    "0x00571d00": {
+      "name": "FreeRep_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x005a0e50": {
+      "name": "OnProcessFrame",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 41
+    }
+  },
+  "cases": [
+    {
+      "name": "sidl-piece-null",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x124", "u32": 0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "first-string-empty",
+      "args": [],
+      "callees": {
+        "0x004d95d0": {
+          "name": "IsEmpty_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [1]
+        }
+      },
+      "expect": {"ret": 41}
+    },
+    {
+      "name": "second-string-empty",
+      "args": [],
+      "callees": {
+        "0x004d95d0": {
+          "name": "IsEmpty_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [0, 1]
+        }
+      },
+      "expect": {"ret": 41}
+    },
+    {
+      "name": "both-strings-nonempty",
+      "args": [],
+      "callees": {
+        "0x004d95d0": {
+          "name": "IsEmpty_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [0, 0]
+        }
+      },
+      "expect": {"ret": 41}
+    },
+    {
+      "name": "first-temp-null-rep",
+      "args": [],
+      "callees": {
+        "0x005b7ed0": {
+          "name": "GetText_guess",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": "arg0",
+          "writes": [
+            {"arg": 0, "offset": 0, "hex": "00000000"}
+          ]
+        },
+        "0x004d95d0": {
+          "name": "IsEmpty_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [1]
+        }
+      },
+      "expect": {"ret": 41}
+    },
+    {
+      "name": "second-temp-null-rep",
+      "args": [],
+      "callees": {
+        "0x005b7ed0": {
+          "name": "GetText_guess",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": "arg0",
+          "writes": [
+            {"arg": 0, "offset": 0, "hex": "00010060", "call": 0},
+            {"arg": 0, "offset": 0, "hex": "00000000", "call": 1}
+          ]
+        },
+        "0x004d95d0": {
+          "name": "IsEmpty_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [0, 1]
+        }
+      },
+      "expect": {"ret": 41}
+    }
+  ],
+  "fuzz": {
+    "seed": 5428717,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@owner", "offset": "0x124", "type": "ptr", "choices": [0, "@piece"]}
+    ]
+  }
+}

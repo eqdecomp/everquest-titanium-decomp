@@ -1,0 +1,84 @@
+{
+  "function": "Notifier_guess::Slot00_guess",
+  "original": "0x004ea36d",
+  "sources": [
+    "src/EverQuest/tu_137_BugReportWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@wnd+0x15c",
+  "args": [
+    {
+      "name": "id_guess",
+      "type": "int"
+    },
+    {
+      "name": "flags_guess",
+      "type": "u8"
+    },
+    {
+      "name": "data_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "wnd": {
+      "size": "0x1a8",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004e9f7a": {
+      "name": "SendBugReport_guess",
+      "conv": "thiscall",
+      "args": ["bool"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "id_below",
+      "args": [99, 5, 1]
+    },
+    {
+      "name": "id_100_no_mask_bits",
+      "args": [100, 0, 0]
+    },
+    {
+      "name": "mask_bit_1",
+      "args": [100, 1, 7]
+    },
+    {
+      "name": "outside_mask_bit",
+      "args": [100, 2, 9]
+    },
+    {
+      "name": "mask_bit_4",
+      "args": [100, 4, -1]
+    },
+    {
+      "name": "both_mask_bits",
+      "args": [100, 5, 0]
+    },
+    {
+      "name": "high_byte_bit",
+      "args": [100, 128, 4]
+    },
+    {
+      "name": "id_above",
+      "args": [101, 255, 4]
+    }
+  ],
+  "fuzz": {
+    "seed": 5153645,
+    "count": 100,
+    "args": [
+      {"choices": [99, 100, 101]},
+      {"choices": [0, 1, 2, 4, 5, 128, 255]},
+      {"range": [-10, 10]}
+    ],
+    "memory": []
+  },
+  "_todo": []
+}

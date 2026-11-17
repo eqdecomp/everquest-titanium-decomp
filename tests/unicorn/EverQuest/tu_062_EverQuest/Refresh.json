@@ -1,0 +1,261 @@
+{
+  "function": "FriendOwner_guess::Refresh_guess",
+  "original": "0x004ab692",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@friendowner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "friendowner": {
+      "size": "0x3a1c8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x3a1c4",
+          "u32": "@friendobject"
+        }
+      ]
+    },
+    "friendobject": {
+      "size": "0x100",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0095a1b4",
+      "size": "0x1900",
+      "fill": "zero"
+    },
+    {
+      "addr": "0x0079ac74",
+      "from_image": "0x0079ac74",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0063f53f",
+      "from_image": "0x0063f53f",
+      "image_size": 64
+    }
+  ],
+  "callees": {
+    "0x00403631": {
+      "name": "FriendName constructor",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this"
+    },
+    "0x0040b88b": {
+      "name": "FriendNames push",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x0040291e": {
+      "name": "basic_string::_Tidy",
+      "conv": "thiscall",
+      "args": [
+        "bool",
+        "u32"
+      ],
+      "ret": "keep"
+    },
+    "0x0040ab88": {
+      "name": "FriendNames size",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x0040b7b2": {
+      "name": "FriendNames copy constructor",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "this"
+    },
+    "0x0042ba5e": {
+      "name": "FriendPair constructor",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "int"
+      ],
+      "ret": "this"
+    },
+    "0x0042bf38": {
+      "name": "FriendSub add",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "keep"
+    },
+    "0x0040b867": {
+      "name": "FriendPair cleanup",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "keep"
+    },
+    "0x00428534": {
+      "name": "FriendSub find",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x0042bf49": {
+      "name": "FriendSub set",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "keep"
+    },
+    "0x0040b540": {
+      "name": "FriendNames cleanup",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "keep"
+    }
+  },
+  "cases": [
+    {
+      "name": "null friend object",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@friendowner",
+          "offset": "0x3a1c4",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "empty list find miss",
+      "args": [],
+      "callees": {
+        "0x0040ab88": {
+          "name": "FriendNames size",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "empty list find hit",
+      "args": [],
+      "callees": {
+        "0x0040ab88": {
+          "name": "FriendNames size",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        },
+        "0x00428534": {
+          "name": "FriendSub find",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "first record",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x0095a1b4",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "last record",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x0095ba74",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "multiple records",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x0095a1f4",
+          "u8": 1
+        },
+        {
+          "addr": "0x0095ba74",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "end boundary record is ignored",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x0095bab4",
+          "u8": 1
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4896402,
+    "count": 50,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x0095a1f4",
+        "type": "u8",
+        "count": 99,
+        "stride": 64,
+        "choices": [
+          0,
+          1
+        ],
+        "p": 0.15
+      },
+      {
+        "addr": "0x0095a1b4",
+        "type": "u8",
+        "choices": [
+          1
+        ]
+      }
+    ]
+  }
+}

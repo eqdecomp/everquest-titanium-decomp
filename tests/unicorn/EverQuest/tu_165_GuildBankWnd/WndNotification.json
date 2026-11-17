@@ -1,0 +1,1348 @@
+{
+  "function": "CGuildBankWnd_guess::WndNotification_guess",
+  "original": "0x0050dd43",
+  "sources": [
+    "src/EverQuest/tu_165_GuildBankWnd.cpp"
+  ],
+  "size": "0x580",
+  "conv": "thiscall",
+  "this": "@derivedobject",
+  "args": [
+    {
+      "name": "sender_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "message_guess",
+      "type": "u32"
+    },
+    {
+      "name": "data_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "derivedobject": {
+      "size": "0xbec0",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xbeb4",
+          "u32": 1
+        },
+        {
+          "offset": "0xbeb8",
+          "u32": 0
+        }
+      ]
+    },
+    "sender": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@sender_vtable"
+        }
+      ]
+    },
+    "sender_vtable": {
+      "size": "0x13c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xe4",
+          "u32": "@fn_rect_call"
+        },
+        {
+          "offset": "0x138",
+          "u32": "@fn_slot_call"
+        }
+      ]
+    },
+    "fn_rect_call": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "fn_slot_call": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "data": {
+      "size": "0x18",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 0
+        },
+        {
+          "offset": "0x8",
+          "u32": 1
+        },
+        {
+          "offset": "0x10",
+          "u32": 2
+        }
+      ]
+    },
+    "rowptr": {
+      "size": "0x18",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@rowvalue"
+        }
+      ]
+    },
+    "rowvalue": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "entry": {
+      "size": "0xa0",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": 7
+        },
+        {
+          "offset": "0xc",
+          "u32": 3
+        },
+        {
+          "offset": "0x10",
+          "u32": 4
+        },
+        {
+          "offset": "0x14",
+          "u32": 1
+        }
+      ]
+    },
+    "entry2": {
+      "size": "0xa0",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": 9
+        },
+        {
+          "offset": "0xc",
+          "u32": 7
+        },
+        {
+          "offset": "0x10",
+          "u32": 2
+        },
+        {
+          "offset": "0x14",
+          "u32": 3
+        }
+      ]
+    },
+    "typeState": {
+      "size": "0xe18",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@nameOffsets"
+        },
+        {
+          "offset": "0xe14",
+          "u8": 1
+        }
+      ]
+    },
+    "nameOffsets": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "0x100"
+        }
+      ]
+    },
+    "table": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "string": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "center": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 2
+        },
+        {
+          "offset": "0x4",
+          "u32": 3
+        }
+      ]
+    },
+    "observer": {
+      "size": "0x16c",
+      "fill": "zero"
+    },
+    "manager": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_is_ready": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "manager_vtable": {
+      "size": "0x138",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x134",
+          "u32": "@fn_is_ready"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x00850c3c",
+      "u32": "@manager"
+    },
+    {
+      "addr": "@manager",
+      "offset": "0x0",
+      "u32": "@manager_vtable"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@table"
+    },
+    {
+      "addr": "0x00850c80",
+      "u32": "@observer"
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@typeState"
+    },
+    {
+      "addr": "0x00905ca0",
+      "u32": 0
+    },
+    {
+      "addr": "0x009248d0",
+      "u32": 0
+    },
+    {
+      "addr": "@entry",
+      "offset": "0x9a",
+      "cstr": "entry"
+    },
+    {
+      "addr": "@entry2",
+      "offset": "0x9a",
+      "cstr": "entry2"
+    },
+    {
+      "addr": "@typeState",
+      "offset": "0x144",
+      "cstr": "fallback"
+    },
+    {
+      "addr": "@string",
+      "cstr": "message"
+    }
+  ],
+  "callees": {
+    "0x00597be0": {
+      "name": "CListWnd::GetCurSel",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00597ed0": {
+      "name": "CListWnd::GetItemData",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x0050d73e": {
+      "name": "ApplySelection_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x0050c873": {
+      "name": "GetItem_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": "@entry"
+    },
+    "0x004d9160": {
+      "name": "RectWork_guess::Copy_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x004dc02d": {
+      "name": "RectWork_guess::CenterPoint",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "arg0"
+    },
+    "0x0054d976": {
+      "name": "Widget_guess::Arrange_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "u32",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0050c956": {
+      "name": "SendWithdraw_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "ptr"
+      ],
+      "ret": "@string"
+    },
+    "0x00560e32": {
+      "name": "ResetObserver_guess::Activate_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "cstr",
+        "int",
+        "int",
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x0059c3a0": {
+      "name": "SelectionTarget_guess::GetCurChoice_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x0050c8c4": {
+      "name": "SendPermissionChange_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "int",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x0050c9a8": {
+      "name": "SendViewItem_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00572300": {
+      "name": "CXStr::operator char*",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@string"
+    },
+    "0x00574460": {
+      "name": "FUN_00574460_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x004912b1": {
+      "name": "FUN_004912b1_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "mem:20",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00560d80": {
+      "name": "ResetObserver_guess::GetEntryText_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00000000"
+        }
+      ]
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x005a2230": {
+      "name": "CSidlScreenWnd::WndNotification",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    },
+    "@fn_rect_call": {
+      "name": "Slot57_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "arg0"
+    },
+    "@fn_slot_call": {
+      "name": "Slot78_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "list click",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x15c",
+          "u32": "@sender"
+        }
+      ]
+    },
+    {
+      "name": "second list click",
+      "args": [
+        "@sender",
+        3,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x17c",
+          "u32": "@sender"
+        }
+      ]
+    },
+    {
+      "name": "unmatched update",
+      "args": [
+        "@sender",
+        3,
+        0
+      ]
+    },
+    {
+      "name": "deposit button",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x180",
+          "u32": "@sender"
+        }
+      ],
+      "callees": {
+        "0x004912b1": {
+          "name": "FUN_004912b1_guess",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "int",
+            "mem:12",
+            "int",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "view button",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x164",
+          "u32": "@sender"
+        }
+      ]
+    },
+    {
+      "name": "promote button",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x184",
+          "u32": "@sender"
+        }
+      ]
+    },
+    {
+      "name": "split button",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x174",
+          "u32": "@sender"
+        }
+      ]
+    },
+    {
+      "name": "merge button",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x170",
+          "u32": "@sender"
+        }
+      ]
+    },
+    {
+      "name": "withdraw small",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x160",
+          "u32": "@sender"
+        },
+        {
+          "addr": "@entry",
+          "offset": "0x10",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "withdraw layout",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x160",
+          "u32": "@sender"
+        },
+        {
+          "addr": "@entry",
+          "offset": "0x10",
+          "u32": 4
+        }
+      ]
+    },
+    {
+      "name": "withdraw count boundary",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x160",
+          "u32": "@sender"
+        },
+        {
+          "addr": "@entry",
+          "offset": "0x10",
+          "u32": 2
+        }
+      ]
+    },
+    {
+      "name": "change target",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x16c",
+          "u32": "@sender"
+        }
+      ]
+    },
+    {
+      "name": "permission other value",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x168",
+          "u32": "@sender"
+        }
+      ],
+      "callees": {
+        "0x0059c3a0": {
+          "name": "SelectionTarget_guess::GetCurChoice_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "permission named value",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x168",
+          "u32": "@sender"
+        }
+      ]
+    },
+    {
+      "name": "permission empty value",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x168",
+          "u32": "@sender"
+        },
+        {
+          "addr": "@entry",
+          "offset": "0x9a",
+          "cstr": ""
+        }
+      ]
+    },
+    {
+      "name": "filter combo",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x178",
+          "u32": "@sender"
+        }
+      ]
+    },
+    {
+      "name": "toggle existing item",
+      "args": [
+        "@sender",
+        15,
+        "0x1234"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x15c",
+          "u32": "@sender"
+        },
+        {
+          "addr": "@sender",
+          "offset": "0x154",
+          "u32": "0x1234"
+        },
+        {
+          "addr": "@sender",
+          "offset": "0x158",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "toggle new item",
+      "args": [
+        "@sender",
+        15,
+        "0x4321"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x17c",
+          "u32": "@sender"
+        }
+      ]
+    },
+    {
+      "name": "sort by first number",
+      "args": [
+        "@sender",
+        16,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x0",
+          "u32": 0
+        },
+        {
+          "addr": "@data",
+          "offset": "0x8",
+          "u32": 1
+        },
+        {
+          "addr": "@data",
+          "offset": "0x10",
+          "u32": 2
+        }
+      ],
+      "callees": {
+        "0x0050c873": {
+          "name": "Select_guess",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            "@entry",
+            "@entry2"
+          ]
+        }
+      }
+    },
+    {
+      "name": "sort by text",
+      "args": [
+        "@sender",
+        16,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x0",
+          "u32": 1
+        },
+        {
+          "addr": "@data",
+          "offset": "0x8",
+          "u32": 1
+        },
+        {
+          "addr": "@data",
+          "offset": "0x10",
+          "u32": 2
+        }
+      ],
+      "callees": {
+        "0x00574460": {
+          "name": "FUN_00574460_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "sort by count",
+      "args": [
+        "@sender",
+        16,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x0",
+          "u32": 2
+        }
+      ],
+      "callees": {
+        "0x0050c873": {
+          "name": "Select_guess",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            "@entry",
+            "@entry2"
+          ]
+        }
+      }
+    },
+    {
+      "name": "sort kind on first list",
+      "args": [
+        "@sender",
+        16,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x15c",
+          "u32": "@sender"
+        },
+        {
+          "addr": "@data",
+          "offset": "0x0",
+          "u32": 3
+        }
+      ],
+      "callees": {
+        "0x0050c873": {
+          "name": "Select_guess",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            "@entry",
+            "@entry2"
+          ]
+        }
+      }
+    },
+    {
+      "name": "sort kind on other sender",
+      "args": [
+        "@sender",
+        16,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x0",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "unknown sort kind",
+      "args": [
+        "@sender",
+        16,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x0",
+          "u32": 4
+        }
+      ]
+    },
+    {
+      "name": "item move mode two",
+      "args": [
+        "@sender",
+        31,
+        "@rowvalue"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0xbeb8",
+          "u32": 2
+        },
+        {
+          "addr": "@entry",
+          "offset": "0x10",
+          "u32": 4
+        },
+        {
+          "addr": "@rowvalue",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "item move boundary",
+      "args": [
+        "@sender",
+        31,
+        "@rowvalue"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0xbeb8",
+          "u32": 2
+        },
+        {
+          "addr": "@entry",
+          "offset": "0x10",
+          "u32": 4
+        },
+        {
+          "addr": "@rowvalue",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "item move mode one",
+      "args": [
+        "@sender",
+        31,
+        "@rowvalue"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0xbeb8",
+          "u32": 1
+        },
+        {
+          "addr": "@rowvalue",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "item move idle",
+      "args": [
+        "@sender",
+        31,
+        "@rowvalue"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0xbeb8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "item move no selection",
+      "args": [
+        "@sender",
+        31,
+        "@rowvalue"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0xbeb4",
+          "u32": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "name": "message thirty three send",
+      "args": [
+        "@sender",
+        33,
+        "@data"
+      ]
+    },
+    {
+      "name": "message thirty three inactive",
+      "args": [
+        "@sender",
+        33,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@typeState",
+          "offset": "0xe14",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "unknown notification",
+      "args": [
+        "@sender",
+        2,
+        "@data"
+      ]
+    },
+    {
+      "name": "unselected sender",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ]
+    },
+    {
+      "name": "null selected entry",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x184",
+          "u32": "@sender"
+        }
+      ],
+      "callees": {
+        "0x0050c873": {
+          "name": "Select_guess",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "invalid selected value",
+      "args": [
+        "@sender",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@derivedobject",
+          "offset": "0x170",
+          "u32": "@sender"
+        },
+        {
+          "addr": "@derivedobject",
+          "offset": "0xbeb4",
+          "u32": "0xffffffff"
+        }
+      ],
+      "callees": {
+        "0x0050c873": {
+          "name": "Select_guess",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5299523,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@sender",
+          0
+        ]
+      },
+      {
+        "choices": [
+          0,
+          1,
+          3,
+          15,
+          16,
+          33,
+          34
+        ]
+      },
+      {
+        "choices": [
+          "@data"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@derivedobject",
+        "offset": "0x15c",
+        "type": "ptr",
+        "choices": [
+          "@sender",
+          0
+        ]
+      },
+      {
+        "addr": "@derivedobject",
+        "offset": "0x160",
+        "type": "ptr",
+        "choices": [
+          "@sender",
+          0
+        ]
+      },
+      {
+        "addr": "@derivedobject",
+        "offset": "0x164",
+        "type": "ptr",
+        "choices": [
+          "@sender",
+          0
+        ]
+      },
+      {
+        "addr": "@derivedobject",
+        "offset": "0x168",
+        "type": "ptr",
+        "choices": [
+          "@sender",
+          0
+        ]
+      },
+      {
+        "addr": "@derivedobject",
+        "offset": "0x16c",
+        "type": "ptr",
+        "choices": [
+          "@sender",
+          0
+        ]
+      },
+      {
+        "addr": "@derivedobject",
+        "offset": "0x170",
+        "type": "ptr",
+        "choices": [
+          "@sender",
+          0
+        ]
+      },
+      {
+        "addr": "@derivedobject",
+        "offset": "0x174",
+        "type": "ptr",
+        "choices": [
+          "@sender",
+          0
+        ]
+      },
+      {
+        "addr": "@derivedobject",
+        "offset": "0x178",
+        "type": "ptr",
+        "choices": [
+          "@sender",
+          0
+        ]
+      },
+      {
+        "addr": "@derivedobject",
+        "offset": "0x17c",
+        "type": "ptr",
+        "choices": [
+          "@sender",
+          0
+        ]
+      },
+      {
+        "addr": "@derivedobject",
+        "offset": "0x180",
+        "type": "ptr",
+        "choices": [
+          "@sender",
+          0
+        ]
+      },
+      {
+        "addr": "@derivedobject",
+        "offset": "0x184",
+        "type": "ptr",
+        "choices": [
+          "@sender",
+          0
+        ]
+      },
+      {
+        "addr": "@derivedobject",
+        "offset": "0xbeb4",
+        "type": "u32",
+        "choices": [
+          1,
+          "0xffffffff"
+        ]
+      },
+      {
+        "addr": "@derivedobject",
+        "offset": "0xbeb8",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@entry",
+        "offset": "0x10",
+        "type": "int",
+        "choices": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "addr": "@entry",
+        "offset": "0x14",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "addr": "@data",
+        "offset": "0x0",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "addr": "@data",
+        "offset": "0x8",
+        "type": "u32",
+        "choices": [
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@data",
+        "offset": "0x10",
+        "type": "u32",
+        "choices": [
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@typeState",
+        "offset": "0xe14",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@rowvalue",
+        "type": "int",
+        "range": [
+          0,
+          4
+        ]
+      }
+    ]
+  }
+}

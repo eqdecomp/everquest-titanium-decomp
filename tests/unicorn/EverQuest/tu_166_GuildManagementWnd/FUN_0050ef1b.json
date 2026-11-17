@@ -1,0 +1,712 @@
+{
+  "function": "GuildMgmtWnd_guess::DumpList_guess",
+  "original": "0x0050ef1b",
+  "sources": [
+    "src/EverQuest/tu_166_GuildManagementWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {
+      "name": "filename",
+      "type": "cstr"
+    },
+    {
+      "name": "separator",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x40c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x16c",
+          "u32": "@members"
+        },
+        {
+          "offset": "0x194",
+          "u32": "@notes"
+        },
+        {
+          "offset": "0x1a8",
+          "u32": "@tribute"
+        },
+        {
+          "offset": "0x408",
+          "u32": 1
+        }
+      ]
+    },
+    "members": {
+      "size": "0x130",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x11c",
+          "u32": 1
+        },
+        {
+          "offset": "0x12c",
+          "u32": 1
+        }
+      ]
+    },
+    "tribute": {
+      "size": "0x130",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x11c",
+          "u32": 1
+        },
+        {
+          "offset": "0x12c",
+          "u32": 1
+        }
+      ]
+    },
+    "notes": {
+      "size": "0x130",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x11c",
+          "u32": 1
+        },
+        {
+          "offset": "0x12c",
+          "u32": 1
+        }
+      ]
+    },
+    "selection": {
+      "size": "0x28c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x288",
+          "u32": 0
+        }
+      ]
+    },
+    "everquest": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "tm": {
+      "size": "0x24",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 56
+        },
+        {
+          "offset": "0x4",
+          "u32": 34
+        },
+        {
+          "offset": "0x8",
+          "u32": 12
+        },
+        {
+          "offset": "0xc",
+          "u32": 8
+        },
+        {
+          "offset": "0x10",
+          "u32": 10
+        },
+        {
+          "offset": "0x14",
+          "u32": 124
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "from_image": "0x0079ac74",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": "@selection"
+    },
+    {
+      "addr": "0x00905d38",
+      "size": 4,
+      "fill": "zero"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@everquest"
+    },
+    {
+      "addr": "0x00641b08",
+      "from_image": "0x00641B08",
+      "image_size": 3
+    },
+    {
+      "addr": "0x0063f9fc",
+      "from_image": "0x0063F9FC",
+      "image_size": 3
+    },
+    {
+      "addr": "0x00641588",
+      "from_image": "0x00641588",
+      "image_size": 2
+    },
+    {
+      "addr": "0x007a0000",
+      "cstr": "Guild"
+    },
+    {
+      "addr": "0x007a0010",
+      "cstr": "Cell"
+    }
+  ],
+  "callees": {
+    "0x0060ecbc": {
+      "name": "time32",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "ret": 1712345678
+    },
+    "0x00612227": {
+      "name": "localtime",
+      "conv": "cdecl",
+      "args": [
+        "mem:4"
+      ],
+      "ret": "@tm"
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "5800"
+        }
+      ]
+    },
+    "0x0040ac55": {
+      "name": "NameTable::Lookup",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "0x007a0000"
+    },
+    "0x0046da4a": {
+      "name": "FormatMessage",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "cstr",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "5800"
+        }
+      ]
+    },
+    "0x00498436": {
+      "name": "CEverQuest::dsp_chat",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x0060e887": {
+      "name": "fopen",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr"
+      ],
+      "ret": "0x61000000"
+    },
+    "0x00597f10": {
+      "name": "CListWnd::GetItemText",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "int",
+        "int"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "01000000"
+        }
+      ]
+    },
+    "0x00572300": {
+      "name": "CXStr::operator char*",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "0x007a0010"
+    },
+    "0x0060ec45": {
+      "name": "fprintf",
+      "conv": "cdecl",
+      "args": [
+        "u32",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "ReleaseCXStr",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x0060e790": {
+      "name": "fclose",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "_localtime": "0x00612227",
+    "_fopen": "0x0060e887",
+    "_fprintf": "0x0060ec45",
+    "_fclose": "0x0060e790"
+  },
+  "cases": [
+    {
+      "name": "selection-disabled",
+      "args": [
+        "data.txt",
+        "|"
+      ],
+      "memory": [
+        {
+          "addr": "@selection",
+          "offset": "0x288",
+          "u32": -1
+        }
+      ]
+    },
+    {
+      "name": "null-filename-no-members",
+      "args": [
+        0,
+        "|"
+      ],
+      "memory": [
+        {
+          "addr": "@selection",
+          "offset": "0x288",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x16c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "empty-filename-no-members",
+      "args": [
+        "",
+        ","
+      ],
+      "memory": [
+        {
+          "addr": "@selection",
+          "offset": "0x288",
+          "u32": 0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x16c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "nonempty-filename-no-members",
+      "args": [
+        "data.txt",
+        ";"
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x16c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "file-open-fails",
+      "args": [
+        "data.txt",
+        "|"
+      ],
+      "callees": {
+        "0x0060e887": {
+          "name": "fopen",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "zero-rows",
+      "args": [
+        "rows.txt",
+        "|"
+      ],
+      "memory": [
+        {
+          "addr": "@members",
+          "offset": "0x11c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "member-columns-zero",
+      "args": [
+        "rows.txt",
+        "|"
+      ],
+      "memory": [
+        {
+          "addr": "@members",
+          "offset": "0x11c",
+          "u32": 1
+        },
+        {
+          "addr": "@members",
+          "offset": "0x12c",
+          "u32": 0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x194",
+          "u32": 0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1a8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "members-and-all-columns",
+      "args": [
+        "rows.txt",
+        "|"
+      ],
+      "memory": [
+        {
+          "addr": "@members",
+          "offset": "0x11c",
+          "u32": 2
+        },
+        {
+          "addr": "@members",
+          "offset": "0x12c",
+          "u32": 3
+        },
+        {
+          "addr": "@tribute",
+          "offset": "0x11c",
+          "u32": 1
+        },
+        {
+          "addr": "@tribute",
+          "offset": "0x12c",
+          "u32": 3
+        },
+        {
+          "addr": "@notes",
+          "offset": "0x11c",
+          "u32": 1
+        },
+        {
+          "addr": "@notes",
+          "offset": "0x12c",
+          "u32": 3
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x408",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "tribute-without-guard",
+      "args": [
+        "rows.txt",
+        "|"
+      ],
+      "memory": [
+        {
+          "addr": "@members",
+          "offset": "0x11c",
+          "u32": 1
+        },
+        {
+          "addr": "@members",
+          "offset": "0x12c",
+          "u32": 2
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x194",
+          "u32": 0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x408",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "tribute-column-boundary",
+      "args": [
+        "rows.txt",
+        "|"
+      ],
+      "memory": [
+        {
+          "addr": "@members",
+          "offset": "0x11c",
+          "u32": 1
+        },
+        {
+          "addr": "@members",
+          "offset": "0x12c",
+          "u32": 1
+        },
+        {
+          "addr": "@tribute",
+          "offset": "0x12c",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x194",
+          "u32": 0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x408",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "notes-column-zero",
+      "args": [
+        "rows.txt",
+        "|"
+      ],
+      "memory": [
+        {
+          "addr": "@members",
+          "offset": "0x11c",
+          "u32": 1
+        },
+        {
+          "addr": "@members",
+          "offset": "0x12c",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1a8",
+          "u32": 0
+        },
+        {
+          "addr": "@notes",
+          "offset": "0x12c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "notes-multiple-columns",
+      "args": [
+        "rows.txt",
+        "|"
+      ],
+      "memory": [
+        {
+          "addr": "@members",
+          "offset": "0x11c",
+          "u32": 1
+        },
+        {
+          "addr": "@members",
+          "offset": "0x12c",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1a8",
+          "u32": 0
+        },
+        {
+          "addr": "@notes",
+          "offset": "0x12c",
+          "u32": 3
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5304091,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "",
+          "rows.txt",
+          "archive.txt"
+        ]
+      },
+      {
+        "choices": [
+          "|",
+          ",",
+          ";"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@selection",
+        "offset": "0x288",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x16c",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@members"
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x194",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@notes"
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x1a8",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@tribute"
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x408",
+        "type": "ptr",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@members",
+        "offset": "0x11c",
+        "type": "int",
+        "range": [
+          0,
+          3
+        ]
+      },
+      {
+        "addr": "@members",
+        "offset": "0x12c",
+        "type": "int",
+        "range": [
+          -1,
+          4
+        ]
+      },
+      {
+        "addr": "@tribute",
+        "offset": "0x12c",
+        "type": "int",
+        "range": [
+          -1,
+          4
+        ]
+      },
+      {
+        "addr": "@notes",
+        "offset": "0x12c",
+        "type": "int",
+        "range": [
+          -1,
+          4
+        ]
+      }
+    ]
+  },
+  "_survivors": "L735: cols == 1 assigns 1 in both the < 1 and <= 1 forms, so the change is equivalent"
+}

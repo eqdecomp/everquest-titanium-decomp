@@ -1,0 +1,139 @@
+{
+  "function": "RecommendedDrivers_guess::Load_guess",
+  "original": "0x004c4228",
+  "sources": [
+    "src/EverQuest/tu_085_RecommendedDrivers.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@recordcollection",
+  "args": [
+    {
+      "name": "path",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "recordcollection": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 7
+        },
+        {
+          "offset": "0x8",
+          "u32": 8
+        },
+        {
+          "offset": "0xc",
+          "u8": 1
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x006478d8",
+      "from_image": "0x006478d8",
+      "image_size": 2
+    }
+  ],
+  "callees": {
+    "0x0060e887": {
+      "name": "_fopen",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr"],
+      "ret": "0x60010000"
+    },
+    "0x004c4143": {
+      "name": "FUN_004c4143",
+      "conv": "thiscall",
+      "args": ["ptr", "mem:21"],
+      "ret": 0
+    },
+    "0x004c408d": {
+      "name": "FUN_004c408d",
+      "conv": "thiscall",
+      "args": ["int", "mem:21"]
+    },
+    "0x0050f3f6": {
+      "name": "FUN_0050f3f6",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004482fb": {
+      "name": "FUN_004482fb",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0060e790": {
+      "name": "_fclose",
+      "conv": "cdecl",
+      "args": ["ptr"],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "_fopen": "0x0060e887",
+    "_fclose": "0x0060e790"
+  },
+  "cases": [
+    {
+      "name": "open fails",
+      "args": ["missing"],
+      "callees": {
+        "0x0060e887": {
+          "name": "_fopen",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "empty file",
+      "args": ["empty"]
+    },
+    {
+      "name": "one record",
+      "args": ["one"],
+      "callees": {
+        "0x004c4143": {
+          "name": "FUN_004c4143",
+          "conv": "thiscall",
+          "args": ["ptr", "mem:21"],
+          "ret": [1, 0]
+        }
+      }
+    },
+    {
+      "name": "two records",
+      "args": ["two"],
+      "callees": {
+        "0x004c4143": {
+          "name": "FUN_004c4143",
+          "conv": "thiscall",
+          "args": ["ptr", "mem:21"],
+          "ret": [1, 1, 0]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4997672,
+    "count": 100,
+    "args": [
+      {}
+    ],
+    "memory": [
+      {
+        "addr": "@recordcollection",
+        "offset": "0x0",
+        "type": "int",
+        "range": [-2, 12]
+      }
+    ]
+  }
+}

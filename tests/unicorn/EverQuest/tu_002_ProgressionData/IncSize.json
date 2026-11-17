@@ -1,0 +1,27 @@
+{
+  "function": "ListBase_guess::IncSize_guess",
+  "_shape": "__EH_prolog frame (fs:[0] chain, passthrough) with a throw path: std::string ctor, exception ctor, _CxxThrowException (noreturn)",
+  "original": "0x00403653",
+  "sources": ["src/EverQuest/tu_002_ProgressionData.cpp"],
+  "conv": "thiscall",
+  "this": "@list",
+  "args": [{"name": "count_guess", "type": "u32"}],
+  "ret": "u32",
+  "objects": {"list": {"size": "0xc", "fill": "random"}},
+  "memory": [],
+  "callees": {
+    "0x00403631": {"name": "std::string::string(const char*)", "conv": "thiscall", "args": ["cstr"]},
+    "0x0040354c": {"name": "runtime_error(const string&)", "conv": "thiscall", "args": ["ignore"]},
+    "0x0060e27f": {"name": "_CxxThrowException", "conv": "stdcall", "args": ["ignore", "u32"], "noreturn": true}
+  },
+  "cases": [
+    {"name": "fits", "args": [5], "memory": [{"addr": "@list", "offset": 8, "u32": 10}]},
+    {"name": "exactly at the limit", "args": [1], "memory": [{"addr": "@list", "offset": 8, "u32": "0x6666665"}]},
+    {"name": "one over", "args": [2], "memory": [{"addr": "@list", "offset": 8, "u32": "0x6666665"}]},
+    {"name": "zero at max", "args": [0], "memory": [{"addr": "@list", "offset": 8, "u32": "0x6666666"}]},
+    {"name": "huge", "args": ["0xffffffff"], "memory": [{"addr": "@list", "offset": 8, "u32": 0}]}
+  ],
+  "rewrite_data_aliases": {"__TI2?AUExceptionDerived_guess@@": "0x00673acc"},
+  "fuzz": {"seed": 4208211, "count": 100, "args": [{"range": [0, 120]}],
+           "memory": [{"addr": "@list", "offset": 8, "type": "u32", "range": [107374100, 107374190], "p": 0.6}]}
+}

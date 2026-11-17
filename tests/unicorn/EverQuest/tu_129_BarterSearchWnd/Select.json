@@ -1,0 +1,199 @@
+{
+  "function": "CBarterSearchWnd_guess::ShowBuyLine_guess",
+  "original": "0x004de785",
+  "sources": [
+    "src/EverQuest/tu_129_BarterSearchWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@tracker",
+  "args": [
+    {
+      "name": "index_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "tracker": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        { "offset": "0x164", "u32": "@list" }
+      ]
+    },
+    "list": {
+      "size": "0x200",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "u32": "@vtbl" }
+      ]
+    },
+    "vtbl": {
+      "size": "0x140",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x130", "u32": "@fn_slot76" }
+      ]
+    },
+    "fn_slot76": {
+      "size": "4",
+      "fill": "zero"
+    },
+    "transform": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "entry": {
+      "size": "0x70",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x6c", "u32": 4660 }
+      ]
+    },
+    "detail0": {
+      "size": "0x4c",
+      "fill": "zero",
+      "init": [
+        { "offset": "4", "u32": 42 },
+        { "offset": "8", "u32": 7 },
+        { "offset": "0xc", "cstr": "Alpha" }
+      ]
+    },
+    "detail1": {
+      "size": "0x4c",
+      "fill": "zero",
+      "init": [
+        { "offset": "4", "u32": 99 },
+        { "offset": "8", "u32": 3 },
+        { "offset": "0xc", "cstr": "Beta" }
+      ]
+    }
+  },
+  "memory": [
+    { "addr": "@tracker", "offset": "0x190", "u32": 2 },
+    { "addr": "@tracker", "offset": "0x1bc", "u32": 4294967295 },
+    { "addr": "@entry", "offset": "0xc", "u32": 2 },
+    { "addr": "0x00991910", "u32": "@transform" }
+  ],
+  "callees": {
+    "0x004de692": {
+      "name": "Cc_guess::Get",
+      "conv": "thiscall",
+      "args": [ "int" ],
+      "ret": "@entry"
+    },
+    "0x00409340": {
+      "name": "EntryIndex_guess::Get_guess",
+      "conv": "thiscall",
+      "args": [ "int" ],
+      "ret": [ "@detail0", "@detail1" ]
+    },
+    "0x00571e00": {
+      "name": "CXStr_ctor",
+      "conv": "thiscall",
+      "args": [ "cstr" ],
+      "ret": 0
+    },
+    "0x0059b9d0": {
+      "name": "CListWnd::AddString",
+      "conv": "thiscall",
+      "args": [ "ignore", "int", "u32", "u32" ],
+      "ret": [ 0, 1 ]
+    },
+    "0x00571d00": {
+      "name": "CXStr_dtor",
+      "conv": "thiscall",
+      "args": [ "ignore" ],
+      "ret": 0
+    },
+    "0x004ffbe9": {
+      "name": "GlobalHandler_guess::GetIcon_guess",
+      "conv": "thiscall",
+      "args": [ "int" ],
+      "ret": [ 7, 9, 11 ]
+    },
+    "0x0059b2e0": {
+      "name": "CListWnd::SetItemData_guess",
+      "conv": "thiscall",
+      "args": [ "int", "int", "u32" ]
+    },
+    "0x0059b360": {
+      "name": "CListWnd::SetItemText",
+      "conv": "thiscall",
+      "args": [ "int", "int", "ignore" ]
+    },
+    "0x006220e9": {
+      "name": "_itoa",
+      "conv": "cdecl",
+      "args": [ "int", "ptr", "int" ],
+      "passthrough": true
+    },
+    "@fn_slot76": {
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9"
+  },
+  "cases": [
+    {
+      "name": "same index, no change",
+      "args": [ 3 ],
+      "memory": [ { "addr": "@tracker", "offset": "0x1bc", "u32": 3 } ]
+    },
+    {
+      "name": "no list",
+      "args": [ 1 ],
+      "memory": [ { "addr": "@tracker", "offset": "0x164", "u32": 0 } ]
+    },
+    {
+      "name": "negative index",
+      "args": [ -2 ]
+    },
+    {
+      "name": "index past count",
+      "args": [ 5 ]
+    },
+    {
+      "name": "index equals count",
+      "args": [ 2 ]
+    },
+    {
+      "name": "index zero, two details",
+      "args": [ 0 ]
+    },
+    {
+      "name": "index one, no details",
+      "args": [ 1 ],
+      "memory": [ { "addr": "@entry", "offset": "0xc", "u32": 0 } ]
+    },
+    {
+      "name": "index one, one detail",
+      "args": [ 1 ],
+      "memory": [ { "addr": "@entry", "offset": "0xc", "u32": 1 } ]
+    },
+    {
+      "name": "index one, three details",
+      "args": [ 1 ],
+      "memory": [ { "addr": "@entry", "offset": "0xc", "u32": 3 } ]
+    },
+    {
+      "name": "index -1 with state -1",
+      "args": [ -1 ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5105541,
+    "count": 120,
+    "args": [
+      { "choices": [ -2, -1, 0, 1, 2, 3, 5 ] }
+    ],
+    "memory": [
+      { "addr": "@tracker", "offset": "0x1bc", "type": "u32", "choices": [ 4294967295, 0, 1, 2, 3 ] },
+      { "addr": "@tracker", "offset": "0x190", "type": "int", "choices": [ 0, 1, 2, 3 ] },
+      { "addr": "@entry", "offset": "0xc", "type": "int", "choices": [ 0, 1, 2, 3 ] }
+    ]
+  }
+}

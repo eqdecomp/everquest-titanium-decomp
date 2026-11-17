@@ -1,0 +1,206 @@
+{
+  "function": "GlobalState_guess::SendNewText_guess",
+  "original": "0x00497c5b",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@globalstate",
+  "args": [
+    {"name": "type_guess", "type": "int"},
+    {"name": "from_guess", "type": "ptr"},
+    {"name": "text_guess", "type": "ptr"},
+    {"name": "value_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "globalstate": {"size": "0x4", "fill": "zero"},
+    "context": {"size": "0xc290", "fill": "zero", "init": [{"offset": "0x8", "u32": "@node"}]},
+    "node": {"size": "0x8", "fill": "zero"},
+    "owner": {"size": "0x25c", "fill": "zero"},
+    "entry": {"size": "0x260", "fill": "zero"},
+    "from": {"size": "0x80", "fill": "zero"},
+    "text": {"size": "0x800", "fill": "zero"},
+    "emptyText": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x00905d00", "u32": "@context"},
+    {"addr": "0x00905ce4", "u32": "@owner"},
+    {"addr": "0x00905d04", "u32": "@entry"},
+    {"addr": "0x00905ca0", "u32": 0},
+    {"addr": "0x00923d5c", "u32": 0},
+    {"addr": "0x00923898", "cstr": "prefix"},
+    {"addr": "@node", "offset": "0x4", "u32": 0},
+    {"addr": "@context", "offset": "0x14", "u8": 48},
+    {"addr": "@context", "offset": "0x44", "cstr": "zone"},
+    {"addr": "@owner", "offset": "0x256", "u8": 0},
+    {"addr": "@owner", "offset": "0x258", "u32": "0x5151"},
+    {"addr": "@entry", "offset": "0x120", "cstr": "entry target"},
+    {"addr": "@entry", "offset": "0x244", "u8": 0},
+    {"addr": "@entry", "offset": "0x256", "u8": 0},
+    {"addr": "@entry", "offset": "0x25c", "u32": "0x5151"},
+    {"addr": "@from", "cstr": "sender"},
+    {"addr": "@text", "cstr": "ordinary message"}
+  ],
+  "callees": {
+    "0x0040e934": {"name": "FindBuffWithEffect_guess", "conv": "thiscall", "args": ["int", "int"], "ret": 0},
+    "0x00492f68": {"name": "DoPercentConvert_guess", "conv": "thiscall", "args": ["mem:2048", "int"], "ret": 0},
+    "0x00497be2": {"name": "GetCurrentLanguage_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005ed550": {"name": "FUN_005ed550", "conv": "cdecl", "args": [], "ret": 0},
+    "0x004912b1": {"name": "FUN_004912b1", "conv": "cdecl", "args": ["ptr", "int", "mem:148", "int", "char"], "ret": 0},
+    "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1]}
+  },
+  "rewrite_aliases": {
+    "_stricmp": "0x00621e9c"
+  },
+  "cases": [
+    {
+      "name": "null-sender-and-adjusted-chance-packet",
+      "args": [1, 0, "@text", 7],
+      "memory": [
+        {"addr": "0x00923898", "cstr": ""},
+        {"addr": "@context", "offset": "0x14", "u8": 48}
+      ],
+      "callees": {
+        "0x005ed550": {"name": "FUN_005ed550", "conv": "cdecl", "args": [], "ret": 8},
+        "0x004912b1": {"name": "FUN_004912b1", "conv": "cdecl", "args": ["ptr", "int", "mem:2196", "int", "char"], "ret": 0}
+      }
+    },
+    {
+      "name": "null-sender-first-payload-byte",
+      "args": [1, 0, "@text", 0],
+      "memory": [{"addr": "0x00923898", "cstr": ""}],
+      "callees": {
+        "0x004912b1": {"name": "FUN_004912b1", "conv": "cdecl", "args": ["ptr", "int", "mem:1", "int", "char"], "ret": 0}
+      }
+    },
+    {"name": "normal-send", "args": [1, 0, "@text", 7]},
+    {"name": "from-and-empty-prefix", "args": [3, "@from", "@text", 1], "memory": [{"addr": "0x00923898", "cstr": ""}]},
+    {"name": "type-two-duplicate-empty", "args": [2, 0, "@emptyText", 2]},
+    {"name": "type-two-new-text", "args": [2, 0, "@text", 3]},
+    {
+      "name": "matching-entry-target",
+      "args": [8, "@from", "@text", 4],
+      "memory": [
+        {"addr": "0x00923898", "cstr": ""},
+        {"addr": "@entry", "offset": "0x244", "u8": 1},
+        {"addr": "@entry", "offset": "0x256", "u8": 0},
+        {"addr": "@entry", "offset": "0x25c", "u32": "0x5151"}
+      ],
+      "callees": {"0x0040e934": {"name": "FUN_0040e934", "conv": "thiscall", "args": ["int", "int"], "ret": 1}}
+    },
+    {
+      "name": "entry-method-fallback",
+      "args": [8, 0, "@text", 5],
+      "memory": [
+        {"addr": "@entry", "offset": "0x244", "u8": 1},
+        {"addr": "@entry", "offset": "0x25c", "u32": "0x5151"}
+      ],
+      "callees": {"0x0040e934": {"name": "FUN_0040e934", "conv": "thiscall", "args": ["int", "int"], "ret": 0}}
+    },
+    {
+      "name": "entry-key-mismatch",
+      "args": [8, 0, "@text", 6],
+      "memory": [
+        {"addr": "@entry", "offset": "0x244", "u8": 1},
+        {"addr": "@entry", "offset": "0x25c", "u32": "0x9999"}
+      ],
+      "callees": {"0x0040e934": {"name": "FUN_0040e934", "conv": "thiscall", "args": ["int", "int"], "ret": 1}}
+    },
+    {
+      "name": "chance-clamped-at-zero",
+      "args": [1, 0, "@text", 0],
+      "memory": [{"addr": "@context", "offset": "0x14", "u8": 0}],
+      "callees": {
+        "0x00497be2": {"name": "FUN_00497be2", "conv": "thiscall", "args": [], "ret": 0},
+        "0x005ed550": {"name": "FUN_005ed550", "conv": "cdecl", "args": [], "ret": 8}
+      }
+    },
+    {
+      "name": "indexed-table-neighbors",
+      "args": [1, 0, "@text", 0],
+      "memory": [
+        {"addr": "@node", "offset": "0x4", "u32": 1},
+        {"addr": "@context", "offset": "0x10", "u8": 7},
+        {"addr": "@context", "offset": "0x1a", "u8": 48},
+        {"addr": "0x00923898", "cstr": ""}
+      ],
+      "callees": {"0x00497be2": {"name": "FUN_00497be2", "conv": "thiscall", "args": [], "ret": 5}}
+    },
+    {
+      "name": "chance-pending",
+      "args": [1, 0, "@text", 0],
+      "memory": [
+        {"addr": "@owner", "offset": "0x256", "u8": 1},
+        {"addr": "0x00923d5c", "u32": 0}
+      ],
+      "callees": {"0x00497be2": {"name": "FUN_00497be2", "conv": "thiscall", "args": [], "ret": 31}}
+    },
+    {
+      "name": "chance-sentinel",
+      "args": [1, 0, "@text", 0],
+      "memory": [
+        {"addr": "@owner", "offset": "0x256", "u8": 1},
+        {"addr": "0x00923d5c", "u32": 1},
+        {"addr": "0x00923898", "cstr": ""},
+        {"addr": "@context", "offset": "0x33", "u8": 5}
+      ],
+      "callees": {
+        "0x00497be2": {"name": "FUN_00497be2", "conv": "thiscall", "args": [], "ret": 31},
+        "0x005ed550": {"name": "FUN_005ed550", "conv": "cdecl", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "log-comparison-early-return",
+      "args": [3, "@from", "@text", 0],
+      "memory": [
+        {"addr": "0x00923898", "cstr": "zone"},
+        {"addr": "@from", "cstr": "zone"}
+      ],
+      "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [0, 0]}}
+    },
+    {
+      "name": "log-second-comparison-differs",
+      "args": [3, "@from", "@text", 0],
+      "memory": [
+        {"addr": "0x00923898", "cstr": "zone"},
+        {"addr": "@from", "cstr": "sender"}
+      ],
+      "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [0, 1]}}
+    },
+    {
+      "name": "null-sender-comparison-visible",
+      "args": [3, 0, "@text", 0],
+      "memory": [{"addr": "0x00923898", "cstr": "zone"}],
+      "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [0, 1]}}
+    },
+    {
+      "name": "out-of-range-index-trap",
+      "args": [1, 0, "@text", 0],
+      "fault_ok": "index 0x20 reaches the original INT3 bounds trap",
+      "callees": {"0x00497be2": {"name": "FUN_00497be2", "conv": "thiscall", "args": [], "ret": 32}}
+    }
+  ],
+  "fuzz": {
+    "seed": 4815963,
+    "count": 100,
+    "args": [
+      {"range": [-1, 10]},
+      {"choices": [0, "@from"]},
+      {"choices": ["@text", "@emptyText"]},
+      {"range": [-10, 10]}
+    ],
+    "memory": [
+      {"addr": "0x00905d04", "type": "ptr", "choices": [0, "@entry"]},
+      {"addr": "@node", "offset": "0x4", "type": "u32", "choices": [0, 1, 4]},
+      {"addr": "@context", "offset": "0x14", "type": "u8", "choices": [0, 48, 100, 255]},
+      {"addr": "@owner", "offset": "0x256", "type": "u8", "choices": [0, 1]},
+      {"addr": "@entry", "offset": "0x244", "type": "u8", "choices": [0, 1]},
+      {"addr": "@entry", "offset": "0x256", "type": "u8", "choices": [0, 1]},
+      {"addr": "@entry", "offset": "0x25c", "type": "u32", "choices": ["0x5151", "0x9999"]},
+      {"addr": "0x00923d5c", "type": "u32", "choices": [0, 1]}
+    ]
+  },
+  "_survivors": "L6770: the sender byte is a stack-local packet field after a full memset; with the fixture's void-connection send stub, no later callee reads that byte, so the redundant zero store has no observed effect"
+}

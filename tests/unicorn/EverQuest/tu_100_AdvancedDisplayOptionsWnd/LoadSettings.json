@@ -1,0 +1,218 @@
+{
+  "function": "CAdvancedDisplayOptionsWnd_guess::LoadSettings_guess",
+  "original": "0x004d47d8",
+  "sources": [
+    "src/EverQuest/tu_100_AdvancedDisplayOptionsWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@wnd",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "wnd": {"size": "0x18c", "fill": "random", "init": [
+      {"offset": "0x15c", "u32": "@w15c"},
+      {"offset": "0x160", "u32": "@w160"},
+      {"offset": "0x164", "u32": "@w164"},
+      {"offset": "0x168", "u32": "@w168"},
+      {"offset": "0x16c", "u32": "@w16c"},
+      {"offset": "0x170", "u32": "@w170"},
+      {"offset": "0x174", "u32": "@w174"},
+      {"offset": "0x178", "u32": "@w178"},
+      {"offset": "0x17c", "u32": "@w17c"},
+      {"offset": "0x180", "u32": "@w180"},
+      {"offset": "0x184", "u32": "@w184"},
+      {"offset": "0x188", "u32": "@w188"}
+    ]},
+    "w15c": {"size": "0x130", "fill": "random"},
+    "w160": {"size": "0x130", "fill": "random"},
+    "w164": {"size": "0x130", "fill": "random"},
+    "w168": {"size": "0x130", "fill": "random"},
+    "w16c": {"size": "0x130", "fill": "random"},
+    "w170": {"size": "0x130", "fill": "random"},
+    "w174": {"size": "0x130", "fill": "random"},
+    "w178": {"size": "0x130", "fill": "random"},
+    "w17c": {"size": "0x130", "fill": "random"},
+    "w180": {"size": "0x130", "fill": "random"},
+    "w184": {"size": "0x130", "fill": "random"},
+    "w188": {"size": "0x130", "fill": "random"},
+    "game": {"size": "0x2d70", "fill": "random", "init": [
+      {"offset": "0x2d5f", "u8": 0},
+      {"offset": "0x2d60", "u8": 0},
+      {"offset": "0x2d61", "u8": 0},
+      {"offset": "0x2d62", "u8": 0},
+      {"offset": "0x2d63", "u8": 0},
+      {"offset": "0x2d64", "u8": 0},
+      {"offset": "0x2d65", "u8": 0},
+      {"offset": "0x2d68", "u32": 123},
+      {"offset": "0x2d6c", "u32": 456}
+    ]},
+    "ctl": {"size": "0x8", "fill": "random", "init": [{"offset": 0, "u32": "@ctlvt"}]},
+    "ctlvt": {"size": "0xe0", "fill": "random", "init": [
+      {"offset": "0xbc", "u32": "@fn_name"},
+      {"offset": "0xd8", "u32": "@fn_caps"}
+    ]},
+    "ctl0": {"size": "0x8", "fill": "random", "init": [{"offset": 0, "u32": "@ctlvt0"}]},
+    "ctlvt0": {"size": "0xe0", "fill": "random", "init": [
+      {"offset": "0xbc", "u32": "@fn_name"},
+      {"offset": "0xd8", "u32": "@fn_caps0"}
+    ]},
+    "ctl1": {"size": "0x8", "fill": "random", "init": [{"offset": 0, "u32": "@ctlvt1"}]},
+    "ctlvt1": {"size": "0xe0", "fill": "random", "init": [
+      {"offset": "0xbc", "u32": "@fn_name"},
+      {"offset": "0xd8", "u32": "@fn_caps1"}
+    ]},
+    "fn_name": {"size": "0x4"},
+    "fn_caps": {"size": "0x4"},
+    "fn_caps0": {"size": "0x4"},
+    "fn_caps1": {"size": "0x4"},
+    "strtab": {"size": "0x10", "fill": "random"},
+    "mgr": {"size": "0x20", "fill": "random"},
+    "setting": {"size": "0x8", "fill": "random", "init": [{"offset": 0, "u32": "@setvt"}]},
+    "setvt": {"size": "0x28", "fill": "random", "init": [{"offset": "0x24", "u32": "@fn_get"}]},
+    "fn_get": {"size": "0x4"}
+  },
+  "memory": [
+    {"addr": "0x0099e364", "u32": "@ctl"},
+    {"addr": "0x00905d24", "u32": "@game"},
+    {"addr": "0x00905cb0", "u32": "@strtab"}
+  ],
+  "callees": {
+    "@fn_caps": {"name": "GetCaps_guess", "conv": "thiscall", "args": ["int"], "ret": 2},
+    "@fn_caps0": {"name": "GetCaps0_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "@fn_caps1": {"name": "GetCaps1_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "@fn_name": {"name": "GetCardName_guess", "conv": "thiscall", "args": [], "ret": 8192},
+    "@fn_get": {"name": "SettingGet_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+      {"call": 0, "arg": 0, "offset": 0, "hex": "e8030000"},
+      {"call": 1, "arg": 0, "offset": 0, "hex": "06000000"}
+    ]},
+    "0x005bb140": {"name": "CButtonWnd::SetCheck", "conv": "thiscall", "args": ["bool"], "ret": 0},
+    "0x005bcd10": {"name": "Widget_guess::SetValue_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00571e00": {"name": "CXStr::CXStr", "conv": "thiscall", "this": "ignore", "args": ["u32"], "ret": "this"},
+    "0x0059b9d0": {"name": "CListWnd::AddString", "conv": "thiscall", "args": ["mem:4", "int", "u32", "u32"], "ret": 0},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "this": "ignore", "args": ["u32"], "ret": 0},
+    "0x005738b0": {"name": "FormatCXStr_guess", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf",
+      "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "44332211"}]},
+    "0x004c398e": {"name": "Mgr_Get_guess", "conv": "cdecl", "args": [], "ret": "@mgr"},
+    "0x005dfa00": {"name": "StringTable::getString", "conv": "thiscall", "args": ["u32", "u32"], "ret": 4096},
+    "0x0059c8d0": {"name": "AdvChild_guess::InsertChoice_guess", "conv": "thiscall", "args": ["mem:4"], "ret": 0},
+    "0x00577110": {"name": "Mgr_guess::Find_guess", "conv": "thiscall", "args": ["cstr"], "ret": "@setting"},
+    "0x0059c360": {"name": "AdvChild_guess::SetChoice_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+  },
+  "cases": [
+    {"name": "all present, caps 2"},
+    {"name": "all present, caps 0", "memory": [{"addr": "0x0099e364", "u32": "@ctl0"}]},
+    {"name": "caps 1 and pixel 2.4 path", "callees": {
+      "@fn_caps": {"name": "GetCaps_guess", "conv": "thiscall", "args": ["int"],
+        "ret": [1, 1, 1, 1, 4, 1, 1, 0, 1, 3, 1]}}},
+    {"name": "caps 1 and pixel not 4", "callees": {
+      "@fn_caps": {"name": "GetCaps_guess", "conv": "thiscall", "args": ["int"],
+        "ret": [1, 1, 1, 1, 3, 1, 2, 1, 0]}}},
+    {"name": "caps 1 first then 0", "callees": {
+      "@fn_caps": {"name": "GetCaps_guess", "conv": "thiscall", "args": ["int"],
+        "ret": [1, 1, 0, 0, 0, 0, 0, 0, 0]}}},
+    {"name": "flags set, no list, no manager", "memory": [
+      {"addr": "@game", "offset": "0x2d5f", "u8": 1},
+      {"addr": "@game", "offset": "0x2d60", "u8": 1},
+      {"addr": "@game", "offset": "0x2d61", "u8": 1},
+      {"addr": "@game", "offset": "0x2d62", "u8": 1},
+      {"addr": "@game", "offset": "0x2d63", "u8": 1},
+      {"addr": "@game", "offset": "0x2d64", "u8": 1},
+      {"addr": "@game", "offset": "0x2d65", "u8": 1},
+      {"addr": "@wnd", "offset": "0x188", "u32": 0}
+    ], "callees": {"0x004c398e": {"name": "Mgr_Get_guess", "conv": "cdecl", "args": [], "ret": 0}}},
+    {"name": "flags set with caps 0, no list, no manager", "memory": [
+      {"addr": "0x0099e364", "u32": "@ctl0"},
+      {"addr": "@game", "offset": "0x2d5f", "u8": 1},
+      {"addr": "@game", "offset": "0x2d62", "u8": 1},
+      {"addr": "@game", "offset": "0x2d63", "u8": 1},
+      {"addr": "@game", "offset": "0x2d64", "u8": 1},
+      {"addr": "@game", "offset": "0x2d65", "u8": 1},
+      {"addr": "@wnd", "offset": "0x188", "u32": 0}
+    ], "callees": {"0x004c398e": {"name": "Mgr_Get_guess", "conv": "cdecl", "args": [], "ret": 0}}},
+    {"name": "no children at all", "memory": [
+      {"addr": "@wnd", "offset": "0x15c", "u32": 0},
+      {"addr": "@wnd", "offset": "0x160", "u32": 0},
+      {"addr": "@wnd", "offset": "0x164", "u32": 0},
+      {"addr": "@wnd", "offset": "0x168", "u32": 0},
+      {"addr": "@wnd", "offset": "0x16c", "u32": 0},
+      {"addr": "@wnd", "offset": "0x170", "u32": 0},
+      {"addr": "@wnd", "offset": "0x174", "u32": 0},
+      {"addr": "@wnd", "offset": "0x178", "u32": 0},
+      {"addr": "@wnd", "offset": "0x17c", "u32": 0},
+      {"addr": "@wnd", "offset": "0x180", "u32": 0},
+      {"addr": "@wnd", "offset": "0x184", "u32": 0},
+      {"addr": "@wnd", "offset": "0x188", "u32": 0}
+    ]},
+    {"name": "manager null", "callees": {"0x004c398e": {"name": "Mgr_Get_guess", "conv": "cdecl", "args": [], "ret": 0}}},
+    {"name": "interval 60000 size 9", "callees": {"@fn_get": {"name": "SettingGet_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+      {"call": 0, "arg": 0, "offset": 0, "hex": "60ea0000"}, {"call": 1, "arg": 0, "offset": 0, "hex": "09000000"}]}}},
+    {"name": "interval 59999 size 10", "callees": {"@fn_get": {"name": "SettingGet_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+      {"call": 0, "arg": 0, "offset": 0, "hex": "5fea0000"}, {"call": 1, "arg": 0, "offset": 0, "hex": "0a000000"}]}}},
+    {"name": "interval 10000 size 8", "callees": {"@fn_get": {"name": "SettingGet_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+      {"call": 0, "arg": 0, "offset": 0, "hex": "10270000"}, {"call": 1, "arg": 0, "offset": 0, "hex": "08000000"}]}}},
+    {"name": "interval 9999 size 5", "callees": {"@fn_get": {"name": "SettingGet_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+      {"call": 0, "arg": 0, "offset": 0, "hex": "0f270000"}, {"call": 1, "arg": 0, "offset": 0, "hex": "05000000"}]}}},
+    {"name": "interval 999 size 4", "callees": {"@fn_get": {"name": "SettingGet_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+      {"call": 0, "arg": 0, "offset": 0, "hex": "e7030000"}, {"call": 1, "arg": 0, "offset": 0, "hex": "04000000"}]}}},
+    {"name": "interval 200 size 0", "callees": {"@fn_get": {"name": "SettingGet_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+      {"call": 0, "arg": 0, "offset": 0, "hex": "c8000000"}, {"call": 1, "arg": 0, "offset": 0, "hex": "00000000"}]}}},
+    {"name": "interval 199 size 1", "callees": {"@fn_get": {"name": "SettingGet_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+      {"call": 0, "arg": 0, "offset": 0, "hex": "c7000000"}, {"call": 1, "arg": 0, "offset": 0, "hex": "01000000"}]}}},
+    {"name": "interval 100 size max", "callees": {"@fn_get": {"name": "SettingGet_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+      {"call": 0, "arg": 0, "offset": 0, "hex": "64000000"}, {"call": 1, "arg": 0, "offset": 0, "hex": "ffffffff"}]}}},
+    {"name": "interval 99 size 7", "callees": {"@fn_get": {"name": "SettingGet_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+      {"call": 0, "arg": 0, "offset": 0, "hex": "63000000"}, {"call": 1, "arg": 0, "offset": 0, "hex": "07000000"}]}}},
+    {"name": "interval 32 size 6", "callees": {"@fn_get": {"name": "SettingGet_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+      {"call": 0, "arg": 0, "offset": 0, "hex": "20000000"}, {"call": 1, "arg": 0, "offset": 0, "hex": "06000000"}]}}},
+    {"name": "interval 31 size 3", "callees": {"@fn_get": {"name": "SettingGet_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+      {"call": 0, "arg": 0, "offset": 0, "hex": "1f000000"}, {"call": 1, "arg": 0, "offset": 0, "hex": "03000000"}]}}},
+    {"name": "interval 0 size 2", "callees": {"@fn_get": {"name": "SettingGet_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+      {"call": 0, "arg": 0, "offset": 0, "hex": "00000000"}, {"call": 1, "arg": 0, "offset": 0, "hex": "02000000"}]}}},
+    {"name": "only size combo", "memory": [{"addr": "@wnd", "offset": "0x180", "u32": 0}],
+      "callees": {"@fn_get": {"name": "SettingGet_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+      {"call": 0, "arg": 0, "offset": 0, "hex": "07000000"}]}}}
+  ],
+  "fuzz": {
+    "seed": 5064664,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {"addr": "0x0099e364", "type": "u32", "choices": ["@ctl", "@ctl0", "@ctl1"]},
+      {"addr": "@wnd", "offset": "0x15c", "type": "u32", "choices": [0, "@w15c"]},
+      {"addr": "@wnd", "offset": "0x160", "type": "u32", "choices": [0, "@w160"]},
+      {"addr": "@wnd", "offset": "0x164", "type": "u32", "choices": [0, "@w164"]},
+      {"addr": "@wnd", "offset": "0x168", "type": "u32", "choices": [0, "@w168"]},
+      {"addr": "@wnd", "offset": "0x16c", "type": "u32", "choices": [0, "@w16c"]},
+      {"addr": "@wnd", "offset": "0x170", "type": "u32", "choices": [0, "@w170"]},
+      {"addr": "@wnd", "offset": "0x178", "type": "u32", "choices": [0, "@w178"]},
+      {"addr": "@wnd", "offset": "0x17c", "type": "u32", "choices": [0, "@w17c"]},
+      {"addr": "@wnd", "offset": "0x180", "type": "u32", "choices": [0, "@w180"]},
+      {"addr": "@wnd", "offset": "0x184", "type": "u32", "choices": [0, "@w184"]},
+      {"addr": "@wnd", "offset": "0x188", "type": "u32", "choices": [0, "@w188"]},
+      {"addr": "@game", "offset": "0x2d5f", "type": "u8", "choices": [0, 1]},
+      {"addr": "@game", "offset": "0x2d60", "type": "u8", "choices": [0, 1]},
+      {"addr": "@game", "offset": "0x2d61", "type": "u8", "choices": [0, 1]},
+      {"addr": "@game", "offset": "0x2d62", "type": "u8", "choices": [0, 1]},
+      {"addr": "@game", "offset": "0x2d63", "type": "u8", "choices": [0, 1]},
+      {"addr": "@game", "offset": "0x2d64", "type": "u8", "choices": [0, 1]},
+      {"addr": "@game", "offset": "0x2d68", "type": "int"},
+      {"addr": "@game", "offset": "0x2d6c", "type": "int"}
+    ]
+  },
+  "coverage_ok": {
+    "004D4A3C-004D4A47": "FreeRep of a CXStr(const char*) temporary: the ctor stub cannot set the temporary's rep pointer (it is ECX, not an argument)",
+    "004D4BA8-004D4BB3": "FreeRep of a CXStr(const char*) temporary: the ctor stub cannot set the rep pointer",
+    "004D4BEB-004D4BF6": "FreeRep of a CXStr(const char*) temporary: the ctor stub cannot set the rep pointer",
+    "004D4C2E-004D4C39": "FreeRep of a CXStr(const char*) temporary: the ctor stub cannot set the rep pointer",
+    "004D4C71-004D4C7C": "FreeRep of a CXStr(const char*) temporary: the ctor stub cannot set the rep pointer",
+    "004D4CB4-004D4CBF": "FreeRep of a CXStr(const char*) temporary: the ctor stub cannot set the rep pointer",
+    "004D4CF7-004D4D02": "FreeRep of a CXStr(const char*) temporary: the ctor stub cannot set the rep pointer",
+    "004D4D3A-004D4D45": "FreeRep of a CXStr(const char*) temporary: the ctor stub cannot set the rep pointer",
+    "004D4DF1-004D4DFC": "FreeRep of a CXStr(const char*) temporary: the ctor stub cannot set the rep pointer",
+    "004D4E34-004D4E3F": "FreeRep of a CXStr(const char*) temporary: the ctor stub cannot set the rep pointer",
+    "004D4E77-004D4E82": "FreeRep of a CXStr(const char*) temporary: the ctor stub cannot set the rep pointer",
+    "004D4EBA-004D4EC5": "FreeRep of a CXStr(const char*) temporary: the ctor stub cannot set the rep pointer",
+    "004D4EFD-004D4F08": "FreeRep of a CXStr(const char*) temporary: the ctor stub cannot set the rep pointer"
+  },
+  "_notes":"The CXStr(const char*) stub cannot set the temporary's rep pointer, so the temporaries built by it keep whatever the stack slot held. The original's byte spill for SetCheck shares that slot ([ebp-0x18]), so every case that builds a temporary keeps the last spilled flag (0x2D65, child 0x174 always present in fuzz) at 0."
+}

@@ -1,0 +1,576 @@
+{
+  "function": "GarbleText_guess",
+  "original": "0x00478f73",
+  "sources": [
+    "src/EverQuest/tu_051_bad_word_class.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "input_guess",
+      "type": "cstr"
+    },
+    {
+      "name": "output_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "threshold_guess",
+      "type": "u8"
+    }
+  ],
+  "ret": "char",
+  "objects": {
+    "output": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00923d70",
+      "u32": 1
+    }
+  ],
+  "callees": {
+    "0x0060f329": {
+      "name": "_isalpha",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": 1
+    },
+    "0x004657ec": {
+      "name": "number_percent_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 1
+    },
+    "0x0040cbb2": {
+      "name": "RandomRange_guess",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00576e40": {
+      "name": "FUN_00576e40",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x00478917": {
+      "name": "RandomVowel_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 97
+    }
+  },
+  "rewrite_aliases": {
+    "_isalpha": "0x0060f329"
+  },
+  "cases": [
+    {
+      "name": "null output",
+      "args": [
+        "abc",
+        0,
+        1
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "null input",
+      "args": [
+        0,
+        "@output",
+        1
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "transform disabled",
+      "args": [
+        "word",
+        "@output",
+        25
+      ],
+      "memory": [
+        {
+          "addr": "0x00923d70",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "threshold above limit",
+      "args": [
+        "word",
+        "@output",
+        100
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "empty active string",
+      "args": [
+        "",
+        "@output",
+        99
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "first roll keeps character",
+      "args": [
+        "a",
+        "@output",
+        0
+      ],
+      "callees": {
+        "0x004657ec": {
+          "ret": 1
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "second roll at lower boundary",
+      "args": [
+        "a",
+        "@output",
+        0
+      ],
+      "callees": {
+        "0x004657ec": {
+          "ret": [
+            51,
+            5
+          ]
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "second roll threshold boundary",
+      "args": [
+        "a",
+        "@output",
+        10
+      ],
+      "callees": {
+        "0x004657ec": {
+          "ret": [
+            51,
+            20
+          ]
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "mutate through random lowercase branch",
+      "args": [
+        "a",
+        "@output",
+        10
+      ],
+      "callees": {
+        "0x004657ec": {
+          "ret": [
+            51,
+            22
+          ]
+        },
+        "0x0040cbb2": {
+          "ret": 7
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "mutate through vowel helper",
+      "args": [
+        "a",
+        "@output",
+        70
+      ],
+      "callees": {
+        "0x004657ec": {
+          "ret": [
+            51,
+            82
+          ]
+        },
+        "0x00576e40": {
+          "ret": 1
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "mutate through consonant random loop",
+      "args": [
+        "b",
+        "@output",
+        70
+      ],
+      "callees": {
+        "0x004657ec": {
+          "ret": [
+            51,
+            82
+          ]
+        },
+        "0x00576e40": {
+          "ret": 0
+        },
+        "0x0040cbb2": {
+          "ret": 3
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "marker range passes through",
+      "args": [
+        "\u0012abc\u0012a",
+        "@output",
+        0
+      ],
+      "callees": {
+        "0x0060f329": {
+          "ret": [
+            0,
+            1,
+            1,
+            1,
+            0,
+            1
+          ]
+        },
+        "0x004657ec": {
+          "ret": 1
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "nonalpha passes through",
+      "args": [
+        "a!b",
+        "@output",
+        0
+      ],
+      "callees": {
+        "0x0060f329": {
+          "ret": [
+            1,
+            0,
+            1
+          ]
+        },
+        "0x004657ec": {
+          "ret": 1
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "insert space between letters",
+      "args": [
+        "acc",
+        "@output",
+        0
+      ],
+      "callees": {
+        "0x004657ec": {
+          "ret": [
+            1,
+            51,
+            100,
+            1
+          ]
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "first character cannot insert space",
+      "args": [
+        "c",
+        "@output",
+        0
+      ],
+      "callees": {
+        "0x004657ec": {
+          "ret": [
+            51,
+            100
+          ]
+        },
+        "0x0040cbb2": {
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "previous output space prevents insertion",
+      "args": [
+        "a cX",
+        "@output",
+        0
+      ],
+      "callees": {
+        "0x0060f329": {
+          "ret": [
+            1,
+            0,
+            1,
+            1
+          ]
+        },
+        "0x004657ec": {
+          "ret": [
+            1,
+            51,
+            100,
+            1
+          ]
+        },
+        "0x0040cbb2": {
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "next input space prevents insertion",
+      "args": [
+        "ac d",
+        "@output",
+        0
+      ],
+      "callees": {
+        "0x0060f329": {
+          "ret": [
+            1,
+            1,
+            0,
+            1
+          ]
+        },
+        "0x004657ec": {
+          "ret": [
+            1,
+            51,
+            100,
+            1
+          ]
+        },
+        "0x0040cbb2": {
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "last character cannot insert space",
+      "args": [
+        "ac",
+        "@output",
+        0
+      ],
+      "callees": {
+        "0x004657ec": {
+          "ret": [
+            1,
+            51,
+            100
+          ]
+        },
+        "0x0040cbb2": {
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "roll 99 inserts a space after a low letter (the roll is tested, not the letter)",
+      "args": [
+        "bab",
+        "@output",
+        0
+      ],
+      "callees": {
+        "0x004657ec": {
+          "ret": [
+            1,
+            51,
+            99,
+            1
+          ]
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "roll 98 on a high letter takes the random letter branch, no space",
+      "args": [
+        "bzb",
+        "@output",
+        0
+      ],
+      "callees": {
+        "0x004657ec": {
+          "ret": [
+            1,
+            51,
+            98,
+            1
+          ]
+        },
+        "0x0040cbb2": {
+          "ret": 4
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "roll 98 is not above 98: low letter, no space",
+      "args": [
+        "bab",
+        "@output",
+        0
+      ],
+      "callees": {
+        "0x004657ec": {
+          "ret": [
+            1,
+            51,
+            98,
+            1
+          ]
+        },
+        "0x0040cbb2": {
+          "ret": 4
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "roll 50 on a high letter (threshold 0): vowel/consonant branch, no space",
+      "args": [
+        "bzb",
+        "@output",
+        0
+      ],
+      "callees": {
+        "0x004657ec": {
+          "ret": [
+            1,
+            51,
+            30,
+            1
+          ]
+        },
+        "0x00576e40": {
+          "ret": 0
+        },
+        "0x0040cbb2": {
+          "ret": 3
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4689779,
+    "count": 50,
+    "args": [
+      {
+        "choices": [
+          "a",
+          "ab",
+          "abc",
+          "letters",
+          ""
+        ]
+      },
+      {
+        "choices": [
+          "@output"
+        ]
+      },
+      {
+        "choices": [
+          0,
+          50,
+          99
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x00923d70",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "_survivors": "L127: outputIndex_guess is coalesced with inputIndex_guess, which is initialized to zero and increments in lockstep, so deleting this redundant assignment cannot change output writes."
+}

@@ -1,0 +1,174 @@
+{
+  "function": "IniConfig_guess::loadOptions_guess",
+  "original": "0x004af32c",
+  "sources": [
+    "src/EverQuest/tu_063_Options.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@iniconfig",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "iniconfig": {"size": "0x20", "fill": "random"},
+    "defcfg": {"size": "0x20", "fill": "random"},
+    "sound": {"size": "0x20", "fill": "random"},
+    "display": {"size": "0x20", "fill": "random"},
+    "cam1": {"size": "0x60", "fill": "random"},
+    "cam2": {"size": "0x60", "fill": "random"},
+    "pm": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "u32": "@pmvt"}]},
+    "pmvt": {"size": "0x100", "fill": "zero", "init": [
+      {"offset": "0x94", "u32": "@fn_envdensity"},
+      {"offset": "0x98", "u32": "@fn_envopacity"},
+      {"offset": "0x9c", "u32": "@fn_actordensity"},
+      {"offset": "0xa0", "u32": "@fn_actoropacity"}
+    ]},
+    "fn_envdensity": {"size": "0x10", "fill": "zero"},
+    "fn_envopacity": {"size": "0x10", "fill": "zero"},
+    "fn_actordensity": {"size": "0x10", "fill": "zero"},
+    "fn_actoropacity": {"size": "0x10", "fill": "zero"},
+    "setting1": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "u32": "@setvt"}]},
+    "setting2": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "u32": "@setvt"}]},
+    "setvt": {"size": "0x80", "fill": "zero", "init": [{"offset": "0x44", "u32": "@fn_setint"}]},
+    "fn_setint": {"size": "0x10", "fill": "zero"},
+    "registry": {"size": "0x20", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x0079AC74", "u32": "0x1234abcd"},
+    {"addr": "0x00851390", "u32": "@sound"},
+    {"addr": "0x0099E36C", "u32": "@pm"},
+    {"addr": "0x00905D24", "u32": "@display"},
+    {"addr": "0x00988DF0", "u32": "@defcfg"},
+    {"addr": "0x00925508", "u32": "@cam1"},
+    {"addr": "0x0092550C", "u32": "@cam2"},
+    {"addr": "0x009248DC", "u32": 37},
+    {"addr": "0x00924AA8", "f32": 10.0}
+  ],
+  "callees": {
+    "0x00612662": {"name": "deleteFile", "conv": "cdecl", "args": ["cstr"], "ret": 0},
+    "0x004ae67a": {"name": "ReadFloat", "conv": "thiscall", "args": ["cstr", "cstr", "float"],
+      "ret_float": [11.0, 0.5, 0.25, 2.0, 0.75, 0.125, 3.0, 0.5, 0.5, 4.0,
+                    1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 100.0, 11.0, 12.0, 0.5]},
+    "0x004ae64c": {"name": "ReadClientIniInt_guess", "conv": "thiscall", "args": ["cstr", "cstr", "int"],
+      "ret": [10, 15, 24, 24, 24, 0, 1, 2, 0, 2, 1, 1, 2, 1, 1, 1, 1, 7,
+              4, 0, 0, 1, 0, 15, 0, 0, 1, 100, 10, 1, 0, 0, 0, 0, 0, 30, 2]},
+    "0x004ae721": {"name": "ReadFlag", "conv": "thiscall", "args": ["cstr", "cstr", "u8"],
+      "ret": ["0x1ff", 0, 1, "0xff", 1, 0, 1, 0]},
+    "0x0044b050": {"name": "SetEnvSounds", "conv": "thiscall", "args": ["char"]},
+    "0x004372e6": {"name": "ResetCameras", "conv": "thiscall", "args": []},
+    "0x004ae514": {"name": "WriteInt", "conv": "thiscall", "args": ["int", "cstr", "cstr"]},
+    "0x004aeca2": {"name": "LoadChannels", "conv": "thiscall", "args": []},
+    "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 8},
+    "0x0060be50": {"name": "GetPrivateString", "conv": "cdecl",
+      "args": ["cstr", "ignore", "cstr", "ignore", "int", "cstr"], "ret": 0,
+      "writes": [{"arg": 3, "offset": 0, "hex": "426f6200"}]},
+    "0x0044a776": {"name": "SetMusicVolume", "conv": "thiscall", "args": ["float"]},
+    "0x0044a753": {"name": "SetSoundVolume", "conv": "thiscall", "args": ["float"]},
+    "0x0044a71f": {"name": "SetRealism", "conv": "thiscall", "args": ["float"]},
+    "0x0044a742": {"name": "Set742", "conv": "thiscall", "args": ["int"]},
+    "0x0046c7a7": {"name": "setLOD_guess", "conv": "cdecl", "args": ["int"]},
+    "0x004389fb": {"name": "SetPCloudDensity_guess", "conv": "thiscall", "args": ["int"]},
+    "0x00439a93": {"name": "SetPCNameSpriteState_guess", "conv": "thiscall", "args": ["int"]},
+    "0x00439ac7": {"name": "SetNPCNameSpriteState_guess", "conv": "thiscall", "args": ["int"]},
+    "0x004ae4b4": {"name": "CopyFrom", "conv": "thiscall", "args": ["ptr"]},
+    "0x004ae4de": {"name": "CopyTo", "conv": "thiscall", "args": ["ptr"]},
+    "0x004ae9c6": {"name": "SaveCamera", "conv": "thiscall", "args": []},
+    "0x004c398e": {"name": "FUN_004c398e", "conv": "cdecl", "args": [], "ret": "@registry"},
+    "0x00577110": {"name": "FindSetting", "conv": "thiscall", "args": ["cstr"], "ret": ["@setting1", "@setting2"]},
+    "@fn_envdensity": {"name": "SetEnvDensity", "conv": "thiscall", "args": ["float"]},
+    "@fn_envopacity": {"name": "SetEnvOpacity", "conv": "thiscall", "args": ["float"]},
+    "@fn_actordensity": {"name": "SetActorDensity", "conv": "thiscall", "args": ["float"]},
+    "@fn_actoropacity": {"name": "SetActorOpacity", "conv": "thiscall", "args": ["float"]},
+    "@fn_setint": {"name": "SetInt", "conv": "thiscall", "args": ["int"]}
+  },
+  "rewrite_aliases": {
+    "?ReadFlag_guess@IniConfig_guess@@QAEDHHE@Z": "0x004ae721",
+    "?ReadFloat_guess@IniConfig_guess@@QAEMHHM@Z": "0x004ae67a",
+    "?ReadClientIniInt_guess@IniConfig_guess@@QAEHHHH@Z": "0x004ae64c",
+    "?WriteInt_guess@IniConfig_guess@@QAEXHHH@Z": "0x004ae514",
+    "?LoadChannels_guess@IniConfig_guess@@QAEXXZ": "0x004aeca2",
+    "?SaveCamera_guess@IniConfig_guess@@QAEXXZ": "0x004ae9c6",
+    "?CopyFrom@EffectObject_guess@@QAEXPAUEffectData_guess@@@Z": "0x004ae4b4",
+    "?CopyTo@EffectObject_guess@@QAEXPAUEffectData_guess@@@Z": "0x004ae4de"
+  },
+  "cases": [
+    {
+      "name": "typical"
+    },
+    {
+      "name": "high",
+      "memory": [{"addr": "0x009248DC", "u32": 99}],
+      "callees": {
+        "0x004ae67a": {"name": "ReadFloat", "conv": "thiscall", "args": ["cstr", "cstr", "float"],
+          "ret_float": [25.0, 2.0, 1.5, 9.0, 3.0, 1.25, 12.0, 7.0, 1.0001, 8.5,
+                        1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 600.0, 11.0, 12.0, 0.0]},
+        "0x004ae64c": {"name": "LoadDefaults", "conv": "thiscall", "args": ["cstr", "cstr", "int"],
+          "ret": [20, 19, 24, 24, 24, 0, 1, 2, 1, 2, 1, 5, 9, 0, 1, 0, 0, 20,
+                  12, 1, 1, 0, 1, 15, 1, 1, 0, 60, 3, 4, 1, 2, 1, 1, 1, 45, 7]},
+        "0x004ae721": {"name": "ReadFlag", "conv": "thiscall", "args": ["cstr", "cstr", "u8"],
+          "ret": [0, "0x100", 0, 1, 0, 1, 0, 1]}
+      }
+    },
+    {
+      "name": "low",
+      "memory": [{"addr": "0x00924AA8", "f32": -3.0}],
+      "callees": {
+        "0x004ae67a": {"name": "ReadFloat", "conv": "thiscall", "args": ["cstr", "cstr", "float"],
+          "ret_float": [-2.0, -0.5, -1.0, 0.5, -3.0, -0.001, -8.0, -1.0, -2.0, 0.25,
+                        1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 0.0, 11.0, 12.0, -1.0]},
+        "0x004ae64c": {"name": "LoadDefaults", "conv": "thiscall", "args": ["cstr", "cstr", "int"],
+          "ret": [-5, 0, 24, 24, 24, 0, 1, 2, 0, 2, 1, -3, -1, 1, 1, 1, 1, -7,
+                  -2, 0, 0, 1, 0, 15, 0, 0, 1, 100, 10, -4, 0, 0, 0, 0, 0, 30, -10]}
+      }
+    },
+    {
+      "name": "boundaries",
+      "memory": [{"addr": "0x00924AA8", "f32": 500.0}],
+      "callees": {
+        "0x004ae67a": {"name": "ReadFloat", "conv": "thiscall", "args": ["cstr", "cstr", "float"],
+          "ret_float": [20.0, 0.0, 1.0, 1.0, 1.0, 0.0, 8.0, 0.0, 1.0, 8.0,
+                        1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 499.0, 11.0, 12.0, 2.0]},
+        "0x004ae64c": {"name": "LoadDefaults", "conv": "thiscall", "args": ["cstr", "cstr", "int"],
+          "ret": [0, 20, 24, 24, 24, 0, 1, 2, 0, 2, 1, 2, 3, 1, 1, 1, 1, 1,
+                  8, 0, 0, 1, 0, 15, 0, 0, 1, 100, 10, 0, 0, 0, 0, 0, 0, 30, 3]}
+      }
+    },
+    {
+      "name": "boundaries_low",
+      "memory": [{"addr": "0x00924AA8", "f32": 499.0}],
+      "callees": {
+        "0x004ae67a": {"name": "ReadFloat", "conv": "thiscall", "args": ["cstr", "cstr", "float"],
+          "ret_float": [0.0, 1.0, 0.0, 8.0, 0.0, 1.0, 1.0, 1.0, 0.0, 1.0,
+                        1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 500.0, 11.0, 12.0, 3.0]},
+        "0x004ae64c": {"name": "LoadDefaults", "conv": "thiscall", "args": ["cstr", "cstr", "int"],
+          "ret": [3, 7, 24, 24, 24, 0, 1, 2, 0, 2, 1, 0, 0, 1, 1, 1, 1, 13,
+                  0, 0, 0, 1, 0, 15, 0, 0, 1, 100, 10, 2, 0, 0, 0, 0, 0, 30, 4]}
+      }
+    },
+    {
+      "name": "cubemap_small",
+      "memory": [{"addr": "0x00924AA8", "f32": 0.001}],
+      "callees": {
+        "0x004ae64c": {"name": "LoadDefaults", "conv": "thiscall", "args": ["cstr", "cstr", "int"],
+          "ret": [10, 15, 24, 24, 24, 0, 1, 2, 0, 2, 1, 1, 2, 1, 1, 1, 1, 7,
+                  9, 0, 0, 1, 0, 15, 0, 0, 1, 100, 10, 1, 0, 0, 0, 0, 0, 30, 1]}
+      }
+    },
+    {
+      "name": "cubemap_zero",
+      "callees": {
+        "0x004ae64c": {"name": "LoadDefaults", "conv": "thiscall", "args": ["cstr", "cstr", "int"],
+          "ret": [10, 15, 24, 24, 24, 0, 1, 2, 0, 2, 1, 1, 2, 1, 1, 1, 1, 7,
+                  4, 0, 0, 1, 0, 15, 0, 0, 1, 100, 10, 1, 0, 0, 0, 0, 0, 30, 0]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4911916,
+    "count": 60,
+    "args": [],
+    "memory": [
+      {"addr": "0x00924AA8", "type": "float", "range": [-10.0, 700.0]},
+      {"addr": "0x009248DC", "type": "int"}
+    ]
+  }
+}

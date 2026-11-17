@@ -1,0 +1,225 @@
+{
+  "function": "FadeSprite_guess::Process_guess",
+  "original": "0x004c449a",
+  "sources": [
+    "src/EverQuest/tu_087_SoundManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@fadesprite",
+  "args": [
+    {
+      "name": "value_guess",
+      "type": "u32"
+    }
+  ],
+  "ret": "char",
+  "objects": {
+    "fadesprite": {
+      "size": "0x3c",
+      "fill": "random",
+      "init": [
+        { "offset": "0x14", "u32": 100 },
+        { "offset": "0x18", "u32": 12 },
+        { "offset": "0x1c", "u32": 4 },
+        { "offset": "0x20", "u32": 4 },
+        { "offset": "0x24", "u32": 42 },
+        { "offset": "0x28", "u32": 20 },
+        { "offset": "0x2c", "u32": 30 },
+        { "offset": "0x30", "u32": "0xaabbccdd" },
+        { "offset": "0x34", "u32": "@shadow" },
+        { "offset": "0x38", "u32": "@image" }
+      ]
+    },
+    "shadow": {
+      "size": "4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "u32": "@surface_vtable" }
+      ]
+    },
+    "image": {
+      "size": "4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "u32": "@surface_vtable" }
+      ]
+    },
+    "callback": {
+      "size": "4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "u32": "@callback_vtable" }
+      ]
+    },
+    "fn_surface_begin": { "size": "4" },
+    "fn_surface_blit": { "size": "4" },
+    "fn_callback": { "size": "4" },
+    "surface_vtable": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "u32": "@fn_surface_begin" },
+        { "offset": "0x8", "u32": "@fn_surface_blit" }
+      ]
+    },
+    "callback_vtable": {
+      "size": "0x7c",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x78", "u32": "@fn_callback" }
+      ]
+    }
+  },
+  "memory": [
+    { "addr": "0x0063f4d8", "from_image": "0x0063f4d8", "image_size": 4 },
+    { "addr": "0x00923780", "u32": 1024 },
+    { "addr": "0x0092379c", "u32": 1024 },
+    { "addr": "0x009237a0", "u32": 768 },
+    { "addr": "0x0099e364", "u32": "@callback" }
+  ],
+  "callees": {
+    "@fn_surface_begin": {
+      "name": "surface_begin",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "@fn_surface_blit": {
+      "name": "surface_blit",
+      "conv": "thiscall",
+      "args": ["int", "int", "int", "int", "mem:16", "u32", "int", "int"]
+    },
+    "@fn_callback": {
+      "name": "callback_slot30",
+      "conv": "thiscall",
+      "args": ["ptr"]
+    }
+  },
+  "cases": [
+    {
+      "name": "below_start",
+      "args": [99],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "range_start_fade_in",
+      "args": [100],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "fade_in_last_step",
+      "args": [103],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "fade_in_boundary",
+      "args": [104],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "middle",
+      "args": [105],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "fade_out_boundary",
+      "args": [108],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "fade_out_first_step",
+      "args": [109],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "range_end",
+      "args": [112],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "above_end",
+      "args": [113],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "null_shadow",
+      "args": [105],
+      "memory": [
+        { "addr": "@fadesprite", "offset": "0x34", "u32": 0 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "centered_screen",
+      "args": [105],
+      "memory": [
+        { "addr": "0x00923780", "u32": 1025 },
+        { "addr": "0x0092379c", "u32": 1280 },
+        { "addr": "0x009237a0", "u32": 900 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "screen_threshold_no_center",
+      "args": [105],
+      "memory": [
+        { "addr": "0x00923780", "u32": 1024 },
+        { "addr": "0x0092379c", "u32": 1280 },
+        { "addr": "0x009237a0", "u32": 900 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "high_fade_in_denominator",
+      "args": [0],
+      "memory": [
+        { "addr": "@fadesprite", "offset": "0x14", "u32": 0 },
+        { "addr": "@fadesprite", "offset": "0x18", "u32": "0xffffffff" },
+        { "addr": "@fadesprite", "offset": "0x1c", "u32": "0x80000000" },
+        { "addr": "@fadesprite", "offset": "0x20", "u32": 4 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "high_offset_fade_in",
+      "args": ["0x80000001"],
+      "memory": [
+        { "addr": "@fadesprite", "offset": "0x14", "u32": 0 },
+        { "addr": "@fadesprite", "offset": "0x18", "u32": "0xffffffff" },
+        { "addr": "@fadesprite", "offset": "0x1c", "u32": "0xffffffff" },
+        { "addr": "@fadesprite", "offset": "0x20", "u32": 4 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "high_fade_out",
+      "args": ["0xfffffffe"],
+      "memory": [
+        { "addr": "@fadesprite", "offset": "0x14", "u32": 0 },
+        { "addr": "@fadesprite", "offset": "0x18", "u32": "0xffffffff" },
+        { "addr": "@fadesprite", "offset": "0x1c", "u32": 0 },
+        { "addr": "@fadesprite", "offset": "0x20", "u32": "0x80000010" }
+      ],
+      "expect": { "ret": 1 }
+    }
+  ],
+  "fuzz": {
+    "seed": 4998298,
+    "count": 100,
+    "args": [
+      { "range": [0, 300] }
+    ],
+    "memory": [
+      { "addr": "@fadesprite", "offset": "0x14", "type": "u32", "range": [0, 200] },
+      { "addr": "@fadesprite", "offset": "0x18", "type": "u32", "range": [0, 50] },
+      { "addr": "@fadesprite", "offset": "0x1c", "type": "u32", "range": [0, 50] },
+      { "addr": "@fadesprite", "offset": "0x20", "type": "u32", "range": [0, 50] },
+      { "addr": "@fadesprite", "offset": "0x24", "type": "u32", "range": [0, 100] },
+      { "addr": "@fadesprite", "offset": "0x28", "type": "int", "range": [-128, 256] },
+      { "addr": "@fadesprite", "offset": "0x2c", "type": "int", "range": [-128, 256] },
+      { "addr": "@fadesprite", "offset": "0x30", "type": "u32" },
+      { "addr": "0x00923780", "type": "u32", "range": [0, 2048] },
+      { "addr": "0x0092379c", "type": "int", "range": [800, 1600] },
+      { "addr": "0x009237a0", "type": "int", "range": [600, 1200] }
+    ]
+  }
+}

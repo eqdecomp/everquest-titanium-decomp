@@ -1,0 +1,20 @@
+{
+  "function": "BarterManager_guess::IsTestServer_guess",
+  "_shape": "CRT _stricmp on a client global string and an .rdata literal (stubbed: VC7.1 MT _stricmp reaches per-thread locale data), global int flag",
+  "original": "0x00408f28",
+  "sources": ["src/EverQuest/tu_009_BarterManager.cpp"],
+  "conv": "thiscall",
+  "this": "0x0",
+  "args": [],
+  "ret": "int",
+  "callees": {"0x00621e9c": {"name": "_stricmp", "args": ["cstr", "cstr"], "ret": [0, 1, -1]}},
+  "cases": [
+    {"name": "test mode", "memory": [{"addr": "0x009247b0", "u32": 1}, {"addr": "0x0095d3d4", "cstr": "live"}]},
+    {"name": "config test", "memory": [{"addr": "0x009247b0", "u32": 0}, {"addr": "0x0095d3d4", "cstr": "TeSt"}]},
+    {"name": "config other", "memory": [{"addr": "0x009247b0", "u32": 0}, {"addr": "0x0095d3d4", "cstr": "tester"}]},
+    {"name": "config empty", "memory": [{"addr": "0x009247b0", "u32": 0}, {"addr": "0x0095d3d4", "cstr": ""}]}
+  ],
+  "fuzz": {"seed": 4231976, "count": 40,
+           "memory": [{"addr": "0x009247b0", "type": "int", "choices": [0, 0, 1, -1]},
+                      {"addr": "0x0095d3d4", "size": 6}]}
+}

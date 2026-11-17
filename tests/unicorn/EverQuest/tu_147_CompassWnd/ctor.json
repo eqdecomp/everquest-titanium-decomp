@@ -1,0 +1,46 @@
+{
+  "function": "CCompassWnd_guess::CCompassWnd_guess",
+  "original": "0x004fa183",
+  "sources": ["src/EverQuest/tu_147_CompassWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@fun_004f9c15",
+  "args": [{"name": "parent_guess", "type": "ptr"}],
+  "ret": "ptr",
+  "objects": {
+    "fun_004f9c15": {"size": "0x1c0", "fill": "random", "init": [{"offset": "0x124", "u32": "@piece"}]},
+    "parent": {"size": "0x11c", "fill": "random"},
+    "piece": {"size": "0x100", "fill": "random"},
+    "strip1": {"size": "0x100", "fill": "random"},
+    "strip2": {"size": "0x100", "fill": "random"},
+    "heap": {"size": "0x1000", "fill": "zero"}
+  },
+  "memory": [],
+  "rewrite_data_aliases": {
+    "?FUN_004f9bea_guess@@YADH@Z": "0x004f9bea",
+    "?FUN_004f9bf0_guess@@YAXXZ": "0x004f9bf0"
+  },
+  "callees": {
+    "0x00571e00": {"name": "CXStr_ctor", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "0x005a3850": {"name": "CSidlScreenWnd_ctor", "conv": "thiscall", "args": ["ptr", "ignore", "int", "int", "ptr"], "ret": "this"},
+    "0x00571d00": {"name": "CXStr_release", "conv": "thiscall", "args": ["ptr"], "passthrough": true},
+    "kernel32.dll!GetProcessHeap": {"name": "GetProcessHeap", "conv": "stdcall", "args": [], "ret": "0x12340000"},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@heap"},
+    "kernel32.dll!HeapFree": {"name": "HeapFree", "conv": "stdcall", "args": ["ptr", "u32", "ptr"], "ret": 1},
+    "0x00446318": {"name": "Element_ctor", "conv": "thiscall", "args": [], "ret": 0},
+    "0x004fa167": {"name": "AddMarker_guess", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x005a25b0": {"name": "CreateChildrenFromSidl", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005a2490": {"name": "GetChildLabel", "conv": "thiscall", "args": ["ignore"], "ret": ["@strip1", "@strip2"]}
+  },
+  "cases": [
+    {"name": "sidl piece absent", "args": ["@parent"], "memory": [{"addr": "@fun_004f9c15", "offset": "0x124", "u32": 0}]},
+    {"name": "sidl piece present", "args": ["@parent"]}
+  ],
+  "fuzz": {
+    "seed": 5218691,
+    "count": 60,
+    "args": [{"choices": ["@parent"]}],
+    "memory": [
+      {"addr": "@fun_004f9c15", "offset": "0x124", "type": "ptr", "choices": ["@piece", 0]}
+    ]
+  }
+}

@@ -1,0 +1,417 @@
+{
+  "function": "CTrackingWnd_guess::RefreshTrackingList_guess",
+  "original": "0x00566194",
+  "sources": [
+    "src/EverQuest/tu_230_TrackingWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@notificationpanel",
+  "args": [
+    {
+      "name": "flag_guess",
+      "type": "bool"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "notificationpanel": {
+      "size": "0x401c",
+      "fill": "random"
+    },
+    "list": {
+      "size": "0x124",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@listvtbl"
+        }
+      ]
+    },
+    "listvtbl": {
+      "size": "0x134",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x130",
+          "u32": "@fn_slot76"
+        }
+      ]
+    },
+    "fn_slot76": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "target_a": {
+      "size": "0x260",
+      "fill": "random"
+    },
+    "target_b": {
+      "size": "0x260",
+      "fill": "random"
+    },
+    "target_c": {
+      "size": "0x260",
+      "fill": "random"
+    },
+    "messagebuffer": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "renderer": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "cxstrheap": {
+      "size": "0x100",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@notificationpanel",
+      "offset": "0x160",
+      "size": "0x3e80",
+      "fill": "zero"
+    },
+    {
+      "addr": "@notificationpanel",
+      "offset": "0x3ff0",
+      "u32": "@list"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@messagebuffer"
+    },
+    {
+      "addr": "0x009917e4",
+      "u32": "@renderer"
+    },
+    {
+      "addr": "0x009043a4",
+      "u8": 0
+    },
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x00641584",
+      "cstr": "P:"
+    },
+    {
+      "addr": "0x007a0000",
+      "cstr": "stored"
+    },
+    {
+      "addr": "@target_a",
+      "offset": "0x258",
+      "u32": 11
+    },
+    {
+      "addr": "@target_b",
+      "offset": "0x258",
+      "u32": 22
+    },
+    {
+      "addr": "@target_c",
+      "offset": "0x258",
+      "u32": 11
+    }
+  ],
+  "callees": {
+    "0x00597be0": {
+      "name": "List_guess::Current_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00597ed0": {
+      "name": "List_guess::Get_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 999
+    },
+    "0x00598580": {
+      "name": "List_guess::Reset_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005660ea": {
+      "name": "Thing_guess::GetEntryColor_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 13
+    },
+    "0x00492ec2": {
+      "name": "MessageBuffer_guess::Store_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "0x007a0000"
+    },
+    "@fn_slot76": {
+      "name": "List_guess::Slot76_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00571e00": {
+      "name": "CXStr::CXStr",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0,
+      "passthrough": true
+    },
+    "0x0059b9d0": {
+      "name": "List_guess::Build_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 17
+    },
+    "0x00571d00": {
+      "name": "CXStr::Release_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0,
+      "passthrough": true
+    },
+    "0x00597c20": {
+      "name": "List_guess::Select_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x004f2bbe": {
+      "name": "Renderer_guess::GetRGBAFromIndex",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 13
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": "@cxstrheap"
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "null-list",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x3ff0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "flag-false-empty",
+      "args": [
+        0
+      ]
+    },
+    {
+      "name": "current-none",
+      "args": [
+        1
+      ],
+      "callees": {
+        "0x00597be0": {
+          "name": "List_guess::Current_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "prefix-normal-selected",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target_a"
+        },
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x16c",
+          "u32": 4
+        },
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x170",
+          "u32": "@target_b"
+        },
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x17c",
+          "u32": 1
+        },
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x3fd0",
+          "u32": "@target_c"
+        },
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x3fdc",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "field-mismatch-no-select",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x160",
+          "u32": "@target_a"
+        },
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x16c",
+          "u32": 4
+        },
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x170",
+          "u32": "@target_b"
+        },
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x17c",
+          "u32": 1
+        },
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x3fd0",
+          "u32": "@target_c"
+        },
+        {
+          "addr": "@notificationpanel",
+          "offset": "0x3fdc",
+          "u32": 1
+        },
+        {
+          "addr": "@target_a",
+          "offset": "0x258",
+          "u32": 12
+        }
+      ],
+      "callees": {
+        "0x00597be0": {
+          "name": "List_guess::Current_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        },
+        "0x00597ed0": {
+          "name": "List_guess::Get_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 999
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5661194,
+    "count": 50,
+    "args": [
+      {
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@notificationpanel",
+        "offset": "0x3ff0",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@list"
+        ]
+      },
+      {
+        "addr": "@notificationpanel",
+        "offset": "0x160",
+        "type": "ptr",
+        "count": 12,
+        "stride": "0x10",
+        "choices": [
+          0,
+          "@target_a",
+          "@target_b",
+          "@target_c"
+        ]
+      },
+      {
+        "addr": "@notificationpanel",
+        "offset": "0x16c",
+        "type": "u32",
+        "count": 12,
+        "stride": "0x10",
+        "choices": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          64,
+          128,
+          256,
+          512
+        ]
+      }
+    ]
+  }
+}

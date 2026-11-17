@@ -1,0 +1,649 @@
+{
+  "function": "Handle_OP_Translocate_guess",
+  "original": "0x00456110",
+  "sources": [
+    "src/EverQuest/tu_042_EQHandleMsg.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "argument_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "argument": {
+      "size": "0x5c",
+      "fill": "random"
+    },
+    "current": {
+      "size": "0x23c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@currentState"
+        }
+      ]
+    },
+    "currentState": {
+      "size": "0x15c",
+      "fill": "random"
+    },
+    "propertyRoot": {
+      "size": "0x150",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@propertyOffset"
+        }
+      ]
+    },
+    "propertyOffset": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 0
+        }
+      ]
+    },
+    "zoneNames": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "stringManager": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "errorDisplay": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "noticeSender": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": 305419896
+    },
+    {
+      "addr": "0x00905cc0",
+      "u32": "@zoneNames"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@stringManager"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@errorDisplay"
+    },
+    {
+      "addr": "0x00991e44",
+      "u32": "@noticeSender"
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": "@current"
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@propertyRoot"
+    },
+    {
+      "addr": "0x00700000",
+      "cstr": "Unknown zone"
+    },
+    {
+      "addr": "@argument",
+      "offset": "0x0",
+      "u32": 41
+    },
+    {
+      "addr": "@argument",
+      "offset": "0x4",
+      "u32": 1911
+    },
+    {
+      "addr": "@argument",
+      "offset": "0xc",
+      "cstr": "zone text"
+    },
+    {
+      "addr": "@argument",
+      "offset": "0x4c",
+      "u32": 1092616192
+    },
+    {
+      "addr": "@argument",
+      "offset": "0x50",
+      "u32": 3248488448
+    },
+    {
+      "addr": "@argument",
+      "offset": "0x54",
+      "u32": 1106247680
+    },
+    {
+      "addr": "@argument",
+      "offset": "0x58",
+      "u32": 0
+    },
+    {
+      "addr": "@current",
+      "offset": "0x204",
+      "u32": 41
+    },
+    {
+      "addr": "@current",
+      "offset": "0x30",
+      "u32": 1067450368
+    },
+    {
+      "addr": "@current",
+      "offset": "0x34",
+      "u32": 1075838976
+    },
+    {
+      "addr": "@current",
+      "offset": "0x38",
+      "u32": 1081081856
+    },
+    {
+      "addr": "@current",
+      "offset": "0x4c",
+      "u32": 1090519040
+    },
+    {
+      "addr": "@current",
+      "offset": "0x238",
+      "u32": 1065353216
+    },
+    {
+      "addr": "@currentState",
+      "offset": "0x48",
+      "u32": 0
+    },
+    {
+      "addr": "@currentState",
+      "offset": "0x158",
+      "u32": 123
+    }
+  ],
+  "callees": {
+    "0x005fa1c0": {
+      "name": "ZoneNames456110_guess::GetLongName_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ignore",
+        "int"
+      ]
+    },
+    "0x00492ec2": {
+      "name": "Target4520E5Data_guess::GetText_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "@argument+0xc"
+    },
+    "0x0046da4a": {
+      "name": "FormatNotice_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "cstr",
+        "ignore",
+        "ptr",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+      ]
+    },
+    "0x005dfa00": {
+      "name": "ErrorStringManager_guess::GetString_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "0x00700000"
+    },
+    "0x00548460": {
+      "name": "CConfirmationDialogPoolView_guess::Activate",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "int",
+        "cstr",
+        "int",
+        "int",
+        "ptr",
+        "int"
+      ]
+    },
+    "0x0040e25c": {
+      "name": "PropertyOwnerClear_guess::Clear_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ]
+    },
+    "0x005f07c0": {
+      "name": "PropertyOwnerRoot_guess::FUN_005f07c0_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret_float": 10.0
+    },
+    "0x005f0820": {
+      "name": "PropertyOwnerRoot_guess::FUN_005f0820_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret_float": 20.0
+    },
+    "0x005f0880": {
+      "name": "PropertyOwnerRoot_guess::FUN_005f0880_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret_float": 30.0
+    },
+    "0x00479ee8": {
+      "name": "DispatchTarget_guess::PlaySound_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x004b718d": {
+      "name": "BeginPositionUpdate_guess",
+      "conv": "cdecl",
+      "args": [
+        "mem:12"
+      ],
+      "ret": "@current"
+    },
+    "0x004b70db": {
+      "name": "PositionUpdate_guess::Apply_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:12",
+        "int"
+      ]
+    },
+    "0x0048a0fc": {
+      "name": "DispatchTarget_guess::GetFloorHeightAt_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "float",
+        "float",
+        "int"
+      ],
+      "ret_float": 5.0
+    },
+    "0x0048a945": {
+      "name": "DispatchTarget_guess::FUN_0048a945_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004ab056": {
+      "name": "ErrorDisplay_guess::MoveToZone_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "cstr",
+        "int",
+        "int",
+        "float",
+        "float",
+        "float",
+        "int"
+      ]
+    },
+    "0x0048bb5a": {
+      "name": "DispatchTarget_guess::UpdateSharedValuesIfLocal_guess",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "message special zone",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@argument",
+          "offset": "0x4",
+          "u32": 1422
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x58",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "message other zone with selector",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@argument",
+          "offset": "0x4",
+          "u32": 1911
+        },
+        {
+          "addr": "@argument",
+          "offset": "0xc",
+          "cstr": "market"
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x58",
+          "u32": 2
+        }
+      ]
+    },
+    {
+      "name": "message other zone with null selector",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "0x00988df0",
+          "u32": 0
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x4",
+          "u32": 1911
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x58",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "state one empty special zone current object",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@argument",
+          "offset": "0x0",
+          "u32": 41
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x4",
+          "u32": 1334
+        },
+        {
+          "addr": "@argument",
+          "offset": "0xc",
+          "cstr": ""
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x58",
+          "u32": 1
+        },
+        {
+          "addr": "@current",
+          "offset": "0x204",
+          "u32": 41
+        }
+      ]
+    },
+    {
+      "name": "state one empty other zone different object",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@argument",
+          "offset": "0x0",
+          "u32": 77
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x4",
+          "u32": 1911
+        },
+        {
+          "addr": "@argument",
+          "offset": "0xc",
+          "cstr": ""
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x58",
+          "u32": 1
+        },
+        {
+          "addr": "@current",
+          "offset": "0x204",
+          "u32": 41
+        }
+      ]
+    },
+    {
+      "name": "state one text special zone current object",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@argument",
+          "offset": "0x0",
+          "u32": 41
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x4",
+          "u32": 3243
+        },
+        {
+          "addr": "@argument",
+          "offset": "0xc",
+          "cstr": "x"
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x58",
+          "u32": 1
+        },
+        {
+          "addr": "@current",
+          "offset": "0x204",
+          "u32": 41
+        }
+      ]
+    },
+    {
+      "name": "state one text other zone different object",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@argument",
+          "offset": "0x0",
+          "u32": 77
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x4",
+          "u32": 1911
+        },
+        {
+          "addr": "@argument",
+          "offset": "0xc",
+          "cstr": "y"
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x58",
+          "u32": 1
+        },
+        {
+          "addr": "@current",
+          "offset": "0x204",
+          "u32": 41
+        }
+      ]
+    },
+    {
+      "name": "state one text other zone current object",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@argument",
+          "offset": "0x0",
+          "u32": 41
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x4",
+          "u32": 1911
+        },
+        {
+          "addr": "@argument",
+          "offset": "0xc",
+          "cstr": "y"
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x58",
+          "u32": 1
+        },
+        {
+          "addr": "@current",
+          "offset": "0x204",
+          "u32": 41
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4546832,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@argument"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@argument",
+        "offset": "0x0",
+        "type": "int",
+        "choices": [
+          41,
+          77
+        ]
+      },
+      {
+        "addr": "@argument",
+        "offset": "0x4",
+        "type": "int",
+        "choices": [
+          1334,
+          1422,
+          3243,
+          1911
+        ]
+      },
+      {
+        "addr": "@argument",
+        "offset": "0xc",
+        "type": "u8",
+        "choices": [
+          0,
+          65
+        ]
+      },
+      {
+        "addr": "@argument",
+        "offset": "0x4c",
+        "type": "float",
+        "choices": [
+          -12.5,
+          0.0,
+          88.25
+        ]
+      },
+      {
+        "addr": "@argument",
+        "offset": "0x50",
+        "type": "float",
+        "choices": [
+          -40.0,
+          2.5,
+          127.0
+        ]
+      },
+      {
+        "addr": "@argument",
+        "offset": "0x54",
+        "type": "float",
+        "choices": [
+          -3.0,
+          44.5,
+          1024.0
+        ]
+      },
+      {
+        "addr": "@argument",
+        "offset": "0x58",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@current",
+        "offset": "0x204",
+        "type": "int",
+        "choices": [
+          41,
+          77
+        ]
+      }
+    ]
+  },
+  "_survivors": "L3672: the repeated value158 = 0 store follows the unconditional reset earlier in this state-one path, so deleting it cannot change observable memory"
+}

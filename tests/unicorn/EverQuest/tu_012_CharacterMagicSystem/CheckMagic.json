@@ -1,0 +1,124 @@
+{
+  "function": "CheckMagic_guess",
+  "original": "0x0040e8f0",
+  "sources": [
+    "src/EverQuest/tu_012_CharacterMagicSystem.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "object_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "index_guess",
+      "type": "u32"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "object": {
+      "size": "0x150",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {},
+  "_survivors": "L1285: index 12 hits the int3 trap in the original (fault, the caller never passes it); L1286: same trap; L1291: same trap; L1292: same trap; L1295: same trap; L1296: same trap; L1285 `12`->`13`: index 12 is the trap, so 13 changes nothing observable on valid input",
+  "coverage_ok": {
+    "0040E8FD-0040E8FE": "bounds int3: index is always below 12 (the caller's table size)",
+    "0040E915-0040E916": "bounds int3: index is always below 12 (the caller's table size)",
+    "0040E925-0040E926": "bounds int3: index is always below 12 (the caller's table size)"
+  },
+  "cases": [
+    {
+      "name": "values120 is 0xfe: return 0",
+      "args": ["@object", 1],
+      "memory": [{"addr": "@object", "offset": "0x124", "u32": 254}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "values120 is 0xfe at index 11 (last)",
+      "args": ["@object", 11],
+      "memory": [{"addr": "@object", "offset": "0x14c", "u32": 254}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "values120 is 10, values30 is 0: return 0",
+      "args": ["@object", 2],
+      "memory": [
+        {"addr": "@object", "offset": "0x128", "u32": 10},
+        {"addr": "@object", "offset": "0x38", "u32": 0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "values120 is 10, values30 is nonzero: return 1",
+      "args": ["@object", 2],
+      "memory": [
+        {"addr": "@object", "offset": "0x128", "u32": 10},
+        {"addr": "@object", "offset": "0x38", "u32": 7}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "values120 is 10 at index 0, values30 zero",
+      "args": ["@object", 0],
+      "memory": [
+        {"addr": "@object", "offset": "0x120", "u32": 10},
+        {"addr": "@object", "offset": "0x30", "u32": 0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "values120 is 10 at index 11, values30 zero",
+      "args": ["@object", 11],
+      "memory": [
+        {"addr": "@object", "offset": "0x14c", "u32": 10},
+        {"addr": "@object", "offset": "0x5c", "u32": 0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "values120 neither 0xfe nor 10: return 1",
+      "args": ["@object", 3],
+      "memory": [{"addr": "@object", "offset": "0x12c", "u32": 5}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "zeroed object at index 0: return 1",
+      "args": ["@object", 0],
+      "memory": [
+        {"addr": "@object", "offset": "0x120", "fill": "zero", "size": 48},
+        {"addr": "@object", "offset": "0x30", "fill": "zero", "size": 48}
+      ],
+      "expect": {"ret": 1}
+    }
+  ],
+  "fuzz": {
+    "seed": 4253936,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@object"
+        ]
+      },
+      {"range": [0, 11]}
+    ],
+    "memory": [
+      {"addr": "@object", "offset": "0x120", "type": "int", "choices": [254, 10, 5, 0]},
+      {"addr": "@object", "offset": "0x124", "type": "int", "choices": [254, 10, 5, 0]},
+      {"addr": "@object", "offset": "0x128", "type": "int", "choices": [254, 10, 5, 0]},
+      {"addr": "@object", "offset": "0x12c", "type": "int", "choices": [254, 10, 5, 0]},
+      {"addr": "@object", "offset": "0x130", "type": "int", "choices": [254, 10, 5, 0]},
+      {"addr": "@object", "offset": "0x134", "type": "int", "choices": [254, 10, 5, 0]},
+      {"addr": "@object", "offset": "0x138", "type": "int", "choices": [254, 10, 5, 0]},
+      {"addr": "@object", "offset": "0x13c", "type": "int", "choices": [254, 10, 5, 0]},
+      {"addr": "@object", "offset": "0x30", "type": "int", "choices": [0, 7]},
+      {"addr": "@object", "offset": "0x34", "type": "int", "choices": [0, 7]},
+      {"addr": "@object", "offset": "0x38", "type": "int", "choices": [0, 7]},
+      {"addr": "@object", "offset": "0x3c", "type": "int", "choices": [0, 7]}
+    ]
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "function": "GuildTributeMasterWnd_00513266_guess::GuildTributeMasterWnd_00513266_guess",
+  "original": "0x00513266",
+  "sources": ["src/EverQuest/tu_167_GuildTributeMasterWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@guildtributemasterwnd_00513266",
+  "args": [{"name": "parent", "type": "ptr"}],
+  "ret": "ptr",
+  "objects": {
+    "guildtributemasterwnd_00513266": {"size": "0x1dc", "fill": "random"},
+    "parent": {"size": "0x11c", "fill": "random"},
+    "child": {"size": "0x170", "fill": "random"},
+    "active_list": {"size": "0x170", "fill": "random"},
+    "master_list": {"size": "0x170", "fill": "random"},
+    "drag_manager": {"size": "0x4", "fill": "random"},
+    "drag_source": {"size": "0x4", "fill": "random"},
+    "drag_item": {"size": "0x4c", "fill": "random"},
+    "string_rep": {"size": "0x200", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0099D3F4", "u32": "@drag_manager"},
+    {"addr": "@guildtributemasterwnd_00513266", "offset": "0x124", "u32": 0},
+    {"addr": "@guildtributemasterwnd_00513266", "offset": "0x66", "u8": 0},
+    {"addr": "@guildtributemasterwnd_00513266", "offset": "0x1c8", "u32": 0}
+  ],
+  "callees": {
+    "0x00571e00": {"name": "CXStr_ctor", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "0x005a3850": {"name": "CSidlScreenWnd_ctor", "conv": "thiscall", "args": ["ptr", "ignore", "int", "int", "int"], "ret": "this"},
+    "0x00571d00": {"name": "CXStr_FreeRep", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x005a25b0": {"name": "CreateChildrenFromSidl", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005a1e10": {
+      "name": "GetChildItem",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "@active_list", "@master_list"]
+    },
+    "0x00597c60": {"name": "SetBenefitListColors", "conv": "thiscall", "args": ["int", "u32", "u32"], "ret": 0},
+    "0x005982e0": {"name": "SetColumnFlag", "conv": "thiscall", "args": ["int", "int"], "ret": 0},
+    "0x005b44a0": {"name": "GetDragItem", "conv": "thiscall", "args": ["ignore"], "ret": "@drag_source"},
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@drag_item"},
+    "0x005b1d90": {"name": "DragItem_ctor", "conv": "thiscall", "args": [], "ret": "this"},
+    "0x004dbb3b": {"name": "DragItem_SetItem", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x005b1ab0": {"name": "DragItem_SetMode", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005119dc": {"name": "LoadBenefitLists", "conv": "thiscall", "args": [], "passthrough": true},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@string_rep"},
+    "0x005a1ef0": {"name": "LoadActiveBenefits", "conv": "thiscall", "args": ["ptr", "cstr"], "ret": 0}
+  },
+  "rewrite_aliases": {"??2@YAPAXI@Z": "0x0060d071"},
+  "ignore_writes": [["0x30002000", "0x30003000"]],
+  "cases": [
+    {"name": "gate false", "args": ["@parent"]},
+    {
+      "name": "child and list paths",
+      "args": ["@parent"],
+      "memory": [{"addr": "@guildtributemasterwnd_00513266", "offset": "0x124", "u32": 1}]
+      ,"callees": {
+        "0x005a1e10": {
+          "name": "GetChildItem_selected_present",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": ["@child", "@child", "@child", "@child", "@child", "@child", "@child", "@child", 0, "@child", "@child", "@child"]
+        }
+      }
+    },
+    {
+      "name": "empty CXStr handles",
+      "args": ["@parent"],
+      "memory": [{"addr": "@guildtributemasterwnd_00513266", "offset": "0x124", "u32": 1}],
+      "callees": {
+        "0x00571e00": {"name": "CXStr_ctor_empty", "conv": "thiscall", "args": ["cstr"], "ret": "this"}
+      }
+    },
+    {
+      "name": "selected child null",
+      "args": ["@parent"],
+      "memory": [{"addr": "@guildtributemasterwnd_00513266", "offset": "0x124", "u32": 1}],
+      "callees": {
+        "0x005a1e10": {
+          "name": "GetChildItem_selected_null",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": ["@child", "@child", 0, "@child", "@child", "@child", "@child", "@child", 0, "@child", "@child", "@child"]
+        }
+      }
+    },
+    {
+      "name": "both lists null",
+      "args": ["@parent"],
+      "memory": [{"addr": "@guildtributemasterwnd_00513266", "offset": "0x124", "u32": 1}],
+      "callees": {
+        "0x005a1e10": {
+          "name": "GetChildItem_lists_null",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "operator new null",
+      "args": ["@parent"],
+      "memory": [{"addr": "@guildtributemasterwnd_00513266", "offset": "0x124", "u32": 1}],
+      "callees": {
+        "0x005a1e10": {
+          "name": "GetChildItem_selected_present",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": ["@child", "@child", "@child", "@child", "@child", "@child", "@child", "@child", 0, "@child", "@child", "@child"]
+        },
+        "0x0060d071": {"name": "operator_new_null", "conv": "cdecl", "args": ["u32"], "ret": 0}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5321318,
+    "count": 100,
+    "args": [{"choices": ["@parent"]}],
+    "memory": [{"addr": "@guildtributemasterwnd_00513266", "offset": "0x124", "type": "int", "choices": [0, 1]}]
+  }
+}

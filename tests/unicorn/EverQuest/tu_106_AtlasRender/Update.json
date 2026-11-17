@@ -1,0 +1,263 @@
+{
+  "function": "Owner_guess::UpdateVScrollRange_guess",
+  "original": "0x004d941c",
+  "sources": [
+    "src/EverQuest/tu_106_AtlasRender.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x110",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@vtbl" },
+        { "offset": "0x2c", "u32": 0 }
+      ]
+    },
+    "vtbl": {
+      "size": "0xe8",
+      "fill": "zero",
+      "init": [
+        { "offset": "0xe4", "u32": "@fn_owner_quad" }
+      ]
+    },
+    "fn_owner_quad": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "cursor1": {
+      "size": "0x34",
+      "fill": "zero"
+    },
+    "cursor2": {
+      "size": "0x34",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    { "addr": "@owner", "offset": "0x4", "u32": 10 },
+    { "addr": "@owner", "offset": "0x64", "u8": 0 },
+    { "addr": "@owner", "offset": "0xc", "u32": 40 },
+    { "addr": "@owner", "offset": "0x108", "u32": 111 },
+    { "addr": "@owner", "offset": "0x10c", "u32": 222 }
+  ],
+  "callees": {
+    "0x004d9160": {
+      "name": "FUN_004d9160",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "0x004d911a": {
+      "name": "Quad_guess::Copy_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "0x0059d110": {
+      "name": "FUN_0059d110",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0059d860": {
+      "name": "FUN_0059d860",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00000000000000006400000014000000",
+          "call": 0
+        },
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "0000000000000000640000000f000000",
+          "call": 1
+        }
+      ]
+    },
+    "0x0059d130": {
+      "name": "FUN_0059d130",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_owner_quad": {
+      "name": "owner_get_quad_stub",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "this"
+    }
+  },
+  "cases": [
+    {
+      "name": "flag_clear_preserves_bounds",
+      "args": [],
+      "memory": [
+        { "addr": "@owner", "offset": "0x4", "u32": 10 },
+        { "addr": "@owner", "offset": "0x64", "u8": 0 },
+        { "addr": "@owner", "offset": "0xc", "u32": 40 },
+        { "addr": "@owner", "offset": "0x108", "u32": 111 },
+        { "addr": "@owner", "offset": "0x10c", "u32": 222 }
+      ]
+    },
+    {
+      "name": "empty_cursor_clears_bounds",
+      "args": [],
+      "memory": [
+        { "addr": "@owner", "offset": "0x4", "u32": 10 },
+        { "addr": "@owner", "offset": "0x64", "u8": 1 },
+        { "addr": "@owner", "offset": "0xc", "u32": 40 },
+        { "addr": "@owner", "offset": "0x2c", "u32": 0 },
+        { "addr": "@owner", "offset": "0x108", "u32": 111 },
+        { "addr": "@owner", "offset": "0x10c", "u32": 222 }
+      ]
+    },
+    {
+      "name": "single_cursor_grows_and_caps_bound",
+      "args": [],
+      "memory": [
+        { "addr": "@owner", "offset": "0x4", "u32": 10 },
+        { "addr": "@owner", "offset": "0x64", "u8": 1 },
+        { "addr": "@owner", "offset": "0xc", "u32": 20 },
+        { "addr": "@owner", "offset": "0x2c", "u32": "@cursor1" },
+        { "addr": "@owner", "offset": "0x10c", "u32": 200 },
+        { "addr": "@cursor1", "offset": "0x30", "u32": 0 }
+      ],
+      "callees": {
+        "0x0059d110": { "conv": "thiscall", "args": [], "ret": "@cursor1" },
+        "0x0059d130": { "conv": "thiscall", "args": [], "ret": 0 }
+      }
+    },
+    {
+      "name": "bound_equal_to_computed_height_is_not_written",
+      "args": [],
+      "memory": [
+        { "addr": "@owner", "offset": "0x4", "u32": 10 },
+        { "addr": "@owner", "offset": "0x64", "u8": 1 },
+        { "addr": "@owner", "offset": "0xc", "u32": 20 },
+        { "addr": "@owner", "offset": "0x2c", "u32": "@cursor1" },
+        { "addr": "@owner", "offset": "0x10c", "u32": 15 },
+        { "addr": "@cursor1", "offset": "0x30", "u32": 0 }
+      ],
+      "callees": {
+        "0x0059d110": { "conv": "thiscall", "args": [], "ret": "@cursor1" },
+        "0x0059d130": { "conv": "thiscall", "args": [], "ret": 0 }
+      }
+    },
+    {
+      "name": "two_cursors_raise_max_then_keep_it",
+      "args": [],
+      "memory": [
+        { "addr": "@owner", "offset": "0x4", "u32": 10 },
+        { "addr": "@owner", "offset": "0x64", "u8": 1 },
+        { "addr": "@owner", "offset": "0xc", "u32": 20 },
+        { "addr": "@owner", "offset": "0x2c", "u32": "@cursor1" },
+        { "addr": "@owner", "offset": "0x10c", "u32": 200 },
+        { "addr": "@cursor1", "offset": "0x30", "u32": "@cursor2" },
+        { "addr": "@cursor2", "offset": "0x30", "u32": 0 }
+      ],
+      "callees": {
+        "0x0059d110": { "conv": "thiscall", "args": [], "ret": "@cursor1" },
+        "0x0059d130": { "conv": "thiscall", "args": [], "ret": ["@cursor2", 0] }
+      }
+    },
+    {
+      "name": "cursor_values_do_not_exceed_delta",
+      "args": [],
+      "memory": [
+        { "addr": "@owner", "offset": "0x4", "u32": 10 },
+        { "addr": "@owner", "offset": "0x64", "u8": 1 },
+        { "addr": "@owner", "offset": "0xc", "u32": 40 },
+        { "addr": "@owner", "offset": "0x2c", "u32": "@cursor1" },
+        { "addr": "@cursor1", "offset": "0x30", "u32": "@cursor2" },
+        { "addr": "@cursor2", "offset": "0x30", "u32": 0 }
+      ],
+      "callees": {
+        "0x0059d110": { "conv": "thiscall", "args": [], "ret": "@cursor1" },
+        "0x0059d130": { "conv": "thiscall", "args": [], "ret": ["@cursor2", 0] }
+      }
+    },
+    {
+      "name": "equal_delta_boundary_clears_bounds",
+      "args": [],
+      "memory": [
+        { "addr": "@owner", "offset": "0x4", "u32": 10 },
+        { "addr": "@owner", "offset": "0x64", "u8": 1 },
+        { "addr": "@owner", "offset": "0xc", "u32": 30 },
+        { "addr": "@owner", "offset": "0x2c", "u32": "@cursor1" },
+        { "addr": "@cursor1", "offset": "0x30", "u32": 0 }
+      ],
+      "callees": {
+        "0x0059d110": { "conv": "thiscall", "args": [], "ret": "@cursor1" },
+        "0x0059d130": { "conv": "thiscall", "args": [], "ret": 0 }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5084188,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@owner",
+        "offset": "0x64",
+        "type": "u8",
+        "choices": [0, 1]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x2c",
+        "type": "u32",
+        "choices": [0, "@cursor1"]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x4",
+        "type": "u32",
+        "range": [0, 50]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0xc",
+        "type": "u32",
+        "range": [0, 100]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x108",
+        "type": "int",
+        "range": [-200, 500]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x10c",
+        "type": "int",
+        "range": [-200, 500]
+      },
+      {
+        "addr": "@cursor1",
+        "offset": "0x30",
+        "type": "u32",
+        "choices": [0, "@cursor2"]
+      }
+    ]
+  },
+  "_survivors": "L515: local_1c.field_C is overwritten by CopyTo before it is read; L516: local_1c.field_8 is overwritten by CopyTo before it is read; L518: local_1c.field_0 is overwritten by CopyTo before it is read; L520: local_2c.field_8 is overwritten by CopyTo before any read, and is not read when the loop is empty; L522: local_2c.field_0 is overwritten by CopyTo before any read, and is not read when the loop is empty; L535: equality assigns the existing local maximum to itself, which is not externally observable."
+}

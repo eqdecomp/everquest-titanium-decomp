@@ -1,0 +1,741 @@
+{
+  "function": "EQ_PCView_guess::UseBandolier_guess",
+  "original": "0x004bf5ba",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [
+    {
+      "name": "value",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "size": "0x391",
+  "objects": {
+    "object": {
+      "size": "0xc34c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@profile_holder"
+        },
+        {
+          "offset": "0xc284",
+          "u32": "@inner_holder"
+        },
+        {
+          "offset": "0xc288",
+          "u32": "@owner"
+        }
+      ]
+    },
+    "profile_holder": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "0x100"
+        }
+      ]
+    },
+    "inner_holder": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "0x20"
+        }
+      ]
+    },
+    "owner": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "copy": {
+      "size": "0x140",
+      "fill": "zero"
+    },
+    "record_host": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x3c",
+          "u32": "@record2c"
+        },
+        {
+          "offset": "0x44",
+          "u32": "@record34"
+        },
+        {
+          "offset": "0x48",
+          "u32": "@record38"
+        }
+      ]
+    },
+    "record2c": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "record34": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "record38": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "match_info": {
+      "size": "0x4c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x48",
+          "u32": "7"
+        }
+      ]
+    },
+    "text": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "connection": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "display": {
+      "size": "0x14",
+      "fill": "zero"
+    },
+    "ui": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@vtable"
+        }
+      ]
+    },
+    "vtable": {
+      "size": "0x8c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x88",
+          "u32": "@fn_cleanup"
+        }
+      ]
+    },
+    "fn_cleanup": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@object",
+      "offset": "0xc3ad",
+      "u8": 1
+    },
+    {
+      "addr": "@copy",
+      "offset": "0x0",
+      "u8": 1
+    },
+    {
+      "addr": "@copy",
+      "offset": "0x20",
+      "u32": 1
+    },
+    {
+      "addr": "0x009248d0",
+      "u32": 0
+    },
+    {
+      "addr": "0x00850bc8",
+      "u32": "@connection"
+    },
+    {
+      "addr": "0x00850c24",
+      "u32": "@ui"
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@display"
+    },
+    {
+      "addr": "@text",
+      "cstr": "record text"
+    }
+  ],
+  "callees": {
+    "0x005f0c30": {
+      "name": "GetCopyBuffer_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@copy"
+    },
+    "0x0047c3af": {
+      "name": "PlayerTableInit_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "this"
+    },
+    "0x004b85ae": {
+      "name": "FillPlayerTable_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "int",
+        "int",
+        "ignore",
+        "mem:16"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 5,
+          "hex": "0000000001000000ffffffff00000000"
+        }
+      ]
+    },
+    "0x0040cc50": {
+      "name": "GetMatchInfo_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@match_info"
+    },
+    "0x004b7772": {
+      "name": "ComparePlayerValues_guess",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int",
+        "ignore",
+        "int",
+        "int"
+      ],
+      "ret": -1
+    },
+    "0x004b76e3": {
+      "name": "StorePlayerEntry_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "mem:36"
+      ]
+    },
+    "0x004b89de": {
+      "name": "CheckPlayerTable_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "ignore",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005ec220": {
+      "name": "GetRecordHost_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@record_host"
+    },
+    "0x0048083a": {
+      "name": "DisplayPlayerText_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "cstr",
+        "int"
+      ]
+    },
+    "0x005e0f00": {
+      "name": "GetRecordText_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@text"
+    },
+    "0x004db2d1": {
+      "name": "RefreshConnection_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "@fn_cleanup": {
+      "name": "CleanupUi_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004912b1": {
+      "name": "SendPlayerPacket_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "mem:40",
+        "int",
+        "char"
+      ]
+    },
+    "0x004649b1": {
+      "name": "ReportPlayerError_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "int",
+        "int"
+      ]
+    },
+    "0x004b73ee": {
+      "name": "DestroyPlayerTable_guess",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "flag-clear",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@object",
+          "offset": "0xc3ad",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "busy",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "0x009248d0",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "negative-index",
+      "args": [
+        -1
+      ]
+    },
+    {
+      "name": "index-at-four",
+      "args": [
+        4
+      ]
+    },
+    {
+      "name": "empty-copy-buffer",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@copy",
+          "offset": "0x0",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "no-slot-counts",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@copy",
+          "offset": "0x20",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x004b7772": {
+          "name": "ComparePlayerValues_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int",
+            "int",
+            "int",
+            "ignore",
+            "int",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "all-slot-counts",
+      "args": [
+        2
+      ],
+      "memory": [
+        {
+          "addr": "@copy",
+          "offset": "0x20",
+          "u32": 1
+        },
+        {
+          "addr": "@copy",
+          "offset": "0x68",
+          "u32": 2
+        },
+        {
+          "addr": "@copy",
+          "offset": "0xb0",
+          "u32": 3
+        },
+        {
+          "addr": "@copy",
+          "offset": "0xf8",
+          "u32": 4
+        }
+      ]
+    },
+    {
+      "name": "no-matching-entry",
+      "args": [
+        1
+      ],
+      "callees": {
+        "0x004b7772": {
+          "name": "ComparePlayerValues_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int",
+            "int",
+            "int",
+            "ignore",
+            "int",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "result-other",
+      "args": [
+        1
+      ],
+      "callees": {
+        "0x004b89de": {
+          "name": "CheckPlayerTable_guess",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "ignore",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "result-two",
+      "args": [
+        1
+      ],
+      "callees": {
+        "0x004b89de": {
+          "name": "CheckPlayerTable_guess",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "ignore",
+            "int"
+          ],
+          "ret": 2
+        }
+      }
+    },
+    {
+      "name": "result-five",
+      "args": [
+        1
+      ],
+      "callees": {
+        "0x004b89de": {
+          "name": "CheckPlayerTable_guess",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "ignore",
+            "int"
+          ],
+          "ret": 5
+        }
+      }
+    },
+    {
+      "name": "success-no-owner",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@object",
+          "offset": "0xc288",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "success-all-null-records",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@record_host",
+          "offset": "0x3c",
+          "u32": 0
+        },
+        {
+          "addr": "@record_host",
+          "offset": "0x44",
+          "u32": 0
+        },
+        {
+          "addr": "@record_host",
+          "offset": "0x48",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "success-second-record-only",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@record_host",
+          "offset": "0x3c",
+          "u32": 0
+        },
+        {
+          "addr": "@record_host",
+          "offset": "0x44",
+          "u32": 0
+        },
+        {
+          "addr": "@record_host",
+          "offset": "0x48",
+          "u32": "@record38"
+        }
+      ]
+    },
+    {
+      "name": "success-first-record-only",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@record_host",
+          "offset": "0x3c",
+          "u32": 0
+        },
+        {
+          "addr": "@record_host",
+          "offset": "0x44",
+          "u32": "@record34"
+        },
+        {
+          "addr": "@record_host",
+          "offset": "0x48",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "success-second-name-only",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@record_host",
+          "offset": "0x3c",
+          "u32": "@record2c"
+        },
+        {
+          "addr": "@record_host",
+          "offset": "0x44",
+          "u32": 0
+        },
+        {
+          "addr": "@record_host",
+          "offset": "0x48",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "success-with-connection-and-ui",
+      "args": [
+        3
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4978106,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -2,
+          5
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x009248d0",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@object",
+        "offset": "0xc3ad",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@copy",
+        "offset": "0x0",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@copy",
+        "offset": "0x20",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@copy",
+        "offset": "0x68",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@copy",
+        "offset": "0xb0",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@copy",
+        "offset": "0xf8",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@object",
+        "offset": "0xc288",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@owner"
+        ]
+      },
+      {
+        "addr": "@record_host",
+        "offset": "0x3c",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@record2c"
+        ]
+      },
+      {
+        "addr": "@record_host",
+        "offset": "0x44",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@record34"
+        ]
+      },
+      {
+        "addr": "@record_host",
+        "offset": "0x48",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@record38"
+        ]
+      },
+      {
+        "addr": "0x00850bc8",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@connection"
+        ]
+      },
+      {
+        "addr": "0x00850c24",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@ui"
+        ]
+      }
+    ]
+  },
+  "_survivors": "L2959: state[1] and state[2] are both initialized to -1, so this index change cannot alter the entry."
+}

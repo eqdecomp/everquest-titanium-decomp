@@ -1,0 +1,271 @@
+{
+  "function": "EQPlayerFunctionView_guess::HandleAmmo_guess",
+  "original": "0x0047F36C",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "size": "0x143",
+  "conv": "thiscall",
+  "this": "@eqplayerfunctionview",
+  "args": [],
+  "ret": "char",
+  "objects": {
+    "eqplayerfunctionview": {
+      "size": "0x248",
+      "fill": "random"
+    },
+    "recordobject": {
+      "size": "0x50",
+      "fill": "random"
+    },
+    "recordoffset": {
+      "size": "0x8",
+      "fill": "random"
+    },
+    "querybase": {
+      "size": "0x68",
+      "fill": "random"
+    },
+    "firststate": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "secondstate": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "textlookup": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "textsink": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "message": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@textlookup"},
+    {"addr": "0x00988df0", "u32": "@textsink"},
+    {"addr": "@eqplayerfunctionview", "offset": "0x244", "u8": 0},
+    {"addr": "@recordobject", "offset": "0x8", "u32": "@recordoffset"},
+    {"addr": "@recordoffset", "offset": "0x4", "u32": "0x20"},
+    {"addr": "@querybase", "offset": "0x3c", "u32": "@firststate"},
+    {"addr": "@querybase", "offset": "0x64", "u32": "@secondstate"},
+    {"addr": "@firststate", "offset": "0x48", "u32": 2},
+    {"addr": "@secondstate", "offset": "0x48", "u32": 1},
+    {"addr": "@message", "cstr": "Fixture text"}
+  ],
+  "callees": {
+    "0x0047c31a": {
+      "name": "FUN_0047c31a_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@recordobject"
+    },
+    "0x005ec220": {
+      "name": "EQ_CharacterProfileView_guess::Find_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@querybase"
+    },
+    "0x005ecc00": {
+      "name": "ProfileText_guess::GetItemType_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [19, 19, 19, 19, 19, 19, 19, 19]
+    },
+    "0x005ec850": {
+      "name": "ProfileText_guess::GetDamage_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x005e0f30": {
+      "name": "ProfileText_guess::GetItemId_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [9, 9]
+    },
+    "0x005dfa00": {
+      "name": "TextLookup_guess::GetText_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": "@message"
+    },
+    "0x00498436": {
+      "name": "TextSink_guess::dsp_chat",
+      "conv": "thiscall",
+      "args": ["cstr"]
+    }
+  },
+  "cases": [
+    {
+      "name": "unrecognized-check-true",
+      "args": [],
+      "callees": {
+        "0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [7, 7, 7]},
+        "0x005ec850": {"name": "GetDamage", "conv": "thiscall", "args": ["int"], "ret": 1}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "unrecognized-check-false",
+      "args": [],
+      "callees": {
+        "0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [7, 7, 7]},
+        "0x005ec850": {"name": "GetDamage", "conv": "thiscall", "args": ["int"], "ret": 0}
+      },
+      "expect": {"ret": 2}
+    },
+    {
+      "name": "state13-null-count-greater-than-one-no-flag",
+      "args": [],
+      "memory": [
+        {"addr": "@querybase", "offset": "0x64", "u32": 0},
+        {"addr": "@firststate", "offset": "0x48", "u32": 2},
+        {"addr": "@eqplayerfunctionview", "offset": "0x244", "u8": 0}
+      ],
+      "callees": {"0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [19, 19]}},
+      "expect": {"ret": 2}
+    },
+    {
+      "name": "state13-null-count-greater-than-one-with-flag",
+      "args": [],
+      "memory": [
+        {"addr": "@querybase", "offset": "0x64", "u32": 0},
+        {"addr": "@firststate", "offset": "0x48", "u32": 2},
+        {"addr": "@eqplayerfunctionview", "offset": "0x244", "u8": 1}
+      ],
+      "callees": {"0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [19, 19, 19]}},
+      "expect": {"ret": 2}
+    },
+    {
+      "name": "state13-null-count-equal-one",
+      "args": [],
+      "memory": [
+        {"addr": "@querybase", "offset": "0x64", "u32": 0},
+        {"addr": "@firststate", "offset": "0x48", "u32": 1}
+      ],
+      "callees": {"0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [19, 19, 19]}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "state13-null-count-zero",
+      "args": [],
+      "memory": [
+        {"addr": "@querybase", "offset": "0x64", "u32": 0},
+        {"addr": "@firststate", "offset": "0x48", "u32": 0}
+      ],
+      "callees": {"0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [19, 19, 19]}},
+      "expect": {"ret": 2}
+    },
+    {
+      "name": "state5-null",
+      "args": [],
+      "memory": [{"addr": "@querybase", "offset": "0x64", "u32": 0}],
+      "callees": {"0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [5, 5, 5, 5]}},
+      "expect": {"ret": 2}
+    },
+    {
+      "name": "state6-null",
+      "args": [],
+      "memory": [{"addr": "@querybase", "offset": "0x64", "u32": 0}],
+      "callees": {"0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [6, 6, 6, 6]}},
+      "expect": {"ret": 2}
+    },
+    {
+      "name": "state13-second-equal-count-positive",
+      "args": [],
+      "memory": [{"addr": "@secondstate", "offset": "0x48", "u32": 1}],
+      "callees": {
+        "0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [19, 19]},
+        "0x005e0f30": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [9, 9]}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "state13-second-equal-count-zero",
+      "args": [],
+      "memory": [{"addr": "@secondstate", "offset": "0x48", "u32": 0}],
+      "callees": {
+        "0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [19, 19]},
+        "0x005e0f30": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [9, 9]}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "state13-second-values-differ-first-count-positive",
+      "args": [],
+      "memory": [{"addr": "@firststate", "offset": "0x48", "u32": 1}],
+      "callees": {
+        "0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [19, 19, 19, 19, 19]},
+        "0x005e0f30": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [9, 10]}
+      },
+      "expect": {"ret": 2}
+    },
+    {
+      "name": "state13-second-values-differ-first-count-zero",
+      "args": [],
+      "memory": [{"addr": "@firststate", "offset": "0x48", "u32": 0}],
+      "callees": {
+        "0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [19, 19, 19, 19, 19]},
+        "0x005e0f30": {"name": "GetValue", "conv": "thiscall", "args": [], "ret": [9, 10]}
+      },
+      "expect": {"ret": 2}
+    },
+    {
+      "name": "state5-second-matches-count-positive",
+      "args": [],
+      "callees": {"0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [5, 5, 5, 5, 27]}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "state5-second-matches-count-zero",
+      "args": [],
+      "memory": [{"addr": "@secondstate", "offset": "0x48", "u32": 0}],
+      "callees": {"0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [5, 5, 5, 5, 27]}},
+      "expect": {"ret": 2}
+    },
+    {
+      "name": "state5-second-does-not-match",
+      "args": [],
+      "callees": {"0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [5, 5, 5, 5, 28, 5, 5]}},
+      "expect": {"ret": 2}
+    },
+    {
+      "name": "state6-second-matches-count-positive",
+      "args": [],
+      "callees": {"0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [6, 6, 6, 6, 6, 6, 28]}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "state6-second-matches-count-zero",
+      "args": [],
+      "memory": [{"addr": "@secondstate", "offset": "0x48", "u32": 0}],
+      "callees": {"0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [6, 6, 6, 6, 6, 6, 28]}},
+      "expect": {"ret": 2}
+    },
+    {
+      "name": "state6-second-does-not-match",
+      "args": [],
+      "callees": {"0x005ecc00": {"name": "GetState", "conv": "thiscall", "args": [], "ret": [6, 6, 6, 6, 6, 6, 27, 6]}},
+      "expect": {"ret": 2}
+    }
+  ],
+  "fuzz": {
+    "seed": 4715372,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@eqplayerfunctionview", "offset": "0x244", "type": "u8", "choices": [0, 1]},
+      {"addr": "@recordoffset", "offset": "0x4", "type": "u32", "choices": [32, 40, 48, 56]},
+      {"addr": "@querybase", "offset": "0x64", "type": "ptr", "choices": ["@secondstate", 0]},
+      {"addr": "@firststate", "offset": "0x48", "type": "int", "choices": [-1, 0, 1, 2]},
+      {"addr": "@secondstate", "offset": "0x48", "type": "int", "choices": [-1, 0, 1, 2]}
+    ]
+  }
+}

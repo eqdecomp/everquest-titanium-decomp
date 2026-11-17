@@ -1,0 +1,200 @@
+{
+  "function": "CollectItemCount_guess",
+  "original": "0x004b8091",
+  "sources": [
+    "src/EverQuest/tu_077_ItemMoveQueue.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "entry_guess", "type": "ptr"},
+    {"name": "amount_guess", "type": "int"},
+    {"name": "flags_guess", "type": "int"},
+    {"name": "probe_guess", "type": "ptr"},
+    {"name": "table_guess", "type": "ptr"},
+    {"name": "extra_guess", "type": "ptr"}
+  ],
+  "ret": "int",
+  "objects": {
+    "entry": {
+      "size": "0x50",
+      "fill": "random",
+      "init": [{"offset": "0x48", "u32": 10}]
+    },
+    "probe": {
+      "size": "0x40",
+      "fill": "random"
+    },
+    "table": {
+      "size": "0x100",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": 3}]
+    },
+    "extra": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "rows": {
+      "size": "0x100",
+      "fill": "random",
+      "init": [
+        {"offset": "0x10", "u32": 3},
+        {"offset": "0x34", "u32": 2},
+        {"offset": "0x58", "u32": 20},
+        {"offset": "0x7c", "u32": 1}
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004b73a9": {
+      "name": "MatchesItemFilter_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "u8"],
+      "ret": 1
+    },
+    "0x004b7772": {
+      "name": "FindLocationIndex_guess",
+      "conv": "cdecl",
+      "args": ["int", "int", "int", "int", "ptr", "int", "int"],
+      "ret": [-1]
+    },
+    "0x005ec760": {
+      "name": "FUN_005ec760",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [1]
+    },
+    "0x004b748c": {
+      "name": "FUN_004b748c",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": ["@rows", "@rows+0x24", "@rows+0x48", "@rows+0x6c"]
+    },
+    "0x004b76e3": {
+      "name": "FUN_004b76e3",
+      "conv": "thiscall",
+      "args": ["int", "ptr"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "flags check fails, returns amount",
+      "args": ["@entry", 5, 1, "@probe", "@table", 0],
+      "callees": {
+        "0x004b73a9": {"name": "FUN_004b73a9", "conv": "cdecl", "args": ["ptr", "u8"], "ret": 0}
+      }
+    },
+    {
+      "name": "not found, check fails",
+      "args": ["@entry", 5, 1, "@probe", "@table", 0],
+      "callees": {
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": [0]}
+      }
+    },
+    {
+      "name": "not found, amount below remaining",
+      "args": ["@entry", 5, 1, "@probe", "@table", 0],
+      "callees": {
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": [1]}
+      }
+    },
+    {
+      "name": "not found, amount above remaining",
+      "args": ["@entry", 12, 1, "@probe", "@table", 0]
+    },
+    {
+      "name": "not found, amount equals remaining",
+      "args": ["@entry", 10, 1, "@probe", "@table", 0]
+    },
+    {
+      "name": "not found, extra copied into probe",
+      "args": ["@entry", 12, 1, "@probe", "@table", "@extra"]
+    },
+    {
+      "name": "not found, amount zero",
+      "args": ["@entry", 0, 1, "@probe", "@table", 0]
+    },
+    {
+      "name": "not found, remaining zero",
+      "args": ["@entry", 3, 1, "@probe", "@table", 0],
+      "memory": [{"addr": "@entry", "offset": "0x48", "u32": 0}]
+    },
+    {
+      "name": "found first, check fails",
+      "args": ["@entry", 5, 1, "@probe", "@table", 0],
+      "callees": {
+        "0x004b7772": {"name": "FUN_004b7772", "conv": "cdecl", "args": ["int", "int", "int", "int", "ptr", "int", "int"], "ret": [0]},
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": [0]}
+      }
+    },
+    {
+      "name": "found, row exhausts remaining",
+      "args": ["@entry", 5, 1, "@probe", "@table", 0],
+      "callees": {
+        "0x004b7772": {"name": "FUN_004b7772", "conv": "cdecl", "args": ["int", "int", "int", "int", "ptr", "int", "int"], "ret": [0, 1, -1]},
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": [1]}
+      },
+      "memory": [{"addr": "@rows", "offset": "0x10", "u32": 20}]
+    },
+    {
+      "name": "found, row reaches zero exactly",
+      "args": ["@entry", 5, 1, "@probe", "@table", 0],
+      "callees": {
+        "0x004b7772": {"name": "FUN_004b7772", "conv": "cdecl", "args": ["int", "int", "int", "int", "ptr", "int", "int"], "ret": [0, -1]},
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": [1]}
+      },
+      "memory": [{"addr": "@rows", "offset": "0x10", "u32": 10}]
+    },
+    {
+      "name": "found, row leaves remaining at one",
+      "args": ["@entry", 5, 1, "@probe", "@table", 0],
+      "callees": {
+        "0x004b7772": {"name": "FUN_004b7772", "conv": "cdecl", "args": ["int", "int", "int", "int", "ptr", "int", "int"], "ret": [0, -1]},
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": [1, 1]}
+      },
+      "memory": [{"addr": "@rows", "offset": "0x10", "u32": 9}]
+    },
+    {
+      "name": "found, then not found, check passes, amount below remaining",
+      "args": ["@entry", 5, 1, "@probe", "@table", 0],
+      "callees": {
+        "0x004b7772": {"name": "FUN_004b7772", "conv": "cdecl", "args": ["int", "int", "int", "int", "ptr", "int", "int"], "ret": [0, -1]},
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": [1, 1]}
+      }
+    },
+    {
+      "name": "found two rows, check fails after loop",
+      "args": ["@entry", 5, 1, "@probe", "@table", 0],
+      "callees": {
+        "0x004b7772": {"name": "FUN_004b7772", "conv": "cdecl", "args": ["int", "int", "int", "int", "ptr", "int", "int"], "ret": [0, 1, -1]},
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": [1, 0]}
+      }
+    },
+    {
+      "name": "found two rows, check passes, amount above remaining",
+      "args": ["@entry", 9, 1, "@probe", "@table", "@extra"],
+      "callees": {
+        "0x004b7772": {"name": "FUN_004b7772", "conv": "cdecl", "args": ["int", "int", "int", "int", "ptr", "int", "int"], "ret": [0, 1, -1]},
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": [1, 1]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4948113,
+    "count": 100,
+    "args": [
+      {"choices": ["@entry"]},
+      {"range": [-2, 20]},
+      {"range": [0, 7]},
+      {"choices": ["@probe"]},
+      {"choices": ["@table"]},
+      {"choices": ["@extra", 0]}
+    ],
+    "memory": [
+      {"addr": "@entry", "offset": "0x48", "type": "int", "range": [-3, 15]},
+      {"addr": "@table", "offset": "0x0", "type": "int", "range": [0, 4]},
+      {"addr": "@rows", "offset": "0x10", "type": "int", "count": 4, "stride": 36, "range": [-3, 25]}
+    ]
+  }
+}

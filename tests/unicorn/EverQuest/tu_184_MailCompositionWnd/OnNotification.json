@@ -1,0 +1,186 @@
+{
+  "function": "CMailAddressBookWndView_guess::WndNotification_guess",
+  "original": "0x0052cfdf",
+  "size": "0x216",
+  "sources": ["src/EverQuest/tu_184_MailCompositionWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {"name": "sender", "type": "ptr"},
+    {"name": "message", "type": "u32"},
+    {"name": "data", "type": "ptr"}
+  ],
+  "ret": "int",
+  "objects": {
+    "owner": {
+      "size": "0x188",
+      "fill": "zero",
+      "init": [{"offset": "0x15c", "u32": "@control_vtbl"}]
+    },
+    "sender": {"size": "4", "fill": "zero"},
+    "data": {"size": "4", "fill": "zero"},
+    "list": {"size": "4", "fill": "zero", "init": [{"offset": "0", "u32": "@list_vtbl"}]},
+    "source": {"size": "4", "fill": "zero", "init": [{"offset": "0", "u32": "@source_vtbl"}]},
+    "window": {"size": "4", "fill": "zero"},
+    "text_170": {"size": "4", "fill": "zero"},
+    "text_174": {"size": "4", "fill": "zero"},
+    "action_178": {"size": "4", "fill": "zero"},
+    "action_17c": {"size": "4", "fill": "zero"},
+    "action_180": {"size": "4", "fill": "zero"},
+    "root": {"size": "4", "fill": "zero"},
+    "state": {"size": "0x95", "fill": "zero", "init": [{"offset": "0x94", "u8": 1}]},
+    "string_service": {"size": "4", "fill": "zero"},
+    "dialog_pool": {"size": "4", "fill": "zero"},
+    "dialog_text": {"size": "0x40", "fill": "zero", "init": [{"offset": "0", "cstr": "fixture message"}]},
+    "control_vtbl": {"size": "4", "fill": "zero", "init": [{"offset": "0", "u32": "@fn_control"}]},
+    "list_vtbl": {"size": "0x134", "fill": "zero", "init": [{"offset": "0x130", "u32": "@fn_list_text"}]},
+    "source_vtbl": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xfc", "u32": "@fn_source_set"},
+        {"offset": "0x130", "u32": "@fn_source_text"}
+      ]
+    },
+    "fn_control": {"size": "4"},
+    "fn_list_text": {"size": "4"},
+    "fn_source_text": {"size": "4"},
+    "fn_source_set": {"size": "4"}
+  },
+  "memory": [
+    {"addr": "@owner", "offset": "0x164", "u32": "@list"},
+    {"addr": "@owner", "offset": "0x168", "u32": "@window"},
+    {"addr": "@owner", "offset": "0x16c", "u32": "@source"},
+    {"addr": "@owner", "offset": "0x170", "u32": "@text_170"},
+    {"addr": "@owner", "offset": "0x174", "u32": "@text_174"},
+    {"addr": "@owner", "offset": "0x178", "u32": "@action_178"},
+    {"addr": "@owner", "offset": "0x17c", "u32": "@action_17c"},
+    {"addr": "@owner", "offset": "0x180", "u32": "@action_180"},
+    {"addr": "@owner", "offset": "0x184", "u8": 0},
+    {"addr": "@owner", "offset": "8", "u32": 3},
+    {"addr": "@sender", "offset": "8", "u32": 4},
+    {"addr": "0x00988df0", "u32": "@root"},
+    {"addr": "0x00905cb0", "u32": "@string_service"},
+    {"addr": "0x00991e44", "u32": "@dialog_pool"}
+  ],
+  "callees": {
+    "0x0052cc8f": {"name": "SaveEntry_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0052cb70": {"name": "AddSelectedToRecipients_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0052c78c": {"name": "HandleButton_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00495250": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": "@state"},
+    "0x005dfa00": {
+      "name": "GetMessage_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": "@dialog_text"
+    },
+    "0x00548460": {"name": "Show_guess", "conv": "thiscall", "args": ["ptr", "int", "cstr", "int", "int", "int", "int"], "ret": 0},
+    "0x0052c52f": {"name": "Refresh_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005a2230": {"name": "Dispatch_guess", "conv": "thiscall", "args": ["ptr", "u32", "ptr"], "ret": 85},
+    "0x005734d0": {"name": "TrimLeft_guess", "conv": "thiscall", "args": ["char"], "ret": 0},
+    "0x00571590": {"name": "CharAt_guess", "conv": "thiscall", "args": ["int"], "ret": 120},
+    "0x00572570": {"name": "SetChar_guess", "conv": "thiscall", "args": ["int", "char"], "ret": 0},
+    "0x00572650": {"name": "Compare_guess", "conv": "thiscall", "args": ["mem:4"], "ret": 0},
+    "0x00571d00": {"name": "FreeRep_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x0052c14f": {"name": "Finish_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "@fn_control": {"name": "ControlSlot00_guess", "conv": "thiscall", "args": ["int", "int", "int"], "ret": 0},
+    "@fn_list_text": {
+      "name": "ListSlot76_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "writes": [{"arg": 0, "offset": 0, "hex": "00 00 00 60"}],
+      "ret": "arg0"
+    },
+    "@fn_source_text": {
+      "name": "SourceSlot76_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "writes": [{"arg": 0, "offset": 0, "hex": "90 01 00 60"}],
+      "ret": "arg0"
+    },
+    "@fn_source_set": {"name": "SourceSlot63_guess", "conv": "thiscall", "args": ["mem:4"], "ret": 0}
+  },
+  "cases": [
+    {"name": "guard list null", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@owner", "offset": "0x164", "u32": 0}]},
+    {"name": "guard source null", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@owner", "offset": "0x16c", "u32": 0}]},
+    {"name": "guard text 170 null", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@owner", "offset": "0x170", "u32": 0}]},
+    {"name": "guard text 174 null", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@owner", "offset": "0x174", "u32": 0}]},
+    {"name": "guard window null", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@owner", "offset": "0x168", "u32": 0}]},
+    {"name": "send selected", "args": ["@action_178", 1, "@data"]},
+    {"name": "refresh addresses", "args": ["@action_178", 1, "@data"], "memory": [{"addr": "@owner", "offset": "0x184", "u8": 1}]},
+    {"name": "button handler", "args": ["@action_180", 1, "@data"]},
+    {"name": "action root null", "args": ["@action_17c", 1, "@data"], "memory": [{"addr": "0x00988df0", "u32": 0}]},
+    {
+      "name": "action manager null",
+      "args": ["@action_17c", 1, "@data"],
+      "callees": {"0x00495250": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 0}}
+    },
+    {"name": "action manager inactive", "args": ["@action_17c", 1, "@data"], "memory": [{"addr": "@state", "offset": "0x94", "u8": 0}]},
+    {"name": "action show dialog", "args": ["@action_17c", 1, "@data"]},
+    {"name": "window notification", "args": ["@window", 0, "@data"]},
+    {
+      "name": "normalize dash and update",
+      "args": ["@source", 14, "@data"],
+      "callees": {"0x00571590": {"name": "CharAt_guess", "conv": "thiscall", "args": ["int"], "ret": 45}}
+    },
+    {
+      "name": "normalize compare mismatch",
+      "args": ["@source", 14, "@data"],
+      "callees": {
+        "0x00571590": {"name": "CharAt_guess", "conv": "thiscall", "args": ["int"], "ret": 120},
+        "0x00572650": {"name": "Compare_guess", "conv": "thiscall", "args": ["mem:4"], "ret": 1}
+      }
+    },
+    {
+      "name": "normalize null selected text",
+      "args": ["@source", 14, "@data"],
+      "callees": {
+        "@fn_source_text": {
+          "name": "SourceSlot76_guess",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "writes": [
+            {"arg": 0, "offset": 0, "hex": "00 00 00 00", "call": 0},
+            {"arg": 0, "offset": 0, "hex": "90 01 00 60", "call": 1}
+          ],
+          "ret": "arg0"
+        },
+        "0x00571590": {"name": "CharAt_guess", "conv": "thiscall", "args": ["int"], "ret": 120}
+      }
+    },
+    {
+      "name": "normalize empty selected text",
+      "args": ["@source", 14, "@data"],
+      "memory": [{"addr": "@sender", "offset": "8", "u32": 0}],
+      "callees": {"0x00571590": {"name": "CharAt_guess", "conv": "thiscall", "args": ["int"], "ret": 120}}
+    },
+    {
+      "name": "normalize one-character dash",
+      "args": ["@source", 14, "@data"],
+      "memory": [{"addr": "@sender", "offset": "8", "u32": 1}],
+      "callees": {"0x00571590": {"name": "CharAt_guess", "conv": "thiscall", "args": ["int"], "ret": 45}}
+    },
+    {"name": "list changed", "args": ["@list", 1, "@data"]},
+    {"name": "list other message", "args": ["@list", 2, "@data"], "expect": {"ret": 85}},
+    {"name": "other sender dispatch", "args": ["@sender", 0, "@data"], "expect": {"ret": 85}}
+  ],
+  "fuzz": {
+    "seed": 5427167,
+    "count": 100,
+    "args": [
+      {"choices": ["@sender", "@action_178", "@action_180", "@action_17c", "@window", "@source", "@list"]},
+      {"choices": [0, 1, 14, 15]},
+      {"choices": ["@data"]}
+    ],
+    "memory": [
+      {"addr": "@owner", "offset": "0x164", "type": "ptr", "choices": ["@list", 0]},
+      {"addr": "@owner", "offset": "0x168", "type": "ptr", "choices": ["@window", 0]},
+      {"addr": "@owner", "offset": "0x16c", "type": "ptr", "choices": ["@source", 0]},
+      {"addr": "@owner", "offset": "0x170", "type": "ptr", "choices": ["@text_170", 0]},
+      {"addr": "@owner", "offset": "0x174", "type": "ptr", "choices": ["@text_174", 0]},
+      {"addr": "@owner", "offset": "0x184", "type": "u8", "choices": [0, 1]},
+      {"addr": "@state", "offset": "0x94", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00988df0", "type": "ptr", "choices": [0, "@root"]}
+    ]
+  }
+}

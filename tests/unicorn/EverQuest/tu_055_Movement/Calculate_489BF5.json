@@ -1,0 +1,77 @@
+{
+  "function": "Actor_489BF5_guess::Calculate_489BF5_guess",
+  "original": "0x00489bf5",
+  "sources": [
+    "src/EverQuest/tu_055_Movement.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@actor",
+  "args": [],
+  "ret": "float",
+  "objects": {
+    "actor": {
+      "size": "0x264",
+      "fill": "random",
+      "init": [
+        {"offset": "0x1a8", "u32": "@data"},
+        {"offset": "0x234", "f32": 7.25},
+        {"offset": "0x238", "f32": 2.0},
+        {"offset": "0x260", "u32": 330}
+      ]
+    },
+    "data": {
+      "size": "0x160",
+      "fill": "random",
+      "init": [
+        {"offset": "0x12c", "u32": "@prop"},
+        {"offset": "0xc4", "f32": 3.0},
+        {"offset": "0x15c", "u32": 1}
+      ]
+    },
+    "prop": {
+      "size": "0x48",
+      "fill": "random",
+      "init": [
+        {"offset": "0x44", "f32": 1.5}
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0048f019": {
+      "name": "Data_489BF5_guess::CheckMode_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {"name": "mode_set_multiply",
+     "callees": {"0x0048f019": {"name": "CheckMode", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "mode_set_high_bits_only",
+     "callees": {"0x0048f019": {"name": "CheckMode", "conv": "thiscall", "args": [], "ret": 256}}},
+    {"name": "kind_330_adds_one"},
+    {"name": "kind_329_adds_half",
+     "memory": [{"addr": "@actor", "offset": "0x260", "u32": 329}]},
+    {"name": "kind_331_adds_half",
+     "memory": [{"addr": "@actor", "offset": "0x260", "u32": 331}]},
+    {"name": "state_zero_no_add",
+     "memory": [{"addr": "@data", "offset": "0x15c", "u32": 0}]},
+    {"name": "state_negative_adds",
+     "memory": [{"addr": "@data", "offset": "0x15c", "u32": "0x80000000"},
+                {"addr": "@actor", "offset": "0x260", "u32": 0}]}
+  ],
+  "fuzz": {
+    "seed": 4758517,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {"addr": "@actor", "offset": "0x234", "type": "float", "range": [-1000.0, 1000.0]},
+      {"addr": "@actor", "offset": "0x238", "type": "float", "range": [-1000.0, 1000.0]},
+      {"addr": "@actor", "offset": "0x260", "type": "int", "choices": [0, 329, 330, 331, 127]},
+      {"addr": "@data", "offset": "0x15c", "type": "int", "choices": [0, 1, -1, 5]},
+      {"addr": "@data", "offset": "0xc4", "type": "float", "range": [-100.0, 100.0]},
+      {"addr": "@prop", "offset": "0x44", "type": "float", "range": [-100.0, 100.0]}
+    ]
+  }
+}

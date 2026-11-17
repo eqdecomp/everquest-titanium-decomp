@@ -1,0 +1,101 @@
+{
+  "function": "LargeCopyB393_guess::CopyFrom_guess",
+  "original": "0x0045b393",
+  "sources": [
+    "src/EverQuest/tu_042_EQHandleMsg.cpp"
+  ],
+  "_survivors": "L7830: `<= 9` writes values1BC[9] (= this+0x1E0), which the next loop rewrites with the same source word; final memory is identical",
+  "conv": "thiscall",
+  "this": "@largecopyb393",
+  "args": [
+    {
+      "name": "source_reference_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "largecopyb393": {
+      "size": "0x348",
+      "fill": "random"
+    },
+    "source_reference": {
+      "size": "0x348",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00494593": {
+      "name": "CopyUnitB393_Copy",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x00458649": {
+      "name": "SixWords_CopyFrom",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x00458672": {
+      "name": "SevenWords_CopyFrom",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x0045b31c": {
+      "name": "IndexedTableB31C_Copy",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        "@source_reference"
+      ]
+    },
+    {
+      "name": "zeros",
+      "args": [
+        "@source_reference"
+      ],
+      "memory": [
+        {
+          "addr": "@source_reference",
+          "size": 840,
+          "fill": "zero"
+        }
+      ]
+    },
+    {
+      "name": "self copy",
+      "args": [
+        "@largecopyb393"
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4567955,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@source_reference"
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

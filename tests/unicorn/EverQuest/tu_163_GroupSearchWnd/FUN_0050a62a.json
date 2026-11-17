@@ -1,0 +1,431 @@
+{
+  "function": "CGroupSearchWndView_guess::InitGroupInfoPage_guess",
+  "original": "0x0050a62a",
+  "sources": [
+    "src/EverQuest/tu_163_GroupSearchWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@bigobject",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "bigobject": {
+      "size": "0xe770",
+      "fill": "zero"
+    },
+    "edit": {
+      "size": "0x240",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@edit_vtbl"
+        }
+      ]
+    },
+    "fn_edit": {
+      "size": "4"
+    },
+    "edit_vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xfc",
+          "u32": "@fn_edit"
+        }
+      ]
+    },
+    "button": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@button_vtbl"
+        }
+      ]
+    },
+    "fn_toggle": {
+      "size": "4"
+    },
+    "button_vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xc0",
+          "u32": "@fn_toggle"
+        }
+      ]
+    },
+    "list": {
+      "size": "0x200",
+      "fill": "zero"
+    },
+    "text_source": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "queue_entry": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "check_control": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d00",
+      "u32": 0
+    },
+    {
+      "addr": "0x0063f53c",
+      "from_image": "0x0063F53C",
+      "image_size": 3
+    }
+  ],
+  "callees": {
+    "0x00509e93": {
+      "name": "UpdateGroupInfoLabel_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0050a2aa": {
+      "name": "GetViewRange_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ignore",
+        "ignore"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "01000000"
+        },
+        {
+          "arg": 2,
+          "offset": 0,
+          "hex": "46000000"
+        }
+      ]
+    },
+    "0x005738b0": {
+      "name": "FormatText_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr",
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "34120000"
+        }
+      ]
+    },
+    "0x004d7ebc": {
+      "name": "SetMaxChars_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "@fn_edit": {
+      "name": "Slot63_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "Release_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x004d22d7": {
+      "name": "GetText_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "34120000"
+        }
+      ]
+    },
+    "0x00571f70": {
+      "name": "Assign_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "this"
+    },
+    "0x00509689": {
+      "name": "SelectAllRoles_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00597c60": {
+      "name": "SetColors_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x005bb140": {
+      "name": "Process_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "@fn_toggle": {
+      "name": "Toggle_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "all-null",
+      "args": []
+    },
+    {
+      "name": "all-controls",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@bigobject",
+          "offset": "0x18c",
+          "u32": "@edit"
+        },
+        {
+          "addr": "@bigobject",
+          "offset": "0x194",
+          "u32": "@edit"
+        },
+        {
+          "addr": "@bigobject",
+          "offset": "0x198",
+          "u32": "@edit"
+        },
+        {
+          "addr": "@bigobject",
+          "offset": "0x224",
+          "u32": "@edit"
+        },
+        {
+          "addr": "@bigobject",
+          "offset": "0x228",
+          "u32": "@button"
+        },
+        {
+          "addr": "@bigobject",
+          "offset": "0x22c",
+          "u32": "@edit"
+        },
+        {
+          "addr": "@bigobject",
+          "offset": "0x23c",
+          "u32": "@list"
+        },
+        {
+          "addr": "@bigobject",
+          "offset": "0x240",
+          "u32": "@check_control"
+        },
+        {
+          "addr": "@bigobject",
+          "offset": "0x248",
+          "u32": "@text_source"
+        }
+      ]
+    },
+    {
+      "name": "empty-text-result",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@bigobject",
+          "offset": "0x18c",
+          "u32": "@edit"
+        },
+        {
+          "addr": "@bigobject",
+          "offset": "0x194",
+          "u32": "@edit"
+        },
+        {
+          "addr": "@bigobject",
+          "offset": "0x198",
+          "u32": "@edit"
+        },
+        {
+          "addr": "@bigobject",
+          "offset": "0x224",
+          "u32": "@edit"
+        },
+        {
+          "addr": "@bigobject",
+          "offset": "0x228",
+          "u32": "@button"
+        },
+        {
+          "addr": "@bigobject",
+          "offset": "0x22c",
+          "u32": "@edit"
+        },
+        {
+          "addr": "@bigobject",
+          "offset": "0x23c",
+          "u32": "@list"
+        },
+        {
+          "addr": "@bigobject",
+          "offset": "0x240",
+          "u32": "@check_control"
+        },
+        {
+          "addr": "@bigobject",
+          "offset": "0x248",
+          "u32": "@text_source"
+        }
+      ],
+      "callees": {
+        "0x004d22d7": {
+          "name": "GetText_empty_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": "arg0",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5285418,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@bigobject",
+        "offset": "0x18c",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@edit"
+        ]
+      },
+      {
+        "addr": "@bigobject",
+        "offset": "0x194",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@edit"
+        ]
+      },
+      {
+        "addr": "@bigobject",
+        "offset": "0x198",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@edit"
+        ]
+      },
+      {
+        "addr": "@bigobject",
+        "offset": "0x224",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@edit"
+        ]
+      },
+      {
+        "addr": "@bigobject",
+        "offset": "0x228",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@button"
+        ]
+      },
+      {
+        "addr": "@bigobject",
+        "offset": "0x22c",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@edit"
+        ]
+      },
+      {
+        "addr": "@bigobject",
+        "offset": "0x23c",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@list"
+        ]
+      },
+      {
+        "addr": "@bigobject",
+        "offset": "0x240",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@check_control"
+        ]
+      },
+      {
+        "addr": "@bigobject",
+        "offset": "0x248",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@text_source"
+        ]
+      }
+    ]
+  },
+  "_survivors": "L1235: SetCheck converts nonzero values to checked, so 1 and 2 have the same behavior."
+}

@@ -1,0 +1,196 @@
+{
+  "function": "Handle_OP_ZoneSpawns_guess",
+  "original": "0x00455710",
+  "sources": ["src/EverQuest/tu_042_EQHandleMsg.cpp"],
+  "conv": "cdecl",
+  "args": [
+    {"name": "first_guess", "type": "int"},
+    {"name": "second_guess", "type": "int"},
+    {"name": "record_guess", "type": "ptr"},
+    {"name": "bytes_guess", "type": "u32"}
+  ],
+  "ret": "void",
+  "objects": {
+    "record": {"size": "0x483", "fill": "random"},
+    "settings": {"size": "0x14c", "fill": "zero"},
+    "everquest": {"size": "0xb54", "fill": "zero"},
+    "actor0": {"size": "0xec0", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "0x12345678"}
+    ]},
+    "actor1": {"size": "0xec0", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "0x23456789"}
+    ]},
+    "actor2": {"size": "0xec0", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "0x3456789a"}
+    ]},
+    "player0": {"size": "0x348", "fill": "zero", "init": [
+      {"offset": "0x120", "cstr": "SPAWN0"},
+      {"offset": "0x1a8", "u32": "@actor0"}
+    ]},
+    "player1": {"size": "0x348", "fill": "zero", "init": [
+      {"offset": "0x120", "cstr": "SPAWN1"},
+      {"offset": "0x1a8", "u32": "@actor1"}
+    ]},
+    "player2": {"size": "0x348", "fill": "zero", "init": [
+      {"offset": "0x120", "cstr": "SPAWN2"},
+      {"offset": "0x1a8", "u32": "@actor2"}
+    ]},
+    "node": {"size": "0x348", "fill": "zero", "init": [
+      {"offset": "0x25c", "u32": 1}
+    ]},
+    "character": {"size": "0xc4d0", "fill": "zero", "init": [
+      {"offset": "0x8", "u32": "@vbtable"},
+      {"offset": "0xc3c0", "cstr": "SPAWN0"}
+    ]},
+    "vbtable": {"size": "0x8", "fill": "zero", "init": [
+      {"offset": "0x4", "u32": "0xc37c"}
+    ]}
+  },
+  "memory": [
+    {"addr": "0x00905cc4", "u32": 0},
+    {"addr": "0x00905d24", "u32": "@settings"},
+    {"addr": "@settings", "offset": "0x148", "u32": 0},
+    {"addr": "0x009043a4", "u8": 0},
+    {"addr": "0x00904390", "size": 20, "fill": "zero"},
+    {"addr": "0x0090424d", "size": "0x140", "fill": "zero"},
+    {"addr": "0x00905d00", "u32": 0},
+    {"addr": "0x00905ce4", "u32": 0},
+    {"addr": "0x00905cf8", "u32": 0},
+    {"addr": "0x00905cfc", "u32": 0},
+    {"addr": "0x00905c00", "u32": 0},
+    {"addr": "0x00988df0", "u32": "@everquest"}
+  ],
+  "callees": {
+    "0x00401b28": {"name": "ResolveDispatch_guess", "conv": "cdecl", "args": ["u32"], "ret": 0},
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": ["@player0", "@player1", "@player2"]},
+    "0x004850a0": {"name": "EQPlayer_constructor", "conv": "thiscall", "args": ["mem:0x181", "u8", "int", "u8", "ptr"], "ret": "this"},
+    "0x00482722": {"name": "SwapNPCMaterials_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0047dec4": {"name": "SwapFace_guess", "conv": "thiscall", "args": ["int", "int"], "ret": 0},
+    "0x0048a6f2": {"name": "FUN_0048a6f2", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0048a945": {"name": "FUN_0048a945", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00452198": {"name": "SetPetIdFromSpawnList_guess", "conv": "cdecl", "args": ["ptr"], "ret": 0},
+    "0x0043910d": {"name": "SetViewActor_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0}
+  },
+  "rewrite_aliases": {"??2@YAPAXI@Z": "0x0060d071"},
+  "cases": [
+    {"name": "null-record", "args": [0, 0, 0, "0x181"]},
+    {"name": "zero-count", "args": [0, 0, "@record", 0]},
+    {"name": "below-one-stride", "args": [1, 1, "@record", "0x180"]},
+    {"name": "one-record-no-optional-work", "args": [1, 1, "@record", "0x181"]},
+    {
+      "name": "class-hair-refresh-name-and-character-match",
+      "args": [1, 1, "@record", "0x181"],
+      "memory": [
+        {"addr": "@settings", "offset": "0x148", "u32": 12001},
+        {"addr": "@actor0", "offset": "0xebc", "u32": 0},
+        {"addr": "@player0", "offset": "0x252", "u8": 26},
+        {"addr": "@player0", "offset": "0x24d", "u8": 1},
+        {"addr": "@player0", "offset": "0x254", "u8": 255},
+        {"addr": "@player0", "offset": "0x120", "cstr": "MATCH"},
+        {"addr": "0x009043a4", "u8": 1},
+        {"addr": "0x0090424d", "cstr": "MATCH"},
+        {"addr": "0x00905d00", "u32": "@character"},
+        {"addr": "@character", "offset": "0xc3c0", "cstr": "MATCH"}
+      ]
+    },
+    {
+      "name": "class-without-hair-at-threshold",
+      "args": [1, 1, "@record", "0x181"],
+      "memory": [
+        {"addr": "@settings", "offset": "0x148", "u32": 12000},
+        {"addr": "@actor0", "offset": "0xebc", "u32": 0},
+        {"addr": "@player0", "offset": "0x252", "u8": 26},
+        {"addr": "@player0", "offset": "0x24d", "u8": 0}
+      ]
+    },
+    {
+      "name": "type-skips-name-slots",
+      "args": [1, 1, "@record", "0x181"],
+      "memory": [
+        {"addr": "@player0", "offset": "0x244", "u8": 1},
+        {"addr": "0x009043a4", "u8": 1},
+        {"addr": "0x00905d00", "u32": "@character"}
+      ]
+    },
+    {
+      "name": "type-nonzero-enabled-name-matches",
+      "args": [1, 1, "@record", "0x181"],
+      "memory": [
+        {"addr": "@player0", "offset": "0x244", "u8": 1},
+        {"addr": "@player0", "offset": "0x120", "cstr": "MATCH"},
+        {"addr": "0x009043a4", "u8": 1},
+        {"addr": "0x0090424d", "cstr": "MATCH"}
+      ]
+    },
+    {
+      "name": "second-name-slot-matches",
+      "args": [1, 1, "@record", "0x181"],
+      "memory": [
+        {"addr": "@player0", "offset": "0x120", "cstr": "SECOND"},
+        {"addr": "0x009043a4", "u8": 1},
+        {"addr": "0x0090428d", "cstr": "SECOND"}
+      ]
+    },
+    {
+      "name": "name-slots-enabled-empty",
+      "args": [1, 1, "@record", "0x181"],
+      "memory": [
+        {"addr": "0x009043a4", "u8": 1},
+        {"addr": "0x00905d00", "u32": 0}
+      ]
+    },
+    {
+      "name": "name-match-character-mismatch",
+      "args": [1, 1, "@record", "0x181"],
+      "memory": [
+        {"addr": "@player0", "offset": "0x120", "cstr": "MATCH"},
+        {"addr": "0x009043a4", "u8": 1},
+        {"addr": "0x0090424d", "cstr": "MATCH"},
+        {"addr": "0x00905d00", "u32": "@character"},
+        {"addr": "@character", "offset": "0xc3c0", "cstr": "OTHER"}
+      ]
+    },
+    {
+      "name": "resolver-misses-existing-player",
+      "args": [1, 1, "@record", "0x181"],
+      "memory": [{"addr": "0x00905cc4", "u32": "@node"}]
+    },
+    {
+      "name": "allocation-fails",
+      "args": [1, 1, "@record", "0x181"],
+      "callees": {
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}
+      }
+    },
+    {"name": "two-records-and-remainder", "args": [0, 0, "@record", "0x303"]},
+    {"name": "three-records", "args": [0, 0, "@record", "0x483"]}
+  ],
+  "fuzz": {
+    "seed": 4544272,
+    "count": 100,
+    "args": [
+      {},
+      {},
+      {"choices": ["@record"]},
+      {"choices": [0, 1, "0x180", "0x181", "0x182", "0x301", "0x302", "0x303", "0x482", "0x483"]}
+    ],
+    "memory": [
+      {"addr": "0x00905cc4", "type": "ptr", "choices": [0, "@node"]},
+      {"addr": "@settings", "offset": "0x148", "type": "u32", "choices": [0, 12000, 12001, 20000]},
+      {"addr": "0x009043a4", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00905d00", "type": "ptr", "choices": [0, "@character"]},
+      {"addr": "@player0", "offset": "0x244", "type": "u8", "choices": [0, 1]},
+      {"addr": "@player0", "offset": "0x24d", "type": "u8", "choices": [0, 1, 255]},
+      {"addr": "@player0", "offset": "0x252", "type": "u8", "choices": [0, 26]},
+      {"addr": "@actor0", "offset": "0xebc", "type": "u32", "choices": [0, 1, 8000, 12000, 20000]},
+      {"addr": "@player1", "offset": "0x244", "type": "u8", "choices": [0, 1]},
+      {"addr": "@player1", "offset": "0x24d", "type": "u8", "choices": [0, 1, 255]},
+      {"addr": "@player1", "offset": "0x252", "type": "u8", "choices": [0, 26]},
+      {"addr": "@actor1", "offset": "0xebc", "type": "u32", "choices": [0, 1, 8000, 12000, 20000]},
+      {"addr": "@player2", "offset": "0x244", "type": "u8", "choices": [0, 1]},
+      {"addr": "@player2", "offset": "0x24d", "type": "u8", "choices": [0, 1, 255]},
+      {"addr": "@player2", "offset": "0x252", "type": "u8", "choices": [0, 26]},
+      {"addr": "@actor2", "offset": "0xebc", "type": "u32", "choices": [0, 1, 8000, 12000, 20000]}
+    ]
+  }
+}

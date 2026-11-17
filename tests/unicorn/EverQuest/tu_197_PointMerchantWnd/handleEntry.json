@@ -1,0 +1,145 @@
+{
+  "function": "StatusOwner_guess::handleEntry_guess",
+  "original": "0x005465d1",
+  "sources": ["src/EverQuest/tu_197_PointMerchantWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@statusowner",
+  "args": [{"name": "entry_guess", "type": "ptr"}],
+  "ret": "void",
+  "objects": {
+    "statusowner": {
+      "size": "0x20c",
+      "fill": "zero",
+      "init": [{"offset": "0x1c0", "u32": "@statustarget"}]
+    },
+    "statustarget": {"size": "0x5e", "fill": "zero"},
+    "entry": {"size": "0x174", "fill": "zero"},
+    "queue": {
+      "size": "0x240",
+      "fill": "zero",
+      "init": [{"offset": "0x120", "cstr": "fixture queue"}]
+    },
+    "strings": {"size": "4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4},
+    {"addr": "0x0065ab14", "from_image": "0x0065ab14", "image_size": 16},
+    {"addr": "0x00905d10", "u32": "@queue"},
+    {"addr": "0x00988df0", "u32": "@strings"}
+  ],
+  "callees": {
+    "0x005e0f90": {"name": "entryRank_guess", "conv": "thiscall", "args": [], "ret": 3},
+    "0x005456d3": {"name": "dispatch13_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 1},
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr", "int"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "2020202020203100"}]
+    },
+    "0x005e0620": {"name": "entryFlag_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "0x005456a5": {"name": "dispatch15_guess", "conv": "thiscall", "args": [], "ret": 5},
+    "0x005e0ff0": {"name": "entryValue170_guess", "conv": "thiscall", "args": [], "ret": 5},
+    "0x005eccc0": {"name": "entryCheck_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005ec760": {"name": "entryHasValue_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005e0ec0": {"name": "entryProbe_guess", "conv": "thiscall", "args": [], "ret": 33},
+    "0x0054568e": {"name": "dispatch16_guess", "conv": "thiscall", "args": [], "ret": 44},
+    "0x00492ec2": {"name": "sanitizeName_guess", "conv": "thiscall", "args": ["cstr"], "ret": "arg0"},
+    "0x0046da4a": {
+      "name": "buildTokenString_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "cstr", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore"],
+      "ret": 0
+    },
+    "0x004982c6": {"name": "show_guess", "conv": "thiscall", "args": ["ignore", "int", "int"], "ret": 0}
+  },
+  "rewrite_aliases": {"_sprintf": "0x0060d5eb"},
+  "cases": [
+    {"name": "null entry", "args": [0]},
+    {
+      "name": "no status target, count one",
+      "args": ["@entry"],
+      "memory": [{"addr": "@statusowner", "offset": "0x1c0", "u32": 0}],
+      "callees": {
+        "0x005e0f90": {"name": "entryRank_guess", "conv": "thiscall", "args": [], "ret": 3},
+        "0x005456d3": {"name": "dispatch13_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 1},
+        "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr", "int"], "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "2020202020203100"}]}
+      }
+    },
+    {
+      "name": "flag rejects",
+      "args": ["@entry"],
+      "callees": {
+        "0x005e0620": {"name": "entryFlag_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+        "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr", "int"], "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "2020202020203100"}]}
+      }
+    },
+    {
+      "name": "value mismatch rejects",
+      "args": ["@entry"],
+      "callees": {
+        "0x005e0ff0": {"name": "entryValue170_guess", "conv": "thiscall", "args": [], "ret": 8},
+        "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr", "int"], "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "2020202020203100"}]}
+      }
+    },
+    {
+      "name": "zero count rejects",
+      "args": ["@entry"],
+      "callees": {
+        "0x005456d3": {"name": "dispatch13_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0},
+        "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr", "int"], "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "2020202020203000"}]}
+      }
+    },
+    {
+      "name": "negative rank rejects",
+      "args": ["@entry"],
+      "callees": {
+        "0x005e0f90": {"name": "entryRank_guess", "conv": "thiscall", "args": [], "ret": -1},
+        "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr", "int"], "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "2020202020203100"}]}
+      }
+    },
+    {
+      "name": "accepted count one and value",
+      "args": ["@entry"],
+      "callees": {
+        "0x005eccc0": {"name": "entryCheck_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x005ec760": {"name": "entryHasValue_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr", "int"], "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "2020202020203100"}]}
+      }
+    },
+    {
+      "name": "accepted count one without value",
+      "args": ["@entry"],
+      "callees": {
+        "0x005456d3": {"name": "dispatch13_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 1},
+        "0x005eccc0": {"name": "entryCheck_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr", "int"], "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "2020202020203100"}]}
+      }
+    },
+    {
+      "name": "accepted count two without value",
+      "args": ["@entry"],
+      "callees": {
+        "0x005456d3": {"name": "dispatch13_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 2},
+        "0x005eccc0": {"name": "entryCheck_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr", "int"], "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "2020202020203200"}]}
+      }
+    },
+    {
+      "name": "accepted count two empty value",
+      "args": ["@entry"],
+      "callees": {
+        "0x005456d3": {"name": "dispatch13_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 2},
+        "0x005eccc0": {"name": "entryCheck_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x005ec760": {"name": "entryHasValue_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr", "int"], "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "2020202020203200"}]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5531089,
+    "count": 100,
+    "args": [{"choices": ["@entry"]}],
+    "memory": [{"addr": "@statusowner", "offset": "0x1c0", "type": "u32", "choices": [0, "@statustarget"]}]
+  }
+}

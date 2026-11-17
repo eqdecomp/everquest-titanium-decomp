@@ -1,0 +1,146 @@
+{
+  "function": "Owner_guess::DrawAnimations_guess",
+  "original": "0x004d98b8",
+  "sources": [
+    "src/EverQuest/tu_106_AtlasRender.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "owner": {
+      "size": "0x200",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@vt"},
+        {"offset": "0x10c", "u32": 3},
+        {"offset": "0x114", "u32": 7},
+        {"offset": "0x13c", "u32": 1}
+      ]
+    },
+    "vt": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xe4", "u32": "@fn_getquad"}
+      ]
+    },
+    "fn_getquad": {"size": "0x4", "fill": "zero"},
+    "qpos": {"size": "0x10", "fill": "random"},
+    "anim": {"size": "0x40", "fill": "zero"},
+    "own_a": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {"offset": "0x64", "u32": "@anim"}
+      ]
+    },
+    "own_b": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {"offset": "0x64", "u32": 0}
+      ]
+    },
+    "e_a": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "u32": "@own_a"}]},
+    "e_b": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "u32": "@own_b"}]},
+    "e_null": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [],
+  "callees": {
+    "@fn_getquad": {
+      "name": "owner_GetQuad_slot57",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "@qpos"
+    },
+    "0x004eb924": {
+      "name": "FUN_004eb924",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": ["@e_a", "@e_a", "@e_a", "@e_a", "@e_a"]
+    },
+    "0x005b1910": {
+      "name": "FUN_005b1910",
+      "conv": "thiscall",
+      "args": ["mem:16", "u32", "int", "u32"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "count_zero",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x13c", "u32": 0}
+      ]
+    },
+    {
+      "name": "null_owner",
+      "args": [],
+      "callees": {
+        "0x004eb924": {"name": "FUN_004eb924", "conv": "thiscall", "args": ["int"], "ret": ["@e_null"]}
+      }
+    },
+    {
+      "name": "owner_no_anim",
+      "args": [],
+      "callees": {
+        "0x004eb924": {"name": "FUN_004eb924", "conv": "thiscall", "args": ["int"], "ret": ["@e_b", "@e_b"]}
+      }
+    },
+    {
+      "name": "draw_one",
+      "args": []
+    },
+    {
+      "name": "mixed_three",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x13c", "u32": 3}
+      ],
+      "callees": {
+        "0x004eb924": {"name": "FUN_004eb924", "conv": "thiscall", "args": ["int"],
+          "ret": ["@e_a", "@e_a", "@e_a", "@e_a", "@e_a", "@e_b", "@e_b", "@e_null"]}
+      }
+    },
+    {
+      "name": "draw_two",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x13c", "u32": 2}
+      ]
+    },
+    {
+      "name": "negative_offsets",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x10c", "u32": 4294967290},
+        {"addr": "@owner", "offset": "0x114", "u32": 2147483640},
+        {"addr": "@qpos", "offset": "0x0", "u32": 4294967000},
+        {"addr": "@qpos", "offset": "0x4", "u32": 4294967100},
+        {"addr": "@own_a", "offset": "0x48", "u32": 4294967200},
+        {"addr": "@own_a", "offset": "0x4c", "u32": 300},
+        {"addr": "@own_a", "offset": "0x50", "u32": 4000000000},
+        {"addr": "@own_a", "offset": "0x54", "u32": 1000}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5085368,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {"addr": "@owner", "offset": "0x13c", "type": "int", "choices": [0, 1, 2, 3]},
+      {"addr": "@owner", "offset": "0x10c", "type": "int", "range": [-60, 60]},
+      {"addr": "@owner", "offset": "0x114", "type": "int", "range": [-60, 60]},
+      {"addr": "@qpos", "offset": "0x0", "type": "int", "range": [-400, 400]},
+      {"addr": "@qpos", "offset": "0x4", "type": "int", "range": [-400, 400]},
+      {"addr": "@own_a", "offset": "0x48", "type": "int", "range": [-300, 300]},
+      {"addr": "@own_a", "offset": "0x4c", "type": "int", "range": [-300, 300]},
+      {"addr": "@own_a", "offset": "0x50", "type": "int", "range": [-300, 300]},
+      {"addr": "@own_a", "offset": "0x54", "type": "int", "range": [-300, 300]}
+    ]
+  }
+}

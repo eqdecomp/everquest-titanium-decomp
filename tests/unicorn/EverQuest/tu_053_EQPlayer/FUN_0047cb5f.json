@@ -1,0 +1,105 @@
+{
+  "function": "EQPlayerCore_guess::feetEnvironmentChange_guess",
+  "original": "0x0047cb5f",
+  "sources": ["src/EverQuest/tu_053_EQPlayer.cpp"],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [{"name": "state", "type": "u8"}],
+  "ret": "void",
+  "objects": {
+    "owner": {"size": "0x1b0", "fill": "random", "init": [{"offset": "0x1a8", "u32": "@handler"}]},
+    "handler": {"size": "0x100", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x00479ee8": {"name": "PlaySound_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+  },
+  "cases": [
+    {"name": "same state returns", "args": [5], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 5},
+      {"addr": "@owner", "offset": "0x44", "f32": 1.5}
+    ]},
+    {"name": "same zero state returns", "args": [0], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 0},
+      {"addr": "@owner", "offset": "0x44", "f32": 0.0}
+    ]},
+    {"name": "to 5 from zero far above one calls 100", "args": [5], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 0},
+      {"addr": "@owner", "offset": "0x44", "f32": 1.5}
+    ]},
+    {"name": "to 5 from zero inside range no call", "args": [5], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 0},
+      {"addr": "@owner", "offset": "0x44", "f32": 0.5}
+    ]},
+    {"name": "to 5 at exactly minus one calls 100", "args": [5], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 0},
+      {"addr": "@owner", "offset": "0x44", "f32": -1.0}
+    ]},
+    {"name": "to 6 below minus one calls 100", "args": [6], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 0},
+      {"addr": "@owner", "offset": "0x44", "f32": -1.5}
+    ]},
+    {"name": "to 8 at exactly one calls 100", "args": [8], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 1},
+      {"addr": "@owner", "offset": "0x44", "f32": 1.0}
+    ]},
+    {"name": "to 9 at minus half no call", "args": [9], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 2},
+      {"addr": "@owner", "offset": "0x44", "f32": -0.5}
+    ]},
+    {"name": "to 10 just under one no call", "args": [10], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 2},
+      {"addr": "@owner", "offset": "0x44", "f32": 0.99}
+    ]},
+    {"name": "to 7 from nonzero calls 99", "args": [7], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 3},
+      {"addr": "@owner", "offset": "0x44", "f32": 0.0}
+    ]},
+    {"name": "to 7 from zero calls 99", "args": [7], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 0},
+      {"addr": "@owner", "offset": "0x44", "f32": 0.0}
+    ]},
+    {"name": "to zero from nonzero calls 99", "args": [0], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 3},
+      {"addr": "@owner", "offset": "0x44", "f32": 0.0}
+    ]},
+    {"name": "to 1 from nonzero no call", "args": [1], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 4},
+      {"addr": "@owner", "offset": "0x44", "f32": 2.0}
+    ]},
+    {"name": "to 2 from zero no call", "args": [2], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 0},
+      {"addr": "@owner", "offset": "0x44", "f32": 2.0}
+    ]},
+    {"name": "to 3 from 5 no call", "args": [3], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 5},
+      {"addr": "@owner", "offset": "0x44", "f32": 2.0}
+    ]},
+    {"name": "to 4 from 7 no call", "args": [4], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 7},
+      {"addr": "@owner", "offset": "0x44", "f32": 2.0}
+    ]},
+    {"name": "to 11 no call", "args": [11], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 3},
+      {"addr": "@owner", "offset": "0x44", "f32": 2.0}
+    ]},
+    {"name": "to 255 no call", "args": [255], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 3},
+      {"addr": "@owner", "offset": "0x44", "f32": 2.0}
+    ]},
+    {"name": "to 6 from 5 at nan-free small value no call", "args": [6], "memory": [
+      {"addr": "@handler", "offset": "0xae", "u8": 5},
+      {"addr": "@owner", "offset": "0x44", "f32": -0.25}
+    ]}
+  ],
+  "_survivors": "L2888: old > 0 is redundant when state == 0 (old == state already returned), so old >= 0 is equivalent",
+  "fuzz": {
+    "seed": 4705119,
+    "count": 200,
+    "args": [{"choices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 255]}],
+    "memory": [
+      {"addr": "@handler", "offset": "0xae", "type": "u8", "choices": [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 255]},
+      {"addr": "@owner", "offset": "0x44", "type": "float", "choices": [0.0, 0.5, -0.5, 0.99, 1.0, -1.0, 1.5, -1.5, 2.0]}
+    ]
+  }
+}

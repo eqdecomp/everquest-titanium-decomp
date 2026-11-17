@@ -1,0 +1,164 @@
+{
+  "function": "CTradeskillWndView_guess::Handle_OP_RecipeReply_guess",
+  "original": "0x00567b79",
+  "sources": [
+    "src/EverQuest/tu_231_TradeskillWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {
+      "name": "record",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "_survivors": "L841: record = entry after FindValue is unobservable: the found path never reads the record slot, and the new path stores it again before the only read (Insert's out pointer, which is ignored)",
+  "objects": {
+    "owner": {
+      "size": "0x400",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x1C4", "u32": "@lookup"},
+        {"offset": "0x364", "u32": "@client"}
+      ]
+    },
+    "lookup": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "client": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "record": {
+      "size": "0x58",
+      "fill": "zero"
+    },
+    "elem": {
+      "size": "0xD0",
+      "fill": "random"
+    },
+    "newobj": {
+      "size": "0xD0",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00567b57": {
+      "name": "FUN_00567b57",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": "@newobj"
+    },
+    "0x005676b4": {
+      "name": "Element_guess::Element_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@newobj"
+    },
+    "0x00447c66": {
+      "name": "Lookup_guess::Insert_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "u32"]
+    },
+    "0x005eccf0": {
+      "name": "Client_guess::GetByte_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005e0f30": {
+      "name": "Client_guess::GetItemId_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "new_entry_match",
+      "args": ["@record"]
+    },
+    {
+      "name": "new_no_pending",
+      "args": ["@record"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x364", "u32": 0}
+      ]
+    },
+    {
+      "name": "new_state_full",
+      "args": ["@record"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x358", "u32": 100}
+      ]
+    },
+    {
+      "name": "new_byte_mismatch",
+      "args": ["@record"],
+      "callees": {
+        "0x005eccf0": {"name": "Client_guess::GetByte_guess", "conv": "thiscall", "args": [], "ret": 9}
+      }
+    },
+    {
+      "name": "new_int_mismatch",
+      "args": ["@record"],
+      "callees": {
+        "0x005e0f30": {"name": "Client_guess::GetItemId_guess", "conv": "thiscall", "args": [], "ret": 9}
+      }
+    },
+    {
+      "name": "found_existing_match",
+      "args": ["@record"],
+      "callees": {
+        "0x00567b57": {"name": "FUN_00567b57", "conv": "thiscall", "args": ["u32"], "ret": "@elem"}
+      }
+    },
+    {
+      "name": "found_existing_no_pending",
+      "args": ["@record"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x364", "u32": 0}
+      ],
+      "callees": {
+        "0x00567b57": {"name": "FUN_00567b57", "conv": "thiscall", "args": ["u32"], "ret": "@elem"}
+      }
+    },
+    {
+      "name": "found_existing_mismatch",
+      "args": ["@record"],
+      "callees": {
+        "0x00567b57": {"name": "FUN_00567b57", "conv": "thiscall", "args": ["u32"], "ret": "@elem"},
+        "0x005eccf0": {"name": "Client_guess::GetByte_guess", "conv": "thiscall", "args": [], "ret": 9}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5667705,
+    "count": 100,
+    "args": [
+      {
+        "choices": ["@record"]
+      }
+    ],
+    "memory": [
+      {"addr": "@record", "offset": "0x0", "type": "int", "choices": [0, 1]},
+      {"addr": "@record", "offset": "0x4", "type": "int", "choices": [0, 1]},
+      {"addr": "@record", "offset": "0x8", "type": "int", "choices": [0, 1]},
+      {"addr": "@record", "offset": "0xC", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@record", "offset": "0x10", "type": "int", "choices": [0, 1]},
+      {"addr": "@owner", "offset": "0x358", "type": "int", "choices": [0, 1, 99, 100]}
+    ]
+  }
+}

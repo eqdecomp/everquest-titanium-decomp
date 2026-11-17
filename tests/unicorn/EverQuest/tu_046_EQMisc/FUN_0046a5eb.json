@@ -1,0 +1,278 @@
+{
+  "function": "do_clearmarks_guess",
+  "original": "0x0046a5eb",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "u32",
+  "objects": {
+    "state": {
+      "size": "0xc390",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0xc284",
+          "u32": "@part"
+        }
+      ]
+    },
+    "part": {
+      "size": "0x8",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d00",
+      "u32": "@state"
+    },
+    {
+      "addr": "0x009859ec",
+      "u32": 1
+    },
+    {
+      "addr": "@part",
+      "offset": "0x4",
+      "u32": 0
+    },
+    {
+      "addr": "@state",
+      "offset": "0xc38c",
+      "u8": 64
+    }
+  ],
+  "callees": {
+    "0x004bab58": {
+      "name": "FUN_004bab58",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004babaa": {
+      "name": "IsRaidMarkNpcDelegate_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004bb282": {
+      "name": "IsGroupLeader_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004bab62": {
+      "name": "IsGroupMarkNpcDelegate_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "ptr",
+        "int",
+        "char"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "flag-bit-clear",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xc38c",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "global-disabled",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x009859ec",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "flag-bit-zero-only",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xc38c",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "global-high-byte-only",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x009859eb",
+          "u8": 0
+        },
+        {
+          "addr": "0x009859ec",
+          "u32": 16777216
+        }
+      ]
+    },
+    {
+      "name": "first-predicate",
+      "args": [],
+      "callees": {
+        "0x004bab58": {
+          "name": "FUN_004bab58",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x004912b1": {
+          "name": "FUN_004912b1",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "int",
+            "ptr",
+            "int",
+            "char"
+          ],
+          "ret": 305419896
+        }
+      }
+    },
+    {
+      "name": "second-predicate-index-one",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@part",
+          "offset": "0x4",
+          "u32": 1
+        },
+        {
+          "addr": "@state",
+          "offset": "0xc38d",
+          "u8": 64
+        }
+      ],
+      "callees": {
+        "0x004babaa": {
+          "name": "FUN_004babaa",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x004912b1": {
+          "name": "FUN_004912b1",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "int",
+            "ptr",
+            "int",
+            "char"
+          ],
+          "ret": 305419896
+        }
+      }
+    },
+    {
+      "name": "third-predicate-message-3ef6",
+      "args": [],
+      "callees": {
+        "0x004bb282": {
+          "name": "FUN_004bb282",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x004912b1": {
+          "name": "FUN_004912b1",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "int",
+            "ptr",
+            "int",
+            "char"
+          ],
+          "ret": 2271560481
+        }
+      }
+    },
+    {
+      "name": "fourth-predicate-message-3ef6",
+      "args": [],
+      "callees": {
+        "0x004bab62": {
+          "name": "FUN_004bab62",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x004912b1": {
+          "name": "FUN_004912b1",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "int",
+            "ptr",
+            "int",
+            "char"
+          ],
+          "ret": 2271560481
+        }
+      }
+    },
+    {
+      "name": "all-predicates-false",
+      "args": []
+    }
+  ],
+  "fuzz": {
+    "seed": 4629995,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x009859ec",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@part",
+        "offset": "0x4",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0xc38c",
+        "type": "u8",
+        "count": 2,
+        "choices": [
+          0,
+          64
+        ]
+      }
+    ]
+  }
+}

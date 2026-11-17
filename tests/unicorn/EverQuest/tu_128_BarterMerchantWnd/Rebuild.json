@@ -1,0 +1,82 @@
+{
+  "function": "CBarterMerchantWnd_guess::Rebuild_guess",
+  "original": "0x004ddd05",
+  "sources": ["src/EverQuest/tu_128_BarterMerchantWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@controller",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "controller": {"size": "0x1a0", "fill": "random"},
+    "list": {"size": "4", "fill": "zero", "init": [{"offset": "0", "u32": "@list_vtbl"}]},
+    "list_vtbl": {"size": "0x134", "fill": "zero", "init": [{"offset": "0x130", "u32": "@fn_clear"}]},
+    "fn_clear": {"size": "4", "fill": "zero"},
+    "char_data": {"size": "0x100", "fill": "zero"},
+    "price_formatter": {"size": "0x20", "fill": "zero"},
+    "cxstr_alloc": {"size": "0x100", "fill": "zero"},
+    "blocks": {"size": "4", "fill": "zero", "init": [{"offset": "0", "u32": "@rows"}]},
+    "rows": {"size": "0xe00", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@controller", "offset": "0x164", "u32": "@list"},
+    {"addr": "@controller", "offset": "0x170", "u8": 1},
+    {"addr": "@controller", "offset": "0x174", "u32": 7},
+    {"addr": "@controller", "offset": "0x178", "u32": 1},
+    {"addr": "@controller", "offset": "0x180", "u32": 31},
+    {"addr": "@controller", "offset": "0x184", "u32": 5},
+    {"addr": "@controller", "offset": "0x188", "u32": "@blocks"},
+    {"addr": "@rows", "offset": "0x4", "u32": 100},
+    {"addr": "@rows", "offset": "0x1c", "u32": 3},
+    {"addr": "@rows", "offset": "0x20", "u32": 7},
+    {"addr": "@rows", "offset": "0x25", "cstr": "Potion"},
+    {"addr": "@rows", "offset": "0x68", "u32": 42},
+    {"addr": "@rows", "offset": "0x74", "u32": 101},
+    {"addr": "@rows", "offset": "0x8c", "u32": 9},
+    {"addr": "@rows", "offset": "0x90", "u32": 8},
+    {"addr": "@rows", "offset": "0x95", "cstr": "Elixir"},
+    {"addr": "@rows", "offset": "0xd8", "u32": 99},
+    {"addr": "0x00905d00", "u32": "@char_data"},
+    {"addr": "0x0063f53f", "cstr": ""},
+    {"addr": "0x00991910", "u32": "@price_formatter"},
+    {"addr": "0x0099db00", "cstr": "0"},
+    {"addr": "0x0079c198", "size": "0x40", "fill": "zero"}
+  ],
+  "callees": {
+    "0x0047c3af": {"name": "ArrayTable_init", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x004b85ae": {"name": "FindItemsById_guess", "conv": "cdecl", "args": ["ptr", "int", "int", "int", "ignore", "int"], "ret": 1},
+    "0x00571e00": {"name": "CXStr_ctor", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "0x0059b9d0": {"name": "List_addString", "conv": "thiscall", "args": ["ignore", "int", "int", "int"], "ret": 10},
+    "0x00571d00": {"name": "CXStr_freeRep", "conv": "thiscall", "args": ["ignore"]},
+    "0x004ffbe9": {"name": "Price_format", "conv": "thiscall", "args": ["int"], "ret": 305419896},
+    "0x0059b2e0": {"name": "List_setItemValue", "conv": "thiscall", "args": ["int", "int", "u32"]},
+    "0x0059b360": {"name": "List_setItemText", "conv": "thiscall", "args": ["int", "int", "ignore"]},
+    "0x0059b3e0": {"name": "List_setItemColor", "conv": "thiscall", "args": ["int", "int", "u32"]},
+    "0x006220e9": {"name": "__itoa", "conv": "cdecl", "args": ["int", "ptr", "int"], "ret": "0x0099db00", "writes": [{"addr": "0x0099db00", "hex": "3300", "call": 0}, {"addr": "0x0099db00", "hex": "3900", "call": 1}]},
+    "0x00409226": {"name": "Text_format", "conv": "thiscall", "args": ["ignore", "ptr"], "ret": "arg0", "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]},
+    "0x004b73ee": {"name": "ArrayTable_destroy", "conv": "thiscall", "args": []},
+    "0x00597c20": {"name": "List_setSelection", "conv": "thiscall", "args": ["int"]},
+    "0x004ddb80": {"name": "Controller_update", "conv": "thiscall", "args": ["int"]},
+    "@fn_clear": {"name": "List_clear", "conv": "thiscall", "args": []}
+    ,"kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@cxstr_alloc"},
+    "kernel32.dll!HeapFree": {"name": "HeapFree", "conv": "stdcall", "args": ["ptr", "u32", "ptr"], "ret": 1}
+  },
+  "rewrite_aliases": {"__itoa": "0x006220e9"},
+  "cases": [
+    {"name": "null_list", "args": [], "memory": [{"addr": "@controller", "offset": "0x164", "u32": 0}, {"addr": "@controller", "offset": "0x170", "u8": 0}, {"addr": "@controller", "offset": "0x178", "u32": 2}]},
+    {"name": "empty_table", "args": [], "memory": [{"addr": "@controller", "offset": "0x178", "u32": 0}]},
+    {"name": "negative_table", "args": [], "memory": [{"addr": "@controller", "offset": "0x178", "u32": -1}]},
+    {"name": "load_failure_and_selected", "args": [], "callees": {"0x004b85ae": {"name": "LoadItem_guess", "conv": "cdecl", "args": ["ptr", "int", "int", "int", "ignore", "int"], "ret": 0}}},
+    {"name": "load_success_and_not_selected", "args": [], "memory": [{"addr": "@controller", "offset": "0x174", "u32": 8}], "callees": {"0x004b85ae": {"name": "LoadItem_guess", "conv": "cdecl", "args": ["ptr", "int", "int", "int", "ignore", "int"], "ret": 1}}},
+    {"name": "two_rows_select_second", "args": [], "memory": [{"addr": "@controller", "offset": "0x178", "u32": 2}, {"addr": "@controller", "offset": "0x174", "u32": 8}], "callees": {"0x004b85ae": {"name": "LoadItem_guess", "conv": "cdecl", "args": ["ptr", "int", "int", "int", "ignore", "int"], "ret": [0, 1]}}}
+  ],
+  "fuzz": {
+    "seed": 5102853,
+    "count": 60,
+    "args": [],
+    "memory": [
+      {"addr": "@controller", "offset": "0x178", "type": "int", "choices": [-1, 0, 1, 2]},
+      {"addr": "@controller", "offset": "0x174", "type": "int", "choices": [-1, 7, 8]},
+      {"addr": "@rows", "offset": "0x20", "type": "int", "choices": [-1, 7, 8]}
+    ]
+  }
+}

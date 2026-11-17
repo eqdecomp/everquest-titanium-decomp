@@ -1,0 +1,184 @@
+{
+  "function": "MakePCloudInstance_guess",
+  "original": "0x00495ad4",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "records_guess", "type": "ptr"},
+    {"name": "objectValue_guess", "type": "int"},
+    {"name": "mode_guess", "type": "int"},
+    {"name": "index_guess", "type": "int"},
+    {"name": "nodeType_guess", "type": "int"},
+    {"name": "position_guess", "type": "ptr"},
+    {"name": "value7_guess", "type": "int"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "records": {"size": "0x740", "fill": "zero"},
+    "position": {"size": "0xC", "fill": "zero"},
+    "source": {"size": "0x84", "fill": "random"},
+    "fn_slot": {"size": "0x4"},
+    "dispatch": {"size": "0x4", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "vtbl": {"size": "0x58", "fill": "zero", "init": [{"offset": "0x54", "u32": "@fn_slot"}]}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x13579bdf"},
+    {"addr": "0x00903ec0", "u32": "@source"},
+    {"addr": "0x0063f4cc", "f32": 0.0},
+    {"addr": "0x0099e368", "u32": "@dispatch"},
+    {"addr": "@records", "offset": "0x8", "cstr": "slot0"},
+    {"addr": "@records", "offset": "0x28", "cstr": "slot"},
+    {"addr": "@records", "offset": "0x48", "cstr": "slot2"},
+    {"addr": "@records", "offset": "0x3c8", "cstr": "row1"}
+  ],
+  "callees": {
+    "0x0049532e": {
+      "name": "CopiedBlock_guess_copy",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "passthrough": true
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr"],
+      "varargs": "printf",
+      "ret": 12,
+      "writes": [{"arg": 0, "offset": 0, "hex": "736c6f745f315f305f315f3000"}]
+    },
+    "@fn_slot": {
+      "name": "dispatch_slot21",
+      "conv": "thiscall",
+      "args": ["cstr", "cstr", "mem:0x84", "ptr", "mem:4", "int", "int"],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "source array entry is null",
+      "args": ["@records", 1, 0, 1, 0, "@position", 0],
+      "memory": [{"addr": "0x00903ec0", "u32": 0}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "all selected values are zero",
+      "args": ["@records", 1, 0, 1, 0, "@position", 0],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "all selected values are nonzero",
+      "args": ["@records", 1, 0, 1, 0, "@position", 1],
+      "memory": [
+        {"addr": "@records", "offset": "0x238", "f32": 1.5},
+        {"addr": "@records", "offset": "0x24c", "f32": 2.5},
+        {"addr": "@records", "offset": "0x250", "f32": 3.5},
+        {"addr": "@records", "offset": "0x254", "f32": 4.5},
+        {"addr": "@records", "offset": "0x268", "f32": 5.5},
+        {"addr": "@records", "offset": "0x274", "f32": 6.5},
+        {"addr": "@records", "offset": "0x280", "u32": 7},
+        {"addr": "@records", "offset": "0x28c", "f32": 8.5},
+        {"addr": "@records", "offset": "0x298", "u32": 9},
+        {"addr": "@records", "offset": "0x2a4", "f32": 10.5},
+        {"addr": "@records", "offset": "0x22c", "hex": "01010100"}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "second vector component selects the block",
+      "args": ["@records", 1, 0, 1, 0, "@position", 0],
+      "memory": [{"addr": "@records", "offset": "0x250", "f32": 1.0}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "third vector component selects the block",
+      "args": ["@records", 1, 0, 1, 0, "@position", 0],
+      "memory": [{"addr": "@records", "offset": "0x254", "f32": 1.0}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "second flag byte selects the block",
+      "args": ["@records", 1, 0, 1, 0, "@position", 0],
+      "memory": [{"addr": "@records", "offset": "0x22d", "u8": 1}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "third flag byte selects the block",
+      "args": ["@records", 1, 0, 1, 0, "@position", 0],
+      "memory": [{"addr": "@records", "offset": "0x22e", "u8": 1}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "first flag byte selects the block",
+      "args": ["@records", 1, 0, 1, 0, "@position", 0],
+      "memory": [{"addr": "@records", "offset": "0x22c", "u8": 1}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "index zero boundary",
+      "args": ["@records", 1, 0, 0, 0, "@position", 0],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf", "conv": "cdecl", "args": ["ptr", "cstr"],
+          "varargs": "printf", "ret": 13,
+          "writes": [{"arg": 0, "offset": 0, "hex": "736c6f74305f315f305f305f3000"}]
+        }
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "index two boundary",
+      "args": ["@records", 1, 0, 2, 0, "@position", 0],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf", "conv": "cdecl", "args": ["ptr", "cstr"],
+          "varargs": "printf", "ret": 13,
+          "writes": [{"arg": 0, "offset": 0, "hex": "736c6f74325f315f305f325f3000"}]
+        }
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "second row stride",
+      "args": ["@records", 1, 1, 1, 0, "@position", 0],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf", "conv": "cdecl", "args": ["ptr", "cstr"],
+          "varargs": "printf", "ret": 12,
+          "writes": [{"arg": 0, "offset": 0, "hex": "726f77315f315f315f315f3000"}]
+        }
+      },
+      "expect": {"ret": 0}
+    }
+  ],
+  "fuzz": {
+    "seed": 4807380,
+    "count": 100,
+    "args": [
+      {"choices": ["@records"]},
+      {"choices": [1]},
+      {"choices": [0]},
+      {"choices": [1]},
+      {"choices": [0]},
+      {"choices": ["@position"]},
+      {"choices": [0, 1, -1]}
+    ],
+    "memory": [
+      {"addr": "@records", "offset": "0x238", "type": "float", "choices": [0.0, 1.0, -1.0]},
+      {"addr": "@records", "offset": "0x24c", "type": "float", "choices": [0.0, 1.0, -1.0]},
+      {"addr": "@records", "offset": "0x250", "type": "float", "choices": [0.0, 1.0, -1.0]},
+      {"addr": "@records", "offset": "0x254", "type": "float", "choices": [0.0, 1.0, -1.0]},
+      {"addr": "@records", "offset": "0x268", "type": "float", "choices": [0.0, 1.0, -1.0]},
+      {"addr": "@records", "offset": "0x274", "type": "float", "choices": [0.0, 1.0, -1.0]},
+      {"addr": "@records", "offset": "0x280", "type": "int", "choices": [0, 1, -1]},
+      {"addr": "@records", "offset": "0x28c", "type": "float", "choices": [0.0, 1.0, -1.0]},
+      {"addr": "@records", "offset": "0x298", "type": "int", "choices": [0, 1, -1]},
+      {"addr": "@records", "offset": "0x2a4", "type": "float", "choices": [0.0, 1.0, -1.0]},
+      {"addr": "@records", "offset": "0x22c", "size": 4}
+    ]
+  }
+}

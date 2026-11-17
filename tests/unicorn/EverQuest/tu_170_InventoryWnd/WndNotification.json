@@ -1,0 +1,131 @@
+{
+  "function": "CInventoryWndView_guess::WndNotification_guess",
+  "original": "0x0051853f",
+  "sources": ["src/EverQuest/tu_170_InventoryWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@clientobject",
+  "args": [
+    {"name": "sender", "type": "ptr"},
+    {"name": "message", "type": "u32"},
+    {"name": "data", "type": "ptr"}
+  ],
+  "ret": "int",
+  "objects": {
+    "clientobject": {
+      "size": "0x268",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@client_vtable"},
+        {"offset": "0x164", "u32": "0xffffffff"},
+        {"offset": "0x168", "u32": "0xffffffff"}
+      ]
+    },
+    "client_vtable": {
+      "size": "0x8c",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x84", "u32": "@fn_slot33"},
+        {"offset": "0x88", "u32": "@fn_slot34"}
+      ]
+    },
+    "fn_slot33": {"size": "0x4"},
+    "fn_slot34": {"size": "0x4"},
+    "sender": {"size": "0x4", "fill": "zero"},
+    "data": {"size": "0x4", "fill": "zero"},
+    "list": {"size": "0x140", "fill": "zero"},
+    "slot": {"size": "0x80", "fill": "zero"},
+    "char_data": {
+      "size": "0xc4d0",
+      "fill": "zero",
+      "init": [{"offset": "0x8", "u32": "@char_vbtable"}]
+    },
+    "char_vbtable": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [{"offset": "0x4", "u32": "0xc37c"}]
+    },
+    "state_cac": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "u32": "@state_vtable"}]},
+    "state_ba0": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "u32": "@state_vtable"}]},
+    "state_bb4": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "u32": "@state_vtable"}]},
+    "state_bd0": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "u32": "@state_vtable"}]},
+    "state_vtable": {
+      "size": "0x8c",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x84", "u32": "@fn_slot33"},
+        {"offset": "0x88", "u32": "@fn_slot34"}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@char_data"},
+    {"addr": "0x00905ca0", "u32": 0},
+    {"addr": "0x00850cac", "u32": "@state_cac"},
+    {"addr": "0x00850ba0", "u32": "@state_ba0"},
+    {"addr": "0x00850bb4", "u32": "@state_bb4"},
+    {"addr": "0x00850bd0", "u32": "@state_bd0"}
+  ],
+  "callees": {
+    "0x0059dd30": {"name": "CheckReady_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005181af": {"name": "UpdateProgressionInfo_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005a2230": {"name": "WndNotification", "conv": "thiscall", "args": ["ptr", "u32", "ptr"], "ret": 42},
+    "0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": -1},
+    "0x00597ed0": {"name": "GetItemData", "conv": "thiscall", "args": ["int"], "ret": "0x12345678"},
+    "0x0041de16": {"name": "FindSlot_guess", "conv": "thiscall", "args": ["u32"], "ret": "@slot"},
+    "0x0042419c": {"name": "RequestEvolvingItemToggle_guess", "conv": "cdecl", "args": ["ptr", "bool"]},
+    "0x004912b1": {"name": "EQSendMessage", "conv": "cdecl", "args": ["ptr", "int", "int", "int", "int"]},
+    "0x00517810": {"name": "ClickedCrystalButton_guess", "conv": "thiscall", "args": ["int", "int"]},
+    "0x004167e2": {"name": "Get_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00517dc3": {"name": "ConfirmDestroyHeld_guess", "conv": "thiscall", "args": []},
+    "0x00517ebb": {"name": "ClickedMoneyButton_guess", "conv": "thiscall", "args": ["int", "int"]},
+    "@fn_slot33": {"name": "slot33", "conv": "thiscall", "args": []},
+    "@fn_slot34": {"name": "slot34", "conv": "thiscall", "args": []}
+  },
+  "cases": [
+    {"name": "not ready", "args": ["@sender", 1, "@data"], "expect": {"ret": 1}, "callees": {"0x0059dd30": {"name": "CheckReady_guess", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "progression list", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x248", "u32": "@sender"}], "expect": {"ret": 42}},
+    {"name": "done button", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x210", "u32": "@sender"}], "expect": {"ret": 42}},
+    {"name": "subwindows write", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x25c", "u32": "@sender"}, {"addr": "@data", "u32": "0x1234abcd"}], "expect": {"ret": 42}},
+    {"name": "toggle without list", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x23c", "u32": "@sender"}], "expect": {"ret": 42}},
+    {"name": "toggle no selection", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x23c", "u32": "@sender"}, {"addr": "@clientobject", "offset": "0x238", "u32": "@list"}], "expect": {"ret": 42}},
+    {"name": "toggle missing item", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x23c", "u32": "@sender"}, {"addr": "@clientobject", "offset": "0x238", "u32": "@list"}], "callees": {"0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": 0}, "0x0041de16": {"name": "FindSlot_guess", "conv": "thiscall", "args": ["u32"], "ret": 0}}, "expect": {"ret": 42}},
+    {"name": "toggle slot already on", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x23c", "u32": "@sender"}, {"addr": "@clientobject", "offset": "0x238", "u32": "@list"}, {"addr": "@slot", "offset": "0x78", "u8": 1}], "callees": {"0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": 0}}, "expect": {"ret": 42}},
+    {"name": "toggle slot already off", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x23c", "u32": "@sender"}, {"addr": "@clientobject", "offset": "0x238", "u32": "@list"}, {"addr": "@slot", "offset": "0x78", "u8": 0}], "callees": {"0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": 0}}, "expect": {"ret": 42}},
+    {"name": "all on empty", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x240", "u32": "@sender"}, {"addr": "@clientobject", "offset": "0x238", "u32": "@list"}], "expect": {"ret": 42}},
+    {"name": "all on one item", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x240", "u32": "@sender"}, {"addr": "@clientobject", "offset": "0x238", "u32": "@list"}, {"addr": "@list", "offset": "0x11c", "u32": 1}], "expect": {"ret": 42}},
+    {"name": "all off two items", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x244", "u32": "@sender"}, {"addr": "@clientobject", "offset": "0x238", "u32": "@list"}, {"addr": "@list", "offset": "0x11c", "u32": 2}], "expect": {"ret": 42}},
+    {"name": "all off missing slot", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x244", "u32": "@sender"}, {"addr": "@clientobject", "offset": "0x238", "u32": "@list"}, {"addr": "@list", "offset": "0x11c", "u32": 1}], "callees": {"0x0041de16": {"name": "FindSlot_guess", "conv": "thiscall", "args": ["u32"], "ret": 0}}, "expect": {"ret": 42}},
+    {"name": "reclaim", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x224", "u32": "@sender"}], "expect": {"ret": 42}},
+    {"name": "good points", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x21c", "u32": "@sender"}], "expect": {"ret": 42}},
+    {"name": "evil points", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x220", "u32": "@sender"}], "expect": {"ret": 42}},
+    {"name": "tint with no character", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x218", "u32": "@sender"}, {"addr": "0x00905d00", "u32": 0}], "expect": {"ret": 42}},
+    {"name": "tint character rejects", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x218", "u32": "@sender"}], "callees": {"0x004167e2": {"name": "Get_guess", "conv": "thiscall", "args": [], "ret": 1}}, "expect": {"ret": 42}},
+    {"name": "tint no state", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x218", "u32": "@sender"}, {"addr": "0x00850cac", "u32": 0}], "expect": {"ret": 42}},
+    {"name": "tint callback", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x218", "u32": "@sender"}], "expect": {"ret": 42}},
+    {"name": "face callback", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x214", "u32": "@sender"}], "expect": {"ret": 42}},
+    {"name": "destroy", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x204", "u32": "@sender"}], "expect": {"ret": 42}},
+    {"name": "skills dispatch", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x208", "u32": "@sender"}], "expect": {"ret": 42}},
+    {"name": "skills callback", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x208", "u32": "@sender"}], "callees": {"0x0059dd30": {"name": "CheckReady_guess", "conv": "thiscall", "args": [], "ret": [1, 0]}}, "expect": {"ret": 42}},
+    {"name": "alt dispatch", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x20c", "u32": "@sender"}], "expect": {"ret": 42}},
+    {"name": "alt callback", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x20c", "u32": "@sender"}], "callees": {"0x0059dd30": {"name": "CheckReady_guess", "conv": "thiscall", "args": [], "ret": [1, 0]}}, "expect": {"ret": 42}},
+    {"name": "unmatched sender", "args": ["@sender", 1, "@data"], "expect": {"ret": 42}},
+    {"name": "money slot 0", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x16c", "u32": "@sender"}], "expect": {"ret": 42}},
+    {"name": "money slot 1", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x170", "u32": "@sender"}], "expect": {"ret": 42}},
+    {"name": "money slot 2", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x174", "u32": "@sender"}], "expect": {"ret": 42}},
+    {"name": "money slot 3", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x178", "u32": "@sender"}], "expect": {"ret": 42}},
+    {"name": "message 0x1f money", "args": ["@sender", 31, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x164", "u32": 2}, {"addr": "@data", "u32": "0x11223344"}], "expect": {"ret": 0}},
+    {"name": "message 0x1f points", "args": ["@sender", 31, "@data"], "memory": [{"addr": "@clientobject", "offset": "0x168", "u32": 4}, {"addr": "@data", "u32": "0x55667788"}], "expect": {"ret": 0}},
+    {"name": "message 0x1f no pending values", "args": ["@sender", 31, "@data"], "expect": {"ret": 0}},
+    {"name": "other message", "args": ["@sender", 2, "@data"], "expect": {"ret": 42}}
+  ],
+  "fuzz": {
+    "seed": 5342527,
+    "count": 100,
+    "args": [
+      {"choices": ["@sender", 0]},
+      {"choices": [0, 1, 2, 31]},
+      {"choices": ["@data"]}
+    ],
+    "memory": []
+  }
+}

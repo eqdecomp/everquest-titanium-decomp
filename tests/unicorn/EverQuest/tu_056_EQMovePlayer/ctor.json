@@ -1,0 +1,155 @@
+{
+  "function": "One_guess::One_guess",
+  "original": "0x0048c220",
+  "sources": [
+    "src/EverQuest/tu_056_EQMovePlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@one",
+  "args": [
+    {
+      "name": "source_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "amount_guess",
+      "type": "float"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "one": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "source": {
+      "size": "0x100",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@dvtbl"
+        }
+      ]
+    },
+    "dvtbl": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x28",
+          "u32": "@fn_slot10"
+        },
+        {
+          "offset": "0x54",
+          "u32": "@fn_slot21"
+        }
+      ]
+    },
+    "fn_slot10": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "fn_slot21": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "prev": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "cur": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "@fn_slot10": {
+      "name": "Slot10_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret_float": [0.25]
+    },
+    "@fn_slot21": {
+      "name": "Slot21_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": ["@prev", "@cur"]
+    },
+    "0x0048a34f": {
+      "name": "FUN_0048a34f",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "float",
+        "ptr"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        "@source",
+        1.5
+      ]
+    },
+    {
+      "name": "zero amount",
+      "args": [
+        "@source",
+        0.0
+      ]
+    },
+    {
+      "name": "negative amount",
+      "args": [
+        "@source",
+        -2.5
+      ],
+      "callees": {
+        "@fn_slot10": {
+          "name": "Slot10_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret_float": [-4.0]
+        }
+      }
+    },
+    {
+      "name": "same object for both lookups",
+      "args": [
+        "@source",
+        1.5
+      ],
+      "callees": {
+        "@fn_slot21": {
+          "name": "Slot21_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": ["@cur", "@cur"]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4768288,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@source"
+        ]
+      },
+      {
+        "range": [
+          -1000.0,
+          1000.0
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

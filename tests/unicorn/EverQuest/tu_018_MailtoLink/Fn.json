@@ -1,0 +1,132 @@
+{
+  "function": "RangeRecord_guess::Fn_guess",
+  "original": "0x0042ca9a",
+  "sources": [
+    "src/EverQuest/tu_018_MailtoLink.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@rangerecord",
+  "args": [
+    {"name": "kind_arg_guess", "type": "int"},
+    {"name": "key_guess", "type": "u32"},
+    {"name": "first_text_guess", "type": "cstr"},
+    {"name": "second_text_guess", "type": "cstr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "rangerecord": {
+      "size": "0x50",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x1c", "u32": 3},
+        {"offset": "0x30", "u32": 4},
+        {"offset": "0x34", "u32": 8}
+      ]
+    },
+    "first_slot": {"size": "0x1c", "fill": "zero"},
+    "second_slot": {"size": "0x1c", "fill": "zero"},
+    "value": {"size": "0x4", "fill": "random"},
+    "node": {"size": "0xc", "fill": "zero"}
+  },
+  "memory": [],
+  "callees": {
+    "0x004257ca": {
+      "name": "FindRange_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "u32", "int", "u32", "int", "u32"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "1111111122222222"}]
+    },
+    "0x00491002": {
+      "name": "SpanPair_guess::Equals_guess",
+      "conv": "thiscall",
+      "args": ["mem:8"],
+      "ret": 0
+    },
+    "0x00425170": {
+      "name": "SpanPair_guess::Deref_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@value"
+    },
+    "0x004657fb": {
+      "name": "CopyTextPair_guess",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr"]
+    },
+    "0x0042bfc6": {
+      "name": "Tree_guess::Subscript_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": ["@first_slot", "@second_slot"]
+    },
+    "0x0040338b": {
+      "name": "std::basic_string::assign",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "this"
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": "@node"
+    },
+    "0x00402d37": {
+      "name": "RangeRecord_guess::Flush_guess",
+      "conv": "thiscall",
+      "args": ["u32"]
+    },
+    "0x0060d0d5": {
+      "name": "free",
+      "conv": "cdecl",
+      "args": ["u32"]
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "kind_mismatch",
+      "args": [1, 5, "abc", "abc"]
+    },
+    {
+      "name": "equal_range_skips",
+      "args": [3, 5, "abc", "abc"],
+      "callees": {
+        "0x00491002": {"name": "SpanPair_guess::Equals_guess", "conv": "thiscall", "args": ["mem:8"], "ret": 1}
+      }
+    },
+    {
+      "name": "not_found_both_text",
+      "args": [3, 5, "abc", "xyz"]
+    },
+    {
+      "name": "not_found_second_null",
+      "args": [3, 5, "abc", 0]
+    },
+    {
+      "name": "not_found_second_empty",
+      "args": [3, 5, "abc", ""]
+    },
+    {
+      "name": "operator_new_null",
+      "args": [3, 5, "abc", "xyz"],
+      "callees": {
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4377242,
+    "count": 100,
+    "args": [
+      {"choices": [3, 3, 1, 0]},
+      {"range": [0, 10]},
+      {"choices": ["abc", "", "xy"]},
+      {"choices": ["xyz", "", "q"]}
+    ],
+    "memory": []
+  }
+}

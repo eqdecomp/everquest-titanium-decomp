@@ -1,0 +1,102 @@
+{
+  "function": "do_find_guess",
+  "original": "0x00470ef3",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "unused_guess", "type": "ptr"},
+    {"name": "name_guess", "type": "cstr"}
+  ],
+  "ret": "void",
+  "_survivors": "L6579: the byte before the empty-string literal is NUL in the image, so 0x0063F53E is also an empty string; a non-empty name never equals either",
+  "objects": {
+    "unused": {"size": "0x100", "fill": "random"},
+    "conn": {"size": "0x260", "fill": "random"},
+    "incoming": {"size": "0x290", "fill": "random"},
+    "found": {"size": "0x290", "fill": "random"},
+    "everquest": {"size": "0x100", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x0079AC74", "u32": 305419896},
+    {"addr": "0x00905CE4", "u32": "@conn"},
+    {"addr": "@conn", "offset": "0x120", "cstr": "Me"},
+    {"addr": "@incoming", "offset": "0x120", "cstr": "Prev"},
+    {"addr": "@found", "offset": "0x120", "cstr": "Found"},
+    {"addr": "0x00988DF0", "u32": "@everquest"}
+  ],
+  "callees": {
+    "0x0047c88e": {"name": "GetSpawnByName_guess", "conv": "cdecl", "args": ["cstr"], "ret": "@found"},
+    "0x004912b1": {"name": "FUN_004912b1", "conv": "cdecl", "args": ["ptr", "int", "mem:152", "int", "int"], "ret": 0},
+    "0x0046da4a": {"name": "FUN_0046da4a", "conv": "cdecl",
+                   "args": ["ignore", "int", "cstr", "u32", "u32", "u32", "u32", "u32", "u32", "u32", "u32"],
+                   "ret": 0, "writes": [{"arg": 0, "hex": "544f4b00"}]},
+    "0x004982c6": {"name": "FUN_004982c6", "conv": "thiscall", "args": ["cstr", "int", "bool"], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "name found, incoming set",
+      "args": ["@unused", "abc"],
+      "memory": [
+        {"addr": "@conn", "offset": "0x256", "u8": 1},
+        {"addr": "0x00905D04", "u32": "@incoming"}
+      ]
+    },
+    {
+      "name": "name not found",
+      "args": ["@unused", "abc"],
+      "memory": [
+        {"addr": "@conn", "offset": "0x256", "u8": 1},
+        {"addr": "0x00905D04", "u32": "@incoming"}
+      ],
+      "callees": {
+        "0x0047c88e": {"name": "FUN_0047c88e", "conv": "cdecl", "args": ["cstr"], "ret": 0}
+      }
+    },
+    {
+      "name": "empty name, incoming set",
+      "args": ["@unused", ""],
+      "memory": [
+        {"addr": "@conn", "offset": "0x256", "u8": 1},
+        {"addr": "0x00905D04", "u32": "@incoming"}
+      ]
+    },
+    {
+      "name": "empty name, no incoming",
+      "args": ["@unused", ""],
+      "memory": [
+        {"addr": "@conn", "offset": "0x256", "u8": 1},
+        {"addr": "0x00905D04", "u32": 0}
+      ]
+    },
+    {
+      "name": "flag clear, name set",
+      "args": ["@unused", "abc"],
+      "memory": [
+        {"addr": "@conn", "offset": "0x256", "u8": 0},
+        {"addr": "0x00905D04", "u32": "@incoming"}
+      ]
+    },
+    {
+      "name": "flag clear, empty name",
+      "args": ["@unused", ""],
+      "memory": [
+        {"addr": "@conn", "offset": "0x256", "u8": 0},
+        {"addr": "0x00905D04", "u32": "@incoming"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4656883,
+    "count": 100,
+    "args": [
+      {"choices": ["@unused"]},
+      {"choices": ["", "abc", "Someone", "Bob"]}
+    ],
+    "memory": [
+      {"addr": "@conn", "offset": "0x256", "type": "u8", "range": [0, 1]},
+      {"addr": "0x00905D04", "type": "u32", "choices": ["@incoming", 0]}
+    ]
+  }
+}

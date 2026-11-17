@@ -1,0 +1,89 @@
+{
+  "function": "CBarterWnd_guess::CBarterWnd_guess",
+  "original": "0x004e09df",
+  "sources": [
+    "src/EverQuest/tu_130_BarterWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@big130",
+  "args": [
+    {
+      "name": "parent_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "big130": {"size": "0x280", "fill": "random", "init": [{"offset": "0x124", "u32": 1}]},
+    "parent": {"size": "0x100", "fill": "random"},
+    "stml": {"size": "0x1d0", "fill": "random"},
+    "list1": {"size": "0x180", "fill": "random"},
+    "list2": {"size": "0x180", "fill": "random"},
+    "list3": {"size": "0x180", "fill": "random"},
+    "list4": {"size": "0x180", "fill": "random"},
+    "edit1": {"size": "0x240", "fill": "random"},
+    "edit2": {"size": "0x240", "fill": "random"},
+    "edit3": {"size": "0x240", "fill": "random"},
+    "button": {"size": "0x100", "fill": "random", "init": [{"offset": "0", "u32": "@btnvt"}]},
+    "btnvt": {"size": "0x100", "fill": "random", "init": [{"offset": "0xfc", "u32": "@fn_settext"}]},
+    "fn_settext": {"size": "0x10", "fill": "zero"},
+    "misc": {"size": "0x100", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x00571e00": {"name": "CXStrCtor", "conv": "thiscall", "this": "ignore", "args": ["cstr"], "ret": "this"},
+    "0x005a3850": {"name": "SidlBaseCtor", "conv": "thiscall", "args": ["ptr", "ignore", "int", "int", "int"], "ret": "this"},
+    "0x00571d00": {"name": "CXStrFreeRep", "conv": "thiscall", "this": "ignore", "args": ["u32"]},
+    "0x0047c3af": {"name": "TableInit", "conv": "thiscall", "args": ["int"]},
+    "0x005e41e0": {"name": "EntryCtor", "conv": "thiscall", "args": [], "ret": "this"},
+    "0x005a25b0": {"name": "CreateChildrenFromSidl", "conv": "thiscall", "args": []},
+    "0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": [
+      "@stml", "@list1", "@list2", "@list3", "@list4", "@edit1", "@misc+0x04", "@misc+0x08", "@misc+0x0c",
+      "@misc+0x10", "@misc+0x14", "@misc+0x18", "@misc+0x1c", "@edit3", "@misc+0x20", "@misc+0x24",
+      "@misc+0x28", "@misc+0x2c", "@misc+0x30", "@misc+0x34", "@button", "@misc+0x38", "@misc+0x3c",
+      "@edit2", "@misc+0x40", "@misc+0x44"]},
+    "0x00597c60": {"name": "SetColors", "conv": "thiscall", "args": ["u32", "u32", "u32"]},
+    "0x005982e0": {"name": "SetColumnJustification", "conv": "thiscall", "args": ["int", "int"]},
+    "0x005981f0": {"name": "ListApply", "conv": "thiscall", "args": ["int", "int"]},
+    "0x004d7ebc": {"name": "SetMaxChars", "conv": "thiscall", "args": ["int"]},
+    "0x004dff42": {"name": "RefreshLists", "conv": "thiscall", "args": []},
+    "@fn_settext": {"name": "SetWindowText", "conv": "thiscall", "args": ["ignore"]}
+  },
+  "cases": [
+    {"name": "all children", "args": ["@parent"]},
+    {"name": "all children, parent null", "args": [0]},
+    {"name": "no sidl piece", "args": ["@parent"], "memory": [{"addr": "@big130", "offset": "0x124", "u32": 0}]},
+    {"name": "no children", "args": ["@parent"], "callees": {
+      "0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": 0}}},
+    {"name": "odd calls null", "args": ["@parent"], "callees": {
+      "0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": [
+        0, "@list1", 0, "@list3", 0, "@edit1", 0, "@misc+0x08", 0, "@misc+0x10", 0, "@misc+0x18", 0, "@edit3",
+        0, "@misc+0x24", 0, "@misc+0x2c", 0, "@misc+0x34", 0, "@misc+0x38", 0, "@edit2", 0, "@misc+0x44"]}}},
+    {"name": "even calls null", "args": ["@parent"], "callees": {
+      "0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": [
+        "@stml", 0, "@list2", 0, "@list4", 0, "@misc+0x04", 0, "@misc+0x0c", 0, "@misc+0x14", 0, "@misc+0x1c", 0,
+        "@misc+0x20", 0, "@misc+0x28", 0, "@misc+0x30", 0, "@button", 0, "@misc+0x3c", 0, "@misc+0x40", 0]}}},
+    {"name": "search edit null, welcome edit set", "args": ["@parent"], "callees": {
+      "0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": [
+        "@stml", "@list1", "@list2", "@list3", "@list4", 0, "@misc+0x04", "@misc+0x08", "@misc+0x0c",
+        "@misc+0x10", "@misc+0x14", "@misc+0x18", "@misc+0x1c", "@edit3", "@misc+0x20", "@misc+0x24",
+        "@misc+0x28", "@misc+0x2c", "@misc+0x30", "@misc+0x34", "@button", "@misc+0x38", "@misc+0x3c",
+        "@edit2", "@misc+0x40", "@misc+0x44"]}}},
+    {"name": "search edit set, welcome edit null", "args": ["@parent"], "callees": {
+      "0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": [
+        "@stml", "@list1", "@list2", "@list3", "@list4", "@edit1", "@misc+0x04", "@misc+0x08", "@misc+0x0c",
+        "@misc+0x10", "@misc+0x14", "@misc+0x18", "@misc+0x1c", "@edit3", "@misc+0x20", "@misc+0x24",
+        "@misc+0x28", "@misc+0x2c", "@misc+0x30", "@misc+0x34", "@button", "@misc+0x38", "@misc+0x3c",
+        0, "@misc+0x40", "@misc+0x44"]}}}
+  ],
+  "fuzz": {
+    "seed": 5114335,
+    "count": 60,
+    "args": [
+      {"choices": ["@parent", 0]}
+    ],
+    "memory": [
+      {"addr": "@big130", "offset": "0x124", "type": "u32", "choices": [0, 1, "0x12345678"]}
+    ]
+  }
+}

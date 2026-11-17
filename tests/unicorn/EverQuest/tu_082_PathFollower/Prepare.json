@@ -1,0 +1,609 @@
+{
+  "function": "PathFollower_guess::TrimToPlayer_guess",
+  "original": "0x004c2b02",
+  "sources": [
+    "src/EverQuest/tu_082_PathFollower.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@pathfollower",
+  "args": [
+    {
+      "name": "position_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "pathfollower": {
+      "size": "0x3fc",
+      "fill": "random"
+    },
+    "position": {
+      "size": "0x0c",
+      "fill": "random"
+    },
+    "buckets": {
+      "size": "0x04",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x00",
+          "u32": "@points"
+        }
+      ]
+    },
+    "points": {
+      "size": "0x30",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@pathfollower",
+      "offset": "0x08",
+      "u32": 1000
+    },
+    {
+      "addr": "@pathfollower",
+      "offset": "0x24",
+      "f32": 10.0
+    },
+    {
+      "addr": "@pathfollower",
+      "offset": "0x2c",
+      "f32": 0.0
+    },
+    {
+      "addr": "@pathfollower",
+      "offset": "0x30",
+      "f32": 0.0
+    },
+    {
+      "addr": "@pathfollower",
+      "offset": "0x34",
+      "f32": 0.0
+    },
+    {
+      "addr": "@pathfollower",
+      "offset": "0x38",
+      "u32": 0
+    },
+    {
+      "addr": "@pathfollower",
+      "offset": "0x3c",
+      "u32": 3
+    },
+    {
+      "addr": "@pathfollower",
+      "offset": "0x40",
+      "f32": 0.0
+    },
+    {
+      "addr": "@pathfollower",
+      "offset": "0x44",
+      "f32": 0.0
+    },
+    {
+      "addr": "@pathfollower",
+      "offset": "0x48",
+      "f32": 0.0
+    },
+    {
+      "addr": "@pathfollower",
+      "offset": "0x4c",
+      "u32": 0
+    },
+    {
+      "addr": "@pathfollower",
+      "offset": "0x74",
+      "f32": 10.0
+    },
+    {
+      "addr": "@pathfollower",
+      "offset": "0x118",
+      "u32": 4
+    },
+    {
+      "addr": "@pathfollower",
+      "offset": "0x120",
+      "u32": 3
+    },
+    {
+      "addr": "@pathfollower",
+      "offset": "0x124",
+      "u32": 2
+    },
+    {
+      "addr": "@pathfollower",
+      "offset": "0x128",
+      "u32": "@buckets"
+    },
+    {
+      "addr": "@pathfollower",
+      "offset": "0x130",
+      "u8": 0
+    },
+    {
+      "addr": "@position",
+      "offset": "0x00",
+      "f32": 100.0
+    },
+    {
+      "addr": "@position",
+      "offset": "0x04",
+      "f32": 0.0
+    },
+    {
+      "addr": "@position",
+      "offset": "0x08",
+      "f32": 0.0
+    },
+    {
+      "addr": "@points",
+      "offset": "0x00",
+      "f32": 0.0
+    },
+    {
+      "addr": "@points",
+      "offset": "0x04",
+      "f32": 0.0
+    },
+    {
+      "addr": "@points",
+      "offset": "0x08",
+      "f32": 0.0
+    },
+    {
+      "addr": "@points",
+      "offset": "0x0c",
+      "f32": 100.0
+    },
+    {
+      "addr": "@points",
+      "offset": "0x10",
+      "f32": 0.0
+    },
+    {
+      "addr": "@points",
+      "offset": "0x14",
+      "f32": 0.0
+    },
+    {
+      "addr": "@points",
+      "offset": "0x18",
+      "f32": 500.0
+    },
+    {
+      "addr": "@points",
+      "offset": "0x1c",
+      "f32": 0.0
+    },
+    {
+      "addr": "@points",
+      "offset": "0x20",
+      "f32": 0.0
+    },
+    {
+      "addr": "@points",
+      "offset": "0x24",
+      "f32": 1000.0
+    },
+    {
+      "addr": "@points",
+      "offset": "0x28",
+      "f32": 0.0
+    },
+    {
+      "addr": "@points",
+      "offset": "0x2c",
+      "f32": 0.0
+    },
+    {
+      "addr": "0x00641fc8",
+      "from_image": "0x00641FC8",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x00435b55": {
+      "name": "Vector3_guess::Distance_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x004c16f4": {
+      "name": "TableView_guess::Lookup_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x004c26d9": {
+      "name": "SlotGate_guess::SetPointCount_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x004c18f5": {
+      "name": "Grow_guess_or_Notify_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x00610884": {
+      "name": "Sqrt_guess",
+      "conv": "cdecl",
+      "args": [
+        "double"
+      ],
+      "passthrough": true
+    },
+    "0x00477c8f": {
+      "name": "Vector3_guess::ScaleInto_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "float"
+      ],
+      "passthrough": true
+    },
+    "0x004c19f7": {
+      "name": "RecordTable_guess::Store_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "mem:12"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "outer update reduces marker and stores directly",
+      "args": [
+        "@position"
+      ]
+    },
+    {
+      "name": "tick threshold equality skips outer update",
+      "args": [
+        "@position"
+      ],
+      "memory": [
+        {
+          "addr": "@pathfollower",
+          "offset": "0x08",
+          "u32": 500
+        },
+        {
+          "addr": "@position",
+          "offset": "0x00",
+          "f32": 5.0
+        }
+      ]
+    },
+    {
+      "name": "distance threshold equality skips outer update and interpolates",
+      "args": [
+        "@position"
+      ],
+      "memory": [
+        {
+          "addr": "@position",
+          "offset": "0x00",
+          "f32": 25.0
+        },
+        {
+          "addr": "@pathfollower",
+          "offset": "0x38",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "one point and interpolation without an intermediate",
+      "args": [
+        "@position"
+      ],
+      "memory": [
+        {
+          "addr": "@pathfollower",
+          "offset": "0x118",
+          "u32": 1
+        },
+        {
+          "addr": "@pathfollower",
+          "offset": "0x08",
+          "u32": 500
+        },
+        {
+          "addr": "@position",
+          "offset": "0x00",
+          "f32": 15.0
+        }
+      ]
+    },
+    {
+      "name": "distance equals max step",
+      "args": [
+        "@position"
+      ],
+      "memory": [
+        {
+          "addr": "@pathfollower",
+          "offset": "0x08",
+          "u32": 500
+        },
+        {
+          "addr": "@position",
+          "offset": "0x00",
+          "f32": 10.0
+        }
+      ]
+    },
+    {
+      "name": "intermediate samples",
+      "args": [
+        "@position"
+      ],
+      "memory": [
+        {
+          "addr": "@pathfollower",
+          "offset": "0x08",
+          "u32": 500
+        },
+        {
+          "addr": "@position",
+          "offset": "0x04",
+          "f32": 50.0
+        },
+        {
+          "addr": "@position",
+          "offset": "0x08",
+          "f32": 25.0
+        }
+      ]
+    },
+    {
+      "name": "outer update without marker reduction",
+      "args": [
+        "@position"
+      ],
+      "memory": [
+        {
+          "addr": "@pathfollower",
+          "offset": "0x38",
+          "u32": 3
+        },
+        {
+          "addr": "@pathfollower",
+          "offset": "0x3c",
+          "u32": 0
+        },
+        {
+          "addr": "@points",
+          "offset": "0x0c",
+          "f32": 1000.0
+        },
+        {
+          "addr": "@points",
+          "offset": "0x18",
+          "f32": 1000.0
+        },
+        {
+          "addr": "@points",
+          "offset": "0x24",
+          "f32": 1000.0
+        }
+      ]
+    },
+    {
+      "name": "substep half-way boundary",
+      "args": [
+        "@position"
+      ],
+      "memory": [
+        {
+          "addr": "@pathfollower",
+          "offset": "0x08",
+          "u32": 500
+        },
+        {
+          "addr": "@position",
+          "offset": "0x00",
+          "f32": 20.0
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4991746,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@position"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@pathfollower",
+        "offset": "0x08",
+        "type": "u32",
+        "choices": [
+          0,
+          500,
+          501,
+          1000
+        ]
+      },
+      {
+        "addr": "@pathfollower",
+        "offset": "0x4c",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          499,
+          500
+        ]
+      },
+      {
+        "addr": "@pathfollower",
+        "offset": "0x24",
+        "type": "float",
+        "choices": [
+          5.0,
+          10.0,
+          25.0,
+          50.0
+        ]
+      },
+      {
+        "addr": "@pathfollower",
+        "offset": "0x38",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@pathfollower",
+        "offset": "0x3c",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@pathfollower",
+        "offset": "0x74",
+        "type": "float",
+        "choices": [
+          -1.0,
+          0.0,
+          10.0,
+          25.0,
+          100.0
+        ]
+      },
+      {
+        "addr": "@pathfollower",
+        "offset": "0x118",
+        "type": "int",
+        "choices": [
+          1,
+          2,
+          4
+        ]
+      },
+      {
+        "addr": "@position",
+        "offset": "0x00",
+        "type": "float",
+        "choices": [
+          -25.0,
+          0.0,
+          5.0,
+          10.0,
+          15.0,
+          25.0,
+          50.0,
+          100.0
+        ]
+      },
+      {
+        "addr": "@position",
+        "offset": "0x04",
+        "type": "float",
+        "choices": [
+          -20.0,
+          0.0,
+          20.0,
+          50.0
+        ]
+      },
+      {
+        "addr": "@position",
+        "offset": "0x08",
+        "type": "float",
+        "choices": [
+          -20.0,
+          0.0,
+          20.0,
+          50.0
+        ]
+      },
+      {
+        "addr": "@pathfollower",
+        "offset": "0x2c",
+        "type": "float",
+        "choices": [
+          0.0,
+          10.0,
+          25.0,
+          50.0
+        ]
+      },
+      {
+        "addr": "@pathfollower",
+        "offset": "0x30",
+        "type": "float",
+        "choices": [
+          -10.0,
+          0.0,
+          10.0,
+          25.0
+        ]
+      },
+      {
+        "addr": "@pathfollower",
+        "offset": "0x34",
+        "type": "float",
+        "choices": [
+          -10.0,
+          0.0,
+          10.0,
+          25.0
+        ]
+      },
+      {
+        "addr": "@pathfollower",
+        "offset": "0x40",
+        "type": "float",
+        "choices": [
+          0.0,
+          10.0,
+          25.0,
+          50.0
+        ]
+      },
+      {
+        "addr": "@points",
+        "offset": "0x00",
+        "type": "float",
+        "count": 12,
+        "choices": [
+          0.0,
+          10.0,
+          20.0,
+          50.0,
+          100.0,
+          500.0
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,449 @@
+{
+  "function": "Cc_guess::Reserve_guess",
+  "original": "0x004deb5a",
+  "sources": [
+    "src/EverQuest/tu_129_BarterSearchWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@cc",
+  "args": [
+    {
+      "name": "requested_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "cc": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "oldelems": {
+      "size": "0x400",
+      "fill": "random"
+    },
+    "newbuf": {
+      "size": "0x2000",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0060e985": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@newbuf"
+    },
+    "0x0060e2b9": {
+      "name": "`eh_vector_constructor_iterator'",
+      "conv": "stdcall",
+      "args": [
+        "ignore",
+        "u32",
+        "u32",
+        "ignore",
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x00409bfd": {
+      "name": "E70_guess::CopyFrom_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x004dd54b": {
+      "name": "E70_guess::DeleteVector_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "zero_count",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@cc",
+          "offset": "0x0",
+          "u32": 2
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x4",
+          "u32": "@oldelems"
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x8",
+          "u32": 2
+        },
+        {
+          "addr": "@cc",
+          "offset": "0xc",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "fits_existing",
+      "args": [
+        2
+      ],
+      "memory": [
+        {
+          "addr": "@cc",
+          "offset": "0x0",
+          "u32": 3
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x4",
+          "u32": "@oldelems"
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x8",
+          "u32": 3
+        },
+        {
+          "addr": "@cc",
+          "offset": "0xc",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "equal_to_count",
+      "args": [
+        3
+      ],
+      "memory": [
+        {
+          "addr": "@cc",
+          "offset": "0x0",
+          "u32": 3
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x4",
+          "u32": "@oldelems"
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x8",
+          "u32": 3
+        },
+        {
+          "addr": "@cc",
+          "offset": "0xc",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "grow_copy",
+      "args": [
+        4
+      ],
+      "memory": [
+        {
+          "addr": "@cc",
+          "offset": "0x0",
+          "u32": 2
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x4",
+          "u32": "@oldelems"
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x8",
+          "u32": 2
+        },
+        {
+          "addr": "@cc",
+          "offset": "0xc",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "first_alloc",
+      "args": [
+        3
+      ],
+      "memory": [
+        {
+          "addr": "@cc",
+          "offset": "0x0",
+          "u32": 0
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x4",
+          "u32": 0
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x8",
+          "u32": 0
+        },
+        {
+          "addr": "@cc",
+          "offset": "0xc",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "grow_no_copy",
+      "args": [
+        2
+      ],
+      "memory": [
+        {
+          "addr": "@cc",
+          "offset": "0x0",
+          "u32": 0
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x4",
+          "u32": "@oldelems"
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x8",
+          "u32": 0
+        },
+        {
+          "addr": "@cc",
+          "offset": "0xc",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "equal_count_no_array",
+      "args": [
+        2
+      ],
+      "memory": [
+        {
+          "addr": "@cc",
+          "offset": "0x0",
+          "u32": 2
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x4",
+          "u32": 0
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x8",
+          "u32": 0
+        },
+        {
+          "addr": "@cc",
+          "offset": "0xc",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "alloc_fails_with_old",
+      "args": [
+        3
+      ],
+      "memory": [
+        {
+          "addr": "@cc",
+          "offset": "0x0",
+          "u32": 2
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x4",
+          "u32": "@oldelems"
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x8",
+          "u32": 2
+        },
+        {
+          "addr": "@cc",
+          "offset": "0xc",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x0060e985": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "alloc_fails_no_old",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@cc",
+          "offset": "0x0",
+          "u32": 0
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x4",
+          "u32": 0
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x8",
+          "u32": 4
+        },
+        {
+          "addr": "@cc",
+          "offset": "0xc",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x0060e985": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "negative_with_array",
+      "args": [
+        -1
+      ],
+      "memory": [
+        {
+          "addr": "@cc",
+          "offset": "0x0",
+          "u32": 0
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x4",
+          "u32": "@oldelems"
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x8",
+          "u32": 0
+        },
+        {
+          "addr": "@cc",
+          "offset": "0xc",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "one_elem_grow",
+      "args": [
+        20
+      ],
+      "memory": [
+        {
+          "addr": "@cc",
+          "offset": "0x0",
+          "u32": 1
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x4",
+          "u32": "@oldelems"
+        },
+        {
+          "addr": "@cc",
+          "offset": "0x8",
+          "u32": 1
+        },
+        {
+          "addr": "@cc",
+          "offset": "0xc",
+          "u8": 0
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5106522,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -2,
+          8
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@cc",
+        "offset": "0x0",
+        "type": "int",
+        "range": [
+          -1,
+          6
+        ]
+      },
+      {
+        "addr": "@cc",
+        "offset": "0x4",
+        "type": "ptr",
+        "choices": [
+          "@oldelems",
+          "0x0"
+        ]
+      },
+      {
+        "addr": "@cc",
+        "offset": "0x8",
+        "type": "int",
+        "range": [
+          0,
+          6
+        ]
+      },
+      {
+        "addr": "@cc",
+        "offset": "0xc",
+        "type": "u8",
+        "range": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

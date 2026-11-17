@@ -1,0 +1,27 @@
+# What this proves: the repository has no forbidden or binary files, local paths or stray e-mail addresses;
+# every annotation is well formed; every fixture is valid JSON of the expected shape with well-formed
+# from_image references; the Python compiles.
+# What it cannot prove: the runner has neither the client (eqgame.exe) nor Visual C++ .NET 2003, so nothing
+# is compiled, no fixture runs and nothing is compared with the original. Those run locally (README.md,
+# CONTRIBUTING.md).
+name: ci
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Python compiles
+        run: python -m compileall -q tools tests
+      - name: Repository checks (no binaries, no compiler)
+        run: python tools/ci/check_tree.py .

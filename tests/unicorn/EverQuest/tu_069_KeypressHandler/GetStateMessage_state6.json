@@ -1,0 +1,19 @@
+{
+  "function": "EQ_Item_guess::CanPlaceInContainer_guess",
+  "original": "0x004b1f6c",
+  "sources": ["src/EverQuest/tu_069_KeypressHandler.cpp"],
+  "conv": "thiscall",
+  "this": "@itemlist",
+  "args": [{"name": "value", "type": "int"}, {"name": "option", "type": "int"}],
+  "ret": "int",
+  "objects": {"itemlist": {"size": "0xa8", "fill": "random"}, "errorhandler": {"size": "0x4", "fill": "random"}, "messagewindow": {"size": "0x4", "fill": "random"}},
+  "memory": [{"addr": "0x00905cb0", "u32": "@errorhandler"}, {"addr": "0x00988df0", "u32": "@messagewindow"}],
+  "callees": {
+    "0x005ece60": {"name": "ItemListBase_guess::GetState_guess", "conv": "thiscall", "args": ["int"], "ret": 6},
+    "0x005dfa00": {"name": "ErrorHandler_guess::Report_guess", "conv": "thiscall", "args": ["int", "int"], "ret": 305419896},
+    "0x00498436": {"name": "MessageWindow_guess::dsp_chat", "conv": "thiscall", "args": ["int"], "ret": 2271560481}
+  },
+  "size": "0x64",
+  "cases": [{"name": "message-off", "args": [42, 0]}, {"name": "message-on", "args": [42, 1]}],
+  "fuzz": {"seed": 4923250, "count": 50, "args": [{"range": [0, 12]}, {"choices": [0, 1]}], "memory": []}
+}

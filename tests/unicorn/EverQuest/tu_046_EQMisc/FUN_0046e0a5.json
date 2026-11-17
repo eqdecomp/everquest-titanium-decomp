@@ -1,0 +1,1435 @@
+{
+  "function": "GetWeaponDamageBonus_guess",
+  "original": "0x0046e0a5",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "host_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "value_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "size": "0x2cb",
+  "objects": {
+    "host": {
+      "size": "0x20",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@vbtable"
+        }
+      ]
+    },
+    "value": {
+      "size": "0x20",
+      "fill": "random"
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "0x20"
+        }
+      ]
+    },
+    "row": {
+      "size": "0x11a8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "offset": "0x11a4",
+          "u32": 40
+        }
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x005ec220": {
+      "name": "Find_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@row"
+    },
+    "0x005ecc00": {
+      "name": "GetValue_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        0,
+        1
+      ]
+    },
+    "0x005e0e90": {
+      "name": "GetLevel_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        40,
+        40,
+        40,
+        43,
+        45
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "null host",
+      "args": [
+        0,
+        "@value"
+      ]
+    },
+    {
+      "name": "initial level below threshold",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 27
+        }
+      ]
+    },
+    {
+      "name": "kind 1",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ]
+    },
+    {
+      "name": "kind 2",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 2
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ]
+    },
+    {
+      "name": "kind 3",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 3
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ]
+    },
+    {
+      "name": "kind 5",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 5
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ]
+    },
+    {
+      "name": "kind 6",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 6
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ]
+    },
+    {
+      "name": "kind 7",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 7
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ]
+    },
+    {
+      "name": "kind 9",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 9
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ]
+    },
+    {
+      "name": "kind 10",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 10
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ]
+    },
+    {
+      "name": "kind 14",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 14
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ]
+    },
+    {
+      "name": "kind 15",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 15
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ]
+    },
+    {
+      "name": "kind 16",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 16
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ]
+    },
+    {
+      "name": "kind 17",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 17
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ]
+    },
+    {
+      "name": "special property below 40",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 16
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 39
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            19
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            39
+          ]
+        }
+      }
+    },
+    {
+      "name": "special property at 40",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 16
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 40
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            19
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            60
+          ]
+        }
+      }
+    },
+    {
+      "name": "special property above 40",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 16
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 42
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            19
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            60
+          ]
+        }
+      }
+    },
+    {
+      "name": "value type 4",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 30
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            0,
+            4
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            28,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "value type 0x23",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 31
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            0,
+            0,
+            35
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            28,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "rank below 28",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 30
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            27,
+            39
+          ]
+        }
+      }
+    },
+    {
+      "name": "rank at 28, property at 29",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 29
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            28,
+            39
+          ]
+        }
+      }
+    },
+    {
+      "name": "rank 39 common boundary",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            28,
+            39
+          ]
+        }
+      }
+    },
+    {
+      "name": "rank 40 common boundary",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            28,
+            40,
+            40,
+            42,
+            44
+          ]
+        }
+      }
+    },
+    {
+      "name": "rank 43 threshold",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            28,
+            40,
+            40,
+            43,
+            44
+          ]
+        }
+      }
+    },
+    {
+      "name": "rank 45 threshold",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            28,
+            40,
+            40,
+            43,
+            45
+          ]
+        }
+      }
+    },
+    {
+      "name": "property level 28",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 28
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            40,
+            40,
+            40,
+            43,
+            45
+          ]
+        }
+      }
+    },
+    {
+      "name": "property level 29",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 29
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            40,
+            40,
+            40,
+            43,
+            45
+          ]
+        }
+      }
+    },
+    {
+      "name": "property level 30",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 30
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            40,
+            40,
+            40,
+            43,
+            45
+          ]
+        }
+      }
+    },
+    {
+      "name": "property level 50",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 50
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            40,
+            40,
+            40,
+            43,
+            45
+          ]
+        }
+      }
+    },
+    {
+      "name": "property level 51",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 51
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            40,
+            40,
+            40,
+            43,
+            45
+          ]
+        }
+      }
+    },
+    {
+      "name": "property level 54",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 54
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            40,
+            40,
+            40,
+            43,
+            45
+          ]
+        }
+      }
+    },
+    {
+      "name": "property level 55",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 55
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            40,
+            40,
+            40,
+            43,
+            45
+          ]
+        }
+      }
+    },
+    {
+      "name": "property level 56",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 56
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            40,
+            40,
+            40,
+            43,
+            45
+          ]
+        }
+      }
+    },
+    {
+      "name": "property level 57",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 57
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            40,
+            40,
+            40,
+            43,
+            45
+          ]
+        }
+      }
+    },
+    {
+      "name": "property level 58",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 58
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            40,
+            40,
+            40,
+            43,
+            45
+          ]
+        }
+      }
+    },
+    {
+      "name": "property level 59",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 59
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            40,
+            40,
+            40,
+            43,
+            45
+          ]
+        }
+      }
+    },
+    {
+      "name": "property level 60",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 60
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            40,
+            40,
+            40,
+            43,
+            45
+          ]
+        }
+      }
+    },
+    {
+      "name": "property level 67",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 67
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            40,
+            40,
+            40,
+            43,
+            45
+          ]
+        }
+      }
+    },
+    {
+      "name": "property level 68",
+      "args": [
+        "@host",
+        "@value"
+      ],
+      "memory": [
+        {
+          "addr": "@row",
+          "offset": "0x119c",
+          "u8": 1
+        },
+        {
+          "addr": "@row",
+          "offset": "0x11a4",
+          "u32": 68
+        }
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x005e0e90": {
+          "name": "GetLevel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            40,
+            40,
+            40,
+            43,
+            45
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4645029,
+    "count": 120,
+    "args": [
+      {
+        "choices": [
+          "@host"
+        ]
+      },
+      {
+        "choices": [
+          "@value"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@row",
+        "offset": "0x119c",
+        "type": "u8",
+        "choices": [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          9,
+          10,
+          14,
+          15,
+          16,
+          17
+        ]
+      },
+      {
+        "addr": "@row",
+        "offset": "0x11a4",
+        "type": "int",
+        "choices": [
+          27,
+          28,
+          29,
+          30,
+          31,
+          39,
+          40,
+          50,
+          51,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          67,
+          68
+        ]
+      }
+    ]
+  },
+  "_survivors": "L4114: repeats the same virtual-base conversion after a read-only getter; L4136: repeats the same virtual-base conversion after a read-only row lookup; L4138: repeats the same virtual-base conversion, with no intervening write to the host or vbtable."
+}

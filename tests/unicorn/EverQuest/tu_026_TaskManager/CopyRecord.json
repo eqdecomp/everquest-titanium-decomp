@@ -1,0 +1,108 @@
+{
+  "function": "TaskManagerView_guess::Handle_OP_TaskActivity_guess",
+  "original": "0x00432fd2",
+  "sources": ["src/EverQuest/tu_026_TaskManager.cpp"],
+  "conv": "thiscall",
+  "this": "@dispatchowner",
+  "args": [{"name": "character_guess", "type": "ptr"}, {"name": "data_guess", "type": "ptr"}],
+  "ret": "void",
+  "objects": {
+    "dispatchowner": {"size": "0x10", "fill": "zero"},
+    "character": {"size": "0x100", "fill": "random"},
+    "record": {"size": "0x80", "fill": "random"},
+    "state": {"size": "0x2840", "fill": "random", "init": [{"offset": "0x2018", "u8": 1}]},
+    "refresh": {"size": "0x10", "fill": "random"},
+    "data": {"size": "0x200", "fill": "zero", "init": [
+      {"offset": 0, "u32": 3},
+      {"offset": 4, "u32": 2},
+      {"offset": 12, "u32": 5},
+      {"offset": 16, "u32": 287454020},
+      {"offset": 20, "u32": 4660},
+      {"offset": 24, "u32": 1},
+      {"offset": 28, "u32": 22136},
+      {"offset": 32, "hex": "416c70686100"},
+      {"offset": 38, "hex": "4265746100"},
+      {"offset": 43, "hex": "04030201080706050c0b0a09100f0e0d14131211"},
+      {"offset": 63, "hex": "47616d00"},
+      {"offset": 67, "u32": 195948557},
+      {"offset": 71, "u32": 0}
+    ]},
+    "dataZero": {"size": "0x200", "fill": "zero", "init": [
+      {"offset": 0, "u32": 3},
+      {"offset": 4, "u32": 2},
+      {"offset": 12, "u32": 5},
+      {"offset": 16, "u32": 287454020},
+      {"offset": 20, "u32": 0},
+      {"offset": 24, "u32": 1},
+      {"offset": 28, "u32": 22136},
+      {"offset": 32, "hex": "416c70686100"},
+      {"offset": 38, "hex": "4265746100"},
+      {"offset": 43, "hex": "04030201080706050c0b0a09100f0e0d14131211"},
+      {"offset": 63, "hex": "47616d00"},
+      {"offset": 67, "u32": 195948557},
+      {"offset": 71, "u32": 0}
+    ]},
+    "dataNeg": {"size": "0x200", "fill": "zero", "init": [
+      {"offset": 0, "u32": 3},
+      {"offset": 4, "u32": 2},
+      {"offset": 12, "u32": 5},
+      {"offset": 16, "u32": 287454020},
+      {"offset": 20, "u32": 4294967295},
+      {"offset": 24, "u32": 1},
+      {"offset": 28, "u32": 22136},
+      {"offset": 32, "hex": "416c70686100"},
+      {"offset": 38, "hex": "4265746100"},
+      {"offset": 43, "hex": "04030201080706050c0b0a09100f0e0d14131211"},
+      {"offset": 63, "hex": "47616d00"},
+      {"offset": 67, "u32": 195948557},
+      {"offset": 71, "u32": 0}
+    ]},
+    "dataFlagsOff": {"size": "0x200", "fill": "zero", "init": [
+      {"offset": 0, "u32": 3},
+      {"offset": 4, "u32": 2},
+      {"offset": 12, "u32": 5},
+      {"offset": 16, "u32": 287454020},
+      {"offset": 20, "u32": 4660},
+      {"offset": 24, "u32": 0},
+      {"offset": 28, "u32": 22136},
+      {"offset": 32, "hex": "416c70686100"},
+      {"offset": 38, "hex": "4265746100"},
+      {"offset": 43, "hex": "04030201080706050c0b0a09100f0e0d14131211"},
+      {"offset": 63, "hex": "47616d00"},
+      {"offset": 67, "u32": 195948557},
+      {"offset": 71, "u32": 1}
+    ]}
+  },
+  "memory": [{"addr": "0x00992858", "u32": "@refresh"}],
+  "callees": {
+    "0x00432d17": {"name": "GetRecord", "conv": "thiscall", "this": "ignore", "args": ["ptr", "int", "int"], "ret": "@record"},
+    "0x004322d2": {"name": "Get", "conv": "thiscall", "this": "ignore", "args": ["int", "int", "char"], "ret": "@state"},
+    "0x0043226d": {"name": "Clear", "conv": "thiscall", "this": "ignore", "args": [], "passthrough": true},
+    "0x00574310": {"name": "CopyBuffer", "conv": "cdecl", "args": ["ptr", "ptr", "int"], "passthrough": true},
+    "0x0055f706": {"name": "SetFlags", "conv": "thiscall", "this": "ignore", "args": [], "passthrough": true}
+  },
+  "cases": [
+    {"name": "typical", "args": ["@character", "@data"]},
+    {"name": "first zero clears", "args": ["@character", "@dataZero"]},
+    {"name": "first minus one", "args": ["@character", "@dataNeg"]},
+    {"name": "flag off, bytes on", "args": ["@character", "@dataFlagsOff"]},
+    {"name": "no record", "args": ["@character", "@data"],
+     "callees": {"0x00432d17": {"name": "GetRecord", "conv": "thiscall", "this": "ignore", "args": ["ptr", "int", "int"], "ret": 0}}},
+    {"name": "no state", "args": ["@character", "@data"],
+     "callees": {"0x004322d2": {"name": "Get", "conv": "thiscall", "this": "ignore", "args": ["int", "int", "char"], "ret": 0}}},
+    {"name": "no refresh owner", "args": ["@character", "@data"], "memory": [{"addr": "0x00992858", "u32": 0}]}
+  ],
+  "fuzz": {
+    "seed": 4403154,
+    "count": 100,
+    "args": [
+      {"choices": ["@character"]},
+      {"choices": ["@data", "@dataZero", "@dataNeg", "@dataFlagsOff"]}
+    ],
+    "memory": [
+      {"addr": "@data", "offset": "0xc", "type": "int", "range": [0, 19]},
+      {"addr": "@data", "offset": "0x14", "type": "int", "choices": [0, -1, 4660]},
+      {"addr": "@data", "offset": "0x18", "type": "int", "range": [0, 1]}
+    ]
+  }
+}

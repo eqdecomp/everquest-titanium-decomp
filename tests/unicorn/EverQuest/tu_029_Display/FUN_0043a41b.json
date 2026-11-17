@@ -1,0 +1,437 @@
+{
+  "function": "Slots_guess::LoadFromFile_guess",
+  "original": "0x0043a41b",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@slots",
+  "args": [
+    {
+      "name": "filename",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "size": "0x202",
+  "objects": {
+    "slots": {
+      "size": "0x8",
+      "fill": "zero"
+    },
+    "file": {
+      "size": "0x1000c",
+      "fill": "zero"
+    },
+    "entries": {
+      "size": "0x2000",
+      "fill": "zero"
+    },
+    "key1": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "value1": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "key2": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "value2": {
+      "size": "0x100",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "from_image": "0x0079ac74",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@file"
+    },
+    "0x00576bd0": {
+      "name": "EntryFile_guess::EntryFile_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int"
+      ],
+      "ret": "this"
+    },
+    "0x00576d10": {
+      "name": "EntryFile_guess::IsOpen_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x00576c60": {
+      "name": "EntryFile_guess::Next_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        0,
+        1,
+        0
+      ]
+    },
+    "0x00576f50": {
+      "name": "EntryFile_guess::Read_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "call": 0,
+          "hex": "3100"
+        },
+        {
+          "arg": 0,
+          "call": 1,
+          "hex": "616c70686100"
+        },
+        {
+          "arg": 0,
+          "call": 2,
+          "hex": "6f6e6500"
+        },
+        {
+          "arg": 0,
+          "call": 3,
+          "hex": "6265746100"
+        },
+        {
+          "arg": 0,
+          "call": 4,
+          "hex": "74776f00"
+        }
+      ]
+    },
+    "0x0060e3a3": {
+      "name": "atoi",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 1
+    },
+    "0x0060e985": {
+      "name": "operator_new_array",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": [
+        "@entries",
+        "@key1",
+        "@value1",
+        "@key2",
+        "@value2"
+      ]
+    },
+    "0x00574110": {
+      "name": "FUN_00574110",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0,
+      "varargs": "printf"
+    },
+    "0x00576c50": {
+      "name": "EntryFile_guess::~EntryFile_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "keep"
+    },
+    "0x0060d0d5": {
+      "name": "operator_delete",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071",
+    "??_U@YAPAXI@Z": "0x0060e985",
+    "??3@YAXPAX@Z": "0x0060d0d5"
+  },
+  "cases": [
+    {
+      "name": "one_entry",
+      "args": [
+        "valid.tbl"
+      ]
+    },
+    {
+      "name": "file_closed",
+      "args": [
+        "closed.tbl"
+      ],
+      "callees": {
+        "0x00576d10": {
+          "name": "EntryFile_guess::IsOpen_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "blank_record",
+      "args": [
+        "blank.tbl"
+      ],
+      "callees": {
+        "0x00576f50": {
+          "name": "EntryFile_guess::Read_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "call": 0,
+              "hex": "3100"
+            },
+            {
+              "arg": 0,
+              "call": 1,
+              "hex": "00"
+            },
+            {
+              "arg": 0,
+              "call": 2,
+              "hex": "6f6e6500"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "fewer_records_than_count",
+      "args": [
+        "short.tbl"
+      ],
+      "callees": {
+        "0x00576f50": {
+          "name": "EntryFile_guess::Read_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "call": 0,
+              "hex": "3200"
+            },
+            {
+              "arg": 0,
+              "call": 1,
+              "hex": "616c70686100"
+            },
+            {
+              "arg": 0,
+              "call": 2,
+              "hex": "6f6e6500"
+            }
+          ]
+        },
+        "0x0060e3a3": {
+          "name": "atoi",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 2
+        }
+      }
+    },
+    {
+      "name": "extra_record",
+      "args": [
+        "long.tbl"
+      ],
+      "callees": {
+        "0x00576c60": {
+          "name": "EntryFile_guess::Next_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "largest_valid_count",
+      "args": [
+        "largest.tbl"
+      ],
+      "callees": {
+        "0x00576c60": {
+          "name": "EntryFile_guess::Next_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            0
+          ]
+        },
+        "0x00576f50": {
+          "name": "EntryFile_guess::Read_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "call": 0,
+              "hex": "39393900"
+            }
+          ]
+        },
+        "0x0060e3a3": {
+          "name": "atoi",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 999
+        }
+      }
+    },
+    {
+      "name": "zero_count",
+      "args": [
+        "zero.tbl"
+      ],
+      "callees": {
+        "0x00576f50": {
+          "name": "EntryFile_guess::Read_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "call": 0,
+              "hex": "3000"
+            }
+          ]
+        },
+        "0x0060e3a3": {
+          "name": "atoi",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "negative_count",
+      "args": [
+        "negative.tbl"
+      ],
+      "callees": {
+        "0x00576f50": {
+          "name": "EntryFile_guess::Read_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "call": 0,
+              "hex": "2d3100"
+            }
+          ]
+        },
+        "0x0060e3a3": {
+          "name": "atoi",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "count_at_1000",
+      "args": [
+        "limit.tbl"
+      ],
+      "callees": {
+        "0x00576f50": {
+          "name": "EntryFile_guess::Read_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "call": 0,
+              "hex": "3130303000"
+            }
+          ]
+        },
+        "0x0060e3a3": {
+          "name": "atoi",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1000
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4432923,
+    "count": 100,
+    "args": [
+      {}
+    ],
+    "memory": []
+  },
+  "_survivors": "L4455: offset is never read, so its shift operation cannot affect observable behavior"
+}

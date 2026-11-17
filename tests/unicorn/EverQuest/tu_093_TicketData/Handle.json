@@ -1,0 +1,930 @@
+{
+  "function": "TicketData_guess::HandleTicketMessage_guess",
+  "original": "0x004c9c57",
+  "sources": [
+    "src/EverQuest/tu_093_TicketData.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@wrapperobject",
+  "args": [
+    {
+      "name": "unused0_guess",
+      "type": "int"
+    },
+    {
+      "name": "code_guess",
+      "type": "u32"
+    },
+    {
+      "name": "data_guess",
+      "type": "int"
+    },
+    {
+      "name": "unused3_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "wrapperobject": {
+      "size": "0x4f0e8",
+      "fill": "random"
+    },
+    "manager": {
+      "size": "0x700",
+      "fill": "zero"
+    },
+    "message_source": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "message_sink": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "request": {
+      "size": "0x1001",
+      "fill": "zero"
+    },
+    "string_update": {
+      "size": "0x2044",
+      "fill": "zero"
+    },
+    "list_update": {
+      "size": "0x28c",
+      "fill": "zero"
+    },
+    "description_update": {
+      "size": "0x1010",
+      "fill": "zero"
+    },
+    "xml_request": {
+      "size": "0x104",
+      "fill": "zero"
+    },
+    "safe_buffer": {
+      "size": "0x2100",
+      "fill": "zero"
+    },
+    "hierarchy": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "category": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "subcategory": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "false_text": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "true_text": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "category_id": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "subcategory_id": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "category_name": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "subcategory_name": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "message_text": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "heap_work": {
+      "size": "0x10000",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x009928a8",
+      "u32": "@manager"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@message_source"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@message_sink"
+    },
+    {
+      "addr": "0x00923d64",
+      "u8": 0
+    },
+    {
+      "addr": "0x006478bc",
+      "from_image": "0x006478BC",
+      "image_size": 3
+    },
+    {
+      "addr": "@false_text",
+      "cstr": "false"
+    },
+    {
+      "addr": "@true_text",
+      "cstr": "true"
+    },
+    {
+      "addr": "@category_id",
+      "cstr": "41"
+    },
+    {
+      "addr": "@subcategory_id",
+      "cstr": "42"
+    },
+    {
+      "addr": "@category_name",
+      "cstr": "Category"
+    },
+    {
+      "addr": "@subcategory_name",
+      "cstr": "Subcategory"
+    },
+    {
+      "addr": "@message_text",
+      "cstr": "Category update failed"
+    },
+    {
+      "addr": "@request",
+      "offset": "0x8",
+      "u32": 0
+    },
+    {
+      "addr": "@request",
+      "offset": "0xc",
+      "u32": 10
+    },
+    {
+      "addr": "@request",
+      "offset": "0x10",
+      "u32": 11
+    },
+    {
+      "addr": "@request",
+      "offset": "0x14",
+      "u32": 12
+    },
+    {
+      "addr": "@request",
+      "offset": "0x18",
+      "u32": 13
+    },
+    {
+      "addr": "@request",
+      "offset": "0x1c",
+      "u32": 14
+    },
+    {
+      "addr": "@request",
+      "offset": "0x20",
+      "cstr": "request body"
+    },
+    {
+      "addr": "@request",
+      "offset": "0xfc1",
+      "cstr": "request name"
+    },
+    {
+      "addr": "@string_update",
+      "offset": "0x4",
+      "cstr": "headline"
+    },
+    {
+      "addr": "@string_update",
+      "offset": "0x104",
+      "cstr": "long description"
+    },
+    {
+      "addr": "@list_update",
+      "u32": 2
+    },
+    {
+      "addr": "@list_update",
+      "offset": "0x4",
+      "cstr": "first label"
+    },
+    {
+      "addr": "@list_update",
+      "offset": "0x45",
+      "cstr": "first detail"
+    },
+    {
+      "addr": "@list_update",
+      "offset": "0x146",
+      "u16": 4660
+    },
+    {
+      "addr": "@list_update",
+      "offset": "0x148",
+      "cstr": "second label"
+    },
+    {
+      "addr": "@list_update",
+      "offset": "0x189",
+      "cstr": "second detail"
+    },
+    {
+      "addr": "@list_update",
+      "offset": "0x28a",
+      "u16": 22136
+    },
+    {
+      "addr": "@description_update",
+      "offset": "0x4",
+      "u32": 20
+    },
+    {
+      "addr": "@description_update",
+      "offset": "0x8",
+      "u32": 21
+    },
+    {
+      "addr": "@description_update",
+      "offset": "0xc",
+      "u32": 22
+    },
+    {
+      "addr": "@description_update",
+      "offset": "0x10",
+      "u32": 23
+    },
+    {
+      "addr": "@description_update",
+      "offset": "0x14",
+      "u32": 24
+    },
+    {
+      "addr": "@description_update",
+      "offset": "0x18",
+      "cstr": "title"
+    },
+    {
+      "addr": "@description_update",
+      "offset": "0x5c",
+      "u32": 25
+    },
+    {
+      "addr": "@description_update",
+      "offset": "0x60",
+      "u32": 26
+    },
+    {
+      "addr": "@description_update",
+      "offset": "0x6c",
+      "u32": 27
+    },
+    {
+      "addr": "@description_update",
+      "offset": "0x70",
+      "cstr": "description body"
+    },
+    {
+      "addr": "@xml_request",
+      "offset": "0x4",
+      "cstr": "<hierarchy />"
+    },
+    {
+      "addr": "@category",
+      "offset": "0x10",
+      "u32": 1
+    },
+    {
+      "addr": "@subcategory",
+      "offset": "0x10",
+      "u32": 1
+    },
+    {
+      "addr": "@safe_buffer",
+      "offset": "0x8",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x004c9b4b": {
+      "name": "FUN_004c9b4b",
+      "conv": "thiscall",
+      "args": [
+        "char"
+      ],
+      "passthrough": true
+    },
+    "0x004c9b8f": {
+      "name": "FUN_004c9b8f",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x004c9ba7": {
+      "name": "FUN_004c9ba7",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x004c9b36": {
+      "name": "FUN_004c9b36",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0056176f": {
+      "name": "CTicketWindow_guess::UpdateGuess_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x004c9b77": {
+      "name": "FUN_004c9b77",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x005dfa00": {
+      "name": "StringTable::GetString_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "@message_text"
+    },
+    "0x004982c6": {
+      "name": "CEverQuestView_guess::Show_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ]
+    },
+    "0x005dce30": {
+      "name": "XmlNode_guess::XmlNode_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x005de910": {
+      "name": "XmlNode_guess::Parse_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005dc9a0": {
+      "name": "XmlNode_guess::GetChild_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": [
+        "@hierarchy",
+        "@category",
+        "@subcategory"
+      ]
+    },
+    "0x005dd9f0": {
+      "name": "XmlNode_guess::GetValue_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": [
+        "@false_text",
+        "@false_text",
+        "@category_id",
+        "@category_name",
+        "@false_text",
+        "@false_text",
+        "@subcategory_id",
+        "@subcategory_name"
+      ]
+    },
+    "0x0060e3a3": {
+      "name": "atoi",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": [
+        41,
+        42
+      ]
+    },
+    "0x005dca80": {
+      "name": "XmlNode_guess::GetNext_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": [
+        0,
+        0
+      ]
+    },
+    "0x005632fb": {
+      "name": "CTicketWindow_guess::OpenCategory_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004c9c05": {
+      "name": "FUN_004c9c05",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0056115a": {
+      "name": "CTicketWindow_guess::SetLanguage_guess",
+      "conv": "thiscall",
+      "args": [
+        "char"
+      ]
+    },
+    "0x00562710": {
+      "name": "CTicketWindow_guess::Forward_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x0056150d": {
+      "name": "CTicketWindow_guess::Prepare_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00563e25": {
+      "name": "CTicketWindow_guess::ShowTicketThunk_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x00562fed": {
+      "name": "CTicketWindow_guess::ForwardLarge_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x005631f4": {
+      "name": "CTicketWindow_guess::ForwardC968_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x005dc920": {
+      "name": "RecordBase_guess::~RecordBase_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": "@heap_work"
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "unknown_low",
+      "args": [
+        0,
+        15115,
+        "@safe_buffer",
+        0
+      ]
+    },
+    {
+      "name": "clear_requests",
+      "args": [
+        0,
+        15116,
+        "@safe_buffer",
+        0
+      ]
+    },
+    {
+      "name": "unhandled_3b0d",
+      "args": [
+        0,
+        15117,
+        "@safe_buffer",
+        0
+      ]
+    },
+    {
+      "name": "update_f40",
+      "args": [
+        0,
+        3904,
+        "@request",
+        0
+      ]
+    },
+    {
+      "name": "update_f40_without_manager",
+      "args": [
+        0,
+        3904,
+        "@request",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x009928a8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "clear_second_flag",
+      "args": [
+        0,
+        5413,
+        "@safe_buffer",
+        0
+      ]
+    },
+    {
+      "name": "reset_and_forward",
+      "args": [
+        0,
+        6604,
+        "@safe_buffer",
+        0
+      ]
+    },
+    {
+      "name": "update_strings",
+      "args": [
+        0,
+        8727,
+        "@string_update",
+        0
+      ]
+    },
+    {
+      "name": "request_index_minus_one",
+      "args": [
+        0,
+        14355,
+        "@request",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x8",
+          "u32": 4294967295
+        }
+      ]
+    },
+    {
+      "name": "request_index_zero",
+      "args": [
+        0,
+        14355,
+        "@request",
+        0
+      ]
+    },
+    {
+      "name": "request_index_nine",
+      "args": [
+        0,
+        14355,
+        "@request",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x8",
+          "u32": 9
+        }
+      ]
+    },
+    {
+      "name": "request_index_ten",
+      "args": [
+        0,
+        14355,
+        "@request",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x8",
+          "u32": 10
+        }
+      ]
+    },
+    {
+      "name": "language_update",
+      "args": [
+        0,
+        16141,
+        "@request",
+        0
+      ]
+    },
+    {
+      "name": "load_categories",
+      "args": [
+        0,
+        19026,
+        "@xml_request",
+        0
+      ]
+    },
+    {
+      "name": "invalid_category",
+      "args": [
+        0,
+        19026,
+        "@xml_request",
+        0
+      ],
+      "callees": {
+        "0x005dd9f0": {
+          "name": "XmlNode_guess::GetValue_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            "@true_text"
+          ]
+        },
+        "0x005dca80": {
+          "name": "XmlNode_guess::GetNext_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "bug_type_category",
+      "args": [
+        0,
+        19026,
+        "@xml_request",
+        0
+      ],
+      "callees": {
+        "0x005dd9f0": {
+          "name": "XmlNode_guess::GetValue_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            "@false_text",
+            "@true_text"
+          ]
+        },
+        "0x005dca80": {
+          "name": "XmlNode_guess::GetNext_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "non_element_category",
+      "args": [
+        0,
+        19026,
+        "@xml_request",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@category",
+          "offset": "0x10",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x005dca80": {
+          "name": "XmlNode_guess::GetNext_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "non_element_subcategory",
+      "args": [
+        0,
+        19026,
+        "@xml_request",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@subcategory",
+          "offset": "0x10",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "repeat_category_and_subcategory",
+      "args": [
+        0,
+        19026,
+        "@xml_request",
+        0
+      ],
+      "callees": {
+        "0x005dc9a0": {
+          "name": "XmlNode_guess::GetChild_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            "@hierarchy",
+            "@category",
+            "@subcategory",
+            0
+          ]
+        },
+        "0x005dca80": {
+          "name": "XmlNode_guess::GetNext_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            "@subcategory",
+            0,
+            "@category",
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "message_category_error",
+      "args": [
+        0,
+        24337,
+        "@safe_buffer",
+        0
+      ]
+    },
+    {
+      "name": "description_update",
+      "args": [
+        0,
+        28329,
+        "@description_update",
+        0
+      ]
+    },
+    {
+      "name": "empty_list_update",
+      "args": [
+        0,
+        28927,
+        "@list_update",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@list_update",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "populated_list_update",
+      "args": [
+        0,
+        28927,
+        "@list_update",
+        0
+      ]
+    },
+    {
+      "name": "unknown_high",
+      "args": [
+        0,
+        65535,
+        "@safe_buffer",
+        0
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5020759,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          0
+        ]
+      },
+      {
+        "choices": [
+          3904,
+          5413,
+          6604,
+          8727,
+          14355,
+          16141,
+          19026,
+          24337,
+          28329,
+          28927,
+          65535
+        ]
+      },
+      {
+        "choices": [
+          "@safe_buffer"
+        ]
+      },
+      {
+        "choices": [
+          0
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@safe_buffer",
+        "offset": "0x0",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@safe_buffer",
+        "offset": "0x8",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          9,
+          10
+        ]
+      }
+    ]
+  },
+  "_survivors": "L895: code 0x3b0d reaches the same unmatched-opcode return on either side of the outer bound, so changing the bound has no observable effect."
+}

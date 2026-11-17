@@ -1,0 +1,73 @@
+{
+  "function": "SlotOwner_guess::BuildCircle_guess",
+  "original": "0x004c8079",
+  "sources": ["src/EverQuest/tu_090_TargetIndicator.cpp"],
+  "conv": "thiscall",
+  "this": "@slotowner",
+  "args": [
+    {"name": "resource", "type": "ptr"},
+    {"name": "center", "type": "ptr"},
+    {"name": "radius", "type": "float"},
+    {"name": "count", "type": "u32"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "slotowner": {"size": "0x4", "fill": "zero"},
+    "resource": {"size": "0x4", "fill": "zero", "init": [{"offset": "0", "u32": "@resource_vtbl"}]},
+    "resource_vtbl": {"size": "0x24", "fill": "zero", "init": [{"offset": "0x20", "u32": "@fn_get_sink"}]},
+    "fn_get_sink": {"size": "0x4", "fill": "zero"},
+    "center": {"size": "0x8", "fill": "zero"},
+    "sink": {"size": "0x4", "fill": "zero", "init": [{"offset": "0", "u32": "@sink_vtbl"}]},
+    "sink_vtbl": {"size": "0x18", "fill": "zero", "init": [{"offset": "0x14", "u32": "@fn_add"}]},
+    "fn_add": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00647588", "from_image": "0x00647588", "image_size": 8},
+    {"addr": "0x0064baf8", "from_image": "0x0064baf8", "image_size": 8},
+    {"addr": "0x0064baf0", "from_image": "0x0064baf0", "image_size": 8}
+  ],
+  "callees": {
+    "0x0060f784": {"name": "Cos_guess", "conv": "cdecl", "args": ["double"], "ret_float": 0.25},
+    "0x0060f6d4": {"name": "Sin_guess", "conv": "cdecl", "args": ["double"], "ret_float": -0.5},
+    "@fn_get_sink": {"name": "GetSink", "conv": "thiscall", "args": [], "ret": "@sink"},
+    "@fn_add": {"name": "Add", "conv": "thiscall", "args": ["mem:12"]}
+  },
+  "cases": [
+    {
+      "name": "zero count and radius",
+      "args": ["@resource", "@center", 0.0, 0],
+      "memory": [{"addr": "@center", "f32": 5.0}, {"addr": "@center", "offset": "4", "f32": -7.0}]
+    },
+    {
+      "name": "one segment",
+      "args": ["@resource", "@center", 1.5, 1],
+      "memory": [{"addr": "@center", "f32": 3.0}, {"addr": "@center", "offset": "4", "f32": -2.0}]
+    },
+    {
+      "name": "negative radius and multiple segments",
+      "args": ["@resource", "@center", -2.0, 3],
+      "memory": [{"addr": "@center", "f32": -4.0}, {"addr": "@center", "offset": "4", "f32": 6.0}]
+    },
+    {
+      "name": "zero radius and eight segments",
+      "args": ["@resource", "@center", 0.0, 8],
+      "memory": [{"addr": "@center", "f32": 0.25}, {"addr": "@center", "offset": "4", "f32": -0.5}]
+    }
+  ],
+  "fuzz": {
+    "seed": 5013625,
+    "count": 100,
+    "args": [
+      {"choices": ["@resource"]},
+      {"choices": ["@center"]},
+      {"range": [-10.0, 10.0]},
+      {"choices": [0, 1, 2, 3, 5, 8]}
+    ],
+    "memory": [{"addr": "@center", "type": "float", "count": 2, "range": [-100.0, 100.0]}]
+  },
+  "coverage_ok": {
+    "004C8096-004C809C": "requires count >= 2^31 and over 2^31 loop iterations before return",
+    "004C80B4-004C80BA": "requires i >= 2^31, after at least 2^31 loop iterations"
+  },
+  "_survivors": "L762: deleting the zero store is invisible because emulator stack memory starts zeroed; L762: changing the index to 3 writes beyond the 12 bytes observed by Add"
+}

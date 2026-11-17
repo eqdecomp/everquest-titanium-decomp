@@ -1,0 +1,145 @@
+{
+  "function": "QueryOwner_guess::HasSelection_guess",
+  "original": "0x005024b7",
+  "sources": [
+    "src/EverQuest/tu_157_FileSelectionWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@queryowner",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "queryowner": {
+      "size": "0x184",
+      "fill": "random",
+      "init": [
+        {"offset": "0x164", "u32": "@provider"},
+        {"offset": "0x180", "u32": "@counted"}
+      ]
+    },
+    "provider": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "counted": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {"offset": "0x8", "u32": 0}
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0047c3af": {
+      "name": "TemporaryResult_guess::TemporaryResult_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "keep"
+    },
+    "0x0059bb50": {
+      "name": "QueryProvider_guess::Read_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "2a000000"}]
+    },
+    "0x00406e7e": {
+      "name": "TemporaryResult_guess::~TemporaryResult_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "keep"
+    }
+  },
+  "cases": [
+    {
+      "name": "count 5 returns 1 without reading",
+      "args": [],
+      "memory": [{"addr": "@counted", "offset": "0x8", "u32": 5}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "count 1 returns 1",
+      "args": [],
+      "memory": [{"addr": "@counted", "offset": "0x8", "u32": 1}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "count 0 with provider reads 42",
+      "args": [],
+      "memory": [{"addr": "@counted", "offset": "0x8", "u32": 0}],
+      "expect": {"ret": 42}
+    },
+    {
+      "name": "count -3 with provider reads 7",
+      "args": [],
+      "memory": [{"addr": "@counted", "offset": "0x8", "u32": "0xfffffffd"}],
+      "callees": {
+        "0x0059bb50": {"name": "QueryProvider_guess::Read_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+          "writes": [{"arg": 0, "offset": 0, "hex": "07000000"}]}
+      },
+      "expect": {"ret": 7}
+    },
+    {
+      "name": "counted null, provider reads 99",
+      "args": [],
+      "memory": [{"addr": "@queryowner", "offset": "0x180", "u32": 0}],
+      "callees": {
+        "0x0059bb50": {"name": "QueryProvider_guess::Read_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+          "writes": [{"arg": 0, "offset": 0, "hex": "63000000"}]}
+      },
+      "expect": {"ret": 99}
+    },
+    {
+      "name": "counted null, provider null returns 0",
+      "args": [],
+      "memory": [{"addr": "@queryowner", "offset": "0x180", "u32": 0},
+                 {"addr": "@queryowner", "offset": "0x164", "u32": 0}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "count 0, provider null returns 0",
+      "args": [],
+      "memory": [{"addr": "@counted", "offset": "0x8", "u32": 0},
+                 {"addr": "@queryowner", "offset": "0x164", "u32": 0}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "count 9, provider null returns 1",
+      "args": [],
+      "memory": [{"addr": "@counted", "offset": "0x8", "u32": 9},
+                 {"addr": "@queryowner", "offset": "0x164", "u32": 0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "count 0, provider reads -1",
+      "args": [],
+      "memory": [{"addr": "@counted", "offset": "0x8", "u32": 0}],
+      "callees": {
+        "0x0059bb50": {"name": "QueryProvider_guess::Read_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+          "writes": [{"arg": 0, "offset": 0, "hex": "ffffffff"}]}
+      },
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "count 0, provider reads 0",
+      "args": [],
+      "memory": [{"addr": "@counted", "offset": "0x8", "u32": 0}],
+      "callees": {
+        "0x0059bb50": {"name": "QueryProvider_guess::Read_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+          "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]}
+      },
+      "expect": {"ret": 0}
+    }
+  ],
+  "fuzz": {
+    "seed": 5252279,
+    "count": 150,
+    "args": [],
+    "memory": [
+      {"addr": "@counted", "offset": "0x8", "type": "int", "range": [-4, 10]},
+      {"addr": "@queryowner", "offset": "0x164", "type": "u32", "choices": ["@provider", 0]},
+      {"addr": "@queryowner", "offset": "0x180", "type": "u32", "choices": ["@counted", 0]}
+    ]
+  }
+}

@@ -1,0 +1,504 @@
+{
+  "function": "BackupMilesSoundSystemFiles_guess",
+  "original": "0x00494319",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "mss_a": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "mss_b": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "mss_end": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@mss_a",
+      "from_image": "0x00649414",
+      "image_size": 12
+    },
+    {
+      "addr": "@mss_b",
+      "from_image": "0x00649404",
+      "image_size": 13
+    },
+    {
+      "addr": "0x0078E00C",
+      "u32": "@mss_a"
+    },
+    {
+      "addr": "0x0078E010",
+      "u32": "@mss_b"
+    },
+    {
+      "addr": "0x0078E014",
+      "u32": "@mss_end"
+    }
+  ],
+  "callees": {
+    "0x0062444b": {
+      "name": "FUN_0062444b",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x00574110": {
+      "name": "FUN_00574110",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "kernel32.dll!FindFirstFileA": {
+      "name": "FindFirstFileA",
+      "conv": "stdcall",
+      "args": [
+        "cstr",
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "kernel32.dll!FileTimeToSystemTime": {
+      "name": "FileTimeToSystemTime",
+      "conv": "stdcall",
+      "args": [
+        "ignore",
+        "ignore"
+      ],
+      "ret": 1
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "kernel32.dll!MoveFileA": {
+      "name": "MoveFileA",
+      "conv": "stdcall",
+      "args": [
+        "cstr",
+        "ignore"
+      ],
+      "ret": 1
+    },
+    "0x00612638": {
+      "name": "FUN_00612638",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 1
+    },
+    "kernel32.dll!FindNextFileA": {
+      "name": "FindNextFileA",
+      "conv": "stdcall",
+      "args": [
+        "u32",
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "kernel32.dll!FindClose": {
+      "name": "FindClose",
+      "conv": "stdcall",
+      "args": [
+        "u32"
+      ],
+      "ret": 1
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "no_obsolete_files_name_loop_runs",
+      "args": []
+    },
+    {
+      "name": "empty_mss_list",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x0078E00C",
+          "u32": "@mss_end"
+        }
+      ]
+    },
+    {
+      "name": "year_2001_moved",
+      "args": [],
+      "callees": {
+        "kernel32.dll!FindFirstFileA": {
+          "name": "FindFirstFileA",
+          "conv": "stdcall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": 4096,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 44,
+              "hex": "6f6c642e6d336400"
+            }
+          ]
+        },
+        "kernel32.dll!FileTimeToSystemTime": {
+          "name": "FileTimeToSystemTime",
+          "conv": "stdcall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "d107"
+            },
+            {
+              "arg": 1,
+              "offset": 2,
+              "hex": "0100"
+            }
+          ]
+        },
+        "kernel32.dll!FindNextFileA": {
+          "name": "FindNextFileA",
+          "conv": "stdcall",
+          "args": [
+            "u32",
+            "ignore"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "year_2001_move_fails_calls_delete",
+      "args": [],
+      "callees": {
+        "kernel32.dll!FindFirstFileA": {
+          "name": "FindFirstFileA",
+          "conv": "stdcall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": 4096,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 44,
+              "hex": "6f6c642e6d336400"
+            }
+          ]
+        },
+        "kernel32.dll!FileTimeToSystemTime": {
+          "name": "FileTimeToSystemTime",
+          "conv": "stdcall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "d107"
+            },
+            {
+              "arg": 1,
+              "offset": 2,
+              "hex": "0100"
+            }
+          ]
+        },
+        "kernel32.dll!MoveFileA": {
+          "name": "MoveFileA",
+          "conv": "stdcall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": [
+            0,
+            1,
+            1
+          ]
+        },
+        "kernel32.dll!FindNextFileA": {
+          "name": "FindNextFileA",
+          "conv": "stdcall",
+          "args": [
+            "u32",
+            "ignore"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "year_2002_june_is_old",
+      "args": [],
+      "callees": {
+        "kernel32.dll!FindFirstFileA": {
+          "name": "FindFirstFileA",
+          "conv": "stdcall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": 4096,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 44,
+              "hex": "6f6c642e6d336400"
+            }
+          ]
+        },
+        "kernel32.dll!FileTimeToSystemTime": {
+          "name": "FileTimeToSystemTime",
+          "conv": "stdcall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "d207"
+            },
+            {
+              "arg": 1,
+              "offset": 2,
+              "hex": "0600"
+            }
+          ]
+        },
+        "kernel32.dll!FindNextFileA": {
+          "name": "FindNextFileA",
+          "conv": "stdcall",
+          "args": [
+            "u32",
+            "ignore"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "year_2002_july_is_kept",
+      "args": [],
+      "callees": {
+        "kernel32.dll!FindFirstFileA": {
+          "name": "FindFirstFileA",
+          "conv": "stdcall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": 4096,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 44,
+              "hex": "6f6c642e6d336400"
+            }
+          ]
+        },
+        "kernel32.dll!FileTimeToSystemTime": {
+          "name": "FileTimeToSystemTime",
+          "conv": "stdcall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "d207"
+            },
+            {
+              "arg": 1,
+              "offset": 2,
+              "hex": "0700"
+            }
+          ]
+        },
+        "kernel32.dll!FindNextFileA": {
+          "name": "FindNextFileA",
+          "conv": "stdcall",
+          "args": [
+            "u32",
+            "ignore"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "year_2010_is_kept",
+      "args": [],
+      "callees": {
+        "kernel32.dll!FindFirstFileA": {
+          "name": "FindFirstFileA",
+          "conv": "stdcall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": 4096,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 44,
+              "hex": "6f6c642e6d336400"
+            }
+          ]
+        },
+        "kernel32.dll!FileTimeToSystemTime": {
+          "name": "FileTimeToSystemTime",
+          "conv": "stdcall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "da07"
+            },
+            {
+              "arg": 1,
+              "offset": 2,
+              "hex": "0300"
+            }
+          ]
+        },
+        "kernel32.dll!FindNextFileA": {
+          "name": "FindNextFileA",
+          "conv": "stdcall",
+          "args": [
+            "u32",
+            "ignore"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "two_files_old_then_new",
+      "args": [],
+      "callees": {
+        "kernel32.dll!FindFirstFileA": {
+          "name": "FindFirstFileA",
+          "conv": "stdcall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": 4096,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 44,
+              "hex": "6f6c642e6d336400"
+            }
+          ]
+        },
+        "kernel32.dll!FileTimeToSystemTime": {
+          "name": "FileTimeToSystemTime",
+          "conv": "stdcall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "d107",
+              "call": 0
+            },
+            {
+              "arg": 1,
+              "offset": 2,
+              "hex": "0100",
+              "call": 0
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "da07",
+              "call": 1
+            },
+            {
+              "arg": 1,
+              "offset": 2,
+              "hex": "0300",
+              "call": 1
+            }
+          ]
+        },
+        "kernel32.dll!FindNextFileA": {
+          "name": "FindNextFileA",
+          "conv": "stdcall",
+          "args": [
+            "u32",
+            "ignore"
+          ],
+          "ret": [
+            1,
+            0
+          ],
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 44,
+              "hex": "6e65772e6d336400",
+              "call": 0
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4801305,
+    "count": 20,
+    "args": [],
+    "memory": []
+  }
+}

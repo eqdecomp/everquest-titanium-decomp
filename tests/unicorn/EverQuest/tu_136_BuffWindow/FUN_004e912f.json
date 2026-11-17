@@ -1,0 +1,183 @@
+{
+  "function": "CBuffWindowView_guess::RefreshBuffDisplay_guess",
+  "original": "0x004e912f",
+  "sources": ["src/EverQuest/tu_136_BuffWindow.cpp"],
+  "conv": "thiscall",
+  "this": "@wnd",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "wnd": {"size": "0x24c", "fill": "zero"},
+    "outer": {"size": "0xc284", "fill": "zero"},
+    "vbtable": {"size": "0x8", "fill": "zero"},
+    "clock": {"size": "0x14c", "fill": "zero"},
+    "item_manager": {"size": "0x4", "fill": "zero"},
+    "entry": {"size": "0xc", "fill": "zero"},
+    "item": {"size": "0x24c", "fill": "zero"},
+    "charinfo": {"size": "0x119d", "fill": "zero"},
+    "child": {
+      "size": "0x24c",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@vtbl"}]
+    },
+    "child2": {
+      "size": "0x24c",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@vtbl"}]
+    },
+    "rep": {"size": "0x40", "fill": "zero"},
+    "vtbl": {
+      "size": "0xc4",
+      "fill": "zero",
+      "init": [{"offset": "0xc0", "u32": "@fn_visible"}]
+    },
+    "fn_visible": {"size": "0x1", "fill": "zero"},
+    "gem": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4},
+    {"addr": "0x00905d00", "u32": "@outer"},
+    {"addr": "0x00905d24", "u32": "@clock"},
+    {"addr": "0x00985cc8", "u32": "@item_manager"},
+    {"addr": "0x0063f53f", "from_image": "0x0063f53f", "image_size": 1},
+    {"addr": "0x0063f9fc", "from_image": "0x0063f9fc", "image_size": 3},
+    {"addr": "@outer", "offset": "0x8", "u32": "@vbtable"},
+    {"addr": "@vbtable", "offset": "0x4", "u32": "0xfffffff8"},
+    {"addr": "@clock", "offset": "0x148", "u32": 1234},
+    {"addr": "@wnd", "offset": "0xb0", "u8": 100},
+    {"addr": "@wnd", "offset": "0x240", "u32": 0},
+    {"addr": "@wnd", "offset": "0x244", "u32": 0},
+    {"addr": "@wnd", "offset": "0x248", "u32": 1},
+    {"addr": "@wnd", "offset": "0x1cc", "u32": "@child"},
+    {"addr": "@entry", "offset": "0x0", "u8": 1},
+    {"addr": "@entry", "offset": "0x1", "u8": 2},
+    {"addr": "@entry", "offset": "0x4", "u32": 1001},
+    {"addr": "@entry", "offset": "0x8", "u32": 5},
+    {"addr": "@item", "offset": "0x17d", "u8": 4},
+    {"addr": "@item", "offset": "0x208", "cstr": "Test Item"},
+    {"addr": "@item", "offset": "0x248", "u32": 55},
+    {"addr": "@charinfo", "offset": "0x119c", "u8": 6},
+    {"addr": "@child", "offset": "0x5c", "u8": 1},
+    {"addr": "@child", "offset": "0x16c", "u32": "@gem"},
+    {"addr": "@child2", "offset": "0x5c", "u8": 1},
+    {"addr": "@child2", "offset": "0x16c", "u32": "@gem"}
+  ],
+  "callees": {
+    "0x0040e7ac": {"name": "get_entry", "conv": "thiscall", "args": ["int"], "ret": "@entry"},
+    "0x0044d0d0": {"name": "is_valid_item", "conv": "cdecl", "args": ["int"], "ret": 1},
+    "0x0040cbd6": {"name": "lookup_item", "conv": "thiscall", "args": ["int"], "ret": "@item"},
+    "0x004e8ba8": {"name": "update_gem", "conv": "thiscall", "args": ["ptr", "int", "int"]},
+    "0x00571e00": {"name": "cxstr_ctor", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "0x00571f70": {"name": "cxstr_assign", "conv": "thiscall", "args": ["mem:4"], "passthrough": true},
+    "0x00571d00": {"name": "cxstr_free_rep", "conv": "thiscall", "args": ["ptr"], "passthrough": true},
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr"],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "5800"}]
+    },
+    "0x005ec220": {"name": "get_charinfo", "conv": "thiscall", "args": [], "ret": "@charinfo"},
+    "0x0040db0b": {"name": "can_use", "conv": "thiscall", "args": ["ptr", "char"], "ret": 1},
+    "0x0040ebc3": {"name": "compare_duration", "conv": "thiscall", "args": ["ptr", "char", "int"], "ret": 3},
+    "0x005b1ab0": {"name": "gem_update", "conv": "thiscall", "args": ["int"]},
+    "kernel32.dll!HeapAlloc": {"name": "heap_alloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@rep"},
+    "kernel32.dll!HeapFree": {"name": "heap_free", "conv": "stdcall", "args": ["ptr", "u32", "ptr"], "ret": 1},
+    "@fn_visible": {"name": "show_child", "conv": "thiscall", "args": ["int", "int"]}
+  },
+  "rewrite_aliases": {"_sprintf": "0x0060d5eb"},
+  "cases": [
+    {"name": "null_outer", "args": [], "memory": [{"addr": "0x00905d00", "u32": 0}]},
+    {"name": "empty_range", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x240", "u32": 1},
+      {"addr": "@wnd", "offset": "0x244", "u32": 0}
+    ]},
+    {"name": "over_count", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x248", "u32": 0}
+    ]},
+    {"name": "null_child", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x1cc", "u32": 0}
+    ]},
+    {"name": "empty_entry", "args": [], "memory": [
+      {"addr": "@entry", "offset": "0x0", "u8": 0}
+    ]},
+    {"name": "invalid_item", "args": [], "callees": {
+      "0x0044d0d0": {"name": "is_valid_item", "conv": "cdecl", "args": ["int"], "ret": 0}
+    }},
+    {"name": "missing_item", "args": [], "callees": {
+      "0x0040cbd6": {"name": "lookup_item", "conv": "thiscall", "args": ["int"], "ret": 0}
+    }},
+    {"name": "negative_duration_hidden", "args": [], "memory": [
+      {"addr": "@entry", "offset": "0x8", "u32": 4294967294},
+      {"addr": "@child", "offset": "0x5c", "u8": 0}
+    ]},
+    {"name": "formatted_duration", "args": [], "memory": [
+      {"addr": "@entry", "offset": "0x8", "u32": 13},
+      {"addr": "@child", "offset": "0x5c", "u8": 1}
+    ]},
+    {"name": "duration_minus_one", "args": [], "memory": [
+      {"addr": "@entry", "offset": "0x8", "u32": 4294967295},
+      {"addr": "@child", "offset": "0x5c", "u8": 1}
+    ]},
+    {"name": "short_not_usable", "args": [], "memory": [
+      {"addr": "@entry", "offset": "0x8", "u32": 3},
+      {"addr": "@child", "offset": "0x5c", "u8": 1}
+    ], "callees": {
+      "0x0040db0b": {"name": "can_use", "conv": "thiscall", "args": ["ptr", "char"], "ret": 0}
+    }},
+    {"name": "short_usable_above_threshold", "args": [], "memory": [
+      {"addr": "@entry", "offset": "0x8", "u32": 3},
+      {"addr": "@child", "offset": "0x5c", "u8": 1}
+    ], "callees": {
+      "0x0040ebc3": {"name": "compare_duration", "conv": "thiscall", "args": ["ptr", "char", "int"], "ret": 4}
+    }},
+    {"name": "short_usable_below_threshold", "args": [], "memory": [
+      {"addr": "@entry", "offset": "0x8", "u32": 0},
+      {"addr": "@child", "offset": "0x5c", "u8": 1}
+    ]},
+    {"name": "negative_icon", "args": [], "memory": [
+      {"addr": "@item", "offset": "0x248", "u32": 4294967295},
+      {"addr": "@entry", "offset": "0x8", "u32": 4},
+      {"addr": "@child", "offset": "0x5c", "u8": 1}
+    ]},
+    {"name": "loop_two_slots", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x244", "u32": 1},
+      {"addr": "@wnd", "offset": "0x248", "u32": 2},
+      {"addr": "@wnd", "offset": "0x1cc", "u32": 0},
+      {"addr": "@wnd", "offset": "0x1d0", "u32": "@child2"},
+      {"addr": "@entry", "offset": "0x8", "u32": 5}
+    ]},
+    {"name": "nonzero_base_index", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x240", "u32": 1},
+      {"addr": "@wnd", "offset": "0x244", "u32": 1},
+      {"addr": "@wnd", "offset": "0x248", "u32": 1},
+      {"addr": "@wnd", "offset": "0x1cc", "u32": "@child"},
+      {"addr": "@child", "offset": "0x5c", "u8": 0},
+      {"addr": "@entry", "offset": "0x8", "u32": 5}
+    ]}
+  ],
+  "fuzz": {
+    "seed": 5148975,
+    "count": 80,
+    "args": [],
+    "memory": [
+      {"addr": "0x00905d00", "type": "ptr", "choices": [0, "@outer"]},
+      {"addr": "@clock", "offset": "0x148", "type": "u32", "choices": [0, 9, 10, 999, 1000, 1001, 1234, 1999]},
+      {"addr": "@wnd", "offset": "0xb0", "type": "u8", "choices": [0, 1, 50, 100, 255]},
+      {"addr": "@wnd", "offset": "0x240", "type": "int", "choices": [0, 1]},
+      {"addr": "@wnd", "offset": "0x244", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@wnd", "offset": "0x248", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@wnd", "offset": "0x1cc", "type": "ptr", "choices": [0, "@child"]},
+      {"addr": "@entry", "offset": "0x0", "type": "u8", "choices": [0, 1]},
+      {"addr": "@entry", "offset": "0x1", "type": "u8", "choices": [0, 2, 4]},
+      {"addr": "@entry", "offset": "0x4", "type": "int", "choices": [1, 1001]},
+      {"addr": "@entry", "offset": "0x8", "type": "int", "choices": [-1, 0, 3, 4, 20]},
+      {"addr": "@item", "offset": "0x17d", "type": "u8", "choices": [0, 4, 255]},
+      {"addr": "@item", "offset": "0x248", "type": "int", "choices": [-1, 0, 55]},
+      {"addr": "@charinfo", "offset": "0x119c", "type": "u8", "choices": [0, 6, 255]},
+      {"addr": "@child", "offset": "0x5c", "type": "u8", "choices": [0, 1]}
+    ]
+  },
+  "_survivors": "L465: icon == 0 has the same clamped value under < 0 and <= 0; negative_icon covers values below zero and the standard cases cover positive values."
+}

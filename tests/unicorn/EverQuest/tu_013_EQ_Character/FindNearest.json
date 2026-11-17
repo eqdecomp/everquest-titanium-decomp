@@ -1,0 +1,942 @@
+{
+  "function": "PlayerSearchOwner_guess::FindClosest_guess",
+  "original": "0x00417669",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@playersearchowner",
+  "args": [
+    {
+      "name": "mode_guess",
+      "type": "int"
+    },
+    {
+      "name": "first_id_guess",
+      "type": "u32"
+    },
+    {
+      "name": "second_id_guess",
+      "type": "u32"
+    },
+    {
+      "name": "third_id_guess",
+      "type": "u32"
+    },
+    {
+      "name": "fourth_id_guess",
+      "type": "u32"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "playersearchowner": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@player"
+        }
+      ]
+    },
+    "player": {
+      "size": "0x274",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x30",
+          "f32": 1.0
+        },
+        {
+          "offset": "0x34",
+          "f32": 2.0
+        },
+        {
+          "offset": "0x38",
+          "f32": 3.0
+        },
+        {
+          "offset": "0x258",
+          "u32": 500
+        }
+      ]
+    },
+    "s0": {
+      "size": "0x274",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x214",
+          "u32": "@s1"
+        },
+        {
+          "offset": "0x244",
+          "u8": 2
+        },
+        {
+          "offset": "0x30",
+          "f32": 10.0
+        },
+        {
+          "offset": "0x34",
+          "f32": 11.0
+        },
+        {
+          "offset": "0x38",
+          "f32": 12.0
+        }
+      ]
+    },
+    "s1": {
+      "size": "0x274",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x214",
+          "u32": "@s2"
+        },
+        {
+          "offset": "0x244",
+          "u8": 3
+        },
+        {
+          "offset": "0x30",
+          "f32": 20.0
+        },
+        {
+          "offset": "0x34",
+          "f32": 21.0
+        },
+        {
+          "offset": "0x38",
+          "f32": 22.0
+        }
+      ]
+    },
+    "s2": {
+      "size": "0x274",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x214",
+          "u32": "@s3"
+        },
+        {
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "offset": "0x1a8",
+          "u32": "@actor2"
+        },
+        {
+          "offset": "0x270",
+          "u32": 10
+        },
+        {
+          "offset": "0x30",
+          "f32": 30.0
+        },
+        {
+          "offset": "0x34",
+          "f32": 31.0
+        },
+        {
+          "offset": "0x38",
+          "f32": 32.0
+        }
+      ]
+    },
+    "s3": {
+      "size": "0x274",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x214",
+          "u32": "@s4"
+        },
+        {
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "offset": "0x1a8",
+          "u32": "@actor3"
+        },
+        {
+          "offset": "0x25c",
+          "u32": 100
+        },
+        {
+          "offset": "0x270",
+          "u32": 20
+        }
+      ]
+    },
+    "s4": {
+      "size": "0x274",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x214",
+          "u32": "@s5"
+        },
+        {
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "offset": "0x1a8",
+          "u32": "@actor4"
+        },
+        {
+          "offset": "0x25c",
+          "u32": 500
+        },
+        {
+          "offset": "0x270",
+          "u32": 30
+        }
+      ]
+    },
+    "s5": {
+      "size": "0x274",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x214",
+          "u32": "@s6"
+        },
+        {
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "offset": "0x1a8",
+          "u32": "@actor5"
+        },
+        {
+          "offset": "0x25c",
+          "u32": 101
+        },
+        {
+          "offset": "0x270",
+          "u32": 40
+        },
+        {
+          "offset": "0x30",
+          "f32": 40.0
+        },
+        {
+          "offset": "0x34",
+          "f32": 41.0
+        },
+        {
+          "offset": "0x38",
+          "f32": 42.0
+        }
+      ]
+    },
+    "s6": {
+      "size": "0x274",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x214",
+          "u32": "@s7"
+        },
+        {
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "offset": "0x270",
+          "u32": 10
+        }
+      ]
+    },
+    "s7": {
+      "size": "0x274",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x214",
+          "u32": "@s8"
+        },
+        {
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "offset": "0x1a8",
+          "u32": "@actor7"
+        },
+        {
+          "offset": "0x270",
+          "u32": 20
+        }
+      ]
+    },
+    "s8": {
+      "size": "0x274",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "offset": "0x1a8",
+          "u32": "@actor8"
+        },
+        {
+          "offset": "0x270",
+          "u32": 99
+        }
+      ]
+    },
+    "actor2": {
+      "size": "0x164",
+      "fill": "zero"
+    },
+    "actor3": {
+      "size": "0x164",
+      "fill": "zero"
+    },
+    "actor4": {
+      "size": "0x164",
+      "fill": "zero"
+    },
+    "actor5": {
+      "size": "0x164",
+      "fill": "zero"
+    },
+    "actor7": {
+      "size": "0x164",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x160",
+          "u32": 1
+        }
+      ]
+    },
+    "actor8": {
+      "size": "0x164",
+      "fill": "zero"
+    },
+    "master_bad": {
+      "size": "0x274",
+      "fill": "zero"
+    },
+    "master_good": {
+      "size": "0x274",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x244",
+          "u8": 2
+        }
+      ]
+    },
+    "distance": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905CC4",
+      "u32": "@s0"
+    },
+    {
+      "addr": "0x00905D24",
+      "u32": "@distance"
+    }
+  ],
+  "callees": {
+    "0x00439bd1": {
+      "name": "SimpleDistance_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "float",
+        "float",
+        "float",
+        "float",
+        "float",
+        "float"
+      ],
+      "ret_float": [
+        100.0
+      ]
+    },
+    "0x00401b28": {
+      "name": "FindSpawnByID_guess",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "player-null",
+      "args": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "memory": [
+        {
+          "addr": "@playersearchowner",
+          "offset": "0x8",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "mode-zero-nearest",
+      "args": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "callees": {
+        "0x00439bd1": {
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": [
+            100.0,
+            50.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "mode-zero-strict-tie",
+      "args": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "callees": {
+        "0x00439bd1": {
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": [
+            50.0,
+            50.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "mode-zero-no-distance-under-limit",
+      "args": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "callees": {
+        "0x00439bd1": {
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": [
+            10001.0,
+            10000.0
+          ]
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "mode-one-filter-and-master-state",
+      "args": [
+        1,
+        10,
+        20,
+        30,
+        40
+      ],
+      "callees": {
+        "0x00401b28": {
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            "@master_bad",
+            "@master_good"
+          ]
+        },
+        "0x00439bd1": {
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": [
+            100.0,
+            50.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "mode-one-master-not-found",
+      "args": [
+        1,
+        10,
+        20,
+        30,
+        40
+      ],
+      "memory": [
+        {
+          "addr": "0x00905CC4",
+          "u32": "@s2"
+        },
+        {
+          "addr": "@s2",
+          "offset": "0x214",
+          "u32": 0
+        },
+        {
+          "addr": "@s2",
+          "offset": "0x25c",
+          "u32": 101
+        }
+      ],
+      "callees": {
+        "0x00401b28": {
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        },
+        "0x00439bd1": {
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": [
+            12.0
+          ]
+        }
+      }
+    },
+    {
+      "name": "mode-one-self-master",
+      "args": [
+        1,
+        10,
+        20,
+        30,
+        40
+      ],
+      "memory": [
+        {
+          "addr": "0x00905CC4",
+          "u32": "@s2"
+        },
+        {
+          "addr": "@s2",
+          "offset": "0x214",
+          "u32": 0
+        },
+        {
+          "addr": "@s2",
+          "offset": "0x25c",
+          "u32": 500
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "mode-one-actor-and-body-filters",
+      "args": [
+        1,
+        10,
+        20,
+        30,
+        40
+      ],
+      "memory": [
+        {
+          "addr": "0x00905CC4",
+          "u32": "@s6"
+        },
+        {
+          "addr": "@s7",
+          "offset": "0x214",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "mode-one-bodytype-miss",
+      "args": [
+        1,
+        1,
+        2,
+        3,
+        4
+      ],
+      "memory": [
+        {
+          "addr": "0x00905CC4",
+          "u32": "@s8"
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "unsupported-mode",
+      "args": [
+        2,
+        10,
+        20,
+        30,
+        40
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "empty-list",
+      "args": [
+        1,
+        10,
+        20,
+        30,
+        40
+      ],
+      "memory": [
+        {
+          "addr": "0x00905CC4",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 417669,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "choices": [
+          10,
+          20,
+          30,
+          40,
+          99
+        ]
+      },
+      {
+        "choices": [
+          10,
+          20,
+          30,
+          40,
+          99
+        ]
+      },
+      {
+        "choices": [
+          10,
+          20,
+          30,
+          40,
+          99
+        ]
+      },
+      {
+        "choices": [
+          10,
+          20,
+          30,
+          40,
+          99
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@playersearchowner",
+        "offset": "0x8",
+        "type": "ptr",
+        "choices": [
+          "@player",
+          0
+        ]
+      },
+      {
+        "addr": "@player",
+        "offset": "0x258",
+        "type": "u32",
+        "choices": [
+          0,
+          100,
+          101,
+          500
+        ]
+      },
+      {
+        "addr": "@player",
+        "offset": "0x30",
+        "type": "float",
+        "count": 3,
+        "range": [
+          -50.0,
+          50.0
+        ]
+      },
+      {
+        "addr": "@s0",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@s1",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@s2",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@s2",
+        "offset": "0x1a8",
+        "type": "ptr",
+        "choices": [
+          "@actor2",
+          0
+        ]
+      },
+      {
+        "addr": "@actor2",
+        "offset": "0x160",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@s2",
+        "offset": "0x25c",
+        "type": "u32",
+        "choices": [
+          0,
+          101,
+          500
+        ]
+      },
+      {
+        "addr": "@s2",
+        "offset": "0x270",
+        "type": "u32",
+        "choices": [
+          10,
+          20,
+          30,
+          40,
+          99
+        ]
+      },
+      {
+        "addr": "@s3",
+        "offset": "0x1a8",
+        "type": "ptr",
+        "choices": [
+          "@actor3",
+          0
+        ]
+      },
+      {
+        "addr": "@actor3",
+        "offset": "0x160",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@s3",
+        "offset": "0x25c",
+        "type": "u32",
+        "choices": [
+          0,
+          100,
+          500
+        ]
+      },
+      {
+        "addr": "@s3",
+        "offset": "0x270",
+        "type": "u32",
+        "choices": [
+          10,
+          20,
+          30,
+          40,
+          99
+        ]
+      },
+      {
+        "addr": "@s4",
+        "offset": "0x1a8",
+        "type": "ptr",
+        "choices": [
+          "@actor4",
+          0
+        ]
+      },
+      {
+        "addr": "@s4",
+        "offset": "0x25c",
+        "type": "u32",
+        "choices": [
+          0,
+          100,
+          500
+        ]
+      },
+      {
+        "addr": "@s4",
+        "offset": "0x270",
+        "type": "u32",
+        "choices": [
+          10,
+          20,
+          30,
+          40,
+          99
+        ]
+      },
+      {
+        "addr": "@s5",
+        "offset": "0x1a8",
+        "type": "ptr",
+        "choices": [
+          "@actor5",
+          0
+        ]
+      },
+      {
+        "addr": "@s5",
+        "offset": "0x25c",
+        "type": "u32",
+        "choices": [
+          0,
+          101,
+          500
+        ]
+      },
+      {
+        "addr": "@s5",
+        "offset": "0x270",
+        "type": "u32",
+        "choices": [
+          10,
+          20,
+          30,
+          40,
+          99
+        ]
+      }
+    ]
+  }
+}

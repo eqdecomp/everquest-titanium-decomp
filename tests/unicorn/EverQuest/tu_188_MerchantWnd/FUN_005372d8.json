@@ -1,0 +1,453 @@
+{
+  "function": "CMerchantWndPriceView_guess::DisplayBuyOrSellPrice",
+  "original": "0x005372d8",
+  "sources": [
+    "src/EverQuest/tu_188_MerchantWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@fun_005372d8_owner",
+  "args": [
+    {
+      "name": "mode_guess",
+      "type": "char"
+    },
+    {
+      "name": "target_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "fun_005372d8_owner": {
+      "size": "0x2cc",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x2c4",
+          "u32": "@flag_c4"
+        },
+        {
+          "offset": "0x2c8",
+          "u32": "@flag_c8"
+        }
+      ]
+    },
+    "target": {
+      "size": "0x88",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@target_vtable"
+        }
+      ]
+    },
+    "target_vtable": {
+      "size": "0x2c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x10",
+          "u32": "@fn_slot4"
+        },
+        {
+          "offset": "0x28",
+          "u32": "@fn_slot10"
+        }
+      ]
+    },
+    "fn_slot4": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_slot10": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "result": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "flag_c4": {
+      "size": "0x5e",
+      "fill": "zero"
+    },
+    "flag_c8": {
+      "size": "0x5e",
+      "fill": "zero"
+    },
+    "player": {
+      "size": "0xc284",
+      "fill": "random"
+    },
+    "text_base": {
+      "size": "0x121",
+      "fill": "random"
+    },
+    "manager": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@player"
+    },
+    {
+      "addr": "0x00905d10",
+      "u32": "@text_base"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@manager"
+    }
+  ],
+  "callees": {
+    "@fn_slot10": {
+      "name": "Slot10_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "int"
+      ],
+      "ret": "@result"
+    },
+    "@fn_slot4": {
+      "name": "Slot04_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x004b1d79": {
+      "name": "FormatMoneyText_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 7
+    },
+    "0x004b1d1f": {
+      "name": "FUN_004b1d1f",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 8
+    },
+    "0x005dfce0": {
+      "name": "GetDuration_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        5,
+        5
+      ]
+    },
+    "0x0041a259": {
+      "name": "GetTime_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 10,
+      "ret_edx": 0
+    },
+    "0x005e1690": {
+      "name": "GetValue_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "int"
+      ],
+      "ret": [
+        20,
+        1
+      ]
+    },
+    "0x005e0620": {
+      "name": "IsReady_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x005eccc0": {
+      "name": "GetState_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005ec760": {
+      "name": "IsValid_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005e0ec0": {
+      "name": "GetTextValue_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 40
+    },
+    "0x00492ec2": {
+      "name": "GetText_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "0x12345000"
+    },
+    "0x0046da4a": {
+      "name": "FUN_0046da4a",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "ptr",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+      ]
+    },
+    "0x004982c6": {
+      "name": "Display_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "int",
+        "int"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "null_target",
+      "args": [
+        1,
+        0
+      ]
+    },
+    {
+      "name": "mode_zero_ready_and_valid",
+      "args": [
+        0,
+        "@target"
+      ]
+    },
+    {
+      "name": "mode_zero_not_ready",
+      "args": [
+        0,
+        "@target"
+      ],
+      "callees": {
+        "0x005e0620": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "mode_zero_slot_false",
+      "args": [
+        0,
+        "@target"
+      ],
+      "callees": {
+        "@fn_slot4": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "mode_zero_nonpositive_value",
+      "args": [
+        0,
+        "@target"
+      ],
+      "callees": {
+        "0x005e1690": {
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "int"
+          ],
+          "ret": [
+            20,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "mode_zero_no_state_object",
+      "args": [
+        0,
+        "@target"
+      ],
+      "memory": [
+        {
+          "addr": "@fun_005372d8_owner",
+          "offset": "0x2c8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "mode_one_elapsed_nonzero_state",
+      "args": [
+        1,
+        "@target"
+      ],
+      "callees": {
+        "0x005eccc0": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "mode_one_future_and_invalid_state",
+      "args": [
+        1,
+        "@target"
+      ],
+      "callees": {
+        "0x005dfce0": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            20,
+            20
+          ]
+        },
+        "0x0041a259": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": 10,
+          "ret_edx": 0
+        },
+        "0x005ec760": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "mode_one_equal_duration",
+      "args": [
+        1,
+        "@target"
+      ],
+      "callees": {
+        "0x005dfce0": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            10,
+            10
+          ]
+        },
+        "0x0041a259": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": 10,
+          "ret_edx": 0
+        }
+      }
+    },
+    {
+      "name": "mode_one_no_state_object",
+      "args": [
+        1,
+        "@target"
+      ],
+      "memory": [
+        {
+          "addr": "@fun_005372d8_owner",
+          "offset": "0x2c4",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "state_zero_invalid",
+      "args": [
+        1,
+        "@target"
+      ],
+      "callees": {
+        "0x005ec760": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5468888,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          -1,
+          0,
+          1
+        ]
+      },
+      {
+        "choices": [
+          "@target",
+          0
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@fun_005372d8_owner",
+        "offset": "0x2c4",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@flag_c4"
+        ]
+      },
+      {
+        "addr": "@fun_005372d8_owner",
+        "offset": "0x2c8",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@flag_c8"
+        ]
+      },
+      {
+        "addr": "@fun_005372d8_owner",
+        "offset": "0x2a4",
+        "type": "float",
+        "range": [
+          -1.0,
+          1.0
+        ]
+      }
+    ]
+  },
+  "_survivors": "L753: the entry write already sets flag_2c8.active_05d to 1, so deleting this repeated write is unobservable"
+}

@@ -1,0 +1,73 @@
+{
+  "function": "CDisplay_guess::CycleCamera_guess",
+  "original": "0x00440f63",
+  "sources": ["src/EverQuest/tu_029_Display.cpp"],
+  "size": "0xe9",
+  "conv": "thiscall",
+  "this": "@client",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "client": {"size": "0x2d70", "fill": "zero"},
+    "stat": {"size": "0xc284", "fill": "zero"},
+    "owner": {"size": "0x4", "fill": "zero"},
+    "setup0": {"size": "0x44", "fill": "zero", "init": [{"offset": "0x40", "f32": 10.0}]},
+    "setup1": {"size": "0x44", "fill": "zero", "init": [{"offset": "0x40", "f32": 11.0}]},
+    "setup2": {"size": "0x44", "fill": "zero", "init": [{"offset": "0x40", "f32": 12.0}]},
+    "setup3": {"size": "0x44", "fill": "zero", "init": [{"offset": "0x40", "f32": 13.0}]},
+    "setup4": {"size": "0x44", "fill": "zero", "init": [{"offset": "0x40", "f32": 14.0}]},
+    "setup5": {"size": "0x44", "fill": "zero", "init": [{"offset": "0x40", "f32": 15.0}]},
+    "setup6": {"size": "0x44", "fill": "zero", "init": [{"offset": "0x40", "f32": 16.0}]},
+    "setup7": {"size": "0x44", "fill": "zero", "init": [{"offset": "0x40", "f32": 17.0}]}
+  },
+  "memory": [
+    {"addr": "0x00850ccc", "u32": 0},
+    {"addr": "0x00905d00", "u32": "@stat"},
+    {"addr": "0x009254fc", "u32": "@setup0"},
+    {"addr": "0x00925500", "u32": "@setup1"},
+    {"addr": "0x00925504", "u32": "@setup2"},
+    {"addr": "0x00925508", "u32": "@setup3"},
+    {"addr": "0x0092550c", "u32": "@setup4"},
+    {"addr": "0x00925510", "u32": "@setup5"},
+    {"addr": "0x00925514", "u32": "@setup6"},
+    {"addr": "0x00925518", "u32": "@setup7"},
+    {"addr": "0x00905d24", "u32": "@client"},
+    {"addr": "0x00988df0", "u32": "@owner"},
+    {"addr": "0x008503ac", "u32": 99}
+  ],
+  "callees": {
+    "0x005ed550": {"name": "FUN_005ed550", "conv": "thiscall", "args": [], "ret": 69},
+    "0x00440f51": {"name": "FUN_00440f51", "conv": "thiscall", "args": ["int"]},
+    "0x004ae9c6": {"name": "FUN_004ae9c6", "conv": "thiscall", "args": []},
+    "0x004106a3": {"name": "FUN_004106a3", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 1},
+    "0x004392de": {"name": "SetCameraMode_guess", "conv": "thiscall", "args": ["int"]}
+  },
+  "cases": [
+    {"name": "mode_8_skips_update", "args": [], "memory": [{"addr": "0x00850ccc", "u32": 8}]},
+    {"name": "level_below_70_mode_0", "args": [], "memory": [{"addr": "0x00850ccc", "u32": 0}]},
+    {"name": "level_70_mode_0_no_transition", "args": [], "memory": [{"addr": "0x00850ccc", "u32": 0}], "callees": {"0x005ed550": {"name": "FUN_005ed550", "conv": "thiscall", "args": [], "ret": [70, 72]}}},
+    {"name": "level_70_mode_5_transition", "args": [], "memory": [{"addr": "0x00850ccc", "u32": 5}], "callees": {"0x005ed550": {"name": "FUN_005ed550", "conv": "thiscall", "args": [], "ret": [70, 72]}}},
+    {"name": "mode_3_option_call", "args": [], "memory": [{"addr": "0x00850ccc", "u32": 3}]},
+    {"name": "mode_4_option_call", "args": [], "memory": [{"addr": "0x00850ccc", "u32": 4}]},
+    {"name": "mode_5_reward_positive", "args": [], "memory": [{"addr": "0x00850ccc", "u32": 5}]},
+    {"name": "mode_5_null_stat_fallback", "args": [], "memory": [{"addr": "0x00850ccc", "u32": 5}, {"addr": "0x00905d00", "u32": 0}]},
+    {"name": "mode_6_resets_before_increment", "args": [], "memory": [{"addr": "0x00850ccc", "u32": 6}]},
+    {"name": "mode_7_reward_fallback", "args": [], "memory": [{"addr": "0x00850ccc", "u32": 7}], "callees": {"0x004106a3": {"name": "FUN_004106a3", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 0}}}
+  ],
+  "fuzz": {
+    "seed": 4460387,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "0x00850ccc", "type": "int", "choices": [0, 1, 2, 3, 4, 5, 6, 7, 8]},
+      {"addr": "@setup0", "offset": "0x40", "type": "float", "choices": [-1.5, 0.0, 10.5, 69.5, 70.0, 100.25]},
+      {"addr": "@setup1", "offset": "0x40", "type": "float", "choices": [-1.5, 0.0, 11.5, 69.5, 70.0, 100.25]},
+      {"addr": "@setup2", "offset": "0x40", "type": "float", "choices": [-1.5, 0.0, 12.5, 69.5, 70.0, 100.25]},
+      {"addr": "@setup3", "offset": "0x40", "type": "float", "choices": [-1.5, 0.0, 13.5, 69.5, 70.0, 100.25]},
+      {"addr": "@setup4", "offset": "0x40", "type": "float", "choices": [-1.5, 0.0, 14.5, 69.5, 70.0, 100.25]},
+      {"addr": "@setup5", "offset": "0x40", "type": "float", "choices": [-1.5, 0.0, 15.5, 69.5, 70.0, 100.25]},
+      {"addr": "@setup6", "offset": "0x40", "type": "float", "choices": [-1.5, 0.0, 16.5, 69.5, 70.0, 100.25]},
+      {"addr": "@setup7", "offset": "0x40", "type": "float", "choices": [-1.5, 0.0, 17.5, 69.5, 70.0, 100.25]}
+    ]
+  }
+}

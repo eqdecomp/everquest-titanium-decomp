@@ -1,0 +1,89 @@
+{
+  "function": "CTipWnd_guess::CTipWnd_guess",
+  "original": "0x00564b30",
+  "sources": ["src/EverQuest/tu_228_TipWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@tipwindow",
+  "args": [{"name": "parent", "type": "ptr"}, {"name": "mode", "type": "int"}],
+  "ret": "ptr",
+  "objects": {
+    "tipwindow": {"size": "0x1cc", "fill": "random"},
+    "parent": {"size": "0x4", "fill": "zero"},
+    "display": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "u32": "@child_vtbl"}]},
+    "nexttip": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "u32": "@child_vtbl"}]},
+    "close": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "u32": "@child_vtbl"}]},
+    "noshowbtn": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "u32": "@child_vtbl"}]},
+    "noshowlabel": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "u32": "@child_vtbl"}]},
+    "noshowthisbtn": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "u32": "@child_vtbl"}]},
+    "history": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "u32": "@child_vtbl"}]},
+    "child_vtbl": {"size": "0xc4", "fill": "zero", "init": [{"offset": "0xc0", "u32": "@fn_slot48"}]},
+    "fn_slot48": {"size": "0x4"}
+  },
+  "memory": [],
+  "callees": {
+    "0x00571e00": {"name": "CXStr_ctor_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0},
+    "0x005a3850": {"name": "SidlBase_ctor_guess", "conv": "thiscall", "args": ["ptr", "ignore", "int", "int", "int"], "ret": 0},
+    "0x00571d00": {"name": "CXStr_cleanup_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x005a25b0": {"name": "CreateChildrenFromSidl_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005a1e10": {
+      "name": "GetChildItem_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": ["@display", "@nexttip", "@close", "@noshowbtn", "@noshowlabel", "@noshowthisbtn", "@history"]
+    },
+    "0x0050f3f6": {"name": "Array_reset_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005648d8": {"name": "LoadTips_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00564216": {"name": "LoadSettings_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0059db90": {"name": "SetWindowFlag_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "@fn_slot48": {"name": "Slot48_guess", "conv": "thiscall", "args": ["char", "int"], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "no_sidl_piece_mode0",
+      "args": ["@parent", 0],
+      "memory": [{"addr": "@tipwindow", "offset": "0x124", "u32": 0}]
+    },
+    {
+      "name": "no_sidl_piece_mode1",
+      "args": ["@parent", 1],
+      "memory": [{"addr": "@tipwindow", "offset": "0x124", "u32": 0}]
+    },
+    {
+      "name": "children_mode0",
+      "args": ["@parent", 0],
+      "memory": [{"addr": "@tipwindow", "offset": "0x124", "u32": 1}]
+    },
+    {
+      "name": "children_mode1",
+      "args": ["@parent", 1],
+      "memory": [{"addr": "@tipwindow", "offset": "0x124", "u32": 1}]
+    },
+    {
+      "name": "children_mode2",
+      "args": ["@parent", 2],
+      "memory": [{"addr": "@tipwindow", "offset": "0x124", "u32": 1}]
+    },
+    {
+      "name": "no_children_mode0",
+      "args": ["@parent", 0],
+      "memory": [{"addr": "@tipwindow", "offset": "0x124", "u32": 1}],
+      "callees": {
+        "0x005a1e10": {"name": "GetChildItem_guess", "conv": "thiscall", "args": ["ignore"], "ret": [0, 0, 0, 0, 0, 0, 0]}
+      }
+    },
+    {
+      "name": "no_children_mode1",
+      "args": ["@parent", 1],
+      "memory": [{"addr": "@tipwindow", "offset": "0x124", "u32": 1}],
+      "callees": {
+        "0x005a1e10": {"name": "GetChildItem_guess", "conv": "thiscall", "args": ["ignore"], "ret": [0, 0, 0, 0, 0, 0, 0]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5655344,
+    "count": 100,
+    "args": [{"choices": ["@parent"]}, {"choices": [0, 1, 2, -1]}],
+    "memory": [{"addr": "@tipwindow", "offset": "0x124", "type": "u32", "choices": [0, 1]}]
+  }
+}

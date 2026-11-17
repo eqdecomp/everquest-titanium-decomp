@@ -1,0 +1,185 @@
+{
+  "function": "do_log_guess",
+  "original": "0x0046a1a3",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "unused_guess",
+      "type": "int"
+    },
+    {
+      "name": "text_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "string_table": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "global_context": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "localized": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "cstr": "localized"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905cb0",
+      "u32": "@string_table"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@global_context"
+    }
+  ],
+  "callees": {
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ptr"
+      ],
+      "ret": "@localized"
+    },
+    "0x00574990": {
+      "name": "FUN_00574990",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "int"
+      ],
+      "ret": [
+        1,
+        1
+      ]
+    },
+    "0x004982c6": {
+      "name": "GlobalContext::SetText",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "int"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "first_match",
+      "args": [
+        0,
+        "anything"
+      ],
+      "memory": [
+        {
+          "addr": "0x00924788",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x00574990": {
+          "ret": [
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "second_match",
+      "args": [
+        0,
+        "anything"
+      ],
+      "memory": [
+        {
+          "addr": "0x00924788",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00574990": {
+          "ret": [
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "toggle_to_off",
+      "args": [
+        0,
+        "anything"
+      ],
+      "memory": [
+        {
+          "addr": "0x00924788",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x00574990": {
+          "ret": [
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "toggle_to_on",
+      "args": [
+        0,
+        "anything"
+      ],
+      "memory": [
+        {
+          "addr": "0x00924788",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00574990": {
+          "ret": [
+            1,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4628899,
+    "count": 100,
+    "args": [
+      {},
+      {}
+    ],
+    "memory": [
+      {
+        "addr": "0x00924788",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

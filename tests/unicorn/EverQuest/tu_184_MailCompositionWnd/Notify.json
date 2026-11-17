@@ -1,0 +1,93 @@
+{
+  "function": "CMailAddressBookWndNotifyView_guess::Notify_guess",
+  "original": "0x0052cb39",
+  "sources": [
+    "src/EverQuest/tu_184_MailCompositionWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@fun_0052cb39_callback",
+  "args": [
+    {
+      "name": "first_guess",
+      "type": "int"
+    },
+    {
+      "name": "value_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "fun_0052cb39_callback": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "second": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0052c995": {
+      "name": "FUN_0052c995",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "below boundary",
+      "args": [
+        1,
+        "@second"
+      ],
+      "memory": [
+        {"addr": "@second", "offset": "0x0", "u32": 3}
+      ]
+    },
+    {
+      "name": "match boundary",
+      "args": [
+        1,
+        "@second"
+      ],
+      "memory": [
+        {"addr": "@second", "offset": "0x0", "u32": 4}
+      ]
+    },
+    {
+      "name": "above boundary",
+      "args": [
+        0,
+        "@second"
+      ],
+      "memory": [
+        {"addr": "@second", "offset": "0x0", "u32": 5}
+      ]
+    },
+    {
+      "name": "null pointers",
+      "args": [
+        1,
+        0
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5425977,
+    "count": 100,
+    "args": [
+      {},
+      {
+        "choices": [
+          "@second"
+        ]
+      }
+    ],
+    "memory": [
+      {"addr": "@second", "offset": "0x0", "type": "int", "choices": [3, 4, 5]}
+    ]
+  }
+}

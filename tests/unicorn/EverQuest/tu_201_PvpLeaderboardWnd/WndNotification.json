@@ -1,0 +1,106 @@
+{
+  "function": "CPvpLeaderboardWndView_guess::WndNotification_guess",
+  "original": "0x0054b53a",
+  "sources": ["src/EverQuest/tu_201_PvpLeaderboardWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [
+    {"name": "sender", "type": "ptr"},
+    {"name": "message", "type": "u32"},
+    {"name": "data", "type": "ptr"}
+  ],
+  "ret": "int",
+  "size": "0x11d",
+  "objects": {
+    "object": {
+      "size": "0x1a4",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@vtbl"}]
+    },
+    "fn_slot34": {"size": "4"},
+    "vtbl": {
+      "size": "0x8c",
+      "fill": "zero",
+      "init": [{"offset": "0x88", "u32": "@fn_slot34"}]
+    },
+    "sender": {"size": "0x100", "fill": "zero"},
+    "data": {"size": "0x100", "fill": "zero"},
+    "itemText": {"size": "0x40", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@itemText", "cstr": "PvpTarget"},
+    {"addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4}
+  ],
+  "callees": {
+    "0x0054b493": {"name": "RequestLeaderboard_guess", "conv": "thiscall", "args": [], "ret": "keep"},
+    "0x00597c00": {"name": "GetSelCount_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00597f10": {"name": "GetItemText", "conv": "thiscall", "args": ["ignore", "int", "int"], "ret": "arg0"},
+    "0x00572300": {"name": "GetString", "conv": "thiscall", "args": [], "ret": "@itemText"},
+    "0x00571d00": {"name": "Release", "conv": "thiscall", "args": ["u32"], "ret": "keep"},
+    "0x004912b1": {"name": "SendMessage", "conv": "cdecl", "args": ["ptr", "int", "mem:68", "int", "int"], "ret": 0},
+    "0x005a2230": {"name": "WndNotification", "conv": "thiscall", "args": ["ptr", "u32", "ptr"], "ret": 42},
+    "@fn_slot34": {"name": "slot34", "conv": "thiscall", "args": [], "ret": "keep"}
+  },
+  "cases": [
+    {
+      "name": "message 1 done button",
+      "args": ["@sender", 1, "@data"],
+      "memory": [{"addr": "@object", "offset": "0x188", "u32": "@sender"}]
+    },
+    {
+      "name": "message 1 first peer",
+      "args": ["@sender", 1, "@data"],
+      "memory": [{"addr": "@object", "offset": "0x164", "u32": "@sender"}]
+    },
+    {
+      "name": "message 1 second peer",
+      "args": ["@sender", 1, "@data"],
+      "memory": [{"addr": "@object", "offset": "0x184", "u32": "@sender"}]
+    },
+    {"name": "message 1 unrelated sender", "args": ["@sender", 1, "@data"]},
+    {
+      "name": "message 3 list with one selection",
+      "args": ["@sender", 3, "@data"],
+      "memory": [{"addr": "@object", "offset": "0x168", "u32": "@sender"}],
+      "callees": {
+        "0x00597c00": {"name": "GetSelCount_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": 7}
+      }
+    },
+    {
+      "name": "message 3 list with no selection",
+      "args": ["@sender", 3, "@data"],
+      "memory": [{"addr": "@object", "offset": "0x168", "u32": "@sender"}],
+      "callees": {
+        "0x00597c00": {"name": "GetSelCount_guess", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "message 3 list with multiple selections",
+      "args": ["@sender", 3, "@data"],
+      "memory": [{"addr": "@object", "offset": "0x168", "u32": "@sender"}],
+      "callees": {
+        "0x00597c00": {"name": "GetSelCount_guess", "conv": "thiscall", "args": [], "ret": 2}
+      }
+    },
+    {"name": "message 3 unrelated sender", "args": ["@sender", 3, "@data"]},
+    {"name": "message 10", "args": ["@sender", 10, "@data"]},
+    {"name": "other message", "args": ["@sender", 13, "@data"]}
+  ],
+  "fuzz": {
+    "seed": 5551418,
+    "count": 100,
+    "args": [
+      {"choices": ["@sender", 0]},
+      {"range": [-1, 12]},
+      {"choices": ["@data", 0]}
+    ],
+    "memory": [
+      {"addr": "@object", "offset": "0x164", "type": "ptr", "choices": [0, "@sender"]},
+      {"addr": "@object", "offset": "0x168", "type": "ptr", "choices": [0, "@sender"]},
+      {"addr": "@object", "offset": "0x184", "type": "ptr", "choices": [0, "@sender"]},
+      {"addr": "@object", "offset": "0x188", "type": "ptr", "choices": [0, "@sender"]}
+    ]
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "function": "Viewport_guess::UpdateLayout_guess",
+  "original": "0x00532a30",
+  "sources": [
+    "src/EverQuest/tu_187_MapViewWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@viewport",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "viewport": {
+      "size": "0x88",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "f32": 0.0},
+        {"offset": "0x4", "f32": 0.0},
+        {"offset": "0x8", "f32": 2.0},
+        {"offset": "0xc", "f32": 4.0},
+        {"offset": "0x10", "f32": 10.0},
+        {"offset": "0x14", "f32": 10.0},
+        {"offset": "0x78", "f32": 1.25},
+        {"offset": "0x84", "u32": 1}
+      ]
+    },
+    "display": {
+      "size": "0x38",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x30", "f32": 3.0},
+        {"offset": "0x34", "f32": 2.0}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "0x0063fd24", "from_image": "0x0063fd24", "image_size": 4},
+    {"addr": "0x00924470", "u32": 1},
+    {"addr": "0x00905ce4", "u32": "@display"}
+  ],
+  "callees": {
+    "0x0060f60d": {
+      "name": "_fabs",
+      "conv": "cdecl",
+      "args": ["double"],
+      "passthrough": true
+    }
+  },
+  "rewrite_aliases": {
+    "_fabs": "0x0060f60d"
+  },
+  "cases": [
+    {
+      "name": "aspect_then_mode_match",
+      "args": [],
+      "memory": [
+        {"addr": "@viewport", "offset": "0x0", "f32": 0.0},
+        {"addr": "@viewport", "offset": "0x4", "f32": 0.0},
+        {"addr": "@viewport", "offset": "0x8", "f32": 4.0},
+        {"addr": "@viewport", "offset": "0xc", "f32": 2.0},
+        {"addr": "@viewport", "offset": "0x10", "f32": 10.0},
+        {"addr": "@viewport", "offset": "0x14", "f32": 14.0},
+        {"addr": "@viewport", "offset": "0x78", "f32": 1.5},
+        {"addr": "@viewport", "offset": "0x84", "u32": 1}
+      ]
+    },
+    {
+      "name": "aspect_else_negative_extents",
+      "args": [],
+      "memory": [
+        {"addr": "@viewport", "offset": "0x0", "f32": 0.0},
+        {"addr": "@viewport", "offset": "0x4", "f32": 0.0},
+        {"addr": "@viewport", "offset": "0x8", "f32": -4.0},
+        {"addr": "@viewport", "offset": "0xc", "f32": -2.0},
+        {"addr": "@viewport", "offset": "0x10", "f32": 10.0},
+        {"addr": "@viewport", "offset": "0x14", "f32": 14.0},
+        {"addr": "@viewport", "offset": "0x78", "f32": 0.5},
+        {"addr": "@viewport", "offset": "0x84", "u32": 2}
+      ]
+    },
+    {
+      "name": "equal_ratios",
+      "args": [],
+      "memory": [
+        {"addr": "@viewport", "offset": "0x0", "f32": 0.0},
+        {"addr": "@viewport", "offset": "0x4", "f32": 0.0},
+        {"addr": "@viewport", "offset": "0x8", "f32": 2.0},
+        {"addr": "@viewport", "offset": "0xc", "f32": 2.0},
+        {"addr": "@viewport", "offset": "0x10", "f32": 4.0},
+        {"addr": "@viewport", "offset": "0x14", "f32": 4.0},
+        {"addr": "@viewport", "offset": "0x78", "f32": 1.0},
+        {"addr": "@viewport", "offset": "0x84", "u32": 1}
+      ]
+    },
+    {
+      "name": "zero_width",
+      "args": [],
+      "memory": [
+        {"addr": "@viewport", "offset": "0x0", "f32": 0.0},
+        {"addr": "@viewport", "offset": "0x4", "f32": 0.0},
+        {"addr": "@viewport", "offset": "0x8", "f32": 0.0},
+        {"addr": "@viewport", "offset": "0xc", "f32": 2.0},
+        {"addr": "@viewport", "offset": "0x10", "f32": 10.0},
+        {"addr": "@viewport", "offset": "0x14", "f32": 14.0},
+        {"addr": "@viewport", "offset": "0x78", "f32": 2.0},
+        {"addr": "@viewport", "offset": "0x84", "u32": 1}
+      ]
+    },
+    {
+      "name": "zero_height",
+      "args": [],
+      "memory": [
+        {"addr": "@viewport", "offset": "0x0", "f32": 0.0},
+        {"addr": "@viewport", "offset": "0x4", "f32": 0.0},
+        {"addr": "@viewport", "offset": "0x8", "f32": 4.0},
+        {"addr": "@viewport", "offset": "0xc", "f32": 0.0},
+        {"addr": "@viewport", "offset": "0x10", "f32": 10.0},
+        {"addr": "@viewport", "offset": "0x14", "f32": 10.0},
+        {"addr": "@viewport", "offset": "0x78", "f32": 0.0},
+        {"addr": "@viewport", "offset": "0x84", "u32": 1}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5450288,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {"addr": "@viewport", "offset": "0x0", "type": "float", "choices": [0.0, 1.0, -2.0]},
+      {"addr": "@viewport", "offset": "0x4", "type": "float", "choices": [0.0, 1.0, -2.0]},
+      {"addr": "@viewport", "offset": "0x8", "type": "float", "choices": [-4.0, -1.0, 2.0, 5.0]},
+      {"addr": "@viewport", "offset": "0xc", "type": "float", "choices": [-3.0, 3.0, 5.0]},
+      {"addr": "@viewport", "offset": "0x10", "type": "float", "choices": [-10.0, -5.0, 1.0, 5.0, 10.0]},
+      {"addr": "@viewport", "offset": "0x14", "type": "float", "choices": [-10.0, -5.0, 1.0, 5.0, 10.0]},
+      {"addr": "@viewport", "offset": "0x78", "type": "float", "choices": [0.0, 0.5, 1.0, 2.0]},
+      {"addr": "@viewport", "offset": "0x84", "type": "u32", "choices": [0, 1, 2]}
+    ]
+  }
+}

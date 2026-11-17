@@ -1,0 +1,521 @@
+{
+  "function": "CDisplay_guess::FindZoneTopZ_guess",
+  "original": "0x0043d64b",
+  "size": "0x17a",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@client",
+  "args": [
+    {
+      "name": "x",
+      "type": "float"
+    },
+    {
+      "name": "y",
+      "type": "float"
+    },
+    {
+      "name": "z",
+      "type": "float"
+    }
+  ],
+  "ret": "float",
+  "objects": {
+    "client": {
+      "size": "0x2d70",
+      "fill": "random"
+    },
+    "service": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@zone_vtable"
+        }
+      ]
+    },
+    "zone_vtable": {
+      "size": "0x34",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x30",
+          "u32": "@fn_zone_test"
+        }
+      ]
+    },
+    "fn_zone_test": { "size": "0x4" }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "from_image": "0x0079ac74",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0099e368",
+      "u32": "@service"
+    },
+    {
+      "addr": "0x006410bc",
+      "from_image": "0x006410bc",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640e20",
+      "from_image": "0x00640e20",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640ea0",
+      "from_image": "0x00640ea0",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x006119fe": {
+      "name": "__isnan",
+      "conv": "cdecl",
+      "args": [
+        "double"
+      ],
+      "ret": 0
+    },
+    "0x00611a2c": {
+      "name": "__fpclass",
+      "conv": "cdecl",
+      "args": [
+        "double"
+      ],
+      "ret": 0
+    },
+    "0x0043a292": {
+      "name": "GetEnvironment_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "float",
+        "float",
+        "ptr"
+      ],
+      "ret": [
+        1,
+        0
+      ]
+    },
+    "@fn_zone_test": {
+      "name": "zone_test",
+      "conv": "thiscall",
+      "args": [
+        "mem:12"
+      ],
+      "ret": 1
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "46495854555245204552524f52202a2a2a0a00"
+        }
+      ]
+    },
+    "0x00574110": {
+      "name": "FUN_00574110",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "kernel32.dll!OutputDebugStringA": {
+      "name": "OutputDebugStringA",
+      "conv": "stdcall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "__isnan": "0x006119fe",
+    "__fpclass": "0x00611a2c",
+    "?sprintf@@YAHPADPBDZZ": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "isnan_error_path",
+      "args": [
+        2,
+        -3,
+        4.5
+      ],
+      "callees": {
+        "0x006119fe": {
+          "name": "__isnan",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "fpclass_4_error_path",
+      "args": [
+        -4,
+        6,
+        -8.5
+      ],
+      "callees": {
+        "0x006119fe": {
+          "name": "__isnan",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": 0
+        },
+        "0x00611a2c": {
+          "name": "__fpclass",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": 4
+        }
+      }
+    },
+    {
+      "name": "fpclass_0x200_error_path",
+      "args": [
+        8,
+        -1,
+        3.25
+      ],
+      "callees": {
+        "0x006119fe": {
+          "name": "__isnan",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": 0
+        },
+        "0x00611a2c": {
+          "name": "__fpclass",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": [
+            0,
+            512
+          ]
+        }
+      }
+    },
+    {
+      "name": "initial_zone_has_no_floor",
+      "args": [
+        7,
+        -9,
+        12
+      ],
+      "callees": {
+        "0x006119fe": {
+          "name": "__isnan",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": 0
+        },
+        "0x00611a2c": {
+          "name": "__fpclass",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": 0
+        },
+        "0x0043a292": {
+          "name": "FUN_0043a292",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "ptr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "floor_changes_after_one_step",
+      "args": [
+        4,
+        -7,
+        10
+      ],
+      "callees": {
+        "0x006119fe": {
+          "name": "__isnan",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": 0
+        },
+        "0x00611a2c": {
+          "name": "__fpclass",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": 0
+        },
+        "0x0043a292": {
+          "name": "FUN_0043a292",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "ptr"
+          ],
+          "ret": [
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "floor_changes_after_multiple_steps",
+      "args": [
+        -12,
+        21,
+        -2.5
+      ],
+      "callees": {
+        "0x006119fe": {
+          "name": "__isnan",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": 0
+        },
+        "0x00611a2c": {
+          "name": "__fpclass",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": 0
+        },
+        "0x0043a292": {
+          "name": "FUN_0043a292",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "ptr"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "virtual_probe_rejects",
+      "args": [
+        30,
+        -40,
+        5
+      ],
+      "callees": {
+        "0x006119fe": {
+          "name": "__isnan",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": 0
+        },
+        "0x00611a2c": {
+          "name": "__fpclass",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": 0
+        },
+        "0x0043a292": {
+          "name": "FUN_0043a292",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "ptr"
+          ],
+          "ret": 1
+        },
+        "@fn_zone_test": {
+          "name": "zone_test",
+          "conv": "thiscall",
+          "args": [
+            "mem:12"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "virtual_probe_changes_x",
+      "args": [
+        13,
+        -17,
+        19
+      ],
+      "callees": {
+        "0x006119fe": {
+          "name": "__isnan",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": 0
+        },
+        "0x00611a2c": {
+          "name": "__fpclass",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": 0
+        },
+        "0x0043a292": {
+          "name": "FUN_0043a292",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "ptr"
+          ],
+          "ret": [
+            1,
+            0
+          ]
+        },
+        "@fn_zone_test": {
+          "name": "zone_test",
+          "conv": "thiscall",
+          "args": [
+            "mem:12"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "0000c842"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "strict_step_limit_100",
+      "args": [
+        -1,
+        2,
+        3
+      ],
+      "callees": {
+        "0x006119fe": {
+          "name": "__isnan",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": 0
+        },
+        "0x00611a2c": {
+          "name": "__fpclass",
+          "conv": "cdecl",
+          "args": [
+            "double"
+          ],
+          "ret": 0
+        },
+        "0x0043a292": {
+          "name": "FUN_0043a292",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "ptr"
+          ],
+          "ret": 1
+        },
+        "@fn_zone_test": {
+          "name": "zone_test",
+          "conv": "thiscall",
+          "args": [
+            "mem:12"
+          ],
+          "ret": 1
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4445771,
+    "count": 50,
+    "args": [
+      {
+        "range": [
+          -100,
+          100
+        ]
+      },
+      {
+        "range": [
+          -100,
+          100
+        ]
+      },
+      {
+        "range": [
+          -100,
+          100
+        ]
+      }
+    ],
+    "memory": []
+  },
+  "max_insns": 200000
+}

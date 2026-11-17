@@ -1,0 +1,215 @@
+{
+  "function": "CDisplay_guess::s3dCollideSphereWithWorld_guess",
+  "original": "0x0043a15c",
+  "sources": ["src/EverQuest/tu_029_Display.cpp"],
+  "size": "0x136",
+  "conv": "thiscall",
+  "this": "@client",
+  "args": [
+    {"name": "value0", "type": "int"},
+    {"name": "value1", "type": "int"},
+    {"name": "value2", "type": "int"},
+    {"name": "x", "type": "float"},
+    {"name": "y", "type": "float"},
+    {"name": "z", "type": "float"},
+    {"name": "outX", "type": "ptr"},
+    {"name": "outY", "type": "ptr"},
+    {"name": "outZ", "type": "ptr"},
+    {"name": "mode", "type": "u8"}
+  ],
+  "ret": "u8",
+  "objects": {
+    "client": {"size": "0x2d70", "fill": "zero"},
+    "outx": {"size": "0x4", "fill": "zero"},
+    "outy": {"size": "0x4", "fill": "zero"},
+    "outz": {"size": "0x4", "fill": "zero"},
+    "service": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": 0, "u32": "@vtbl"}]
+    },
+    "vtbl": {
+      "size": "0x28",
+      "fill": "zero",
+      "init": [{"offset": "0x24", "u32": "@fn"}]
+    },
+    "fn": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@client", "offset": "0x2cf8", "u32": 1},
+    {"addr": "@client", "offset": "0x2d14", "f32": 1.25},
+    {"addr": "0x0099e370", "u32": "@service"},
+    {"addr": "0x00640038", "from_image": "0x00640038", "image_size": 4}
+  ],
+  "callees": {
+    "0x0060f60d": {
+      "name": "_fabs",
+      "conv": "cdecl",
+      "args": ["double"],
+      "passthrough": true
+    },
+    "@fn": {
+      "name": "TraceService::Slot09",
+      "conv": "thiscall",
+      "args": ["mem:12", "mem:12", "float", "ignore", "ignore", "int", "ignore", "ignore", "ignore", "int", "int"],
+      "ret": 0,
+      "writes": [{"arg": 6, "offset": 0, "hex": "000000000000000000000000"}]
+    }
+  },
+  "rewrite_aliases": {
+    "_fabs": "0x0060f60d",
+    "?TraceCallback0042cf5c_guess@@YAXXZ": "0x0042cf5c",
+    "?TraceCallback0042cf6e_guess@@YAXXZ": "0x0042cf6e",
+    "?TraceCallback0042d109_guess@@YAXXZ": "0x0042d109",
+    "?FUN_0056f736_guess@@YAXXZ": "0x0056f736"
+  },
+  "cases": [
+    {
+      "name": "client-disabled-skips-service",
+      "args": [1, 2, 3, 1.0, 2.0, 3.0, "@outx", "@outy", "@outz", 1],
+      "memory": [
+        {"addr": "@client", "offset": "0x2cf8", "u32": 0},
+        {"addr": "@outx", "offset": 0, "f32": 91.0},
+        {"addr": "@outy", "offset": 0, "f32": 92.0},
+        {"addr": "@outz", "offset": 0, "f32": 93.0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "service-error-skips-outputs",
+      "args": [1, 2, 3, 1.0, 2.0, 3.0, "@outx", "@outy", "@outz", 4],
+      "memory": [
+        {"addr": "@outx", "offset": 0, "f32": 91.0},
+        {"addr": "@outy", "offset": 0, "f32": 92.0},
+        {"addr": "@outz", "offset": 0, "f32": 93.0}
+      ],
+      "callees": {
+        "@fn": {
+          "name": "TraceService::Slot09",
+          "conv": "thiscall",
+          "args": ["mem:12", "mem:12", "float", "ignore", "ignore", "int", "ignore", "ignore", "ignore", "int", "int"],
+          "ret": 1
+        }
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "mode-zero-exact-hit",
+      "args": [1, 2, 3, 0.0, 0.0, 0.0, "@outx", "@outy", "@outz", 0],
+      "memory": [
+        {"addr": "@outx", "offset": 0, "f32": 91.0},
+        {"addr": "@outy", "offset": 0, "f32": 92.0},
+        {"addr": "@outz", "offset": 0, "f32": 93.0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "mode-one-exact-hit",
+      "args": [1, 2, 3, 0.0, 0.0, 0.0, "@outx", "@outy", "@outz", 1],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "mode-two-exact-hit",
+      "args": [1, 2, 3, 0.0, 0.0, 0.0, "@outx", "@outy", "@outz", 2],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "mode-three-exact-hit",
+      "args": [1, 2, 3, 0.0, 0.0, 0.0, "@outx", "@outy", "@outz", 3],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "null-output-pointers-still-check-hit",
+      "args": [1, 2, 3, 0.0, 0.0, 0.0, 0, 0, 0, 0],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "all-axes-below-tolerance",
+      "args": [1, 2, 3, 0.005, 0.005, 0.005, "@outx", "@outy", "@outz", 1],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "x-at-tolerance-boundary",
+      "args": [1, 2, 3, 0.0, 0.0, 0.0, "@outx", "@outy", "@outz", 1],
+      "memory": [
+        {"addr": "@outx", "offset": 0, "f32": 91.0},
+        {"addr": "@outy", "offset": 0, "f32": 92.0},
+        {"addr": "@outz", "offset": 0, "f32": 93.0}
+      ],
+      "callees": {
+        "@fn": {
+          "name": "TraceService::Slot09",
+          "conv": "thiscall",
+          "args": ["mem:12", "mem:12", "float", "ignore", "ignore", "int", "ignore", "ignore", "ignore", "int", "int"],
+          "ret": 0,
+          "writes": [{"arg": 6, "offset": 0, "hex": "0ad7233c0000000000000000"}]
+        }
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "y-at-tolerance-boundary",
+      "args": [1, 2, 3, 0.0, 0.0, 0.0, "@outx", "@outy", "@outz", 1],
+      "callees": {
+        "@fn": {
+          "name": "TraceService::Slot09",
+          "conv": "thiscall",
+          "args": ["mem:12", "mem:12", "float", "ignore", "ignore", "int", "ignore", "ignore", "ignore", "int", "int"],
+          "ret": 0,
+          "writes": [{"arg": 6, "offset": 0, "hex": "000000000ad7233c00000000"}]
+        }
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "z-at-tolerance-boundary",
+      "args": [1, 2, 3, 0.0, 0.0, 0.0, "@outx", "@outy", "@outz", 1],
+      "callees": {
+        "@fn": {
+          "name": "TraceService::Slot09",
+          "conv": "thiscall",
+          "args": ["mem:12", "mem:12", "float", "ignore", "ignore", "int", "ignore", "ignore", "ignore", "int", "int"],
+          "ret": 0,
+          "writes": [{"arg": 6, "offset": 0, "hex": "00000000000000000ad7233c"}]
+        }
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "x-over-tolerance",
+      "args": [1, 2, 3, 0.02, 0.0, 0.0, "@outx", "@outy", "@outz", 1],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "y-over-tolerance",
+      "args": [1, 2, 3, 0.0, 0.02, 0.0, "@outx", "@outy", "@outz", 1],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "z-over-tolerance",
+      "args": [1, 2, 3, 0.0, 0.0, 0.02, "@outx", "@outy", "@outz", 1],
+      "expect": {"ret": 1}
+    }
+  ],
+  "fuzz": {
+    "seed": 4432220,
+    "count": 100,
+    "args": [
+      {},
+      {},
+      {},
+      {"choices": [-0.01, 0.0, 0.005, 0.01, 1.0]},
+      {"choices": [-0.01, 0.0, 0.005, 0.01, 2.0]},
+      {"choices": [-0.01, 0.0, 0.005, 0.01, 3.0]},
+      {"choices": [0, "@outx"]},
+      {"choices": [0, "@outy"]},
+      {"choices": [0, "@outz"]},
+      {"choices": [0, 1, 2, 3, 4, 255]}
+    ],
+    "memory": [
+      {"addr": "@client", "offset": "0x2cf8", "type": "int", "choices": [0, 1]},
+      {"addr": "@client", "offset": "0x2d14", "type": "float", "choices": [-1.0, 0.0, 1.0, 1.25, 100.0]}
+    ]
+  },
+  "_survivors": "L4431: callback code pointers are image-specific and the scripted service does not invoke them; L4432: callback code pointers are image-specific and the scripted service does not invoke them; L4436: callback code pointers are image-specific and the scripted service does not invoke them"
+}

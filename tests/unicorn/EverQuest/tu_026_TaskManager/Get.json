@@ -1,0 +1,57 @@
+{
+  "function": "LookupOwner_guess::Get_guess",
+  "original": "0x004322d2",
+  "sources": [
+    "src/EverQuest/tu_026_TaskManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@lookupowner",
+  "args": [
+    {"name": "index_guess", "type": "int"},
+    {"name": "category_guess", "type": "int"},
+    {"name": "allowEmpty_guess", "type": "char"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "lookupowner": {"size": "0x34C48", "fill": "zero"}
+  },
+  "memory": [],
+  "callees": {},
+  "cases": [
+    {"name": "cat0 idx0 empty allow0", "args": [0, 0, 0], "memory": []},
+    {"name": "cat0 idx0 empty allow1", "args": [0, 0, 1], "memory": []},
+    {"name": "cat0 idx0 set allow1", "args": [0, 0, 1], "memory": [{"addr": "@lookupowner", "offset": "0x4", "u32": 3}]},
+    {"name": "cat0 idx0 set allow0", "args": [0, 0, 0], "memory": [{"addr": "@lookupowner", "offset": "0x4", "u32": 3}]},
+    {"name": "cat0 idx-1", "args": [-1, 0, 0], "memory": [{"addr": "@lookupowner", "offset": "0x4", "u32": 3}]},
+    {"name": "cat0 idx1", "args": [1, 0, 0], "memory": [{"addr": "@lookupowner", "offset": "0x4", "u32": 3}]},
+    {"name": "cat1 idx0 empty allow0", "args": [0, 1, 0], "memory": []},
+    {"name": "cat1 idx0 empty allow1", "args": [0, 1, 1], "memory": []},
+    {"name": "cat1 idx0 set allow1", "args": [0, 1, 1], "memory": [{"addr": "@lookupowner", "offset": "0x32414", "u32": 2}]},
+    {"name": "cat1 idx-1", "args": [-1, 1, 0], "memory": [{"addr": "@lookupowner", "offset": "0x32414", "u32": 2}]},
+    {"name": "cat1 idx1", "args": [1, 1, 0], "memory": [{"addr": "@lookupowner", "offset": "0x32414", "u32": 2}]},
+    {"name": "cat2 idx0 empty allow0", "args": [0, 2, 0], "memory": []},
+    {"name": "cat2 idx0 set allow1", "args": [0, 2, 1], "memory": [{"addr": "@lookupowner", "offset": "0x2838", "u32": 9}]},
+    {"name": "cat2 idx18 empty allow0", "args": [18, 2, 0], "memory": []},
+    {"name": "cat2 idx18 empty allow1", "args": [18, 2, 1], "memory": []},
+    {"name": "cat2 idx18 set allow1", "args": [18, 2, 1], "memory": [{"addr": "@lookupowner", "offset": "0x2838", "u32": 9}, {"addr": "@lookupowner", "offset": "0x2838", "u32": 9}]},
+    {"name": "cat2 idx5 set allow1", "args": [5, 2, 1], "memory": [{"addr": "@lookupowner", "offset": "0xC908", "u32": 4}]},
+    {"name": "cat2 idx19", "args": [19, 2, 0], "memory": []},
+    {"name": "cat2 idx-1", "args": [-1, 2, 0], "memory": []},
+    {"name": "cat3", "args": [0, 3, 0], "memory": []},
+    {"name": "cat-1", "args": [0, -1, 0], "memory": []}
+  ],
+  "fuzz": {
+    "seed": 4399826,
+    "count": 200,
+    "args": [
+      {"range": [-2, 21]},
+      {"range": [-1, 4]},
+      {"choices": [0, 1, 2]}
+    ],
+    "memory": [
+      {"addr": "@lookupowner", "offset": "0x4", "type": "int", "choices": [0, 0, 1, -1]},
+      {"addr": "@lookupowner", "offset": "0x2838", "type": "int", "choices": [0, 0, 1, -1], "count": 19, "stride": "0x2834"},
+      {"addr": "@lookupowner", "offset": "0x32414", "type": "int", "choices": [0, 0, 1, -1]}
+    ]
+  }
+}

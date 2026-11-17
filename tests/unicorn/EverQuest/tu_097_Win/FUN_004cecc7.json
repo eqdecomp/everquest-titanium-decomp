@@ -1,0 +1,80 @@
+{
+  "function": "ProcessKeyboardEvents_guess",
+  "original": "0x004cecc7",
+  "sources": ["src/EverQuest/tu_097_Win.cpp"],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "u32",
+  "objects": {
+    "config": {"size": "0x4", "fill": "random", "init": [{"offset": "0", "u32": "@config_vtable"}]},
+    "config_vtable": {"size": "0x2c", "fill": "random", "init": [
+      {"offset": "0x1c", "u32": "@slot7"},
+      {"offset": "0x28", "u32": "@request"}
+    ]},
+    "slot7": {"size": "0x4", "fill": "random"},
+    "request": {"size": "0x4", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00988c80", "u32": "@config"},
+    {"addr": "0x00923770", "u32": 4660}
+  ],
+  "callees": {
+    "user32.dll!GetForegroundWindow": {"name": "GetForegroundWindow", "conv": "stdcall", "args": [], "ret": 4660},
+    "0x004ccb85": {"name": "FlushKeyboard_guess", "conv": "cdecl", "args": [], "ret": 0},
+    "0x004ce4ac": {"name": "HandleKeyDown_guess", "conv": "cdecl", "args": ["u32"], "ret": 0},
+    "0x004ccbfc": {"name": "HandleKeyUp_guess", "conv": "cdecl", "args": ["u32"], "ret": 0},
+    "@slot7": {"name": "slot7", "conv": "stdcall", "args": ["ptr"]},
+    "@request": {"name": "Request", "conv": "stdcall", "args": ["ptr", "u32", "ptr", "ptr", "u32"], "ret": 0}
+  },
+  "cases": [
+    {"name": "no-foreground-window", "args": [], "callees": {
+      "user32.dll!GetForegroundWindow": {"name": "GetForegroundWindow", "conv": "stdcall", "args": [], "ret": 0}
+    }, "expect": {"ret": 1}},
+    {"name": "other-foreground-window", "args": [], "callees": {
+      "user32.dll!GetForegroundWindow": {"name": "GetForegroundWindow", "conv": "stdcall", "args": [], "ret": 39321}
+    }, "expect": {"ret": 1}},
+    {"name": "request-fails-calls-ccb85", "args": [], "callees": {
+      "@request": {"name": "Request", "conv": "stdcall", "args": ["ptr", "u32", "ptr", "ptr", "u32"], "ret": 1}
+    }, "expect": {"ret": 1}},
+    {"name": "size-zero", "args": [], "callees": {
+      "@request": {"name": "Request", "conv": "stdcall", "args": ["ptr", "u32", "ptr", "ptr", "u32"], "ret": 0,
+        "writes": [{"arg": 3, "offset": 0, "hex": "00000000"}]}
+    }, "expect": {"ret": 0}},
+    {"name": "one-key-plain", "args": [], "callees": {
+      "@request": {"name": "Request", "conv": "stdcall", "args": ["ptr", "u32", "ptr", "ptr", "u32"], "ret": 0,
+        "writes": [{"arg": 2, "offset": 0, "hex": "4100000000"}, {"arg": 3, "offset": 0, "hex": "01000000"}]}
+    }, "expect": {"ret": 1}},
+    {"name": "one-key-flag", "args": [], "callees": {
+      "@request": {"name": "Request", "conv": "stdcall", "args": ["ptr", "u32", "ptr", "ptr", "u32"], "ret": 0,
+        "writes": [{"arg": 2, "offset": 0, "hex": "4200000080"}, {"arg": 3, "offset": 0, "hex": "01000000"}]}
+    }, "expect": {"ret": 1}},
+    {"name": "flag-0x7f-is-plain", "args": [], "callees": {
+      "@request": {"name": "Request", "conv": "stdcall", "args": ["ptr", "u32", "ptr", "ptr", "u32"], "ret": 0,
+        "writes": [{"arg": 2, "offset": 0, "hex": "430000007f"}, {"arg": 3, "offset": 0, "hex": "01000000"}]}
+    }, "expect": {"ret": 1}},
+    {"name": "two-mixed", "args": [], "callees": {
+      "@request": {"name": "Request", "conv": "stdcall", "args": ["ptr", "u32", "ptr", "ptr", "u32"], "ret": 0,
+        "writes": [{"arg": 2, "offset": 0, "hex": "4100000000"}, {"arg": 2, "offset": 20, "hex": "4200000080"},
+          {"arg": 3, "offset": 0, "hex": "02000000"}]}
+    }, "expect": {"ret": 2}},
+    {"name": "three-high-keys", "args": [], "callees": {
+      "@request": {"name": "Request", "conv": "stdcall", "args": ["ptr", "u32", "ptr", "ptr", "u32"], "ret": 0,
+        "writes": [{"arg": 2, "offset": 0, "hex": "ff00000080"}, {"arg": 2, "offset": 20, "hex": "800000007f"},
+          {"arg": 2, "offset": 40, "hex": "0100000000"}, {"arg": 3, "offset": 0, "hex": "03000000"}]}
+    }, "expect": {"ret": 3}},
+    {"name": "four-alternating", "args": [], "callees": {
+      "@request": {"name": "Request", "conv": "stdcall", "args": ["ptr", "u32", "ptr", "ptr", "u32"], "ret": 0,
+        "writes": [{"arg": 2, "offset": 0, "hex": "4400000080"}, {"arg": 2, "offset": 20, "hex": "4500000000"},
+          {"arg": 2, "offset": 40, "hex": "4600000080"}, {"arg": 2, "offset": 60, "hex": "4700000000"},
+          {"arg": 3, "offset": 0, "hex": "04000000"}]}
+    }, "expect": {"ret": 4}}
+  ],
+  "fuzz": {
+    "seed": 5041351,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "0x00923770", "type": "int", "choices": [4660, 0, 39321]}
+    ]
+  }
+}

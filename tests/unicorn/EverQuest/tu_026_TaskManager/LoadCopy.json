@@ -1,0 +1,164 @@
+{
+  "function": "TaskManagerView_guess::LoadCopy_guess",
+  "original": "0x0043379d",
+  "sources": [
+    "src/EverQuest/tu_026_TaskManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@dispatchowner",
+  "args": [
+    {
+      "name": "source_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "length_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "dispatchowner": {
+      "size": "0x556E8",
+      "fill": "random"
+    },
+    "copy": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x8", "u32": 1},
+        {"offset": "0xC", "u32": 7},
+        {"offset": "0x10", "u8": 0},
+        {"offset": "0x11", "u32": 0}
+      ]
+    },
+    "notify": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "u32": "@vtbl"}
+      ]
+    },
+    "fn_slot21": {
+      "size": "4"
+    },
+    "heapbuf": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x84", "u32": "@fn_slot21"}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "0x0099283c", "u32": 0},
+    {"addr": "@dispatchowner", "offset": "0x32414", "u32": 1}
+  ],
+  "callees": {
+    "0x00433131": {"name": "CopyObject_Load", "conv": "thiscall", "args": ["ptr", "int"], "passthrough": true},
+    "0x0050f3f6": {"name": "Part_Reset", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x00432806": {"name": "CopyList_Get", "conv": "thiscall", "args": ["int"], "passthrough": true},
+    "0x00432bcc": {"name": "CopyList_Set", "conv": "thiscall", "args": ["int", "ptr"], "passthrough": true},
+    "0x00432827": {"name": "CopyList_Grow", "conv": "thiscall", "args": ["int"]},
+    "0x00577000": {"name": "CopyTextHelper", "conv": "cdecl", "args": ["ignore", "int", "ptr", "cstr"], "ret": 0},
+    "0x0055d8ba": {"name": "NotifyOwner_Flush", "conv": "thiscall", "args": []},
+    "@fn_slot21": {"name": "NotifyOwner_Slot21", "conv": "thiscall", "args": []},
+    "kernel32.dll!HeapFree": {"conv": "stdcall", "args": ["ignore", "u32", "ignore"], "ret": 1},
+    "kernel32.dll!HeapAlloc": {"conv": "stdcall", "args": ["ignore", "u32", "u32"], "ret": "@heapbuf"}
+  },
+  "cases": [
+    {
+      "name": "null_source",
+      "args": [0, 256]
+    },
+    {
+      "name": "no_match",
+      "args": ["@copy", 256],
+      "memory": [{"addr": "@dispatchowner", "offset": "0x32414", "u32": 2}]
+    },
+    {
+      "name": "match_empty",
+      "args": ["@copy", 256]
+    },
+    {
+      "name": "match_empty_notify",
+      "args": ["@copy", 256],
+      "memory": [{"addr": "0x0099283c", "u32": "@notify"}]
+    },
+    {
+      "name": "one_item_flag0",
+      "args": ["@copy", 256],
+      "memory": [
+        {"addr": "@copy", "offset": "0x11", "u32": 1},
+        {"addr": "@dispatchowner", "offset": "0x34C34", "u32": 0}
+      ]
+    },
+    {
+      "name": "one_item_flag0_notify",
+      "args": ["@copy", 256],
+      "memory": [
+        {"addr": "@copy", "offset": "0x11", "u32": 1},
+        {"addr": "@dispatchowner", "offset": "0x34C34", "u32": 0},
+        {"addr": "0x0099283c", "u32": "@notify"}
+      ]
+    },
+    {
+      "name": "one_item_flag1_notify",
+      "args": ["@copy", 256],
+      "memory": [
+        {"addr": "@copy", "offset": "0x11", "u32": 1},
+        {"addr": "@copy", "offset": "0x10", "u8": 1},
+        {"addr": "@dispatchowner", "offset": "0x34C34", "u32": 0},
+        {"addr": "0x0099283c", "u32": "@notify"}
+      ]
+    },
+    {
+      "name": "second_slot_matches_only",
+      "args": ["@copy", 256],
+      "memory": [
+        {"addr": "@dispatchowner", "offset": "0x32414", "u32": 2},
+        {"addr": "@dispatchowner", "offset": "0x34C48", "u32": 1},
+        {"addr": "0x0099283c", "u32": "@notify"}
+      ]
+    },
+    {
+      "name": "two_items_flag0_notify",
+      "args": ["@copy", 256],
+      "memory": [
+        {"addr": "@copy", "offset": "0x11", "u32": 2},
+        {"addr": "@dispatchowner", "offset": "0x34C34", "u32": 0},
+        {"addr": "0x0099283c", "u32": "@notify"}
+      ]
+    },
+    {
+      "name": "short_length_one_item",
+      "args": ["@copy", 20],
+      "memory": [
+        {"addr": "@copy", "offset": "0x11", "u32": 1},
+        {"addr": "@dispatchowner", "offset": "0x34C34", "u32": 0},
+        {"addr": "0x0099283c", "u32": "@notify"}
+      ]
+    }
+  ],
+  "_survivors": "L1291: `int copy_guess = 0` is an equivalent initializer: the for-init assigns copy_guess = 0 before any read",
+  "fuzz": {
+    "seed": 4405149,
+    "count": 80,
+    "args": [
+      {"choices": ["@copy", 0]},
+      {"range": [0, 512]}
+    ],
+    "memory": [
+      {"addr": "@dispatchowner", "offset": "0x32414", "type": "int", "choices": [1, 2]},
+      {"addr": "@dispatchowner", "offset": "0x34C34", "type": "int", "choices": [0, 0, 5]},
+      {"addr": "@copy", "offset": "0x8", "type": "u32", "choices": [1, 2]},
+      {"addr": "@copy", "offset": "0x10", "type": "u8", "choices": [0, 0, 1]},
+      {"addr": "@copy", "offset": "0x11", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "0x0099283c", "type": "u32", "choices": ["@notify", 0]}
+    ]
+  }
+}

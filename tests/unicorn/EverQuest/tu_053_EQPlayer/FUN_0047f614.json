@@ -1,0 +1,308 @@
+{
+  "function": "EQPlayerMotion_guess::IWasHit_guess",
+  "original": "0x0047f614",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@eqplayermotion",
+  "args": [
+    {
+      "name": "update",
+      "type": "ptr"
+    }
+  ],
+  "ret": "char",
+  "objects": {
+    "eqplayermotion": {
+      "size": "0x348",
+      "fill": "random"
+    },
+    "update": {
+      "size": "0x1f",
+      "fill": "random"
+    },
+    "client": {
+      "size": "0xc2a0",
+      "fill": "random",
+      "init": [
+        { "offset": "0x8", "u32": "@offset_node" },
+        { "offset": "0x28", "u32": "@query_vtable" },
+        { "offset": "0xc288", "u32": "@player" }
+      ]
+    },
+    "player": {
+      "size": "0x348",
+      "fill": "random",
+      "init": [
+        { "offset": "0x1a8", "u32": "@actor" }
+      ]
+    },
+    "actor": {
+      "size": "0x10c0",
+      "fill": "random"
+    },
+    "offset_node": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x4", "u32": "0x20" }
+      ]
+    },
+    "query_vtable": {
+      "size": "0x44",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x40", "u32": "@fn_query" }
+      ]
+    },
+    "query_state": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "angles": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@angle_vtable" }
+      ]
+    },
+    "angle_vtable": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x8", "u32": "@fn_cos" },
+        { "offset": "0xc", "u32": "@fn_sin" }
+      ]
+    },
+    "other": {
+      "size": "0x348",
+      "fill": "random"
+    },
+    "fn_query": {
+      "size": "0x1",
+      "fill": "zero"
+    },
+    "fn_cos": {
+      "size": "0x1",
+      "fill": "zero"
+    },
+    "fn_sin": {
+      "size": "0x1",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    { "addr": "@update", "offset": "0xa", "f32": 0.0 },
+    { "addr": "@update", "offset": "0xe", "f32": 0.5 },
+    { "addr": "@update", "offset": "0x12", "f32": -0.25 },
+    { "addr": "@update", "offset": "0x16", "u8": 230 },
+    { "addr": "@update", "offset": "0x1e", "u8": 0 },
+    { "addr": "@eqplayermotion", "offset": "0x3c", "f32": 1.0 },
+    { "addr": "@eqplayermotion", "offset": "0x40", "f32": 2.0 },
+    { "addr": "@eqplayermotion", "offset": "0x44", "f32": 3.0 },
+    { "addr": "@player", "offset": "0x244", "u8": 1 },
+    { "addr": "0x0063f4cc", "f32": 0.0 },
+    { "addr": "0x0099e374", "u32": "@angles" },
+    { "addr": "0x00905ce4", "u32": "@eqplayermotion" },
+    { "addr": "0x00905cf8", "u32": "@other" },
+    { "addr": "0x00923d79", "u8": 0 },
+    { "addr": "0x00923d78", "u8": 0 }
+  ],
+  "callees": {
+    "0x0047c2fb": {
+      "name": "GetPcClient_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@client"
+    },
+    "0x0047f4af": {
+      "name": "TriggerSpellEffect_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x00414913": {
+      "name": "HitBySpell",
+      "conv": "thiscall",
+      "args": ["ptr", "int"],
+      "ret": 0
+    },
+    "@fn_query": {
+      "name": "query slot 16",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@query_state"
+    },
+    "0x005ed820": {
+      "name": "FUN_005ed820",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x005ed860": {
+      "name": "FUN_005ed860",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x0040e934": {
+      "name": "FindBuffWithEffect_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": [256, 257, 258, 259, 260, 261]
+    },
+    "0x00411f2f": {
+      "name": "RemovePCAffect_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "@fn_cos": {
+      "name": "cos slot",
+      "conv": "thiscall",
+      "args": ["float"],
+      "ret_float": 0.5
+    },
+    "@fn_sin": {
+      "name": "sin slot",
+      "conv": "thiscall",
+      "args": ["float"],
+      "ret_float": 0.25
+    },
+    "0x0048c130": {
+      "name": "FUN_0048c130",
+      "conv": "stdcall",
+      "args": ["ptr", "int"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "e7 client null",
+      "args": ["@update"],
+      "memory": [
+        { "addr": "@update", "offset": "0x16", "u8": 231 },
+        { "addr": "@update", "offset": "0x1e", "u8": 4 }
+      ],
+      "callees": {
+        "0x0047c2fb": { "name": "FUN_0047c2fb", "conv": "thiscall", "args": [], "ret": 0 }
+      },
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "e7 without flag",
+      "args": ["@update"],
+      "memory": [
+        { "addr": "@update", "offset": "0x16", "u8": 231 },
+        { "addr": "@update", "offset": "0x1e", "u8": 3 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "e7 with flag",
+      "args": ["@update"],
+      "memory": [
+        { "addr": "@update", "offset": "0x16", "u8": 231 },
+        { "addr": "@update", "offset": "0x1e", "u8": 4 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "other type client null",
+      "args": ["@update"],
+      "callees": {
+        "0x0047c2fb": { "name": "FUN_0047c2fb", "conv": "thiscall", "args": [], "ret": 0 }
+      },
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "nonzero player type without motion",
+      "args": ["@update"],
+      "memory": [
+        { "addr": "@update", "offset": "0x16", "u8": 230 },
+        { "addr": "@update", "offset": "0xa", "f32": 0.0 },
+        { "addr": "@player", "offset": "0x244", "u8": 1 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "zero player type without motion",
+      "args": ["@update"],
+      "memory": [
+        { "addr": "@update", "offset": "0x16", "u8": 230 },
+        { "addr": "@update", "offset": "0xa", "f32": 0.0 },
+        { "addr": "@player", "offset": "0x244", "u8": 0 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "primary player moves",
+      "args": ["@update"],
+      "memory": [
+        { "addr": "@update", "offset": "0x16", "u8": 230 },
+        { "addr": "@update", "offset": "0xa", "f32": 1.5 },
+        { "addr": "@player", "offset": "0x244", "u8": 1 },
+        { "addr": "0x00905ce4", "u32": "@eqplayermotion" },
+        { "addr": "0x00905cf8", "u32": "@other" }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "secondary player moves",
+      "args": ["@update"],
+      "memory": [
+        { "addr": "@update", "offset": "0x16", "u8": 230 },
+        { "addr": "@update", "offset": "0xa", "f32": -1.25 },
+        { "addr": "@player", "offset": "0x244", "u8": 1 },
+        { "addr": "0x00905ce4", "u32": "@other" },
+        { "addr": "0x00905cf8", "u32": "@eqplayermotion" }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "same primary and secondary",
+      "args": ["@update"],
+      "memory": [
+        { "addr": "@update", "offset": "0x16", "u8": 230 },
+        { "addr": "@update", "offset": "0xa", "f32": 0.000001 },
+        { "addr": "@player", "offset": "0x244", "u8": 1 },
+        { "addr": "0x00905ce4", "u32": "@eqplayermotion" },
+        { "addr": "0x00905cf8", "u32": "@eqplayermotion" }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "neither player global matches",
+      "args": ["@update"],
+      "memory": [
+        { "addr": "@update", "offset": "0x16", "u8": 230 },
+        { "addr": "@update", "offset": "0xa", "f32": 0.75 },
+        { "addr": "@player", "offset": "0x244", "u8": 1 },
+        { "addr": "0x00905ce4", "u32": "@other" },
+        { "addr": "0x00905cf8", "u32": "@other" }
+      ],
+      "expect": { "ret": 1 }
+    }
+  ],
+  "fuzz": {
+    "seed": 4716052,
+    "count": 100,
+    "args": [
+      { "choices": ["@update"] }
+    ],
+    "memory": [
+      { "addr": "@update", "offset": "0xa", "type": "float", "range": [-2.0, 2.0] },
+      { "addr": "@update", "offset": "0xe", "type": "float", "range": [-3.0, 3.0] },
+      { "addr": "@update", "offset": "0x12", "type": "float", "range": [-3.0, 3.0] },
+      { "addr": "@update", "offset": "0x16", "type": "u8", "choices": [230, 231] },
+      { "addr": "@update", "offset": "0x1e", "type": "u8", "range": [0, 255] },
+      { "addr": "@eqplayermotion", "offset": "0x3c", "type": "float", "range": [-10.0, 10.0] },
+      { "addr": "@eqplayermotion", "offset": "0x40", "type": "float", "range": [-10.0, 10.0] },
+      { "addr": "@eqplayermotion", "offset": "0x44", "type": "float", "range": [-10.0, 10.0] },
+      { "addr": "@player", "offset": "0x244", "type": "u8", "choices": [0, 1, 255] },
+      { "addr": "0x00905ce4", "type": "ptr", "choices": ["@eqplayermotion", "@other"] },
+      { "addr": "0x00905cf8", "type": "ptr", "choices": ["@eqplayermotion", "@other"] }
+    ]
+  }
+}

@@ -1,0 +1,615 @@
+{
+  "function": "Player_48BA76_guess::UpdateRegion_guess",
+  "original": "0x0048b52c",
+  "sources": [
+    "src/EverQuest/tu_055_Movement.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@player",
+  "args": [
+    {
+      "name": "position_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "char",
+  "objects": {
+    "player": {
+      "size": "0x2ec",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@data"
+        }
+      ]
+    },
+    "position": {
+      "size": "0x0c",
+      "fill": "zero"
+    },
+    "data": {
+      "size": "0x164",
+      "fill": "zero"
+    },
+    "display": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "movement": {
+      "size": "0x04",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x00",
+          "u32": "@vtbl"
+        }
+      ]
+    },
+    "vtbl": {
+      "size": "0x34",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x14",
+          "u32": "@get_flags"
+        },
+        {
+          "offset": "0x30",
+          "u32": "@check_position"
+        }
+      ]
+    },
+    "get_flags": {
+      "size": "0x04"
+    },
+    "check_position": {
+      "size": "0x04"
+    },
+    "notice": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00645ed0",
+      "from_image": "0x00645ED0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0099e368",
+      "u32": "@movement"
+    },
+    {
+      "addr": "0x009237c0",
+      "u32": 286331153
+    },
+    {
+      "addr": "0x009237c4",
+      "u32": 572662306
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@display"
+    },
+    {
+      "addr": "0x00924470",
+      "u32": 0
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": 0
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": 0
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": 0
+    },
+    {
+      "addr": "@display",
+      "offset": "0x15",
+      "cstr": "movement warning"
+    },
+    {
+      "addr": "@player",
+      "offset": "0x204",
+      "u32": 0
+    },
+    {
+      "addr": "@player",
+      "offset": "0x22c",
+      "f32": 0.0
+    },
+    {
+      "addr": "@player",
+      "offset": "0x238",
+      "f32": 0.0
+    },
+    {
+      "addr": "@player",
+      "offset": "0x244",
+      "u8": 0
+    },
+    {
+      "addr": "@player",
+      "offset": "0x251",
+      "u8": 0
+    },
+    {
+      "addr": "@data",
+      "offset": "0x0a8",
+      "u32": 0
+    },
+    {
+      "addr": "@data",
+      "offset": "0x160",
+      "u32": 0
+    },
+    {
+      "addr": "@position",
+      "offset": "0x00",
+      "f32": 1.0
+    },
+    {
+      "addr": "@position",
+      "offset": "0x04",
+      "f32": 2.0
+    },
+    {
+      "addr": "@position",
+      "offset": "0x08",
+      "f32": 3.0
+    },
+    {
+      "addr": "@notice",
+      "cstr": "A movement warning"
+    }
+  ],
+  "callees": {
+    "0x004899d3": {
+      "name": "calculate speed",
+      "conv": "thiscall",
+      "args": [],
+      "ret_float": 0.0
+    },
+    "0x0048c130": {
+      "name": "update state",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ]
+    },
+    "0x0048b42b": {
+      "name": "check transition",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x0048bb42": {
+      "name": "is self",
+      "conv": "fastcall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "get string",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "ptr"
+      ],
+      "ret": "@notice"
+    },
+    "0x00498436": {
+      "name": "display chat",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ]
+    },
+    "0x0047cb5f": {
+      "name": "update flags",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ]
+    },
+    "@check_position": {
+      "name": "check position",
+      "conv": "thiscall",
+      "args": [
+        "mem:12"
+      ],
+      "ret": 1
+    },
+    "@get_flags": {
+      "name": "get flags",
+      "conv": "thiscall",
+      "args": [
+        "mem:12"
+      ],
+      "ret": 1073741824
+    }
+  },
+  "cases": [
+    {
+      "name": "position rejected",
+      "args": [
+        "@position"
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "@check_position": {
+          "name": "check position",
+          "conv": "thiscall",
+          "args": [
+            "mem:12"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "unchanged flags",
+      "args": [
+        "@position"
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x0a8",
+          "u32": 32
+        }
+      ],
+      "callees": {
+        "@get_flags": {
+          "name": "get flags",
+          "conv": "thiscall",
+          "args": [
+            "mem:12"
+          ],
+          "ret": 32
+        }
+      }
+    },
+    {
+      "name": "positive flag update",
+      "args": [
+        "@position"
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x244",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "@get_flags": {
+          "name": "get flags",
+          "conv": "thiscall",
+          "args": [
+            "mem:12"
+          ],
+          "ret": 1073741824
+        }
+      }
+    },
+    {
+      "name": "negative transition returns true",
+      "args": [
+        "@position"
+      ],
+      "expect": {
+        "ret": 1
+      },
+      "callees": {
+        "@get_flags": {
+          "name": "get flags",
+          "conv": "thiscall",
+          "args": [
+            "mem:12"
+          ],
+          "ret": 3489660928
+        },
+        "0x0048b42b": {
+          "name": "check transition",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "int",
+            "ignore"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "negative transition matches state",
+      "args": [
+        "@position"
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x204",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "@get_flags": {
+          "name": "get flags",
+          "conv": "thiscall",
+          "args": [
+            "mem:12"
+          ],
+          "ret": 2147483648
+        },
+        "0x0048b42b": {
+          "name": "check transition",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "int",
+            "ignore"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "negative transition differs from state",
+      "args": [
+        "@position"
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x204",
+          "u32": 4660
+        }
+      ],
+      "callees": {
+        "@get_flags": {
+          "name": "get flags",
+          "conv": "thiscall",
+          "args": [
+            "mem:12"
+          ],
+          "ret": 3221225472
+        },
+        "0x0048b42b": {
+          "name": "check transition",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "int",
+            "ignore"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "global flag reset",
+      "args": [
+        "@position"
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "0x00924470",
+          "u32": 126
+        }
+      ],
+      "callees": {
+        "@get_flags": {
+          "name": "get flags",
+          "conv": "thiscall",
+          "args": [
+            "mem:12"
+          ],
+          "ret": 1073741824
+        }
+      }
+    },
+    {
+      "name": "self movement warning",
+      "args": [
+        "@position"
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@player"
+        }
+      ],
+      "callees": {
+        "@get_flags": {
+          "name": "get flags",
+          "conv": "thiscall",
+          "args": [
+            "mem:12"
+          ],
+          "ret": 1073741824
+        },
+        "0x0048bb42": {
+          "name": "is self",
+          "conv": "fastcall",
+          "args": [
+            "u32"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "float adjustment with unequal speeds",
+      "args": [
+        "@position"
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x22c",
+          "f32": 3.0
+        },
+        {
+          "addr": "@player",
+          "offset": "0x238",
+          "f32": 1.0
+        }
+      ],
+      "callees": {
+        "0x004899d3": {
+          "name": "calculate speed",
+          "conv": "thiscall",
+          "args": [],
+          "ret_float": 3.0
+        },
+        "@get_flags": {
+          "name": "get flags",
+          "conv": "thiscall",
+          "args": [
+            "mem:12"
+          ],
+          "ret": 1073741824
+        }
+      }
+    },
+    {
+      "name": "zero flags boundary",
+      "args": [
+        "@position"
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x0a8",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "@get_flags": {
+          "name": "get flags",
+          "conv": "thiscall",
+          "args": [
+            "mem:12"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4764972,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@position"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@position",
+        "offset": "0x00",
+        "type": "float",
+        "choices": [
+          -8.0,
+          0.0,
+          1.0,
+          2.0,
+          8.0
+        ]
+      },
+      {
+        "addr": "@position",
+        "offset": "0x04",
+        "type": "float",
+        "choices": [
+          -8.0,
+          0.0,
+          1.0,
+          2.0,
+          8.0
+        ]
+      },
+      {
+        "addr": "@position",
+        "offset": "0x08",
+        "type": "float",
+        "choices": [
+          -8.0,
+          0.0,
+          1.0,
+          2.0,
+          8.0
+        ]
+      },
+      {
+        "addr": "@player",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@data",
+        "offset": "0x0a8",
+        "type": "u32",
+        "choices": [
+          0,
+          1073741824
+        ]
+      },
+      {
+        "addr": "0x00924470",
+        "type": "u32",
+        "choices": [
+          0,
+          126
+        ]
+      }
+    ]
+  }
+}

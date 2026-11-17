@@ -1,0 +1,253 @@
+{
+  "function": "social_frown_guess",
+  "original": "0x00466e40",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "unused_guess",
+      "type": "int"
+    },
+    {
+      "name": "source_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "controlled": {
+      "size": "0x252",
+      "fill": "random"
+    },
+    "text_lookup": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "global_context": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905cf8",
+      "u32": "@controlled"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@text_lookup"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@global_context"
+    },
+    {
+      "addr": "0x00640e38",
+      "from_image": "0x00640E38",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x0060f60d": {
+      "name": "_fabs",
+      "conv": "cdecl",
+      "args": [
+        "double"
+      ],
+      "passthrough": true
+    },
+    "0x00466dea": {
+      "name": "DoSocial_guess",
+      "conv": "cdecl",
+      "args": [
+        "u32",
+        "cstr"
+      ]
+    },
+    "0x005dfa00": {
+      "name": "FindText_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00498436": {
+      "name": "ReportError_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "_fabs": "0x0060f60d"
+  },
+  "cases": [
+    {
+      "name": "state-not-d",
+      "args": [
+        0,
+        "fallback"
+      ],
+      "memory": [
+        {
+          "addr": "@controlled",
+          "offset": "0x251",
+          "u8": 97
+        },
+        {
+          "addr": "@controlled",
+          "offset": "0x48",
+          "f32": 0.05
+        }
+      ]
+    },
+    {
+      "name": "below-threshold",
+      "args": [
+        1,
+        "wake"
+      ],
+      "memory": [
+        {
+          "addr": "@controlled",
+          "offset": "0x251",
+          "u8": 100
+        },
+        {
+          "addr": "@controlled",
+          "offset": "0x48",
+          "f32": 0.05
+        }
+      ]
+    },
+    {
+      "name": "negative-below-threshold",
+      "args": [
+        -1,
+        "stand"
+      ],
+      "memory": [
+        {
+          "addr": "@controlled",
+          "offset": "0x251",
+          "u8": 100
+        },
+        {
+          "addr": "@controlled",
+          "offset": "0x48",
+          "f32": -0.05
+        }
+      ]
+    },
+    {
+      "name": "threshold-equality",
+      "args": [
+        2,
+        "sleep"
+      ],
+      "memory": [
+        {
+          "addr": "@controlled",
+          "offset": "0x251",
+          "u8": 100
+        },
+        {
+          "addr": "@controlled",
+          "offset": "0x48",
+          "f32": 0.1
+        }
+      ]
+    },
+    {
+      "name": "negative-threshold-equality",
+      "args": [
+        3,
+        "sit"
+      ],
+      "memory": [
+        {
+          "addr": "@controlled",
+          "offset": "0x251",
+          "u8": 100
+        },
+        {
+          "addr": "@controlled",
+          "offset": "0x48",
+          "f32": -0.1
+        }
+      ]
+    },
+    {
+      "name": "above-threshold",
+      "args": [
+        4,
+        "run"
+      ],
+      "memory": [
+        {
+          "addr": "@controlled",
+          "offset": "0x251",
+          "u8": 100
+        },
+        {
+          "addr": "@controlled",
+          "offset": "0x48",
+          "f32": 0.11
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4615744,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -2,
+          2
+        ]
+      },
+      {
+        "choices": [
+          "",
+          "a",
+          "wake",
+          "hello"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@controlled",
+        "offset": "0x251",
+        "type": "u8",
+        "choices": [
+          97,
+          100
+        ]
+      },
+      {
+        "addr": "@controlled",
+        "offset": "0x48",
+        "type": "float",
+        "choices": [
+          -0.2,
+          -0.1,
+          -0.099,
+          0.0,
+          0.05,
+          0.099,
+          0.1,
+          0.101,
+          0.2
+        ]
+      }
+    ]
+  },
+  "_survivors": "L6052: float32 input cannot equal the double literal 0.1; adjacent representable values fall on the same side for < and <=."
+}

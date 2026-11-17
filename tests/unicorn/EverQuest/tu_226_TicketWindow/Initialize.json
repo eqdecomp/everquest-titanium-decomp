@@ -1,0 +1,129 @@
+{
+  "function": "TicketUiOwner_guess::LoadIniInfo_guess",
+  "original": "0x00561204",
+  "sources": [
+    "src/EverQuest/tu_226_TicketWindow.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@ticketuiowner",
+  "args": [],
+  "ret": "char",
+  "objects": {
+    "ticketuiowner": {
+      "size": "0x5c8",
+      "fill": "random"
+    },
+    "searchstatus": {
+      "size": "0x2",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1",
+          "u8": 0
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00923d64",
+      "u8": 0
+    },
+    {
+      "addr": "0x00985cf0",
+      "u32": "@searchstatus"
+    },
+    {
+      "addr": "0x00905ca0",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x005a1ef0": {
+      "name": "SetListName_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "mem:4",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "disabled",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00923d64",
+          "u8": 0
+        },
+        {
+          "addr": "@searchstatus",
+          "offset": "0x1",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "enabled-and-inactive",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00923d64",
+          "u8": 1
+        },
+        {
+          "addr": "@searchstatus",
+          "offset": "0x1",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "enabled-and-active",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00923d64",
+          "u8": 1
+        },
+        {
+          "addr": "@searchstatus",
+          "offset": "0x1",
+          "u8": 1
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5640708,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x00923d64",
+        "type": "u8",
+        "choices": [0, 1, 255]
+      },
+      {
+        "addr": "@searchstatus",
+        "offset": "0x1",
+        "type": "u8",
+        "choices": [0, 1, 255]
+      }
+    ]
+  }
+}

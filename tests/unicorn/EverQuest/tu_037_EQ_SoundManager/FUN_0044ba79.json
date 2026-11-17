@@ -1,0 +1,491 @@
+{
+  "function": "EqSoundManagerView_guess::CreateSoundEmitter_guess",
+  "original": "0x0044ba79",
+  "sources": [
+    "src/EverQuest/tu_037_EQ_SoundManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@thing",
+  "args": [
+    {
+      "name": "type",
+      "type": "int"
+    },
+    {
+      "name": "value_c",
+      "type": "int"
+    },
+    {
+      "name": "value_10",
+      "type": "int"
+    },
+    {
+      "name": "value_14",
+      "type": "float"
+    },
+    {
+      "name": "value_18",
+      "type": "int"
+    },
+    {
+      "name": "value_1c",
+      "type": "int"
+    },
+    {
+      "name": "value_20",
+      "type": "int"
+    },
+    {
+      "name": "value_24",
+      "type": "float"
+    },
+    {
+      "name": "value_28",
+      "type": "int"
+    },
+    {
+      "name": "value_2c",
+      "type": "int"
+    },
+    {
+      "name": "index",
+      "type": "int"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "thing": {
+      "size": "0xb9dc",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@part"
+        },
+        {
+          "offset": "0xc",
+          "u32": "@listener"
+        },
+        {
+          "offset": "0x24",
+          "u32": "@item"
+        },
+        {
+          "offset": "0x2c",
+          "u8": 0
+        },
+        {
+          "offset": "0x30",
+          "u32": 0
+        },
+        {
+          "offset": "0x1004",
+          "u32": "@item"
+        },
+        {
+          "offset": "0xabc8",
+          "u32": "@item"
+        },
+        {
+          "offset": "0xb9d8",
+          "u32": 1
+        }
+      ]
+    },
+    "part": {
+      "size": "0x40",
+      "fill": "random"
+    },
+    "listener": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "item": {
+      "size": "0x8",
+      "fill": "random"
+    },
+    "track": {
+      "size": "0x180",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00640fc0",
+      "u32": 0
+    },
+    {
+      "addr": "0x00640fc4",
+      "u32": 0
+    },
+    {
+      "addr": "0x00642ae0",
+      "f32": 0.5
+    },
+    {
+      "addr": "0x00644164",
+      "from_image": "0x00644164",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@track"
+    },
+    "0x004c6658": {
+      "name": "Track_guess::Track_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr",
+        "int"
+      ],
+      "ret": "@track"
+    },
+    "??0Track_guess@@QAE@PAUPart_guess@@PAUIndexedItem_guess@@H@Z": {
+      "name": "Track_guess::Track_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr",
+        "int"
+      ],
+      "ret": "@track"
+    },
+    "0x0044b502": {
+      "name": "GetMp3Asset_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@item"
+    },
+    "0x004c6a99": {
+      "name": "SoundListener_guess::FUN_004c6a99_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ptr",
+        "int",
+        "float",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+      ]
+    },
+    "0x004c6698": {
+      "name": "Track_guess::Track_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr",
+        "int"
+      ],
+      "ret": "@track"
+    },
+    "??0Track_guess@@QAE@PAUPart_guess@@0H@Z": {
+      "name": "Track_guess::Track_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr",
+        "int"
+      ],
+      "ret": "@track"
+    },
+    "0x004c4fa1": {
+      "name": "FUN_004c4fa1_guess",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret_float": 0.75
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071",
+    "??0Track_guess@@QAE@PAUPart_guess@@PAUIndexedItem_guess@@H@Z": "0x004c6658",
+    "??0Track_guess@@QAE@PAUPart_guess@@0H@Z": "0x004c6698"
+  },
+  "cases": [
+    {
+      "name": "disabled",
+      "args": [
+        0,
+        4,
+        5,
+        1.5,
+        1,
+        1,
+        1,
+        1.5,
+        4,
+        20000,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@thing",
+          "offset": "0x2c",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "type_0_negative_time_positive_scale",
+      "args": [
+        0,
+        4,
+        5,
+        1.5,
+        1,
+        0,
+        1,
+        -1.5,
+        4,
+        20001,
+        0
+      ]
+    },
+    {
+      "name": "type_0_default_scale",
+      "args": [
+        0,
+        4,
+        5,
+        1.5,
+        0,
+        0,
+        0,
+        0.0,
+        4,
+        1500,
+        0
+      ]
+    },
+    {
+      "name": "type_2_value_below_3",
+      "args": [
+        2,
+        4,
+        5,
+        -1.5,
+        -1,
+        1,
+        2,
+        1.5,
+        2,
+        20000,
+        0
+      ]
+    },
+    {
+      "name": "type_2_value_at_3",
+      "args": [
+        2,
+        4,
+        5,
+        -1.5,
+        0,
+        2,
+        0,
+        1.5,
+        3,
+        20001,
+        0
+      ]
+    },
+    {
+      "name": "type_3",
+      "args": [
+        3,
+        4,
+        5,
+        1.5,
+        2,
+        2,
+        -1,
+        1.5,
+        4,
+        20000,
+        0
+      ]
+    },
+    {
+      "name": "type_1_negative_index",
+      "args": [
+        1,
+        4,
+        5,
+        1.5,
+        1,
+        1,
+        2,
+        1.5,
+        4,
+        20001,
+        -1
+      ]
+    },
+    {
+      "name": "type_1_direct_index",
+      "args": [
+        1,
+        4,
+        5,
+        1.5,
+        0,
+        1,
+        2,
+        1.5,
+        4,
+        20000,
+        0
+      ]
+    },
+    {
+      "name": "type_1_null_node",
+      "args": [
+        1,
+        4,
+        5,
+        1.5,
+        0,
+        1,
+        2,
+        1.5,
+        4,
+        20000,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@thing",
+          "offset": "0x24",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "invalid_type",
+      "args": [
+        4,
+        4,
+        5,
+        1.5,
+        0,
+        1,
+        2,
+        1.5,
+        4,
+        20000,
+        0
+      ]
+    },
+    {
+      "name": "missing_entry",
+      "args": [
+        0,
+        4,
+        5,
+        1.5,
+        0,
+        1,
+        2,
+        1.5,
+        4,
+        20000,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@thing",
+          "offset": "0x1004",
+          "u32": 0
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4504185,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -1,
+          4
+        ]
+      },
+      {
+        "range": [
+          -10,
+          10
+        ]
+      },
+      {
+        "range": [
+          -10,
+          10
+        ]
+      },
+      {
+        "range": [
+          -2.0,
+          2.0
+        ]
+      },
+      {
+        "range": [
+          -1,
+          2
+        ]
+      },
+      {
+        "range": [
+          -1,
+          2
+        ]
+      },
+      {
+        "range": [
+          -1,
+          2
+        ]
+      },
+      {
+        "range": [
+          -1.5,
+          1.5
+        ]
+      },
+      {
+        "range": [
+          2,
+          4
+        ]
+      },
+      {
+        "range": [
+          0,
+          20001
+        ]
+      },
+      {
+        "range": [
+          -1,
+          1
+        ]
+      }
+    ],
+    "memory": []
+  },
+  "_survivors": "L2092: changing > to >= only assigns 20000 when limit is already 20000, so the call argument is unchanged; L2162: at value_28 == 3 both arms store 3.0f, so < versus <= and bound 3 versus 4 are observationally equivalent."
+}

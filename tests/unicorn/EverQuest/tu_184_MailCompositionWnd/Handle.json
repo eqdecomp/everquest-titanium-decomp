@@ -1,0 +1,259 @@
+{
+  "function": "CMailCompositionWndMainView_guess::WndNotification_guess",
+  "original": "0x0052e576",
+  "sources": [
+    "src/EverQuest/tu_184_MailCompositionWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {
+      "name": "sender",
+      "type": "ptr"
+    },
+    {
+      "name": "message",
+      "type": "u32"
+    },
+    {
+      "name": "data",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "owner": {
+      "size": "0x188",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@owner_vtbl" },
+        { "offset": "0x168", "u32": "@address_ctrl" },
+        { "offset": "0x16c", "u32": "@subject_ctrl" },
+        { "offset": "0x170", "u32": "@body_ctrl" },
+        { "offset": "0x174", "u32": "@sender_send" },
+        { "offset": "0x178", "u32": "@sender_cancel" },
+        { "offset": "0x17c", "u32": "@sender_manager" },
+        { "offset": "0x180", "u32": "@sender_sync" }
+      ]
+    },
+    "fn_slot33": { "size": "0x4" },
+    "fn_slot34": { "size": "0x4" },
+    "fn_manager_slot33": { "size": "0x4" },
+    "fn_gettext": { "size": "0x4" },
+    "owner_vtbl": {
+      "size": "0x8c",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x84", "u32": "@fn_slot33" },
+        { "offset": "0x88", "u32": "@fn_slot34" }
+      ]
+    },
+    "address_ctrl": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{ "offset": "0", "u32": "@edit_vtbl" }]
+    },
+    "subject_ctrl": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{ "offset": "0", "u32": "@edit_vtbl" }]
+    },
+    "body_ctrl": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{ "offset": "0", "u32": "@edit_vtbl" }]
+    },
+    "edit_vtbl": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [{ "offset": "0x130", "u32": "@fn_gettext" }]
+    },
+    "sender_send": { "size": "0x4", "fill": "zero" },
+    "sender_cancel": { "size": "0x4", "fill": "zero" },
+    "sender_manager": { "size": "0x4", "fill": "zero" },
+    "sender_sync": { "size": "0x4", "fill": "zero" },
+    "sender_other": { "size": "0x4", "fill": "zero" },
+    "data": { "size": "0x4", "fill": "zero" },
+    "root": { "size": "0x838", "fill": "zero" },
+    "mailroot": { "size": "0x4", "fill": "zero" },
+    "strings": { "size": "0x4", "fill": "zero" },
+    "manager": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{ "offset": "0", "u32": "@manager_vtbl" }]
+    },
+    "manager_vtbl": {
+      "size": "0x88",
+      "fill": "zero",
+      "init": [{ "offset": "0x84", "u32": "@fn_manager_slot33" }]
+    },
+    "chat_error": { "size": "0x20", "fill": "zero", "init": [{ "offset": "0", "cstr": "error text" }] },
+    "chat_cancel": { "size": "0x20", "fill": "zero", "init": [{ "offset": "0", "cstr": "cancel text" }] },
+    "text_address": { "size": "0x20", "fill": "zero", "init": [{ "offset": "0", "cstr": "to@example.test" }] },
+    "text_subject": { "size": "0x20", "fill": "zero", "init": [{ "offset": "0", "cstr": "subject" }] },
+    "text_body": { "size": "0x20", "fill": "zero", "init": [{ "offset": "0", "cstr": "body" }] }
+  },
+  "memory": [
+    { "addr": "0x00988df0", "u32": "@root" },
+    { "addr": "0x00905cb0", "u32": "@strings" },
+    { "addr": "0x00850bec", "u32": "@manager" },
+    { "addr": "@root", "offset": "0x834", "u32": 0 },
+    { "addr": "0x007a1000", "size": "0x10", "fill": "zero" }
+  ],
+  "callees": {
+    "0x005dfa00": {
+      "name": "string_table_getString_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": ["@chat_error", "@chat_cancel"]
+    },
+    "0x004982c6": {
+      "name": "CEverQuest_dsp_chat_colored_guess",
+      "conv": "thiscall",
+      "args": ["cstr", "int", "bool"],
+      "ret": 0
+    },
+    "0x00495250": {
+      "name": "mail_root_Get_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": ["@mailroot", "@mailroot"]
+    },
+    "0x00572300": {
+      "name": "CXStr_operator_char_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": ["@text_address", "@text_subject", "@text_body"]
+    },
+    "0x00403631": {
+      "name": "basic_string_ctor_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "this"
+    },
+    "0x0042b166": {
+      "name": "MailtoLink_Send_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "ignore", "ignore", "int"],
+      "ret": 0
+    },
+    "0x0040291e": {
+      "name": "basic_string_Tidy_guess",
+      "conv": "thiscall",
+      "args": ["bool", "u32"],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "CXStr_FreeRep_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x00498436": {
+      "name": "CEverQuest_dsp_chat_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": 0
+    },
+    "0x0059d080": {
+      "name": "manager_Flag_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x0052dfbb": {
+      "name": "SyncWithAddressBook_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005a2230": {
+      "name": "CSidlScreenWnd_WndNotification",
+      "conv": "thiscall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 0
+    },
+    "@fn_slot33": {
+      "name": "owner_slot33",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_slot34": {
+      "name": "owner_slot34",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_manager_slot33": {
+      "name": "manager_slot33",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_gettext": {
+      "name": "text_control_GetText_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [{ "arg": 0, "offset": 0, "hex": "00107a00" }]
+    }
+  },
+  "rewrite_inline": ["@__security_check_cookie@4"],
+  "cases": [
+    {
+      "name": "message not handled",
+      "args": ["@sender_other", 0, "@data"]
+    },
+    {
+      "name": "send button while not ready",
+      "args": ["@sender_send", 1, "@data"],
+      "memory": [{ "addr": "@root", "offset": "0x834", "u32": 0 }],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "send button sends mail",
+      "args": ["@sender_send", 1, "@data"],
+      "memory": [{ "addr": "@root", "offset": "0x834", "u32": 1 }]
+    },
+    {
+      "name": "send button without mail root",
+      "args": ["@sender_send", 1, "@data"],
+      "memory": [{ "addr": "@root", "offset": "0x834", "u32": 1 }],
+      "callees": { "0x00495250": { "ret": 0 } }
+    },
+    {
+      "name": "cancel button",
+      "args": ["@sender_cancel", 1, "@data"]
+    },
+    {
+      "name": "manager button",
+      "args": ["@sender_manager", 1, "@data"]
+    },
+    {
+      "name": "sync button",
+      "args": ["@sender_sync", 1, "@data"]
+    },
+    {
+      "name": "manager button without global manager",
+      "args": ["@sender_manager", 1, "@data"],
+      "memory": [{ "addr": "0x00850bec", "u32": 0 }]
+    },
+    {
+      "name": "unknown command sender",
+      "args": ["@sender_other", 1, "@data"]
+    }
+  ],
+  "fuzz": {
+    "seed": 5432694,
+    "count": 100,
+    "args": [
+      { "choices": ["@sender_send", "@sender_cancel", "@sender_manager", "@sender_sync", "@sender_other"] },
+      { "choices": [0, 1, 2] },
+      { "choices": ["@data"] }
+    ],
+    "memory": [
+      { "addr": "@root", "offset": "0x834", "type": "int", "choices": [0, 1] }
+    ]
+  }
+}

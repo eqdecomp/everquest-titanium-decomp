@@ -1,0 +1,126 @@
+{
+  "function": "CopperToMoneyText_guess",
+  "original": "0x0046daaf",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "value_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "cstr",
+  "objects": {},
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0xbb40e64"
+    },
+    {
+      "addr": "0x0099db00",
+      "cstr": ""
+    },
+    {
+      "addr": "0x0063f53f",
+      "cstr": ""
+    },
+    {
+      "addr": "0x00900700",
+      "size": 128,
+      "fill": "zero"
+    }
+  ],
+  "callees": {
+    "0x006220e9": {
+      "name": "__itoa",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ptr",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x0046da4a": {
+      "name": "FUN_0046da4a",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "int",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "58 00"
+        }
+      ]
+    },
+    "0x0060e450": {
+      "name": "FUN_0060e450",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00"
+        }
+      ]
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "writes": [
+        {
+          "addr": "0x00900700",
+          "hex": "00"
+        }
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9",
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {"name": "all_digits_positive", "args": [1234]},
+    {"name": "all_zero", "args": [0]},
+    {"name": "negative", "args": [-1]},
+    {"name": "thousands_only", "args": [1000]},
+    {"name": "hundreds_only", "args": [100]},
+    {"name": "tens_only", "args": [10]},
+    {"name": "ones_only", "args": [1]},
+    {"name": "upper_boundary", "args": [999999]},
+    {"name": "lower_boundary", "args": [-999999]}
+  ],
+  "fuzz": {
+    "seed": 4643503,
+    "count": 100,
+    "args": [
+      {"range": [-999999, 999999]}
+    ],
+    "memory": []
+  }
+}

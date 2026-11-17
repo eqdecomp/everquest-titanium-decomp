@@ -1,0 +1,52 @@
+{
+  "function": "Weather_guess::Weather_guess",
+  "original": "0x004c32c2",
+  "sources": [
+    "src/EverQuest/tu_084_Weather.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@window",
+  "args": [],
+  "ret": "ptr",
+  "objects": {
+    "window": {
+      "size": "0x30",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {},
+  "cases": [
+    {
+      "name": "random_fill",
+      "args": []
+    },
+    {
+      "name": "all_ones_fill",
+      "args": [],
+      "memory": [
+        {"addr": "@window", "offset": "0x00", "u32": "0xffffffff"},
+        {"addr": "@window", "offset": "0x04", "u32": "0xffffffff"},
+        {"addr": "@window", "offset": "0x08", "u32": "0xffffffff"},
+        {"addr": "@window", "offset": "0x0c", "u32": "0xffffffff"},
+        {"addr": "@window", "offset": "0x10", "u32": "0xffffffff"},
+        {"addr": "@window", "offset": "0x14", "u32": "0xffffffff"},
+        {"addr": "@window", "offset": "0x18", "u32": "0xffffffff"},
+        {"addr": "@window", "offset": "0x1c", "u32": "0xffffffff"},
+        {"addr": "@window", "offset": "0x20", "u32": "0xffffffff"},
+        {"addr": "@window", "offset": "0x24", "u32": "0xffffffff"},
+        {"addr": "@window", "offset": "0x28", "u32": "0xffffffff"},
+        {"addr": "@window", "offset": "0x2c", "u32": "0xffffffff"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4993730,
+    "count": 50,
+    "args": [],
+    "memory": [
+      {"addr": "@window", "offset": "0x00", "type": "int", "choices": [0, 1, 255, -1]},
+      {"addr": "@window", "offset": "0x0c", "type": "int", "choices": [0, 1, 255, -1]}
+    ]
+  }
+}

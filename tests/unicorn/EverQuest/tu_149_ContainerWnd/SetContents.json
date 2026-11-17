@@ -1,0 +1,230 @@
+{
+  "function": "ContainerWnd_guess::SetContainer_guess",
+  "original": "0x004fb700",
+  "sources": [
+    "src/EverQuest/tu_149_ContainerWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@wnd",
+  "args": [
+    {"name": "contents_guess", "type": "ptr"},
+    {"name": "slot_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "vt": {"size": "0x120", "fill": "zero", "init": [
+      {"offset": "0xc0", "u32": "@fn_show"},
+      {"offset": "0xfc", "u32": "@fn_settext"},
+      {"offset": "0x118", "u32": "@fn_layout"}
+    ]},
+    "fn_show": {"size": "0x4", "fill": "zero"},
+    "fn_settext": {"size": "0x4", "fill": "zero"},
+    "fn_layout": {"size": "0x4", "fill": "zero"},
+    "wnd": {"size": "0x1b4", "fill": "random", "init": [
+      {"offset": "0x0", "u32": "@vt"},
+      {"offset": "0x160", "u32": "@s0"},
+      {"offset": "0x164", "u32": "@s1"},
+      {"offset": "0x168", "u32": "@s2"},
+      {"offset": "0x16c", "u32": "@s3"},
+      {"offset": "0x170", "u32": "@s4"},
+      {"offset": "0x174", "u32": "@s5"},
+      {"offset": "0x178", "u32": "@s6"},
+      {"offset": "0x17c", "u32": "@s7"},
+      {"offset": "0x180", "u32": "@s8"},
+      {"offset": "0x184", "u32": "@s9"},
+      {"offset": "0x188", "u32": "@combine"},
+      {"offset": "0x18c", "u32": "@done"},
+      {"offset": "0x190", "u32": "@icon"},
+      {"offset": "0x1a0", "u32": "@anim"},
+      {"offset": "0x1a4", "u32": "@label"},
+      {"offset": "0x1a8", "u32": "@aug"}
+    ]},
+    "s0": {"size": "0x124", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "s1": {"size": "0x124", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "s2": {"size": "0x124", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "s3": {"size": "0x124", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "s4": {"size": "0x124", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "s5": {"size": "0x124", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "s6": {"size": "0x124", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "s7": {"size": "0x124", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "s8": {"size": "0x124", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "s9": {"size": "0x124", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "combine": {"size": "0x124", "fill": "random", "init": [
+      {"offset": "0x0", "u32": "@vt"},
+      {"offset": "0x3c", "u32": 3}, {"offset": "0x40", "u32": 7}, {"offset": "0x44", "u32": 64}, {"offset": "0x48", "u32": 30}
+    ]},
+    "done": {"size": "0x124", "fill": "random", "init": [
+      {"offset": "0x0", "u32": "@vt"},
+      {"offset": "0x3c", "u32": 2}, {"offset": "0x40", "u32": 11}, {"offset": "0x44", "u32": 51}, {"offset": "0x48", "u32": 34}
+    ]},
+    "aug": {"size": "0x124", "fill": "random", "init": [
+      {"offset": "0x0", "u32": "@vt"},
+      {"offset": "0x3c", "u32": 4}, {"offset": "0x40", "u32": 9}, {"offset": "0x44", "u32": 131}, {"offset": "0x48", "u32": 77}
+    ]},
+    "label": {"size": "0x124", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "icon": {"size": "0x124", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "anim": {"size": "0x50", "fill": "random"},
+    "contents": {"size": "0x100", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x005a0850": {"name": "Resize_guess", "conv": "thiscall", "args": ["int", "int"]},
+    "0x00571e00": {"name": "CXStr::CXStr", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x005738b0": {"name": "ContainerPrintf_guess", "conv": "cdecl", "args": ["ignore", "cstr", "int"], "ret": 0},
+    "0x00572300": {"name": "CXStr::operator char*", "conv": "thiscall", "args": [], "ret": "0x00653330"},
+    "0x005a1d40": {"name": "EnableIniStorage", "conv": "thiscall", "args": ["int", "u32"]},
+    "0x0059d860": {"name": "GetRect_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0", "writes": [
+      {"arg": 0, "offset": 0, "hex": "0a000000140000006e000000dc000000", "call": [0, 2, 4, 6, 8, 10, 12, 14]},
+      {"arg": 0, "offset": 0, "hex": "050000000f00000050000000c8000000", "call": [1, 3, 5, 7, 9, 11, 13, 15]}
+    ]},
+    "0x0059fb00": {"name": "Move_guess", "conv": "thiscall", "args": ["mem:16"]},
+    "@fn_layout": {"name": "Layout_guess", "conv": "thiscall", "args": []},
+    "0x005e0ec0": {"name": "GetName_guess", "conv": "thiscall", "args": [], "ret": "0x00653324"},
+    "@fn_settext": {"name": "SetWindowText_guess", "conv": "thiscall", "args": ["mem:4"]},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["u32"]},
+    "0x005e0f60": {"name": "GetIcon_guess", "conv": "thiscall", "args": [], "ret": 612},
+    "0x005b1ab0": {"name": "Anim_guess", "conv": "thiscall", "args": ["int"]},
+    "0x004face1": {"name": "Rect_guess::Merge_guess", "conv": "thiscall", "args": ["mem:16", "mem:16"], "passthrough": true},
+    "0x004d9160": {"name": "Rect_guess::Assign_guess", "conv": "thiscall", "args": ["ignore", "mem:16"], "passthrough": true},
+    "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 4},
+    "0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": 20},
+    "0x004fae39": {"name": "UpdateAugments_guess", "conv": "thiscall", "args": []},
+    "0x0059fa70": {"name": "MoveTo_guess", "conv": "thiscall", "args": ["mem:8"]},
+    "@fn_show": {"name": "Show_guess", "conv": "thiscall", "args": ["int", "int"]}
+  },
+  "cases": [
+    {"name": "null contents", "args": [0, 22]},
+    {"name": "null contents, no buttons, slot 3 empty", "args": [0, 22], "memory": [
+      {"addr": "@wnd", "offset": "0x188", "u32": 0},
+      {"addr": "@wnd", "offset": "0x18c", "u32": 0},
+      {"addr": "@wnd", "offset": "0x16c", "u32": 0}
+    ]},
+    {"name": "slot -1", "args": ["@contents", -1]},
+    {"name": "inv 21", "args": ["@contents", 21]},
+    {"name": "inv 22", "args": ["@contents", 22]},
+    {"name": "inv 29", "args": ["@contents", 29]},
+    {"name": "inv 30", "args": ["@contents", 30]},
+    {"name": "bank 1999", "args": ["@contents", 1999]},
+    {"name": "bank 2000", "args": ["@contents", 2000]},
+    {"name": "bank 2030", "args": ["@contents", 2030]},
+    {"name": "bank 2031", "args": ["@contents", 2031]},
+    {"name": "shared 2499", "args": ["@contents", 2499]},
+    {"name": "shared 2500", "args": ["@contents", 2500]},
+    {"name": "shared 2530", "args": ["@contents", 2530]},
+    {"name": "shared 2531", "args": ["@contents", 2531]},
+    {"name": "trade 2999", "args": ["@contents", 2999]},
+    {"name": "trade 3000", "args": ["@contents", 3000]},
+    {"name": "trade 3030", "args": ["@contents", 3030]},
+    {"name": "trade 3031", "args": ["@contents", 3031]},
+    {"name": "world 3999", "args": ["@contents", 3999]},
+    {"name": "world 4000", "args": ["@contents", 4000]},
+    {"name": "world 4030", "args": ["@contents", 4030]},
+    {"name": "world 4031", "args": ["@contents", 4031]},
+    {"name": "viewpc 8999", "args": ["@contents", 8999]},
+    {"name": "viewpc 9000", "args": ["@contents", 9000]},
+    {"name": "viewpc 9030", "args": ["@contents", 9030]},
+    {"name": "viewpc 9031", "args": ["@contents", 9031]},
+    {"name": "viewbank 9999", "args": ["@contents", 9999]},
+    {"name": "viewbank 10000", "args": ["@contents", 10000]},
+    {"name": "viewbank 10030", "args": ["@contents", 10030]},
+    {"name": "viewbank 10031", "args": ["@contents", 10031]},
+    {"name": "viewshared 10499", "args": ["@contents", 10499]},
+    {"name": "viewshared 10500", "args": ["@contents", 10500]},
+    {"name": "viewshared 10530", "args": ["@contents", 10530]},
+    {"name": "viewshared 10531", "args": ["@contents", 10531]},
+    {"name": "type 0x35 (augment)", "args": ["@contents", 22],
+     "callees": {"0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": 53}}},
+    {"name": "type 0x35, no augment list", "args": ["@contents", 2000],
+     "memory": [{"addr": "@wnd", "offset": "0x1a8", "u32": 0}],
+     "callees": {"0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": 53}}},
+    {"name": "type 0x33", "args": ["@contents", 3000],
+     "callees": {"0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": 51}}},
+    {"name": "type 0x34", "args": ["@contents", 3000],
+     "callees": {"0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": 52}}},
+    {"name": "type 8", "args": ["@contents", 4000],
+     "callees": {"0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": 8}}},
+    {"name": "type 9", "args": ["@contents", 4000],
+     "callees": {"0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": 9}}},
+    {"name": "type 8, no combine", "args": ["@contents", 4000], "memory": [{"addr": "@wnd", "offset": "0x188", "u32": 0}],
+     "callees": {"0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": 8}}},
+    {"name": "type 9, no combine", "args": ["@contents", 4000], "memory": [{"addr": "@wnd", "offset": "0x188", "u32": 0}],
+     "callees": {"0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": 9}}},
+    {"name": "type per call varies", "args": ["@contents", 9000],
+     "callees": {"0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": [53, 20, 51, 20, 53]}}},
+    {"name": "type per call varies 2", "args": ["@contents", 9000],
+     "callees": {"0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": [20, 20, 20, 53, 20]}}},
+    {"name": "type per call varies 3", "args": ["@contents", 9000],
+     "callees": {"0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": [20, 20, 20, 20, 53]}}},
+    {"name": "no label, icon, anim, done", "args": ["@contents", 22], "memory": [
+      {"addr": "@wnd", "offset": "0x1a4", "u32": 0},
+      {"addr": "@wnd", "offset": "0x190", "u32": 0},
+      {"addr": "@wnd", "offset": "0x1a0", "u32": 0},
+      {"addr": "@wnd", "offset": "0x18c", "u32": 0}
+    ]},
+    {"name": "no icon", "args": ["@contents", 22], "memory": [{"addr": "@wnd", "offset": "0x190", "u32": 0}]},
+    {"name": "no label", "args": ["@contents", 22], "memory": [{"addr": "@wnd", "offset": "0x1a4", "u32": 0}]},
+    {"name": "count 0", "args": ["@contents", 2500],
+     "callees": {"0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "count 10, slot 5 empty", "args": ["@contents", 2500], "memory": [{"addr": "@wnd", "offset": "0x174", "u32": 0}],
+     "callees": {"0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 10}}},
+    {"name": "count 1", "args": ["@contents", 10500],
+     "callees": {"0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "empty rects, no done, no combine", "args": ["@contents", 22], "memory": [
+      {"addr": "@wnd", "offset": "0x18c", "u32": 0},
+      {"addr": "@wnd", "offset": "0x188", "u32": 0}
+    ], "callees": {"0x0059d860": {"name": "GetRect_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "00000000000000000000000000000000"}]}}},
+    {"name": "flat rects (top == bottom), no buttons", "args": ["@contents", 22], "memory": [
+      {"addr": "@wnd", "offset": "0x18c", "u32": 0},
+      {"addr": "@wnd", "offset": "0x188", "u32": 0}
+    ], "callees": {"0x0059d860": {"name": "GetRect_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "00000000050000006400000005000000"}]}}},
+    {"name": "narrow rects (left == right), no buttons", "args": ["@contents", 22], "memory": [
+      {"addr": "@wnd", "offset": "0x18c", "u32": 0},
+      {"addr": "@wnd", "offset": "0x188", "u32": 0}
+    ], "callees": {"0x0059d860": {"name": "GetRect_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "07000000050000000700000064000000"}]}}},
+    {"name": "negative done width", "args": ["@contents", 3000], "memory": [
+      {"addr": "@done", "offset": "0x3c", "u32": 61},
+      {"addr": "@done", "offset": "0x44", "u32": 4}
+    ]},
+    {"name": "negative done width, type 0x35", "args": ["@contents", 3000], "memory": [
+      {"addr": "@done", "offset": "0x3c", "u32": 61},
+      {"addr": "@done", "offset": "0x44", "u32": 4}
+    ], "callees": {"0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": 53}}},
+    {"name": "negative combine width", "args": ["@contents", 3000], "memory": [
+      {"addr": "@combine", "offset": "0x3c", "u32": 61},
+      {"addr": "@combine", "offset": "0x44", "u32": 4}
+    ]}
+  ],
+  "fuzz": {
+    "seed": 5224192,
+    "count": 120,
+    "args": [
+      {"choices": ["@contents", "@contents", "@contents", 0]},
+      {"choices": [-1, 0, 21, 22, 25, 29, 30, 1999, 2000, 2015, 2030, 2031, 2499, 2500, 2530, 2531, 2999, 3000, 3030, 3031,
+                   3999, 4000, 4017, 4030, 4031, 8999, 9000, 9030, 9031, 9999, 10000, 10030, 10031, 10499, 10500, 10530, 10531]}
+    ],
+    "memory": [
+      {"addr": "@wnd", "offset": "0x160", "type": "ptr", "choices": ["@s0", 0]},
+      {"addr": "@wnd", "offset": "0x16c", "type": "ptr", "choices": ["@s3", 0]},
+      {"addr": "@wnd", "offset": "0x184", "type": "ptr", "choices": ["@s9", 0]},
+      {"addr": "@wnd", "offset": "0x188", "type": "ptr", "choices": ["@combine", 0]},
+      {"addr": "@wnd", "offset": "0x18c", "type": "ptr", "choices": ["@done", 0]},
+      {"addr": "@wnd", "offset": "0x190", "type": "ptr", "choices": ["@icon", 0]},
+      {"addr": "@wnd", "offset": "0x1a0", "type": "ptr", "choices": ["@anim", 0]},
+      {"addr": "@wnd", "offset": "0x1a4", "type": "ptr", "choices": ["@label", 0]},
+      {"addr": "@wnd", "offset": "0x1a8", "type": "ptr", "choices": ["@aug", 0]},
+      {"addr": "@done", "offset": "0x3c", "type": "int", "range": [-50, 50]},
+      {"addr": "@done", "offset": "0x40", "type": "int", "range": [-50, 50]},
+      {"addr": "@done", "offset": "0x44", "type": "int", "range": [-50, 150]},
+      {"addr": "@done", "offset": "0x48", "type": "int", "range": [-50, 150]},
+      {"addr": "@combine", "offset": "0x3c", "type": "int", "range": [-50, 50]},
+      {"addr": "@combine", "offset": "0x40", "type": "int", "range": [-50, 50]},
+      {"addr": "@combine", "offset": "0x44", "type": "int", "range": [-50, 150]},
+      {"addr": "@combine", "offset": "0x48", "type": "int", "range": [-50, 150]},
+      {"addr": "@aug", "offset": "0x3c", "type": "int", "range": [-50, 50]},
+      {"addr": "@aug", "offset": "0x44", "type": "int", "range": [-50, 150]}
+    ]
+  }
+}

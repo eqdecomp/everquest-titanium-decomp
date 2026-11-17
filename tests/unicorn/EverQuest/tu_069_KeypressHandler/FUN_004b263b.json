@@ -1,0 +1,262 @@
+{
+  "function": "KeyMap_guess::HandleKeyUp",
+  "original": "0x004b263b",
+  "sources": [
+    "src/EverQuest/tu_069_KeypressHandler.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@keymap",
+  "args": [
+    {
+      "name": "key",
+      "type": "ptr"
+    }
+  ],
+  "ret": "bool",
+  "objects": {
+    "keymap": {
+      "size": "0x964",
+      "fill": "zero"
+    },
+    "key": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "keyobject": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0099d3ec",
+      "u32": "@keyobject"
+    }
+  ],
+  "callees": {
+    "0x005ba250": {
+      "name": "Key_guess::Current_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        0
+      ]
+    },
+    "0x005ae430": {
+      "name": "KeyObject_guess::Find_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x004619cd": {
+      "name": "ExecuteCmd",
+      "conv": "cdecl",
+      "args": [
+        "u32",
+        "int",
+        "u32"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "find_nonzero_no_pressed_keys",
+      "args": [
+        "@key"
+      ],
+      "expect": {
+        "ret": false
+      }
+    },
+    {
+      "name": "find_zero_no_pressed_keys",
+      "args": [
+        "@key"
+      ],
+      "callees": {
+        "0x005ae430": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": true
+      }
+    },
+    {
+      "name": "primary_match_clears_first",
+      "args": [
+        "@keymap"
+      ],
+      "memory": [
+        {
+          "addr": "@keymap",
+          "offset": "0x858",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x005ba250": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            10,
+            10
+          ]
+        }
+      },
+      "expect": {
+        "ret": true
+      }
+    },
+    {
+      "name": "primary_miss_alternate_match",
+      "args": [
+        "@keymap"
+      ],
+      "memory": [
+        {
+          "addr": "@keymap",
+          "offset": "0x858",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x005ba250": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            10,
+            20,
+            30,
+            30
+          ]
+        }
+      },
+      "expect": {
+        "ret": true
+      }
+    },
+    {
+      "name": "primary_miss_alternate_miss",
+      "args": [
+        "@keymap"
+      ],
+      "memory": [
+        {
+          "addr": "@keymap",
+          "offset": "0x858",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x005ba250": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            10,
+            20,
+            30,
+            40
+          ]
+        }
+      },
+      "expect": {
+        "ret": false
+      }
+    },
+    {
+      "name": "pressed_flag_must_equal_one",
+      "args": [
+        "@keymap"
+      ],
+      "memory": [
+        {
+          "addr": "@keymap",
+          "offset": "0x858",
+          "u8": 2
+        }
+      ],
+      "expect": {
+        "ret": false
+      }
+    },
+    {
+      "name": "last_pressed_slot_boundary",
+      "args": [
+        "@keymap+0x428"
+      ],
+      "memory": [
+        {
+          "addr": "@keymap",
+          "offset": "0x962",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x005ba250": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            5,
+            5
+          ]
+        }
+      },
+      "expect": {
+        "ret": true
+      }
+    },
+    {
+      "name": "sentinel_past_pressed_array",
+      "args": [
+        "@keymap+0x42c"
+      ],
+      "memory": [
+        {
+          "addr": "@keymap",
+          "offset": "0x963",
+          "u8": 1
+        }
+      ],
+      "expect": {
+        "ret": false
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4924987,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@keymap"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@keymap",
+        "offset": "0x858",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  }
+}

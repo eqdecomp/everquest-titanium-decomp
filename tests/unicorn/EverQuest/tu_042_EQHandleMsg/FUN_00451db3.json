@@ -1,0 +1,206 @@
+{
+  "function": "Handle_OP_BecomeCorpse_guess",
+  "original": "0x00451db3",
+  "sources": [
+    "src/EverQuest/tu_042_EQHandleMsg.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "request_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "request": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "target": {
+      "size": "0x280",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@state"
+        }
+      ]
+    },
+    "state": {
+      "size": "0x1070",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0063F4D0",
+      "from_image": "0x0063F4D0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640EA0",
+      "from_image": "0x00640EA0",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x00401b28": {
+      "name": "ResolveDispatch_guess",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@target"
+    },
+    "0x0048a0fc": {
+      "name": "GetFloorHeightAt_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "float",
+        "float",
+        "int"
+      ],
+      "ret_float": 2.5
+    },
+    "0x0048a945": {
+      "name": "FUN_0048a945_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "height stored",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x0",
+          "u32": 3
+        },
+        {
+          "addr": "@request",
+          "offset": "0x4",
+          "f32": 1.5
+        },
+        {
+          "addr": "@request",
+          "offset": "0x8",
+          "f32": -2.0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "f32": 4.25
+        }
+      ]
+    },
+    {
+      "name": "sentinel height not stored",
+      "args": [
+        "@request"
+      ],
+      "callees": {
+        "0x0048a0fc": {
+          "name": "GetHeight_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "int"
+          ],
+          "ret_float": -9.999999884841548e26
+        }
+      }
+    },
+    {
+      "name": "negative height stored",
+      "args": [
+        "@request"
+      ],
+      "callees": {
+        "0x0048a0fc": {
+          "name": "GetHeight_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "int"
+          ],
+          "ret_float": -3.0
+        }
+      }
+    },
+    {
+      "name": "no dispatch target",
+      "args": [
+        "@request"
+      ],
+      "callees": {
+        "0x00401b28": {
+          "name": "ResolveDispatch_guess",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "zero request",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x0",
+          "u32": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0x4",
+          "f32": 0.0
+        },
+        {
+          "addr": "@request",
+          "offset": "0x8",
+          "f32": 0.0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "f32": 0.0
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4529587,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@request"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@request",
+        "offset": "0x4",
+        "type": "float",
+        "count": 3,
+        "p": 0.5
+      }
+    ]
+  }
+}

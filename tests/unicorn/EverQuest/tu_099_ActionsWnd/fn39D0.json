@@ -1,0 +1,187 @@
+{
+  "function": "CActionsWnd_guess::AbilitiesPageOnProcessFrame_guess",
+  "original": "0x004d39d0",
+  "sources": ["src/EverQuest/tu_099_ActionsWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "object": {
+      "size": "0x218",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x194", "u32": "@child0"},
+        {"offset": "0x198", "u32": "@child1"},
+        {"offset": "0x19c", "u32": "@child2"},
+        {"offset": "0x1a0", "u32": "@child3"},
+        {"offset": "0x1a4", "u32": "@child4"},
+        {"offset": "0x1a8", "u32": "@child5"}
+      ]
+    },
+    "child0": {"size": "0x10", "fill": "zero"},
+    "child1": {"size": "0x10", "fill": "zero"},
+    "child2": {"size": "0x10", "fill": "zero"},
+    "child3": {"size": "0x10", "fill": "zero"},
+    "child4": {"size": "0x10", "fill": "zero"},
+    "child5": {"size": "0x10", "fill": "zero"},
+    "root": {"size": "0x150", "fill": "zero"},
+    "flag_owner": {"size": "0x1b0", "fill": "zero", "init": [{"offset": "0x1a8", "u32": "@inner"}]},
+    "inner": {"size": "0x110", "fill": "zero"},
+    "ent_type2": {"size": "0x10", "fill": "zero"},
+    "ent_type0": {"size": "0x10", "fill": "zero"},
+    "ent_type1": {"size": "0x10", "fill": "zero"},
+    "ent_type3": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@ent_type2", "offset": "0xa", "u8": 2},
+    {"addr": "@ent_type0", "offset": "0xa", "u8": 0},
+    {"addr": "@ent_type1", "offset": "0xa", "u8": 1},
+    {"addr": "@ent_type3", "offset": "0xa", "u8": 3},
+    {"addr": "@root", "offset": "0x148", "u32": 5},
+    {"addr": "@inner", "offset": "0x10c", "u32": 5},
+    {"addr": "0x00905ce4", "u32": "@flag_owner"},
+    {"addr": "0x00905d24", "u32": "@root"},
+    {"addr": "0x00851200", "offset": "0x0", "u32": "@ent_type2"},
+    {"addr": "0x00851200", "offset": "0x4", "u32": "@ent_type0"},
+    {"addr": "0x00851200", "offset": "0x8", "u32": "@ent_type1"},
+    {"addr": "0x00851200", "offset": "0xc", "u32": "@ent_type3"},
+    {"addr": "0x00851200", "offset": "0x10", "u32": "@ent_type2"},
+    {"addr": "0x00851200", "offset": "0x14", "u32": "@ent_type0"},
+    {"addr": "0x00851200", "offset": "0x18", "u32": "@ent_type1"},
+    {"addr": "0x00851200", "offset": "0x1c", "u32": "@ent_type3"},
+    {"addr": "0x00851200", "offset": "0x20", "u32": "@ent_type2"},
+    {"addr": "0x00851200", "offset": "0x24", "u32": "@ent_type0"},
+    {"addr": "0x00851200", "offset": "0x28", "u32": "@ent_type1"},
+    {"addr": "0x00851200", "offset": "0x2c", "u32": "@ent_type3"},
+    {"addr": "0x00851200", "offset": "0x30", "u32": "@ent_type2"},
+    {"addr": "0x00851200", "offset": "0x34", "u32": "@ent_type0"},
+    {"addr": "0x00851200", "offset": "0x38", "u32": "@ent_type1"},
+    {"addr": "0x00851200", "offset": "0x3c", "u32": "@ent_type3"},
+    {"addr": "0x0092460c", "hex": "00 01 00 01 00 01 00 01 00 01 00 01 00 01 00 01"},
+    {"addr": "0x00924672", "u8": 0},
+    {"addr": "0x0095d424", "hex": "ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff"}
+  ],
+  "callees": {
+    "0x005bb140": {
+      "name": "ItemAction_guess::apply_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "all_skip_keys_minus1",
+      "args": []
+    },
+    {
+      "name": "null_children",
+      "args": [],
+      "memory": [
+        {"addr": "@object", "offset": "0x194", "u32": 0},
+        {"addr": "@object", "offset": "0x198", "u32": 0},
+        {"addr": "@object", "offset": "0x19c", "u32": 0},
+        {"addr": "@object", "offset": "0x1a0", "u32": 0},
+        {"addr": "@object", "offset": "0x1a4", "u32": 0},
+        {"addr": "@object", "offset": "0x1a8", "u32": 0},
+        {"addr": "0x0095d424", "hex": "00 00 00 00 01 00 00 00 02 00 00 00 03 00 00 00 64 00 00 00 6f 00 00 00"}
+      ]
+    },
+    {
+      "name": "type2_special0_arg1",
+      "args": [],
+      "memory": [
+        {"addr": "0x0095d424", "hex": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"},
+        {"addr": "0x00924672", "u8": 0}
+      ]
+    },
+    {
+      "name": "type2_special1_arg0",
+      "args": [],
+      "memory": [
+        {"addr": "0x0095d424", "hex": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"},
+        {"addr": "0x00924672", "u8": 1}
+      ]
+    },
+    {
+      "name": "flags_by_table",
+      "args": [],
+      "memory": [
+        {"addr": "0x0095d424", "hex": "01 00 00 00 02 00 00 00 03 00 00 00 01 00 00 00 02 00 00 00 03 00 00 00"}
+      ]
+    },
+    {
+      "name": "key_6f_special0",
+      "args": [],
+      "memory": [
+        {"addr": "0x0095d424", "hex": "6f 00 00 00 6f 00 00 00 6f 00 00 00 6f 00 00 00 6f 00 00 00 6f 00 00 00"},
+        {"addr": "0x00924672", "u8": 0}
+      ]
+    },
+    {
+      "name": "key_6f_special1",
+      "args": [],
+      "memory": [
+        {"addr": "0x0095d424", "hex": "6f 00 00 00 6f 00 00 00 6f 00 00 00 6f 00 00 00 6f 00 00 00 6f 00 00 00"},
+        {"addr": "0x00924672", "u8": 1}
+      ]
+    },
+    {
+      "name": "keys_72_73",
+      "args": [],
+      "memory": [
+        {"addr": "0x0095d424", "hex": "72 00 00 00 73 00 00 00 72 00 00 00 73 00 00 00 72 00 00 00 73 00 00 00"}
+      ]
+    },
+    {
+      "name": "seventh_slot_not_read",
+      "args": [],
+      "memory": [
+        {"addr": "@object", "offset": "0x1ac", "u32": "@child0"},
+        {"addr": "0x0095d43c", "u32": 0},
+        {"addr": "0x0095d424", "hex": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"}
+      ]
+    },
+    {
+      "name": "clock_less_arg1",
+      "args": [],
+      "memory": [
+        {"addr": "0x0095d424", "hex": "64 00 00 00 65 00 00 00 96 00 00 00 64 00 00 00 c8 00 00 00 65 00 00 00"},
+        {"addr": "@root", "offset": "0x148", "u32": 4},
+        {"addr": "@inner", "offset": "0x10c", "u32": 5}
+      ]
+    },
+    {
+      "name": "clock_equal_arg0",
+      "args": [],
+      "memory": [
+        {"addr": "0x0095d424", "hex": "64 00 00 00 65 00 00 00 96 00 00 00 64 00 00 00 c8 00 00 00 65 00 00 00"},
+        {"addr": "@root", "offset": "0x148", "u32": 5},
+        {"addr": "@inner", "offset": "0x10c", "u32": 5}
+      ]
+    },
+    {
+      "name": "clock_greater_arg0",
+      "args": [],
+      "memory": [
+        {"addr": "0x0095d424", "hex": "64 00 00 00 65 00 00 00 96 00 00 00 64 00 00 00 c8 00 00 00 65 00 00 00"},
+        {"addr": "@root", "offset": "0x148", "u32": 6},
+        {"addr": "@inner", "offset": "0x10c", "u32": 5}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5061072,
+    "count": 150,
+    "args": [],
+    "memory": [
+      {"addr": "0x0095d424", "type": "int", "count": 6, "stride": 4, "choices": [-1, 0, 1, 2, 3, 4, 5, 15, 100, 101, 111, 114, 115, 150, 200]},
+      {"addr": "0x0092460c", "type": "u8", "count": 16, "stride": 1, "choices": [0, 1]},
+      {"addr": "0x00924672", "type": "u8", "choices": [0, 1]},
+      {"addr": "@root", "offset": "0x148", "type": "u32", "range": [0, 12]},
+      {"addr": "@inner", "offset": "0x10c", "type": "u32", "range": [0, 12]},
+      {"addr": "@object", "offset": "0x194", "type": "u32", "choices": [0], "count": 6, "stride": 4, "p": 0.3}
+    ]
+  }
+}

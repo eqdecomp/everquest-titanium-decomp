@@ -1,0 +1,111 @@
+{
+  "function": "TableLookup_guess::CityCanStart_guess",
+  "original": "0x004171a1",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@tablelookup",
+  "args": [
+    {
+      "name": "first_guess",
+      "type": "int"
+    },
+    {
+      "name": "second_guess",
+      "type": "int"
+    },
+    {
+      "name": "third_guess",
+      "type": "int"
+    },
+    {
+      "name": "fourth_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "char",
+  "objects": {
+    "tablelookup": {
+      "size": "0x1",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00923d58",
+      "u32": 0
+    },
+    {
+      "addr": "0x00695f20",
+      "size": 352,
+      "fill": "random"
+    }
+  ],
+  "callees": {},
+  "cases": [
+    { "name": "table_default", "args": [1, 1, 1, 1] },
+    { "name": "table_boundary_11", "args": [11, 2, 1, 1] },
+    { "name": "first_boundary_12", "args": [12, 2, 1, 1] },
+    { "name": "negative_table_index", "args": [-1, -2, 0, 0] },
+    { "name": "special_127_match", "args": [12, 127, 0, 0] },
+    { "name": "special_127_miss", "args": [11, 127, 0, 0] },
+    { "name": "special_129_match", "args": [13, 129, 0, 0] },
+    { "name": "special_129_miss", "args": [12, 129, 0, 0] },
+    { "name": "special_329_match", "args": [14, 329, 0, 0] },
+    { "name": "special_329_miss", "args": [13, 329, 0, 0] },
+    { "name": "second0_first4_allows_6", "args": [4, 0, 6, 0] },
+    { "name": "second0_first3_rejects_6", "args": [3, 0, 6, 0] },
+    { "name": "second0_first3_rejects_7", "args": [3, 0, 7, 0] },
+    { "name": "second0_first3_rejects_4", "args": [3, 0, 4, 0] },
+    { "name": "second0_fourth6_third10_rejects", "args": [3, 0, 10, 6] },
+    { "name": "second0_first1_allows", "args": [1, 0, 1, 5] },
+    { "name": "second0_third1_rejects", "args": [2, 0, 1, 0] },
+    { "name": "second0_third8_rejects", "args": [2, 0, 8, 0] },
+    { "name": "second0_third5_rejects", "args": [2, 0, 5, 0] },
+    { "name": "second0_fourth5_rejects", "args": [2, 0, 2, 5] },
+    { "name": "second0_fourth3_rejects", "args": [2, 0, 2, 3] },
+    { "name": "second0_fourth3_first1_allows", "args": [1, 0, 2, 3] },
+    { "name": "second0_mode4_third15_rejects", "args": [2, 0, 15, 6], "memory": [{ "addr": "0x00923d58", "u32": 4 }] },
+    { "name": "second0_mode4_third15_other_fourth", "args": [2, 0, 15, 0], "memory": [{ "addr": "0x00923d58", "u32": 4 }] },
+    { "name": "second0_third0_fourth6_rejects", "args": [2, 0, 0, 6] },
+    { "name": "second6_mode2_rejects_first8", "args": [8, 6, 0, 0], "memory": [{ "addr": "0x00923d58", "u32": 2 }] },
+    { "name": "second6_mode2_allows_first9", "args": [9, 6, 0, 0], "memory": [{ "addr": "0x00923d58", "u32": 2 }] },
+    { "name": "second6_mode2_allows_first10", "args": [10, 6, 0, 0], "memory": [{ "addr": "0x00923d58", "u32": 2 }] },
+    { "name": "second6_first3_rejects_third4", "args": [3, 6, 4, 0] },
+    { "name": "second6_first3_rejects_third6", "args": [3, 6, 6, 0] },
+    { "name": "second6_first3_rejects_third7", "args": [3, 6, 7, 0] },
+    { "name": "second6_first4_allows_third4", "args": [4, 6, 4, 0] },
+    { "name": "second6_first3_rejects_third1", "args": [3, 6, 1, 0] },
+    { "name": "second6_first3_rejects_third5", "args": [3, 6, 5, 0] },
+    { "name": "second6_first3_rejects_third8", "args": [3, 6, 8, 0] },
+    { "name": "second6_first1_allows_third1", "args": [1, 6, 1, 0] },
+    { "name": "second6_fourth3_rejects_first2", "args": [2, 6, 0, 3] },
+    { "name": "second6_fourth3_allows_first1", "args": [1, 6, 0, 3] },
+    { "name": "second6_fourth3_first9_third14_allows", "args": [9, 6, 14, 3] },
+    { "name": "second6_fourth3_first9_other_third_rejects", "args": [9, 6, 13, 3] },
+    { "name": "second6_fourth0_third14_first2_rejects", "args": [2, 6, 14, 0] },
+    { "name": "second6_fourth0_third14_first9_allows", "args": [9, 6, 14, 0] },
+    { "name": "second6_fourth8_third14_first2_rejects", "args": [2, 6, 14, 8] },
+    { "name": "second6_fourth8_third14_first9_allows", "args": [9, 6, 14, 8] },
+    { "name": "second6_fourth5_third14_first2_rejects", "args": [2, 6, 14, 5] },
+    { "name": "second6_fourth5_third14_first1_allows", "args": [1, 6, 14, 5] },
+    { "name": "second6_fourth5_third14_first9_allows", "args": [9, 6, 14, 5] },
+    { "name": "second6_fourth2_third14_first2_rejects", "args": [2, 6, 14, 2] },
+    { "name": "second6_fourth2_third14_first10_allows", "args": [10, 6, 14, 2] },
+    { "name": "second6_fourth2_other_third_first10_rejects", "args": [10, 6, 0, 2] }
+  ],
+  "fuzz": {
+    "seed": 4288929,
+    "count": 300,
+    "args": [
+      { "choices": [-1, 0, 1, 2, 3, 4, 5, 9, 10, 11, 12, 13, 14] },
+      { "choices": [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 126, 127, 128, 129, 130, 328, 329, 330] },
+      { "choices": [-1, 0, 1, 4, 5, 6, 7, 8, 10, 14, 15, 16] },
+      { "choices": [-1, 0, 2, 3, 5, 6, 8] }
+    ],
+    "memory": [
+      { "addr": "0x00923d58", "type": "u32", "choices": [0, 2, 4] }
+    ]
+  }
+}

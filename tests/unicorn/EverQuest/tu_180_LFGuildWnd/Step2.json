@@ -1,0 +1,156 @@
+{
+  "function": "TimerState_guess::Step2_guess",
+  "original": "0x005296fa",
+  "sources": ["src/EverQuest/tu_180_LFGuildWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@timerstate",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "timerstate": {
+      "size": "0x6dc",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x6b8", "u32": "@target"},
+        {"offset": "0x6bc", "u32": "@target"},
+        {"offset": "0x6c0", "u32": "@status"},
+        {"offset": "0x6c4", "u32": "@target"},
+        {"offset": "0x6c8", "u32": "@target"},
+        {"offset": "0x6d8", "u32": "@target"}
+      ]
+    },
+    "status": {"size": "0x4", "fill": "zero"},
+    "fn_slot48": {"size": "0x1", "fill": "zero"},
+    "fn_slot63": {"size": "0x1", "fill": "zero"},
+    "target": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@vtbl"}]
+    },
+    "vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xc0", "u32": "@fn_slot48"},
+        {"offset": "0xfc", "u32": "@fn_slot63"}
+      ]
+    },
+    "ctime_text": {"size": "0x40", "fill": "zero"},
+    "string_rep": {"size": "0x40", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x0063f53f", "cstr": "inactive"},
+    {"addr": "0x0099db00", "cstr": "42"},
+    {"addr": "@timerstate", "offset": "0x3c0", "cstr": "Timer name"},
+    {"addr": "@ctime_text", "cstr": "Mon Jan 01 00:00:00 2001\n"}
+  ],
+  "callees": {
+    "0x0059c360": {"name": "StatusSource_guess::Set_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00571e00": {"name": "StringValue_guess::StringValue_guess", "conv": "thiscall", "this": "ignore", "args": ["cstr"], "ret": "this", "passthrough": true},
+    "0x00571d00": {"name": "StringValue_guess::Release_guess", "conv": "thiscall", "this": "ignore", "args": ["ptr"], "ret": 0},
+    "0x0060eca3": {"name": "_ctime", "conv": "cdecl", "args": ["mem:4"], "ret": "@ctime_text"},
+    "0x0046da4a": {
+      "name": "FormatDate_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "cstr", "int", "int", "int", "int", "int", "int", "int", "int"],
+      "ret": 0,
+      "writes": [{"arg": 0, "hex": "4461746500"}]
+    },
+    "0x006220e9": {
+      "name": "__itoa",
+      "conv": "cdecl",
+      "args": ["int", "ptr", "int"],
+      "ret": "0x0099db00",
+      "writes": [{"addr": "0x0099db00", "hex": "343200"}]
+    },
+    "0x00527fcc": {"name": "FlagHandler_guess::Apply_guess", "conv": "thiscall", "args": ["ptr", "u32"]},
+    "0x0046d655": {"name": "FUN_0046d655", "conv": "cdecl", "args": [], "ret": "0x12345678"},
+    "0x005280e0": {"name": "TimerState_guess::Update_005280e0_guess", "conv": "thiscall", "args": []},
+    "kernel32.dll!GetProcessHeap": {"name": "GetProcessHeap", "conv": "stdcall", "args": [], "ret": 1},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@string_rep"},
+    "@fn_slot48": {"name": "TimerTarget_guess::Slot48_guess", "conv": "thiscall", "this": "ignore", "args": ["u32", "int"], "ret": 0},
+    "@fn_slot63": {"name": "TimerTarget_guess::SetText_guess", "conv": "thiscall", "this": "ignore", "args": ["mem:4"], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "_ctime": "0x0060eca3",
+    "__itoa": "0x006220e9"
+  },
+  "rewrite_data_aliases": {"___security_cookie": "0x0079ac74"},
+  "cases": [
+    {
+      "name": "inactive_all_targets",
+      "args": [],
+      "memory": [
+        {"addr": "@timerstate", "offset": "0x5c0", "u32": 12},
+        {"addr": "@timerstate", "offset": "0x5c4", "u32": 46},
+        {"addr": "@timerstate", "offset": "0x5c8", "u32": 43690},
+        {"addr": "@timerstate", "offset": "0x5cc", "u32": 9},
+        {"addr": "@timerstate", "offset": "0x5d0", "u32": 8},
+        {"addr": "@timerstate", "offset": "0x5d4", "u8": 0},
+        {"addr": "@timerstate", "offset": "0x5d8", "u32": 100}
+      ]
+    },
+    {
+      "name": "active_all_targets",
+      "args": [],
+      "memory": [
+        {"addr": "@timerstate", "offset": "0x5c0", "u32": 12},
+        {"addr": "@timerstate", "offset": "0x5c4", "u32": 46},
+        {"addr": "@timerstate", "offset": "0x5c8", "u32": 43690},
+        {"addr": "@timerstate", "offset": "0x5cc", "u32": 9},
+        {"addr": "@timerstate", "offset": "0x5d0", "u32": 8},
+        {"addr": "@timerstate", "offset": "0x5d4", "u8": 1},
+        {"addr": "@timerstate", "offset": "0x5d8", "u32": 100}
+      ]
+    },
+    {
+      "name": "noncanonical_nonzero_byte",
+      "args": [],
+      "memory": [
+        {"addr": "@timerstate", "offset": "0x5c0", "u32": -123},
+        {"addr": "@timerstate", "offset": "0x5c4", "u32": 789},
+        {"addr": "@timerstate", "offset": "0x5c8", "u32": 2147483648},
+        {"addr": "@timerstate", "offset": "0x5cc", "u32": -1},
+        {"addr": "@timerstate", "offset": "0x5d0", "u32": 0},
+        {"addr": "@timerstate", "offset": "0x5d4", "u8": 255},
+        {"addr": "@timerstate", "offset": "0x5d8", "u32": 2147483647}
+      ]
+    },
+    {
+      "name": "all_targets_null",
+      "args": [],
+      "memory": [
+        {"addr": "@timerstate", "offset": "0x6b8", "u32": 0},
+        {"addr": "@timerstate", "offset": "0x6bc", "u32": 0},
+        {"addr": "@timerstate", "offset": "0x6c0", "u32": 0},
+        {"addr": "@timerstate", "offset": "0x6c4", "u32": 0},
+        {"addr": "@timerstate", "offset": "0x6c8", "u32": 0},
+        {"addr": "@timerstate", "offset": "0x6d8", "u32": 0},
+        {"addr": "@timerstate", "offset": "0x5d4", "u8": 1}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5412602,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@timerstate", "offset": "0x6b8", "type": "ptr", "choices": ["@target", 0]},
+      {"addr": "@timerstate", "offset": "0x6bc", "type": "ptr", "choices": ["@target", 0]},
+      {"addr": "@timerstate", "offset": "0x6c0", "type": "ptr", "choices": ["@status", 0]},
+      {"addr": "@timerstate", "offset": "0x6c4", "type": "ptr", "choices": ["@target", 0]},
+      {"addr": "@timerstate", "offset": "0x6c8", "type": "ptr", "choices": ["@target", 0]},
+      {"addr": "@timerstate", "offset": "0x6d8", "type": "ptr", "choices": ["@target", 0]},
+      {"addr": "@timerstate", "offset": "0x5d4", "type": "u8", "choices": [0, 1, 2, 255]},
+      {"addr": "@timerstate", "offset": "0x5c0", "type": "int", "choices": [-2147483648, -1, 0, 1, 2147483647]},
+      {"addr": "@timerstate", "offset": "0x5c4", "type": "int", "choices": [-1, 0, 70, 2147483647]},
+      {"addr": "@timerstate", "offset": "0x5c8", "type": "u32", "choices": [0, 1, 2147483648, 4294967295]},
+      {"addr": "@timerstate", "offset": "0x5cc", "type": "int", "choices": [-1, 0, 1, 2147483647]},
+      {"addr": "@timerstate", "offset": "0x5d0", "type": "int", "choices": [-1, 0, 1, 2147483647]},
+      {"addr": "@timerstate", "offset": "0x5d8", "type": "int", "choices": [-1, 0, 1, 2147483647]},
+      {"addr": "@timerstate", "offset": "0x3c0", "type": "u8", "choices": [0, 84, 120]}
+    ]
+  },
+  "_survivors": "L1117: the emulated stack starts zeroed, and the scripted date formatter fills the buffer before it is read on the active path, so clearing byte zero is unobservable"
+}

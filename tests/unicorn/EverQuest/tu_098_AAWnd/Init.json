@@ -1,0 +1,149 @@
+{
+  "function": "CAAWndView_guess::BuildAbilityLists_guess",
+  "original": "0x004d06e9",
+  "sources": [
+    "src/EverQuest/tu_098_AAWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@book",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "book": {
+      "size": "0x1400",
+      "fill": "random",
+      "init": [
+        {"offset": "0x160", "u32": 10},
+        {"offset": "0x1e0", "u32": "@lst0"},
+        {"offset": "0x1e4", "u32": "@lst1"},
+        {"offset": "0x1e8", "u32": "@lst2"},
+        {"offset": "0x1ec", "u32": "@lst3"},
+        {"offset": "0x1f0", "u32": "@lst4"},
+        {"offset": "0x1f4", "u32": "@lst5"},
+        {"offset": "0x1f8", "u32": "@lst6"},
+        {"offset": "0x1fc", "u32": "@lst7"},
+        {"offset": "0x200", "u32": "@lst8"},
+        {"offset": "0x204", "u32": "@lst9"},
+        {"offset": "0x208", "u32": 0}
+      ]
+    },
+    "status": {
+      "size": "0x1000",
+      "fill": "zero",
+      "init": [{"offset": "0x8", "u32": "@vb"}]
+    },
+    "vb": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [{"offset": "0x4", "u32": 128}]
+    },
+    "magic": {"size": "0x40", "fill": "zero"},
+    "dbs": {"size": "0x10", "fill": "zero"},
+    "name": {"size": "0x20", "fill": "zero"},
+    "vt": {
+      "size": "0x140",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x130", "u32": "@fn76"},
+        {"offset": "0x138", "u32": "@fn78"}
+      ]
+    },
+    "fn76": {"size": "0x10", "fill": "zero"},
+    "fn78": {"size": "0x10", "fill": "zero"},
+    "lst0": {"size": "0x180", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "lst1": {"size": "0x180", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "lst2": {"size": "0x180", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "lst3": {"size": "0x180", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "lst4": {"size": "0x180", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "lst5": {"size": "0x180", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "lst6": {"size": "0x180", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "lst7": {"size": "0x180", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "lst8": {"size": "0x180", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "lst9": {"size": "0x180", "fill": "random", "init": [{"offset": "0x0", "u32": "@vt"}]},
+    "m_c1": {"size": "0x40", "fill": "zero", "init": [{"offset": "0x0", "u32": 100}, {"offset": "0x4", "u8": 1}, {"offset": "0x10", "u32": 500}, {"offset": "0x30", "u32": 1}]},
+    "m_c2": {"size": "0x40", "fill": "zero", "init": [{"offset": "0x0", "u32": 101}, {"offset": "0x4", "u8": 1}, {"offset": "0x10", "u32": 501}, {"offset": "0x30", "u32": 2}]},
+    "m_c2b": {"size": "0x40", "fill": "zero", "init": [{"offset": "0x0", "u32": 105}, {"offset": "0x4", "u8": 1}, {"offset": "0x10", "u32": 505}, {"offset": "0x30", "u32": 2}]},
+    "m_c3": {"size": "0x40", "fill": "zero", "init": [{"offset": "0x0", "u32": 102}, {"offset": "0x4", "u8": 0}, {"offset": "0x10", "u32": 502}, {"offset": "0x30", "u32": 3}]},
+    "m_c0": {"size": "0x40", "fill": "zero", "init": [{"offset": "0x0", "u32": 103}, {"offset": "0x4", "u8": 1}, {"offset": "0x10", "u32": 503}, {"offset": "0x30", "u32": 0}]},
+    "m_c12": {"size": "0x40", "fill": "zero", "init": [{"offset": "0x0", "u32": 104}, {"offset": "0x4", "u8": 1}, {"offset": "0x10", "u32": 504}, {"offset": "0x30", "u32": 12}]},
+    "m_c9": {"size": "0x40", "fill": "zero", "init": [{"offset": "0x0", "u32": 107}, {"offset": "0x4", "u8": 1}, {"offset": "0x10", "u32": 507}, {"offset": "0x30", "u32": 9}]},
+    "m_c10": {"size": "0x40", "fill": "zero", "init": [{"offset": "0x0", "u32": 109}, {"offset": "0x4", "u8": 1}, {"offset": "0x10", "u32": 509}, {"offset": "0x30", "u32": 10}]},
+    "m_x": {"size": "0x40", "fill": "zero", "init": [{"offset": "0x0", "u32": 110}, {"offset": "0x4", "u8": 1}, {"offset": "0x10", "u32": 600}, {"offset": "0x30", "u32": 0}]}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@status"},
+    {"addr": "0x008511d8", "u32": "@magic"},
+    {"addr": "0x00850398", "u32": "@dbs"},
+    {"addr": "@name", "cstr": "Spell"}
+  ],
+  "callees": {
+    "0x005ec220": {"name": "GetCharInfo2", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00447d07": {"name": "MagicTable_Read", "conv": "thiscall", "args": ["int"],
+                   "ret": ["@m_c1", "@m_c2", "@m_c3", "@m_c0", "@m_c12", "@m_c2b", 0, "@m_c9", "@m_c9", "@m_c10",
+                            "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1",
+                            "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1",
+                            "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1",
+                            "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1",
+                            "@m_x"]},
+    "0x00447f0b": {"name": "MagicTable_Check", "conv": "thiscall", "args": ["ptr", "ptr"],
+                   "ret": [1, 0, 1, 0, 1, 1, 1,
+                           1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                           1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]},
+    "0x00447cf2": {"name": "MagicTable_Apply", "conv": "thiscall", "args": ["ptr"]},
+    "0x004baaeb": {"name": "Status_Contains", "conv": "thiscall", "args": ["int"], "ret": [1, 0]},
+    "0x00447cb1": {"name": "IsStatusOneOrTwo", "conv": "thiscall", "args": [], "ret": 0},
+    "0x004355f7": {"name": "DbStrings_GetString", "conv": "thiscall", "args": ["u32", "u32", "u32"], "ret": "@name"},
+    "0x00571fc0": {"name": "CXStr_assign", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x0059b9d0": {"name": "CListWnd_AddString", "conv": "thiscall", "args": ["ignore", "u32", "u32", "u32"], "ret": 0},
+    "0x00598620": {"name": "CListWnd_SetItemData", "conv": "thiscall", "args": ["u32", "u32"]},
+    "0x00597ed0": {"name": "CListWnd_GetItemData", "conv": "thiscall", "args": ["u32"], "ret": 7},
+    "0x00571d00": {"name": "CXStr_FreeRep", "conv": "thiscall", "args": ["u32"]},
+    "0x004d0423": {"name": "Entry_Get", "conv": "thiscall", "args": ["u32"], "passthrough": true},
+    "@fn76": {"conv": "thiscall", "args": [], "ret": 0},
+    "@fn78": {"conv": "thiscall", "args": [], "ret": 0}
+  },
+  "coverage_ok": {
+    "004D072D-004D072E": "bounds trap: the zeroing loop index is 0..10 by construction",
+    "004D0784-004D0785": "bounds trap: category is checked to 1..11 before the index",
+    "004D079A-004D079B": "bounds trap: same index as above",
+    "004D07BA-004D07BB": "bounds trap: counts index is the checked category-1",
+    "004D080E-004D080F": "bounds trap: list loop index (only listCount>=12 reaches it; see listCount12 case)",
+    "004D0821-004D0822": "bounds trap: list loop index (listCount>=12 only)",
+    "004D0839-004D083A": "bounds trap: list loop index (listCount>=12 only)",
+    "004D085E-004D085F": "bounds trap: pair index j<counts, and counts<50 by the Apply check",
+    "004D08A6-004D08A7": "bounds trap: list loop index (listCount>=12 only)",
+    "004D08D3-004D08D4": "bounds trap: pair index j<50",
+    "004D08DF-004D08E0": "bounds trap: list loop index (listCount>=12 only)",
+    "004D0944-004D0945": "bounds trap: list loop index (listCount>=12 only)",
+    "004D0957-004D0958": "bounds trap: list loop index (listCount>=12 only)",
+    "004D096B-004D096C": "bounds trap: list loop index (listCount>=12 only)",
+    "004D0980-004D0981": "bounds trap: list loop index (listCount>=12 only)",
+    "004D099D-004D099E": "bounds trap: pair index k<counts<50",
+    "004D09A7-004D09A8": "bounds trap: list loop index (listCount>=12 only)",
+    "004D09BE-004D09BF": "bounds trap: pair index k<counts<50",
+    "004D08FB-004D0906": "CXStr_assign stub leaves the string buffer null, so FreeRep is not reached"
+  },
+  "cases": [
+    {"name": "typical", "args": []},
+    {"name": "no_status", "args": [], "memory": [{"addr": "0x00905d00", "u32": 0}]},
+    {"name": "status_one_or_two", "args": [], "callees": {"0x00447cb1": {"name": "IsStatusOneOrTwo", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "list_null_1", "args": [], "memory": [{"addr": "@book", "offset": "0x1e4", "u32": 0}]},
+    {"name": "no_lists", "args": [], "memory": [{"addr": "@book", "offset": "0x160", "u32": 0}]},
+    {"name": "lookup_null_in_phase2", "args": [], "callees": {"0x00447d07": {"name": "MagicTable_Read", "conv": "thiscall", "args": ["int"],
+                   "ret": ["@m_c1", "@m_c2", "@m_c3", "@m_c0", "@m_c12", "@m_c2b", 0, "@m_c9", "@m_c9", "@m_c10",
+                            "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1",
+                            "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1",
+                            "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1",
+                            "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1", "@m_c1",
+                            0]}}},
+    {"name": "listCount12", "args": [], "memory": [{"addr": "@book", "offset": "0x160", "u32": 12}]}
+  ],
+  "fuzz": {
+    "seed": 5048041,
+    "count": 20,
+    "args": [],
+    "memory": [
+      {"addr": "@book", "offset": "0x160", "type": "int", "choices": [0, 1, 2, 5, 9, 10]}
+    ]
+  }
+}

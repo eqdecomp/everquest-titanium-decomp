@@ -1,0 +1,76 @@
+{
+  "function": "EqSoundManager_guess::AddDynamicAsset_guess",
+  "original": "0x0044c7e0",
+  "sources": ["src/EverQuest/tu_037_EQ_SoundManager.cpp"],
+  "conv": "thiscall",
+  "this": "@eqsoundmanager",
+  "args": [{"name": "value", "type": "cstr"}],
+  "ret": "int",
+  "objects": {
+    "eqsoundmanager": {"size": "0xbafc", "fill": "zero"}
+  },
+  "callees": {
+    "0x00403631": {
+      "name": "ClientString_guess::ClientString_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": 0
+    },
+    "0x0042c050": {
+      "name": "SoundList_guess::Insert_guess",
+      "conv": "thiscall",
+      "args": ["mem:24"],
+      "ret": "@eqsoundmanager+0xbaec"
+    },
+    "0x0040291e": {
+      "name": "ClientString_guess::Tidy_guess",
+      "conv": "thiscall",
+      "args": ["bool", "u32"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "negative count",
+      "args": ["negative"],
+      "memory": [{"addr": "@eqsoundmanager", "offset": "0xbaf8", "u32": "0xffffffff"}],
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "occupied entry",
+      "args": ["occupied"],
+      "memory": [
+        {"addr": "@eqsoundmanager", "offset": "0xbaf8", "u32": 0},
+        {"addr": "@eqsoundmanager", "offset": "0x1004", "u32": 1}
+      ],
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "first free entry",
+      "args": ["first"],
+      "memory": [
+        {"addr": "@eqsoundmanager", "offset": "0xbaf8", "u32": 0},
+        {"addr": "@eqsoundmanager", "offset": "0x1004", "u32": 0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "last free entry",
+      "args": ["last"],
+      "memory": [
+        {"addr": "@eqsoundmanager", "offset": "0xbaf8", "u32": 4999},
+        {"addr": "@eqsoundmanager", "offset": "0xac3c", "u32": 0}
+      ],
+      "expect": {"ret": 4999}
+    }
+  ],
+  "fuzz": {
+    "seed": 4507616,
+    "count": 100,
+    "args": [{}],
+    "memory": [
+      {"addr": "@eqsoundmanager", "offset": "0xbaf8", "type": "int", "choices": [-1, 0, 1, 4999]},
+      {"addr": "@eqsoundmanager", "offset": "0x1004", "type": "u32", "count": 5000, "stride": 8, "choices": [0, 1]}
+    ]
+  }
+}

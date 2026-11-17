@@ -1,0 +1,129 @@
+{
+  "function": "CGemsGameWndView_guess::Draw_guess",
+  "original": "0x00504fb4",
+  "sources": [
+    "src/EverQuest/tu_160_GemsGameWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {"name": "source", "type": "int"},
+    {"name": "x", "type": "int"},
+    {"name": "y", "type": "int"},
+    {"name": "unused_14", "type": "int"},
+    {"name": "unused_18", "type": "int"},
+    {"name": "index", "type": "int"},
+    {"name": "highlighted", "type": "char"}
+  ],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x4288",
+      "fill": "random",
+      "init": [
+        {"offset": "0xdf0", "u32": "@r0"},
+        {"offset": "0xdf4", "u32": "@r1"},
+        {"offset": "0xdf8", "u32": "@r2"}
+      ]
+    },
+    "r0": {
+      "size": "0x38",
+      "fill": "random",
+      "init": [
+        {"offset": "0x30", "u32": 40},
+        {"offset": "0x34", "u32": 20}
+      ]
+    },
+    "r1": {"size": "0x38", "fill": "random"},
+    "r2": {"size": "0x38", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x0059d6c0": {
+      "name": "PrepareDraw_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "0x005b1ab0": {
+      "name": "Renderer_SetSource_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x005b1910": {
+      "name": "Renderer_Draw_guess",
+      "conv": "thiscall",
+      "args": ["mem:16", "ignore", "u32", "u32"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "all_highlighted_index3",
+      "args": [7, 100, 200, 0, 0, 3, 1]
+    },
+    {
+      "name": "all_plain_index3",
+      "args": [7, 100, 200, 0, 0, 3, 0]
+    },
+    {
+      "name": "index0_plain",
+      "args": [7, 100, 200, 0, 0, 0, 0]
+    },
+    {
+      "name": "index0_highlighted",
+      "args": [7, 100, 200, 0, 0, 0, 1]
+    },
+    {
+      "name": "index10_highlighted",
+      "args": [7, -4, 9, 0, 0, 10, 1]
+    },
+    {
+      "name": "no_df4",
+      "args": [7, 100, 200, 0, 0, 3, 1],
+      "memory": [{"addr": "@owner", "offset": "0xdf4", "u32": 0}]
+    },
+    {
+      "name": "no_df0",
+      "args": [7, 100, 200, 0, 0, 3, 1],
+      "memory": [{"addr": "@owner", "offset": "0xdf0", "u32": 0}]
+    },
+    {
+      "name": "no_df8",
+      "args": [7, 100, 200, 0, 0, 3, 0],
+      "memory": [{"addr": "@owner", "offset": "0xdf8", "u32": 0}]
+    },
+    {
+      "name": "all_null",
+      "args": [7, 100, 200, 0, 0, 3, 1],
+      "memory": [
+        {"addr": "@owner", "offset": "0xdf0", "u32": 0},
+        {"addr": "@owner", "offset": "0xdf4", "u32": 0},
+        {"addr": "@owner", "offset": "0xdf8", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 16004,
+    "count": 150,
+    "args": [
+      {"range": [-50, 100]},
+      {"range": [-200, 800]},
+      {"range": [-200, 800]},
+      {},
+      {},
+      {"range": [0, 10]},
+      {"choices": [0, 1, 2]}
+    ],
+    "memory": [
+      {"addr": "@owner", "offset": "0xdf0", "type": "u32", "choices": ["@r0", 0]},
+      {"addr": "@owner", "offset": "0xdf4", "type": "u32", "choices": ["@r1", 0]},
+      {"addr": "@owner", "offset": "0xdf8", "type": "u32", "choices": ["@r2", 0]},
+      {"addr": "@owner", "offset": "0xde0", "type": "int", "range": [-100, 700]},
+      {"addr": "@owner", "offset": "0xde4", "type": "int", "range": [-100, 700]},
+      {"addr": "@r0", "offset": "0x30", "type": "int", "range": [-5, 60]},
+      {"addr": "@r0", "offset": "0x34", "type": "int", "range": [-5, 60]}
+    ]
+  }
+}

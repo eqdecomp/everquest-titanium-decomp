@@ -1,0 +1,472 @@
+{
+  "function": "CostOwner_guess::CalculateWeight_guess",
+  "original": "0x0041BB06",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@costowner",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "costowner": {
+      "size": "0x284",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@offsets"
+        }
+      ]
+    },
+    "offsets": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 0
+        }
+      ]
+    },
+    "entry": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "subentry": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "lookup": {
+      "size": "0x1200",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@lookup",
+      "offset": "0x11d4",
+      "u32": 10
+    },
+    {
+      "addr": "@lookup",
+      "offset": "0x11d8",
+      "u32": 10
+    },
+    {
+      "addr": "@lookup",
+      "offset": "0x11dc",
+      "u32": 10
+    },
+    {
+      "addr": "@lookup",
+      "offset": "0x11e0",
+      "u32": 10
+    },
+    {
+      "addr": "@lookup",
+      "offset": "0x11e4",
+      "u32": 10
+    },
+    {
+      "addr": "@lookup",
+      "offset": "0x11e8",
+      "u32": 10
+    },
+    {
+      "addr": "@lookup",
+      "offset": "0x11ec",
+      "u32": 10
+    },
+    {
+      "addr": "@lookup",
+      "offset": "0x11f0",
+      "u32": 10
+    },
+    {
+      "addr": "0x00640e38",
+      "f32": 0.01
+    },
+    {
+      "addr": "0x00640e20",
+      "from_image": "0x00640E20",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00640038",
+      "from_image": "0x00640038",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00641094",
+      "f32": 0.01
+    },
+    {
+      "addr": "0x00641090",
+      "f32": 100.0
+    },
+    {
+      "addr": "0x0063f4cc",
+      "f32": 0.0
+    }
+  ],
+  "callees": {
+    "0x0040cc50": {
+      "name": "InventorySlots_guess::GetEntry_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@entry"
+    },
+    "0x005e0130": {
+      "name": "ItemInstance_guess::FUN_005e0130_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x005eccc0": {
+      "name": "ItemInstance_guess::GetItemClass_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005e0e00": {
+      "name": "ItemInstance_guess::FUN_005e0e00_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005ecc30": {
+      "name": "ItemInstance_guess::GetCount_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005ec630": {
+      "name": "ItemInstance_guess::GetEntry_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@subentry"
+    },
+    "0x005ec220": {
+      "name": "LookupService_guess::Find_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@lookup"
+    },
+    "0x005e0f30": {
+      "name": "ItemInstance_guess::GetItemId_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 17205
+    },
+    "0x004106a3": {
+      "name": "CostOwner_guess::TotalSpellAffects_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "all-loops-and-ranges",
+      "args": []
+    },
+    {
+      "name": "nonzero-dynamic-offset",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@offsets",
+          "offset": "0x4",
+          "u32": 8
+        }
+      ]
+    },
+    {
+      "name": "outer-entry-null",
+      "args": [],
+      "callees": {
+        "0x0040cc50": {
+          "name": "InventorySlots_guess::GetEntry_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "entry-not-blocked",
+      "args": [],
+      "callees": {
+        "0x005eccc0": {
+          "name": "ItemInstance_guess::GetItemClass_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "entry-with-no-children",
+      "args": [],
+      "callees": {
+        "0x005ecc30": {
+          "name": "ItemInstance_guess::GetCount_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "null-child-entry",
+      "args": [],
+      "callees": {
+        "0x005ec630": {
+          "name": "ItemInstance_guess::GetEntry_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "key-4330-lower-outside",
+      "args": [],
+      "callees": {
+        "0x005e0f30": {
+          "name": "ItemInstance_guess::GetItemId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 17200
+        }
+      }
+    },
+    {
+      "name": "key-4331-lower-first",
+      "args": [],
+      "callees": {
+        "0x005e0f30": {
+          "name": "ItemInstance_guess::GetItemId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 17201
+        }
+      }
+    },
+    {
+      "name": "key-433a-upper-first",
+      "args": [],
+      "callees": {
+        "0x005e0f30": {
+          "name": "ItemInstance_guess::GetItemId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 17210
+        }
+      }
+    },
+    {
+      "name": "key-433b-lower-second",
+      "args": [],
+      "callees": {
+        "0x005e0f30": {
+          "name": "ItemInstance_guess::GetItemId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 17211
+        }
+      }
+    },
+    {
+      "name": "key-4344-upper-second",
+      "args": [],
+      "callees": {
+        "0x005e0f30": {
+          "name": "ItemInstance_guess::GetItemId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 17220
+        }
+      }
+    },
+    {
+      "name": "key-4345-lower-third",
+      "args": [],
+      "callees": {
+        "0x005e0f30": {
+          "name": "ItemInstance_guess::GetItemId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 17221
+        }
+      }
+    },
+    {
+      "name": "key-434e-upper-third",
+      "args": [],
+      "callees": {
+        "0x005e0f30": {
+          "name": "ItemInstance_guess::GetItemId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 17230
+        }
+      }
+    },
+    {
+      "name": "key-434f-upper-outside",
+      "args": [],
+      "callees": {
+        "0x005e0f30": {
+          "name": "ItemInstance_guess::GetItemId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 17231
+        }
+      }
+    },
+    {
+      "name": "random-causes-zero-clamp",
+      "args": [],
+      "callees": {
+        "0x004106a3": {
+          "name": "CostOwner_guess::TotalSpellAffects_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int",
+            "int",
+            "int"
+          ],
+          "ret": 200
+        }
+      }
+    },
+    {
+      "name": "minimum-clamp-address-boundary",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x0063f4cc",
+          "f32": 3.0
+        }
+      ],
+      "callees": {
+        "0x004106a3": {
+          "name": "CostOwner_guess::TotalSpellAffects_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int",
+            "int",
+            "int"
+          ],
+          "ret": -100
+        }
+      }
+    },
+    {
+      "name": "random-causes-cap-clamp",
+      "args": [],
+      "callees": {
+        "0x004106a3": {
+          "name": "CostOwner_guess::TotalSpellAffects_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int",
+            "int",
+            "int"
+          ],
+          "ret": -20000
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4307718,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@lookup",
+        "offset": "0x11d4",
+        "type": "int",
+        "choices": [
+          -100,
+          0,
+          10,
+          100
+        ]
+      },
+      {
+        "addr": "@lookup",
+        "offset": "0x11dc",
+        "type": "int",
+        "choices": [
+          -100,
+          0,
+          10,
+          100
+        ]
+      },
+      {
+        "addr": "@lookup",
+        "offset": "0x11f0",
+        "type": "int",
+        "choices": [
+          -100,
+          0,
+          10,
+          100
+        ]
+      },
+      {
+        "addr": "0x00640e38",
+        "type": "float",
+        "choices": [
+          0.0,
+          0.005,
+          0.01,
+          0.02
+        ]
+      },
+      {
+        "addr": "0x00640038",
+        "type": "float",
+        "choices": [
+          0.0,
+          0.005,
+          0.01,
+          0.02
+        ]
+      },
+      {
+        "addr": "0x00641094",
+        "type": "float",
+        "choices": [
+          0.0,
+          0.005,
+          0.01,
+          0.02
+        ]
+      }
+    ]
+  }
+}

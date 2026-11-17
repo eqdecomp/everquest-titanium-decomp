@@ -1,0 +1,782 @@
+{
+  "function": "EQPlayer_guess::RandomizeRace_guess",
+  "original": "0x0047fdf6",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@eqplayer",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "eqplayer": {
+      "size": "0x264",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@actorinfo"
+        }
+      ]
+    },
+    "actorinfo": {
+      "size": "0x48",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x8",
+          "cstr": "base"
+        }
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0040cbb2": {
+      "name": "RandomRange_guess",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": [
+        13,
+        1
+      ]
+    },
+    "0x0047a741": {
+      "name": "SetRace_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret_edx": 0
+    },
+    "0x004798d7": {
+      "name": "GetActorTag_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ]
+    },
+    "0x0047fa9e": {
+      "name": "SetHeights_guess",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "roll_0x01",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x0c",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            12,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x0d",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            13,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x0e",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            14,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x0f",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            15,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x10",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            16,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x11",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            17,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x12",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            18,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x13",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            19,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x14",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            20,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x15",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            21,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x16",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            22,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x17",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            23,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x18",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            24,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x19",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            25,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x1a",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            26,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x1b",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            27,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x1c",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            28,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x1d",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            29,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x1e",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            30,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x1f",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            31,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x20",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            32,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x21",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            33,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x22",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            34,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x23",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            35,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x24",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            36,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x25",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            37,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x26",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            38,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x27",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            39,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x28",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            40,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x29",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            41,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x2a",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            42,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x2b",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            43,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x2c",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            44,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x2d",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            45,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x2e",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            46,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "roll_0x2f",
+      "args": [],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "FUN_0040cbb2",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            47,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4718070,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@eqplayer",
+        "offset": "0x260",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          85,
+          130,
+          404
+        ]
+      },
+      {
+        "addr": "@eqplayer",
+        "offset": "0x23c",
+        "type": "float",
+        "choices": [
+          -1,
+          0,
+          1,
+          2.5
+        ]
+      },
+      {
+        "addr": "@eqplayer",
+        "offset": "0x24e",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    ]
+  },
+  "coverage_ok": {
+    "0048001E-00480023": "state 1 is never assigned; the function uses only states 0, 2, 3 and 4"
+  },
+  "_survivors": "L3987: roll 13 is handled by switch case 0xd, so the default-path comparison cannot distinguish < from <="
+}

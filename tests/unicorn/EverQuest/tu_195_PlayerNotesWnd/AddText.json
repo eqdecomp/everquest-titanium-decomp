@@ -1,0 +1,381 @@
+{
+  "function": "CPlayerNotesWnd_guess::AddText_guess",
+  "original": "0x00544a29",
+  "sources": [
+    "src/EverQuest/tu_195_PlayerNotesWnd.cpp"
+  ],
+  "rewrite": "CPlayerNotesWnd_guess::AddText_guess",
+  "conv": "thiscall",
+  "this": "@derived",
+  "args": [
+    {
+      "name": "text",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "size": "0x24a",
+  "objects": {
+    "derived": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x124", "u32": 1 },
+        { "offset": "0x15c", "u32": "@source" }
+      ]
+    },
+    "source": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "u32": "@source_vtbl" }
+      ]
+    },
+    "source_vtbl": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [
+        { "offset": "0xfc", "u32": "@fn_set" },
+        { "offset": "0x130", "u32": "@fn_get" }
+      ]
+    },
+    "fn_set": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_get": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "text": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "u32": "@rep_input" }
+      ]
+    },
+    "rep_input": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "u32": 1 },
+        { "offset": "4", "u32": 32 },
+        { "offset": "8", "u32": 5 }
+      ]
+    },
+    "rep_date": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "u32": 1 },
+        { "offset": "4", "u32": 32 },
+        { "offset": "8", "u32": 4 }
+      ]
+    },
+    "rep_prefix": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "u32": 1 },
+        { "offset": "4", "u32": 32 },
+        { "offset": "8", "u32": 8 }
+      ]
+    },
+    "rep_suffix": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "u32": 1 },
+        { "offset": "4", "u32": 32 },
+        { "offset": "8", "u32": 8 }
+      ]
+    },
+    "rep_existing": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "u32": 1 },
+        { "offset": "4", "u32": 32 },
+        { "offset": "8", "u32": 12 }
+      ]
+    },
+    "strings": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "everquest": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "error": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "ctime_text": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "source_text": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    { "addr": "0x00905cb0", "u32": "@strings" },
+    { "addr": "0x00988df0", "u32": "@everquest" },
+    { "addr": "0x007a0000", "size": "0x400", "fill": "zero" },
+    { "addr": "0x007a0000", "u32": 100 },
+    { "addr": "0x007a0004", "u32": 64 },
+    { "addr": "0x007a0008", "u32": 4 },
+    { "addr": "0x007a0100", "u32": 100 },
+    { "addr": "0x007a0104", "u32": 64 },
+    { "addr": "0x007a0108", "u32": 8 },
+    { "addr": "0x007a0200", "u32": 100 },
+    { "addr": "0x007a0204", "u32": 64 },
+    { "addr": "0x007a0208", "u32": 8 },
+    { "addr": "0x007a0300", "u32": 100 },
+    { "addr": "0x007a0304", "u32": 64 },
+    { "addr": "0x007a0308", "u32": 12 },
+    { "addr": "0x0063f9fc", "from_image": "0x0063f9fc", "image_size": 32 },
+    { "addr": "0x0065a5b8", "from_image": "0x0065a5b8", "image_size": 32 },
+    { "addr": "@error", "cstr": "The note could not be added." },
+    { "addr": "@ctime_text", "cstr": "Tue Nov 14 22:13:20 2023\n" },
+    { "addr": "@source_text", "cstr": "existing note" },
+    { "addr": "@rep_input", "offset": "0x14", "cstr": "hello" },
+    { "addr": "@rep_date", "offset": "0x14", "cstr": "date" }
+  ],
+  "callees": {
+    "0x00576e80": {
+      "name": "CurrentTime_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 1700000000
+    },
+    "0x0060eca3": {
+      "name": "_ctime",
+      "conv": "cdecl",
+      "args": ["ignore"],
+      "ret": "@ctime_text"
+    },
+    "0x005738b0": {
+      "name": "FormatString_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr", "ptr"],
+      "ret": 0,
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "00007a00", "call": 0 },
+        { "arg": 0, "offset": 0, "hex": "00007a00", "call": 1 }
+      ]
+    },
+    "0x00571590": {
+      "name": "CText_guess::GetAt_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0,
+      "ret": 0
+    },
+    "0x00572570": {
+      "name": "CText_guess::SetAt_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 0
+    },
+    "0x0042e3d9": {
+      "name": "JoinPrefix_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr", "ignore"],
+      "ret": "arg0",
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "00017a00" }
+      ]
+    },
+    "0x004b1357": {
+      "name": "JoinSuffix_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "ignore", "cstr"],
+      "ret": "arg0",
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "00027a00" }
+      ]
+    },
+    "0x00571f70": {
+      "name": "CXStr::operator=",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x00572130": {
+      "name": "CText_guess::SetAtByValue_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 0
+    },
+    "0x00572380": {
+      "name": "CText_guess::Find_guess",
+      "conv": "thiscall",
+      "args": ["int", "ignore"],
+      "ret": 0,
+      "writes": [
+        { "arg": 1, "offset": 0, "hex": "01000000", "call": 0 },
+        { "arg": 1, "offset": 0, "hex": "03000000", "call": 1 }
+      ],
+      "ret": [1, 1, 0]
+    },
+    "0x00572c10": {
+      "name": "StrAppend_guess::Append_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "@fn_get": {
+      "name": "TextSource_guess::GetText_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "00037a00" }
+      ]
+    },
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": ["u32", "u32"],
+      "ret": "@error"
+    },
+    "@fn_set": {
+      "name": "TextSource_guess::SetText_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "0x00498436": {
+      "name": "CEverQuest::dsp_chat",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": 0
+    },
+    "0x0054497b": {
+      "name": "CPlayerNotesWnd_guess::SaveNotes_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "_ctime": "0x0060eca3"
+  },
+  "cases": [
+    {
+      "name": "base is absent",
+      "args": ["@text"],
+      "memory": [
+        { "addr": "@derived", "offset": "0x124", "u32": 0 }
+      ]
+    },
+    {
+      "name": "source is absent",
+      "args": ["@text"],
+      "memory": [
+        { "addr": "@derived", "offset": "0x15c", "u32": 0 }
+      ]
+    },
+    {
+      "name": "newline and both markers",
+      "args": ["@text"],
+      "callees": {
+        "0x00571590": {
+          "name": "CText_guess::GetAt_guess", "conv": "thiscall", "args": ["int"], "ret": [10, 48]
+        },
+        "0x00572380": {
+          "name": "CText_guess::Find_guess", "conv": "thiscall", "args": ["int", "ignore"],
+          "writes": [
+            { "arg": 1, "offset": 0, "hex": "01000000", "call": 0 },
+            { "arg": 1, "offset": 0, "hex": "03000000", "call": 1 }
+          ],
+          "ret": [1, 1, 0]
+        }
+      }
+    },
+    {
+      "name": "newline but second marker is absent",
+      "args": ["@text"],
+      "callees": {
+        "0x00571590": {
+          "name": "CText_guess::GetAt_guess", "conv": "thiscall", "args": ["int"], "ret": [10, 48]
+        },
+        "0x00572380": {
+          "name": "CText_guess::Find_guess", "conv": "thiscall", "args": ["int", "ignore"],
+          "writes": [{ "arg": 1, "offset": 0, "hex": "01000000", "call": 0 }],
+          "ret": [1, 0, 0]
+        }
+      }
+    },
+    {
+      "name": "no newline and no markers",
+      "args": ["@text"],
+      "callees": {
+        "0x00571590": {
+          "name": "CText_guess::GetAt_guess", "conv": "thiscall", "args": ["int"], "ret": [120]
+        },
+        "0x00572380": {
+          "name": "CText_guess::Find_guess", "conv": "thiscall", "args": ["int", "ignore"], "ret": "bool", "ret": [0]
+        }
+      }
+    },
+    {
+      "name": "length exactly 10000",
+      "args": ["@text"],
+      "memory": [
+        { "addr": "0x007a0308", "u32": 10000 }
+      ],
+      "callees": {
+        "0x00571590": {
+          "name": "CText_guess::GetAt_guess", "conv": "thiscall", "args": ["int"], "ret": [120]
+        },
+        "0x00572380": {
+          "name": "CText_guess::Find_guess", "conv": "thiscall", "args": ["int", "ignore"], "ret": "bool", "ret": [0]
+        }
+      }
+    },
+    {
+      "name": "empty formatted strings and empty getter",
+      "args": ["@text"],
+      "callees": {
+        "0x005738b0": {
+          "name": "FormatString_guess", "conv": "cdecl", "args": ["ignore", "cstr", "ptr"], "ret": 0
+        },
+        "0x00571590": {
+          "name": "CText_guess::GetAt_guess", "conv": "thiscall", "args": ["int"], "ret": [10]
+        },
+        "0x00572380": {
+          "name": "CText_guess::Find_guess", "conv": "thiscall", "args": ["int", "ignore"], "ret": [0]
+        },
+        "@fn_get": {
+          "name": "TextSource_guess::GetText_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+          "writes": [{ "arg": 0, "offset": 0, "hex": "00000000" }]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5524009,
+    "count": 100,
+    "args": [
+      {
+        "choices": ["@text"]
+      }
+    ],
+    "memory": [
+      { "addr": "@derived", "offset": "0x124", "type": "u32", "choices": [0, 1] },
+      { "addr": "@derived", "offset": "0x15c", "type": "u32", "choices": [0, "@source"] },
+      { "addr": "0x007a0308", "type": "u32", "choices": [0, 4, 10000] }
+    ]
+  }
+}

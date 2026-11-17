@@ -1,0 +1,169 @@
+{
+  "function": "Owner2_guess::ShowKBResults_guess",
+  "original": "0x00562fed",
+  "sources": [
+    "src/EverQuest/tu_226_TicketWindow.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner2",
+  "args": [
+    {
+      "name": "records_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "owner2": {
+      "size": "0x5cc",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x5c0", "u32": "@widget"},
+        {"offset": "0x5c8", "u32": "@sink"}
+      ]
+    },
+    "widget": {"size": "4", "fill": "zero"},
+    "sink": {"size": "4", "fill": "zero"},
+    "records": {
+      "size": "0x1a94",
+      "fill": "zero"
+    },
+    "stringtable": {"size": "4", "fill": "zero"},
+    "status": {"size": "0x20", "fill": "zero", "init": [{"offset": "0", "cstr": "No active items"}]}
+    ,"heap": {"size": "0x1000", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x13579bdf"},
+    {"addr": "0x0063f53f", "cstr": ""},
+    {"addr": "0x00905cb0", "u32": "@stringtable"}
+  ],
+  "callees": {
+    "0x0056146f": {
+      "name": "FUN_0056146f",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0056148e": {
+      "name": "FUN_0056148e",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00571e00": {
+      "name": "FUN_00571e00",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "passthrough": true
+    },
+    "0x0059b9d0": {
+      "name": "FUN_0059b9d0",
+      "conv": "thiscall",
+      "args": ["ignore", "int", "int", "int"]
+    },
+    "0x00571d00": {
+      "name": "FUN_00571d00",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "passthrough": true
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr"],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x0059b360": {
+      "name": "FUN_0059b360",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "ignore"
+      ]
+    },
+    "0x0059b3e0": {
+      "name": "FUN_0059b3e0",
+      "conv": "thiscall",
+      "args": ["int", "int", "int"]
+    },
+    "0x005dfa00": {
+      "name": "FUN_005dfa00",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": "@status"
+    },
+    "0x005a8b00": {
+      "name": "FUN_005a8b00",
+      "conv": "thiscall",
+      "args": ["ignore", "int", "int"],
+      "ret": 0
+    },
+    "0x00561727": {
+      "name": "FUN_00561727",
+      "conv": "thiscall",
+      "args": [
+        "char"
+      ]
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": "@heap"
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 1
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {"name": "null records", "args": [0]},
+    {
+      "name": "null widget",
+      "args": ["@records"],
+      "memory": [{"addr": "@owner2", "offset": "0x5c0", "u32": 0}]
+    },
+    {"name": "all inactive", "args": ["@records"]},
+    {
+      "name": "active first and last, signed percent limits",
+      "args": ["@records"],
+      "memory": [
+        {"addr": "@records", "offset": "0", "cstr": "Alpha"},
+        {"addr": "@records", "offset": "0x41", "cstr": "First label"},
+        {"addr": "@records", "offset": "0x142", "hex": "00 80"},
+        {"addr": "@records", "offset": "0x180c", "cstr": "Omega"},
+        {"addr": "@records", "offset": "0x184d", "cstr": "Last label"},
+        {"addr": "@records", "offset": "0x194e", "hex": "ff 7f"}
+      ]
+    },
+    {
+      "name": "mutation guard row 20",
+      "args": ["@records"],
+      "memory": [
+        {"addr": "@records", "offset": "0x1950", "cstr": "Extra"},
+        {"addr": "@records", "offset": "0x1991", "cstr": "Extra label"},
+        {"addr": "@records", "offset": "0x1a92", "hex": "2a 00"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5648365,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@records"
+        ]
+      }
+    ],
+    "memory": [
+      {"addr": "@owner2", "offset": "0x5c0", "type": "ptr", "choices": [0, "@widget"]},
+      {"addr": "@records", "offset": "0", "type": "u8", "choices": [0, 1]}
+    ]
+  }
+}

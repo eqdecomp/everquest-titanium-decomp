@@ -1,0 +1,201 @@
+{
+  "function": "copyFileWithRetry_guess",
+  "original": "0x0046556b",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "source_guess", "type": "cstr"},
+    {"name": "destination_guess", "type": "cstr"},
+    {"name": "message_guess", "type": "ptr"}
+  ],
+  "ret": "int",
+  "objects": {
+    "msg": {"size": "0x100", "fill": "random"},
+    "data": {"size": "0x80", "fill": "random"},
+    "srcfile": {"size": "0x20", "fill": "random"},
+    "dstfile": {"size": "0x20", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x006104f0": {
+      "name": "__stat",
+      "conv": "cdecl",
+      "args": ["cstr", "ignore"],
+      "ret": 0,
+      "writes": [{"arg": 1, "offset": 20, "hex": "34120000"}]
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr"],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "kernel32.dll!GlobalAlloc": {
+      "name": "GlobalAlloc",
+      "conv": "stdcall",
+      "args": ["u32", "u32"],
+      "ret": "@data"
+    },
+    "0x0060e887": {
+      "name": "_fopen",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr"],
+      "ret": ["@srcfile", "@dstfile"]
+    },
+    "0x00611d51": {
+      "name": "_fread",
+      "conv": "cdecl",
+      "args": ["ptr", "u32", "u32", "ptr"],
+      "ret": 1
+    },
+    "0x0060e790": {
+      "name": "_fclose",
+      "conv": "cdecl",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "kernel32.dll!Sleep": {
+      "name": "Sleep",
+      "conv": "stdcall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "user32.dll!MessageBoxA": {
+      "name": "MessageBoxA",
+      "conv": "stdcall",
+      "args": ["u32", "ptr", "cstr", "u32"],
+      "ret": 4
+    },
+    "0x006101ba": {
+      "name": "_fwrite",
+      "conv": "cdecl",
+      "args": ["ptr", "u32", "u32", "ptr"],
+      "ret": 1
+    },
+    "kernel32.dll!GlobalFree": {
+      "name": "GlobalFree",
+      "conv": "stdcall",
+      "args": ["ptr"],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "__stat": "0x006104f0",
+    "_sprintf": "0x0060d5eb",
+    "_fopen": "0x0060e887",
+    "_fread": "0x00611d51",
+    "_fclose": "0x0060e790",
+    "_fwrite": "0x006101ba"
+  },
+  "cases": [
+    {
+      "name": "success first try",
+      "args": ["src.txt", "dst.txt", "@msg"],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "stat fails",
+      "args": ["src.txt", "dst.txt", "@msg"],
+      "callees": {"0x006104f0": {"name": "__stat", "conv": "cdecl", "args": ["cstr", "ignore"], "ret": -1}},
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "source open fails",
+      "args": ["src.txt", "dst.txt", "@msg"],
+      "callees": {"0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 0}},
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "read fails",
+      "args": ["src.txt", "dst.txt", "@msg"],
+      "callees": {"0x00611d51": {"name": "_fread", "conv": "cdecl", "args": ["ptr", "u32", "u32", "ptr"], "ret": 0}},
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "read returns 2",
+      "args": ["src.txt", "dst.txt", "@msg"],
+      "callees": {"0x00611d51": {"name": "_fread", "conv": "cdecl", "args": ["ptr", "u32", "u32", "ptr"], "ret": 2}},
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "write fails",
+      "args": ["src.txt", "dst.txt", "@msg"],
+      "callees": {"0x006101ba": {"name": "_fwrite", "conv": "cdecl", "args": ["ptr", "u32", "u32", "ptr"], "ret": 0}},
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "write returns 2",
+      "args": ["src.txt", "dst.txt", "@msg"],
+      "callees": {"0x006101ba": {"name": "_fwrite", "conv": "cdecl", "args": ["ptr", "u32", "u32", "ptr"], "ret": 2}},
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "dest opens on 4th try, no message box",
+      "args": ["src.txt", "dst.txt", "@msg"],
+      "callees": {"0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": ["@srcfile", 0, 0, 0, "@dstfile"]}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "dest opens on 2nd try, junk registers",
+      "args": ["src.txt", "dst.txt", "@msg"],
+      "regs": {"ebx": 100, "esi": 100, "edi": 100, "ecx": 100, "edx": 100, "eax": 100},
+      "callees": {"0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": ["@srcfile", 0, "@dstfile"]}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "dest opens on 4th try, nonzero call returns",
+      "args": ["src.txt", "dst.txt", "@msg"],
+      "callees": {
+        "0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": ["@srcfile", 0, 0, 0, "@dstfile"]},
+        "0x0060e790": {"name": "_fclose", "conv": "cdecl", "args": ["ptr"], "ret": 5},
+        "kernel32.dll!Sleep": {"name": "Sleep", "conv": "stdcall", "args": ["u32"], "ret": 7},
+        "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ptr", "cstr"], "varargs": "printf", "ret": 9}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "message box retry, then open",
+      "args": ["src.txt", "dst.txt", "@msg"],
+      "callees": {"0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": ["@srcfile", 0, 0, 0, 0, "@dstfile"]}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "message box cancel",
+      "args": ["src.txt", "dst.txt", "@msg"],
+      "callees": {
+        "0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": ["@srcfile", 0]},
+        "user32.dll!MessageBoxA": {"name": "MessageBoxA", "conv": "stdcall", "args": ["u32", "ptr", "cstr", "u32"], "ret": 2}
+      },
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "message box returns 1 then 2 (counter reset)",
+      "args": ["src.txt", "dst.txt", "@msg"],
+      "callees": {
+        "0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": ["@srcfile", 0]},
+        "user32.dll!MessageBoxA": {"name": "MessageBoxA", "conv": "stdcall", "args": ["u32", "ptr", "cstr", "u32"], "ret": [1, 3, 2]}
+      },
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "eight failures then open",
+      "args": ["src.txt", "dst.txt", "@msg"],
+      "callees": {"0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": ["@srcfile", 0, 0, 0, 0, 0, 0, 0, 0, 0, "@dstfile"]}},
+      "expect": {"ret": 1}
+    }
+  ],
+  "_survivors": "L1582: deleting the initial retry_guess = 0 leaves an undefined counter the compiler still zeroes (cases with ebx/esi/edi=100 at entry and nonzero callee returns all pass), so the mutant is equivalent",
+  "fuzz": {
+    "seed": 4609387,
+    "count": 60,
+    "args": [
+      {},
+      {},
+      {"choices": ["@msg"]}
+    ],
+    "memory": []
+  }
+}

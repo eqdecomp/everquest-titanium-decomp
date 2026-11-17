@@ -1,0 +1,73 @@
+{
+  "function": "pack_physics_guess",
+  "original": "0x00465244",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "source_guess", "type": "ptr"},
+    {"name": "destination_guess", "type": "ptr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "source": {"size": "0x2c", "fill": "random"},
+    "destination": {"size": "0x20", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00645ECC", "from_image": "0x00645ECC", "image_size": 4},
+    {"addr": "0x00645EC8", "from_image": "0x00645EC8", "image_size": 4},
+    {"addr": "0x00645EC4", "from_image": "0x00645EC4", "image_size": 4},
+    {"addr": "0x00642650", "from_image": "0x00642650", "image_size": 4},
+    {"addr": "0x00645EC0", "from_image": "0x00645EC0", "image_size": 4},
+    {"addr": "0x00644368", "from_image": "0x00644368", "image_size": 4},
+    {"addr": "@source", "offset": "0x18", "f32": 1.5},
+    {"addr": "@source", "offset": "0x1c", "f32": 100.0},
+    {"addr": "@source", "offset": "0x28", "f32": 3.25}
+  ],
+  "callees": {},
+  "cases": [
+    {"name": "typical", "args": ["@source", "@destination"]},
+    {"name": "clamp above upper", "args": ["@source", "@destination"],
+     "memory": [{"addr": "@source", "offset": "0x18", "f32": 13.0}]},
+    {"name": "equal upper", "args": ["@source", "@destination"],
+     "memory": [{"addr": "@source", "offset": "0x18", "f32": 12.7}]},
+    {"name": "just below upper", "args": ["@source", "@destination"],
+     "memory": [{"addr": "@source", "offset": "0x18", "f32": 12.6}]},
+    {"name": "clamp below lower", "args": ["@source", "@destination"],
+     "memory": [{"addr": "@source", "offset": "0x18", "f32": -13.0}]},
+    {"name": "equal lower", "args": ["@source", "@destination"],
+     "memory": [{"addr": "@source", "offset": "0x18", "f32": -12.8}]},
+    {"name": "just above lower", "args": ["@source", "@destination"],
+     "memory": [{"addr": "@source", "offset": "0x18", "f32": -12.7}]},
+    {"name": "nan clamp", "args": ["@source", "@destination"],
+     "memory": [{"addr": "@source", "offset": "0x18", "u32": "0x7fc00000"}]},
+    {"name": "heading wraps", "args": ["@source", "@destination"],
+     "memory": [{"addr": "@source", "offset": "0x1c", "f32": 600.0},
+                {"addr": "@source", "offset": "0x28", "f32": -20.0}]},
+    {"name": "negative heading", "args": ["@source", "@destination"],
+     "memory": [{"addr": "@source", "offset": "0x1c", "f32": -300.0},
+                {"addr": "@source", "offset": "0x18", "f32": -5.5}]},
+    {"name": "large values", "args": ["@source", "@destination"],
+     "memory": [{"addr": "@source", "offset": "0x1c", "f32": 1999.75},
+                {"addr": "@source", "offset": "0x28", "f32": 60.0},
+                {"addr": "@source", "offset": "0x18", "f32": 12.0}]},
+    {"name": "zeros", "args": ["@source", "@destination"],
+     "memory": [{"addr": "@source", "offset": "0x18", "f32": 0.0},
+                {"addr": "@source", "offset": "0x1c", "f32": 0.0},
+                {"addr": "@source", "offset": "0x28", "f32": 0.0}]}
+  ],
+  "fuzz": {
+    "seed": 4608580,
+    "count": 150,
+    "args": [
+      {"choices": ["@source"]},
+      {"choices": ["@destination"]}
+    ],
+    "memory": [
+      {"addr": "@source", "offset": "0x18", "type": "float", "choices": [-20.0, -12.8, -12.79, -3.3, 0.0, 0.4, 7.9, 12.69, 12.7, 12.71, 40.0]},
+      {"addr": "@source", "offset": "0x1c", "type": "float", "choices": [-600.0, -1.0, 0.0, 0.3, 127.5, 255.9, 511.0, 512.0, 700.25, 4000.0]},
+      {"addr": "@source", "offset": "0x28", "type": "float", "choices": [-30.0, -1.5, 0.0, 0.1, 12.3, 25.55, 51.0, 100.0]}
+    ]
+  }
+}

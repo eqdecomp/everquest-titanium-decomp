@@ -1,0 +1,468 @@
+{
+  "function": "do_shownames_guess",
+  "original": "0x0046c10a",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "unused_guess",
+      "type": "int"
+    },
+    {
+      "name": "text_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "text_lookup": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "global_context": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "npc_name_state": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "show_name_text": {
+      "size": "0x10",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@text_lookup"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@global_context"
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@npc_name_state"
+    },
+    {
+      "addr": "0x006410a8",
+      "from_image": "0x006410a8",
+      "image_size": 16
+    },
+    {
+      "addr": "0x00924978",
+      "u32": 0
+    },
+    {
+      "addr": "0x00924860",
+      "u32": 0
+    },
+    {
+      "addr": "0x0063f53c",
+      "from_image": "0x0063f53c",
+      "image_size": 4
+    },
+    {
+      "addr": "@show_name_text",
+      "cstr": "OFF"
+    }
+  ],
+  "callees": {
+    "0x0042dd82": {
+      "name": "GrabFirstWord_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "ignore",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x005dfa00": {
+      "name": "FindText_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "@show_name_text"
+    },
+    "0x00574990": {
+      "name": "FUN_00574990",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x004982c6": {
+      "name": "SetText_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ]
+    },
+    "0x00439a93": {
+      "name": "SetPCNameSpriteState_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x0060beb0": {
+      "name": "FUN_0060beb0",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x0060e3a3": {
+      "name": "atol",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 4
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 1,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "3400"
+        }
+      ]
+    },
+    "0x004ae514": {
+      "name": "WriteInt_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "cstr",
+        "cstr"
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "empty_input",
+      "args": [
+        0,
+        ""
+      ]
+    },
+    {
+      "name": "off_match",
+      "args": [
+        1,
+        "OFF"
+      ]
+    },
+    {
+      "name": "level_1",
+      "args": [
+        1,
+        "1"
+      ],
+      "callees": {
+        "0x0060e3a3": {
+          "name": "atol",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        },
+        "0x0060d5eb": {
+          "name": "sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "3100"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "level_2",
+      "args": [
+        2,
+        "2"
+      ],
+      "callees": {
+        "0x0060e3a3": {
+          "name": "atol",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 2
+        },
+        "0x0060d5eb": {
+          "name": "sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "3200"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "level_3",
+      "args": [
+        3,
+        "3"
+      ],
+      "callees": {
+        "0x0060e3a3": {
+          "name": "atol",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 3
+        },
+        "0x0060d5eb": {
+          "name": "sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "3300"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "level_4",
+      "args": [
+        4,
+        "4"
+      ],
+      "callees": {
+        "0x0060e3a3": {
+          "name": "atol",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 4
+        }
+      }
+    },
+    {
+      "name": "level_5",
+      "args": [
+        5,
+        "5"
+      ],
+      "callees": {
+        "0x0060e3a3": {
+          "name": "atol",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 5
+        },
+        "0x0060d5eb": {
+          "name": "sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "3500"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "level_6",
+      "args": [
+        6,
+        "6"
+      ],
+      "callees": {
+        "0x0060e3a3": {
+          "name": "atol",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 6
+        },
+        "0x0060d5eb": {
+          "name": "sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "3600"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "lower_boundary_zero",
+      "args": [
+        7,
+        "0"
+      ],
+      "callees": {
+        "0x0060e3a3": {
+          "name": "atol",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "upper_boundary_seven",
+      "args": [
+        8,
+        "7"
+      ],
+      "callees": {
+        "0x0060e3a3": {
+          "name": "atol",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 7
+        }
+      }
+    },
+    {
+      "name": "negative_boundary",
+      "args": [
+        9,
+        "-1"
+      ],
+      "callees": {
+        "0x0060e3a3": {
+          "name": "atol",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "nonnumeric_input",
+      "args": [
+        10,
+        "abc"
+      ],
+      "callees": {
+        "0x0060e3a3": {
+          "name": "atol",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4636938,
+    "count": 100,
+    "args": [
+      {},
+      {
+        "choices": [
+          "",
+          "OFF",
+          "on",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "0",
+          "7",
+          "-1",
+          "abc"
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

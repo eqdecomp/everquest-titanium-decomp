@@ -1,0 +1,240 @@
+{
+  "function": "do_decline_guess",
+  "original": "0x0047297a",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "size": "0xed",
+  "conv": "cdecl",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "context": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "lookup": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "player": {
+      "size": "0x348",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x258",
+          "u32": "0x1001"
+        }
+      ]
+    },
+    "spawn": {
+      "size": "0x348",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x120",
+          "cstr": "Target"
+        },
+        {
+          "offset": "0x258",
+          "u32": "0x2345"
+        }
+      ]
+    },
+    "text": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "cstr": "Lookup text"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x13572468"
+    },
+    {
+      "addr": "0x009238e0",
+      "u8": 0
+    },
+    {
+      "addr": "0x009238dc",
+      "u32": 0
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@context"
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": "@player"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@lookup"
+    }
+  ],
+  "callees": {
+    "0x00401b28": {
+      "name": "FUN_00401b28",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@spawn"
+    },
+    "0x0046da4a": {
+      "name": "build_token_string_PARAM_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "cstr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "hex": "466f726d617474656400"
+        }
+      ]
+    },
+    "0x004982c6": {
+      "name": "SetText_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "mem:12",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "FindText_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "@text"
+    }
+  },
+  "cases": [
+    {
+      "name": "held flag selects 0x33bd and leaves marker alone",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x009238e0",
+          "u8": 1
+        },
+        {
+          "addr": "0x009238dc",
+          "u32": "0x7777"
+        }
+      ]
+    },
+    {
+      "name": "empty marker selects 0x33bf",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x009238e0",
+          "u8": 0
+        },
+        {
+          "addr": "0x009238dc",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "unresolved marker is cleared",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x009238e0",
+          "u8": 0
+        },
+        {
+          "addr": "0x009238dc",
+          "u32": "0x2468"
+        }
+      ],
+      "callees": {
+        "0x00401b28": {
+          "name": "FUN_00401b28",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "resolved marker formats and sends both spawn ids",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x009238e0",
+          "u8": 0
+        },
+        {
+          "addr": "0x009238dc",
+          "u32": "0x2345"
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4663674,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x009238e0",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009238dc",
+        "type": "u32",
+        "choices": [
+          0,
+          0,
+          "0x1555",
+          "0x2876"
+        ]
+      }
+    ]
+  },
+  "_survivors": "L6000: the stack starts zeroed, so the packet byte remains zero without this assignment"
+}

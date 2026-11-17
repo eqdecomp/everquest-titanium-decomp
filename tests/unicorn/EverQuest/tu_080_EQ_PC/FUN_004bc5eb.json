@@ -1,0 +1,145 @@
+{
+  "function": "EQ_PCView_guess::FitsEquipSlot_guess",
+  "original": "0x004bc5eb",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [
+    {"name": "slot", "type": "int"},
+    {"name": "who", "type": "ptr"}
+  ],
+  "ret": "char",
+  "objects": {
+    "object": {
+      "size": "0xc350",
+      "fill": "random",
+      "init": [
+        {"offset": "0x8", "u32": "@holder"}
+      ]
+    },
+    "holder": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "who": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "info": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x44", "u32": "@item"},
+        {"offset": "0x48", "u32": "@item"}
+      ]
+    },
+    "item": {
+      "size": "0x40",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x005ee500": {"name": "FUN_005ee500", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "0x005eccc0": {"name": "FUN_005eccc0", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": 16},
+    "0x005ec850": {"name": "FUN_005ec850", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005ec220": {"name": "FUN_005ec220", "conv": "thiscall", "args": [], "ret": "@info"},
+    "0x005e1640": {"name": "FUN_005e1640", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0041c8f4": {"name": "FUN_0041c8f4", "conv": "thiscall", "args": ["int"], "ret": 1}
+  },
+  "cases": [
+    {"name": "null who", "args": [1, 0]},
+    {"name": "ee500 false", "args": [5, "@who"],
+     "callees": {"0x005ee500": {"name": "FUN_005ee500", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "slot 0x16 in range", "args": [22, "@who"]},
+    {"name": "slot 0x1d in range", "args": [29, "@who"]},
+    {"name": "slot 0x1e outside, blocked 1", "args": [30, "@who"],
+     "callees": {"0x005eccc0": {"name": "FUN_005eccc0", "conv": "thiscall", "args": [], "ret": [1]}}},
+    {"name": "blocked 2", "args": [5, "@who"],
+     "callees": {"0x005eccc0": {"name": "FUN_005eccc0", "conv": "thiscall", "args": [], "ret": [0, 2]}}},
+    {"name": "value 0x36", "args": [5, "@who"],
+     "callees": {"0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [54]}}},
+    {"name": "slot 0xb value 0x1b", "args": [11, "@who"],
+     "callees": {"0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [16, 27]}}},
+    {"name": "slot 0xb value 0x1c", "args": [11, "@who"],
+     "callees": {"0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [16, 16, 28]}}},
+    {"name": "slot 0xb count positive", "args": [11, "@who"],
+     "callees": {"0x005ec850": {"name": "FUN_005ec850", "conv": "thiscall", "args": ["int"], "ret": 1}}},
+    {"name": "slot 0xb count zero, mask set", "args": [11, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 2048}}},
+    {"name": "slot 0xb count zero, mask clear", "args": [11, "@who"]},
+    {"name": "slot 0x15 value 0x13", "args": [21, "@who"],
+     "callees": {"0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [16, 19]}}},
+    {"name": "slot 0x15 value 0x1b", "args": [21, "@who"],
+     "callees": {"0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [16, 16, 27]}}},
+    {"name": "slot 0x15 value 0x1c", "args": [21, "@who"],
+     "callees": {"0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [16, 16, 16, 28]}}},
+    {"name": "slot 0x15 mask clear", "args": [21, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "slot 5 mask set", "args": [5, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 32}}},
+    {"name": "slot 5 mask clear", "args": [5, "@who"]},
+    {"name": "slot 0xd info value zero", "args": [13, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 8192}},
+     "memory": [{"addr": "@info", "offset": "0x48", "u32": 0}]},
+    {"name": "slot 0xd who 1", "args": [13, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 8192},
+                 "0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [16, 1]}}},
+    {"name": "slot 0xd who 4", "args": [13, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 8192},
+                 "0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [16, 16, 4]}}},
+    {"name": "slot 0xd who 0x23", "args": [13, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 8192},
+                 "0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [16, 16, 16, 35]}}},
+    {"name": "slot 0xd item below 0x17", "args": [13, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 8192},
+                 "0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [16, 16, 16, 16, 5]}}},
+    {"name": "slot 0xd item 0x18", "args": [13, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 8192},
+                 "0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [16, 16, 16, 16, 24]}}},
+    {"name": "slot 0xd item 0x1b", "args": [13, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 8192},
+                 "0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [16, 16, 16, 16, 27]}}},
+    {"name": "slot 0xd mask clear", "args": [13, "@who"]},
+    {"name": "slot 0xe who 1", "args": [14, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 16384},
+                 "0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [16, 1]}}},
+    {"name": "slot 0xe who 0x23", "args": [14, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 16384},
+                 "0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [16, 16, 16, 35]}}},
+    {"name": "slot 0xe e1640 and 41c8f4 zero", "args": [14, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 16384},
+                 "0x005e1640": {"name": "FUN_005e1640", "conv": "thiscall", "args": [], "ret": 1},
+                 "0x0041c8f4": {"name": "FUN_0041c8f4", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "slot 0xe e1640 nonzero, 41c8f4 nonzero", "args": [14, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 16384},
+                 "0x005e1640": {"name": "FUN_005e1640", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "slot 0xe info value zero", "args": [14, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 16384}},
+     "memory": [{"addr": "@info", "offset": "0x44", "u32": 0}]},
+    {"name": "slot 0xe who 0x18", "args": [14, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 16384},
+                 "0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [16, 16, 16, 16, 24]}}},
+    {"name": "slot 0xe item 1", "args": [14, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 16384},
+                 "0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [16, 16, 16, 16, 16, 1]}}},
+    {"name": "slot 0xe item 0x23", "args": [14, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 16384},
+                 "0x005ecc00": {"name": "FUN_005ecc00", "conv": "thiscall", "args": [], "ret": [16, 16, 16, 16, 16, 35]}}},
+    {"name": "slot 0xe item neutral", "args": [14, "@who"],
+     "callees": {"0x005ecba0": {"name": "FUN_005ecba0", "conv": "thiscall", "args": ["int"], "ret": 16384}}},
+    {"name": "slot 0xe mask clear", "args": [14, "@who"]}
+  ],
+  "fuzz": {
+    "seed": 4965867,
+    "count": 80,
+    "args": [
+      {"range": [0, 32]},
+      {"choices": ["@who"]}
+    ]
+  }
+}

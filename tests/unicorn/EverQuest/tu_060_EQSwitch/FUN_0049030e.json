@@ -1,0 +1,75 @@
+{
+  "function": "EQSwitch_guess::GetTriggerRange_guess",
+  "original": "0x0049030e",
+  "sources": [
+    "src/EverQuest/tu_060_EQSwitch.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@record",
+  "args": [],
+  "ret": "float",
+  "_survivors": "L912: value 0 gives +0.0f on both the positive branch ((float)0) and the return 0.0f branch, so > 0 and >= 0 cannot be told apart",
+  "objects": {
+    "record": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {},
+  "cases": [
+    {
+      "name": "positive_one",
+      "memory": [{"addr": "@record", "offset": "0x66", "u16": 1}],
+      "args": []
+    },
+    {
+      "name": "positive_typical",
+      "memory": [{"addr": "@record", "offset": "0x66", "u16": 300}],
+      "args": []
+    },
+    {
+      "name": "positive_max",
+      "memory": [{"addr": "@record", "offset": "0x66", "u16": 32767}],
+      "args": []
+    },
+    {
+      "name": "zero",
+      "memory": [{"addr": "@record", "offset": "0x66", "u16": 0}],
+      "args": []
+    },
+    {
+      "name": "minus_one",
+      "memory": [{"addr": "@record", "offset": "0x66", "u16": 65535}],
+      "args": []
+    },
+    {
+      "name": "minus_three_boundary",
+      "memory": [{"addr": "@record", "offset": "0x66", "u16": 65533}],
+      "args": []
+    },
+    {
+      "name": "minus_four_boundary",
+      "memory": [{"addr": "@record", "offset": "0x66", "u16": 65532}],
+      "args": []
+    },
+    {
+      "name": "minus_300",
+      "memory": [{"addr": "@record", "offset": "0x66", "u16": 65236}],
+      "args": []
+    },
+    {
+      "name": "min_short",
+      "memory": [{"addr": "@record", "offset": "0x66", "u16": 32768}],
+      "args": []
+    }
+  ],
+  "fuzz": {
+    "seed": 4784910,
+    "count": 150,
+    "args": [],
+    "memory": [
+      {"addr": "@record", "offset": "0x66", "type": "i16", "range": [-400, 400]}
+    ]
+  }
+}

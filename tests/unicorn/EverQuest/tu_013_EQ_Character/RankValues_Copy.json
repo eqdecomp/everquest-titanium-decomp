@@ -1,0 +1,19 @@
+{
+  "function": "RankValues_guess::Copy_guess",
+  "_shape": "NOT byte-identical (structural, ndiff 19): bounded-array copy of 9 dwords, forward, element by element (overlap cases pin the order)",
+  "original": "0x0041a9ff",
+  "sources": ["src/EverQuest/tu_013_EQ_Character.cpp"],
+  "conv": "thiscall",
+  "this": "@dst",
+  "args": [{"name": "source", "type": "ptr"}],
+  "ret": "void",
+  "objects": {"dst": {"size": "0x30", "fill": "random"}, "src": {"size": "0x30", "fill": "random"}},
+  "coverage_ok": {"0041AA12-0041AA13": "int3 of the bounds check: index 0 < 9 always"},
+  "cases": [
+    {"name": "separate", "args": ["@src"]},
+    {"name": "same object", "args": ["@dst"]},
+    {"name": "source one dword below (forward copy smears)", "this": "@dst+4", "args": ["@dst"]},
+    {"name": "source one dword above", "args": ["@dst+4"]}
+  ],
+  "fuzz": {"seed": 4303359, "count": 30, "args": [{"choices": ["@src", "@src+4", "@dst+8"]}]}
+}

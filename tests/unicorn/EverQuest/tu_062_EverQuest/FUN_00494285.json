@@ -1,0 +1,132 @@
+{
+  "function": "GlobalState_guess::DoLoadScreen_guess",
+  "original": "0x00494285",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@globalstate",
+  "args": [
+    {
+      "name": "cleanup_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "globalstate": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "sink": {
+      "size": "0x218",
+      "fill": "random"
+    },
+    "newobj": {
+      "size": "0x218",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00448314": {
+      "name": "FUN_00448314",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0060d0d5": {
+      "name": "_free",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@newobj"
+    },
+    "0x00448a0b": {
+      "name": "FUN_00448a0b",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x0044861f": {
+      "name": "FUN_0044861f",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071",
+    "??3@YAXPAX@Z": "0x0060d0d5"
+  },
+  "_survivors": "L2033: the store of 0 after the first free is overwritten by the new-expression's store before any call can read the global (operator new is stubbed and does not read it); the original keeps the store (AND [0x905c9c],0) and the rewrite does too, so the survivor is equivalent",
+  "cases": [
+    {
+      "name": "fresh_no_cleanup",
+      "args": [0]
+    },
+    {
+      "name": "fresh_with_cleanup",
+      "args": [1]
+    },
+    {
+      "name": "replace_old_no_cleanup",
+      "args": [0],
+      "memory": [{"addr": "0x00905C9C", "u32": "@sink"}]
+    },
+    {
+      "name": "replace_old_with_cleanup",
+      "args": [1],
+      "memory": [{"addr": "0x00905C9C", "u32": "@sink"}]
+    },
+    {
+      "name": "new_fails_fresh_no_cleanup",
+      "args": [0],
+      "callees": {
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}
+      }
+    },
+    {
+      "name": "new_fails_fresh_with_cleanup",
+      "args": [1],
+      "callees": {
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}
+      }
+    },
+    {
+      "name": "new_fails_replace_old_no_cleanup",
+      "args": [0],
+      "memory": [{"addr": "0x00905C9C", "u32": "@sink"}],
+      "callees": {
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}
+      }
+    },
+    {
+      "name": "new_fails_replace_old_with_cleanup",
+      "args": [1],
+      "memory": [{"addr": "0x00905C9C", "u32": "@sink"}],
+      "callees": {
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4801157,
+    "count": 100,
+    "args": [
+      {"range": [-1, 2]}
+    ],
+    "memory": [
+      {"addr": "0x00905C9C", "type": "u32", "choices": [0, "@sink"]}
+    ]
+  }
+}

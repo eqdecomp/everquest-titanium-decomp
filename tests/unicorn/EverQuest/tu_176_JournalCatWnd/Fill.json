@@ -1,0 +1,154 @@
+{
+  "function": "CJournalNPCWnd_guess::FillCategoryCombos_guess",
+  "original": "0x0052384f",
+  "sources": ["src/EverQuest/tu_176_JournalCatWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@manager",
+  "args": [],
+  "ret": "void",
+  "size": "0x1c1",
+  "objects": {
+    "manager": {
+      "size": "0x1e4",
+      "fill": "random",
+      "init": [
+        {"offset": "0x160", "u32": "@array"},
+        {"offset": "0x180", "u32": "@selected"},
+        {"offset": "0x1a0", "u32": 0},
+        {"offset": "0x1dc", "u32": "@combo1"},
+        {"offset": "0x1e0", "u32": "@combo2"}
+      ]
+    },
+    "array": {
+      "size": "0x818",
+      "fill": "random",
+      "init": [
+        {"offset": "0x80c", "u32": "@values"},
+        {"offset": "0x814", "u32": 3}
+      ]
+    },
+    "values": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@record0"},
+        {"offset": "0x4", "u32": "@record1"},
+        {"offset": "0x8", "u32": "@record2"}
+      ]
+    },
+    "record0": {"size": "0x14", "fill": "random", "init": [{"offset": "0x0", "u32": 101}]},
+    "record1": {"size": "0x14", "fill": "random", "init": [{"offset": "0x0", "u32": 202}]},
+    "record2": {"size": "0x14", "fill": "random", "init": [{"offset": "0x0", "u32": 303}]},
+    "selected": {"size": "0x18", "fill": "random", "init": [{"offset": "0x14", "u32": 202}]},
+    "combo1": {"size": "0x4", "fill": "random"},
+    "combo2": {"size": "0x4", "fill": "random"},
+    "stringTable": {"size": "0x4", "fill": "random"},
+    "emptyText": {"size": "0x1", "fill": "zero"},
+    "rep": {"size": "0x40", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@stringTable"},
+    {"addr": "@record0", "offset": "0x4", "cstr": "Alpha"},
+    {"addr": "@record1", "offset": "0x4", "cstr": "Beta"},
+    {"addr": "@record2", "offset": "0x4", "cstr": "Gamma"}
+  ],
+  "callees": {
+    "0x0042e972": {"name": "ValueArray_guess::GetValues_guess", "conv": "thiscall", "args": [], "ret": "@values"},
+    "0x0059c3e0": {"name": "CComboWnd_guess::Clear_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005dfa00": {"name": "StringTableView_guess::GetString_guess", "conv": "thiscall", "args": ["int", "int"], "ret": ["@emptyText", "@emptyText"]},
+    "0x00571e00": {
+      "name": "CXStr::CXStr",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "this",
+      "passthrough": true
+    },
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@rep"},
+    "0x0059c8d0": {"name": "CComboWnd_guess::AddChoice_guess", "conv": "thiscall", "args": ["mem:4"], "ret": 0},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x0059c360": {"name": "CComboWnd_guess::SetCurSel_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "both-combos-null",
+      "args": [],
+      "memory": [
+        {"addr": "@array", "offset": "0x814", "u32": 0},
+        {"addr": "@manager", "offset": "0x180", "u32": 0},
+        {"addr": "@manager", "offset": "0x1dc", "u32": 0},
+        {"addr": "@manager", "offset": "0x1e0", "u32": 0}
+      ]
+    },
+    {
+      "name": "first-combo-empty",
+      "args": [],
+      "memory": [
+        {"addr": "@array", "offset": "0x814", "u32": 0},
+        {"addr": "@manager", "offset": "0x180", "u32": 0},
+        {"addr": "@manager", "offset": "0x1dc", "u32": "@combo1"},
+        {"addr": "@manager", "offset": "0x1e0", "u32": 0}
+      ]
+    },
+    {
+      "name": "second-combo-empty-with-selection",
+      "args": [],
+      "memory": [
+        {"addr": "@array", "offset": "0x814", "u32": 0},
+        {"addr": "@manager", "offset": "0x180", "u32": "@selected"},
+        {"addr": "@selected", "offset": "0x14", "u32": 202},
+        {"addr": "@manager", "offset": "0x1dc", "u32": 0},
+        {"addr": "@manager", "offset": "0x1e0", "u32": "@combo2"}
+      ]
+    },
+    {
+      "name": "both-loops-match-last-id",
+      "args": [],
+      "memory": [
+        {"addr": "@array", "offset": "0x814", "u32": 3},
+        {"addr": "@manager", "offset": "0x1a0", "u32": 1},
+        {"addr": "@manager", "offset": "0x180", "u32": "@selected"},
+        {"addr": "@selected", "offset": "0x14", "u32": 303},
+        {"addr": "@manager", "offset": "0x1dc", "u32": "@combo1"},
+        {"addr": "@manager", "offset": "0x1e0", "u32": "@combo2"}
+      ]
+    },
+    {
+      "name": "both-loops-no-id-match",
+      "args": [],
+      "memory": [
+        {"addr": "@array", "offset": "0x814", "u32": 2},
+        {"addr": "@manager", "offset": "0x180", "u32": "@selected"},
+        {"addr": "@selected", "offset": "0x14", "u32": 999},
+        {"addr": "@manager", "offset": "0x1dc", "u32": "@combo1"},
+        {"addr": "@manager", "offset": "0x1e0", "u32": "@combo2"}
+      ]
+    },
+    {
+      "name": "null-temporary-handles",
+      "args": [],
+      "memory": [
+        {"addr": "@array", "offset": "0x814", "u32": 3},
+        {"addr": "@manager", "offset": "0x180", "u32": 0},
+        {"addr": "@manager", "offset": "0x1dc", "u32": "@combo1"},
+        {"addr": "@manager", "offset": "0x1e0", "u32": "@combo2"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5388367,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@array", "offset": "0x814", "type": "u32", "choices": [0, 1, 2, 3]},
+      {"addr": "@manager", "offset": "0x1a0", "type": "int", "choices": [-2, -1, 0, 1, 2, 3]},
+      {"addr": "@manager", "offset": "0x180", "type": "ptr", "choices": [0, "@selected"]},
+      {"addr": "@manager", "offset": "0x1dc", "type": "ptr", "choices": [0, "@combo1"]},
+      {"addr": "@manager", "offset": "0x1e0", "type": "ptr", "choices": [0, "@combo2"]},
+      {"addr": "@selected", "offset": "0x14", "type": "int", "choices": [-1, 101, 202, 303, 999]},
+      {"addr": "@record0", "offset": "0x0", "type": "int", "choices": [-1, 0, 101, 202, 303]},
+      {"addr": "@record1", "offset": "0x0", "type": "int", "choices": [-1, 0, 101, 202, 303]},
+      {"addr": "@record2", "offset": "0x0", "type": "int", "choices": [-1, 0, 101, 202, 303]}
+    ]
+  },
+  "_survivors": "L792: GetString's zero flags value resets the shared index register before any first-loop read, so this initialization store is unobservable"
+}

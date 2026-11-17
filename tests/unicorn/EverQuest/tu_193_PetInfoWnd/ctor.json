@@ -1,0 +1,1059 @@
+{
+  "function": "CPetInfoWndView_guess::CPetInfoWndView_guess",
+  "original": "0x00542620",
+  "sources": [
+    "src/EverQuest/tu_193_PetInfoWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@data",
+  "args": [
+    {
+      "name": "parent_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "data": {
+      "size": "0x380",
+      "fill": "random"
+    },
+    "parent": {
+      "size": "0x11c",
+      "fill": "random"
+    },
+    "client_data": {
+      "size": "0x14c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x148",
+          "u32": "0x2468"
+        }
+      ]
+    },
+    "sidl_manager": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "popup": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "blue": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "red": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "icons": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "popup_value": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "cstr": "enabled"
+        }
+      ]
+    },
+    "heap": {
+      "size": "0x10000",
+      "fill": "zero"
+    },
+    "window00": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window01": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window02": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window03": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window04": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window05": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window06": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window07": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window08": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window09": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window10": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window11": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window12": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window13": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window14": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window15": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window16": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window17": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window18": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window19": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window20": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window21": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window22": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window23": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window24": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window25": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window26": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window27": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window28": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window29": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window30": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window31": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window32": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window33": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window34": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window35": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window36": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window37": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "window38": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x78",
+          "u32": 0
+        }
+      ]
+    },
+    "buff00": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff01": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff02": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff03": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff04": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff05": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff06": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff07": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff08": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff09": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff10": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff11": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff12": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff13": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff14": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff15": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff16": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff17": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff18": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff19": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff20": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff21": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff22": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff23": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff24": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff25": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff26": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff27": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff28": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "buff29": {
+      "size": "0x4c",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079AC74",
+      "u32": "0x9e3779b9"
+    },
+    {
+      "addr": "0x00905D24",
+      "u32": "@client_data"
+    },
+    {
+      "addr": "0x0099D3F4",
+      "u32": "@sidl_manager"
+    },
+    {
+      "addr": "0x00988DF0",
+      "u32": "@popup"
+    },
+    {
+      "addr": "0x0063F53F",
+      "cstr": ""
+    }
+  ],
+  "callees": {
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": ["@heap+0x0","@heap+0x100","@heap+0x200","@heap+0x300","@heap+0x400","@heap+0x500","@heap+0x600","@heap+0x700","@heap+0x800","@heap+0x900","@heap+0xa00","@heap+0xb00","@heap+0xc00","@heap+0xd00","@heap+0xe00","@heap+0xf00","@heap+0x1000","@heap+0x1100","@heap+0x1200","@heap+0x1300","@heap+0x1400","@heap+0x1500","@heap+0x1600","@heap+0x1700","@heap+0x1800","@heap+0x1900","@heap+0x1a00","@heap+0x1b00","@heap+0x1c00","@heap+0x1d00","@heap+0x1e00","@heap+0x1f00","@heap+0x2000","@heap+0x2100","@heap+0x2200","@heap+0x2300","@heap+0x2400","@heap+0x2500","@heap+0x2600","@heap+0x2700","@heap+0x2800","@heap+0x2900","@heap+0x2a00","@heap+0x2b00","@heap+0x2c00","@heap+0x2d00","@heap+0x2e00","@heap+0x2f00","@heap+0x3000","@heap+0x3100","@heap+0x3200","@heap+0x3300","@heap+0x3400","@heap+0x3500","@heap+0x3600","@heap+0x3700","@heap+0x3800","@heap+0x3900","@heap+0x3a00","@heap+0x3b00","@heap+0x3c00","@heap+0x3d00","@heap+0x3e00","@heap+0x3f00","@heap+0x4000","@heap+0x4100","@heap+0x4200","@heap+0x4300","@heap+0x4400","@heap+0x4500","@heap+0x4600","@heap+0x4700","@heap+0x4800","@heap+0x4900","@heap+0x4a00","@heap+0x4b00","@heap+0x4c00","@heap+0x4d00","@heap+0x4e00","@heap+0x4f00","@heap+0x5000","@heap+0x5100","@heap+0x5200","@heap+0x5300","@heap+0x5400","@heap+0x5500","@heap+0x5600","@heap+0x5700","@heap+0x5800","@heap+0x5900","@heap+0x5a00","@heap+0x5b00","@heap+0x5c00","@heap+0x5d00","@heap+0x5e00","@heap+0x5f00","@heap+0x6000","@heap+0x6100","@heap+0x6200","@heap+0x6300","@heap+0x6400","@heap+0x6500","@heap+0x6600","@heap+0x6700","@heap+0x6800","@heap+0x6900","@heap+0x6a00","@heap+0x6b00","@heap+0x6c00","@heap+0x6d00","@heap+0x6e00","@heap+0x6f00","@heap+0x7000","@heap+0x7100","@heap+0x7200","@heap+0x7300","@heap+0x7400","@heap+0x7500","@heap+0x7600","@heap+0x7700","@heap+0x7800","@heap+0x7900","@heap+0x7a00","@heap+0x7b00","@heap+0x7c00","@heap+0x7d00","@heap+0x7e00","@heap+0x7f00","@heap+0x8000","@heap+0x8100","@heap+0x8200","@heap+0x8300","@heap+0x8400","@heap+0x8500","@heap+0x8600","@heap+0x8700","@heap+0x8800","@heap+0x8900","@heap+0x8a00","@heap+0x8b00","@heap+0x8c00","@heap+0x8d00","@heap+0x8e00","@heap+0x8f00","@heap+0x9000","@heap+0x9100","@heap+0x9200","@heap+0x9300","@heap+0x9400","@heap+0x9500","@heap+0x9600","@heap+0x9700","@heap+0x9800","@heap+0x9900","@heap+0x9a00","@heap+0x9b00","@heap+0x9c00","@heap+0x9d00","@heap+0x9e00","@heap+0x9f00","@heap+0xa000","@heap+0xa100","@heap+0xa200","@heap+0xa300","@heap+0xa400","@heap+0xa500","@heap+0xa600","@heap+0xa700","@heap+0xa800","@heap+0xa900","@heap+0xaa00","@heap+0xab00","@heap+0xac00","@heap+0xad00","@heap+0xae00","@heap+0xaf00","@heap+0xb000","@heap+0xb100","@heap+0xb200","@heap+0xb300","@heap+0xb400","@heap+0xb500","@heap+0xb600","@heap+0xb700","@heap+0xb800","@heap+0xb900","@heap+0xba00","@heap+0xbb00","@heap+0xbc00","@heap+0xbd00","@heap+0xbe00","@heap+0xbf00","@heap+0xc000","@heap+0xc100","@heap+0xc200","@heap+0xc300","@heap+0xc400","@heap+0xc500","@heap+0xc600","@heap+0xc700","@heap+0xc800","@heap+0xc900","@heap+0xca00","@heap+0xcb00","@heap+0xcc00","@heap+0xcd00","@heap+0xce00","@heap+0xcf00","@heap+0xd000","@heap+0xd100","@heap+0xd200","@heap+0xd300","@heap+0xd400","@heap+0xd500","@heap+0xd600","@heap+0xd700","@heap+0xd800","@heap+0xd900","@heap+0xda00","@heap+0xdb00","@heap+0xdc00","@heap+0xdd00","@heap+0xde00","@heap+0xdf00","@heap+0xe000","@heap+0xe100","@heap+0xe200","@heap+0xe300","@heap+0xe400","@heap+0xe500","@heap+0xe600","@heap+0xe700","@heap+0xe800","@heap+0xe900","@heap+0xea00","@heap+0xeb00","@heap+0xec00","@heap+0xed00","@heap+0xee00","@heap+0xef00","@heap+0xf000","@heap+0xf100","@heap+0xf200","@heap+0xf300","@heap+0xf400","@heap+0xf500","@heap+0xf600","@heap+0xf700","@heap+0xf800","@heap+0xf900","@heap+0xfa00","@heap+0xfb00","@heap+0xfc00","@heap+0xfd00","@heap+0xfe00","@heap+0xff00"]
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    },
+    "0x00571e00": {
+      "name": "CXStr::CXStr",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x005a3850": {
+      "name": "CSidlScreenWnd::CSidlScreenWnd",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ignore",
+        "int",
+        "int",
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x005a25b0": {
+      "name": "CSidlScreenWnd::CreateChildrenFromSidl",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005a1e10": {
+      "name": "CSidlScreenWnd::GetChildItem",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "0x005b44a0": {
+      "name": "SidlManager_guess::Find_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": [
+        "@blue",
+        "@red",
+        "@icons"
+      ]
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": [
+        "@buff00",
+        "@buff01",
+        "@buff02",
+        "@buff03",
+        "@buff04",
+        "@buff05",
+        "@buff06",
+        "@buff07",
+        "@buff08",
+        "@buff09",
+        "@buff10",
+        "@buff11",
+        "@buff12",
+        "@buff13",
+        "@buff14",
+        "@buff15",
+        "@buff16",
+        "@buff17",
+        "@buff18",
+        "@buff19",
+        "@buff20",
+        "@buff21",
+        "@buff22",
+        "@buff23",
+        "@buff24",
+        "@buff25",
+        "@buff26",
+        "@buff27",
+        "@buff28",
+        "@buff29"
+      ]
+    },
+    "0x005b1d90": {
+      "name": "CTextureAnimationView_guess::CTextureAnimationView_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x004dbb3b": {
+      "name": "CTextureAnimationView_guess::Initialize_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x00541a3b": {
+      "name": "CPetInfoWndView_guess::SetBuffIcon_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00571f70": {
+      "name": "CXStr::operator=",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "0x00572300": {
+      "name": "CXStr::operator char*",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@popup_value"
+    },
+    "0x004ae919": {
+      "name": "Popup_guess::GetSetting_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "cstr",
+        "int",
+        "int"
+      ],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "inactive",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x124",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "inactive null parent",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x124",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "active empty",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x124",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "all children",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x124",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x005a1e10": {
+          "name": "CSidlScreenWnd::GetChildItem",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": [
+            "@window00",
+            "@window01",
+            "@window02",
+            "@window03",
+            "@window04",
+            "@window05",
+            "@window06",
+            "@window07",
+            "@window08",
+            "@window09",
+            "@window10",
+            "@window11",
+            "@window12",
+            "@window13",
+            "@window14",
+            "@window15",
+            "@window16",
+            "@window17",
+            "@window18",
+            "@window19",
+            "@window20",
+            "@window21",
+            "@window22",
+            "@window23",
+            "@window24",
+            "@window25",
+            "@window26",
+            "@window27",
+            "@window28",
+            "@window29",
+            "@window30",
+            "@window31",
+            "@window32",
+            "@window33",
+            "@window34",
+            "@window35",
+            "@window36",
+            "@window37",
+            "@window38"
+          ]
+        },
+        "0x004ae919": {
+          "name": "Popup_guess::GetSetting_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "cstr",
+            "int",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "allocation failure",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x124",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x005a1e10": {
+          "name": "CSidlScreenWnd::GetChildItem",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": ["@window00","@window01","@window02","@window03","@window04","@window05","@window06","@window07","@window08","@window09","@window10","@window11","@window12","@window13","@window14","@window15","@window16","@window17","@window18","@window19","@window20","@window21","@window22","@window23","@window24","@window25","@window26","@window27","@window28","@window29","@window30","@window31","@window32","@window33","@window34","@window35","@window36","@window37","@window38"]
+        },
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": [0,"@buff00","@buff01","@buff02","@buff03","@buff04","@buff05","@buff06","@buff07","@buff08","@buff09","@buff10","@buff11","@buff12","@buff13","@buff14","@buff15","@buff16","@buff17","@buff18","@buff19","@buff20","@buff21","@buff22","@buff23","@buff24","@buff25","@buff26","@buff27","@buff28"]
+        }
+      }
+    },
+    {
+      "name": "alternating buffs",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {
+          "addr": "@data",
+          "offset": "0x124",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x005a1e10": {
+          "name": "CSidlScreenWnd::GetChildItem",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": [
+            "@window00",
+            "@window01",
+            "@window02",
+            "@window03",
+            "@window04",
+            "@window05",
+            "@window06",
+            "@window07",
+            "@window08",
+            "@window09",
+            0,
+            "@window11",
+            0,
+            "@window13",
+            0,
+            "@window15",
+            0,
+            "@window17",
+            0,
+            "@window19",
+            0,
+            "@window21",
+            0,
+            "@window23",
+            0,
+            "@window25",
+            0,
+            "@window27",
+            0,
+            "@window29",
+            0,
+            "@window31",
+            0,
+            "@window33",
+            0,
+            "@window35",
+            0,
+            "@window37",
+            0
+          ]
+        },
+        "0x004ae919": {
+          "name": "Popup_guess::GetSetting_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "cstr",
+            "int",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5514784,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@parent",
+          0
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@data",
+        "offset": "0x124",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

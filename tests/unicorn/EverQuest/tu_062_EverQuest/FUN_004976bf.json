@@ -1,0 +1,135 @@
+{
+  "function": "GlobalState_guess::SavePCOnZone_guess",
+  "original": "0x004976bf",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@globalstate",
+  "args": [
+    {
+      "name": "home_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "globalstate": {"size": "0x100", "fill": "random"},
+    "vbtbl": {"size": "0x8", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "0xfffffff8"},
+      {"offset": "0x4", "u32": "0xef8"}
+    ]},
+    "pc": {"size": "0x1000", "fill": "random", "init": [
+      {"offset": "0x8", "u32": "@vbtbl"},
+      {"offset": "0xe20", "u32": 1234},
+      {"offset": "0xe30", "u32": 5678},
+      {"offset": "0xf2c", "f32": 11.5},
+      {"offset": "0xf30", "f32": -22.25},
+      {"offset": "0xf34", "f32": 33.0},
+      {"offset": "0xf38", "f32": 200.75},
+      {"offset": "0xfbc", "cstr": "Bob"}
+    ]},
+    "player": {"size": "0x260", "fill": "random", "init": [
+      {"offset": "0x30", "f32": 1.5},
+      {"offset": "0x34", "f32": 2.5},
+      {"offset": "0x38", "f32": 3.5},
+      {"offset": "0x4c", "f32": 99.25},
+      {"offset": "0x1bc", "u32": 101},
+      {"offset": "0x1c0", "u32": 102},
+      {"offset": "0x1c4", "u32": 103},
+      {"offset": "0x1c8", "u32": 104},
+      {"offset": "0x1cc", "u32": 105},
+      {"offset": "0x1d0", "u32": 106},
+      {"offset": "0x1d4", "u32": 107},
+      {"offset": "0x1d8", "u32": 108},
+      {"offset": "0x1dc", "u32": 109},
+      {"offset": "0x1e0", "u32": 110},
+      {"offset": "0x244", "u8": 0}
+    ]},
+    "info": {"size": "0x50", "fill": "random", "init": [
+      {"offset": "0x44", "u32": "@val1"},
+      {"offset": "0x48", "u32": "@val2"}
+    ]},
+    "val1": {"size": "0x10", "fill": "random"},
+    "val2": {"size": "0x10", "fill": "random"},
+    "str1": {"size": "0x20", "fill": "zero", "init": [{"offset": "0", "cstr": "xx4321"}]},
+    "str2": {"size": "0x40", "fill": "zero", "init": [{"offset": "0", "cstr": "yy98765432109876543210"}]},
+    "cleaned": {"size": "0x20", "fill": "zero", "init": [{"offset": "0", "cstr": "Bobclean"}]},
+    "rec": {"size": "0x60", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@pc"},
+    {"addr": "0x00905ce4", "u32": "@player"},
+    {"addr": "0x00924676", "u8": 0},
+    {"addr": "0x00924673", "u8": 7},
+    {"addr": "0x00923788", "u32": 9},
+    {"addr": "0x00905ca0", "u32": "0x12345678"}
+  ],
+  "callees": {
+    "0x004b07d8": {"name": "FUN_004b07d8", "conv": "thiscall", "args": []},
+    "0x00492e6e": {"name": "StripShipName_guess", "conv": "thiscall", "args": ["cstr", "ignore"], "ret": "@cleaned"},
+    "0x0047981d": {"name": "FindPlayerByPartialDisplayName_guess", "conv": "cdecl", "args": ["cstr", "int"], "ret": "@rec"},
+    "0x004bf9b2": {"name": "TransformPassengersToBoatSpace_guess", "conv": "cdecl", "args": ["ptr"],
+      "writes": [{"addr": "@player", "offset": 48, "hex": "0000a0400000c0400000e040"},
+                 {"addr": "@player", "offset": 76, "hex": "00004842"}]},
+    "0x004bfc71": {"name": "TransformPassengersToWorldSpace_guess", "conv": "cdecl", "args": ["ptr"]},
+    "0x0040e25c": {"name": "FUN_0040e25c", "conv": "thiscall", "args": ["cstr"], "ret": 0},
+    "0x005ed8a0": {"name": "SetFirst", "conv": "thiscall", "args": ["int"]},
+    "0x005ed8e0": {"name": "SetSecond", "conv": "thiscall", "args": ["int"]},
+    "0x005ec220": {"name": "GetCharInfo2", "conv": "thiscall", "args": [], "ret": "@info"},
+    "0x005e0f00": {"name": "GetText", "conv": "thiscall", "args": [], "ret": ["@str1", "@str2"]},
+    "0x004658dd": {"name": "is_number_guess", "conv": "cdecl", "args": ["cstr"], "ret": 1},
+    "0x0060e3a3": {"name": "atol", "conv": "cdecl", "args": ["cstr"], "ret": [4321, 765432]},
+    "0x0047a3d0": {"name": "GetArmorType_guess", "conv": "thiscall", "args": ["int"], "ret": [11, 22, 33, 44, 55, 66, 77, 88, 99]},
+    "0x005f06b0": {"name": "SetValue", "conv": "thiscall", "args": ["int", "int"]},
+    "0x004be2dc": {"name": "SetChoice", "conv": "thiscall", "args": ["int", "int"]},
+    "0x005ed880": {"name": "GetFirst", "conv": "thiscall", "args": [], "ret": 3131},
+    "0x005ed8c0": {"name": "GetSecond", "conv": "thiscall", "args": [], "ret": 4242},
+    "0x005f05e0": {"name": "GetValue", "conv": "thiscall", "args": ["int"],
+      "ret": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]},
+    "0x004b6c04": {"name": "MemChecker0", "conv": "cdecl", "args": ["mem:184", "int"], "ret": "0x5eed"},
+    "0x004912b1": {"name": "FUN_004912b1", "conv": "cdecl", "args": ["u32", "int", "mem:192", "int", "int"], "ret": 1}
+  },
+  "cases": [
+    {"name": "flag_set_no_names_home", "args": [1],
+     "memory": [{"addr": "0x00924676", "u8": 1},
+                {"addr": "@info", "offset": "0x44", "u32": 0},
+                {"addr": "@info", "offset": "0x48", "u32": 0}]},
+    {"name": "type0_empty_name_send", "args": [0],
+     "memory": [{"addr": "@pc", "offset": "0xfbc", "u8": 0}]},
+    {"name": "type1_name_found_send", "args": [0],
+     "memory": [{"addr": "@player", "offset": "0x244", "u8": 1}]},
+    {"name": "type0_name_found_home", "args": [1]},
+    {"name": "name_not_found", "args": [0],
+     "callees": {"0x0047981d": {"name": "FUN_0047981d", "conv": "cdecl", "args": ["cstr", "int"], "ret": 0}}},
+    {"name": "names_not_numeric", "args": [0],
+     "callees": {"0x004658dd": {"name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": 0}}},
+    {"name": "only_second_name", "args": [0],
+     "memory": [{"addr": "@info", "offset": "0x44", "u32": 0}]},
+    {"name": "only_first_name", "args": [1],
+     "memory": [{"addr": "@info", "offset": "0x48", "u32": 0}]},
+    {"name": "first_numeric_second_not", "args": [0],
+     "callees": {"0x004658dd": {"name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": [1, 0]}}},
+    {"name": "first_not_second_numeric", "args": [0],
+     "callees": {"0x004658dd": {"name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": [0, 1]}}},
+    {"name": "no_player_flag_set", "args": [0],
+     "memory": [{"addr": "0x00924676", "u8": 1},
+                {"addr": "0x00905ce4", "u32": 0}]},
+    {"name": "home_minus_one", "args": [-1]}
+  ],
+  "fuzz": {
+    "seed": 4814527,
+    "count": 100,
+    "args": [
+      {"choices": [0, 1, 2, -1]}
+    ],
+    "memory": [
+      {"addr": "0x00924676", "type": "u8", "choices": [0, 1]},
+      {"addr": "@player", "offset": "0x244", "type": "u8", "choices": [0, 1, 2, 255]},
+      {"addr": "@info", "offset": "0x44", "type": "u32", "choices": [0, "@val1"]},
+      {"addr": "@info", "offset": "0x48", "type": "u32", "choices": [0, "@val2"]},
+      {"addr": "@pc", "offset": "0xfbc", "type": "u8", "choices": [0, 66]},
+      {"addr": "@pc", "offset": "0xf38", "type": "int", "choices": [0, 1065353216, -1054867456, 1130430464]}
+    ]
+  }
+}

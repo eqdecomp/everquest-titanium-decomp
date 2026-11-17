@@ -1,0 +1,144 @@
+{
+  "function": "CPlayerWndView_guess::CreateContextMenu_guess",
+  "_survivors": "L468: recipient = 0 is overwritten by the new-result store before any call reads the member (operator_new's stub does not read the container); L472: x - 0x80000000 equals x + 0x80000000 mod 2^32, so no input tells them apart",
+  "original": "0x005451b9",
+  "sources": [
+    "src/EverQuest/tu_196_PlayerWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@container",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "container": {
+      "size": "0x180",
+      "fill": "random"
+    },
+    "recipient": {
+      "size": "0x1a8",
+      "fill": "random"
+    },
+    "strtab": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "text": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "manager": {
+      "size": "0x1158",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x00905CB0", "u32": "@strtab"},
+    {"addr": "0x0099D414", "u32": "@manager"}
+  ],
+  "callees": {
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@recipient"
+    },
+    "0x005bfae0": {
+      "name": "CContextMenu_guess::ctor",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32",
+        "ignore"
+      ],
+      "ret": "this"
+    },
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": "@text"
+    },
+    "0x00571e00": {
+      "name": "CXStr::CXStr",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x005bfcf0": {
+      "name": "CContextMenu_guess::Pick_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": [
+        7,
+        42
+      ]
+    },
+    "0x00571d00": {
+      "name": "CXStr::~CXStr",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ]
+    },
+    "0x005bfe60": {
+      "name": "CContextMenu_guess::Prepare_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x005ad5a0": {
+      "name": "CContextMenuManager_guess::Attach_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 4242
+    },
+    "0x0054504d": {
+      "name": "UpdatePetDisplayCheck_guess",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": []
+    },
+    {
+      "name": "allocation fails",
+      "args": [],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5525945,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@manager", "offset": "0x1154", "type": "int", "range": [-1000, 1000]}
+    ]
+  }
+}

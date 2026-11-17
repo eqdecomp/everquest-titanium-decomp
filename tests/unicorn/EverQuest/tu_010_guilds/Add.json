@@ -1,0 +1,114 @@
+{
+  "function": "ListOwner_guess::Add_guess",
+  "original": "0x0040a8b5",
+  "sources": [
+    "src/EverQuest/tu_010_guilds.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@listowner",
+  "args": [
+    {
+      "name": "value",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "listowner": {
+      "size": "0x17a00",
+      "fill": "random",
+      "init": [
+        {"offset": "0x48", "u32": "@oldhead"}
+      ]
+    },
+    "oldhead": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "value": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "observer": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x00991aac", "u32": "@observer"},
+    {"addr": "@listowner", "offset": "0x44", "u32": 3},
+    {"addr": "@listowner", "offset": "0x17994", "u8": 0},
+    {"addr": "@listowner", "offset": "0x179b4", "u8": 0}
+  ],
+  "callees": {
+    "0x0051059a": {
+      "name": "AddMember_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "head set, observer set",
+      "args": [
+        "@value"
+      ]
+    },
+    {
+      "name": "empty list, observer set",
+      "args": [
+        "@value"
+      ],
+      "memory": [
+        {"addr": "@listowner", "offset": "0x48", "u32": 0}
+      ]
+    },
+    {
+      "name": "head set, no observer",
+      "args": [
+        "@value"
+      ],
+      "memory": [
+        {"addr": "0x00991aac", "u32": 0}
+      ]
+    },
+    {
+      "name": "empty list, no observer",
+      "args": [
+        "@value"
+      ],
+      "memory": [
+        {"addr": "@listowner", "offset": "0x48", "u32": 0},
+        {"addr": "0x00991aac", "u32": 0}
+      ]
+    },
+    {
+      "name": "null value, empty list, no observer",
+      "args": [
+        0
+      ],
+      "memory": [
+        {"addr": "@listowner", "offset": "0x48", "u32": 0},
+        {"addr": "0x00991aac", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4237493,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@value"
+        ]
+      }
+    ],
+    "memory": [
+      {"addr": "@listowner", "offset": "0x48", "type": "int", "choices": [0, "@oldhead"]},
+      {"addr": "@listowner", "offset": "0x44", "type": "int", "choices": [0, 1, 3, 7]},
+      {"addr": "0x00991aac", "type": "int", "choices": [0, "@observer"]}
+    ]
+  }
+}

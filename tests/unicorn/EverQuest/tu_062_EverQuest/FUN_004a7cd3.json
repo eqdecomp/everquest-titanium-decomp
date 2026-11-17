@@ -1,0 +1,251 @@
+{
+  "function": "GlobalState_guess::ResetGameGlobals_guess",
+  "original": "0x004a7cd3",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@globalstate",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "globalstate": {
+      "size": "0x3A0BB",
+      "fill": "random"
+    },
+    "record": {
+      "size": "0xF8",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0063F53F",
+      "from_image": "0x0063F53F",
+      "image_size": 256
+    },
+    {
+      "addr": "0x00649F18",
+      "from_image": "0x00649F18",
+      "image_size": 256
+    },
+    {
+      "addr": "0x00851390",
+      "u32": 0
+    },
+    {
+      "addr": "0x00988DF0",
+      "u32": 0
+    },
+    {
+      "addr": "0x009858C8",
+      "u8": 0
+    }
+  ],
+  "callees": {
+    "0x004c94ae": {
+      "name": "FUN_004c94ae",
+      "conv": "cdecl",
+      "args": [],
+      "ret": "@record"
+    },
+    "0x004a2f7a": {
+      "name": "SetAutoAttack_guess",
+      "conv": "thiscall",
+      "args": [
+        "u8"
+      ],
+      "passthrough": true
+    },
+    "0x0049994c": {
+      "name": "SetAutoFire_guess",
+      "conv": "thiscall",
+      "args": [
+        "char"
+      ],
+      "passthrough": true
+    },
+    "0x004917dd": {
+      "name": "SetDefaultVisionColors_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "ret": 1,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "4000"
+        }
+      ]
+    },
+    "0x004ae64c": {
+      "name": "ReadClientIniInt_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "cstr",
+        "int"
+      ],
+      "ret": [
+        8,
+        1,
+        0
+      ]
+    },
+    "0x004ae514": {
+      "name": "FUN_004ae514",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "cstr",
+        "cstr"
+      ]
+    },
+    "0x004ae5e9": {
+      "name": "FUN_004ae5e9",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "cstr",
+        "cstr",
+        "ptr",
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 3,
+          "offset": 0,
+          "hex": "2a"
+        }
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "channel-default",
+      "args": []
+    },
+    {
+      "name": "tell-wildcard",
+      "args": [],
+      "callees": {
+        "0x004ae64c": {
+          "name": "FUN_004ae64c",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            7,
+            "0x12345678",
+            "0xFFFFFFFF"
+          ]
+        },
+        "0x004ae5e9": {
+          "name": "FUN_004ae5e9",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "cstr",
+            "cstr",
+            "ptr",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "2a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "tell-custom",
+      "args": [],
+      "callees": {
+        "0x004ae64c": {
+          "name": "FUN_004ae64c",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            7,
+            -123,
+            "0x12345678"
+          ]
+        },
+        "0x004ae5e9": {
+          "name": "FUN_004ae5e9",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "cstr",
+            "cstr",
+            "ptr",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 3,
+              "offset": 0,
+              "hex": "7800"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "other-config-values",
+      "args": [],
+      "callees": {
+        "0x004ae64c": {
+          "name": "FUN_004ae64c",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            "0x102",
+            -1,
+            "0x200"
+          ]
+        }
+      }
+    },
+    {
+      "name": "zeros",
+      "args": []
+    }
+  ],
+  "fuzz": {
+    "seed": 4881619,
+    "count": 50,
+    "args": [],
+    "memory": []
+  },
+  "_survivors": "L3666: repeated writes of zero to 0x0095A174 have the same final memory as one write"
+}

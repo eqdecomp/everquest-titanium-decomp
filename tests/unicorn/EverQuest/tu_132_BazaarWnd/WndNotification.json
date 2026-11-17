@@ -1,0 +1,432 @@
+{
+  "function": "CBazaarWndView_guess::WndNotification_guess",
+  "original": "0x004e5c84",
+  "sources": [
+    "src/EverQuest/tu_132_BazaarWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@bazaarwnd",
+  "args": [
+    { "name": "sender", "type": "ptr" },
+    { "name": "message", "type": "u32" },
+    { "name": "data", "type": "ptr" }
+  ],
+  "ret": "int",
+  "objects": {
+    "bazaarwnd": {
+      "size": "0x5f8",
+      "fill": "random",
+      "init": [
+        { "offset": "0x15c", "u32": -1 },
+        { "offset": "0x164", "u32": 0 },
+        { "offset": "0x168", "u32": -1 },
+        { "offset": "0x16c", "u32": "@trade" },
+        { "offset": "0x170", "u32": 0 },
+        { "offset": "0x174", "u32": 0 },
+        { "offset": "0x178", "u32": 0 },
+        { "offset": "0x17c", "u32": 0 },
+        { "offset": "0x180", "u32": 0 },
+        { "offset": "0x188", "u32": 0 },
+        { "offset": "0x18c", "u32": 0 },
+        { "offset": "0x190", "u32": 0 },
+        { "offset": "0x194", "u32": 0 },
+        { "offset": "0x198", "u32": 0 },
+        { "offset": "0x19c", "u32": 0 },
+        { "offset": "0x5f4", "u8": 0 }
+      ]
+    },
+    "sender": { "size": "0x4", "fill": "zero" },
+    "data": { "size": "0x4", "fill": "zero" },
+    "trade": {
+      "size": "0x88",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x80", "u32": 101 },
+        { "offset": "0x84", "u32": 202 }
+      ]
+    },
+    "stringtable": { "size": "0x4", "fill": "zero" },
+    "empty": { "size": "0x1", "fill": "zero" }
+  },
+  "memory": [
+    { "addr": "@bazaarwnd", "offset": "0x564", "size": 80, "fill": "zero" },
+    { "addr": "0x00905cb0", "u32": "@stringtable" },
+    { "addr": "0x00991680", "u8": 1 }
+  ],
+  "callees": {
+    "0x004e53fb": {
+      "name": "GetTotalCopper_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x004e5769": {
+      "name": "SetPriceForSelectedItem_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x004912b1": {
+      "name": "SendMessage_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "mem:24", "int", "int"]
+    },
+    "0x005dfa00": {
+      "name": "getString_guess",
+      "conv": "thiscall",
+      "args": ["u32", "ptr"],
+      "ret": "@empty"
+    },
+    "0x004e4ca6": {
+      "name": "AddBazaarText_guess",
+      "conv": "thiscall",
+      "args": ["cstr", "int"]
+    },
+    "0x004e5907": {
+      "name": "UpdatePriceButtons_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004e5436": {
+      "name": "CheckPrice_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": -1
+    },
+    "0x004e5143": {
+      "name": "UpdateMoney_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004e5533": {
+      "name": "UpdateItemColors_guess",
+      "conv": "thiscall",
+      "args": ["int", "char"]
+    },
+    "0x005a2230": {
+      "name": "CSidlScreenWnd::WndNotification",
+      "conv": "thiscall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 16962
+    },
+    "0x004e5bd4": {
+      "name": "ClickedMoneyButton_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"]
+    }
+  },
+  "cases": [
+    {
+      "name": "price-empty-slot-shows-error",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x17c", "u32": "@sender" },
+        { "addr": "@bazaarwnd", "offset": "0x15c", "u32": 2 },
+        { "addr": "@bazaarwnd", "offset": "0x5f4", "u8": 1 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "price-listed-slot-sends-message",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x17c", "u32": "@sender" },
+        { "addr": "@bazaarwnd", "offset": "0x15c", "u32": 2 },
+        { "addr": "@bazaarwnd", "offset": "0x5f4", "u8": 1 },
+        { "addr": "@bazaarwnd", "offset": "0x566", "u8": 1 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "price-no-selection",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x17c", "u32": "@sender" },
+        { "addr": "@bazaarwnd", "offset": "0x15c", "u32": -1 },
+        { "addr": "@bazaarwnd", "offset": "0x5f4", "u8": 1 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "price-cannot-sell",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x17c", "u32": "@sender" },
+        { "addr": "@bazaarwnd", "offset": "0x15c", "u32": 2 },
+        { "addr": "@bazaarwnd", "offset": "0x5f4", "u8": 1 }
+      ],
+      "callees": {
+        "0x004e5769": {
+          "name": "CanSell_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "price-inactive-window",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x17c", "u32": "@sender" },
+        { "addr": "@bazaarwnd", "offset": "0x15c", "u32": 2 },
+        { "addr": "@bazaarwnd", "offset": "0x5f4", "u8": 0 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "add-with-zero-money",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x188", "u32": "@sender" },
+        { "addr": "@bazaarwnd", "offset": "0x16c", "u32": "@trade" },
+        { "addr": "@bazaarwnd", "offset": "0x5f4", "u8": 1 }
+      ],
+      "callees": {
+        "0x004e53fb": {
+          "name": "GetTotalMoney_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "add-with-money-sends-message",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x188", "u32": "@sender" },
+        { "addr": "@bazaarwnd", "offset": "0x16c", "u32": "@trade" },
+        { "addr": "@bazaarwnd", "offset": "0x5f4", "u8": 1 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "remove-inactive-window",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x18c", "u32": "@sender" },
+        { "addr": "@bazaarwnd", "offset": "0x16c", "u32": "@trade" },
+        { "addr": "@bazaarwnd", "offset": "0x5f4", "u8": 0 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "remove-active-sends-message",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x18c", "u32": "@sender" },
+        { "addr": "@bazaarwnd", "offset": "0x16c", "u32": "@trade" },
+        { "addr": "@bazaarwnd", "offset": "0x5f4", "u8": 1 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "start-price-error-minus-one",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x170", "u32": "@sender" }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "start-price-error-minus-two",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x170", "u32": "@sender" }
+      ],
+      "callees": {
+        "0x004e5436": {
+          "name": "CheckPrice_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": -2
+        }
+      },
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "start-price-valid",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x170", "u32": "@sender" }
+      ],
+      "callees": {
+        "0x004e5436": {
+          "name": "CheckPrice_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "list-inactive-window",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x180", "u32": "@sender" },
+        { "addr": "@bazaarwnd", "offset": "0x5f4", "u8": 0 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "list-active-sends-20-byte-message",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x180", "u32": "@sender" },
+        { "addr": "@bazaarwnd", "offset": "0x5f4", "u8": 1 }
+      ],
+      "callees": {
+        "0x004912b1": {
+          "name": "SendMessage_guess",
+          "conv": "cdecl",
+          "args": ["ptr", "int", "mem:20", "int", "int"]
+        }
+      },
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "clear-inactive",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x178", "u32": "@sender" },
+        { "addr": "@bazaarwnd", "offset": "0x164", "u32": 12345 },
+        { "addr": "@bazaarwnd", "offset": "0x15c", "u32": -1 },
+        { "addr": "@bazaarwnd", "offset": "0x5f4", "u8": 0 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "clear-active-without-selection",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x178", "u32": "@sender" },
+        { "addr": "@bazaarwnd", "offset": "0x15c", "u32": -1 },
+        { "addr": "@bazaarwnd", "offset": "0x5f4", "u8": 1 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "clear-active-sends-message",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x178", "u32": "@sender" },
+        { "addr": "@bazaarwnd", "offset": "0x164", "u32": 12345 },
+        { "addr": "@bazaarwnd", "offset": "0x15c", "u32": 2 },
+        { "addr": "@bazaarwnd", "offset": "0x5f4", "u8": 1 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "end-clears-flags-and-global",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x174", "u32": "@sender" },
+        { "addr": "@bazaarwnd", "offset": "0x564", "size": 80, "fill": "random" },
+        { "addr": "0x00991680", "u8": 1 }
+      ],
+      "callees": {
+        "0x004912b1": {
+          "name": "SendMessage_guess",
+          "conv": "cdecl",
+          "args": ["ptr", "int", "mem:20", "int", "int"]
+        }
+      },
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "money-field-zero",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x190", "u32": "@sender" }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "money-field-one",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x194", "u32": "@sender" }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "money-field-two",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x198", "u32": "@sender" }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "money-field-three",
+      "args": ["@sender", 1, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x19c", "u32": "@sender" }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "message-31-sets-item-slot-and-clears-request",
+      "args": ["@sender", 31, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x168", "u32": 7 },
+        { "addr": "@data", "u32": 4660 }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "message-31-without-request-falls-back",
+      "args": ["@sender", 31, "@data"],
+      "memory": [
+        { "addr": "@bazaarwnd", "offset": "0x168", "u32": -1 }
+      ],
+      "expect": { "ret": 16962 }
+    },
+    {
+      "name": "message-3-falls-back",
+      "args": ["@sender", 3, "@data"],
+      "expect": { "ret": 16962 }
+    },
+    {
+      "name": "message-1-unmatched-sender-falls-back",
+      "args": ["@sender", 1, "@data"],
+      "expect": { "ret": 16962 }
+    },
+    {
+      "name": "message-0-falls-back",
+      "args": ["@sender", 0, "@data"],
+      "expect": { "ret": 16962 }
+    }
+  ],
+  "fuzz": {
+    "seed": 5135492,
+    "count": 150,
+    "args": [
+      { "choices": ["@sender"] },
+      { "choices": [0, 1, 2, 3, 30, 31, 32] },
+      { "choices": ["@data"] }
+    ],
+    "memory": [
+      { "addr": "@bazaarwnd", "offset": "0x15c", "type": "int", "choices": [-1, 0, 2, 79] },
+      { "addr": "@bazaarwnd", "offset": "0x168", "type": "int", "choices": [-1, 0, 7, 79] },
+      { "addr": "@bazaarwnd", "offset": "0x5f4", "type": "u8", "choices": [0, 1] },
+      { "addr": "@bazaarwnd", "offset": "0x564", "type": "u8", "count": 80, "choices": [0, 1] },
+      { "addr": "@bazaarwnd", "offset": "0x170", "type": "ptr", "choices": [0, "@sender"], "p": 0.25 },
+      { "addr": "@bazaarwnd", "offset": "0x174", "type": "ptr", "choices": [0, "@sender"], "p": 0.25 },
+      { "addr": "@bazaarwnd", "offset": "0x178", "type": "ptr", "choices": [0, "@sender"], "p": 0.25 },
+      { "addr": "@bazaarwnd", "offset": "0x17c", "type": "ptr", "choices": [0, "@sender"], "p": 0.25 },
+      { "addr": "@bazaarwnd", "offset": "0x180", "type": "ptr", "choices": [0, "@sender"], "p": 0.25 },
+      { "addr": "@bazaarwnd", "offset": "0x188", "type": "ptr", "choices": [0, "@sender"], "p": 0.25 },
+      { "addr": "@bazaarwnd", "offset": "0x18c", "type": "ptr", "choices": [0, "@sender"], "p": 0.25 },
+      { "addr": "@bazaarwnd", "offset": "0x190", "type": "ptr", "choices": [0, "@sender"], "p": 0.2 },
+      { "addr": "@bazaarwnd", "offset": "0x194", "type": "ptr", "choices": [0, "@sender"], "p": 0.2 },
+      { "addr": "@bazaarwnd", "offset": "0x198", "type": "ptr", "choices": [0, "@sender"], "p": 0.2 },
+      { "addr": "@bazaarwnd", "offset": "0x19c", "type": "ptr", "choices": [0, "@sender"], "p": 0.2 },
+      { "addr": "@data", "type": "u32", "choices": [0, 1, 4660, 4294967295] }
+    ]
+  }
+}

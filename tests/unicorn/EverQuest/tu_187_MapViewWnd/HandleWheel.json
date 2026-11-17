@@ -1,0 +1,125 @@
+{
+  "function": "Target5332_guess::HandleWheel_guess",
+  "original": "0x005333c9",
+  "sources": [
+    "src/EverQuest/tu_187_MapViewWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@target5332",
+  "args": [
+    {"name": "point_guess", "type": "ptr"},
+    {"name": "second_guess", "type": "int"},
+    {"name": "third_guess", "type": "int"}
+  ],
+  "ret": "int",
+  "objects": {
+    "target5332": {
+      "size": "0x300",
+      "fill": "random",
+      "init": [{"offset": "0x1dc", "u32": "@gate"}]
+    },
+    "gate": {
+      "size": "0x40",
+      "fill": "random",
+      "init": [{"offset": "0", "u32": "@vtbl"}]
+    },
+    "vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xe4", "u32": "@fn_slot57"}]
+    },
+    "point": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "fn_slot57": {
+      "size": "0x10",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00531e41": {
+      "name": "FUN_00531e41",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005329df": {
+      "name": "FUN_005329df",
+      "conv": "thiscall",
+      "args": ["int", "int", "int", "int", "int"],
+      "ret": 1
+    },
+    "0x00531da9": {
+      "name": "FUN_00531da9",
+      "conv": "thiscall",
+      "args": ["float"]
+    },
+    "@fn_slot57": {
+      "name": "Slot57_rect",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "writes": [{"arg": 0, "offset": 0, "hex": "0a000000140000002c010000c8000000"}]
+    }
+  },
+  "cases": [
+    {
+      "name": "wheel up, inside",
+      "args": ["@point", 1, 0],
+      "memory": [{"addr": "@target5332", "offset": "0x264", "u32": 1073741824}]
+    },
+    {
+      "name": "wheel up, ratio 0.5",
+      "args": ["@point", 2, 0],
+      "memory": [{"addr": "@target5332", "offset": "0x264", "u32": 1056964608}]
+    },
+    {
+      "name": "no wheel movement",
+      "args": ["@point", 0, 0],
+      "memory": [{"addr": "@target5332", "offset": "0x264", "u32": 1073741824}]
+    },
+    {
+      "name": "wheel down, ratio 2.0",
+      "args": ["@point", -1, 0],
+      "memory": [{"addr": "@target5332", "offset": "0x264", "u32": 1073741824}]
+    },
+    {
+      "name": "wheel down, ratio 0.5",
+      "args": ["@point", -1, 0],
+      "memory": [{"addr": "@target5332", "offset": "0x264", "u32": 1056964608}]
+    },
+    {
+      "name": "wheel down, ratio 1.0",
+      "args": ["@point", -1, 0],
+      "memory": [{"addr": "@target5332", "offset": "0x264", "u32": 1065353216}]
+    },
+    {
+      "name": "wheel down, ratio NaN",
+      "args": ["@point", -1, 0],
+      "memory": [{"addr": "@target5332", "offset": "0x264", "u32": 2143289344}]
+    },
+    {
+      "name": "permit denied",
+      "args": ["@point", 1, 0],
+      "callees": {"0x00531e41": {"name": "FUN_00531e41", "conv": "thiscall", "args": [], "ret": 0}}
+    },
+    {
+      "name": "point outside rect",
+      "args": ["@point", 1, 0],
+      "callees": {"0x005329df": {"name": "FUN_005329df", "conv": "thiscall", "args": ["int", "int", "int", "int", "int"], "ret": 0}}
+    }
+  ],
+  "fuzz": {
+    "seed": 5452745,
+    "count": 100,
+    "args": [
+      {"choices": ["@point"]},
+      {"range": [-3, 3]},
+      {"range": [-3, 3]}
+    ],
+    "memory": [
+      {"addr": "@target5332", "offset": "0x264", "type": "float", "choices": [0.5, 1.0, 2.0, -1.0, 0.0]}
+    ]
+  }
+}

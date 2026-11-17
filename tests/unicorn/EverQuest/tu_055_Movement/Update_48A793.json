@@ -1,0 +1,137 @@
+{
+  "function": "State_48995D_guess::Update_48A793_guess",
+  "original": "0x0048a793",
+  "sources": [
+    "src/EverQuest/tu_055_Movement.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@state",
+  "args": [
+    {
+      "name": "move_guess",
+      "type": "bool"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "state": {
+      "size": "0x1ac",
+      "fill": "random",
+      "init": [
+        {"offset": "0x44", "f32": 10.0},
+        {"offset": "0x1a8", "u32": "@timer"}
+      ]
+    },
+    "timer": {
+      "size": "0xc4",
+      "fill": "random",
+      "init": [
+        {"offset": "0x6c", "u32": 1000},
+        {"offset": "0xc0", "f32": 2.5}
+      ]
+    },
+    "display": {
+      "size": "0x14c",
+      "fill": "random",
+      "init": [
+        {"offset": "0x148", "u32": 2000}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "0x00905d24", "u32": "@display"}
+  ],
+  "callees": {
+    "0x0048a026": {
+      "name": "Probe_48A026",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x00489c83": {
+      "name": "Push_489C83",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "move_probe_hit",
+      "args": [1]
+    },
+    {
+      "name": "move_probe_miss",
+      "args": [1],
+      "callees": {"0x0048a026": {"name": "Probe_48A026", "conv": "thiscall", "args": [], "ret": 0}}
+    },
+    {
+      "name": "probe_returns_high_bits",
+      "args": [1],
+      "callees": {"0x0048a026": {"name": "Probe_48A026", "conv": "thiscall", "args": [], "ret": 256}}
+    },
+    {
+      "name": "no_move",
+      "args": [0]
+    },
+    {
+      "name": "null_timer",
+      "args": [1],
+      "memory": [{"addr": "@state", "offset": "0x1a8", "u32": 0}]
+    },
+    {
+      "name": "time_equal",
+      "args": [1],
+      "memory": [{"addr": "@display", "offset": "0x148", "u32": 1000}]
+    },
+    {
+      "name": "time_one_more",
+      "args": [1],
+      "memory": [{"addr": "@display", "offset": "0x148", "u32": 1001}]
+    },
+    {
+      "name": "time_less",
+      "args": [1],
+      "memory": [{"addr": "@display", "offset": "0x148", "u32": 999}]
+    },
+    {
+      "name": "unsigned_compare",
+      "args": [1],
+      "memory": [
+        {"addr": "@display", "offset": "0x148", "u32": "0x80000000"},
+        {"addr": "@timer", "offset": "0x6c", "u32": 5}
+      ]
+    },
+    {
+      "name": "unsigned_compare_rev",
+      "args": [1],
+      "memory": [
+        {"addr": "@display", "offset": "0x148", "u32": 5},
+        {"addr": "@timer", "offset": "0x6c", "u32": "0x80000000"}
+      ]
+    },
+    {
+      "name": "wraparound_add",
+      "args": [1],
+      "memory": [
+        {"addr": "@display", "offset": "0x148", "u32": "0xffffff00"},
+        {"addr": "@timer", "offset": "0x6c", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4761491,
+    "count": 120,
+    "args": [
+      {"type": "char", "choices": [0, 1, 2, 255]}
+    ],
+    "memory": [
+      {"addr": "@display", "offset": "0x148", "type": "u32", "choices": [0, 999, 1000, 1001, 2000, 4294967295, 2147483648]},
+      {"addr": "@timer", "offset": "0x6c", "type": "u32", "choices": [0, 999, 1000, 1001, 2147483648]},
+      {"addr": "@timer", "offset": "0xc0", "type": "float", "range": [-100.0, 100.0]},
+      {"addr": "@state", "offset": "0x44", "type": "float", "range": [-1000.0, 1000.0]},
+      {"addr": "@state", "offset": "0x1a8", "type": "ptr", "choices": ["@timer", 0], "p": 0.2}
+    ]
+  }
+}

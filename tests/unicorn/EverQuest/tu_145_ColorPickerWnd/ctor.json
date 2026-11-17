@@ -1,0 +1,112 @@
+{
+  "function": "CColorPickerWndView_guess::CColorPickerWndView_guess",
+  "original": "0x004f83ac",
+  "sources": ["src/EverQuest/tu_145_ColorPickerWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [{"name": "parent_guess", "type": "ptr"}],
+  "ret": "ptr",
+  "size": "0x32d",
+  "objects": {
+    "owner": {"size": "0x1d0", "fill": "random", "init": [{"offset": "0x124", "u32": "@piece"}]},
+    "parent": {"size": "0x11c", "fill": "random"},
+    "piece": {"size": "0x64", "fill": "random", "init": [{"offset": "0x60", "u32": "0x13579bdf"}]},
+    "entry0": {"size": "0x140", "fill": "random", "init": [{"offset": "0x7c", "u32": 100}]},
+    "entry1": {"size": "0x140", "fill": "random", "init": [{"offset": "0x7c", "u32": 101}]},
+    "entry2": {"size": "0x140", "fill": "random", "init": [{"offset": "0x7c", "u32": 102}]},
+    "entry3": {"size": "0x140", "fill": "random", "init": [{"offset": "0x7c", "u32": 103}]},
+    "entry4": {"size": "0x140", "fill": "random", "init": [{"offset": "0x7c", "u32": 104}]},
+    "entry5": {"size": "0x140", "fill": "random", "init": [{"offset": "0x7c", "u32": 105}]},
+    "entry6": {"size": "0x140", "fill": "random", "init": [{"offset": "0x7c", "u32": 106}]},
+    "entry7": {"size": "0x140", "fill": "random", "init": [{"offset": "0x7c", "u32": 107}]},
+    "entry8": {"size": "0x140", "fill": "random", "init": [{"offset": "0x7c", "u32": 108}]},
+    "entry9": {"size": "0x140", "fill": "random", "init": [{"offset": "0x7c", "u32": 109}]},
+    "entry10": {"size": "0x140", "fill": "random", "init": [{"offset": "0x7c", "u32": 110}]},
+    "entry11": {"size": "0x140", "fill": "random", "init": [{"offset": "0x7c", "u32": 111}]},
+    "entry12": {"size": "0x140", "fill": "random", "init": [{"offset": "0x7c", "u32": 112}]},
+    "entry13": {"size": "0x140", "fill": "random", "init": [{"offset": "0x7c", "u32": 113}]},
+    "entry14": {"size": "0x140", "fill": "random", "init": [{"offset": "0x7c", "u32": 114}]},
+    "entry15": {"size": "0x140", "fill": "random", "init": [{"offset": "0x7c", "u32": 115}]},
+    "red": {"size": "0x4", "fill": "random"},
+    "redCtl": {"size": "0x234", "fill": "random"},
+    "green": {"size": "0x4", "fill": "random"},
+    "greenCtl": {"size": "0x234", "fill": "random"},
+    "blue": {"size": "0x4", "fill": "random"},
+    "blueCtl": {"size": "0x234", "fill": "random"},
+    "accept": {"size": "0x4", "fill": "random"},
+    "heap": {"size": "0x1000", "fill": "zero"}
+  },
+  "memory": [{"addr": "0x0079ac74", "u32": "0x13579bdf"}],
+  "callees": {
+    "0x00571e00": {"name": "CXStr_ctor", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "0x005a3850": {"name": "CSidlScreenWnd_ctor", "conv": "thiscall", "args": ["ptr", "ignore", "int", "int", "ptr"], "ret": "this"},
+    "0x00571d00": {"name": "CXStr_release", "conv": "thiscall", "args": ["ptr"], "passthrough": true},
+    "kernel32.dll!GetProcessHeap": {"name": "GetProcessHeap", "conv": "stdcall", "args": [], "ret": "0x12340000"},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@heap"},
+    "kernel32.dll!HeapFree": {"name": "HeapFree", "conv": "stdcall", "args": ["ptr", "u32", "ptr"], "ret": 1},
+    "0x005a25b0": {"name": "CreateChildrenFromSidl", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr"],
+      "varargs": "printf",
+      "ret": [13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 14, 14],
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "4350575f544330427574746f6e00", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "4350575f544331427574746f6e00", "call": 1},
+        {"arg": 0, "offset": 0, "hex": "4350575f544332427574746f6e00", "call": 2},
+        {"arg": 0, "offset": 0, "hex": "4350575f544333427574746f6e00", "call": 3},
+        {"arg": 0, "offset": 0, "hex": "4350575f544334427574746f6e00", "call": 4},
+        {"arg": 0, "offset": 0, "hex": "4350575f544335427574746f6e00", "call": 5},
+        {"arg": 0, "offset": 0, "hex": "4350575f544336427574746f6e00", "call": 6},
+        {"arg": 0, "offset": 0, "hex": "4350575f544337427574746f6e00", "call": 7},
+        {"arg": 0, "offset": 0, "hex": "4350575f544338427574746f6e00", "call": 8},
+        {"arg": 0, "offset": 0, "hex": "4350575f544339427574746f6e00", "call": 9},
+        {"arg": 0, "offset": 0, "hex": "4350575f54433130427574746f6e00", "call": 10},
+        {"arg": 0, "offset": 0, "hex": "4350575f54433131427574746f6e00", "call": 11},
+        {"arg": 0, "offset": 0, "hex": "4350575f54433132427574746f6e00", "call": 12},
+        {"arg": 0, "offset": 0, "hex": "4350575f54433133427574746f6e00", "call": 13},
+        {"arg": 0, "offset": 0, "hex": "4350575f54433134427574746f6e00", "call": 14},
+        {"arg": 0, "offset": 0, "hex": "4350575f54433135427574746f6e00", "call": 15}
+      ]
+    },
+    "0x005a1e10": {
+      "name": "GetChildItem",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": ["@entry0", "@entry1", "@entry2", "@entry3", "@entry4", "@entry5", "@entry6", "@entry7", "@entry8", "@entry9", "@entry10", "@entry11", "@entry12", "@entry13", "@entry14", "@entry15", "@red", "@redCtl", "@green", "@greenCtl", "@blue", "@blueCtl", "@accept"]
+    },
+    "0x005bd180": {"name": "SetValue", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x004d7ebc": {"name": "SetMaxChars", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0059db90": {"name": "Finish", "conv": "thiscall", "args": ["int"], "ret": 0}
+  },
+  "rewrite_aliases": {"_sprintf": "0x0060d5eb"},
+  "cases": [
+    {"name": "sidl piece absent", "args": ["@parent"], "memory": [{"addr": "@owner", "offset": "0x124", "u32": 0}]},
+    {"name": "all child controls", "args": ["@parent"]},
+    {
+      "name": "red input absent",
+      "args": ["@parent"],
+      "callees": {"0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": ["@entry0", "@entry1", "@entry2", "@entry3", "@entry4", "@entry5", "@entry6", "@entry7", "@entry8", "@entry9", "@entry10", "@entry11", "@entry12", "@entry13", "@entry14", "@entry15", "@red", 0, "@green", "@greenCtl", "@blue", "@blueCtl", "@accept"]}}
+    },
+    {
+      "name": "green input absent",
+      "args": ["@parent"],
+      "callees": {"0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": ["@entry0", "@entry1", "@entry2", "@entry3", "@entry4", "@entry5", "@entry6", "@entry7", "@entry8", "@entry9", "@entry10", "@entry11", "@entry12", "@entry13", "@entry14", "@entry15", "@red", "@redCtl", "@green", 0, "@blue", "@blueCtl", "@accept"]}}
+    },
+    {
+      "name": "blue input absent",
+      "args": ["@parent"],
+      "callees": {"0x005a1e10": {"name": "GetChildItem", "conv": "thiscall", "args": ["ignore"], "ret": ["@entry0", "@entry1", "@entry2", "@entry3", "@entry4", "@entry5", "@entry6", "@entry7", "@entry8", "@entry9", "@entry10", "@entry11", "@entry12", "@entry13", "@entry14", "@entry15", "@red", "@redCtl", "@green", "@greenCtl", "@blue", 0, "@accept"]}}
+    }
+  ],
+  "fuzz": {
+    "seed": 5211052,
+    "count": 80,
+    "args": [{"choices": ["@parent"]}],
+    "memory": [
+      {"addr": "@owner", "offset": "0x124", "type": "ptr", "choices": ["@piece", 0]},
+      {"addr": "@piece", "offset": "0x60", "type": "u32", "range": [0, 4294967295]}
+    ]
+  }
+}

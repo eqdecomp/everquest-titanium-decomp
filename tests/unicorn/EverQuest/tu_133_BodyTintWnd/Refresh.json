@@ -1,0 +1,123 @@
+{
+  "function": "CBodyTintWnd_guess::CountDyesAvailable_guess",
+  "original": "0x004e7579",
+  "sources": ["src/EverQuest/tu_133_BodyTintWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@bodytintwnd",
+  "args": [],
+  "ret": "void",
+  "size": "0x148",
+  "objects": {
+    "bodytintwnd": {"size": "0x1c8", "fill": "random"},
+    "root": {"size": "0x20", "fill": "zero", "init": [{"offset": "0x8", "u32": "@offsetblock"}]},
+    "offsetblock": {"size": "0x8", "fill": "zero", "init": [{"offset": "0x4", "u32": 0}]},
+    "outer": {"size": "0x4c", "fill": "zero", "init": [{"offset": "0x48", "u32": 11}]},
+    "entry": {"size": "0x4c", "fill": "zero", "init": [{"offset": "0x48", "u32": 7}]}
+  },
+  "memory": [{"addr": "0x00905d00", "u32": "@root"}],
+  "callees": {
+    "0x0040cc50": {"name": "GetInventorySlot_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005eccc0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005e0f30": {"name": "GetValue_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005ec630": {"name": "GetEntry_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+  },
+  "cases": [
+    {"name": "global-null", "args": [], "memory": [{"addr": "0x00905d00", "u32": 0}]},
+    {"name": "all-top-level-queries-null", "args": []},
+    {
+      "name": "top-level-match",
+      "args": [],
+      "callees": {
+        "0x0040cc50": {"name": "Query_guess", "conv": "thiscall", "args": ["int"], "ret": ["@outer", "@outer", "@outer", "@outer", 0]},
+        "0x005eccc0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x005e0f30": {"name": "GetValue_guess", "conv": "thiscall", "args": [], "ret": "0x7f2d"}
+      }
+    },
+    {
+      "name": "top-level-state-zero-value-mismatch",
+      "args": [],
+      "callees": {
+        "0x0040cc50": {"name": "Query_guess", "conv": "thiscall", "args": ["int"], "ret": ["@outer", "@outer", "@outer", "@outer", 0]},
+        "0x005eccc0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": [0, 0]},
+        "0x005e0f30": {"name": "GetValue_guess", "conv": "thiscall", "args": [], "ret": "0x7f2e"}
+      }
+    },
+    {
+      "name": "top-level-other-state",
+      "args": [],
+      "callees": {
+        "0x0040cc50": {"name": "Query_guess", "conv": "thiscall", "args": ["int"], "ret": ["@outer", "@outer", "@outer", 0]},
+        "0x005eccc0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": [2, 2]}
+      }
+    },
+    {
+      "name": "container-count-zero",
+      "args": [],
+      "callees": {
+        "0x0040cc50": {"name": "Query_guess", "conv": "thiscall", "args": ["int"], "ret": ["@outer", "@outer", "@outer", 0]},
+        "0x005eccc0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "container-one-null-entry",
+      "args": [],
+      "callees": {
+        "0x0040cc50": {"name": "Query_guess", "conv": "thiscall", "args": ["int"], "ret": ["@outer", "@outer", "@outer", 0]},
+        "0x005eccc0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": [1, 1]},
+        "0x005ec630": {"name": "GetEntry_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    },
+    {
+      "name": "container-entry-other-state",
+      "args": [],
+      "callees": {
+        "0x0040cc50": {"name": "Query_guess", "conv": "thiscall", "args": ["int"], "ret": ["@outer", "@outer", "@outer", 0]},
+        "0x005eccc0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": [1, 1, 2]},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": [1, 1]},
+        "0x005ec630": {"name": "GetEntry_guess", "conv": "thiscall", "args": ["int"], "ret": 1}
+      }
+    },
+    {
+      "name": "container-entry-state-zero-value-mismatch",
+      "args": [],
+      "callees": {
+        "0x0040cc50": {"name": "Query_guess", "conv": "thiscall", "args": ["int"], "ret": ["@outer", "@outer", "@outer", 0]},
+        "0x005eccc0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": [1, 1, 0]},
+        "0x005e0f30": {"name": "GetValue_guess", "conv": "thiscall", "args": [], "ret": "0x7f2e"},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": [1, 1]},
+        "0x005ec630": {"name": "GetEntry_guess", "conv": "thiscall", "args": ["int"], "ret": "@outer"}
+      }
+    },
+    {
+      "name": "container-entry-match",
+      "args": [],
+      "callees": {
+        "0x0040cc50": {"name": "Query_guess", "conv": "thiscall", "args": ["int"], "ret": ["@outer", "@outer", "@outer", 0]},
+        "0x005eccc0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": [1, 1, 0]},
+        "0x005e0f30": {"name": "GetValue_guess", "conv": "thiscall", "args": [], "ret": "0x7f2d"},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": [1, 1]},
+        "0x005ec630": {"name": "GetEntry_guess", "conv": "thiscall", "args": ["int"], "ret": "@outer"}
+      }
+    },
+    {
+      "name": "container-two-entries",
+      "args": [],
+      "callees": {
+        "0x0040cc50": {"name": "Query_guess", "conv": "thiscall", "args": ["int"], "ret": ["@outer", "@outer", "@outer", 0]},
+        "0x005eccc0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": [1, 1, 0]},
+        "0x005e0f30": {"name": "GetValue_guess", "conv": "thiscall", "args": [], "ret": "0x7f2d"},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": [2, 2, 2]},
+        "0x005ec630": {"name": "GetEntry_guess", "conv": "thiscall", "args": ["int"], "ret": [0, "@outer", "@outer", "@outer", "@outer"]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5141881,
+    "count": 100,
+    "args": [],
+    "memory": [{"addr": "@offsetblock", "offset": "0x4", "type": "int", "choices": [-32, 0, 32]}]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "function": "GuardedShutdown_guess",
+  "original": "0x004cdd75",
+  "sources": [
+    "src/EverQuest/tu_097_Win.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "state": {"size": "0x100", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0099D3EC", "u32": "@state"},
+    {"addr": "0x0079AC74", "u32": 305419896},
+    {"addr": "0x00989528", "u32": 0},
+    {"addr": "0x0098952C", "u8": 0},
+    {"addr": "0x0098952D", "u8": 0},
+    {"addr": "0x00988C70", "u32": 0}
+  ],
+  "callees": {
+    "0x005aef50": {"name": "FUN_005aef50", "conv": "thiscall", "args": [], "ret": 1},
+    "0x004cdd09": {"name": "RunGameAndShutdown_guess", "conv": "cdecl", "args": [], "ret": 0}
+  },
+  "cases": [
+    {"name": "typical", "args": []},
+    {"name": "stateZero", "args": [],
+     "callees": {"0x005aef50": {"name": "FUN_005aef50", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "stateTwo", "args": [],
+     "callees": {"0x005aef50": {"name": "FUN_005aef50", "conv": "thiscall", "args": [], "ret": 2}}},
+    {"name": "cookieZero", "args": [],
+     "memory": [{"addr": "0x0079AC74", "u32": 0}]},
+    {"name": "oldGlobalsSet", "args": [],
+     "memory": [{"addr": "0x00989528", "u32": 5}, {"addr": "0x0098952C", "u8": 1}, {"addr": "0x00988C70", "u32": 9}]}
+  ],
+  "fuzz": {
+    "seed": 5037429,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "0x0079AC74", "type": "int", "choices": [0, 1, 305419896, -1]},
+      {"addr": "0x00989528", "type": "int", "choices": [0, 5, 7, -1]}
+    ]
+  }
+}

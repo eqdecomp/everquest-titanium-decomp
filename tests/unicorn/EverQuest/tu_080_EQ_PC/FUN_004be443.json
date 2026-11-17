@@ -1,0 +1,365 @@
+{
+  "function": "EQ_PCView_guess::GetItemSlotPointer_guess",
+  "original": "0x004be443",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "size": "0x1bb",
+  "coverage_ok": {
+    "004BE4F1-004BE4F2": "the direct d30 slot guard guarantees index 1 here",
+    "004BE54A-004BE54B": "the first d30 checked access traps before this repeated check",
+    "004BE565-004BE566": "the first d30 checked access traps before this repeated check",
+    "004BE582-004BE583": "the direct cf0 slot guard guarantees an index below 16",
+    "004BE5C4-004BE5C5": "the first cf0 checked access traps before this repeated check",
+    "004BE5DB-004BE5DC": "the first cf0 checked access traps before this repeated check"
+  },
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [
+    {
+      "name": "index_guess",
+      "type": "u32"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "object": {
+      "size": "0xc34c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@holder"
+        }
+      ]
+    },
+    "holder": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 0
+        }
+      ]
+    },
+    "entry": {
+      "size": "0x5c",
+      "fill": "zero"
+    },
+    "slot": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "result": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "callees": {
+    "0x00434777": {
+      "name": "GetSlot_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@slot"
+    },
+    "0x0040cc50": {
+      "name": "GetFirst_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@entry"
+    },
+    "0x005eccc0": {
+      "name": "IsBlocked_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005ec650": {
+      "name": "GetValue_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@result"
+    }
+  },
+  "cases": [
+    {
+      "name": "slot_first",
+      "args": [
+        0
+      ]
+    },
+    {
+      "name": "slot_last",
+      "args": [
+        30
+      ]
+    },
+    {
+      "name": "low_group_first",
+      "args": [
+        31
+      ]
+    },
+    {
+      "name": "low_group_last",
+      "args": [
+        40
+      ]
+    },
+    {
+      "name": "low_getfirst_null",
+      "args": [
+        31
+      ],
+      "callees": {
+        "0x0040cc50": {
+          "name": "GetFirst_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "low_not_blocked",
+      "args": [
+        31
+      ],
+      "callees": {
+        "0x005eccc0": {
+          "name": "IsBlocked_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "low_high_index",
+      "args": [
+        999
+      ]
+    },
+    {
+      "name": "cf0_first_slot",
+      "args": [
+        1000
+      ]
+    },
+    {
+      "name": "cf0_last_slot",
+      "args": [
+        1015
+      ]
+    },
+    {
+      "name": "cf0_negative_group",
+      "args": [
+        1016
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "negative_remainder",
+      "args": [
+        1030
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "cf0_group_first",
+      "args": [
+        1031
+      ],
+      "memory": [
+        {
+          "addr": "@object",
+          "offset": "0xcf0",
+          "u32": "@entry"
+        }
+      ]
+    },
+    {
+      "name": "cf0_group_last",
+      "args": [
+        1190
+      ],
+      "memory": [
+        {
+          "addr": "@object",
+          "offset": "0xd2c",
+          "u32": "@entry"
+        }
+      ]
+    },
+    {
+      "name": "cf0_group_null",
+      "args": [
+        1031
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "cf0_not_blocked",
+      "args": [
+        1031
+      ],
+      "memory": [
+        {
+          "addr": "@object",
+          "offset": "0xcf0",
+          "u32": "@entry"
+        }
+      ],
+      "callees": {
+        "0x005eccc0": {
+          "name": "IsBlocked_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "cf0_array_bound_trap",
+      "args": [
+        1191
+      ]
+    },
+    {
+      "name": "cf0_too_far",
+      "args": [
+        1201
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "middle_boundary",
+      "args": [
+        1500
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "d30_direct_slot",
+      "args": [
+        1501
+      ]
+    },
+    {
+      "name": "d30_group_first",
+      "args": [
+        1531
+      ],
+      "memory": [
+        {
+          "addr": "@object",
+          "offset": "0xd30",
+          "u32": "@entry"
+        }
+      ]
+    },
+    {
+      "name": "d30_group_last",
+      "args": [
+        1550
+      ],
+      "memory": [
+        {
+          "addr": "@object",
+          "offset": "0xd34",
+          "u32": "@entry"
+        }
+      ]
+    },
+    {
+      "name": "d30_array_bound_trap",
+      "args": [
+        1551
+      ]
+    },
+    {
+      "name": "d30_too_far",
+      "args": [
+        1561
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "d30_negative_group",
+      "args": [
+        1502
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "high_signed",
+      "args": [
+        "0x80000000"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "all_bits_set",
+      "args": [
+        "0xffffffff"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4973635,
+    "count": 100,
+    "args": [
+      {}
+    ],
+    "memory": [
+      {
+        "addr": "@object",
+        "offset": "0xcf0",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@entry"
+        ],
+        "count": 18
+      }
+    ]
+  }
+}

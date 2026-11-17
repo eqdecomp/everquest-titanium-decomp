@@ -1,0 +1,162 @@
+{
+  "function": "PcBase_guess::~PcBase_guess",
+  "original": "0x004be9dc",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@pcbase+0xc384",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "pcbase": {
+      "size": "0xc4d0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x8", "u32": "@vbtbl"}
+      ]
+    },
+    "vbtbl": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "0xfffffff8"},
+        {"offset": "0x4", "u32": "0xc37c"}
+      ]
+    },
+    "evt": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@fn_free"}
+      ]
+    },
+    "fn_free": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "entry": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@evt"}
+      ]
+    },
+    "entry2": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@evt"}
+      ]
+    },
+    "n10a": {
+      "size": "0x14",
+      "fill": "random",
+      "init": [
+        {"offset": "0x10", "u32": "@n10b"}
+      ]
+    },
+    "n10b": {
+      "size": "0x14",
+      "fill": "random",
+      "init": [
+        {"offset": "0x10", "u32": "0"}
+      ]
+    },
+    "ncA": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {"offset": "0xc", "u32": "@ncB"}
+      ]
+    },
+    "ncB": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {"offset": "0xc", "u32": "0"}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "@pcbase", "offset": "0xcf0", "size": 72, "fill": "zero"},
+    {"addr": "@pcbase", "offset": "0xe6c", "u32": 0},
+    {"addr": "@pcbase", "offset": "0x1144", "u32": 0}
+  ],
+  "callees": {
+    "0x0040cc50": {"name": "GetEntry", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0041aa84": {"name": "ClearEntry", "conv": "thiscall", "args": ["int", "int"]},
+    "0x0040cc6b": {"name": "GetOtherEntry", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00434792": {"name": "ClearOtherEntry", "conv": "thiscall", "args": ["int", "int"]},
+    "0x004bac86": {"name": "CSlot05", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005f0e20": {"name": "SetEntry", "conv": "thiscall", "args": ["int", "int"]},
+    "0x004bca0b": {"name": "EmptyPossessionSlots_guess", "conv": "thiscall", "args": []},
+    "0x005f0710": {"name": "PSlot00", "conv": "thiscall", "args": []},
+    "0x0060d0d5": {"name": "operator delete", "conv": "cdecl", "args": ["u32"]},
+    "0x0041682f": {"name": "PcCharacter1 cleanup", "conv": "thiscall", "args": []},
+    "0x005ee700": {"name": "~PcProfileBase", "conv": "thiscall", "args": []},
+    "@fn_free": {"name": "RankEntry::Free", "conv": "thiscall", "args": ["int"]}
+  },
+  "coverage_ok": {
+    "004BEB40-004BEB41": "int3 bounds check, index always < 16",
+    "004BEB50-004BEB51": "int3 bounds check, index always < 16",
+    "004BEB67-004BEB68": "int3 bounds check, index always < 16",
+    "004BEB7F-004BEB80": "int3 bounds check, index always < 2",
+    "004BEB8F-004BEB90": "int3 bounds check, index always < 2",
+    "004BEBA6-004BEBA7": "int3 bounds check, index always < 2"
+  },
+  "cases": [
+    {
+      "name": "empty"
+    },
+    {
+      "name": "all_full",
+      "callees": {
+        "0x0040cc50": {"name": "GetEntry", "conv": "thiscall", "args": ["int"], "ret": "@entry"},
+        "0x0040cc6b": {"name": "GetOtherEntry", "conv": "thiscall", "args": ["int"], "ret": "@entry2"},
+        "0x004bac86": {"name": "CSlot05", "conv": "thiscall", "args": ["int"], "ret": "@entry"}
+      },
+      "memory": [
+        {"addr": "@pcbase", "offset": "0xcf0", "u32": "@entry"},
+        {"addr": "@pcbase", "offset": "0xcf4", "u32": "@entry2"},
+        {"addr": "@pcbase", "offset": "0xd00", "u32": "@entry"},
+        {"addr": "@pcbase", "offset": "0xd2c", "u32": "@entry2"},
+        {"addr": "@pcbase", "offset": "0xd30", "u32": "@entry"},
+        {"addr": "@pcbase", "offset": "0xd34", "u32": "@entry2"},
+        {"addr": "@pcbase", "offset": "0xe6c", "u32": "@n10a"},
+        {"addr": "@pcbase", "offset": "0x1144", "u32": "@ncA"}
+      ]
+    },
+    {
+      "name": "second_get_null",
+      "callees": {
+        "0x0040cc50": {"name": "GetEntry", "conv": "thiscall", "args": ["int"], "ret": ["@entry", 0, "@entry", "@entry", 0]},
+        "0x0040cc6b": {"name": "GetOtherEntry", "conv": "thiscall", "args": ["int"], "ret": [0, "@entry2", 0, "@entry2", "@entry2", 0]},
+        "0x004bac86": {"name": "CSlot05", "conv": "thiscall", "args": ["int"], "ret": ["@entry", 0, 0, "@entry2", "@entry2"]}
+      },
+      "memory": [
+        {"addr": "@pcbase", "offset": "0xd2c", "u32": "@entry"},
+        {"addr": "@pcbase", "offset": "0xd34", "u32": "@entry2"},
+        {"addr": "@pcbase", "offset": "0x1144", "u32": "@ncB"}
+      ]
+    },
+    {
+      "name": "one_node_lists",
+      "memory": [
+        {"addr": "@pcbase", "offset": "0xe6c", "u32": "@n10b"},
+        {"addr": "@pcbase", "offset": "0xd30", "u32": "@entry2"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4975068,
+    "count": 80,
+    "args": [],
+    "memory": [
+      {"addr": "@pcbase", "offset": "0xcf0", "type": "ptr", "count": 16, "choices": [0, "@entry", "@entry2"]},
+      {"addr": "@pcbase", "offset": "0xd30", "type": "ptr", "count": 2, "choices": [0, "@entry", "@entry2"]},
+      {"addr": "@pcbase", "offset": "0xe6c", "type": "ptr", "choices": [0, "@n10a", "@n10b"]},
+      {"addr": "@pcbase", "offset": "0x1144", "type": "ptr", "choices": [0, "@ncA", "@ncB"]}
+    ]
+  }
+}

@@ -1,0 +1,480 @@
+{
+  "function": "InvSlotWnd_guess::Draw_guess",
+  "original": "0x0051bc61",
+  "sources": [
+    "src/EverQuest/tu_173_InvSlotWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@invslotwnd",
+  "args": [],
+  "ret": "int",
+  "_survivors": "L644: when box20.right equals max_right_guess, assigning that same value is unobservable, so > and >= behave identically",
+  "objects": {
+    "invslotwnd": {
+      "size": "0x15c",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@wnd_vtbl"},
+        {"offset": "0x11c", "u32": "@texture"},
+        {"offset": "0x120", "u32": 1999},
+        {"offset": "0x124", "u32": 3},
+        {"offset": "0x128", "u32": 5},
+        {"offset": "0x12c", "u32": "@anchor"},
+        {"offset": "0x130", "u32": 0},
+        {"offset": "0x134", "u8": 0},
+        {"offset": "0x140", "u32": "@child"},
+        {"offset": "0x144", "u32": "@surface"},
+        {"offset": "0x148", "u32": 2},
+        {"offset": "0x150", "u32": "0xff112233"},
+        {"offset": "0x154", "u32": "0xffc0c0c0"},
+        {"offset": "0x62", "u8": 0}
+      ]
+    },
+    "wnd_vtbl": {
+      "size": "0xe8",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xe4", "u32": "@fn_rect"}
+      ]
+    },
+    "fn_rect": {"size": "0x4"},
+    "fn_surface_text": {"size": "0x4"},
+    "fn_surface_draw": {"size": "0x4"},
+    "fn_painter": {"size": "0x4"},
+    "child": {
+      "size": "0x14",
+      "fill": "random",
+      "init": [
+        {"offset": "0x10", "u32": 0}
+      ]
+    },
+    "holder": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@item"}
+      ]
+    },
+    "item": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "texture": {
+      "size": "0x2c",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x24", "u32": 40},
+        {"offset": "0x28", "u32": 50}
+      ]
+    },
+    "anchor": {
+      "size": "0x2c",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x24", "u32": 40},
+        {"offset": "0x28", "u32": 50}
+      ]
+    },
+    "surface": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@surface_vtbl"}
+      ]
+    },
+    "surface_vtbl": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": "@fn_surface_text"},
+        {"offset": "0xc", "u32": "@fn_surface_draw"}
+      ]
+    },
+    "painter": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@painter_vtbl"}
+      ]
+    },
+    "painter_vtbl": {
+      "size": "0x7c",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x78", "u32": "@fn_painter"}
+      ]
+    },
+    "owner": {
+      "size": "0xf8",
+      "fill": "zero"
+    },
+    "countvalue": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": 1}
+      ]
+    },
+    "chardata": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "0x0099d3ec", "u32": "@owner"},
+    {"addr": "0x0099e364", "u32": "@painter"},
+    {"addr": "0x00905d00", "u32": "@chardata"}
+  ],
+  "callees": {
+    "0x00518e58": {
+      "name": "ChildWnd_guess::IsAvailable_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x0059d6c0": {
+      "name": "CXWnd::GetClientClipRect",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "0000000000000000f4010000f4010000"}
+      ]
+    },
+    "0x005591d0": {
+      "name": "GetBankWndFlag04_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 127
+    },
+    "0x005b1910": {
+      "name": "TextureAnim_guess::Draw_guess",
+      "conv": "thiscall",
+      "args": ["mem:16", "mem:16", "u32", "u32"],
+      "ret": [0, 0]
+    },
+    "0x005c0c30": {
+      "name": "DebugSpew_guess",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr", "cstr", "int"],
+      "ret": 0
+    },
+    "0x005738b0": {
+      "name": "FormatString_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr", "int"],
+      "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "78 56 34 12"}
+      ]
+    },
+    "0x004eb924": {
+      "name": "Table_guess::Get_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@countvalue"
+    },
+    "0x005a3a00": {
+      "name": "MeasureText_guess",
+      "conv": "stdcall",
+      "args": ["ignore"],
+      "ret": 5
+    },
+    "0x0059d2e0": {
+      "name": "DrawRect_guess",
+      "conv": "cdecl",
+      "args": ["mem:16", "u32", "mem:16"],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x005a00e0": {
+      "name": "DrawFallback_guess",
+      "conv": "cdecl",
+      "args": ["mem:16", "u32", "mem:16"],
+      "ret": 0
+    },
+    "0x005eccc0": {
+      "name": "Item_guess::GetItemClass_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005ecd20": {
+      "name": "Item_guess::Check_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 1
+    },
+    "0x005e05b0": {
+      "name": "Item_guess::GetRecastTime_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [8, 8]
+    },
+    "0x004bac48": {
+      "name": "CharDataCost_guess::GetItemTimerValue",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 120
+    },
+    "0x00576e80": {
+      "name": "GetTime_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 100
+    },
+    "@fn_rect": {
+      "name": "InvSlotWnd_guess::Slot39_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "0a00000014000000640000006e000000"}
+      ]
+    },
+    "@fn_surface_text": {
+      "name": "Surface_guess::Slot01_guess",
+      "conv": "thiscall",
+      "args": ["mem:4"],
+      "ret": 0
+    },
+    "@fn_surface_draw": {
+      "name": "Surface_guess::Slot03_guess",
+      "conv": "thiscall",
+      "args": ["int", "mem:16", "mem:16", "int", "int", "int"],
+      "ret": 0
+    },
+    "@fn_painter": {
+      "name": "Painter_guess::Slot1e_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "no_child",
+      "args": [],
+      "memory": [
+        {"addr": "@invslotwnd", "offset": "0x140", "u32": 0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "unavailable_child",
+      "args": [],
+      "callees": {
+        "0x00518e58": {"name": "IsAvailable", "conv": "thiscall", "args": [], "ret": 0}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "anim_lower_boundary",
+      "args": [],
+      "memory": [
+        {"addr": "@invslotwnd", "offset": "0x120", "u32": 2000},
+        {"addr": "@invslotwnd", "offset": "0x62", "u8": 1}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "anim_upper_inside",
+      "args": [],
+      "memory": [
+        {"addr": "@invslotwnd", "offset": "0x120", "u32": 2507}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "anim_before_upper_boundary",
+      "args": [],
+      "memory": [
+        {"addr": "@invslotwnd", "offset": "0x120", "u32": 2499}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "anim_at_upper_boundary",
+      "args": [],
+      "memory": [
+        {"addr": "@invslotwnd", "offset": "0x120", "u32": 2500}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "anim_upper_boundary",
+      "args": [],
+      "memory": [
+        {"addr": "@invslotwnd", "offset": "0x120", "u32": 2508}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "texture_draw_error",
+      "args": [],
+      "callees": {
+        "0x005b1910": {"name": "Draw", "conv": "thiscall", "args": ["mem:16", "mem:16", "u32", "u32"], "ret": [-1]}
+      },
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "anchor_draw_error",
+      "args": [],
+      "memory": [
+        {"addr": "@invslotwnd", "offset": "0x11c", "u32": 0}
+      ],
+      "callees": {
+        "0x005b1910": {"name": "Draw", "conv": "thiscall", "args": ["mem:16", "mem:16", "u32", "u32"], "ret": [-1]}
+      },
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "missing_anchor",
+      "args": [],
+      "memory": [
+        {"addr": "@invslotwnd", "offset": "0x11c", "u32": 0},
+        {"addr": "@invslotwnd", "offset": "0x12c", "u32": 0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "count_without_measure",
+      "args": [],
+      "memory": [
+        {"addr": "@invslotwnd", "offset": "0x130", "u32": 2},
+        {"addr": "@countvalue", "u32": 0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "count_small_width",
+      "args": [],
+      "memory": [
+        {"addr": "@invslotwnd", "offset": "0x130", "u32": 2},
+        {"addr": "@countvalue", "u32": 1}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "count_width_nine",
+      "args": [],
+      "memory": [
+        {"addr": "@invslotwnd", "offset": "0x130", "u32": 2},
+        {"addr": "@countvalue", "u32": 1}
+      ],
+      "callees": {
+        "0x005a3a00": {"name": "MeasureText", "conv": "stdcall", "args": ["ignore"], "ret": 9}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "count_wide_text_and_fallback",
+      "args": [],
+      "memory": [
+        {"addr": "@invslotwnd", "offset": "0x130", "u32": 3},
+        {"addr": "@invslotwnd", "offset": "0x134", "u8": 1},
+        {"addr": "@countvalue", "u32": 1}
+      ],
+      "callees": {
+        "0x005a3a00": {"name": "MeasureText", "conv": "stdcall", "args": ["ignore"], "ret": 15}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "item_blocked",
+      "args": [],
+      "memory": [
+        {"addr": "@child", "offset": "0x10", "u32": "@holder"}
+      ],
+      "callees": {
+        "0x005eccc0": {"name": "IsBlocked", "conv": "thiscall", "args": [], "ret": 1}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "item_check_rejected",
+      "args": [],
+      "memory": [
+        {"addr": "@child", "offset": "0x10", "u32": "@holder"}
+      ],
+      "callees": {
+        "0x005ecd20": {"name": "Check", "conv": "thiscall", "args": ["int"], "ret": 0}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "item_empty",
+      "args": [],
+      "memory": [
+        {"addr": "@child", "offset": "0x10", "u32": "@holder"}
+      ],
+      "callees": {
+        "0x005e05b0": {"name": "GetSize", "conv": "thiscall", "args": [], "ret": [0]}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "timer_not_active",
+      "args": [],
+      "memory": [
+        {"addr": "@child", "offset": "0x10", "u32": "@holder"}
+      ],
+      "callees": {
+        "0x004bac48": {"name": "GetCost", "conv": "thiscall", "args": ["ptr"], "ret": 90},
+        "0x00576e80": {"name": "GetTime", "conv": "cdecl", "args": [], "ret": 100}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "timer_full_overlay",
+      "args": [],
+      "memory": [
+        {"addr": "@child", "offset": "0x10", "u32": "@holder"}
+      ],
+      "callees": {
+        "0x005e05b0": {"name": "GetSize", "conv": "thiscall", "args": [], "ret": [8, 8]},
+        "0x004bac48": {"name": "GetCost", "conv": "thiscall", "args": ["ptr"], "ret": 125},
+        "0x00576e80": {"name": "GetTime", "conv": "cdecl", "args": [], "ret": 100}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "timer_partial_overlay",
+      "args": [],
+      "memory": [
+        {"addr": "@child", "offset": "0x10", "u32": "@holder"}
+      ],
+      "callees": {
+        "0x005e05b0": {"name": "GetSize", "conv": "thiscall", "args": [], "ret": [30, 30]},
+        "0x004bac48": {"name": "GetCost", "conv": "thiscall", "args": ["ptr"], "ret": 120},
+        "0x00576e80": {"name": "GetTime", "conv": "cdecl", "args": [], "ret": 100}
+      },
+      "expect": {"ret": 0}
+    }
+  ],
+  "fuzz": {
+    "seed": 5356641,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@invslotwnd", "offset": "0x11c", "type": "ptr", "choices": [0, "@texture"]},
+      {"addr": "@invslotwnd", "offset": "0x120", "type": "int", "choices": [1999, 2000, 2001, 2507, 2508]},
+      {"addr": "@invslotwnd", "offset": "0x124", "type": "int", "range": [-10, 10]},
+      {"addr": "@invslotwnd", "offset": "0x128", "type": "int", "range": [-10, 10]},
+      {"addr": "@invslotwnd", "offset": "0x12c", "type": "ptr", "choices": [0, "@anchor"]},
+      {"addr": "@invslotwnd", "offset": "0x130", "type": "int", "range": [-1, 4]},
+      {"addr": "@invslotwnd", "offset": "0x134", "type": "u8", "choices": [0, 1]},
+      {"addr": "@invslotwnd", "offset": "0x140", "type": "ptr", "choices": [0, "@child"]},
+      {"addr": "@invslotwnd", "offset": "0x150", "type": "u32", "choices": ["0xff112233", "0xff00ff00"]},
+      {"addr": "@invslotwnd", "offset": "0x154", "type": "u32", "choices": ["0xffc0c0c0", "0xffffffff"]},
+      {"addr": "@invslotwnd", "offset": "0x62", "type": "u8", "choices": [0, 1]},
+      {"addr": "@child", "offset": "0x10", "type": "ptr", "choices": [0, "@holder"]},
+      {"addr": "@holder", "offset": "0x0", "type": "ptr", "choices": [0, "@item"]}
+    ]
+  }
+}

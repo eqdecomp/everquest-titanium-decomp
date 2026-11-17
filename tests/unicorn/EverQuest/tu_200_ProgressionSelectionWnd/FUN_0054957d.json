@@ -1,0 +1,232 @@
+{
+  "function": "CProgressionSelectionWndView_guess::ShowSelectedEquipment_guess",
+  "original": "0x0054957d",
+  "sources": [
+    "src/EverQuest/tu_200_ProgressionSelectionWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@progressionmanager",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "progressionmanager": {
+      "size": "0x220",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x168", "u32": "@list1" },
+        { "offset": "0x16c", "u32": "@reset" },
+        { "offset": "0x170", "u32": "@list2" },
+        { "offset": "0x174", "u32": "@text" },
+        { "offset": "0x1b8", "u32": "@window" }
+      ]
+    },
+    "text": { "size": "0x20", "fill": "zero" },
+    "reset": { "size": "0x140", "fill": "zero" },
+    "list1": { "size": "0x140", "fill": "zero" },
+    "list2": { "size": "0x140", "fill": "zero" },
+    "window": {
+      "size": "0x200",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@vtbl" }
+      ]
+    },
+    "vtbl": {
+      "size": "0xc8",
+      "fill": "zero",
+      "init": [
+        { "offset": "0xc0", "u32": "@fn_slot48" }
+      ]
+    },
+    "fn_slot48": { "size": "0x4" },
+    "entry": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x4", "u32": 32 }
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00571e00": {
+      "name": "CXStr_ctor_cstr",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "keep"
+    },
+    "0x00407d68": {
+      "name": "CXStr_copy",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": "keep"
+    },
+    "0x005a8b00": {
+      "name": "CStmlWnd_SetSTMLText",
+      "conv": "thiscall",
+      "args": ["ignore", "bool", "u32"],
+      "ret": 0
+    },
+    "0x00597c20": {
+      "name": "CListWnd_SetCurSel",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x00597be0": {
+      "name": "CListWnd_GetCurSel",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 3
+    },
+    "0x00597ed0": {
+      "name": "CListWnd_GetItemData",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": [-5, 32]
+    },
+    "0x00490d40": {
+      "name": "ProgressionDatabase_Find",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@entry"
+    },
+    "0x0059d080": {
+      "name": "Window_FUN_0059d080",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x005b1ab0": {
+      "name": "Link_FUN_005b1ab0",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x004912b1": {
+      "name": "EQSendMessage",
+      "conv": "cdecl",
+      "args": ["u32", "u32", "mem:8", "int", "bool"],
+      "ret": 0
+    },
+    "@fn_slot48": {
+      "name": "Window_Slot48",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 0
+    }
+  },
+  "_survivors": "L511: value <= 0 instead of value < 0 gives the same result: -0 is 0, so the abs value is unchanged",
+  "cases": [
+    {
+      "name": "no_text",
+      "args": [],
+      "memory": [
+        { "addr": "@progressionmanager", "offset": "0x174", "u32": 0 }
+      ]
+    },
+    {
+      "name": "text_no_window_no_reset_no_list2",
+      "args": [],
+      "memory": [
+        { "addr": "@progressionmanager", "offset": "0x1b8", "u32": 0 },
+        { "addr": "@progressionmanager", "offset": "0x16c", "u32": 0 },
+        { "addr": "@progressionmanager", "offset": "0x170", "u32": 0 }
+      ]
+    },
+    {
+      "name": "list2_null",
+      "args": [],
+      "memory": [
+        { "addr": "@progressionmanager", "offset": "0x170", "u32": 0 }
+      ]
+    },
+    {
+      "name": "list1_null",
+      "args": [],
+      "memory": [
+        { "addr": "@progressionmanager", "offset": "0x168", "u32": 0 }
+      ]
+    },
+    {
+      "name": "reset_null",
+      "args": [],
+      "memory": [
+        { "addr": "@progressionmanager", "offset": "0x16c", "u32": 0 }
+      ]
+    },
+    {
+      "name": "not_found_error_message",
+      "args": [],
+      "callees": {
+        "0x00490d40": {
+          "name": "ProgressionDatabase_Find",
+          "conv": "thiscall",
+          "args": ["int"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "not_found_no_window",
+      "args": [],
+      "memory": [
+        { "addr": "@progressionmanager", "offset": "0x1b8", "u32": 0 }
+      ],
+      "callees": {
+        "0x00490d40": {
+          "name": "ProgressionDatabase_Find",
+          "conv": "thiscall",
+          "args": ["int"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "found_no_window",
+      "args": [],
+      "memory": [
+        { "addr": "@progressionmanager", "offset": "0x1b8", "u32": 0 }
+      ]
+    },
+    {
+      "name": "positive_value",
+      "args": [],
+      "callees": {
+        "0x00597ed0": {
+          "name": "CListWnd_GetItemData",
+          "conv": "thiscall",
+          "args": ["int"],
+          "ret": [7, 32]
+        }
+      }
+    },
+    {
+      "name": "entry_value_zero",
+      "args": [],
+      "memory": [
+        { "addr": "@entry", "offset": "0x4", "u32": 0 }
+      ],
+      "callees": {
+        "0x00597ed0": {
+          "name": "CListWnd_GetItemData",
+          "conv": "thiscall",
+          "args": ["int"],
+          "ret": [0, 0]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5543293,
+    "count": 120,
+    "args": [],
+    "memory": [
+      { "addr": "@progressionmanager", "offset": "0x174", "type": "u32", "choices": [0, "@text"] },
+      { "addr": "@progressionmanager", "offset": "0x16c", "type": "u32", "choices": [0, "@reset"] },
+      { "addr": "@progressionmanager", "offset": "0x168", "type": "u32", "choices": [0, "@list1"] },
+      { "addr": "@progressionmanager", "offset": "0x170", "type": "u32", "choices": [0, "@list2"] },
+      { "addr": "@progressionmanager", "offset": "0x1b8", "type": "u32", "choices": [0, "@window"] }
+    ]
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "function": "Deleter_00512846_guess::~Deleter_00512846_guess",
+  "original": "0x0051216c",
+  "sources": [
+    "src/EverQuest/tu_167_GuildTributeMasterWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@deleter_00512846",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "deleter_00512846": {
+      "size": "0x1b4",
+      "fill": "random"
+    },
+    "slot": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "0x0c0c0c01"}]
+    }
+  },
+  "memory": [
+    {"addr": "@deleter_00512846", "offset": "0x18c", "u32": 2},
+    {"addr": "@deleter_00512846", "offset": "0x1a0", "u32": 1}
+  ],
+  "callees": {
+    "0x004eb924": {
+      "name": "Container_At",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@slot"
+    },
+    "0x0060d0d5": {
+      "name": "operator_delete",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x0050f3f6": {
+      "name": "OwnedList_Reset",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005a3100": {
+      "name": "OwnerBase_dtor",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "both lists empty",
+      "args": [],
+      "memory": [
+        {"addr": "@deleter_00512846", "offset": "0x18c", "u32": 0},
+        {"addr": "@deleter_00512846", "offset": "0x1a0", "u32": 0}
+      ]
+    },
+    {
+      "name": "first list two, second empty",
+      "args": [],
+      "memory": [
+        {"addr": "@deleter_00512846", "offset": "0x18c", "u32": 2},
+        {"addr": "@deleter_00512846", "offset": "0x1a0", "u32": 0}
+      ]
+    },
+    {
+      "name": "first list empty, second three",
+      "args": [],
+      "memory": [
+        {"addr": "@deleter_00512846", "offset": "0x18c", "u32": 0},
+        {"addr": "@deleter_00512846", "offset": "0x1a0", "u32": 3}
+      ]
+    },
+    {
+      "name": "both lists one",
+      "args": [],
+      "memory": [
+        {"addr": "@deleter_00512846", "offset": "0x18c", "u32": 1},
+        {"addr": "@deleter_00512846", "offset": "0x1a0", "u32": 1}
+      ]
+    },
+    {
+      "name": "negative counts",
+      "args": [],
+      "memory": [
+        {"addr": "@deleter_00512846", "offset": "0x18c", "u32": "0xffffffff"},
+        {"addr": "@deleter_00512846", "offset": "0x1a0", "u32": "0xfffffffe"}
+      ]
+    },
+    {
+      "name": "both lists five",
+      "args": [],
+      "memory": [
+        {"addr": "@deleter_00512846", "offset": "0x18c", "u32": 5},
+        {"addr": "@deleter_00512846", "offset": "0x1a0", "u32": 5}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5316972,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@deleter_00512846", "offset": "0x18c", "type": "int", "choices": [-2, -1, 0, 1, 2, 3, 4]},
+      {"addr": "@deleter_00512846", "offset": "0x1a0", "type": "int", "choices": [-2, -1, 0, 1, 2, 3, 4]}
+    ]
+  }
+}

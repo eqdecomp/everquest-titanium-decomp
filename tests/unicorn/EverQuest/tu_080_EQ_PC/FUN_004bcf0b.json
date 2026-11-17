@@ -1,0 +1,182 @@
+{
+  "function": "EQ_PCView_guess::AutoInventoryItem_guess",
+  "original": "0x004bcf0b",
+  "sources": ["src/EverQuest/tu_080_EQ_PC.cpp"],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [
+    {"name": "pp_guess", "type": "ptr"},
+    {"name": "value_guess", "type": "int"},
+    {"name": "unused_guess", "type": "int"},
+    {"name": "flag_guess", "type": "char"}
+  ],
+  "ret": "int",
+  "objects": {
+    "object": {
+      "size": "0xc340",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x8", "u32": "@holder"},
+        {"offset": "0x108", "u32": "@profile_vtbl"}
+      ]
+    },
+    "holder": {"size": "0x8", "fill": "zero", "init": [{"offset": "0x4", "u32": 256}]},
+    "pp": {"size": "0x4", "fill": "zero", "init": [{"offset": "0", "u32": "@player"}]},
+    "player": {"size": "0x4", "fill": "zero", "init": [{"offset": "0", "u32": "@player_vtbl"}]},
+    "player_vtbl": {
+      "size": "0x18",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "u32": "@fn_slot0"},
+        {"offset": "0x4", "u32": "@fn_slot1"},
+        {"offset": "0x10", "u32": "@fn_slot4"},
+        {"offset": "0x14", "u32": "@fn_slot5"}
+      ]
+    },
+    "profile_vtbl": {"size": "0x38", "fill": "zero", "init": [{"offset": "0x34", "u32": "@fn_profile_slot13"}]},
+    "entry": {"size": "0x4", "fill": "zero"},
+    "child": {"size": "0x4", "fill": "zero"},
+    "fn_slot0": {"size": "0x4"},
+    "fn_slot1": {"size": "0x4"},
+    "fn_slot4": {"size": "0x4"},
+    "fn_slot5": {"size": "0x4"},
+    "fn_profile_slot13": {"size": "0x4"},
+    "lookup": {"size": "0x8c", "fill": "zero", "init": [{"offset": "0x88", "u32": 1}]},
+    "display": {"size": "0x14", "fill": "zero"},
+    "stringtable": {"size": "0x4", "fill": "zero"},
+    "everquest": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@stringtable"},
+    {"addr": "0x00988df0", "u32": "@everquest"},
+    {"addr": "0x00905d24", "u32": "@display"},
+    {"addr": "0x00923798", "u8": 0},
+    {"addr": "0x00923884", "u32": 0},
+    {"addr": "0x0063f53f", "cstr": ""}
+  ],
+  "callees": {
+    "0x005ec760": {"name": "Valid_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x0040cc50": {"name": "GetEntry_guess", "conv": "thiscall", "args": ["int"], "ret": "@entry"},
+    "0x00434777": {"name": "FUN_00434777_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00464d65": {"name": "SwapCombine_guess", "conv": "cdecl", "args": ["ignore", "int", "int", "int"], "ret": 0},
+    "0x005eccc0": {"name": "IsBlocked_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005ec630": {"name": "GetEntry_guess", "conv": "thiscall", "args": ["int"], "ret": "@child"},
+    "0x005ec650": {"name": "GetValue_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005ee500": {"name": "FUN_005ee500_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0041aa84": {"name": "SetEntry_guess", "conv": "thiscall", "args": ["int", "int"]},
+    "0x004912b1": {"name": "FUN_004912b1_guess", "conv": "cdecl", "args": ["ptr", "int", "ignore", "int", "char"], "ret": 0},
+    "0x00474597": {"name": "UpdateLight_guess", "conv": "cdecl", "args": ["ptr"], "ret": 0},
+    "0x005ec640": {"name": "SetValue_guess", "conv": "thiscall", "args": ["int", "ptr"]},
+    "0x005dfa00": {"name": "getString", "conv": "thiscall", "args": ["int", "bool"], "ret": "0x0063f53f"},
+    "0x004982c6": {"name": "dsp_chat", "conv": "thiscall", "args": ["cstr", "int", "bool"], "ret": 0},
+    "0x005ec220": {"name": "GetObject_guess", "conv": "thiscall", "args": [], "ret": "@lookup"},
+    "@fn_slot0": {"name": "Slot00_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "@fn_slot1": {"name": "Slot01_guess", "conv": "thiscall", "args": [], "ret": "@child"},
+    "@fn_slot4": {"name": "Slot04_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "@fn_slot5": {"name": "Slot05_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 1},
+    "@fn_profile_slot13": {"name": "Slot0D_guess", "conv": "thiscall", "args": [], "ret": "@entry"}
+  },
+  "cases": [
+    {
+      "name": "null player value",
+      "args": ["@pp", 1, 1, 1],
+      "memory": [{"addr": "@pp", "offset": "0", "u32": 0}]
+    },
+    {
+      "name": "first free slot",
+      "args": ["@pp", 1, 1, 1],
+      "callees": {
+        "0x005ec760": {"name": "Valid_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x0040cc50": {"name": "GetEntry_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+        "0x005ee500": {"name": "FUN_005ee500_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+        "0x004912b1": {"name": "FUN_004912b1_guess", "conv": "cdecl", "args": ["ptr", "int", "mem:12", "int", "char"], "ret": 0}
+      }
+    },
+    {
+      "name": "root slot after occupied range",
+      "args": ["@pp", 1, 1, 1],
+      "callees": {
+        "0x005ec760": {"name": "Valid_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x0040cc50": {
+          "name": "GetEntry_guess",
+          "conv": "thiscall",
+          "args": ["int"],
+          "ret": ["@entry", "@entry", "@entry", "@entry", "@entry", "@entry", "@entry", "@entry", 0]
+        },
+        "0x004912b1": {"name": "FUN_004912b1_guess", "conv": "cdecl", "args": ["ptr", "int", "mem:12", "int", "char"], "ret": 0}
+      }
+    },
+    {
+      "name": "nested search and denied item",
+      "args": ["@pp", 9999, 1, 1],
+      "callees": {
+        "0x005eccc0": {"name": "IsBlocked_guess", "conv": "thiscall", "args": [], "ret": [0, 1, 1, 1, 1, 1, 1, 1, 1, 1]},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ec630": {"name": "GetEntry_guess", "conv": "thiscall", "args": ["int"], "ret": "@child"},
+        "0x00464d65": {"name": "FUN_00464d65_guess", "conv": "cdecl", "args": ["ignore", "int", "int", "int"], "ret": 1},
+        "@fn_slot4": {"name": "Slot04_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+        "@fn_slot5": {"name": "Slot05_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 1}
+      }
+    },
+    {
+      "name": "empty nested groups",
+      "args": ["@pp", 10000, 1, 1],
+      "callees": {
+        "0x005eccc0": {"name": "IsBlocked_guess", "conv": "thiscall", "args": [], "ret": [0, 1, 1, 1, 1, 1, 1, 1, 1, 1]},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x00464d65": {"name": "FUN_00464d65_guess", "conv": "cdecl", "args": ["ignore", "int", "int", "int"], "ret": 0}
+      }
+    },
+    {
+      "name": "insert in nested group",
+      "args": ["@pp", 10000, 1, 1],
+      "callees": {
+        "0x005eccc0": {"name": "IsBlocked_guess", "conv": "thiscall", "args": [], "ret": [0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1]},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ec630": {"name": "GetEntry_guess", "conv": "thiscall", "args": ["int"], "ret": ["@child", "@child", "@child", "@child", "@child", "@child", "@child", "@child", "@child", "@child", "@child", "@child", "@child", "@child", "@child", "@child", 0]},
+        "0x00464d65": {"name": "FUN_00464d65_guess", "conv": "cdecl", "args": ["ignore", "int", "int", "int"], "ret": 0},
+        "@fn_slot5": {"name": "Slot05_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 1},
+        "0x004912b1": {"name": "FUN_004912b1_guess", "conv": "cdecl", "args": ["ptr", "int", "mem:12", "int", "char"], "ret": 0}
+      }
+    },
+    {
+      "name": "nested scans count two through final group",
+      "args": ["@pp", 10000, 1, 1],
+      "callees": {
+        "0x005eccc0": {"name": "IsBlocked_guess", "conv": "thiscall", "args": [], "ret": [0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1]},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 2},
+        "0x005ec630": {"name": "GetEntry_guess", "conv": "thiscall", "args": ["int"], "ret": "@child"},
+        "0x00464d65": {"name": "FUN_00464d65_guess", "conv": "cdecl", "args": ["ignore", "int", "int", "int"], "ret": 0}
+      }
+    },
+    {
+      "name": "ten thousand boundary",
+      "args": ["@pp", 10000, 1, 1]
+    },
+    {
+      "name": "below boundary with flag clear",
+      "args": ["@pp", 9999, 1, 0]
+    },
+    {
+      "name": "below boundary with permission",
+      "args": ["@pp", 9999, 1, 1]
+    }
+  ],
+  "fuzz": {
+    "seed": 4968203,
+    "count": 100,
+    "args": [
+      {"choices": ["@pp"]},
+      {"range": [9998, 10001]},
+      {"range": [-1, 1]},
+      {"choices": [0, 1]}
+    ],
+    "memory": [
+      {"addr": "@lookup", "offset": "0x88", "type": "int", "choices": [0, 1]},
+      {"addr": "0x00923798", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00923884", "type": "int", "choices": [0, 1]}
+    ]
+  },
+  "_survivors": "L1739: the explicit zero for message_guess.value_8 is indistinguishable because the harness starts the caller stack at zero, even when the send script reads mem:12; L1765: same zero-initialized stack behavior for the nested-slot message."
+}

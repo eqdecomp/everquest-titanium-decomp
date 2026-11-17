@@ -1,0 +1,645 @@
+{
+  "function": "ChaseCameraView_guess::UpdateChaseCamera_guess",
+  "original": "0x0056fd78",
+  "sources": [
+    "src/EverQuest/tu_239_ChaseCamera.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@motionstate",
+  "args": [
+    {
+      "name": "player_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "u32",
+  "objects": {
+    "motionstate": {
+      "size": "0x48",
+      "fill": "random"
+    },
+    "player": {
+      "size": "0x348",
+      "fill": "random"
+    },
+    "game": {
+      "size": "0xb58",
+      "fill": "random"
+    },
+    "display": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "angles": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@angle_vtable"
+        }
+      ]
+    },
+    "angle_vtable": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@angle_x_fn"
+        },
+        {
+          "offset": "0xc",
+          "u32": "@angle_y_fn"
+        }
+      ]
+    },
+    "actor_data": {
+      "size": "0x160",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x15c",
+          "u32": "@actor"
+        }
+      ]
+    },
+    "actor": {
+      "size": "0x1ac",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@actor_state"
+        }
+      ]
+    },
+    "actor_state": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@actor_query"
+        }
+      ]
+    },
+    "actor_query": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@query_vtable"
+        }
+      ]
+    },
+    "query_vtable": {
+      "size": "0x158",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x154",
+          "u32": "@query_fn"
+        }
+      ]
+    },
+    "query_fn": {
+      "size": "0x4"
+    },
+    "angle_x_fn": {
+      "size": "0x4"
+    },
+    "angle_y_fn": {
+      "size": "0x4"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00988df0",
+      "u32": "@game"
+    },
+    {
+      "addr": "0x0065fb0c",
+      "from_image": "0x0065FB0C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0065fb10",
+      "f32": 0.0
+    },
+    {
+      "addr": "0x0065fb14",
+      "from_image": "0x0065FB14",
+      "image_size": 4
+    },
+    {
+      "addr": "0x006410d0",
+      "from_image": "0x006410D0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0063f4cc",
+      "f32": 0.0
+    },
+    {
+      "addr": "0x00642d68",
+      "from_image": "0x00642D68",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0065fb2c",
+      "from_image": "0x0065FB2C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@display"
+    },
+    {
+      "addr": "0x0099e374",
+      "u32": "@angles"
+    },
+    {
+      "addr": "@motionstate",
+      "offset": "0x2c",
+      "f32": 1.0
+    },
+    {
+      "addr": "@motionstate",
+      "offset": "0x30",
+      "f32": 4.0
+    },
+    {
+      "addr": "@motionstate",
+      "offset": "0x34",
+      "f32": 40.0
+    },
+    {
+      "addr": "@motionstate",
+      "offset": "0x38",
+      "f32": 2.0
+    },
+    {
+      "addr": "@motionstate",
+      "offset": "0x45",
+      "u8": 0
+    },
+    {
+      "addr": "@player",
+      "offset": "0x1a8",
+      "u32": 0
+    },
+    {
+      "addr": "@player",
+      "offset": "0x30",
+      "f32": 10.0
+    },
+    {
+      "addr": "@player",
+      "offset": "0x34",
+      "f32": 20.0
+    },
+    {
+      "addr": "@player",
+      "offset": "0x38",
+      "f32": 30.0
+    },
+    {
+      "addr": "@player",
+      "offset": "0x4c",
+      "f32": 90.0
+    },
+    {
+      "addr": "@player",
+      "offset": "0x251",
+      "u8": 0
+    }
+  ],
+  "callees": {
+    "0x00489bf5": {
+      "name": "FUN_00489bf5_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret_float": [
+        1.25,
+        0.1,
+        0.2,
+        0.3
+      ]
+    },
+    "0x0047bf6c": {
+      "name": "FUN_0047bf6c_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ptr"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 1,
+          "offset": 8,
+          "hex": "00008040"
+        }
+      ]
+    },
+    "0x004365db": {
+      "name": "FixHeading_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ],
+      "ret_float": 2.0
+    },
+    "0x0043a15c": {
+      "name": "s3dCollideSphereWithWorld_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "float",
+        "float",
+        "float",
+        "float",
+        "float",
+        "ptr",
+        "ptr",
+        "ptr",
+        "int"
+      ],
+      "writes": [
+        {
+          "arg": 6,
+          "offset": 0,
+          "hex": "0000c03f"
+        },
+        {
+          "arg": 7,
+          "offset": 0,
+          "hex": "00002040"
+        },
+        {
+          "arg": 8,
+          "offset": 0,
+          "hex": "0000a040"
+        }
+      ]
+    },
+    "0x0046e42f": {
+      "name": "get_bearing_guess",
+      "conv": "cdecl",
+      "args": [
+        "float",
+        "float",
+        "float",
+        "float"
+      ],
+      "ret_float": 45.0
+    },
+    "@query_fn": {
+      "name": "HasFlag_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "@angle_x_fn": {
+      "name": "AngleX_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ],
+      "ret_float": 1.0
+    },
+    "@angle_y_fn": {
+      "name": "AngleY_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ],
+      "ret_float": 2.0
+    }
+  },
+  "cases": [
+    {
+      "name": "mode_one_normal",
+      "args": [
+        "@player"
+      ],
+      "memory": [
+        {
+          "addr": "@game",
+          "offset": "0xb54",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "mode_five_equal_limits",
+      "args": [
+        "@player"
+      ],
+      "memory": [
+        {
+          "addr": "@game",
+          "offset": "0xb54",
+          "u32": 5
+        },
+        {
+          "addr": "@motionstate",
+          "offset": "0x2c",
+          "f32": 30.0
+        },
+        {
+          "addr": "@motionstate",
+          "offset": "0x34",
+          "f32": 200.0
+        }
+      ]
+    },
+    {
+      "name": "mode_five_upper_clamps",
+      "args": [
+        "@player"
+      ],
+      "memory": [
+        {
+          "addr": "@game",
+          "offset": "0xb54",
+          "u32": 5
+        },
+        {
+          "addr": "@motionstate",
+          "offset": "0x2c",
+          "f32": 31.0
+        },
+        {
+          "addr": "@motionstate",
+          "offset": "0x34",
+          "f32": 201.0
+        },
+        {
+          "addr": "@player",
+          "offset": "0x251",
+          "u8": 111
+        },
+        {
+          "addr": "@motionstate",
+          "offset": "0x45",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "negative_offset",
+      "args": [
+        "@player"
+      ],
+      "memory": [
+        {
+          "addr": "@game",
+          "offset": "0xb54",
+          "u32": 0
+        },
+        {
+          "addr": "@motionstate",
+          "offset": "0x2c",
+          "f32": -1.0
+        }
+      ]
+    },
+    {
+      "name": "actor_query_false",
+      "args": [
+        "@player"
+      ],
+      "memory": [
+        {
+          "addr": "@game",
+          "offset": "0xb54",
+          "u32": 0
+        },
+        {
+          "addr": "@player",
+          "offset": "0x1a8",
+          "u32": "@actor_data"
+        }
+      ]
+    },
+    {
+      "name": "actor_query_true_helper_false",
+      "args": [
+        "@player"
+      ],
+      "memory": [
+        {
+          "addr": "@game",
+          "offset": "0xb54",
+          "u32": 0
+        },
+        {
+          "addr": "@player",
+          "offset": "0x1a8",
+          "u32": "@actor_data"
+        }
+      ],
+      "callees": {
+        "@query_fn": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x0047bf6c": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ptr"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 8,
+              "hex": "00008040"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "actor_query_true_helper_true",
+      "args": [
+        "@player"
+      ],
+      "memory": [
+        {
+          "addr": "@game",
+          "offset": "0xb54",
+          "u32": 1
+        },
+        {
+          "addr": "@player",
+          "offset": "0x1a8",
+          "u32": "@actor_data"
+        }
+      ],
+      "callees": {
+        "@query_fn": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x0047bf6c": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ptr"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 8,
+              "hex": "00008040"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5700984,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@player"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@game",
+        "offset": "0xb54",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          5,
+          6
+        ]
+      },
+      {
+        "addr": "@motionstate",
+        "offset": "0x2c",
+        "type": "float",
+        "choices": [
+          -10.0,
+          0.0,
+          10.0,
+          30.0,
+          35.0
+        ]
+      },
+      {
+        "addr": "@motionstate",
+        "offset": "0x30",
+        "type": "float",
+        "range": [
+          -100.0,
+          100.0
+        ]
+      },
+      {
+        "addr": "@motionstate",
+        "offset": "0x34",
+        "type": "float",
+        "choices": [
+          0.0,
+          199.0,
+          200.0,
+          201.0,
+          250.0
+        ]
+      },
+      {
+        "addr": "@motionstate",
+        "offset": "0x38",
+        "type": "float",
+        "range": [
+          -10.0,
+          10.0
+        ]
+      },
+      {
+        "addr": "@motionstate",
+        "offset": "0x45",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@player",
+        "offset": "0x1a8",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@actor_data"
+        ]
+      },
+      {
+        "addr": "@player",
+        "offset": "0x30",
+        "type": "float",
+        "range": [
+          -100.0,
+          100.0
+        ]
+      },
+      {
+        "addr": "@player",
+        "offset": "0x34",
+        "type": "float",
+        "range": [
+          -100.0,
+          100.0
+        ]
+      },
+      {
+        "addr": "@player",
+        "offset": "0x38",
+        "type": "float",
+        "range": [
+          -100.0,
+          100.0
+        ]
+      },
+      {
+        "addr": "@player",
+        "offset": "0x4c",
+        "type": "float",
+        "range": [
+          0.0,
+          360.0
+        ]
+      },
+      {
+        "addr": "@player",
+        "offset": "0x251",
+        "type": "u8",
+        "choices": [
+          0,
+          111,
+          120
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "function": "EQSwitch_guess::RepopFrequency_guess",
+  "original": "0x0048faa5",
+  "sources": [
+    "src/EverQuest/tu_060_EQSwitch.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@record",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "record": {
+      "size": "0x260",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "@record", "offset": "0x4e", "u8": 0},
+    {"addr": "@record", "offset": "0x66", "u16": 0}
+  ],
+  "callees": {},
+  "cases": [
+    {"name": "kind 0 gives 10000", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 0}]},
+    {"name": "kind 5 gives 10000", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 5}]},
+    {"name": "kind 0x23 gives 6000", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 35}]},
+    {"name": "kind 0x24 gives 6000", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 36}]},
+    {"name": "kind 0x28 positive field66 returned", "args": [], "memory": [
+      {"addr": "@record", "offset": "0x22", "u8": 40}, {"addr": "@record", "offset": "0x66", "u16": 300}]},
+    {"name": "kind 0x2d positive field66 returned", "args": [], "memory": [
+      {"addr": "@record", "offset": "0x22", "u8": 45}, {"addr": "@record", "offset": "0x66", "u16": 300}]},
+    {"name": "kind 0x32 field66 0x7d01 gives 1800000", "args": [], "memory": [
+      {"addr": "@record", "offset": "0x22", "u8": 50}, {"addr": "@record", "offset": "0x66", "u16": 32001}]},
+    {"name": "kind 0x28 field66 0 gives 20000", "args": [], "memory": [
+      {"addr": "@record", "offset": "0x22", "u8": 40}, {"addr": "@record", "offset": "0x66", "u16": 0}]},
+    {"name": "kind 0x2d field66 -5 gives 20000", "args": [], "memory": [
+      {"addr": "@record", "offset": "0x22", "u8": 45}, {"addr": "@record", "offset": "0x66", "u16": 65531}]},
+    {"name": "kind 0x32 field66 -2 gives 0", "args": [], "memory": [
+      {"addr": "@record", "offset": "0x22", "u8": 50}, {"addr": "@record", "offset": "0x66", "u16": 65534}]},
+    {"name": "kind 0x28 field66 0x7d00 is plain", "args": [], "memory": [
+      {"addr": "@record", "offset": "0x22", "u8": 40}, {"addr": "@record", "offset": "0x66", "u16": 32000}]},
+    {"name": "kind 0x28 field66 0x7d02 is plain", "args": [], "memory": [
+      {"addr": "@record", "offset": "0x22", "u8": 40}, {"addr": "@record", "offset": "0x66", "u16": 32002}]},
+    {"name": "kind 0x35 field4e 0 gives 1", "args": [], "memory": [
+      {"addr": "@record", "offset": "0x22", "u8": 53}]},
+    {"name": "kind 0x35 field4e 1 gives 0", "args": [], "memory": [
+      {"addr": "@record", "offset": "0x22", "u8": 53}, {"addr": "@record", "offset": "0x4e", "u8": 1}]},
+    {"name": "kind 0x39 gives 2000", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 57}]},
+    {"name": "kind 0x3a gives 2000", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 58}]},
+    {"name": "kind 0x3b field66 0xab gives 0", "args": [], "memory": [
+      {"addr": "@record", "offset": "0x22", "u8": 59}, {"addr": "@record", "offset": "0x66", "u16": 171}]},
+    {"name": "kind 0x3b field66 0xaa gives 20000", "args": [], "memory": [
+      {"addr": "@record", "offset": "0x22", "u8": 59}, {"addr": "@record", "offset": "0x66", "u16": 170}]},
+    {"name": "kind 0x3b field66 -2 gives 0", "args": [], "memory": [
+      {"addr": "@record", "offset": "0x22", "u8": 59}, {"addr": "@record", "offset": "0x66", "u16": 65534}]},
+    {"name": "kind 0x33 default", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 51}]},
+    {"name": "kind 0x36 default", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 54}]},
+    {"name": "kind 0x38 default", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 56}]},
+    {"name": "kind 0x3c default", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 60}]},
+    {"name": "kind 0x68 default", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 104}]},
+    {"name": "kind 0x69 gives 0", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 105}]},
+    {"name": "kind 0x6a gives 0", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 106}]},
+    {"name": "kind 0x6b gives 0", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 107}]},
+    {"name": "kind 0x6c default", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 108}]},
+    {"name": "kind 0x73 gives 1", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 115}]},
+    {"name": "kind 0x74 gives 6000", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 116}]},
+    {"name": "kind 0x75 default", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 117}]},
+    {"name": "kind 0x78 gives 3000", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 120}]},
+    {"name": "kind 0x79 default", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 121}]},
+    {"name": "kind 0x7d gives 3000", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 125}]},
+    {"name": "kind 0x82 gives 800", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 130}]},
+    {"name": "kind 0x87 gives 3000", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 135}]},
+    {"name": "kind 0x8c gives 2000", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 140}]},
+    {"name": "kind 0x8d default", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 141}]},
+    {"name": "kind 0x91 gives 6000", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 145}]},
+    {"name": "kind 0x92 gives 3000", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 146}]},
+    {"name": "kind 0x93 default", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 147}]},
+    {"name": "kind 0x96 gives 4000", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 150}]},
+    {"name": "kind 0x97 gives 6000", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 151}]},
+    {"name": "kind 0x98 gives 3000", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 152}]},
+    {"name": "kind 0x99 default", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 153}]},
+    {"name": "kind 0xff default", "args": [], "memory": [{"addr": "@record", "offset": "0x22", "u8": 255}]},
+    {"name": "kind 0x78 field66 -2 gives 0", "args": [], "memory": [
+      {"addr": "@record", "offset": "0x22", "u8": 120}, {"addr": "@record", "offset": "0x66", "u16": 65534}]},
+    {"name": "kind 0 field66 -3 gives 0", "args": [], "memory": [
+      {"addr": "@record", "offset": "0x22", "u8": 0}, {"addr": "@record", "offset": "0x66", "u16": 65533}]},
+    {"name": "kind 0 field66 -4 keeps 10000", "args": [], "memory": [
+      {"addr": "@record", "offset": "0x22", "u8": 0}, {"addr": "@record", "offset": "0x66", "u16": 65532}]}
+  ],
+  "fuzz": {
+    "seed": 4790001,
+    "count": 150,
+    "args": [],
+    "memory": [
+      {"addr": "@record", "offset": "0x22", "type": "u8", "choices": [0, 5, 35, 36, 40, 45, 50, 53, 57, 58, 59, 105, 106, 107, 115, 116, 120, 125, 130, 135, 140, 145, 146, 150, 151, 152, 255]},
+      {"addr": "@record", "offset": "0x4e", "type": "u8", "choices": [0, 1, 2, 255]},
+      {"addr": "@record", "offset": "0x66", "type": "u16", "choices": [0, 1, 5, 170, 171, 300, 32000, 32001, 32002, 65531, 65532, 65533, 65534, 65535]}
+    ]
+  }
+}

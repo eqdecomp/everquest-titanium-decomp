@@ -1,0 +1,295 @@
+{
+  "function": "LoadAnimationSounds_guess",
+  "original": "0x00487ff0",
+  "sources": [
+    "src/EverQuest/tu_054_Mapper.cpp"
+  ],
+  "size": "0x138",
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "file_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "reader": {
+      "size": "0x1000c",
+      "fill": "zero"
+    },
+    "record0": {
+      "size": "0x1c",
+      "fill": "zero"
+    },
+    "record1": {
+      "size": "0x1c",
+      "fill": "zero"
+    },
+    "record2": {
+      "size": "0x1c",
+      "fill": "zero"
+    },
+    "record3": {
+      "size": "0x1c",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "from_image": "0x0079ac74",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": [
+        "@reader",
+        "@record0",
+        "@record1",
+        "@record2",
+        "@record3"
+      ]
+    },
+    "0x00576bd0": {
+      "name": "Reader_ctor",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int"
+      ],
+      "ret": "this"
+    },
+    "0x00576d10": {
+      "name": "Reader_ok",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x00576c60": {
+      "name": "Reader_count",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        1,
+        0
+      ]
+    },
+    "0x00576cf0": {
+      "name": "Reader_read_line",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "int"
+      ],
+      "writes": [
+        {
+          "arg": 0,
+          "hex": "414e494d5e343200",
+          "call": 0
+        },
+        {
+          "arg": 0,
+          "hex": "57414c4b5e3700",
+          "call": 1
+        }
+      ]
+    },
+    "0x00576d20": {
+      "name": "Read_field",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "ignore",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x00574310": {
+      "name": "Copy_field",
+      "conv": "cdecl",
+      "args": [
+        "mem:24",
+        "mem:24",
+        "u32"
+      ],
+      "passthrough": true
+    },
+    "0x00576d80": {
+      "name": "Read_int",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int"
+      ],
+      "ret": [
+        17,
+        23
+      ]
+    },
+    "0x0042e3b4": {
+      "name": "Hash_record",
+      "conv": "cdecl",
+      "args": [
+        "mem:0x1c"
+      ],
+      "ret": "keep",
+      "passthrough": true
+    },
+    "0x00447c66": {
+      "name": "Record_table_add",
+      "conv": "thiscall",
+      "args": [
+        "mem:4",
+        "u32"
+      ]
+    },
+    "0x00576c50": {
+      "name": "Reader_dtor",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0060d0d5": {
+      "name": "operator_delete",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x00574110": {
+      "name": "Log",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "varargs": "printf"
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071",
+    "??3@YAXPAX@Z": "0x0060d0d5"
+  },
+  "cases": [
+    {
+      "name": "allocation_returns_null",
+      "args": [
+        "null-reader.anim"
+      ],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator_new_null",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        },
+        "0x00576d10": {
+          "name": "Reader_ok_null_stub",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "reader_not_ok",
+      "args": [
+        "bad-reader.anim"
+      ],
+      "callees": {
+        "0x00576d10": {
+          "name": "Reader_ok_false",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "zero_records",
+      "args": [
+        "empty.anim"
+      ],
+      "callees": {
+        "0x00576c60": {
+          "name": "Reader_count_zero",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "negative_count",
+      "args": [
+        "negative.anim"
+      ],
+      "callees": {
+        "0x00576c60": {
+          "name": "Reader_count_negative",
+          "conv": "thiscall",
+          "args": [],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "one_record",
+      "args": [
+        "one.anim"
+      ]
+    },
+    {
+      "name": "two_records",
+      "args": [
+        "two.anim"
+      ],
+      "callees": {
+        "0x00576c60": {
+          "name": "Reader_count_two",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            2,
+            1,
+            0
+          ]
+        },
+        "0x00576d80": {
+          "name": "Read_int_two",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "int"
+          ],
+          "ret": [
+            17,
+            23
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4751340,
+    "count": 50,
+    "args": [
+      {
+        "choices": [
+          "animations.cfg",
+          "sound_table.txt",
+          "character_sounds.dat"
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

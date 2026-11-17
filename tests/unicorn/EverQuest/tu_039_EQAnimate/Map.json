@@ -1,0 +1,464 @@
+{
+  "function": "OldPlayerAnimationMapView_guess::GetFallbackAnimation_guess",
+  "original": "0x00450aed",
+  "sources": [
+    "src/EverQuest/tu_039_EQAnimate.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@fun_00450aed",
+  "args": [
+    {
+      "name": "input_code_guess",
+      "type": "int"
+    },
+    {
+      "name": "input_text_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "fun_00450aed": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@state"
+        }
+      ]
+    },
+    "state": {
+      "size": "0x264",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@mid"
+        }
+      ]
+    },
+    "mid": {
+      "size": "0x130",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x12c",
+          "u32": "@table"
+        }
+      ]
+    },
+    "table": {
+      "size": "0x38",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@table",
+      "offset": "0x34",
+      "u8": 0
+    },
+    {
+      "addr": "@state",
+      "offset": "0x252",
+      "u8": 62
+    },
+    {
+      "addr": "@state",
+      "offset": "0x260",
+      "u32": 72
+    },
+    {
+      "addr": "0x0092446c",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x0045099f": {
+      "name": "FUN_0045099f",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "char"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "callee_changes_byte",
+      "args": [
+        21,
+        "A"
+      ]
+    },
+    {
+      "name": "low_default_global_off",
+      "args": [
+        0,
+        ""
+      ]
+    },
+    {
+      "name": "low_case_1",
+      "args": [
+        1,
+        ""
+      ]
+    },
+    {
+      "name": "low_case_4",
+      "args": [
+        4,
+        ""
+      ]
+    },
+    {
+      "name": "low_case_6",
+      "args": [
+        6,
+        ""
+      ]
+    },
+    {
+      "name": "low_case_9",
+      "args": [
+        9,
+        ""
+      ]
+    },
+    {
+      "name": "low_default_5",
+      "args": [
+        5,
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "0x0092446c",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "low_case_a",
+      "args": [
+        10,
+        ""
+      ]
+    },
+    {
+      "name": "low_case_b",
+      "args": [
+        11,
+        ""
+      ]
+    },
+    {
+      "name": "low_case_c",
+      "args": [
+        12,
+        ""
+      ]
+    },
+    {
+      "name": "low_case_d",
+      "args": [
+        13,
+        ""
+      ]
+    },
+    {
+      "name": "low_case_e",
+      "args": [
+        14,
+        ""
+      ]
+    },
+    {
+      "name": "low_case_f_class_gt",
+      "args": [
+        15,
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x252",
+          "u8": 62
+        }
+      ]
+    },
+    {
+      "name": "low_case_f_class_other",
+      "args": [
+        15,
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x252",
+          "u8": 65
+        }
+      ]
+    },
+    {
+      "name": "low_case_11",
+      "args": [
+        17,
+        ""
+      ]
+    },
+    {
+      "name": "low_case_12",
+      "args": [
+        18,
+        ""
+      ]
+    },
+    {
+      "name": "boundary_15",
+      "args": [
+        21,
+        ""
+      ]
+    },
+    {
+      "name": "boundary_16",
+      "args": [
+        22,
+        ""
+      ]
+    },
+    {
+      "name": "boundary_18_global_on",
+      "args": [
+        24,
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "0x0092446c",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "case_19",
+      "args": [
+        25,
+        ""
+      ]
+    },
+    {
+      "name": "case_1a",
+      "args": [
+        26,
+        ""
+      ]
+    },
+    {
+      "name": "case_25_state_48",
+      "args": [
+        37,
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x260",
+          "u32": 72
+        }
+      ]
+    },
+    {
+      "name": "case_25_state_194",
+      "args": [
+        37,
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x260",
+          "u32": 404
+        }
+      ]
+    },
+    {
+      "name": "case_25_state_2a",
+      "args": [
+        37,
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x260",
+          "u32": 42
+        }
+      ]
+    },
+    {
+      "name": "case_25_state_other",
+      "args": [
+        37,
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x260",
+          "u32": 5
+        }
+      ]
+    },
+    {
+      "name": "case_27",
+      "args": [
+        39,
+        ""
+      ]
+    },
+    {
+      "name": "case_2a",
+      "args": [
+        42,
+        ""
+      ]
+    },
+    {
+      "name": "case_2b_global_on",
+      "args": [
+        43,
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "0x0092446c",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "case_2c",
+      "args": [
+        44,
+        ""
+      ]
+    },
+    {
+      "name": "boundary_2d_global_on",
+      "args": [
+        45,
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "0x0092446c",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "case_48",
+      "args": [
+        72,
+        ""
+      ]
+    },
+    {
+      "name": "case_4b",
+      "args": [
+        75,
+        ""
+      ]
+    },
+    {
+      "name": "case_4c",
+      "args": [
+        76,
+        ""
+      ]
+    },
+    {
+      "name": "case_4d_global_on",
+      "args": [
+        77,
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "0x0092446c",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "case_4e",
+      "args": [
+        78,
+        ""
+      ]
+    },
+    {
+      "name": "case_4f_global_off",
+      "args": [
+        79,
+        ""
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4524781,
+    "count": 120,
+    "args": [
+      {
+        "range": [
+          -1,
+          90
+        ]
+      },
+      {
+        "choices": [
+          "",
+          "A",
+          "B"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@state",
+        "offset": "0x252",
+        "type": "u8",
+        "choices": [
+          62,
+          65
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0x260",
+        "type": "int",
+        "choices": [
+          72,
+          404,
+          42,
+          5
+        ]
+      },
+      {
+        "addr": "0x0092446c",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "_survivors": "L1618: code 0x16 defaults on both sides of the high-code split, so the threshold change leaves all caller-visible behavior unchanged."
+}

@@ -1,0 +1,389 @@
+{
+  "function": "CBarterWnd_guess::AddBuyLine_guess",
+  "original": "0x004e18ae",
+  "sources": [
+    "src/EverQuest/tu_130_BarterWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@big130",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "big130": {
+      "size": "0x230",
+      "fill": "random"
+    },
+    "string_table": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "error_string": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "empty_string": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "single_char": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "heap": {
+      "size": "0x400",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905cb0",
+      "u32": "@string_table"
+    },
+    {
+      "addr": "@error_string",
+      "cstr": "The entry is invalid"
+    },
+    {
+      "addr": "@single_char",
+      "cstr": "x"
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x15c",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x160",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x164",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x168",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x16c",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x170",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x174",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x178",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x17c",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x180",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x184",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x188",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x18c",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x190",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x194",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x198",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x19c",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x1a0",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x1a4",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x1a8",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x1ac",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x1b0",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x1b4",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x1b8",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x1bc",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x1c0",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x210",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x214",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x224",
+      "u32": 0
+    },
+    {
+      "addr": "@big130",
+      "offset": "0x228",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x00408f4d": {
+      "name": "FindFreeBuyLine_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [-1, 17]
+    },
+    "0x005dfa00": {
+      "name": "StringTable_getString",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": "@error_string"
+    },
+    "0x00571fc0": {
+      "name": "CXStr_assign_cstr",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "passthrough": true
+    },
+    "0x00572300": {
+      "name": "CXStr_Ptr",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x004dfe23": {
+      "name": "AppendColoredText_guess",
+      "conv": "thiscall",
+      "args": ["cstr", "int"],
+      "passthrough": true
+    },
+    "0x00409e84": {
+      "name": "UpdateBuyLine_guess",
+      "conv": "thiscall",
+      "args": ["ptr"]
+    },
+    "0x004e17ac": {
+      "name": "Big130_Close",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x00571d00": {
+      "name": "CXStr_release",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "passthrough": true
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": "@heap"
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 1
+    },
+    "kernel32.dll!GetTickCount": {
+      "name": "GetTickCount",
+      "conv": "stdcall",
+      "args": [],
+      "ret": 1
+    },
+    "kernel32.dll!GetSystemTimeAsFileTime": {
+      "name": "GetSystemTimeAsFileTime",
+      "conv": "stdcall",
+      "args": ["ptr"]
+    },
+    "0x005e3fe0": {
+      "name": "Entry208_Clear",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004dfc22": {
+      "name": "Big130_Finish",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "count_below_zero",
+      "args": [],
+      "memory": [
+        {"addr": "@big130", "offset": "0x224", "u32": -1}
+      ]
+    },
+    {
+      "name": "count_zero_boundary",
+      "args": [],
+      "memory": [
+        {"addr": "@big130", "offset": "0x224", "u32": 0}
+      ]
+    },
+    {
+      "name": "positive_count_empty_value_and_items",
+      "args": [],
+      "memory": [
+        {"addr": "@big130", "offset": "0x224", "u32": 1},
+        {"addr": "@big130", "offset": "0x210", "u32": 0},
+        {"addr": "@big130", "offset": "0x214", "u32": 0}
+      ]
+    },
+    {
+      "name": "missing_active_status",
+      "args": [],
+      "memory": [
+        {"addr": "@big130", "offset": "0x224", "u32": 1},
+        {"addr": "@big130", "offset": "0x210", "u32": 1},
+        {"addr": "@big130", "offset": "0x214", "u32": 0}
+      ]
+    },
+    {
+      "name": "items_present",
+      "args": [],
+      "memory": [
+        {"addr": "@big130", "offset": "0x224", "u32": 1},
+        {"addr": "@big130", "offset": "0x210", "u32": 0},
+        {"addr": "@big130", "offset": "0x214", "u32": 1}
+      ]
+    },
+    {
+      "name": "valid_active_status",
+      "args": [],
+      "memory": [
+        {"addr": "@big130", "offset": "0x224", "u32": 1},
+        {"addr": "@big130", "offset": "0x210", "u32": 1},
+        {"addr": "@big130", "offset": "0x214", "u32": 0}
+      ],
+      "callees": {
+        "0x00408f4d": {
+          "name": "FUN_00408f4d",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [0, 23]
+        }
+      }
+    },
+    {
+      "name": "empty_returned_string",
+      "args": [],
+      "memory": [
+        {"addr": "@big130", "offset": "0x224", "u32": 0}
+      ],
+      "callees": {
+        "0x005dfa00": {
+          "name": "StringTable_getString",
+          "conv": "thiscall",
+          "args": ["int", "int"],
+          "ret": "@empty_string"
+        },
+        "0x00408f4d": {
+          "name": "FUN_00408f4d",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 23
+        }
+      }
+    },
+    {
+      "name": "single_character_message",
+      "args": [],
+      "memory": [
+        {"addr": "@big130", "offset": "0x224", "u32": 0}
+      ],
+      "callees": {
+        "0x005dfa00": {
+          "name": "StringTable_getString",
+          "conv": "thiscall",
+          "args": ["int", "int"],
+          "ret": "@single_char"
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5118126,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@big130", "offset": "0x224", "type": "int", "choices": [-1, 0, 1, 2, 20]},
+      {"addr": "@big130", "offset": "0x210", "type": "int", "choices": [-1, 0, 1, 20]},
+      {"addr": "@big130", "offset": "0x214", "type": "int", "choices": [0, 1, 2]}
+    ]
+  }
+}

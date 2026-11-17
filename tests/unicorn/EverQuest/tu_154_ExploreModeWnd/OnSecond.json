@@ -1,0 +1,255 @@
+{
+  "function": "EventCallback_guess::OnSecond_guess",
+  "original": "0x004fff69",
+  "sources": [
+    "src/EverQuest/tu_154_ExploreModeWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@eventcallback",
+  "args": [
+    {
+      "name": "argument",
+      "type": "int"
+    }
+  ],
+  "ret": "char",
+  "objects": {
+    "eventcallback": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "mode_node": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "0x2fc"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d00",
+      "u32": "0x00905d00"
+    },
+    {
+      "addr": "0x00905d08",
+      "u32": "@mode_node"
+    },
+    {
+      "addr": "0x00906100",
+      "u8": 2
+    }
+  ],
+  "callees": {
+    "0x00417e07": {
+      "name": "Cur_HP",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x004ffec9": {
+      "name": "IsRespawnOrChatWindow_guess",
+      "conv": "stdcall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "null_runtime",
+      "args": [
+        305419896
+      ],
+      "memory": [
+        {
+          "addr": "0x00905d00",
+          "u32": 0
+        },
+        {
+          "addr": "0x00905cff",
+          "u8": 1
+        },
+        {
+          "addr": "0x00905d04",
+          "u8": 1
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "query_below_one",
+      "args": [
+        305419896
+      ],
+      "callees": {
+        "0x00417e07": {
+          "name": "FUN_00417e07",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x004ffec9": {
+          "name": "FUN_004ffec9",
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": -1
+        }
+      },
+      "expect": {
+        "ret": -1
+      }
+    },
+    {
+      "name": "query_negative",
+      "args": [
+        305419896
+      ],
+      "callees": {
+        "0x00417e07": {
+          "name": "FUN_00417e07",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": -1
+        },
+        "0x004ffec9": {
+          "name": "FUN_004ffec9",
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "mode_three",
+      "args": [
+        305419896
+      ],
+      "memory": [
+        {
+          "addr": "0x00906100",
+          "u8": 3
+        }
+      ],
+      "callees": {
+        "0x004ffec9": {
+          "name": "FUN_004ffec9",
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 7
+        }
+      },
+      "expect": {
+        "ret": 7
+      }
+    },
+    {
+      "name": "mode_four",
+      "args": [
+        305419896
+      ],
+      "memory": [
+        {
+          "addr": "0x00906100",
+          "u8": 4
+        }
+      ],
+      "callees": {
+        "0x004ffec9": {
+          "name": "FUN_004ffec9",
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": -2
+        }
+      },
+      "expect": {
+        "ret": -2
+      }
+    },
+    {
+      "name": "mode_two_returns_one",
+      "args": [
+        305419896
+      ],
+      "memory": [
+        {
+          "addr": "0x00906100",
+          "u8": 2
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "mode_five_returns_one",
+      "args": [
+        305419896
+      ],
+      "memory": [
+        {
+          "addr": "0x00906100",
+          "u8": 5
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5242729,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -8,
+          64
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x00905d00",
+        "type": "ptr",
+        "choices": [
+          0,
+          "0x00905d00"
+        ]
+      },
+      {
+        "addr": "0x00906100",
+        "type": "u8",
+        "choices": [
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    ]
+  }
+}

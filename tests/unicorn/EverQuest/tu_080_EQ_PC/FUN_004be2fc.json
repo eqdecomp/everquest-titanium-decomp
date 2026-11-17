@@ -1,0 +1,231 @@
+{
+  "function": "EQ_PCView_guess::FindItemByKey_guess",
+  "original": "0x004be2fc",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [
+    {"name": "first_guess", "type": "int"},
+    {"name": "second_guess", "type": "int"},
+    {"name": "index_guess", "type": "ptr"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "object": {
+      "size": "0x100",
+      "fill": "random",
+      "init": [
+        {"offset": "0x8", "u32": "@holder"}
+      ]
+    },
+    "holder": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": 0}
+      ]
+    },
+    "index": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "node_match": {
+      "size": "0x88",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x80", "u32": 5},
+        {"offset": "0x84", "u32": 7}
+      ]
+    },
+    "node_other": {
+      "size": "0x88",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x80", "u32": 1},
+        {"offset": "0x84", "u32": 2}
+      ]
+    },
+    "group": {
+      "size": "0x88",
+      "fill": "zero"
+    },
+    "child_match": {
+      "size": "0x88",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x80", "u32": 5},
+        {"offset": "0x84", "u32": 7}
+      ]
+    },
+    "child_other": {
+      "size": "0x88",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x80", "u32": 1},
+        {"offset": "0x84", "u32": 2}
+      ]
+    },
+    "node_first_only": {
+      "size": "0x88",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x80", "u32": 5},
+        {"offset": "0x84", "u32": 0}
+      ]
+    },
+    "child_first_only": {
+      "size": "0x88",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x80", "u32": 5},
+        {"offset": "0x84", "u32": 0}
+      ]
+    }
+  },
+  "callees": {
+    "0x0040cc50": {"name": "GetNode_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005eccc0": {"name": "Check_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005ec630": {"name": "GetChild_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "no_nodes",
+      "args": [1, 1, "@index"],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "zeros_no_nodes",
+      "args": [0, 0, "@index"],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "match_slot0",
+      "args": [5, 7, "@index"],
+      "callees": {
+        "0x0040cc50": {"name": "GetNode_guess", "conv": "thiscall", "args": ["int"], "ret": ["@node_match", "@node_match", "@node_match"]}
+      },
+      "expect": {}
+    },
+    {
+      "name": "match_slot3",
+      "args": [5, 7, "@index"],
+      "callees": {
+        "0x0040cc50": {"name": "GetNode_guess", "conv": "thiscall", "args": ["int"], "ret": [0, 0, 0, "@node_match", "@node_match", "@node_match"]}
+      },
+      "expect": {}
+    },
+    {
+      "name": "match_no_index_ptr",
+      "args": [5, 7, 0],
+      "callees": {
+        "0x0040cc50": {"name": "GetNode_guess", "conv": "thiscall", "args": ["int"], "ret": ["@node_match", "@node_match", "@node_match"]}
+      },
+      "expect": {}
+    },
+    {
+      "name": "mismatch_node_no_group",
+      "args": [5, 7, "@index"],
+      "callees": {
+        "0x0040cc50": {"name": "GetNode_guess", "conv": "thiscall", "args": ["int"], "ret": "@node_other"}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "group_child_match",
+      "args": [5, 7, "@index"],
+      "callees": {
+        "0x0040cc50": {"name": "GetNode_guess", "conv": "thiscall", "args": ["int"], "ret": "@group"},
+        "0x005eccc0": {"name": "Check_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 2},
+        "0x005ec630": {"name": "GetChild_guess", "conv": "thiscall", "args": ["int"], "ret": ["@child_other", "@child_other", "@child_match", "@child_match", "@child_match"]}
+      },
+      "expect": {}
+    },
+    {
+      "name": "group_child_match_no_index_ptr",
+      "args": [5, 7, 0],
+      "callees": {
+        "0x0040cc50": {"name": "GetNode_guess", "conv": "thiscall", "args": ["int"], "ret": "@group"},
+        "0x005eccc0": {"name": "Check_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 2},
+        "0x005ec630": {"name": "GetChild_guess", "conv": "thiscall", "args": ["int"], "ret": ["@child_other", "@child_other", "@child_match", "@child_match", "@child_match"]}
+      },
+      "expect": {}
+    },
+    {
+      "name": "group_child_mismatch",
+      "args": [5, 7, "@index"],
+      "callees": {
+        "0x0040cc50": {"name": "GetNode_guess", "conv": "thiscall", "args": ["int"], "ret": "@group"},
+        "0x005eccc0": {"name": "Check_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 2},
+        "0x005ec630": {"name": "GetChild_guess", "conv": "thiscall", "args": ["int"], "ret": "@child_other"}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "group_count_zero",
+      "args": [5, 7, "@index"],
+      "callees": {
+        "0x0040cc50": {"name": "GetNode_guess", "conv": "thiscall", "args": ["int"], "ret": "@group"},
+        "0x005eccc0": {"name": "Check_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 0}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "group_child_null",
+      "args": [5, 7, "@index"],
+      "callees": {
+        "0x0040cc50": {"name": "GetNode_guess", "conv": "thiscall", "args": ["int"], "ret": "@group"},
+        "0x005eccc0": {"name": "Check_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 2},
+        "0x005ec630": {"name": "GetChild_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "node_first_field_only",
+      "args": [5, 7, "@index"],
+      "callees": {
+        "0x0040cc50": {"name": "GetNode_guess", "conv": "thiscall", "args": ["int"], "ret": "@node_first_only"}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "group_child_first_field_only",
+      "args": [5, 7, "@index"],
+      "callees": {
+        "0x0040cc50": {"name": "GetNode_guess", "conv": "thiscall", "args": ["int"], "ret": "@group"},
+        "0x005eccc0": {"name": "Check_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 2},
+        "0x005ec630": {"name": "GetChild_guess", "conv": "thiscall", "args": ["int"], "ret": ["@child_other", "@child_other", "@child_first_only", "@child_first_only", "@child_first_only"]}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "group_at_slot1_child_match",
+      "args": [5, 7, "@index"],
+      "callees": {
+        "0x0040cc50": {"name": "GetNode_guess", "conv": "thiscall", "args": ["int"], "ret": [0, "@group"]},
+        "0x005eccc0": {"name": "Check_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x005ecc30": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": 2},
+        "0x005ec630": {"name": "GetChild_guess", "conv": "thiscall", "args": ["int"], "ret": ["@child_other", "@child_other", "@child_match", "@child_match", "@child_match"]}
+      },
+      "expect": {}
+    }
+  ],
+  "fuzz": {
+    "seed": 4973308,
+    "count": 100,
+    "args": [
+      {"choices": [0, 1, 5, 7]},
+      {"choices": [0, 1, 5, 7]},
+      {"choices": ["@index", 0]}
+    ],
+    "memory": []
+  }
+}

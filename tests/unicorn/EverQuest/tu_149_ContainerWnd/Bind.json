@@ -1,0 +1,87 @@
+{
+  "function": "CContainerMgrView_guess::Bind_guess",
+  "original": "0x004fa7cd",
+  "sources": ["src/EverQuest/tu_149_ContainerWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@slotowner",
+  "args": [
+    {"name": "extra_guess", "type": "ptr"},
+    {"name": "delay_guess", "type": "int"},
+    {"name": "flag_guess", "type": "char"}
+  ],
+  "ret": "void",
+  "size": "0x13d",
+  "objects": {
+    "slotowner": {"size": "0x74", "fill": "zero"},
+    "extra": {"size": "0x4", "fill": "zero", "init": [{"offset": "0", "u32": "@extra_vt"}]},
+    "extra_vt": {"size": "0x2c", "fill": "zero", "init": [{"offset": "0x28", "u32": "@fn_slot0a"}]},
+    "part": {"size": "0x4", "fill": "zero"},
+    "widget": {"size": "0x1b4", "fill": "zero", "init": [{"offset": "0", "u32": "@widget_vt"}]},
+    "widget_vt": {"size": "0x88", "fill": "zero", "init": [{"offset": "0x84", "u32": "@fn_widget_refresh"}]},
+    "ready": {"size": "0x36c", "fill": "zero", "init": [{"offset": "0", "u32": "@ready_vt"}]},
+    "ready_vt": {"size": "0xc4", "fill": "zero", "init": [{"offset": "0xc0", "u32": "@fn_ready_slot48"}]},
+    "notice": {"size": "0x4", "fill": "zero"},
+    "lookup": {"size": "0xc284", "fill": "zero"},
+    "fn_slot0a": {"size": "0x4", "fill": "zero"},
+    "fn_widget_refresh": {"size": "0x4", "fill": "zero"},
+    "fn_ready_slot48": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00851390", "u32": "@notice"},
+    {"addr": "0x00992940", "u32": "@ready"},
+    {"addr": "0x00905d00", "u32": "@lookup"}
+  ],
+  "callees": {
+    "0x004fa2d4": {"name": "Refresh_guess", "conv": "thiscall", "args": [], "ret": "@widget"},
+    "0x005eccf0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": [6, 6, 6]},
+    "0x0044a537": {"name": "Show_guess", "conv": "thiscall", "args": ["int", "int"]},
+    "0x0059dd30": {"name": "IsReady_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00567634": {"name": "IsTradeskillContainerType_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "0x004bb89c": {"name": "GetContainerTradeskill_guess", "conv": "thiscall", "args": ["int", "ptr"], "ret": 1},
+    "0x0041b0de": {"name": "Check_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "0x004b1cf4": {"name": "IsAvailable_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x004fb700": {"name": "SetContainer_guess", "conv": "thiscall", "args": ["ptr", "int"]},
+    "0x00567fe5": {"name": "SetExtra_guess", "conv": "thiscall", "args": ["ptr", "int"]},
+    "@fn_slot0a": {"name": "Slot0a_guess", "conv": "thiscall", "args": [], "ret": "@part"},
+    "@fn_widget_refresh": {"name": "RefreshVirtual_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "@fn_ready_slot48": {"name": "Slot48_guess", "conv": "thiscall", "args": ["int", "int"]}
+  },
+  "cases": [
+    {"name": "refresh null", "args": ["@extra", 22, 1], "callees": {"0x004fa2d4": {"name": "Refresh_guess", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "state below six", "args": ["@extra", 22, 1], "memory": [{"addr": "0x00992940", "u32": 0}], "callees": {"0x005eccf0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 5}}},
+    {"name": "state six", "args": ["@extra", 22, 1], "memory": [{"addr": "0x00992940", "u32": 0}], "callees": {"0x005eccf0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 6}}},
+    {"name": "state seven", "args": ["@extra", 22, 1], "memory": [{"addr": "0x00992940", "u32": 0}], "callees": {"0x005eccf0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 7}}},
+    {"name": "state eight", "args": ["@extra", 22, 1], "memory": [{"addr": "0x00992940", "u32": 0}], "callees": {"0x005eccf0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 8}}},
+    {"name": "state ten", "args": ["@extra", 22, 1], "memory": [{"addr": "0x00992940", "u32": 0}], "callees": {"0x005eccf0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 10}}},
+    {"name": "state eleven", "args": ["@extra", 22, 1], "memory": [{"addr": "0x00992940", "u32": 0}], "callees": {"0x005eccf0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 11}}},
+    {"name": "state fifteen", "args": ["@extra", 22, 1], "memory": [{"addr": "0x00992940", "u32": 0}], "callees": {"0x005eccf0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 15}}},
+    {"name": "state eighteen", "args": ["@extra", 22, 1], "memory": [{"addr": "0x00992940", "u32": 0}], "callees": {"0x005eccf0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 18}}},
+    {"name": "state twenty one", "args": ["@extra", 22, 1], "memory": [{"addr": "0x00992940", "u32": 0}], "callees": {"0x005eccf0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 21}}},
+    {"name": "state twenty two", "args": ["@extra", 22, 1], "memory": [{"addr": "0x00992940", "u32": 0}], "callees": {"0x005eccf0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 22}}},
+    {"name": "state twenty three", "args": ["@extra", 22, 1], "memory": [{"addr": "0x00992940", "u32": 0}], "callees": {"0x005eccf0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 23}}},
+    {"name": "ready global null", "args": ["@extra", 22, 1], "memory": [{"addr": "0x00992940", "u32": 0}]},
+    {"name": "already ready", "args": ["@extra", 22, 1], "callees": {"0x0059dd30": {"name": "IsReady_guess", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "flag zero", "args": ["@extra", 22, 0]},
+    {"name": "delay lower outside", "args": ["@extra", 21, 1]},
+    {"name": "delay lower included, no state", "args": ["@extra", 22, 1], "callees": {"0x00567634": {"name": "HasState_guess", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "delay upper included and available", "args": ["@extra", 29, 1]},
+    {"name": "delay upper outside", "args": ["@extra", 30, 1]},
+    {"name": "special delay", "args": ["@extra", 4000, 1]},
+    {"name": "classification sentinel", "args": ["@extra", 22, 1], "callees": {"0x004bb89c": {"name": "Classify_guess", "conv": "thiscall", "args": ["int", "ptr"], "ret": 255}}},
+    {"name": "classification unavailable", "args": ["@extra", 22, 1], "callees": {"0x0041b0de": {"name": "Check_guess", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "classification available", "args": ["@extra", 22, 1], "callees": {"0x004bb89c": {"name": "Classify_guess", "conv": "thiscall", "args": ["int", "ptr"], "ret": 9}, "0x0041b0de": {"name": "Check_guess", "conv": "thiscall", "args": ["int"], "ret": 1}}},
+    {"name": "noncanonical true flags", "args": ["@extra", 22, 2], "callees": {"0x0059dd30": {"name": "IsReady_guess", "conv": "thiscall", "args": [], "ret": 0}, "0x00567634": {"name": "HasState_guess", "conv": "thiscall", "args": ["int"], "ret": 2}}}
+  ],
+  "fuzz": {
+    "seed": 5220301,
+    "count": 100,
+    "args": [
+      {"choices": ["@extra"]},
+      {"choices": [-1, 0, 21, 22, 23, 29, 30, 4000]},
+      {"choices": [0, 1, 2, -1, 256]}
+    ],
+    "memory": [
+      {"addr": "0x00992940", "type": "ptr", "choices": ["@ready", 0]}
+    ]
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "function": "HelpTips_guess::ShowHistoryEntry_guess",
+  "original": "0x00564397",
+  "sources": ["src/EverQuest/tu_228_TipWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@helptips",
+  "args": [{"name": "index_guess", "type": "int"}],
+  "ret": "void",
+  "objects": {
+    "helptips": {
+      "size": "0x1c8",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@tips_vtable"},
+        {"offset": "0x15c", "u32": "@container"},
+        {"offset": "0x168", "u32": "@selector"},
+        {"offset": "0x17c", "u32": 3},
+        {"offset": "0x180", "u32": "@category_data"},
+        {"offset": "0x184", "u32": 3},
+        {"offset": "0x18c", "u32": 3},
+        {"offset": "0x190", "u32": "@text_data"},
+        {"offset": "0x194", "u32": 3},
+        {"offset": "0x1c4", "u32": -1}
+      ]
+    },
+    "category_data": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": 0},
+        {"offset": "0x4", "u32": 1},
+        {"offset": "0x8", "u32": 2}
+      ]
+    },
+    "text_data": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@text0"},
+        {"offset": "0x4", "u32": "@text1"},
+        {"offset": "0x8", "u32": "@text2"}
+      ]
+    },
+    "text0": {"size": "0x20", "fill": "zero", "init": [{"offset": "0", "cstr": "first tip"}]},
+    "text1": {"size": "0x20", "fill": "zero", "init": [{"offset": "0", "cstr": "second tip"}]},
+    "text2": {"size": "0x20", "fill": "zero", "init": [{"offset": "0", "cstr": "third tip"}]},
+    "container": {"size": "4", "fill": "zero"},
+    "selector": {"size": "4", "fill": "zero"},
+    "fn_showtip": {"size": "4", "fill": "zero"},
+    "heap0": {"size": "0x100", "fill": "zero"},
+    "heap1": {"size": "0x100", "fill": "zero"},
+    "heap2": {"size": "0x100", "fill": "zero"},
+    "heap3": {"size": "0x100", "fill": "zero"},
+    "heap4": {"size": "0x100", "fill": "zero"},
+    "heap5": {"size": "0x100", "fill": "zero"},
+    "tips_vtable": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xfc", "u32": "@fn_showtip"}]
+    }
+  },
+  "memory": [
+    {"addr": "0x007948b4", "from_image": "0x007948b4", "image_size": 264}
+  ],
+  "callees": {
+    "0x004eb924": {"name": "Array_guess::at_guess", "conv": "thiscall", "args": ["int"], "passthrough": true},
+    "0x0059c360": {"name": "CComboWnd_guess::select_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00571e00": {"name": "CXStr::CXStr", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "0x00572e00": {"name": "CXStr::operator+=", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "0x005a9060": {"name": "TipContainer_guess::setPage_guess", "conv": "thiscall", "args": ["ignore", "int", "int"], "ret": 0},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["ptr"], "passthrough": true},
+    "@fn_showtip": {"name": "HelpTips_guess::showTip_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["u32", "u32", "u32"], "ret": ["@heap0", "@heap1", "@heap2", "@heap3", "@heap4", "@heap5"]},
+    "kernel32.dll!HeapFree": {"name": "HeapFree", "conv": "stdcall", "args": ["u32", "u32", "ptr"], "ret": 1}
+  },
+  "cases": [
+    {"name": "negative index", "args": [-1]},
+    {"name": "minimum index", "args": [-2147483648]},
+    {"name": "first category", "args": [0]},
+    {"name": "middle category without selector", "args": [1], "memory": [{"addr": "@helptips", "offset": "0x168", "u32": 0}]},
+    {"name": "last category without container", "args": [2], "memory": [{"addr": "@helptips", "offset": "0x15c", "u32": 0}]},
+    {"name": "equal to count", "args": [3]},
+    {"name": "above count", "args": [4]}
+  ],
+  "fuzz": {
+    "seed": 5653399,
+    "count": 100,
+    "args": [{"choices": [-2, -1, 0, 1, 2, 3, 4]}],
+    "memory": [
+      {"addr": "@helptips", "offset": "0x15c", "type": "ptr", "choices": [0, "@container"]},
+      {"addr": "@helptips", "offset": "0x168", "type": "ptr", "choices": [0, "@selector"]},
+      {"addr": "@helptips", "offset": "0x17c", "type": "u32", "choices": [0, 1, 2, 3]},
+      {"addr": "@category_data", "offset": "0x0", "type": "u32", "count": 3, "choices": [0, 1, 2]}
+    ]
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "function": "VlongValue_guess::fast_mul_guess",
+  "original": "0x004ca2aa",
+  "sources": [
+    "src/EverQuest/tu_095_vlong.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@indexedvalues",
+  "args": [
+    {
+      "name": "x_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "y_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "bits_guess",
+      "type": "u32"
+    }
+  ],
+  "ret": "void",
+  "_survivors": "L431: x-count clamp removed only changes reads past x's count; for i >= words the row's end is <= words <= i, so nothing is written or called; L464: the carry loop runs at most once because the word it reaches is zero (zeroed up to words, earlier rows write below it), so the k increment is unobservable; L466: on that zero word carry_in == new value, so both comparison directions give 0",
+  "objects": {
+    "indexedvalues": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@vals"},
+        {"offset": "0x4", "u32": 64},
+        {"offset": "0x8", "u32": 0},
+        {"offset": "0xc", "u32": 0}
+      ]
+    },
+    "vals": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "x": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@xvals"},
+        {"offset": "0x4", "u32": 64},
+        {"offset": "0x8", "u32": 2},
+        {"offset": "0xc", "u32": 0}
+      ]
+    },
+    "xvals": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "y": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@yvals"},
+        {"offset": "0x4", "u32": 64},
+        {"offset": "0x8", "u32": 2},
+        {"offset": "0xc", "u32": 0}
+      ]
+    },
+    "yvals": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004ca1fb": {
+      "name": "FUN_004ca1fb",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "typical two words",
+      "args": ["@x", "@y", 64],
+      "memory": [
+        {"addr": "@x", "offset": "0x8", "u32": 3},
+        {"addr": "@y", "offset": "0x8", "u32": 2}
+      ]
+    },
+    {
+      "name": "bits not word aligned",
+      "args": ["@x", "@y", 42],
+      "memory": [
+        {"addr": "@x", "offset": "0x8", "u32": 2},
+        {"addr": "@y", "offset": "0x8", "u32": 2}
+      ]
+    },
+    {
+      "name": "bits 33 mask on second word",
+      "args": ["@x", "@y", 33],
+      "memory": [
+        {"addr": "@x", "offset": "0x8", "u32": 2},
+        {"addr": "@y", "offset": "0x8", "u32": 2}
+      ]
+    },
+    {
+      "name": "bits 3 mask on first word",
+      "args": ["@x", "@y", 3],
+      "memory": [
+        {"addr": "@x", "offset": "0x8", "u32": 1},
+        {"addr": "@y", "offset": "0x8", "u32": 1}
+      ]
+    },
+    {
+      "name": "bits 32 no mask",
+      "args": ["@x", "@y", 32],
+      "memory": [
+        {"addr": "@x", "offset": "0x8", "u32": 1},
+        {"addr": "@y", "offset": "0x8", "u32": 1}
+      ]
+    },
+    {
+      "name": "zero bits",
+      "args": ["@x", "@y", 0],
+      "memory": [
+        {"addr": "@x", "offset": "0x8", "u32": 2},
+        {"addr": "@y", "offset": "0x8", "u32": 2}
+      ]
+    },
+    {
+      "name": "x longer than words",
+      "args": ["@x", "@y", 64],
+      "memory": [
+        {"addr": "@x", "offset": "0x8", "u32": 5},
+        {"addr": "@y", "offset": "0x8", "u32": 4}
+      ]
+    },
+    {
+      "name": "y empty",
+      "args": ["@x", "@y", 128],
+      "memory": [
+        {"addr": "@x", "offset": "0x8", "u32": 2},
+        {"addr": "@y", "offset": "0x8", "u32": 0}
+      ]
+    },
+    {
+      "name": "x empty",
+      "args": ["@x", "@y", 128],
+      "memory": [
+        {"addr": "@x", "offset": "0x8", "u32": 0},
+        {"addr": "@y", "offset": "0x8", "u32": 3}
+      ]
+    },
+    {
+      "name": "y longer tail carry",
+      "args": ["@x", "@y", 192],
+      "memory": [
+        {"addr": "@x", "offset": "0x8", "u32": 1},
+        {"addr": "@y", "offset": "0x8", "u32": 6}
+      ]
+    },
+    {
+      "name": "carry ripple all ones",
+      "args": ["@x", "@y", 64],
+      "memory": [
+        {"addr": "@xvals", "offset": "0x0", "u32": 4294967295},
+        {"addr": "@yvals", "offset": "0x0", "u32": 4294967295},
+        {"addr": "@x", "offset": "0x8", "u32": 1},
+        {"addr": "@y", "offset": "0x8", "u32": 1}
+      ]
+    },
+    {
+      "name": "high words zero trim",
+      "args": ["@x", "@y", 256],
+      "memory": [
+        {"addr": "@xvals", "offset": "0x8", "u32": 0},
+        {"addr": "@xvals", "offset": "0xc", "u32": 0},
+        {"addr": "@yvals", "offset": "0x8", "u32": 0},
+        {"addr": "@yvals", "offset": "0xc", "u32": 0},
+        {"addr": "@x", "offset": "0x8", "u32": 4},
+        {"addr": "@y", "offset": "0x8", "u32": 4}
+      ]
+    },
+    {
+      "name": "all zero operands trim to empty",
+      "args": ["@x", "@y", 64],
+      "memory": [
+        {"addr": "@xvals", "offset": "0x0", "u32": 0},
+        {"addr": "@xvals", "offset": "0x4", "u32": 0},
+        {"addr": "@yvals", "offset": "0x0", "u32": 0},
+        {"addr": "@yvals", "offset": "0x4", "u32": 0},
+        {"addr": "@x", "offset": "0x8", "u32": 2},
+        {"addr": "@y", "offset": "0x8", "u32": 2}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5022378,
+    "count": 150,
+    "args": [
+      {
+        "choices": [
+          "@x"
+        ]
+      },
+      {
+        "choices": [
+          "@y"
+        ]
+      },
+      {
+        "choices": [0, 1, 2, 31, 32, 33, 63, 64, 95, 96, 128, 160, 192, 255, 256]
+      }
+    ],
+    "memory": [
+      {"addr": "@x", "offset": "0x8", "type": "int", "choices": [0, 1, 2, 3, 4, 8]},
+      {"addr": "@y", "offset": "0x8", "type": "int", "choices": [0, 1, 2, 3, 4, 8]}
+    ]
+  }
+}

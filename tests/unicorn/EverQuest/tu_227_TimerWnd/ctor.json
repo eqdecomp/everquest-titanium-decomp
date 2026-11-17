@@ -1,0 +1,325 @@
+{
+  "function": "CTimeLeftWnd_guess::CTimeLeftWnd_guess",
+  "original": "0x00563fbb",
+  "sources": [
+    "src/EverQuest/tu_227_TimerWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@timerwnd",
+  "args": [
+    {
+      "name": "duration_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "timerwnd": {
+      "size": "0x13c",
+      "fill": "random"
+    },
+    "clock": {
+      "size": "0x14c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x148",
+          "u32": 123456
+        }
+      ]
+    },
+    "settings": {
+      "size": "0xfc",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0xf4",
+          "u32": 6
+        },
+        {
+          "offset": "0xf8",
+          "u32": "@setup"
+        }
+      ]
+    },
+    "setup": {
+      "size": "0x1c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x18",
+          "u32": "@setupdata"
+        }
+      ]
+    },
+    "setupdata": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "service": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@vtbl"
+        }
+      ]
+    },
+    "vtbl": {
+      "size": "0x38",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x34",
+          "u32": "@fn"
+        }
+      ]
+    },
+    "textwnd": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "fn": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d24",
+      "u32": "@clock"
+    },
+    {
+      "addr": "0x0099d3ec",
+      "u32": "@settings"
+    },
+    {
+      "addr": "0x0099e360",
+      "u32": "@service"
+    }
+  ],
+  "callees": {
+    "0x00525e53": {
+      "name": "WidgetBase_guess::WidgetBase_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": "keep"
+    },
+    "0x00407a38": {
+      "name": "CTimeLeftWnd_guess::SetDrawTemplate_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "keep"
+    },
+    "0x0059db90": {
+      "name": "CTimeLeftWnd_guess::SetState_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "keep"
+    },
+    "0x00405492": {
+      "name": "ThrowSelf_guess",
+      "conv": "cdecl",
+      "args": [],
+      "noreturn": true
+    },
+    "@fn": {
+      "name": "Service_guess::Slot13_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@textwnd"
+    }
+  },
+  "cases": [
+    {
+      "name": "mode_boundary_throw",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@settings",
+          "offset": "0xf4",
+          "u32": 6
+        },
+        {
+          "addr": "@settings",
+          "offset": "0xf8",
+          "u32": "@setup"
+        }
+      ]
+    },
+    {
+      "name": "null_object_throw",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@settings",
+          "offset": "0xf4",
+          "u32": 7
+        },
+        {
+          "addr": "@settings",
+          "offset": "0xf8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "duration_zero_success",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@settings",
+          "offset": "0xf4",
+          "u32": 7
+        },
+        {
+          "addr": "@settings",
+          "offset": "0xf8",
+          "u32": "@setup"
+        }
+      ]
+    },
+    {
+      "name": "duration_negative_success",
+      "args": [
+        -1
+      ],
+      "memory": [
+        {
+          "addr": "@settings",
+          "offset": "0xf4",
+          "u32": 7
+        },
+        {
+          "addr": "@settings",
+          "offset": "0xf8",
+          "u32": "@setup"
+        }
+      ]
+    },
+    {
+      "name": "duration_mul_boundary",
+      "args": [
+        2147483
+      ],
+      "memory": [
+        {
+          "addr": "@settings",
+          "offset": "0xf4",
+          "u32": 8
+        },
+        {
+          "addr": "@settings",
+          "offset": "0xf8",
+          "u32": "@setup"
+        }
+      ]
+    },
+    {
+      "name": "duration_mul_overflow",
+      "args": [
+        2147484
+      ],
+      "memory": [
+        {
+          "addr": "@settings",
+          "offset": "0xf4",
+          "u32": 8
+        },
+        {
+          "addr": "@settings",
+          "offset": "0xf8",
+          "u32": "@setup"
+        }
+      ]
+    },
+    {
+      "name": "duration_int_min",
+      "args": [
+        -2147483648
+      ],
+      "memory": [
+        {
+          "addr": "@settings",
+          "offset": "0xf4",
+          "u32": 8
+        },
+        {
+          "addr": "@settings",
+          "offset": "0xf8",
+          "u32": "@setup"
+        }
+      ]
+    },
+    {
+      "name": "duration_int_max",
+      "args": [
+        2147483647
+      ],
+      "memory": [
+        {
+          "addr": "@settings",
+          "offset": "0xf4",
+          "u32": 8
+        },
+        {
+          "addr": "@settings",
+          "offset": "0xf8",
+          "u32": "@setup"
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5652411,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -2147483648,
+          2147483647
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@settings",
+        "offset": "0xf4",
+        "type": "int",
+        "choices": [
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "addr": "@settings",
+        "offset": "0xf8",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@setup"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "function": "EQPlayer_guess::SwapNPCMaterials_guess",
+  "original": "0x00482722",
+  "sources": ["src/EverQuest/tu_053_EQPlayer.cpp"],
+  "conv": "thiscall",
+  "this": "@eqplayer",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "eqplayer": {
+      "size": "0x29c",
+      "fill": "random",
+      "init": [{"offset": "0x1a8", "u32": "@actor"}]
+    },
+    "actor": {
+      "size": "0x138",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@visual"}]
+    },
+    "visual": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@visual_vtable"}]
+    },
+    "visual_vtable": {
+      "size": "0x1bc",
+      "fill": 0,
+      "init": [
+        {"offset": "0x110", "u32": "@fn_count"},
+        {"offset": "0x114", "u32": "@fn_set_text"},
+        {"offset": "0x1b8", "u32": "@fn_apply"}
+      ]
+    },
+    "manager": {"size": "0x2d5c", "fill": "random"},
+    "traits": {"size": "0x4", "fill": "random"},
+    "attachment": {"size": "0x4", "fill": "random"},
+    "fn_count": {"size": "0x4", "fill": "zero"},
+    "fn_set_text": {"size": "0x4", "fill": "zero"},
+    "fn_apply": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x00985c50", "u32": "@traits"},
+    {"addr": "0x00905d24", "u32": "@manager"},
+    {"addr": "0x006974cc", "cstr": "IT"},
+    {"addr": "@eqplayer", "offset": "0x254", "u8": 0},
+    {"addr": "@eqplayer", "offset": "0x255", "u8": 255},
+    {"addr": "@eqplayer", "offset": "0x260", "u32": 1},
+    {"addr": "@eqplayer", "offset": "0x270", "u32": 1},
+    {"addr": "@eqplayer", "offset": "0x298", "u32": 0},
+    {"addr": "@actor", "offset": "0x134", "u32": 0},
+    {"addr": "@manager", "offset": "0x2d58", "u32": 0}
+  ],
+  "callees": {
+    "0x004798d7": {
+      "name": "GetActorTag_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "writes": [{"arg": 0, "hex": "4e414d4500"}]
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr"],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [{"arg": 0, "hex": "303000"}]
+    },
+    "0x0048236e": {
+      "name": "SetTexture_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "int", "int"],
+      "ret": [0, 0, 0, 0, 0]
+    },
+    "0x004b8f3b": {
+      "name": "GetTrait_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 77
+    },
+    "0x0048f019": {
+      "name": "IsReady_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0047c08e": {
+      "name": "GetAnimation_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@attachment"
+    },
+    "0x00488974": {
+      "name": "PlayAttachment_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "int", "float", "int"]
+    },
+    "0x0047b8d5": {
+      "name": "NotifyAppearance_guess",
+      "conv": "thiscall",
+      "args": ["cstr"]
+    },
+    "0x0060d674": {
+      "name": "__security_check_cookie",
+      "conv": "fastcall",
+      "args": ["u32"],
+      "passthrough": true
+    },
+    "@fn_count": {
+      "name": "GetCount_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [2, 2]
+    },
+    "@fn_set_text": {
+      "name": "SetText_guess",
+      "conv": "thiscall",
+      "args": ["mem:16", "mem:4", "int"]
+    },
+    "@fn_apply": {
+      "name": "Apply_guess",
+      "conv": "thiscall",
+      "args": ["int"]
+    }
+  },
+  "rewrite_aliases": {"_sprintf": "0x0060d5eb"},
+  "cases": [
+    {"name": "missing actor", "args": [], "memory": [{"addr": "@eqplayer", "offset": "0x1a8", "u32": 0}], "expect": {"ret": 0}},
+    {"name": "missing visual", "args": [], "memory": [{"addr": "@actor", "offset": "0x0", "u32": 0}], "expect": {"ret": 0}},
+    {"name": "negative appearance", "args": [], "memory": [{"addr": "@eqplayer", "offset": "0x254", "u8": 255}], "expect": {"ret": 0}},
+    {"name": "appearance above range", "args": [], "memory": [{"addr": "@eqplayer", "offset": "0x254", "u8": 31}], "expect": {"ret": 0}},
+    {"name": "upper valid appearance", "args": [], "memory": [{"addr": "@eqplayer", "offset": "0x254", "u8": 30}], "expect": {"ret": 1}},
+    {"name": "race reset", "args": [], "memory": [{"addr": "@eqplayer", "offset": "0x254", "u8": 5}, {"addr": "@eqplayer", "offset": "0x260", "u32": 60}], "expect": {"ret": 1}},
+    {"name": "no visual entries", "args": [], "callees": {"@fn_count": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": [0]}}, "expect": {"ret": 0}},
+    {"name": "one visual entry", "args": [], "callees": {"@fn_count": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": [1, 1]}}, "expect": {"ret": 1}},
+    {"name": "multiple entries negative alternate", "args": [], "callees": {"@fn_count": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": [2, 2]}}, "expect": {"ret": 1}},
+    {"name": "texture scan breaks", "args": [], "memory": [{"addr": "@eqplayer", "offset": "0x255", "u8": 0}], "callees": {"@fn_count": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": [2, 2]}, "0x0048236e": {"name": "SetTexture_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": [1]}}, "expect": {"ret": 1}},
+    {"name": "texture scan limit four", "args": [], "memory": [{"addr": "@eqplayer", "offset": "0x255", "u8": 0}], "callees": {"@fn_count": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": [2, 2]}, "0x0048236e": {"name": "SetTexture_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": [0, 0, 0, 0]}}, "expect": {"ret": 1}},
+    {"name": "trait lookup after texture scan", "args": [], "memory": [{"addr": "@eqplayer", "offset": "0x255", "u8": 0}, {"addr": "@eqplayer", "offset": "0x298", "u32": 1}], "callees": {"@fn_count": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": [2, 2]}, "0x0048236e": {"name": "SetTexture_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": [0, 1]}}, "expect": {"ret": 1}},
+    {"name": "race texture limit five", "args": [], "memory": [{"addr": "@eqplayer", "offset": "0x255", "u8": 0}, {"addr": "@eqplayer", "offset": "0x260", "u32": 364}], "callees": {"@fn_count": {"name": "GetCount_guess", "conv": "thiscall", "args": [], "ret": [2, 2]}, "0x0048236e": {"name": "SetTexture_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": [0, 0, 0, 0, 0]}}, "expect": {"ret": 1}},
+    {"name": "trait lookup skipped", "args": [], "expect": {"ret": 1}},
+    {"name": "trait lookup used", "args": [], "memory": [{"addr": "@eqplayer", "offset": "0x298", "u32": 3}], "expect": {"ret": 1}},
+    {"name": "attachment unavailable", "args": [], "callees": {"0x0048f019": {"name": "IsReady_guess", "conv": "thiscall", "args": [], "ret": 0}}, "expect": {"ret": 1}},
+    {"name": "attachment played", "args": [], "memory": [{"addr": "@actor", "offset": "0x134", "u32": 145}], "callees": {"0x0048f019": {"name": "IsReady_guess", "conv": "thiscall", "args": [], "ret": 1}}, "expect": {"ret": 1}},
+    {"name": "attachment suppressed by actor type", "args": [], "memory": [{"addr": "@actor", "offset": "0x134", "u32": 146}], "callees": {"0x0048f019": {"name": "IsReady_guess", "conv": "thiscall", "args": [], "ret": 1}}, "expect": {"ret": 1}},
+    {"name": "appearance notification off", "args": [], "memory": [{"addr": "@manager", "offset": "0x2d58", "u32": 0}], "expect": {"ret": 1}},
+    {"name": "body type eight", "args": [], "memory": [{"addr": "@manager", "offset": "0x2d58", "u32": 1}, {"addr": "@eqplayer", "offset": "0x270", "u32": 8}], "expect": {"ret": 1}},
+    {"name": "body type three", "args": [], "memory": [{"addr": "@manager", "offset": "0x2d58", "u32": 1}, {"addr": "@eqplayer", "offset": "0x270", "u32": 3}], "expect": {"ret": 1}},
+    {"name": "body type five", "args": [], "memory": [{"addr": "@manager", "offset": "0x2d58", "u32": 1}, {"addr": "@eqplayer", "offset": "0x270", "u32": 5}], "expect": {"ret": 1}},
+    {"name": "body type twelve", "args": [], "memory": [{"addr": "@manager", "offset": "0x2d58", "u32": 1}, {"addr": "@eqplayer", "offset": "0x270", "u32": 12}], "expect": {"ret": 1}},
+    {"name": "appearance notified", "args": [], "memory": [{"addr": "@manager", "offset": "0x2d58", "u32": 1}], "expect": {"ret": 1}}
+  ],
+  "fuzz": {
+    "seed": 482722,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@eqplayer", "offset": "0x254", "type": "u8", "choices": [255, 0, 1, 30, 31]},
+      {"addr": "@eqplayer", "offset": "0x255", "type": "u8", "choices": [255, 0, 1, 30]},
+      {"addr": "@eqplayer", "offset": "0x260", "type": "int", "choices": [60, 364, 1]},
+      {"addr": "@eqplayer", "offset": "0x270", "type": "int", "choices": [8, 3, 5, 12, 1]},
+      {"addr": "@eqplayer", "offset": "0x298", "type": "int", "choices": [-1, 0, 1, 3]},
+      {"addr": "@actor", "offset": "0x134", "type": "int", "choices": [146, 145]},
+      {"addr": "@manager", "offset": "0x2d58", "type": "int", "choices": [0, 1]}
+    ]
+  },
+  "_survivors": "L3533: limit is assigned 4 or 5 before its only read, so the initializer is unobservable"
+}

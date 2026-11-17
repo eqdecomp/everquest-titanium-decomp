@@ -1,0 +1,87 @@
+{
+  "function": "SubCopy_guess::SubCopy_guess",
+  "original": "0x004045e0",
+  "sources": [
+    "src/EverQuest/tu_002_ProgressionData.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@sub",
+  "args": [
+    {
+      "name": "other",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "sub": {
+      "size": "0xc",
+      "fill": "random"
+    },
+    "other": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [{"offset": "0x4", "u32": "@othersent"}]
+    },
+    "othersent": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@othernode1"}]
+    },
+    "othernode1": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@othersent"}]
+    },
+    "emptyother": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [{"offset": "0x4", "u32": "@emptysent"}]
+    },
+    "emptysent": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@emptysent"}]
+    },
+    "newnode": {
+      "size": "0x54",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@newnode"}, {"offset": "0x4", "u32": "@newnode"}]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00402aaf": {
+      "name": "FUN_00402AAF",
+      "conv": "cdecl",
+      "args": [],
+      "ret": "@newnode"
+    },
+    "0x004044ba": {
+      "name": "CopyRange",
+      "conv": "thiscall",
+      "args": ["ptr", "ptr", "ptr", "ptr"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "one source node",
+      "args": ["@other"]
+    },
+    {
+      "name": "empty source list",
+      "args": ["@emptyother"]
+    }
+  ],
+  "fuzz": {
+    "seed": 4504001,
+    "count": 60,
+    "args": [
+      {
+        "choices": ["@other", "@emptyother"]
+      }
+    ],
+    "memory": []
+  }
+}

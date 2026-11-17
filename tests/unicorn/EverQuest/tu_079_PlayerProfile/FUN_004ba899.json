@@ -1,0 +1,227 @@
+{
+  "function": "Pc_guess::Handle_OP_PlayerProfile_guess",
+  "original": "0x004ba899",
+  "sources": [
+    "src/EverQuest/tu_079_PlayerProfile.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@pc",
+  "args": [
+    {
+      "name": "packet_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "size_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "pc": {
+      "size": "0xc350",
+      "fill": "random",
+      "init": [
+        { "offset": "0x8", "u32": "@vbtable" }
+      ]
+    },
+    "packet": {
+      "size": "0x4c88",
+      "fill": "random"
+    },
+    "vbtable": {
+      "size": "8",
+      "fill": "zero"
+    },
+    "result": {
+      "size": "0x1300",
+      "fill": "zero"
+    },
+    "manager": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "game": {
+      "size": "0x39404",
+      "fill": "zero"
+    },
+    "connection": {
+      "size": "8",
+      "init": [
+        { "offset": "0", "u32": "@connection_vtable" }
+      ]
+    },
+    "connection_vtable": {
+      "size": "8",
+      "fill": "zero",
+      "init": [
+        { "offset": "4", "u32": "@fn" }
+      ]
+    },
+    "fn": {
+      "size": "4",
+      "fill": "zero"
+    },
+    "candidate_table": {
+      "size": "4",
+      "fill": "zero"
+    },
+    "candidate": {
+      "size": "4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    { "addr": "0x0079ac74", "u32": 1 },
+    { "addr": "0x00988df0", "u32": "@game" },
+    { "addr": "0x00923794", "u32": 0 },
+    { "addr": "0x00905ca0", "u32": "@connection" },
+    { "addr": "0x00905d24", "u32": "@manager" },
+    { "addr": "0x00850cb8", "u32": "@candidate_table" },
+    { "addr": "@vbtable", "offset": "4", "u32": 0 }
+  ],
+  "callees": {
+    "0x004b6c04": {
+      "name": "MemChecker0",
+      "conv": "cdecl",
+      "args": ["ptr", "int"],
+      "ret": 0
+    },
+    "0x00574110": {
+      "name": "FUN_00574110",
+      "conv": "cdecl",
+      "args": ["cstr"],
+      "ret": 0
+    },
+    "0x00494b3d": {
+      "name": "SetGameState",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x0040be64": {
+      "name": "FUN_0040be64",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x0040beae": {
+      "name": "FUN_0040beae",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x004ba0fb": {
+      "name": "LoadProfile_guess",
+      "conv": "thiscall",
+      "args": ["ignore"]
+    },
+    "0x005ec220": {
+      "name": "FUN_005ec220",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@result"
+    },
+    "0x004b925c": {
+      "name": "FUN_004b925c",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0051a84d": {
+      "name": "FUN_0051a84d",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": [
+        "@candidate", "@candidate", "@candidate", "@candidate", "@candidate",
+        "@candidate", "@candidate", "@candidate", "@candidate", "@candidate",
+        "@candidate", "@candidate", "@candidate", "@candidate", "@candidate",
+        "@candidate", "@candidate", "@candidate", "@candidate", "@candidate",
+        "@candidate", "@candidate", "@candidate", "@candidate", "@candidate",
+        "@candidate", "@candidate", "@candidate", "@candidate", "@candidate"
+      ]
+    },
+    "0x005ee500": {
+      "name": "FUN_005ee500",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": [
+        1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
+        1, 0, 1, 0, 1, 0, 1, 0, 1, 0,
+        1, 0, 1, 0, 1, 0, 1, 0, 1, 0
+      ]
+    },
+    "0x00518e4e": {
+      "name": "FUN_00518e4e",
+      "conv": "thiscall",
+      "args": ["u32"]
+    },
+    "0x0050f3f6": {
+      "name": "FUN_0050f3f6",
+      "conv": "thiscall",
+      "args": []
+    },
+    "@fn": {
+      "name": "connection disconnect slot",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "invalid size disconnects",
+      "args": ["@packet", 19591]
+    },
+    {
+      "name": "invalid checksum disconnects",
+      "args": ["@packet", 19592],
+      "memory": [
+        { "addr": "@packet", "offset": "0", "u32": 1 }
+      ]
+    },
+    {
+      "name": "valid packet no flags",
+      "args": ["@packet", 19592]
+    },
+    {
+      "name": "flag one has priority",
+      "args": ["@packet", 19592],
+      "memory": [
+        { "addr": "@result", "offset": "0x11e4", "u32": 1 },
+        { "addr": "@result", "offset": "0x11e8", "u32": 1 }
+      ]
+    },
+    {
+      "name": "flag two",
+      "args": ["@packet", 19592],
+      "memory": [
+        { "addr": "@result", "offset": "0x11e8", "u32": 1 }
+      ]
+    },
+    {
+      "name": "flag three",
+      "args": ["@packet", 19592],
+      "memory": [
+        { "addr": "@result", "offset": "0x11ec", "u32": 1 }
+      ]
+    },
+    {
+      "name": "flag four",
+      "args": ["@packet", 19592],
+      "memory": [
+        { "addr": "@result", "offset": "0x11f0", "u32": 1 }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4958361,
+    "count": 100,
+    "args": [
+      { "choices": ["@packet"] },
+      { "choices": [19591, 19592] }
+    ],
+    "memory": [
+      { "addr": "@packet", "offset": "0", "type": "u32", "choices": [0, 1] },
+      { "addr": "@result", "offset": "0x11e4", "type": "u32", "choices": [0, 1] },
+      { "addr": "@result", "offset": "0x11e8", "type": "u32", "choices": [0, 1] },
+      { "addr": "@result", "offset": "0x11ec", "type": "u32", "choices": [0, 1] },
+      { "addr": "@result", "offset": "0x11f0", "type": "u32", "choices": [0, 1] }
+    ]
+  }
+}

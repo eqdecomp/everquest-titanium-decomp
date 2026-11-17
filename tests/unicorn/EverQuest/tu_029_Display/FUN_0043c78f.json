@@ -1,0 +1,174 @@
+{
+  "function": "CDisplay_guess::ChangeVideoMode_guess",
+  "original": "0x0043c78f",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@client",
+  "args": [],
+  "ret": "void",
+  "size": "0xbc",
+  "objects": {
+    "client": {
+      "size": "0x2d70",
+      "fill": "random",
+      "init": [
+        {"offset": "0x118", "u32": "@render"}
+      ]
+    },
+    "render": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@render_vtbl"}
+      ]
+    },
+    "render_vtbl": {
+      "size": "0x24",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": "@fn_render_slot1"},
+        {"offset": "0xc", "u32": "@fn_render_slot3"},
+        {"offset": "0x20", "u32": "@fn_render_slot8"}
+      ]
+    },
+    "fn_render_slot1": {"size": "0x4", "fill": "zero"},
+    "fn_render_slot3": {"size": "0x4", "fill": "zero"},
+    "fn_render_slot8": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00850508", "u32": 2},
+    {"addr": "0x00698a04", "u32": 2},
+    {"addr": "0x00923780", "u32": 1280},
+    {"addr": "0x00923778", "u32": 0},
+    {"addr": "0x00923784", "u32": 720},
+    {"addr": "0x0092377c", "u32": 0},
+    {"addr": "@client", "offset": "0x8", "u32": "0x40500000"},
+    {"addr": "@client", "offset": "0x28e8", "u32": "0x3fc00000"},
+    {"addr": "@client", "offset": "0x28f4", "u32": "0x40100000"},
+    {"addr": "@client", "offset": "0x2d68", "u32": 8},
+    {"addr": "@client", "offset": "0x2d6c", "u32": 4}
+  ],
+  "callees": {
+    "0x0043933d": {
+      "name": "FUN_0043933d",
+      "conv": "cdecl",
+      "args": []
+    },
+    "0x004360d6": {
+      "name": "SetActorClipPlane_guess",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x00436129": {
+      "name": "SetShadowClipPlane_guess",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x00436267": {
+      "name": "SetRenderWindow_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "@fn_render_slot8": {
+      "name": "render_slot8",
+      "conv": "thiscall",
+      "args": ["float", "float"]
+    },
+    "@fn_render_slot1": {
+      "name": "render_slot1",
+      "conv": "thiscall",
+      "args": ["float"]
+    },
+    "@fn_render_slot3": {
+      "name": "render_slot3",
+      "conv": "thiscall",
+      "args": ["float"]
+    }
+  },
+  "cases": [
+    {
+      "name": "unchanged_state_wide",
+      "args": []
+    },
+    {
+      "name": "changed_state_tall",
+      "args": [],
+      "memory": [
+        {"addr": "0x00850508", "u32": 3},
+        {"addr": "0x00698a04", "u32": 2},
+        {"addr": "0x00923780", "u32": 800},
+        {"addr": "0x00923778", "u32": 0},
+        {"addr": "0x00923784", "u32": 1200},
+        {"addr": "0x0092377c", "u32": 0},
+        {"addr": "@client", "offset": "0x8", "u32": "0xbfc00000"},
+        {"addr": "@client", "offset": "0x28e8", "u32": "0x40800000"},
+        {"addr": "@client", "offset": "0x28f4", "u32": "0x3f000000"},
+        {"addr": "@client", "offset": "0x2d68", "u32": -10},
+        {"addr": "@client", "offset": "0x2d6c", "u32": 1}
+      ]
+    },
+    {
+      "name": "zero_height",
+      "args": [],
+      "memory": [
+        {"addr": "0x00923780", "u32": 800},
+        {"addr": "0x00923778", "u32": 0},
+        {"addr": "0x00923784", "u32": 100},
+        {"addr": "0x0092377c", "u32": 100}
+      ]
+    },
+    {
+      "name": "zero_width",
+      "args": [],
+      "memory": [
+        {"addr": "0x00923780", "u32": 640},
+        {"addr": "0x00923778", "u32": 640},
+        {"addr": "0x00923784", "u32": 480},
+        {"addr": "0x0092377c", "u32": 0}
+      ]
+    },
+    {
+      "name": "negative_dimensions",
+      "args": [],
+      "memory": [
+        {"addr": "0x00923780", "u32": -320},
+        {"addr": "0x00923778", "u32": 0},
+        {"addr": "0x00923784", "u32": -240},
+        {"addr": "0x0092377c", "u32": 0},
+        {"addr": "@client", "offset": "0x28e8", "u32": "0x00000000"}
+      ]
+    },
+    {
+      "name": "wrapped_subtractions",
+      "args": [],
+      "memory": [
+        {"addr": "0x00923780", "u32": 2147483647},
+        {"addr": "0x00923778", "u32": -1},
+        {"addr": "0x00923784", "u32": -2147483648},
+        {"addr": "0x0092377c", "u32": 1},
+        {"addr": "@client", "offset": "0x28e8", "u32": "0x3f800000"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4441999,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {"addr": "0x00850508", "type": "int", "choices": [0, 1, 2, 3, -1]},
+      {"addr": "0x00698a04", "type": "int", "choices": [0, 1, 2, 3, -1]},
+      {"addr": "0x00923780", "type": "int", "choices": [-2147483648, -100, -1, 0, 1, 100, 2147483647]},
+      {"addr": "0x00923778", "type": "int", "choices": [-2147483648, -100, -1, 0, 1, 100, 2147483647]},
+      {"addr": "0x00923784", "type": "int", "choices": [-2147483648, -100, -1, 0, 1, 100, 2147483647]},
+      {"addr": "0x0092377c", "type": "int", "choices": [-2147483648, -100, -1, 0, 1, 100, 2147483647]},
+      {"addr": "@client", "offset": "0x8", "type": "u32", "choices": ["0x00000000", "0x3f000000", "0x3f800000", "0xc0200000", "0x41200000"]},
+      {"addr": "@client", "offset": "0x28e8", "type": "u32", "choices": ["0x00000000", "0x3f000000", "0x3f800000", "0xc0200000", "0x41200000"]},
+      {"addr": "@client", "offset": "0x28f4", "type": "u32", "choices": ["0x00000000", "0x3f000000", "0x3f800000", "0xc0200000", "0x41200000"]},
+      {"addr": "@client", "offset": "0x2d68", "type": "int", "choices": [-100, -10, -1, 0, 1, 8, 100]},
+      {"addr": "@client", "offset": "0x2d6c", "type": "int", "choices": [-100, -10, -1, 0, 1, 8, 100]}
+    ]
+  },
+  "_survivors": "L6125: changing or deleting the first value_0000 store is unobservable because the final store overwrites it and no intervening callee reads or changes +0; L6135: deleting the final store is unobservable because the first store already zeroed +0 and no intervening callee changes it."
+}

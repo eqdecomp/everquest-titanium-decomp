@@ -1,0 +1,147 @@
+{
+  "function": "Owner_guess::Function_0054d976_guess",
+  "original": "0x0054d976",
+  "sources": ["src/EverQuest/tu_204_RaidOptionsWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {"name": "support_guess", "type": "ptr"},
+    {"name": "mode_guess", "type": "int"},
+    {"name": "value_guess", "type": "int"},
+    {"name": "x_guess", "type": "int"},
+    {"name": "y_guess", "type": "int"},
+    {"name": "randomize_guess", "type": "char"}
+  ],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x1b8",
+      "fill": "random",
+      "init": [
+        {"offset": "0", "u32": "@owner_vtbl"},
+        {"offset": "0x168", "u32": "@provider"},
+        {"offset": "0x16c", "u32": "@interface"}
+      ]
+    },
+    "support": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@support_vtbl"}]
+    },
+    "provider": {"size": "0x4", "fill": "zero"},
+    "interface": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@interface_vtbl"}]
+    },
+    "options": {
+      "size": "0x80",
+      "fill": "zero",
+      "init": [{"offset": "0x7d", "u8": 0}]
+    },
+    "graphics_root": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@display"}]
+    },
+    "display": {
+      "size": "0xf4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xec", "u32": 200},
+        {"offset": "0xf0", "u32": 150}
+      ]
+    },
+    "owner_vtbl": {
+      "size": "0xc4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x88", "u32": "@owner_slot34"},
+        {"offset": "0xc0", "u32": "@owner_slot48"}
+      ]
+    },
+    "support_vtbl": {
+      "size": "0x84",
+      "fill": "zero",
+      "init": [{"offset": "0x80", "u32": "@support_slot32"}]
+    },
+    "owner_slot34": {"size": "4", "fill": "zero"},
+    "owner_slot48": {"size": "4", "fill": "zero"},
+    "support_slot32": {"size": "4", "fill": "zero"},
+    "interface_slot63": {"size": "4", "fill": "zero"},
+    "interface_vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xfc", "u32": "@interface_slot63"}]
+    }
+  },
+  "memory": [
+    {"addr": "0x0099d3ec", "u32": "@options"},
+    {"addr": "0x0099d334", "u32": "@graphics_root"}
+  ],
+  "callees": {
+    "0x005adf60": {"name": "CXWndManager::GetKeyboardFlags", "conv": "thiscall", "args": [], "ret": [0, 0]},
+    "0x005bd180": {"name": "CSliderWnd_guess::SetCount_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005bcd10": {"name": "CSliderWnd_guess::SetValue_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0054d935": {"name": "Owner_guess::Accept_guess", "conv": "thiscall", "args": []},
+    "0x0054d7e0": {"name": "Owner_guess::UpdateEditWndFromSlider_guess", "conv": "thiscall", "args": []},
+    "0x0059d860": {
+      "name": "Owner_guess::GetRect_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "0a000000140000006e0000005a000000"}]
+    },
+    "0x0059fa70": {"name": "Owner_guess::SetRect_guess", "conv": "thiscall", "args": ["mem:8"]},
+    "0x005a0480": {"name": "Owner_guess::ClearRect_guess", "conv": "thiscall", "args": []},
+    "0x0059edf0": {"name": "CXWnd::SetFocus", "conv": "thiscall", "args": [], "ret": 0},
+    "@owner_slot34": {"name": "Owner_guess::Slot34_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "@owner_slot48": {"name": "Owner_guess::Slot48_guess", "conv": "thiscall", "args": ["int", "int"], "ret": 0},
+    "@support_slot32": {"name": "Support_guess::Slot32_guess", "conv": "thiscall", "args": ["ptr", "int", "ptr"], "ret": 0},
+    "@interface_slot63": {"name": "Interface_guess::Slot63_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0}
+  },
+  "cases": [
+    {"name": "mode zero", "args": ["@support", 0, 7, 10, 20, 0]},
+    {"name": "initial mode one resets", "args": ["@support", 1, 7, 10, 20, 0]},
+    {"name": "negative x clears", "args": ["@support", 2, 7, -1, 0, 0]},
+    {"name": "negative y clears", "args": ["@support", 2, 7, 0, -1, 0]},
+    {"name": "zero coordinates set rect", "args": ["@support", 2, 7, 0, 0, 0]},
+    {"name": "dimension boundaries fit", "args": ["@support", 2, 7, 100, 80, 0]},
+    {"name": "width overflows", "args": ["@support", 2, 7, 101, 80, 0]},
+    {"name": "height overflows", "args": ["@support", 2, 7, 100, 81, 0]},
+    {"name": "both dimensions overflow", "args": ["@support", 2, 7, 101, 81, 0]},
+    {
+      "name": "randomize first flag",
+      "args": ["@support", 2, 7, 10, 20, 1],
+      "callees": {"0x005adf60": {"name": "CXWndManager::GetKeyboardFlags", "conv": "thiscall", "args": [], "ret": 1}}
+    },
+    {
+      "name": "randomize second flag",
+      "args": ["@support", 2, 7, 10, 20, 1],
+      "callees": {"0x005adf60": {"name": "CXWndManager::GetKeyboardFlags", "conv": "thiscall", "args": [], "ret": [0, 2]}}
+    },
+    {
+      "name": "randomize no flags",
+      "args": ["@support", 2, 7, 10, 20, 1],
+      "callees": {"0x005adf60": {"name": "CXWndManager::GetKeyboardFlags", "conv": "thiscall", "args": [], "ret": [0, 0]}}
+    }
+  ],
+  "fuzz": {
+    "seed": 5560694,
+    "count": 100,
+    "args": [
+      {"choices": ["@support"]},
+      {"choices": [-1, 0, 1, 2, 3, 2147483647]},
+      {"range": [-100, 100]},
+      {"range": [-3, 250]},
+      {"range": [-3, 200]},
+      {"choices": [0, 1, 2, 255]}
+    ],
+    "memory": [
+      {"addr": "@options", "offset": "0x7d", "type": "u8", "choices": [0, 1, 2, 3]},
+      {"addr": "@display", "offset": "0xec", "type": "int", "range": [0, 250]},
+      {"addr": "@display", "offset": "0xf0", "type": "int", "range": [0, 200]}
+    ]
+  },
+  "_survivors": "L514: the position array's initial zeros are overwritten before either element is read"
+}

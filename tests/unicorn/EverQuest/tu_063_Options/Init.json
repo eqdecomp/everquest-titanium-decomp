@@ -1,0 +1,112 @@
+{
+  "function": "IniSave_guess::Init_guess",
+  "original": "0x004b102d",
+  "sources": ["src/EverQuest/tu_063_Options.cpp"],
+  "conv": "thiscall",
+  "this": "@inisave",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "inisave": {"size": "0x100", "fill": "zero"},
+    "pc": {"size": "0xc300", "fill": "zero", "init": [{"offset": "0x8", "u32": "@vbtable"}]},
+    "vbtable": {"size": "0x8", "fill": "zero", "init": [{"offset": "0x4", "u32": 0}]},
+    "flush": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@pc"},
+    {"addr": "0x00850c44", "u32": "@flush"},
+    {"addr": "0x0095d414", "u32": 4294967295},
+    {"addr": "0x0095d418", "u32": 99},
+    {"addr": "0x0095d41c", "u32": 98},
+    {"addr": "0x0095d420", "u32": 100},
+    {"addr": "0x0095d424", "u32": 105},
+    {"addr": "0x0095d428", "u32": 107},
+    {"addr": "0x0095d42c", "u32": 111},
+    {"addr": "0x0095d430", "u32": 114},
+    {"addr": "0x0095d434", "u32": 115},
+    {"addr": "0x0095d438", "u32": 116},
+    {"addr": "0x00983b7c", "size": 804, "fill": "zero"},
+    {"addr": "0x009839e5", "size": 100, "fill": "zero"},
+    {"addr": "0x00923798", "u8": 0},
+    {"addr": "0x00923d7b", "u8": 0},
+    {"addr": "0x00923788", "u32": 0},
+    {"addr": "0x00923d7a", "u8": 0},
+    {"addr": "0x00983b7c", "u8": 2},
+    {"addr": "0x00983b80", "u32": 0},
+    {"addr": "0x00983b84", "u8": 2},
+    {"addr": "0x00983b88", "u32": 1},
+    {"addr": "0x00983b8c", "u8": 2},
+    {"addr": "0x00983b90", "u32": 2},
+    {"addr": "0x00983b94", "u8": 2},
+    {"addr": "0x00983b98", "u32": 3},
+    {"addr": "0x00983b9c", "u8": 3},
+    {"addr": "0x00983ba0", "u32": 0},
+    {"addr": "0x00983ba4", "u8": 3},
+    {"addr": "0x00983ba8", "u32": 1},
+    {"addr": "0x00983bac", "u8": 3},
+    {"addr": "0x00983bb0", "u32": 2},
+    {"addr": "0x00983bb4", "u8": 3},
+    {"addr": "0x00983bb8", "u32": 3},
+    {"addr": "0x00983bbc", "u8": 3},
+    {"addr": "0x00983bc0", "u32": 4},
+    {"addr": "0x00983bc4", "u8": 3},
+    {"addr": "0x00983bc8", "u32": 5}
+  ],
+  "callees": {
+    "0x0055955c": {"name": "GetCustomIniFilename_guess", "conv": "cdecl", "args": [], "ret": 4660},
+    "0x00494e0f": {"name": "initCustom_guess", "conv": "thiscall", "args": []},
+    "0x00576670": {"name": "FUN_00576670", "conv": "cdecl", "args": ["int"], "ret": 0},
+    "0x00496e20": {"name": "SetDefaultClassHotButtons_guess", "conv": "thiscall", "args": []},
+    "0x004b0812": {"name": "FUN_004b0812", "conv": "thiscall", "args": ["int"]},
+    "0x0040e73f": {"name": "FUN_0040e73f", "conv": "thiscall", "args": ["int"], "ret": [0, 0, 0, 0, 0, 0, 1]},
+    "0x0041b0de": {"name": "FUN_0041b0de", "conv": "thiscall", "args": ["u32"], "ret": [1, 0]},
+    "0x004b05d6": {"name": "SaveAbilities_guess", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x004b0668": {"name": "SaveCombatSkills_guess", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x004b023b": {"name": "SaveHotButtons_guess", "conv": "thiscall", "args": []},
+    "0x004d2344": {"name": "UpdateButtonLabels_guess", "conv": "thiscall", "args": []}
+  },
+  "cases": [
+    {"name": "path_missing_mixed_ranges", "args": []},
+    {
+      "name": "high_value_lookup_rejected",
+      "args": [],
+      "callees": {
+        "0x0040e73f": {"name": "FUN_0040e73f", "conv": "thiscall", "args": ["int"], "ret": [1]}
+      }
+    },
+    {"name": "path_found_mixed_ranges", "args": [], "callees": {"0x00576670": {"name": "FUN_00576670", "conv": "cdecl", "args": ["int"], "ret": 1}}},
+    {
+      "name": "negative_and_boundary_values",
+      "args": [],
+      "memory": [
+        {"addr": "0x0095d414", "u32": 4294967295},
+        {"addr": "0x0095d418", "u32": 0},
+        {"addr": "0x0095d41c", "u32": 99},
+        {"addr": "0x0095d420", "u32": 100},
+        {"addr": "0x0095d424", "u32": 104},
+        {"addr": "0x0095d428", "u32": 106},
+        {"addr": "0x0095d42c", "u32": 110},
+        {"addr": "0x0095d430", "u32": 113},
+        {"addr": "0x0095d434", "u32": 115},
+        {"addr": "0x0095d438", "u32": 116}
+      ],
+      "callees": {
+        "0x00576670": {"name": "FUN_00576670", "conv": "cdecl", "args": ["int"], "ret": 0},
+        "0x0040e73f": {"name": "FUN_0040e73f", "conv": "thiscall", "args": ["int"], "ret": [0, 0, 0, 0, 0, 0, 0]},
+        "0x0041b0de": {"name": "FUN_0041b0de", "conv": "thiscall", "args": ["u32"], "ret": [0, 1]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4919341,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "0x0095d414", "type": "int", "count": 10, "choices": [-2, -1, 0, 1, 98, 99, 100, 104, 105, 106, 107, 111, 114, 115, 116]},
+      {"addr": "0x00983b7c", "type": "u8", "count": 100, "stride": 8, "choices": [0, 2, 3, 9]},
+      {"addr": "0x00983b80", "type": "int", "count": 100, "stride": 8, "choices": [0, 1, 2, 3, 4, 5]},
+      {"addr": "0x009839e5", "type": "u8", "count": 100, "choices": [0, 1]}
+    ]
+  },
+  "_survivors": "L1096: the high-lookup rejection store is followed by range validation, which stores -1 for either interim value"
+}

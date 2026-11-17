@@ -1,0 +1,122 @@
+{
+  "function": "CMailCompositionWndMainView_guess::NormalizeToField_guess",
+  "original": "0x0052db00",
+  "sources": [
+    "src/EverQuest/tu_184_MailCompositionWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "owner": {"size": "0x188", "fill": "random", "init": [{"offset": "0x168", "u32": "@wnd"}]},
+    "wnd": {"size": "0x10", "fill": "zero", "init": [{"offset": 0, "u32": "@wnd_vtbl"}]},
+    "wnd_vtbl": {"size": "0x134", "fill": "zero", "init": [
+      {"offset": "0xfc", "u32": "@fn_set"},
+      {"offset": "0x130", "u32": "@fn_get"}
+    ]},
+    "fn_set": {"size": "0x4"},
+    "fn_get": {"size": "0x4"},
+    "root": {"size": "0x4", "fill": "zero"},
+    "manager": {"size": "0x90", "fill": "random"},
+    "src": {"size": "0x10", "fill": "zero", "init": [{"offset": 0, "cstr": "a b,<x>, c d"}]},
+    "heap": {"size": "0x200", "fill": "zero"},
+    "entry": {"size": "0x4c", "fill": "zero", "init": [
+      {"offset": 4, "cstr": "E1 e"},
+      {"offset": "0x14", "u32": 4},
+      {"offset": "0x18", "u32": 15}
+    ]}
+  },
+  "memory": [
+    {"addr": "0x00988DF0", "u32": "@root"},
+    {"addr": "0x0079AC74", "from_image": "0x0079AC74", "image_size": 4}
+  ],
+  "callees": {
+    "0x00495250": {"name": "GetManager_guess", "conv": "thiscall", "args": [], "ret": "@manager"},
+    "@fn_get": {"name": "GetText_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "00 00 00 00"}]},
+    "0x00572300": {"name": "CXStrChars_guess", "conv": "thiscall", "args": [], "ret": "@src"},
+    "0x00403631": {"name": "StringFromChars", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "0x00571d00": {"name": "FreeRep_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x00427663": {"name": "OStringStreamCtor", "conv": "thiscall", "args": ["u32", "u32"], "ret": "this"},
+    "0x00402902": {"name": "StringEnd", "conv": "thiscall", "args": ["ignore"], "passthrough": true},
+    "0x00427179": {"name": "StringBufStr", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "00000000 00000000 00000000 00000000 00000000 00000000 0f000000", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "00000000 61000000 00000000 00000000 00000000 01000000 0f000000", "call": [1, 2, 3, 4, 5, 6, 7, 8]}
+      ]},
+    "0x0040291e": {"name": "StringTidy", "conv": "thiscall", "args": ["u32", "u32"], "passthrough": true},
+    "0x0052d79c": {"name": "Find_guess", "conv": "cdecl", "args": ["ignore", "ignore", "ignore", "ignore"], "passthrough": true},
+    "0x00426ac9": {"name": "StringAssignRange", "conv": "thiscall", "args": ["ignore", "ignore"], "passthrough": true},
+    "0x00425491": {"name": "StringFind", "conv": "thiscall", "args": ["ignore", "u32", "u32"], "passthrough": true},
+    "0x004255b3": {"name": "StringFindFirstOf", "conv": "thiscall", "args": ["ignore", "u32", "u32"], "passthrough": true},
+    "0x0042561d": {"name": "StringFindLastOf", "conv": "thiscall", "args": ["ignore", "u32", "u32"], "passthrough": true},
+    "0x00427645": {"name": "StringSubstr", "conv": "thiscall", "args": ["ignore", "u32", "u32"], "passthrough": true},
+    "0x0060d071": {"name": "operator new", "conv": "cdecl", "args": ["u32"], "ret": "@entry"},
+    "0x0042c74b": {"name": "EntryCtor_guess", "conv": "thiscall", "args": ["ignore"], "ret": "this"},
+    "0x00428534": {"name": "FindEntry_guess", "conv": "thiscall", "args": ["ptr"], "ret": "@entry"},
+    "0x0042cc75": {"name": "Status_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x0040b867": {"name": "EntryDtor_guess", "conv": "thiscall", "args": []},
+    "0x0060d0d5": {"name": "operator delete", "conv": "cdecl", "args": ["ptr"], "ret": 0},
+    "0x0042650a": {"name": "OStreamPutChars", "conv": "cdecl", "args": ["ignore", "cstr"], "ret": "arg0"},
+    "0x00426786": {"name": "OStreamPutString", "conv": "cdecl", "args": ["ignore", "mem:24"], "ret": "arg0"},
+    "0x004276d4": {"name": "OStringStreamStr", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "00000000 6f757400 00000000 00000000 00000000 03000000 0f000000"}]},
+    "0x00571e00": {"name": "CXStrFromChars_guess", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "kernel32.dll!HeapAlloc": {"conv": "stdcall", "args": ["ignore", "ignore", "u32"], "ret": "@heap"},
+    "kernel32.dll!HeapFree": {"conv": "stdcall", "args": ["ignore", "ignore", "u32"], "ret": 1},
+    "@fn_set": {"name": "SetText_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x00425a76": {"name": "OStringStreamDtorBase", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00623d8d": {"name": "ios_base dtor", "conv": "thiscall", "args": [], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "_Tidy": "0x0040291e",
+    "?find_first_not_of@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEIPBDII@Z": "0x004255b3",
+    "?find_last_not_of@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEIPBDII@Z": "0x0042561d",
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {"name": "root-null", "args": [], "memory": [{"addr": "0x00988DF0", "u32": 0}]},
+    {"name": "manager-null", "args": [], "callees": {"0x00495250": {"name": "GetManager_guess", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "window-null", "args": [], "memory": [{"addr": "@owner", "offset": "0x168", "u32": 0}]},
+    {"name": "empty-source", "args": [], "memory": [{"addr": "@src", "u8": 0}]},
+    {"name": "mixed-found-status0", "args": []},
+    {"name": "status4", "args": [], "callees": {"0x0042cc75": {"name": "Status_guess", "conv": "thiscall", "args": ["ptr"], "ret": 4}}},
+    {"name": "status2", "args": [], "callees": {"0x0042cc75": {"name": "Status_guess", "conv": "thiscall", "args": ["ptr"], "ret": 2}}},
+    {"name": "status1", "args": [], "callees": {"0x0042cc75": {"name": "Status_guess", "conv": "thiscall", "args": ["ptr"], "ret": 1}}},
+    {"name": "not-found", "args": [], "callees": {"0x00428534": {"name": "FindEntry_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0}}},
+    {"name": "new-null", "args": [], "callees": {
+      "0x0060d071": {"name": "operator new", "conv": "cdecl", "args": ["u32"], "ret": 0},
+      "0x00428534": {"name": "FindEntry_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0}}},
+    {"name": "two-entries-trailing-comma", "args": [], "memory": [{"addr": "@src", "cstr": "<a>,<b c>,"}]},
+    {"name": "text-only", "args": [], "memory": [{"addr": "@src", "cstr": " ab  c "}]},
+    {"name": "first-entry-found", "args": [], "memory": [{"addr": "@src", "cstr": "<x>,<y>"}]},
+    {"name": "first-entry-not-found", "args": [], "memory": [{"addr": "@src", "cstr": "<x>,<y>"}],
+      "callees": {"0x00428534": {"name": "FindEntry_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0}}},
+    {"name": "source-rep-nonnull", "args": [], "callees": {
+      "@fn_get": {"name": "GetText_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+        "writes": [{"arg": 0, "offset": 0, "hex": "01 00 00 00"}]}}},
+    {"name": "long-output", "args": [], "callees": {
+      "0x004276d4": {"name": "OStringStreamStr", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+        "writes": [
+          {"arg": 0, "offset": 0, "hex": "00000000 ecf96300 00000000 00000000 00000000 14000000 1f000000"}
+        ]}}}
+  ],
+  "_survivors": "L1368: catch(...) body only runs when the entry constructor throws, which the emulator cannot do; L1373: 0x0063F53E is the NUL ending the previous .rdata string, so it reads as the same empty string as 0x0063F53F",
+  "fuzz": {
+    "seed": 5430016,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@src", "offset": 0, "type": "u8", "choices": [60, 97]},
+      {"addr": "@src", "offset": 2, "type": "u8", "choices": [32, 60, 97]},
+      {"addr": "@src", "offset": 3, "type": "u8", "choices": [44, 98]},
+      {"addr": "@src", "offset": 4, "type": "u8", "choices": [32, 60]},
+      {"addr": "@src", "offset": 6, "type": "u8", "choices": [32, 60, 97]},
+      {"addr": "@src", "offset": 8, "type": "u8", "choices": [60, 97]},
+      {"addr": "@src", "offset": 9, "type": "u8", "choices": [0, 32, 99]},
+      {"addr": "@owner", "offset": "0x168", "type": "ptr", "choices": [0, "@wnd", "@wnd", "@wnd"]},
+      {"addr": "0x00988DF0", "type": "ptr", "choices": [0, "@root", "@root", "@root"]}
+    ]
+  }
+}

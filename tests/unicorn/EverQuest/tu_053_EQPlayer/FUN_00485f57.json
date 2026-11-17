@@ -1,0 +1,386 @@
+{
+  "function": "PlayerAnimation_guess::RemapAnimationKey_guess",
+  "original": "0x00485f57",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@initobject",
+  "args": [
+    {
+      "name": "key",
+      "type": "int"
+    },
+    {
+      "name": "recordIndex",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "initobject": {
+      "size": "0x20",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@root"
+        }
+      ]
+    },
+    "root": {
+      "size": "0x298",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@middle"
+        }
+      ]
+    },
+    "middle": {
+      "size": "0x160",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x12c",
+          "u32": "@tables"
+        }
+      ]
+    },
+    "tables": {
+      "size": "0x30",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x2c",
+          "u32": "@array"
+        }
+      ]
+    },
+    "array": {
+      "size": "0x1c8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x180",
+          "u32": "@records"
+        },
+        {
+          "offset": "0x184",
+          "u32": "@records"
+        },
+        {
+          "offset": "0x1c0",
+          "u32": "@records"
+        },
+        {
+          "offset": "0x1c4",
+          "u32": "@records"
+        }
+      ]
+    },
+    "records": {
+      "size": "0x20",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 0
+        },
+        {
+          "offset": "0x10",
+          "u32": 0
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00647cb0",
+      "u32": 1
+    },
+    {
+      "addr": "0x00647cb4",
+      "u32": 2
+    },
+    {
+      "addr": "0x0066d248",
+      "u32": 0
+    },
+    {
+      "addr": "@root",
+      "offset": "0x294",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x0047c007": {
+      "name": "HasPlayerState_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "no_flags",
+      "args": [
+        109,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@root",
+          "offset": "0x294",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 109
+      }
+    },
+    {
+      "name": "second_flag_no_match",
+      "args": [
+        109,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@root",
+          "offset": "0x294",
+          "u32": 2
+        }
+      ],
+      "expect": {
+        "ret": 109
+      }
+    },
+    {
+      "name": "first_key_record_selected",
+      "args": [
+        110,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@root",
+          "offset": "0x294",
+          "u32": 1
+        },
+        {
+          "addr": "@records",
+          "offset": "0x10",
+          "u32": 1
+        }
+      ],
+      "expect": {
+        "ret": 112
+      }
+    },
+    {
+      "name": "first_key_first_record_fallback",
+      "args": [
+        110,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@root",
+          "offset": "0x294",
+          "u32": 1
+        },
+        {
+          "addr": "@records",
+          "offset": "0x0",
+          "u32": 1
+        },
+        {
+          "addr": "@records",
+          "offset": "0x10",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 112
+      }
+    },
+    {
+      "name": "first_key_empty_records",
+      "args": [
+        110,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@root",
+          "offset": "0x294",
+          "u32": 1
+        },
+        {
+          "addr": "@records",
+          "offset": "0x0",
+          "u32": 0
+        },
+        {
+          "addr": "@records",
+          "offset": "0x10",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 110
+      }
+    },
+    {
+      "name": "second_key_record_selected",
+      "args": [
+        111,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@root",
+          "offset": "0x294",
+          "u32": 1
+        },
+        {
+          "addr": "@records",
+          "offset": "0x0",
+          "u32": 1
+        }
+      ],
+      "expect": {
+        "ret": 113
+      }
+    },
+    {
+      "name": "null_table",
+      "args": [
+        110,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@root",
+          "offset": "0x294",
+          "u32": 1
+        },
+        {
+          "addr": "@array",
+          "offset": "0x1c0",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 110
+      }
+    },
+    {
+      "name": "offset_adjusted_key",
+      "args": [
+        94,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x0066d248",
+          "u32": 16
+        },
+        {
+          "addr": "@root",
+          "offset": "0x294",
+          "u32": 1
+        },
+        {
+          "addr": "@records",
+          "offset": "0x0",
+          "u32": 1
+        }
+      ],
+      "expect": {
+        "ret": 96
+      }
+    },
+    {
+      "name": "offset_adjusted_second_key",
+      "args": [
+        95,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x0066d248",
+          "u32": 16
+        },
+        {
+          "addr": "@root",
+          "offset": "0x294",
+          "u32": 1
+        },
+        {
+          "addr": "@records",
+          "offset": "0x0",
+          "u32": 1
+        }
+      ],
+      "expect": {
+        "ret": 97
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4742999,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          109,
+          110,
+          111,
+          112
+        ]
+      },
+      {
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@root",
+        "offset": "0x294",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@records",
+        "offset": "0x0",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@records",
+        "offset": "0x10",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

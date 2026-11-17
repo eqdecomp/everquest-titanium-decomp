@@ -1,0 +1,84 @@
+{
+  "function": "CTextureAnimationView_guess::Reset_guess",
+  "original": "0x004fd8bc",
+  "sources": [
+    "src/EverQuest/tu_150_CursorAttachment.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@animation",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "animation": {
+      "size": "0x4c",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004482fb": {
+      "name": "AnimName_guess::Clear_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004dbaca": {
+      "name": "AnimFrames_guess::Clear_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004d9160": {
+      "name": "Rect_guess::Combine_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "mem:16"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "random_object",
+      "args": []
+    },
+    {
+      "name": "all_ones",
+      "args": [],
+      "memory": [
+        {"addr": "@animation", "offset": "0x18", "u32": 4294967295},
+        {"addr": "@animation", "offset": "0x1c", "u32": 4294967295},
+        {"addr": "@animation", "offset": "0x20", "u32": 4294967295},
+        {"addr": "@animation", "offset": "0x24", "u32": 4294967295},
+        {"addr": "@animation", "offset": "0x28", "u32": 4294967295},
+        {"addr": "@animation", "offset": "0x2c", "u32": 4294967295},
+        {"addr": "@animation", "offset": "0x30", "u32": 4294967295},
+        {"addr": "@animation", "offset": "0x34", "u32": 4294967295},
+        {"addr": "@animation", "offset": "0x38", "u32": 305419896}
+      ]
+    },
+    {
+      "name": "already_reset",
+      "args": [],
+      "memory": [
+        {"addr": "@animation", "offset": "0x18", "u32": 0},
+        {"addr": "@animation", "offset": "0x1c", "u32": 0},
+        {"addr": "@animation", "offset": "0x20", "u32": 0},
+        {"addr": "@animation", "offset": "0x24", "u32": 0},
+        {"addr": "@animation", "offset": "0x28", "u32": 0},
+        {"addr": "@animation", "offset": "0x2c", "u32": 256},
+        {"addr": "@animation", "offset": "0x30", "u32": 0},
+        {"addr": "@animation", "offset": "0x34", "u32": 0},
+        {"addr": "@animation", "offset": "0x38", "u32": 4294967295}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5232828,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@animation", "offset": "0x28", "type": "int", "choices": [0, 1, -1, 500]},
+      {"addr": "@animation", "offset": "0x38", "type": "int", "choices": [0, 1, -1, 7]}
+    ]
+  }
+}

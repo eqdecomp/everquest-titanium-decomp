@@ -1,0 +1,149 @@
+{
+  "function": "ChatServerClient_guess::Parse_guess",
+  "original": "0x0040c6b7",
+  "sources": [
+    "src/EverQuest/tu_010_guilds.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@bufferowner",
+  "args": [
+    {"name": "unused_guess", "type": "int"},
+    {"name": "data", "type": "ptr"},
+    {"name": "size", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "bufferowner": {
+      "size": "0xd0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": "@sink"},
+        {"offset": "0xc", "u32": "@vals"},
+        {"offset": "0x10", "u32": 0},
+        {"offset": "0x14", "u8": 0},
+        {"offset": "0x1c", "hex": "5461726765740000"},
+        {"offset": "0xbc", "u32": 3},
+        {"offset": "0xcc", "u32": 0}
+      ]
+    },
+    "sink": {
+      "size": "0x40",
+      "fill": "random",
+      "init": [{"offset": 0, "u32": "@sinkvt"}]
+    },
+    "sinkvt": {
+      "size": "0x2c",
+      "fill": "random",
+      "init": [
+        {"offset": 0, "u32": "@slot0"},
+        {"offset": 4, "u32": "@slot1"},
+        {"offset": 8, "u32": "@slot2"},
+        {"offset": 12, "u32": "@slot3"},
+        {"offset": 16, "u32": "@slot4"},
+        {"offset": 20, "u32": "@slot5"},
+        {"offset": 24, "u32": "@slot6"},
+        {"offset": 28, "u32": "@slot7"},
+        {"offset": 32, "u32": "@slot8"},
+        {"offset": 36, "u32": "@slot9"},
+        {"offset": 40, "u32": "@slot10"}
+      ]
+    },
+    "slot0": {"size": "0x4"},
+    "slot1": {"size": "0x4"},
+    "slot2": {"size": "0x4"},
+    "slot3": {"size": "0x4"},
+    "slot4": {"size": "0x4"},
+    "slot5": {"size": "0x4"},
+    "slot6": {"size": "0x4"},
+    "slot7": {"size": "0x4"},
+    "slot8": {"size": "0x4"},
+    "slot9": {"size": "0x4"},
+    "slot10": {"size": "0x4"},
+    "vals": {"size": "0x100", "fill": "random"},
+    "dup": {"size": "0x40", "fill": "random"},
+    "data": {
+      "size": "0x20",
+      "fill": "random",
+      "init": [{"offset": 0, "hex": "0100000000000000000000000000000000000000000000000000000000000000"}]
+    }
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x0063f53f", "hex": "00"}
+  ],
+  "callees": {
+    "0x0040c3ce": {"name": "Clear", "conv": "thiscall", "args": []},
+    "0x0040c0f2": {"name": "ParseField", "conv": "cdecl", "args": ["ptr", "int", "ptr", "char"], "passthrough": true},
+    "0x0060f455": {"name": "_isspace", "conv": "cdecl", "args": ["int"], "ret": 0},
+    "0x0040c095": {"name": "ResizeBuffer", "conv": "cdecl", "args": ["ptr", "int", "int"], "ret": "@vals"},
+    "0x004c4fe3": {"name": "Duplicate", "conv": "cdecl", "args": ["cstr"], "ret": "@dup"},
+    "0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["ptr", "ptr", "u32"], "ret": "arg2"},
+    "0x0040c027": {"name": "Find", "conv": "thiscall", "args": ["cstr"], "ret": "arg0"},
+    "0x0040c405": {"name": "Set", "conv": "thiscall", "args": ["cstr", "int"]},
+    "0x0040c00b": {"name": "Sort", "conv": "thiscall", "args": []},
+    "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["ptr", "ptr"], "ret": [1, 1, 0]},
+    "kernel32.dll!GetLastError": {"conv": "stdcall", "args": [], "ret": 0},
+    "@slot0": {"conv": "thiscall", "args": ["bool"]},
+    "@slot2": {"conv": "thiscall", "args": ["cstr", "cstr", "int", "cstr", "bool"]},
+    "@slot3": {"conv": "thiscall", "args": ["cstr", "ptr", "cstr", "int", "cstr", "bool"]},
+    "@slot4": {"conv": "thiscall", "args": ["cstr", "int", "cstr", "bool"]},
+    "@slot5": {"conv": "thiscall", "args": ["cstr", "int", "cstr", "bool"]},
+    "@slot6": {"conv": "thiscall", "args": ["cstr", "int", "cstr"]},
+    "@slot7": {"conv": "thiscall", "args": []},
+    "@slot8": {"conv": "thiscall", "args": ["cstr", "int"]},
+    "@slot9": {"conv": "thiscall", "args": ["int", "cstr"]},
+    "@slot10": {"conv": "thiscall", "args": ["int"]}
+  },
+  "rewrite_aliases": {
+    "__strnicmp": "0x0062202c",
+    "__stricmp": "0x00621e9c"
+  },
+  "cases": [
+    {"name": "bool_true", "args": [0, "@data", 3], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "010100"}]}}},
+    {"name": "bool_false", "args": [0, "@data", 2], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "0100"}]}}},
+    {"name": "list_short", "args": [0, "@data", 2], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "0200"}]}}},
+    {"name": "list_items", "args": [0, "@data", 5], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "02612c6200"}]}}},
+    {"name": "name_plain", "args": [0, "@data", 10], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "034e6d00536300546800"}]}}},
+    {"name": "name_plain_prefix", "args": [0, "@data", 10], "memory": [{"addr": "@bufferowner", "offset": "0xbc", "u32": 0}], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "034e6d00536300546800"}]}}},
+    {"name": "name_plain_found", "args": [0, "@data", 10], "memory": [{"addr": "@bufferowner", "offset": "0x10", "u32": 1}], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "034e6d00536300546800"}]}}},
+    {"name": "case4_found", "args": [0, "@data", 7], "memory": [{"addr": "@bufferowner", "offset": "0x10", "u32": 2}], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "044e6d00536300"}]}}},
+    {"name": "case4_found_first", "args": [0, "@data", 7], "memory": [{"addr": "@bufferowner", "offset": "0x10", "u32": 1}], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "044e6d00536300"}]}}},
+    {"name": "case5_prefix", "args": [0, "@data", 7], "memory": [{"addr": "@bufferowner", "offset": "0xbc", "u32": 0}], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "054e6d00536300"}]}}},
+    {"name": "case7_dollar_prefix", "args": [0, "@data", 12], "memory": [{"addr": "@bufferowner", "offset": "0xbc", "u32": 0}], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "072478004d6400546c00"}]}}},
+    {"name": "case7_plain_prefix", "args": [0, "@data", 10], "memory": [{"addr": "@bufferowner", "offset": "0xbc", "u32": 0}], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "07486400" }, {"offset": 4, "hex": "4d6400546c00"}]}}},
+    {"name": "case7_found", "args": [0, "@data", 10], "memory": [{"addr": "@bufferowner", "offset": "0x10", "u32": 1}], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "07486400" }, {"offset": 4, "hex": "4d6400546c00"}]}}},
+    {"name": "name_empty", "args": [0, "@data", 8], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "0300536300546800"}]}}},
+    {"name": "name_dollar", "args": [0, "@data", 12], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "03247800536300546800"}]}}},
+    {"name": "case4", "args": [0, "@data", 7], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "044e6d00536300"}]}}},
+    {"name": "case4_prefix", "args": [0, "@data", 7], "memory": [{"addr": "@bufferowner", "offset": "0xbc", "u32": 0}], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "044e6d00536300"}]}}},
+    {"name": "case5", "args": [0, "@data", 7], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "054e6d00536300"}]}}},
+    {"name": "case6", "args": [0, "@data", 6], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "060574787400"}]}}},
+    {"name": "case7_plain", "args": [0, "@data", 10], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "07486400" }, {"offset": 4, "hex": "4d6400546c00"}]}}},
+    {"name": "case7_dollar", "args": [0, "@data", 12], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "072478004d6400546c00"}]}}},
+    {"name": "case7_empty_head", "args": [0, "@data", 10], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "07004d6400546c00"}]}}},
+    {"name": "case8", "args": [0, "@data", 4], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "086e6d00"}]}}},
+    {"name": "case9", "args": [0, "@data", 7], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "096e6d00536300"}]}}},
+    {"name": "case10", "args": [0, "@data", 7], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "0a6e6d00536300"}]}}},
+    {"name": "case11", "args": [0, "@data", 5], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "0b41747800"}]}}},
+    {"name": "case12", "args": [0, "@data", 6], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "0c07000000"}]}}},
+    {"name": "unknown_tag", "args": [0, "@data", 2], "objects": {"data": {"size": "0x20", "fill": "random", "init": [{"offset": 0, "hex": "0d00"}]}}}
+  ],
+  "_survivors": "L2015: cursor = data - 1 survived the mutate run; cause not isolated (kept open); L2031 and L2067: `+= length` after a strnicmp match: the stub returns its length argument, so a match only happens at length 0 and the statement adds 0; L2083: same as L2067 in case 5; L2041: same reason in the $-mismatch prefix path; L2038 and L2113: the -4 ($-prefix match) branch is not reachable with the stricmp return sequence (waived in coverage_ok); L2070: index >= 0 vs index > 0 is unobservable because the Find stub returns a nonzero name pointer",
+  "coverage_ok": {
+    "0040CA41-0040CA4B": "Find is stubbed to return its name argument, so index < 0 never happens in the fixture",
+    "0040CB5A-0040CB5F": "same: the Find-miss path (index < 0) is unreachable with the Find stub",
+    "0040C94C-0040C953": "__stricmp is stubbed; the first call in case 3 always returns the mismatch value, so flag is never true",
+    "0040C9B4-0040C9CB": "__stricmp returns 1 then 0 per call; the $-prefix match (-4) and mismatch (-3) cannot both be taken in one run",
+    "0040CACF-0040CAE3": "same stricmp call sequence in case 7: the $-prefix match (-4) and mismatch (-3) cannot both be taken"
+  },
+  "fuzz": {
+    "seed": 4245175,
+    "count": 60,
+    "args": [
+      {"range": [0, 0]},
+      {"choices": ["@data"]},
+      {"range": [0, 12]}
+    ],
+    "memory": []
+  }
+}

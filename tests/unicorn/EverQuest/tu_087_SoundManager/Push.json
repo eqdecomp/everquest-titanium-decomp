@@ -1,0 +1,518 @@
+{
+  "function": "SoundAsset_guess::SoundAsset_Play_guess",
+  "original": "0x004c5b16",
+  "sources": [
+    "src/EverQuest/tu_087_SoundManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@queuestate",
+  "args": [
+    {
+      "name": "params_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "queuestate": {
+      "size": "0x21c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x214",
+          "u32": "@audioengine"
+        }
+      ]
+    },
+    "params": {
+      "size": "0x2c",
+      "fill": "zero"
+    },
+    "audioengine": {
+      "size": "0xb0",
+      "fill": "zero"
+    },
+    "node": {
+      "size": "0x18",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@node_vtable"
+        }
+      ]
+    },
+    "node_vtable": {
+      "size": "0x18",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@fn_attach"
+        },
+        {
+          "offset": "0x10",
+          "u32": "@fn_params"
+        }
+      ]
+    },
+    "fn_attach": {
+      "size": "4",
+      "fill": "zero"
+    },
+    "fn_params": {
+      "size": "4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@queuestate",
+      "offset": "0x210",
+      "u32": 4
+    },
+    {
+      "addr": "@params",
+      "offset": "0x0",
+      "f32": 1.0
+    },
+    {
+      "addr": "0x00640fc0",
+      "from_image": "0x00640fc0",
+      "image_size": 8
+    },
+    {
+      "addr": "0x0063f4cc",
+      "from_image": "0x0063f4cc",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x004c50ef": {
+      "name": "GetListenerLocation_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr"
+      ],
+      "ret": "keep",
+      "passthrough": true
+    },
+    "0x004c5125": {
+      "name": "TakeFreeInstance_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "@node"
+    },
+    "@fn_attach": {
+      "name": "Attach_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "@fn_params": {
+      "name": "SetParams_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "null engine",
+      "args": [
+        "@params"
+      ],
+      "memory": [
+        {
+          "addr": "@queuestate",
+          "offset": "0x210",
+          "u32": 1
+        },
+        {
+          "addr": "@queuestate",
+          "offset": "0x214",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "negative value",
+      "args": [
+        "@params"
+      ],
+      "memory": [
+        {
+          "addr": "@queuestate",
+          "offset": "0x210",
+          "u32": 2
+        },
+        {
+          "addr": "@params",
+          "offset": "0x0",
+          "f32": -1.0
+        }
+      ]
+    },
+    {
+      "name": "zero value",
+      "args": [
+        "@params"
+      ],
+      "memory": [
+        {
+          "addr": "@queuestate",
+          "offset": "0x210",
+          "u32": 2
+        },
+        {
+          "addr": "@params",
+          "offset": "0x0",
+          "f32": 0.0
+        }
+      ]
+    },
+    {
+      "name": "invalid mode and null params",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@queuestate",
+          "offset": "0x210",
+          "u32": 4
+        }
+      ]
+    },
+    {
+      "name": "mode 1 inactive",
+      "args": [
+        "@params"
+      ],
+      "memory": [
+        {
+          "addr": "@queuestate",
+          "offset": "0x210",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "mode 1 radius equality",
+      "args": [
+        "@params"
+      ],
+      "memory": [
+        {
+          "addr": "@queuestate",
+          "offset": "0x210",
+          "u32": 1
+        },
+        {
+          "addr": "@params",
+          "offset": "0x20",
+          "f32": 5.0
+        },
+        {
+          "addr": "@params",
+          "offset": "0x10",
+          "f32": 5.0
+        }
+      ]
+    },
+    {
+      "name": "mode 1 outside radius",
+      "args": [
+        "@params"
+      ],
+      "memory": [
+        {
+          "addr": "@queuestate",
+          "offset": "0x210",
+          "u32": 1
+        },
+        {
+          "addr": "@params",
+          "offset": "0x20",
+          "f32": 5.0
+        },
+        {
+          "addr": "@params",
+          "offset": "0x10",
+          "f32": 6.0
+        }
+      ]
+    },
+    {
+      "name": "mode 1 inside radius",
+      "args": [
+        "@params"
+      ],
+      "memory": [
+        {
+          "addr": "@queuestate",
+          "offset": "0x210",
+          "u32": 1
+        },
+        {
+          "addr": "@params",
+          "offset": "0x20",
+          "f32": 5.0
+        },
+        {
+          "addr": "@params",
+          "offset": "0x10",
+          "f32": 1.0
+        },
+        {
+          "addr": "@params",
+          "offset": "0x14",
+          "f32": 2.0
+        },
+        {
+          "addr": "@params",
+          "offset": "0x18",
+          "f32": 3.0
+        }
+      ]
+    },
+    {
+      "name": "mode 1 nonzero origin catches y sum",
+      "args": [
+        "@params"
+      ],
+      "memory": [
+        {
+          "addr": "@queuestate",
+          "offset": "0x210",
+          "u32": 1
+        },
+        {
+          "addr": "@audioengine",
+          "offset": "0x4",
+          "f32": 2.0
+        },
+        {
+          "addr": "@params",
+          "offset": "0x20",
+          "f32": 3.0
+        },
+        {
+          "addr": "@params",
+          "offset": "0x14",
+          "f32": 2.0
+        }
+      ]
+    },
+    {
+      "name": "mode 1 active flag and zero radius",
+      "args": [
+        "@params"
+      ],
+      "memory": [
+        {
+          "addr": "@queuestate",
+          "offset": "0x210",
+          "u32": 1
+        },
+        {
+          "addr": "@params",
+          "offset": "0x1c",
+          "f32": 1.0
+        },
+        {
+          "addr": "@params",
+          "offset": "0x10",
+          "f32": 1.0
+        }
+      ]
+    },
+    {
+      "name": "mode 2",
+      "args": [
+        "@params"
+      ],
+      "memory": [
+        {
+          "addr": "@queuestate",
+          "offset": "0x210",
+          "u32": 2
+        },
+        {
+          "addr": "@params",
+          "offset": "0x28",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "mode 3",
+      "args": [
+        "@params"
+      ],
+      "memory": [
+        {
+          "addr": "@queuestate",
+          "offset": "0x210",
+          "u32": 3
+        },
+        {
+          "addr": "@params",
+          "offset": "0x28",
+          "u32": 4
+        }
+      ]
+    },
+    {
+      "name": "factory returns null",
+      "args": [
+        "@params"
+      ],
+      "memory": [
+        {
+          "addr": "@queuestate",
+          "offset": "0x210",
+          "u32": 2
+        }
+      ],
+      "callees": {
+        "0x004c5125": {
+          "name": "FUN_004c5125",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "positive NaN",
+      "args": [
+        "@params"
+      ],
+      "memory": [
+        {
+          "addr": "@queuestate",
+          "offset": "0x210",
+          "u32": 4
+        },
+        {
+          "addr": "@params",
+          "offset": "0x0",
+          "hex": "0000c07f"
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5004054,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@params",
+          0
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@queuestate",
+        "offset": "0x210",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "addr": "@queuestate",
+        "offset": "0x214",
+        "type": "ptr",
+        "choices": [
+          "@audioengine",
+          0
+        ]
+      },
+      {
+        "addr": "@params",
+        "offset": "0x0",
+        "type": "float",
+        "choices": [
+          -1.0,
+          0.0,
+          1.0,
+          2.0
+        ]
+      },
+      {
+        "addr": "@params",
+        "offset": "0x1c",
+        "type": "float",
+        "range": [
+          -1.0,
+          1.0
+        ]
+      },
+      {
+        "addr": "@params",
+        "offset": "0x20",
+        "type": "float",
+        "range": [
+          -1.0,
+          8.0
+        ]
+      },
+      {
+        "addr": "@params",
+        "offset": "0x10",
+        "type": "float",
+        "range": [
+          -8.0,
+          8.0
+        ]
+      },
+      {
+        "addr": "@params",
+        "offset": "0x14",
+        "type": "float",
+        "range": [
+          -8.0,
+          8.0
+        ]
+      },
+      {
+        "addr": "@params",
+        "offset": "0x18",
+        "type": "float",
+        "range": [
+          -8.0,
+          8.0
+        ]
+      },
+      {
+        "addr": "@params",
+        "offset": "0x28",
+        "type": "int",
+        "range": [
+          0,
+          5
+        ]
+      }
+    ]
+  },
+  "_survivors": "L2228: reversing the y delta preserves its square; L2229: reversing the z delta preserves its square"
+}

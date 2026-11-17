@@ -1,0 +1,235 @@
+{
+  "function": "Result_guess::SetFrom_guess",
+  "original": "0x005701c0",
+  "sources": [
+    "src/EverQuest/tu_242_CameraState.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@result",
+  "args": [
+    {
+      "name": "source_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "u32",
+  "size": "0x1e0",
+  "objects": {
+    "result": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "source": {
+      "size": "0x252",
+      "fill": "random",
+      "init": [
+        { "offset": "0x30", "f32": 1.0 },
+        { "offset": "0x34", "f32": 2.0 },
+        { "offset": "0x38", "f32": 3.0 },
+        { "offset": "0x4c", "f32": 0.5 },
+        { "offset": "0x5c", "f32": -15.0 },
+        { "offset": "0x1a8", "u32": "@container" },
+        { "offset": "0x251", "u8": 111 }
+      ]
+    },
+    "actor": {
+      "size": 4,
+      "fill": "random",
+      "init": [ { "offset": 0, "u32": "@actor_vtbl" } ]
+    },
+    "container": {
+      "size": "0x160",
+      "fill": "random",
+      "init": [
+        { "offset": 0, "u32": "@actor" },
+        { "offset": "0x15c", "u32": "@state" }
+      ]
+    },
+    "state": {
+      "size": "0x1ac",
+      "fill": "random",
+      "init": [
+        { "offset": "0x30", "f32": 10.0 },
+        { "offset": "0x34", "f32": 20.0 },
+        { "offset": "0x38", "f32": 30.0 },
+        { "offset": "0x1a8", "u32": "@hostptr" }
+      ]
+    },
+    "hostptr": {
+      "size": 4,
+      "fill": "zero",
+      "init": [ { "offset": 0, "u32": "@effecthost" } ]
+    },
+    "effecthost": {
+      "size": 4,
+      "fill": "zero",
+      "init": [ { "offset": 0, "u32": "@host_vtbl" } ]
+    },
+    "transform": {
+      "size": 4,
+      "fill": "zero",
+      "init": [ { "offset": 0, "u32": "@transform_vtbl" } ]
+    },
+    "resolver": { "size": 4, "fill": "zero" },
+    "settings": {
+      "size": "0xb58",
+      "fill": "zero",
+      "init": [ { "offset": "0xb54", "u32": 1 } ]
+    },
+    "fn_actor6": { "size": 4, "fill": "zero" },
+    "fn_actor7": { "size": 4, "fill": "zero" },
+    "fn_actor7_false": { "size": 4, "fill": "zero" },
+    "fn_actor18": { "size": 4, "fill": "zero" },
+    "fn_actor19": { "size": 4, "fill": "zero" },
+    "fn_actor52": { "size": 4, "fill": "zero" },
+    "fn_host85": { "size": 4, "fill": "zero" },
+    "fn_host85_false": { "size": 4, "fill": "zero" },
+    "fn_transform2": { "size": 4, "fill": "zero" },
+    "fn_transform3": { "size": 4, "fill": "zero" },
+    "actor_vtbl": {
+      "size": "0xd4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x18", "u32": "@fn_actor6" },
+        { "offset": "0x1c", "u32": "@fn_actor7" },
+        { "offset": "0x48", "u32": "@fn_actor18" },
+        { "offset": "0x4c", "u32": "@fn_actor19" },
+        { "offset": "0xd0", "u32": "@fn_actor52" }
+      ]
+    },
+    "actor_vtbl_no_toggle": {
+      "size": "0xd4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x18", "u32": "@fn_actor6" },
+        { "offset": "0x1c", "u32": "@fn_actor7_false" },
+        { "offset": "0x48", "u32": "@fn_actor18" },
+        { "offset": "0x4c", "u32": "@fn_actor19" },
+        { "offset": "0xd0", "u32": "@fn_actor52" }
+      ]
+    },
+    "host_vtbl": {
+      "size": "0x158",
+      "fill": "zero",
+      "init": [ { "offset": "0x154", "u32": "@fn_host85" } ]
+    },
+    "host_vtbl_false": {
+      "size": "0x158",
+      "fill": "zero",
+      "init": [ { "offset": "0x154", "u32": "@fn_host85_false" } ]
+    },
+    "transform_vtbl": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        { "offset": 8, "u32": "@fn_transform2" },
+        { "offset": "0xc", "u32": "@fn_transform3" }
+      ]
+    }
+  },
+  "memory": [
+    { "addr": "0x0099e374", "u32": "@transform" },
+    { "addr": "0x00905d24", "u32": "@resolver" },
+    { "addr": "0x00988df0", "u32": "@settings" },
+    { "addr": "0x0065fb58", "from_image": "0x0065fb58", "image_size": 4 },
+    { "addr": "0x00641f9c", "from_image": "0x00641f9c", "image_size": 4 },
+    { "addr": "0x00642d68", "from_image": "0x00642d68", "image_size": 4 },
+    { "addr": "0x0065fb2c", "from_image": "0x0065fb2c", "image_size": 4 }
+  ],
+  "callees": {
+    "0x0047bf6c": {
+      "name": "State_guess::GetEffect_guess",
+      "conv": "thiscall",
+      "args": [ "int", "ptr" ],
+      "ret": [ 1, 0 ],
+      "writes": [ { "arg": 1, "offset": 8, "hex": "0000a040" } ]
+    },
+    "0x00489bf5": {
+      "name": "Input_guess::GetHeight_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret_float": 2.5
+    },
+    "0x0043a15c": {
+      "name": "Resolver_guess::s3dCollideSphereWithWorld_guess",
+      "conv": "thiscall",
+      "args": [ "float", "float", "float", "float", "float", "float", "ptr", "ptr", "ptr", "int" ],
+      "ret": 0,
+      "writes": [
+        { "arg": 6, "offset": 0, "hex": "0000803f" },
+        { "arg": 7, "offset": 0, "hex": "00000040" },
+        { "arg": 8, "offset": 0, "hex": "00004040" }
+      ]
+    },
+    "@fn_actor6": { "name": "EQPlayerView_guess::Slot06_guess", "conv": "thiscall", "args": [ "int" ], "ret": 0 },
+    "@fn_actor7": { "name": "EQPlayerView_guess::Slot07_guess", "conv": "thiscall", "args": [], "ret": 1 },
+    "@fn_actor7_false": { "name": "Actor_guess::Slot07_false_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "@fn_actor18": { "name": "EQPlayerView_guess::Slot18_guess", "conv": "thiscall", "args": [ "mem:12" ], "ret": 0 },
+    "@fn_actor19": { "name": "EQPlayerView_guess::Slot19_guess", "conv": "thiscall", "args": [ "mem:12" ], "ret": 0 },
+    "@fn_actor52": { "name": "EQPlayerView_guess::Slot52_guess", "conv": "thiscall", "args": [ "int" ], "ret": 0 },
+    "@fn_host85": { "name": "EffectHost_guess::Slot85_guess", "conv": "thiscall", "args": [ "int" ], "ret": 1 },
+    "@fn_host85_false": { "name": "EffectHost_guess::Slot85_false_guess", "conv": "thiscall", "args": [ "int" ], "ret": 0 },
+    "@fn_transform2": { "name": "Transform_guess::Slot02_guess", "conv": "thiscall", "args": [ "float" ], "ret_float": 2.5 },
+    "@fn_transform3": { "name": "Transform_guess::Slot03_guess", "conv": "thiscall", "args": [ "float" ], "ret_float": 1.25 }
+  },
+  "cases": [
+    {
+      "name": "no state with mode o",
+      "args": [ "@source" ],
+      "memory": [
+        { "addr": "@source", "offset": "0x251", "u8": 111 },
+        { "addr": "@container", "offset": "0x15c", "u32": 0 }
+      ]
+    },
+    {
+      "name": "no state height with slot toggle",
+      "args": [ "@source" ],
+      "memory": [
+        { "addr": "@source", "offset": "0x251", "u8": 0 },
+        { "addr": "@container", "offset": "0x15c", "u32": 0 },
+        { "addr": "@actor", "offset": 0, "u32": "@actor_vtbl_no_toggle" }
+      ]
+    },
+    {
+      "name": "state low value with effect data",
+      "args": [ "@source" ],
+      "memory": [
+        { "addr": "@source", "offset": "0x5c", "f32": -17.0 },
+        { "addr": "@actor", "offset": 0, "u32": "@actor_vtbl_no_toggle" },
+        { "addr": "@effecthost", "offset": 0, "u32": "@host_vtbl" }
+      ]
+    },
+    {
+      "name": "state threshold with host rejection",
+      "args": [ "@source" ],
+      "memory": [
+        { "addr": "@source", "offset": "0x5c", "f32": -16.0 },
+        { "addr": "@actor", "offset": 0, "u32": "@actor_vtbl" },
+        { "addr": "@effecthost", "offset": 0, "u32": "@host_vtbl_false" }
+      ]
+    },
+    {
+      "name": "state height with lookup false",
+      "args": [ "@source" ],
+      "memory": [
+        { "addr": "@source", "offset": "0x5c", "f32": -15.5 },
+        { "addr": "@actor", "offset": 0, "u32": "@actor_vtbl" },
+        { "addr": "@effecthost", "offset": 0, "u32": "@host_vtbl" }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5702080,
+    "count": 120,
+    "args": [ { "choices": [ "@source" ] } ],
+    "memory": [
+      { "addr": "@source", "offset": "0x30", "type": "float", "count": 3, "range": [ -100.0, 100.0 ] },
+      { "addr": "@source", "offset": "0x4c", "type": "float", "range": [ -20.0, 20.0 ] },
+      { "addr": "@source", "offset": "0x5c", "type": "float", "choices": [ -17.0, -16.0, -15.0, 0.0, 40.0 ] },
+      { "addr": "@source", "offset": "0x251", "type": "u8", "choices": [ 0, 111 ] },
+      { "addr": "@container", "offset": "0x15c", "type": "u32", "choices": [ 0, "@state" ] },
+      { "addr": "@settings", "offset": "0xb54", "type": "u32", "choices": [ 0, 1, 2 ] }
+    ]
+  },
+  "_survivors": "L274: mode 'o' assigns the same z again at line 276; the other branch overwrites z with the height expression."
+}

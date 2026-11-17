@@ -1,0 +1,114 @@
+{
+  "function": "CAlarmWnd_guess::SaveShowAlarm_guess",
+  "original": "0x004d8150",
+  "sources": [
+    "src/EverQuest/tu_104_AlarmWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@calarmwnd",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "calarmwnd": {
+      "size": "0x170",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x164",
+          "u32": "@checkbox"
+        }
+      ]
+    },
+    "checkbox": {
+      "size": "0x12c",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0060beb0": {
+      "name": "WriteIniString_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "null-checkbox",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@calarmwnd",
+          "offset": "0x164",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "unchecked",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@checkbox",
+          "offset": "0x128",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "checked",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@checkbox",
+          "offset": "0x128",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "nonzero-high-bit",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@checkbox",
+          "offset": "0x128",
+          "u8": 255
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5079376,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@calarmwnd",
+        "offset": "0x164",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@checkbox"
+        ]
+      },
+      {
+        "addr": "@checkbox",
+        "offset": "0x128",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          127,
+          255
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "function": "Handle_OP_MoveItem_guess",
+  "original": "0x004591fd",
+  "sources": [
+    "src/EverQuest/tu_042_EQHandleMsg.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "firstIndex_guess", "type": "int"},
+    {"name": "secondIndex_guess", "type": "int"},
+    {"name": "operation_guess", "type": "int"}
+  ],
+  "ret": "int",
+  "objects": {
+    "root": {"size": "0x10", "fill": "zero", "init": [{"offset": "0x8", "u32": "@offset"}]},
+    "offset": {"size": "0x8", "fill": "zero"},
+    "entry": {"size": "0x4", "fill": "zero"},
+    "slotA": {"size": "0x4", "fill": "zero", "init": [{"offset": "0", "u32": "@valueA"}]},
+    "slotB": {"size": "0x4", "fill": "zero", "init": [{"offset": "0", "u32": "@valueB"}]},
+    "valueA": {"size": "0x4", "fill": "zero", "init": [{"offset": "0", "u32": "@vtable"}]},
+    "valueB": {"size": "0x4", "fill": "zero", "init": [{"offset": "0", "u32": "@vtable"}]},
+    "vtable": {"size": "0x4", "fill": "zero", "init": [{"offset": "0", "u32": "@fn"}]},
+    "fn": {"size": "0x4", "fill": "zero"},
+    "current": {"size": "0x1ac", "fill": "zero", "init": [{"offset": "0x1a8", "u32": "@state"}]},
+    "state": {"size": "0x104c", "fill": "zero", "init": [{"offset": "0x1048", "u32": "@valueA"}]},
+    "manager": {"size": "0x4", "fill": "zero"},
+    "settings": {"size": "0x14", "fill": "zero", "init": [{"offset": "0x10", "u8": 1}]},
+    "property": {"size": "0x90", "fill": "zero", "init": [{"offset": "0x88", "u32": 1}]}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@root"},
+    {"addr": "0x00850cbc", "u32": "@manager"},
+    {"addr": "0x00905ce4", "u32": "@current"},
+    {"addr": "0x00905d24", "u32": "@settings"},
+    {"addr": "0x006410a8", "from_image": "0x006410a8", "image_size": 64}
+  ],
+  "callees": {
+    "0x0040cc50": {"name": "GetEntry_guess", "conv": "thiscall", "args": ["int"], "ret": "@entry"},
+    "0x00434777": {"name": "GetSlot_guess", "conv": "thiscall", "args": ["int"], "ret": ["@slotA", "@slotB"]},
+    "0x005eccc0": {"name": "Check_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005ec630": {"name": "HasValue_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "0x005ec650": {"name": "GetValue_guess", "conv": "thiscall", "args": ["int"], "ret": ["@slotA", "@slotB"]},
+    "0x004faa17": {"name": "Apply_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0},
+    "0x00464afb": {"name": "GetIdForIndex_guess", "conv": "cdecl", "args": ["int"], "ret": 7},
+    "0x0048083a": {"name": "Refresh_guess", "conv": "thiscall", "args": ["int", "cstr", "int"], "ret": 0},
+    "0x005ec760": {"name": "CanStack_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005e0f30": {"name": "GetId_guess", "conv": "thiscall", "args": [], "ret": [101, 101]},
+    "0x00464c94": {"name": "Merge_guess", "conv": "cdecl", "args": ["mem:4", "mem:4", "int", "int", "int"], "ret": 1},
+    "0x005ec220": {"name": "FindProperty_guess", "conv": "thiscall", "args": [], "ret": "@property"},
+    "@fn": {"name": "Release_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "low-entry-rejected",
+      "args": [2, 3, 0],
+      "callees": {"0x0040cc50": {"conv": "thiscall", "args": ["int"], "ret": 0}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "high-first-entry-rejected",
+      "args": [31, 0, 0],
+      "callees": {"0x0040cc50": {"conv": "thiscall", "args": ["int"], "ret": 0}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "high-first-check-rejected",
+      "args": [31, 0, 0],
+      "callees": {"0x005eccc0": {"conv": "thiscall", "args": [], "ret": 0}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "high-first-value-rejected",
+      "args": [31, 0, 0],
+      "callees": {"0x005ec630": {"conv": "thiscall", "args": ["int"], "ret": 0}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "high-second-entry-rejected",
+      "args": [1, 31, 0],
+      "callees": {"0x0040cc50": {"conv": "thiscall", "args": ["int"], "ret": ["@entry", 0]}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "high-second-check-rejected",
+      "args": [1, 31, 0],
+      "callees": {"0x005eccc0": {"conv": "thiscall", "args": [], "ret": 0}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "first-low-second-high-boundary",
+      "args": [30, 31, 2],
+      "callees": {"0x005ec650": {"conv": "thiscall", "args": ["int"], "ret": ["@slotA", "@slotB"]}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "first-high-second-high",
+      "args": [31, 32, 2],
+      "callees": {"0x005ec650": {"conv": "thiscall", "args": ["int"], "ret": ["@slotA", "@slotB"]}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "first-slot-null",
+      "args": [1, 2, 0],
+      "callees": {"0x00434777": {"conv": "thiscall", "args": ["int"], "ret": [0, "@slotB"]}, "0x005ec650": {"conv": "thiscall", "args": ["int"], "ret": "@slotB"}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "second-slot-null",
+      "args": [1, 2, 0],
+      "callees": {"0x00434777": {"conv": "thiscall", "args": ["int"], "ret": ["@slotA", 0]}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "both-values-null",
+      "args": [1, 2, 0],
+      "memory": [
+        {"addr": "@slotA", "offset": "0", "u32": 0},
+        {"addr": "@slotB", "offset": "0", "u32": 0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "first-value-null",
+      "args": [1, 2, 0],
+      "memory": [{"addr": "@slotA", "offset": "0", "u32": 0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "second-value-null-not-stackable",
+      "args": [1, 2, 0],
+      "memory": [{"addr": "@slotB", "offset": "0", "u32": 0}],
+      "callees": {"0x005ec760": {"conv": "thiscall", "args": [], "ret": 0}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "second-value-null-stack-fails",
+      "args": [1, 2, 0],
+      "memory": [{"addr": "@slotB", "offset": "0", "u32": 0}],
+      "callees": {"0x00464c94": {"conv": "cdecl", "args": ["mem:4", "mem:4", "int", "int", "int"], "ret": 0}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "both-values-stack-success",
+      "args": [1, 2, 3],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "both-values-different-id",
+      "args": [1, 2, 3],
+      "callees": {"0x005e0f30": {"conv": "thiscall", "args": [], "ret": [101, 202]}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "both-values-not-stackable",
+      "args": [1, 2, 3],
+      "callees": {"0x005ec760": {"conv": "thiscall", "args": [], "ret": 0}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "delete-index-30-equal-current",
+      "args": [30, -1, 0],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "delete-check-fails",
+      "args": [29, -1, 0],
+      "callees": {"0x005eccc0": {"conv": "thiscall", "args": [], "ret": 0}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "delete-current-value-differs",
+      "args": [29, -1, 0],
+      "memory": [{"addr": "@state", "offset": "0x1048", "u32": "@valueB"}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "final-property-flag-clear",
+      "args": [1, 2, 0],
+      "memory": [{"addr": "@property", "offset": "0x88", "u32": 0}],
+      "expect": {"ret": 1}
+    }
+  ],
+  "fuzz": {
+    "seed": 4559357,
+    "count": 100,
+    "args": [
+      {"range": [-3, 50]},
+      {"choices": [-3, -1, 0, 1, 29, 30, 31, 32, 49]},
+      {"range": [-2, 3]}
+    ],
+    "memory": [
+      {"addr": "@slotA", "offset": "0", "type": "ptr", "choices": ["@valueA", "@valueB"]},
+      {"addr": "@slotB", "offset": "0", "type": "ptr", "choices": ["@valueA", "@valueB"]}
+    ]
+  }
+}

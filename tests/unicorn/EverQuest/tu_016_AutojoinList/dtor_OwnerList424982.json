@@ -1,0 +1,108 @@
+{
+  "function": "OwnerList424982_guess::~OwnerList424982_guess",
+  "original": "0x00424982",
+  "sources": [
+    "src/EverQuest/tu_016_AutojoinList.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@ownerlist424982",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "ownerlist424982": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [{"offset": "0", "u32": 0}]
+    },
+    "entry0": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": "0", "u32": "@owner0"}]
+    },
+    "entry1": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": "0", "u32": "@owner1"}]
+    },
+    "owner0": {"size": "0x10", "fill": "random"},
+    "owner1": {"size": "0x10", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x004eb924": {
+      "name": "Get_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": ["@entry0", "@entry1", "@entry0", "@entry1"]
+    },
+    "0x004245d4": {
+      "name": "OwnerDtor_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0060d0d5": {
+      "name": "operator_delete",
+      "conv": "cdecl",
+      "args": ["u32"]
+    },
+    "0x0050f3f6": {
+      "name": "ArrayDtor_guess",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "rewrite_aliases": {"??1?$ArrayClass424982_guess@PAUAutojoinChannel_guess@@@@QAE@XZ": "0x0050f3f6"},
+  "cases": [
+    {
+      "name": "negative count skips loop",
+      "args": [],
+      "memory": [{"addr": "@ownerlist424982", "offset": "0", "u32": -1}]
+    },
+    {
+      "name": "zero count skips loop",
+      "args": [],
+      "memory": [{"addr": "@ownerlist424982", "offset": "0", "u32": 0}]
+    },
+    {
+      "name": "one null item",
+      "args": [],
+      "memory": [
+        {"addr": "@ownerlist424982", "offset": "0", "u32": 1},
+        {"addr": "@entry0", "offset": "0", "u32": 0}
+      ]
+    },
+    {
+      "name": "one live item",
+      "args": [],
+      "memory": [{"addr": "@ownerlist424982", "offset": "0", "u32": 1}]
+    },
+    {
+      "name": "two live items",
+      "args": [],
+      "memory": [{"addr": "@ownerlist424982", "offset": "0", "u32": 2}]
+    },
+    {
+      "name": "null then live",
+      "args": [],
+      "memory": [
+        {"addr": "@ownerlist424982", "offset": "0", "u32": 2},
+        {"addr": "@entry0", "offset": "0", "u32": 0}
+      ]
+    },
+    {
+      "name": "four items",
+      "args": [],
+      "memory": [{"addr": "@ownerlist424982", "offset": "0", "u32": 4}]
+    }
+  ],
+  "fuzz": {
+    "seed": 4344194,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@ownerlist424982", "offset": "0", "type": "u32", "choices": [-1, 0, 1, 2, 3, 4]},
+      {"addr": "@entry0", "offset": "0", "type": "ptr", "choices": [0, "@owner0"]},
+      {"addr": "@entry1", "offset": "0", "type": "ptr", "choices": [0, "@owner1"]}
+    ]
+  }
+}

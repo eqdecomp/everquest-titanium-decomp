@@ -1,0 +1,816 @@
+{
+  "function": "CommitMovedItems_guess",
+  "original": "0x004b7c7c",
+  "sources": [
+    "src/EverQuest/tu_077_ItemMoveQueue.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "ctx_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "local_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "holder": {
+      "size": "0xc288",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0xc284",
+          "u32": "@candidateOffset"
+        }
+      ]
+    },
+    "local": {
+      "size": "0x18",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 2
+        },
+        {
+          "offset": "0x8",
+          "u32": 1
+        },
+        {
+          "offset": "0xc",
+          "u32": 1
+        },
+        {
+          "offset": "0x10",
+          "u32": "@chunkPointers"
+        }
+      ]
+    },
+    "chunkPointers": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@chunk"
+        }
+      ]
+    },
+    "chunk": {
+      "size": "0x70",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x14",
+          "u32": 0
+        },
+        {
+          "offset": "0x18",
+          "u32": 0
+        },
+        {
+          "offset": "0x1c",
+          "u32": 4294967295
+        },
+        {
+          "offset": "0x24",
+          "u32": "@target1"
+        },
+        {
+          "offset": "0x4c",
+          "u32": 0
+        },
+        {
+          "offset": "0x50",
+          "u32": 0
+        },
+        {
+          "offset": "0x54",
+          "u32": 4294967295
+        },
+        {
+          "offset": "0x5c",
+          "u32": "@target2"
+        }
+      ]
+    },
+    "candidateOffset": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": -4
+        }
+      ]
+    },
+    "gateArg": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@existing"
+        }
+      ]
+    },
+    "slotCell": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@existing"
+        }
+      ]
+    },
+    "existing": {
+      "size": "0x4c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x48",
+          "u32": 1
+        }
+      ]
+    },
+    "target1": {
+      "size": "0x4c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@targetVtable"
+        },
+        {
+          "offset": "0x48",
+          "u32": 2
+        }
+      ]
+    },
+    "target2": {
+      "size": "0x4c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@targetVtable"
+        },
+        {
+          "offset": "0x48",
+          "u32": 3
+        }
+      ]
+    },
+    "targetVtable": {
+      "size": "0x18",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@fn_slot0"
+        },
+        {
+          "offset": "0x14",
+          "u32": "@fn_slot5"
+        }
+      ]
+    },
+    "fn_slot0": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_slot5": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004b7422": {
+      "name": "Probe_Check_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x004b76a6": {
+      "name": "Probe_ResolveSlot_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "@gateArg"
+    },
+    "0x004b7398": {
+      "name": "State_IsReady_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x004bc906": {
+      "name": "SlotHolder_ValidatePair_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x004bce5f": {
+      "name": "SlotHolder_Bind_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x00434777": {
+      "name": "SlotTable_GetSlot_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@gateArg"
+    },
+    "0x005dfc40": {
+      "name": "Gate_IsReady_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005ecc30": {
+      "name": "Gate_GetLimit_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 10
+    },
+    "0x005ec650": {
+      "name": "Gate_GetByIndex_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@slotCell"
+    },
+    "0x005ec760": {
+      "name": "Target_IsValid_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005ecd50": {
+      "name": "Target_GetLimit_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 100
+    },
+    "0x005e0f30": {
+      "name": "Target_GetId_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 7
+    },
+    "@fn_slot0": {
+      "name": "Target_Delete_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "@fn_slot5": {
+      "name": "Target_Apply_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "merge two records",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "empty table",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "memory": [
+        {
+          "addr": "@local",
+          "offset": "0x0",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "negative count",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "memory": [
+        {
+          "addr": "@local",
+          "offset": "0x0",
+          "u32": 4294967295
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "invalid key index",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "memory": [
+        {
+          "addr": "@chunk",
+          "offset": "0x1c",
+          "u32": 11
+        }
+      ],
+      "expect": {
+        "ret": 2
+      }
+    },
+    {
+      "name": "null context",
+      "args": [
+        0,
+        "@local"
+      ],
+      "callees": {
+        "0x004b76a6": {
+          "name": "Probe_ResolveSlot_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 2
+      }
+    },
+    {
+      "name": "validate pair rejects",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "callees": {
+        "0x004bc906": {
+          "name": "SlotHolder_ValidatePair_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int",
+            "int"
+          ],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 5
+      }
+    },
+    {
+      "name": "bind rejects",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "callees": {
+        "0x004bce5f": {
+          "name": "SlotHolder_Bind_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr"
+          ],
+          "ret": 1
+        }
+      },
+      "expect": {
+        "ret": 4
+      }
+    },
+    {
+      "name": "optional gate path",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "memory": [
+        {
+          "addr": "@chunk",
+          "offset": "0x1c",
+          "u32": 0
+        },
+        {
+          "addr": "@chunk",
+          "offset": "0x18",
+          "u32": 22
+        },
+        {
+          "addr": "@local",
+          "offset": "0x0",
+          "u32": 1
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "optional gate is not ready",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "memory": [
+        {
+          "addr": "@chunk",
+          "offset": "0x1c",
+          "u32": 0
+        },
+        {
+          "addr": "@chunk",
+          "offset": "0x18",
+          "u32": 22
+        },
+        {
+          "addr": "@local",
+          "offset": "0x0",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x005dfc40": {
+          "name": "Gate_IsReady_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 2
+      }
+    },
+    {
+      "name": "optional gate rejected in resolve",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "memory": [
+        {
+          "addr": "@chunk",
+          "offset": "0x1c",
+          "u32": 0
+        },
+        {
+          "addr": "@chunk",
+          "offset": "0x18",
+          "u32": 22
+        }
+      ],
+      "callees": {
+        "0x005dfc40": {
+          "name": "Gate_IsReady_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 2
+      }
+    },
+    {
+      "name": "second helper returns no slot",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "memory": [
+        {
+          "addr": "@chunk",
+          "offset": "0x1c",
+          "u32": 0
+        },
+        {
+          "addr": "@chunk",
+          "offset": "0x18",
+          "u32": 22
+        },
+        {
+          "addr": "@local",
+          "offset": "0x0",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x004b76a6": {
+          "name": "Probe_ResolveSlot_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": [
+            "@gateArg",
+            0
+          ]
+        },
+        "0x00434777": {
+          "name": "SlotTable_GetSlot_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@gateArg",
+            0
+          ]
+        }
+      },
+      "expect": {
+        "ret": 2
+      }
+    },
+    {
+      "name": "probe index reset avoids a null child",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "memory": [
+        {
+          "addr": "@chunk",
+          "offset": "0x1c",
+          "u32": 0
+        },
+        {
+          "addr": "@chunk",
+          "offset": "0x18",
+          "u32": 22
+        },
+        {
+          "addr": "@local",
+          "offset": "0x0",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x005ec650": {
+          "name": "Gate_GetByIndex_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@slotCell",
+            0
+          ]
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "optional slot rejects",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "memory": [
+        {
+          "addr": "@chunk",
+          "offset": "0x1c",
+          "u32": 0
+        },
+        {
+          "addr": "@chunk",
+          "offset": "0x18",
+          "u32": 22
+        },
+        {
+          "addr": "@local",
+          "offset": "0x0",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "@fn_slot5": {
+          "name": "Target_Apply_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int"
+          ],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 2
+      }
+    },
+    {
+      "name": "empty slot adopts target",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "memory": [
+        {
+          "addr": "@chunk",
+          "offset": "0x1c",
+          "u32": 4294967295
+        },
+        {
+          "addr": "@gateArg",
+          "offset": "0x0",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "existing target invalid",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "callees": {
+        "0x005ec760": {
+          "name": "Target_IsValid_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 2
+      }
+    },
+    {
+      "name": "capacity too small",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "callees": {
+        "0x005ecd50": {
+          "name": "Target_GetLimit_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 2
+        }
+      },
+      "expect": {
+        "ret": 2
+      }
+    },
+    {
+      "name": "capacity exactly fits",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "memory": [
+        {
+          "addr": "@local",
+          "offset": "0x0",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x005ecd50": {
+          "name": "Target_GetLimit_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 3
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "target ids differ",
+      "args": [
+        "@holder",
+        "@local"
+      ],
+      "callees": {
+        "0x005e0f30": {
+          "name": "Target_GetId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            7,
+            8
+          ]
+        }
+      },
+      "expect": {
+        "ret": 2
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4947068,
+    "count": 120,
+    "args": [
+      {
+        "choices": [
+          "@holder"
+        ]
+      },
+      {
+        "choices": [
+          "@local"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@local",
+        "offset": "0x0",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@chunk",
+        "offset": "0x14",
+        "type": "int",
+        "count": 2,
+        "stride": "0x38",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@chunk",
+        "offset": "0x18",
+        "type": "int",
+        "count": 2,
+        "stride": "0x38",
+        "choices": [
+          -1,
+          0,
+          1,
+          15,
+          16,
+          21,
+          22,
+          31
+        ]
+      },
+      {
+        "addr": "@chunk",
+        "offset": "0x1c",
+        "type": "int",
+        "count": 2,
+        "stride": "0x38",
+        "choices": [
+          -1,
+          0,
+          10,
+          11
+        ]
+      }
+    ]
+  },
+  "_survivors": "L1476: the changed key is only read by Probe_ResolveSlot_guess through a stack this pointer; scripting it hides the value and passthrough faults at 0x004B732F on the unseeded SlotTable layout"
+}

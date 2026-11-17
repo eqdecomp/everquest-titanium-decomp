@@ -1,0 +1,261 @@
+{
+  "function": "CCompassWnd_guess::PostDraw_guess",
+  "original": "0x004f9c81",
+  "sources": [
+    "src/EverQuest/tu_147_CompassWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@fun_004f9c15",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "fun_004f9c15": {
+      "size": "0x1bc",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@this_vtable"
+        },
+        {
+          "offset": "0x1ac",
+          "u32": 1
+        },
+        {
+          "offset": "0x1b0",
+          "u32": "@slots"
+        }
+      ]
+    },
+    "this_vtable": {
+      "size": "0xe4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xe0",
+          "u32": "@fn_position"
+        }
+      ]
+    },
+    "fn_position": {
+      "size": 4
+    },
+    "slots": {
+      "size": 4,
+      "fill": "zero",
+      "init": [
+        {
+          "offset": 0,
+          "u32": "@entry_slot"
+        }
+      ]
+    },
+    "entry_slot": {
+      "size": 4,
+      "fill": "zero",
+      "init": [
+        {
+          "offset": 0,
+          "u32": "@entry"
+        }
+      ]
+    },
+    "entry": {
+      "size": "0x2c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 10
+        },
+        {
+          "offset": "0x4",
+          "u32": 20
+        },
+        {
+          "offset": "0x8",
+          "u32": 30
+        },
+        {
+          "offset": "0x18",
+          "u8": 1
+        },
+        {
+          "offset": "0x1c",
+          "u32": 17
+        },
+        {
+          "offset": "0x20",
+          "u8": 1
+        },
+        {
+          "offset": "0x24",
+          "u32": 0
+        },
+        {
+          "offset": "0x28",
+          "u32": 0
+        }
+      ]
+    },
+    "renderer": {
+      "size": 4,
+      "fill": "zero",
+      "init": [
+        {
+          "offset": 0,
+          "u32": "@renderer_vtable"
+        }
+      ]
+    },
+    "renderer_vtable": {
+      "size": "0x74",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x70",
+          "u32": "@fn_line"
+        }
+      ]
+    },
+    "fn_line": {
+      "size": 4
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0099e364",
+      "u32": "@renderer"
+    },
+    {
+      "addr": "0x0063f4d0",
+      "from_image": "0x0063F4D0",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x004eb924": {
+      "name": "FUN_004eb924",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@entry_slot"
+    },
+    "0x004f9bd2": {
+      "name": "FUN_004f9bd2",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "@fn_position": {
+      "name": "GetPos_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "64000000c8000000000000002c010000"
+        }
+      ]
+    },
+    "@fn_line": {
+      "name": "DrawLine_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:12",
+        "mem:12",
+        "u32"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "empty",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@fun_004f9c15",
+          "offset": "0x1ac",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "callback_false",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entry",
+          "offset": "0x18",
+          "u8": 0
+        }
+      ],
+      "callees": {
+        "0x004f9bd2": {
+          "name": "FUN_004f9bd2",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "flag_false",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@entry",
+          "offset": "0x20",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "draw",
+      "args": []
+    },
+    {
+      "name": "loop_twice",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@fun_004f9c15",
+          "offset": "0x1ac",
+          "u32": 2
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5217409,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@fun_004f9c15",
+        "offset": "0x1ac",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@entry",
+        "offset": "0x20",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

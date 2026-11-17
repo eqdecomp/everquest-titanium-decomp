@@ -1,0 +1,93 @@
+{
+  "function": "Owner_guess::Update_guess",
+  "original": "0x004eb5a2",
+  "sources": [
+    "src/EverQuest/tu_140_CastSpellWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x188",
+      "fill": "random",
+      "init": [
+        {"offset": "0x184", "u32": "@callee"}
+      ]
+    },
+    "callee": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "pool": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "state1": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "state2": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x0098599C", "u32": "@pool"}
+  ],
+  "callees": {
+    "0x004b2459": {
+      "name": "FUN_004b2459",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@state1"
+    },
+    "0x005ba300": {
+      "name": "FUN_005ba300",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [17, 34]
+    },
+    "0x004b244f": {
+      "name": "FUN_004b244f",
+      "conv": "thiscall",
+      "args": ["int", "u32"],
+      "ret": "@state2"
+    },
+    "0x0059dbf0": {
+      "name": "FUN_0059dbf0",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": []
+    },
+    {
+      "name": "null callee",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x184", "u32": 0}
+      ]
+    },
+    {
+      "name": "zeros",
+      "args": [],
+      "memory": [
+        {"addr": "0x0098599C", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5158306,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@owner", "offset": "0x184", "type": "u32", "choices": [0, "@callee"]}
+    ]
+  }
+}

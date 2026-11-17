@@ -1,0 +1,594 @@
+{
+  "function": "EQPlayer_guess::SetHeights_guess",
+  "original": "0x0047fa9e",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@eqplayer",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "eqplayer": {
+      "size": "0x348",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@actorinfo"
+        },
+        {
+          "offset": "0x218",
+          "u32": 0
+        },
+        {
+          "offset": "0x1b6",
+          "u8": 0
+        },
+        {
+          "offset": "0x23c",
+          "u32": "0xbf800000"
+        },
+        {
+          "offset": "0x244",
+          "u8": 0
+        },
+        {
+          "offset": "0x24c",
+          "u8": 50
+        },
+        {
+          "offset": "0x24e",
+          "u8": 0
+        },
+        {
+          "offset": "0x252",
+          "u8": 1
+        },
+        {
+          "offset": "0x260",
+          "u32": 1
+        }
+      ]
+    },
+    "actorinfo": {
+      "size": "0x10c0",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x09c",
+          "u8": 1
+        },
+        {
+          "offset": "0x0f88",
+          "u32": 0
+        },
+        {
+          "offset": "0x0ec4",
+          "u32": 0
+        }
+      ]
+    },
+    "charlink": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x004",
+          "u32": "@dispatch_vtable"
+        }
+      ]
+    },
+    "dispatch_vtable": {
+      "size": "0x44",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x004",
+          "u32": 0
+        },
+        {
+          "offset": "0x040",
+          "u32": "@fn_slot16"
+        }
+      ]
+    },
+    "pcclient": {
+      "size": "0xc400",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x008",
+          "u32": "@pcnode"
+        },
+        {
+          "offset": "0x208",
+          "u32": 84
+        },
+        {
+          "offset": "0x210",
+          "u32": 85
+        }
+      ]
+    },
+    "pcnode": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x004",
+          "u32": "0x100"
+        }
+      ]
+    },
+    "profile": {
+      "size": "0x1300",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1128",
+          "u32": 42
+        }
+      ]
+    },
+    "scale": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "fn_slot16": {
+      "size": "0x1",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x0063f4cc",
+      "u32": 0
+    },
+    {
+      "addr": "0x0063fda4",
+      "from_image": "0x0063FDA4",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00642d54",
+      "from_image": "0x00642D54",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00642650",
+      "from_image": "0x00642650",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00648110",
+      "from_image": "0x00648110",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0064810c",
+      "from_image": "0x0064810C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": 0
+    },
+    {
+      "addr": "0x00923c30",
+      "u32": 0
+    },
+    {
+      "addr": "0x00923798",
+      "u8": 0
+    }
+  ],
+  "callees": {
+    "0x0047a64d": {
+      "name": "SetLevitate_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x0047a147": {
+      "name": "GetDefaultSizeForRace_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "char"
+      ],
+      "passthrough": true
+    },
+    "0x004798d7": {
+      "name": "GetActorTag_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "4163746f7200"
+        }
+      ]
+    },
+    "0x004b6cb4": {
+      "name": "FUN_004b6cb4",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": "@scale"
+    },
+    "0x004b6d42": {
+      "name": "GetROffset_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret_float": 0.0
+    },
+    "0x0047a0e9": {
+      "name": "ScaleFromSize_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ],
+      "passthrough": true
+    },
+    "0x004899cc": {
+      "name": "FUN_004899cc",
+      "conv": "thiscall",
+      "args": [],
+      "ret_float": 1.0
+    },
+    "0x0047a239": {
+      "name": "AdjustHeightsForRace_guess",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "bool"
+      ],
+      "passthrough": true
+    },
+    "0x0047a085": {
+      "name": "InitSneakMod_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0047c2fb": {
+      "name": "GetPcClient_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@pcclient"
+    },
+    "0x005ec220": {
+      "name": "FUN_005ec220",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@profile"
+    },
+    "0x0041bf92": {
+      "name": "FUN_0041bf92",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ]
+    },
+    "0x0040e75c": {
+      "name": "FUN_0040e75c",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ]
+    },
+    "@fn_slot16": {
+      "name": "Slot016",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@pcclient"
+    }
+  },
+  "cases": [
+    {
+      "name": "normal-zero-height-and-small-scale",
+      "args": []
+    },
+    {
+      "name": "actor-info-null",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@eqplayer",
+          "offset": "0x1a8",
+          "u32": 0
+        },
+        {
+          "addr": "@eqplayer",
+          "offset": "0x23c",
+          "u32": "0x40c00000"
+        }
+      ]
+    },
+    {
+      "name": "race-8d-and-negative-height",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@eqplayer",
+          "offset": "0x260",
+          "u32": 141
+        },
+        {
+          "addr": "@eqplayer",
+          "offset": "0x1b6",
+          "u8": 1
+        },
+        {
+          "addr": "@eqplayer",
+          "offset": "0x23c",
+          "u32": "0xbf800000"
+        }
+      ]
+    },
+    {
+      "name": "clear-actor-flag-and-zero-height",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@eqplayer",
+          "offset": "0x260",
+          "u32": 1
+        },
+        {
+          "addr": "@eqplayer",
+          "offset": "0x1b6",
+          "u8": 1
+        },
+        {
+          "addr": "@eqplayer",
+          "offset": "0x23c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "keep-actor-flag-and-positive-height",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@eqplayer",
+          "offset": "0x260",
+          "u32": 1
+        },
+        {
+          "addr": "@eqplayer",
+          "offset": "0x1b6",
+          "u8": 0
+        },
+        {
+          "addr": "@eqplayer",
+          "offset": "0x23c",
+          "u32": "0x40c00000"
+        }
+      ]
+    },
+    {
+      "name": "high-scale-and-no-minimum",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@eqplayer",
+          "offset": "0x260",
+          "u32": 49
+        },
+        {
+          "addr": "@eqplayer",
+          "offset": "0x23c",
+          "u32": "0x40c00000"
+        }
+      ]
+    },
+    {
+      "name": "race-48-with-null-global",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@eqplayer",
+          "offset": "0x260",
+          "u32": 72
+        }
+      ]
+    },
+    {
+      "name": "race-48-type-54",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@eqplayer",
+          "offset": "0x260",
+          "u32": 72
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@pcclient"
+        },
+        {
+          "addr": "@pcclient",
+          "offset": "0x208",
+          "u32": 84
+        },
+        {
+          "addr": "@pcclient",
+          "offset": "0x210",
+          "u32": 85
+        }
+      ]
+    },
+    {
+      "name": "race-48-type-5d",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@eqplayer",
+          "offset": "0x260",
+          "u32": 72
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@pcclient"
+        },
+        {
+          "addr": "@pcclient",
+          "offset": "0x208",
+          "u32": 93
+        },
+        {
+          "addr": "@pcclient",
+          "offset": "0x210",
+          "u32": 85
+        }
+      ]
+    },
+    {
+      "name": "race-48-other-type",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@eqplayer",
+          "offset": "0x260",
+          "u32": 72
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": "@pcclient"
+        },
+        {
+          "addr": "@pcclient",
+          "offset": "0x208",
+          "u32": 85
+        },
+        {
+          "addr": "@pcclient",
+          "offset": "0x210",
+          "u32": 84
+        }
+      ]
+    },
+    {
+      "name": "scale-equals-four",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@eqplayer",
+          "offset": "0x260",
+          "u32": 1
+        },
+        {
+          "addr": "@eqplayer",
+          "offset": "0x23c",
+          "u32": "0x41d00000"
+        },
+        {
+          "addr": "0x00923c30",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x004b6d42": {
+          "name": "FUN_004b6d42",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret_float": 1.0
+        }
+      }
+    },
+    {
+      "name": "char-info-call-chain",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@eqplayer",
+          "offset": "0x218",
+          "u32": "@charlink"
+        },
+        {
+          "addr": "@eqplayer",
+          "offset": "0x260",
+          "u32": 1
+        },
+        {
+          "addr": "@eqplayer",
+          "offset": "0x23c",
+          "u32": "0x40c00000"
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4717214,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@eqplayer",
+        "offset": "0x260",
+        "type": "int",
+        "choices": [
+          1,
+          141,
+          49,
+          72,
+          120,
+          108
+        ]
+      },
+      {
+        "addr": "@eqplayer",
+        "offset": "0x23c",
+        "type": "float",
+        "choices": [
+          -1.0,
+          0.0,
+          0.01,
+          3.0,
+          100.0
+        ]
+      },
+      {
+        "addr": "@eqplayer",
+        "offset": "0x1b6",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@eqplayer",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

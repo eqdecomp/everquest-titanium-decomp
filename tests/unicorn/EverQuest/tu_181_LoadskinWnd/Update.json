@@ -1,0 +1,198 @@
+{
+  "function": "C52A939_guess::Update_guess",
+  "original": "0x0052a9f3",
+  "sources": [
+    "src/EverQuest/tu_181_LoadskinWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@c52a939",
+  "args": [],
+  "ret": "u8",
+  "objects": {
+    "c52a939": {
+      "size": "0x640",
+      "fill": "random"
+    },
+    "handler": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x009247B0",
+      "u32": 1
+    },
+    {
+      "addr": "@c52a939",
+      "offset": "0x124",
+      "u32": 1
+    },
+    {
+      "addr": "@c52a939",
+      "offset": "0x638",
+      "u32": "@handler"
+    },
+    {
+      "addr": "@c52a939",
+      "offset": "0x63c",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x0052a939": {
+      "name": "RefreshAllTabs_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005bc460": {
+      "name": "FUN_005bc460",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x00529ece": {
+      "name": "FUN_00529ece",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00529c66": {
+      "name": "FUN_00529c66",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "global_disabled",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x009247B0",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "object_disabled",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x009247B0",
+          "u32": 1
+        },
+        {
+          "addr": "@c52a939",
+          "offset": "0x124",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "no_handler",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x009247B0",
+          "u32": 1
+        },
+        {
+          "addr": "@c52a939",
+          "offset": "0x124",
+          "u32": 1
+        },
+        {
+          "addr": "@c52a939",
+          "offset": "0x638",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "with_handler",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x009247B0",
+          "u32": 1
+        },
+        {
+          "addr": "@c52a939",
+          "offset": "0x124",
+          "u32": 1
+        },
+        {
+          "addr": "@c52a939",
+          "offset": "0x638",
+          "u32": "@handler"
+        },
+        {
+          "addr": "@c52a939",
+          "offset": "0x63c",
+          "u32": 305419896
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5417459,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x009247B0",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@c52a939",
+        "offset": "0x124",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          -1
+        ]
+      },
+      {
+        "addr": "@c52a939",
+        "offset": "0x638",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@handler"
+        ]
+      },
+      {
+        "addr": "@c52a939",
+        "offset": "0x63c",
+        "type": "int",
+        "range": [
+          -1000,
+          1000
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,278 @@
+{
+  "function": "Selector_guess::Update_guess",
+  "_shape": "member update with bounded selector bits, nested table population, four item lists, and selected-type mapping",
+  "original": "0x004f5728",
+  "sources": ["src/EverQuest/tu_143_ChatManager.cpp"],
+  "conv": "thiscall",
+  "this": "@selector",
+  "args": [{"name": "selected_guess", "type": "ptr"}],
+  "ret": "void",
+  "objects": {
+    "selector": {
+      "size": "0x264", "fill": "random",
+      "init": [
+        {"offset": "0x164", "u32": "@button"},
+        {"offset": "0x168", "u32": 1},
+        {"offset": "0x16c", "u32": "@tabs"},
+        {"offset": "0x174", "u32": "@list174"},
+        {"offset": "0x17c", "u32": "0x1001"},
+        {"offset": "0x188", "u32": "@list188"},
+        {"offset": "0x190", "u32": "@list190"},
+        {"offset": "0x198", "u32": "@list198"},
+        {"offset": "0x19c", "u32": 10},
+        {"offset": "0x1a0", "u32": "@list1a0"},
+        {"offset": "0x1a8", "u32": "0x1002"},
+        {"offset": "0x1ac", "u32": "@list1ac"}
+      ]
+    },
+    "selected": {
+      "size": "0x1b4", "fill": "random",
+      "init": [
+        {"offset": "0x164", "u32": "@selectedFlags"},
+        {"offset": "0x168", "u32": "0x13"},
+        {"offset": "0x16c", "u32": 0},
+        {"offset": "0x1b0", "u32": 1}
+      ]
+    },
+    "selectedFlags": {"size": "0x68", "fill": "random", "init": [{"offset": "0x64", "u32": "0x101"}]},
+    "button": {"size": "0x120", "fill": "random", "init": [{"offset": "0x11c", "u32": 0}]},
+    "tabs": {"size": "0x120", "fill": "random", "init": [{"offset": "0x11c", "u32": 0}]},
+    "list174": {"size": "0x120", "fill": "random", "init": [{"offset": "0x11c", "u32": 0}]},
+    "list188": {"size": "0x120", "fill": "random", "init": [{"offset": "0x11c", "u32": 0}]},
+    "list190": {"size": "0x120", "fill": "random", "init": [{"offset": "0x11c", "u32": 0}]},
+    "list198": {"size": "0x120", "fill": "random", "init": [{"offset": "0x11c", "u32": 0}]},
+    "list1a0": {"size": "0x120", "fill": "random", "init": [{"offset": "0x11c", "u32": 0}]},
+    "list1ac": {"size": "0x120", "fill": "random", "init": [{"offset": "0x11c", "u32": 0}]},
+    "globalStrings": {"size": "0x294", "fill": "random", "init": [{"offset": "0x290", "u32": "@entries"}]},
+    "entries": {"size": "0x120", "fill": "random", "init": [{"offset": "0x11c", "u32": 0}]},
+    "errorStrings": {"size": "0x4", "fill": "random"},
+    "bitdata": {"size": "0x8", "fill": "random", "init": [{"offset": "0x04", "u32": 0}]},
+    "label": {"size": "0x20", "init": [{"offset": 0, "hex": "6c6162656c00"}]}
+  },
+  "memory": [
+    {"addr": "0x00905D00", "u32": "0x00905D00"},
+    {"addr": "0x00905D08", "u32": "@bitdata"},
+    {"addr": "0x00905D14", "hex": "0000000000000000000000000000000000000000000000000000000000000000"},
+    {"addr": "0x00988DF0", "u32": "@globalStrings"},
+    {"addr": "0x00905CB0", "u32": "@errorStrings"},
+    {"addr": "0x7F0EFFE4", "u32": 0}
+  ],
+  "callees": {
+    "0x005bfef0": {"name": "Reset", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00492595": {"name": "GetString", "conv": "thiscall", "args": ["int"], "ret": "@label"},
+    "0x00571fc0": {"name": "Assign", "conv": "thiscall", "this": "ignore", "args": ["cstr"], "ret": 0},
+    "0x005bfcf0": {"name": "AddText", "conv": "thiscall", "args": ["ignore", "int", "int", "int"], "ret": 0},
+    "0x005bff70": {"name": "SetValue", "conv": "thiscall", "args": ["int", "u32", "u32"], "ret": 0},
+    "0x00571d00": {"name": "Release", "conv": "thiscall", "this": "ignore", "args": ["u32"], "ret": 0},
+    "0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0040c059": {"name": "GetText", "conv": "thiscall", "args": ["int"], "ret": "@label"},
+    "0x00571e00": {"name": "StringCtor", "conv": "thiscall", "this": "ignore", "args": ["cstr"], "ret": 0},
+    "0x004f2b2f": {"name": "GetSlot", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005dfa00": {"name": "ErrorString", "conv": "thiscall", "args": ["int", "int"], "ret": "@label"},
+    "0x00598620": {"name": "SetRange", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0},
+    "0x005bff10": {"name": "SetActive", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0},
+    "0x00597ed0": {"name": "GetItem", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x004f2ca2": {"name": "Finish", "conv": "thiscall", "args": ["ptr"], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "all populated branches and selected entries",
+      "args": ["@selected"],
+      "memory": [
+        {"addr": "0x00905D14", "hex": "0001000000000001000000000000000000000000000000000000000000000000"},
+        {"addr": "@selector", "offset": "0x174", "u32": "@list174"},
+        {"addr": "@list174", "offset": "0x11c", "u32": 1},
+        {"addr": "@list188", "offset": "0x11c", "u32": 1},
+        {"addr": "@list190", "offset": "0x11c", "u32": 1},
+        {"addr": "@list1a0", "offset": "0x11c", "u32": 1},
+        {"addr": "@selected", "offset": "0x168", "u32": "0x13"},
+        {"addr": "@selected", "offset": "0x16c", "u32": 0},
+        {"addr": "@selected", "offset": "0x1b0", "u32": 1},
+        {"addr": "@selectedFlags", "offset": "0x64", "u32": "0x101"}
+      ],
+      "callees": {
+        "0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 2},
+        "0x0040c059": {"name": "GetText", "conv": "thiscall", "args": ["int"], "ret": ["@label", "@label"]},
+        "0x005bfcf0": {"name": "AddText", "conv": "thiscall", "args": ["ignore", "int", "int", "int"], "ret": [10, 11, 12, 13, 14, 15, 16]},
+        "0x00597ed0": {"name": "GetItem", "conv": "thiscall", "args": ["int"], "ret": [100, 101, 102, 200]},
+        "0x004f2b2f": {"name": "GetSlot", "conv": "thiscall", "args": ["int"], "ret": ["@selected", 0, "@selected", "@selected", "@selected"]}
+      }
+    },
+    {
+      "name": "selector disabled and globals absent",
+      "args": ["@selected"],
+      "memory": [
+        {"addr": "@selector", "offset": "0x16c", "u32": 0},
+        {"addr": "0x00905D00", "u32": 0},
+        {"addr": "@globalStrings", "offset": "0x290", "u32": 0}
+      ]
+    },
+    {
+      "name": "selector enabled with empty flags",
+      "args": ["@selected"],
+      "memory": [{"addr": "0x00905D14", "hex": "0000000000000000000000000000000000000000000000000000000000000000"},
+                 {"addr": "@globalStrings", "offset": "0x290", "u32": 0}]
+    },
+    {
+      "name": "table count zero disables controls",
+      "args": ["@selected"],
+      "callees": {"0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0}}
+    },
+    {
+      "name": "table has items but first control absent",
+      "args": ["@selected"],
+      "memory": [{"addr": "@selector", "offset": "0x198", "u32": 0}],
+      "callees": {"0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 1}}
+    },
+    {
+      "name": "table has items but second control absent",
+      "args": ["@selected"],
+      "memory": [{"addr": "@selector", "offset": "0x1ac", "u32": 0}],
+      "callees": {"0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 1}}
+    },
+    {
+      "name": "selected type 14 and second tab index",
+      "args": ["@selected"],
+      "memory": [{"addr": "@selected", "offset": "0x168", "u32": "0x14"},
+                 {"addr": "@selected", "offset": "0x16c", "u32": 1}],
+      "callees": {"0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 2},
+                  "0x0040c059": {"name": "GetText", "conv": "thiscall", "args": ["int"], "ret": ["@label", "@label"]},
+                  "0x005bfcf0": {"name": "AddText", "conv": "thiscall", "args": ["ignore", "int", "int", "int"], "ret": [1, 2, 3, 4, 5, 6, 7]},
+                  "0x004f2b2f": {"name": "GetSlot", "conv": "thiscall", "args": ["int"], "ret": [0, 0]}}
+    },
+    {
+      "name": "list lower and upper bounds",
+      "args": ["@selected"],
+      "memory": [
+        {"addr": "@list174", "offset": "0x11c", "u32": 1},
+        {"addr": "@list188", "offset": "0x11c", "u32": 1},
+        {"addr": "@list190", "offset": "0x11c", "u32": 1},
+        {"addr": "@list1a0", "offset": "0x11c", "u32": 1}
+      ],
+      "callees": {
+        "0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0},
+        "0x00597ed0": {"name": "GetItem", "conv": "thiscall", "args": ["int"], "ret": [0, "0x4000000", 1, "0x3ffffff"]},
+        "0x004f2b2f": {"name": "GetSlot", "conv": "thiscall", "args": ["int"], "ret": [0, 0]}
+      }
+    },
+    {
+      "name": "final type 8 maps item 200",
+      "args": ["@selected"],
+      "memory": [{"addr": "@list1a0", "offset": "0x11c", "u32": 1},
+                 {"addr": "@selected", "offset": "0x168", "u32": 8}],
+      "callees": {"0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0},
+                  "0x00597ed0": {"name": "GetItem", "conv": "thiscall", "args": ["int"], "ret": [200]}}
+    },
+    {
+      "name": "final type 7 maps item 201",
+      "args": ["@selected"],
+      "memory": [{"addr": "@list1a0", "offset": "0x11c", "u32": 1}, {"addr": "@selected", "offset": "0x168", "u32": 7}],
+      "callees": {"0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0},
+                  "0x00597ed0": {"name": "GetItem", "conv": "thiscall", "args": ["int"], "ret": [201]}}
+    },
+    {
+      "name": "final type 2 maps item 202",
+      "args": ["@selected"],
+      "memory": [{"addr": "@list1a0", "offset": "0x11c", "u32": 1}, {"addr": "@selected", "offset": "0x168", "u32": 2}],
+      "callees": {"0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0},
+                  "0x00597ed0": {"name": "GetItem", "conv": "thiscall", "args": ["int"], "ret": [202]}}
+    },
+    {
+      "name": "final type 15 maps item 217",
+      "args": ["@selected"],
+      "memory": [{"addr": "@list1a0", "offset": "0x11c", "u32": 1}, {"addr": "@selected", "offset": "0x168", "u32": 15}],
+      "callees": {"0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0},
+                  "0x00597ed0": {"name": "GetItem", "conv": "thiscall", "args": ["int"], "ret": [217]}}
+    },
+    {
+      "name": "final type 0 maps item 203",
+      "args": ["@selected"],
+      "memory": [{"addr": "@list1a0", "offset": "0x11c", "u32": 1}, {"addr": "@selected", "offset": "0x168", "u32": 0}],
+      "callees": {"0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0},
+                  "0x00597ed0": {"name": "GetItem", "conv": "thiscall", "args": ["int"], "ret": [203]}}
+    },
+    {
+      "name": "final type 3 maps item 206",
+      "args": ["@selected"],
+      "memory": [{"addr": "@list1a0", "offset": "0x11c", "u32": 1}, {"addr": "@selected", "offset": "0x168", "u32": 3}],
+      "callees": {"0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0},
+                  "0x00597ed0": {"name": "GetItem", "conv": "thiscall", "args": ["int"], "ret": [206]}}
+    },
+    {
+      "name": "final type 4 maps item 205",
+      "args": ["@selected"],
+      "memory": [{"addr": "@list1a0", "offset": "0x11c", "u32": 1}, {"addr": "@selected", "offset": "0x168", "u32": 4}],
+      "callees": {"0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0},
+                  "0x00597ed0": {"name": "GetItem", "conv": "thiscall", "args": ["int"], "ret": [205]}}
+    },
+    {
+      "name": "final type 5 maps item 204",
+      "args": ["@selected"],
+      "memory": [{"addr": "@list1a0", "offset": "0x11c", "u32": 1}, {"addr": "@selected", "offset": "0x168", "u32": 5}],
+      "callees": {"0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0},
+                  "0x00597ed0": {"name": "GetItem", "conv": "thiscall", "args": ["int"], "ret": [204]}}
+    },
+    {
+      "name": "final id 202 with wrong type",
+      "args": ["@selected"],
+      "memory": [{"addr": "@list1a0", "offset": "0x11c", "u32": 1}, {"addr": "@selected", "offset": "0x168", "u32": 3}],
+      "callees": {"0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0},
+                  "0x00597ed0": {"name": "GetItem", "conv": "thiscall", "args": ["int"], "ret": [202]}}
+    },
+    {
+      "name": "final type 2 with wrong id",
+      "args": ["@selected"],
+      "memory": [{"addr": "@list1a0", "offset": "0x11c", "u32": 1}, {"addr": "@selected", "offset": "0x168", "u32": 2}],
+      "callees": {"0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0},
+                  "0x00597ed0": {"name": "GetItem", "conv": "thiscall", "args": ["int"], "ret": [204]}}
+    },
+    {
+      "name": "final id 204 with wrong type",
+      "args": ["@selected"],
+      "memory": [{"addr": "@list1a0", "offset": "0x11c", "u32": 1}, {"addr": "@selected", "offset": "0x168", "u32": 4}],
+      "callees": {"0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0},
+                  "0x00597ed0": {"name": "GetItem", "conv": "thiscall", "args": ["int"], "ret": [204]}}
+    },
+    {
+      "name": "final type 5 with wrong id",
+      "args": ["@selected"],
+      "memory": [{"addr": "@list1a0", "offset": "0x11c", "u32": 1}, {"addr": "@selected", "offset": "0x168", "u32": 5}],
+      "callees": {"0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0},
+                  "0x00597ed0": {"name": "GetItem", "conv": "thiscall", "args": ["int"], "ret": [205]}}
+    },
+    {
+      "name": "upper bound item remains hidden",
+      "args": ["@selected"],
+      "memory": [{"addr": "@list174", "offset": "0x11c", "u32": 1}],
+      "callees": {
+        "0x004c9c1e": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0},
+        "0x00597ed0": {"name": "GetItem", "conv": "thiscall", "args": ["int"], "ret": [67108863]},
+        "0x004f2b2f": {"name": "GetSlot", "conv": "thiscall", "args": ["int"], "ret": ["@selected"]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5199656,
+    "count": 100,
+    "args": [{"choices": ["@selected"]}],
+    "memory": [
+      {"addr": "0x00905D00", "type": "u32", "choices": [0, "0x00905D00"]},
+      {"addr": "0x00905D14", "type": "u8", "choices": [0, 1, 255]},
+      {"addr": "@selected", "offset": "0x168", "type": "int", "choices": [0, 2, 5, 7, 8, 13, 14, 15]},
+      {"addr": "@selected", "offset": "0x16c", "type": "int", "range": [-1, 3]},
+      {"addr": "@selected", "offset": "0x1b0", "type": "int", "range": [-1, 3]},
+      {"addr": "@selectedFlags", "offset": "0x64", "type": "u32", "choices": [0, 1, "0x101", "0xffffffff"]},
+      {"addr": "@list174", "offset": "0x11c", "type": "int", "range": [0, 3]},
+      {"addr": "@list188", "offset": "0x11c", "type": "int", "range": [0, 3]},
+      {"addr": "@list190", "offset": "0x11c", "type": "int", "range": [0, 3]},
+      {"addr": "@list1a0", "offset": "0x11c", "type": "int", "range": [0, 3]}
+    ]
+  },
+  "coverage_ok": {
+    "004F5784-004F5785": "index_guess runs from 0 through 31, so the bounds trap cannot be reached"
+  },
+  "_survivors": [
+    "L646: index_guess runs from 0 through 31, so the bounds trap cannot be reached",
+    "L737: value 0x3FFFFFF yields slot index 0x3FFFF9D; GetSlot returns zero outside its 54 entries, so it cannot match the nonnull selected item"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "function": "CChatWindowView_guess::AddOutputText_guess",
+  "original": "0x004f6a90",
+  "sources": ["src/EverQuest/tu_144_ChatWindow.cpp"],
+  "conv": "thiscall",
+  "this": "@chatwindow",
+  "args": [
+    {"name": "text", "type": "u32"},
+    {"name": "color", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "chatwindow": {"size": "0x268", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@cw_vtbl"},
+      {"offset": "0x15c", "u32": "@component"},
+      {"offset": "0x164", "u32": "@output"}
+    ]},
+    "cw_vtbl": {"size": "0x140", "fill": "zero"},
+    "component": {"size": "0x300", "fill": "zero"},
+    "output": {"size": "0x120", "fill": "zero", "init": [
+      {"offset": "0x0", "u32": "@out_vtbl"},
+      {"offset": "0x108", "u32": 7},
+      {"offset": "0x10c", "u32": 7}
+    ]},
+    "out_vtbl": {"size": "0x140", "fill": "zero", "init": [
+      {"offset": "0x100", "u32": "@fn_slot64"}
+    ]},
+    "fn_slot64": {"size": "0x1", "fill": "zero"},
+    "rep": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [],
+  "callees": {
+    "0x004f2bbe": {"name": "Component_Read", "conv": "thiscall", "args": ["int"], "ret": 3},
+    "0x005a40f0": {"name": "BuildText", "conv": "cdecl", "args": ["ignore", "int"], "ret": "arg0",
+                   "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]},
+    "0x0042e3d9": {"name": "DecorateText", "conv": "cdecl", "args": ["ignore", "cstr", "ignore"], "ret": "arg0",
+                   "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]},
+    "0x004b1357": {"name": "MakeText", "conv": "cdecl", "args": ["ignore", "ignore", "cstr"], "ret": "arg0"},
+    "0x00571f70": {"name": "Str_Assign", "conv": "thiscall", "args": ["ignore"], "ret": "keep"},
+    "0x00571d00": {"name": "Str_Release", "conv": "thiscall", "args": ["u32"], "ret": "keep"},
+    "0x00572c10": {"name": "Str_Set", "conv": "thiscall", "args": ["ignore"], "ret": "keep"},
+    "0x00572e00": {"name": "Str_Append", "conv": "thiscall", "args": ["cstr"], "ret": "keep"},
+    "0x00407d68": {"name": "Str_Copy", "conv": "thiscall", "args": ["ignore"], "ret": "keep",
+                   "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]},
+    "0x005ac2a0": {"name": "Widget_GetText", "conv": "thiscall", "args": ["ignore", "ignore"], "ret": "keep"},
+    "@fn_slot64": {"name": "Widget_Slot64", "conv": "thiscall", "args": ["int"]}
+  },
+  "cases": [
+    {"name": "send equal", "args": ["@rep", 1]},
+    {"name": "send differs", "args": ["@rep", 1],
+     "memory": [{"addr": "@output", "offset": "0x10c", "u32": 9}]},
+    {"name": "no widget", "args": ["@rep", 1],
+     "memory": [{"addr": "@chatwindow", "offset": "0x164", "u32": 0}]},
+    {"name": "null text", "args": [0, 2]},
+    {"name": "null text no widget", "args": [0, 0],
+     "memory": [{"addr": "@chatwindow", "offset": "0x164", "u32": 0}]}
+  ],
+  "fuzz": {
+    "seed": 5204624,
+    "count": 100,
+    "args": [{"choices": [0, "@rep"]}, {"range": [-4, 30]}],
+    "memory": [
+      {"addr": "@output", "offset": "0x10c", "type": "u32", "choices": [7, 9]}
+    ]
+  }
+}

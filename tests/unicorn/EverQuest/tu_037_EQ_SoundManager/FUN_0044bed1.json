@@ -1,0 +1,135 @@
+{
+  "function": "EqSoundManager_guess::LoadOldEmitters_guess",
+  "original": "0x0044bed1",
+  "sources": [
+    "src/EverQuest/tu_037_EQ_SoundManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@eqsoundmanager",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "eqsoundmanager": {
+      "size": "0xbafc",
+      "fill": "random",
+      "init": [
+        {"offset": "0x8", "u32": "@mixer"}
+      ]
+    },
+    "mixer": {"size": "0x14", "fill": "random"},
+    "bank": {"size": "0x20", "fill": "random"},
+    "sounds": {"size": "0x20", "fill": "random"},
+    "cb1": {"size": "0x60", "fill": "random"},
+    "cb2": {"size": "0x60", "fill": "random"},
+    "cb3": {"size": "0x60", "fill": "random"},
+    "cb4": {"size": "0x60", "fill": "random"},
+    "cb5": {"size": "0x60", "fill": "random"},
+    "cb6": {"size": "0x60", "fill": "random"},
+    "cb7": {"size": "0x60", "fill": "random"},
+    "cb8": {"size": "0x60", "fill": "random"},
+    "cb9": {"size": "0x60", "fill": "random"},
+    "cb10": {"size": "0x60", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "@eqsoundmanager", "offset": "0x2c", "u8": 0},
+    {"addr": "@eqsoundmanager", "offset": "0xac44", "cstr": "zone"},
+    {"addr": "@eqsoundmanager", "offset": "0xfd4", "u32": 0},
+    {"addr": "@bank", "offset": "0xc", "u32": 0},
+    {"addr": "@sounds", "offset": "0xc", "u32": 0}
+  ],
+  "callees": {
+    "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ignore", "cstr", "cstr"], "ret": 0},
+    "0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["ignore", "cstr"], "ret": ["@bank", "@sounds"]},
+    "0x0060fbe1": {
+      "name": "_fgets",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "u32"],
+      "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "782e77617600", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "454d495400", "call": 1},
+        {"arg": 0, "offset": 0, "hex": "612e77617600", "call": 2},
+        {"arg": 0, "offset": 0, "hex": "4c4f4f5000", "call": 3},
+        {"arg": 0, "offset": 0, "hex": "6200", "call": 4},
+        {"arg": 0, "offset": 0, "hex": "00", "call": 5},
+        {"arg": 0, "offset": 0, "hex": "632e77617600", "call": 6},
+        {"arg": 2, "offset": 12, "hex": "10000000", "call": 6}
+      ]
+    },
+    "0x00576930": {"name": "RemoveCharacter_guess", "conv": "cdecl", "args": ["cstr", "int"], "ret": 0},
+    "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1]},
+    "0x0044b6d9": {"name": "WaveLoad_guess", "conv": "thiscall", "args": ["cstr", "int", "char"]},
+    "0x0060e790": {"name": "_fclose", "conv": "cdecl", "args": ["u32"], "ret": 0},
+    "0x00611d51": {
+      "name": "_fread",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "int", "u32"],
+      "ret": [84, 16, 84, 84, 84, 84, 84, 84, 84],
+      "writes": [
+        {"arg": 0, "offset": 0, "call": [0, 8], "hex": "00112233445566778899aabbccddeeff0000803f00000040000040400000804005000000060000000700000008000000090000000a000000010100000b0000000b0000000c0000000d0000000e0000000f000000"},
+        {"arg": 0, "offset": 0, "call": 2, "hex": "00112233445566778899aabbccddeeff0000c03f000020c10000c8420000a0c005000000050000001500000016000000090000000900000001010000" },
+        {"arg": 0, "offset": 60, "call": 2, "hex": "0b0000000b0000001700000018000000190000001a000000"},
+        {"arg": 0, "offset": 0, "call": 3, "hex": "00112233445566778899aabbccddeeff0000803f000000400000404000008040010000000200000007000000080000000300000004000000020300000500000006000000" },
+        {"arg": 0, "offset": 64, "call": 3, "hex": "060000000c0000000d0000000e0000000f000000"},
+        {"arg": 0, "offset": 0, "call": 4, "hex": "00112233445566778899aabbccddeeff0000803f00000040000040400000804005000000050000000700000008000000090000000900000001020000" },
+        {"arg": 0, "offset": 60, "call": 4, "hex": "0b0000000b0000000c0000000d0000000e0000000f000000"},
+        {"arg": 0, "offset": 0, "call": 5, "hex": "00112233445566778899aabbccddeeff0000803f00000040000040400000804005000000050000000700000008000000090000000900000000000000" },
+        {"arg": 0, "offset": 60, "call": 5, "hex": "0b0000000c0000000c0000000d0000000e0000000f000000"},
+        {"arg": 0, "offset": 0, "call": 6, "hex": "00112233445566778899aabbccddeeff0000803f00000040000040400000804005000000050000000700000008000000090000000800000081810000" },
+        {"arg": 0, "offset": 60, "call": 6, "hex": "0b0000000b0000000c0000000d0000000e0000000f000000"},
+        {"arg": 0, "offset": 0, "call": 7, "hex": "00112233445566778899aabbccddeeff0000803f00000040000040400000804005000000050000000700000008000000090000000900000002020000" },
+        {"arg": 0, "offset": 60, "call": 7, "hex": "0b0000000b0000000c0000000d0000000e0000000f000000"},
+        {"arg": 3, "offset": 12, "call": 8, "hex": "10000000"}
+      ]
+    },
+    "0x0044ba79": {
+      "name": "CreateSoundEmitter_guess",
+      "conv": "thiscall",
+      "args": ["int", "float", "float", "float", "int", "int", "int", "float", "int", "int", "int"],
+      "ret": ["@cb1", "@cb2", "@cb3", 0, 0, "@cb4", "@cb5", 0, "@cb6", "@cb7", "@cb8", "@cb9", "@cb10"]
+    },
+    "0x004c5e40": {"name": "Callback8_guess::SetEnabled_guess", "conv": "thiscall", "args": ["char"]},
+    "0x004c6079": {"name": "SoundMixer_guess::Attach_guess", "conv": "thiscall", "args": ["ptr"]}
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb",
+    "_fopen": "0x0060e887",
+    "_fgets": "0x0060fbe1",
+    "__stricmp": "0x00621e9c",
+    "_fclose": "0x0060e790",
+    "_fread": "0x00611d51"
+  },
+  "cases": [
+    {"name": "full run", "args": []},
+    {"name": "disabled", "args": [], "memory": [{"addr": "@eqsoundmanager", "offset": "0x2c", "u8": 1}]},
+    {"name": "no zone name", "args": [], "memory": [{"addr": "@eqsoundmanager", "offset": "0xac44", "u8": 0}]},
+    {"name": "callback count 5", "args": [], "memory": [{"addr": "@eqsoundmanager", "offset": "0xfd4", "u32": 5}]},
+    {"name": "no files", "args": [], "callees": {"0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["ignore", "cstr"], "ret": [0, 0]}}},
+    {"name": "bank only", "args": [], "callees": {"0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["ignore", "cstr"], "ret": ["@bank", 0]}}},
+    {"name": "sounds only", "args": [], "callees": {"0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["ignore", "cstr"], "ret": [0, "@sounds"]}}},
+    {"name": "both files already at eof", "args": [], "memory": [
+      {"addr": "@bank", "offset": "0xc", "u32": 16},
+      {"addr": "@sounds", "offset": "0xc", "u32": 16}
+    ]},
+    {"name": "eof flag among other flags", "args": [], "memory": [
+      {"addr": "@bank", "offset": "0xc", "u32": 239},
+      {"addr": "@sounds", "offset": "0xc", "u32": 239}
+    ]},
+    {"name": "no tracks created", "args": [], "callees": {"0x0044ba79": {
+      "name": "FUN_0044ba79", "conv": "thiscall",
+      "args": ["int", "float", "float", "float", "int", "int", "int", "float", "int", "int", "int"], "ret": 0}}}
+  ],
+  "_survivors": "L2573: same is a local only tested against zero (callback->second = same == 0, if (same == 0)), so 1 and 2 behave identically",
+  "fuzz": {
+    "seed": 4505297,
+    "count": 60,
+    "args": [],
+    "memory": [
+      {"addr": "@eqsoundmanager", "offset": "0x2c", "type": "u8", "choices": [0, 0, 1]},
+      {"addr": "@eqsoundmanager", "offset": "0xac44", "type": "u8", "choices": [0, 122, 122]},
+      {"addr": "@eqsoundmanager", "offset": "0xfd4", "type": "int", "range": [0, 20]},
+      {"addr": "@bank", "offset": "0xc", "type": "u32", "choices": [0, 1, 16, 17, 32]},
+      {"addr": "@sounds", "offset": "0xc", "type": "u32", "choices": [0, 1, 16, 17, 32]}
+    ]
+  }
+}

@@ -1,0 +1,255 @@
+{
+  "function": "CGroupSearchWndView_guess::ProcessEntry_guess",
+  "original": "0x0050b634",
+  "sources": [
+    "src/EverQuest/tu_163_GroupSearchWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@bigobject",
+  "args": [
+    {
+      "name": "entry_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "bigobject": {
+      "size": "0xe770",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x254", "u32": "@requester" },
+        { "offset": "0xe6f8", "u8": 1 }
+      ]
+    },
+    "entry": {
+      "size": "0x248",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x4c", "u32": 55 },
+        { "offset": "0x94", "u32": 77 },
+        { "offset": "0x98", "u32": 88 },
+        { "offset": "0x9c", "u32": 12 }
+      ]
+    },
+    "requester": {
+      "size": "0x120",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x11c", "u32": 42 }
+      ]
+    },
+    "zone_service": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "dispatch": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "list": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "u32": "@list_vtbl" }
+      ]
+    },
+    "list_vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        { "offset": "0xfc", "u32": "@fn_slot63" }
+      ]
+    },
+    "fn_slot63": {
+      "size": "0x1",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    { "addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4 },
+    { "addr": "0x00905cc0", "u32": "@zone_service" },
+    { "addr": "0x0063f9fc", "from_image": "0x0063f9fc", "image_size": 64 },
+    { "addr": "0x0063f53c", "from_image": "0x0063f53c", "image_size": 64 },
+    { "addr": "0x0099db00", "cstr": "42" },
+    { "addr": "0x00850bd4", "u32": 0 }
+  ],
+  "callees": {
+    "kernel32.dll!GetTickCount": {
+      "conv": "stdcall",
+      "args": [],
+      "ret": 0
+    },
+    "kernel32.dll!GetSystemTimeAsFileTime": {
+      "conv": "stdcall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "0x00509738": {
+      "name": "UpdateObject_guess",
+      "conv": "stdcall",
+      "args": ["ptr"],
+      "passthrough": true
+    },
+    "0x0040ac55": {
+      "name": "ReadValue_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 7
+    },
+    "0x00508955": {
+      "name": "IsFilteredOut_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "int"],
+      "ret": 1
+    },
+    "0x005fa1c0": {
+      "name": "GetZoneName_guess",
+      "conv": "thiscall",
+      "args": ["int", "ignore", "int"],
+      "ret": 0
+    },
+    "0x004657fb": {
+      "name": "BuildItemInfo_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ignore"],
+      "ret": 0
+    },
+    "0x005738b0": {
+      "name": "FormatText_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr", "ptr"],
+      "ret": 0
+    },
+    "0x0042d7a7": {
+      "name": "AddField_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "mem:12"],
+      "ret": 0
+    },
+    "0x0059b800": {
+      "name": "Submit_guess",
+      "conv": "thiscall",
+      "args": ["mem:28"],
+      "ret": 0
+    },
+    "0x006220e9": {
+      "name": "__itoa",
+      "conv": "cdecl",
+      "args": ["int", "ptr", "int"],
+      "ret": "0x0099db00"
+    },
+    "0x0046da4a": {
+      "name": "FormatLocalizedText_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "cstr", "u32", "u32", "u32", "u32", "u32", "u32", "u32", "u32"],
+      "ret": 0
+    },
+    "0x00571e00": {
+      "name": "Str_ctor_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": 0
+    },
+    "@fn_slot63": {
+      "name": "Slot63_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "Str_release_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x004482fb": {
+      "name": "FormattedText_dtor_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0042d7e5": {
+      "name": "RequestData_dtor_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9"
+  },
+  "cases": [
+    {
+      "name": "null entry",
+      "args": [0]
+    },
+    {
+      "name": "null requester",
+      "args": ["@entry"],
+      "memory": [
+        { "addr": "@bigobject", "offset": "0x254", "u32": 0 }
+      ]
+    },
+    {
+      "name": "filter hit returns early",
+      "args": ["@entry"],
+      "memory": [
+        { "addr": "0x00850bd4", "u32": "@dispatch" },
+        { "addr": "@entry", "offset": "0x9c", "u32": 7 },
+        { "addr": "@bigobject", "offset": "0xe6f8", "u8": 0 }
+      ]
+    },
+    {
+      "name": "process with filter disabled and no result list",
+      "args": ["@entry"],
+      "memory": [
+        { "addr": "@bigobject", "offset": "0xe6f8", "u8": 1 },
+        { "addr": "@bigobject", "offset": "0x250", "u32": 0 }
+      ]
+    },
+    {
+      "name": "process after an empty filter",
+      "args": ["@entry"],
+      "memory": [
+        { "addr": "0x00850bd4", "u32": 0 },
+        { "addr": "@bigobject", "offset": "0xe6f8", "u8": 0 },
+        { "addr": "@bigobject", "offset": "0x250", "u32": 0 }
+      ]
+    },
+    {
+      "name": "notify result list",
+      "args": ["@entry"],
+      "memory": [
+        { "addr": "@bigobject", "offset": "0xe6f8", "u8": 1 },
+        { "addr": "@bigobject", "offset": "0x250", "u32": "@list" }
+      ]
+    },
+    {
+      "name": "last entry slot",
+      "args": ["@entry"],
+      "memory": [
+        { "addr": "@bigobject", "offset": "0xe6f8", "u8": 1 },
+        { "addr": "@bigobject", "offset": "0x2d0", "u32": 99 },
+        { "addr": "@bigobject", "offset": "0x250", "u32": 0 }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5289524,
+    "count": 100,
+    "args": [
+      { "choices": ["@entry"] }
+    ],
+    "memory": [
+      { "addr": "@bigobject", "offset": "0xe6f8", "type": "u8", "choices": [0, 1] },
+      { "addr": "@bigobject", "offset": "0x250", "type": "ptr", "choices": [0, "@list"] },
+      { "addr": "@bigobject", "offset": "0x254", "type": "ptr", "choices": ["@requester"] },
+      { "addr": "@bigobject", "offset": "0x2d0", "type": "int", "choices": [0, 1, 99] },
+      { "addr": "@entry", "offset": "0x4c", "type": "int", "range": [-10, 100] },
+      { "addr": "@entry", "offset": "0x94", "type": "int", "range": [-10, 100] },
+      { "addr": "@entry", "offset": "0x98", "type": "int", "range": [-10, 100] }
+    ]
+  },
+  "_survivors": "L1997: firstField.kind_guess starts at zero on the emulator stack and no earlier call writes it; L2013: fourthField.text_guess.data_guess starts at zero and the stubbed FormatText call does not write it, so deleting its zero initialization is unobservable."
+}

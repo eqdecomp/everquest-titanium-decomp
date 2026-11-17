@@ -1,0 +1,155 @@
+{
+  "function": "DynamicPropertyOwner_guess::ConsumeCharge_guess",
+  "original": "0x0041a037",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@dynamicpropertyowner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "dynamicpropertyowner": {
+      "size": "0xa0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": "@offset_holder"},
+        {"offset": "0x8", "u32": "@input"}
+      ]
+    },
+    "offset_holder": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": "0x70"}
+      ]
+    },
+    "input": {
+      "size": "0x25c",
+      "fill": "random",
+      "init": [
+        {"offset": "0x1a8", "u32": "@threshold"}
+      ]
+    },
+    "threshold": {
+      "size": "0x154",
+      "fill": "random"
+    },
+    "refresh": {
+      "size": "0x14c",
+      "fill": "random"
+    },
+    "lookupresult": {
+      "size": "0x11a0",
+      "fill": "random"
+    },
+    "sink": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@sink_vtable"}
+      ]
+    },
+    "sink_vtable": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x8", "u32": "@notify"}
+      ]
+    },
+    "stringtable": {"size": "0x4", "fill": "zero"},
+    "everquest": {"size": "0x4", "fill": "zero"},
+    "message": {"size": "0x40", "fill": "zero"},
+    "other": {"size": "0x4", "fill": "zero"},
+    "skip": {"size": "0x4", "fill": "zero"},
+    "notify": {"size": "0x1", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905d24", "u32": "@refresh"},
+    {"addr": "0x00905d04", "u32": "@other"},
+    {"addr": "0x00905cf8", "u32": "@skip"},
+    {"addr": "0x00905cb0", "u32": "@stringtable"},
+    {"addr": "0x00988df0", "u32": "@everquest"},
+    {"addr": "0x00640e5c", "from_image": "0x00640e5c", "image_size": 4},
+    {"addr": "@input", "offset": "0x244", "u8": 0},
+    {"addr": "@input", "offset": "0x251", "u8": 100},
+    {"addr": "@threshold", "offset": "0x128", "u32": 100},
+    {"addr": "@threshold", "offset": "0x153", "u8": 2},
+    {"addr": "@refresh", "offset": "0x148", "u32": 100},
+    {"addr": "@lookupresult", "offset": "0x119c", "u8": 0},
+    {"addr": "@message", "cstr": "A charge was consumed."}
+  ],
+  "callees": {
+    "0x005ec220": {
+      "name": "LookupService_guess::Find_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@lookupresult"
+    },
+    "0x0047c08e": {
+      "name": "DynamicPropertyInput_guess::GetObject_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@sink"
+    },
+    "0x004912b1": {
+      "name": "EQSendMessage",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "mem:4", "int", "int"],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": ["u32", "ptr"],
+      "ret": "@message"
+    },
+    "0x004982c6": {
+      "name": "CEverQuest::dsp_chat",
+      "conv": "thiscall",
+      "args": ["cstr", "int", "bool"]
+    },
+    "@notify": {
+      "name": "ChargeSink_guess::Notify_guess",
+      "conv": "thiscall",
+      "args": ["char", "int", "int", "float", "int"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {"name": "null_input", "args": [], "memory": [{"addr": "@dynamicpropertyowner", "offset": "0x8", "u32": 0}]},
+    {"name": "nonzero_flag_clears_charges", "args": [], "memory": [{"addr": "@input", "offset": "0x244", "u8": 1}, {"addr": "@threshold", "offset": "0x153", "u8": 5}]},
+    {"name": "non_d_mode_clears_charges", "args": [], "memory": [{"addr": "@input", "offset": "0x251", "u8": 99}, {"addr": "@threshold", "offset": "0x153", "u8": 4}]},
+    {"name": "zero_charges_returns", "args": [], "memory": [{"addr": "@threshold", "offset": "0x153", "u8": 0}]},
+    {"name": "timer_not_expired", "args": [], "memory": [{"addr": "@threshold", "offset": "0x128", "u32": 101}, {"addr": "@refresh", "offset": "0x148", "u32": 100}]},
+    {"name": "target_null_chats", "args": [], "memory": [{"addr": "0x00905d04", "u32": 0}, {"addr": "@threshold", "offset": "0x153", "u8": 2}]},
+    {"name": "target_is_input_chats", "args": [], "memory": [{"addr": "0x00905d04", "u32": "@input"}, {"addr": "@threshold", "offset": "0x153", "u8": 2}]},
+    {"name": "target_matches_skip_chats", "args": [], "memory": [{"addr": "0x00905d04", "u32": "@other"}, {"addr": "0x00905cf8", "u32": "@other"}, {"addr": "@threshold", "offset": "0x153", "u8": 2}]},
+    {"name": "one_charge_resets_timer", "args": [], "memory": [{"addr": "@threshold", "offset": "0x153", "u8": 1}]},
+    {"name": "charge_2_state_0", "args": [], "memory": [{"addr": "@threshold", "offset": "0x153", "u8": 2}, {"addr": "@lookupresult", "offset": "0x119c", "u8": 0}]},
+    {"name": "charge_2_state_7", "args": [], "memory": [{"addr": "@threshold", "offset": "0x153", "u8": 2}, {"addr": "@lookupresult", "offset": "0x119c", "u8": 7}]},
+    {"name": "charge_3_state_0", "args": [], "memory": [{"addr": "@threshold", "offset": "0x153", "u8": 3}, {"addr": "@lookupresult", "offset": "0x119c", "u8": 0}]},
+    {"name": "charge_3_state_7", "args": [], "memory": [{"addr": "@threshold", "offset": "0x153", "u8": 3}, {"addr": "@lookupresult", "offset": "0x119c", "u8": 7}]},
+    {"name": "charge_4_state_0", "args": [], "memory": [{"addr": "@threshold", "offset": "0x153", "u8": 4}, {"addr": "@lookupresult", "offset": "0x119c", "u8": 0}]},
+    {"name": "charge_4_state_7", "args": [], "memory": [{"addr": "@threshold", "offset": "0x153", "u8": 4}, {"addr": "@lookupresult", "offset": "0x119c", "u8": 7}]},
+    {"name": "charge_5_state_0", "args": [], "memory": [{"addr": "@threshold", "offset": "0x153", "u8": 5}, {"addr": "@lookupresult", "offset": "0x119c", "u8": 0}]},
+    {"name": "charge_5_state_7", "args": [], "memory": [{"addr": "@threshold", "offset": "0x153", "u8": 5}, {"addr": "@lookupresult", "offset": "0x119c", "u8": 7}]},
+    {"name": "charge_6_special_value", "args": [], "memory": [{"addr": "@threshold", "offset": "0x153", "u8": 6}]},
+    {"name": "invalid_charge_7", "args": [], "memory": [{"addr": "@threshold", "offset": "0x153", "u8": 7}]}
+  ],
+  "fuzz": {
+    "seed": 4300855,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@input", "offset": "0x244", "type": "u8", "choices": [0, 1, 255]},
+      {"addr": "@input", "offset": "0x251", "type": "u8", "choices": [0, 99, 100, 101, 255]},
+      {"addr": "@threshold", "offset": "0x128", "type": "u32", "choices": [0, 99, 100, 101, 200]},
+      {"addr": "@threshold", "offset": "0x153", "type": "u8", "choices": [0, 1, 2, 3, 4, 5, 6, 7, 255]},
+      {"addr": "@refresh", "offset": "0x148", "type": "u32", "choices": [0, 99, 100, 101, 4294967295]},
+      {"addr": "@lookupresult", "offset": "0x119c", "type": "u8", "choices": [0, 7, 8, 255]},
+      {"addr": "0x00905d04", "type": "ptr", "choices": [0, "@input", "@other", "@skip"]},
+      {"addr": "0x00905cf8", "type": "ptr", "choices": [0, "@input", "@other", "@skip"]}
+    ]
+  }
+}

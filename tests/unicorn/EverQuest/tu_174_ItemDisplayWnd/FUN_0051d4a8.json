@@ -1,0 +1,536 @@
+{
+  "function": "CreateEvolvingString_guess",
+  "original": "0x0051d4a8",
+  "sources": [
+    "src/EverQuest/tu_174_ItemDisplayWnd.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "result_out",
+      "type": "ptr"
+    },
+    {
+      "name": "owner_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "result": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "owner": {
+      "size": "0xa0",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@owner_vtbl"
+        },
+        {
+          "offset": "0x64",
+          "u32": 3
+        },
+        {
+          "offset": "0x68",
+          "u32": 4
+        },
+        {
+          "offset": "0x70",
+          "f64": 12.5
+        },
+        {
+          "offset": "0x9c",
+          "u32": 5
+        }
+      ]
+    },
+    "fn_get_query": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "owner_vtbl": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@fn_get_query"
+        }
+      ]
+    },
+    "query": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@query_vtbl"
+        }
+      ]
+    },
+    "fn_query_release": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "query_vtbl": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@fn_query_release"
+        }
+      ]
+    },
+    "entry": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@entry_vtbl"
+        }
+      ]
+    },
+    "fn_entry_release": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "entry_vtbl": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@fn_entry_release"
+        }
+      ]
+    },
+    "stringtable": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "lookup": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "cstr": "Updated"
+        }
+      ]
+    },
+    "converted": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "cstr": "Updated"
+        }
+      ]
+    },
+    "heap": {
+      "size": "0x1000",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@stringtable"
+    },
+    {
+      "addr": "0x0099df60",
+      "size": 32,
+      "fill": "zero"
+    },
+    {
+      "addr": "0x0099dae0",
+      "size": 32,
+      "fill": "zero"
+    },
+    {
+      "addr": "0x0099db00",
+      "size": 32,
+      "fill": "zero"
+    }
+  ],
+  "callees": {
+    "@fn_get_query": {
+      "name": "Owner_guess::Slot01_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@query"
+    },
+    "@fn_query_release": {
+      "name": "Query_guess::Slot00_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "@fn_entry_release": {
+      "name": "Entry_guess::Slot00_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005ec630": {
+      "name": "UpdateQuery_guess::GetEntry_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": [
+        "@entry",
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "0x005ec640": {
+      "name": "UpdateQuery_guess::SetEntry_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005e33f0": {
+      "name": "UpdateQuery_guess::GetCount_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 17
+    },
+    "0x005e0f30": {
+      "name": "Owner_guess::GetItemId_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 23
+    },
+    "0x00577000": {
+      "name": "FormatShort_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "cstr",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x00571e00": {
+      "name": "CXStr::CXStr",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x005dfa00": {
+      "name": "StringTable_guess::Lookup_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "@lookup"
+    },
+    "0x005a4190": {
+      "name": "Build_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "ignore",
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "0x00571f70": {
+      "name": "CXStr::operator=",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "0x00571d00": {
+      "name": "CXStr::~CXStr",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "0x00572300": {
+      "name": "CXStr::GetString_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@converted"
+    },
+    "0x0060e98c": {
+      "name": "__ftol2",
+      "conv": "cdecl",
+      "args": [],
+      "passthrough": true
+    },
+    "0x006220e9": {
+      "name": "__itoa",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ptr",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x0046da4a": {
+      "name": "Format_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x00571fc0": {
+      "name": "CXStr::Append_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x00407d68": {
+      "name": "CXStr::CXStr_copy",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "kernel32.dll!GetProcessHeap": {
+      "conv": "stdcall",
+      "args": [],
+      "ret": "0x1234"
+    },
+    "kernel32.dll!HeapAlloc": {
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": "@heap"
+    },
+    "kernel32.dll!HeapFree": {
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    }
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9"
+  },
+  "cases": [
+    {
+      "name": "equal_skips_update",
+      "args": [
+        "@result",
+        "@owner"
+      ]
+    },
+    {
+      "name": "greater_skips_update",
+      "args": [
+        "@result",
+        "@owner"
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x68",
+          "u32": 6
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x9c",
+          "u32": 5
+        }
+      ]
+    },
+    {
+      "name": "less_with_entry",
+      "args": [
+        "@result",
+        "@owner"
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x68",
+          "u32": 4
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x9c",
+          "u32": 5
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x70",
+          "f64": 3.5
+        }
+      ]
+    },
+    {
+      "name": "less_without_entry",
+      "args": [
+        "@result",
+        "@owner"
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x68",
+          "u32": 2
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x9c",
+          "u32": 8
+        }
+      ],
+      "callees": {
+        "0x005ec630": {
+          "name": "UpdateQuery_guess::GetEntry_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "less_with_null_query",
+      "args": [
+        "@result",
+        "@owner"
+      ],
+      "callees": {
+        "@fn_get_query": {
+          "name": "Owner_guess::Slot01_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        },
+        "0x005ec630": {
+          "name": "UpdateQuery_guess::GetEntry_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5362856,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@result"
+        ]
+      },
+      {
+        "choices": [
+          "@owner"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@owner",
+        "offset": "0x64",
+        "type": "int",
+        "range": [
+          -10,
+          10
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x68",
+        "type": "int",
+        "range": [
+          -10,
+          10
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x70",
+        "type": "double",
+        "range": [
+          -100.0,
+          100.0
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x9c",
+        "type": "int",
+        "range": [
+          -10,
+          10
+        ]
+      }
+    ]
+  }
+}

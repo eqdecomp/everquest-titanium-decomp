@@ -1,0 +1,151 @@
+{
+  "function": "CMailCompositionWndMainView_guess::SyncWithAddressBook_guess",
+  "original": "0x0052dfbb",
+  "sources": ["src/EverQuest/tu_184_MailCompositionWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "maphead": {"size": "0x10", "fill": "zero", "init": [
+      {"offset": "0", "u32": "@node1"},
+      {"offset": "4", "u32": "@node2"},
+      {"offset": "8", "u32": "@node2"}
+    ]},
+    "rep": {"size": "0x40", "fill": "zero", "init": [
+      {"offset": "0", "u32": 1000},
+      {"offset": "4", "u32": 16},
+      {"offset": "8", "u32": 11},
+      {"offset": "0xc", "u32": 0},
+      {"offset": "0x14", "cstr": "<,<,<,<,<,<"}
+    ]},
+    "node1": {"size": "0x2c", "fill": "zero", "init": [
+      {"offset": "0", "u32": "@maphead"},
+      {"offset": "4", "u32": "@node2"},
+      {"offset": "8", "u32": "@maphead"},
+      {"offset": "0x10", "cstr": "a"},
+      {"offset": "0x20", "u32": 1},
+      {"offset": "0x24", "u32": 15},
+      {"offset": "0x28", "u32": 1}
+    ]},
+    "node2": {"size": "0x2c", "fill": "zero", "init": [
+      {"offset": "0", "u32": "@node1"},
+      {"offset": "4", "u32": "@maphead"},
+      {"offset": "8", "u32": "@maphead"},
+      {"offset": "0x10", "cstr": "b"},
+      {"offset": "0x20", "u32": 1},
+      {"offset": "0x24", "u32": 15},
+      {"offset": "0x28", "u32": "0xffffffff"}
+    ]},
+    "label_changed": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "cstr": "changed"}]},
+    "label_added": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "cstr": "added"}]},
+    "label_removed": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "cstr": "removed"}]},
+    "owner": {"size": "0x188", "fill": "zero", "init": [
+      {"offset": "0x168", "u32": "@text_widget"},
+      {"offset": "0x180", "u32": 0}
+    ]},
+    "root": {"size": "0x4", "fill": "zero"},
+    "manager": {"size": "0x8c", "fill": "zero"},
+    "dialog_pool": {"size": "0x4", "fill": "zero"},
+    "string_table": {"size": "0x4", "fill": "zero"},
+    "text_widget": {"size": "0x4", "fill": "zero", "init": [
+      {"offset": "0", "u32": "@text_vtable"}
+    ]},
+    "text_vtable": {"size": "0x134", "fill": "zero", "init": [
+      {"offset": "0x130", "u32": "@fn_gettext"}
+    ]},
+    "fn_gettext": {"size": "0x4", "fill": "zero"},
+    "flag_existing": {"size": "0x4c", "fill": "zero", "init": [
+      {"offset": "0x49", "u8": 1}
+    ]},
+    "existing": {"size": "0x4c", "fill": "zero"},
+    "entry0": {"size": "0x4c", "fill": "zero"},
+    "entry1": {"size": "0x4c", "fill": "zero"},
+    "entry2": {"size": "0x4c", "fill": "zero"},
+    "entry3": {"size": "0x4c", "fill": "zero"},
+    "entry4": {"size": "0x4c", "fill": "zero"},
+    "entry5": {"size": "0x4c", "fill": "zero"},
+    "heap0": {"size": "0x1000", "fill": "zero"},
+    "heap1": {"size": "0x1000", "fill": "zero"},
+    "heap2": {"size": "0x1000", "fill": "zero"},
+    "heap3": {"size": "0x1000", "fill": "zero"},
+    "heap4": {"size": "0x1000", "fill": "zero"},
+    "heap5": {"size": "0x1000", "fill": "zero"},
+    "heap6": {"size": "0x1000", "fill": "zero"},
+    "heap7": {"size": "0x1000", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00988df0", "u32": "@root"},
+    {"addr": "0x00991e44", "u32": "@dialog_pool"},
+    {"addr": "0x00905cb0", "u32": "@string_table"},
+    {"addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4}
+  ],
+  "callees": {
+    "0x00495250": {"name": "Get_guess", "conv": "thiscall", "args": [], "ret": "@manager"},
+    "@fn_gettext": {"name": "GetText_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "10000060"}]},
+    "0x00572300": {"name": "CXStr::operator char*", "conv": "thiscall", "args": [], "ret": 0, "passthrough": true},
+    "0x00403631": {"name": "basic_string<>", "conv": "thiscall", "args": ["cstr"], "ret": "this", "passthrough": true},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["ptr"], "ret": 0, "passthrough": true},
+    "0x00427663": {"name": "ostringstream_ctor", "conv": "thiscall", "args": ["u32", "u32"], "ret": 0},
+    "0x00402902": {"name": "string_begin", "conv": "thiscall", "args": ["ignore"], "ret": 0, "passthrough": true},
+    "0x00427179": {"name": "stream_str", "conv": "thiscall", "args": ["ignore"], "ret": "arg0"},
+    "0x0040291e": {"name": "string_tidy", "conv": "thiscall", "args": ["bool", "u32"], "ret": 0},
+    "0x0052d79c": {"name": "Find_guess", "conv": "cdecl", "args": ["ignore", "int", "int", "ptr"], "ret": 0, "passthrough": true},
+    "0x00426ac9": {"name": "string_substr", "conv": "thiscall", "args": ["ptr", "ptr"], "ret": "this", "passthrough": true},
+    "0x00425491": {"name": "string_find", "conv": "thiscall", "args": ["ptr", "u32", "u32"], "ret": 0, "passthrough": true},
+    "0x0060d071": {"name": "operator new", "conv": "cdecl", "args": ["u32"], "ret": ["@entry0", "@entry1", "@entry2", "@entry3", "@entry4", "@entry5", "@heap0", "@heap1", "@heap2", "@heap3", "@heap4", "@heap5", "@heap6", "@heap7"]},
+    "0x0042c74b": {"name": "Entry_ctor", "conv": "thiscall", "args": ["ptr"], "ret": "this"},
+    "0x00428534": {"name": "Find_entry", "conv": "thiscall", "args": ["ptr"], "ret": [0, "@flag_existing", "@existing", "@existing", "@existing", "@existing"]},
+    "0x0046da4a": {"name": "Format_guess", "conv": "cdecl", "args": ["ignore", "int", "ignore", "int", "int", "int", "int", "int", "int", "int", "int"], "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "6d65737361676500"}]},
+    "0x00548460": {"name": "Show_guess", "conv": "thiscall", "args": ["ptr", "int", "cstr", "int", "int", "ptr", "int"], "ret": 0},
+    "0x0052d1f5": {"name": "Update_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0042cc75": {"name": "Status_guess", "conv": "thiscall", "args": ["ptr"], "ret": [3, 0, 4, 2]},
+    "0x0042650a": {"name": "stream_insert", "conv": "cdecl", "args": ["ignore", "ignore", "ignore"], "ret": 0},
+    "0x0042cbea": {"name": "Differences_guess", "conv": "thiscall", "args": ["ignore", "ptr"], "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 4, "hex": "00000060"}]},
+    "0x00402505": {"name": "string_eos", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x00427607": {"name": "string_append_cstr", "conv": "thiscall", "args": ["cstr"], "ret": "this", "passthrough": true},
+    "0x004261a1": {"name": "string_append", "conv": "thiscall", "args": ["ptr", "u32", "u32"], "ret": "this", "passthrough": true},
+    "0x0042533a": {"name": "tree_iter_inc", "conv": "thiscall", "args": [], "ret": "this", "passthrough": true},
+    "0x005dfa00": {"name": "StringTable::getString", "conv": "thiscall", "args": ["u32", "ptr"],
+      "ret": ["@label_changed", "@label_added", "@label_removed", "@label_changed", "@label_added", "@label_removed"]},
+    "0x00426786": {"name": "stream_insert_result", "conv": "cdecl", "args": ["ignore", "ignore"], "ret": 0},
+    "0x0042bdbe": {"name": "map_dtor", "conv": "thiscall", "args": [], "ret": 0},
+    "0x004276d4": {"name": "stream_result", "conv": "thiscall", "args": ["ignore"], "ret": "arg0"},
+    "0x00425a76": {"name": "stream_dtor", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00623d8d": {"name": "ios_base_dtor", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0060e07d": {"name": "free", "conv": "cdecl", "args": ["ptr"], "ret": 0},
+    "kernel32.dll!HeapAlloc": {"conv": "stdcall", "args": ["ptr", "u32", "u32"],
+      "ret": ["@heap0", "@heap1", "@heap2", "@heap3", "@heap4", "@heap5", "@heap6", "@heap7"]},
+    "kernel32.dll!HeapFree": {"conv": "stdcall", "args": ["ptr", "u32", "ptr"], "ret": 1},
+    "kernel32.dll!EnterCriticalSection": {"conv": "stdcall", "args": ["ptr"], "ret": 0},
+    "kernel32.dll!LeaveCriticalSection": {"conv": "stdcall", "args": ["ptr"], "ret": 0}
+  },
+  "cases": [
+    {"name": "all-branches", "args": []},
+    {"name": "no-angle-brackets", "args": [], "memory": [
+      {"addr": "@rep", "offset": "0x8", "u32": 11},
+      {"addr": "@rep", "offset": "0x14", "cstr": "plain,other"}
+    ]},
+    {"name": "empty-input", "args": [], "memory": [
+      {"addr": "@rep", "offset": "0x8", "u32": 0},
+      {"addr": "@rep", "offset": "0x14", "cstr": ""}
+    ]},
+    {"name": "root-null", "args": [], "memory": [{"addr": "0x00988df0", "u32": 0}]},
+    {"name": "text-widget-null", "args": [], "memory": [{"addr": "@owner", "offset": "0x168", "u32": 0}]},
+    {"name": "dialog-pool-null", "args": [], "memory": [{"addr": "0x00991e44", "u32": 0}]}
+  ],
+  "fuzz": {
+    "seed": 5431227,
+    "count": 50,
+    "args": [],
+    "memory": [
+      {"addr": "0x00988df0", "type": "u32", "choices": [0, "@root"]},
+      {"addr": "0x00991e44", "type": "u32", "choices": [0, "@dialog_pool"]},
+      {"addr": "@owner", "offset": "0x168", "type": "u32", "choices": [0, "@text_widget"]},
+      {"addr": "@owner", "offset": "0x184", "type": "int", "choices": [-1, 0, 1, 4]}
+    ]
+  }
+}

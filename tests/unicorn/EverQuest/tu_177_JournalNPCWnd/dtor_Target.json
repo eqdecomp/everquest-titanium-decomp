@@ -1,0 +1,72 @@
+{
+  "function": "Target_guess::~CJournalNPCWnd_guess",
+  "original": "0x005245ff",
+  "sources": [
+    "src/EverQuest/tu_177_JournalNPCWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@target",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "target": {
+      "size": "0x1d0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x160", "u32": "@alloc"}
+      ]
+    },
+    "alloc": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0042f6c7": {
+      "name": "Allocation_guess::Cleanup_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0060d0d5": {
+      "name": "operator delete",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x0050f3f6": {
+      "name": "TargetBuffer_guess::~TargetBuffer_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004482fb": {
+      "name": "CleanupPart_guess::~CleanupPart_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x005a3100": {
+      "name": "Base_guess::~Base_guess",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "allocation present",
+      "args": []
+    },
+    {
+      "name": "allocation null",
+      "args": [],
+      "memory": [{"addr": "@target", "offset": "0x160", "u32": 0}]
+    }
+  ],
+  "fuzz": {
+    "seed": 5391871,
+    "count": 100,
+    "args": [],
+    "memory": []
+  }
+}

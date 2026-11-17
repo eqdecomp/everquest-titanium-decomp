@@ -1,0 +1,483 @@
+{
+  "function": "GlobalState_guess::Invite_guess",
+  "original": "0x0049d3cc",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@globalstate",
+  "args": [
+    {
+      "name": "name_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "globalstate": {
+      "size": "0x3a0bb",
+      "fill": "zero"
+    },
+    "context": {
+      "size": "0xe11",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@contextnode"
+        },
+        {
+          "offset": "0x44",
+          "cstr": "\u0001x"
+        }
+      ]
+    },
+    "contextnode": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 0
+        }
+      ]
+    },
+    "player": {
+      "size": "0x248",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x120",
+          "cstr": ""
+        },
+        {
+          "offset": "0x244",
+          "u8": 0
+        }
+      ]
+    },
+    "otherplayer": {
+      "size": "0x248",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x120",
+          "cstr": "other"
+        },
+        {
+          "offset": "0x244",
+          "u8": 0
+        }
+      ]
+    },
+    "stringtable": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "returntext": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": 0,
+          "cstr": "localized text"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d00",
+      "u32": "@context"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@stringtable"
+    },
+    {
+      "addr": "0x00905d04",
+      "u32": 0
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": "@player"
+    },
+    {
+      "addr": "0x00900478",
+      "u32": 0
+    },
+    {
+      "addr": "0x009043a4",
+      "u8": 0
+    },
+    {
+      "addr": "0x0090424d",
+      "size": "0x140",
+      "fill": "zero"
+    }
+  ],
+  "callees": {
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "@returntext"
+    },
+    "0x00498436": {
+      "name": "GlobalState::DspChat",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ]
+    },
+    "0x00621e9c": {
+      "name": "_stricmp",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr"
+      ],
+      "ret": 1
+    },
+    "0x0047994f": {
+      "name": "PlayerActionView::Check",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x0042fcc2": {
+      "name": "PromptState::CheckName",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        0,
+        1
+      ]
+    },
+    "0x0043077b": {
+      "name": "PromptState::CanProceed",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        0,
+        1
+      ]
+    },
+    "0x0042fcf9": {
+      "name": "PromptState::HasPrompt",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        0,
+        1
+      ]
+    },
+    "0x004982c6": {
+      "name": "GlobalState::DspChatColored",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ]
+    },
+    "0x004912b1": {
+      "name": "SendMessage",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "mem:128",
+        "int",
+        "char"
+      ],
+      "ret": 0
+    },
+    "0x0046da4a": {
+      "name": "FormatMessage",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "cstr",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "6669787475726500"
+        }
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "__stricmp": "0x00621e9c",
+    "?DspChat_guess@GlobalState_guess@@QAEXPBD@Z": "0x00498436",
+    "?DspChat_guess@GlobalState_guess@@QAEXPBDH_N@Z": "0x004982c6"
+  },
+  "cases": [
+    {
+      "name": "filter_mismatch",
+      "args": [
+        "ignored"
+      ],
+      "memory": [
+        {
+          "addr": "0x009043a4",
+          "hex": "017800"
+        },
+        {
+          "addr": "@context",
+          "offset": "0x44",
+          "cstr": "\u0002x"
+        }
+      ]
+    },
+    {
+      "name": "filter_mismatch_single_byte",
+      "args": [
+        "ignored"
+      ],
+      "memory": [
+        {
+          "addr": "0x009043a4",
+          "hex": "0100"
+        },
+        {
+          "addr": "@context",
+          "offset": "0x44",
+          "cstr": "\u0002"
+        }
+      ]
+    },
+    {
+      "name": "no_player_empty",
+      "args": [
+        ""
+      ]
+    },
+    {
+      "name": "flagged_player_empty",
+      "args": [
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "0x00905d04",
+          "u32": "@otherplayer"
+        },
+        {
+          "addr": "@otherplayer",
+          "offset": "0x244",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "same_player_empty",
+      "args": [
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "0x00905d04",
+          "u32": "@player"
+        }
+      ]
+    },
+    {
+      "name": "empty_name_other_owner",
+      "args": [
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "0x00905d04",
+          "u32": "@otherplayer"
+        },
+        {
+          "addr": "@player",
+          "offset": "0x120",
+          "cstr": "owner"
+        }
+      ]
+    },
+    {
+      "name": "status_blocked",
+      "args": [
+        "target"
+      ],
+      "memory": [
+        {
+          "addr": "0x00905d04",
+          "u32": "@otherplayer"
+        },
+        {
+          "addr": "0x00900478",
+          "u32": 4
+        }
+      ]
+    },
+    {
+      "name": "duplicate_name",
+      "args": [
+        "one"
+      ],
+      "memory": [
+        {
+          "addr": "0x0090424d",
+          "cstr": "one"
+        }
+      ]
+    },
+    {
+      "name": "insert_after_occupied_slot",
+      "args": [
+        "new"
+      ],
+      "memory": [
+        {
+          "addr": "0x0090424d",
+          "cstr": "occupied"
+        }
+      ]
+    },
+    {
+      "name": "full_name_table",
+      "args": [
+        "new"
+      ],
+      "memory": [
+        {
+          "addr": "0x0090424d",
+          "cstr": "one"
+        },
+        {
+          "addr": "0x0090424d",
+          "offset": "0x40",
+          "cstr": "two"
+        },
+        {
+          "addr": "0x0090424d",
+          "offset": "0x80",
+          "cstr": "three"
+        },
+        {
+          "addr": "0x0090424d",
+          "offset": "0xc0",
+          "cstr": "four"
+        },
+        {
+          "addr": "0x0090424d",
+          "offset": "0x100",
+          "cstr": "five"
+        }
+      ]
+    },
+    {
+      "name": "insert_empty_filter_off",
+      "args": [
+        "new"
+      ]
+    },
+    {
+      "name": "insert_empty_filter_on",
+      "args": [
+        "new"
+      ],
+      "memory": [
+        {
+          "addr": "0x009043a4",
+          "hex": "017800"
+        },
+        {
+          "addr": "@context",
+          "offset": "0x44",
+          "cstr": "\u0001x"
+        }
+      ]
+    },
+    {
+      "name": "prompt_denied",
+      "args": [
+        "new"
+      ],
+      "callees": {
+        "0x0042fcc2": {
+          "ret": 1
+        },
+        "0x0043077b": {
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "prompt_shown",
+      "args": [
+        "new"
+      ],
+      "callees": {
+        "0x0042fcc2": {
+          "ret": 1
+        },
+        "0x0043077b": {
+          "ret": 1
+        },
+        "0x0042fcf9": {
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "prompt_not_shown",
+      "args": [
+        "new"
+      ],
+      "callees": {
+        "0x0042fcc2": {
+          "ret": 1
+        },
+        "0x0043077b": {
+          "ret": 1
+        },
+        "0x0042fcf9": {
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "coverage_ok": {
+    "0049D625-0049D62B": "An empty name with no last player returns at 0049D44C before this later null-player guard; no callee changes the global."
+  },
+  "_survivors": "L6341: nameCount_guess starts at 0 and the five-entry table loop cannot make it negative; the increment only feeds the redundant >= 0 check.",
+  "fuzz": {
+    "seed": 4838348,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "",
+          "alpha",
+          "one",
+          "new"
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

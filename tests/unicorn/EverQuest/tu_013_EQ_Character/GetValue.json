@@ -1,0 +1,197 @@
+{
+  "function": "InventoryView_guess::GetValue_guess",
+  "original": "0x0041de16",
+  "_survivors": "L5781: in the value < 0 arm, value <= 30 is always true. Reversed (30 <= value) or 29 sends a negative value to the division, where index = (value - 31) / 10 is negative (or wraps to a huge positive for INT_MIN) and the bounds check returns 0 before any call, so no input differs.",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@rankowner",
+  "args": [
+    {
+      "name": "value_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "rankowner": {
+      "size": "0x100",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@offsets"
+        }
+      ]
+    },
+    "offsets": {
+      "size": "0x8",
+      "fill": "zero"
+    },
+    "entry": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "sub": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@offsets",
+      "offset": "0x4",
+      "u32": 16
+    }
+  ],
+  "callees": {
+    "0x0040cc50": {
+      "name": "RankTable_GetEntry",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": "@entry"
+    },
+    "0x005eccc0": {
+      "name": "RankEntry_IsBlocked",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005ecc30": {
+      "name": "RankEntry_GetCount",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 5
+    },
+    "0x005ec630": {
+      "name": "RankEntry_GetEntry",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": "@sub"
+    }
+  },
+  "cases": [
+    {
+      "name": "negative",
+      "args": [-5]
+    },
+    {
+      "name": "negative_min",
+      "args": [-2147483648]
+    },
+    {
+      "name": "zero_table_entry",
+      "args": [0]
+    },
+    {
+      "name": "thirty_table_entry",
+      "args": [30]
+    },
+    {
+      "name": "div_index0_rem0",
+      "args": [31]
+    },
+    {
+      "name": "div_index0_rem4",
+      "args": [35]
+    },
+    {
+      "name": "div_rem_equals_count",
+      "args": [36]
+    },
+    {
+      "name": "div_index1_rem0",
+      "args": [41]
+    },
+    {
+      "name": "div_index30_last",
+      "args": [331]
+    },
+    {
+      "name": "div_index31_out_of_range",
+      "args": [341]
+    },
+    {
+      "name": "div_entry_null",
+      "args": [31],
+      "callees": {
+        "0x0040cc50": {
+          "name": "RankTable_GetEntry",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "div_not_blocked",
+      "args": [31],
+      "callees": {
+        "0x005eccc0": {
+          "name": "RankEntry_IsBlocked",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "div_blocked_is_two",
+      "args": [31],
+      "callees": {
+        "0x005eccc0": {
+          "name": "RankEntry_IsBlocked",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 2
+        }
+      }
+    },
+    {
+      "name": "div_count_zero",
+      "args": [31],
+      "callees": {
+        "0x005ecc30": {
+          "name": "RankEntry_GetCount",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "div_sub_null",
+      "args": [31],
+      "callees": {
+        "0x005ec630": {
+          "name": "RankEntry_GetEntry",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4316694,
+    "count": 200,
+    "args": [
+      {
+        "range": [
+          -40,
+          400
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

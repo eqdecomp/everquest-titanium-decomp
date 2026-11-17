@@ -1,0 +1,1429 @@
+{
+  "function": "TicketEventOwner_guess::WndNotification_guess",
+  "original": "0x00561D1E",
+  "sources": [
+    "src/EverQuest/tu_226_TicketWindow.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {
+      "name": "sender",
+      "type": "ptr"
+    },
+    {
+      "name": "message",
+      "type": "int"
+    },
+    {
+      "name": "data",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "owner": {
+      "size": "0x600",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@owner_vt"
+        },
+        {
+          "offset": "0x160",
+          "u32": "@tabs"
+        },
+        {
+          "offset": "0x164",
+          "u32": "@source"
+        },
+        {
+          "offset": "0x168",
+          "u32": "@timer_button"
+        },
+        {
+          "offset": "0x16c",
+          "u32": "@source_button"
+        },
+        {
+          "offset": "0x170",
+          "u32": "@action_button"
+        },
+        {
+          "offset": "0x580",
+          "u32": "@close0"
+        },
+        {
+          "offset": "0x584",
+          "u32": "@close1"
+        },
+        {
+          "offset": "0x588",
+          "u32": "@close2"
+        },
+        {
+          "offset": "0x58c",
+          "u32": "@search_button"
+        },
+        {
+          "offset": "0x590",
+          "u32": "@article_button"
+        },
+        {
+          "offset": "0x594",
+          "u32": "@newticket"
+        },
+        {
+          "offset": "0x598",
+          "u32": "@submit"
+        },
+        {
+          "offset": "0x59c",
+          "u32": "@delete"
+        },
+        {
+          "offset": "0x5a0",
+          "u32": "@addcomment"
+        },
+        {
+          "offset": "0x5a4",
+          "u32": "@search_edit"
+        },
+        {
+          "offset": "0x5a8",
+          "u32": "@article_edit"
+        },
+        {
+          "offset": "0x5ac",
+          "u32": "@combo1"
+        },
+        {
+          "offset": "0x5b0",
+          "u32": "@combo2"
+        },
+        {
+          "offset": "0x5b4",
+          "u32": "@comments"
+        },
+        {
+          "offset": "0x5b8",
+          "u32": "@instructions"
+        },
+        {
+          "offset": "0x5bc",
+          "u32": "@begin"
+        },
+        {
+          "offset": "0x5c0",
+          "u32": "@kb_list"
+        },
+        {
+          "offset": "0x5c4",
+          "u32": "@ticket_list"
+        },
+        {
+          "offset": "0x5c8",
+          "u32": "@stml"
+        },
+        {
+          "offset": "0x17c",
+          "cstr": "source text"
+        },
+        {
+          "offset": "0x5d4",
+          "u32": 12
+        }
+      ]
+    },
+    "owner_vt": {
+      "size": "0x90",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x88",
+          "u32": "@fn_close"
+        }
+      ]
+    },
+    "search_button": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "search_edit": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "article_button": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "article_edit": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "submit": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "comments": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "instructions": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "begin": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "newticket": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "close0": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "close1": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "close2": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "delete": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "addcomment": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "timer_button": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "action_button": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "source_button": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vt"
+        }
+      ]
+    },
+    "control_vt": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x130",
+          "u32": "@fn_text"
+        },
+        {
+          "offset": "0xfc",
+          "u32": "@fn_set"
+        },
+        {
+          "offset": "0xc0",
+          "u32": "@fn_show"
+        }
+      ]
+    },
+    "fn_close": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": []
+    },
+    "fn_text": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": []
+    },
+    "fn_set": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": []
+    },
+    "fn_show": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": []
+    },
+    "fn_notify": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": []
+    },
+    "combo1": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": []
+    },
+    "combo2": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": []
+    },
+    "tabs": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": []
+    },
+    "source": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": []
+    },
+    "stml": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": []
+    },
+    "names": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": []
+    },
+    "records": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": []
+    },
+    "strtab": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": []
+    },
+    "action": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": []
+    },
+    "action2": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": []
+    },
+    "notify": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@notify_vt"
+        }
+      ]
+    },
+    "notify_vt": {
+      "size": "0x88",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x84",
+          "u32": "@fn_notify"
+        }
+      ]
+    },
+    "kb_list": {
+      "size": "0x140",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x11c",
+          "u32": 1
+        }
+      ]
+    },
+    "ticket_list": {
+      "size": "0x140",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x11c",
+          "u32": 1
+        }
+      ]
+    },
+    "root": {
+      "size": "0xa00",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@vbtable"
+        },
+        {
+          "offset": "0x500",
+          "u32": 77
+        },
+        {
+          "offset": "0x900",
+          "u32": 88
+        }
+      ]
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": -8
+        },
+        {
+          "offset": "0x4",
+          "u32": 1016
+        }
+      ]
+    },
+    "charinfo": {
+      "size": "0x11a8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x1198",
+          "u32": 2
+        },
+        {
+          "offset": "0x119c",
+          "u32": 3
+        },
+        {
+          "offset": "0x11a4",
+          "u32": 30
+        }
+      ]
+    },
+    "guild": {
+      "size": "0x140",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x120",
+          "cstr": "guild"
+        }
+      ]
+    },
+    "text": {
+      "size": "0x80",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": 0,
+          "cstr": "hello"
+        }
+      ]
+    },
+    "instruction": {
+      "size": "0x80",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": 0,
+          "cstr": "he"
+        }
+      ]
+    },
+    "race_name": {
+      "size": "0x80",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": 0,
+          "cstr": "race"
+        }
+      ]
+    },
+    "class_name": {
+      "size": "0x80",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": 0,
+          "cstr": "class"
+        }
+      ]
+    },
+    "zone_record": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x10",
+          "cstr": "zone"
+        }
+      ]
+    },
+    "notify_source": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": []
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x905d00",
+      "u32": "@root"
+    },
+    {
+      "addr": "0x905d04",
+      "u32": "@guild"
+    },
+    {
+      "addr": "0x988df0",
+      "u32": "@names"
+    },
+    {
+      "addr": "0x905cc0",
+      "u32": "@records"
+    },
+    {
+      "addr": "0x905cb0",
+      "u32": "@strtab"
+    },
+    {
+      "addr": "0x99288c",
+      "u32": "@notify"
+    },
+    {
+      "addr": "0x9928a8",
+      "u32": "@notify_source"
+    },
+    {
+      "addr": "0x9928dc",
+      "u32": "@action"
+    },
+    {
+      "addr": "0x9928e0",
+      "u32": "@action2"
+    },
+    {
+      "addr": "0x991e44",
+      "u32": "@tabs"
+    }
+  ],
+  "callees": {
+    "@fn_text": {
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "01000000"
+        }
+      ]
+    },
+    "0x0059c3b0": {
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "01000000"
+        }
+      ]
+    },
+    "0x00597f10": {
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "int",
+        "int"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "01000000"
+        }
+      ]
+    },
+    "0x00572300": {
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@text",
+      "this": "ignore"
+    },
+    "0x00571d00": {
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "keep",
+      "this": "ignore"
+    },
+    "0x00571e00": {
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this",
+      "this": "ignore"
+    },
+    "@fn_close": {
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_notify": {
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005a8c30": {
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00564141": {
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00561b34": {
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_set": {
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "@fn_show": {
+      "conv": "thiscall",
+      "args": [
+        "char",
+        "char"
+      ],
+      "ret": 1
+    },
+    "0x00561727": {
+      "conv": "thiscall",
+      "args": [
+        "char"
+      ],
+      "ret": 0
+    },
+    "0x00561515": {
+      "conv": "thiscall",
+      "args": [
+        "char"
+      ],
+      "ret": 0
+    },
+    "0x0059d080": {
+      "conv": "thiscall",
+      "args": [
+        "char"
+      ],
+      "ret": 0
+    },
+    "0x005bc460": {
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00564e7e": {
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005a4cd0": {
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005a9060": {
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00597be0": {
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00561c72": {
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 7
+    },
+    "0x005ec220": {
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@charinfo"
+    },
+    "0x0049273d": {
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@race_name"
+    },
+    "0x00491e5b": {
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@class_name"
+    },
+    "0x0043a6bf": {
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@zone_record"
+    },
+    "0x005dfa00": {
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ptr"
+      ],
+      "ret": "@instruction"
+    },
+    "0x005a8b00": {
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "char",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x00548460": {
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "cstr",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005a2230": {
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "ptr"
+      ],
+      "ret": 123
+    },
+    "0x0060e3a3": {
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 123
+    },
+    "0x0060d5eb": {
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr",
+        "int"
+      ],
+      "ret": 1,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "6c00"
+        }
+      ]
+    },
+    "0x004912b1": {
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "mem:0x4c",
+        "int",
+        "char"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "fallback",
+      "args": [
+        "@source_button",
+        99,
+        0
+      ]
+    },
+    {
+      "name": "click_tabs",
+      "args": [
+        "@tabs",
+        1,
+        0
+      ]
+    },
+    {
+      "name": "click_close0",
+      "args": [
+        "@close0",
+        1,
+        0
+      ]
+    },
+    {
+      "name": "click_close1",
+      "args": [
+        "@close1",
+        1,
+        0
+      ]
+    },
+    {
+      "name": "click_close2",
+      "args": [
+        "@close2",
+        1,
+        0
+      ]
+    },
+    {
+      "name": "query_search_button",
+      "args": [
+        "@search_button",
+        1,
+        0
+      ]
+    },
+    {
+      "name": "query_search_edit",
+      "args": [
+        "@search_edit",
+        6,
+        0
+      ]
+    },
+    {
+      "name": "query_article_button",
+      "args": [
+        "@article_button",
+        6,
+        0
+      ]
+    },
+    {
+      "name": "query_article_edit",
+      "args": [
+        "@article_edit",
+        6,
+        0
+      ]
+    },
+    {
+      "name": "empty_search",
+      "args": [
+        "@search_button",
+        1,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@instruction",
+          "offset": "0x0",
+          "cstr": ""
+        }
+      ],
+      "callees": {
+        "0x00572300": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": "@instruction",
+          "this": "ignore"
+        }
+      }
+    },
+    {
+      "name": "submit_valid",
+      "args": [
+        "@submit",
+        1,
+        0
+      ],
+      "callees": {
+        "0x004912b1": {
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "int",
+            "mem:0x1024",
+            "int",
+            "char"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "submit_second_vbase_offset",
+      "args": [
+        "@submit",
+        1,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@vbtable",
+          "offset": "0x4",
+          "u32": 2040
+        }
+      ],
+      "callees": {
+        "0x004912b1": {
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "int",
+            "mem:0x1024",
+            "int",
+            "char"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "submit_without_guild",
+      "args": [
+        "@submit",
+        1,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905d04",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x004912b1": {
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "int",
+            "mem:0x1024",
+            "int",
+            "char"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "submit_instructions_active",
+      "args": [
+        "@submit",
+        1,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x5ef",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "submit_missing_topic",
+      "args": [
+        "@submit",
+        1,
+        0
+      ],
+      "callees": {
+        "0x00561c72": {
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            0,
+            7
+          ]
+        }
+      }
+    },
+    {
+      "name": "submit_missing_subtopic",
+      "args": [
+        "@submit",
+        1,
+        0
+      ],
+      "callees": {
+        "0x00561c72": {
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            7,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "delete",
+      "args": [
+        "@delete",
+        1,
+        0
+      ]
+    },
+    {
+      "name": "delete_empty",
+      "args": [
+        "@delete",
+        1,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@ticket_list",
+          "offset": "0x11c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "add_comment",
+      "args": [
+        "@addcomment",
+        1,
+        0
+      ]
+    },
+    {
+      "name": "add_comment_without_window",
+      "args": [
+        "@addcomment",
+        1,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x0099288c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "new_ticket_ready",
+      "args": [
+        "@newticket",
+        1,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x5ed",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "new_ticket_not_ready",
+      "args": [
+        "@newticket",
+        1,
+        0
+      ]
+    },
+    {
+      "name": "combo_changed",
+      "args": [
+        "@combo1",
+        1,
+        0
+      ]
+    },
+    {
+      "name": "begin_edit",
+      "args": [
+        "@begin",
+        1,
+        0
+      ]
+    },
+    {
+      "name": "begin_without_controls",
+      "args": [
+        "@begin",
+        1,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x5b8",
+          "u32": 0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x5b4",
+          "u32": 0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x598",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "timer",
+      "args": [
+        "@timer_button",
+        1,
+        0
+      ]
+    },
+    {
+      "name": "timer_without_source",
+      "args": [
+        "@timer_button",
+        1,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x164",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "action",
+      "args": [
+        "@action_button",
+        1,
+        0
+      ]
+    },
+    {
+      "name": "action_without_windows",
+      "args": [
+        "@action_button",
+        1,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x009928dc",
+          "u32": 0
+        },
+        {
+          "addr": "0x009928e0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "source_changed",
+      "args": [
+        "@source_button",
+        1,
+        0
+      ]
+    },
+    {
+      "name": "source_missing",
+      "args": [
+        "@source_button",
+        1,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x164",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "kb_selected",
+      "args": [
+        "@kb_list",
+        4,
+        0
+      ]
+    },
+    {
+      "name": "kb_unselected",
+      "args": [
+        "@kb_list",
+        4,
+        0
+      ],
+      "callees": {
+        "0x00597be0": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "ticket_selected",
+      "args": [
+        "@ticket_list",
+        4,
+        0
+      ],
+      "callees": {
+        "0x004912b1": {
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "int",
+            "mem:0x8",
+            "int",
+            "char"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "ticket_empty",
+      "args": [
+        "@ticket_list",
+        4,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@ticket_list",
+          "offset": "0x11c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "edit_not_active",
+      "args": [
+        "@comments",
+        14,
+        0
+      ]
+    },
+    {
+      "name": "edit_append_character",
+      "args": [
+        "@comments",
+        14,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x5ef",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "edit_clear_instruction",
+      "args": [
+        "@comments",
+        14,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x5ef",
+          "u8": 1
+        },
+        {
+          "addr": "@instruction",
+          "offset": "0x0",
+          "cstr": "long instruction"
+        }
+      ]
+    },
+    {
+      "name": "edit_without_control",
+      "args": [
+        "@comments",
+        14,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x5ef",
+          "u8": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x5b4",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "one_character_article_query",
+      "args": [
+        "@article_button",
+        6,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@text",
+          "cstr": "x"
+        }
+      ]
+    }
+  ],
+  "_shape": "Ticket-window dispatch, text sends, report assembly through the dynamic character virtual base, page actions, and edit notifications. The two virtual-base offsets exercise all three remaining combined LEA sites.",
+  "_survivors": {
+    "L1945": "Deleting the mode=0 store survives because the harness initializes the emulated stack to zero. The original store is retained; this is a fixture limitation, not an equivalent source edit."
+  }
+}

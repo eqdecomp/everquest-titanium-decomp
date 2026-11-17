@@ -1,0 +1,1025 @@
+{
+  "function": "CCharacterCreationView_guess::SetScreen_guess",
+  "original": "0x004ed32e",
+  "sources": [
+    "src/EverQuest/tu_141_CharacterCreation.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@transferowner",
+  "args": [
+    {
+      "name": "value",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "transferowner": {
+      "size": "0x424",
+      "fill": "zero"
+    },
+    "vtable": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xc0",
+          "u32": "@fn_show"
+        },
+        {
+          "offset": "0xfc",
+          "u32": "@fn_text"
+        }
+      ]
+    },
+    "fn_show": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_text": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "window": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@vtable"
+        }
+      ]
+    },
+    "layout": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "nameinput": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "stringtable": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "effects": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "cxstrbuffer": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "value": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "stage0": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "stage1": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "helptext": {
+      "size": "0x40",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@transferowner",
+      "offset": "0x248",
+      "u32": "@window"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x24c",
+      "u32": "@window"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x250",
+      "u32": "@layout"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x254",
+      "u32": "@layout"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x258",
+      "u32": "@layout"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x25c",
+      "u32": "@layout"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x260",
+      "u32": "@layout"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x264",
+      "u32": "@layout"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x268",
+      "u32": "@layout"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x26c",
+      "u32": "@layout"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x270",
+      "u32": "@window"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x348",
+      "u32": "@window"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x34c",
+      "u32": "@window"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x350",
+      "u32": "@window"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x354",
+      "u32": "@window"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x358",
+      "u32": "@window"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x35c",
+      "u32": "@window"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x360",
+      "u32": "@window"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x228",
+      "u32": "@value"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x22c",
+      "u32": "@value"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x230",
+      "u32": "@value"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x234",
+      "u32": "@value"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x238",
+      "u32": "@value"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x23c",
+      "u32": "@value"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x240",
+      "u32": "@value"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x388",
+      "u32": "@nameinput"
+    },
+    {
+      "addr": "@transferowner",
+      "offset": "0x390",
+      "u32": "@window"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@stringtable"
+    },
+    {
+      "addr": "0x00851390",
+      "u32": "@effects"
+    },
+    {
+      "addr": "0x00923780",
+      "u32": 800
+    },
+    {
+      "addr": "0x00923784",
+      "u32": 600
+    },
+    {
+      "addr": "0x0079ac74",
+      "from_image": "0x0079ac74",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0063f53c",
+      "from_image": "0x0063f53c",
+      "image_size": 64
+    },
+    {
+      "addr": "@value",
+      "u32": 0
+    },
+    {
+      "addr": "@stage0",
+      "cstr": "Character creation"
+    },
+    {
+      "addr": "@stage1",
+      "cstr": "Enter your name"
+    },
+    {
+      "addr": "@helptext",
+      "cstr": "Creation help"
+    }
+  ],
+  "callees": {
+    "0x0059edf0": {
+      "name": "FUN_0059edf0",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "FUN_005dfa00",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": [
+        "@stage0",
+        "@helptext"
+      ]
+    },
+    "0x00571e00": {
+      "name": "CXStr constructor",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0,
+      "passthrough": true
+    },
+    "0x005a8b00": {
+      "name": "SetWindowTextDirect",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "CXStr cleanup",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x0060be50": {
+      "name": "GetINIString",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "cstr",
+        "ignore",
+        "int",
+        "cstr"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 3,
+          "hex": "46 00"
+        }
+      ]
+    },
+    "0x0044b741": {
+      "name": "PlayMp3_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "float"
+      ],
+      "ret": 0
+    },
+    "0x0044a617": {
+      "name": "SetMusicSelection_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "hex": "30 00"
+        }
+      ]
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": "@cxstrbuffer"
+    },
+    "0x0060beb0": {
+      "name": "FUN_0060beb0",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x0059fb00": {
+      "name": "FUN_0059fb00",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x005a0540": {
+      "name": "FUN_005a0540",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005a0650": {
+      "name": "FUN_005a0650",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005a05f0": {
+      "name": "FUN_005a05f0",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005a06a0": {
+      "name": "FUN_005a06a0",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005a0850": {
+      "name": "FUN_005a0850",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005a0590": {
+      "name": "FUN_005a0590",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_show": {
+      "name": "window show",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "@fn_text": {
+      "name": "window text",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "stage0-false",
+      "args": [
+        0
+      ]
+    },
+    {
+      "name": "stage0-default",
+      "args": [
+        0
+      ],
+      "callees": {
+        "0x0060be50": {
+          "name": "GetINIString",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "cstr",
+            "ignore",
+            "int",
+            "cstr"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 3,
+              "hex": "2a 00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stage0-true-upper",
+      "args": [
+        0
+      ],
+      "callees": {
+        "0x0060be50": {
+          "name": "GetINIString",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "cstr",
+            "ignore",
+            "int",
+            "cstr"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 3,
+              "hex": "54 00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stage0-true-lower",
+      "args": [
+        0
+      ],
+      "callees": {
+        "0x0060be50": {
+          "name": "GetINIString",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "cstr",
+            "ignore",
+            "int",
+            "cstr"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 3,
+              "hex": "74 00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stage0-true-digit",
+      "args": [
+        0
+      ],
+      "callees": {
+        "0x0060be50": {
+          "name": "GetINIString",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "cstr",
+            "ignore",
+            "int",
+            "cstr"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 3,
+              "hex": "31 00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stage1-false",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@transferowner",
+          "offset": "0x41c",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x005dfa00": {
+          "name": "FUN_005dfa00",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            "@stage1",
+            "@helptext"
+          ]
+        }
+      }
+    },
+    {
+      "name": "stage1-default",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@transferowner",
+          "offset": "0x41c",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x005dfa00": {
+          "name": "FUN_005dfa00",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            "@stage1",
+            "@helptext"
+          ]
+        },
+        "0x0060be50": {
+          "name": "GetINIString",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "cstr",
+            "ignore",
+            "int",
+            "cstr"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 3,
+              "hex": "2a 00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stage1-true",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@transferowner",
+          "offset": "0x41c",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x005dfa00": {
+          "name": "FUN_005dfa00",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            "@stage1",
+            "@helptext"
+          ]
+        },
+        "0x0060be50": {
+          "name": "GetINIString",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "cstr",
+            "ignore",
+            "int",
+            "cstr"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 3,
+              "hex": "54 00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "stage1-title-null",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@transferowner",
+          "offset": "0x41c",
+          "u32": 1
+        },
+        {
+          "addr": "@transferowner",
+          "offset": "0x390",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "stage1-help-null",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@transferowner",
+          "offset": "0x41c",
+          "u32": 1
+        },
+        {
+          "addr": "@transferowner",
+          "offset": "0x270",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "change-stage-0-to-1",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@transferowner",
+          "offset": "0x41c",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x005dfa00": {
+          "name": "FUN_005dfa00",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            "@stage1",
+            "@helptext"
+          ]
+        }
+      }
+    },
+    {
+      "name": "change-stage-1-to-0",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@transferowner",
+          "offset": "0x41c",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "negative-stage",
+      "args": [
+        -1
+      ],
+      "memory": [
+        {
+          "addr": "@transferowner",
+          "offset": "0x41c",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "high-stage",
+      "args": [
+        2
+      ]
+    },
+    {
+      "name": "old-page-null",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@transferowner",
+          "offset": "0x248",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "active-page-null",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@transferowner",
+          "offset": "0x248",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "stage-title-null",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@transferowner",
+          "offset": "0x390",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "help-window-null",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@transferowner",
+          "offset": "0x270",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "name-input-null",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@transferowner",
+          "offset": "0x41c",
+          "u32": 1
+        },
+        {
+          "addr": "@transferowner",
+          "offset": "0x388",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x005dfa00": {
+          "name": "FUN_005dfa00",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            "@stage1",
+            "@helptext"
+          ]
+        }
+      }
+    },
+    {
+      "name": "one-display-null",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@transferowner",
+          "offset": "0x348",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "all-displays-null",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@transferowner",
+          "offset": "0x348",
+          "u32": 0
+        },
+        {
+          "addr": "@transferowner",
+          "offset": "0x34c",
+          "u32": 0
+        },
+        {
+          "addr": "@transferowner",
+          "offset": "0x350",
+          "u32": 0
+        },
+        {
+          "addr": "@transferowner",
+          "offset": "0x354",
+          "u32": 0
+        },
+        {
+          "addr": "@transferowner",
+          "offset": "0x358",
+          "u32": 0
+        },
+        {
+          "addr": "@transferowner",
+          "offset": "0x35c",
+          "u32": 0
+        },
+        {
+          "addr": "@transferowner",
+          "offset": "0x360",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "layout-low-clamps",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00923780",
+          "u32": 100
+        },
+        {
+          "addr": "0x00923784",
+          "u32": 100
+        }
+      ]
+    },
+    {
+      "name": "layout-no-clamps",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00923780",
+          "u32": 1200
+        },
+        {
+          "addr": "0x00923784",
+          "u32": 900
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5165870,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          -2,
+          -1,
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@transferowner",
+        "offset": "0x41c",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00923780",
+        "type": "int",
+        "choices": [
+          100,
+          800,
+          1200
+        ]
+      },
+      {
+        "addr": "0x00923784",
+        "type": "int",
+        "choices": [
+          100,
+          600,
+          900
+        ]
+      },
+      {
+        "addr": "@transferowner",
+        "offset": "0x348",
+        "type": "ptr",
+        "count": 7,
+        "choices": [
+          "@window",
+          0
+        ]
+      },
+      {
+        "addr": "@transferowner",
+        "offset": "0x250",
+        "type": "ptr",
+        "count": 8,
+        "choices": [
+          "@layout",
+          0
+        ]
+      }
+    ]
+  },
+  "_survivors": "L691: changing the < 0 boundary to <= 0 or < 1 only changes the value-zero case, which is assigned zero either way; L769: when y equals 0xb4, < and <= produce the same coordinate."
+}

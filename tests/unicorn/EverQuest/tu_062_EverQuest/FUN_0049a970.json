@@ -1,0 +1,390 @@
+{
+  "function": "ChannelEventHandler_guess::MailServerMessageReceived_guess",
+  "original": "0x0049a970",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@channeleventhandler+0x4",
+  "args": [
+    {
+      "name": "first_guess",
+      "type": "cstr"
+    },
+    {
+      "name": "second_guess",
+      "type": "cstr"
+    },
+    {
+      "name": "index_guess",
+      "type": "int"
+    },
+    {
+      "name": "text_guess",
+      "type": "cstr"
+    },
+    {
+      "name": "flag_guess",
+      "type": "char"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "channeleventhandler": {
+      "size": "0x8",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079AC74",
+      "from_image": "0x0079AC74",
+      "image_size": 4
+    },
+    {
+      "addr": "0x006460AC",
+      "from_image": "0x006460AC",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00923D74",
+      "from_image": "0x00923D74",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x0049297b": {
+      "name": "BeingIgnored_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x0046da4a": {
+      "name": "FUN_0046da4a",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "5800"
+        }
+      ]
+    },
+    "0x00467ad1": {
+      "name": "AddNameToTellList_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x00478f73": {
+      "name": "GarbleText_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "ignore",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0049a4f9": {
+      "name": "MailServerNotificationFlush_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004982c6": {
+      "name": "FUN_004982c6",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ]
+    },
+    "?DspChat_guess@GlobalState_guess@@QAEXPBDH_N@Z": {
+      "name": "DspChat_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb",
+    "?DspChat_guess@GlobalState_guess@@QAEXPBDH_N@Z": "0x004982c6"
+  },
+  "cases": [
+    {
+      "name": "index-minus-four-copy",
+      "args": [
+        "channel text",
+        "sender",
+        -4,
+        "speaker",
+        0
+      ]
+    },
+    {
+      "name": "index-minus-four-message-offset",
+      "args": [
+        "channel text",
+        "sender",
+        -4,
+        "speaker",
+        0
+      ],
+      "callees": {
+        "0x0046da4a": {
+          "name": "FUN_0046da4a",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "int",
+            "cstr",
+            "cstr",
+            "cstr",
+            "cstr",
+            "cstr",
+            "cstr",
+            "cstr",
+            "cstr",
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "index-minus-four-filtered",
+      "args": [
+        "channel text",
+        "sender",
+        -4,
+        "speaker",
+        0
+      ],
+      "callees": {
+        "0x0049297b": {
+          "name": "FUN_0049297b",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "index-minus-four-global-copy",
+      "args": [
+        "channel text",
+        "sender",
+        -4,
+        "speaker",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00923D74",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "index-minus-three-flag-off",
+      "args": [
+        "channel text",
+        "sender",
+        -3,
+        "speaker",
+        0
+      ]
+    },
+    {
+      "name": "index-minus-three-flag-on",
+      "args": [
+        "channel text",
+        "sender",
+        -3,
+        "speaker",
+        1
+      ]
+    },
+    {
+      "name": "index-minus-two",
+      "args": [
+        "channel text",
+        "sender",
+        -2,
+        "speaker",
+        0
+      ]
+    },
+    {
+      "name": "index-minus-one",
+      "args": [
+        "channel text",
+        "sender",
+        -1,
+        "",
+        0
+      ]
+    },
+    {
+      "name": "index-below-minus-one",
+      "args": [
+        "channel text",
+        "sender",
+        -5,
+        "",
+        0
+      ]
+    },
+    {
+      "name": "index-zero-empty-text",
+      "args": [
+        "channel text",
+        "sender",
+        0,
+        "",
+        0
+      ]
+    },
+    {
+      "name": "index-zero-text-flag-off",
+      "args": [
+        "channel text",
+        "sender",
+        0,
+        "speaker",
+        0
+      ]
+    },
+    {
+      "name": "index-zero-text-flag-on",
+      "args": [
+        "channel text",
+        "sender",
+        0,
+        "speaker",
+        1
+      ]
+    },
+    {
+      "name": "index-zero-filtered",
+      "args": [
+        "channel text",
+        "sender",
+        0,
+        "speaker",
+        0
+      ],
+      "callees": {
+        "0x0049297b": {
+          "name": "FUN_0049297b",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "index-one-global-copy",
+      "args": [
+        "channel text",
+        "sender",
+        1,
+        "speaker",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00923D74",
+          "u32": 1
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4827504,
+    "count": 120,
+    "args": [
+      {
+        "choices": [
+          "",
+          "channel text",
+          "another channel"
+        ]
+      },
+      {
+        "choices": [
+          "",
+          "sender",
+          "other"
+        ]
+      },
+      {
+        "range": [
+          -5,
+          5
+        ]
+      },
+      {
+        "choices": [
+          "",
+          "speaker",
+          "other speaker"
+        ]
+      },
+      {
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x00923D74",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "_survivors": "L8788: the stack is zeroed before entry and message_guess has no prior write, so the initial clear is unobservable"
+}

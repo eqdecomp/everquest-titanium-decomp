@@ -1,0 +1,291 @@
+{
+  "function": "CBookWndView_guess::CBookWndView_guess",
+  "original": "0x004e84e8",
+  "_survivors": "L320: page0Number_174 is overwritten by the next ChildNumber_guess call before return; the generic child lookup does not read this derived field.",
+  "sources": [
+    "src/EverQuest/tu_134_BookWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner_004e8133",
+  "args": [
+    {
+      "name": "parent",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "owner_004e8133": {
+      "size": "0x718",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x124",
+          "u32": "@sidl_piece"
+        }
+      ]
+    },
+    "parent": {
+      "size": "0x11c",
+      "fill": "random"
+    },
+    "sidl_piece": {
+      "size": "0x64",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x60",
+          "u32": 0
+        }
+      ]
+    },
+    "right_button": {
+      "size": "0x1",
+      "fill": "random"
+    },
+    "left_button": {
+      "size": "0x1",
+      "fill": "random"
+    },
+    "done_button": {
+      "size": "0x1",
+      "fill": "random"
+    },
+    "page0": {
+      "size": "0x1",
+      "fill": "random"
+    },
+    "page1": {
+      "size": "0x1",
+      "fill": "random"
+    },
+    "number0": {
+      "size": "0x1",
+      "fill": "random"
+    },
+    "number1": {
+      "size": "0x1",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00571e00": {
+      "name": "CXStr_ctor",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this"
+    },
+    "0x005a3900": {
+      "name": "CSidlScreenWnd_ctor",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "mem:4"
+      ],
+      "ret": "this"
+    },
+    "0x00571d00": {
+      "name": "CXStr_FreeRep",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x0060e2b9": {
+      "name": "eh_vector_constructor_iterator",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "int",
+        "ignore",
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x005a25b0": {
+      "name": "CreateChildrenFromSidl",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00572040": {
+      "name": "Setup_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005a1e10": {
+      "name": "GetChildItem",
+      "conv": "thiscall",
+      "args": [
+        "mem:4"
+      ],
+      "ret": [
+        "@right_button",
+        "@left_button",
+        "@done_button",
+        "@page0",
+        "@page1"
+      ]
+    },
+    "0x005b7ea0": {
+      "name": "SetPage_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005a2490": {
+      "name": "ChildNumber_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:4"
+      ],
+      "ret": [
+        "@number0",
+        "@number1"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "both pages",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {
+          "addr": "@owner_004e8133",
+          "offset": "0x64",
+          "u32": 32
+        },
+        {
+          "addr": "@sidl_piece",
+          "offset": "0x60",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "null sidl piece",
+      "args": [
+        "@parent"
+      ],
+      "memory": [
+        {
+          "addr": "@owner_004e8133",
+          "offset": "0x124",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "page0 null",
+      "args": [
+        "@parent"
+      ],
+      "callees": {
+        "0x005a1e10": {
+          "name": "GetChildItem",
+          "conv": "thiscall",
+          "args": [
+            "mem:4"
+          ],
+          "ret": [
+            "@right_button",
+            "@left_button",
+            "@done_button",
+            0,
+            "@page1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "page1 null",
+      "args": [
+        "@parent"
+      ],
+      "callees": {
+        "0x005a1e10": {
+          "name": "GetChildItem",
+          "conv": "thiscall",
+          "args": [
+            "mem:4"
+          ],
+          "ret": [
+            "@right_button",
+            "@left_button",
+            "@done_button",
+            "@page0",
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "null parent and null piece",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner_004e8133",
+          "offset": "0x124",
+          "u32": 0
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5145832,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@parent"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@owner_004e8133",
+        "offset": "0x124",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@sidl_piece"
+        ]
+      },
+      {
+        "addr": "@owner_004e8133",
+        "offset": "0x64",
+        "type": "u32",
+        "choices": [
+          0,
+          32,
+          2147483648
+        ]
+      },
+      {
+        "addr": "@sidl_piece",
+        "offset": "0x60",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          2147483648,
+          4294967295
+        ]
+      }
+    ]
+  }
+}

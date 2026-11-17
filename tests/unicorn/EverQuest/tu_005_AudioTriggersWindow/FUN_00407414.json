@@ -1,0 +1,265 @@
+{
+  "function": "CAudioTriggersWindow_guess::FillSoundList_guess",
+  "original": "0x00407414",
+  "sources": [
+    "src/EverQuest/tu_005_AudioTriggersWindow.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@triggerwindow",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "triggerwindow": {
+      "size": "0x190",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x180", "u32": "@source" }
+      ]
+    },
+    "source": {
+      "size": "0x120",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x11c", "u32": "@list" }
+      ]
+    },
+    "list": {
+      "size": "0x8",
+      "fill": "zero"
+    },
+    "manager": {
+      "size": "0x50",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x48", "u32": "@buckets" },
+        { "offset": "0x4c", "u32": 4 }
+      ]
+    },
+    "buckets": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@entry0" },
+        { "offset": "0x4", "u32": "@entry1" },
+        { "offset": "0x8", "u32": "@entry2" },
+        { "offset": "0xc", "u32": "@entry3" }
+      ]
+    },
+    "entry0": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@sort0" },
+        { "offset": "0x4", "u32": 0 }
+      ]
+    },
+    "entry1": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@sort1" },
+        { "offset": "0x4", "u32": 1 }
+      ]
+    },
+    "entry2": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@sort2" },
+        { "offset": "0x4", "u32": 2 }
+      ]
+    },
+    "entry3": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@sort3" },
+        { "offset": "0x4", "u32": 3 }
+      ]
+    },
+    "sort0": { "size": "0x8", "fill": "zero" },
+    "sort1": { "size": "0x8", "fill": "zero" },
+    "sort2": { "size": "0x8", "fill": "zero" },
+    "sort3": { "size": "0x8", "fill": "zero" },
+    "heap0": { "size": "0x100", "fill": "zero" },
+    "heap1": { "size": "0x100", "fill": "zero" },
+    "heap2": { "size": "0x100", "fill": "zero" }
+  },
+  "memory": [
+    { "addr": "0x0079C144", "u32": "@manager" },
+    { "addr": "0x0063F53F", "cstr": "" }
+  ],
+  "callees": {
+    "0x0059c3e0": {
+      "name": "ResetResultList_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "keep"
+    },
+    "0x00406aef": {
+      "name": "GetOwner_guess",
+      "conv": "cdecl",
+      "args": [],
+      "passthrough": true
+    },
+    "0x00405678": {
+      "name": "GetFirstHashEntry_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x00571e00": {
+      "name": "CXStrFromCString_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "passthrough": true
+    },
+    "0x0059c8d0": {
+      "name": "AddResult_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": "keep"
+    },
+    "0x00571d00": {
+      "name": "ReleaseCXStr_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "passthrough": true
+    },
+    "0x0047c3af": {
+      "name": "InitializeSortedPointers_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "passthrough": true
+    },
+    "0x00573b10": {
+      "name": "CompareKeyText_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "int"],
+      "ret": [0]
+    },
+    "0x00407328": {
+      "name": "InsertSortedPointer_guess",
+      "conv": "thiscall",
+      "args": ["int", "ptr"],
+      "passthrough": true
+    },
+    "0x00405697": {
+      "name": "GetNextHashEntry_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "passthrough": true
+    },
+    "0x00598620": {
+      "name": "SetListItemData_guess",
+      "conv": "thiscall",
+      "args": ["int", "ptr"],
+      "ret": "keep"
+    },
+    "0x00406e7e": {
+      "name": "DestroySortedPointers_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0051da09": {
+      "name": "GrowPointerArray_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "arg0",
+      "passthrough": true
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": ["@heap0", "@heap1", "@heap2"]
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "null source",
+      "args": [],
+      "memory": [
+        { "addr": "@triggerwindow", "offset": "0x180", "u32": 0 }
+      ]
+    },
+    {
+      "name": "empty table",
+      "args": [],
+      "memory": [
+        { "addr": "@manager", "offset": "0x4c", "u32": 0 }
+      ]
+    },
+    {
+      "name": "one entry",
+      "args": [],
+      "memory": [
+        { "addr": "@manager", "offset": "0x4c", "u32": 1 }
+      ]
+    },
+    {
+      "name": "comparison stops",
+      "args": [],
+      "memory": [
+        { "addr": "@manager", "offset": "0x4c", "u32": 3 }
+      ],
+      "callees": {
+        "0x00573b10": {
+          "name": "CompareKeyText_guess",
+          "conv": "thiscall",
+          "args": ["ptr", "int"],
+          "ret": [0]
+        }
+      }
+    },
+    {
+      "name": "comparison continues then stops",
+      "args": [],
+      "memory": [
+        { "addr": "@manager", "offset": "0x4c", "u32": 4 }
+      ],
+      "callees": {
+        "0x00573b10": {
+          "name": "CompareKeyText_guess",
+          "conv": "thiscall",
+          "args": ["ptr", "int"],
+          "ret": [-1, -1, 0]
+        }
+      }
+    },
+    {
+      "name": "non-null empty entry stops traversal",
+      "args": [],
+      "memory": [
+        { "addr": "@manager", "offset": "0x4c", "u32": 4 },
+        { "addr": "@entry3", "offset": "0x0", "u32": 0 }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4224020,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@triggerwindow",
+        "offset": "0x180",
+        "type": "u32",
+        "choices": [0, "@source"]
+      },
+      {
+        "addr": "@manager",
+        "offset": "0x4c",
+        "type": "int",
+        "choices": [0, 1, 2, 3, 4]
+      }
+    ]
+  }
+}

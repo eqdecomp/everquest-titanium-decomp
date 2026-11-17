@@ -1,0 +1,83 @@
+{
+  "function": "CCompassWnd_guess::CalculateNeedleVariation_guess",
+  "original": "0x004f9df8",
+  "sources": [
+    "src/EverQuest/tu_147_CompassWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@fun_004f9c15",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "fun_004f9c15": {
+      "size": "0x200",
+      "fill": "random"
+    },
+    "charview": {
+      "size": "0x20",
+      "fill": "random",
+      "init": [{"offset": "0x8", "u32": "@inner"}]
+    },
+    "inner": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x4", "u32": 0}]
+    },
+    "charinfo": {
+      "size": "0x1020",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@charview"},
+    {"addr": "@charinfo", "offset": "0x1010", "u32": 12}
+  ],
+  "callees": {
+    "0x0060f5eb": {
+      "name": "_rand",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 12345
+    },
+    "0x0060f81e": {
+      "name": "FUN_0060f81e",
+      "conv": "cdecl",
+      "args": ["int"],
+      "passthrough": true
+    },
+    "0x005ec220": {
+      "name": "FUN_005ec220",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@charinfo"
+    }
+  },
+  "cases": [
+    {"name": "no_view", "args": [], "memory": [{"addr": "0x00905d00", "u32": 0}]},
+    {"name": "level_0", "args": [], "memory": [{"addr": "@charinfo", "offset": "0x1010", "u32": 0}]},
+    {"name": "level_negative", "args": [], "memory": [{"addr": "@charinfo", "offset": "0x1010", "u32": -7}]},
+    {"name": "level_1", "args": [], "memory": [{"addr": "@charinfo", "offset": "0x1010", "u32": 1}]},
+    {"name": "level_50", "args": [], "memory": [{"addr": "@charinfo", "offset": "0x1010", "u32": 50}]},
+    {"name": "level_199", "args": [], "memory": [{"addr": "@charinfo", "offset": "0x1010", "u32": 199}]},
+    {"name": "level_200_early", "args": [], "memory": [{"addr": "@charinfo", "offset": "0x1010", "u32": 200}]},
+    {"name": "level_300_early", "args": [], "memory": [{"addr": "@charinfo", "offset": "0x1010", "u32": 300}]},
+    {"name": "level_190_forced_neg", "args": [],
+     "memory": [{"addr": "@charinfo", "offset": "0x1010", "u32": 190}],
+     "callees": {"0x0060f5eb": {"name": "_rand", "conv": "cdecl", "args": [], "ret": 0}}},
+    {"name": "level_190_forced_pos", "args": [],
+     "memory": [{"addr": "@charinfo", "offset": "0x1010", "u32": 190}],
+     "callees": {"0x0060f5eb": {"name": "_rand", "conv": "cdecl", "args": [], "ret": 24}}},
+    {"name": "level_120_rand_zero", "args": [],
+     "memory": [{"addr": "@charinfo", "offset": "0x1010", "u32": 120}],
+     "callees": {"0x0060f5eb": {"name": "_rand", "conv": "cdecl", "args": [], "ret": 0}}}
+  ],
+  "fuzz": {
+    "seed": 5217784,
+    "count": 200,
+    "args": [],
+    "memory": [
+      {"addr": "@charinfo", "offset": "0x1010", "type": "int", "range": [-10, 260]},
+      {"addr": "0x00905d00", "type": "u32", "choices": [0, "@charview"]}
+    ]
+  }
+}

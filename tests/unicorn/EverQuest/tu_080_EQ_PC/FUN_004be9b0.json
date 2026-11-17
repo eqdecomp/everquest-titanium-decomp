@@ -1,0 +1,77 @@
+{
+  "function": "PcCharacter_guess::GetCompleteObject_guess",
+  "original": "0x004be9b0",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@pccharacter+0xc384",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "pccharacter": {
+      "size": "0xc4d0",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0xc380",
+          "u32": "0xffff3c7c"
+        }
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {},
+  "cases": [
+    {
+      "name": "typical",
+      "args": []
+    },
+    {
+      "name": "zeros",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@pccharacter",
+          "offset": "0xc380",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "positive-vtordisp",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@pccharacter",
+          "offset": "0xc380",
+          "u32": 4096
+        }
+      ]
+    },
+    {
+      "name": "negative-vtordisp",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@pccharacter",
+          "offset": "0xc380",
+          "u32": -4096
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4975024,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@pccharacter",
+        "offset": "0xc380",
+        "type": "int",
+        "choices": [-50052, -4096, -256, 0, 256, 4096, 50052]
+      }
+    ]
+  }
+}

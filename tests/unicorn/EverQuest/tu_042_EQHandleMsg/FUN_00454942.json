@@ -1,0 +1,112 @@
+{
+  "function": "Handle_OP_SetChatServer_guess",
+  "original": "0x00454942",
+  "_survivors": "L2964: first[0]=0 deleted or index moved: the stack starts zeroed and the parser stub writes bytes 1..4; L2965: third[0]=0 same; L2966: fourth[0]=0 same; L2967: second[0]=0 same",
+  "sources": [
+    "src/EverQuest/tu_042_EQHandleMsg.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "text",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "display": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00988DF0",
+      "u32": "@display"
+    },
+    {
+      "addr": "0x0079AC74",
+      "u32": 305419896
+    }
+  ],
+  "callees": {
+    "0x0040c0f2": {
+      "name": "ParseField54942",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "mem:4",
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        {"call": 0, "arg": 0, "offset": 1, "hex": "66697200"},
+        {"call": 1, "arg": 0, "offset": 1, "hex": "73656300"},
+        {"call": 2, "arg": 0, "offset": 1, "hex": "74680000"},
+        {"call": 3, "arg": 0, "offset": 1, "hex": "666f7500"}
+      ]
+    },
+    "0x0060e3a3": {
+      "name": "atol",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 7
+    },
+    "0x00495720": {
+      "name": "ErrorDisplay54942::Show",
+      "conv": "thiscall",
+      "args": [
+        "mem:256",
+        "long",
+        "mem:256",
+        "mem:256"
+      ],
+      "ret": "keep"
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        "12,alpha,beta,gamma"
+      ]
+    },
+    {
+      "name": "one field",
+      "args": [
+        "5"
+      ]
+    },
+    {
+      "name": "empty text",
+      "args": [
+        ""
+      ]
+    },
+    {
+      "name": "negative number",
+      "args": [
+        "-3,x,y,z"
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4540738,
+    "count": 120,
+    "args": [
+      {
+        "choices": [
+          "1,a,b,c",
+          "0",
+          "",
+          "99,hello,world,x,y,z",
+          "-7,,,",
+          "42,one,two"
+        ]
+      }
+    ]
+  }
+}

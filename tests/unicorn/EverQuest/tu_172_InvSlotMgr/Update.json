@@ -1,0 +1,166 @@
+{
+  "function": "DragController_guess::Update_guess",
+  "original": "0x00518e5c",
+  "sources": [
+    "src/EverQuest/tu_172_InvSlotMgr.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@dragcontroller",
+  "args": [
+    {
+      "name": "value",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "dragcontroller": {
+      "size": "0x14",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": "@referenced"},
+        {"offset": "0x8", "u32": "@outerstore"},
+        {"offset": "0xc", "u32": 21}
+      ]
+    },
+    "value": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@item"}]
+    },
+    "item": {
+      "size": "0x79",
+      "fill": "random",
+      "init": [
+        {"offset": "0x48", "u32": "0x1234"},
+        {"offset": "0x60", "u8": 1},
+        {"offset": "0x78", "u8": 1}
+      ]
+    },
+    "referenced": {
+      "size": "0x158",
+      "fill": "random",
+      "init": [
+        {"offset": "0x120", "u32": 21},
+        {"offset": "0x12c", "u32": "@nestedstore"},
+        {"offset": "0x130", "u32": "0x13579bdf"},
+        {"offset": "0x150", "u32": "0x11111111"},
+        {"offset": "0x154", "u32": "0x22222222"}
+      ]
+    },
+    "outerstore": {"size": "0x4", "fill": "zero"},
+    "nestedstore": {"size": "0x4", "fill": "zero"},
+    "stringtable": {"size": "0x4", "fill": "zero"},
+    "itemtext": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@stringtable"},
+    {"addr": "0x006674c8", "from_image": "0x006674c8", "image_size": 88},
+    {"addr": "@itemtext", "cstr": "fixture item text"}
+  ],
+  "callees": {
+    "0x005e0f60": {"name": "ItemData_guess::GetValue_guess", "conv": "thiscall", "args": [], "ret": 600},
+    "0x005b1ab0": {"name": "DragItemStore_guess::SetState_guess", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x005eccc0": {"name": "ItemData_guess::GetItemClass_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005ec760": {"name": "ItemData_guess::IsStackable_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005e0ec0": {"name": "ItemData_guess::GetText_guess", "conv": "thiscall", "args": [], "ret": "@itemtext"},
+    "0x00571e00": {"name": "CXStr::CXStr", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x00571f70": {"name": "Referenced_guess::TextSlot_guess::Set_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x00571d00": {"name": "CXStr::Release_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x005dfa00": {"name": "StringTableView_guess::Lookup_guess", "conv": "thiscall", "args": ["cstr", "int"], "ret": "@itemtext"}
+  },
+  "cases": [
+    {
+      "name": "no referenced object",
+      "args": ["@value"],
+      "memory": [{"addr": "@dragcontroller", "offset": "0x4", "u32": 0}]
+    },
+    {
+      "name": "referenced object without store and no outer store",
+      "args": ["@value"],
+      "memory": [
+        {"addr": "@dragcontroller", "offset": "0x8", "u32": 0},
+        {"addr": "@referenced", "offset": "0x12c", "u32": 0}
+      ]
+    },
+    {
+      "name": "null input uses table entry 21",
+      "args": [0],
+      "memory": [{"addr": "@referenced", "offset": "0x120", "u32": 21}]
+    },
+    {
+      "name": "empty item uses literal at index 22",
+      "args": ["@value"],
+      "memory": [
+        {"addr": "@value", "offset": "0x0", "u32": 0},
+        {"addr": "@referenced", "offset": "0x120", "u32": 22},
+        {"addr": "@dragcontroller", "offset": "0x8", "u32": 0}
+      ]
+    },
+    {
+      "name": "item with colors disabled and first check true",
+      "args": ["@value"],
+      "memory": [
+        {"addr": "@dragcontroller", "offset": "0xc", "u32": 21},
+        {"addr": "@item", "offset": "0x60", "u8": 0},
+        {"addr": "@item", "offset": "0x78", "u8": 0}
+      ],
+      "callees": {"0x005eccc0": {"name": "ItemData_guess::GetItemClass_guess", "conv": "thiscall", "args": [], "ret": 1}}
+    },
+    {
+      "name": "red item and second check false at value boundary",
+      "args": ["@value"],
+      "memory": [
+        {"addr": "@dragcontroller", "offset": "0xc", "u32": 21},
+        {"addr": "@item", "offset": "0x60", "u8": 1},
+        {"addr": "@item", "offset": "0x78", "u8": 0}
+      ],
+      "callees": {
+        "0x005e0f60": {"name": "ItemData_guess::GetValue_guess", "conv": "thiscall", "args": [], "ret": 500},
+        "0x005eccc0": {"name": "ItemData_guess::GetItemClass_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x005ec760": {"name": "ItemData_guess::IsStackable_guess", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "green item and second check true",
+      "args": ["@value"],
+      "memory": [
+        {"addr": "@dragcontroller", "offset": "0xc", "u32": 21},
+        {"addr": "@item", "offset": "0x48", "u32": "0x1234"},
+        {"addr": "@item", "offset": "0x60", "u8": 1},
+        {"addr": "@item", "offset": "0x78", "u8": 1}
+      ],
+      "callees": {
+        "0x005eccc0": {"name": "ItemData_guess::GetItemClass_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x005ec760": {"name": "ItemData_guess::IsStackable_guess", "conv": "thiscall", "args": [], "ret": 1}
+      }
+    },
+    {
+      "name": "item index above color range and no outer store",
+      "args": ["@value"],
+      "memory": [
+        {"addr": "@dragcontroller", "offset": "0xc", "u32": 22},
+        {"addr": "@dragcontroller", "offset": "0x8", "u32": 0},
+        {"addr": "@item", "offset": "0x60", "u8": 1},
+        {"addr": "@item", "offset": "0x78", "u8": 1}
+      ],
+      "callees": {"0x005eccc0": {"name": "ItemData_guess::GetItemClass_guess", "conv": "thiscall", "args": [], "ret": 1}}
+    }
+  ],
+  "fuzz": {
+    "seed": 5344860,
+    "count": 100,
+    "args": [{"choices": [0, "@value"]}],
+    "memory": [
+      {"addr": "@dragcontroller", "offset": "0x4", "type": "ptr", "choices": [0, "@referenced"]},
+      {"addr": "@dragcontroller", "offset": "0x8", "type": "ptr", "choices": [0, "@outerstore"]},
+      {"addr": "@dragcontroller", "offset": "0xc", "type": "int", "choices": [0, 21, 22]},
+      {"addr": "@referenced", "offset": "0x120", "type": "int", "choices": [0, 21, 22]},
+      {"addr": "@referenced", "offset": "0x12c", "type": "ptr", "choices": [0, "@nestedstore"]},
+      {"addr": "@value", "offset": "0x0", "type": "ptr", "choices": [0, "@item"]},
+      {"addr": "@item", "offset": "0x48", "type": "u32", "choices": [0, "0x1234"]},
+      {"addr": "@item", "offset": "0x60", "type": "u8", "choices": [0, 1]},
+      {"addr": "@item", "offset": "0x78", "type": "u8", "choices": [0, 1]}
+    ]
+  }
+}

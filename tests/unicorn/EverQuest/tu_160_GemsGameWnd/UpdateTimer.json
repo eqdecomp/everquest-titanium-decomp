@@ -1,0 +1,25 @@
+{
+  "function": "CGemsGameWndView_guess::UpdateTimer_guess",
+  "_survivors": "remaining == 2 is unreachable: 40 - trunc(1.5 * int) never equals 2 (x=25 gives 3, x=26 gives 1), so `<` -> `<=` and `2` -> `3` on L154 are equivalent",
+  "_shape": "member function reading [ecx+0x43c], x87 fild/fmul by an .rdata float, __ftol2 (passthrough), a client global pointer",
+  "original": "0x0050509b",
+  "sources": ["src/EverQuest/tu_160_GemsGameWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "objects": {"owner": {"size": "0x490", "fill": "random"}, "clock": {"size": "0x150", "fill": "random"}},
+  "memory": [{"addr": "0x00905d24", "u32": "@clock"}],
+  "callees": {},
+  "cases": [
+    {"name": "zero", "memory": [{"addr": "@owner", "offset": "0x43c", "u32": 0}, {"addr": "@clock", "offset": "0x148", "u32": 1000}]},
+    {"name": "small remaining", "memory": [{"addr": "@owner", "offset": "0x43c", "u32": 39}, {"addr": "@clock", "offset": "0x148", "u32": 5}]},
+    {"name": "remaining 1 (x=26: 1.5*26=39)", "memory": [{"addr": "@owner", "offset": "0x43c", "u32": 26}, {"addr": "@clock", "offset": "0x148", "u32": 100}]},
+    {"name": "remaining 3 (x=25: trunc 37.5)", "memory": [{"addr": "@owner", "offset": "0x43c", "u32": 25}, {"addr": "@clock", "offset": "0x148", "u32": 100}]},
+    {"name": "remaining 0 (x=27: trunc 40.5)", "memory": [{"addr": "@owner", "offset": "0x43c", "u32": 27}, {"addr": "@clock", "offset": "0x148", "u32": 100}]},
+    {"name": "negative", "memory": [{"addr": "@owner", "offset": "0x43c", "u32": "0xfffffff0"}, {"addr": "@clock", "offset": "0x148", "u32": 7}]}
+  ],
+  "fuzz": {"seed": 5263515, "count": 120,
+           "memory": [{"addr": "@owner", "offset": "0x43c", "type": "int", "range": [-200, 4000]},
+                      {"addr": "@clock", "offset": "0x148", "type": "int"}]}
+}

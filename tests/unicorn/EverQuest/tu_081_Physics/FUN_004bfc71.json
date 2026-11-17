@@ -1,0 +1,242 @@
+{
+  "function": "TransformPassengersToWorldSpace_guess",
+  "original": "0x004bfc71",
+  "size": "0x19e",
+  "sources": [
+    "src/EverQuest/tu_081_Physics.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "pBoat",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "pboat": {
+      "size": "0x348",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x30", "f32": 1.0 },
+        { "offset": "0x34", "f32": 2.0 },
+        { "offset": "0x38", "f32": 3.0 },
+        { "offset": "0x3c", "f32": 4.0 },
+        { "offset": "0x40", "f32": 5.0 },
+        { "offset": "0x44", "f32": 6.0 },
+        { "offset": "0x4c", "f32": 7.0 },
+        { "offset": "0x50", "f32": 8.0 },
+        { "offset": "0x1a8", "u32": "@boatinfo" },
+        { "offset": "0x1b6", "u8": 1 },
+        { "offset": "0x214", "u32": "@child" }
+      ]
+    },
+    "child": {
+      "size": "0x348",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x30", "f32": 11.0 },
+        { "offset": "0x34", "f32": 13.0 },
+        { "offset": "0x38", "f32": 17.0 },
+        { "offset": "0x3c", "f32": 19.0 },
+        { "offset": "0x40", "f32": 23.0 },
+        { "offset": "0x44", "f32": 29.0 },
+        { "offset": "0x4c", "f32": 31.0 },
+        { "offset": "0x50", "f32": 37.0 },
+        { "offset": "0x1a8", "u32": "@childinfo" },
+        { "offset": "0x214", "u32": "@unrelated" }
+      ]
+    },
+    "unrelated": {
+      "size": "0x348",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x30", "f32": 41.0 },
+        { "offset": "0x34", "f32": 43.0 },
+        { "offset": "0x38", "f32": 47.0 },
+        { "offset": "0x3c", "f32": 53.0 },
+        { "offset": "0x40", "f32": 59.0 },
+        { "offset": "0x44", "f32": 61.0 },
+        { "offset": "0x4c", "f32": 67.0 },
+        { "offset": "0x50", "f32": 71.0 },
+        { "offset": "0x1a8", "u32": "@unrelatedinfo" }
+      ]
+    },
+    "otherboat": {
+      "size": "0x348",
+      "fill": "zero"
+    },
+    "boatinfo": {
+      "size": "0x15c",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@boatactor" },
+        { "offset": "0x158", "u32": "@pboat" }
+      ]
+    },
+    "childinfo": {
+      "size": "0x15c",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@childactor" },
+        { "offset": "0x158", "u32": "@pboat" }
+      ]
+    },
+    "unrelatedinfo": {
+      "size": "0x15c",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@unrelatedactor" },
+        { "offset": "0x158", "u32": "@otherboat" }
+      ]
+    },
+    "boatactor": {
+      "size": "4",
+      "fill": "zero",
+      "init": [{ "offset": "0", "u32": "@actorvtable" }]
+    },
+    "childactor": {
+      "size": "4",
+      "fill": "zero",
+      "init": [{ "offset": "0", "u32": "@actorvtable" }]
+    },
+    "unrelatedactor": {
+      "size": "4",
+      "fill": "zero",
+      "init": [{ "offset": "0", "u32": "@actorvtable" }]
+    },
+    "actorvtable": {
+      "size": "0x50",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x48", "u32": "@fn_set_position" },
+        { "offset": "0x4c", "u32": "@fn_set_heading" }
+      ]
+    },
+    "rotmanager": {
+      "size": "4",
+      "fill": "zero",
+      "init": [{ "offset": "0", "u32": "@rotvtable" }]
+    },
+    "rotvtable": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [{ "offset": "0x1c", "u32": "@fn_rotate" }]
+    },
+    "fn_rotate": { "size": "0x1" },
+    "fn_set_position": { "size": "0x1" },
+    "fn_set_heading": { "size": "0x1" },
+    "display": {
+      "size": "4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    { "addr": "0x0099e374", "u32": "@rotmanager" },
+    { "addr": "0x00905cc4", "u32": "@pboat" },
+    { "addr": "0x00905d24", "u32": "@display" }
+  ],
+  "callees": {
+    "@fn_rotate": {
+      "name": "Rotate_guess",
+      "conv": "thiscall",
+      "args": ["float", "float", "float", "ignore"],
+      "writes": [
+        { "arg": 3, "offset": 0, "hex": "0000803f0000004000004040000080400000a0400000c0400000e0400000004100001041" }
+      ]
+    },
+    "@fn_set_position": {
+      "name": "SetPosition_guess",
+      "conv": "thiscall",
+      "args": ["mem:12"]
+    },
+    "@fn_set_heading": {
+      "name": "SetHeading_guess",
+      "conv": "thiscall",
+      "args": ["mem:12"]
+    },
+    "0x004365db": {
+      "name": "FixHeading_guess",
+      "conv": "thiscall",
+      "args": ["float"],
+      "ret_float": 13.25
+    }
+  },
+  "cases": [
+    {
+      "name": "null argument",
+      "args": [0]
+    },
+    {
+      "name": "boat flag clear",
+      "args": ["@pboat"],
+      "memory": [
+        { "addr": "@pboat", "offset": "0x1b6", "u8": 0 }
+      ]
+    },
+    {
+      "name": "empty player list",
+      "args": ["@pboat"],
+      "memory": [
+        { "addr": "@pboat", "offset": "0x1b6", "u8": 1 },
+        { "addr": "0x00905cc4", "u32": 0 }
+      ]
+    },
+    {
+      "name": "self only",
+      "args": ["@pboat"],
+      "memory": [
+        { "addr": "@pboat", "offset": "0x1b6", "u8": 1 },
+        { "addr": "@pboat", "offset": "0x214", "u32": 0 },
+        { "addr": "0x00905cc4", "u32": "@pboat" }
+      ]
+    },
+    {
+      "name": "owner mismatch",
+      "args": ["@pboat"],
+      "memory": [
+        { "addr": "@pboat", "offset": "0x1b6", "u8": 1 },
+        { "addr": "@unrelated", "offset": "0x214", "u32": 0 },
+        { "addr": "0x00905cc4", "u32": "@unrelated" }
+      ]
+    },
+    {
+      "name": "one attached player",
+      "args": ["@pboat"],
+      "memory": [
+        { "addr": "@pboat", "offset": "0x1b6", "u8": 1 },
+        { "addr": "@child", "offset": "0x214", "u32": 0 },
+        { "addr": "0x00905cc4", "u32": "@child" }
+      ]
+    },
+    {
+      "name": "mixed linked list",
+      "args": ["@pboat"],
+      "memory": [
+        { "addr": "@pboat", "offset": "0x1b6", "u8": 1 },
+        { "addr": "@pboat", "offset": "0x214", "u32": "@child" },
+        { "addr": "@child", "offset": "0x214", "u32": "@unrelated" },
+        { "addr": "@unrelated", "offset": "0x214", "u32": 0 },
+        { "addr": "@childinfo", "offset": "0x158", "u32": "@pboat" },
+        { "addr": "@unrelatedinfo", "offset": "0x158", "u32": "@otherboat" },
+        { "addr": "0x00905cc4", "u32": "@pboat" }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4979825,
+    "count": 120,
+    "args": [
+      { "choices": ["@pboat"] }
+    ],
+    "memory": [
+      { "addr": "@pboat", "offset": "0x1b6", "type": "u8", "choices": [0, 1] },
+      { "addr": "0x00905cc4", "type": "ptr", "choices": [0, "@pboat", "@child", "@unrelated"] },
+      { "addr": "@childinfo", "offset": "0x158", "type": "ptr", "choices": ["@pboat", "@otherboat"] },
+      { "addr": "@unrelatedinfo", "offset": "0x158", "type": "ptr", "choices": ["@pboat", "@otherboat"] },
+      { "addr": "@pboat", "offset": "0x30", "type": "float", "count": 9, "range": [-100.0, 100.0] },
+      { "addr": "@child", "offset": "0x30", "type": "float", "count": 9, "range": [-100.0, 100.0] },
+      { "addr": "@unrelated", "offset": "0x30", "type": "float", "count": 9, "range": [-100.0, 100.0] }
+    ]
+  }
+}

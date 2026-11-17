@@ -1,0 +1,427 @@
+{
+  "function": "LoadScreenView_guess::DrawLoadScreen_guess",
+  "original": "0x0044861f",
+  "sources": [
+    "src/EverQuest/tu_035_EQ_LoadingS.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "size": "0x32d",
+  "objects": {
+    "owner": {
+      "size": "0x218",
+      "fill": "random"
+    },
+    "mode": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0xc",
+          "u8": 0
+        }
+      ]
+    },
+    "manager": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": 0,
+          "u32": "@vtbl"
+        }
+      ]
+    },
+    "fn_slot70": {
+      "size": "0x4"
+    },
+    "fn_slot84": {
+      "size": "0x4"
+    },
+    "fn_slot94": {
+      "size": "0x4"
+    },
+    "vtbl": {
+      "size": "0x98",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x70",
+          "u32": "@fn_slot70"
+        },
+        {
+          "offset": "0x84",
+          "u32": "@fn_slot84"
+        },
+        {
+          "offset": "0x94",
+          "u32": "@fn_slot94"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0085098c",
+      "u32": "@mode"
+    },
+    {
+      "addr": "0x00923780",
+      "u32": 640
+    },
+    {
+      "addr": "0x0092379c",
+      "u32": 640
+    },
+    {
+      "addr": "0x009237a0",
+      "u32": 480
+    },
+    {
+      "addr": "0x00698b28",
+      "u8": 0
+    },
+    {
+      "addr": "0x0099e364",
+      "u32": "@manager"
+    },
+    {
+      "addr": "0x00923d74",
+      "u32": 0
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": 0
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x214",
+      "u32": 1
+    }
+  ],
+  "callees": {
+    "0x0060ecbc": {
+      "name": "time_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "ret": 1234
+    },
+    "0x0060f5de": {
+      "name": "srand_guess",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ]
+    },
+    "0x00448526": {
+      "name": "DrawBackground_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:12"
+      ]
+    },
+    "0x00448376": {
+      "name": "WriteTextHD",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "int",
+        "int"
+      ]
+    },
+    "@fn_slot70": {
+      "name": "DrawLine_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:8",
+        "mem:8",
+        "u32"
+      ]
+    },
+    "@fn_slot84": {
+      "name": "DrawQuadOutline_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:48",
+        "u32"
+      ]
+    },
+    "@fn_slot94": {
+      "name": "DrawCursor_guess",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "rewrite_aliases": {
+    "_srand": "0x0060f5de"
+  },
+  "_survivors": "L269: the stack starts zeroed, so deleting the origin z initialization is unobservable; L366: changing the point index writes points_guess[3][0], overwritten at line 369 before it is read.",
+  "cases": [
+    {
+      "name": "null-redraw-mode",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x0085098c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "redraw-active",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@mode",
+          "offset": "0xc",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "width-at-640-progress-zero",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00923780",
+          "u32": 640
+        },
+        {
+          "addr": "0x00698b28",
+          "u8": 0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x214",
+          "u32": 0
+        },
+        {
+          "addr": "0x00923d74",
+          "u32": 1
+        },
+        {
+          "addr": "0x00905d24",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "width-641-redraw-progress-one-text-and-cursor",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00923780",
+          "u32": 641
+        },
+        {
+          "addr": "0x0092379c",
+          "u32": 1920
+        },
+        {
+          "addr": "0x009237a0",
+          "u32": 1080
+        },
+        {
+          "addr": "0x00698b28",
+          "from_image": "0x00698B28",
+          "image_size": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x214",
+          "u32": 1
+        },
+        {
+          "addr": "0x00923d74",
+          "u32": 0
+        },
+        {
+          "addr": "0x00905d24",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "progress-100",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00923780",
+          "u32": 641
+        },
+        {
+          "addr": "0x00698b28",
+          "u8": 0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x214",
+          "u32": 100
+        },
+        {
+          "addr": "0x00923d74",
+          "u32": 1
+        },
+        {
+          "addr": "0x00905d24",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "progress-101",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00923780",
+          "u32": 641
+        },
+        {
+          "addr": "0x00698b28",
+          "u8": 0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x214",
+          "u32": 101
+        },
+        {
+          "addr": "0x00923d74",
+          "u32": 1
+        },
+        {
+          "addr": "0x00905d24",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "negative-progress",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00923780",
+          "u32": 639
+        },
+        {
+          "addr": "0x00698b28",
+          "u8": 0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x214",
+          "u32": "0xffffffff"
+        },
+        {
+          "addr": "0x00923d74",
+          "u32": 0
+        },
+        {
+          "addr": "0x00905d24",
+          "u32": 1
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4490783,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x0085098c",
+        "type": "ptr",
+        "choices": [
+          "0x0",
+          "@mode"
+        ]
+      },
+      {
+        "addr": "@mode",
+        "offset": "0xc",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          255
+        ]
+      },
+      {
+        "addr": "0x00923780",
+        "type": "int",
+        "choices": [
+          639,
+          640,
+          641,
+          800,
+          1920
+        ]
+      },
+      {
+        "addr": "0x0092379c",
+        "type": "int",
+        "choices": [
+          0,
+          640,
+          641,
+          800,
+          1920
+        ]
+      },
+      {
+        "addr": "0x009237a0",
+        "type": "int",
+        "choices": [
+          0,
+          480,
+          481,
+          1080
+        ]
+      },
+      {
+        "addr": "0x00698b28",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          255
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x214",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          50,
+          100,
+          101,
+          200
+        ]
+      },
+      {
+        "addr": "0x00923d74",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00905d24",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

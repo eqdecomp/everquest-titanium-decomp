@@ -1,0 +1,267 @@
+{
+  "function": "CTributeBenefitWnd_guess::UpdateGuild_guess",
+  "original": "0x0056bd46",
+  "sources": [
+    "src/EverQuest/tu_234_TributeBenefitWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@benefitowner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "benefitowner": {
+      "size": "0x1c4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x18c", "u32": "@guildsink"},
+        {"offset": "0x190", "u32": "@guildlist"},
+        {"offset": "0x1ac", "u32": "@row0"},
+        {"offset": "0x1b0", "u32": "@row1"}
+      ]
+    },
+    "guildsink": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "guildlist": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "u32": "@guildlist_vtbl"}
+      ]
+    },
+    "guildlist_vtbl": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x130", "u32": "@fn_clear"}
+      ]
+    },
+    "fn_clear": {
+      "size": "0x1",
+      "fill": "zero"
+    },
+    "row0": {
+      "size": "0x50",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "cstr": "Benefit Alpha"},
+        {"offset": "0x40", "u32": 3},
+        {"offset": "0x44", "u32": 4},
+        {"offset": "0x4c", "u32": 42}
+      ]
+    },
+    "row1": {
+      "size": "0x50",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "cstr": "Benefit Beta"},
+        {"offset": "0x40", "u32": 8},
+        {"offset": "0x44", "u32": 9},
+        {"offset": "0x4c", "u32": 99}
+      ]
+    },
+    "lookupglobal": {
+      "size": "0x28c",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x120", "cstr": "Benefit Alpha"},
+        {"offset": "0x288", "u32": "0xffffffff"}
+      ]
+    },
+    "lookupresult": {
+      "size": "0x265",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x264", "u8": 0}
+      ]
+    },
+    "string_storage": {
+      "size": "0x100",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "0x00905ce4", "u32": "@lookupglobal"},
+    {"addr": "0x0099db00", "size": 32, "fill": "zero"}
+  ],
+  "callees": {
+    "@fn_clear": {
+      "name": "Clear_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00597be0": {
+      "name": "GetIndex_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": -1
+    },
+    "0x00597ed0": {
+      "name": "GetValue_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 42
+    },
+    "0x0040aa28": {
+      "name": "Find_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": 0
+    },
+    "0x00571e00": {
+      "name": "BenefitStr_ctor_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "passthrough": true
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": "@string_storage"
+    },
+    "0x0059b9d0": {
+      "name": "Add_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "int", "int", "int"],
+      "ret": [7, 8]
+    },
+    "0x00571d00": {
+      "name": "BenefitStr_release_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x006220e9": {
+      "name": "_itoa",
+      "conv": "cdecl",
+      "args": ["int", "ptr", "int"],
+      "ret": "0x0099db00"
+    },
+    "0x0059b360": {
+      "name": "SetText_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "mem:4"],
+      "ret": 0
+    },
+    "0x0059b3e0": {
+      "name": "SetColor_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "u32"],
+      "ret": 0
+    },
+    "0x005a8b00": {
+      "name": "Set_guess",
+      "conv": "thiscall",
+      "args": ["u32", "int", "int"],
+      "ret": 0
+    },
+    "0x00597c20": {
+      "name": "Select_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9"
+  },
+  "cases": [
+    {
+      "name": "null-list",
+      "args": [],
+      "memory": [
+        {"addr": "@benefitowner", "offset": "0x190", "u32": 0}
+      ]
+    },
+    {
+      "name": "empty-list-fallback",
+      "args": [],
+      "memory": [
+        {"addr": "@benefitowner", "offset": "0x1b4", "u32": 0}
+      ]
+    },
+    {
+      "name": "selected-without-lookup",
+      "args": [],
+      "memory": [
+        {"addr": "@benefitowner", "offset": "0x1b4", "u32": 1},
+        {"addr": "@lookupglobal", "offset": "0x288", "u32": "0xffffffff"}
+      ],
+      "callees": {
+        "0x00597be0": {"name": "GetIndex_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x00597ed0": {"name": "GetValue_guess", "conv": "thiscall", "args": ["int"], "ret": 42}
+      }
+    },
+    {
+      "name": "unselected-row-fallback",
+      "args": [],
+      "memory": [
+        {"addr": "@benefitowner", "offset": "0x1b4", "u32": 1},
+        {"addr": "@lookupglobal", "offset": "0x288", "u32": "0xffffffff"}
+      ]
+    },
+    {
+      "name": "lookup-not-found",
+      "args": [],
+      "memory": [
+        {"addr": "@benefitowner", "offset": "0x1b4", "u32": 1},
+        {"addr": "@lookupglobal", "offset": "0x288", "u32": 0}
+      ]
+    },
+    {
+      "name": "lookup-result-zero",
+      "args": [],
+      "memory": [
+        {"addr": "@benefitowner", "offset": "0x1b4", "u32": 1},
+        {"addr": "@lookupglobal", "offset": "0x288", "u32": 0},
+        {"addr": "@lookupresult", "offset": "0x264", "u8": 0}
+      ],
+      "callees": {
+        "0x00597be0": {"name": "GetIndex_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x00597ed0": {"name": "GetValue_guess", "conv": "thiscall", "args": ["int"], "ret": 42},
+        "0x0040aa28": {"name": "Find_guess", "conv": "thiscall", "args": ["cstr"], "ret": "@lookupresult"}
+      }
+    },
+    {
+      "name": "lookup-result-active",
+      "args": [],
+      "memory": [
+        {"addr": "@benefitowner", "offset": "0x1b4", "u32": 1},
+        {"addr": "@lookupglobal", "offset": "0x288", "u32": 0},
+        {"addr": "@lookupresult", "offset": "0x264", "u8": 1}
+      ],
+      "callees": {
+        "0x00597be0": {"name": "GetIndex_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x00597ed0": {"name": "GetValue_guess", "conv": "thiscall", "args": ["int"], "ret": 42},
+        "0x0040aa28": {"name": "Find_guess", "conv": "thiscall", "args": ["cstr"], "ret": "@lookupresult"}
+      }
+    },
+    {
+      "name": "two-rows-select-second",
+      "args": [],
+      "memory": [
+        {"addr": "@benefitowner", "offset": "0x1b4", "u32": 2},
+        {"addr": "@lookupglobal", "offset": "0x288", "u32": "0xffffffff"}
+      ],
+      "callees": {
+        "0x00597be0": {"name": "GetIndex_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x00597ed0": {"name": "GetValue_guess", "conv": "thiscall", "args": ["int"], "ret": 99}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5684550,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@benefitowner", "offset": "0x190", "type": "ptr", "choices": ["0x0", "@guildlist"]},
+      {"addr": "@benefitowner", "offset": "0x1b4", "type": "int", "choices": [-1, 0, 1, 2]},
+      {"addr": "@lookupglobal", "offset": "0x288", "type": "int", "choices": [-1, 0, 1]},
+      {"addr": "@row0", "offset": "0x4c", "type": "int", "choices": [-1, 42, 99]},
+      {"addr": "@row1", "offset": "0x4c", "type": "int", "choices": [-1, 42, 99]}
+    ]
+  }
+}

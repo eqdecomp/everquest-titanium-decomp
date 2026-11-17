@@ -1,0 +1,133 @@
+{
+  "function": "Loader_guess::Store_guess",
+  "original": "0x0042b2c8",
+  "sources": [
+    "src/EverQuest/tu_018_MailtoLink.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@loader",
+  "args": [
+    {
+      "name": "item_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "loader": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "item": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "entry": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "slot": {
+      "size": "0x4",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@entry"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "@loader", "offset": "0x30", "u32": 0},
+    {"addr": "@loader", "offset": "0x34", "u32": 2}
+  ],
+  "callees": {
+    "0x004257ca": {
+      "name": "FUN_004257ca",
+      "conv": "cdecl",
+      "args": ["ignore", "u32", "int", "u32", "int", "int"],
+      "ret": "arg0"
+    },
+    "0x00491002": {
+      "name": "FUN_00491002",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": ["mem:8"],
+      "ret": [0]
+    },
+    "0x0042aa48": {
+      "name": "FUN_0042aa48",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "0x00425170": {
+      "name": "FUN_00425170",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [],
+      "ret": "@slot"
+    },
+    "0x00428780": {
+      "name": "FUN_00428780",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x00425ea1": {
+      "name": "FUN_00425ea1",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0060d0d5": {
+      "name": "_free",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "found copies into entry",
+      "args": ["@item"]
+    },
+    {
+      "name": "not found inserts",
+      "args": ["@item"],
+      "callees": {
+        "0x00491002": {"name": "FUN_00491002", "conv": "thiscall", "this": "ignore", "args": ["mem:8"], "ret": [1]}
+      }
+    },
+    {
+      "name": "empty range inserts",
+      "args": ["@item"],
+      "memory": [
+        {"addr": "@loader", "offset": "0x34", "u32": 0}
+      ],
+      "callees": {
+        "0x00491002": {"name": "FUN_00491002", "conv": "thiscall", "this": "ignore", "args": ["mem:8"], "ret": [1]}
+      }
+    },
+    {
+      "name": "range starting at 3 copies",
+      "args": ["@item"],
+      "memory": [
+        {"addr": "@loader", "offset": "0x30", "u32": 3},
+        {"addr": "@loader", "offset": "0x34", "u32": 5}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 1812011,
+    "count": 100,
+    "args": [
+      {
+        "choices": ["@item"]
+      }
+    ],
+    "memory": [
+      {"addr": "@loader", "offset": "0x30", "type": "int", "range": [0, 10]},
+      {"addr": "@loader", "offset": "0x34", "type": "int", "range": [0, 6]}
+    ]
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "function": "AtlasRender_guess::ParseImage_guess",
+  "original": "0x004d9f03",
+  "sources": ["src/EverQuest/tu_106_AtlasRender.cpp"],
+  "conv": "thiscall",
+  "this": "@cleanupowner",
+  "args": [
+    {"name": "return_sret", "type": "ptr"},
+    {"name": "element_guess", "type": "ptr"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "cleanupowner": {"size": "0x200", "fill": "zero"},
+    "element": {"size": "0x10", "fill": "zero"},
+    "sret": {"size": "0x10", "fill": "zero"},
+    "heap": {"size": "0x4", "fill": "zero"},
+    "heap_block": {"size": "0x100", "fill": "zero"},
+    "file_ok": {"size": "0x10", "fill": "zero"},
+    "file_empty": {"size": "0x10", "fill": "zero"},
+    "file_one": {"size": "0x10", "fill": "zero"},
+    "rep": {"size": "0x40", "fill": "zero"},
+    "imageobj": {"size": "0x68", "fill": "zero"},
+    "anim": {"size": "0x4c", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@file_ok", "cstr": "a.bmp"},
+    {"addr": "@file_empty", "cstr": ""},
+    {"addr": "@file_one", "cstr": "x"}
+  ],
+  "callees": {
+    "0x005dcb60": {"name": "Settings::GetImage", "conv": "thiscall", "args": ["cstr"], "ret": ["@element"]},
+    "0x005dd9f0": {"name": "Settings::GetString", "conv": "thiscall", "args": ["cstr"], "ret": "@file_ok"},
+    "0x005dda20": {
+      "name": "XMLElement::GetIntAttribute",
+      "conv": "thiscall",
+      "args": ["cstr", "ignore"],
+      "ret": [0, 0, 0, 0],
+      "writes": [
+        {"call": 0, "arg": 1, "hex": "64000000"},
+        {"call": 1, "arg": 1, "hex": "32000000"},
+        {"call": 2, "arg": 1, "hex": "0a000000"},
+        {"call": 3, "arg": 1, "hex": "14000000"}
+      ]
+    },
+    "0x004d924f": {"name": "ParseRect", "conv": "thiscall", "args": ["ptr", "ptr", "ptr"], "ret": "arg0",
+                   "writes": [{"arg": 0, "offset": 0, "hex": "0a000000140000006e00000046000000"}]},
+    "0x004d9160": {"name": "Quad::CopyTo", "passthrough": true},
+    "0x004d918b": {"name": "Quad::BoundsValid", "passthrough": true},
+    "0x004d91a1": {"name": "NamedObject::NamedObject", "passthrough": true},
+    "0x004d95e7": {"name": "TextureFrame::TextureFrame", "conv": "thiscall", "args": ["mem:24"], "ret": "this"},
+    "0x00571e00": {"name": "CXStr::CXStr", "passthrough": true},
+    "0x00572e00": {"name": "CXStr::operator+=", "passthrough": true},
+    "0x00572c10": {"name": "CXStr::AppendText", "conv": "thiscall", "args": ["mem:4"], "ret": "this"},
+    "0x00571f70": {"name": "CXStr::operator=", "conv": "thiscall", "args": ["ignore"], "ret": "this"},
+    "0x00407d68": {"name": "CXStr::CXStr(copy)", "conv": "thiscall", "args": ["ignore"], "ret": "keep"},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x004482fb": {"name": "TextHandle::~TextHandle", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0042e3d9": {
+      "name": "Concat_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr", "mem:4"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]
+    },
+    "0x004b1357": {
+      "name": "Join_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "mem:4", "cstr"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "02000000"}]
+    },
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": ["@rep", "@imageobj", "@anim"]},
+    "0x005bdef0": {"name": "ImageObject::ImageObject", "conv": "thiscall", "args": ["u32"], "ret": "this"},
+    "0x005b1d90": {"name": "TextureAnimation::TextureAnimation", "conv": "thiscall", "args": [], "ret": "this"},
+    "0x005b1f60": {"name": "TextureAnimation::AddFrame", "conv": "thiscall",
+                   "args": ["ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "int", "ignore", "ignore"],
+                   "ret": 0},
+    "0x0050319b": {"name": "Lookup184::Set", "conv": "thiscall", "args": ["int", "ignore"], "ret": 0},
+    "kernel32.dll!GetProcessHeap": {"name": "GetProcessHeap", "conv": "stdcall", "args": [], "ret": "@heap"},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["u32", "u32", "u32"], "ret": ["@heap_block"]},
+    "kernel32.dll!HeapFree": {"name": "HeapFree", "conv": "stdcall", "args": ["u32", "u32", "u32"], "ret": 1}
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {"name": "valid-rect-and-file", "args": ["@sret", "@element"]},
+    {"name": "no-rect", "args": ["@sret", "@element"],
+     "callees": {"0x005dcb60": {"name": "Settings::GetImage", "conv": "thiscall", "args": ["cstr"], "ret": [0]}}},
+    {"name": "rect-cx-invalid", "args": ["@sret", "@element"],
+     "callees": {"0x005dda20": {"name": "XMLElement::GetIntAttribute", "conv": "thiscall", "args": ["cstr", "ignore"], "ret": [1, 0, 0, 0],
+                                  "writes": [{"call": 1, "arg": 1, "hex": "32000000"}]}}},
+    {"name": "rect-cy-invalid", "args": ["@sret", "@element"],
+     "callees": {"0x005dda20": {"name": "XMLElement::GetIntAttribute", "conv": "thiscall", "args": ["cstr", "ignore"], "ret": [0, 1, 0, 0],
+                                  "writes": [{"call": 0, "arg": 1, "hex": "64000000"}]}}},
+    {"name": "rect-x-invalid", "args": ["@sret", "@element"],
+     "callees": {"0x005dda20": {"name": "XMLElement::GetIntAttribute", "conv": "thiscall", "args": ["cstr", "ignore"], "ret": [0, 0, 1, 0],
+                                  "writes": [{"call": 0, "arg": 1, "hex": "64000000"}]}}},
+    {"name": "file-empty", "args": ["@sret", "@element"],
+     "callees": {"0x005dd9f0": {"name": "Settings::GetString", "conv": "thiscall", "args": ["cstr"], "ret": "@file_empty"}}},
+    {"name": "file-one-char", "args": ["@sret", "@element"],
+     "callees": {"0x005dd9f0": {"name": "Settings::GetString", "conv": "thiscall", "args": ["cstr"], "ret": "@file_one"}}},
+    {"name": "file-null-pointer", "args": ["@sret", "@element"],
+     "callees": {"0x005dd9f0": {"name": "Settings::GetString", "conv": "thiscall", "args": ["cstr"], "ret": 0}}},
+    {"name": "all-invalid", "args": ["@sret", "@element"],
+     "callees": {
+       "0x005dcb60": {"name": "Settings::GetImage", "conv": "thiscall", "args": ["cstr"], "ret": [0]},
+       "0x005dd9f0": {"name": "Settings::GetString", "conv": "thiscall", "args": ["cstr"], "ret": "@file_empty"}}},
+    {"name": "new-returns-null", "args": ["@sret", "@element"],
+     "callees": {"0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": [0, 0]}}},
+    {"name": "anim-new-returns-null", "args": ["@sret", "@element"],
+     "callees": {"0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": ["@imageobj", 0]}}}
+  ],
+  "_survivors": "L47: the passed-through CXStr ctor always leaves its pointer non-null in this harness, so the zero arm of the length test is never taken; L1124: bounds is fully overwritten by CopyTo before any read, so zeroing it is unobservable; L1125: same bounds zeroing (field 8); L1126: same bounds zeroing (field 4); L1127: same bounds zeroing (field 0)",
+  "fuzz": {
+    "seed": 5086980,
+    "count": 60,
+    "args": [{"choices": ["@sret"]}, {"choices": ["@element"]}]
+  }
+}

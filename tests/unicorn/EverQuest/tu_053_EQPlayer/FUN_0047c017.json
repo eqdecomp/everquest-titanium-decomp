@@ -1,0 +1,124 @@
+{
+  "function": "EQPlayer_guess::CreateAnimation_guess",
+  "original": "0x0047c017",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@eqplayer",
+  "args": [
+    {
+      "name": "value",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "eqplayer": {
+      "size": "0x210",
+      "fill": "random",
+      "init": [
+        {"offset": "0x208", "u32": "@old"}
+      ]
+    },
+    "old": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@oldvt"}
+      ]
+    },
+    "oldvt": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@fn_old_dtor"}
+      ]
+    },
+    "fn_old_dtor": {
+      "size": "0x4"
+    },
+    "newobj": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@newobj"
+    },
+    "0x00485e40": {
+      "name": "FUN_00485e40",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x0044f6d9": {
+      "name": "FUN_0044f6d9",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ]
+    },
+    "@fn_old_dtor": {
+      "name": "old_deleting_dtor",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "coverage_ok": {
+    "0047C077-0047C078": "operator new returns null only on out-of-memory; the scripted callee always returns a block"
+  },
+  "cases": [
+    {
+      "name": "flag1_old_attachment",
+      "args": [1]
+    },
+    {
+      "name": "flag0_old_attachment",
+      "args": [0]
+    },
+    {
+      "name": "flag1_no_attachment",
+      "args": [1],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x208", "u32": 0}
+      ]
+    },
+    {
+      "name": "flag0_no_attachment",
+      "args": [0],
+      "memory": [
+        {"addr": "@eqplayer", "offset": "0x208", "u32": 0}
+      ]
+    },
+    {
+      "name": "low_byte_zero_is_flag0",
+      "args": [256]
+    },
+    {
+      "name": "negative_low_byte_is_flag1",
+      "args": [-1]
+    }
+  ],
+  "fuzz": {
+    "seed": 4702231,
+    "count": 100,
+    "args": [
+      {}
+    ],
+    "memory": []
+  }
+}

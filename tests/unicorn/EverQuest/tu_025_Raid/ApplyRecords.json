@@ -1,0 +1,165 @@
+{
+  "function": "CRaid_guess::ReportRosterChanges_guess",
+  "original": "0x004303f6",
+  "sources": ["src/EverQuest/tu_025_Raid.cpp"],
+  "conv": "thiscall",
+  "this": "@everquestobject",
+  "args": [{"name": "data", "type": "ptr"}],
+  "ret": "void",
+  "objects": {
+    "everquestobject": {
+      "size": "0x5ab9",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x154", "hex": "0101"},
+        {"offset": "0x19c", "u8": 1},
+        {"offset": "0x5060", "u32": 1},
+        {"offset": "0x5064", "cstr": "Target"}
+      ]
+    },
+    "input": {
+      "size": "0x400",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "cstr": "prefix"},
+        {"offset": "0x16b", "cstr": "Alice"},
+        {"offset": "0x171", "cstr": "value"},
+        {"offset": "0x186", "cstr": "skip"},
+        {"offset": "0x18b", "cstr": "end"},
+        {"offset": "0x18f", "cstr": "Target"}
+      ]
+    },
+    "input2": {
+      "size": "0x400",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "cstr": "prefix"},
+        {"offset": "0x16b", "cstr": "Alice"},
+        {"offset": "0x171", "cstr": "one"},
+        {"offset": "0x180", "cstr": "Bob"},
+        {"offset": "0x184", "cstr": "two"},
+        {"offset": "0x197", "cstr": "s1"},
+        {"offset": "0x19a", "cstr": "s2"},
+        {"offset": "0x19d", "cstr": "end"},
+        {"offset": "0x1a1", "cstr": "Target"}
+      ]
+    },
+    "input73": {
+      "size": "0x1000",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "cstr": "prefix"},
+        {"offset": "0x16b", "hex": "410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000410076000000000000000000000000"}
+      ]
+    },
+    "controller": {"size": "0x4", "fill": "zero"},
+    "owner": {"size": "0x4", "fill": "zero"},
+    "messages": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x009859ec", "u32": 0},
+    {"addr": "0x00905d00", "u32": "@owner"},
+    {"addr": "0x00988df0", "u32": "@messages"}
+  ],
+  "callees": {
+    "0x004b412f": {"name": "SetRaidLeaderBlock_guess", "conv": "thiscall", "args": ["ptr", "ptr"]},
+    "0x00433d68": {"name": "ReadBigEndianUInt32_guess", "conv": "cdecl", "args": ["ptr"], "ret": [0, 0]},
+    "0x00574950": {"name": "CompareRecord_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [0]},
+    "0x0046da4a": {
+      "name": "FormatText_guess", "conv": "cdecl",
+      "args": ["mem:0x200", "int", "ignore", "int", "int", "int", "int", "int", "int", "int", "int"],
+      "ret": 0
+    },
+    "0x004982c6": {"name": "ShowWithOptions_guess", "conv": "thiscall", "args": ["ignore", "int", "bool"]},
+    "0x00430366": {"name": "FindMemberIndex_guess", "conv": "thiscall", "args": ["mem:0x40"], "passthrough": true}
+  },
+  "cases": [
+    {"name": "inactive", "args": ["@input"]},
+    {
+      "name": "empty-no-controller",
+      "args": ["@input"],
+      "memory": [{"addr": "@everquestobject", "offset": "0x55e4", "u8": 4}],
+      "callees": {"0x00433d68": {"ret": [0, 0]}, "0x00574950": {"ret": [0]}}
+    },
+    {
+      "name": "payload-difference-controller",
+      "args": ["@input"],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e4", "u8": 4},
+        {"addr": "0x009859ec", "u32": "@controller"}
+      ],
+      "callees": {"0x00433d68": {"ret": [0, 0]}, "0x00574950": {"ret": [1]}}
+    },
+    {
+      "name": "one-match-with-skipped-string",
+      "args": ["@input"],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e4", "u8": 4},
+        {"addr": "0x009859ec", "u32": "@controller"}
+      ],
+      "callees": {"0x00433d68": {"ret": [1, 1]}, "0x00574950": {"ret": [1, 0]}}
+    },
+    {
+      "name": "index-found-branch",
+      "args": ["@input"],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e4", "u8": 4},
+        {"addr": "0x009859ec", "u32": "@controller"}
+      ],
+      "callees": {
+        "0x00433d68": {"ret": [1, 0]},
+        "0x00430366": {"name": "FindTextIndex_guess", "conv": "thiscall", "args": ["mem:0x40"], "ret": 0},
+        "0x00574950": {"ret": [1]}
+      }
+    },
+    {
+      "name": "one-missing",
+      "args": ["@input"],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e4", "u8": 4},
+        {"addr": "@everquestobject", "offset": "0x5060", "u32": 0},
+        {"addr": "0x009859ec", "u32": "@controller"}
+      ],
+      "callees": {"0x00433d68": {"ret": [1, 0]}, "0x00574950": {"ret": [1]}}
+    },
+    {
+      "name": "two-record-loops-two-skips",
+      "args": ["@input2"],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e4", "u8": 4},
+        {"addr": "@everquestobject", "offset": "0x2b4", "u8": 1},
+        {"addr": "0x009859ec", "u32": "@controller"}
+      ],
+      "callees": {
+        "0x00433d68": {"ret": [2, 2]},
+        "0x00574950": {"ret": [1, 0, 1, 0]}
+      }
+    }
+    ,
+    {
+      "name": "73-record-buffer-boundary",
+      "args": ["@input73"],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e4", "u8": 4},
+        {"addr": "@everquestobject", "offset": "0x5060", "u32": 0}
+      ],
+      "callees": {
+        "0x00433d68": {"ret": [73, 0]},
+        "0x00574950": {"ret": [1]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4391926,
+    "count": 50,
+    "args": [{"choices": ["@input"]}],
+    "memory": [
+      {"addr": "@everquestobject", "offset": "0x55e4", "type": "u8", "choices": [0, 4]},
+      {"addr": "@everquestobject", "offset": "0x5060", "type": "int", "choices": [0, 1]},
+      {"addr": "@everquestobject", "offset": "0x154", "type": "u8", "count": 2, "choices": [0, 1]},
+      {"addr": "@everquestobject", "offset": "0x19c", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x009859ec", "type": "ptr", "choices": [0, "@controller"]}
+    ]
+  }
+}

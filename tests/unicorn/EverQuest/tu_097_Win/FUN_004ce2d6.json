@@ -1,0 +1,152 @@
+{
+  "function": "RunFrontend_guess",
+  "original": "0x004ce2d6",
+  "sources": [
+    "src/EverQuest/tu_097_Win.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "fn_notify": {"size": "0x4"},
+    "fn_shutdown": {"size": "0x4"},
+    "fn_newmain": {"size": "0x4"},
+    "fn_dllmain": {"size": "0x4"},
+    "svc": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "u32": "@vtbl"}
+      ]
+    },
+    "vtbl": {
+      "size": "0xc0",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x50", "u32": "@fn_notify"},
+        {"offset": "0xbc", "u32": "@fn_shutdown"}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "0x0099e364", "u32": "@svc"},
+    {"addr": "0x0099e368", "u32": "@svc"},
+    {"addr": "0x00988df4", "u32": 7},
+    {"addr": "0x009889a4", "u32": 0},
+    {"addr": "0x009889fc", "u32": 0}
+  ],
+  "callees": {
+    "0x004cc7fd": {
+      "name": "LoadEQMainDLL_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 1
+    },
+    "user32.dll!MessageBoxA": {
+      "name": "MessageBoxA",
+      "conv": "stdcall",
+      "args": ["u32", "cstr", "cstr", "u32"],
+      "ret": 1
+    },
+    "0x004cc889": {
+      "name": "UnloadFrontendDll_guess",
+      "conv": "cdecl",
+      "args": []
+    },
+    "0x00574110": {
+      "name": "FUN_00574110",
+      "conv": "cdecl",
+      "args": ["cstr"],
+      "varargs": "printf"
+    },
+    "0x00611848": {
+      "name": "exit",
+      "conv": "cdecl",
+      "args": ["int"],
+      "noreturn": true
+    },
+    "@fn_notify": {
+      "name": "NotifyError",
+      "conv": "thiscall",
+      "args": []
+    },
+    "@fn_shutdown": {
+      "name": "Shutdown",
+      "conv": "thiscall",
+      "args": []
+    },
+    "@fn_newmain": {
+      "name": "newFrontendMain",
+      "conv": "cdecl",
+      "args": ["u32", "u32", "u32"],
+      "ret": 0
+    },
+    "@fn_dllmain": {
+      "name": "frontendMain",
+      "conv": "cdecl",
+      "args": ["u32", "u32"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "newmain_returns_minus1",
+      "args": [],
+      "memory": [{"addr": "0x009889a4", "u32": "@fn_newmain"}],
+      "callees": {"@fn_newmain": {"name": "newFrontendMain", "conv": "cdecl", "args": ["u32", "u32", "u32"], "ret": -1}},
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "newmain_returns_minus2_shows_box",
+      "args": [],
+      "memory": [{"addr": "0x009889a4", "u32": "@fn_newmain"}],
+      "callees": {"@fn_newmain": {"name": "newFrontendMain", "conv": "cdecl", "args": ["u32", "u32", "u32"], "ret": -2}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "newmain_returns_zero",
+      "args": [],
+      "memory": [{"addr": "0x009889a4", "u32": "@fn_newmain"}],
+      "callees": {"@fn_newmain": {"name": "newFrontendMain", "conv": "cdecl", "args": ["u32", "u32", "u32"], "ret": 0}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "legacy_returns_minus1",
+      "args": [],
+      "memory": [{"addr": "0x009889a4", "u32": 0}, {"addr": "0x009889fc", "u32": "@fn_dllmain"}],
+      "callees": {"@fn_dllmain": {"name": "frontendMain", "conv": "cdecl", "args": ["u32", "u32"], "ret": -1}},
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "legacy_returns_minus2_shows_box",
+      "args": [],
+      "memory": [{"addr": "0x009889a4", "u32": 0}, {"addr": "0x009889fc", "u32": "@fn_dllmain"}],
+      "callees": {"@fn_dllmain": {"name": "frontendMain", "conv": "cdecl", "args": ["u32", "u32"], "ret": -2}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "legacy_returns_zero",
+      "args": [],
+      "memory": [{"addr": "0x009889a4", "u32": 0}, {"addr": "0x009889fc", "u32": "@fn_dllmain"}],
+      "callees": {"@fn_dllmain": {"name": "frontendMain", "conv": "cdecl", "args": ["u32", "u32"], "ret": 0}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "no_frontend_exits",
+      "args": [],
+      "memory": [{"addr": "0x009889a4", "u32": 0}, {"addr": "0x009889fc", "u32": 0}],
+      "expect": {}
+    }
+  ],
+  "fuzz": {
+    "seed": 5038806,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "0x00988df4", "type": "u32", "choices": [0, 7, 9]}
+    ]
+  },
+  "coverage_ok": {
+    "004CE381-004CE382": "int3 padding after the noreturn exit call; never reached"
+  }
+}

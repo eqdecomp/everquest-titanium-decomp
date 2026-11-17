@@ -1,0 +1,181 @@
+{
+  "function": "CActionsWnd_guess::UpdateButtonLabels_guess",
+  "original": "0x004d2344",
+  "sources": ["src/EverQuest/tu_099_ActionsWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "object": {
+      "size": "0x218",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x194", "u32": "@widget"},
+        {"offset": "0x198", "u32": "@widget"},
+        {"offset": "0x19c", "u32": "@widget"},
+        {"offset": "0x1a0", "u32": "@widget"},
+        {"offset": "0x1a4", "u32": "@widget"},
+        {"offset": "0x1a8", "u32": "@widget"},
+        {"offset": "0x1bc", "u32": "@widget"},
+        {"offset": "0x1c0", "u32": "@widget"},
+        {"offset": "0x1c4", "u32": "@widget"},
+        {"offset": "0x1c8", "u32": "@widget"},
+        {"offset": "0x1e0", "u32": "@widget"},
+        {"offset": "0x1e4", "u32": "@widget"},
+        {"offset": "0x1e8", "u32": "@widget"},
+        {"offset": "0x1ec", "u32": "@widget"},
+        {"offset": "0x1f0", "u32": "@widget"},
+        {"offset": "0x1f4", "u32": "@widget"},
+        {"offset": "0x1f8", "u32": "@widget"},
+        {"offset": "0x1fc", "u32": "@widget"},
+        {"offset": "0x200", "u32": "@widget"},
+        {"offset": "0x204", "u32": "@widget"},
+        {"offset": "0x208", "u32": "@widget"},
+        {"offset": "0x20c", "u32": "@widget"}
+      ]
+    },
+    "widget": {"size": "0x100", "fill": "zero", "init": [{"offset": 0, "u32": "@widget_vtbl"}]},
+    "widget_vtbl": {"size": "0x100", "fill": "zero", "init": [{"offset": "0xfc", "u32": "@fn_setvalue"}]},
+    "fn_setvalue": {"size": "0x1", "fill": "zero"},
+    "string_table": {"size": "0x4", "fill": "zero"},
+    "text_service": {"size": "0x4", "fill": "zero"},
+    "value_service": {"size": "0x4", "fill": "zero"},
+    "rep_buffer": {"size": "0x1000", "fill": "zero"},
+    "key_id": {"size": "0x4", "fill": "zero"},
+    "text": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@string_table"},
+    {"addr": "0x00988df0", "u32": "@text_service"},
+    {"addr": "0x00850c6c", "u32": "@value_service"},
+    {"addr": "0x00851200", "u32": "@key_id"},
+    {"addr": "0x00851200", "offset": "0x190", "u32": "@key_id"},
+    {"addr": "@key_id", "u32": 1234},
+    {"addr": "@text", "cstr": "fixture text"},
+    {"addr": "0x0095d424", "hex": "ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff"},
+    {"addr": "0x0095d414", "hex": "ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff"},
+    {"addr": "0x009839dd", "u8": 0},
+    {"addr": "0x0095d4d4", "offset": "0x0", "cstr": "value-00"},
+    {"addr": "0x0095d4d4", "offset": "0x511", "cstr": "value-01"},
+    {"addr": "0x0095d4d4", "offset": "0xa22", "cstr": "value-02"},
+    {"addr": "0x0095d4d4", "offset": "0xf33", "cstr": "value-03"},
+    {"addr": "0x0095d4d4", "offset": "0x1444", "cstr": "value-04"},
+    {"addr": "0x0095d4d4", "offset": "0x1955", "cstr": "value-05"},
+    {"addr": "0x0095d4d4", "offset": "0x1e66", "cstr": "value-06"},
+    {"addr": "0x0095d4d4", "offset": "0x2377", "cstr": "value-07"},
+    {"addr": "0x0095d4d4", "offset": "0x2888", "cstr": "value-08"},
+    {"addr": "0x0095d4d4", "offset": "0x2d99", "cstr": "value-09"},
+    {"addr": "0x0095d4d4", "offset": "0x32aa", "cstr": "value-10"},
+    {"addr": "0x0095d4d4", "offset": "0x37bb", "cstr": "value-11"},
+    {"addr": "0x0095d4d4", "offset": "0x3ccc", "cstr": "value-12"},
+    {"addr": "0x0095d4d4", "offset": "0x41dd", "cstr": "value-13"},
+    {"addr": "0x0095d4d4", "offset": "0x46ee", "cstr": "value-14"},
+    {"addr": "0x0095d4d4", "offset": "0x4bff", "cstr": "value-15"},
+    {"addr": "0x0095d4d4", "offset": "0x5110", "cstr": "value-16"},
+    {"addr": "0x0095d4d4", "offset": "0x5621", "cstr": "value-17"},
+    {"addr": "0x0095d4d4", "offset": "0x5b32", "cstr": "value-18"},
+    {"addr": "0x0095d4d4", "offset": "0x6043", "cstr": "value-19"},
+    {"addr": "0x0095d4d4", "offset": "0x6554", "cstr": "value-20"},
+    {"addr": "0x0095d4d4", "offset": "0x6a65", "cstr": "value-21"},
+    {"addr": "0x0095d4d4", "offset": "0x6f76", "cstr": "value-22"},
+    {"addr": "0x0095d4d4", "offset": "0x7487", "cstr": "value-23"},
+    {"addr": "0x0095d9e4", "offset": "0x0", "u8": 1},
+    {"addr": "0x0095d9e4", "offset": "0x511", "u8": 2},
+    {"addr": "0x0095d9e4", "offset": "0xa22", "u8": 3},
+    {"addr": "0x0095d9e4", "offset": "0xf33", "u8": 4},
+    {"addr": "0x0095d9e4", "offset": "0x1444", "u8": 5},
+    {"addr": "0x0095d9e4", "offset": "0x1955", "u8": 6},
+    {"addr": "0x0095d9e4", "offset": "0x1e66", "u8": 7},
+    {"addr": "0x0095d9e4", "offset": "0x2377", "u8": 8},
+    {"addr": "0x0095d9e4", "offset": "0x2888", "u8": 9},
+    {"addr": "0x0095d9e4", "offset": "0x2d99", "u8": 10},
+    {"addr": "0x0095d9e4", "offset": "0x32aa", "u8": 11},
+    {"addr": "0x0095d9e4", "offset": "0x37bb", "u8": 12},
+    {"addr": "0x0095d9e4", "offset": "0x3ccc", "u8": 13},
+    {"addr": "0x0095d9e4", "offset": "0x41dd", "u8": 14},
+    {"addr": "0x0095d9e4", "offset": "0x46ee", "u8": 15},
+    {"addr": "0x0095d9e4", "offset": "0x4bff", "u8": 16},
+    {"addr": "0x0095d9e4", "offset": "0x5110", "u8": 17},
+    {"addr": "0x0095d9e4", "offset": "0x5621", "u8": 18},
+    {"addr": "0x0095d9e4", "offset": "0x5b32", "u8": 19},
+    {"addr": "0x0095d9e4", "offset": "0x6043", "u8": 20},
+    {"addr": "0x0095d9e4", "offset": "0x6554", "u8": 21},
+    {"addr": "0x0095d9e4", "offset": "0x6a65", "u8": 22},
+    {"addr": "0x0095d9e4", "offset": "0x6f76", "u8": 23},
+    {"addr": "0x0095d9e4", "offset": "0x7487", "u8": 24}
+  ],
+  "callees": {
+    "0x00492874": {"name": "EverQuestText_getText", "conv": "thiscall", "args": ["int"], "ret": "@text"},
+    "0x00571e00": {"name": "CXStr_ctor", "conv": "thiscall", "args": ["ptr"], "passthrough": true},
+    "0x00571d00": {"name": "CXStr_FreeRep", "conv": "thiscall", "this": "ignore", "args": ["u32"], "ret": 0},
+    "0x005dfa00": {"name": "StringTable_getString", "conv": "thiscall", "args": ["u32", "ptr"], "ret": "@text"},
+    "0x00555224": {"name": "ValueService_setMode", "conv": "thiscall", "args": ["int"], "ret": [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112]},
+    "@fn_setvalue": {"name": "ValueTarget_setValue", "conv": "thiscall", "args": ["mem:4"], "ret": 0},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@rep_buffer"}
+  },
+  "cases": [
+    {
+      "name": "code-and-disallowed-boundaries",
+      "args": [],
+      "memory": [
+        {"addr": "0x0095d424", "hex": "ff ff ff ff 00 00 00 00 64 00 00 00 65 00 00 00 69 00 00 00 74 00 00 00"},
+        {"addr": "0x0095d414", "hex": "64 00 00 00 65 00 00 00 6b 00 00 00 71 00 00 00"}
+      ]
+    },
+    {
+      "name": "accepted-text-keys-and-offset-one",
+      "args": [],
+      "memory": [
+        {"addr": "0x0095d424", "hex": "69 00 00 00 6b 00 00 00 6f 00 00 00 72 00 00 00 73 00 00 00 71 00 00 00"},
+        {"addr": "0x0095d414", "hex": "69 00 00 00 6f 00 00 00 72 00 00 00 73 00 00 00"},
+        {"addr": "0x009839dd", "u8": 1}
+      ]
+    },
+    {
+      "name": "null-target-branches",
+      "args": [],
+      "memory": [
+        {"addr": "0x0095d424", "hex": "00 00 00 00 69 00 00 00 72 00 00 00 74 00 00 00 71 00 00 00 ff ff ff ff"},
+        {"addr": "0x0095d414", "hex": "00 00 00 00 69 00 00 00 74 00 00 00 71 00 00 00"},
+        {"addr": "@object", "offset": "0x194", "u32": 0},
+        {"addr": "@object", "offset": "0x198", "u32": 0},
+        {"addr": "@object", "offset": "0x1bc", "u32": 0},
+        {"addr": "@object", "offset": "0x1c0", "u32": 0},
+        {"addr": "@object", "offset": "0x1e0", "u32": 0}
+      ]
+    },
+    {
+      "name": "value-service-null",
+      "args": [],
+      "memory": [
+        {"addr": "0x0095d424", "hex": "ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff"},
+        {"addr": "0x0095d414", "hex": "ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff"},
+        {"addr": "0x00850c6c", "u32": 0}
+      ]
+    },
+    {
+      "name": "adjacent-slot-catches-seven-iteration-mutant",
+      "args": [],
+      "memory": [
+        {"addr": "0x0095d424", "hex": "ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff"},
+        {"addr": "0x0095d43c", "u32": 0},
+        {"addr": "@object", "offset": "0x1ac", "u32": "@widget"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5055300,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "0x0095d424", "type": "int", "count": 6, "choices": [-1, 0, 100, 101, 105, 107, 111, 113, 114, 115, 116]},
+      {"addr": "0x0095d414", "type": "int", "count": 4, "choices": [-1, 0, 100, 101, 105, 107, 111, 113, 114, 115, 116]},
+      {"addr": "@object", "offset": "0x194", "type": "u32", "count": 6, "choices": [0, "@widget"]},
+      {"addr": "@object", "offset": "0x1bc", "type": "u32", "count": 4, "choices": [0, "@widget"]},
+      {"addr": "@object", "offset": "0x1e0", "type": "u32", "count": 12, "choices": [0, "@widget"]},
+      {"addr": "0x009839dd", "type": "char", "choices": [0, 1]},
+      {"addr": "0x00850c6c", "type": "u32", "choices": [0, "@value_service"]}
+    ]
+  }
+}

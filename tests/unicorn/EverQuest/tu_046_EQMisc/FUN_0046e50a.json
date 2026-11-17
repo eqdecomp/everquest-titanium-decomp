@@ -1,0 +1,309 @@
+{
+  "function": "do_makeleader_guess",
+  "original": "0x0046e50a",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "unused_guess",
+      "type": "int"
+    },
+    {
+      "name": "text_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "state": {
+      "size": "0x200",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x8", "u32": "@offsets" },
+        { "offset": "0x44", "cstr": "state text" }
+      ]
+    },
+    "offsets": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x4", "u32": 0 }
+      ]
+    },
+    "incoming": {
+      "size": "0x180",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x120", "cstr": "incoming text" }
+      ]
+    },
+    "string_table": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "everquest": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "lookup": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "cstr": "formatted" }
+      ]
+    }
+  },
+  "memory": [
+    { "addr": "0x0079ac74", "u32": "0x12345678" },
+    { "addr": "0x009043a4", "cstr": "active" },
+    { "addr": "0x00905d00", "u32": "@state" },
+    { "addr": "0x00905d04", "u32": "@incoming" },
+    { "addr": "0x00905cb0", "u32": "@string_table" },
+    { "addr": "0x00988df0", "u32": "@everquest" },
+    { "addr": "0x0090424d", "cstr": "row0" },
+    { "addr": "0x0090428d", "cstr": "row1" },
+    { "addr": "0x009042cd", "cstr": "row2" },
+    { "addr": "0x0090430d", "cstr": "row3" },
+    { "addr": "0x0090434d", "cstr": "row4" },
+    { "addr": "0x0090438d", "cstr": "row5" }
+  ],
+  "callees": {
+    "0x00574950": {
+      "name": "FUN_00574950",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr"],
+      "ret": [0, 1, 1, 1, 1, 1, 1]
+    },
+    "0x0042fcc2": {
+      "name": "ActionContext_guess::IsInRaid_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0042fcf9": {
+      "name": "ActionContext_guess::CanDisplay_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "pStringTable->getString",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": "@lookup"
+    },
+    "0x004982c6": {
+      "name": "CEverQuest::dsp_chat",
+      "conv": "thiscall",
+      "args": ["cstr", "int", "bool"],
+      "ret": 0
+    },
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "mem:0x1c4", "int", "int"],
+      "ret": 0
+    },
+    "0x00467441": {
+      "name": "FUN_00467441",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr", "mem:4", "int", "int"],
+      "ret": 0,
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "66 6f 72 6d 61 74 74 65 64 00" }
+      ]
+    },
+    "0x00490f27": {
+      "name": "CapitalizeFirstLetter_guess",
+      "conv": "cdecl",
+      "args": ["cstr", "ignore", "u32"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "global disabled",
+      "args": [0, "custom"],
+      "memory": [
+        { "addr": "0x009043a4", "u8": 0 }
+      ]
+    },
+    {
+      "name": "initial string mismatch",
+      "args": [0, "custom"],
+      "callees": {
+        "0x00574950": {
+          "name": "FUN_00574950",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr"],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chat enabled",
+      "args": [0, "custom"],
+      "callees": {
+        "0x0042fcc2": {
+          "name": "ActionContext_guess::FUN_0042fcc2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x0042fcf9": {
+          "name": "ActionContext_guess::CanDisplay_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chat denied after first check",
+      "args": [0, "custom"],
+      "callees": {
+        "0x0042fcc2": {
+          "name": "ActionContext_guess::FUN_0042fcc2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x0042fcf9": {
+          "name": "ActionContext_guess::CanDisplay_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "empty input matches first incoming row",
+      "args": [0, ""],
+      "callees": {
+        "0x00574950": {
+          "name": "FUN_00574950",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr"],
+          "ret": [0, 0]
+        }
+      }
+    },
+    {
+      "name": "empty input matches final incoming row",
+      "args": [0, ""],
+      "callees": {
+        "0x00574950": {
+          "name": "FUN_00574950",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr"],
+          "ret": [0, 1, 1, 1, 1, 0]
+        }
+      }
+    },
+    {
+      "name": "empty input misses incoming rows",
+      "args": [0, ""],
+      "callees": {
+        "0x00574950": {
+          "name": "FUN_00574950",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr"],
+          "ret": [0, 1, 1, 1, 1, 1]
+        }
+      }
+    },
+    {
+      "name": "input matches first outgoing row",
+      "args": [0, "row0"],
+      "callees": {
+        "0x00574950": {
+          "name": "FUN_00574950",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr"],
+          "ret": [0, 0]
+        },
+        "0x00490f27": {
+          "name": "FUN_00490f27",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore", "u32"],
+          "ret": 0,
+          "writes": [
+            { "arg": 1, "offset": 0, "hex": "72 6f 77 30 00" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "nonzero state string offset",
+      "args": [0, "row0"],
+      "memory": [
+        { "addr": "@offsets", "offset": "0x4", "u32": 4 },
+        { "addr": "@state", "offset": "0x40", "cstr": "minus" },
+        { "addr": "@state", "offset": "0x48", "cstr": "plus" }
+      ],
+      "callees": {
+        "0x00574950": {
+          "name": "FUN_00574950",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr"],
+          "ret": [0, 0]
+        },
+        "0x00490f27": {
+          "name": "FUN_00490f27",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore", "u32"],
+          "ret": 0,
+          "writes": [
+            { "arg": 1, "offset": 0, "hex": "72 6f 77 30 00" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "input matches final outgoing row",
+      "args": [0, "row5"],
+      "callees": {
+        "0x00574950": {
+          "name": "FUN_00574950",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr"],
+          "ret": [0, 1, 1, 1, 1, 1, 0]
+        },
+        "0x00490f27": {
+          "name": "FUN_00490f27",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore", "u32"],
+          "ret": 0,
+          "writes": [
+            { "arg": 1, "offset": 0, "hex": "72 6f 77 35 00" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "input misses outgoing rows",
+      "args": [0, "custom"]
+    },
+    {
+      "name": "empty input with no incoming message",
+      "args": [0, ""],
+      "memory": [
+        { "addr": "0x00905d04", "u32": 0 }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4646154,
+    "count": 100,
+    "args": [
+      {},
+      { "choices": ["", "alpha", "row0", "row5", "custom"] }
+    ],
+    "memory": [
+      { "addr": "0x009043a4", "type": "u8", "choices": [0, 1] },
+      { "addr": "0x00905d04", "type": "ptr", "choices": [0, "@incoming"] }
+    ]
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "function": "CBarterWnd_guess::PrintActiveLines_guess",
+  "original": "0x004e07da",
+  "sources": [
+    "src/EverQuest/tu_130_BarterWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@big130",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "big130": {
+      "size": "0x274",
+      "fill": "zero"
+    },
+    "line_text": {
+      "size": "0x10",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079AC74",
+      "from_image": "0x0079AC74",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0079C198",
+      "size": "0x2300",
+      "fill": "zero"
+    },
+    {
+      "addr": "0x0063F9FC",
+      "from_image": "0x0063F9FC",
+      "image_size": 3
+    },
+    {
+      "addr": "@line_text",
+      "cstr": "Line"
+    }
+  ],
+  "callees": {
+    "0x004dfe23": {
+      "name": "CBarterWnd_guess::AppendColoredText_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int"
+      ]
+    },
+    "0x004096ef": {
+      "name": "RecordList_guess::WriteBarterLog_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ]
+    },
+    "0x004e0143": {
+      "name": "RecordList_guess::Check_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x00409d5e": {
+      "name": "NameList_guess::GetBuyLineText_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "int"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "01000000"
+        }
+      ]
+    },
+    "0x00572300": {
+      "name": "Name_guess::GetString_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@line_text"
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 4,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "4c696e6500"
+        }
+      ]
+    },
+    "0x00571d00": {
+      "name": "Name_guess::~Name_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "no-active-lines",
+      "args": []
+    },
+    {
+      "name": "first-slot-active",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x0079C198",
+          "u8": 1
+        },
+        {
+          "addr": "0x0079C198",
+          "offset": "0x24",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "last-slot-active",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x0079C198",
+          "offset": "0x1570",
+          "u8": 1
+        },
+        {
+          "addr": "0x0079C198",
+          "offset": "0x1594",
+          "u8": 1
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5113818,
+    "count": 100,
+    "args": [],
+    "memory": []
+  }
+}

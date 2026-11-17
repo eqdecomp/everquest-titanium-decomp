@@ -1,0 +1,198 @@
+{
+  "function": "Transform_46D6C3_guess::SetDeltaTo_guess",
+  "original": "0x0046d6c3",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@transform_46d6c3",
+  "args": [
+    {
+      "name": "source_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "transform_46d6c3": {
+      "size": "0x18",
+      "fill": "random"
+    },
+    "source": {
+      "size": "0x18",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@transform_46d6c3",
+      "offset": "0x0",
+      "f32": 1.0
+    },
+    {
+      "addr": "@transform_46d6c3",
+      "offset": "0x4",
+      "f32": 2.0
+    },
+    {
+      "addr": "@transform_46d6c3",
+      "offset": "0x8",
+      "f32": 3.0
+    },
+    {
+      "addr": "@transform_46d6c3",
+      "offset": "0xc",
+      "f32": -9.0
+    },
+    {
+      "addr": "@transform_46d6c3",
+      "offset": "0x10",
+      "f32": -8.0
+    },
+    {
+      "addr": "@transform_46d6c3",
+      "offset": "0x14",
+      "f32": -7.0
+    },
+    {
+      "addr": "@source",
+      "offset": "0x0",
+      "f32": 10.0
+    },
+    {
+      "addr": "@source",
+      "offset": "0x4",
+      "f32": -20.0
+    },
+    {
+      "addr": "@source",
+      "offset": "0x8",
+      "f32": 30.0
+    }
+  ],
+  "callees": {},
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        "@source"
+      ]
+    },
+    {
+      "name": "zero_delta",
+      "args": [
+        "@source"
+      ],
+      "memory": [
+        {
+          "addr": "@transform_46d6c3",
+          "offset": "0x0",
+          "f32": 0.0
+        },
+        {
+          "addr": "@transform_46d6c3",
+          "offset": "0x4",
+          "f32": -0.0
+        },
+        {
+          "addr": "@transform_46d6c3",
+          "offset": "0x8",
+          "f32": 1.0
+        },
+        {
+          "addr": "@source",
+          "offset": "0x0",
+          "f32": 0.0
+        },
+        {
+          "addr": "@source",
+          "offset": "0x4",
+          "f32": -0.0
+        },
+        {
+          "addr": "@source",
+          "offset": "0x8",
+          "f32": 1.0
+        }
+      ]
+    },
+    {
+      "name": "same_object",
+      "args": [
+        "@transform_46d6c3"
+      ]
+    },
+    {
+      "name": "mixed_signs",
+      "args": [
+        "@source"
+      ],
+      "memory": [
+        {
+          "addr": "@transform_46d6c3",
+          "offset": "0x0",
+          "f32": -1000.0
+        },
+        {
+          "addr": "@transform_46d6c3",
+          "offset": "0x4",
+          "f32": 1000.0
+        },
+        {
+          "addr": "@transform_46d6c3",
+          "offset": "0x8",
+          "f32": -0.25
+        },
+        {
+          "addr": "@source",
+          "offset": "0x0",
+          "f32": 1000.0
+        },
+        {
+          "addr": "@source",
+          "offset": "0x4",
+          "f32": -1000.0
+        },
+        {
+          "addr": "@source",
+          "offset": "0x8",
+          "f32": 0.25
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4642499,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@source",
+          "@transform_46d6c3"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@transform_46d6c3",
+        "offset": "0x0",
+        "type": "float",
+        "count": 3,
+        "range": [
+          -1000.0,
+          1000.0
+        ]
+      },
+      {
+        "addr": "@source",
+        "offset": "0x0",
+        "type": "float",
+        "count": 3,
+        "range": [
+          -1000.0,
+          1000.0
+        ]
+      }
+    ]
+  }
+}

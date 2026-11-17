@@ -1,0 +1,240 @@
+{
+  "function": "GlobalState_guess::RunCharacterSelectLoop_guess",
+  "original": "0x004a9cd2",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@globalstate",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "globalstate": {
+      "size": "0xB60",
+      "fill": "random"
+    },
+    "frontend": {
+      "size": "0x420",
+      "fill": "random",
+      "init": [
+        {"offset": "0", "u32": "@vt_frontend"},
+        {"offset": "0x418", "u32": 0}
+      ]
+    },
+    "vt_frontend": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x88", "u32": "@fn_slot34"},
+        {"offset": "0xc0", "u32": "@fn_slot48"}
+      ]
+    },
+    "display": {
+      "size": "0x40",
+      "fill": "random",
+      "init": [
+        {"offset": "0", "u32": "@vt_display"}
+      ]
+    },
+    "vt_display": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x94", "u32": "@fn_slot37"}
+      ]
+    },
+    "login": {
+      "size": "0x200",
+      "fill": "random"
+    },
+    "clock": {
+      "size": "0x160",
+      "fill": "random"
+    },
+    "resetOwner": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "effect": {
+      "size": "0x40",
+      "fill": "random",
+      "init": [
+        {"offset": "0", "u32": "@vt_effect"}
+      ]
+    },
+    "vt_effect": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x20", "u32": "@fn_slot8"},
+        {"offset": "0x24", "u32": "@fn_slot9"}
+      ]
+    },
+    "pipeline": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "fn_slot34": {"size": "0x10", "fill": "zero"},
+    "fn_slot48": {"size": "0x10", "fill": "zero"},
+    "fn_slot37": {"size": "0x10", "fill": "zero"},
+    "fn_slot8": {"size": "0x10", "fill": "zero"},
+    "fn_slot9": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00988DF0", "u32": "@globalstate"},
+    {"addr": "0x00850C20", "u32": "@frontend"},
+    {"addr": "0x00850BA0", "u32": "@login"},
+    {"addr": "0x00905D24", "u32": "@clock"},
+    {"addr": "0x00905CE4", "u32": "@resetOwner"},
+    {"addr": "0x00850CCC", "u32": 0},
+    {"addr": "0x009254FC", "u32": "@effect"},
+    {"addr": "0x0099D3EC", "u32": "@pipeline"},
+    {"addr": "0x009237C8", "u32": 16},
+    {"addr": "0x009237CC", "u32": 32},
+    {"addr": "0x0099E364", "u32": "@display"},
+    {"addr": "0x00923842", "u8": 0},
+    {"addr": "@globalstate", "offset": "0xb54", "u32": 2},
+    {"addr": "@frontend", "offset": "0x418", "u32": 0},
+    {"addr": "@login", "offset": "0x1c0", "u32": 2},
+    {"addr": "@clock", "offset": "0x148", "u32": 0},
+    {"addr": "@resetOwner", "offset": "0x4c", "f32": 3.0},
+    {"addr": "@pipeline", "offset": "0x74", "u32": 48},
+    {"addr": "@pipeline", "offset": "0x78", "u32": 64}
+  ],
+  "callees": {
+    "0x00494b3d": {"name": "SetGameState", "conv": "thiscall", "args": ["int"]},
+    "0x004f04ec": {"name": "FUN_004f04ec", "conv": "thiscall", "args": []},
+    "0x004ccfb7": {"name": "FlushMouse_guess", "conv": "cdecl", "args": [], "ret": 0},
+    "0x004ccb85": {"name": "FlushKeyboard_guess", "conv": "cdecl", "args": [], "ret": 0},
+    "0x004a9c84": {"name": "ProcessGameEvents", "conv": "cdecl", "args": [], "ret": 0},
+    "0x004a56b1": {"name": "ProcessMBox_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00496932": {"name": "CheckCharSelectDisconnect_guess", "conv": "thiscall", "args": ["cstr", "u32", "char"], "ret": [0, 1]},
+    "0x0059dd30": {"name": "FUN_0059dd30", "conv": "thiscall", "args": [], "ret": 1},
+    "0x004426fb": {"name": "SetupCharacterViewCamera_guess", "conv": "thiscall", "args": ["int"]},
+    "0x0047a523": {"name": "GetHairKind_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x00491002": {"name": "FUN_00491002", "conv": "thiscall", "args": ["mem:8"], "ret": 0},
+    "0x005af6a0": {"name": "FUN_005af6a0", "conv": "thiscall", "args": ["mem:8"]},
+    "0x005b06a0": {"name": "FUN_005b06a0", "conv": "thiscall", "args": []},
+    "0x005af250": {"name": "FUN_005af250", "conv": "thiscall", "args": []},
+    "0x005af580": {"name": "FUN_005af580", "conv": "thiscall", "args": []},
+    "0x00445842": {"name": "Render_MinWorld_guess", "conv": "thiscall", "args": []},
+    "@fn_slot48": {"name": "Slot48", "conv": "thiscall", "args": ["int", "int"]},
+    "@fn_slot34": {"name": "Slot34", "conv": "thiscall", "args": []},
+    "@fn_slot37": {"name": "Slot37", "conv": "thiscall", "args": []},
+    "@fn_slot8": {"name": "SetValue", "conv": "thiscall", "args": ["float"]},
+    "@fn_slot9": {"name": "GetValue", "conv": "thiscall", "args": [], "ret_float": 2.0},
+    "kernel32.dll!Sleep": {"name": "Sleep", "conv": "stdcall", "args": ["u32"]}
+  },
+  "cases": [
+    {
+      "name": "not_connected_early_return",
+      "memory": [
+        {"addr": "@globalstate", "offset": "0xb54", "u32": 1}
+      ]
+    },
+    {
+      "name": "login_fails_break_first",
+      "callees": {
+        "0x00496932": {"name": "FUN_00496932", "conv": "thiscall", "args": ["cstr", "u32", "char"], "ret": [1]}
+      }
+    },
+    {
+      "name": "update_if_branch_with_1_5",
+      "memory": [
+        {"addr": "@clock", "offset": "0x148", "u32": 100}
+      ],
+      "callees": {
+        "0x0059dd30": {"name": "FUN_0059dd30", "conv": "thiscall", "args": [], "ret": 1},
+        "0x0047a523": {"name": "FUN_0047a523", "conv": "thiscall", "args": [], "ret": 1}
+      }
+    },
+    {
+      "name": "update_if_branch_no_set",
+      "memory": [
+        {"addr": "@clock", "offset": "0x148", "u32": 100}
+      ],
+      "callees": {
+        "0x0059dd30": {"name": "FUN_0059dd30", "conv": "thiscall", "args": [], "ret": 1},
+        "0x0047a523": {"name": "FUN_0047a523", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "update_else_login_zero",
+      "memory": [
+        {"addr": "@clock", "offset": "0x148", "u32": 100}
+      ],
+      "callees": {
+        "0x0059dd30": {"name": "FUN_0059dd30", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "update_else_state_not_2",
+      "memory": [
+        {"addr": "@clock", "offset": "0x148", "u32": 100},
+        {"addr": "@login", "offset": "0x1c0", "u32": 1}
+      ],
+      "callees": {
+        "0x0059dd30": {"name": "FUN_0059dd30", "conv": "thiscall", "args": [], "ret": 1}
+      }
+    },
+    {
+      "name": "pipeline_null",
+      "memory": [
+        {"addr": "0x0099D3EC", "u32": 0}
+      ]
+    },
+    {
+      "name": "flag_set_skips_pipeline_writes",
+      "callees": {
+        "0x004a9c84": {"name": "FUN_004a9c84", "conv": "cdecl", "args": [], "ret": 0, "writes": [{"addr": "0x00923842", "hex": "01"}]}
+      }
+    },
+    {
+      "name": "contains_true_skips_af6a0",
+      "callees": {
+        "0x00491002": {"name": "FUN_00491002", "conv": "thiscall", "args": ["mem:8"], "ret": 1}
+      }
+    },
+    {
+      "name": "clock_one_first_update",
+      "memory": [
+        {"addr": "@clock", "offset": "0x148", "u32": 1}
+      ]
+    },
+    {
+      "name": "clock_changes_between_iterations",
+      "memory": [
+        {"addr": "@clock", "offset": "0x148", "u32": 100},
+        {"addr": "0x007A0000", "size": 256, "fill": "zero"},
+        {"addr": "0x007A0148", "u32": 150}
+      ],
+      "callees": {
+        "0x00496932": {"name": "FUN_00496932", "conv": "thiscall", "args": ["cstr", "u32", "char"], "ret": [0, 0, 1]},
+        "0x004a9c84": {"name": "FUN_004a9c84", "conv": "cdecl", "args": [], "ret": 0,
+                       "writes": [{"addr": "0x00905D24", "hex": "00007a00", "call": 1}]}
+      }
+    },
+    {
+      "name": "field418_breaks_at_end",
+      "memory": [
+        {"addr": "@frontend", "offset": "0x418", "u32": 1}
+      ],
+      "callees": {
+        "0x00496932": {"name": "FUN_00496932", "conv": "thiscall", "args": ["cstr", "u32", "char"], "ret": [0]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4889810,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@globalstate", "offset": "0xb54", "type": "int", "choices": [2, 2, 2, 1, 3]},
+      {"addr": "@frontend", "offset": "0x418", "type": "int", "choices": [0, 0, 1]},
+      {"addr": "@clock", "offset": "0x148", "type": "u32", "range": [0, 300]},
+      {"addr": "@login", "offset": "0x1c0", "type": "int", "choices": [1, 2, 3]},
+      {"addr": "@resetOwner", "offset": "0x4c", "type": "float", "range": [-5.0, 5.0]},
+      {"addr": "0x0099D3EC", "type": "ptr", "choices": [0, "@pipeline"]}
+    ]
+  }
+}

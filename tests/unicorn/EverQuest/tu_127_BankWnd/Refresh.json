@@ -1,0 +1,221 @@
+{
+  "function": "Window_guess::OnMoneyClick_guess",
+  "original": "0x004dcd85",
+  "sources": ["src/EverQuest/tu_127_BankWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@window",
+  "args": [
+    {"name": "index_guess", "type": "int"},
+    {"name": "value_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "window": {
+      "size": "0x1dc",
+      "fill": "random",
+      "init": [
+        {"offset": "0x168", "u32": 0},
+        {"offset": "0x16c", "u32": 0},
+        {"offset": "0x170", "u32": 0},
+        {"offset": "0x174", "u32": 0},
+        {"offset": "0x178", "u32": 0},
+        {"offset": "0x17c", "u32": 0}
+      ]
+    },
+    "settings": {
+      "size": "0x12",
+      "fill": "random",
+      "init": [{"offset": "0x11", "u8": 0}]
+    },
+    "valueRoot": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x8", "u32": "@offsetHolder"}]
+    },
+    "offsetHolder": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [{"offset": "0x4", "u32": 256}]
+    },
+    "valueSlots": {
+      "size": "0x11f4",
+      "fill": "random",
+      "init": [
+        {"offset": "0x11e4", "u32": 101},
+        {"offset": "0x11e8", "u32": 202},
+        {"offset": "0x11ec", "u32": 303},
+        {"offset": "0x11f0", "u32": 404}
+      ]
+    },
+    "formatManager": {"size": "0x4", "fill": "random"},
+    "service": {"size": "0x4", "fill": "random"},
+    "sink": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@vtable"}]
+    },
+    "vtable": {
+      "size": "0xe8",
+      "fill": "random",
+      "init": [{"offset": "0xe4", "u32": "@fn"}]
+    },
+    "sourceRect": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": 0},
+        {"offset": "0x4", "u32": 0},
+        {"offset": "0x8", "u32": 100},
+        {"offset": "0xc", "u32": 80}
+      ]
+    },
+    "fn": {"size": "0x4", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00905d24", "u32": "@settings"},
+    {"addr": "0x00905d00", "u32": "@valueRoot"},
+    {"addr": "0x00988df0", "u32": "@formatManager"},
+    {"addr": "0x00850c3c", "u32": "@service"}
+  ],
+  "callees": {
+    "0x005ec220": {
+      "name": "EQ_CharacterProfileView_guess::Find_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@valueSlots"
+    },
+    "0x00495f81": {
+      "name": "FormatManager_guess::MoveMoney_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "int", "int", "int", "int"],
+      "ret": 0
+    },
+    "0x004dc5aa": {
+      "name": "Window_guess::UpdateMoneyLabels_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004dc4d7": {
+      "name": "GetBankCoins_guess",
+      "conv": "stdcall",
+      "args": ["int"],
+      "ret": 1337,
+      "ret_edx": 0
+    },
+    "0x004d9160": {
+      "name": "TextValue_guess::operator=",
+      "conv": "thiscall",
+      "args": ["ptr", "ignore"],
+      "passthrough": true
+    },
+    "0x004dc02d": {
+      "name": "Rect_guess::CenterPoint",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "passthrough": true
+    },
+    "0x004d911a": {
+      "name": "FUN_004d911a",
+      "conv": "thiscall",
+      "args": ["ignore"]
+    },
+    "0x0054d976": {
+      "name": "Service_guess::Draw_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "int", "int", "int", "int", "int"],
+      "ret": 0
+    },
+    "@fn": {
+      "name": "TextSink_guess::GetRect_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "@sourceRect"
+    }
+  },
+  "cases": [
+    {
+      "name": "mode-zero-layout-index-zero",
+      "args": [0, 0],
+      "memory": [{"addr": "@settings", "offset": "0x11", "u8": 0}]
+    },
+    {
+      "name": "mode-zero-layout-index-three",
+      "args": [3, 12],
+      "memory": [{"addr": "@settings", "offset": "0x11", "u8": 0}]
+    },
+    {
+      "name": "mode-zero-layout-index-four",
+      "args": [4, 2147483647],
+      "memory": [{"addr": "@settings", "offset": "0x11", "u8": 0}]
+    },
+    {
+      "name": "mode-zero-negative-null-sink",
+      "args": [0, -1],
+      "memory": [{"addr": "@settings", "offset": "0x11", "u8": 0}]
+    },
+    {
+      "name": "mode-zero-negative-virtual-sink",
+      "args": [0, -1],
+      "memory": [
+        {"addr": "@settings", "offset": "0x11", "u8": 0},
+        {"addr": "@window", "offset": "0x168", "u32": "@sink"}
+      ]
+    },
+    {
+      "name": "mode-zero-negative-virtual-sink-index-four",
+      "args": [4, -1],
+      "memory": [
+        {"addr": "@settings", "offset": "0x11", "u8": 0},
+        {"addr": "@window", "offset": "0x178", "u32": "@sink"}
+      ]
+    },
+    {
+      "name": "mode-one-index-three",
+      "args": [3, 99],
+      "memory": [{"addr": "@settings", "offset": "0x11", "u8": 1}]
+    },
+    {
+      "name": "mode-two-index-four",
+      "args": [4, -1],
+      "memory": [{"addr": "@settings", "offset": "0x11", "u8": 2}]
+    },
+    {
+      "name": "mode-three-index-zero",
+      "args": [0, 0],
+      "memory": [{"addr": "@settings", "offset": "0x11", "u8": 3}]
+    },
+    {
+      "name": "mode-four-index-four",
+      "args": [4, 0],
+      "memory": [{"addr": "@settings", "offset": "0x11", "u8": 4}]
+    },
+    {
+      "name": "mode-five-default-case",
+      "args": [4, 0],
+      "memory": [{"addr": "@settings", "offset": "0x11", "u8": 5}]
+    },
+    {
+      "name": "mode-255-default-case",
+      "args": [3, 0],
+      "memory": [{"addr": "@settings", "offset": "0x11", "u8": 255}]
+    }
+  ],
+  "fuzz": {
+    "seed": 5098885,
+    "count": 100,
+    "args": [
+      {"range": [0, 5]},
+      {"choices": [-2, -1, 0, 1, 4, 2147483647]}
+    ],
+    "memory": [
+      {"addr": "@settings", "offset": "0x11", "type": "u8", "choices": [0, 1, 2, 3, 4, 5, 255]},
+      {"addr": "@window", "offset": "0x168", "type": "ptr", "choices": [0, "@sink"]},
+      {"addr": "@window", "offset": "0x16c", "type": "ptr", "choices": [0]},
+      {"addr": "@window", "offset": "0x170", "type": "ptr", "choices": [0]},
+      {"addr": "@window", "offset": "0x174", "type": "ptr", "choices": [0]},
+      {"addr": "@window", "offset": "0x178", "type": "ptr", "choices": [0]},
+      {"addr": "@window", "offset": "0x17c", "type": "ptr", "choices": [0]}
+    ]
+  },
+  "_survivors": "L705: rect_guess is overwritten by the copy before any read when the sink is non-null, and is never read when the sink is null"
+}

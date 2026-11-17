@@ -1,0 +1,241 @@
+{
+  "function": "Expedition_guess::Handle_OP_DzMemberListStatus_guess",
+  "original": "0x00446bc4",
+  "sources": [
+    "src/EverQuest/tu_031_Expedition.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@cleanuplist",
+  "args": [
+    {
+      "name": "source_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "cleanuplist": {
+      "size": "0x118",
+      "fill": "random",
+      "init": [
+        {"offset": "0x110", "u32": "@e0"}
+      ]
+    },
+    "e0": {
+      "size": "0x48",
+      "fill": "random",
+      "init": [
+        {"offset": "0x44", "u32": "@e1"}
+      ]
+    },
+    "e1": {
+      "size": "0x48",
+      "fill": "random",
+      "init": [
+        {"offset": "0x44", "u32": 0}
+      ]
+    },
+    "blob": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "manager": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "n0": {
+      "size": "0x48",
+      "fill": "zero"
+    },
+    "n1": {
+      "size": "0x48",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "0x009918C0", "u32": "@manager"}
+  ],
+  "callees": {
+    "0x00446a33": {
+      "name": "TextList_guess::Read_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "int"],
+      "passthrough": true
+    },
+    "0x00446233": {
+      "name": "TextNode_guess::Init_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0044624f": {
+      "name": "TextNode_guess::SetText_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "passthrough": true
+    },
+    "0x0044627a": {
+      "name": "TextList_guess::Append_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "passthrough": true
+    },
+    "0x0060d071": {
+      "name": "operator new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": ["@n0", "@n1"]
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr"],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "kernel32.dll!HeapAlloc": {
+      "conv": "stdcall",
+      "args": ["u32", "u32", "u32"],
+      "ret": ["@n0", "@n1"]
+    },
+    "0x00621e9c": {
+      "name": "__stricmp",
+      "conv": "cdecl",
+      "args": ["u32", "u32"],
+      "ret": 1
+    },
+    "0x0060d0d5": {
+      "name": "_free",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x004ff54d": {
+      "name": "Manager_guess::Notify_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "__stricmp": "0x00621e9c",
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "null source",
+      "args": [0]
+    },
+    {
+      "name": "empty source",
+      "args": ["@blob"],
+      "memory": [
+        {"addr": "@blob", "offset": "0x0", "u32": 0},
+        {"addr": "@blob", "offset": "0x4", "u32": 0}
+      ]
+    },
+    {
+      "name": "empty source, no manager",
+      "args": ["@blob"],
+      "memory": [
+        {"addr": "@blob", "offset": "0x0", "u32": 0},
+        {"addr": "@blob", "offset": "0x4", "u32": 0},
+        {"addr": "0x009918C0", "u32": 0}
+      ]
+    },
+    {
+      "name": "one node, empty list",
+      "args": ["@blob"],
+      "memory": [
+        {"addr": "@blob", "offset": "0x0", "u32": 0},
+        {"addr": "@blob", "offset": "0x4", "u32": 1},
+        {"addr": "@blob", "offset": "0x8", "cstr": "abc"},
+        {"addr": "@cleanuplist", "offset": "0x110", "u32": 0}
+      ],
+      "callees": {
+        "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 3},
+        "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["u32", "u32"], "ret": 1}
+      }
+    },
+    {
+      "name": "one node, matches head",
+      "args": ["@blob"],
+      "memory": [
+        {"addr": "@blob", "offset": "0x0", "u32": 0},
+        {"addr": "@blob", "offset": "0x4", "u32": 1},
+        {"addr": "@blob", "offset": "0x8", "cstr": "abc"}
+      ],
+      "callees": {
+        "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 3},
+        "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["u32", "u32"], "ret": 0}
+      }
+    },
+    {
+      "name": "one node, matches head, no manager",
+      "args": ["@blob"],
+      "memory": [
+        {"addr": "@blob", "offset": "0x0", "u32": 0},
+        {"addr": "@blob", "offset": "0x4", "u32": 1},
+        {"addr": "@blob", "offset": "0x8", "cstr": "abc"},
+        {"addr": "0x009918C0", "u32": 0}
+      ],
+      "callees": {
+        "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 3},
+        "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["u32", "u32"], "ret": 0}
+      }
+    },
+    {
+      "name": "one node, matches second",
+      "args": ["@blob"],
+      "memory": [
+        {"addr": "@blob", "offset": "0x0", "u32": 0},
+        {"addr": "@blob", "offset": "0x4", "u32": 1},
+        {"addr": "@blob", "offset": "0x8", "cstr": "abc"}
+      ],
+      "callees": {
+        "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 3},
+        "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["u32", "u32"], "ret": [1, 0]}
+      }
+    },
+    {
+      "name": "one node, no match in list",
+      "args": ["@blob"],
+      "memory": [
+        {"addr": "@blob", "offset": "0x0", "u32": 0},
+        {"addr": "@blob", "offset": "0x4", "u32": 1},
+        {"addr": "@blob", "offset": "0x8", "cstr": "abc"}
+      ],
+      "callees": {
+        "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 3},
+        "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["u32", "u32"], "ret": 1}
+      }
+    },
+    {
+      "name": "two nodes, second matches the tail and ends the chain",
+      "args": ["@blob"],
+      "memory": [
+        {"addr": "@blob", "offset": "0x0", "u32": 0},
+        {"addr": "@blob", "offset": "0x4", "u32": 2},
+        {"addr": "@blob", "offset": "0x8", "cstr": "abc"},
+        {"addr": "@blob", "offset": "0xd", "cstr": "de"}
+      ],
+      "callees": {
+        "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": [3, 2]},
+        "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["u32", "u32"], "ret": [1, 0, 1, 0]}
+      }
+    }
+  ],
+  "_survivors": "L1566: Read's memcpy overwrites count before any read, so the zero init is never observed; L1567: head is zero only from the zeroed harness stack (with count 0 Read writes no head; real stack junk is not modelled); L1568: tail likewise, read only through Append which the harness never reaches with count 0",
+  "fuzz": {
+    "seed": 4484036,
+    "count": 100,
+    "args": [
+      {"choices": [0, "@blob"]}
+    ],
+    "memory": [
+      {"addr": "@cleanuplist", "offset": "0x110", "type": "ptr", "choices": [0, "@e0"]},
+      {"addr": "@blob", "offset": "0x4", "type": "u32", "choices": [0, 1]},
+      {"addr": "0x009918C0", "type": "ptr", "choices": [0, "@manager"]}
+    ]
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "function": "FUN_0049a7f8_callback_guess::Report_guess",
+  "original": "0x0049a7f8",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner+0x4",
+  "args": [
+    { "name": "id_guess", "type": "int" },
+    { "name": "mode_guess", "type": "u32" },
+    { "name": "includeMode_guess", "type": "bool" }
+  ],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x3a1c8",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x3a1c4", "u32": "@state" }
+      ]
+    },
+    "state": {
+      "size": "0xa0",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x1c", "u32": 1 }
+      ]
+    },
+    "rep": {
+      "size": "0x100",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    { "addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4 },
+    { "addr": "0x00649a24", "from_image": "0x00649a24", "image_size": 3 }
+  ],
+  "callees": {
+    "0x00495250": {
+      "name": "GetManagedObject_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@state"
+    },
+    "0x004275c7": {
+      "name": "ManagedObject_guess::At_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "u32"],
+      "ret": "arg0",
+      "writes": [
+        { "arg": 0, "offset": 4, "hex": "656e7472790000000000000000000000" },
+        { "arg": 0, "offset": 20, "hex": "05000000" },
+        { "arg": 0, "offset": 24, "hex": "0f000000" }
+      ]
+    },
+    "0x00571e00": {
+      "name": "CXStr_ctor_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x0040291e": {
+      "name": "string_Tidy_guess",
+      "conv": "thiscall",
+      "args": ["bool", "u32"],
+      "ret": 0
+    },
+    "0x00572300": {
+      "name": "CXStr_to_char_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0,
+      "passthrough": true
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr"],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        { "arg": 0, "hex": "3200" }
+      ]
+    },
+    "0x0046da4a": {
+      "name": "FormatText_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "cstr", "cstr", "cstr", "cstr", "cstr", "cstr", "cstr", "cstr", "cstr"],
+      "ret": 0,
+      "writes": [
+        { "arg": 0, "hex": "7265706f727400" }
+      ]
+    },
+    "0x004982c6": {
+      "name": "dsp_chat_guess",
+      "conv": "thiscall",
+      "args": ["cstr", "int", "bool"],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "CXStr_FreeRep_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "passthrough": true
+    },
+    "kernel32.dll!GetProcessHeap": {
+      "conv": "stdcall",
+      "args": [],
+      "ret": 1
+    },
+    "kernel32.dll!HeapAlloc": {
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": "@rep"
+    },
+    "kernel32.dll!HeapFree": {
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 1
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb",
+    "?DspChat_guess@GlobalState_guess@@QAEXPBDH_N@Z": "0x004982c6"
+  },
+  "cases": [
+    { "name": "null_state", "args": [1, 0, 0], "callees": { "0x00495250": { "name": "GetManagedObject_guess", "conv": "thiscall", "args": [], "ret": 0 } } },
+    { "name": "id_mismatch", "args": [2, 0, 0] },
+    { "name": "no_mode", "args": [1, 0, 0] },
+    { "name": "mode_zero", "args": [1, 0, 1] },
+    { "name": "mode_one", "args": [1, 1, 1] },
+    { "name": "mode_two", "args": [1, 2, 1] },
+    {
+      "name": "mode_other",
+      "args": [1, 17, 1],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "sprintf",
+          "conv": "cdecl",
+          "args": ["ptr", "cstr"],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            { "arg": 0, "hex": "313700" }
+          ]
+        }
+      }
+    },
+    { "name": "noncanonical_bool", "args": [1, 0, 2] }
+  ],
+  "fuzz": {
+    "seed": 4827128,
+    "count": 100,
+    "args": [
+      { "choices": [0, 1, 2] },
+      { "choices": [0, 1] },
+      { "choices": [0, 1] }
+    ],
+    "memory": []
+  }
+}

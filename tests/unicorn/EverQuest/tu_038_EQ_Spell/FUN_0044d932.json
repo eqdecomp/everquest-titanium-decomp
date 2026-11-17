@@ -1,0 +1,46 @@
+{
+  "function": "EQ_Spell_guess::ClearSpellData_guess",
+  "original": "0x0044d932",
+  "sources": [
+    "src/EverQuest/tu_038_EQ_Spell.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@fun_0044d0e6_owner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "fun_0044d0e6_owner": {
+      "size": "0x270",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {},
+  "cases": [
+    {
+      "name": "typical",
+      "args": []
+    },
+    {
+      "name": "zeros",
+      "args": []
+    }
+  ],
+  "fuzz": {
+    "seed": 4512050,
+    "count": 100,
+    "args": [],
+    "memory": []
+  },
+  "coverage_ok": {
+    "0044D969-0044D96A": "fixed loop index is below its 0x30 bound",
+    "0044D972-0044D973": "fixed loop index is below its 0x30 bound",
+    "0044D97B-0044D97C": "fixed loop index is below its 0x30 bound",
+    "0044D987-0044D988": "fixed loop index is below its 0x30 bound",
+    "0044D993-0044D994": "last loop iteration is still below its 0x30 bound",
+    "0044D9AB-0044D9AC": "fixed loop index is below its 0x10 bound",
+    "0044D9B7-0044D9B8": "fixed loop index is below its 0x10 bound",
+    "0044D9CC-0044D9CD": "fixed loop index is below its 0x10 bound",
+    "0044D9E3-0044D9E4": "fixed byte index is below its 0x24 bound"
+  }
+}

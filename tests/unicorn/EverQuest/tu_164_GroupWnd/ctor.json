@@ -1,0 +1,138 @@
+{
+  "function": "GroupWindow_guess::GroupWindow_guess",
+  "original": "0x0050c317",
+  "sources": ["src/EverQuest/tu_164_GroupWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@groupwindow",
+  "args": [{"name": "parent", "type": "ptr"}],
+  "ret": "ptr",
+  "objects": {
+    "groupwindow": {
+      "size": "0x1c0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x124", "u32": "@piece"},
+        {"offset": "0x64", "u32": "0x1000"}
+      ]
+    },
+    "parent": {"size": "0x4", "fill": "random"},
+    "piece": {
+      "size": "0x64",
+      "fill": "random",
+      "init": [{"offset": "0x60", "u32": "0x80"}]
+    },
+    "cxstrheap": {"size": "0x1000", "fill": "zero"}
+  },
+  "memory": [{"addr": "0x0079ac74", "u32": "0x13579bdf"}],
+  "callees": {
+    "0x00571e00": {
+      "name": "CXStr_ctor_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "passthrough": true
+    },
+    "0x005a3850": {
+      "name": "CSidlScreenWnd_ctor_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "ignore", "int", "int", "ptr"],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "CXStr_dtor_helper_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x005a25b0": {
+      "name": "CreateChildrenFromSidl_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005a1e10": {
+      "name": "GetChildItem_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": [
+        "0x70000001", "0x70000002", "0x70000003", "0x70000004", "0x70000005",
+        "0x70000006", "0x70000007", "0x70000008", "0x70000009", "0x7000000a",
+        "0x7000000b", "0x7000000c", "0x7000000d", "0x7000000e", "0x7000000f",
+        "0x70000010", "0x70000011", "0x70000012", "0x70000013", "0x70000014"
+      ]
+    },
+    "0x0060d5eb": {
+      "name": "sprintf_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr"],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "50 65 74 47 61 75 67 65 31 00", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "48 50 4c 61 62 65 6c 31 00", "call": 1},
+        {"arg": 0, "offset": 0, "hex": "48 50 50 65 72 63 4c 61 62 65 6c 31 00", "call": 2},
+        {"arg": 0, "offset": 0, "hex": "50 65 74 47 61 75 67 65 32 00", "call": 3},
+        {"arg": 0, "offset": 0, "hex": "48 50 4c 61 62 65 6c 32 00", "call": 4},
+        {"arg": 0, "offset": 0, "hex": "48 50 50 65 72 63 4c 61 62 65 6c 32 00", "call": 5},
+        {"arg": 0, "offset": 0, "hex": "50 65 74 47 61 75 67 65 33 00", "call": 6},
+        {"arg": 0, "offset": 0, "hex": "48 50 4c 61 62 65 6c 33 00", "call": 7},
+        {"arg": 0, "offset": 0, "hex": "48 50 50 65 72 63 4c 61 62 65 6c 33 00", "call": 8},
+        {"arg": 0, "offset": 0, "hex": "50 65 74 47 61 75 67 65 34 00", "call": 9},
+        {"arg": 0, "offset": 0, "hex": "48 50 4c 61 62 65 6c 34 00", "call": 10},
+        {"arg": 0, "offset": 0, "hex": "48 50 50 65 72 63 4c 61 62 65 6c 34 00", "call": 11},
+        {"arg": 0, "offset": 0, "hex": "50 65 74 47 61 75 67 65 35 00", "call": 12},
+        {"arg": 0, "offset": 0, "hex": "48 50 4c 61 62 65 6c 35 00", "call": 13},
+        {"arg": 0, "offset": 0, "hex": "48 50 50 65 72 63 4c 61 62 65 6c 35 00", "call": 14}
+      ]
+    },
+    "0x0050c1d9": {
+      "name": "CreateContextMenu_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc_guess",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": "@cxstrheap+0x100"
+    }
+  },
+  "rewrite_aliases": {"_sprintf_guess": "0x0060d5eb"},
+  "cases": [
+    {
+      "name": "piece present and flags set",
+      "args": ["@parent"],
+      "memory": [
+        {"addr": "@groupwindow", "offset": "0x124", "u32": "@piece"},
+        {"addr": "@groupwindow", "offset": "0x64", "u32": "0x1000"},
+        {"addr": "@piece", "offset": "0x60", "u32": "0x80"}
+      ]
+    },
+    {
+      "name": "no SIDL piece",
+      "args": ["@parent"],
+      "memory": [
+        {"addr": "@groupwindow", "offset": "0x124", "u32": 0}
+      ]
+    },
+    {
+      "name": "piece present with zero flags",
+      "args": ["@parent"],
+      "memory": [
+        {"addr": "@groupwindow", "offset": "0x124", "u32": "@piece"},
+        {"addr": "@groupwindow", "offset": "0x64", "u32": 0},
+        {"addr": "@piece", "offset": "0x60", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5292823,
+    "count": 100,
+    "args": [{"choices": ["@parent"]}],
+    "memory": [
+      {"addr": "@groupwindow", "offset": "0x124", "type": "ptr", "choices": [0, "@piece"]},
+      {"addr": "@groupwindow", "offset": "0x64", "type": "u32", "choices": [0, 256, 2048, 4096]},
+      {"addr": "@piece", "offset": "0x60", "type": "u32", "choices": [0, 128, 2048, 305419896]}
+    ]
+  }
+}

@@ -1,0 +1,459 @@
+{
+  "function": "CharacterMagicSystem_guess::CheckCast_guess",
+  "original": "0x004109df",
+  "sources": ["src/EverQuest/tu_012_CharacterMagicSystem.cpp"],
+  "conv": "thiscall",
+  "this": "@charactermagicsystem",
+  "args": [
+    {"name": "mode_guess", "type": "u8"},
+    {"name": "spell_guess", "type": "ptr"}
+  ],
+  "ret": "char",
+  "objects": {
+    "charactermagicsystem": {
+      "size": "0x30", "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@vtbl"},
+        {"offset": "0x4", "u32": "@container"},
+        {"offset": "0x8", "u32": "@state"}
+      ]
+    },
+    "state": {"size": "0x248", "fill": "random"},
+    "spell": {"size": "0x1c8", "fill": "random"},
+    "result": {"size": "0x11ac", "fill": "random"},
+    "lookup": {"size": "0x4c", "fill": "random"},
+    "container": {
+      "size": "0x8", "fill": "random",
+      "init": [{"offset": "0x4", "u32": 0}]
+    },
+    "fn_mana": {"size": "0x4"},
+    "vtbl": {
+      "size": "0xc", "fill": "zero",
+      "init": [{"offset": "0x8", "u32": "@fn_mana"}]
+    },
+    "messageLookup": {"size": "0x4", "fill": "zero"},
+    "messageRouter": {"size": "0x4", "fill": "zero"},
+    "message": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@charactermagicsystem", "offset": "0x18", "u32": 600},
+    {"addr": "@charactermagicsystem", "offset": "0x1c", "u32": 600},
+    {"addr": "@charactermagicsystem", "offset": "0x20", "u32": 600},
+    {"addr": "@charactermagicsystem", "offset": "0x28", "u32": 600},
+    {"addr": "@charactermagicsystem", "offset": "0x2c", "u32": 20},
+    {"addr": "@state", "offset": "0x244", "u8": 0},
+    {"addr": "@spell", "offset": "0x2c", "u32": 50},
+    {"addr": "@spell", "offset": "0x181", "u8": 1},
+    {"addr": "@spell", "offset": "0x182", "u8": 10},
+    {"addr": "@spell", "offset": "0x1c4", "u8": 1},
+    {"addr": "@result", "offset": "0x119c", "u8": 2},
+    {"addr": "@result", "offset": "0x11a8", "u32": 0},
+    {"addr": "@lookup", "offset": "0x48", "u32": 0},
+    {"addr": "0x00985cc8", "u32": "@lookup"},
+    {"addr": "0x00905cb0", "u32": "@messageLookup"},
+    {"addr": "0x00988df0", "u32": "@messageRouter"},
+    {"addr": "@message", "cstr": "A spell message"}
+  ],
+  "callees": {
+    "0x004106a3": {"name": "TotalSpellAffects_guess", "conv": "thiscall", "args": ["int", "bool", "int", "int"], "ret": 0},
+    "0x005ec220": {"name": "Resolve_guess", "conv": "thiscall", "args": [], "ret": "@result"},
+    "0x0044e755": {"name": "Check_guess", "conv": "thiscall", "args": ["int"], "ret": 10},
+    "0x0041c8f4": {"name": "IsSpellAllowed_guess", "conv": "thiscall", "args": ["u8"], "ret": 0},
+    "0x0041ace9": {"name": "GetSpellAdjustment_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0040cbb2": {"name": "RandomRange_guess", "conv": "cdecl", "args": ["int", "int"], "ret": 0},
+    "0x004168bd": {"name": "normal_to_special_guess", "conv": "cdecl", "args": ["u8"], "ret": 0},
+    "0x004657ec": {"name": "number_percent_guess", "conv": "cdecl", "args": [], "ret": 99},
+    "0x0040e934": {"name": "FindBuffWithEffect_guess", "conv": "thiscall", "args": ["int", "ptr"], "ret": 0},
+    "0x0040db0b": {"name": "IsBardSong_guess", "conv": "stdcall", "args": ["ptr", "int"], "passthrough": true},
+    "0x004649b1": {"name": "ReportMagicMessage_guess", "conv": "cdecl", "args": ["ptr", "int", "int", "int"]},
+    "0x0040e2a8": {"name": "AddField11A8_guess", "conv": "thiscall", "args": ["int"]},
+    "0x005dfa00": {"name": "GetString_guess", "conv": "thiscall", "args": ["int", "int"], "ret": "@message"},
+    "0x004982c6": {"name": "ShowText_guess", "conv": "thiscall", "args": ["cstr", "int", "bool"]},
+    "@fn_mana": {"name": "GetMana_guess", "conv": "thiscall", "args": [], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "state pointer is null",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@charactermagicsystem", "offset": "0x8", "u32": 0}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "state is active",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@state", "offset": "0x244", "u8": 1}],
+      "expect": {"ret": 0}
+    },
+    {"name": "mode above eight", "args": [9, "@spell"], "expect": {"ret": 0}},
+    {
+      "name": "rank zero and nonnegative effect",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@spell", "offset": "0x181", "u8": 0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "rank zero and negative effect",
+      "args": [1, "@spell"],
+      "memory": [
+        {"addr": "@spell", "offset": "0x181", "u8": 0},
+        {"addr": "@charactermagicsystem", "offset": "0x28", "u32": 600}
+      ],
+      "callees": {
+        "0x004106a3": {"conv": "thiscall", "args": ["int", "bool", "int", "int"], "ret": -1}
+      },
+      "expect": {"ret": 1}
+    },
+    {"name": "switch mode two", "args": [1, "@spell"], "expect": {"ret": 1}},
+    {"name": "switch mode six", "args": [1, "@spell"], "memory": [{"addr": "@result", "offset": "0x119c", "u8": 6}], "expect": {"ret": 1}},
+    {"name": "switch mode ten", "args": [1, "@spell"], "memory": [{"addr": "@result", "offset": "0x119c", "u8": 10}], "expect": {"ret": 1}},
+    {"name": "switch mode three", "args": [1, "@spell"], "memory": [{"addr": "@result", "offset": "0x119c", "u8": 3}], "expect": {"ret": 1}},
+    {"name": "switch mode four", "args": [1, "@spell"], "memory": [{"addr": "@result", "offset": "0x119c", "u8": 4}], "expect": {"ret": 1}},
+    {"name": "switch mode fifteen", "args": [1, "@spell"], "memory": [{"addr": "@result", "offset": "0x119c", "u8": 15}], "expect": {"ret": 1}},
+    {"name": "switch mode five", "args": [1, "@spell"], "memory": [{"addr": "@result", "offset": "0x119c", "u8": 5}], "expect": {"ret": 1}},
+    {
+      "name": "switch mode eight and rank cap",
+      "args": [1, "@spell"],
+      "memory": [
+        {"addr": "@result", "offset": "0x119c", "u8": 8},
+        {"addr": "@spell", "offset": "0x181", "u8": 20}
+      ],
+      "expect": {"ret": 1}
+    },
+    {"name": "switch mode eleven", "args": [1, "@spell"], "memory": [{"addr": "@result", "offset": "0x119c", "u8": 11}], "expect": {"ret": 1}},
+    {"name": "switch mode fourteen", "args": [1, "@spell"], "memory": [{"addr": "@result", "offset": "0x119c", "u8": 14}], "expect": {"ret": 1}},
+    {"name": "switch default seven", "args": [1, "@spell"], "memory": [{"addr": "@result", "offset": "0x119c", "u8": 7}], "expect": {"ret": 1}},
+    {"name": "switch default nine", "args": [1, "@spell"], "memory": [{"addr": "@result", "offset": "0x119c", "u8": 9}], "expect": {"ret": 1}},
+    {
+      "name": "matching spell pointer clears rank",
+      "args": [1, "@spell"],
+      "memory": [
+        {"addr": "@result", "offset": "0x119c", "u8": 3},
+        {"addr": "@lookup", "offset": "0x48", "u32": "@spell"}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "check value clears rank at fifty six",
+      "args": [1, "@spell"],
+      "callees": {
+        "0x0044e755": {"conv": "thiscall", "args": ["int"], "ret": [56, 10]}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "mode three check value clears rank above forty",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@result", "offset": "0x119c", "u8": 3}],
+      "callees": {
+        "0x0044e755": {"conv": "thiscall", "args": ["int"], "ret": [10, 41, 10]}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "spell allowed adjustment",
+      "args": [1, "@spell"],
+      "callees": {
+        "0x004106a3": {"conv": "thiscall", "args": ["int", "bool", "int", "int"], "ret": 5},
+        "0x0041c8f4": {"conv": "thiscall", "args": ["u8"], "ret": 1},
+        "0x0041ace9": {"conv": "thiscall", "args": ["int"], "ret": 10}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "random penalty ten",
+      "args": [1, "@spell"],
+      "callees": {"0x0040cbb2": {"conv": "cdecl", "args": ["int", "int"], "ret": 10}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "minimum chance five clamp",
+      "args": [1, "@spell"],
+      "memory": [
+        {"addr": "@charactermagicsystem", "offset": "0x28", "u32": 1},
+        {"addr": "@spell", "offset": "0x181", "u8": 50}
+      ],
+      "callees": {"0x0044e755": {"conv": "thiscall", "args": ["int"], "ret": [10, 100]}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "mode eight minimum chance one clamp",
+      "args": [1, "@spell"],
+      "memory": [
+        {"addr": "@result", "offset": "0x119c", "u8": 8},
+        {"addr": "@charactermagicsystem", "offset": "0x18", "u32": 1},
+        {"addr": "@charactermagicsystem", "offset": "0x1c", "u32": 1},
+        {"addr": "@spell", "offset": "0x181", "u8": 50}
+      ],
+      "callees": {"0x0044e755": {"conv": "thiscall", "args": ["int"], "ret": [10, 100]}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "effect bonus reaches upper cap",
+      "args": [1, "@spell"],
+      "callees": {
+        "0x004168bd": {"conv": "cdecl", "args": ["u8"], "ret": 1},
+        "0x0041ace9": {"conv": "thiscall", "args": ["int"], "ret": 251}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "effect adjustment at upper boundary is ignored",
+      "args": [1, "@spell"],
+      "callees": {
+        "0x004168bd": {"conv": "cdecl", "args": ["u8"], "ret": 1},
+        "0x0041ace9": {"conv": "thiscall", "args": ["int"], "ret": 252}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "find matching slot forces success",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@spell", "offset": "0x1c4", "u8": 0}],
+      "callees": {
+        "0x0040e934": {"conv": "thiscall", "args": ["int", "ptr"], "ret": "@spell"}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "no matching slot follows random roll",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@spell", "offset": "0x1c4", "u8": 0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "random roll fails",
+      "args": [1, "@spell"],
+      "callees": {"0x004657ec": {"conv": "cdecl", "args": [], "ret": 0}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "predicate warning reports and rejects",
+      "args": [1, "@spell"],
+      "memory": [
+        {"addr": "@result", "offset": "0x119c", "u8": 8},
+        {"addr": "@spell", "offset": "0x1c4", "u8": 0}
+      ],
+      "callees": {
+        "0x004106a3": {"conv": "thiscall", "args": ["int", "bool", "int", "int"], "ret": 100},
+        "0x004657ec": {"conv": "cdecl", "args": [], "ret": [99, 0]}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "successful mode eight displays string",
+      "args": [1, "@spell"],
+      "memory": [
+        {"addr": "@result", "offset": "0x119c", "u8": 8},
+        {"addr": "@spell", "offset": "0x1c4", "u8": 0}
+      ],
+      "callees": {
+        "0x004106a3": {"conv": "thiscall", "args": ["int", "bool", "int", "int"], "ret": 0},
+        "0x004657ec": {"conv": "cdecl", "args": [], "ret": [99, 99]}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "mana cost limited by available mana",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@spell", "offset": "0x2c", "u32": 100}],
+      "callees": {"@fn_mana": {"conv": "thiscall", "args": [], "ret": 24}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "negative accumulated mana is reset",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@result", "offset": "0x11a8", "u32": -1}],
+      "callees": {"@fn_mana": {"conv": "thiscall", "args": [], "ret": 0}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "rank zero chance boundary",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@spell", "offset": "0x181", "u8": 0}],
+      "callees": {"0x004657ec": {"conv": "cdecl", "args": [], "ret": 90}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "matching pointer rank boundary",
+      "args": [1, "@spell"],
+      "memory": [
+        {"addr": "@result", "offset": "0x119c", "u8": 3},
+        {"addr": "@charactermagicsystem", "offset": "0x28", "u32": 100},
+        {"addr": "@lookup", "offset": "0x48", "u32": "@spell"}
+      ],
+      "callees": {"0x004657ec": {"conv": "cdecl", "args": [], "ret": 55}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "mode check at fifty six",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@charactermagicsystem", "offset": "0x28", "u32": 100}],
+      "callees": {
+        "0x0044e755": {"conv": "thiscall", "args": ["int"], "ret": [56, 10]},
+        "0x004657ec": {"conv": "cdecl", "args": [], "ret": 55}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "mode three check at forty one",
+      "args": [1, "@spell"],
+      "memory": [
+        {"addr": "@result", "offset": "0x119c", "u8": 3},
+        {"addr": "@charactermagicsystem", "offset": "0x28", "u32": 100}
+      ],
+      "callees": {
+        "0x0044e755": {"conv": "thiscall", "args": ["int"], "ret": [10, 41, 10]},
+        "0x004657ec": {"conv": "cdecl", "args": [], "ret": 55}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "mode five check at forty",
+      "args": [1, "@spell"],
+      "memory": [
+        {"addr": "@result", "offset": "0x119c", "u8": 5},
+        {"addr": "@charactermagicsystem", "offset": "0x20", "u32": 100}
+      ],
+      "callees": {
+        "0x0044e755": {"conv": "thiscall", "args": ["int"], "ret": [10, 40, 10]},
+        "0x004657ec": {"conv": "cdecl", "args": [], "ret": 55}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "mode five check at forty one",
+      "args": [1, "@spell"],
+      "memory": [
+        {"addr": "@result", "offset": "0x119c", "u8": 5},
+        {"addr": "@charactermagicsystem", "offset": "0x20", "u32": 100}
+      ],
+      "callees": {
+        "0x0044e755": {"conv": "thiscall", "args": ["int"], "ret": [10, 41, 10]},
+        "0x004657ec": {"conv": "cdecl", "args": [], "ret": 55}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "positive adjustment combination boundary",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@charactermagicsystem", "offset": "0x28", "u32": 100}],
+      "callees": {
+        "0x004106a3": {"conv": "thiscall", "args": ["int", "bool", "int", "int"], "ret": 5},
+        "0x0041c8f4": {"conv": "thiscall", "args": ["u8"], "ret": 1},
+        "0x0041ace9": {"conv": "thiscall", "args": ["int"], "ret": 10},
+        "0x004657ec": {"conv": "cdecl", "args": [], "ret": 64}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "negative adjustment is clamped",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@charactermagicsystem", "offset": "0x28", "u32": 100}],
+      "callees": {
+        "0x004106a3": {"conv": "thiscall", "args": ["int", "bool", "int", "int"], "ret": -5},
+        "0x0041c8f4": {"conv": "thiscall", "args": ["u8"], "ret": 1},
+        "0x0041ace9": {"conv": "thiscall", "args": ["int"], "ret": -5},
+        "0x004657ec": {"conv": "cdecl", "args": [], "ret": 49}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "base chance formula boundary",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@charactermagicsystem", "offset": "0x28", "u32": 100}],
+      "callees": {"0x004657ec": {"conv": "cdecl", "args": [], "ret": 70}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "base formula constant boundary",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@charactermagicsystem", "offset": "0x28", "u32": 100}],
+      "callees": {"0x004657ec": {"conv": "cdecl", "args": [], "ret": 57}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "maximum rank subtraction boundary",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@charactermagicsystem", "offset": "0x28", "u32": 100}],
+      "callees": {"0x004657ec": {"conv": "cdecl", "args": [], "ret": 30}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "spell rank subtraction boundary",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@charactermagicsystem", "offset": "0x28", "u32": 100}],
+      "callees": {"0x004657ec": {"conv": "cdecl", "args": [], "ret": 55}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "spell adjustment subtraction boundary",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@charactermagicsystem", "offset": "0x28", "u32": 100}],
+      "callees": {
+        "0x004106a3": {"conv": "thiscall", "args": ["int", "bool", "int", "int"], "ret": 5},
+        "0x0041c8f4": {"conv": "thiscall", "args": ["u8"], "ret": 1},
+        "0x0041ace9": {"conv": "thiscall", "args": ["int"], "ret": 10},
+        "0x004657ec": {"conv": "cdecl", "args": [], "ret": 50}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "mode eight lower chance clamp boundary",
+      "args": [1, "@spell"],
+      "memory": [
+        {"addr": "@result", "offset": "0x119c", "u8": 8},
+        {"addr": "@charactermagicsystem", "offset": "0x18", "u32": 1},
+        {"addr": "@charactermagicsystem", "offset": "0x1c", "u32": 1},
+        {"addr": "@spell", "offset": "0x181", "u8": 50}
+      ],
+      "callees": {
+        "0x0044e755": {"conv": "thiscall", "args": ["int"], "ret": [10, 100]},
+        "0x004657ec": {"conv": "cdecl", "args": [], "ret": 0}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "effect bonus condition boundary",
+      "args": [1, "@spell"],
+      "callees": {
+        "0x004168bd": {"conv": "cdecl", "args": ["u8"], "ret": 1},
+        "0x0041ace9": {"conv": "thiscall", "args": ["int"], "ret": 251},
+        "0x004657ec": {"conv": "cdecl", "args": [], "ret": 96}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "effect bonus division boundary",
+      "args": [1, "@spell"],
+      "memory": [{"addr": "@charactermagicsystem", "offset": "0x28", "u32": 100}],
+      "callees": {
+        "0x004168bd": {"conv": "cdecl", "args": ["u8"], "ret": 1},
+        "0x0041ace9": {"conv": "thiscall", "args": ["int"], "ret": 10},
+        "0x004657ec": {"conv": "cdecl", "args": [], "ret": 80}
+      },
+      "expect": {"ret": 1}
+    }
+  ],
+  "fuzz": {
+    "seed": 4262367,
+    "count": 100,
+    "args": [
+      {"choices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]},
+      {"choices": ["@spell"]}
+    ],
+    "memory": [
+      {"addr": "@state", "offset": "0x244", "type": "u8", "choices": [0, 1]},
+      {"addr": "@spell", "offset": "0x181", "type": "u8", "choices": [0, 1, 15, 16, 50, 255]},
+      {"addr": "@spell", "offset": "0x182", "type": "u8", "choices": [1, 2, 10, 100, 255]},
+      {"addr": "@spell", "offset": "0x1c4", "type": "u8", "choices": [0, 1]},
+      {"addr": "@spell", "offset": "0x2c", "type": "int", "choices": [0, 1, 10, 50, 100]},
+      {"addr": "@charactermagicsystem", "offset": "0x18", "type": "int", "choices": [-10, 0, 1, 10, 600]},
+      {"addr": "@charactermagicsystem", "offset": "0x1c", "type": "int", "choices": [-10, 0, 1, 10, 600]},
+      {"addr": "@charactermagicsystem", "offset": "0x20", "type": "int", "choices": [-10, 0, 1, 10, 600]},
+      {"addr": "@charactermagicsystem", "offset": "0x28", "type": "int", "choices": [-10, 0, 1, 10, 600]},
+      {"addr": "@result", "offset": "0x119c", "type": "u8", "choices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 255]},
+      {"addr": "@result", "offset": "0x11a8", "type": "int", "choices": [-1, 0, 1, 100]},
+      {"addr": "@lookup", "offset": "0x48", "type": "ptr", "choices": [0, "@spell"]}
+    ]
+  }
+}

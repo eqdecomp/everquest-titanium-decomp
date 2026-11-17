@@ -1,0 +1,217 @@
+{
+  "function": "Selector_guess::GetAllVisibleText_guess",
+  "original": "0x004f2e69",
+  "sources": [
+    "src/EverQuest/tu_143_ChatManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@selector",
+  "args": [
+    {
+      "name": "return_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "title_guess",
+      "type": "u32"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "selector": {
+      "size": "0x240",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x80", "u32": 0 },
+        { "offset": "0x0", "u32": "@chat1" },
+        { "offset": "0x4", "u32": "@chat2" }
+      ]
+    },
+    "chat1": {
+      "size": "0x268",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x164", "u32": "@text" }
+      ]
+    },
+    "chat2": {
+      "size": "0x268",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x164", "u32": "@text" }
+      ]
+    },
+    "text": {
+      "size": "4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0", "u32": "@vtbl" }
+      ]
+    },
+    "vtbl": {
+      "size": "0xe8",
+      "fill": "zero",
+      "init": [
+        { "offset": "0xe4", "u32": "@fn_slot57" }
+      ]
+    },
+    "fn_slot57": {
+      "size": "4",
+      "fill": "zero"
+    },
+    "out": {
+      "size": "4",
+      "fill": "zero"
+    },
+    "titlebuf": {
+      "size": "0x40",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00407d68": {
+      "name": "CXStr_copy_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "passthrough": true
+    },
+    "@fn_slot57": {
+      "name": "Text_guess::Slot57_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": [7, 11]
+    },
+    "0x005a6890": {
+      "name": "Text_guess::Describe_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "u32", "int"],
+      "ret": "arg0",
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "04000060" }
+      ]
+    },
+    "0x00572300": {
+      "name": "Str_guess::GetText_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "0x006529f0"
+    },
+    "0x00572e00": {
+      "name": "Str_guess::Append_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "this"
+    },
+    "0x00571d00": {
+      "name": "Str_guess::Release_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "negative_count",
+      "args": ["@out", 0],
+      "memory": [
+        { "addr": "@selector", "offset": "0x80", "u32": 4294967295 }
+      ]
+    },
+    {
+      "name": "empty",
+      "args": ["@out", 0],
+      "memory": [
+        { "addr": "@selector", "offset": "0x80", "u32": 0 }
+      ]
+    },
+    {
+      "name": "null_slot",
+      "args": ["@out", 0],
+      "memory": [
+        { "addr": "@selector", "offset": "0x80", "u32": 1 },
+        { "addr": "@selector", "offset": "0x0", "u32": 0 }
+      ]
+    },
+    {
+      "name": "one_value_and_title_release",
+      "args": ["@out", "@titlebuf+0x4"],
+      "memory": [
+        { "addr": "@selector", "offset": "0x80", "u32": 1 },
+        { "addr": "@selector", "offset": "0x0", "u32": "@chat1" }
+      ]
+    },
+    {
+      "name": "value_after_null",
+      "args": ["@out", 0],
+      "memory": [
+        { "addr": "@selector", "offset": "0x80", "u32": 2 },
+        { "addr": "@selector", "offset": "0x0", "u32": 0 },
+        { "addr": "@selector", "offset": "0x4", "u32": "@chat2" }
+      ]
+    },
+    {
+      "name": "multiple_values_empty_body",
+      "args": ["@out", 0],
+      "memory": [
+        { "addr": "@selector", "offset": "0x80", "u32": 3 },
+        { "addr": "@selector", "offset": "0x0", "u32": "@chat1" },
+        { "addr": "@selector", "offset": "0x4", "u32": 0 },
+        { "addr": "@selector", "offset": "0x8", "u32": "@chat2" }
+      ],
+      "callees": {
+        "0x005a6890": {
+          "name": "Text_guess::Describe_guess",
+          "conv": "thiscall",
+          "args": ["ignore", "u32", "int"],
+          "ret": "arg0",
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "00000000" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "full_empty",
+      "args": ["@out", 0],
+      "memory": [
+        { "addr": "@selector", "offset": "0x80", "u32": 32 },
+        { "addr": "@selector", "offset": "0x0", "u32": 0 },
+        { "addr": "@selector", "offset": "0x4", "u32": 0 }
+      ]
+    },
+    {
+      "name": "full_last_slot",
+      "args": ["@out", 0],
+      "memory": [
+        { "addr": "@selector", "offset": "0x80", "u32": 32 },
+        { "addr": "@selector", "offset": "0x0", "u32": 0 },
+        { "addr": "@selector", "offset": "0x4", "u32": 0 },
+        { "addr": "@selector", "offset": "0x7c", "u32": "@chat2" }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5189225,
+    "count": 100,
+    "args": [
+      { "choices": ["@out"] },
+      { "choices": [0, "@titlebuf+0x4"] }
+    ],
+    "memory": [
+      {
+        "addr": "@selector",
+        "offset": "0x80",
+        "type": "int",
+        "choices": [-1, 0, 1, 2, 31, 32]
+      },
+      {
+        "addr": "@selector",
+        "offset": "0",
+        "type": "ptr",
+        "count": 32,
+        "choices": [0, "@chat1", "@chat2"]
+      }
+    ]
+  }
+}

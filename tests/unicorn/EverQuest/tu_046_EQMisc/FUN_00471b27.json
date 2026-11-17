@@ -1,0 +1,125 @@
+{
+  "function": "do_mp3_guess",
+  "original": "0x00471b27",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "unused_guess", "type": "int"},
+    {"name": "text_guess", "type": "cstr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "holder": {"size": "0x4", "init": [{"offset": "0x0", "u32": "@player"}]},
+    "player": {"size": "0x40", "fill": "random"},
+    "strtab": {"size": "0x10", "fill": "random"},
+    "eq": {"size": "0x10", "fill": "random"},
+    "wnd": {"size": "0x10", "init": [{"offset": "0x0", "u32": "@vtbl"}]},
+    "vtbl": {"size": "0x88", "fill": "zero", "init": [{"offset": "0x84", "u32": "@fn_show"}]},
+    "fn_show": {"size": "0x10"},
+    "s_remove": {"size": "0x10"},
+    "s_load": {"size": "0x10"},
+    "s_play": {"size": "0x10"},
+    "s_pause": {"size": "0x10"},
+    "s_list": {"size": "0x10"},
+    "s_stop": {"size": "0x10"},
+    "s_on": {"size": "0x10"},
+    "s_off": {"size": "0x10"},
+    "s_msg": {"size": "0x10"},
+    "n1": {"size": "0x10"},
+    "n3": {"size": "0x10"}
+  },
+  "memory": [
+    {"addr": "0x00851390", "u32": "@holder"},
+    {"addr": "0x00905cb0", "u32": "@strtab"},
+    {"addr": "0x00988df0", "u32": "@eq"},
+    {"addr": "0x00850be0", "u32": "@wnd"},
+    {"addr": "@s_remove", "cstr": "remove"},
+    {"addr": "@s_load", "cstr": "load"},
+    {"addr": "@s_play", "cstr": "play"},
+    {"addr": "@s_pause", "cstr": "pause"},
+    {"addr": "@s_list", "cstr": "list"},
+    {"addr": "@s_stop", "cstr": "stop"},
+    {"addr": "@s_on", "cstr": "shuffleon"},
+    {"addr": "@s_off", "cstr": "shuffleoff"},
+    {"addr": "@s_msg", "cstr": "message"},
+    {"addr": "@n1", "cstr": "song one"},
+    {"addr": "@n3", "cstr": "song three"}
+  ],
+  "callees": {
+    "0x005dfa00": {"name": "getString", "conv": "thiscall", "args": ["int", "int"],
+      "ret": ["@s_remove", "@s_load", "@s_play", "@s_pause", "@s_list", "@s_stop", "@s_on", "@s_off", "@s_msg"]},
+    "0x00498436": {"name": "dsp_chat", "conv": "thiscall", "args": ["cstr"]},
+    "@fn_show": {"name": "wnd_show", "conv": "thiscall", "args": []},
+    "0x00574990": {"name": "FUN_00574990", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1]},
+    "0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1]},
+    "0x004c71b6": {"name": "Load", "conv": "thiscall", "args": ["cstr"], "ret": 3},
+    "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 0},
+    "0x0046da4a": {"name": "build_token_string", "conv": "cdecl",
+      "args": ["ignore", "int", "ignore", "u32", "u32", "u32", "u32", "u32", "u32", "u32", "u32"], "ret": 0},
+    "0x004c705f": {"name": "Play", "conv": "thiscall", "args": []},
+    "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": 4},
+    "0x004c70ce": {"name": "PlayTrack", "conv": "thiscall", "args": ["int"]},
+    "0x004c70fd": {"name": "Remove", "conv": "thiscall", "args": []},
+    "0x004c713c": {"name": "RemoveTrack", "conv": "thiscall", "args": ["int"]},
+    "0x004c66d1": {"name": "Pause", "conv": "thiscall", "args": []},
+    "0x004c703e": {"name": "Stop", "conv": "thiscall", "args": []},
+    "0x004c7314": {"name": "SetShuffle", "conv": "thiscall", "args": ["int"]},
+    "0x004c5edb": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 3},
+    "0x004c5ec1": {"name": "GetName", "conv": "thiscall", "args": ["int"], "ret": ["@n1", 0, "@n3"]}
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {"name": "no player", "args": [1, "load x"], "memory": [{"addr": "@holder", "u32": 0}]},
+    {"name": "empty text, window", "args": [1, ""]},
+    {"name": "empty text, no window", "args": [1, ""], "memory": [{"addr": "0x00850be0", "u32": 0}]},
+    {"name": "load ok", "args": [1, "load   song.mp3"], "callees": {"0x00574990": {"name": "FUN_00574990", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [0]}}},
+    {"name": "load one", "args": [1, "loadx"], "callees": {
+      "0x00574990": {"name": "FUN_00574990", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [0]},
+      "0x004c71b6": {"name": "Load", "conv": "thiscall", "args": ["cstr"], "ret": 1}}},
+    {"name": "load zero", "args": [1, "load song"], "callees": {
+      "0x00574990": {"name": "FUN_00574990", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [0]},
+      "0x004c71b6": {"name": "Load", "conv": "thiscall", "args": ["cstr"], "ret": 0}}},
+    {"name": "load negative", "args": [1, "load song"], "callees": {
+      "0x00574990": {"name": "FUN_00574990", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [0]},
+      "0x004c71b6": {"name": "Load", "conv": "thiscall", "args": ["cstr"], "ret": -1}}},
+    {"name": "play no arg", "args": [1, "play  "], "callees": {"0x00574990": {"name": "FUN_00574990", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 0]}}},
+    {"name": "play track", "args": [1, "play 4"], "callees": {"0x00574990": {"name": "FUN_00574990", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 0]}}},
+    {"name": "play track 1", "args": [1, "play1"], "callees": {
+      "0x00574990": {"name": "FUN_00574990", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 0]},
+      "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": 1}}},
+    {"name": "remove no arg", "args": [1, "remove"], "callees": {"0x00574990": {"name": "FUN_00574990", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 1, 0]}}},
+    {"name": "remove track", "args": [1, "remove   7"], "callees": {
+      "0x00574990": {"name": "FUN_00574990", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 1, 0]},
+      "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": 7}}},
+    {"name": "pause", "args": [1, "pause"], "callees": {"0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [0]}}},
+    {"name": "stop", "args": [1, "stop"], "callees": {"0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1, 0]}}},
+    {"name": "shuffle on", "args": [1, "shuffleon"], "callees": {"0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1, 1, 0]}}},
+    {"name": "shuffle off", "args": [1, "shuffleoff"], "callees": {"0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1, 1, 1, 0]}}},
+    {"name": "list three", "args": [1, "list"], "callees": {"0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1, 1, 1, 1, 0]}}},
+    {"name": "list one", "args": [1, "list"], "callees": {
+      "0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1, 1, 1, 1, 0]},
+      "0x004c5edb": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "list empty", "args": [1, "list"], "callees": {
+      "0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1, 1, 1, 1, 0]},
+      "0x004c5edb": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "list negative", "args": [1, "list"], "callees": {
+      "0x00574950": {"name": "FUN_00574950", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1, 1, 1, 1, 0]},
+      "0x004c5edb": {"name": "GetCount", "conv": "thiscall", "args": [], "ret": -2}}},
+    {"name": "no match", "args": [1, "bogus"]}
+  ],
+  "fuzz": {
+    "seed": 4660007,
+    "count": 60,
+    "args": [
+      {},
+      {"choices": ["", "load a", "play", "play 3", "remove", "remove 2", "pause", "list", "zzz", "  x"]}
+    ],
+    "memory": [
+      {"addr": "0x00850be0", "type": "u32", "choices": [0, "@wnd"]}
+    ]
+  }
+}

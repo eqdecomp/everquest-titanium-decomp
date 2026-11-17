@@ -1,0 +1,166 @@
+{
+  "function": "CSocialEditWnd_guess::ClickedAccept_guess",
+  "original": "0x00555003",
+  "sources": [
+    "src/EverQuest/tu_213_SocialEditWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@socialeditwnd",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "socialeditwnd": {
+      "size": "0x1d8",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@edit_vtbl"}
+      ]
+    },
+    "edit_vtbl": {
+      "size": "0x8c",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x88", "u32": "@finish_fn"}
+      ]
+    },
+    "finish_fn": {"size": "0x4", "fill": "zero"},
+    "textwindow": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@text_vtbl"}
+      ]
+    },
+    "text_vtbl": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x130", "u32": "@get_text_fn"}
+      ]
+    },
+    "get_text_fn": {"size": "0x4", "fill": "zero"},
+    "string_data": {"size": "0x4", "fill": "zero"},
+    "name_text": {"size": "0x20", "fill": "zero"},
+    "line0_text": {"size": "0x20", "fill": "zero"},
+    "line1_text": {"size": "0x20", "fill": "zero"},
+    "line2_text": {"size": "0x20", "fill": "zero"},
+    "line3_text": {"size": "0x20", "fill": "zero"},
+    "line4_text": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0095D45C", "size": "0x78", "fill": "zero"},
+    {"addr": "0x0095D4D4", "size": "0x26058", "fill": "zero"},
+    {"addr": "0x00988DF0", "u32": "0x12345678"},
+    {"addr": "@name_text", "cstr": "Social macro"},
+    {"addr": "@line0_text", "cstr": "first line"},
+    {"addr": "@line1_text", "cstr": "second line"},
+    {"addr": "@line2_text", "cstr": "third line"},
+    {"addr": "@line3_text", "cstr": "fourth line"},
+    {"addr": "@line4_text", "cstr": "fifth line"}
+  ],
+  "callees": {
+    "@get_text_fn": {
+      "name": "GetText_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "78563412"}
+      ]
+    },
+    "@finish_fn": {
+      "name": "Finish_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00572300": {
+      "name": "FUN_00572300",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        "@name_text",
+        "@line0_text",
+        "@line1_text",
+        "@line2_text",
+        "@line3_text",
+        "@line4_text"
+      ]
+    },
+    "0x00571d00": {
+      "name": "FUN_00571d00",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x004b03b1": {
+      "name": "SaveSocials_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "all_inputs_present_index0",
+      "args": [],
+      "memory": [
+        {"addr": "@socialeditwnd", "offset": "0x15c", "u32": 0},
+        {"addr": "@socialeditwnd", "offset": "0x160", "u32": 0},
+        {"addr": "@socialeditwnd", "offset": "0x164", "u8": 255},
+        {"addr": "@socialeditwnd", "offset": "0x1c0", "u32": "@textwindow"},
+        {"addr": "@socialeditwnd", "offset": "0x1c4", "u32": "@textwindow"},
+        {"addr": "@socialeditwnd", "offset": "0x1c8", "u32": "@textwindow"},
+        {"addr": "@socialeditwnd", "offset": "0x1cc", "u32": "@textwindow"},
+        {"addr": "@socialeditwnd", "offset": "0x1d0", "u32": "@textwindow"},
+        {"addr": "@socialeditwnd", "offset": "0x1d4", "u32": "@textwindow"}
+      ]
+    },
+    {
+      "name": "all_inputs_null_index119",
+      "args": [],
+      "memory": [
+        {"addr": "@socialeditwnd", "offset": "0x15c", "u32": 9},
+        {"addr": "@socialeditwnd", "offset": "0x160", "u32": 11},
+        {"addr": "@socialeditwnd", "offset": "0x164", "u8": 128}
+      ]
+    },
+    {
+      "name": "sparse_inputs_mixed",
+      "args": [],
+      "memory": [
+        {"addr": "@socialeditwnd", "offset": "0x15c", "u32": 2},
+        {"addr": "@socialeditwnd", "offset": "0x160", "u32": 5},
+        {"addr": "@socialeditwnd", "offset": "0x164", "u8": 65},
+        {"addr": "@socialeditwnd", "offset": "0x1c4", "u32": "@textwindow"},
+        {"addr": "@socialeditwnd", "offset": "0x1cc", "u32": "@textwindow"},
+        {"addr": "@socialeditwnd", "offset": "0x1d4", "u32": "@textwindow"}
+      ]
+    },
+    {
+      "name": "one_past_line_pointer",
+      "args": [],
+      "memory": [
+        {"addr": "@socialeditwnd", "offset": "0x15c", "u32": 0},
+        {"addr": "@socialeditwnd", "offset": "0x160", "u32": 0},
+        {"addr": "@socialeditwnd", "offset": "0x1d8", "u32": "@textwindow"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5591043,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@socialeditwnd", "offset": "0x15c", "type": "int", "range": [0, 9]},
+      {"addr": "@socialeditwnd", "offset": "0x160", "type": "int", "range": [0, 11]},
+      {"addr": "@socialeditwnd", "offset": "0x164", "type": "u8", "range": [0, 255]},
+      {"addr": "@socialeditwnd", "offset": "0x1c0", "type": "ptr", "choices": [0, "@textwindow"]},
+      {"addr": "@socialeditwnd", "offset": "0x1c4", "type": "ptr", "choices": [0, "@textwindow"]},
+      {"addr": "@socialeditwnd", "offset": "0x1c8", "type": "ptr", "choices": [0, "@textwindow"]},
+      {"addr": "@socialeditwnd", "offset": "0x1cc", "type": "ptr", "choices": [0, "@textwindow"]},
+      {"addr": "@socialeditwnd", "offset": "0x1d0", "type": "ptr", "choices": [0, "@textwindow"]},
+      {"addr": "@socialeditwnd", "offset": "0x1d4", "type": "ptr", "choices": [0, "@textwindow"]}
+    ]
+  }
+}

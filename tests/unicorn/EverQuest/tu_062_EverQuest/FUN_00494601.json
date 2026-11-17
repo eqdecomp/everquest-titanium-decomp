@@ -1,0 +1,72 @@
+{
+  "function": "GlobalState_guess::RMouseDown_guess",
+  "original": "0x00494601",
+  "sources": ["src/EverQuest/tu_062_EverQuest.cpp"],
+  "conv": "thiscall",
+  "this": "@gs",
+  "args": [
+    {"name": "x_guess", "type": "int"},
+    {"name": "y_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "gs": {"size": "0xb60", "fill": "zero"},
+    "clock": {"size": "0x20", "fill": "zero"},
+    "input": {"size": "0x200", "fill": "zero"},
+    "pos": {"size": "0x120", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00988df0", "u32": "@gs"},
+    {"addr": "@gs", "offset": "0xb54", "u32": 1},
+    {"addr": "0x00905d24", "u32": "@clock"},
+    {"addr": "0x00850b9c", "u32": "@input"},
+    {"addr": "@input", "offset": "0x1e2", "u8": 1},
+    {"addr": "0x0099d3ec", "u32": "@pos"},
+    {"addr": "0x00923842", "u8": 0},
+    {"addr": "0x00850508", "u32": 0},
+    {"addr": "0x009237b8", "u8": 1}
+  ],
+  "callees": {
+    "0x0043745d": {"name": "FUN_0043745d", "conv": "thiscall", "args": [], "ret": 1},
+    "user32.dll!ShowCursor": {"name": "ShowCursor", "conv": "stdcall", "args": ["int"], "ret": [0, -1]},
+    "user32.dll!GetCursorPos": {
+      "name": "GetCursorPos", "conv": "stdcall", "args": ["ignore"], "ret": 1,
+      "writes": [{"arg": 0, "offset": 0, "hex": "1100000022000000"}]
+    }
+  },
+  "cases": [
+    {"name": "mode3_cursor_on", "args": [1, 1],
+     "memory": [{"addr": "0x00850508", "u32": 3}]},
+    {"name": "mode3_cursor_off", "args": [1, 1],
+     "memory": [{"addr": "0x00850508", "u32": 3}, {"addr": "0x009237b8", "u8": 0}]},
+    {"name": "already_flagged", "args": [1, 1],
+     "memory": [{"addr": "0x00923842", "u8": 1}]},
+    {"name": "clock_says_no", "args": [1, 1],
+     "callees": {"0x0043745d": {"name": "FUN_0043745d", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "cursor_off", "args": [1, 1],
+     "memory": [{"addr": "0x009237b8", "u8": 0}]},
+    {"name": "state1_input1_loop", "args": [7, 9]},
+    {"name": "state1_input0", "args": [7, 9],
+     "memory": [{"addr": "@input", "offset": "0x1e2", "u8": 0}]},
+    {"name": "state1_input2", "args": [7, 9],
+     "memory": [{"addr": "@input", "offset": "0x1e2", "u8": 2}]},
+    {"name": "state5_loop", "args": [7, 9],
+     "memory": [{"addr": "@gs", "offset": "0xb54", "u32": 5}]},
+    {"name": "state2_skip", "args": [7, 9],
+     "memory": [{"addr": "@gs", "offset": "0xb54", "u32": 2}]},
+    {"name": "state5_input0", "args": [7, 9],
+     "memory": [{"addr": "@gs", "offset": "0xb54", "u32": 5}, {"addr": "@input", "offset": "0x1e2", "u8": 0}]}
+  ],
+  "fuzz": {
+    "seed": 4802049,
+    "count": 200,
+    "args": [{"range": [-8, 64]}, {"range": [-8, 64]}],
+    "memory": [
+      {"addr": "0x00850508", "type": "int", "choices": [3, 0, 1]},
+      {"addr": "0x009237b8", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00923842", "type": "u8", "choices": [0, 1]},
+      {"addr": "@gs", "offset": "0xb54", "type": "int", "choices": [0, 1, 2, 5]},
+      {"addr": "@input", "offset": "0x1e2", "type": "u8", "choices": [0, 1, 2]}
+    ]
+  }
+}

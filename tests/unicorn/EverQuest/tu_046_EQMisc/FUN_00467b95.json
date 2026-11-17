@@ -1,0 +1,131 @@
+{
+  "function": "CycleNamesInTellList_guess",
+  "original": "0x00467b95",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "value_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "_survivors": "L3124: the scan's exit by its condition is unreachable: record 0 is the parse-state byte (0x00925920), nonzero by the first test, so the scan always returns at index 0; both the 0->1 and the && -> || mutants change only that unreachable exit",
+  "objects": {
+    "everquest": {"size": "0x10", "fill": "zero"},
+    "strtable": {"size": "0x10", "fill": "zero"},
+    "msg": {"size": "0x40", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00988df0", "u32": "@everquest"},
+    {"addr": "0x00905cb0", "u32": "@strtable"},
+    {"addr": "@msg", "cstr": "Unknown name"},
+    {"addr": "0x00925920", "size": 3136, "fill": "zero"},
+    {"addr": "0x00926560", "u8": 0},
+    {"addr": "0x009265a0", "u32": 0}
+  ],
+  "callees": {
+    "0x005dfa00": {
+      "name": "FUN_005dfa00",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": "@msg"
+    },
+    "0x00498436": {
+      "name": "FUN_00498436",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "parsing_off_value_1",
+      "args": [1],
+      "memory": [{"addr": "0x00925920", "u8": 0}]
+    },
+    {
+      "name": "parsing_off_value_0",
+      "args": [0],
+      "memory": [{"addr": "0x00925920", "u8": 0}, {"addr": "0x009265a0", "u32": 7}]
+    },
+    {
+      "name": "step_back_5",
+      "args": [1],
+      "memory": [{"addr": "0x00925920", "u8": 1}, {"addr": "0x009265a0", "u32": 5}]
+    },
+    {
+      "name": "step_back_to_zero",
+      "args": [1],
+      "memory": [{"addr": "0x00925920", "u8": 1}, {"addr": "0x009265a0", "u32": 1}]
+    },
+    {
+      "name": "step_back_from_top",
+      "args": [1],
+      "memory": [{"addr": "0x00925920", "u8": 1}, {"addr": "0x009265a0", "u32": 49}]
+    },
+    {
+      "name": "busy_restarts_at_top",
+      "args": [1],
+      "memory": [{"addr": "0x00925920", "u8": 1}, {"addr": "0x009265a0", "u32": 0}, {"addr": "0x00926560", "u8": 1}]
+    },
+    {
+      "name": "scan_finds_record_10",
+      "args": [1],
+      "memory": [{"addr": "0x00925920", "u8": 1}, {"addr": "0x009265a0", "u32": 0}, {"addr": "0x00925ba0", "u8": 1}]
+    },
+    {
+      "name": "scan_finds_record_0",
+      "args": [1],
+      "memory": [{"addr": "0x00925920", "u8": 1}, {"addr": "0x009265a0", "u32": 0}]
+    },
+    {
+      "name": "scan_from_negative_index",
+      "args": [1],
+      "memory": [{"addr": "0x00925920", "u8": 1}, {"addr": "0x009265a0", "u32": "0xfffffffd"}, {"addr": "0x00925ba0", "u8": 1}]
+    },
+    {
+      "name": "forward_to_4",
+      "args": [0],
+      "memory": [{"addr": "0x00925920", "u8": 1}, {"addr": "0x009265a0", "u32": 3}, {"addr": "0x00925a20", "u8": 1}]
+    },
+    {
+      "name": "forward_blocked_resets",
+      "args": [0],
+      "memory": [{"addr": "0x00925920", "u8": 1}, {"addr": "0x009265a0", "u32": 3}]
+    },
+    {
+      "name": "forward_at_top_resets",
+      "args": [0],
+      "memory": [{"addr": "0x00925920", "u8": 1}, {"addr": "0x009265a0", "u32": 49}]
+    },
+    {
+      "name": "forward_from_negative",
+      "args": [2],
+      "memory": [{"addr": "0x00925920", "u8": 1}, {"addr": "0x009265a0", "u32": "0xffffffff"}]
+    },
+    {
+      "name": "forward_into_busy_byte",
+      "args": [0],
+      "memory": [{"addr": "0x00925920", "u8": 1}, {"addr": "0x009265a0", "u32": 48}, {"addr": "0x00926560", "u8": 1}]
+    }
+  ],
+  "fuzz": {
+    "seed": 4619157,
+    "count": 150,
+    "args": [
+      {"range": [-2, 3]}
+    ],
+    "memory": [
+      {"addr": "0x00925920", "type": "u8", "choices": [0, 1], "count": 49, "stride": 64},
+      {"addr": "0x00926560", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x009265a0", "type": "int", "range": [-2, 52]}
+    ]
+  }
+}

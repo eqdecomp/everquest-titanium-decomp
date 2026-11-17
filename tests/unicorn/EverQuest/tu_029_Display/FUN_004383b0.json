@@ -1,0 +1,1687 @@
+{
+  "function": "LoadWorldFileRequest_guess",
+  "original": "0x004383b0",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "rewrite": "?LoadWorldFileRequest_guess@@YAXPAUWorldLoadRequest_guess@@@Z",
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "request",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "world": {
+      "size": "0x80",
+      "fill": "random"
+    },
+    "file": {
+      "size": "0x80",
+      "fill": "random"
+    },
+    "request": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {
+          "offset": 0,
+          "u32": "@world"
+        },
+        {
+          "offset": 4,
+          "u32": "@file"
+        }
+      ]
+    },
+    "loader": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "fnGetWorld": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "fnRelease": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "fnRead": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "wfsVtbl": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": 0,
+          "u32": "@fnGetWorld"
+        },
+        {
+          "offset": 4,
+          "u32": "@fnRelease"
+        }
+      ]
+    },
+    "wfs": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {
+          "offset": 0,
+          "u32": "@wfsVtbl"
+        }
+      ]
+    },
+    "readerVtbl": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xc",
+          "u32": "@fnRead"
+        }
+      ]
+    },
+    "reader": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {
+          "offset": 0,
+          "u32": "@readerVtbl"
+        }
+      ]
+    },
+    "wobj": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "fileobj": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d24",
+      "u32": "@loader"
+    },
+    {
+      "addr": "0x0099e35c",
+      "u32": "@wfs"
+    },
+    {
+      "addr": "0x0099e360",
+      "u32": "@reader"
+    },
+    {
+      "addr": "@world",
+      "cstr": "zoneabc"
+    },
+    {
+      "addr": "@file",
+      "cstr": "zoneabc"
+    }
+  ],
+  "callees": {
+    "0x0062202c": {
+      "name": "__strnicmp",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "int"
+      ],
+      "ret": [
+        1
+      ]
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x00574110": {
+      "name": "DebugLog",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x00438357": {
+      "name": "BuildPath",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "ret": 1,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "433a5c705c7a00"
+        }
+      ]
+    },
+    "@fnGetWorld": {
+      "name": "GetWorld",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "@wobj"
+    },
+    "@fnRelease": {
+      "name": "ReleaseWorld",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "@fnRead": {
+      "name": "ReadWorld",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "ptr",
+        "u8",
+        "u8",
+        "u8"
+      ],
+      "ret": 7
+    },
+    "0x006243d0": {
+      "name": "__strrev",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x0060e887": {
+      "name": "_fopen",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr"
+      ],
+      "ret": "@fileobj"
+    },
+    "0x0060e790": {
+      "name": "_fclose",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "kernel32.dll!Sleep": {
+      "name": "Sleep",
+      "conv": "stdcall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "__strnicmp": "0x0062202c",
+    "__strrev": "0x006243d0"
+  },
+  "cases": [
+    {
+      "name": "ok_plain_loaded",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "qeynos"
+        },
+        {
+          "addr": "@file",
+          "cstr": "qeynos"
+        }
+      ],
+      "callees": {
+        "@fnRead": {
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ptr",
+            "u8",
+            "u8",
+            "u8"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "ok_plain_loaded_flag_zero",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 1
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 0
+        },
+        {
+          "addr": "@world",
+          "cstr": "qeynos"
+        },
+        {
+          "addr": "@file",
+          "cstr": "qeynos"
+        }
+      ],
+      "callees": {
+        "@fnRead": {
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ptr",
+            "u8",
+            "u8",
+            "u8"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "arena2_both",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "arena2"
+        },
+        {
+          "addr": "@file",
+          "cstr": "arena2xy"
+        }
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 7,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "6172656e61787900"
+            }
+          ]
+        },
+        "@fnRead": {
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ptr",
+            "u8",
+            "u8",
+            "u8"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "arena2_inside_world_name",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "xxarena2yyz"
+        },
+        {
+          "addr": "@file",
+          "cstr": "plain"
+        }
+      ],
+      "callees": {
+        "@fnRead": {
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ptr",
+            "u8",
+            "u8",
+            "u8"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "erudsxing2_both",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "from_image": "0x006422F8",
+          "image_size": 11
+        },
+        {
+          "addr": "@file",
+          "cstr": "erudsxing2q"
+        }
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            1,
+            0,
+            1
+          ]
+        },
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 10,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "6572756473786e677100"
+            }
+          ]
+        },
+        "@fnRead": {
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ptr",
+            "u8",
+            "u8",
+            "u8"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "erudsxing2_inside_world_name",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "aerudsxing2bcd"
+        },
+        {
+          "addr": "@file",
+          "cstr": "plain"
+        }
+      ],
+      "callees": {
+        "@fnRead": {
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ptr",
+            "u8",
+            "u8",
+            "u8"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "buildpath_fails",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "from_image": "0x0066B7C8",
+          "image_size": 9
+        },
+        {
+          "addr": "@file",
+          "from_image": "0x0066B7C8",
+          "image_size": 9
+        }
+      ],
+      "callees": {
+        "0x00438357": {
+          "name": "BuildPath",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "433a5c705c7a00"
+            }
+          ]
+        },
+        "@fnRead": {
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ptr",
+            "u8",
+            "u8",
+            "u8"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "open_fails_no_default_message",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "nowhere"
+        },
+        {
+          "addr": "@file",
+          "cstr": "nowhere"
+        }
+      ],
+      "callees": {
+        "@fnGetWorld": {
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "open_fails_load_chr",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "from_image": "0x00642290",
+          "image_size": 9
+        },
+        {
+          "addr": "@file",
+          "from_image": "0x00642290",
+          "image_size": 9
+        }
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            1,
+            1,
+            0
+          ]
+        },
+        "@fnGetWorld": {
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "open_fails_global2_chr",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "from_image": "0x00642284",
+          "image_size": 12
+        },
+        {
+          "addr": "@file",
+          "from_image": "0x00642284",
+          "image_size": 12
+        }
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            0
+          ]
+        },
+        "@fnGetWorld": {
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "open_fails_global3_chr",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "from_image": "0x00642278",
+          "image_size": 12
+        },
+        {
+          "addr": "@file",
+          "from_image": "0x00642278",
+          "image_size": 12
+        }
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        },
+        "@fnGetWorld": {
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "open_fails_global4_chr",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "from_image": "0x0064226C",
+          "image_size": 12
+        },
+        {
+          "addr": "@file",
+          "from_image": "0x0064226C",
+          "image_size": 12
+        }
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        },
+        "@fnGetWorld": {
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "open_fails_lit",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "zone_lit"
+        },
+        {
+          "addr": "@file",
+          "cstr": "zone_lit"
+        }
+      ],
+      "callees": {
+        "@fnGetWorld": {
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "open_fails_amr",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "zone_amr"
+        },
+        {
+          "addr": "@file",
+          "cstr": "zone_amr"
+        }
+      ],
+      "callees": {
+        "@fnGetWorld": {
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "open_fails_chr2",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "zone_chr2"
+        },
+        {
+          "addr": "@file",
+          "cstr": "zone_chr2"
+        }
+      ],
+      "callees": {
+        "@fnGetWorld": {
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "open_fails_obj2",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "zone_obj2"
+        },
+        {
+          "addr": "@file",
+          "cstr": "zone_obj2"
+        }
+      ],
+      "callees": {
+        "@fnGetWorld": {
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "default_objects_wld_then_ok",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 1
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "badzone"
+        },
+        {
+          "addr": "@file",
+          "cstr": "objects"
+        }
+      ],
+      "callees": {
+        "@fnGetWorld": {
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            0,
+            "@wobj"
+          ]
+        },
+        "@fnRead": {
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ptr",
+            "u8",
+            "u8",
+            "u8"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "default_lights_wld_then_ok",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 255
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "badzone"
+        },
+        {
+          "addr": "@file",
+          "cstr": "lights"
+        }
+      ],
+      "callees": {
+        "@fnGetWorld": {
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            0,
+            "@wobj"
+          ]
+        },
+        "@fnRead": {
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ptr",
+            "u8",
+            "u8",
+            "u8"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "default_other_wld_then_ok",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 1
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "badzone"
+        },
+        {
+          "addr": "@file",
+          "cstr": "badzone"
+        }
+      ],
+      "callees": {
+        "@fnGetWorld": {
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            0,
+            "@wobj"
+          ]
+        },
+        "@fnRead": {
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ptr",
+            "u8",
+            "u8",
+            "u8"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "default_other_wld_then_read_error",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 1
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "badzone"
+        },
+        {
+          "addr": "@file",
+          "cstr": "badzone"
+        }
+      ],
+      "callees": {
+        "@fnGetWorld": {
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            0,
+            "@wobj"
+          ]
+        }
+      }
+    },
+    {
+      "name": "default_second_open_fails",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 1
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "badzone"
+        },
+        {
+          "addr": "@file",
+          "cstr": "badzone"
+        }
+      ],
+      "callees": {
+        "@fnGetWorld": {
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "read_error_same_length_chk_written",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "abcdef"
+        },
+        {
+          "addr": "@file",
+          "cstr": "uvwxyz"
+        }
+      ]
+    },
+    {
+      "name": "read_error_fopen_fails",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "abcdef"
+        },
+        {
+          "addr": "@file",
+          "cstr": "uvwxyz"
+        }
+      ],
+      "callees": {
+        "0x0060e887": {
+          "name": "_fopen",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "read_error_world_longer",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "abcdefg"
+        },
+        {
+          "addr": "@file",
+          "cstr": "uvwxyz"
+        }
+      ]
+    },
+    {
+      "name": "read_error_file_longer",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "abcdef"
+        },
+        {
+          "addr": "@file",
+          "cstr": "uvwxyz1"
+        }
+      ]
+    },
+    {
+      "name": "read_error_load_chr",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "from_image": "0x00642290",
+          "image_size": 9
+        },
+        {
+          "addr": "@file",
+          "from_image": "0x00642290",
+          "image_size": 9
+        }
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            1,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "read_error_global2_chr",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "from_image": "0x00642284",
+          "image_size": 12
+        },
+        {
+          "addr": "@file",
+          "from_image": "0x00642284",
+          "image_size": 12
+        }
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "read_error_global3_chr",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "from_image": "0x00642278",
+          "image_size": 12
+        },
+        {
+          "addr": "@file",
+          "from_image": "0x00642278",
+          "image_size": 12
+        }
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "read_error_global4_chr",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "from_image": "0x0064226C",
+          "image_size": 12
+        },
+        {
+          "addr": "@file",
+          "from_image": "0x0064226C",
+          "image_size": 12
+        }
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "read_error_gequip2",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "gequip2"
+        },
+        {
+          "addr": "@file",
+          "cstr": "gequip2"
+        }
+      ],
+      "callees": {
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "int"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "read_error_lit",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "zone_lit"
+        },
+        {
+          "addr": "@file",
+          "cstr": "zone_lit"
+        }
+      ]
+    },
+    {
+      "name": "read_error_amr",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "zone_amr"
+        },
+        {
+          "addr": "@file",
+          "cstr": "zone_amr"
+        }
+      ]
+    },
+    {
+      "name": "read_error_chr2_still_reported",
+      "args": [
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": 9,
+          "u8": 0
+        },
+        {
+          "addr": "@request",
+          "offset": "0xc",
+          "u8": 1
+        },
+        {
+          "addr": "@world",
+          "cstr": "zone_chr2"
+        },
+        {
+          "addr": "@file",
+          "cstr": "zone_chr2"
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4424624,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@request"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@request",
+        "offset": 8,
+        "type": "u8"
+      },
+      {
+        "addr": "@request",
+        "offset": 9,
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2,
+          255
+        ]
+      },
+      {
+        "addr": "@request",
+        "offset": "0xa",
+        "type": "u8"
+      },
+      {
+        "addr": "@request",
+        "offset": "0xb",
+        "type": "u8"
+      },
+      {
+        "addr": "@request",
+        "offset": "0xc",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2,
+          255
+        ]
+      },
+      {
+        "addr": "@world",
+        "offset": 4,
+        "size": 3,
+        "p": 0.5
+      },
+      {
+        "addr": "@file",
+        "offset": 4,
+        "size": 3,
+        "p": 0.5
+      }
+    ]
+  }
+}

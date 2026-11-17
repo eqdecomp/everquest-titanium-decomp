@@ -1,0 +1,207 @@
+{
+  "function": "CLeadershipWindow_guess::BuildLists_guess",
+  "original": "0x00526a44",
+  "sources": [
+    "src/EverQuest/tu_179_LeadershipWindow.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@panel",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "panel": {
+      "size": "0x4d4",
+      "fill": "random",
+      "init": [
+        {"offset": "0x160", "u32": 2},
+        {"offset": "0x19c", "u32": "@lane0"},
+        {"offset": "0x1a0", "u32": "@lane1"}
+      ]
+    },
+    "lane0": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@vt"}]
+    },
+    "lane1": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@vt"}]
+    },
+    "vt": {
+      "size": "0x140",
+      "fill": "zero",
+      "init": [{"offset": "0x130", "u32": "@fn130"}]
+    },
+    "fn130": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "state": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "strtab": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "str": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "entries": {
+      "size": "0x80",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@e1"},
+        {"offset": "0x4", "u32": "@e2"},
+        {"offset": "0x8", "u32": "@eo"},
+        {"offset": "0xc", "u32": "@e3"},
+        {"offset": "0x10", "u32": "@e1"},
+        {"offset": "0x14", "u32": "@e2"},
+        {"offset": "0x18", "u32": "@eo"},
+        {"offset": "0x1c", "u32": "@e3"},
+        {"offset": "0x20", "u32": "@e1"},
+        {"offset": "0x24", "u32": "@e2"},
+        {"offset": "0x28", "u32": "@eo"},
+        {"offset": "0x2c", "u32": "@e3"},
+        {"offset": "0x30", "u32": "@e1"},
+        {"offset": "0x34", "u32": "@e2"},
+        {"offset": "0x38", "u32": "@eo"},
+        {"offset": "0x3c", "u32": "@e3"},
+        {"offset": "0x40", "u32": "@e1"},
+        {"offset": "0x44", "u32": "@e2"},
+        {"offset": "0x48", "u32": "@eo"},
+        {"offset": "0x4c", "u32": "@e3"},
+        {"offset": "0x50", "u32": "@e1"},
+        {"offset": "0x54", "u32": "@e2"},
+        {"offset": "0x58", "u32": "@eo"},
+        {"offset": "0x5c", "u32": "@e3"},
+        {"offset": "0x60", "u32": "@e1"},
+        {"offset": "0x64", "u32": "@e2"},
+        {"offset": "0x68", "u32": "@eo"},
+        {"offset": "0x6c", "u32": "@e3"},
+        {"offset": "0x70", "u32": "@e1"},
+        {"offset": "0x74", "u32": "@e2"},
+        {"offset": "0x78", "u32": "@eo"}
+      ]
+    },
+    "e1": {
+      "size": "0x40",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": 4097},
+        {"offset": "0x30", "u32": 1},
+        {"offset": "0x38", "u8": 1}
+      ]
+    },
+    "e2": {
+      "size": "0x40",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": 4098},
+        {"offset": "0x30", "u32": 2},
+        {"offset": "0x38", "u8": 1}
+      ]
+    },
+    "eo": {
+      "size": "0x40",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": 4099},
+        {"offset": "0x30", "u32": 1},
+        {"offset": "0x38", "u8": 0}
+      ]
+    },
+    "e3": {
+      "size": "0x40",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": 4100},
+        {"offset": "0x30", "u32": 3},
+        {"offset": "0x38", "u8": 1}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@state"},
+    {"addr": "0x009859ec", "u32": "@entries"},
+    {"addr": "0x00905cb0", "u32": "@strtab"},
+    {"addr": "@str", "cstr": "Item name"}
+  ],
+  "callees": {
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": ["u32", "u32"],
+      "ret": "@str"
+    },
+    "0x00571e00": {
+      "name": "CXStr::CXStr",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "this"
+    },
+    "0x0059b9d0": {
+      "name": "CListWnd::AddString",
+      "conv": "thiscall",
+      "args": ["ignore", "int", "u32", "u32"],
+      "ret": 5,
+      "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "@fn130": {
+      "name": "CListWnd::Slot130",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "typical: two lanes, mixed entries",
+      "args": []
+    },
+    {
+      "name": "no state",
+      "args": [],
+      "memory": [{"addr": "0x00905d00", "u32": 0}]
+    },
+    {
+      "name": "one lane",
+      "args": [],
+      "memory": [{"addr": "@panel", "offset": "0x160", "u32": 1}]
+    },
+    {
+      "name": "no lanes",
+      "args": [],
+      "memory": [{"addr": "@panel", "offset": "0x160", "u32": 0}]
+    },
+    {
+      "name": "lane 0 null",
+      "args": [],
+      "memory": [{"addr": "@panel", "offset": "0x19c", "u32": 0}]
+    },
+    {
+      "name": "lane 1 null",
+      "args": [],
+      "memory": [{"addr": "@panel", "offset": "0x1a0", "u32": 0}]
+    }
+  ],
+  "fuzz": {
+    "seed": 5401156,
+    "count": 200,
+    "args": [],
+    "memory": [
+      {"addr": "0x00905d00", "type": "ptr", "choices": ["@state", 0]},
+      {"addr": "@panel", "offset": "0x160", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@panel", "offset": "0x19c", "type": "ptr", "count": 2, "choices": ["@lane0", "@lane1", 0]},
+      {"addr": "@entries", "type": "ptr", "count": 31, "choices": ["@e1", "@e2", "@eo", "@e3"]}
+    ]
+  }
+}

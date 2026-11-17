@@ -1,0 +1,71 @@
+{
+  "function": "GlobalState_guess::DspChat_guess",
+  "original": "0x004982c6",
+  "sources": ["src/EverQuest/tu_062_EverQuest.cpp"],
+  "rewrite": "?DspChat_guess@GlobalState_guess@@QAEXPBDH_N@Z",
+  "conv": "thiscall",
+  "this": "@globalstate",
+  "args": [
+    {"name": "line_guess", "type": "cstr"},
+    {"name": "color_guess", "type": "int"},
+    {"name": "log_guess", "type": "bool"}
+  ],
+  "ret": "void",
+  "objects": {
+    "globalstate": {"size": "0xb58", "fill": "random"},
+    "chatmgr": {"size": "0x4", "fill": "zero"},
+    "pending": {"size": "0x804", "fill": "zero"},
+    "copytext": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00988df0", "u32": "@globalstate"},
+    {"addr": "@globalstate", "offset": "0xb54", "u32": 5},
+    {"addr": "0x009917e4", "u32": 0},
+    {"addr": "0x0095d3c4", "u32": 0},
+    {"addr": "0x00924788", "u32": 0},
+    {"addr": "@copytext", "cstr": "filtered"}
+  ],
+  "callees": {
+    "0x00492f68": {"name": "DoPercentConvert_guess", "conv": "thiscall", "args": ["cstr", "int"], "ret": 0},
+    "0x00571e00": {"name": "CXStr_ctor", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x0060aca0": {"name": "FilterChat", "conv": "cdecl", "args": ["ignore", "ignore"], "ret": "arg0", "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]},
+    "0x00571f70": {"name": "CXStr_assign", "conv": "thiscall", "args": ["ignore"], "ret": "this"},
+    "0x00571d00": {"name": "CXStr_FreeRep", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x0046d46d": {"name": "ConvertItemTags", "conv": "cdecl", "args": ["ignore", "int"], "ret": 0},
+    "0x00407d68": {"name": "CXStr_copy", "conv": "thiscall", "args": ["ignore"], "ret": "this"},
+    "0x004f2f8a": {"name": "ChatWindowManager_AddChat", "conv": "thiscall", "args": ["u32", "int"], "ret": 0},
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@pending"},
+    "0x00572300": {"name": "CXStr_to_char", "conv": "thiscall", "args": [], "ret": "@copytext"},
+    "0x00576fa0": {"name": "CopyBounded", "conv": "cdecl", "args": ["ptr", "cstr", "u32"], "passthrough": true},
+    "0x0050319b": {"name": "PendingChatArray_Set", "conv": "thiscall", "args": ["int", "mem:4"], "ret": 0},
+    "0x00491125": {"name": "eqlog_guess", "conv": "cdecl", "args": ["cstr"], "ret": 0}
+  },
+  "rewrite_aliases": {"??2@YAPAXI@Z": "0x0060d071"},
+  "cases": [
+    {"name": "empty-input", "args": ["", 20, 1]},
+    {"name": "wrong-state", "args": ["hello", 3, 1], "memory": [{"addr": "@globalstate", "offset": "0xb54", "u32": 4}]},
+    {"name": "manager-color-normalized-and-log", "args": ["manager message", 20, 1], "memory": [{"addr": "0x009917e4", "u32": "@chatmgr"}, {"addr": "0x00924788", "u32": 1}]},
+    {"name": "pending-ordinary-color-arg-log-off", "args": ["pending message", 7, 0], "memory": [{"addr": "0x00924788", "u32": 1}]},
+    {"name": "pending-global-log-off", "args": ["pending message", 0, 1], "memory": [{"addr": "0x00924788", "u32": 0}]},
+    {"name": "pending-log-enabled", "args": ["logged message", 10, 1], "memory": [{"addr": "0x00924788", "u32": 1}]}
+  ],
+  "fuzz": {
+    "seed": 4817606,
+    "count": 100,
+    "args": [
+      {"choices": ["", "x", "chat fuzz"]},
+      {"range": [-2, 21]},
+      {"choices": [0, 1]}
+    ],
+    "memory": [
+      {"addr": "@globalstate", "offset": "0xb54", "type": "int", "choices": [0, 4, 5]},
+      {"addr": "0x009917e4", "type": "u32", "choices": [0, "@chatmgr"]},
+      {"addr": "0x0095d3c4", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "0x00924788", "type": "int", "choices": [0, 1]}
+    ]
+  },
+  "coverage_ok": {
+    "00498359-00498364": "The scripted CXStr constructor cannot write through its stack-local this pointer.",
+    "0049841A-00498425": "The scripted CXStr assignment cannot write through its stack-local this pointer."
+  }
+}

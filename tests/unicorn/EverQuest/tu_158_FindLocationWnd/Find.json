@@ -1,0 +1,157 @@
+{
+  "function": "CFindLocationWnd_guess::RemoveSpawnRow_guess",
+  "original": "0x00502dc4",
+  "sources": [
+    "src/EverQuest/tu_158_FindLocationWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@objectat15c",
+  "args": [
+    {
+      "name": "other",
+      "type": "ptr"
+    }
+  ],
+  "ret": "char",
+  "objects": {
+    "objectat15c": {
+      "size": "0x170",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x15c", "u32": "@state"}
+      ]
+    },
+    "state": {
+      "size": "0x124",
+      "fill": "zero"
+    },
+    "other": {
+      "size": "0x260",
+      "fill": "zero"
+    },
+    "e0": {"size": "0x260", "fill": "zero", "init": [{"offset": "0x258", "u32": 256}]},
+    "e1": {"size": "0x260", "fill": "zero", "init": [{"offset": "0x258", "u32": 257}]},
+    "e2": {"size": "0x260", "fill": "zero", "init": [{"offset": "0x258", "u32": 258}]},
+    "e3": {"size": "0x260", "fill": "zero", "init": [{"offset": "0x258", "u32": 259}]},
+    "e4": {"size": "0x260", "fill": "zero", "init": [{"offset": "0x258", "u32": 260}]},
+    "e5": {"size": "0x260", "fill": "zero", "init": [{"offset": "0x258", "u32": 261}]},
+    "e6": {"size": "0x260", "fill": "zero", "init": [{"offset": "0x258", "u32": 262}]},
+    "e7": {"size": "0x260", "fill": "zero", "init": [{"offset": "0x258", "u32": 263}]}
+  },
+  "memory": [],
+  "callees": {
+    "0x00597ed0": {
+      "name": "FUN_00597ed0",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": ["@e0", "@e1", "@e2", "@e3", "@e4", "@e5", "@e6", "@e7"]
+    },
+    "0x00502c97": {
+      "name": "FUN_00502c97",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "no elements",
+      "args": ["@other"],
+      "memory": [
+        {"addr": "@state", "offset": "0x11c", "u32": 0},
+        {"addr": "@other", "offset": "0x258", "u32": 256}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "negative count",
+      "args": ["@other"],
+      "memory": [
+        {"addr": "@state", "offset": "0x11c", "u32": -1},
+        {"addr": "@other", "offset": "0x258", "u32": 256}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "one element, match",
+      "args": ["@other"],
+      "memory": [
+        {"addr": "@state", "offset": "0x11c", "u32": 1},
+        {"addr": "@other", "offset": "0x258", "u32": 256}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "one element, no match",
+      "args": ["@other"],
+      "memory": [
+        {"addr": "@state", "offset": "0x11c", "u32": 1},
+        {"addr": "@other", "offset": "0x258", "u32": 257}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "three elements, first matches",
+      "args": ["@other"],
+      "memory": [
+        {"addr": "@state", "offset": "0x11c", "u32": 3},
+        {"addr": "@other", "offset": "0x258", "u32": 256}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "three elements, last matches",
+      "args": ["@other"],
+      "memory": [
+        {"addr": "@state", "offset": "0x11c", "u32": 3},
+        {"addr": "@other", "offset": "0x258", "u32": 258}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "three elements, no match",
+      "args": ["@other"],
+      "memory": [
+        {"addr": "@state", "offset": "0x11c", "u32": 3},
+        {"addr": "@other", "offset": "0x258", "u32": 999}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "eight elements, last matches",
+      "args": ["@other"],
+      "memory": [
+        {"addr": "@state", "offset": "0x11c", "u32": 8},
+        {"addr": "@other", "offset": "0x258", "u32": 263}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "eight elements, no match",
+      "args": ["@other"],
+      "memory": [
+        {"addr": "@state", "offset": "0x11c", "u32": 8},
+        {"addr": "@other", "offset": "0x258", "u32": 300}
+      ],
+      "expect": {"ret": 0}
+    }
+  ],
+  "fuzz": {
+    "seed": 5254596,
+    "count": 200,
+    "args": [
+      {
+        "choices": [
+          "@other"
+        ]
+      }
+    ],
+    "memory": [
+      {"addr": "@state", "offset": "0x11c", "type": "int", "choices": [-1, 0, 1, 2, 3, 5, 7, 8]},
+      {"addr": "@other", "offset": "0x258", "type": "int", "choices": [256, 257, 258, 259, 260, 261, 262, 263, 999]}
+    ]
+  }
+}

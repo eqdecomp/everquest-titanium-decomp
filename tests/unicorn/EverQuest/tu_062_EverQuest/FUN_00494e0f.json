@@ -1,0 +1,81 @@
+{
+  "function": "initCustom_guess",
+  "original": "0x00494e0f",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "void",
+  "objects": {},
+  "memory": [
+    {
+      "addr": "0x00905cb0",
+      "u32": "0x00984100"
+    },
+    {
+      "addr": "0x00984000",
+      "cstr": "Default String"
+    }
+  ],
+  "callees": {
+    "0x005dfa00": {
+      "name": "StringTable_guess::getString",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": [
+        "0x00984000", "0x00984000", "0x00984000", "0x00984000",
+        "0x00984000", "0x00984000", "0x00984000", "0x00984000",
+        "0x00984000", "0x00984000", "0x00984000", "0x00984000",
+        "0x00984000", "0x00984000", "0x00984000", "0x00984000",
+        "0x00984000", "0x00984000", "0x00984000", "0x00984000",
+        "0x00984000", "0x00984000", "0x00984000", "0x00984000"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "default strings",
+      "args": []
+    },
+    {
+      "name": "empty string source",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00984000",
+          "cstr": ""
+        }
+      ]
+    },
+    {
+      "name": "long string source",
+      "args": [],
+      "memory": [
+        {
+          "addr": "0x00984000",
+          "cstr": "Alternate language text used to check copied defaults"
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4804111,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x00905cb0",
+        "type": "u32",
+        "choices": [
+          "0x00984100",
+          "0x00984200"
+        ]
+      }
+    ]
+  },
+  "_survivors": "L2738: the earlier slot reset loop already zeroes both slot 11 and slot 12 tail bytes, so deleting this store or changing its index from 12 to 11 cannot alter observable state"
+}

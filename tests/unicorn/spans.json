@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "client": "titanium",
+  "source": "binary survey of eqgame.exe, code map",
+  "ranges_are_half_open": true,
+  "spans": [
+    {"name": "game", "start": "0x00401000", "end": "0x00571290"},
+    {"name": "lib", "start": "0x00571290", "end": "0x005803E1"},
+    {"name": "d3dx", "start": "0x005803E1", "end": "0x00591280"},
+    {"name": "suite", "start": "0x00591280", "end": "0x0060D071"},
+    {"name": "crt", "start": "0x0060D071", "end": "0x006244EA"},
+    {"name": "eh_funclet", "start": "0x006244EA", "end": "0x00638110"},
+    {"name": "init_stub", "start": "0x00638110", "end": null}
+  ]
+}

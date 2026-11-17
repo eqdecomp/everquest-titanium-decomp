@@ -1,0 +1,314 @@
+{
+  "function": "FindStackSlot_guess",
+  "original": "0x004b8269",
+  "sources": ["src/EverQuest/tu_077_ItemMoveQueue.cpp"],
+  "conv": "cdecl",
+  "args": [
+    {"name": "holder_guess", "type": "ptr"},
+    {"name": "key_kind_guess", "type": "int"},
+    {"name": "key_field04_guess", "type": "int"},
+    {"name": "key_field08_guess", "type": "int"},
+    {"name": "key_type_guess", "type": "int"},
+    {"name": "lookup_guess", "type": "ptr"},
+    {"name": "index_guess", "type": "int"}
+  ],
+  "ret": "char",
+  "objects": {
+    "holder": {
+      "size": "0xc288",
+      "fill": "zero",
+      "init": [{"offset": "0xc284", "u32": "@offset"}]
+    },
+    "offset": {"size": "0x8", "fill": "zero", "init": [{"offset": "0x4", "u32": 0}]},
+    "lookup": {
+      "size": "0x1c",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": 2},
+        {"offset": "0x8", "u32": 15},
+        {"offset": "0xc", "u32": 4},
+        {"offset": "0x10", "u32": "@buckets"},
+        {"offset": "0x14", "u32": 16},
+        {"offset": "0x18", "u8": 1}
+      ]
+    },
+    "buckets": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "u32": "@rows"}]},
+    "rows": {
+      "size": "0x380",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x10", "u32": 10},
+        {"offset": "0x14", "u32": 0},
+        {"offset": "0x18", "u32": 22},
+        {"offset": "0x1c", "u32": -1},
+        {"offset": "0x24", "u32": "@target0"},
+        {"offset": "0x48", "u32": 10},
+        {"offset": "0x4c", "u32": 0},
+        {"offset": "0x50", "u32": 22},
+        {"offset": "0x54", "u32": -1},
+        {"offset": "0x5c", "u32": "@target"}
+      ]
+    },
+    "state0": {"size": "0x2c0", "fill": "zero", "init": [{"offset": "0x2bc", "u32": 100}]},
+    "state": {"size": "0x2c0", "fill": "zero", "init": [{"offset": "0x2bc", "u32": 100}]},
+    "slot_state": {"size": "0x2c0", "fill": "zero", "init": [{"offset": "0x2bc", "u32": 100}]},
+    "clone_state": {"size": "0x2c0", "fill": "zero", "init": [{"offset": "0x2bc", "u32": 100}]},
+    "target0": {
+      "size": "0x2c0",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@vtable"},
+        {"offset": "0x1c", "u32": "@state0"},
+        {"offset": "0x48", "u32": 5},
+        {"offset": "0x2bc", "u32": 100}
+      ]
+    },
+    "target": {
+      "size": "0x2c0",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@vtable"},
+        {"offset": "0x1c", "u32": "@state"},
+        {"offset": "0x2bc", "u32": 100}
+      ]
+    },
+    "slot_target": {
+      "size": "0x2c0",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@vtable"},
+        {"offset": "0x1c", "u32": "@slot_state"},
+        {"offset": "0x48", "u32": 3},
+        {"offset": "0x2bc", "u32": 100}
+      ]
+    },
+    "clone": {
+      "size": "0x2c0",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@vtable"},
+        {"offset": "0x1c", "u32": "@clone_state"},
+        {"offset": "0x2bc", "u32": 100}
+      ]
+    },
+    "vtable": {
+      "size": "0x18",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": "@fn_clone"},
+        {"offset": "0x14", "u32": "@fn_slot05"}
+      ]
+    },
+    "fn_clone": {"size": "0x4", "fill": "zero"},
+    "fn_slot05": {"size": "0x4", "fill": "zero"},
+    "argument": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "u32": "@slot_target"}]},
+    "empty_argument": {"size": "0x4", "fill": "zero"},
+    "slot_word": {"size": "0x4", "fill": "zero"},
+    "slot_pointer": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "u32": "@slot_target"}]},
+    "empty_slot_pointer": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [],
+  "ignore_writes": [["0x6000c31c", "0x6000c32c"]],
+  "callees": {
+    "0x005ec760": {"name": "Target_IsValid_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x004b7422": {"name": "Probe_Check_guess", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x004b736f": {"name": "Kind_GetCode_guess", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x004b76a6": {"name": "Probe_GetSlot_guess", "conv": "thiscall", "args": ["ptr"], "ret": "@slot_pointer"},
+    "0x00434777": {"name": "SlotTable_GetSlot_guess", "conv": "thiscall", "args": ["u32"], "ret": "@argument"},
+    "0x005dfc40": {"name": "Gate_IsReady_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005ecc30": {"name": "Gate_GetLimit_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005ec650": {"name": "Gate_GetByIndex_guess", "conv": "thiscall", "args": ["int"], "ret": "@slot_word"},
+    "0x005e0f30": {"name": "Target_GetId_guess", "conv": "thiscall", "args": [], "ret": [100, 100, 100, 100]},
+    "0x005ecd50": {"name": "Target_Get700_guess", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x005ecd80": {"name": "Target_Set700_guess", "conv": "thiscall", "args": ["int"], "passthrough": true},
+    "0x004b7885": {
+      "name": "FindMatchingKey_guess",
+      "conv": "cdecl",
+      "args": ["u32", "u32", "u32", "u32", "ptr", "int", "int"],
+      "passthrough": true
+    },
+    "0x004b72d7": {"name": "Triple_IsEqual_guess", "conv": "thiscall", "args": ["ptr"], "passthrough": true},
+    "0x004b7724": {"name": "Table_SetWide_guess", "conv": "thiscall", "args": ["int", "mem:56"], "passthrough": true},
+    "0x004b75aa": {"name": "Table_GrowWide_guess", "conv": "thiscall", "args": ["int"]},
+    "@fn_clone": {"name": "Target_Clone_guess", "conv": "thiscall", "args": [], "ret": "@clone"},
+    "@fn_slot05": {"name": "Target_Slot05_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 1}
+  },
+  "cases": [
+    {
+      "name": "invalid target",
+      "args": ["@holder", 0, 22, -1, 0, "@lookup", 1],
+      "callees": {"0x005ec760": {"name": "Target_IsValid_guess", "conv": "thiscall", "args": [], "ret": 0}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "invalid key",
+      "args": ["@holder", 2, 2, 0, 0, "@lookup", 1],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "unresolved slot",
+      "args": ["@holder", 0, 22, 0, 0, "@lookup", 1],
+      "callees": {"0x004b76a6": {"name": "Probe_GetSlot_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "empty slot",
+      "args": ["@holder", 0, 22, -1, 0, "@lookup", 1],
+      "callees": {"0x004b76a6": {"name": "Probe_GetSlot_guess", "conv": "thiscall", "args": ["ptr"], "ret": "@empty_slot_pointer"}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "same id fits",
+      "args": ["@holder", 0, 22, -1, 0, "@lookup", 1],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "same id at split lower bound",
+      "args": ["@holder", 0, 22, -1, 0, "@lookup", 1],
+      "memory": [
+        {"addr": "@rows", "offset": "0x48", "u32": 20},
+        {"addr": "@target", "offset": "0x48", "u32": 20},
+        {"addr": "@state", "offset": "0x2bc", "u32": 8}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "same id split",
+      "args": ["@holder", 0, 22, -1, 0, "@lookup", 1],
+      "memory": [
+        {"addr": "@rows", "offset": "0x48", "u32": 20},
+        {"addr": "@target", "offset": "0x48", "u32": 20},
+        {"addr": "@state", "offset": "0x2bc", "u32": 10}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "forced split without a matching prior key",
+      "args": ["@holder", 0, 20, -1, 0, "@lookup", 1],
+      "memory": [
+        {"addr": "@rows", "offset": "0x48", "u32": 20},
+        {"addr": "@target", "offset": "0x48", "u32": 1000},
+        {"addr": "@state", "offset": "0x2bc", "u32": 4}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "different id gate not ready",
+      "args": ["@holder", 0, 22, -1, 0, "@lookup", 1],
+      "callees": {
+        "0x005e0f30": {"name": "Target_GetId_guess", "conv": "thiscall", "args": [], "ret": [100, 101]},
+        "0x005dfc40": {"name": "Gate_IsReady_guess", "conv": "thiscall", "args": [], "ret": 0}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "different id slot veto",
+      "args": ["@holder", 0, 22, -1, 0, "@lookup", 1],
+      "callees": {
+        "0x005e0f30": {"name": "Target_GetId_guess", "conv": "thiscall", "args": [], "ret": [100, 101]},
+        "@fn_slot05": {"name": "Target_Slot05_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "different id empty range",
+      "args": ["@holder", 0, 22, -1, 0, "@lookup", 1],
+      "callees": {
+        "0x005e0f30": {"name": "Target_GetId_guess", "conv": "thiscall", "args": [], "ret": [100, 101]},
+        "0x005ecc30": {"name": "Gate_GetLimit_guess", "conv": "thiscall", "args": [], "ret": 0}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "recursive empty slot",
+      "args": ["@holder", 0, 20, -1, 0, "@lookup", 1],
+      "callees": {
+        "0x004b76a6": {"name": "Probe_GetSlot_guess", "conv": "thiscall", "args": ["ptr"], "ret": "@slot_pointer"},
+        "0x005e0f30": {"name": "Target_GetId_guess", "conv": "thiscall", "args": [], "ret": [100, 101]},
+        "0x005ecc30": {"name": "Gate_GetLimit_guess", "conv": "thiscall", "args": [], "ret": [1, 1]},
+        "0x005ec760": {"name": "Target_IsValid_guess", "conv": "thiscall", "args": [], "ret": [1, 1]}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "equal offset with matching prior key",
+      "args": ["@holder", 0, 22, -1, 0, "@lookup", 1],
+      "memory": [
+        {"addr": "@slot_target", "offset": "0x48", "u32": 10},
+        {"addr": "@target", "offset": "0x48", "u32": -1},
+        {"addr": "@state", "offset": "0x2bc", "u32": 10},
+        {"addr": "@target0", "offset": "0x48", "u32": 2}
+      ],
+      "callees": {
+        "0x004b7885": {
+          "name": "FindMatchingKey_guess",
+          "conv": "cdecl",
+          "args": ["u32", "u32", "u32", "u32", "ptr", "int", "int"],
+          "ret": 0
+        }
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "duplicate scan skips different id at index zero",
+      "args": ["@holder", 0, 22, -1, 0, "@lookup", 1],
+      "callees": {
+        "0x005e0f30": {
+          "name": "Target_GetId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [100, 100, 100, 101]
+        },
+        "0x004b7885": {
+          "name": "FindMatchingKey_guess",
+          "conv": "cdecl",
+          "args": ["u32", "u32", "u32", "u32", "ptr", "int", "int"],
+          "ret": [0, -1]
+        }
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "recursive second value succeeds",
+      "args": ["@holder", 0, 22, -1, 0, "@lookup", 1],
+      "callees": {
+        "0x005e0f30": {
+          "name": "Target_GetId_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [100, 101, 100, 101, 100, 100]
+        },
+        "0x005dfc40": {
+          "name": "Gate_IsReady_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [1, 0]
+        },
+        "0x005ecc30": {
+          "name": "Gate_GetLimit_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 2
+        }
+      },
+      "expect": {"ret": 1}
+    }
+  ],
+  "fuzz": {
+    "seed": 4948585,
+    "count": 100,
+    "args": [
+      {"choices": ["@holder"]},
+      {"choices": [0, 1, 2]},
+      {"choices": [0, 2, 21, 22]},
+      {"choices": [-1, 0, 1]},
+      {"choices": [0]},
+      {"choices": ["@lookup"]},
+      {"choices": [1]}
+    ],
+    "memory": [
+      {"addr": "@rows", "offset": "0x48", "type": "int", "range": [0, 20]},
+      {"addr": "@slot_target", "offset": "0x48", "type": "int", "range": [0, 20]}
+    ]
+  }
+}

@@ -1,0 +1,368 @@
+{
+  "function": "TributeTable_guess::HandleTributeMessage_guess",
+  "original": "0x00434d9a",
+  "sources": ["src/EverQuest/tu_027_Tribute.cpp"],
+  "conv": "thiscall",
+  "this": "@lookupstate",
+  "args": [
+    {"name": "message_guess", "type": "int"},
+    {"name": "data_guess", "type": "ptr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "lookupstate": {
+      "size": "0x28", "fill": "zero",
+      "init": [{"offset": "0x10", "u32": "@buckets"}]
+    },
+    "data": {"size": "0x90", "fill": "zero"},
+    "buckets": {
+      "size": "0x40", "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@page"}]
+    },
+    "page": {
+      "size": "0x40", "fill": "zero",
+      "init": [{"offset": "0x8", "u32": "@oldrecord"}]
+    },
+    "oldrecord": {"size": "0x88", "fill": "zero"},
+    "record": {"size": "0x88", "fill": "zero"},
+    "textrecord": {"size": "0x10", "fill": "zero"},
+    "resolved": {"size": "0x140", "fill": "zero"},
+    "messageState": {"size": "0x4", "fill": "zero"},
+    "everquest": {"size": "0x100", "fill": "zero"},
+    "sink": {"size": "0x4", "fill": "zero"},
+    "candidate": {
+      "size": "0xc390", "fill": "zero",
+      "init": [{"offset": "0x8", "u32": "@offset_holder"}]
+    },
+    "offset_holder": {
+      "size": "0x8", "fill": "zero",
+      "init": [{"offset": "0x4", "u32": "0x100"}]
+    },
+    "slot0": {"size": "0x8", "fill": "zero"},
+    "slot1": {"size": "0x8", "fill": "zero"},
+    "slot2": {"size": "0x8", "fill": "zero"},
+    "slot3": {"size": "0x8", "fill": "zero"},
+    "slot4": {"size": "0x8", "fill": "zero"},
+    "holderentry": {
+      "size": "0x4", "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@entry_vtable"}]
+    },
+    "entry_vtable": {
+      "size": "0x4", "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@fn_dtor"}]
+    },
+    "pending": {
+      "size": "0x4", "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@pending_vtable"}]
+    },
+    "pending_vtable": {
+      "size": "0xc4", "fill": "zero",
+      "init": [{"offset": "0xc0", "u32": "@fn_pending"}]
+    },
+    "fn_pending": {"size": "0x4", "fill": "zero"},
+    "fn_pending_alt": {"size": "0x4", "fill": "zero"},
+    "fn_dtor": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@lookupstate", "offset": "0x0", "u32": 16},
+    {"addr": "@lookupstate", "offset": "0x8", "u32": 15},
+    {"addr": "@lookupstate", "offset": "0xc", "u32": 4},
+    {"addr": "@resolved", "offset": "0x120", "cstr": "resolved entry"},
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x009929a8", "u32": "@pending"},
+    {"addr": "0x009248d4", "u32": "0x55667788"},
+    {"addr": "0x009247a8", "u32": 0},
+    {"addr": "0x009247ac", "u32": 0},
+    {"addr": "0x00850350", "size": 4, "fill": "zero"},
+    {"addr": "0x00988df0", "u32": "@everquest"},
+    {"addr": "0x00905d10", "u32": 0},
+    {"addr": "0x00905ca0", "size": 12, "fill": "zero"},
+    {"addr": "0x00905d00", "u32": "@candidate"},
+    {"addr": "0x0099298c", "u32": "@sink"}
+  ],
+  "callees": {
+    "0x00401b28": {
+      "name": "resolve_guess", "conv": "cdecl", "args": ["u32"], "ret": "arg0"
+    },
+    "0x00434495": {
+      "name": "IsTributeAvailable_guess", "conv": "thiscall", "args": [], "passthrough": true
+    },
+    "0x00492ec2": {
+      "name": "Store_guess", "conv": "thiscall", "args": ["cstr"], "ret": "arg0"
+    },
+    "0x0046da4a": {
+      "name": "BuildText_guess", "conv": "cdecl",
+      "args": ["ignore", "int", "cstr", "int", "int", "int", "int", "int", "int", "int", "int"],
+      "ret": 0
+    },
+    "0x004982c6": {
+      "name": "dsp_chat", "conv": "thiscall", "args": ["cstr", "int", "bool"]
+    },
+    "0x004912b1": {
+      "name": "SendMessage_guess", "conv": "cdecl",
+      "args": ["ptr", "int", "mem:12", "int", "char"], "ret": 0
+    },
+    "0x00434567": {
+      "name": "Handle_guess", "conv": "stdcall", "args": ["int", "ptr", "int"]
+    },
+    "0x0060d071": {
+      "name": "operator_new", "conv": "cdecl", "args": ["u32"], "passthrough": true
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@record"
+    },
+    "0x00433de7": {
+      "name": "Record_guess_ctor", "conv": "thiscall", "args": [], "passthrough": true
+    },
+    "0x004341cf": {
+      "name": "RecordReader_guess_Read", "conv": "thiscall",
+      "args": ["ptr", "ptr"], "passthrough": true
+    },
+    "0x0040600c": {
+      "name": "SetElementIdx_guess", "conv": "thiscall", "args": ["int", "ignore"], "passthrough": true
+    },
+    "0x00433d86": {
+      "name": "OwnedPair_guess_dtor", "conv": "thiscall", "args": [], "passthrough": true
+    },
+    "0x0060d0d5": {
+      "name": "operator_delete", "conv": "cdecl", "args": ["ptr"]
+    },
+    "0x0056bb49": {
+      "name": "MarkDirty_guess", "conv": "thiscall", "args": []
+    },
+    "0x0056ce7c": {
+      "name": "Refresh_guess", "conv": "thiscall", "args": []
+    },
+    "0x005f0d80": {
+      "name": "GetSlot_guess", "conv": "thiscall", "args": ["int"],
+      "ret": ["@slot0", "@slot1", "@slot2", "@slot3", "@slot4"]
+    },
+    "0x0040cc6b": {
+      "name": "GetSmallEntry_guess", "conv": "thiscall", "args": ["u32"], "ret": "@holderentry"
+    },
+    "0x00434792": {
+      "name": "Set_guess", "conv": "thiscall", "args": ["u32", "u32"]
+    },
+    "0x004347d3": {
+      "name": "HandleList_guess", "conv": "stdcall", "args": ["ptr", "ptr", "u32"]
+    },
+    "0x0043415d": {
+      "name": "ShowTributeDescription_guess", "conv": "thiscall", "args": ["int", "int", "ptr"]
+    },
+    "0x00571fc0": {
+      "name": "CXStr_assign", "conv": "thiscall", "args": ["ptr"], "ret": "this"
+    },
+    "0x00433d68": {
+      "name": "ReadBigEndian_guess", "conv": "cdecl", "args": ["ptr"], "passthrough": true
+    },
+    "@fn_pending": {
+      "name": "PendingSlotC0_guess", "conv": "thiscall", "args": ["int", "int"], "ret": -1
+    },
+    "@fn_pending_alt": {
+      "name": "PendingSlotC0_alt_guess", "conv": "thiscall", "args": ["int", "int"], "ret": 1
+    },
+    "@fn_dtor": {
+      "name": "HolderEntry_delete_guess", "conv": "thiscall", "args": ["u32"], "ret": 0
+    }
+  },
+  "rewrite_aliases": {"??2@YAPAXI@Z": "0x0060d071"},
+  "cases": [
+    {
+      "name": "replace record and grow index table",
+      "args": [5421, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "hex": "00000002"},
+        {"addr": "@lookupstate", "offset": "0x0", "u32": 1}
+      ]
+    },
+    {
+      "name": "replace empty record slot",
+      "args": [5421, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "hex": "00000002"},
+        {"addr": "@page", "offset": "0x8", "u32": 0}
+      ]
+    },
+    {
+      "name": "delete replaced record",
+      "args": [5421, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "hex": "00000002"},
+        {"addr": "@lookupstate", "offset": "0x0", "u32": 16},
+        {"addr": "@page", "offset": "0x8", "u32": "@oldrecord"}
+      ]
+    },
+    {
+      "name": "delete record at zero index",
+      "args": [5421, "@data"],
+      "memory": [
+        {"addr": "@lookupstate", "offset": "0x0", "u32": 16},
+        {"addr": "@page", "offset": "0x0", "u32": "@oldrecord"}
+      ]
+    },
+    {
+      "name": "grow when record equals count",
+      "args": [5421, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "hex": "00000002"},
+        {"addr": "@lookupstate", "offset": "0x0", "u32": 2},
+        {"addr": "@page", "offset": "0x8", "u32": "@oldrecord"}
+      ],
+      "callees": {
+        "0x004341cf": {
+          "name": "RecordReader_guess_Read", "conv": "thiscall", "args": ["ptr", "ptr"],
+          "writes": [{"addr": "@record", "offset": 0, "hex": "02000000"}]
+        }
+      }
+    },
+    {
+      "name": "grow when zero ID equals zero count",
+      "args": [5421, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "hex": "00000000"},
+        {"addr": "@lookupstate", "offset": "0x0", "u32": 0},
+        {"addr": "@page", "offset": "0x0", "u32": "@oldrecord"}
+      ]
+    },
+    {
+      "name": "null record allocation",
+      "args": [5421, "@data"],
+      "memory": [{"addr": "@data", "offset": "0x0", "hex": "00000002"}],
+      "callees": {
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}
+      }
+    },
+    {
+      "name": "clear five slots active",
+      "args": [22073, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": 1},
+        {"addr": "@data", "offset": "0x18", "u32": 10},
+        {"addr": "@data", "offset": "0x1c", "u32": 21},
+        {"addr": "@data", "offset": "0x20", "u32": 32},
+        {"addr": "@data", "offset": "0x24", "u32": 43},
+        {"addr": "@data", "offset": "0x28", "u32": 54}
+      ]
+    },
+    {"name": "clear five slots inactive", "args": [22073, "@data"], "memory": [{"addr": "@data", "offset": "0x0", "u32": 0}]},
+    {"name": "short message code", "args": [18021, "@data"]},
+    {"name": "remove message code", "args": [10163, "@data"]},
+    {
+      "name": "connection notice success",
+      "args": [20782, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": 0},
+        {"addr": "@data", "offset": "0x4", "u32": "@resolved"},
+        {"addr": "0x00905d00", "u32": 0},
+        {"addr": "0x009247a8", "u32": 1}
+      ]
+    },
+    {
+      "name": "connection notice disabled",
+      "args": [20782, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": 0},
+        {"addr": "@data", "offset": "0x4", "u32": "@resolved"},
+        {"addr": "0x00905d00", "u32": 0},
+        {"addr": "0x009247a8", "u32": 0},
+        {"addr": "0x009247ac", "u32": 0}
+      ]
+    },
+    {
+      "name": "connection notice unresolved",
+      "args": [20782, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": 0},
+        {"addr": "@data", "offset": "0x4", "u32": 0},
+        {"addr": "0x00905d00", "u32": 0},
+        {"addr": "0x009247a8", "u32": 1}
+      ]
+    },
+    {
+      "name": "connection send message",
+      "args": [20782, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": 7},
+        {"addr": "@data", "offset": "0x4", "u32": 77},
+        {"addr": "@data", "offset": "0x8", "u32": 1},
+        {"addr": "0x00905d10", "u32": 0}
+      ]
+    },
+    {
+      "name": "connection rejected by pending state",
+      "args": [20782, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": 7},
+        {"addr": "@data", "offset": "0x4", "u32": 77},
+        {"addr": "@data", "offset": "0x8", "u32": 1},
+        {"addr": "0x00905d10", "u32": 0},
+        {"addr": "@pending_vtable", "offset": "0xc0", "u32": "@fn_pending_alt"}
+      ]
+    },
+    {
+      "name": "connection already active",
+      "args": [20782, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x8", "u32": 1},
+        {"addr": "0x00905d10", "u32": "@messageState"}
+      ]
+    },
+    {
+      "name": "connection without pending state",
+      "args": [20782, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x8", "u32": 1},
+        {"addr": "0x009929a8", "u32": 0}
+      ]
+    },
+    {
+      "name": "string update nonempty",
+      "args": [25181, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": 1},
+        {"addr": "@data", "offset": "0x4", "u32": 2},
+        {"addr": "@page", "offset": "0x8", "u32": "@textrecord"}
+      ]
+    },
+    {
+      "name": "string update empty slot",
+      "args": [25181, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": 1},
+        {"addr": "@data", "offset": "0x4", "u32": 2},
+        {"addr": "@page", "offset": "0x8", "u32": 0}
+      ]
+    },
+    {
+      "name": "string update out of range",
+      "args": [25181, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": 1},
+        {"addr": "@data", "offset": "0x4", "u32": 16}
+      ]
+    },
+    {
+      "name": "state fields",
+      "args": [25699, "@data"],
+      "memory": [
+        {"addr": "@data", "offset": "0x0", "u32": 11},
+        {"addr": "@data", "offset": "0x4", "u32": 12},
+        {"addr": "@data", "offset": "0x8", "u32": 13},
+        {"addr": "@data", "offset": "0xc", "u32": 14}
+      ]
+    },
+    {"name": "list message", "args": [28524, "@data"]},
+    {"name": "high unknown", "args": [28653, "@data"]},
+    {"name": "low threshold", "args": [22072, "@data"]},
+    {"name": "high threshold", "args": [22074, "@data"]},
+    {"name": "unknown low", "args": [0, "@data"]}
+  ],
+  "fuzz": {
+    "seed": 4410778,
+    "count": 100,
+    "args": [
+      {"choices": [0, 20480, 22072, 22074, 24576, 28653]},
+      {"choices": ["@data"]}
+    ]
+  }
+}

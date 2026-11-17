@@ -1,0 +1,124 @@
+{
+  "function": "ValueOwner_guess::IsActiveFor_guess",
+  "original": "0x00417373",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@valueowner",
+  "args": [
+    {
+      "name": "owner_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "bool",
+  "objects": {
+    "valueowner": {
+      "size": "0x400",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": "@offsetholder"}
+      ]
+    },
+    "offsetholder": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": 64}
+      ]
+    },
+    "owner": {
+      "size": "0x1000",
+      "fill": "random",
+      "init": [
+        {"offset": "0x1a8", "u32": "@link"}
+      ]
+    },
+    "link": {
+      "size": "0x1000",
+      "fill": "random",
+      "init": [
+        {"offset": "0xf94", "u32": "@state"}
+      ]
+    },
+    "state": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "checker": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x00905cc0", "u32": "@checker"}
+  ],
+  "callees": {
+    "0x005f6d00": {
+      "name": "ValueChecker_guess::Check_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": "arg0"
+    },
+    "0x004903c2": {
+      "name": "ActiveState_guess::IsActive_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "typical: check passes, state active",
+      "args": ["@owner"],
+      "memory": [{"addr": "@valueowner", "offset": "0x144", "u32": 1}]
+    },
+    {
+      "name": "check returns zero",
+      "args": ["@owner"],
+      "memory": [{"addr": "@valueowner", "offset": "0x144", "u32": 0}]
+    },
+    {
+      "name": "check value with zero low byte",
+      "args": ["@owner"],
+      "memory": [{"addr": "@valueowner", "offset": "0x144", "u32": 256}]
+    },
+    {
+      "name": "null owner",
+      "args": [0],
+      "memory": [{"addr": "@valueowner", "offset": "0x144", "u32": 1}]
+    },
+    {
+      "name": "owner has no link",
+      "args": ["@owner"],
+      "memory": [
+        {"addr": "@valueowner", "offset": "0x144", "u32": 1},
+        {"addr": "@owner", "offset": "0x1a8", "u32": 0}
+      ]
+    },
+    {
+      "name": "link has no state",
+      "args": ["@owner"],
+      "memory": [
+        {"addr": "@valueowner", "offset": "0x144", "u32": 1},
+        {"addr": "@link", "offset": "0xf94", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4289395,
+    "count": 120,
+    "args": [
+      {
+        "choices": ["@owner", 0]
+      }
+    ],
+    "memory": [
+      {"addr": "@valueowner", "offset": "0x144", "type": "u32", "choices": [0, 1, 256, 255]},
+      {"addr": "@offsetholder", "offset": "0x4", "type": "u32", "choices": [0, 64, 256, 512]},
+      {"addr": "@owner", "offset": "0x1a8", "type": "u32", "choices": [0, 0], "p": 0.2},
+      {"addr": "@link", "offset": "0xf94", "type": "u32", "choices": [0, 0], "p": 0.2}
+    ]
+  }
+}

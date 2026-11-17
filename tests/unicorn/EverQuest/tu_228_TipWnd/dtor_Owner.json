@@ -1,0 +1,125 @@
+{
+  "function": "Owner_guess::~Owner_guess",
+  "original": "0x005644d6",
+  "sources": [
+    "src/EverQuest/tu_228_TipWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x1a8",
+      "fill": "random"
+    },
+    "allocation_items": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "tip_items": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "@owner", "offset": "0x17c", "u32": 0},
+    {"addr": "@owner", "offset": "0x180", "u32": "@allocation_items"},
+    {"addr": "@owner", "offset": "0x184", "u32": 4},
+    {"addr": "@owner", "offset": "0x18c", "u32": 0},
+    {"addr": "@owner", "offset": "0x190", "u32": "@tip_items"},
+    {"addr": "@owner", "offset": "0x194", "u32": 4},
+    {"addr": "@owner", "offset": "0x19c", "u32": 0},
+    {"addr": "@owner", "offset": "0x1a0", "u32": "@allocation_items"},
+    {"addr": "@owner", "offset": "0x1a4", "u32": 4},
+    {"addr": "@allocation_items", "offset": "0x0", "u32": "@owner"},
+    {"addr": "@allocation_items", "offset": "0x4", "u32": "@tip_items"},
+    {"addr": "@allocation_items", "offset": "0x8", "u32": "@allocation_items"},
+    {"addr": "@allocation_items", "offset": "0xc", "u32": "@owner"},
+    {"addr": "@tip_items", "offset": "0x0", "u32": "@tip_items"},
+    {"addr": "@tip_items", "offset": "0x4", "u32": "@owner"},
+    {"addr": "@tip_items", "offset": "0x8", "u32": "@allocation_items"},
+    {"addr": "@tip_items", "offset": "0xc", "u32": "@tip_items"}
+  ],
+  "callees": {
+    "0x005642cb": {
+      "name": "FreeTips_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x004eb924": {
+      "name": "Array_guess::at_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "passthrough": true
+    },
+    "0x0060d682": {
+      "name": "free",
+      "conv": "cdecl",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 1
+    },
+    "0x0050f3f6": {
+      "name": "Array_guess::reset_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x005a3100": {
+      "name": "OwnerBase_guess::~OwnerBase_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "empty arrays",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x18c", "u32": 0},
+        {"addr": "@owner", "offset": "0x19c", "u32": 0}
+      ]
+    },
+    {
+      "name": "both arrays populated",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x18c", "u32": 3},
+        {"addr": "@owner", "offset": "0x19c", "u32": 2}
+      ]
+    },
+    {
+      "name": "empty allocation list",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x18c", "u32": 2},
+        {"addr": "@owner", "offset": "0x19c", "u32": 0}
+      ]
+    },
+    {
+      "name": "empty freed list",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x18c", "u32": 0},
+        {"addr": "@owner", "offset": "0x19c", "u32": 2}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5653718,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@owner", "offset": "0x18c", "type": "int", "choices": [0, 1, 2, 3]},
+      {"addr": "@owner", "offset": "0x19c", "type": "int", "choices": [0, 1, 2, 3]}
+    ]
+  }
+}

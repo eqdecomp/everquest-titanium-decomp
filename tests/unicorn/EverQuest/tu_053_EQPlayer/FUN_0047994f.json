@@ -1,0 +1,103 @@
+{
+  "function": "EQPlayerCore_guess::NotOnSameDeity_guess",
+  "original": "0x0047994f",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {
+      "name": "other",
+      "type": "ptr"
+    },
+    {
+      "name": "flag",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "owner": {
+      "size": "0x284",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x280",
+          "u32": "0xc9"
+        }
+      ]
+    },
+    "other": {
+      "size": "0x284",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x256",
+          "u8": 0
+        },
+        {
+          "offset": "0x280",
+          "u32": 0
+        }
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {},
+  "cases": [
+    {"name": "null this", "this": 0, "args": ["@other", 1]},
+    {"name": "null other", "args": [0, 1]},
+    {"name": "guard returns zero", "args": ["@other", 0], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xc9"}, {"addr": "@other", "offset": "0x256", "u8": 1}, {"addr": "@other", "offset": "0x280", "u32": "0xca"}]},
+    {"name": "guard bypassed by flag", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xc9"}, {"addr": "@other", "offset": "0x256", "u8": 1}, {"addr": "@other", "offset": "0x280", "u32": "0xca"}]},
+    {"name": "guard bypassed by clear byte", "args": ["@other", 0], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xc9"}, {"addr": "@other", "offset": "0x256", "u8": 0}, {"addr": "@other", "offset": "0x280", "u32": "0xca"}]},
+    {"name": "lower boundary", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xc8"}]},
+    {"name": "upper boundary", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xd9"}]},
+    {"name": "0xc9 group fallthrough", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xc9"}, {"addr": "@other", "offset": "0x280", "u32": "0xca"}]},
+    {"name": "0xca group fallthrough", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xca"}, {"addr": "@other", "offset": "0x280", "u32": "0xc9"}]},
+    {"name": "0xcc group fallthrough", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xcc"}, {"addr": "@other", "offset": "0x280", "u32": "0xc9"}]},
+    {"name": "0xc9 matches itself", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xc9"}, {"addr": "@other", "offset": "0x280", "u32": "0xc9"}]},
+    {"name": "0xca matches itself", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xca"}, {"addr": "@other", "offset": "0x280", "u32": "0xca"}]},
+    {"name": "0xcb matches itself", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xcb"}, {"addr": "@other", "offset": "0x280", "u32": "0xcb"}]},
+    {"name": "0xcc matches itself", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xcc"}, {"addr": "@other", "offset": "0x280", "u32": "0xcc"}]},
+    {"name": "0xcd matches itself", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xcd"}, {"addr": "@other", "offset": "0x280", "u32": "0xcd"}]},
+    {"name": "0xce matches itself", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xce"}, {"addr": "@other", "offset": "0x280", "u32": "0xce"}]},
+    {"name": "0xcf matches itself", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xcf"}, {"addr": "@other", "offset": "0x280", "u32": "0xcf"}]},
+    {"name": "0xd0 matches itself", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xd0"}, {"addr": "@other", "offset": "0x280", "u32": "0xd0"}]},
+    {"name": "0xd1 matches itself", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xd1"}, {"addr": "@other", "offset": "0x280", "u32": "0xd1"}]},
+    {"name": "0xd2 matches itself", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xd2"}, {"addr": "@other", "offset": "0x280", "u32": "0xd2"}]},
+    {"name": "0xd3 matches itself", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xd3"}, {"addr": "@other", "offset": "0x280", "u32": "0xd3"}]},
+    {"name": "0xd4 matches itself", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xd4"}, {"addr": "@other", "offset": "0x280", "u32": "0xd4"}]},
+    {"name": "0xd5 matches itself", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xd5"}, {"addr": "@other", "offset": "0x280", "u32": "0xd5"}]},
+    {"name": "0xd6 matches itself", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xd6"}, {"addr": "@other", "offset": "0x280", "u32": "0xd6"}]},
+    {"name": "0xd7 matches itself", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xd7"}, {"addr": "@other", "offset": "0x280", "u32": "0xd7"}]},
+    {"name": "0xd8 matches itself", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xd8"}, {"addr": "@other", "offset": "0x280", "u32": "0xd8"}]},
+    {"name": "0xcc group tests d0", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xcc"}, {"addr": "@other", "offset": "0x280", "u32": "0xd0"}]},
+    {"name": "0xcc group tests d4", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xcc"}, {"addr": "@other", "offset": "0x280", "u32": "0xd4"}]},
+    {"name": "0xcc group tests d2", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xcc"}, {"addr": "@other", "offset": "0x280", "u32": "0xd2"}]},
+    {"name": "0xcc group tests d7", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xcc"}, {"addr": "@other", "offset": "0x280", "u32": "0xd7"}]},
+    {"name": "0xca group tests cd", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xca"}, {"addr": "@other", "offset": "0x280", "u32": "0xcd"}]},
+    {"name": "0xca group tests cf", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xca"}, {"addr": "@other", "offset": "0x280", "u32": "0xcf"}]},
+    {"name": "0xca group tests d1", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xca"}, {"addr": "@other", "offset": "0x280", "u32": "0xd1"}]},
+    {"name": "0xca group tests d5", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xca"}, {"addr": "@other", "offset": "0x280", "u32": "0xd5"}]},
+    {"name": "0xca group tests d6", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xca"}, {"addr": "@other", "offset": "0x280", "u32": "0xd6"}]},
+    {"name": "0xca group tests d8", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xca"}, {"addr": "@other", "offset": "0x280", "u32": "0xd8"}]},
+    {"name": "0xc9 group tests cb", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xc9"}, {"addr": "@other", "offset": "0x280", "u32": "0xcb"}]},
+    {"name": "0xc9 group tests ce", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xc9"}, {"addr": "@other", "offset": "0x280", "u32": "0xce"}]},
+    {"name": "0xc9 group tests d3", "args": ["@other", 1], "memory": [{"addr": "@owner", "offset": "0x280", "u32": "0xc9"}, {"addr": "@other", "offset": "0x280", "u32": "0xd3"}]}
+  ],
+  "fuzz": {
+    "seed": 4692303,
+    "count": 100,
+    "args": [
+      {"choices": ["@other", 0]},
+      {"choices": [0, 1, -1]}
+    ],
+    "memory": [
+      {"addr": "@owner", "offset": "0x280", "type": "u32", "choices": ["0xc8", "0xc9", "0xca", "0xcb", "0xcc", "0xcd", "0xce", "0xcf", "0xd0", "0xd1", "0xd2", "0xd3", "0xd4", "0xd5", "0xd6", "0xd7", "0xd8", "0xd9"]},
+      {"addr": "@other", "offset": "0x256", "type": "u8", "choices": [0, 1, 255]},
+      {"addr": "@other", "offset": "0x280", "type": "u32", "choices": ["0xc8", "0xc9", "0xca", "0xcb", "0xcc", "0xcd", "0xce", "0xcf", "0xd0", "0xd1", "0xd2", "0xd3", "0xd4", "0xd5", "0xd6", "0xd7", "0xd8", "0xd9"]}
+    ]
+  },
+  "_survivors": "L1103: when this is null ECX is already zero, so assigning type = 0 is unobservable; L1109: when other is null EAX is already zero, so assigning otherType = 0 is unobservable."
+}

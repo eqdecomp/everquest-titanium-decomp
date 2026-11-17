@@ -1,0 +1,115 @@
+{
+  "function": "CharacterStats_guess::Max_Endurance",
+  "original": "0x00416a40",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@characterstats",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "characterstats": {
+      "size": "0x100",
+      "fill": "random",
+      "init": [{"offset": "0x4", "u32": "@holder"}]
+    },
+    "holder": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x4", "u32": "0x40"}]
+    },
+    "result": {
+      "size": "0x1280",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x005ec220": {
+      "name": "LookupService_guess::Find_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@result"
+    },
+    "0x005fba90": {
+      "name": "LookupResult_guess::GetValue1240_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0041691b": {
+      "name": "AdjustAverage_guess",
+      "conv": "cdecl",
+      "args": ["int", "int", "int", "int"],
+      "passthrough": true
+    },
+    "0x004106a3": {
+      "name": "CharacterStats_guess::TotalSpellAffects_guess",
+      "conv": "thiscall",
+      "args": ["int", "bool", "int", "bool"],
+      "ret": 7
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": []
+    },
+    {
+      "name": "spell_zero",
+      "args": [],
+      "callees": {
+        "0x004106a3": {"name": "CharacterStats_guess::TotalSpellAffects_guess", "conv": "thiscall", "args": ["int", "bool", "int", "bool"], "ret": 0}
+      }
+    },
+    {
+      "name": "spell_negative_clamped",
+      "args": [],
+      "memory": [{"addr": "@characterstats", "offset": "0x58", "u32": "0xfffe7960"}],
+      "callees": {
+        "0x004106a3": {"name": "CharacterStats_guess::TotalSpellAffects_guess", "conv": "thiscall", "args": ["int", "bool", "int", "bool"], "ret": -100000}
+      }
+    },
+    {
+      "name": "all_zero_inputs",
+      "args": [],
+      "memory": [
+        {"addr": "@characterstats", "offset": "0x10", "u32": 0},
+        {"addr": "@characterstats", "offset": "0x14", "u32": 0},
+        {"addr": "@characterstats", "offset": "0x1c", "u32": 0},
+        {"addr": "@characterstats", "offset": "0x24", "u32": 0},
+        {"addr": "@characterstats", "offset": "0x58", "u32": 0},
+        {"addr": "@result", "offset": "0x1240", "u32": 0}
+      ],
+      "callees": {
+        "0x004106a3": {"name": "CharacterStats_guess::TotalSpellAffects_guess", "conv": "thiscall", "args": ["int", "bool", "int", "bool"], "ret": 0}
+      }
+    },
+    {
+      "name": "above_200_average",
+      "args": [],
+      "memory": [
+        {"addr": "@characterstats", "offset": "0x10", "u32": 500},
+        {"addr": "@characterstats", "offset": "0x14", "u32": 500},
+        {"addr": "@characterstats", "offset": "0x1c", "u32": 500},
+        {"addr": "@characterstats", "offset": "0x24", "u32": 500},
+        {"addr": "@result", "offset": "0x1240", "u32": 300}
+      ]
+    }
+  ],
+  "_survivors": "L607: `<` -> `<=` and `0` -> `1` in the clamp only differ when the result is exactly 0, and the clamp assigns 0 there anyway; no input can tell them apart",
+  "fuzz": {
+    "seed": 4287040,
+    "count": 200,
+    "args": [],
+    "memory": [
+      {"addr": "@characterstats", "offset": "0x10", "type": "int", "range": [-300, 1000]},
+      {"addr": "@characterstats", "offset": "0x14", "type": "int", "range": [-300, 1000]},
+      {"addr": "@characterstats", "offset": "0x1c", "type": "int", "range": [-300, 1000]},
+      {"addr": "@characterstats", "offset": "0x24", "type": "int", "range": [-300, 1000]},
+      {"addr": "@characterstats", "offset": "0x58", "type": "int", "range": [-5000, 5000]},
+      {"addr": "@result", "offset": "0x1240", "type": "int", "range": [-50, 400]}
+    ]
+  }
+}

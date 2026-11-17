@@ -1,0 +1,280 @@
+{
+  "function": "LoadViewportRect_guess",
+  "original": "0x0046c627",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "void",
+  "objects": {},
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x0092379c",
+      "u32": 800
+    },
+    {
+      "addr": "0x009237a0",
+      "u32": 600
+    }
+  ],
+  "callees": {
+    "0x00559545": {
+      "name": "NewUIINI",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 1
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x0055958a": {
+      "name": "LoadStringFromUIIniFile_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr",
+        "cstr",
+        "ignore",
+        "int",
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 3,
+          "offset": 0,
+          "hex": "313000",
+          "call": 0
+        },
+        {
+          "arg": 3,
+          "offset": 0,
+          "hex": "323000",
+          "call": 1
+        },
+        {
+          "arg": 3,
+          "offset": 0,
+          "hex": "39303000",
+          "call": 2
+        },
+        {
+          "arg": 3,
+          "offset": 0,
+          "hex": "37303000",
+          "call": 3
+        }
+      ]
+    },
+    "0x0060e3a3": {
+      "name": "_atol",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": [
+        10,
+        20,
+        900,
+        700
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "no-configuration",
+      "args": [],
+      "callees": {
+        "0x00559545": {
+          "name": "FUN_00559545",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "all-null-defaults",
+      "args": [],
+      "callees": {
+        "0x0055958a": {
+          "name": "FUN_0055958a",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr",
+            "cstr",
+            "ignore",
+            "int",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {"arg": 3, "offset": 0, "hex": "2a4e554c4c2a00", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "2a4e554c4c2a00", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "2a4e554c4c2a00", "call": 2},
+            {"arg": 3, "offset": 0, "hex": "2a4e554c4c2a00", "call": 3}
+          ]
+        }
+      }
+    },
+    {
+      "name": "x-default",
+      "args": [],
+      "callees": {
+        "0x0055958a": {
+          "name": "FUN_0055958a",
+          "conv": "cdecl",
+          "args": ["ignore", "cstr", "cstr", "ignore", "int", "int"],
+          "ret": 0,
+          "writes": [
+            {"arg": 3, "offset": 0, "hex": "2a4e554c4c2a00", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "353000", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "33303000", "call": 2},
+            {"arg": 3, "offset": 0, "hex": "32303000", "call": 3}
+          ]
+        },
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [50, 300, 200]}
+      }
+    },
+    {
+      "name": "y-default",
+      "args": [],
+      "callees": {
+        "0x0055958a": {
+          "name": "FUN_0055958a",
+          "conv": "cdecl",
+          "args": ["ignore", "cstr", "cstr", "ignore", "int", "int"],
+          "ret": 0,
+          "writes": [
+            {"arg": 3, "offset": 0, "hex": "353000", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "2a4e554c4c2a00", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "33303000", "call": 2},
+            {"arg": 3, "offset": 0, "hex": "32303000", "call": 3}
+          ]
+        },
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [50, 300, 200]}
+      }
+    },
+    {
+      "name": "width-default",
+      "args": [],
+      "callees": {
+        "0x0055958a": {
+          "name": "FUN_0055958a",
+          "conv": "cdecl",
+          "args": ["ignore", "cstr", "cstr", "ignore", "int", "int"],
+          "ret": 0,
+          "writes": [
+            {"arg": 3, "offset": 0, "hex": "353000", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "323500", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "2a4e554c4c2a00", "call": 2},
+            {"arg": 3, "offset": 0, "hex": "32303000", "call": 3}
+          ]
+        },
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [50, 25, 200]}
+      }
+    },
+    {
+      "name": "height-default",
+      "args": [],
+      "callees": {
+        "0x0055958a": {
+          "name": "FUN_0055958a",
+          "conv": "cdecl",
+          "args": ["ignore", "cstr", "cstr", "ignore", "int", "int"],
+          "ret": 0,
+          "writes": [
+            {"arg": 3, "offset": 0, "hex": "353000", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "323500", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "33303000", "call": 2},
+            {"arg": 3, "offset": 0, "hex": "2a4e554c4c2a00", "call": 3}
+          ]
+        },
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [50, 25, 300]}
+      }
+    },
+    {
+      "name": "equal-boundaries",
+      "args": [],
+      "callees": {
+        "0x0055958a": {
+          "name": "FUN_0055958a",
+          "conv": "cdecl",
+          "args": ["ignore", "cstr", "cstr", "ignore", "int", "int"],
+          "ret": 0,
+          "writes": [
+            {"arg": 3, "offset": 0, "hex": "31303000", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "31303000", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "37303000", "call": 2},
+            {"arg": 3, "offset": 0, "hex": "35303000", "call": 3}
+          ]
+        },
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [100, 100, 700, 500]}
+      }
+    },
+    {
+      "name": "negative-offsets",
+      "args": [],
+      "callees": {
+        "0x0055958a": {
+          "name": "FUN_0055958a",
+          "conv": "cdecl",
+          "args": ["ignore", "cstr", "cstr", "ignore", "int", "int"],
+          "ret": 0,
+          "writes": [
+            {"arg": 3, "offset": 0, "hex": "2d353000", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "2d323000", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "33303000", "call": 2},
+            {"arg": 3, "offset": 0, "hex": "32303000", "call": 3}
+          ]
+        },
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [-50, -20, 300, 200]}
+      }
+    },
+    {
+      "name": "offset-overflow",
+      "args": [],
+      "callees": {
+        "0x0055958a": {
+          "name": "FUN_0055958a",
+          "conv": "cdecl",
+          "args": ["ignore", "cstr", "cstr", "ignore", "int", "int"],
+          "ret": 0,
+          "writes": [
+            {"arg": 3, "offset": 0, "hex": "31303000", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "353000", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "37353000", "call": 2},
+            {"arg": 3, "offset": 0, "hex": "35373500", "call": 3}
+          ]
+        },
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [100, 50, 750, 575]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4638247,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "0x0092379c", "type": "u32", "choices": [320, 640, 800, 1024, 1280, 1920]},
+      {"addr": "0x009237a0", "type": "u32", "choices": [240, 480, 600, 720, 1080]}
+    ]
+  },
+  "_survivors": "L2641: deleting this initialization is hidden because the emulator starts the local stack as zero; L2645: deleting this default Y offset is hidden because the emulator starts the local stack as zero; L2671: at equality, assigning screenWidth - sizeWidth produces the existing offsetX, so < and <= have identical observable results"
+}

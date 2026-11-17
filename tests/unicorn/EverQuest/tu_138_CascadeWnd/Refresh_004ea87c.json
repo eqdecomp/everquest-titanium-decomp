@@ -1,0 +1,201 @@
+{
+  "function": "Panel_guess::Refresh_guess",
+  "original": "0x004ea87c",
+  "sources": [
+    "src/EverQuest/tu_138_CascadeWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@panel",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "string_rep": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x00", "u32": 10 }
+      ]
+    },
+    "panel": {
+      "size": "0x16c",
+      "fill": "random",
+      "init": [
+        { "offset": "0x15c", "u32": "@record" },
+        { "offset": "0x168", "u32": "@child" }
+      ]
+    },
+    "record": {
+      "size": "0x18",
+      "fill": "random",
+      "init": [
+        { "offset": "0x0c", "u32": 7 },
+        { "offset": "0x10", "u32": "@string_rep" },
+        { "offset": "0x14", "u32": 42 }
+      ]
+    },
+    "child": {
+      "size": "0x170",
+      "fill": "random",
+      "init": [
+        { "offset": "0x00", "u32": "@child_vtbl" },
+        { "offset": "0x78", "u32": 0 },
+        { "offset": "0x134", "u32": 64 }
+      ]
+    },
+    "child_vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        { "offset": "0xfc", "u32": "@fn_slot63" }
+      ]
+    },
+    "fn_slot63": {
+      "size": "0x04",
+      "fill": "zero"
+    },
+    "lookup": {
+      "size": "0x04",
+      "fill": "zero"
+    },
+    "index": {
+      "size": "0x04",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    { "addr": "0x0098599c", "u32": "@lookup" },
+    { "addr": "0x00991914", "u32": "@index" }
+  ],
+  "callees": {
+    "0x004b244f": {
+      "name": "Fill_guess",
+      "conv": "thiscall",
+      "args": [ "int" ],
+      "ret": "@lookup"
+    },
+    "0x005ba560": {
+      "name": "Normalize_guess",
+      "conv": "thiscall",
+      "args": [ "ignore" ],
+      "ret": 0,
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "00 00 00 60" }
+      ]
+    },
+    "0x00407d68": {
+      "name": "CXStr_copy_guess",
+      "conv": "thiscall",
+      "args": [ "ignore" ],
+      "passthrough": true
+    },
+    "0x004cc626": {
+      "name": "GetChar_guess",
+      "conv": "thiscall",
+      "args": [ "int" ],
+      "ret": 65
+    },
+    "0x004b1357": {
+      "name": "CXStr_plus_char_guess",
+      "conv": "cdecl",
+      "args": [ "ignore", "ignore", "cstr" ],
+      "ret": "arg0",
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "00 00 00 60" }
+      ]
+    },
+    "0x004d9090": {
+      "name": "CXStr_plus_CXStr_guess",
+      "conv": "cdecl",
+      "args": [ "ignore", "ignore", "ignore" ],
+      "ret": "arg0",
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "00 00 00 60" }
+      ]
+    },
+    "0x00571f70": {
+      "name": "CXStr_assign_guess",
+      "conv": "thiscall",
+      "args": [ "ignore" ],
+      "passthrough": true
+    },
+    "0x00571d00": {
+      "name": "CXStr_FreeRep_guess",
+      "conv": "thiscall",
+      "args": [ "u32" ],
+      "ret": 0
+    },
+    "0x004ffbe9": {
+      "name": "Find_guess",
+      "conv": "thiscall",
+      "args": [ "int" ],
+      "ret": 7
+    },
+    "0x004ea5e4": {
+      "name": "Build_guess",
+      "conv": "thiscall",
+      "args": [ "mem:16" ],
+      "ret": 0
+    },
+    "@fn_slot63": {
+      "name": "SetText_guess",
+      "conv": "thiscall",
+      "args": [ "ignore" ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "format_and_find",
+      "args": [],
+      "callees": {
+        "0x004cc626": {
+          "name": "GetChar_guess",
+          "conv": "thiscall",
+          "args": [ "int" ],
+          "ret": 65
+        }
+      }
+    },
+    {
+      "name": "dash_and_no_find",
+      "args": [],
+      "memory": [
+        { "addr": "@record", "offset": "0x0c", "u32": 4294967295 }
+      ],
+      "callees": {
+        "0x004cc626": {
+          "name": "GetChar_guess",
+          "conv": "thiscall",
+          "args": [ "int" ],
+          "ret": 45
+        }
+      }
+    },
+    {
+      "name": "missing_record",
+      "args": [],
+      "memory": [
+        { "addr": "@panel", "offset": "0x15c", "u32": 0 }
+      ]
+    },
+    {
+      "name": "missing_child",
+      "args": [],
+      "memory": [
+        { "addr": "@panel", "offset": "0x168", "u32": 0 }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5154940,
+    "count": 100,
+    "args": [],
+    "memory": [
+      { "addr": "@panel", "offset": "0x15c", "type": "ptr", "choices": [ 0, "@record" ] },
+      { "addr": "@panel", "offset": "0x168", "type": "ptr", "choices": [ 0, "@child" ] },
+      { "addr": "@record", "offset": "0x0c", "type": "int", "choices": [ -1, 0, 1, 42 ] },
+      { "addr": "@record", "offset": "0x14", "type": "int", "choices": [ -1, 0, 1, 42 ] }
+    ]
+  },
+  "_survivors": "L778: changing the zero store from args_guess[1] to args_guess[2] is unobservable because both local stack slots start zeroed. L779: deleting the zero store or moving it to args_guess[3] is unobservable because these local stack slots start zeroed. L780: the args_guess[4] mutant is an out-of-bounds zero store that VC71 optimizes away."
+}

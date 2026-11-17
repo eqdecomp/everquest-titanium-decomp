@@ -1,0 +1,55 @@
+{
+  "function": "CBazaarWndMoneyView_guess::ClickedMoneyButton_guess",
+  "original": "0x004e5bd4",
+  "sources": ["src/EverQuest/tu_132_BazaarWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@moneyowner",
+  "args": [{"name": "index", "type": "int"}, {"name": "value", "type": "int"}],
+  "ret": "void",
+  "objects": {
+    "moneyowner": {"size": "0x600", "fill": "random", "init": [
+      {"offset": "0x16c", "u32": "@sel"},
+      {"offset": "0x190", "u32": "@f0"}, {"offset": "0x194", "u32": "@f1"},
+      {"offset": "0x198", "u32": "@f2"}, {"offset": "0x19c", "u32": "@f3"}]},
+    "sel": {"size": "0x100", "fill": "random"},
+    "vt": {"size": "0x100", "fill": "zero", "init": [{"offset": "0xe4", "u32": "@fn57"}]},
+    "f0": {"size": "0x40", "fill": "zero", "init": [{"offset": 0, "u32": "@vt"}]},
+    "f1": {"size": "0x40", "fill": "zero", "init": [{"offset": 0, "u32": "@vt"}]},
+    "f2": {"size": "0x40", "fill": "zero", "init": [{"offset": 0, "u32": "@vt"}]},
+    "f3": {"size": "0x40", "fill": "zero", "init": [{"offset": 0, "u32": "@vt"}]},
+    "fn57": {"size": "0x4"},
+    "notifier": {"size": "0x10", "fill": "zero"}
+  },
+  "_survivors": "L1206: bounds.bottom=0 is only read by CopyTo/GetCenter, which are stubs that never read the stack-local bounds, so no case can see it; L1207: bounds.right=0, same reason; L1208: bounds.top=0, same reason; L1209: bounds.left=0, same reason",
+  "memory": [{"addr": "0x00850C3C", "u32": "@notifier"}],
+  "callees": {
+    "0x004e5b31": {"name": "SetFieldMoney", "conv": "thiscall", "args": ["int", "int"]},
+    "0x004e52d7": {"name": "GetMoney", "conv": "thiscall", "args": ["int"], "ret": 1234},
+    "0x004e5907": {"name": "UpdateBazaar", "conv": "thiscall", "args": []},
+    "0x004d9160": {"name": "CopyTo", "conv": "thiscall", "args": ["ignore", "ignore"], "ret": "arg0"},
+    "0x004dc02d": {"name": "GetCenter", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+                   "writes": [{"arg": 0, "offset": 0, "hex": "3300000044000000"}]},
+    "0x0054d976": {"name": "Notifier_Show", "conv": "thiscall",
+                   "args": ["ptr", "int", "int", "int", "int", "char"]},
+    "@fn57": {"name": "Slot57", "conv": "thiscall", "args": ["ignore"], "ret": "arg0",
+              "writes": [{"arg": 0, "offset": 0, "hex": "0a00000014000000"}]}
+  },
+  "cases": [
+    {"name": "set money, value 5", "args": [2, 5]},
+    {"name": "set money, value 0", "args": [1, 0]},
+    {"name": "set money, sel null", "args": [1, 5], "memory": [{"addr": "@moneyowner", "offset": "0x16c", "u32": 0}]},
+    {"name": "notify platinum, value -1", "args": [0, -1]},
+    {"name": "notify gold, value -1", "args": [1, -1]},
+    {"name": "notify index 3, value -2", "args": [3, -2]},
+    {"name": "notify, sel null", "args": [0, -1], "memory": [{"addr": "@moneyowner", "offset": "0x16c", "u32": 0}]},
+    {"name": "notify, sel null, index 2", "args": [2, -1], "memory": [{"addr": "@moneyowner", "offset": "0x16c", "u32": 0}]}
+  ],
+  "fuzz": {
+    "seed": 5132001,
+    "count": 120,
+    "args": [{"range": [0, 3]}, {"range": [-3, 20]}],
+    "memory": [
+      {"addr": "@moneyowner", "offset": "0x16c", "type": "ptr", "choices": ["@sel", "@sel", 0]}
+    ]
+  }
+}

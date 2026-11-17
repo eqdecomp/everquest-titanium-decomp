@@ -1,0 +1,181 @@
+{
+  "function": "Validator_guess::Check_guess",
+  "original": "0x00447be2",
+  "sources": [
+    "src/EverQuest/tu_031_Expedition.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@validator",
+  "args": [
+    {"name": "owner_guess", "type": "ptr"},
+    {"name": "source_guess", "type": "ptr"},
+    {"name": "result_guess", "type": "ptr"}
+  ],
+  "ret": "char",
+  "objects": {
+    "validator": {"size": "0x100", "fill": "random"},
+    "owner": {"size": "0xc284", "fill": "random"},
+    "source": {"size": "0x100", "fill": "random"},
+    "result": {"size": "0x100", "fill": "random"},
+    "query": {"size": "0x10", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@query"},
+    {"addr": "@source", "offset": "0x3c", "u32": 5}
+  ],
+  "callees": {
+    "0x00447bae": {
+      "name": "AltAdvManager_GetCalculatedTimer",
+      "conv": "stdcall",
+      "args": ["ptr", "ptr"],
+      "ret": [7, 7]
+    },
+    "0x005f0bd0": {
+      "name": "Query::GetOffset_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 3
+    },
+    "0x00576e80": {
+      "name": "GetCurrent_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 100
+    }
+  },
+  "cases": [
+    {
+      "name": "typical fits",
+      "args": ["@owner", "@source", "@result"]
+    },
+    {
+      "name": "null owner",
+      "args": [0, "@source", "@result"]
+    },
+    {
+      "name": "null source",
+      "args": ["@owner", 0, "@result"]
+    },
+    {
+      "name": "null owner and source",
+      "args": [0, 0, 0]
+    },
+    {
+      "name": "zero amount",
+      "args": ["@owner", "@source", "@result"],
+      "callees": {
+        "0x00447bae": {"name": "Calculate_guess", "conv": "stdcall", "args": ["ptr", "ptr"], "ret": 0}
+      }
+    },
+    {
+      "name": "zero amount null result",
+      "args": ["@owner", "@source", 0],
+      "callees": {
+        "0x00447bae": {"name": "Calculate_guess", "conv": "stdcall", "args": ["ptr", "ptr"], "ret": 0}
+      }
+    },
+    {
+      "name": "negative amount is nonzero",
+      "args": ["@owner", "@source", "@result"],
+      "callees": {
+        "0x00447bae": {"name": "Calculate_guess", "conv": "stdcall", "args": ["ptr", "ptr"], "ret": -3}
+      }
+    },
+    {
+      "name": "field3c negative",
+      "args": ["@owner", "@source", "@result"],
+      "memory": [{"addr": "@source", "offset": "0x3c", "u32": -1}]
+    },
+    {
+      "name": "amount of one is in range",
+      "args": ["@owner", "@source", "@result"],
+      "callees": {
+        "0x00447bae": {"name": "Calculate_guess", "conv": "stdcall", "args": ["ptr", "ptr"], "ret": [1, 1]},
+        "0x005f0bd0": {"name": "Query::GetOffset_guess", "conv": "thiscall", "args": ["u32"], "ret": 3},
+        "0x00576e80": {"name": "GetCurrent_guess", "conv": "cdecl", "args": [], "ret": 100}
+      }
+    },
+    {
+      "name": "field3c zero is in range",
+      "args": ["@owner", "@source", "@result"],
+      "memory": [{"addr": "@source", "offset": "0x3c", "u32": 0}],
+      "callees": {
+        "0x00447bae": {"name": "Calculate_guess", "conv": "stdcall", "args": ["ptr", "ptr"], "ret": [7, 7]},
+        "0x005f0bd0": {"name": "Query::GetOffset_guess", "conv": "thiscall", "args": ["u32"], "ret": 3},
+        "0x00576e80": {"name": "GetCurrent_guess", "conv": "cdecl", "args": [], "ret": 100}
+      }
+    },
+    {
+      "name": "field3c equals 0x1e",
+      "args": ["@owner", "@source", "@result"],
+      "memory": [{"addr": "@source", "offset": "0x3c", "u32": 30}]
+    },
+    {
+      "name": "field3c 0x1d in range",
+      "args": ["@owner", "@source", "@result"],
+      "memory": [{"addr": "@source", "offset": "0x3c", "u32": 29}]
+    },
+    {
+      "name": "out of range null result",
+      "args": ["@owner", "@source", 0],
+      "memory": [{"addr": "@source", "offset": "0x3c", "u32": 30}]
+    },
+    {
+      "name": "fits in window",
+      "args": ["@owner", "@source", "@result"],
+      "callees": {
+        "0x00447bae": {"name": "Calculate_guess", "conv": "stdcall", "args": ["ptr", "ptr"], "ret": [7, 7]},
+        "0x005f0bd0": {"name": "Query::GetOffset_guess", "conv": "thiscall", "args": ["u32"], "ret": 3},
+        "0x00576e80": {"name": "GetCurrent_guess", "conv": "cdecl", "args": [], "ret": 100}
+      }
+    },
+    {
+      "name": "does not fit",
+      "args": ["@owner", "@source", "@result"],
+      "callees": {
+        "0x00447bae": {"name": "Calculate_guess", "conv": "stdcall", "args": ["ptr", "ptr"], "ret": [80, 80]},
+        "0x005f0bd0": {"name": "Query::GetOffset_guess", "conv": "thiscall", "args": ["u32"], "ret": 30},
+        "0x00576e80": {"name": "GetCurrent_guess", "conv": "cdecl", "args": [], "ret": 100}
+      }
+    },
+    {
+      "name": "does not fit null result",
+      "args": ["@owner", "@source", 0],
+      "callees": {
+        "0x00447bae": {"name": "Calculate_guess", "conv": "stdcall", "args": ["ptr", "ptr"], "ret": [80, 80]},
+        "0x005f0bd0": {"name": "Query::GetOffset_guess", "conv": "thiscall", "args": ["u32"], "ret": 30},
+        "0x00576e80": {"name": "GetCurrent_guess", "conv": "cdecl", "args": [], "ret": 100}
+      }
+    },
+    {
+      "name": "exact fit boundary",
+      "args": ["@owner", "@source", "@result"],
+      "callees": {
+        "0x00447bae": {"name": "Calculate_guess", "conv": "stdcall", "args": ["ptr", "ptr"], "ret": [70, 70]},
+        "0x005f0bd0": {"name": "Query::GetOffset_guess", "conv": "thiscall", "args": ["u32"], "ret": 30},
+        "0x00576e80": {"name": "GetCurrent_guess", "conv": "cdecl", "args": [], "ret": 100}
+      }
+    },
+    {
+      "name": "second read changes the amount",
+      "args": ["@owner", "@source", "@result"],
+      "callees": {
+        "0x00447bae": {"name": "Calculate_guess", "conv": "stdcall", "args": ["ptr", "ptr"], "ret": [7, 90]},
+        "0x005f0bd0": {"name": "Query::GetOffset_guess", "conv": "thiscall", "args": ["u32"], "ret": 3},
+        "0x00576e80": {"name": "GetCurrent_guess", "conv": "cdecl", "args": [], "ret": 100}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4488162,
+    "count": 120,
+    "args": [
+      {"choices": ["@owner", 0]},
+      {"choices": ["@source", 0]},
+      {"choices": ["@result", 0]}
+    ],
+    "memory": [
+      {"addr": "@source", "offset": "0x3c", "type": "int", "range": [-2, 34]}
+    ]
+  }
+}

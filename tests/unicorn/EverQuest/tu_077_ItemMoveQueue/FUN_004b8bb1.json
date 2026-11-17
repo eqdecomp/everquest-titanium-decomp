@@ -1,0 +1,495 @@
+{
+  "function": "DrawNetGraph_guess",
+  "original": "0x004B8BB1",
+  "sources": [
+    "src/EverQuest/tu_077_ItemMoveQueue.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "start_guess",
+      "type": "u16"
+    },
+    {
+      "name": "row_guess",
+      "type": "u16"
+    },
+    {
+      "name": "span_guess",
+      "type": "u16"
+    },
+    {
+      "name": "count_guess",
+      "type": "u16"
+    },
+    {
+      "name": "fade_guess",
+      "type": "float"
+    },
+    {
+      "name": "delta_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "drawService": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@drawVtable"
+        }
+      ]
+    },
+    "drawVtable": {
+      "size": "0x74",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x70",
+          "u32": "@draw"
+        }
+      ]
+    },
+    "draw": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0099e364",
+      "u32": "@drawService"
+    },
+    {
+      "addr": "0x006486e0",
+      "from_image": "0x006486E0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00642014",
+      "from_image": "0x00642014",
+      "image_size": 4
+    },
+    {
+      "addr": "0x006410bc",
+      "f32": 1.0
+    },
+    {
+      "addr": "0x0063f4d0",
+      "from_image": "0x0063F4D0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00985c28",
+      "u32": 0
+    },
+    {
+      "addr": "0x00985c24",
+      "u16": 0
+    },
+    {
+      "addr": "0x00985c20",
+      "u32": 0
+    },
+    {
+      "addr": "0x0078e848",
+      "from_image": "0x0078E848",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x0060e98c": {
+      "name": "ftol_guess",
+      "conv": "cdecl",
+      "args": [],
+      "passthrough": true
+    },
+    "@draw": {
+      "name": "Draw_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:12",
+        "mem:12",
+        "u32"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "initial_state_and_loop",
+      "args": [
+        10,
+        6,
+        20,
+        3,
+        0.8,
+        1
+      ]
+    },
+    {
+      "name": "first_threshold_boundary",
+      "args": [
+        10,
+        6,
+        20,
+        0,
+        0.7,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00985c28",
+          "u32": 1
+        },
+        {
+          "addr": "0x00985c24",
+          "u16": 10
+        }
+      ]
+    },
+    {
+      "name": "second_threshold_boundary",
+      "args": [
+        10,
+        6,
+        20,
+        2,
+        0.4,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "0x00985c28",
+          "u32": 1
+        },
+        {
+          "addr": "0x00985c24",
+          "u16": 10
+        }
+      ]
+    },
+    {
+      "name": "below_color_thresholds",
+      "args": [
+        10,
+        6,
+        20,
+        1,
+        0.2,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "0x00985c28",
+          "u32": 1
+        },
+        {
+          "addr": "0x00985c24",
+          "u16": 10
+        }
+      ]
+    },
+    {
+      "name": "edge_and_middle_colors",
+      "args": [
+        10,
+        6,
+        20,
+        3,
+        0.8,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "0x006410bc",
+          "from_image": "0x006410BC",
+          "image_size": 4
+        },
+        {
+          "addr": "0x00985c28",
+          "u32": 1
+        },
+        {
+          "addr": "0x00985c24",
+          "u16": 10
+        },
+        {
+          "addr": "0x00985c20",
+          "u32": 0
+        },
+        {
+          "addr": "0x0078e848",
+          "from_image": "0x0078E848",
+          "image_size": 4
+        }
+      ]
+    },
+    {
+      "name": "below_start_and_zero_pending",
+      "args": [
+        10,
+        0,
+        10,
+        1,
+        0.5,
+        -1
+      ],
+      "memory": [
+        {
+          "addr": "0x00985c28",
+          "u32": 1
+        },
+        {
+          "addr": "0x00985c24",
+          "u16": 5
+        },
+        {
+          "addr": "0x00985c20",
+          "u32": 0
+        },
+        {
+          "addr": "0x0078e848",
+          "u32": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "name": "step_two",
+      "args": [
+        10,
+        5,
+        20,
+        1,
+        0.6,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "0x00985c28",
+          "u32": 1
+        },
+        {
+          "addr": "0x00985c24",
+          "u16": 10
+        },
+        {
+          "addr": "0x00985c20",
+          "u32": 100
+        }
+      ]
+    },
+    {
+      "name": "step_five",
+      "args": [
+        10,
+        5,
+        20,
+        1,
+        0.6,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "0x00985c28",
+          "u32": 1
+        },
+        {
+          "addr": "0x00985c24",
+          "u16": 10
+        },
+        {
+          "addr": "0x00985c20",
+          "u32": 1000
+        }
+      ]
+    },
+    {
+      "name": "position_below_start",
+      "args": [
+        10,
+        5,
+        20,
+        0,
+        0.6,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "0x00985c28",
+          "u32": 1
+        },
+        {
+          "addr": "0x00985c24",
+          "u16": 5
+        },
+        {
+          "addr": "0x00985c20",
+          "u32": 0
+        },
+        {
+          "addr": "0x0078e848",
+          "u32": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "name": "position_at_end",
+      "args": [
+        10,
+        5,
+        10,
+        1,
+        0.6,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "0x00985c28",
+          "u32": 1
+        },
+        {
+          "addr": "0x00985c24",
+          "u16": 19
+        },
+        {
+          "addr": "0x00985c20",
+          "u32": 0
+        },
+        {
+          "addr": "0x0078e848",
+          "from_image": "0x0078E848",
+          "image_size": 4
+        }
+      ]
+    },
+    {
+      "name": "position_past_end",
+      "args": [
+        10,
+        5,
+        10,
+        1,
+        0.6,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "0x00985c28",
+          "u32": 1
+        },
+        {
+          "addr": "0x00985c24",
+          "u16": 20
+        },
+        {
+          "addr": "0x00985c20",
+          "u32": 0
+        },
+        {
+          "addr": "0x0078e848",
+          "from_image": "0x0078E848",
+          "image_size": 4
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4950961,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          0,
+          40
+        ]
+      },
+      {
+        "range": [
+          0,
+          30
+        ]
+      },
+      {
+        "range": [
+          0,
+          40
+        ]
+      },
+      {
+        "range": [
+          0,
+          6
+        ]
+      },
+      {
+        "range": [
+          -0.25,
+          1.25
+        ]
+      },
+      {
+        "choices": [
+          -20,
+          -1,
+          0,
+          1,
+          99,
+          100,
+          101,
+          999,
+          1000,
+          1001,
+          3000
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x00985c28",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "0x00985c24",
+        "type": "u16",
+        "range": [
+          0,
+          40
+        ]
+      },
+      {
+        "addr": "0x00985c20",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          99,
+          100,
+          101,
+          999,
+          1000,
+          1001,
+          2000
+        ]
+      },
+      {
+        "addr": "0x0078e848",
+        "type": "u32",
+        "choices": [
+          1,
+          "0xffffffff"
+        ]
+      }
+    ]
+  },
+  "_survivors": "L1160: harness stack starts zeroed, so deleting this color word clear leaves the untouched channels zero; L1182: harness stack starts zeroed, and first.z is never changed before it is passed to Draw_guess"
+}

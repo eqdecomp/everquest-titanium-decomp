@@ -1,0 +1,679 @@
+{
+  "function": "EQPlayer_guess::MountEQPlayer_guess",
+  "original": "0x00483958",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@eqplayer",
+  "args": [
+    {
+      "name": "mount",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "eqplayer": {
+      "size": "0x324",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@eqactor"
+        },
+        {
+          "offset": "0x238",
+          "f32": 1.0
+        },
+        {
+          "offset": "0x23c",
+          "f32": 1.0
+        }
+      ]
+    },
+    "mount": {
+      "size": "0x324",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@mountactor"
+        },
+        {
+          "offset": "0x23c",
+          "f32": 1.0
+        }
+      ]
+    },
+    "eqactor": {
+      "size": "0x1b4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x1b0",
+          "f32": 5.0
+        }
+      ]
+    },
+    "mountactor": {
+      "size": "0x1b4",
+      "fill": "zero"
+    },
+    "other": {
+      "size": "0x324",
+      "fill": "zero"
+    },
+    "display": {
+      "size": "0x12a",
+      "fill": "zero"
+    },
+    "pcclient": {
+      "size": "0xc284",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d24",
+      "u32": "@display"
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": "@eqplayer"
+    },
+    {
+      "addr": "0x00905cf8",
+      "u32": 0
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@pcclient"
+    },
+    {
+      "addr": "0x00640e24",
+      "from_image": "0x00640E24",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00648168",
+      "from_image": "0x00648168",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x00481dc7": {
+      "name": "Dismount_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0047bfd0": {
+      "name": "IsHorseRace_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1,
+      "ret_edx": "@eqplayer"
+    },
+    "0x0047a387": {
+      "name": "FUN_0047a387",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x0048bb83": {
+      "name": "FUN_0048bb83",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x00481d5d": {
+      "name": "SetAvatarHeight_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ]
+    },
+    "0x0047e668": {
+      "name": "AttachPlayerToPlayerDag_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x0047a64d": {
+      "name": "SetLevitate_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x00494593": {
+      "name": "FUN_00494593",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x0048a945": {
+      "name": "FUN_0048a945",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004899cc": {
+      "name": "FUN_004899cc",
+      "conv": "thiscall",
+      "args": [],
+      "ret_float": 1.25
+    },
+    "0x00480409": {
+      "name": "UpdatePlayerVisibility_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0048a7f9": {
+      "name": "FUN_0048a7f9",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004649b1": {
+      "name": "token_string_to_client_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "int",
+        "int"
+      ]
+    },
+    "0x0040e934": {
+      "name": "FindBuffWithEffect_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "0x12345678"
+    },
+    "0x00411f2f": {
+      "name": "RemovePCAffect_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "null mount",
+      "args": [
+        0
+      ]
+    },
+    {
+      "name": "mount without actor",
+      "args": [
+        "@mount"
+      ],
+      "memory": [
+        {
+          "addr": "@mount",
+          "offset": "0x1a8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "player without actor",
+      "args": [
+        "@mount"
+      ],
+      "memory": [
+        {
+          "addr": "@eqplayer",
+          "offset": "0x1a8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "already attached",
+      "args": [
+        "@mount"
+      ],
+      "memory": [
+        {
+          "addr": "@eqactor",
+          "offset": "0x15c",
+          "u32": "@mount"
+        }
+      ]
+    },
+    {
+      "name": "replace old attachment",
+      "args": [
+        "@mount"
+      ],
+      "memory": [
+        {
+          "addr": "@eqactor",
+          "offset": "0x15c",
+          "u32": "@other"
+        }
+      ]
+    },
+    {
+      "name": "display suppresses first state write",
+      "args": [
+        "@mount"
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x128",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x0047bfd0": {
+          "name": "FUN_0047bfd0",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        },
+        "0x0048bb83": {
+          "name": "FUN_0048bb83",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "controlled distance rejected",
+      "args": [
+        "@mount"
+      ],
+      "memory": [
+        {
+          "addr": "@eqactor",
+          "offset": "0x1b0",
+          "f32": 0.0
+        }
+      ],
+      "callees": {
+        "0x0048bb83": {
+          "name": "FUN_0048bb83",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "controlled distance accepted",
+      "args": [
+        "@mount"
+      ],
+      "memory": [
+        {
+          "addr": "@eqactor",
+          "offset": "0x1b0",
+          "f32": 5.0
+        }
+      ],
+      "callees": {
+        "0x0048bb83": {
+          "name": "FUN_0048bb83",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "controlled distance boundary",
+      "args": [
+        "@mount"
+      ],
+      "memory": [
+        {
+          "addr": "@eqactor",
+          "offset": "0x1b0",
+          "f32": 3.0
+        },
+        {
+          "addr": "@eqplayer",
+          "offset": "0x238",
+          "f32": 1.0
+        },
+        {
+          "addr": "@eqplayer",
+          "offset": "0x2f8",
+          "f32": 0.0
+        }
+      ],
+      "callees": {
+        "0x0048bb83": {
+          "name": "FUN_0048bb83",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "uncontrolled player",
+      "args": [
+        "@mount"
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@other"
+        }
+      ]
+    },
+    {
+      "name": "attachment rejected while uncontrolled",
+      "args": [
+        "@mount"
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@other"
+        }
+      ],
+      "callees": {
+        "0x0047e668": {
+          "name": "FUN_0047e668",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "attachment rejected while controlled",
+      "args": [
+        "@mount"
+      ],
+      "callees": {
+        "0x0048bb83": {
+          "name": "FUN_0048bb83",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0047e668": {
+          "name": "FUN_0047e668",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "mount kind changes between checks",
+      "args": [
+        "@mount"
+      ],
+      "memory": [
+        {
+          "addr": "@mountactor",
+          "offset": "0x158",
+          "u32": 1
+        },
+        {
+          "addr": "@eqplayer",
+          "offset": "0x28c",
+          "u32": 2
+        }
+      ],
+      "callees": {
+        "0x0047bfd0": {
+          "name": "FUN_0047bfd0",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            0
+          ]
+        },
+        "0x0048bb83": {
+          "name": "FUN_0048bb83",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "mount kind active and copy pose",
+      "args": [
+        "@mount"
+      ],
+      "memory": [
+        {
+          "addr": "@mountactor",
+          "offset": "0x158",
+          "u32": 1
+        },
+        {
+          "addr": "@eqplayer",
+          "offset": "0x28c",
+          "u32": 2
+        }
+      ],
+      "callees": {
+        "0x0047bfd0": {
+          "name": "FUN_0047bfd0",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1,
+          "ret_edx": "@eqplayer"
+        },
+        "0x0047a387": {
+          "name": "FUN_0047a387",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x0048bb83": {
+          "name": "FUN_0048bb83",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "success without copy or levitate",
+      "args": [
+        "@mount"
+      ],
+      "memory": [
+        {
+          "addr": "@mountactor",
+          "offset": "0x158",
+          "u32": 0
+        },
+        {
+          "addr": "@eqplayer",
+          "offset": "0x28c",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0047bfd0": {
+          "name": "FUN_0047bfd0",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        },
+        "0x0048bb83": {
+          "name": "FUN_0048bb83",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4733272,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@mount"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@eqplayer",
+        "offset": "0x1a8",
+        "type": "ptr",
+        "choices": [
+          "@eqactor",
+          0
+        ]
+      },
+      {
+        "addr": "@mount",
+        "offset": "0x1a8",
+        "type": "ptr",
+        "choices": [
+          "@mountactor",
+          0
+        ]
+      },
+      {
+        "addr": "@eqactor",
+        "offset": "0x15c",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@mount",
+          "@other"
+        ]
+      },
+      {
+        "addr": "@eqactor",
+        "offset": "0x158",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@eqactor",
+        "offset": "0x1b0",
+        "type": "float",
+        "range": [
+          -2.0,
+          10.0
+        ]
+      },
+      {
+        "addr": "@eqplayer",
+        "offset": "0x238",
+        "type": "float",
+        "range": [
+          -1.0,
+          5.0
+        ]
+      },
+      {
+        "addr": "@eqplayer",
+        "offset": "0x2f8",
+        "type": "float",
+        "range": [
+          -4.0,
+          8.0
+        ]
+      },
+      {
+        "addr": "@eqplayer",
+        "offset": "0x28c",
+        "type": "int",
+        "choices": [
+          0,
+          2
+        ]
+      },
+      {
+        "addr": "@mountactor",
+        "offset": "0x158",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@display",
+        "offset": "0x128",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00905ce4",
+        "type": "ptr",
+        "choices": [
+          "@eqplayer",
+          "@other",
+          0
+        ]
+      },
+      {
+        "addr": "0x00905d00",
+        "type": "ptr",
+        "choices": [
+          "@pcclient",
+          0
+        ]
+      }
+    ]
+  }
+}

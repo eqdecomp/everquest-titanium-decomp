@@ -1,0 +1,133 @@
+{
+  "function": "CTargetWndView_guess::Draw_guess",
+  "original": "0x0055b98c",
+  "sources": [
+    "src/EverQuest/tu_220_TargetWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "owner": {
+      "size": "0x170",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@vtbl"},
+        {"offset": "0x164", "u32": "@holder"}
+      ]
+    },
+    "holder": {
+      "size": "0x68",
+      "fill": "random",
+      "init": [
+        {"offset": "0x64", "u32": "@timer"}
+      ]
+    },
+    "timer": {
+      "size": "0x30",
+      "fill": "random"
+    },
+    "vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xe4", "u32": "@fn_slot57"}
+      ]
+    },
+    "pt": {
+      "size": "0x8",
+      "fill": "zero"
+    },
+    "fn_slot57": {
+      "size": "0x1"
+    }
+  },
+  "memory": [
+    {"addr": "0x00905d04", "u32": 1}
+  ],
+  "callees": {
+    "@fn_slot57": {
+      "name": "Slot57_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "@pt"
+    },
+    "0x004d9139": {
+      "name": "FUN_004d9139",
+      "conv": "thiscall",
+      "args": ["ignore", "mem:8"],
+      "passthrough": true
+    },
+    "0x0059d6c0": {
+      "name": "FUN_0059d6c0",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 7
+    },
+    "0x005b1910": {
+      "name": "FUN_005b1910",
+      "conv": "thiscall",
+      "args": ["mem:16", "i32", "i32", "u32"]
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [],
+      "memory": [
+        {"addr": "@timer", "offset": "0x24", "u32": 3},
+        {"addr": "@timer", "offset": "0x28", "u32": 4},
+        {"addr": "@owner", "offset": "0x16c", "u32": 5},
+        {"addr": "@pt", "offset": "0", "u32": 1},
+        {"addr": "@pt", "offset": "4", "u32": 2}
+      ]
+    },
+    {
+      "name": "global_zero",
+      "args": [],
+      "memory": [
+        {"addr": "0x00905d04", "u32": 0}
+      ]
+    },
+    {
+      "name": "no_holder",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x164", "u32": 0}
+      ]
+    },
+    {
+      "name": "no_timer",
+      "args": [],
+      "memory": [
+        {"addr": "@holder", "offset": "0x64", "u32": 0}
+      ]
+    },
+    {
+      "name": "negative_point",
+      "args": [],
+      "memory": [
+        {"addr": "@pt", "offset": "0", "u32": 4294967290},
+        {"addr": "@pt", "offset": "4", "u32": 4294967280},
+        {"addr": "@timer", "offset": "0x24", "u32": 4294967295}
+      ]
+    }
+  ],
+  "_survivors": "L267: rect.fields[3] zeroing is overwritten by Combine before any read (index and value mutants unobservable); L268: rect.fields[2] zeroing overwritten by Combine (unobservable); L269: rect.fields[1] zeroing: deleting it is unobservable because the stack starts zeroed (FIXTURES item 6), value/index mutants NOT caught by the mem:16 check on Draw's rect argument (unresolved); L270: rect.fields[0] zeroing, same as L269 (unresolved)",
+  "fuzz": {
+    "seed": 5618060,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "0x00905d04", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "@owner", "offset": "0x164", "type": "ptr", "choices": ["@holder", "0x0"]},
+      {"addr": "@holder", "offset": "0x64", "type": "ptr", "choices": ["@timer", "0x0"]},
+      {"addr": "@timer", "offset": "0x24", "type": "int", "range": [-20, 40]},
+      {"addr": "@timer", "offset": "0x28", "type": "int", "range": [-20, 40]},
+      {"addr": "@owner", "offset": "0x16c", "type": "int", "range": [-20, 40]},
+      {"addr": "@pt", "offset": "0", "type": "int", "range": [-100, 100]},
+      {"addr": "@pt", "offset": "4", "type": "int", "range": [-100, 100]}
+    ]
+  }
+}

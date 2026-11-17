@@ -1,0 +1,183 @@
+{
+  "function": "Work_guess::Copy_guess",
+  "original": "0x0052f8e1",
+  "sources": [
+    "src/EverQuest/tu_185_MailWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@work+0x15c",
+  "args": [
+    {"name": "first_guess", "type": "int"},
+    {"name": "flags_guess", "type": "int"},
+    {"name": "third_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "work": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [{"offset": "0x178", "u32": "@listwnd"}]
+    },
+    "listwnd": {"size": "0x200", "fill": "random"},
+    "service": {"size": "0x10", "fill": "random"},
+    "collection": {"size": "0x40", "fill": "random"},
+    "newbuf": {"size": "0x100", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00988df0", "u32": "@service"},
+    {"addr": "0x007a0000", "size": 512, "fill": "zero"},
+    {"addr": "0x007a0000", "u32": "0x007a0100"},
+    {"addr": "0x007a0100", "hex": "050000000a0000000c00000007000000"}
+  ],
+  "callees": {
+    "0x0047c3af": {
+      "name": "ArrayClass2_ctor",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x0059bb50": {
+      "name": "ListSelect_GetSelected",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "0200000000000000030000000200000000007a00"}]
+    },
+    "0x00598580": {
+      "name": "CListWnd_ClearAllSel",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0052e770": {
+      "name": "ClearMessageBody_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x0060e985": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": "@newbuf"
+    },
+    "0x00597ed0": {
+      "name": "CListWnd_GetItemData",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": [17, 34, 51, 68, 85, 102, 119, 136]
+    },
+    "0x00495250": {
+      "name": "Service_Get",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@collection"
+    },
+    "0x00428e9a": {
+      "name": "Collection_Assign",
+      "conv": "thiscall",
+      "args": ["int", "ptr"],
+      "ret": 0
+    },
+    "0x0060d682": {
+      "name": "operator_delete_array",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x00406e7e": {
+      "name": "ArrayClass2_dtor",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [1, 1, 1]
+    },
+    {
+      "name": "flags_zero",
+      "args": [1, 0, 1]
+    },
+    {
+      "name": "flags_two",
+      "args": [1, 2, 1]
+    },
+    {
+      "name": "flags_four",
+      "args": [1, 4, 1]
+    },
+    {
+      "name": "no_list",
+      "args": [1, 1, 1],
+      "memory": [{"addr": "@work", "offset": "0x178", "u32": 0}]
+    },
+    {
+      "name": "count_negative",
+      "args": [1, 1, 1],
+      "callees": {
+        "0x0059bb50": {
+          "name": "ListSelect_GetSelected",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": 0,
+          "writes": [{"arg": 0, "offset": 0, "hex": "ffffffff00000000030000000200000000007a00"}]
+        }
+      }
+    },
+    {
+      "name": "count_zero",
+      "args": [1, 1, 1],
+      "callees": {
+        "0x0059bb50": {
+          "name": "ListSelect_GetSelected",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": 0,
+          "writes": [{"arg": 0, "offset": 0, "hex": "0000000000000000030000000200000000007a00"}]
+        }
+      }
+    },
+    {
+      "name": "count_three",
+      "args": [1, 1, 1],
+      "callees": {
+        "0x0059bb50": {
+          "name": "ListSelect_GetSelected",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": 0,
+          "writes": [{"arg": 0, "offset": 0, "hex": "0300000000000000030000000200000000007a00"}]
+        }
+      }
+    },
+    {
+      "name": "no_service",
+      "args": [1, 1, 1],
+      "memory": [{"addr": "0x00988df0", "u32": 0}]
+    },
+    {
+      "name": "collection_null",
+      "args": [1, 1, 1],
+      "callees": {
+        "0x00495250": {
+          "name": "Service_Get",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5437665,
+    "count": 100,
+    "args": [
+      {},
+      {},
+      {}
+    ],
+    "memory": []
+  }
+}

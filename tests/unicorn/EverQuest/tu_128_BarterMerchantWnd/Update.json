@@ -1,0 +1,74 @@
+{
+  "function": "CBarterMerchantWnd_guess::Update_guess",
+  "original": "0x004ddb80",
+  "sources": ["src/EverQuest/tu_128_BarterMerchantWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@controller",
+  "args": [{"name": "index", "type": "int"}],
+  "ret": "void",
+  "objects": {
+    "controller": {"size": "0x1a0", "fill": "random"},
+    "list": {"size": "0x200", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "vtbl": {"size": "0x140", "fill": "zero", "init": [{"offset": "0x130", "u32": "@fn_slot76"}]},
+    "fn_slot76": {"size": "0x10", "fill": "zero"},
+    "blocks": {"size": "8", "fill": "zero", "init": [{"offset": "0", "u32": "@groups0"}, {"offset": "4", "u32": "@groups1"}]},
+    "groups0": {"size": "0xe00", "fill": "zero"},
+    "groups1": {"size": "0xe00", "fill": "zero"},
+    "rowA": {"size": "0x4c", "fill": "zero"},
+    "rowB": {"size": "0x4c", "fill": "zero"},
+    "txt": {"size": "0x20", "fill": "zero"},
+    "textsrc": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@controller", "offset": "0x160", "u32": "@list"},
+    {"addr": "@controller", "offset": "0x178", "u32": 40},
+    {"addr": "@controller", "offset": "0x180", "u32": 31},
+    {"addr": "@controller", "offset": "0x184", "u32": 5},
+    {"addr": "@controller", "offset": "0x188", "u32": "@blocks"},
+    {"addr": "@groups0", "offset": "0x15c", "u32": 2},
+    {"addr": "@groups0", "offset": "0x170", "u32": 7},
+    {"addr": "@groups1", "offset": "0x7c", "u32": 1},
+    {"addr": "@groups1", "offset": "0x90", "u32": 9},
+    {"addr": "@rowA", "offset": "0x4", "u32": 4660},
+    {"addr": "@rowA", "offset": "0x8", "u32": 119},
+    {"addr": "@rowA", "offset": "0xc", "cstr": "Sword"},
+    {"addr": "@rowB", "offset": "0x4", "u32": 250},
+    {"addr": "@rowB", "offset": "0x8", "u32": 3},
+    {"addr": "@rowB", "offset": "0xc", "cstr": "Shield"},
+    {"addr": "@txt", "offset": "0", "cstr": "Bronze Coin"},
+    {"addr": "0x00991910", "u32": "@textsrc"}
+  ],
+  "callees": {
+    "@fn_slot76": {"name": "ListVt_Slot76", "conv": "thiscall", "args": []},
+    "0x00409340": {"name": "BarterRows_GetEntry", "conv": "thiscall", "args": ["int"], "ret": "@rowA"},
+    "0x00571e00": {"name": "CXStr_ctor", "conv": "thiscall", "args": ["u32"]},
+    "0x0059b9d0": {"name": "CListWnd_AddString", "conv": "thiscall", "args": ["ignore", "u32", "u32", "u32"], "ret": 0},
+    "0x00571d00": {"name": "CXStr_FreeRep", "conv": "thiscall", "args": ["ignore"]},
+    "0x004ffbe9": {"name": "TextSource_Get", "conv": "thiscall", "args": ["int"], "ret": "@txt"},
+    "0x0059b2e0": {"name": "CListWnd_SetItemText_char", "conv": "thiscall", "args": ["int", "int", "ptr"]},
+    "0x0059b360": {"name": "CListWnd_SetItemText", "conv": "thiscall", "args": ["int", "int", "ignore"]},
+    "0x006220e9": {"name": "_itoa", "conv": "cdecl", "args": ["int", "ptr", "int"], "ret": "0x0099db00"}
+  },
+  "rewrite_aliases": {"__itoa": "0x006220e9"},
+  "cases": [
+    {"name": "typical_two_rows", "args": [3],
+     "callees": {"0x00409340": {"name": "BarterRows_GetEntry", "conv": "thiscall", "args": ["int"], "ret": ["@rowA", "@rowB"]},
+                 "0x0059b9d0": {"name": "CListWnd_AddString", "conv": "thiscall", "args": ["ignore", "u32", "u32", "u32"], "ret": [0, 1]}}},
+    {"name": "one_row", "args": [33]},
+    {"name": "empty_group", "args": [0]},
+    {"name": "negative_index", "args": [-1]},
+    {"name": "index_at_count", "args": [40]},
+    {"name": "no_list", "args": [3], "memory": [{"addr": "@controller", "offset": "0x160", "u32": 0}]},
+    {"name": "no_table", "args": [3], "memory": [{"addr": "@controller", "offset": "0x178", "u32": 0}]}
+  ],
+  "fuzz": {
+    "seed": 5102464,
+    "count": 100,
+    "args": [{"choices": [-1, 0, 1, 3, 33, 39, 40, 64]}],
+    "memory": [
+      {"addr": "@groups0", "offset": "0x15c", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@groups1", "offset": "0x7c", "type": "int", "choices": [0, 1]},
+      {"addr": "@controller", "offset": "0x178", "type": "int", "choices": [0, 40, 64]}
+    ]
+  }
+}

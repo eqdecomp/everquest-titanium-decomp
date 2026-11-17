@@ -1,0 +1,534 @@
+{
+  "function": "modinv_guess",
+  "original": "0x004cad26",
+  "sources": [
+    "src/EverQuest/tu_095_vlong.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "result_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "a_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "m_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "result": {
+      "size": "0x8",
+      "fill": "zero"
+    },
+    "heap_arena": {
+      "size": "0x10000",
+      "fill": "zero"
+    },
+    "a": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@aval"
+        },
+        {
+          "offset": "0x4",
+          "u32": 0
+        }
+      ]
+    },
+    "m": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@mval"
+        },
+        {
+          "offset": "0x4",
+          "u32": 0
+        }
+      ]
+    },
+    "aval": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@adigits"
+        },
+        {
+          "offset": "0x4",
+          "u32": 1
+        },
+        {
+          "offset": "0x8",
+          "u32": 1
+        },
+        {
+          "offset": "0xc",
+          "u32": 1
+        }
+      ]
+    },
+    "mval": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@mdigits"
+        },
+        {
+          "offset": "0x4",
+          "u32": 1
+        },
+        {
+          "offset": "0x8",
+          "u32": 1
+        },
+        {
+          "offset": "0xc",
+          "u32": 1
+        }
+      ]
+    },
+    "adigits": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "mdigits": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004ca70f": {
+      "name": "Vlong_ctor_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "??0Vlong_guess@@QAE@HH@Z": {
+      "name": "Vlong_ctor_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x00447428": {
+      "name": "VlongNotEqual_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x004ca75f": {
+      "name": "Vlong_dtor_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x004cabcc": {
+      "name": "Divide_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "ptr",
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x004ca9c3": {
+      "name": "Vlong_assign_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "0x004ca781": {
+      "name": "vlong_mul_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "ptr",
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x004cab67": {
+      "name": "vlong_sub_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "ptr",
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x0044744e": {
+      "name": "VlongLess_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x004caa20": {
+      "name": "Vlong_add_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "passthrough": true
+    },
+    "0x0060d0d5": {
+      "name": "operator_delete",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x0060e07d": {
+      "name": "free",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x004b8f50": {
+      "name": "IndexedValues_before_free_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x004b8f2d": {
+      "name": "IndexedValues_release_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x004ca954": {
+      "name": "Vlong_compare_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "0x004ca470": {
+      "name": "IndexedValues_compare_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x004ca1e6": {
+      "name": "IndexedValues_get_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "passthrough": true
+    },
+    "0x004ca23f": {
+      "name": "IndexedValues_set_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x004ca592": {
+      "name": "IndexedValues_add_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x004ca5fc": {
+      "name": "IndexedValues_subtract_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x004ca646": {
+      "name": "IndexedValues_reset_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x004ca658": {
+      "name": "IndexedValues_pair_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x004ca67b": {
+      "name": "IndexedValues_copy_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x004ca6d8": {
+      "name": "Vlong_detach_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x004ca749": {
+      "name": "Vlong_copy_ctor_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x004ca2aa": {
+      "name": "IndexedValues_fast_mul_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr",
+        "u32"
+      ],
+      "passthrough": true
+    },
+    "kernel32.dll!GetProcessHeap": {
+      "name": "GetProcessHeap",
+      "conv": "stdcall",
+      "args": [],
+      "ret": "0x1000"
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": [
+        "@heap_arena+0x0",
+        "@heap_arena+0x100",
+        "@heap_arena+0x200",
+        "@heap_arena+0x300",
+        "@heap_arena+0x400",
+        "@heap_arena+0x500",
+        "@heap_arena+0x600",
+        "@heap_arena+0x700",
+        "@heap_arena+0x800",
+        "@heap_arena+0x900",
+        "@heap_arena+0xa00",
+        "@heap_arena+0xb00",
+        "@heap_arena+0xc00",
+        "@heap_arena+0xd00",
+        "@heap_arena+0xe00",
+        "@heap_arena+0xf00",
+        "@heap_arena+0x1000",
+        "@heap_arena+0x1100",
+        "@heap_arena+0x1200",
+        "@heap_arena+0x1300",
+        "@heap_arena+0x1400",
+        "@heap_arena+0x1500",
+        "@heap_arena+0x1600",
+        "@heap_arena+0x1700",
+        "@heap_arena+0x1800",
+        "@heap_arena+0x1900",
+        "@heap_arena+0x1a00",
+        "@heap_arena+0x1b00",
+        "@heap_arena+0x1c00",
+        "@heap_arena+0x1d00",
+        "@heap_arena+0x1e00",
+        "@heap_arena+0x1f00",
+        "@heap_arena+0x2000",
+        "@heap_arena+0x2100",
+        "@heap_arena+0x2200",
+        "@heap_arena+0x2300",
+        "@heap_arena+0x2400",
+        "@heap_arena+0x2500",
+        "@heap_arena+0x2600",
+        "@heap_arena+0x2700",
+        "@heap_arena+0x2800",
+        "@heap_arena+0x2900",
+        "@heap_arena+0x2a00",
+        "@heap_arena+0x2b00",
+        "@heap_arena+0x2c00",
+        "@heap_arena+0x2d00",
+        "@heap_arena+0x2e00",
+        "@heap_arena+0x2f00",
+        "@heap_arena+0x3000",
+        "@heap_arena+0x3100",
+        "@heap_arena+0x3200",
+        "@heap_arena+0x3300",
+        "@heap_arena+0x3400",
+        "@heap_arena+0x3500",
+        "@heap_arena+0x3600",
+        "@heap_arena+0x3700",
+        "@heap_arena+0x3800",
+        "@heap_arena+0x3900",
+        "@heap_arena+0x3a00",
+        "@heap_arena+0x3b00",
+        "@heap_arena+0x3c00",
+        "@heap_arena+0x3d00",
+        "@heap_arena+0x3e00",
+        "@heap_arena+0x3f00"
+      ]
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "typical-negative-adjustment",
+      "args": [
+        "@result",
+        "@a",
+        "@m"
+      ],
+      "memory": [
+        {
+          "addr": "@adigits",
+          "u32": 3
+        },
+        {
+          "addr": "@mdigits",
+          "u32": 7
+        }
+      ]
+    },
+    {
+      "name": "zero-a-skips-loop",
+      "args": [
+        "@result",
+        "@a",
+        "@m"
+      ],
+      "memory": [
+        {
+          "addr": "@adigits",
+          "u32": 0
+        },
+        {
+          "addr": "@aval",
+          "offset": "0x8",
+          "u32": 0
+        },
+        {
+          "addr": "@mdigits",
+          "u32": 7
+        }
+      ]
+    },
+    {
+      "name": "positive-result-no-adjustment",
+      "args": [
+        "@result",
+        "@a",
+        "@m"
+      ],
+      "memory": [
+        {
+          "addr": "@adigits",
+          "u32": 1
+        },
+        {
+          "addr": "@mdigits",
+          "u32": 8
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5025062,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@result"
+        ]
+      },
+      {
+        "choices": [
+          "@a"
+        ]
+      },
+      {
+        "choices": [
+          "@m"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@adigits",
+        "type": "u32",
+        "range": [
+          1,
+          7
+        ]
+      },
+      {
+        "addr": "@mdigits",
+        "type": "u32",
+        "range": [
+          1,
+          12
+        ]
+      }
+    ]
+  },
+  "rewrite_aliases": {
+    "??0Vlong_guess@@QAE@HH@Z": "0x004ca70f"
+  }
+}

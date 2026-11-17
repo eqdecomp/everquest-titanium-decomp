@@ -1,0 +1,237 @@
+{
+  "function": "SlotOwner_guess::Process_guess",
+  "original": "0x004c8fdb",
+  "sources": [
+    "src/EverQuest/tu_090_TargetIndicator.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@slotowner",
+  "args": [
+    {
+      "name": "arg",
+      "type": "u32"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "slotowner": {
+      "size": "0x40",
+      "fill": "random",
+      "init": []
+    },
+    "player": {
+      "size": "0x1b0",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@actorinfo"
+        }
+      ]
+    },
+    "actorinfo": {
+      "size": "0x1a0",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@slotowner",
+      "offset": "0x1",
+      "u8": 1
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": "@player"
+    },
+    {
+      "addr": "0x009859ec",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x004c8c95": {
+      "name": "FUN_004c8c95",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004c8537": {
+      "name": "UpdateTargetRing_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ]
+    },
+    "0x004b424f": {
+      "name": "FUN_004b424f",
+      "conv": "stdcall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x004c846b": {
+      "name": "UpdateMarker_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "int",
+        "ptr"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        1
+      ]
+    },
+    {
+      "name": "zeros",
+      "args": [
+        0
+      ]
+    },
+    {
+      "name": "global_flag_set",
+      "args": [
+        7
+      ],
+      "memory": [
+        {
+          "addr": "0x009859ec",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "global_flag_set_mode_nonzero",
+      "args": [
+        7
+      ],
+      "memory": [
+        {
+          "addr": "0x009859ec",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x004b424f": {
+          "name": "FUN_004b424f",
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 4660
+        }
+      }
+    },
+    {
+      "name": "flag01_clear_runs_init",
+      "args": [
+        3
+      ],
+      "memory": [
+        {
+          "addr": "@slotowner",
+          "offset": "0x1",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "no_actor_info",
+      "args": [
+        3
+      ],
+      "memory": [
+        {
+          "addr": "@player",
+          "offset": "0x1a8",
+          "u32": 0
+        },
+        {
+          "addr": "0x009859ec",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "slots_all_null_use_fallback",
+      "args": [
+        5
+      ],
+      "memory": [
+        {
+          "addr": "@actorinfo",
+          "offset": "0x180",
+          "u32": 0
+        },
+        {
+          "addr": "@actorinfo",
+          "offset": "0x184",
+          "u32": 0
+        },
+        {
+          "addr": "@actorinfo",
+          "offset": "0x188",
+          "u32": 0
+        },
+        {
+          "addr": "@actorinfo",
+          "offset": "0x18c",
+          "u32": 0
+        },
+        {
+          "addr": "@actorinfo",
+          "offset": "0x190",
+          "u32": 0
+        },
+        {
+          "addr": "@actorinfo",
+          "offset": "0x194",
+          "u32": 0
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5017563,
+    "count": 100,
+    "args": [
+      {}
+    ],
+    "memory": [
+      {
+        "addr": "@slotowner",
+        "offset": "0x1",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009859ec",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@actorinfo",
+        "offset": "0x180",
+        "type": "u32",
+        "count": 7,
+        "stride": 4,
+        "choices": [
+          0,
+          4096,
+          8192
+        ]
+      }
+    ]
+  }
+}

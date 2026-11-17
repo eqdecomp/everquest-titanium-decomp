@@ -1,0 +1,150 @@
+{
+  "function": "CFriendsWnd_guess::CalcLinesFillRect",
+  "original": "0x005046fe",
+  "sources": [
+    "src/EverQuest/tu_159_FriendsWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@gaugewnd",
+  "args": [
+    {
+      "name": "destination_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "source_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "amount_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "gaugewnd": {
+      "size": "0x188",
+      "fill": "random"
+    },
+    "destination": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "source": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00654998",
+      "from_image": "0x00654998",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x004d911a": {
+      "name": "CXRectView_guess::CopyTail_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x0060e98c": {
+      "name": "FUN_0060e98c",
+      "conv": "cdecl",
+      "args": [],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "range disabled copy tail",
+      "args": [
+        "@destination",
+        "@source",
+        1
+      ],
+      "memory": [
+        {"addr": "@gaugewnd", "offset": "0x11c", "u32": 0},
+        {"addr": "@source", "offset": "0x0", "u32": 13},
+        {"addr": "@source", "offset": "0x4", "u32": 17},
+        {"addr": "@source", "offset": "0x8", "u32": 53},
+        {"addr": "@source", "offset": "0xc", "u32": 71}
+      ]
+    },
+    {
+      "name": "positive range first remainder",
+      "args": [
+        "@destination",
+        "@source",
+        1
+      ],
+      "memory": [
+        {"addr": "@gaugewnd", "offset": "0x11c", "u32": 1},
+        {"addr": "@source", "offset": "0x0", "u32": 10},
+        {"addr": "@source", "offset": "0x4", "u32": 20},
+        {"addr": "@source", "offset": "0x8", "u32": 110},
+        {"addr": "@source", "offset": "0xc", "u32": 60}
+      ]
+    },
+    {
+      "name": "positive range modulo boundary",
+      "args": [
+        "@destination",
+        "@source",
+        201
+      ],
+      "memory": [
+        {"addr": "@gaugewnd", "offset": "0x11c", "u32": 2},
+        {"addr": "@source", "offset": "0x0", "u32": -120},
+        {"addr": "@source", "offset": "0x4", "u32": 50},
+        {"addr": "@source", "offset": "0x8", "u32": 180},
+        {"addr": "@source", "offset": "0xc", "u32": -70}
+      ]
+    },
+    {
+      "name": "negative amount remainder",
+      "args": [
+        "@destination",
+        "@source",
+        -199
+      ],
+      "memory": [
+        {"addr": "@gaugewnd", "offset": "0x11c", "u32": 5},
+        {"addr": "@source", "offset": "0x0", "u32": 1},
+        {"addr": "@source", "offset": "0x8", "u32": 501}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5261054,
+    "count": 120,
+    "args": [
+      {
+        "choices": [
+          "@destination"
+        ]
+      },
+      {
+        "choices": [
+          "@source"
+        ]
+      },
+      {
+        "range": [
+          -1000,
+          1000
+        ]
+      }
+    ],
+    "memory": [
+      {"addr": "@gaugewnd", "offset": "0x11c", "type": "int", "choices": [-1, 0, 1, 5]},
+      {"addr": "@source", "offset": "0x0", "type": "int", "choices": [-300, 0, 300]},
+      {"addr": "@source", "offset": "0x4", "type": "int", "choices": [-200, 0, 200]},
+      {"addr": "@source", "offset": "0x8", "type": "int", "choices": [-100, 0, 500]},
+      {"addr": "@source", "offset": "0xc", "type": "int", "choices": [-50, 0, 50]}
+    ]
+  }
+}

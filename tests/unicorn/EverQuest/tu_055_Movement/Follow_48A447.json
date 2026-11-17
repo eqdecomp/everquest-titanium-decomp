@@ -1,0 +1,187 @@
+{
+  "function": "Player_48BA76_guess::Follow_48A447_guess",
+  "original": "0x0048a447",
+  "sources": ["src/EverQuest/tu_055_Movement.cpp"],
+  "conv": "thiscall",
+  "this": "@player",
+  "args": [
+    {"name": "position_guess", "type": "ptr"},
+    {"name": "result_guess", "type": "ptr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "player": {
+      "size": "0x2ec",
+      "fill": "random",
+      "init": [{"offset": "0x1a8", "u32": "@data"}]
+    },
+    "data": {
+      "size": "0x164",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@actor"}]
+    },
+    "actor": {
+      "size": "0x64",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@actor_vtbl"}]
+    },
+    "actor_vtbl": {
+      "size": "0x64",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x54", "u32": "@fn_current"},
+        {"offset": "0x60", "u32": "@fn_speed"}
+      ]
+    },
+    "current": {"size": "0xc", "fill": "random"},
+    "position": {"size": "0xc", "fill": "random"},
+    "result": {"size": "0xc", "fill": "random"},
+    "fn_current": {"size": "0x4"},
+    "fn_speed": {"size": "0x4"},
+    "fn_sin": {"size": "0x4"},
+    "fn_cos": {"size": "0x4"},
+    "trig": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@trig_vtbl"}]
+    },
+    "trig_vtbl": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x8", "u32": "@fn_sin"},
+        {"offset": "0xc", "u32": "@fn_cos"}
+      ]
+    },
+    "display": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0099e374", "u32": "@trig"},
+    {"addr": "0x00905d24", "u32": "@display"},
+    {"addr": "@player", "offset": "0x4c", "f32": 0.0},
+    {"addr": "0x0064264c", "from_image": "0x0064264c", "image_size": 4},
+    {"addr": "0x0063f4d0", "from_image": "0x0063f4d0", "image_size": 4},
+    {"addr": "0x00640ea0", "from_image": "0x00640ea0", "image_size": 4},
+    {"addr": "0x00640038", "from_image": "0x00640038", "image_size": 4},
+    {"addr": "0x006485cc", "from_image": "0x006485cc", "image_size": 4}
+  ],
+  "callees": {
+    "@fn_current": {"name": "GetCurrentPosition_054_guess", "conv": "thiscall", "args": [], "ret": "@current"},
+    "@fn_speed": {"name": "GetValue_060_guess", "conv": "thiscall", "args": [], "ret_float": 12.5},
+    "@fn_sin": {"name": "Sin_guess", "conv": "thiscall", "args": ["float"], "ret_float": 0.0},
+    "@fn_cos": {"name": "Cos_guess", "conv": "thiscall", "args": ["float"], "ret_float": 1.0},
+    "0x0048a0fc": {
+      "name": "GetFloorHeightAt_guess",
+      "conv": "thiscall",
+      "args": ["float", "float", "float", "int"],
+      "ret_float": 20.0
+    },
+    "0x0043a15c": {
+      "name": "s3dCollideSphereWithWorld_guess",
+      "conv": "thiscall",
+      "args": ["float", "float", "float", "float", "float", "float", "ptr", "ptr", "ptr", "int"],
+      "ret": 1
+    },
+    "0x0043a292": {
+      "name": "GetEnvironment_guess",
+      "conv": "thiscall",
+      "args": ["float", "float", "float", "ptr"],
+      "ret": 0
+    },
+    "0x004bf9b2": {"name": "TransformPassengersToBoatSpace_guess", "conv": "cdecl", "args": ["ptr"]},
+    "0x004bfc71": {"name": "TransformPassengersToWorldSpace_guess", "conv": "cdecl", "args": ["ptr"]}
+  },
+  "cases": [
+    {
+      "name": "forward check accepts",
+      "args": ["@position", "@result"],
+      "callees": {"0x0043a15c": {"conv": "thiscall", "args": ["float", "float", "float", "float", "float", "float", "ptr", "ptr", "ptr", "int"], "ret": 1}}
+    },
+    {
+      "name": "nonzero sine scales forward y",
+      "args": ["@position", "@result"],
+      "callees": {
+        "@fn_sin": {"conv": "thiscall", "args": ["float"], "ret_float": 1.0},
+        "0x0043a15c": {"conv": "thiscall", "args": ["float", "float", "float", "float", "float", "float", "ptr", "ptr", "ptr", "int"], "ret": 1}
+      }
+    },
+    {
+      "name": "forward floor check clears",
+      "args": ["@position", "@result"],
+      "callees": {
+        "0x0043a15c": {"conv": "thiscall", "args": ["float", "float", "float", "float", "float", "float", "ptr", "ptr", "ptr", "int"], "ret": 0},
+        "0x0043a292": {"conv": "thiscall", "args": ["float", "float", "float", "ptr"], "ret": 0}
+      }
+    },
+    {
+      "name": "reverse check accepts",
+      "args": ["@position", "@result"],
+      "callees": {
+        "0x0048a0fc": {"conv": "thiscall", "args": ["float", "float", "float", "int"], "ret_float": [20.0, 30.0]},
+        "0x0043a15c": {"conv": "thiscall", "args": ["float", "float", "float", "float", "float", "float", "ptr", "ptr", "ptr", "int"], "ret": [0, 1]},
+        "0x0043a292": {"conv": "thiscall", "args": ["float", "float", "float", "ptr"], "ret": 1}
+      }
+    },
+    {
+      "name": "reverse floor check clears",
+      "args": ["@position", "@result"],
+      "callees": {
+        "0x0048a0fc": {"conv": "thiscall", "args": ["float", "float", "float", "int"], "ret_float": [20.0, 30.0]},
+        "0x0043a15c": {"conv": "thiscall", "args": ["float", "float", "float", "float", "float", "float", "ptr", "ptr", "ptr", "int"], "ret": [0, 0]},
+        "0x0043a292": {"conv": "thiscall", "args": ["float", "float", "float", "ptr"], "ret": [1, 0]}
+      }
+    },
+    {
+      "name": "both forward and reverse blocked",
+      "args": ["@position", "@result"],
+      "callees": {
+        "0x0048a0fc": {"conv": "thiscall", "args": ["float", "float", "float", "int"], "ret_float": [20.0, 30.0]},
+        "0x0043a15c": {"conv": "thiscall", "args": ["float", "float", "float", "float", "float", "float", "ptr", "ptr", "ptr", "int"], "ret": [0, 0]},
+        "0x0043a292": {"conv": "thiscall", "args": ["float", "float", "float", "ptr"], "ret": [1, 1]}
+      }
+    },
+    {
+      "name": "sentinel uses input z",
+      "args": ["@position", "@result"],
+      "memory": [{"addr": "@position", "offset": "0x8", "f32": 7.0}],
+      "callees": {
+        "0x0048a0fc": {"conv": "thiscall", "args": ["float", "float", "float", "int"], "ret_float": -9.9999998848415475e26},
+        "0x0043a15c": {"conv": "thiscall", "args": ["float", "float", "float", "float", "float", "float", "ptr", "ptr", "ptr", "int"], "ret": 0},
+        "0x0043a292": {"conv": "thiscall", "args": ["float", "float", "float", "ptr"], "ret": 0}
+      }
+    },
+    {
+      "name": "near sentinel uses returned floor",
+      "args": ["@position", "@result"],
+      "callees": {
+        "0x0048a0fc": {"conv": "thiscall", "args": ["float", "float", "float", "int"], "ret_float": -9.99e26},
+        "0x0043a15c": {"conv": "thiscall", "args": ["float", "float", "float", "float", "float", "float", "ptr", "ptr", "ptr", "int"], "ret": 0},
+        "0x0043a292": {"conv": "thiscall", "args": ["float", "float", "float", "ptr"], "ret": 0}
+      }
+    }
+    ,{
+      "name": "reverse sentinel uses input z",
+      "args": ["@position", "@result"],
+      "memory": [{"addr": "@position", "offset": "0x8", "f32": 9.0}],
+      "callees": {
+        "0x0048a0fc": {"conv": "thiscall", "args": ["float", "float", "float", "int"], "ret_float": [20.0, -9.9999998848415475e26]},
+        "0x0043a15c": {"conv": "thiscall", "args": ["float", "float", "float", "float", "float", "float", "ptr", "ptr", "ptr", "int"], "ret": [0, 0]},
+        "0x0043a292": {"conv": "thiscall", "args": ["float", "float", "float", "ptr"], "ret": [1, 0]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4760647,
+    "count": 100,
+    "args": [{"choices": ["@position"]}, {"choices": ["@result"]}],
+    "memory": [
+      {"addr": "@player", "offset": "0x4c", "type": "float", "range": [-6.28, 6.28]},
+      {"addr": "@position", "offset": "0x0", "type": "float", "range": [-100.0, 100.0]},
+      {"addr": "@position", "offset": "0x4", "type": "float", "range": [-100.0, 100.0]},
+      {"addr": "@position", "offset": "0x8", "type": "float", "range": [-100.0, 100.0]},
+      {"addr": "@current", "offset": "0x0", "type": "float", "range": [-100.0, 100.0]},
+      {"addr": "@current", "offset": "0x4", "type": "float", "range": [-100.0, 100.0]},
+      {"addr": "@current", "offset": "0x8", "type": "float", "range": [-100.0, 100.0]}
+    ]
+  }
+}

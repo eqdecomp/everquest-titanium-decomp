@@ -1,0 +1,417 @@
+{
+  "function": "Callback_guess::WndNotification",
+  "original": "0x004eccc6",
+  "sources": [
+    "src/EverQuest/tu_140_CastSpellWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@callback",
+  "args": [
+    {
+      "name": "sender",
+      "type": "ptr"
+    },
+    {
+      "name": "message",
+      "type": "u32"
+    },
+    {
+      "name": "data",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "callback": {
+      "size": "0x1b4",
+      "fill": "random",
+      "init": [
+        {"offset": "0x160", "u32": 0}, {"offset": "0x164", "u32": 0},
+        {"offset": "0x168", "u32": 0}, {"offset": "0x16c", "u32": 0},
+        {"offset": "0x170", "u32": 0}, {"offset": "0x174", "u32": 0},
+        {"offset": "0x178", "u32": 0}, {"offset": "0x17c", "u32": 0},
+        {"offset": "0x180", "u32": 0}, {"offset": "0x184", "u32": "@control"},
+        {"offset": "0x19c", "u32": 77}, {"offset": "0x1a0", "u32": -1},
+        {"offset": "0x1a4", "u32": -1}
+      ]
+    },
+    "sender": {
+      "size": "0x140",
+      "fill": "random"
+    },
+    "data": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "control": {"size": "0x140", "fill": "random"},
+    "entry0": {"size": "0x140", "fill": "random"},
+    "entry1": {"size": "0x140", "fill": "random"},
+    "window_manager": {"size": "0x4", "fill": "random"},
+    "manager": {"size": "0x4", "fill": "random"},
+    "sink": {"size": "0x4", "fill": "random", "init": [{"offset": 0, "u32": "@sink_vtable"}]},
+    "sink_vtable": {"size": "0x8c", "fill": "random", "init": [
+      {"offset": "0x84", "u32": "@fn_slot84"}, {"offset": "0x88", "u32": "@fn_slot88"}
+    ]},
+    "fn_slot84": {"size": "0x4"},
+    "fn_slot88": {"size": "0x4"},
+    "screen": {"size": "0x164", "fill": "random"},
+    "receiver": {"size": "0x4", "fill": "random"},
+    "dispatcher": {"size": "0x4", "fill": "random"},
+    "popup": {"size": "0x4", "fill": "random"},
+    "string_table": {"size": "0x4", "fill": "random"},
+    "everquest": {"size": "0x4", "fill": "random"},
+    "root": {"size": "0x300", "fill": "random", "init": [
+      {"offset": "0x8", "u32": "@route"}
+    ]},
+    "route": {"size": "0x8", "fill": "random", "init": [
+      {"offset": "0x4", "u32": 256}
+    ]},
+    "spell_rep": {"size": "0x20", "fill": "random"},
+    "spell_text": {"size": "0x40", "init": [{"offset": 0, "hex": "6669726562616c6c00"}]},
+    "popup_text": {"size": "0x40", "init": [{"offset": 0, "hex": "6d65737361676500"}]},
+    "number": {"size": "0x20", "init": [{"offset": 0, "hex": "313000"}]
+    }
+  },
+  "memory": [
+    {"addr": "0x0079AC74", "u32": "0x12345678"},
+    {"addr": "0x0099D3EC", "u32": "@window_manager"},
+    {"addr": "0x00850C30", "u32": "@sink"},
+    {"addr": "0x00905CE4", "u32": "@manager"},
+    {"addr": "0x0099D414", "u32": "@dispatcher"},
+    {"addr": "0x00850C24", "u32": "@screen"},
+    {"addr": "0x00991B88", "u32": "@receiver"},
+    {"addr": "0x00988DF0", "u32": "@everquest"},
+    {"addr": "0x00905D00", "u32": "@root"},
+    {"addr": "0x00850C80", "u32": "@popup"},
+    {"addr": "0x00905CB0", "u32": "@string_table"},
+    {"addr": "0x00984828", "cstr": "Fireball"},
+    {"addr": "0x0099DB00", "cstr": "000000000000"},
+    {"addr": "0x00984841", "u8": 0}, {"addr": "0x00984881", "u8": 0},
+    {"addr": "0x009848C1", "u8": 0}, {"addr": "0x00984901", "u8": 0},
+    {"addr": "0x00984941", "u8": 0}, {"addr": "0x00984981", "u8": 0},
+    {"addr": "0x009849C1", "u8": 0}, {"addr": "0x00984A01", "u8": 0},
+    {"addr": "0x00984A41", "u8": 0}, {"addr": "0x00984A81", "u8": 0}
+  ],
+  "callees": {
+    "0x005adf60": {
+      "name": "CXWndManager::GetKeyboardFlags",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004ebe36": {
+      "name": "FUN_004ebe36",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x0059dd30": {
+      "name": "FUN_0059dd30",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005a2230": {
+      "name": "FUN_005a2230",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x0047e8e0": {
+      "name": "FUN_0047e8e0",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004ecb56": {
+      "name": "FUN_004ecb56",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x004eb804": {
+      "name": "FUN_004eb804",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0059d960": {
+      "name": "FUN_0059d960",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "00000000000000000000000050000000"}]
+    },
+    "0x005adc20": {
+      "name": "FUN_005adc20",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "mem:8",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x004ebf26": {
+      "name": "FUN_004ebf26",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x004fd36c": {
+      "name": "IsOkToActivate_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x004fd91e": {
+      "name": "FUN_004fd91e",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "cstr",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0051e0ea": {
+      "name": "CloseNewestItemDisplay_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00560d80": {
+      "name": "FUN_00560d80",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "00db9900"}]
+    },
+    "0x00572300": {
+      "name": "CXStr::operator char*",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [],
+      "ret": "@spell_text"
+    },
+    "0x00574950": {
+      "name": "FUN_00574950",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr"],
+      "ret": 0
+    },
+    "0x006220e9": {
+      "name": "__itoa",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ignore",
+        "int"
+      ],
+      "ret": "@number"
+    },
+    "0x0046da4a": {
+      "name": "FUN_0046da4a",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "cstr",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "6f6b00"}]
+    },
+    "0x004982c6": {
+      "name": "FUN_004982c6",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ]
+    },
+    "0x00571d00": {
+      "name": "FUN_00571d00",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x0040e705": {
+      "name": "FUN_0040e705",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00494da9": {
+      "name": "FUN_00494da9",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00557cd8": {
+      "name": "MemorizeSet",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "FUN_005dfa00",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x00560e32": {
+      "name": "FUN_00560e32",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "cstr",
+        "int",
+        "int",
+        "cstr"
+      ]
+    },
+    "0x0044d0d0": {
+      "name": "FUN_0044d0d0",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00557e55": {
+      "name": "MemorizeSpellById_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ]
+    },
+    "@fn_slot84": {"name": "sink_vtable_slot84", "conv": "thiscall", "args": [], "ret": 0},
+    "@fn_slot88": {"name": "sink_vtable_slot88", "conv": "thiscall", "args": [], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9"
+  },
+  "cases": [
+    {"name": "fallback", "args": ["@sender", 0, "@data"]},
+    {"name": "message 1 keyboard flags", "args": ["@sender", 1, "@data"], "callees": {
+      "0x005adf60": {"name": "GetKeyboardFlags", "conv": "thiscall", "args": [], "ret": 12}}},
+    {"name": "message 1 control route false", "args": ["@control", 1, "@data"]},
+    {"name": "message 1 control route true", "args": ["@control", 1, "@data"], "callees": {
+      "0x0059dd30": {"name": "Check", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "message 1 entry", "args": ["@entry0", 1, "@data"], "memory": [
+      {"addr": "@callback", "offset": "0x160", "u32": "@entry0"}]},
+    {"name": "message 1 unmatched", "args": ["@sender", 1, "@data"]},
+    {"name": "message 3 control dispatch", "args": ["@control", 3, "@data"], "memory": [
+      {"addr": "@callback", "offset": "0x1a0", "u32": 4}], "callees": {
+      "0x0059d960": {"name": "GetScreenRect", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+        "writes": [{"arg": 0, "offset": 0, "hex": "00000000000000005000000050000000"}]}}},
+    {"name": "message 3 entry", "args": ["@entry0", 3, "@data"], "memory": [
+      {"addr": "@callback", "offset": "0x160", "u32": "@entry0"}]},
+    {"name": "message 3 disabled control", "args": ["@control", 3, "@data"]},
+    {"name": "message 17 control opens", "args": ["@control", 23, "@data"], "callees": {
+      "0x004fd36c": {"name": "CanOpen", "conv": "thiscall", "args": ["int"], "ret": 1}}},
+    {"name": "message 17 control hidden", "args": ["@control", 23, "@data"]},
+    {"name": "message 17 entry opens", "args": ["@entry0", 23, "@data"], "memory": [
+      {"addr": "@callback", "offset": "0x160", "u32": "@entry0"}], "callees": {
+      "0x004fd36c": {"name": "CanOpen", "conv": "thiscall", "args": ["int"], "ret": 1}}},
+    {"name": "message 17 entry denied", "args": ["@entry0", 23, "@data"], "memory": [
+      {"addr": "@callback", "offset": "0x160", "u32": "@entry0"}]},
+    {"name": "message 18 handle", "args": ["@sender", 24, "@data"]},
+    {"name": "message 1a receiver", "args": ["@sender", 26, "@data"]},
+    {"name": "message 21 ignored data", "args": ["@sender", 33, 0]},
+    {"name": "message 21 zero data diagnostic", "args": ["@sender", 33, 0]},
+    {"name": "message 21 new slot zero", "args": ["@sender", 33, 1], "callees": {
+      "0x00574950": {"name": "CompareText", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 1},
+      "0x0040e705": {"name": "Fetch", "conv": "thiscall", "args": ["int"], "ret": [10,11,12,13,14,15,16,17,18]}}},
+    {"name": "message 21 match active slot", "args": ["@sender", 33, 1], "memory": [
+      {"addr": "0x00984841", "u8": 1}, {"addr": "0x00984828", "cstr": "Fireball"}]},
+    {"name": "message 21 first free after active", "args": ["@sender", 33, 1], "memory": [
+      {"addr": "0x00984841", "u8": 1}, {"addr": "0x00984881", "u8": 0}], "callees": {
+      "0x00574950": {"name": "CompareText", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 1}}},
+    {"name": "message 21 no free slot", "args": ["@sender", 33, 1], "memory": [
+      {"addr": "0x00984841", "u8": 1}, {"addr": "0x00984881", "u8": 1},
+      {"addr": "0x009848c1", "u8": 1}, {"addr": "0x00984901", "u8": 1},
+      {"addr": "0x00984941", "u8": 1}, {"addr": "0x00984981", "u8": 1},
+      {"addr": "0x009849c1", "u8": 1}, {"addr": "0x00984a01", "u8": 1},
+      {"addr": "0x00984a41", "u8": 1}, {"addr": "0x00984a81", "u8": 1}], "callees": {
+      "0x00574950": {"name": "CompareText", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 1}}},
+    {"name": "message 14 below first custom ID", "args": ["@sender", 20, 5099]},
+    {"name": "message 14 first remove ID", "args": ["@sender", 20, 5100], "memory": [
+      {"addr": "0x00984841", "u8": 1}]},
+    {"name": "message 14 last remove ID", "args": ["@sender", 20, 5109], "memory": [
+      {"addr": "0x00984841", "u8": 1}]},
+    {"name": "message 14 above remove IDs", "args": ["@sender", 20, 5110]},
+    {"name": "message 14 below edit IDs", "args": ["@sender", 20, 5199]},
+    {"name": "message 14 first edit ID", "args": ["@sender", 20, 5200], "memory": [
+      {"addr": "0x00984841", "u8": 1}]},
+    {"name": "message 14 last edit ID", "args": ["@sender", 20, 5209], "memory": [
+      {"addr": "0x00984841", "u8": 1}]},
+    {"name": "message 14 above edit IDs", "args": ["@sender", 20, 5210]},
+    {"name": "message 14 popup", "args": ["@sender", 20, 5300]},
+    {"name": "message 14 below general ID threshold", "args": ["@sender", 20, 9999]},
+    {"name": "message 14 general ID not ready", "args": ["@sender", 20, 10000], "callees": {
+      "0x0044d0d0": {"name": "IsReady", "conv": "cdecl", "args": ["int"], "ret": 0}}},
+    {"name": "message 14 general ID ready", "args": ["@sender", 20, 10000]},
+    {"name": "message 14 general ID forwarded", "args": ["@sender", 20, 10001], "callees": {
+      "0x0044d0d0": {"name": "IsReady", "conv": "cdecl", "args": ["int"], "ret": 1}}},
+    {"name": "unknown message", "args": ["@sender", 2, "@data"]}
+  ],
+  "fuzz": {
+    "seed": 5164230,
+    "count": 100,
+    "args": [
+      {"choices": ["@sender", "@control", "@entry0"]},
+      {"choices": [0, 1, 3, 20, 23, 24, 26, 33]},
+      {"choices": [0, 1, 5099, 5100, 5109, 5110, 5199, 5200, 5209, 5210, 5300, 9999, 10000, 10001]}
+    ],
+    "memory": [
+      {"addr": "@callback", "offset": "0x160", "type": "u32", "choices": [0, "@entry0", "@sender"]},
+      {"addr": "@callback", "offset": "0x184", "type": "u32", "choices": ["@control", "@sender"]},
+      {"addr": "@callback", "offset": "0x19c", "type": "int", "choices": [-1, 0, 77]},
+      {"addr": "@callback", "offset": "0x1a0", "type": "int", "choices": [-1, 4]},
+      {"addr": "0x00984841", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00984881", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x009848c1", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00984901", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00984941", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00984981", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x009849c1", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00984a01", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00984a41", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00984a81", "type": "u8", "choices": [0, 1]}
+    ]
+  },
+  "_survivors": "L825: handled-event return value has no observable effect in the caller; L839: handled-event return value has no observable effect in the caller; L922: handled-event return value has no observable effect in the caller"
+}

@@ -1,0 +1,116 @@
+{
+  "function": "do_viewport_guess",
+  "original": "0x0046c352",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "unused_guess", "type": "int"},
+    {"name": "text_guess", "type": "cstr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "rest": {"size": "0x10", "fill": "zero"},
+    "display": {"size": "0x40", "fill": "random"},
+    "everquest": {"size": "0x40", "fill": "random"},
+    "strtab": {"size": "0x40", "fill": "random"},
+    "msg": {"size": "0x10", "fill": "zero", "init": [{"offset": 0, "hex": "566965772068656c7000"}]}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x0092379c", "u32": 800},
+    {"addr": "0x009237a0", "u32": 600},
+    {"addr": "0x00923778", "u32": 5},
+    {"addr": "0x0092377c", "u32": 7},
+    {"addr": "0x00923780", "u32": 705},
+    {"addr": "0x00923784", "u32": 507},
+    {"addr": "0x00905d24", "u32": "@display"},
+    {"addr": "0x00988df0", "u32": "@everquest"},
+    {"addr": "0x00905cb0", "u32": "@strtab"}
+  ],
+  "callees": {
+    "0x0042dd82": {
+      "name": "GrabFirstWord_guess",
+      "conv": "cdecl",
+      "args": ["cstr", "ignore", "int"],
+      "ret": "@rest",
+      "writes": [
+        {"arg": 1, "offset": 0, "hex": "313000", "call": 0},
+        {"arg": 1, "offset": 0, "hex": "323000", "call": 1},
+        {"arg": 1, "offset": 0, "hex": "33303000", "call": 2},
+        {"arg": 1, "offset": 0, "hex": "32303000", "call": 3}
+      ]
+    },
+    "0x004658dd": {"name": "is_number_guess", "conv": "cdecl", "args": ["cstr"], "ret": 1},
+    "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [10, 20, 300, 200]},
+    "0x00439212": {"name": "ApplyVideoMode_guess", "conv": "thiscall", "args": []},
+    "0x00559545": {"name": "NewUIINI", "conv": "cdecl", "args": [], "ret": 1},
+    "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 0},
+    "0x0060bf20": {"name": "FUN_0060bf20", "conv": "cdecl", "args": ["ignore", "cstr", "ignore"], "ret": 0},
+    "0x004982c6": {"name": "dsp_chat", "conv": "thiscall", "args": ["u32", "int", "bool"]},
+    "0x005dfa00": {"name": "getString", "conv": "thiscall", "args": ["u32", "u32"], "ret": "@msg"}
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb",
+    "_atol": "0x0060e3a3"
+  },
+  "cases": [
+    {"name": "empty", "args": [1, ""]},
+    {"name": "reset-save", "args": [1, "reset"]},
+    {"name": "reset-inside", "args": [0, "please reset now"]},
+    {"name": "reset-nosave", "args": [1, "reset"],
+     "callees": {"0x00559545": {"name": "FUN_00559545", "conv": "cdecl", "args": [], "ret": 0}}},
+    {"name": "numbers-save", "args": [1, "10 20 300 200"]},
+    {"name": "numbers-nosave", "args": [1, "10 20 300 200"],
+     "callees": {"0x00559545": {"name": "FUN_00559545", "conv": "cdecl", "args": [], "ret": 0}}},
+    {"name": "x-not-number", "args": [1, "a 20 300 200"],
+     "callees": {"0x004658dd": {"name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": [0, 1, 1, 1]},
+                 "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [20, 300, 200]}}},
+    {"name": "y-not-number", "args": [1, "10 a 300 200"],
+     "callees": {"0x004658dd": {"name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": [1, 0, 1, 1]},
+                 "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [10, 300, 200]}}},
+    {"name": "w-not-number", "args": [1, "10 20 a 200"],
+     "callees": {"0x004658dd": {"name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": [1, 1, 0, 1]},
+                 "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [10, 20, 200]}}},
+    {"name": "h-not-number", "args": [1, "10 20 300 a"],
+     "callees": {"0x004658dd": {"name": "FUN_004658dd", "conv": "cdecl", "args": ["cstr"], "ret": [1, 1, 1, 0]},
+                 "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [10, 20, 300]}}},
+    {"name": "all-zero", "args": [1, "0 0 0 0"],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [0, 0, 0, 0]}}},
+    {"name": "x-minus-one", "args": [1, "-1 0 0 0"],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [-1, 0, 0, 0]}}},
+    {"name": "y-minus-one", "args": [1, "0 -1 0 0"],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [0, -1, 0, 0]}}},
+    {"name": "w-minus-one", "args": [1, "0 0 -1 0"],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [0, 0, -1, 0]}}},
+    {"name": "h-minus-one", "args": [1, "0 0 0 -1"],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [0, 0, 0, -1]}}},
+    {"name": "clamp-size", "args": [1, "0 0 801 601"],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [0, 0, 801, 601]}}},
+    {"name": "size-equal", "args": [1, "0 0 800 600"],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [0, 0, 800, 600]}}},
+    {"name": "clamp-offset", "args": [1, "600 500 300 200"],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [600, 500, 300, 200]}}},
+    {"name": "offset-equal", "args": [1, "500 400 300 200"],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [500, 400, 300, 200]}}},
+    {"name": "offset-one-over", "args": [1, "501 401 300 200"],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [501, 401, 300, 200]}}},
+    {"name": "clamp-both", "args": [1, "100 100 900 700"],
+     "callees": {"0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [100, 100, 900, 700]}}}
+  ],
+  "fuzz": {
+    "seed": 4637522,
+    "count": 100,
+    "args": [{}, {"choices": ["", "reset", "10 20 300 200", "x", "RESET"]}],
+    "memory": [
+      {"addr": "0x0092379c", "type": "int", "choices": [0, 100, 299, 300, 310, 640, 800]},
+      {"addr": "0x009237a0", "type": "int", "choices": [0, 100, 199, 200, 220, 480, 600]},
+      {"addr": "0x00923778", "type": "int", "range": [-50, 900]},
+      {"addr": "0x0092377c", "type": "int", "range": [-50, 900]},
+      {"addr": "0x00923780", "type": "int", "range": [-50, 900]},
+      {"addr": "0x00923784", "type": "int", "range": [-50, 900]}
+    ]
+  },
+  "_survivors": "L4303: the initial x only matters when its token is not a number, and any negative start value takes the same x < 0 print path as -1; L4310: in the reset path w = screen width, so any x > 0 gives x + w > width and is clamped back to width - w = 0; L4311: same for y with h = screen height, clamped back to 0"
+}

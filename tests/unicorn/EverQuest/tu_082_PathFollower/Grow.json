@@ -1,0 +1,121 @@
+{
+  "function": "RecordTable_guess::Grow_guess",
+  "original": "0x004c18f5",
+  "sources": [
+    "src/EverQuest/tu_082_PathFollower.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@recordtable",
+  "args": [
+    {
+      "name": "requested_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "recordtable": {
+      "size": "0x1c",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": 3},
+        {"offset": "0x10", "u32": "@oldvals"},
+        {"offset": "0x14", "u32": 4},
+        {"offset": "0x18", "u8": 1}
+      ]
+    },
+    "oldvals": {
+      "size": "0x40",
+      "fill": "random"
+    },
+    "newarr": {
+      "size": "0x40",
+      "fill": "random"
+    },
+    "b1": {"size": "0x40", "fill": "random"},
+    "b2": {"size": "0x40", "fill": "random"},
+    "b3": {"size": "0x40", "fill": "random"},
+    "b4": {"size": "0x40", "fill": "random"}
+  },
+  "memory": [],
+  "rewrite_aliases": {"??_H@YGXPAXIHP6EPAX0@Z@Z": "0x00401000"},
+  "rewrite_data_aliases": {"??0ValueRecord_guess@@QAE@XZ": "0x00451a9b"},
+  "callees": {
+    "0x0051da09": {
+      "name": "RecordTable_guess::RoundUp_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 6
+    },
+    "0x0060e985": {
+      "name": "operator new[]",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": ["@newarr", "@b1", "@b2", "@b3", "@b4"]
+    },
+    "0x00401000": {
+      "name": "`vector_constructor_iterator'",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "int", "u32"],
+      "ret": 0
+    },
+    "0x0060d682": {
+      "name": "operator delete[]",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x004b73ee": {
+      "name": "TableView_guess::Clear_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00405492": {
+      "name": "RecordTable_guess::Fail_guess",
+      "conv": "thiscall",
+      "args": [],
+      "noreturn": true
+    }
+  },
+  "cases": [
+    {"name": "grow 4 -> 6", "args": [5]},
+    {"name": "disabled", "args": [5],
+     "memory": [{"addr": "@recordtable", "offset": "0x18", "u8": 0}]},
+    {"name": "zero request", "args": [0]},
+    {"name": "one request", "args": [1]},
+    {"name": "negative request", "args": [-1]},
+    {"name": "rounded equals count", "args": [3],
+     "callees": {"0x0051da09": {"name": "RoundUp", "conv": "thiscall", "args": ["int"], "ret": 4}}},
+    {"name": "rounded below count", "args": [3],
+     "callees": {"0x0051da09": {"name": "RoundUp", "conv": "thiscall", "args": ["int"], "ret": 3}}},
+    {"name": "rounded count+1", "args": [3],
+     "callees": {"0x0051da09": {"name": "RoundUp", "conv": "thiscall", "args": ["int"], "ret": 5}}},
+    {"name": "empty table", "args": [2],
+     "memory": [{"addr": "@recordtable", "offset": "0x14", "u32": 0}]},
+    {"name": "one entry", "args": [2],
+     "memory": [{"addr": "@recordtable", "offset": "0x14", "u32": 1}]},
+    {"name": "flag 0x80", "args": [2],
+     "memory": [{"addr": "@recordtable", "offset": "0x18", "u8": 128}]},
+    {"name": "array alloc fails", "args": [5],
+     "callees": {"0x0060e985": {"name": "new", "conv": "cdecl", "args": ["u32"], "ret": 0}}},
+    {"name": "first block fails", "args": [5],
+     "callees": {"0x0060e985": {"name": "new", "conv": "cdecl", "args": ["u32"], "ret": ["@newarr", 0]}}},
+    {"name": "second block fails", "args": [5],
+     "callees": {"0x0060e985": {"name": "new", "conv": "cdecl", "args": ["u32"], "ret": ["@newarr", "@b1", 0]}}},
+    {"name": "block size 1", "args": [5],
+     "memory": [{"addr": "@recordtable", "offset": "0x4", "u32": 1}]}
+  ],
+  "_survivors": "L1092: copying one extra slot (index == count) is unobservable: requested > count, so the block loop always runs and stores newValues[count] (block pointer or 0) before any check; the extra read of values[count] has no effect",
+  "fuzz": {
+    "seed": 4987125,
+    "count": 120,
+    "args": [
+      {"range": [-1, 8]}
+    ],
+    "memory": [
+      {"addr": "@recordtable", "offset": "0x14", "type": "int", "range": [0, 7]},
+      {"addr": "@recordtable", "offset": "0x4", "type": "int", "range": [0, 5]},
+      {"addr": "@recordtable", "offset": "0x18", "type": "u8", "choices": [0, 1, 255]}
+    ]
+  }
+}

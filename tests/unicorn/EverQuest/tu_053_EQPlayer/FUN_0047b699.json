@@ -1,0 +1,230 @@
+{
+  "function": "EQPlayerCore_guess::GetAttachedHelmITNum_guess",
+  "original": "0x0047b699",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {
+      "name": "kind",
+      "type": "int"
+    },
+    {
+      "name": "flagOut",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "owner": {
+      "size": "0x300",
+      "fill": "random"
+    },
+    "flagout": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "state": {
+      "size": "0xc400",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xc284",
+          "u32": "@part"
+        }
+      ]
+    },
+    "part": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 16
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d00",
+      "u32": "@state"
+    },
+    {
+      "addr": "@state",
+      "offset": "0xc39c",
+      "u16": 16
+    }
+  ],
+  "callees": {},
+  "coverage_ok": {
+    "0047B86B-0047B86D": "dead: field 10 exits earlier and the JLE above takes 3..9, so this JMP never runs"
+  },
+  "cases": [
+    {"name": "f0 field 2 no flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 2}, {"addr": "@owner", "offset": "0x24e", "u8": 0}]},
+    {"name": "f0 field 2 flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 2}, {"addr": "@owner", "offset": "0x24e", "u8": 1}]},
+    {"name": "f0 field 4 no flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 4}, {"addr": "@owner", "offset": "0x24e", "u8": 0}]},
+    {"name": "f0 field 4 flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 4}, {"addr": "@owner", "offset": "0x24e", "u8": 1}]},
+    {"name": "f0 field 5 no flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 5}, {"addr": "@owner", "offset": "0x24e", "u8": 0}]},
+    {"name": "f0 field 5 flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 5}, {"addr": "@owner", "offset": "0x24e", "u8": 1}]},
+    {"name": "f0 field 6 no flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 6}, {"addr": "@owner", "offset": "0x24e", "u8": 0}]},
+    {"name": "f0 field 6 flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 6}, {"addr": "@owner", "offset": "0x24e", "u8": 1}]},
+    {"name": "f0 field 7 no flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 7}, {"addr": "@owner", "offset": "0x24e", "u8": 0}]},
+    {"name": "f0 field 7 flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 7}, {"addr": "@owner", "offset": "0x24e", "u8": 1}]},
+    {"name": "f0 field 8 no flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 8}, {"addr": "@owner", "offset": "0x24e", "u8": 0}]},
+    {"name": "f0 field 8 flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 8}, {"addr": "@owner", "offset": "0x24e", "u8": 1}]},
+    {"name": "f0 field 9 no flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 9}, {"addr": "@owner", "offset": "0x24e", "u8": 0}]},
+    {"name": "f0 field 9 flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 9}, {"addr": "@owner", "offset": "0x24e", "u8": 1}]},
+    {"name": "f0 field 10 no flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 10}, {"addr": "@owner", "offset": "0x24e", "u8": 0}]},
+    {"name": "f0 field 10 flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 10}, {"addr": "@owner", "offset": "0x24e", "u8": 1}]},
+    {"name": "f0 field 11 no flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 11}, {"addr": "@owner", "offset": "0x24e", "u8": 0}]},
+    {"name": "f0 field 11 flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 11}, {"addr": "@owner", "offset": "0x24e", "u8": 1}]},
+    {"name": "f0 field 12 no flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 12}, {"addr": "@owner", "offset": "0x24e", "u8": 0}]},
+    {"name": "f0 field 12 flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 12}, {"addr": "@owner", "offset": "0x24e", "u8": 1}]},
+    {"name": "f0 field 0x80 flag", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 128}, {"addr": "@owner", "offset": "0x24e", "u8": 1}]},
+    {"name": "f1 field 2 flag", "args": [241, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 2}, {"addr": "@owner", "offset": "0x24e", "u8": 1}]},
+    {"name": "f1 field 0x80", "args": [241, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 128}]},
+    {"name": "f1 field 11", "args": [241, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 11}]},
+    {"name": "f1 field 4", "args": [241, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 4}]},
+    {"name": "f1 field 10 no flag", "args": [241, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 10}, {"addr": "@owner", "offset": "0x24e", "u8": 0}]},
+    {"name": "f0 field 10 no flag 2", "args": [240, "@flagout"], "memory": [{"addr": "@owner", "offset": "0x260", "u32": 10}, {"addr": "@owner", "offset": "0x24e", "u8": 0}]},
+    {"name": "kind f0, field 1, no flag",
+      "args": [240, "@flagout"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x260", "u32": 1},
+        {"addr": "@owner", "offset": "0x24e", "u8": 0}
+      ]
+    },
+    {
+      "name": "kind f0, field 1, flag",
+      "args": [240, "@flagout"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x260", "u32": 1},
+        {"addr": "@owner", "offset": "0x24e", "u8": 1}
+      ]
+    },
+    {
+      "name": "kind f0, field 3, flag",
+      "args": [240, "@flagout"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x260", "u32": 3},
+        {"addr": "@owner", "offset": "0x24e", "u8": 1}
+      ]
+    },
+    {
+      "name": "kind f0, field 0x80, no flag",
+      "args": [240, "@flagout"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x260", "u32": 128},
+        {"addr": "@owner", "offset": "0x24e", "u8": 0}
+      ]
+    },
+    {
+      "name": "kind f0, field above 0x80",
+      "args": [240, "@flagout"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x260", "u32": 129}
+      ]
+    },
+    {
+      "name": "kind f0, field 0 falls to default",
+      "args": [240, "@flagout"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x260", "u32": 0}
+      ]
+    },
+    {
+      "name": "kind f1, field 1 gives 3",
+      "args": [241, "@flagout"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x260", "u32": 1}
+      ]
+    },
+    {
+      "name": "kind f1, field 2 no flag",
+      "args": [241, "@flagout"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x260", "u32": 2},
+        {"addr": "@owner", "offset": "0x24e", "u8": 0}
+      ]
+    },
+    {
+      "name": "kind f1, field 10 flag",
+      "args": [241, "@flagout"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x260", "u32": 10},
+        {"addr": "@owner", "offset": "0x24e", "u8": 1}
+      ]
+    },
+    {
+      "name": "kind f1, field 13 returns kind",
+      "args": [241, "@flagout"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x260", "u32": 13}
+      ]
+    },
+    {
+      "name": "kind other returns kind",
+      "args": [5, "@flagout"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x260", "u32": 1}
+      ]
+    },
+    {
+      "name": "inactive state returns 3",
+      "args": [240, "@flagout"],
+      "memory": [
+        {"addr": "@state", "offset": "0xc39c", "u16": 1},
+        {"addr": "@owner", "offset": "0x260", "u32": 1}
+      ]
+    },
+    {
+      "name": "null state returns 3",
+      "args": [240, "@flagout"],
+      "memory": [
+        {"addr": "0x00905d00", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4699801,
+    "count": 300,
+    "args": [
+      {
+        "choices": [240, 241, 0, 1, 2, 5, 256, -1, 16]
+      },
+      {
+        "choices": [
+          "@flagout"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@owner",
+        "offset": "0x260",
+        "type": "int",
+        "choices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 128, 129, -1, 127]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x24e",
+        "type": "u8",
+        "choices": [0, 1, 2]
+      },
+      {
+        "addr": "@state",
+        "offset": "0xc39c",
+        "type": "u16",
+        "choices": [0, 1, 16, 512, 1022, 1023]
+      },
+      {
+        "addr": "0x00905d00",
+        "type": "ptr",
+        "choices": ["@state", 0]
+      }
+    ]
+  }
+}

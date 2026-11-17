@@ -1,0 +1,226 @@
+{
+  "function": "WinMain_guess",
+  "original": "0x004cfd32",
+  "sources": ["src/EverQuest/tu_097_Win.cpp"],
+  "conv": "stdcall",
+  "args": [
+    {"name": "instance_guess", "type": "int"},
+    {"name": "previousInstance_guess", "type": "int"},
+    {"name": "commandLine_guess", "type": "cstr"},
+    {"name": "showCommand_guess", "type": "int"}
+  ],
+  "ret": "int",
+  "objects": {
+    "graphics": {"size": "0x83c", "fill": "zero"},
+    "scratch": {"size": "0x10", "fill": "zero"},
+    "cpu1": {"size": "0x4", "fill": "zero"},
+    "cpu2": {"size": "0x4", "fill": "zero"},
+    "coinit": {"size": "0x4", "fill": "zero"},
+    "couninit": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x0079af50", "u32": -3600},
+    {"addr": "0x0099140d", "u8": 0},
+    {"addr": "0x0099140c", "u8": 0},
+    {"addr": "0x0099e38c", "u32": 0},
+    {"addr": "0x0099e388", "u32": "@cpu1"},
+    {"addr": "0x0099e384", "u32": "@cpu2"},
+    {"addr": "0x0063f434", "u32": "@coinit"},
+    {"addr": "0x0063f438", "u32": "@couninit"},
+    {"addr": "0x00988c79", "u8": 0},
+    {"addr": "0x00905d28", "u32": 0},
+    {"addr": "0x00985840", "u32": 0},
+    {"addr": "0x00904004", "cstr": ""},
+    {"addr": "0x00904084", "cstr": ""},
+    {"addr": "0x00904104", "cstr": ""},
+    {"addr": "0x00904184", "cstr": ""},
+    {"addr": "0x00904208", "u32": 0},
+    {"addr": "0x0098797c", "u32": 0},
+    {"addr": "0x00851398", "u32": 0},
+    {"addr": "0x00988c24", "u32": 0},
+    {"addr": "0x009873cc", "cstr": "123"},
+    {"addr": "0x0098754c", "cstr": "TestServer"},
+    {"addr": "0x0098744c", "cstr": "password"},
+    {"addr": "0x009875cc", "cstr": "1234"},
+    {"addr": "0x0098764c", "u32": 17}
+  ],
+  "callees": {
+    "0x00612662": {"name": "thunk_FUN_00612638", "conv": "cdecl", "args": ["cstr"], "ret": 1},
+    "0x00576ed0": {"name": "FUN_00576ed0", "conv": "cdecl", "args": ["cstr"], "ret": 0},
+    "0x00574110": {"name": "FUN_00574110", "conv": "cdecl", "args": ["cstr"], "varargs": "printf", "ret": 0},
+    "0x004cc9c2": {"name": "RestrictProcessAccess_guess", "conv": "cdecl", "args": [], "ret": 0},
+    "0x004ce382": {"name": "WriteChecksumFile_guess", "conv": "cdecl", "args": ["cstr"], "ret": 0},
+    "0x00576e80": {"name": "FUN_00576e80", "conv": "cdecl", "args": [], "ret": 100},
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@graphics"},
+    "0x00609940": {"name": "FUN_00609940", "conv": "thiscall", "args": [], "ret": "this"},
+    "0x0060be50": {
+      "name": "FUN_0060be50", "conv": "cdecl",
+      "args": ["cstr", "cstr", "cstr", "mem:128", "int", "cstr"], "ret": 0,
+      "writes": [{"arg": 3, "offset": 0, "hex": "2a4e554c4c2a00"}]
+    },
+    "0x00609680": {"name": "FUN_00609680", "conv": "cdecl", "args": ["cstr"], "ret": 0},
+    "user32.dll!MessageBoxA": {"name": "MessageBoxA", "conv": "stdcall", "args": ["u32", "cstr", "cstr", "u32"], "ret": 0},
+    "0x0060d0d5": {"name": "operator delete", "conv": "cdecl", "args": ["u32"], "ret": 0},
+    "0x00611848": {"name": "_exit", "conv": "cdecl", "args": ["int"], "noreturn": true},
+    "0x004cc98f": {"name": "FUN_004cc98f", "conv": "cdecl", "args": [], "ret": 0, "ret_edx": 1},
+    "@cpu1": {"name": "cpu1", "conv": "cdecl", "args": [], "ret": 1000},
+    "@cpu2": {"name": "cpu2", "conv": "cdecl", "args": [], "ret": 1100},
+    "@coinit": {"name": "CoInitialize", "conv": "stdcall", "args": ["u32"], "ret": 0},
+    "@couninit": {"name": "CoUninitialize", "conv": "stdcall", "args": [], "ret": 0},
+    "0x0060f81e": {"name": "FUN_0060f81e", "conv": "cdecl", "args": ["int"], "ret": 100},
+    "0x004ced8f": {"name": "CheckCriticalFiles_guess", "conv": "cdecl", "args": ["cstr", "int"], "ret": 0},
+    "ole32.dll!CoInitialize": {"name": "CoInitialize", "conv": "stdcall", "args": ["u32"], "ret": 0},
+    "0x004ce2d6": {"name": "RunFrontend_guess", "conv": "cdecl", "args": [], "ret": -1},
+    "0x0060f3dc": {"name": "_isdigit", "conv": "cdecl", "args": ["int"], "ret": 0},
+    "0x0060ecbc": {"name": "_time32", "conv": "cdecl", "args": ["u32"], "ret": 12345},
+    "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 1},
+    "0x0046d655": {"name": "FUN_0046d655", "conv": "cdecl", "args": [], "ret": 5},
+    "0x004cf93c": {"name": "ExecuteEverQuest_guess", "conv": "cdecl", "args": ["int", "int", "cstr", "int"], "ret": 0},
+    "0x004ccb5e": {"name": "MaximizeOrRestoreWindow_guess", "conv": "cdecl", "args": ["char"], "ret": 0},
+    "0x0060e07d": {"name": "free", "conv": "cdecl", "args": ["u32"], "ret": 0},
+    "0x004b3709": {"name": "FUN_004b3709", "conv": "cdecl", "args": [], "ret": 0},
+    "ole32.dll!CoUninitialize": {"name": "CoUninitialize", "conv": "stdcall", "args": [], "ret": 0},
+    "user32.dll!DestroyWindow": {"name": "DestroyWindow", "conv": "stdcall", "args": ["u32"], "ret": 0},
+    "0x006098c0": {"name": "FUN_006098c0", "conv": "cdecl", "args": [], "ret": 0},
+    "kernel32.dll!ExitProcess": {"name": "ExitProcess", "conv": "stdcall", "args": ["u32"], "noreturn": true}
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071",
+    "??3@YAXPAX@Z": "0x0060d0d5",
+    "_exit": "0x00611848",
+    "_isdigit": "0x0060f3dc",
+    "__stricmp": "0x00621e9c",
+    "_free": "0x0060e07d"
+  },
+  "cases": [
+    {
+      "name": "error_text_early_return",
+      "args": [1, 0, {"from_image": "0x0064da6c", "image_size": 128, "as": "cstr"}, 1]
+    },
+    {
+      "name": "error_text_with_tail",
+      "args": [1, 0, "prefix xx suffix", 1],
+      "memory": [{"addr": "0x0064da6c", "cstr": "xx"}]
+    },
+    {
+      "name": "loop_negative_result",
+      "args": [1, 0, "client", 1],
+      "callees": {"0x004ce2d6": {"ret": -1}}
+    },
+    {
+      "name": "zero_message_first_poll",
+      "args": [1, 0, "client", 1],
+      "callees": {
+        "0x004ce2d6": {"ret": 0},
+        "0x0060f3dc": {"ret": 0}
+      },
+      "memory": [{"addr": "0x009873cc", "cstr": "abc"}]
+    },
+    {
+      "name": "normal_dispatch_then_idle",
+      "args": [1, 0, "client", 1],
+      "callees": {
+        "0x00609680": {"ret": 0},
+        "0x004ce2d6": {"ret": [1, 0]},
+        "0x0060f3dc": {"ret": [1, 1, 1, 1, 0]},
+        "0x00621e9c": {"ret": [0, 0]},
+        "0x0060f81e": {"ret": 100},
+        "ole32.dll!CoInitialize": null,
+        "@coinit": {"ret": -1}
+      },
+      "memory": [
+        {"addr": "0x0098797c", "u32": 1},
+        {"addr": "0x009873cc", "cstr": "123"}
+      ]
+    },
+    {
+      "name": "quit_after_dispatch_and_timer_fast_path",
+      "args": [1, 0, "client", 1],
+      "callees": {
+        "0x004ce2d6": {"ret": 1},
+        "0x0060f3dc": {"ret": 0},
+        "0x00621e9c": {"ret": 1},
+        "@cpu1": {"ret": 10000},
+        "@cpu2": {"ret": 10050},
+        "0x0060f81e": {"ret": 50}
+      },
+      "memory": [
+        {"addr": "0x00905d28", "u32": 1},
+        {"addr": "0x009875cc", "cstr": "1234567890123456789012345"},
+        {"addr": "0x009873cc", "cstr": "abc"}
+      ]
+    },
+    {
+      "name": "graphics_fallback_and_failure_exit",
+      "args": [1, 0, "client", 1],
+      "callees": {
+        "0x0060be50": {
+          "writes": [{"arg": 3, "offset": 0, "hex": "637573746f6d2e646c6c00"}]
+        },
+        "0x00609680": {"ret": [1, 1]},
+        "0x00611848": {"noreturn": true}
+      }
+    },
+    {
+      "name": "null_graphics_allocation_and_free",
+      "args": [1, 0, "client", 1],
+      "callees": {
+        "0x0060d071": {"ret": 0},
+        "0x004ce2d6": {"ret": -1}
+      },
+      "memory": [{"addr": "0x00851398", "u32": "@scratch"}]
+    },
+    {
+      "name": "long_numeric_server",
+      "args": [1, 0, "client", 1],
+      "callees": {
+        "0x004ce2d6": {"ret": [1, 0]},
+        "0x0060f3dc": {"ret": [1, 0]},
+        "0x00621e9c": {"ret": [1, 1]}
+      },
+      "memory": [
+        {"addr": "0x009873cc", "cstr": "123456789012345678901234567890"},
+        {"addr": "0x009875cc", "cstr": "1234567890123456789012345"}
+      ]
+    },
+    {
+      "name": "dll_fallback_success",
+      "args": [1, 0, "client", 1],
+      "callees": {
+        "0x0060be50": {
+          "writes": [{"arg": 3, "offset": 0, "hex": "637573746f6d2e646c6c00"}]
+        },
+        "0x00609680": {"ret": [1, 0]},
+        "0x004ce2d6": {"ret": -1}
+      }
+    },
+    {
+      "name": "custom_graphics_loaded_without_fallback",
+      "args": [1, 0, "client", 1],
+      "callees": {
+        "0x0060be50": {
+          "writes": [{"arg": 3, "offset": 0, "hex": "637573746f6d2e646c6c00"}]
+        },
+        "0x00609680": {"ret": 0},
+        "0x004ce2d6": {"ret": -1}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5045554,
+    "count": 50,
+    "args": [
+      {"choices": [0, 1, 2]},
+      {"choices": [0, 1]},
+      {"choices": ["client", "fatal", "client fatal", ""]},
+      {"choices": [0, 1, 2]}
+    ],
+    "memory": [
+      {"addr": "0x0079af50", "type": "int", "choices": [-7200, -60, 0, 3600]},
+      {"addr": "0x00905d28", "type": "int", "choices": [0, 1]},
+      {"addr": "0x0098797c", "type": "int", "choices": [0, 1, 5]}
+    ]
+  },
+  "_survivors": "L2387: when timezone is zero, negating zero has no observable effect; L2447: while (1) and while (2) are both always true, and the loop exits only through explicit breaks"
+}

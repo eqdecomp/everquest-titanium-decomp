@@ -1,0 +1,123 @@
+{
+  "function": "ContainerWnd_guess::WndNotification_guess",
+  "original": "0x004fc6f5",
+  "sources": ["src/EverQuest/tu_149_ContainerWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@containerwnd",
+  "args": [
+    {"name": "sender_guess", "type": "ptr"},
+    {"name": "message_guess", "type": "u32"},
+    {"name": "data_guess", "type": "ptr"}
+  ],
+  "ret": "int",
+  "objects": {
+    "containerwnd": {
+      "size": "0x1b4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@wnd_vtable"},
+        {"offset": "0x15c", "u32": "@contents"},
+        {"offset": "0x160", "u32": "@slot0"},
+        {"offset": "0x164", "u32": "@slot1"},
+        {"offset": "0x168", "u32": "@slot2"},
+        {"offset": "0x16c", "u32": "@slot3"},
+        {"offset": "0x170", "u32": "@slot4"},
+        {"offset": "0x174", "u32": "@slot5"},
+        {"offset": "0x178", "u32": "@slot6"},
+        {"offset": "0x17c", "u32": "@slot7"},
+        {"offset": "0x180", "u32": "@slot8"},
+        {"offset": "0x184", "u32": "@slot9"},
+        {"offset": "0x188", "u32": "@combine"},
+        {"offset": "0x18c", "u32": "@done"},
+        {"offset": "0x194", "u32": "@insert"},
+        {"offset": "0x198", "u32": "@remove"},
+        {"offset": "0x19c", "u32": "@delete"},
+        {"offset": "0x1a8", "u32": "@augment"}
+      ]
+    },
+    "fn": {"size": "0x4", "fill": "zero"},
+    "wnd_vtable": {"size": "0x8c", "fill": "zero", "init": [{"offset": "0x88", "u32": "@fn"}]},
+    "contents": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "u32": "@contents_vtable"}]},
+    "contents_vtable": {"size": "0x2c", "fill": "zero", "init": [{"offset": "0x28", "u32": "@fn"}]},
+    "part": {"size": "0x100", "fill": "zero"},
+    "owner": {"size": "0x74", "fill": "zero"},
+    "sender": {"size": "0x100", "fill": "zero"},
+    "data": {"size": "0x100", "fill": "zero"},
+    "combine": {"size": "0x100", "fill": "zero"},
+    "done": {"size": "0x100", "fill": "zero"},
+    "insert": {"size": "0x100", "fill": "zero"},
+    "remove": {"size": "0x100", "fill": "zero"},
+    "delete": {"size": "0x100", "fill": "zero"},
+    "augment": {"size": "0x100", "fill": "zero"},
+    "slot0": {"size": "0x100", "fill": "zero"},
+    "slot1": {"size": "0x100", "fill": "zero"},
+    "slot2": {"size": "0x100", "fill": "zero"},
+    "slot3": {"size": "0x100", "fill": "zero"},
+    "slot4": {"size": "0x100", "fill": "zero"},
+    "slot5": {"size": "0x100", "fill": "zero"},
+    "slot6": {"size": "0x100", "fill": "zero"},
+    "slot7": {"size": "0x100", "fill": "zero"},
+    "slot8": {"size": "0x100", "fill": "zero"},
+    "slot9": {"size": "0x100", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00850cbc", "u32": "@owner"},
+    {"addr": "0x007a1000", "size": 32, "fill": "zero"},
+    {"addr": "0x007a1000", "offset": "0x8", "u32": 8},
+    {"addr": "0x007a2000", "cstr": "Empty"},
+    {"addr": "0x007a2010", "cstr": "Item"}
+  ],
+  "callees": {
+    "0x004faa17": {"name": "CloseContainer_guess", "conv": "thiscall", "args": ["int", "u8"]},
+    "0x004b1d0b": {"name": "Check_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x004fb700": {"name": "SetContainer_guess", "conv": "thiscall", "args": ["ptr", "int"]},
+    "0x004fbdd0": {"name": "Confirm_guess", "conv": "thiscall", "args": ["int"]},
+    "0x004fc106": {"name": "HandleCombine", "conv": "thiscall", "args": []},
+    "0x004fae39": {"name": "UpdateAugments_guess", "conv": "thiscall", "args": []},
+    "0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": [9, 50]},
+    "0x00597c20": {"name": "SetCurSel_guess", "conv": "thiscall", "args": ["u32"]},
+    "0x00597f10": {
+      "name": "GetItemText_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "u32", "u32"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "00107a00"}]
+    },
+    "0x00572300": {"name": "CXStrToString_guess", "conv": "thiscall", "args": [], "ret": "0x007a2000"},
+    "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 0},
+    "0x00571d00": {"name": "CXStrCleanup_guess", "conv": "thiscall", "args": ["u32"]},
+    "0x0059dd30": {"name": "IsReady_guess", "conv": "thiscall", "args": [], "ret": [1, 1]},
+    "0x00598580": {"name": "ClearAllSel_guess", "conv": "thiscall", "args": []},
+    "0x005a2230": {"name": "BaseWndNotification_guess", "conv": "thiscall", "args": ["ptr", "u32", "ptr"], "ret": 77},
+    "@fn": {"name": "VirtualSlot_guess", "conv": "thiscall", "args": [], "ret": "@part"}
+  },
+  "rewrite_aliases": {"__stricmp": "0x00621e9c"},
+  "cases": [
+    {"name": "message 10 with no contents", "args": ["@sender", 10, "@data"], "memory": [{"addr": "@containerwnd", "offset": "0x15c", "u32": 0}]},
+    {"name": "message 10 drops contents", "args": ["@sender", 10, "@data"]},
+    {"name": "combine accepted", "args": ["@combine", 1, "@data"]},
+    {"name": "combine below threshold", "args": ["@combine", 1, "@data"], "callees": {"0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": 8}}},
+    {"name": "combine state 0x33", "args": ["@combine", 1, "@data"], "callees": {"0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": [9, 51]}}},
+    {"name": "done accepted", "args": ["@done", 1, "@data"]},
+    {"name": "done with no contents", "args": ["@done", 1, "@data"], "memory": [{"addr": "@containerwnd", "offset": "0x15c", "u32": 0}]},
+    {"name": "insert confirmation", "args": ["@insert", 1, "@data"]},
+    {"name": "delete confirmation", "args": ["@delete", 1, "@data"]},
+    {"name": "remove confirmation", "args": ["@remove", 1, "@data"]},
+    {"name": "augment list Empty", "args": ["@augment", 1, "@data"]},
+    {"name": "augment list other text", "args": ["@augment", 1, "@data"], "callees": {"0x00572300": {"name": "CXStrToString_guess", "conv": "thiscall", "args": [], "ret": "0x007a2010"}, "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 1}}},
+    {"name": "augment first text empty", "args": ["@augment", 1, "@data"], "callees": {"0x00597f10": {"name": "GetItemText_guess", "conv": "thiscall", "args": ["ignore", "u32", "u32"], "ret": "arg0"}, "0x0059dd30": {"name": "IsReady_guess", "conv": "thiscall", "args": [], "ret": [0, 1]}}},
+    {"name": "slot nine update", "args": ["@slot9", 1, "@data"], "callees": {"0x005eccf0": {"name": "GetType_guess", "conv": "thiscall", "args": [], "ret": 53}}},
+    {"name": "unmatched control", "args": ["@sender", 1, "@data"]},
+    {"name": "other message", "args": ["@sender", 2, "@data"]}
+  ],
+  "fuzz": {
+    "seed": 5228277,
+    "count": 100,
+    "args": [
+      {"choices": ["@sender", "@combine", "@done", "@insert", "@delete", "@remove", "@augment", "@slot9"]},
+      {"choices": [0, 1, 2, 10]},
+      {"choices": ["@data", 0]}
+    ],
+    "memory": [{"addr": "@containerwnd", "offset": "0x15c", "type": "u32", "choices": ["@contents"]}]
+  }
+}

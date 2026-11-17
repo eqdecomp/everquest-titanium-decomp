@@ -1,0 +1,360 @@
+{
+  "function": "ChannelEventHandler_guess::ChatServerMessageReceived_guess",
+  "original": "0x0049a2d7",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@channeleventhandler",
+  "args": [
+    {
+      "name": "first_guess",
+      "type": "cstr"
+    },
+    {
+      "name": "second_guess",
+      "type": "cstr"
+    },
+    {
+      "name": "index_guess",
+      "type": "int"
+    },
+    {
+      "name": "text_guess",
+      "type": "cstr"
+    },
+    {
+      "name": "flag_guess",
+      "type": "char"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "channeleventhandler": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "from_image": "0x0079ac74",
+      "image_size": 4
+    },
+    {
+      "addr": "0x006460ac",
+      "from_image": "0x006460ac",
+      "image_size": 64
+    },
+    {
+      "addr": "0x00923d74",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x0049297b": {
+      "name": "BeingIgnored_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x0046da4a": {
+      "name": "FUN_0046da4a",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "41"
+        }
+      ]
+    },
+    "0x00467ad1": {
+      "name": "AddNameToTellList_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x00478f73": {
+      "name": "GarbleText_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "ignore",
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "6f 6b 00"
+        }
+      ]
+    },
+    "0x0049a111": {
+      "name": "ChatServerNotificationFlush_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004982c6": {
+      "name": "dsp_chat",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "negative-copy-chat",
+      "args": [
+        "first",
+        "channel",
+        -5,
+        "body",
+        0
+      ]
+    },
+    {
+      "name": "minus-one-copy-chat",
+      "args": [
+        "first",
+        "channel",
+        -1,
+        "body",
+        0
+      ]
+    },
+    {
+      "name": "empty-copy-no-chat",
+      "args": [
+        "",
+        "channel",
+        -5,
+        "body",
+        0
+      ]
+    },
+    {
+      "name": "minus-four-duplicate",
+      "args": [
+        "first",
+        "channel",
+        -4,
+        "body",
+        0
+      ],
+      "callees": {
+        "0x0049297b": {
+          "name": "FUN_0049297b",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "minus-four-short-copy",
+      "args": [
+        "first",
+        "channel",
+        -4,
+        "body",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00923d74",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "minus-four-full-copy",
+      "args": [
+        "first",
+        "channel",
+        -4,
+        "body",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00923d74",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "minus-three-flag-clear",
+      "args": [
+        "first",
+        "channel",
+        -3,
+        "body",
+        0
+      ]
+    },
+    {
+      "name": "minus-three-flag-set",
+      "args": [
+        "first",
+        "channel",
+        -3,
+        "body",
+        1
+      ]
+    },
+    {
+      "name": "minus-two",
+      "args": [
+        "first",
+        "channel",
+        -2,
+        "body",
+        0
+      ]
+    },
+    {
+      "name": "zero-empty-text-copy",
+      "args": [
+        "first",
+        "channel",
+        0,
+        "",
+        0
+      ]
+    },
+    {
+      "name": "zero-text-flag-clear",
+      "args": [
+        "first",
+        "channel",
+        0,
+        "body",
+        0
+      ]
+    },
+    {
+      "name": "positive-text-flag-set",
+      "args": [
+        "first",
+        "channel",
+        1,
+        "body",
+        1
+      ]
+    },
+    {
+      "name": "positive-duplicate",
+      "args": [
+        "first",
+        "channel",
+        1,
+        "body",
+        0
+      ],
+      "callees": {
+        "0x0049297b": {
+          "name": "FUN_0049297b",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 1
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4825815,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "first",
+          "",
+          "source"
+        ]
+      },
+      {
+        "choices": [
+          "channel",
+          "other"
+        ]
+      },
+      {
+        "choices": [
+          -5,
+          -4,
+          -3,
+          -2,
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "choices": [
+          "body",
+          "",
+          "text"
+        ]
+      },
+      {
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x00923d74",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "_survivors": "L8680: the fixture stack starts zeroed and every continuing branch overwrites message_guess[0] before reading it"
+}

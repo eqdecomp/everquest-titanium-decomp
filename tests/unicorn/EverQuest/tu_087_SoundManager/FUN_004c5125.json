@@ -1,0 +1,118 @@
+{
+  "function": "SoundManager_guess::TakeFreeInstance_guess",
+  "original": "0x004c5125",
+  "sources": [
+    "src/EverQuest/tu_087_SoundManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@audioengine",
+  "args": [
+    {
+      "name": "type_guess",
+      "type": "int"
+    },
+    {
+      "name": "index_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "audioengine": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "node_a": {
+      "size": "0x18",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x14",
+          "u32": "@node_b"
+        }
+      ]
+    },
+    "node_b": {
+      "size": "0x18",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {},
+  "cases": [
+    {
+      "name": "type 1 head with next",
+      "args": [1, 1],
+      "memory": [
+        {"addr": "@audioengine", "offset": "0x34", "u32": "@node_a"}
+      ]
+    },
+    {
+      "name": "type 1 empty slot",
+      "args": [1, 2]
+    },
+    {
+      "name": "type 1 last node",
+      "args": [1, 0],
+      "memory": [
+        {"addr": "@audioengine", "offset": "0x30", "u32": "@node_b"}
+      ]
+    },
+    {
+      "name": "type 0 head with next",
+      "args": [0, 3],
+      "memory": [
+        {"addr": "@audioengine", "offset": "0x6c", "u32": "@node_a"}
+      ]
+    },
+    {
+      "name": "type 0 empty slot",
+      "args": [0, 0]
+    },
+    {
+      "name": "type 2 sequence present",
+      "args": [2, 0],
+      "memory": [
+        {"addr": "@audioengine", "offset": "0x90", "u32": "@node_a"}
+      ]
+    },
+    {
+      "name": "type 2 sequence empty",
+      "args": [2, 0]
+    },
+    {
+      "name": "type 3 unknown",
+      "args": [3, 0],
+      "memory": [
+        {"addr": "@audioengine", "offset": "0x30", "u32": "@node_a"}
+      ]
+    },
+    {
+      "name": "type -1 unknown",
+      "args": [-1, 0]
+    }
+  ],
+  "fuzz": {
+    "seed": 5001509,
+    "count": 150,
+    "args": [
+      {"choices": [0, 1, 2, 3, -1]},
+      {"range": [-1, 7]}
+    ],
+    "memory": [
+      {"addr": "@audioengine", "offset": "0x30", "type": "ptr", "choices": ["@node_a", "@node_b", 0]},
+      {"addr": "@audioengine", "offset": "0x34", "type": "ptr", "choices": ["@node_a", "@node_b", 0]},
+      {"addr": "@audioengine", "offset": "0x38", "type": "ptr", "choices": ["@node_a", "@node_b", 0]},
+      {"addr": "@audioengine", "offset": "0x3c", "type": "ptr", "choices": ["@node_a", "@node_b", 0]},
+      {"addr": "@audioengine", "offset": "0x40", "type": "ptr", "choices": ["@node_a", "@node_b", 0]},
+      {"addr": "@audioengine", "offset": "0x44", "type": "ptr", "choices": ["@node_a", "@node_b", 0]},
+      {"addr": "@audioengine", "offset": "0x60", "type": "ptr", "choices": ["@node_a", "@node_b", 0]},
+      {"addr": "@audioengine", "offset": "0x64", "type": "ptr", "choices": ["@node_a", "@node_b", 0]},
+      {"addr": "@audioengine", "offset": "0x68", "type": "ptr", "choices": ["@node_a", "@node_b", 0]},
+      {"addr": "@audioengine", "offset": "0x6c", "type": "ptr", "choices": ["@node_a", "@node_b", 0]},
+      {"addr": "@audioengine", "offset": "0x70", "type": "ptr", "choices": ["@node_a", "@node_b", 0]},
+      {"addr": "@audioengine", "offset": "0x74", "type": "ptr", "choices": ["@node_a", "@node_b", 0]},
+      {"addr": "@audioengine", "offset": "0x90", "type": "ptr", "choices": ["@node_a", "@node_b", 0]}
+    ]
+  }
+}

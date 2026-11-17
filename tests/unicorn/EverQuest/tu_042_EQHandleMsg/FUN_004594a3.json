@@ -1,0 +1,145 @@
+{
+  "function": "AddItemToCursorQueue_guess",
+  "original": "0x004594a3",
+  "sources": [
+    "src/EverQuest/tu_042_EQHandleMsg.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "setting_guess", "type": "ptr"},
+    {"name": "flag_guess", "type": "char"}
+  ],
+  "ret": "bool",
+  "objects": {
+    "setting": {"size": "0x100", "fill": "zero"},
+    "item1": {"size": "0x100", "fill": "zero"},
+    "item2": {"size": "0x100", "fill": "zero"},
+    "root": {"size": "0xe00", "fill": "zero"},
+    "offsetObj": {"size": 8, "fill": "zero"},
+    "found": {"size": "0x100", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@root"},
+    {"addr": "@root", "offset": "0x8", "u32": "@offsetObj"},
+    {"addr": "@offsetObj", "offset": "0x4", "u32": 0},
+    {"addr": "@setting", "offset": "0x4c", "u32": 1234},
+    {"addr": "@item1", "offset": "0x4c", "u32": 10000},
+    {"addr": "@item2", "offset": "0x4c", "u32": 20000},
+    {"addr": "@root", "offset": "0xd38", "u32": "@item1"}
+  ],
+  "callees": {
+    "0x005ec220": {"name": "Locator4594A3::Find_guess", "conv": "thiscall", "args": [], "ret": "@found"},
+    "0x005e0f30": {"name": "Item45A817::GetCount_guess", "conv": "thiscall", "args": [], "ret": "this"},
+    "0x004912b1": {"name": "SendMessage_guess", "conv": "cdecl", "args": ["ptr", "int", "mem:12", "int", "int"]},
+    "0x00458707": {"name": "Settings_guess::SetD38_guess", "conv": "thiscall", "args": ["u32", "u32"]}
+  },
+  "cases": [
+    {
+      "name": "null setting",
+      "args": [0, 1]
+    },
+    {
+      "name": "null setting, flag clear",
+      "args": [0, 0]
+    },
+    {
+      "name": "flag set, free slot",
+      "args": ["@setting", 1]
+    },
+    {
+      "name": "flag set, full table",
+      "args": ["@setting", 1],
+      "memory": [
+        {"addr": "@root", "offset": "0xd3c", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd40", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd44", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd48", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd4c", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd50", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd54", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd58", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd5c", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd60", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd64", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd68", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd6c", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd70", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd74", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd78", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd7c", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd80", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd84", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd88", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd8c", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd90", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd94", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd98", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xd9c", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xda0", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xda4", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xda8", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xdac", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xdb0", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xdb4", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xdb8", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xdbc", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xdc0", "u32": "@item1"},
+        {"addr": "@root", "offset": "0xdc4", "u32": "@item1"}
+      ]
+    },
+    {
+      "name": "flag clear, found item is the setting",
+      "args": ["@setting", 0],
+      "memory": [
+        {"addr": "@found", "offset": "0x88", "u32": "@setting"}
+      ]
+    },
+    {
+      "name": "flag clear, found item differs",
+      "args": ["@setting", 0],
+      "memory": [
+        {"addr": "@found", "offset": "0x88", "u32": "@item2"}
+      ]
+    },
+    {
+      "name": "flag clear, slot holds the setting",
+      "args": ["@setting", 0],
+      "memory": [
+        {"addr": "@root", "offset": "0xd38", "u32": "@setting"}
+      ]
+    },
+    {
+      "name": "flag clear, slot holds the setting but it is big",
+      "args": ["@setting", 0],
+      "memory": [
+        {"addr": "@root", "offset": "0xd38", "u32": "@setting"},
+        {"addr": "@setting", "offset": "0x4c", "u32": 40000}
+      ]
+    },
+    {
+      "name": "flag clear, free slot",
+      "args": ["@setting", 0]
+    }
+  ],
+  "_survivors": "L6881: the message's field8 is already 0 from the zeroed stack, so deleting its store is not observable",
+  "coverage_ok": {
+    "00459538-00459539": "bounds trap (__debugbreak) on the slot index: the loops never pass 0x23",
+    "0045954E-0045954F": "bounds trap (__debugbreak) on the slot index: the loops never pass 0x23",
+    "0045956B-0045956C": "bounds trap (__debugbreak) on the slot index: the loops never pass 0x23",
+    "0045959E-0045959F": "bounds trap (__debugbreak) on the slot index: the loops never pass 0x23"
+  },
+  "fuzz": {
+    "seed": 4560035,
+    "count": 100,
+    "args": [
+      {"choices": ["@setting", 0]},
+      {"choices": [0, 1]}
+    ],
+    "memory": [
+      {"addr": "@found", "offset": "0x88", "type": "u32", "choices": [0, "@setting", "@item2"]},
+      {"addr": "@root", "offset": "0xd38", "type": "u32", "choices": [0, "@item1", "@setting"]},
+      {"addr": "@root", "offset": "0xd3c", "type": "u32", "choices": [0, "@item2"]},
+      {"addr": "@setting", "offset": "0x4c", "type": "int", "range": [0, 40000]}
+    ]
+  }
+}

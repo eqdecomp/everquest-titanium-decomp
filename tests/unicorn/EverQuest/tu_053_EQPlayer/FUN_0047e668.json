@@ -1,0 +1,626 @@
+{
+  "function": "EQPlayer_guess::AttachPlayerToPlayerDag_guess",
+  "original": "0x0047E668",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@eqplayer",
+  "args": [
+    {
+      "name": "actor",
+      "type": "ptr"
+    },
+    {
+      "name": "state",
+      "type": "int"
+    }
+  ],
+  "ret": "char",
+  "objects": {
+    "eqplayer": {
+      "size": "0x348",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@selfInfo"
+        }
+      ]
+    },
+    "actor": {
+      "size": "0x348",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@actorInfo"
+        }
+      ]
+    },
+    "selfInfo": {
+      "size": "0x10c0",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@selfVisual"
+        },
+        {
+          "offset": "0x12c",
+          "u32": "@selfMetadata"
+        },
+        {
+          "offset": "0x15c",
+          "u32": "@actor"
+        }
+      ]
+    },
+    "actorInfo": {
+      "size": "0x10c0",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@actorVisual"
+        }
+      ]
+    },
+    "selfVisual": {
+      "size": "4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@selfTable"
+        }
+      ]
+    },
+    "actorVisual": {
+      "size": "4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@actorTable"
+        }
+      ]
+    },
+    "selfTable": {
+      "size": "0x168",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x18",
+          "u32": "@fn_slot6"
+        },
+        {
+          "offset": "0x48",
+          "u32": "@fn_slot18"
+        }
+      ]
+    },
+    "actorTable": {
+      "size": "0x168",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x14c",
+          "u32": "@fn_slot83"
+        },
+        {
+          "offset": "0x154",
+          "u32": "@fn_slot85_true"
+        },
+        {
+          "offset": "0x15c",
+          "u32": "@fn_slot87"
+        },
+        {
+          "offset": "0x164",
+          "u32": "@fn_slot89"
+        }
+      ]
+    },
+    "selfMetadata": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "cstr": "OTHER"
+        },
+        {
+          "offset": "0x34",
+          "u8": 1
+        }
+      ]
+    },
+    "fn_slot6": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "fn_slot18": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "fn_slot83": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "fn_slot85_true": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "fn_slot85_false_then_true": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "fn_slot85_false": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "fn_slot87": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "fn_slot89": {
+      "size": "0x10",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": 0
+    },
+    {
+      "addr": "0x00905cf8",
+      "u32": 0
+    },
+    {
+      "addr": "0x00850ccc",
+      "u32": 1
+    },
+    {
+      "addr": "@eqplayer",
+      "offset": "0x260",
+      "u32": "0x16f"
+    },
+    {
+      "addr": "@actor",
+      "offset": "0x260",
+      "u32": "0xd8"
+    }
+  ],
+  "callees": {
+    "0x0047bfd0": {
+      "name": "IsHorseRace_guess",
+      "passthrough": true
+    },
+    "0x0047a387": {
+      "name": "FUN_0047a387_guess",
+      "passthrough": true
+    },
+    "0x0047cee4": {
+      "name": "IsHorseUsingHumanModel_guess",
+      "passthrough": true
+    },
+    "0x004798d7": {
+      "name": "GetActorTag_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00"
+        }
+      ]
+    },
+    "0x0048c879": {
+      "name": "FormatName_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "int"
+      ],
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00"
+        }
+      ]
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "52494445525f44414700"
+        }
+      ]
+    },
+    "@fn_slot6": {
+      "name": "set_actor_state",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "@fn_slot18": {
+      "name": "sync_position",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ]
+    },
+    "@fn_slot83": {
+      "name": "set_rider_text",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "cstr"
+      ]
+    },
+    "@fn_slot85_true": {
+      "name": "has_rider_true",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 1
+    },
+    "@fn_slot85_false_then_true": {
+      "name": "has_rider_false_then_true",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": [
+        0,
+        1
+      ]
+    },
+    "@fn_slot85_false": {
+      "name": "has_rider_false",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "@fn_slot87": {
+      "name": "clear_rider",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ]
+    },
+    "@fn_slot89": {
+      "name": "attach_rider",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "null actor",
+      "args": [
+        0,
+        1
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "missing self visual",
+      "args": [
+        "@actor",
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@selfInfo",
+          "offset": "0x0",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "normal state same actor",
+      "args": [
+        "@actor",
+        1
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "normal state other actor",
+      "args": [
+        "@actor",
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@selfInfo",
+          "offset": "0x15c",
+          "u32": "0x12345678"
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "controlled rider state",
+      "args": [
+        "@actor",
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@selfInfo",
+          "offset": "0x15c",
+          "u32": "0x12345678"
+        },
+        {
+          "addr": "0x00905ce4",
+          "u32": "@eqplayer"
+        },
+        {
+          "addr": "0x00850ccc",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "sentinel rejects non mount",
+      "args": [
+        "@actor",
+        -1
+      ],
+      "memory": [
+        {
+          "addr": "@actor",
+          "offset": "0x260",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "sentinel rejects actor state",
+      "args": [
+        "@actor",
+        -1
+      ],
+      "memory": [
+        {
+          "addr": "@eqplayer",
+          "offset": "0x260",
+          "u32": "0xd8"
+        },
+        {
+          "addr": "@selfInfo",
+          "offset": "0x15c",
+          "u32": "0x12345678"
+        },
+        {
+          "addr": "@selfMetadata",
+          "offset": "0x34",
+          "u8": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "sentinel rejects actor definition",
+      "args": [
+        "@actor",
+        -1
+      ],
+      "memory": [
+        {
+          "addr": "@eqplayer",
+          "offset": "0x260",
+          "u32": "0xd8"
+        },
+        {
+          "addr": "@selfInfo",
+          "offset": "0x15c",
+          "u32": "0x12345678"
+        },
+        {
+          "addr": "@selfMetadata",
+          "offset": "0x34",
+          "u8": 1
+        },
+        {
+          "addr": "@selfMetadata",
+          "offset": "0x8",
+          "from_image": "0x006426B0",
+          "image_size": 13
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "sentinel existing rider",
+      "args": [
+        "@actor",
+        -1
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "sentinel installs rider",
+      "args": [
+        "@actor",
+        -1
+      ],
+      "memory": [
+        {
+          "addr": "@selfInfo",
+          "offset": "0x15c",
+          "u32": "0x12345678"
+        },
+        {
+          "addr": "@actorTable",
+          "offset": "0x154",
+          "u32": "@fn_slot85_false_then_true"
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "sentinel still missing rider",
+      "args": [
+        "@actor",
+        -1
+      ],
+      "memory": [
+        {
+          "addr": "@selfInfo",
+          "offset": "0x15c",
+          "u32": "0x12345678"
+        },
+        {
+          "addr": "@actorTable",
+          "offset": "0x154",
+          "u32": "@fn_slot85_false"
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4712040,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@actor",
+          0
+        ]
+      },
+      {
+        "choices": [
+          -1,
+          -2,
+          0,
+          1
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@eqplayer",
+        "offset": "0x260",
+        "type": "int",
+        "choices": [
+          0,
+          216,
+          367,
+          472
+        ]
+      },
+      {
+        "addr": "@actor",
+        "offset": "0x260",
+        "type": "int",
+        "choices": [
+          0,
+          216,
+          472
+        ]
+      },
+      {
+        "addr": "@selfInfo",
+        "offset": "0x15c",
+        "type": "u32",
+        "choices": [
+          "@actor",
+          "0x12345678"
+        ]
+      },
+      {
+        "addr": "@selfMetadata",
+        "offset": "0x34",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00905ce4",
+        "type": "u32",
+        "choices": [
+          0,
+          "@eqplayer"
+        ]
+      },
+      {
+        "addr": "0x00905cf8",
+        "type": "u32",
+        "choices": [
+          0,
+          "@eqplayer"
+        ]
+      },
+      {
+        "addr": "0x00850ccc",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

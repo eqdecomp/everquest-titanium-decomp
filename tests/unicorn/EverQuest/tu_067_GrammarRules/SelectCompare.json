@@ -1,0 +1,57 @@
+{
+  "function": "GrammarRules_guess::RuleEn4_guess",
+  "original": "0x004b172e",
+  "sources": [
+    "src/EverQuest/tu_067_GrammarRules.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@cache",
+  "args": [
+    {"name": "destination", "type": "ptr"},
+    {"name": "first", "type": "cstr"},
+    {"name": "second", "type": "cstr"},
+    {"name": "third", "type": "cstr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "cache": {"size": "0x100", "fill": "random"},
+    "destination": {"size": "0x100", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x00621e9c": {"name": "_stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 0},
+    "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "__stricmp": "0x00621e9c"
+  },
+  "cases": [
+    {"name": "equal atoi 0", "args": ["@destination", "7", "bcd", "xyz"]},
+    {"name": "equal atoi 1", "args": ["@destination", "1", "bcd", "xyz"],
+     "callees": {"0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 1}}},
+    {"name": "equal atoi 2", "args": ["@destination", "2", "bcd", "xyz"],
+     "callees": {"0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 2}}},
+    {"name": "equal atoi minus 1", "args": ["@destination", "-1", "bcd", "xyz"],
+     "callees": {"0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": -1}}},
+    {"name": "not equal", "args": ["@destination", "abc", "bcd", "xyz"],
+     "callees": {"0x00621e9c": {"name": "_stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 1}}},
+    {"name": "not equal atoi 1", "args": ["@destination", "1", "bcd", "xyz"],
+     "callees": {"0x00621e9c": {"name": "_stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 1},
+                 "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 1}}},
+    {"name": "not equal atoi 0", "args": ["@destination", "0", "bcd", "xyz"],
+     "callees": {"0x00621e9c": {"name": "_stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": -1},
+                 "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 0}}},
+    {"name": "zeros", "args": ["@destination", "", "", ""]}
+  ],
+  "fuzz": {
+    "seed": 4921134,
+    "count": 100,
+    "args": [
+      {"choices": ["@destination"]},
+      {"choices": ["7", "1", "abc", "", "hello world", "0"]},
+      {"choices": ["bcd", "", "hello world"]},
+      {"choices": ["xyz", "", "vowel text"]}
+    ],
+    "memory": []
+  }
+}

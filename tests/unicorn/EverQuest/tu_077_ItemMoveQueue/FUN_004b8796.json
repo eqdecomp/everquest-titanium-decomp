@@ -1,0 +1,231 @@
+{
+  "function": "PlaceMovedItem_guess",
+  "original": "0x004B8796",
+  "sources": [
+    "src/EverQuest/tu_077_ItemMoveQueue.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "holder_guess", "type": "ptr"},
+    {"name": "lookup_guess", "type": "ptr"},
+    {"name": "index_guess", "type": "int"}
+  ],
+  "ret": "bool",
+  "objects": {
+    "holder": {"size": "0xc288", "fill": "zero"},
+    "lookup": {
+      "size": "0x14", "fill": "zero",
+      "init": [
+        {"offset": "0x08", "u32": 0},
+        {"offset": "0x0c", "u32": 0},
+        {"offset": "0x10", "u32": "@pages"}
+      ]
+    },
+    "pages": {
+      "size": "0x0c", "fill": "zero",
+      "init": [
+        {"offset": "0x00", "u32": "@page"},
+        {"offset": "0x08", "u32": "@wrongpage"}
+      ]
+    },
+    "page": {
+      "size": "0xe0", "fill": "zero",
+      "init": [
+        {"offset": "0x14", "u32": 17},
+        {"offset": "0x20", "u32": 1},
+        {"offset": "0x24", "u32": "@target"},
+        {"offset": "0xbc", "u32": 34},
+        {"offset": "0xc8", "u32": 1},
+        {"offset": "0xcc", "u32": "@target"}
+      ]
+    },
+    "wrongpage": {
+      "size": "0x38", "fill": "zero",
+      "init": [
+        {"offset": "0x20", "u32": 1},
+        {"offset": "0x24", "u32": "@target"}
+      ]
+    },
+    "target": {"size": "0x4", "fill": "zero"},
+    "slot": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [],
+  "callees": {
+    "0x004b735d": {"name": "FUN_004b735d", "conv": "thiscall", "args": [], "ret": 0, "ret_edx": "@page"},
+    "0x004b736f": {"name": "FUN_004b736f", "conv": "thiscall", "args": [], "ret": 1, "ret_edx": "@page"},
+    "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": 0},
+    "0x004b76a6": {"name": "GetInventorySlot_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x004b8269": {"name": "FindStackSlot_guess", "conv": "cdecl", "args": ["ptr", "int", "int", "int", "int", "ptr", "int"], "ret": 0},
+    "0x004b7398": {"name": "FUN_004b7398", "conv": "thiscall", "args": [], "ret": 0, "ret_edx": "@page"},
+    "0x004bc906": {"name": "CanEquipItem_guess", "conv": "thiscall", "args": ["ptr", "int", "int"], "ret": 0},
+    "0x004b7b74": {"name": "FindFreeSlot_guess", "conv": "cdecl", "args": ["ptr", "int", "int", "int", "int", "ptr", "int"], "ret": 0},
+    "0x004b78f2": {"name": "SwapMovedItem_guess", "conv": "cdecl", "args": ["ptr", "ptr", "int"], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "zero type returns false",
+      "args": ["@holder", "@lookup", 0],
+      "memory": [{"addr": "@page", "offset": "0x20", "u32": 0}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "invalid target takes not-ready path twice",
+      "args": ["@holder", "@lookup", 0],
+      "callees": {
+        "0x004b736f": {"name": "FUN_004b736f", "conv": "thiscall", "args": [], "ret": 2, "ret_edx": "@page"},
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": 0},
+        "0x004b7398": {"name": "FUN_004b7398", "conv": "thiscall", "args": [], "ret": [0, 0], "ret_edx": "@page"},
+        "0x004b7b74": {"name": "FUN_004b7b74", "conv": "cdecl", "args": ["ptr", "int", "int", "int", "int", "ptr", "int"], "ret": [0, 0]}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "first loop succeeds on second slot",
+      "args": ["@holder", "@lookup", 0],
+      "callees": {
+        "0x004b736f": {"name": "FUN_004b736f", "conv": "thiscall", "args": [], "ret": 2, "ret_edx": "@page"},
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": 1},
+        "0x004b76a6": {"name": "FUN_004b76a6", "conv": "thiscall", "args": ["ptr"], "ret": [0, "@slot"]},
+        "0x004b8269": {"name": "FUN_004b8269", "conv": "cdecl", "args": ["ptr", "int", "int", "int", "int", "ptr", "int"], "ret": 1}
+      },
+      "memory": [{"addr": "@slot", "u32": 1}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "null holder candidate succeeds",
+      "args": [0, "@lookup", 0],
+      "callees": {
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": 1},
+        "0x004b76a6": {"name": "FUN_004b76a6", "conv": "thiscall", "args": ["ptr"], "ret": "@slot"},
+        "0x004b8269": {"name": "FUN_004b8269", "conv": "cdecl", "args": ["ptr", "int", "int", "int", "int", "ptr", "int"], "ret": 1}
+      },
+      "memory": [{"addr": "@slot", "u32": 1}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "non-null empty slot skips first helper",
+      "args": ["@holder", "@lookup", 0],
+      "callees": {
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": 1},
+        "0x004b76a6": {"name": "FUN_004b76a6", "conv": "thiscall", "args": ["ptr"], "ret": "@slot"},
+        "0x004b7398": {"name": "FUN_004b7398", "conv": "thiscall", "args": [], "ret": 1, "ret_edx": "@page"},
+        "0x004bc906": {"name": "FUN_004bc906", "conv": "thiscall", "args": ["ptr", "int", "int"], "ret": 0},
+        "0x004b78f2": {"name": "FUN_004b78f2", "conv": "cdecl", "args": ["ptr", "ptr", "int"], "ret": 1}
+      },
+      "memory": [{"addr": "@slot", "u32": 0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "not ready then ready validation succeeds",
+      "args": ["@holder", "@lookup", 0],
+      "callees": {
+        "0x004b736f": {"name": "FUN_004b736f", "conv": "thiscall", "args": [], "ret": 2, "ret_edx": "@page"},
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": 0},
+        "0x004b7398": {"name": "FUN_004b7398", "conv": "thiscall", "args": [], "ret": [0, 1], "ret_edx": "@page"},
+        "0x004bc906": {"name": "FUN_004bc906", "conv": "thiscall", "args": ["ptr", "int", "int"], "ret": 1},
+        "0x004b7b74": {"name": "FUN_004b7b74", "conv": "cdecl", "args": ["ptr", "int", "int", "int", "int", "ptr", "int"], "ret": [0, 1]}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "ready but unvalidated reaches final helper",
+      "args": ["@holder", "@lookup", 0],
+      "callees": {
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": 0},
+        "0x004b7398": {"name": "FUN_004b7398", "conv": "thiscall", "args": [], "ret": 1, "ret_edx": "@page"},
+        "0x004bc906": {"name": "FUN_004bc906", "conv": "thiscall", "args": ["ptr", "int", "int"], "ret": 0},
+        "0x004b78f2": {"name": "FUN_004b78f2", "conv": "cdecl", "args": ["ptr", "ptr", "int"], "ret": 1}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "not ready no match returns false",
+      "args": ["@holder", "@lookup", 0],
+      "callees": {
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": 0},
+        "0x004b7398": {"name": "FUN_004b7398", "conv": "thiscall", "args": [], "ret": 0, "ret_edx": "@page"},
+        "0x004b7b74": {"name": "FUN_004b7b74", "conv": "cdecl", "args": ["ptr", "int", "int", "int", "int", "ptr", "int"], "ret": 0},
+        "0x004b78f2": {"name": "FUN_004b78f2", "conv": "cdecl", "args": ["ptr", "ptr", "int"], "ret": 0}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "empty range returns final true",
+      "args": ["@holder", "@lookup", 0],
+      "callees": {
+        "0x004b735d": {"name": "FUN_004b735d", "conv": "thiscall", "args": [], "ret": 1, "ret_edx": "@page"},
+        "0x004b736f": {"name": "FUN_004b736f", "conv": "thiscall", "args": [], "ret": 1, "ret_edx": "@page"},
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": 1},
+        "0x004b78f2": {"name": "FUN_004b78f2", "conv": "cdecl", "args": ["ptr", "ptr", "int"], "ret": 1}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "descending range returns final false",
+      "args": ["@holder", "@lookup", 0],
+      "callees": {
+        "0x004b735d": {"name": "FUN_004b735d", "conv": "thiscall", "args": [], "ret": 2, "ret_edx": "@page"},
+        "0x004b736f": {"name": "FUN_004b736f", "conv": "thiscall", "args": [], "ret": 1, "ret_edx": "@page"},
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": 1},
+        "0x004b78f2": {"name": "FUN_004b78f2", "conv": "cdecl", "args": ["ptr", "ptr", "int"], "ret": 0}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "null holder on validation path",
+      "args": [0, "@lookup", 0],
+      "callees": {
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": 0},
+        "0x004b7398": {"name": "FUN_004b7398", "conv": "thiscall", "args": [], "ret": 1, "ret_edx": "@page"},
+        "0x004bc906": {"name": "FUN_004bc906", "conv": "thiscall", "args": ["ptr", "int", "int"], "ret": 1},
+        "0x004b7b74": {"name": "FUN_004b7b74", "conv": "cdecl", "args": ["ptr", "int", "int", "int", "int", "ptr", "int"], "ret": 1}
+      },
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "right shift selects page zero",
+      "args": ["@holder", "@lookup", 1],
+      "memory": [
+        {"addr": "@lookup", "offset": "0x08", "u32": 0},
+        {"addr": "@lookup", "offset": "0x0c", "u32": 1},
+        {"addr": "@page", "offset": "0x20", "u32": 0},
+        {"addr": "@wrongpage", "offset": "0x20", "u32": 1}
+      ],
+      "callees": {
+        "0x004b78f2": {"name": "FUN_004b78f2", "conv": "cdecl", "args": ["ptr", "ptr", "int"], "ret": 1}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "mask selects record zero for key kind",
+      "args": ["@holder", "@lookup", 2],
+      "memory": [
+        {"addr": "@lookup", "offset": "0x08", "u32": 1},
+        {"addr": "@lookup", "offset": "0x0c", "u32": 2},
+        {"addr": "@page", "offset": "0x14", "u32": 17},
+        {"addr": "@page", "offset": "0x20", "u32": 1},
+        {"addr": "@page", "offset": "0xbc", "u32": 34},
+        {"addr": "@slot", "u32": 1}
+      ],
+      "callees": {
+        "0x005ec760": {"name": "FUN_005ec760", "conv": "thiscall", "args": [], "ret": 1},
+        "0x004b76a6": {"name": "FUN_004b76a6", "conv": "thiscall", "args": ["ptr"], "ret": "@slot"},
+        "0x004b8269": {"name": "FUN_004b8269", "conv": "cdecl", "args": ["ptr", "int", "int", "int", "int", "ptr", "int"], "ret": 0}
+      },
+      "expect": {"ret": 0}
+    }
+  ],
+  "_survivors": "L980: deleting type_guess = 0 is unobservable because the fixture emulator starts the stack at zero; L986: return 2 is equivalent to return 1 because the function returns bool and both normalize to true",
+  "fuzz": {
+    "seed": 4949910,
+    "count": 100,
+    "args": [
+      {"choices": ["@holder", 0]},
+      {"choices": ["@lookup"]},
+      {"choices": [0]}
+    ],
+    "memory": [
+      {"addr": "@page", "offset": "0x20", "type": "u32", "choices": [0, 1]}
+    ]
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "function": "WriteTextHD2",
+  "original": "0x0043c3e0",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    { "name": "text", "type": "cstr" },
+    { "name": "x", "type": "int" },
+    { "name": "y", "type": "int" },
+    { "name": "color", "type": "int" }
+  ],
+  "ret": "int",
+  "size": "0x185",
+  "objects": {
+    "manager": {
+      "size": "0xfc",
+      "fill": "random",
+      "init": [
+        { "offset": "0xec", "u32": 640 },
+        { "offset": "0xf0", "u32": 480 },
+        { "offset": "0xf4", "u32": 3 },
+        { "offset": "0xf8", "u32": "@node" }
+      ]
+    },
+    "node": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [
+        { "offset": "0x8", "u32": "@target" }
+      ]
+    },
+    "target": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    { "addr": "0x0099d3ec", "u32": "@manager" },
+    { "addr": "0x008503b0", "size": 344, "fill": "zero" },
+    { "addr": "0x008503b0", "u32": "0x00334455" },
+    { "addr": "0x008503b4", "u32": "0x00667788" },
+    { "addr": "0x008503b0", "offset": "0x154", "u32": "0x00aabbcc" }
+  ],
+  "callees": {
+    "0x00438ba7": {
+      "name": "GetUserDefinedColor",
+      "conv": "cdecl",
+      "args": [ "int" ],
+      "ret": "0x00334455"
+    },
+    "0x00571e00": {
+      "name": "CXStr_ctor_guess",
+      "conv": "thiscall",
+      "args": [ "cstr" ],
+      "ret": "this"
+    },
+    "0x005a3c80": {
+      "name": "DrawText_guess",
+      "conv": "thiscall",
+      "args": [ "mem:4", "int", "int", "int", "mem:16", "u32", "int", "int" ],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "CXStr_FreeRep_guess",
+      "conv": "thiscall",
+      "args": [ "ignore" ],
+      "ret": 0
+    },
+    "0x00405492": {
+      "name": "UIErrorState_Fail_guess",
+      "conv": "thiscall",
+      "args": [],
+      "noreturn": true
+    }
+  },
+  "cases": [
+    { "name": "lower_default", "args": [ "gray", 1, 2, 1 ], "expect": { "ret": 1 } },
+    { "name": "color_0", "args": [ 0, 1, 2, 0 ], "expect": { "ret": 1 } },
+    { "name": "color_2", "args": [ "green", 1, 2, 2 ], "expect": { "ret": 1 } },
+    { "name": "color_4", "args": [ "blue", 1, 2, 4 ], "expect": { "ret": 1 } },
+    { "name": "color_5", "args": [ "magenta", 1, 2, 5 ], "expect": { "ret": 1 } },
+    { "name": "color_6", "args": [ "gray", 1, 2, 6 ], "expect": { "ret": 1 } },
+    { "name": "color_7", "args": [ "white", 1, 2, 7 ], "expect": { "ret": 1 } },
+    { "name": "color_10", "args": [ "white", 1, 2, 10 ], "expect": { "ret": 1 } },
+    { "name": "color_12", "args": [ "silver", 1, 2, 12 ], "expect": { "ret": 1 } },
+    { "name": "color_13", "args": [ "red", 1, 2, 13 ], "expect": { "ret": 1 } },
+    { "name": "color_14", "args": [ "green", 1, 2, 14 ], "expect": { "ret": 1 } },
+    { "name": "color_15", "args": [ "yellow", 1, 2, 15 ], "expect": { "ret": 1 } },
+    { "name": "color_16", "args": [ "blue", 1, 2, 16 ], "expect": { "ret": 1 } },
+    { "name": "color_18", "args": [ "cyan", 1, 2, 18 ], "expect": { "ret": 1 } },
+    { "name": "color_20", "args": [ "black", 1, 2, 20 ], "expect": { "ret": 1 } },
+    { "name": "upper_default", "args": [ "default", 1, 2, 21 ], "expect": { "ret": 1 } },
+    { "name": "negative_color", "args": [ "default", 1, 2, -1 ], "expect": { "ret": 1 } },
+    { "name": "boundary_255", "args": [ "default", 1, 2, 255 ], "expect": { "ret": 1 } },
+    { "name": "indexed_100", "args": [ "indexed", 5, 6, 256 ], "expect": { "ret": 1 } },
+    {
+      "name": "indexed_101",
+      "args": [ 0, 5, 6, 257 ],
+      "expect": { "ret": 1 },
+      "callees": {
+        "0x00438ba7": {
+          "name": "FUN_00438ba7_guess",
+          "conv": "cdecl",
+          "args": [ "int" ],
+          "ret": "0x00667788"
+        }
+      }
+    },
+    {
+      "name": "indexed_155",
+      "args": [ 0, 5, 6, 341 ],
+      "expect": { "ret": 1 },
+      "callees": {
+        "0x00438ba7": {
+          "name": "FUN_00438ba7_guess",
+          "conv": "cdecl",
+          "args": [ "int" ],
+          "ret": "0x00aabbcc"
+        }
+      }
+    },
+    { "name": "indexed_156_clamped", "args": [ "overflow", 5, 6, 342 ], "expect": { "ret": 1 } },
+    {
+      "name": "null_ui",
+      "args": [ "unused", 1, 2, 0 ],
+      "memory": [ { "addr": "0x0099d3ec", "u32": 0 } ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "count_at_two_fails",
+      "args": [ "", 1, 2, 2 ],
+      "memory": [ { "addr": "@manager", "offset": "0xf4", "u32": 2 } ]
+    },
+    {
+      "name": "null_node_fails",
+      "args": [ "", 1, 2, 2 ],
+      "memory": [
+        { "addr": "@manager", "offset": "0xf4", "u32": 3 },
+        { "addr": "@manager", "offset": "0xf8", "u32": 0 }
+      ]
+    },
+    { "name": "width_zero", "args": [ "edge", 640, 480, 2 ], "expect": { "ret": 1 } },
+    { "name": "negative_width", "args": [ "edge", 700, 500, 2 ], "expect": { "ret": 1 } }
+  ],
+  "fuzz": {
+    "seed": 4441056,
+    "count": 100,
+    "args": [
+      { "choices": [ "", "fuzz", "label" ] },
+      { "range": [ -16, 720 ] },
+      { "range": [ -16, 540 ] },
+      { "choices": [ -1, 0, 1, 2, 4, 5, 6, 7, 10, 12, 13, 14, 15, 16, 18, 20, 21, 255, 256 ] }
+    ],
+    "memory": [
+      { "addr": "0x0099d3ec", "type": "ptr", "choices": [ 0, "@manager" ] },
+      { "addr": "@manager", "offset": "0xec", "type": "int", "choices": [ -16, 0, 640, 1280 ] },
+      { "addr": "@manager", "offset": "0xf0", "type": "int", "choices": [ -16, 0, 480, 960 ] },
+      { "addr": "@manager", "offset": "0xf4", "type": "int", "choices": [ 2, 3 ] },
+      { "addr": "@manager", "offset": "0xf8", "type": "ptr", "choices": [ 0, "@node" ] }
+    ]
+  }
+}

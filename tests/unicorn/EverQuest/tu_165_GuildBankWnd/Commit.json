@@ -1,0 +1,162 @@
+{
+  "function": "CGuildBankWndView_guess::UpdateButtons_guess",
+  "original": "0x0050ca92",
+  "sources": ["src/EverQuest/tu_165_GuildBankWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@resetstate",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "resetstate": {
+      "size": "0xBEC0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x160", "u32": "@status160"},
+        {"offset": "0x164", "u32": "@status164"},
+        {"offset": "0x168", "u32": "@status168"},
+        {"offset": "0x16c", "u32": "@status16c"},
+        {"offset": "0x170", "u32": "@status170"},
+        {"offset": "0x174", "u32": "@status174"},
+        {"offset": "0x180", "u32": "@status180"},
+        {"offset": "0x184", "u32": "@status184"},
+        {"offset": "0xbeb4", "u32": 0},
+        {"offset": "0x1a8", "u32": 2},
+        {"offset": "0x1ac", "u32": 1},
+        {"offset": "0x1b0", "u8": 1}
+      ]
+    },
+    "typestate": {"size": "0xC28D", "fill": "random", "init": [{"offset": "0xe14", "u8": 1}]},
+    "status160": {"size": "0x5e", "fill": "random", "init": [{"offset": "0x5d", "u8": 1}]},
+    "status164": {"size": "0x5e", "fill": "random"},
+    "status168": {"size": "0x5e", "fill": "random"},
+    "status16c": {"size": "0x5e", "fill": "random"},
+    "status170": {"size": "0x5e", "fill": "random"},
+    "status174": {"size": "0x5e", "fill": "random"},
+    "status180": {"size": "0x5e", "fill": "random"},
+    "status184": {"size": "0x5e", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@typestate"},
+    {"addr": "0x009248d0", "u32": 0}
+  ],
+  "callees": {
+    "0x0041de16": {"name": "Check_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "0x0050c873": {"name": "GetItem_guess", "conv": "thiscall", "args": ["u32"], "ret": "@resetstate+0x198"},
+    "0x0050c68f": {"name": "IsOrdinary_guess", "conv": "cdecl", "args": ["int"], "ret": 1},
+    "0x0050c673": {"name": "IsSpecial_guess", "conv": "cdecl", "args": ["u32"], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "ordinary active and below threshold",
+      "args": [],
+      "memory": [
+        {"addr": "@resetstate", "offset": "0xbeac", "u32": 19},
+        {"addr": "0x009248d0", "u32": 0},
+        {"addr": "@typestate", "offset": "0xe14", "u8": 1},
+        {"addr": "@status160", "offset": "0x5d", "u8": 1}
+      ]
+    },
+    {
+      "name": "ordinary at threshold and mode disabled",
+      "args": [],
+      "memory": [
+        {"addr": "@resetstate", "offset": "0xbeac", "u32": 20},
+        {"addr": "0x009248d0", "u32": 0},
+        {"addr": "@typestate", "offset": "0xe14", "u8": 1}
+      ],
+      "callees": {"0x0041de16": {"name": "Check_guess", "conv": "thiscall", "args": ["int"], "ret": 0}}
+    },
+    {
+      "name": "messages pending clears prior selection",
+      "args": [],
+      "memory": [
+        {"addr": "@resetstate", "offset": "0xbeac", "u32": 19},
+        {"addr": "0x009248d0", "u32": 1},
+        {"addr": "@typestate", "offset": "0xe14", "u8": 1},
+        {"addr": "@status160", "offset": "0x5d", "u8": 1}
+      ]
+    },
+    {
+      "name": "special record enables all matching targets",
+      "args": [],
+      "memory": [
+        {"addr": "@resetstate", "offset": "0xbeac", "u32": 19},
+        {"addr": "@resetstate", "offset": "0xbeb4", "u32": 65536},
+        {"addr": "@resetstate", "offset": "0x12d8", "u32": 2},
+        {"addr": "@resetstate", "offset": "0x12dc", "u32": 1},
+        {"addr": "@resetstate", "offset": "0x12e0", "u8": 1},
+        {"addr": "0x009248d0", "u32": 0},
+        {"addr": "@typestate", "offset": "0xe14", "u8": 1}
+      ],
+      "callees": {
+        "0x0050c873": {"name": "Select_guess", "conv": "thiscall", "args": ["u32"], "ret": "@resetstate+0x12c8"},
+        "0x0050c68f": {"name": "IsOrdinary_guess", "conv": "cdecl", "args": ["int"], "ret": 0},
+        "0x0050c673": {"name": "IsSpecial_guess", "conv": "cdecl", "args": ["u32"], "ret": 1}
+      }
+    },
+    {
+      "name": "special record fails kind count and flag predicates",
+      "args": [],
+      "memory": [
+        {"addr": "@resetstate", "offset": "0xbeb4", "u32": 65536},
+        {"addr": "@resetstate", "offset": "0x12d8", "u32": 1},
+        {"addr": "@resetstate", "offset": "0x12dc", "u32": 0},
+        {"addr": "@resetstate", "offset": "0x12e0", "u8": 0},
+        {"addr": "0x009248d0", "u32": 0},
+        {"addr": "@typestate", "offset": "0xe14", "u8": 2}
+      ],
+      "callees": {
+        "0x0050c873": {"name": "Select_guess", "conv": "thiscall", "args": ["u32"], "ret": "@resetstate+0x12c8"},
+        "0x0050c68f": {"name": "IsOrdinary_guess", "conv": "cdecl", "args": ["int"], "ret": 0},
+        "0x0050c673": {"name": "IsSpecial_guess", "conv": "cdecl", "args": ["u32"], "ret": 1},
+        "0x0041de16": {"name": "Check_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    },
+    {
+      "name": "no selected entry",
+      "args": [],
+      "memory": [
+        {"addr": "@resetstate", "offset": "0xbeb4", "u32": 4294967295},
+        {"addr": "@status160", "offset": "0x5d", "u8": 1},
+        {"addr": "0x009248d0", "u32": 0}
+      ],
+      "callees": {"0x0050c873": {"name": "Select_guess", "conv": "thiscall", "args": ["u32"], "ret": 0}}
+    },
+    {
+      "name": "all targets null",
+      "args": [],
+      "memory": [
+        {"addr": "@resetstate", "offset": "0x160", "u32": 0},
+        {"addr": "@resetstate", "offset": "0x164", "u32": 0},
+        {"addr": "@resetstate", "offset": "0x168", "u32": 0},
+        {"addr": "@resetstate", "offset": "0x16c", "u32": 0},
+        {"addr": "@resetstate", "offset": "0x170", "u32": 0},
+        {"addr": "@resetstate", "offset": "0x174", "u32": 0},
+        {"addr": "@resetstate", "offset": "0x180", "u32": 0},
+        {"addr": "@resetstate", "offset": "0x184", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5294738,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {"addr": "@resetstate", "offset": "0xbeac", "type": "int", "choices": [-1, 0, 19, 20, 21]},
+      {"addr": "0x009248d0", "type": "int", "choices": [0, 1]},
+      {"addr": "@typestate", "offset": "0xe14", "type": "u8", "choices": [0, 1, 2, 3]},
+      {"addr": "@resetstate", "offset": "0x1a8", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@resetstate", "offset": "0x1ac", "type": "int", "choices": [0, 1]},
+      {"addr": "@resetstate", "offset": "0x1b0", "type": "u8", "choices": [0, 1]},
+      {"addr": "@status160", "offset": "0x5d", "type": "u8", "choices": [0, 1]},
+      {"addr": "@resetstate", "offset": "0x160", "type": "ptr", "choices": [0, "@status160"]},
+      {"addr": "@resetstate", "offset": "0x164", "type": "ptr", "choices": [0, "@status164"]},
+      {"addr": "@resetstate", "offset": "0x168", "type": "ptr", "choices": [0, "@status168"]},
+      {"addr": "@resetstate", "offset": "0x16c", "type": "ptr", "choices": [0, "@status16c"]},
+      {"addr": "@resetstate", "offset": "0x170", "type": "ptr", "choices": [0, "@status170"]},
+      {"addr": "@resetstate", "offset": "0x174", "type": "ptr", "choices": [0, "@status174"]},
+      {"addr": "@resetstate", "offset": "0x180", "type": "ptr", "choices": [0, "@status180"]},
+      {"addr": "@resetstate", "offset": "0x184", "type": "ptr", "choices": [0, "@status184"]}
+    ]
+  }
+}

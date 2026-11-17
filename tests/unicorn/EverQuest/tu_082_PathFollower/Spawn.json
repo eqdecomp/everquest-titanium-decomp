@@ -1,0 +1,141 @@
+{
+  "function": "Ring_guess::CreateRingShape_guess",
+  "original": "0x004c0c3b",
+  "sources": [
+    "src/EverQuest/tu_082_PathFollower.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@ring",
+  "args": [
+    {
+      "name": "center_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "radius_guess",
+      "type": "float"
+    },
+    {
+      "name": "segments_guess",
+      "type": "u32"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "ring": {
+      "size": "0x118",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x114", "u32": "@source"}
+      ]
+    },
+    "source": {
+      "size": "0x24",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@src_vtbl"}
+      ]
+    },
+    "src_vtbl": {
+      "size": "0x24",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x20", "u32": "@fn_create"}
+      ]
+    },
+    "fn_create": {"size": "0x4"},
+    "emitter": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@em_vtbl"}
+      ]
+    },
+    "em_vtbl": {
+      "size": "0x18",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x14", "u32": "@fn_plot"}
+      ]
+    },
+    "fn_plot": {"size": "0x4"},
+    "center": {
+      "size": "0x8",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "@center", "offset": "0x0", "f32": 3.0},
+    {"addr": "@center", "offset": "0x4", "f32": -2.0}
+  ],
+  "callees": {
+    "0x0060f784": {
+      "name": "Cosine_guess",
+      "conv": "cdecl",
+      "args": ["double"],
+      "passthrough": true
+    },
+    "0x0060f6d4": {
+      "name": "Sine_guess",
+      "conv": "cdecl",
+      "args": ["double"],
+      "passthrough": true
+    },
+    "kernel32.dll!GetLastError": {"conv": "stdcall", "ret": 0},
+    "@fn_create": {
+      "name": "Create_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@emitter"
+    },
+    "@fn_plot": {
+      "name": "Plot_guess",
+      "conv": "thiscall",
+      "args": ["mem:12"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": ["@center", 1.5, 4]
+    },
+    {
+      "name": "one segment",
+      "args": ["@center", 2.0, 1]
+    },
+    {
+      "name": "zero segments runs once",
+      "args": ["@center", 1.0, 0]
+    },
+    {
+      "name": "zero radius",
+      "args": ["@center", 0.0, 3]
+    },
+    {
+      "name": "negative radius",
+      "args": ["@center", -2.5, 5]
+    },
+    {
+      "name": "many segments",
+      "args": ["@center", 10.0, 16]
+    }
+  ],
+  "coverage_ok": {
+    "004C0C5B-004C0C61": "unsigned fixup for segments >= 2^31: the loop would run 2^31 times, not reachable",
+    "004C0C79-004C0C7F": "unsigned fixup for index >= 2^31: same loop bound, not reachable"
+  },
+  "fuzz": {
+    "seed": 4983867,
+    "count": 120,
+    "args": [
+      {"choices": ["@center"]},
+      {"choices": [0.0, 0.5, 1.0, -1.5, 2.25, 7.0]},
+      {"choices": [0, 1, 2, 3, 5, 8, 13]}
+    ],
+    "memory": [
+      {"addr": "@center", "offset": "0x0", "type": "float", "choices": [0.0, 1.0, -3.5, 12.0]},
+      {"addr": "@center", "offset": "0x4", "type": "float", "choices": [0.0, 2.5, -7.0, 100.0]}
+    ]
+  }
+}

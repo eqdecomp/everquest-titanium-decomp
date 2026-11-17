@@ -1,0 +1,165 @@
+{
+  "function": "Report_00511af8_guess::SetSlot_guess",
+  "original": "0x0051256a",
+  "sources": [
+    "src/EverQuest/tu_167_GuildTributeMasterWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@report",
+  "args": [
+    {"name": "slot", "type": "int"},
+    {"name": "item", "type": "ptr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "report": {
+      "size": "0x1e0",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x168", "u32": "@holder"},
+        {"offset": "0x16c", "u32": "@sink16"},
+        {"offset": "0x17c", "u32": "@sink17"},
+        {"offset": "0x1c8", "u32": "0x11111111"},
+        {"offset": "0x1cc", "u32": "0x22222222"},
+        {"offset": "0x1d4", "u32": "0x33333333"}
+      ]
+    },
+    "item": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [{"offset": "0x38", "u32": "0x1234"}]
+    },
+    "holder": {
+      "size": "0x170",
+      "fill": "zero",
+      "init": [{"offset": "0x16c", "u32": "@sub"}]
+    },
+    "sub": {"size": "0x10", "fill": "zero"},
+    "vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xfc", "u32": "@fn63"}]
+    },
+    "fn63": {"size": "0x10", "fill": "zero"},
+    "sink16": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@vtbl"}]
+    },
+    "sink17": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@vtbl"}]
+    },
+    "vbtbl": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [{"offset": "0x4", "u32": "0x10"}]
+    },
+    "inv": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [{"offset": "0x8", "u32": "@vbtbl"}]
+    },
+    "src": {"size": "0x60", "fill": "zero"},
+    "bag": {"size": "0x60", "fill": "zero"},
+    "child": {"size": "0x60", "fill": "zero"},
+    "slotptr": {"size": "0x10", "fill": "zero"},
+    "everquest": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x00905d00", "u32": "@inv"},
+    {"addr": "0x00988df0", "u32": "@everquest"}
+  ],
+  "callees": {
+    "0x00571e00": {"name": "CXStr::CXStr", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "@fn63": {"name": "Slots::Slot63_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x005b1ab0": {"name": "Sub::Method_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0040cc50": {"name": "Inventory::GetItem_guess", "conv": "thiscall", "args": ["int"], "ret": "@src"},
+    "0x00434777": {"name": "Inventory::GetItemSlot_guess", "conv": "thiscall", "args": ["int"], "ret": "@slotptr"},
+    "0x005eccc0": {"name": "Source::IsReady_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005ecc30": {"name": "Source::GetCount_guess", "conv": "thiscall", "args": [], "ret": 2},
+    "0x005ec630": {"name": "Source::GetChild_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005ec650": {"name": "Source::GetChildSlot_guess", "conv": "thiscall", "args": ["int"], "ret": "@slotptr"},
+    "0x005e1080": {"name": "Source::GetLimit_guess", "conv": "thiscall", "args": [], "ret": 42},
+    "0x005118e0": {"name": "ShowTributeValue_guess", "conv": "thiscall", "args": ["ptr"], "ret": 1},
+    "0x0046da4a": {
+      "name": "FormatText",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "u32", "u32", "u32", "u32", "u32", "u32", "u32", "u32", "u32"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "4d534700"}]
+    },
+    "0x004982c6": {"name": "CEverQuest::dsp_chat", "conv": "thiscall", "args": ["cstr", "int", "bool"], "ret": 0},
+    "0x006220e9": {"name": "_itoa", "conv": "cdecl", "args": ["int", "ignore", "int"], "passthrough": true},
+    "0x00511af8": {"name": "Update_guess", "conv": "thiscall", "args": []}
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9"
+  },
+  "cases": [
+    {"name": "low slot, no item", "args": [30, "@item"],
+     "callees": {"0x0040cc50": {"conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "slot 0, item not a container", "args": [0, "@item"],
+     "callees": {"0x005eccc0": {"conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "container, empty", "args": [5, "@item"],
+     "callees": {"0x005ecc30": {"conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "container, children all empty", "args": [5, "@item"],
+     "callees": {"0x005ecc30": {"conv": "thiscall", "args": [], "ret": 2},
+                 "0x005ec630": {"conv": "thiscall", "args": ["int"], "ret": [0, 0]}}},
+    {"name": "container, one child", "args": [5, "@item"],
+     "callees": {"0x005ecc30": {"conv": "thiscall", "args": [], "ret": 3},
+                 "0x005ec630": {"conv": "thiscall", "args": ["int"], "ret": [0, "@child", 0]}}},
+    {"name": "container, first child", "args": [7, "@item"],
+     "callees": {"0x005ecc30": {"conv": "thiscall", "args": [], "ret": 1},
+                 "0x005ec630": {"conv": "thiscall", "args": ["int"], "ret": ["@child"]}}},
+    {"name": "bag slot, no bag", "args": [31, "@item"],
+     "callees": {"0x0040cc50": {"conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "bag slot, bag not ready", "args": [45, "@item"],
+     "callees": {"0x0040cc50": {"conv": "thiscall", "args": ["int"], "ret": "@bag"},
+                 "0x005eccc0": {"conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "bag slot, empty slot", "args": [45, "@item"],
+     "callees": {"0x0040cc50": {"conv": "thiscall", "args": ["int"], "ret": "@bag"},
+                 "0x005eccc0": {"conv": "thiscall", "args": [], "ret": 1},
+                 "0x005ec630": {"conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "bag slot, plain item", "args": [44, "@item"],
+     "callees": {"0x0040cc50": {"conv": "thiscall", "args": ["int"], "ret": "@bag"},
+                 "0x005eccc0": {"conv": "thiscall", "args": [], "ret": [1, 0]},
+                 "0x005ec630": {"conv": "thiscall", "args": ["int"], "ret": ["@src"]}}},
+    {"name": "last bag slot, container item with child", "args": [331, "@item"],
+     "callees": {"0x0040cc50": {"conv": "thiscall", "args": ["int"], "ret": "@bag"},
+                 "0x005eccc0": {"conv": "thiscall", "args": [], "ret": [1, 1]},
+                 "0x005ecc30": {"conv": "thiscall", "args": [], "ret": 2},
+                 "0x005ec630": {"conv": "thiscall", "args": ["int"], "ret": ["@src", "@child", 0]}}},
+    {"name": "past last bag slot", "args": [332, "@item"]},
+    {"name": "negative slot", "args": [-3, "@item"],
+     "callees": {"0x005eccc0": {"conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "no holder or sinks", "args": [5, 0],
+     "memory": [
+       {"addr": "@report", "offset": "0x168", "u32": 0},
+       {"addr": "@report", "offset": "0x16c", "u32": 0},
+       {"addr": "@report", "offset": "0x17c", "u32": 0}
+     ],
+     "callees": {"0x005ecc30": {"conv": "thiscall", "args": [], "ret": 1},
+                 "0x005ec630": {"conv": "thiscall", "args": ["int"], "ret": ["@child"]}}},
+    {"name": "no sink16, slot zero arg", "args": [0, "@item"],
+     "memory": [{"addr": "@report", "offset": "0x16c", "u32": 0}],
+     "callees": {"0x005eccc0": {"conv": "thiscall", "args": [], "ret": 0}}}
+  ],
+  "fuzz": {
+    "seed": 5317994,
+    "count": 120,
+    "args": [
+      {"choices": [-1, 0, 1, 30, 31, 32, 40, 41, 99, 100, 255, 330, 331, 332, 400]},
+      {"choices": ["@item"]}
+    ],
+    "memory": [
+      {"addr": "@report", "offset": "0x168", "type": "u32", "choices": [0, "@holder"]},
+      {"addr": "@report", "offset": "0x16c", "type": "u32", "choices": [0, "@sink16"]},
+      {"addr": "@report", "offset": "0x17c", "type": "u32", "choices": [0, "@sink17"]},
+      {"addr": "@item", "offset": "0x38", "type": "int", "choices": [0, 1, -1, 77]}
+    ]
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "function": "LoadScreenView_guess::LoadScreenView_guess",
+  "original": "0x00448a0b",
+  "sources": ["src/EverQuest/tu_035_EQ_LoadingS.cpp"],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "ptr",
+  "objects": {
+    "owner": {"size": "0x218", "fill": "zero"},
+    "manager": {"size": "0x4", "fill": "zero", "init": [{"offset": "0", "u32": "@manager_vtable"}]},
+    "manager_vtable": {
+      "size": "0x48", "fill": "zero",
+      "init": [
+        {"offset": "0x34", "u32": "@fn_size"},
+        {"offset": "0x44", "u32": "@fn_load"}
+      ]
+    },
+    "fn_size": {"size": "0x10", "fill": "zero"},
+    "fn_load": {"size": "0x10", "fill": "zero"},
+    "everquest": {"size": "0x10", "fill": "zero"},
+    "lookup": {"size": "0x10", "fill": "zero"},
+    "loader": {"size": "0x256", "fill": "zero", "init": [{"offset": "0x252", "u8": 1}]},
+    "dirstr": {"size": "0x4", "fill": "zero"},
+    "path": {"size": "0x40", "fill": "zero", "init": [{"offset": "0", "cstr": "fixture\\path"}]},
+    "lookupdata": {"size": "0x40", "fill": "zero", "init": [{"offset": "0x10", "cstr": "resource"}]},
+    "modeldata": {"size": "0x40", "fill": "zero", "init": [{"offset": "0x10", "cstr": "race"}]},
+    "alloc1": {"size": "0x200", "fill": "zero"},
+    "alloc2": {"size": "0x200", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x13579bdf"},
+    {"addr": "0x0099e360", "u32": "@manager"},
+    {"addr": "0x00905cc0", "u32": "@lookup"},
+    {"addr": "0x00988df0", "u32": "@everquest"},
+    {"addr": "0x00905ce4", "u32": "@loader"},
+    {"addr": "0x009254cc", "u32": 1},
+    {"addr": "0x00924470", "u32": 12},
+    {"addr": "0x007a0000", "size": "0x100", "fill": "zero"},
+    {"addr": "0x007a0000", "u32": 100},
+    {"addr": "0x007a0004", "u32": 32},
+    {"addr": "0x007a0008", "u32": 5},
+    {"addr": "0x007a0014", "cstr": "first"},
+    {"addr": "0x007a0020", "u32": 100},
+    {"addr": "0x007a0024", "u32": 32},
+    {"addr": "0x007a0028", "u32": 6},
+    {"addr": "0x007a0034", "cstr": "second"}
+  ],
+  "callees": {
+    "0x00571e00": {"name": "CXStrCtor", "conv": "thiscall", "this": "ignore", "args": ["cstr"], "ret": "this"},
+    "0x0060c0d0": {"name": "PathTableGet", "conv": "thiscall", "args": ["int"], "ret": "@dirstr"},
+    "0x0043a6bf": {"name": "LookupFind", "conv": "thiscall", "this": "ignore", "args": ["int"], "ret": "@lookupdata"},
+    "0x004922d5": {"name": "ModelForRace", "conv": "thiscall", "this": "ignore", "args": ["u8"], "ret": "@modeldata"},
+    "0x005738b0": {"name": "FormatString", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf"},
+    "0x00571fc0": {"name": "CXStrAssign", "conv": "thiscall", "this": "ignore", "args": ["cstr"], "ret": "this"},
+    "0x00572300": {"name": "CXStrToCString", "conv": "thiscall", "this": "ignore", "args": [], "passthrough": true},
+    "0x0047c3af": {"name": "NameListCtor", "conv": "thiscall", "this": "ignore", "args": ["int"], "passthrough": true},
+    "0x00576690": {"name": "FindFilesCtor", "conv": "thiscall", "this": "ignore", "args": ["cstr", "cstr"], "ret": "this"},
+    "0x00576760": {"name": "FindFilesNext", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": [0, 0]},
+    "0x00405f79": {"name": "NameListInsert", "conv": "thiscall", "this": "ignore", "args": ["int", "ptr"], "passthrough": true},
+    "0x0060f5eb": {"name": "_rand", "conv": "cdecl", "args": [], "ret": 0},
+    "@fn_load": {"name": "ManagerLoad", "conv": "thiscall", "args": ["cstr", "cstr", "int", "int"], "ret": 1},
+    "0x00574110": {"name": "LogError", "conv": "cdecl", "args": ["cstr"], "varargs": "printf"},
+    "0x00571d00": {"name": "CXStrFreeRep", "conv": "thiscall", "this": "ignore", "args": ["u32"]},
+    "0x00576740": {"name": "FindFilesDtor", "conv": "thiscall", "this": "ignore", "args": []},
+    "0x00405bff": {"name": "NameListDtor", "conv": "thiscall", "this": "ignore", "args": [], "passthrough": true},
+    "@fn_size": {"name": "ManagerGetHandle", "conv": "thiscall", "args": [], "ret": [48, 49]},
+    "0x004482fb": {"name": "CXStrDtorAlias", "conv": "thiscall", "this": "ignore", "args": []},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": ["@alloc1", "@alloc2"]},
+    "kernel32.dll!HeapFree": {"name": "HeapFree", "conv": "stdcall", "args": ["ptr", "u32", "ptr"], "ret": 1}
+  },
+  "rewrite_aliases": {"_rand": "0x0060f5eb"},
+  "rewrite_data_aliases": {"??_7LoadScreenView_guess@@6B@": "0x00643f6c"},
+  "cases": [
+    {"name": "default_mode", "args": [], "memory": [{"addr": "0x009254cc", "u32": 1}]},
+    {"name": "no_loadscreen", "args": [], "memory": [{"addr": "0x009254cc", "u32": 0}]},
+    {"name": "lookup_hit", "args": [], "memory": [{"addr": "0x009254cc", "u32": 2}]},
+    {"name": "lookup_miss", "args": [], "memory": [{"addr": "0x009254cc", "u32": 2}], "callees": {"0x0043a6bf": {"name": "LookupFind", "conv": "thiscall", "this": "ignore", "args": ["int"], "ret": 0}}},
+    {"name": "model_hit", "args": [], "memory": [{"addr": "0x009254cc", "u32": 3}]},
+    {"name": "model_miss", "args": [], "memory": [{"addr": "0x009254cc", "u32": 3}], "callees": {"0x004922d5": {"name": "ModelForRace", "conv": "thiscall", "this": "ignore", "args": ["u8"], "ret": 0}}},
+    {"name": "wildcard", "args": [], "memory": [{"addr": "0x009254cc", "u32": 4}]},
+    {"name": "custom_directory", "args": [], "memory": [{"addr": "0x009254cc", "u32": 5}]},
+    {"name": "directory_lookup", "args": [], "memory": [{"addr": "0x009254cc", "u32": 6}]},
+    {"name": "directory_model", "args": [], "memory": [{"addr": "0x009254cc", "u32": 7}]},
+    {"name": "directory_wildcard", "args": [], "memory": [{"addr": "0x009254cc", "u32": 8}]},
+    {"name": "loader_missing", "args": [], "memory": [{"addr": "0x00905ce4", "u32": 0}, {"addr": "0x009254cc", "u32": 8}]},
+    {"name": "manager_load_failure", "args": [], "memory": [{"addr": "0x009254cc", "u32": 1}], "callees": {"@fn_load": {"name": "ManagerLoad", "conv": "thiscall", "args": ["cstr", "cstr", "int", "int"], "ret": 0}}},
+    {"name": "one_file", "args": [], "memory": [{"addr": "0x009254cc", "u32": 1}], "callees": {"0x00576760": {"name": "FindFilesNext", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": [1, 0]}}},
+    {"name": "two_files_and_nonzero_random", "args": [], "memory": [{"addr": "0x009254cc", "u32": 1}], "callees": {
+      "0x00576760": {"name": "FindFilesNext", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": [1, 1, 0], "writes": [
+        {"arg": 0, "offset": 0, "hex": "00 00 7a 00", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "20 00 7a 00", "call": 1}
+      ]},
+      "0x0060f5eb": {"name": "_rand", "conv": "cdecl", "args": [], "ret": 3}
+    }}
+  ],
+  "fuzz": {
+    "seed": 4491787,
+    "count": 60,
+    "args": [],
+    "memory": [
+      {"addr": "0x009254cc", "type": "u32", "choices": [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]},
+      {"addr": "0x00905ce4", "type": "u32", "choices": [0, "@loader"]}
+    ]
+  }
+}

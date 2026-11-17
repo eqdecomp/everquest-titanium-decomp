@@ -1,0 +1,193 @@
+{
+  "function": "CGroupSearchWndView_guess::OnPlayerInfoEdited_guess",
+  "original": "0x0050a1da",
+  "sources": [
+    "src/EverQuest/tu_163_GroupSearchWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@bigobject",
+  "args": [],
+  "ret": "void",
+  "size": "0xd0",
+  "objects": {
+    "bigobject": {
+      "size": "0xe770",
+      "fill": "random",
+      "init": [
+        { "offset": "0x168", "u32": "@provider" },
+        { "offset": "0x17c", "u32": "@control" }
+      ]
+    },
+    "provider": {
+      "size": "0x234",
+      "fill": "random",
+      "init": [
+        { "offset": "0x0", "u32": "@provider_vtbl" }
+      ]
+    },
+    "provider_vtbl": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x130", "u32": "@fn_get" }
+      ]
+    },
+    "control": {
+      "size": "0x5e",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@notify_vtbl" },
+        { "offset": "0x5d", "u8": 1 }
+      ]
+    },
+    "notify_vtbl": {
+      "size": "0xc4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0xc0", "u32": "@fn_notify" }
+      ]
+    },
+    "comparison_text": { "size": "0x20", "fill": "zero" },
+    "fn_get": { "size": "4" },
+    "fn_notify": { "size": "4" }
+  },
+  "memory": [
+    { "addr": "@bigobject", "offset": "0x170", "u32": 0 },
+    { "addr": "@bigobject", "offset": "0x174", "u32": 0 },
+    { "addr": "@bigobject", "offset": "0x284", "u32": 0 },
+    { "addr": "@bigobject", "offset": "0x288", "u32": 0 },
+    { "addr": "@bigobject", "offset": "0x28c", "cstr": "same" },
+    { "addr": "@comparison_text", "cstr": "same" }
+  ],
+  "ignore_writes": [["0x6000ed00", "0x60010000"]],
+  "callees": {
+    "@fn_get": {
+      "name": "GetString_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": "arg0",
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "00000070" }
+      ]
+    },
+    "@fn_notify": {
+      "name": "Notify_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 0
+    },
+    "0x00571630": {
+      "name": "GetLength_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [2, 3]
+    },
+    "0x00571d00": {
+      "name": "FreeRep_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x00572300": {
+      "name": "ToChar_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@comparison_text"
+    },
+    "0x00574460": {
+      "name": "CompareText_guess",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr"],
+      "ret": 0
+    },
+    "0x00509aa7": {
+      "name": "GetPipLevelMin_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x00509afd": {
+      "name": "GetPipLevelMax_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "unchanged_empty_text_and_lengths",
+      "args": [],
+      "memory": [
+        { "addr": "@bigobject", "offset": "0x168", "u32": 0 },
+        { "addr": "@bigobject", "offset": "0x170", "u32": 0 },
+        { "addr": "@bigobject", "offset": "0x174", "u32": 0 },
+        { "addr": "@bigobject", "offset": "0x284", "u32": 0 },
+        { "addr": "@bigobject", "offset": "0x288", "u32": 0 }
+      ]
+    },
+    {
+      "name": "changed_text",
+      "args": [],
+      "memory": [
+        { "addr": "@comparison_text", "cstr": "different" }
+      ],
+      "callees": {
+        "0x00574460": {
+          "name": "CompareText_guess",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr"],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "changed_length",
+      "args": [],
+      "memory": [
+        { "addr": "@bigobject", "offset": "0x168", "u32": 0 },
+        { "addr": "@bigobject", "offset": "0x284", "u32": 0 },
+        { "addr": "@bigobject", "offset": "0x288", "u32": 1 }
+      ]
+    },
+    {
+      "name": "changed_without_control",
+      "args": [],
+      "memory": [
+        { "addr": "@bigobject", "offset": "0x17c", "u32": 0 },
+        { "addr": "@comparison_text", "cstr": "different" }
+      ],
+      "callees": {
+        "0x00574460": {
+          "name": "CompareText_guess",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr"],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "empty_without_control",
+      "args": [],
+      "memory": [
+        { "addr": "@bigobject", "offset": "0x168", "u32": 0 },
+        { "addr": "@bigobject", "offset": "0x170", "u32": 0 },
+        { "addr": "@bigobject", "offset": "0x174", "u32": 0 },
+        { "addr": "@bigobject", "offset": "0x17c", "u32": 0 },
+        { "addr": "@bigobject", "offset": "0x284", "u32": 0 },
+        { "addr": "@bigobject", "offset": "0x288", "u32": 0 }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5284314,
+    "count": 50,
+    "args": [],
+    "memory": [
+      { "addr": "@bigobject", "offset": "0x168", "type": "ptr", "choices": [0, "@provider"] },
+      { "addr": "@bigobject", "offset": "0x17c", "type": "ptr", "choices": [0, "@control"] },
+      { "addr": "@bigobject", "offset": "0x284", "type": "int", "range": [-1, 4] },
+      { "addr": "@bigobject", "offset": "0x288", "type": "int", "range": [-1, 4] }
+    ]
+  },
+  "_survivors": "L1676: changed_guess is tested only for zero/nonzero, so 1 and 2 are equivalent; L1682: same"
+}

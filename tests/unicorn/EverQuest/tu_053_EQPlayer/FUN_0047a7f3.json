@@ -1,0 +1,219 @@
+{
+  "function": "EQPlayerCore_guess::CanFitIllusionRace_guess",
+  "original": "0x0047a7f3",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {"name": "race", "type": "int"},
+    {"name": "state", "type": "u32"},
+    {"name": "value", "type": "float"}
+  ],
+  "ret": "char",
+  "objects": {
+    "owner": {
+      "size": "0x264",
+      "fill": "random",
+      "init": [
+        {"offset": "0x1a8", "u32": "@handler"},
+        {"offset": "0x218", "u32": "@context"}
+      ]
+    },
+    "handler": {"size": "0x160", "fill": "random"},
+    "context": {"size": "0x4", "fill": "random"},
+    "display": {"size": "0x2d60", "fill": "random"},
+    "scale": {"size": "0x4", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4},
+    {"addr": "0x00905d24", "u32": "@display"},
+    {"addr": "0x0063f4cc", "from_image": "0x0063f4cc", "image_size": 4},
+    {"addr": "0x00640fec", "from_image": "0x00640fec", "image_size": 4},
+    {"addr": "0x006410bc", "from_image": "0x006410bc", "image_size": 4},
+    {"addr": "@owner", "offset": "0x238", "f32": 2.0},
+    {"addr": "@owner", "offset": "0x244", "u8": 0},
+    {"addr": "@owner", "offset": "0x260", "u32": 1},
+    {"addr": "@handler", "offset": "0x15c", "u32": 0},
+    {"addr": "@owner", "offset": "0x30", "f32": 10.0},
+    {"addr": "@owner", "offset": "0x34", "f32": 20.0},
+    {"addr": "@owner", "offset": "0x38", "f32": 30.0}
+  ],
+  "callees": {
+    "0x00479e02": {
+      "name": "EQPlayerCore_guess::LegalPlayerRace_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "passthrough": true
+    },
+    "0x004649b1": {
+      "name": "token_string_to_client_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "int", "int"]
+    },
+    "0x0047a147": {
+      "name": "EQPlayerCore_guess::GetDefaultSizeForRace_guess",
+      "conv": "thiscall",
+      "args": ["int", "char"],
+      "passthrough": true
+    },
+    "0x0048c879": {
+      "name": "GetRaceModelTag_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "int"]
+    },
+    "0x004b6cb4": {
+      "name": "FUN_004b6cb4_guess",
+      "conv": "cdecl",
+      "args": ["cstr"],
+      "ret": "@scale"
+    },
+    "0x004b6d42": {
+      "name": "ScaleProvider_guess::GetROffset_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret_float": 1.0
+    },
+    "0x0047a239": {
+      "name": "AdjustHeightsForRace_guess",
+      "conv": "cdecl",
+      "args": ["int", "ignore", "ignore", "ignore", "ignore", "bool"],
+      "passthrough": true
+    },
+    "0x0043a0a0": {
+      "name": "Display2_guess::GetCeilingHeight_guess",
+      "conv": "thiscall",
+      "args": ["float", "float", "float", "float"],
+      "ret_float": 10.0
+    },
+    "0x00439f26": {
+      "name": "Display2_guess::GetFloorHeight_guess",
+      "conv": "thiscall",
+      "args": ["float", "float", "float"],
+      "ret_float": 5.0
+    }
+  },
+  "cases": [
+    {
+      "name": "null handler returns true",
+      "args": [1, 1, 1.5],
+      "memory": [{"addr": "@owner", "offset": "0x1a8", "u32": 0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "blocked gate notifies and returns false",
+      "args": [13, 1, 1.5],
+      "memory": [
+        {"addr": "@handler", "offset": "0x15c", "u32": 1},
+        {"addr": "@owner", "offset": "0x244", "u8": 0},
+        {"addr": "@owner", "offset": "0x218", "u32": "@context"}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "blocked gate without notification",
+      "args": [13, 1, 1.5],
+      "memory": [
+        {"addr": "@handler", "offset": "0x15c", "u32": 1},
+        {"addr": "@owner", "offset": "0x244", "u8": 1}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "display null after allowed gate",
+      "args": [1, 1, 1.5],
+      "memory": [
+        {"addr": "@handler", "offset": "0x15c", "u32": 0},
+        {"addr": "0x00905d24", "u32": 0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "basic race permits scaling",
+      "args": [5, 2, 1.5],
+      "memory": [
+        {"addr": "@handler", "offset": "0x15c", "u32": 1},
+        {"addr": "@owner", "offset": "0x238", "f32": 2.0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "special race 0x3c permits scaling",
+      "args": [60, 2, 1.5],
+      "memory": [
+        {"addr": "@handler", "offset": "0x15c", "u32": 1},
+        {"addr": "@owner", "offset": "0x238", "f32": 2.0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "special race 0x16f permits scaling",
+      "args": [367, 2, 1.5],
+      "memory": [
+        {"addr": "@handler", "offset": "0x15c", "u32": 1},
+        {"addr": "@owner", "offset": "0x238", "f32": 2.0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "negative height uses race height and clears low byte state",
+      "args": [1, 258, -1.0],
+      "memory": [
+        {"addr": "@handler", "offset": "0x15c", "u32": 0},
+        {"addr": "@owner", "offset": "0x238", "f32": 2.0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "value below current scale checks floor distance and passes",
+      "args": [1, 1, 1.5],
+      "memory": [
+        {"addr": "@handler", "offset": "0x15c", "u32": 0},
+        {"addr": "@owner", "offset": "0x238", "f32": 0.0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "floor distance at threshold returns false",
+      "args": [1, 1, 5.0],
+      "memory": [
+        {"addr": "@handler", "offset": "0x15c", "u32": 0},
+        {"addr": "@owner", "offset": "0x238", "f32": 0.0}
+      ],
+      "callees": {
+        "0x0043a0a0": {"name": "Display2_guess::GetFloorHeight2_guess", "conv": "thiscall", "args": ["float", "float", "float", "float"], "ret_float": 4.0},
+        "0x00439f26": {"name": "Display2_guess::GetFloorHeight_guess", "conv": "thiscall", "args": ["float", "float", "float"], "ret_float": 2.0}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "nonnegative height skips race height lookup",
+      "args": [1, 1, 0.0],
+      "memory": [
+        {"addr": "@handler", "offset": "0x15c", "u32": 0},
+        {"addr": "@owner", "offset": "0x238", "f32": 1.0}
+      ],
+      "expect": {"ret": 1}
+    }
+  ],
+  "fuzz": {
+    "seed": 4696051,
+    "count": 100,
+    "args": [
+      {"choices": [-1, 0, 1, 5, 12, 13, 36, 60, 72, 143, 367]},
+      {"choices": [0, 1, 2, 255, 256]},
+      {"range": [-2.0, 10.0]}
+    ],
+    "memory": [
+      {"addr": "@owner", "offset": "0x1a8", "type": "ptr", "choices": [0, "@handler"]},
+      {"addr": "@owner", "offset": "0x218", "type": "ptr", "choices": [0, "@context"]},
+      {"addr": "@owner", "offset": "0x238", "type": "float", "range": [-1.0, 10.0]},
+      {"addr": "@owner", "offset": "0x244", "type": "u8", "choices": [0, 1]},
+      {"addr": "@owner", "offset": "0x260", "type": "int", "choices": [0, 1, 9, 13]},
+      {"addr": "@owner", "offset": "0x30", "type": "float", "count": 3, "range": [-100.0, 100.0]},
+      {"addr": "@handler", "offset": "0x15c", "type": "int", "choices": [0, 1]},
+      {"addr": "0x00905d24", "type": "ptr", "choices": [0, "@display"]}
+    ]
+  }
+}

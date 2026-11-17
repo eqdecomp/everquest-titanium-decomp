@@ -1,0 +1,449 @@
+{
+  "function": "AtlasRender_guess::ParseLink_guess",
+  "original": "0x004da2d8",
+  "sources": [
+    "src/EverQuest/tu_106_AtlasRender.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@cleanupowner",
+  "args": [
+    {
+      "name": "result_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "element_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "cleanupowner": {
+      "size": "0x16c",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x11c",
+          "u32": 0
+        },
+        {
+          "offset": "0x120",
+          "u32": 0
+        },
+        {
+          "offset": "0x124",
+          "u32": 0
+        },
+        {
+          "offset": "0x128",
+          "u8": 1
+        }
+      ]
+    },
+    "element": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "result": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "target": {
+      "size": "0x19c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x198",
+          "u32": "@targetrep"
+        }
+      ]
+    },
+    "targetrep": {
+      "size": "0x18",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 1
+        },
+        {
+          "offset": "0x4",
+          "u32": 24
+        },
+        {
+          "offset": "0x8",
+          "u32": 4
+        },
+        {
+          "offset": "0x14",
+          "cstr": "link"
+        }
+      ]
+    },
+    "heapblock1": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "heapblock2": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "heapblock3": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "heapblock4": {
+      "size": "0x100",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0064f07c",
+      "from_image": "0x0064f07c",
+      "image_size": 16
+    },
+    {
+      "addr": "0x0099e600",
+      "hex": "010000001000000004000000000000000000000065727200"
+    }
+  ],
+  "callees": {
+    "0x005dcb60": {
+      "name": "GetImage_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x004d924f": {
+      "name": "ParseRect_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "u32",
+        "ignore"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00000000000000000a0000000a000000"
+        }
+      ]
+    },
+    "0x004d9160": {
+      "name": "Quad_guess::CopyTo_guess",
+      "passthrough": true
+    },
+    "0x004d918b": {
+      "name": "Quad_guess::IsInverted_guess",
+      "passthrough": true
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@target"
+    },
+    "0x004da15b": {
+      "name": "AtlasLink_guess::AtlasLink_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "0x0050319b": {
+      "name": "Lookup184_guess::Set_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x00572c10": {
+      "name": "TextAppend_guess::Append_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x00571fc0": {
+      "name": "CXStr::operator=",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this"
+    },
+    "0x0042e3d9": {
+      "name": "Concat_guess",
+      "passthrough": true
+    },
+    "0x004b1357": {
+      "name": "Join_guess",
+      "passthrough": true
+    },
+    "0x00571e00": {
+      "name": "CXStr::CXStr",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this"
+    },
+    "0x00571f70": {
+      "name": "CXStr::operator=",
+      "passthrough": true
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x00407d68": {
+      "name": "CXStr::CXStr",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this"
+    },
+    "kernel32.dll!GetProcessHeap": {
+      "conv": "stdcall",
+      "args": [],
+      "ret": 1
+    },
+    "kernel32.dll!HeapAlloc": {
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": [
+        "@heapblock1",
+        "@heapblock2",
+        "@heapblock3",
+        "@heapblock4"
+      ]
+    },
+    "kernel32.dll!HeapFree": {
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    }
+  },
+  "size": "0x1ae",
+  "cases": [
+    {
+      "name": "missing rect image",
+      "args": [
+        "@result",
+        "@element"
+      ],
+      "callees": {
+        "0x005dcb60": {
+          "name": "GetImage_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "invalid rectangle skips target creation",
+      "args": [
+        "@result",
+        "@element"
+      ],
+      "callees": {
+        "0x005dcb60": {
+          "name": "GetImage_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        },
+        "0x004d924f": {
+          "name": "ParseRect_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "u32",
+            "ignore"
+          ],
+          "ret": "arg0",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "0a0000000a0000000000000000000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "valid rectangle creates target",
+      "args": [
+        "@result",
+        "@element"
+      ],
+      "callees": {
+        "0x005dcb60": {
+          "name": "GetImage_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        },
+        "0x004d924f": {
+          "name": "ParseRect_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "u32",
+            "ignore"
+          ],
+          "ret": "arg0",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "00000000000000000a0000000a000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "rectangle error formats a link error",
+      "args": [
+        "@result",
+        "@element"
+      ],
+      "memory": [
+        {
+          "addr": "0x0099e608",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x005dcb60": {
+          "name": "GetImage_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        },
+        "0x004d924f": {
+          "name": "ParseRect_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "u32",
+            "ignore"
+          ],
+          "ret": "arg0",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "00000000000000000a0000000a000000"
+            },
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "00e69900"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "allocation returns null",
+      "args": [
+        "@result",
+        "@element"
+      ],
+      "callees": {
+        "0x005dcb60": {
+          "name": "GetImage_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        },
+        "0x004d924f": {
+          "name": "ParseRect_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "u32",
+            "ignore"
+          ],
+          "ret": "arg0",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "00000000000000000a0000000a000000"
+            }
+          ]
+        },
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5087960,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@result"
+        ]
+      },
+      {
+        "choices": [
+          "@element"
+        ]
+      }
+    ],
+    "memory": []
+  },
+  "_survivors": "L1122: ParseRect writes all 16 Quad bytes before any field is read; L1123: ParseRect writes all 16 Quad bytes before any field is read; L1124: ParseRect writes all 16 Quad bytes before any field is read; L1125: ParseRect writes all 16 Quad bytes before any field is read"
+}

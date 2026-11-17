@@ -1,0 +1,102 @@
+{
+  "function": "LeadershipManager_guess::GetNextRankCost_guess",
+  "original": "0x004b5085",
+  "sources": [
+    "src/EverQuest/tu_073_login.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {
+      "name": "target",
+      "type": "ptr"
+    },
+    {
+      "name": "index",
+      "type": "u32"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "owner": {
+      "size": "0x100",
+      "fill": "random",
+      "init": [
+        {"offset": "0x00", "u32": "@elem"}, {"offset": "0x04", "u32": "@elem"}, {"offset": "0x08", "u32": "@elem"}, {"offset": "0x0c", "u32": "@elem"},
+        {"offset": "0x10", "u32": "@elem"}, {"offset": "0x14", "u32": "@elem"}, {"offset": "0x18", "u32": "@elem"}, {"offset": "0x1c", "u32": "@elem"},
+        {"offset": "0x20", "u32": "@elem"}, {"offset": "0x24", "u32": "@elem"}, {"offset": "0x28", "u32": "@elem"}, {"offset": "0x2c", "u32": "@elem"},
+        {"offset": "0x30", "u32": "@elem"}, {"offset": "0x34", "u32": "@elem"}, {"offset": "0x38", "u32": "@elem"}, {"offset": "0x3c", "u32": "@elem"},
+        {"offset": "0x40", "u32": "@elem"}, {"offset": "0x44", "u32": "@elem"}, {"offset": "0x48", "u32": "@elem"}, {"offset": "0x4c", "u32": "@elem"},
+        {"offset": "0x50", "u32": "@elem"}, {"offset": "0x54", "u32": "@elem"}, {"offset": "0x58", "u32": "@elem"}, {"offset": "0x5c", "u32": "@elem"},
+        {"offset": "0x60", "u32": "@elem"}, {"offset": "0x64", "u32": "@elem"}, {"offset": "0x68", "u32": "@elem"}, {"offset": "0x6c", "u32": "@elem"},
+        {"offset": "0x70", "u32": "@elem"}, {"offset": "0x74", "u32": "@elem"}, {"offset": "0x78", "u32": "@elem"}, {"offset": "0x7c", "u32": "@elem"},
+        {"offset": "0x80", "u32": "@elem"}, {"offset": "0x84", "u32": "@elem"}, {"offset": "0x88", "u32": "@elem"}, {"offset": "0x8c", "u32": "@elem"},
+        {"offset": "0x90", "u32": "@elem"}, {"offset": "0x94", "u32": "@elem"}, {"offset": "0x98", "u32": "@elem"}, {"offset": "0x9c", "u32": "@elem"},
+        {"offset": "0xa0", "u32": "@elem"}, {"offset": "0xa4", "u32": "@elem"}, {"offset": "0xa8", "u32": "@elem"}, {"offset": "0xac", "u32": "@elem"},
+        {"offset": "0xb0", "u32": "@elem"}, {"offset": "0xb4", "u32": "@elem"}, {"offset": "0xb8", "u32": "@elem"}, {"offset": "0xbc", "u32": "@elem"},
+        {"offset": "0xc0", "u32": "@elem"}, {"offset": "0xc4", "u32": "@elem"}, {"offset": "0xc8", "u32": "@elem"}, {"offset": "0xcc", "u32": "@elem"},
+        {"offset": "0xd0", "u32": "@elem"}, {"offset": "0xd4", "u32": "@elem"}, {"offset": "0xd8", "u32": "@elem"}, {"offset": "0xdc", "u32": "@elem"},
+        {"offset": "0xe0", "u32": "@elem"}, {"offset": "0xe4", "u32": "@elem"}, {"offset": "0xe8", "u32": "@elem"}, {"offset": "0xec", "u32": "@elem"},
+        {"offset": "0xf0", "u32": "@elem"}, {"offset": "0xf4", "u32": "@elem"}, {"offset": "0xf8", "u32": "@elem"}, {"offset": "0xfc", "u32": "@elem"}
+      ]
+    },
+    "elem": {
+      "size": "0x30",
+      "fill": "random"
+    },
+    "target": {
+      "size": "0xd00",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {},
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        "@target",
+        1
+      ]
+    },
+    {
+      "name": "first slot",
+      "args": [
+        "@target",
+        0
+      ]
+    },
+    {
+      "name": "last slot",
+      "args": [
+        "@target",
+        63
+      ]
+    },
+    {
+      "name": "index 64 hits the bounds check",
+      "args": [
+        "@target",
+        64
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4935813,
+    "count": 200,
+    "args": [
+      {
+        "choices": [
+          "@target"
+        ]
+      },
+      {
+        "range": [
+          0,
+          63
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

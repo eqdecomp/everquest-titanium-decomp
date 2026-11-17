@@ -1,0 +1,279 @@
+{
+  "function": "AdventureManager_guess::Tick_guess",
+  "original": "0x004082df",
+  "sources": [
+    "src/EverQuest/tu_008_AdventureManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@itemtimer",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "itemtimer": {
+      "size": "0x480",
+      "fill": "random",
+      "init": [
+        {"offset": "0x47c", "u32": 0}
+      ]
+    },
+    "rootstate": {
+      "size": "0x150",
+      "fill": "random"
+    },
+    "callback": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@cbvtbl"}
+      ]
+    },
+    "cbvtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x88", "u32": "@fn_slot34"}
+      ]
+    },
+    "spell": {
+      "size": "0x260",
+      "fill": "random"
+    },
+    "fn_slot34": {
+      "size": "0x10",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "0x009913d4", "u32": "@callback"},
+    {"addr": "0x00905d24", "u32": "@rootstate"},
+    {"addr": "0x00905ce4", "u32": 7},
+    {"addr": "@rootstate", "offset": "0x148", "u32": 1500},
+    {"addr": "@itemtimer", "offset": "0x4", "u32": 0},
+    {"addr": "@itemtimer", "offset": "0x458", "u32": 1000},
+    {"addr": "@itemtimer", "offset": "0x45c", "u32": 1000},
+    {"addr": "@itemtimer", "offset": "0x460", "u32": 0},
+    {"addr": "@itemtimer", "offset": "0x450", "u32": 5000},
+    {"addr": "@itemtimer", "offset": "0x454", "u32": 5000}
+  ],
+  "callees": {
+    "0x0059dd30": {
+      "name": "IsActive_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005a1cd0": {
+      "name": "FinishUpdate_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00439d16": {
+      "name": "PlayerDistance_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "int", "float"],
+      "ret_float": 40.0
+    },
+    "0x004d6c89": {
+      "name": "UpdateFirst_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x004d6d3d": {
+      "name": "UpdateSecond_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "@fn_slot34": {
+      "name": "Slot34_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "no callback",
+      "args": [],
+      "memory": [
+        {"addr": "0x009913d4", "u32": 0}
+      ]
+    },
+    {
+      "name": "not active, mode 1 over threshold",
+      "args": [],
+      "memory": [
+        {"addr": "@itemtimer", "offset": "0x4", "u32": 1},
+        {"addr": "@rootstate", "offset": "0x148", "u32": 1501}
+      ],
+      "callees": {
+        "0x0059dd30": {"name": "IsActive_guess", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "active, mode 0 (no action)",
+      "args": [],
+      "memory": [
+        {"addr": "@itemtimer", "offset": "0x4", "u32": 0},
+        {"addr": "@rootstate", "offset": "0x148", "u32": 1501}
+      ]
+    },
+    {
+      "name": "mode 1, root at threshold (not greater)",
+      "args": [],
+      "memory": [
+        {"addr": "@itemtimer", "offset": "0x4", "u32": 1},
+        {"addr": "@itemtimer", "offset": "0x458", "u32": 1000},
+        {"addr": "@rootstate", "offset": "0x148", "u32": 1500}
+      ]
+    },
+    {
+      "name": "mode 1, over threshold, no spell",
+      "args": [],
+      "memory": [
+        {"addr": "@itemtimer", "offset": "0x4", "u32": 1},
+        {"addr": "@itemtimer", "offset": "0x458", "u32": 1000},
+        {"addr": "@rootstate", "offset": "0x148", "u32": 1501},
+        {"addr": "@itemtimer", "offset": "0x47c", "u32": 0}
+      ]
+    },
+    {
+      "name": "mode 2, spell measure 40 (over 30)",
+      "args": [],
+      "memory": [
+        {"addr": "@itemtimer", "offset": "0x4", "u32": 2},
+        {"addr": "@itemtimer", "offset": "0x458", "u32": 1000},
+        {"addr": "@rootstate", "offset": "0x148", "u32": 1501},
+        {"addr": "@itemtimer", "offset": "0x47c", "u32": "@spell"}
+      ]
+    },
+    {
+      "name": "mode 2, spell measure exactly 30 (not greater)",
+      "args": [],
+      "memory": [
+        {"addr": "@itemtimer", "offset": "0x4", "u32": 2},
+        {"addr": "@itemtimer", "offset": "0x458", "u32": 1000},
+        {"addr": "@rootstate", "offset": "0x148", "u32": 1501},
+        {"addr": "@itemtimer", "offset": "0x47c", "u32": "@spell"}
+      ],
+      "callees": {
+        "0x00439d16": {"name": "Measure_guess", "conv": "thiscall", "args": ["ptr", "int", "float"], "ret_float": 30.0}
+      }
+    },
+    {
+      "name": "mode 1, spell measure 10 (not greater)",
+      "args": [],
+      "memory": [
+        {"addr": "@itemtimer", "offset": "0x4", "u32": 1},
+        {"addr": "@itemtimer", "offset": "0x458", "u32": 1000},
+        {"addr": "@rootstate", "offset": "0x148", "u32": 1501},
+        {"addr": "@itemtimer", "offset": "0x47c", "u32": "@spell"}
+      ],
+      "callees": {
+        "0x00439d16": {"name": "Measure_guess", "conv": "thiscall", "args": ["ptr", "int", "float"], "ret_float": 10.0}
+      }
+    },
+    {
+      "name": "mode 3, state 100 (no update)",
+      "args": [],
+      "memory": [
+        {"addr": "@itemtimer", "offset": "0x4", "u32": 3},
+        {"addr": "@itemtimer", "offset": "0x45c", "u32": 100},
+        {"addr": "@rootstate", "offset": "0x148", "u32": 200},
+        {"addr": "@itemtimer", "offset": "0x460", "u32": 0}
+      ]
+    },
+    {
+      "name": "mode 3, state reaches 1500, firstValue 5000 -> 4999",
+      "args": [],
+      "memory": [
+        {"addr": "@itemtimer", "offset": "0x4", "u32": 3},
+        {"addr": "@itemtimer", "offset": "0x45c", "u32": 0},
+        {"addr": "@rootstate", "offset": "0x148", "u32": 1500},
+        {"addr": "@itemtimer", "offset": "0x460", "u32": 0},
+        {"addr": "@itemtimer", "offset": "0x450", "u32": 5000}
+      ]
+    },
+    {
+      "name": "mode 3, clamp firstValue to 0",
+      "args": [],
+      "memory": [
+        {"addr": "@itemtimer", "offset": "0x4", "u32": 3},
+        {"addr": "@itemtimer", "offset": "0x45c", "u32": 0},
+        {"addr": "@rootstate", "offset": "0x148", "u32": 2000},
+        {"addr": "@itemtimer", "offset": "0x460", "u32": 0},
+        {"addr": "@itemtimer", "offset": "0x450", "u32": 0}
+      ]
+    },
+    {
+      "name": "mode 4, state exactly 1000, secondValue 100 -> 99",
+      "args": [],
+      "memory": [
+        {"addr": "@itemtimer", "offset": "0x4", "u32": 4},
+        {"addr": "@itemtimer", "offset": "0x45c", "u32": 0},
+        {"addr": "@rootstate", "offset": "0x148", "u32": 1000},
+        {"addr": "@itemtimer", "offset": "0x460", "u32": 0},
+        {"addr": "@itemtimer", "offset": "0x454", "u32": 100}
+      ]
+    },
+    {
+      "name": "mode 4, clamp secondValue to 0",
+      "args": [],
+      "memory": [
+        {"addr": "@itemtimer", "offset": "0x4", "u32": 4},
+        {"addr": "@itemtimer", "offset": "0x45c", "u32": 0},
+        {"addr": "@rootstate", "offset": "0x148", "u32": 2000},
+        {"addr": "@itemtimer", "offset": "0x460", "u32": 0},
+        {"addr": "@itemtimer", "offset": "0x454", "u32": 0}
+      ]
+    },
+    {
+      "name": "mode 4, state 999 (boundary, no update)",
+      "args": [],
+      "memory": [
+        {"addr": "@itemtimer", "offset": "0x4", "u32": 4},
+        {"addr": "@itemtimer", "offset": "0x45c", "u32": 0},
+        {"addr": "@rootstate", "offset": "0x148", "u32": 999},
+        {"addr": "@itemtimer", "offset": "0x460", "u32": 0}
+      ]
+    },
+    {
+      "name": "mode 3, negative elapsed",
+      "args": [],
+      "memory": [
+        {"addr": "@itemtimer", "offset": "0x4", "u32": 3},
+        {"addr": "@itemtimer", "offset": "0x45c", "u32": 500},
+        {"addr": "@rootstate", "offset": "0x148", "u32": 0},
+        {"addr": "@itemtimer", "offset": "0x460", "u32": 0}
+      ]
+    },
+    {
+      "name": "mode 5 (no timer change)",
+      "args": [],
+      "memory": [
+        {"addr": "@itemtimer", "offset": "0x4", "u32": 5},
+        {"addr": "@itemtimer", "offset": "0x45c", "u32": 0},
+        {"addr": "@rootstate", "offset": "0x148", "u32": 5000},
+        {"addr": "@itemtimer", "offset": "0x460", "u32": 0}
+      ]
+    }
+  ],
+  "_survivors": "L238: secondValue <= 0 instead of < 0 clamps an exact 0 to 0: same value written, same UpdateSecond argument",
+  "fuzz": {
+    "seed": 4227807,
+    "count": 200,
+    "args": [],
+    "memory": [
+      {"addr": "@itemtimer", "offset": "0x4", "type": "int", "choices": [0, 1, 2, 3, 4, 5]},
+      {"addr": "@itemtimer", "offset": "0x458", "type": "int", "range": [-2000, 3000]},
+      {"addr": "@itemtimer", "offset": "0x45c", "type": "int", "range": [-2000, 3000]},
+      {"addr": "@itemtimer", "offset": "0x460", "type": "int", "range": [-3000, 3000]},
+      {"addr": "@itemtimer", "offset": "0x450", "type": "int", "range": [-5, 3000]},
+      {"addr": "@itemtimer", "offset": "0x454", "type": "int", "range": [-5, 3000]},
+      {"addr": "@itemtimer", "offset": "0x47c", "type": "u32", "choices": [0, "@spell"]},
+      {"addr": "@rootstate", "offset": "0x148", "type": "int", "range": [-2000, 5000]}
+    ]
+  }
+}

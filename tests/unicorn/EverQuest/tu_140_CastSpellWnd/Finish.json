@@ -1,0 +1,198 @@
+{
+  "function": "Callback_guess::RefreshSpellGemButtons_guess",
+  "original": "0x004ec5a6",
+  "size": "0x16b",
+  "sources": ["src/EverQuest/tu_140_CastSpellWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@callback",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "callback": {
+      "size": "0x184",
+      "fill": "zero",
+      "init": [{"offset": "0x180", "u32": "@entry"}]
+    },
+    "root": {
+      "size": "0xc284",
+      "fill": "zero",
+      "init": [{"offset": "0x8", "u32": "@route"}]
+    },
+    "route": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [{"offset": "0x4", "u32": "0x100"}]
+    },
+    "manager": {
+      "size": "0x1ac",
+      "fill": "zero",
+      "init": [{"offset": "0x1a8", "u32": "@manager_data"}]
+    },
+    "manager_data": {
+      "size": "0xf9c",
+      "fill": "zero"
+    },
+    "limit": {
+      "size": "0x14c",
+      "fill": "zero",
+      "init": [{"offset": "0x148", "u32": 1}]
+    },
+    "entry": {
+      "size": "0x190",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@entry_vtbl"},
+        {"offset": "0x188", "u32": 0},
+        {"offset": "0x18c", "u32": 0}
+      ]
+    },
+    "fn_slot48": {"size": "4", "fill": "zero"},
+    "entry_vtbl": {
+      "size": "0xc4",
+      "fill": "zero",
+      "init": [{"offset": "0xc0", "u32": "@fn_slot48"}]
+    }
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@root"},
+    {"addr": "0x00905ce4", "u32": "@manager"},
+    {"addr": "0x00905d24", "u32": "@limit"}
+  ],
+  "callees": {
+    "0x004167e2": {"name": "Ready_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0044d0d0": {"name": "IsReady_guess", "conv": "cdecl", "args": ["int"], "ret": [0, 1]},
+    "0x0040e705": {"name": "Fetch_guess", "conv": "thiscall", "args": ["int"], "ret": [2, 3]},
+    "0x004bacfb": {"name": "Check_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "0x004ec163": {"name": "Tail_guess", "conv": "thiscall", "args": ["int"]},
+    "0x00558a18": {"name": "SetFadeMode_guess", "conv": "thiscall", "args": ["int"]},
+    "0x004106a3": {"name": "Pump_guess", "conv": "thiscall", "args": ["int", "bool", "int", "int"], "ret": 1},
+    "@fn_slot48": {"name": "Slot48_guess", "conv": "thiscall", "args": ["int", "int"]}
+  },
+  "cases": [
+    {"name": "typical_tail_active", "args": []},
+    {
+      "name": "empty_entries",
+      "args": [],
+      "memory": [{"addr": "@callback", "offset": "0x180", "u32": 0}]
+    },
+    {
+      "name": "ready_already",
+      "args": [],
+      "callees": {
+        "0x004167e2": {"name": "Ready_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x004106a3": {"name": "Pump_guess", "conv": "thiscall", "args": ["int", "bool", "int", "int"], "ret": 0},
+        "@fn_slot48": {"name": "Slot48_guess", "conv": "thiscall", "args": ["int", "int"]}
+      },
+      "memory": [{"addr": "@entry", "offset": "0x5d", "u8": 1}]
+    },
+    {
+      "name": "manager_value_ready",
+      "args": [],
+      "callees": {
+        "0x0044d0d0": {"name": "IsReady_guess", "conv": "cdecl", "args": ["int"], "ret": 1}
+      },
+      "memory": [
+        {"addr": "@callback", "offset": "0x160", "u32": "@entry"},
+        {"addr": "@callback", "offset": "0x180", "u32": 0},
+        {"addr": "@entry", "offset": "0x188", "u32": "0xffffffff"}
+      ]
+    },
+    {
+      "name": "fetch_value_not_ready",
+      "args": [],
+      "callees": {
+        "0x0044d0d0": {"name": "IsReady_guess", "conv": "cdecl", "args": ["int"], "ret": [0, 0]},
+        "0x0040e705": {"name": "Fetch_guess", "conv": "thiscall", "args": ["int"], "ret": 5}
+      },
+      "memory": [
+        {"addr": "@callback", "offset": "0x160", "u32": "@entry"},
+        {"addr": "@callback", "offset": "0x180", "u32": 0},
+        {"addr": "@entry", "offset": "0x188", "u32": "0xffffffff"}
+      ]
+    },
+    {
+      "name": "below_array_limit",
+      "args": [],
+      "memory": [
+        {"addr": "@callback", "offset": "0x160", "u32": "@entry"},
+        {"addr": "@callback", "offset": "0x180", "u32": 0},
+        {"addr": "@manager_data", "offset": "0xe8", "u32": 3},
+        {"addr": "@limit", "offset": "0x148", "u32": 2}
+      ]
+    },
+    {
+      "name": "at_field_limit",
+      "args": [],
+      "memory": [
+        {"addr": "@callback", "offset": "0x160", "u32": "@entry"},
+        {"addr": "@callback", "offset": "0x180", "u32": 0},
+        {"addr": "@manager_data", "offset": "0xe8", "u32": 2},
+        {"addr": "@manager_data", "offset": "0x110", "u32": 2},
+        {"addr": "@limit", "offset": "0x148", "u32": 2}
+      ]
+    },
+    {
+      "name": "check_rejected",
+      "args": [],
+      "callees": {
+        "0x004bacfb": {"name": "Check_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+      },
+      "memory": [
+        {"addr": "@callback", "offset": "0x160", "u32": "@entry"},
+        {"addr": "@callback", "offset": "0x180", "u32": 0}
+      ]
+    },
+    {
+      "name": "accepted_state_minus_one",
+      "args": [],
+      "memory": [
+        {"addr": "@callback", "offset": "0x160", "u32": "@entry"},
+        {"addr": "@callback", "offset": "0x180", "u32": 0},
+        {"addr": "@entry", "offset": "0x188", "u32": "0xffffffff"}
+      ]
+    },
+    {
+      "name": "accepted_state_18c_one",
+      "args": [],
+      "memory": [
+        {"addr": "@callback", "offset": "0x160", "u32": "@entry"},
+        {"addr": "@callback", "offset": "0x180", "u32": 0},
+        {"addr": "@entry", "offset": "0x188", "u32": 0},
+        {"addr": "@entry", "offset": "0x18c", "u32": 1}
+      ]
+    },
+    {
+      "name": "pump_off_flag_set",
+      "args": [],
+      "callees": {
+        "0x0044d0d0": {"name": "IsReady_guess", "conv": "cdecl", "args": ["int"], "ret": 1},
+        "0x004106a3": {"name": "Pump_guess", "conv": "thiscall", "args": ["int", "bool", "int", "int"], "ret": 0}
+      },
+      "memory": [{"addr": "@entry", "offset": "0x5d", "u8": 1}]
+    },
+    {
+      "name": "pump_off_flag_clear",
+      "args": [],
+      "callees": {
+        "0x0044d0d0": {"name": "IsReady_guess", "conv": "cdecl", "args": ["int"], "ret": 1},
+        "0x004106a3": {"name": "Pump_guess", "conv": "thiscall", "args": ["int", "bool", "int", "int"], "ret": 0}
+      },
+      "memory": [{"addr": "@entry", "offset": "0x5d", "u8": 0}]
+    }
+  ],
+  "fuzz": {
+    "seed": 5162406,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@callback", "offset": "0x160", "type": "u32", "count": 9, "choices": [0, "@entry"]},
+      {"addr": "@manager_data", "offset": "0xe8", "type": "u32", "count": 9, "choices": [0, 1, 2, 3, 4]},
+      {"addr": "@manager_data", "offset": "0x110", "type": "u32", "choices": [0, 1, 2, 3, 4]},
+      {"addr": "@manager_data", "offset": "0xf98", "type": "int", "choices": [0, 1]},
+      {"addr": "@limit", "offset": "0x148", "type": "u32", "choices": [0, 1, 2, 3, 4]},
+      {"addr": "@entry", "offset": "0x188", "type": "int", "choices": [-1, 0, 1]},
+      {"addr": "@entry", "offset": "0x18c", "type": "int", "choices": [0, 1]},
+      {"addr": "@entry", "offset": "0x5d", "type": "u8", "choices": [0, 1]}
+    ]
+  }
+}

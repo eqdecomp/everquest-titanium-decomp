@@ -1,0 +1,189 @@
+{
+  "function": "CTitleWndView_guess::OnMessage_guess",
+  "original": "0x00565f53",
+  "sources": [
+    "src/EverQuest/tu_229_TitleWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@controlstateowner",
+  "args": [
+    {
+      "name": "sender_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "message_guess",
+      "type": "u32"
+    },
+    {
+      "name": "data_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "controlstateowner": {
+      "size": "0x1dc",
+      "fill": "random",
+      "init": [
+        { "offset": "0x170", "u32": "@first_control" },
+        { "offset": "0x174", "u32": "@second_control" },
+        { "offset": "0x178", "u32": "@first_widget" },
+        { "offset": "0x17c", "u32": "@second_widget" },
+        { "offset": "0x180", "u32": "@third_widget" },
+        { "offset": "0x184", "u32": "@fourth_widget" },
+        { "offset": "0x188", "u32": "@source" },
+        { "offset": "0x1d8", "u8": 0 }
+      ]
+    },
+    "first_control": { "size": "0x4", "fill": "random" },
+    "second_control": { "size": "0x4", "fill": "random" },
+    "first_widget": { "size": "0x4", "fill": "random" },
+    "second_widget": { "size": "0x4", "fill": "random" },
+    "third_widget": { "size": "0x4", "fill": "random" },
+    "fourth_widget": { "size": "0x4", "fill": "random" },
+    "source": {
+      "size": "0x129",
+      "fill": "random",
+      "init": [{ "offset": "0x128", "u8": 37 }]
+    },
+    "sender": { "size": "0x4", "fill": "random" },
+    "data": { "size": "0x4", "fill": "random" },
+    "node": { "size": "0x4", "fill": "random" },
+    "callback_global": { "size": "0x4", "fill": "random" }
+  },
+  "memory": [
+    { "addr": "0x00988df0", "u32": "@callback_global" }
+  ],
+  "callees": {
+    "0x00597be0": {
+      "name": "FUN_00597be0",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 7
+    },
+    "0x00597ed0": {
+      "name": "FUN_00597ed0",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 4660
+    },
+    "0x0056529c": {
+      "name": "FindKey_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": "@node"
+    },
+    "0x00565b3b": {
+      "name": "SetSelectedTitle_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "bool"]
+    },
+    "0x00565084": {
+      "name": "FUN_00565084",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00598580": {
+      "name": "FUN_00598580",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00564fab": {
+      "name": "SendSetTitle_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "int"]
+    },
+    "0x004ae82a": {
+      "name": "FUN_004ae82a",
+      "conv": "thiscall",
+      "args": ["int", "cstr", "cstr"]
+    },
+    "0x005a2230": {
+      "name": "CSidlScreenWnd::WndNotification",
+      "conv": "thiscall",
+      "args": ["ptr", "u32", "ptr"]
+    }
+  },
+  "cases": [
+    {
+      "name": "message zero bypasses branches",
+      "args": ["@first_control", 0, "@data"]
+    },
+    {
+      "name": "message one with first control and node",
+      "args": ["@first_control", 1, "@data"]
+    },
+    {
+      "name": "message one with first control and no node",
+      "args": ["@first_control", 1, "@data"],
+      "callees": {
+        "0x0056529c": {
+          "name": "FUN_0056529c",
+          "conv": "thiscall",
+          "args": ["u32"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "message one with second control",
+      "args": ["@second_control", 1, "@data"]
+    },
+    {
+      "name": "message one with first widget",
+      "args": ["@first_widget", 1, "@data"]
+    },
+    {
+      "name": "message one with third widget",
+      "args": ["@third_widget", 1, "@data"]
+    },
+    {
+      "name": "message one clears second widget",
+      "args": ["@second_widget", 1, "@data"]
+    },
+    {
+      "name": "message one clears fourth widget",
+      "args": ["@fourth_widget", 1, "@data"]
+    },
+    {
+      "name": "message one updates source byte",
+      "args": ["@source", 1, "@data"],
+      "memory": [{ "addr": "@source", "offset": "0x128", "u8": 255 }]
+    },
+    {
+      "name": "message one unknown sender and null data",
+      "args": ["@sender", 1, 0]
+    },
+    {
+      "name": "other message bypasses branches",
+      "args": ["@first_widget", 2, "@data"]
+    },
+    {
+      "name": "null sender on message one",
+      "args": [0, 1, "@data"]
+    }
+  ],
+  "fuzz": {
+    "seed": 5660499,
+    "count": 120,
+    "args": [
+      {
+        "choices": [
+          "@first_control", "@second_control", "@first_widget", "@second_widget",
+          "@third_widget", "@fourth_widget", "@source", "@sender", 0
+        ]
+      },
+      { "choices": [0, 1, 2, 4294967295] },
+      { "choices": ["@data", 0] }
+    ],
+    "memory": [
+      {
+        "addr": "@source",
+        "offset": "0x128",
+        "type": "u8",
+        "choices": [0, 1, 127, 128, 255]
+      }
+    ]
+  }
+}

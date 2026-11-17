@@ -1,0 +1,189 @@
+{
+  "function": "CTradeskillWndView_guess::Refresh_guess",
+  "original": "0x00567846",
+  "sources": [
+    "src/EverQuest/tu_231_TradeskillWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x1000",
+      "fill": "random",
+      "init": [{"offset": "0x18c", "u32": "@iface"}, {"offset": "0x364", "u32": "@client"}]
+    },
+    "iface": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@vtbl"}]
+    },
+    "vtbl": {
+      "size": "0x200",
+      "fill": "zero",
+      "init": [{"offset": "0xfc", "u32": "@slot3f"}]
+    },
+    "client": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "slot3f": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "root": {
+      "size": "0xc300",
+      "fill": "zero"
+    },
+    "strtab": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "str": {
+      "size": "0x40",
+      "fill": "zero"
+    },
+    "id0": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "id1": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "id2": {
+      "size": "0x10",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "0x0079AC74", "u32": "0x5A5A1234"},
+    {"addr": "0x00905D00", "u32": "@root"},
+    {"addr": "0x00905CB0", "u32": "@strtab"},
+    {"addr": "0x00851200", "u32": "@id0"},
+    {"addr": "0x00851204", "u32": "@id1"},
+    {"addr": "0x00851208", "u32": "@id2"},
+    {"addr": "@str", "cstr": "Ruined Item"},
+    {"addr": "@id0", "u32": 3124},
+    {"addr": "@id1", "u32": 3125},
+    {"addr": "@id2", "u32": 3126}
+  ],
+  "callees": {
+    "0x005eccf0": {
+      "name": "ReadClientByte",
+      "conv": "stdcall",
+      "args": ["ptr"],
+      "ret": 1
+    },
+    "0x004bb89c": {
+      "name": "LookupRoot::FindIndex",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 1
+    },
+    "0x0041ace9": {
+      "name": "LookupSub::Get",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 7
+    },
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": ["u32", "u32"],
+      "ret": "@str"
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr"],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        {"arg": 0, "hex": "5275696e6564204974656d2028372900"}
+      ]
+    },
+    "0x00571e00": {
+      "name": "CXStr::CXStr",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "keep"
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "@slot3f": {
+      "name": "Interface::Slot3F",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "78563412"}
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "slot found, name formatted",
+      "args": []
+    },
+    {
+      "name": "slot 0xff, fixed text",
+      "args": [],
+      "callees": {
+        "0x004bb89c": {"name": "LookupRoot::FindIndex", "conv": "thiscall", "args": ["int"], "ret": 255}
+      }
+    },
+    {
+      "name": "second index, zero value",
+      "args": [],
+      "callees": {
+        "0x004bb89c": {"name": "LookupRoot::FindIndex", "conv": "thiscall", "args": ["int"], "ret": 2},
+        "0x0041ace9": {"name": "LookupSub::Get", "conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    },
+    {
+      "name": "index zero, byte zero",
+      "args": [],
+      "callees": {
+        "0x005eccf0": {"name": "ReadClientByte", "conv": "stdcall", "args": ["ptr"], "ret": 0},
+        "0x004bb89c": {"name": "LookupRoot::FindIndex", "conv": "thiscall", "args": ["int"], "ret": 0},
+        "0x0041ace9": {"name": "LookupSub::Get", "conv": "thiscall", "args": ["int"], "ret": 99}
+      }
+    },
+    {
+      "name": "label keeps no rep",
+      "args": [],
+      "callees": {
+        "@slot3f": {"name": "Interface::Slot3F", "conv": "thiscall", "args": ["ignore"], "ret": 0}
+      }
+    },
+    {
+      "name": "no child interface",
+      "args": [],
+      "memory": [{"addr": "@owner", "offset": "0x18c", "u32": 0}]
+    },
+    {
+      "name": "no pending client",
+      "args": [],
+      "memory": [{"addr": "@owner", "offset": "0x364", "u32": 0}]
+    }
+  ],
+  "fuzz": {
+    "seed": 5666886,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@owner", "offset": "0x370", "type": "int", "range": [-2, 300]},
+      {"addr": "@owner", "offset": "0x18c", "type": "u32", "choices": [0, "@iface"]},
+      {"addr": "@owner", "offset": "0x364", "type": "u32", "choices": [0, "@client"]}
+    ]
+  }
+}

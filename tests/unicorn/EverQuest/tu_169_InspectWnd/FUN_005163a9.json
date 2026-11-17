@@ -1,0 +1,525 @@
+{
+  "function": "CInspectWnd_guess::SetInspectAnswer_guess",
+  "original": "0x005163a9",
+  "sources": [
+    "src/EverQuest/tu_169_InspectWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@handler",
+  "args": [
+    {
+      "name": "item",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "handler": {
+      "size": "0x1c4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@handler_vtbl"
+        },
+        {
+          "offset": "0x5c",
+          "u8": 1
+        }
+      ]
+    },
+    "item": {
+      "size": "0x660",
+      "fill": "zero"
+    },
+    "handler_vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xfc",
+          "u32": "@fn_slot63"
+        }
+      ]
+    },
+    "child": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@child_vtbl"
+        }
+      ]
+    },
+    "child_vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xfc",
+          "u32": "@fn_slot63"
+        }
+      ]
+    },
+    "clock": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "everquest": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "allocation": {
+      "size": "0x2c4",
+      "fill": "zero"
+    },
+    "fn_slot63": {
+      "size": "0x1",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "from_image": "0x0079ac74",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@clock"
+    },
+    {
+      "addr": "0x00905cf8",
+      "u32": 123
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@everquest"
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": 7
+    }
+  ],
+  "callees": {
+    "0x0051638b": {
+      "name": "InitializeInspectWindowData_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00401b28": {
+      "name": "FUN_00401b28",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": 1
+    },
+    "0x00439d16": {
+      "name": "PlayerDistance_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32",
+        "float"
+      ],
+      "ret_float": 20.0
+    },
+    "0x0046da4a": {
+      "name": "Format_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x004982c6": {
+      "name": "CEverQuest::dsp_chat",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ]
+    },
+    "0x00571e00": {
+      "name": "CXStr(const char*)",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this"
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@allocation"
+    },
+    "0x005ece20": {
+      "name": "Obj_guess::Obj_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x00601f60": {
+      "name": "Thing_guess::Thing_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x005ec620": {
+      "name": "EQ_Item_guess::Attach_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x005a0a80": {
+      "name": "CInspectWnd_guess::Refresh_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "@fn_slot63": {
+      "name": "slot63",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "null item and reset path",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@handler",
+          "offset": "0x5c",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "zero lookup",
+      "args": [
+        "@item"
+      ],
+      "callees": {
+        "0x00401b28": {
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "duration at limit",
+      "args": [
+        "@item"
+      ],
+      "memory": [
+        {
+          "addr": "@item",
+          "offset": "0x4",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "duration above limit",
+      "args": [
+        "@item"
+      ],
+      "memory": [
+        {
+          "addr": "@item",
+          "offset": "0x4",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x00439d16": {
+          "name": "FUN_00439d16",
+          "conv": "thiscall",
+          "args": [
+            "u32",
+            "u32",
+            "float"
+          ],
+          "ret_float": 21.0
+        }
+      }
+    },
+    {
+      "name": "child match and one row",
+      "args": [
+        "@item"
+      ],
+      "callees": {
+        "0x00401b28": {
+          "ret": 7
+        }
+      },
+      "memory": [
+        {
+          "addr": "@handler",
+          "offset": "0x1bc",
+          "u32": "@child"
+        },
+        {
+          "addr": "@handler",
+          "offset": "0x160",
+          "u32": 7
+        },
+        {
+          "addr": "@item",
+          "offset": "0x4",
+          "u32": 1
+        },
+        {
+          "addr": "@item",
+          "offset": "0x8",
+          "cstr": "row"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x5e0",
+          "cstr": "description"
+        }
+      ]
+    },
+    {
+      "name": "child mismatch and reset message",
+      "args": [
+        "@item"
+      ],
+      "memory": [
+        {
+          "addr": "@handler",
+          "offset": "0x5c",
+          "u8": 0
+        },
+        {
+          "addr": "@handler",
+          "offset": "0x1bc",
+          "u32": "@child"
+        },
+        {
+          "addr": "@handler",
+          "offset": "0x160",
+          "u32": 8
+        },
+        {
+          "addr": "@item",
+          "offset": "0x4",
+          "u32": 1
+        },
+        {
+          "addr": "@item",
+          "offset": "0x5e0",
+          "cstr": "description"
+        }
+      ]
+    },
+    {
+      "name": "full 22-row loop",
+      "args": [
+        "@item"
+      ],
+      "memory": [
+        {
+          "addr": "@item",
+          "offset": "0x4",
+          "u32": 1
+        },
+        {
+          "addr": "@item",
+          "offset": "0x5e0",
+          "cstr": "description"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x8",
+          "cstr": "row0"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x48",
+          "cstr": "row1"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x88",
+          "cstr": "row2"
+        },
+        {
+          "addr": "@item",
+          "offset": "0xc8",
+          "cstr": "row3"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x108",
+          "cstr": "row4"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x148",
+          "cstr": "row5"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x188",
+          "cstr": "row6"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x1c8",
+          "cstr": "row7"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x208",
+          "cstr": "row8"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x248",
+          "cstr": "row9"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x288",
+          "cstr": "row10"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x2c8",
+          "cstr": "row11"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x308",
+          "cstr": "row12"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x348",
+          "cstr": "row13"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x388",
+          "cstr": "row14"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x3c8",
+          "cstr": "row15"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x408",
+          "cstr": "row16"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x448",
+          "cstr": "row17"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x488",
+          "cstr": "row18"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x4c8",
+          "cstr": "row19"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x508",
+          "cstr": "row20"
+        },
+        {
+          "addr": "@item",
+          "offset": "0x548",
+          "cstr": "row21"
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5333929,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@item"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@handler",
+        "offset": "0x5c",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@item",
+        "offset": "0x4",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@item",
+        "offset": "0x8",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

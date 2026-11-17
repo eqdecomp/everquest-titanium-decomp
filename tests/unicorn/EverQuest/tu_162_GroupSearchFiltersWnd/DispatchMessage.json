@@ -1,0 +1,85 @@
+{
+  "function": "CGroupSearchFiltersWnd_guess::DispatchMessage_guess",
+  "original": "0x00508840",
+  "sources": [
+    "src/EverQuest/tu_162_GroupSearchFiltersWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    { "name": "widget", "type": "ptr" },
+    { "name": "message", "type": "int" },
+    { "name": "data", "type": "int" }
+  ],
+  "ret": "int",
+  "objects": {
+    "owner": { "size": "0x198", "fill": "random" }
+  },
+  "memory": [
+    { "addr": "@owner", "offset": "0x15c", "u32": "0x11111000" },
+    { "addr": "@owner", "offset": "0x160", "u32": "0x11111004" },
+    { "addr": "@owner", "offset": "0x164", "u32": "0x11111008" },
+    { "addr": "@owner", "offset": "0x170", "u32": "0x1111100c" },
+    { "addr": "@owner", "offset": "0x174", "u32": "0x11111010" },
+    { "addr": "@owner", "offset": "0x178", "u32": "0x11111014" },
+    { "addr": "@owner", "offset": "0x17c", "u32": "0x11111018" },
+    { "addr": "@owner", "offset": "0x188", "u32": "0x1111101c" },
+    { "addr": "@owner", "offset": "0x18c", "u32": "0x11111020" },
+    { "addr": "@owner", "offset": "0x190", "u32": "0x11111024" },
+    { "addr": "@owner", "offset": "0x194", "u32": "0x11111028" }
+  ],
+  "callees": {
+    "0x00507e6e": { "name": "UncheckFriendsList_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x00507e80": { "name": "UncheckIgnoreList_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x00507e92": { "name": "UncheckDesiredGuilds_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x00507fc6": { "name": "RemoveExcludedGuild_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x00507fe2": { "name": "RemoveAllExcludedGuilds_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x00507eb6": { "name": "AddExcludedGuild_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x00507ea4": { "name": "UncheckExcludedGuilds_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x0050810a": { "name": "RemoveDesiredGuild_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x00508126": { "name": "RemoveAllDesiredGuilds_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x00507ffa": { "name": "AddDesiredGuild_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x005082f0": { "name": "WriteFilters_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x005a2230": {
+      "name": "DefaultMessage_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "int", "int"],
+      "ret": 305419896
+    }
+  },
+  "cases": [
+    { "name": "callback 15c", "args": ["0x11111000", 1, 101], "expect": { "ret": 0 } },
+    { "name": "callback 160", "args": ["0x11111004", 1, 102], "expect": { "ret": 0 } },
+    { "name": "callback 164", "args": ["0x11111008", 1, 103], "expect": { "ret": 0 } },
+    { "name": "callback 170", "args": ["0x1111100c", 1, 104], "expect": { "ret": 0 } },
+    { "name": "callback 174", "args": ["0x11111010", 1, 105], "expect": { "ret": 0 } },
+    { "name": "callback 178", "args": ["0x11111014", 1, 106], "expect": { "ret": 0 } },
+    { "name": "callback 17c", "args": ["0x11111018", 1, 107], "expect": { "ret": 0 } },
+    { "name": "callback 188", "args": ["0x1111101c", 1, 108], "expect": { "ret": 0 } },
+    { "name": "callback 18c", "args": ["0x11111020", 1, 109], "expect": { "ret": 0 } },
+    { "name": "callback 190", "args": ["0x11111024", 1, 110], "expect": { "ret": 0 } },
+    { "name": "callback 194", "args": ["0x11111028", 1, 111], "expect": { "ret": 0 } },
+    { "name": "message zero 15c", "args": ["0x11111000", 0, 201], "expect": { "ret": 305419896 } },
+    { "name": "message zero 160", "args": ["0x11111004", 0, 202], "expect": { "ret": 305419896 } },
+    { "name": "message zero 164", "args": ["0x11111008", 0, 203], "expect": { "ret": 305419896 } },
+    { "name": "message zero 170", "args": ["0x1111100c", 0, 204], "expect": { "ret": 305419896 } },
+    { "name": "message zero 174", "args": ["0x11111010", 0, 205], "expect": { "ret": 305419896 } },
+    { "name": "message zero 178", "args": ["0x11111014", 0, 206], "expect": { "ret": 305419896 } },
+    { "name": "message zero 17c", "args": ["0x11111018", 0, 207], "expect": { "ret": 305419896 } },
+    { "name": "message zero 188", "args": ["0x1111101c", 0, 208], "expect": { "ret": 305419896 } },
+    { "name": "message zero 18c", "args": ["0x11111020", 0, 209], "expect": { "ret": 305419896 } },
+    { "name": "message zero 190", "args": ["0x11111024", 0, 210], "expect": { "ret": 305419896 } },
+    { "name": "message zero 194", "args": ["0x11111028", 0, 211], "expect": { "ret": 305419896 } },
+    { "name": "unmatched widget", "args": ["0x22222000", 1, 301], "expect": { "ret": 305419896 } },
+    { "name": "message above one", "args": ["0x11111028", 2, 302], "expect": { "ret": 305419896 } }
+  ],
+  "fuzz": {
+    "seed": 5277760,
+    "count": 120,
+    "args": [
+      { "choices": ["0x11111000", "0x11111004", "0x11111008", "0x1111100c", "0x11111010", "0x11111014", "0x11111018", "0x1111101c", "0x11111020", "0x11111024", "0x11111028", "0x22222000"] },
+      { "choices": [0, 1, 2] },
+      { "range": [-10, 20] }
+    ]
+  }
+}

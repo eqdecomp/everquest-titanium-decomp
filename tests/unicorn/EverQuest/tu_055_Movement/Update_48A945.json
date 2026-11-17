@@ -1,0 +1,187 @@
+{
+  "function": "State_48995D_guess::Update_48A945_guess",
+  "original": "0x0048a945",
+  "sources": ["src/EverQuest/tu_055_Movement.cpp"],
+  "size": "0x161",
+  "conv": "thiscall",
+  "this": "@state",
+  "args": [],
+  "ret": "char",
+  "objects": {
+    "state": {
+      "size": "0x264",
+      "fill": "random",
+      "init": [
+        {"offset": "0x30", "f32": 10.0},
+        {"offset": "0x34", "f32": 20.0},
+        {"offset": "0x38", "f32": 30.0},
+        {"offset": "0x4c", "f32": 2.0},
+        {"offset": "0x50", "f32": 0.5},
+        {"offset": "0x60", "u32": 0},
+        {"offset": "0x64", "u32": 0},
+        {"offset": "0x1a8", "u32": "@data"},
+        {"offset": "0x260", "u32": 48}
+      ]
+    },
+    "data": {
+      "size": "0x164",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@iface"},
+        {"offset": "0x48", "f32": 4.0},
+        {"offset": "0x15c", "u32": 0}
+      ]
+    },
+    "iface": {"size": "0x4", "fill": "random", "init": [{"offset": "0x0", "u32": "@iface_vtbl"}]},
+    "iface_vtbl": {
+      "size": "0x64",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x48", "u32": "@read_position"},
+        {"offset": "0x4c", "u32": "@write_position"},
+        {"offset": "0x60", "u32": "@get_value"}
+      ]
+    },
+    "effect": {"size": "0x4", "fill": "random", "init": [{"offset": "0x0", "u32": "@effect_vtbl"}]},
+    "effect_vtbl": {"size": "0xc", "fill": "zero", "init": [{"offset": "0x8", "u32": "@effect_call"}]},
+    "other": {
+      "size": "0x264",
+      "fill": "random",
+      "init": [
+        {"offset": "0x30", "f32": 1.0},
+        {"offset": "0x34", "f32": 2.0},
+        {"offset": "0x38", "f32": 3.0},
+        {"offset": "0x4c", "f32": 1.25},
+        {"offset": "0x1a8", "u32": "@other_data"}
+      ]
+    },
+    "other_data": {
+      "size": "0x164",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@other_iface"},
+        {"offset": "0x48", "f32": 9.0}
+      ]
+    },
+    "other_iface": {"size": "0x4", "fill": "random", "init": [{"offset": "0x0", "u32": "@iface_vtbl"}]},
+    "display": {"size": "0x4", "fill": "zero"},
+    "get_value": {"size": "0x4", "fill": "zero"},
+    "effect_call": {"size": "0x4", "fill": "zero"},
+    "read_position": {"size": "0x4", "fill": "zero"},
+    "write_position": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905d24", "u32": "@display"},
+    {"addr": "0x006410d0", "from_image": "0x006410d0", "image_size": 4}
+  ],
+  "callees": {
+    "0x0043745d": {"name": "GetValue2cf8_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x0047c08e": {"name": "GetObject_guess", "conv": "thiscall", "args": [], "ret": "@effect"},
+    "0x00489c51": {"name": "Advance_489C51_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0048a7f9": {"name": "Update_48A7F9_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "@get_value": {"name": "GetValue_guess", "conv": "thiscall", "args": [], "ret_float": 1.5},
+    "@effect_call": {"name": "Effect_guess", "conv": "thiscall", "args": ["int", "int", "int", "float", "int"], "ret": 0},
+    "@read_position": {"name": "ReadPosition_guess", "conv": "thiscall", "args": ["mem:12"], "ret": 0},
+    "@write_position": {"name": "WritePosition_guess", "conv": "thiscall", "args": ["mem:8"], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "null-data",
+      "memory": [{"addr": "@state", "offset": "0x1a8", "u32": 0}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "null-interface",
+      "memory": [{"addr": "@data", "offset": "0x0", "u32": 0}],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "manager-inactive",
+      "callees": {"0x0043745d": {"name": "GetValue2cf8_guess", "conv": "thiscall", "args": [], "ret": 0}},
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "ordinary-no-flags",
+      "memory": [
+        {"addr": "@state", "offset": "0x260", "u32": 48},
+        {"addr": "@data", "offset": "0x15c", "u32": 0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "kind-31-equal",
+      "memory": [
+        {"addr": "@state", "offset": "0x260", "u32": 49},
+        {"addr": "@state", "offset": "0x4c", "f32": 1.5},
+        {"addr": "@data", "offset": "0x15c", "u32": 0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "kind-31-different-with-flags",
+      "memory": [
+        {"addr": "@state", "offset": "0x260", "u32": 49},
+        {"addr": "@state", "offset": "0x4c", "f32": 2.0},
+        {"addr": "@state", "offset": "0x60", "u32": 1},
+        {"addr": "@data", "offset": "0x15c", "u32": 0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "read-failure",
+      "memory": [{"addr": "@data", "offset": "0x15c", "u32": 0}],
+      "callees": {"@read_position": {"name": "ReadPosition_guess", "conv": "thiscall", "args": ["mem:12"], "ret": 1}},
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "null-child-state",
+      "memory": [{"addr": "@data", "offset": "0x15c", "u32": 0}],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "null-child-data",
+      "memory": [
+        {"addr": "@data", "offset": "0x15c", "u32": "@other"},
+        {"addr": "@other", "offset": "0x1a8", "u32": 0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "null-child-interface",
+      "memory": [
+        {"addr": "@data", "offset": "0x15c", "u32": "@other"},
+        {"addr": "@other_data", "offset": "0x0", "u32": 0}
+      ],
+      "expect": {"ret": 1}
+    },
+    {
+      "name": "copy-child-state",
+      "memory": [
+        {"addr": "@state", "offset": "0x260", "u32": 49},
+        {"addr": "@state", "offset": "0x4c", "f32": 2.0},
+        {"addr": "@state", "offset": "0x30", "f32": 12.0},
+        {"addr": "@state", "offset": "0x34", "f32": 23.0},
+        {"addr": "@state", "offset": "0x38", "f32": 34.0},
+        {"addr": "@state", "offset": "0x60", "u32": 1},
+        {"addr": "@data", "offset": "0x15c", "u32": "@other"}
+      ],
+      "expect": {"ret": 1}
+    }
+  ],
+  "fuzz": {
+    "seed": 4761925,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@state", "offset": "0x1a8", "type": "ptr", "choices": ["@data", 0]},
+      {"addr": "@state", "offset": "0x260", "type": "u32", "choices": [48, 49]},
+      {"addr": "@state", "offset": "0x4c", "type": "float", "choices": [1.5, 2.0]},
+      {"addr": "@state", "offset": "0x60", "type": "u32", "choices": [0, 1]},
+      {"addr": "@state", "offset": "0x64", "type": "u32", "choices": [0, 1]},
+      {"addr": "@data", "offset": "0x0", "type": "ptr", "choices": ["@iface", 0]},
+      {"addr": "@data", "offset": "0x15c", "type": "ptr", "choices": ["@other", 0]},
+      {"addr": "@other", "offset": "0x1a8", "type": "ptr", "choices": ["@other_data", 0]},
+      {"addr": "@other_data", "offset": "0x0", "type": "ptr", "choices": ["@other_iface", 0]}
+    ]
+  }
+}

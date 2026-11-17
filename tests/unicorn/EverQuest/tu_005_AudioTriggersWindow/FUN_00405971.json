@@ -1,0 +1,164 @@
+{
+  "function": "TriggerOwner_guess::SaveTriggers_guess",
+  "original": "0x00405971",
+  "sources": [
+    "src/EverQuest/tu_005_AudioTriggersWindow.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@triggerowner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "triggerowner": {
+      "size": "0x80",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u8": 1},
+        {"offset": "0x4", "u32": 0},
+        {"offset": "0x7c", "u32": "@pathrep"}
+      ]
+    },
+    "pathrep": {
+      "size": "0x18",
+      "fill": "random",
+      "init": [
+        {"offset": "0x8", "u32": 1}
+      ]
+    },
+    "link0": {
+      "size": "0x18",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": "@link1"}
+      ]
+    },
+    "link1": {
+      "size": "0x18",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": 0}
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004058e6": {
+      "name": "GetUserIniPath_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "01000000"}
+      ]
+    },
+    "0x00572300": {
+      "name": "CXStr::operator char*",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    "0x005764e0": {
+      "name": "IniWriter_guess::IniWriter_guess",
+      "conv": "thiscall",
+      "args": ["u32", "cstr"],
+      "ret": 0
+    },
+    "0x005738b0": {
+      "name": "FUN_005738b0",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr"],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "01000000"}
+      ]
+    },
+    "0x00576050": {
+      "name": "IniWriter_guess::Write_guess",
+      "conv": "thiscall",
+      "args": ["u32", "u32", "int"],
+      "ret": 0
+    },
+    "0x00575ff0": {
+      "name": "IniWriter_guess::WriteInt_guess",
+      "conv": "thiscall",
+      "args": ["cstr", "int", "int"],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x005761d0": {
+      "name": "IniWriter_guess::~IniWriter_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "flag-clear",
+      "args": [],
+      "memory": [
+        {"addr": "@triggerowner", "offset": "0x0", "u8": 0}
+      ]
+    },
+    {
+      "name": "null-path",
+      "args": [],
+      "memory": [
+        {"addr": "@triggerowner", "offset": "0x7c", "u32": 0}
+      ]
+    },
+    {
+      "name": "empty-path",
+      "args": [],
+      "memory": [
+        {"addr": "@pathrep", "offset": "0x8", "u32": 0}
+      ]
+    },
+    {
+      "name": "empty-list",
+      "args": [],
+      "memory": [
+        {"addr": "@triggerowner", "offset": "0x4", "u32": 0}
+      ]
+    },
+    {
+      "name": "one-node",
+      "args": [],
+      "memory": [
+        {"addr": "@triggerowner", "offset": "0x4", "u32": "@link0"},
+        {"addr": "@link0", "offset": "0x4", "u32": 0}
+      ]
+    },
+    {
+      "name": "two-nodes",
+      "args": [],
+      "memory": [
+        {"addr": "@triggerowner", "offset": "0x4", "u32": "@link0"},
+        {"addr": "@link0", "offset": "0x4", "u32": "@link1"},
+        {"addr": "@link1", "offset": "0x4", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4217201,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@triggerowner", "offset": "0x0", "type": "u8", "choices": [0, 1, 255]},
+      {"addr": "@triggerowner", "offset": "0x4", "type": "u32", "choices": [0, "@link0"]},
+      {"addr": "@triggerowner", "offset": "0x7c", "type": "u32", "choices": [0, "@pathrep"]},
+      {"addr": "@pathrep", "offset": "0x8", "type": "int", "choices": [0, 1, -1]},
+      {"addr": "@link0", "offset": "0x4", "type": "u32", "choices": [0, "@link1"]}
+    ]
+  },
+  "coverage_ok": {
+    "00405A87-00405A92": "the first temporary CXStr is initialized to zero and never written",
+    "00405A9E-00405AA9": "the second temporary CXStr is initialized to zero and never written"
+  }
+}

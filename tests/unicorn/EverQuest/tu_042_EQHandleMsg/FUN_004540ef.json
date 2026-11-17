@@ -1,0 +1,117 @@
+{
+  "function": "Handle_OP_TradeCoins_guess",
+  "original": "0x004540ef",
+  "sources": [
+    "src/EverQuest/tu_042_EQHandleMsg.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "argument_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "argument": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "ctrl": {
+      "size": "0x240",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x00905ce0", "u32": 1},
+    {"addr": "0x00850c50", "u32": "@ctrl"},
+    {"addr": "@ctrl", "offset": "0x1d4", "u32": 100},
+    {"addr": "@ctrl", "offset": "0x1d8", "u32": 200},
+    {"addr": "@ctrl", "offset": "0x1dc", "u32": 300},
+    {"addr": "@ctrl", "offset": "0x1e0", "u32": 400},
+    {"addr": "@argument", "offset": "0x4", "u8": 0},
+    {"addr": "@argument", "offset": "0x8", "u32": 5}
+  ],
+  "callees": {
+    "0x00569db3": {
+      "name": "SetHisMoney_guess",
+      "conv": "stdcall",
+      "args": [
+        "int",
+        "int"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "index 0, value 5",
+      "args": [
+        "@argument"
+      ]
+    },
+    {
+      "name": "index 1, value 5",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {"addr": "@argument", "offset": "0x4", "u8": 1}
+      ]
+    },
+    {
+      "name": "index 2, negative value",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {"addr": "@argument", "offset": "0x4", "u8": 2},
+        {"addr": "@argument", "offset": "0x8", "u32": 4294967290}
+      ]
+    },
+    {
+      "name": "index 3, zero value",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {"addr": "@argument", "offset": "0x4", "u8": 3},
+        {"addr": "@argument", "offset": "0x8", "u32": 0}
+      ]
+    },
+    {
+      "name": "gate closed: update flag zero, no call",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {"addr": "0x00905ce0", "u32": 0}
+      ],
+      "expect": {"calls": []}
+    },
+    {
+      "name": "null pointer: no call",
+      "args": [
+        0
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4538607,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@argument",
+          0
+        ]
+      }
+    ],
+    "memory": [
+      {"addr": "@argument", "offset": "0x4", "type": "u8", "choices": [0, 1, 2, 3]},
+      {"addr": "@argument", "offset": "0x8", "type": "int", "choices": [0, 1, -1, 2147483647, -2147483648, 12345]},
+      {"addr": "0x00905ce0", "type": "int", "choices": [0, 1]},
+      {"addr": "@ctrl", "offset": "0x1d4", "type": "int", "choices": [0, -1, 2147483647]},
+      {"addr": "@ctrl", "offset": "0x1e0", "type": "int", "choices": [0, -7, 99]}
+    ]
+  }
+}

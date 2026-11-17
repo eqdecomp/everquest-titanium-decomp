@@ -1,0 +1,129 @@
+{
+  "function": "CActionsWnd_guess::UpdateKeyCombos_guess",
+  "original": "0x004d262d",
+  "sources": ["src/EverQuest/tu_099_ActionsWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "object": {
+      "size": "0x218",
+      "fill": "random",
+      "init": [
+        {"offset": "0x160", "u32": 0},
+        {"offset": "0x190", "u32": 0},
+        {"offset": "0x1b0", "u32": 0},
+        {"offset": "0x1d0", "u32": 0},
+        {"offset": "0x164", "u32": 0},
+        {"offset": "0x170", "u32": 0},
+        {"offset": "0x174", "u32": 0},
+        {"offset": "0x178", "u32": 0},
+        {"offset": "0x17c", "u32": 0},
+        {"offset": "0x180", "u32": 0},
+        {"offset": "0x184", "u32": 0},
+        {"offset": "0x188", "u32": 0},
+        {"offset": "0x18c", "u32": 0},
+        {"offset": "0x168", "u32": 0},
+        {"offset": "0x16c", "u32": 0},
+        {"offset": "0x1b4", "u32": 0}
+      ]
+    },
+    "service": {"size": "0x4", "fill": "random"},
+    "textvalue": {"size": "0x10", "fill": "zero"},
+    "sink": {"size": "0x4", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x0098599c", "u32": "@service"}
+  ],
+  "callees": {
+    "0x004b2459": {
+      "name": "TextService_guess::first_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@textvalue"
+    },
+    "0x005ba300": {
+      "name": "TextValue_guess::toFlags_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34]
+    },
+    "0x004b244f": {
+      "name": "TextService_guess::second_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": "@textvalue"
+    },
+    "0x0059dbf0": {
+      "name": "ValueSink_guess::set_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {"name": "all_zero", "args": []},
+    {
+      "name": "all_fields",
+      "args": [],
+      "memory": [
+        {"addr": "@object", "offset": "0x160", "u32": "@sink"},
+        {"addr": "@object", "offset": "0x190", "u32": "@sink"},
+        {"addr": "@object", "offset": "0x1b0", "u32": "@sink"},
+        {"addr": "@object", "offset": "0x1d0", "u32": "@sink"},
+        {"addr": "@object", "offset": "0x164", "u32": "@sink"},
+        {"addr": "@object", "offset": "0x170", "u32": "@sink"},
+        {"addr": "@object", "offset": "0x174", "u32": "@sink"},
+        {"addr": "@object", "offset": "0x178", "u32": "@sink"},
+        {"addr": "@object", "offset": "0x17c", "u32": "@sink"},
+        {"addr": "@object", "offset": "0x180", "u32": "@sink"},
+        {"addr": "@object", "offset": "0x184", "u32": "@sink"},
+        {"addr": "@object", "offset": "0x188", "u32": "@sink"},
+        {"addr": "@object", "offset": "0x18c", "u32": "@sink"},
+        {"addr": "@object", "offset": "0x168", "u32": "@sink"},
+        {"addr": "@object", "offset": "0x16c", "u32": "@sink"},
+        {"addr": "@object", "offset": "0x1b4", "u32": "@sink"}
+      ]
+    },
+    {"name": "only_0160", "args": [], "memory": [{"addr": "@object", "offset": "0x160", "u32": "@sink"}]},
+    {"name": "only_0190", "args": [], "memory": [{"addr": "@object", "offset": "0x190", "u32": "@sink"}]},
+    {"name": "only_01b0", "args": [], "memory": [{"addr": "@object", "offset": "0x1b0", "u32": "@sink"}]},
+    {"name": "only_01d0", "args": [], "memory": [{"addr": "@object", "offset": "0x1d0", "u32": "@sink"}]},
+    {"name": "only_0164", "args": [], "memory": [{"addr": "@object", "offset": "0x164", "u32": "@sink"}]},
+    {"name": "only_0170", "args": [], "memory": [{"addr": "@object", "offset": "0x170", "u32": "@sink"}]},
+    {"name": "only_0174", "args": [], "memory": [{"addr": "@object", "offset": "0x174", "u32": "@sink"}]},
+    {"name": "only_0178", "args": [], "memory": [{"addr": "@object", "offset": "0x178", "u32": "@sink"}]},
+    {"name": "only_017c", "args": [], "memory": [{"addr": "@object", "offset": "0x17c", "u32": "@sink"}]},
+    {"name": "only_0180", "args": [], "memory": [{"addr": "@object", "offset": "0x180", "u32": "@sink"}]},
+    {"name": "only_0184", "args": [], "memory": [{"addr": "@object", "offset": "0x184", "u32": "@sink"}]},
+    {"name": "only_0188", "args": [], "memory": [{"addr": "@object", "offset": "0x188", "u32": "@sink"}]},
+    {"name": "only_018c", "args": [], "memory": [{"addr": "@object", "offset": "0x18c", "u32": "@sink"}]},
+    {"name": "only_0168", "args": [], "memory": [{"addr": "@object", "offset": "0x168", "u32": "@sink"}]},
+    {"name": "only_016c", "args": [], "memory": [{"addr": "@object", "offset": "0x16c", "u32": "@sink"}]},
+    {"name": "only_01b4", "args": [], "memory": [{"addr": "@object", "offset": "0x1b4", "u32": "@sink"}]}
+  ],
+  "fuzz": {
+    "seed": 5056045,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@object", "offset": "0x160", "type": "ptr", "choices": [0, "@sink"]},
+      {"addr": "@object", "offset": "0x190", "type": "ptr", "choices": [0, "@sink"]},
+      {"addr": "@object", "offset": "0x1b0", "type": "ptr", "choices": [0, "@sink"]},
+      {"addr": "@object", "offset": "0x1d0", "type": "ptr", "choices": [0, "@sink"]},
+      {"addr": "@object", "offset": "0x164", "type": "ptr", "choices": [0, "@sink"]},
+      {"addr": "@object", "offset": "0x170", "type": "ptr", "choices": [0, "@sink"]},
+      {"addr": "@object", "offset": "0x174", "type": "ptr", "choices": [0, "@sink"]},
+      {"addr": "@object", "offset": "0x178", "type": "ptr", "choices": [0, "@sink"]},
+      {"addr": "@object", "offset": "0x17c", "type": "ptr", "choices": [0, "@sink"]},
+      {"addr": "@object", "offset": "0x180", "type": "ptr", "choices": [0, "@sink"]},
+      {"addr": "@object", "offset": "0x184", "type": "ptr", "choices": [0, "@sink"]},
+      {"addr": "@object", "offset": "0x188", "type": "ptr", "choices": [0, "@sink"]},
+      {"addr": "@object", "offset": "0x18c", "type": "ptr", "choices": [0, "@sink"]},
+      {"addr": "@object", "offset": "0x168", "type": "ptr", "choices": [0, "@sink"]},
+      {"addr": "@object", "offset": "0x16c", "type": "ptr", "choices": [0, "@sink"]},
+      {"addr": "@object", "offset": "0x1b4", "type": "ptr", "choices": [0, "@sink"]}
+    ]
+  }
+}

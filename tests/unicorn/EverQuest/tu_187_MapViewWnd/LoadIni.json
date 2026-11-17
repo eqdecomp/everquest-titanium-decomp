@@ -1,0 +1,207 @@
+{
+  "function": "MapViewIniFields_guess::LoadIniInfo_guess",
+  "original": "0x00531f44",
+  "sources": ["src/EverQuest/tu_187_MapViewWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@mapviewinifields",
+  "args": [],
+  "ret": "void",
+  "_survivors": "L1337: equivalent: the earlier changed_26d stores already set 0x26d to 1 and nothing clears it before the end",
+  "objects": {
+    "mapviewinifields": {
+      "size": "0x270",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x1a0", "u32": "@button_a"},
+        {"offset": "0x1a4", "u32": "@edit_low"},
+        {"offset": "0x1a8", "u32": "@edit_high"},
+        {"offset": "0x1ac", "u32": "@button_b"},
+        {"offset": "0x258", "u32": 5},
+        {"offset": "0x25c", "u32": 9},
+        {"offset": "0x260", "u8": 1},
+        {"offset": "0x26c", "u8": 1}
+      ]
+    },
+    "button_a": {"size": "0x140", "fill": "zero"},
+    "button_b": {"size": "0x140", "fill": "zero"},
+    "edit_low": {"size": "0x40", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl_edit"}]},
+    "edit_high": {"size": "0x40", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl_edit"}]},
+    "vtbl_edit": {"size": "0x100", "fill": "zero", "init": [{"offset": "0xfc", "u32": "@fn_settext"}]},
+    "fn_settext": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079AC74", "u32": 305419896}
+  ],
+  "callees": {
+    "0x00559545": {"name": "NewUIINI", "conv": "cdecl", "args": [], "ret": 1},
+    "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ignore", "cstr", "ignore"], "ret": 0},
+    "0x00572300": {"name": "CXStr::operator char*", "conv": "thiscall", "args": [], "ret": "this"},
+    "0x0055958a": {
+      "name": "IniGet",
+      "conv": "cdecl",
+      "args": ["u32", "cstr", "ignore", "ignore", "int", "int"],
+      "ret": 0,
+      "writes": [
+        {"arg": 3, "offset": 0, "hex": "7400", "call": 0},
+        {"arg": 3, "offset": 0, "hex": "5400", "call": 1},
+        {"arg": 3, "offset": 0, "hex": "3100", "call": 2},
+        {"arg": 3, "offset": 0, "hex": "7800", "call": 3}
+      ]
+    },
+    "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [1, 0]},
+    "0x005bb140": {"name": "CButtonWnd::SetCheck", "conv": "thiscall", "args": ["bool"], "ret": 0},
+    "0x006220e9": {"name": "_itoa", "conv": "cdecl", "args": ["int", "ignore", "int"], "ret": "arg1"},
+    "0x00571e00": {"name": "CXStr::CXStr", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x005a2660": {"name": "CSidlScreenWnd::LoadIniInfo", "conv": "thiscall", "args": [], "ret": 0},
+    "@fn_settext": {"name": "CXWnd::SetWindowText", "conv": "thiscall", "args": ["ignore"], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb",
+    "__itoa": "0x006220e9"
+  },
+  "cases": [
+    {"name": "typical", "args": []},
+    {
+      "name": "all_false",
+      "args": [],
+      "callees": {
+        "0x0055958a": {
+          "name": "IniGet",
+          "conv": "cdecl",
+          "args": ["u32", "cstr", "ignore", "ignore", "int", "int"],
+          "ret": 0,
+          "writes": [
+            {"arg": 3, "offset": 0, "hex": "7800", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "6600", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "3000", "call": 2},
+            {"arg": 3, "offset": 0, "hex": "3000", "call": 3}
+          ]
+        },
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [0, 0]}
+      }
+    },
+    {
+      "name": "ini_disabled",
+      "args": [],
+      "callees": {
+        "0x00559545": {"name": "FUN_00559545", "conv": "cdecl", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "no_controls",
+      "args": [],
+      "memory": [
+        {"addr": "@mapviewinifields", "offset": "0x1a0", "u32": 0},
+        {"addr": "@mapviewinifields", "offset": "0x1a4", "u32": 0},
+        {"addr": "@mapviewinifields", "offset": "0x1a8", "u32": 0},
+        {"addr": "@mapviewinifields", "offset": "0x1ac", "u32": 0}
+      ]
+    },
+    {
+      "name": "only_low",
+      "args": [],
+      "memory": [
+        {"addr": "@mapviewinifields", "offset": "0x1a0", "u32": 0},
+        {"addr": "@mapviewinifields", "offset": "0x1a8", "u32": 0},
+        {"addr": "@mapviewinifields", "offset": "0x1ac", "u32": 0}
+      ]
+    },
+    {
+      "name": "only_high",
+      "args": [],
+      "memory": [
+        {"addr": "@mapviewinifields", "offset": "0x1a0", "u32": 0},
+        {"addr": "@mapviewinifields", "offset": "0x1a4", "u32": 0},
+        {"addr": "@mapviewinifields", "offset": "0x1ac", "u32": 0}
+      ]
+    },
+    {
+      "name": "value_forms",
+      "args": [],
+      "callees": {
+        "0x0055958a": {
+          "name": "IniGet",
+          "conv": "cdecl",
+          "args": ["u32", "cstr", "ignore", "ignore", "int", "int"],
+          "ret": 0,
+          "writes": [
+            {"arg": 3, "offset": 0, "hex": "785400", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "5400", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "313200", "call": 2},
+            {"arg": 3, "offset": 0, "hex": "3100", "call": 3}
+          ]
+        },
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [12, 1]}
+      }
+    },
+    {
+      "name": "value_forms_2",
+      "args": [],
+      "callees": {
+        "0x0055958a": {
+          "name": "IniGet",
+          "conv": "cdecl",
+          "args": ["u32", "cstr", "ignore", "ignore", "int", "int"],
+          "ret": 0,
+          "writes": [
+            {"arg": 3, "offset": 0, "hex": "3100", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "7400", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "3700", "call": 2},
+            {"arg": 3, "offset": 0, "hex": "7800", "call": 3}
+          ]
+        },
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [7, 0]}
+      }
+    },
+    {
+      "name": "filter_1",
+      "args": [],
+      "callees": {
+        "0x0055958a": {
+          "name": "IniGet",
+          "conv": "cdecl",
+          "args": ["u32", "cstr", "ignore", "ignore", "int", "int"],
+          "ret": 0,
+          "writes": [
+            {"arg": 3, "offset": 0, "hex": "7800", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "3100", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "3000", "call": 2},
+            {"arg": 3, "offset": 0, "hex": "3000", "call": 3}
+          ]
+        },
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [0, 0]}
+      }
+    },
+    {
+      "name": "labels_T",
+      "args": [],
+      "callees": {
+        "0x0055958a": {
+          "name": "IniGet",
+          "conv": "cdecl",
+          "args": ["u32", "cstr", "ignore", "ignore", "int", "int"],
+          "ret": 0,
+          "writes": [
+            {"arg": 3, "offset": 0, "hex": "5400", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "7800", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "7800", "call": 2},
+            {"arg": 3, "offset": 0, "hex": "7800", "call": 3}
+          ]
+        },
+        "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": [0, 0]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5447492,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@mapviewinifields", "offset": "0x26c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@mapviewinifields", "offset": "0x260", "type": "u8", "choices": [0, 1]},
+      {"addr": "@mapviewinifields", "offset": "0x258", "type": "int", "range": [-5, 40]},
+      {"addr": "@mapviewinifields", "offset": "0x25c", "type": "int", "range": [-5, 40]}
+    ]
+  }
+}

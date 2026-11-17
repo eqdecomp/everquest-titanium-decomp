@@ -1,0 +1,127 @@
+{
+  "function": "CharacterMagicSystem_guess::SpellDuration_guess",
+  "original": "0x0040ebc3",
+  "sources": [
+    "src/EverQuest/tu_012_CharacterMagicSystem.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@charactermagicsystem",
+  "args": [
+    {"name": "spell_guess", "type": "ptr"},
+    {"name": "level_guess", "type": "u8"},
+    {"name": "flag_guess", "type": "char"}
+  ],
+  "ret": "u32",
+  "objects": {
+    "charactermagicsystem": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x8", "u32": "@state"},
+        {"offset": "0xc8", "u8": 1}
+      ]
+    },
+    "spell": {"size": "0x17e", "fill": "zero"},
+    "state": {
+      "size": "0x260",
+      "fill": "zero",
+      "init": [{"offset": "0x1a8", "u32": 1}]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0044e77b": {
+      "name": "FindAffectSlot_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 1
+    },
+    "0x004106a3": {
+      "name": "TotalSpellAffects_guess",
+      "conv": "thiscall",
+      "args": ["int", "bool", "int", "bool"],
+      "ret": 1
+    },
+    "0x00417b9c": {
+      "name": "GetSpellAffect_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 0
+    },
+    "0x00417ba7": {
+      "name": "GetAltAffect_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 1
+    },
+    "0x00417bcf": {
+      "name": "GetItemAffect_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 0
+    }
+  },
+  "coverage_ok": {
+    "0040ECCD-0040ECCE": "step-by-4 loop offsets remain below 0x30",
+    "0040ECDC-0040ECDD": "step-by-4 loop offsets remain below 0x30",
+    "0040ECEB-0040ECEC": "step-by-4 loop offsets remain below 0x30",
+    "0040ECFA-0040ECFB": "step-by-4 loop offsets remain below 0x30"
+  },
+  "cases": [
+    {"name": "null-spell", "args": [0, 1, 1]},
+    {"name": "zero-count-full-scan", "args": ["@spell", 1, 0]},
+    {"name": "count-1-level-0", "args": ["@spell", 0, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 1}]},
+    {"name": "count-1-level-4", "args": ["@spell", 4, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 1}]},
+    {"name": "count-2-low", "args": ["@spell", 0, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 2}]},
+    {"name": "count-2-high", "args": ["@spell", 4, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 2}]},
+    {"name": "count-3", "args": ["@spell", 4, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 3}]},
+    {"name": "count-4", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 4}]},
+    {"name": "count-5", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 5}]},
+    {"name": "count-6", "args": ["@spell", 4, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 6}]},
+    {"name": "count-7", "args": ["@spell", 9, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 7}]},
+    {"name": "count-8", "args": ["@spell", 9, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 8}]},
+    {"name": "count-9", "args": ["@spell", 9, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 9}]},
+    {"name": "count-10", "args": ["@spell", 9, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 10}]},
+    {"name": "count-11", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 11}]},
+    {"name": "count-12-low", "args": ["@spell", 0, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 12}]},
+    {"name": "count-12-high", "args": ["@spell", 8, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 12}]},
+    {"name": "count-13-default-zero", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 13}]},
+    {"name": "count-13-default-flag", "args": ["@spell", 1, 1], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 13}]},
+    {"name": "count-49-default", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 49}]},
+    {"name": "count-50-sentinel", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 50}]},
+    {"name": "count-51-zero-flag", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 51}]},
+    {"name": "count-51-nonzero-flag", "args": ["@spell", 1, 1], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 51}]},
+    {"name": "count-199", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 199}]},
+    {"name": "count-200", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 200}]},
+    {"name": "count-200-cap", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 200}, {"addr": "@spell", "offset": "0x24", "u32": 50}]},
+    {"name": "count-200-flag", "args": ["@spell", 1, 1], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 200}]},
+    {"name": "cap-reduces-result", "args": ["@spell", 4, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 3}, {"addr": "@spell", "offset": "0x24", "u32": 20}]},
+    {"name": "effect-6b-last", "args": ["@spell", 4, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 3}, {"addr": "@spell", "offset": "0x11c", "u32": 107}]},
+    {"name": "effect-6c-last", "args": ["@spell", 4, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 3}, {"addr": "@spell", "offset": "0x11c", "u32": 108}]},
+    {"name": "effect-78-last", "args": ["@spell", 4, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 3}, {"addr": "@spell", "offset": "0x11c", "u32": 120}]},
+    {"name": "effect-7a-last", "args": ["@spell", 4, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 3}, {"addr": "@spell", "offset": "0x11c", "u32": 122}]},
+    {"name": "special-effect-6b-index-1", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 1}, {"addr": "@spell", "offset": "0x17d", "u8": 1}, {"addr": "@spell", "offset": "0xf4", "u32": 107}]},
+    {"name": "special-effect-6b-index-3", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 1}, {"addr": "@spell", "offset": "0x17d", "u8": 1}, {"addr": "@spell", "offset": "0xfc", "u32": 107}]},
+    {"name": "special-state-null", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 1}, {"addr": "@spell", "offset": "0x17d", "u8": 1}, {"addr": "@charactermagicsystem", "offset": "0x8", "u32": 0}]},
+    {"name": "special-linked-null", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 1}, {"addr": "@spell", "offset": "0x17d", "u8": 1}, {"addr": "@state", "offset": "0x1a8", "u32": 0}]},
+    {"name": "special-callee-false", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 1}, {"addr": "@spell", "offset": "0x17d", "u8": 1}], "callees": {"0x0044e77b": {"name": "FUN_0044e77b_guess", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "special-total-false", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 1}, {"addr": "@spell", "offset": "0x17d", "u8": 1}], "callees": {"0x004106a3": {"name": "TotalSpellAffects_guess", "conv": "thiscall", "args": ["int", "bool", "int", "bool"], "ret": 0}, "0x00417ba7": {"name": "GetAltAffect_guess", "conv": "thiscall", "args": ["int", "int"], "ret": 0}}},
+    {"name": "special-total-true", "args": ["@spell", 1, 0], "memory": [{"addr": "@spell", "offset": "0x20", "u32": 1}, {"addr": "@spell", "offset": "0x17d", "u8": 1}]}
+  ],
+  "fuzz": {
+    "seed": 4254659,
+    "count": 120,
+    "args": [
+      {"choices": ["@spell"]},
+      {},
+      {}
+    ],
+    "memory": [
+      {"addr": "@spell", "offset": "0x20", "type": "u32", "choices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 49, 50, 51, 199, 200, 201, 4294967295]},
+      {"addr": "@spell", "offset": "0x24", "type": "u32", "choices": [0, 1, 2, 20, 50, 200, 4294967295]},
+      {"addr": "@spell", "offset": "0xf0", "type": "u32", "count": 12, "choices": [0, 1, 107, 108, 120, 122], "p": 0.2},
+      {"addr": "@spell", "offset": "0x17d", "type": "u8", "choices": [0, 1]}
+    ]
+  },
+  "_survivors": "L1170: for >=2 to >2, the only changed input has (level & 0xfe)==2, where both the initialized half and level>>1 equal 1; for >=2 to >=1, (level & 0xfe) is always zero or at least 2. L1213: this default arm only handles effect counts 13 through 49, so <200 and <=200 are equivalent."
+}

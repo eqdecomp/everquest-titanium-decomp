@@ -1,0 +1,413 @@
+{
+  "function": "MapViewWnd_guess::PostDraw_guess",
+  "original": "0x0053598f",
+  "sources": [
+    "src/EverQuest/tu_187_MapViewWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@mapviewwnd",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "mapviewwnd": {
+      "size": "0x274",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1dc",
+          "u32": "@area"
+        }
+      ]
+    },
+    "area": {
+      "size": "0xe8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@area_vtable"
+        }
+      ]
+    },
+    "area_vtable": {
+      "size": "0xe8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0xe4",
+          "u32": "0x0059d860"
+        }
+      ]
+    },
+    "mapglobals": {
+      "size": "0xfc",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0xf4",
+          "u32": 4
+        },
+        {
+          "offset": "0xf8",
+          "u32": "@fonts"
+        }
+      ]
+    },
+    "fonts": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0xc",
+          "u32": "@font"
+        }
+      ]
+    },
+    "font": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "string_rep": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "stringtable": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0099d3ec",
+      "u32": "@mapglobals"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@stringtable"
+    },
+    {
+      "addr": "0x00793760",
+      "from_image": "0x00793760",
+      "image_size": 1
+    },
+    {
+      "addr": "0x007a0000",
+      "cstr": "Map error"
+    }
+  ],
+  "callees": {
+    "0x0059fec0": {
+      "name": "IsReallyVisible_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x0059d860": {
+      "name": "GetClientRect_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "0a000000140000000b00000015000000"
+        }
+      ]
+    },
+    "0x0053459f": {
+      "name": "MapLayer_guess::Draw_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "ptr"
+      ],
+      "ret": "0x007a0000"
+    },
+    "0x00571e00": {
+      "name": "CXStr_ctor",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x005a3c80": {
+      "name": "MapFont_guess::DrawText_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "int",
+        "int",
+        "int",
+        "mem:16",
+        "u32",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "CXStr_FreeRep",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "0x00405492": {
+      "name": "Fail_guess",
+      "conv": "thiscall",
+      "args": [],
+      "noreturn": true
+    },
+    "kernel32.dll!HeapAlloc": {
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": "@string_rep"
+    },
+    "kernel32.dll!HeapFree": {
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "hidden",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@mapviewwnd",
+          "offset": "0x5c",
+          "u8": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "not_visible",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@mapviewwnd",
+          "offset": "0x5c",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x0059fec0": {
+          "name": "IsReallyVisible_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "zero_width",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@mapviewwnd",
+          "offset": "0x5c",
+          "u8": 1
+        },
+        {
+          "addr": "0x00793760",
+          "from_image": "0x00793760",
+          "image_size": 1
+        }
+      ],
+      "callees": {
+        "0x0059d860": {
+          "name": "GetClientRect_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "0a000000140000000a00000015000000"
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "zero_height",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@mapviewwnd",
+          "offset": "0x5c",
+          "u8": 1
+        },
+        {
+          "addr": "0x00793760",
+          "from_image": "0x00793760",
+          "image_size": 1
+        }
+      ],
+      "callees": {
+        "0x0059d860": {
+          "name": "GetClientRect_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "0a000000140000000b00000014000000"
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "draw_map",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@mapviewwnd",
+          "offset": "0x5c",
+          "u8": 1
+        },
+        {
+          "addr": "0x00793760",
+          "from_image": "0x00793760",
+          "image_size": 1
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "error_text",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@mapviewwnd",
+          "offset": "0x5c",
+          "u8": 1
+        },
+        {
+          "addr": "0x00793760",
+          "u8": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "font_count_too_small",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@mapviewwnd",
+          "offset": "0x5c",
+          "u8": 1
+        },
+        {
+          "addr": "0x00793760",
+          "u8": 0
+        },
+        {
+          "addr": "@mapglobals",
+          "offset": "0xf4",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "font_data_null",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@mapviewwnd",
+          "offset": "0x5c",
+          "u8": 1
+        },
+        {
+          "addr": "0x00793760",
+          "u8": 0
+        },
+        {
+          "addr": "@mapglobals",
+          "offset": "0xf4",
+          "u32": 4
+        },
+        {
+          "addr": "@mapglobals",
+          "offset": "0xf8",
+          "u32": 0
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5462415,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@mapviewwnd",
+        "offset": "0x5c",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          255
+        ]
+      },
+      {
+        "addr": "0x00793760",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

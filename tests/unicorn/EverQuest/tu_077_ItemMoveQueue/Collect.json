@@ -1,0 +1,139 @@
+{
+  "function": "PositionHistory_guess::BuildMessage_guess",
+  "original": "0x004b6f1f",
+  "sources": [
+    "src/EverQuest/tu_077_ItemMoveQueue.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@extendedqueue",
+  "args": [
+    {"name": "records_guess", "type": "ptr"},
+    {"name": "force_guess", "type": "char"}
+  ],
+  "ret": "int",
+  "objects": {
+    "extendedqueue": {
+      "size": "0x30",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": 0},
+        {"offset": "0x4", "u32": 0},
+        {"offset": "0x8", "u32": 0},
+        {"offset": "0xc", "u32": 0},
+        {"offset": "0x10", "u32": "@n0"},
+        {"offset": "0x14", "u32": "@n2"},
+        {"offset": "0x18", "u16": 0},
+        {"offset": "0x1a", "u16": 10},
+        {"offset": "0x1c", "u8": 1},
+        {"offset": "0x29", "u8": 0}
+      ]
+    },
+    "records": {"size": "0x100", "fill": "random"},
+    "n0": {
+      "size": "0x20", "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": 0},
+        {"offset": "0x4", "u32": "@n1"},
+        {"offset": "0x8", "u32": 0},
+        {"offset": "0xc", "u32": 100},
+        {"offset": "0x10", "u32": 200},
+        {"offset": "0x14", "u32": 300},
+        {"offset": "0x18", "u8": 1},
+        {"offset": "0x1c", "u32": 1000}
+      ]
+    },
+    "n1": {
+      "size": "0x20", "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@n0"},
+        {"offset": "0x4", "u32": "@n2"},
+        {"offset": "0x8", "u32": 0},
+        {"offset": "0xc", "u32": 5},
+        {"offset": "0x10", "u32": 6},
+        {"offset": "0x14", "u32": 7},
+        {"offset": "0x18", "u8": 2},
+        {"offset": "0x1c", "u32": 4000}
+      ]
+    },
+    "n2": {
+      "size": "0x20", "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@n1"},
+        {"offset": "0x4", "u32": 0},
+        {"offset": "0x8", "u32": 0},
+        {"offset": "0xc", "u32": 100},
+        {"offset": "0x10", "u32": 200},
+        {"offset": "0x14", "u32": 300},
+        {"offset": "0x18", "u8": 1},
+        {"offset": "0x1c", "u32": 1000}
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "kernel32.dll!GetTickCount": {"conv": "stdcall", "ret": 5000},
+    "0x004b6e52": {"name": "List_Remove", "conv": "thiscall", "args": ["ptr"], "passthrough": true},
+    "0x004b6dd5": {"name": "FloatVector3_IsEqual", "conv": "thiscall", "args": ["ptr"], "passthrough": true},
+    "0x004b6e97": {"name": "Queue_Add", "conv": "thiscall", "args": ["ptr"], "passthrough": true},
+    "0x004055ce": {"name": "Node_Clear", "conv": "thiscall", "args": []},
+    "0x00405b38": {"name": "Queue_Attach", "conv": "thiscall", "args": ["ptr"]},
+    "0x0060e27f": {"name": "__CxxThrowException@8", "conv": "stdcall", "args": ["ignore", "u32"], "noreturn": true}
+  },
+  "rewrite_aliases": {
+    "__CxxThrowException@8": "0x0060e27f",
+    "?GetTickCount@@YGKXZ": "kernel32.dll!GetTickCount"
+  },
+  "cases": [
+    {"name": "equal_skip_typical", "args": ["@records", 1]},
+    {"name": "unequal_all_counted", "args": ["@records", 1],
+     "memory": [{"addr": "@n2", "offset": "0xc", "u32": 7}]},
+    {"name": "field29_set_equal_skip", "args": ["@records", 1],
+     "memory": [{"addr": "@extendedqueue", "offset": "0x29", "u8": 1},
+                {"addr": "@extendedqueue", "offset": "0x1d", "u32": 100},
+                {"addr": "@extendedqueue", "offset": "0x21", "u32": 200},
+                {"addr": "@extendedqueue", "offset": "0x25", "u32": 300}]},
+    {"name": "field29_set_differs_store", "args": ["@records", 1],
+     "memory": [{"addr": "@extendedqueue", "offset": "0x29", "u8": 1},
+                {"addr": "@extendedqueue", "offset": "0x1d", "u32": 1},
+                {"addr": "@extendedqueue", "offset": "0x21", "u32": 1},
+                {"addr": "@extendedqueue", "offset": "0x25", "u32": 1}]},
+    {"name": "force0_young_breaks_after_one", "args": ["@records", 0]},
+    {"name": "force0_exact_2000_breaks_at_once", "args": ["@records", 0],
+     "memory": [{"addr": "@n0", "offset": "0x1c", "u32": 3000}]},
+    {"name": "force0_2001_collects", "args": ["@records", 0],
+     "memory": [{"addr": "@n0", "offset": "0x1c", "u32": 2999}]},
+    {"name": "field1A_zero_seq_wraps", "args": ["@records", 1],
+     "memory": [{"addr": "@extendedqueue", "offset": "0x1a", "u16": 0}]},
+    {"name": "field1C_clear_returns_0", "args": ["@records", 1],
+     "memory": [{"addr": "@extendedqueue", "offset": "0x1c", "u8": 0}]},
+    {"name": "empty_list_returns_0", "args": ["@records", 1],
+     "memory": [{"addr": "@extendedqueue", "offset": "0x10", "u32": 0}]},
+    {"name": "type3_counted", "args": ["@records", 1],
+     "memory": [{"addr": "@n1", "offset": "0x18", "u8": 3}]},
+    {"name": "type6_throws", "args": ["@records", 1],
+     "memory": [{"addr": "@n1", "offset": "0x18", "u8": 6}]}
+  ],
+  "rewrite_data_aliases": {
+    "__TI1?AUQueueError_guess@@": "0x0067828c"
+  },
+  "fuzz": {
+    "seed": 4943647,
+    "count": 120,
+    "args": [
+      {"choices": ["@records"]},
+      {"choices": [0, 1]}
+    ],
+    "memory": [
+      {"addr": "@n0", "offset": "0x18", "type": "u8", "choices": [1, 2, 3, 4, 5, 7, 8]},
+      {"addr": "@n1", "offset": "0x18", "type": "u8", "choices": [1, 2, 3, 4, 5, 7, 8]},
+      {"addr": "@n2", "offset": "0x18", "type": "u8", "choices": [1, 2, 3, 4, 5, 7, 8]},
+      {"addr": "@n0", "offset": "0x1c", "type": "int", "range": [0, 6000]},
+      {"addr": "@n1", "offset": "0x1c", "type": "int", "range": [0, 6000]},
+      {"addr": "@n2", "offset": "0x1c", "type": "int", "range": [0, 6000]},
+      {"addr": "@n2", "offset": "0xc", "type": "int", "choices": [100, 7]},
+      {"addr": "@extendedqueue", "offset": "0x29", "type": "u8", "choices": [0, 1]},
+      {"addr": "@extendedqueue", "offset": "0x1a", "type": "u16", "range": [0, 20]}
+    ]
+  },
+  "_note": "GetTickCount is a stub ret 5000; List_Remove, FloatVector3_IsEqual, Queue_Add run natively (landed, identical) so the pending list drains; Node_Clear and Queue_Attach are stubs (both sides call the same stubs)."
+}

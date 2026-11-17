@@ -1,0 +1,1834 @@
+{
+  "function": "CDisplay_guess::SetAmbientLight_guess",
+  "original": "0x00441295",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@client",
+  "args": [
+    {
+      "name": "value",
+      "type": "float"
+    }
+  ],
+  "ret": "void",
+  "_survivors": "L5906: max of level and the stored green; when equal both sides pick the same value, so > and >= cannot differ; L5941: clamp green to 1.0; when green == 1.0 assigning 1.0 changes nothing; L6000: raise blue to the tint; when blue == tintBlue the assignment changes nothing",
+  "objects": {
+    "client": {
+      "size": "0x2d70",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x2cf8",
+          "u32": 1
+        },
+        {
+          "offset": "0x12c",
+          "f32": 150.0
+        },
+        {
+          "offset": "0x130",
+          "f32": 1800.0
+        }
+      ]
+    },
+    "client2": {
+      "size": "0x40",
+      "fill": "random"
+    },
+    "window": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x9",
+          "u8": 0
+        }
+      ]
+    },
+    "render": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {
+          "offset": 0,
+          "u32": "@rvtbl"
+        }
+      ]
+    },
+    "rvtbl": {
+      "size": "0xb0",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xa4",
+          "u32": "@fn_ambient"
+        },
+        {
+          "offset": "0xa8",
+          "u32": "@fn_fog"
+        }
+      ]
+    },
+    "fn_ambient": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "fn_fog": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "player": {
+      "size": "0x1b0",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@lightref"
+        }
+      ]
+    },
+    "lightref": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": 0,
+          "u32": "@light"
+        }
+      ]
+    },
+    "light": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {
+          "offset": 0,
+          "u32": "@lvtbl"
+        }
+      ]
+    },
+    "lvtbl": {
+      "size": "0xb8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xb4",
+          "u32": "@fn_level"
+        }
+      ]
+    },
+    "fn_level": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "csrc": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {
+          "offset": 0,
+          "u32": "@cvtbl"
+        }
+      ]
+    },
+    "cvtbl": {
+      "size": "0x24",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x20",
+          "u32": "@fn_color"
+        }
+      ]
+    },
+    "fn_color": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "colorval": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": 0,
+          "u32": "0x00ff8040"
+        }
+      ]
+    },
+    "fogowner": {
+      "size": "0x39410",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x39404",
+          "u32": 100
+        },
+        {
+          "offset": "0x39408",
+          "u32": 120
+        },
+        {
+          "offset": "0x3940c",
+          "u32": 300
+        }
+      ]
+    },
+    "pc": {
+      "size": "0xc290",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@vbt"
+        }
+      ]
+    },
+    "vbt": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "0x10"
+        }
+      ]
+    },
+    "charinfo": {
+      "size": "0x1140",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1118",
+          "u32": "0xff"
+        },
+        {
+          "offset": "0x1134",
+          "u32": "0xff"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0099E368",
+      "u32": "@render"
+    },
+    {
+      "addr": "0x00905CF8",
+      "u32": "@player"
+    },
+    {
+      "addr": "0x00988DF0",
+      "u32": "@fogowner"
+    },
+    {
+      "addr": "0x00905D24",
+      "u32": "@client2"
+    },
+    {
+      "addr": "0x00905D00",
+      "u32": "@pc"
+    },
+    {
+      "addr": "0x008503A8",
+      "u32": 0
+    },
+    {
+      "addr": "0x0085097C",
+      "u8": 0
+    },
+    {
+      "addr": "0x00923B88",
+      "u8": 1
+    },
+    {
+      "addr": "0x00698A08",
+      "f32": 0.0
+    },
+    {
+      "addr": "0x009238FC",
+      "u32": 255000
+    },
+    {
+      "addr": "0x00923900",
+      "u32": 127500
+    },
+    {
+      "addr": "0x00923904",
+      "u32": 51000
+    },
+    {
+      "addr": "0x00923908",
+      "u32": 25500
+    },
+    {
+      "addr": "0x0092390C",
+      "u32": 204000
+    },
+    {
+      "addr": "0x00923910",
+      "u32": 76500
+    },
+    {
+      "addr": "0x00923B57",
+      "u8": 200
+    },
+    {
+      "addr": "0x00923B5B",
+      "u8": 150
+    },
+    {
+      "addr": "0x00923B5F",
+      "u8": 90
+    }
+  ],
+  "callees": {
+    "0x00439b36": {
+      "name": "GetZoneTimeOfDay_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "ignore"
+      ],
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "0d000000"
+        },
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "1e000000"
+        }
+      ]
+    },
+    "0x004c32ff": {
+      "name": "FUN_004c32ff",
+      "conv": "cdecl",
+      "args": [],
+      "ret": "@window"
+    },
+    "0x0044104c": {
+      "name": "SetFogState_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "float",
+        "float",
+        "u8",
+        "u8",
+        "u8"
+      ]
+    },
+    "0x005ec220": {
+      "name": "GetCharInfo2",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@charinfo"
+    },
+    "0x004106a3": {
+      "name": "FUN_004106a3",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x004940e1": {
+      "name": "UpdateFog_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "@fn_ambient": {
+      "name": "SetAmbient",
+      "conv": "thiscall",
+      "args": [
+        "mem:4"
+      ]
+    },
+    "@fn_fog": {
+      "name": "SetFogColor",
+      "conv": "thiscall",
+      "args": [
+        "mem:4"
+      ]
+    },
+    "@fn_level": {
+      "name": "GetLevel",
+      "conv": "thiscall",
+      "args": [],
+      "ret_float": 0.0
+    },
+    "@fn_color": {
+      "name": "GetColor",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@colorval"
+    }
+  },
+  "cases": [
+    {
+      "name": "inactive",
+      "args": [
+        1.5
+      ],
+      "objects": {
+        "client": {
+          "size": "0x2d70",
+          "fill": "random",
+          "init": [
+            {
+              "offset": "0x2cf8",
+              "u32": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "zone0_table",
+      "args": [
+        1.5
+      ]
+    },
+    {
+      "name": "zone5",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x0085097C",
+          "u8": 5
+        }
+      ]
+    },
+    {
+      "name": "zone6",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x0085097C",
+          "u8": 6
+        }
+      ]
+    },
+    {
+      "name": "zone7",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x0085097C",
+          "u8": 7
+        }
+      ]
+    },
+    {
+      "name": "zone8",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x0085097C",
+          "u8": 8
+        }
+      ]
+    },
+    {
+      "name": "zone9",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x0085097C",
+          "u8": 9
+        }
+      ]
+    },
+    {
+      "name": "zone10",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x0085097C",
+          "u8": 10
+        }
+      ]
+    },
+    {
+      "name": "zone11",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x0085097C",
+          "u8": 11
+        }
+      ]
+    },
+    {
+      "name": "k5_rg",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 5
+        },
+        {
+          "addr": "0x009238FC",
+          "u32": 255000
+        },
+        {
+          "addr": "0x00923900",
+          "u32": 255000
+        },
+        {
+          "addr": "0x00923904",
+          "u32": 255000
+        }
+      ]
+    },
+    {
+      "name": "k5_b",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 5
+        },
+        {
+          "addr": "0x009238FC",
+          "u32": 0
+        },
+        {
+          "addr": "0x00923900",
+          "u32": 0
+        },
+        {
+          "addr": "0x00923904",
+          "u32": 255000
+        }
+      ]
+    },
+    {
+      "name": "k6_rg",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 6
+        },
+        {
+          "addr": "0x009238FC",
+          "u32": 255000
+        },
+        {
+          "addr": "0x00923900",
+          "u32": 255000
+        },
+        {
+          "addr": "0x00923904",
+          "u32": 255000
+        }
+      ]
+    },
+    {
+      "name": "k6_b",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 6
+        },
+        {
+          "addr": "0x009238FC",
+          "u32": 0
+        },
+        {
+          "addr": "0x00923900",
+          "u32": 0
+        },
+        {
+          "addr": "0x00923904",
+          "u32": 255000
+        }
+      ]
+    },
+    {
+      "name": "k7_rg",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 7
+        },
+        {
+          "addr": "0x009238FC",
+          "u32": 255000
+        },
+        {
+          "addr": "0x00923900",
+          "u32": 255000
+        },
+        {
+          "addr": "0x00923904",
+          "u32": 255000
+        }
+      ]
+    },
+    {
+      "name": "k7_small",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 7
+        },
+        {
+          "addr": "0x009238FC",
+          "u32": 25500
+        },
+        {
+          "addr": "0x00923900",
+          "u32": 25500
+        },
+        {
+          "addr": "0x00923904",
+          "u32": 25500
+        }
+      ]
+    },
+    {
+      "name": "k7_b",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 7
+        },
+        {
+          "addr": "0x009238FC",
+          "u32": 0
+        },
+        {
+          "addr": "0x00923900",
+          "u32": 0
+        },
+        {
+          "addr": "0x00923904",
+          "u32": 255000
+        }
+      ]
+    },
+    {
+      "name": "k8_rg",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 8
+        },
+        {
+          "addr": "0x009238FC",
+          "u32": 255000
+        },
+        {
+          "addr": "0x00923900",
+          "u32": 255000
+        },
+        {
+          "addr": "0x00923904",
+          "u32": 255000
+        }
+      ]
+    },
+    {
+      "name": "k8_b",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 8
+        },
+        {
+          "addr": "0x009238FC",
+          "u32": 0
+        },
+        {
+          "addr": "0x00923900",
+          "u32": 0
+        },
+        {
+          "addr": "0x00923904",
+          "u32": 255000
+        }
+      ]
+    },
+    {
+      "name": "k9_rg",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 9
+        },
+        {
+          "addr": "0x009238FC",
+          "u32": 255000
+        },
+        {
+          "addr": "0x00923900",
+          "u32": 255000
+        },
+        {
+          "addr": "0x00923904",
+          "u32": 255000
+        }
+      ]
+    },
+    {
+      "name": "k9_b",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 9
+        },
+        {
+          "addr": "0x009238FC",
+          "u32": 0
+        },
+        {
+          "addr": "0x00923900",
+          "u32": 0
+        },
+        {
+          "addr": "0x00923904",
+          "u32": 255000
+        }
+      ]
+    },
+    {
+      "name": "k10_rg",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 10
+        },
+        {
+          "addr": "0x009238FC",
+          "u32": 255000
+        },
+        {
+          "addr": "0x00923900",
+          "u32": 255000
+        },
+        {
+          "addr": "0x00923904",
+          "u32": 255000
+        }
+      ]
+    },
+    {
+      "name": "k10_b",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 10
+        },
+        {
+          "addr": "0x009238FC",
+          "u32": 0
+        },
+        {
+          "addr": "0x00923900",
+          "u32": 0
+        },
+        {
+          "addr": "0x00923904",
+          "u32": 255000
+        }
+      ]
+    },
+    {
+      "name": "infra_by_slot",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 3
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 5
+        }
+      ]
+    },
+    {
+      "name": "infra_by_effect",
+      "args": [
+        1.5
+      ],
+      "callees": {
+        "0x004106a3": {
+          "name": "FUN_004106a3",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int",
+            "int",
+            "int"
+          ],
+          "ret": [
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "ultra_by_slot",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x1134",
+          "u32": 0
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 9
+        }
+      ]
+    },
+    {
+      "name": "ultra_by_effect",
+      "args": [
+        1.5
+      ],
+      "callees": {
+        "0x004106a3": {
+          "name": "FUN_004106a3",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int",
+            "int",
+            "int"
+          ],
+          "ret": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "infra_and_ultra",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "@charinfo",
+          "offset": "0x1134",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 10
+        }
+      ]
+    },
+    {
+      "name": "mode2",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00923B88",
+          "u8": 2
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 6
+        }
+      ]
+    },
+    {
+      "name": "mode5",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00923B88",
+          "u8": 5
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 7
+        }
+      ]
+    },
+    {
+      "name": "mode4",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00923B88",
+          "u8": 4
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 8
+        }
+      ]
+    },
+    {
+      "name": "mode3",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00923B88",
+          "u8": 3
+        }
+      ]
+    },
+    {
+      "name": "mode0",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00923B88",
+          "u8": 0
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 5
+        }
+      ]
+    },
+    {
+      "name": "colorsource",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x008503A8",
+          "u32": "@csrc"
+        }
+      ]
+    },
+    {
+      "name": "colorsource_dim",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x008503A8",
+          "u32": "@csrc"
+        },
+        {
+          "addr": "@colorval",
+          "u32": "0x00102030"
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 9
+        }
+      ]
+    },
+    {
+      "name": "hour24",
+      "args": [
+        1.5
+      ],
+      "callees": {
+        "0x00439b36": {
+          "name": "FUN_00439b36",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "18000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "3b000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "hour23",
+      "args": [
+        1.5
+      ],
+      "callees": {
+        "0x00439b36": {
+          "name": "FUN_00439b36",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "17000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "hour1",
+      "args": [
+        1.5
+      ],
+      "callees": {
+        "0x00439b36": {
+          "name": "FUN_00439b36",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "ignore"
+          ],
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "01000000"
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "0f000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "no_light_fade_init",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@lightref",
+          "u32": 0
+        },
+        {
+          "addr": "0x00698A08",
+          "from_image": "0x00698A08",
+          "image_size": 4
+        }
+      ]
+    },
+    {
+      "name": "fade_up",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00698A08",
+          "f32": 0.3
+        }
+      ],
+      "callees": {
+        "@fn_level": {
+          "name": "GetLevel",
+          "conv": "thiscall",
+          "args": [],
+          "ret_float": 0.6
+        }
+      }
+    },
+    {
+      "name": "fade_up_clamp",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00698A08",
+          "f32": 0.595
+        }
+      ],
+      "callees": {
+        "@fn_level": {
+          "name": "GetLevel",
+          "conv": "thiscall",
+          "args": [],
+          "ret_float": 0.6
+        }
+      }
+    },
+    {
+      "name": "fade_down",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00698A08",
+          "f32": 0.9
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 5
+        }
+      ],
+      "callees": {
+        "@fn_level": {
+          "name": "GetLevel",
+          "conv": "thiscall",
+          "args": [],
+          "ret_float": 0.6
+        }
+      }
+    },
+    {
+      "name": "fade_down_clamp",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00698A08",
+          "f32": 0.605
+        }
+      ],
+      "callees": {
+        "@fn_level": {
+          "name": "GetLevel",
+          "conv": "thiscall",
+          "args": [],
+          "ret_float": 0.6
+        }
+      }
+    },
+    {
+      "name": "fade_equal",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00698A08",
+          "f32": 0.6
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 6
+        }
+      ],
+      "callees": {
+        "@fn_level": {
+          "name": "GetLevel",
+          "conv": "thiscall",
+          "args": [],
+          "ret_float": 0.6
+        }
+      }
+    },
+    {
+      "name": "p_fade25_def",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00698A08",
+          "f32": 0.25
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "p_fade50_def",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00698A08",
+          "f32": 0.5
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "p_fade70_def",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00698A08",
+          "f32": 0.7
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "p_fade25_infra",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00698A08",
+          "f32": 0.25
+        },
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 9
+        }
+      ]
+    },
+    {
+      "name": "p_fade70_infra",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00698A08",
+          "f32": 0.7
+        },
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 10
+        }
+      ]
+    },
+    {
+      "name": "p_fade70_ultra_def",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00698A08",
+          "f32": 0.7
+        },
+        {
+          "addr": "@charinfo",
+          "offset": "0x1134",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 11
+        }
+      ]
+    },
+    {
+      "name": "p_fade50_src",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00698A08",
+          "f32": 0.5
+        },
+        {
+          "addr": "0x008503A8",
+          "u32": "@csrc"
+        },
+        {
+          "addr": "@colorval",
+          "u32": "0x00c08060"
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 5
+        }
+      ]
+    },
+    {
+      "name": "sky_clamp",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x0078F738",
+          "f32": 1.5
+        },
+        {
+          "addr": "0x0078F73C",
+          "f32": 2.5
+        },
+        {
+          "addr": "0x0078F798",
+          "f32": 1.25
+        },
+        {
+          "addr": "0x0078F79C",
+          "f32": 1.75
+        },
+        {
+          "addr": "0x0078F7F8",
+          "f32": 3.0
+        },
+        {
+          "addr": "0x0078F7FC",
+          "f32": 1.1
+        }
+      ]
+    },
+    {
+      "name": "sky_clamp_green_only",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x0078F798",
+          "f32": 1.25
+        },
+        {
+          "addr": "0x0078F79C",
+          "f32": 1.75
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 10
+        }
+      ]
+    },
+    {
+      "name": "sky_clamp_blue_only",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x0078F7F8",
+          "f32": 3.0
+        },
+        {
+          "addr": "0x0078F7FC",
+          "f32": 1.1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 9
+        }
+      ]
+    },
+    {
+      "name": "sky_clamp_red_only",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x0078F738",
+          "f32": 1.5
+        },
+        {
+          "addr": "0x0078F73C",
+          "f32": 2.5
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 5
+        }
+      ]
+    },
+    {
+      "name": "p_fade100_infra",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00698A08",
+          "f32": 1.0
+        },
+        {
+          "addr": "@charinfo",
+          "offset": "0x1118",
+          "u32": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 5
+        }
+      ]
+    },
+    {
+      "name": "fade_full",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00698A08",
+          "f32": 1.0
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 7
+        }
+      ],
+      "callees": {
+        "@fn_level": {
+          "name": "GetLevel",
+          "conv": "thiscall",
+          "args": [],
+          "ret_float": 1.0
+        }
+      }
+    },
+    {
+      "name": "lowmax_fog_wins",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "0x00698A08",
+          "f32": 1.0
+        },
+        {
+          "addr": "0x00923B88",
+          "u8": 3
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 11
+        }
+      ],
+      "callees": {
+        "@fn_level": {
+          "name": "GetLevel",
+          "conv": "thiscall",
+          "args": [],
+          "ret_float": 1.0
+        }
+      }
+    },
+    {
+      "name": "window_white_nolight",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x9",
+          "u8": 1
+        },
+        {
+          "addr": "@lightref",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "window_white_light",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x9",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "@fn_level": {
+          "name": "GetLevel",
+          "conv": "thiscall",
+          "args": [],
+          "ret_float": 0.45
+        }
+      }
+    },
+    {
+      "name": "window_white_light_high",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x9",
+          "u8": 1
+        },
+        {
+          "addr": "@fogowner",
+          "offset": "0x39404",
+          "u32": 50
+        },
+        {
+          "addr": "@fogowner",
+          "offset": "0x39408",
+          "u32": 114
+        },
+        {
+          "addr": "@fogowner",
+          "offset": "0x3940c",
+          "u32": 115
+        }
+      ],
+      "callees": {
+        "@fn_level": {
+          "name": "GetLevel",
+          "conv": "thiscall",
+          "args": [],
+          "ret_float": 0.45
+        }
+      }
+    },
+    {
+      "name": "window_zone7",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x9",
+          "u8": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 7
+        }
+      ]
+    },
+    {
+      "name": "window_zone8",
+      "args": [
+        1.5
+      ],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x9",
+          "u8": 1
+        },
+        {
+          "addr": "0x0085097C",
+          "u8": 8
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4461205,
+    "count": 150,
+    "args": [
+      {
+        "range": [
+          0.0,
+          2.0
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x0085097C",
+        "type": "u8",
+        "choices": [
+          0,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      {
+        "addr": "0x00923B88",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "addr": "0x00698A08",
+        "type": "float",
+        "choices": [
+          -1.0,
+          0.0,
+          0.25,
+          0.5,
+          0.7,
+          1.0
+        ]
+      },
+      {
+        "addr": "0x009238FC",
+        "type": "int",
+        "range": [
+          0,
+          300000
+        ],
+        "count": 6
+      },
+      {
+        "addr": "0x00923B57",
+        "type": "u8",
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "addr": "0x00923B5B",
+        "type": "u8",
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "addr": "0x00923B5F",
+        "type": "u8",
+        "range": [
+          0,
+          255
+        ]
+      },
+      {
+        "addr": "@charinfo",
+        "offset": "0x1118",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          255
+        ],
+        "p": 0.5
+      },
+      {
+        "addr": "@charinfo",
+        "offset": "0x1134",
+        "type": "u32",
+        "choices": [
+          0,
+          255
+        ],
+        "p": 0.4
+      },
+      {
+        "addr": "@window",
+        "offset": "0x9",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ],
+        "p": 0.3
+      },
+      {
+        "addr": "@fogowner",
+        "offset": "0x39404",
+        "type": "int",
+        "range": [
+          -50,
+          400
+        ],
+        "count": 3
+      },
+      {
+        "addr": "0x008503A8",
+        "type": "u32",
+        "choices": [
+          0,
+          "@csrc"
+        ],
+        "p": 0.4
+      },
+      {
+        "addr": "@colorval",
+        "type": "u32",
+        "range": [
+          0,
+          16777215
+        ],
+        "p": 0.5
+      }
+    ]
+  }
+}

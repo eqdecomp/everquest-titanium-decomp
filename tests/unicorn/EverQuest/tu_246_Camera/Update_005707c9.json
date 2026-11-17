@@ -1,0 +1,96 @@
+{
+  "function": "ProjectileCamera_guess::Update_guess",
+  "original": "0x005707c9",
+  "sources": [
+    "src/EverQuest/tu_246_Camera.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@target",
+  "args": [
+    {
+      "name": "unused_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "target": {
+      "size": "0x60",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4c", "u32": "@source"}
+      ]
+    },
+    "source": {
+      "size": "0x30",
+      "fill": "random"
+    },
+    "cbmgr": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x00905D24", "u32": "@cbmgr"},
+    {"addr": "@target", "offset": "0x50", "u32": 500}
+  ],
+  "callees": {
+    "0x0046d655": {
+      "name": "FUN_0046d655",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 1000
+    },
+    "0x004392de": {
+      "name": "SetCameraMode_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "fresh_source_success",
+      "args": [1]
+    },
+    {
+      "name": "null_source_callback",
+      "args": [0],
+      "memory": [{"addr": "@target", "offset": "0x4c", "u32": 0}]
+    },
+    {
+      "name": "stale_unsigned_wrap_callback",
+      "args": [0],
+      "memory": [{"addr": "@target", "offset": "0x50", "u32": 10000}]
+    },
+    {
+      "name": "elapsed_5999_success",
+      "args": [0],
+      "memory": [{"addr": "@target", "offset": "0x50", "u32": 4294962297}]
+    },
+    {
+      "name": "elapsed_6000_callback",
+      "args": [0],
+      "memory": [{"addr": "@target", "offset": "0x50", "u32": 4294962296}]
+    },
+    {
+      "name": "elapsed_zero_success",
+      "args": [0],
+      "memory": [{"addr": "@target", "offset": "0x50", "u32": 1000}]
+    }
+  ],
+  "fuzz": {
+    "seed": 5703625,
+    "count": 100,
+    "args": [
+      {}
+    ],
+    "memory": [
+      {"addr": "@target", "offset": "0x4c", "type": "u32", "choices": [0, "@source"]},
+      {"addr": "@target", "offset": "0x50", "type": "u32", "choices": [0, 500, 1000, 5999, 6000, 10000, 4294962297, 4294962296]},
+      {"addr": "@target", "offset": "0x48", "type": "int", "range": [-16, 64]}
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "function": "AddOverlay_guess",
+  "original": "0x005336bb",
+  "sources": [
+    "src/EverQuest/tu_187_MapViewWnd.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "bounds_left", "type": "int"},
+    {"name": "bounds_top", "type": "int"},
+    {"name": "bounds_right", "type": "int"},
+    {"name": "bounds_bottom", "type": "int"},
+    {"name": "entry_guess", "type": "ptr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "entry": {"size": "0x40", "fill": "random"},
+    "prev": {"size": "0x1c", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x60010000", "size": 28, "fill": "random"},
+    {"addr": "0x00991d10", "u32": "@prev"}
+  ],
+  "callees": {
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": "0x60010000"
+    },
+    "0x004d9160": {
+      "name": "FUN_004d9160",
+      "conv": "thiscall",
+      "args": ["ignore", "mem:16"],
+      "ret": "arg0",
+      "writes": [{"addr": "0x60010004", "hex": "11223344556677889900aabbccddeeff"}]
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "ignore_writes": [["0x60010018", "0x60010019"]],
+  "cases": [
+    {"name": "append to existing head", "args": [1, 2, 3, 4, "@entry"]},
+    {"name": "empty list", "args": [-5, 7, 100, 200, "@entry"],
+     "memory": [{"addr": "0x00991d10", "u32": 0}]},
+    {"name": "new fails, head set", "args": [1, 2, 3, 4, "@entry"],
+     "callees": {"0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}}},
+    {"name": "new fails, empty list", "args": [1, 2, 3, 4, "@entry"],
+     "memory": [{"addr": "0x00991d10", "u32": 0}],
+     "callees": {"0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}}}
+  ],
+  "fuzz": {
+    "seed": 5453499,
+    "count": 100,
+    "args": [{}, {}, {}, {}, {"choices": ["@entry"]}],
+    "memory": [
+      {"addr": "0x00991d10", "type": "u32", "choices": [0, "@prev"]}
+    ]
+  },
+  "_survivors": "L3012: node+0x18 is ignored: the original stores an uninitialised EBX byte (garbage from the caller), the rewrite an uninitialised local"
+}

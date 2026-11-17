@@ -1,0 +1,107 @@
+{
+  "function": "Motion_48A34F_guess::Motion_48A34F_guess",
+  "original": "0x0048a34f",
+  "sources": [
+    "src/EverQuest/tu_055_Movement.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@motion_48a34f",
+  "args": [
+    {
+      "name": "current_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "radius_guess",
+      "type": "float"
+    },
+    {
+      "name": "previous_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "motion_48a34f": {
+      "size": "0x88",
+      "fill": "random"
+    },
+    "current": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": 3},
+        {"offset": "0x4", "u32": 4},
+        {"offset": "0x8", "u32": 5}
+      ]
+    },
+    "previous": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0046d713": {
+      "name": "FUN_0046d713",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        "@current",
+        1.5,
+        "@previous"
+      ]
+    },
+    {
+      "name": "zero radius",
+      "args": [
+        "@current",
+        0.0,
+        "@previous"
+      ]
+    },
+    {
+      "name": "negative radius",
+      "args": [
+        "@current",
+        -2.5,
+        "@previous"
+      ]
+    },
+    {
+      "name": "small radius",
+      "args": [
+        "@current",
+        0.001,
+        "@previous"
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4760399,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@current"
+        ]
+      },
+      {},
+      {
+        "choices": [
+          "@previous"
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

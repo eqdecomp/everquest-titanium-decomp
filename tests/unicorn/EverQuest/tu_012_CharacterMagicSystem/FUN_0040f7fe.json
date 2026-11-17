@@ -1,0 +1,207 @@
+{
+  "function": "CharacterMagicSystem_guess::CalcScaledAffectChange_guess",
+  "original": "0x0040f7fe",
+  "sources": ["src/EverQuest/tu_012_CharacterMagicSystem.cpp"],
+  "conv": "thiscall",
+  "this": "@charactermagicsystem",
+  "args": [
+    {"name": "effect_guess", "type": "u32"},
+    {"name": "entry_guess", "type": "ptr"},
+    {"name": "slot_guess", "type": "int"},
+    {"name": "spell_guess", "type": "ptr"}
+  ],
+  "ret": "int",
+  "objects": {
+    "charactermagicsystem": {
+      "size": "0x136ac",
+      "fill": "random",
+      "init": [{"offset": "0x8", "u32": "@current"}]
+    },
+    "entry": {"size": "0x14", "fill": "random"},
+    "spell": {"size": "0x270", "fill": "random"},
+    "current": {"size": "0x288", "fill": "random"},
+    "found": {"size": "0x288", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00640E38", "f32": 1.0},
+    {"addr": "@entry", "offset": "0x0", "u8": 0},
+    {"addr": "@entry", "offset": "0x1", "u8": 20},
+    {"addr": "@entry", "offset": "0x2", "u8": 10},
+    {"addr": "@current", "offset": "0x218", "u32": "@charactermagicsystem"},
+    {"addr": "@current", "offset": "0x244", "u8": 0},
+    {"addr": "@found", "offset": "0x218", "u32": "@charactermagicsystem"},
+    {"addr": "@found", "offset": "0x244", "u8": 0}
+  ],
+  "callees": {
+    "0x0040f339": {
+      "name": "CalcAffectChange_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "u8", "int", "ptr"],
+      "ret": "arg2"
+    },
+    "0x00401b28": {
+      "name": "LookupState_guess",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": "arg0"
+    }
+  },
+  "cases": [
+    {
+      "name": "scale ten bypasses conversion",
+      "args": [0, "@entry", -5, "@spell"],
+      "expect": {"ret": -5}
+    },
+    {
+      "name": "scale nine multiplies",
+      "args": [0, "@entry", -5, "@spell"],
+      "memory": [{"addr": "@entry", "offset": "0x2", "u8": 9}],
+      "expect": {"ret": -45}
+    },
+    {
+      "name": "scale eleven multiplies",
+      "args": [0, "@entry", -5, "@spell"],
+      "memory": [{"addr": "@entry", "offset": "0x2", "u8": 11}],
+      "expect": {"ret": -55}
+    },
+    {
+      "name": "zero global scale",
+      "args": [0, "@entry", -5, "@spell"],
+      "memory": [
+        {"addr": "0x00640E38", "f32": 0.0},
+        {"addr": "@entry", "offset": "0x2", "u8": 9}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "active four negates",
+      "args": [0, "@entry", 5, "@spell"],
+      "memory": [{"addr": "@entry", "offset": "0x0", "u8": 4}],
+      "expect": {"ret": -5}
+    },
+    {
+      "name": "active boundary three does not negate",
+      "args": [0, "@entry", -5, "@spell"],
+      "memory": [{"addr": "@entry", "offset": "0x0", "u8": 3}],
+      "expect": {"ret": -5}
+    },
+    {
+      "name": "lookup returns null",
+      "args": [0, "@entry", -8, "@spell"],
+      "expect": {"ret": -8}
+    },
+    {
+      "name": "lookup field 218 null",
+      "args": ["@found", "@entry", -8, "@spell"],
+      "memory": [{"addr": "@found", "offset": "0x218", "u32": 0}],
+      "expect": {"ret": -8}
+    },
+    {
+      "name": "lookup field 244 nonzero",
+      "args": ["@found", "@entry", -8, "@spell"],
+      "memory": [{"addr": "@found", "offset": "0x244", "u8": 1}],
+      "expect": {"ret": -8}
+    },
+    {
+      "name": "negation makes amount positive",
+      "args": ["@found", "@entry", -5, "@spell"],
+      "memory": [{"addr": "@entry", "offset": "0x0", "u8": 4}],
+      "expect": {"ret": 5}
+    },
+    {
+      "name": "current state null",
+      "args": ["@found", "@entry", -8, "@spell"],
+      "memory": [{"addr": "@charactermagicsystem", "offset": "0x8", "u32": 0}],
+      "expect": {"ret": -8}
+    },
+    {
+      "name": "current flag nonzero",
+      "args": ["@found", "@entry", -8, "@spell"],
+      "memory": [{"addr": "@current", "offset": "0x244", "u8": 1}],
+      "expect": {"ret": -8}
+    },
+    {
+      "name": "same state clamp at minus one",
+      "args": ["@current", "@entry", -1, "@spell"],
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "same state quotient minus one",
+      "args": ["@current", "@entry", -2, "@spell"],
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "same state larger penalty",
+      "args": ["@current", "@entry", -8, "@spell"],
+      "expect": {"ret": -6}
+    },
+    {
+      "name": "different state clamp at minus one",
+      "args": ["@found", "@entry", -1, "@spell"],
+      "expect": {"ret": -1}
+    },
+    {
+      "name": "different state penalty",
+      "args": ["@found", "@entry", -10, "@spell"],
+      "expect": {"ret": -7}
+    },
+    {
+      "name": "null spell is forwarded",
+      "args": [0, "@entry", -5, 0],
+      "expect": {"ret": -5}
+    }
+  ],
+  "fuzz": {
+    "seed": 4257790,
+    "count": 100,
+    "args": [
+      {"choices": ["@found", "@current", 0]},
+      {"choices": ["@entry"]},
+      {"range": [-10, 10]},
+      {"choices": ["@spell", 0]}
+    ],
+    "memory": [
+      {
+        "addr": "0x00640E38",
+        "type": "float",
+        "choices": [0.0, 0.25, 0.5, 1.0, 2.0]
+      },
+      {
+        "addr": "@entry",
+        "offset": "0x0",
+        "type": "u8",
+        "choices": [0, 3, 4, 5]
+      },
+      {
+        "addr": "@entry",
+        "offset": "0x2",
+        "type": "u8",
+        "choices": [0, 1, 9, 10, 11, 50, 255]
+      },
+      {
+        "addr": "@charactermagicsystem",
+        "offset": "0x8",
+        "type": "ptr",
+        "choices": ["@current", 0]
+      },
+      {
+        "addr": "@current",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [0, 1, 255]
+      },
+      {
+        "addr": "@found",
+        "offset": "0x218",
+        "type": "ptr",
+        "choices": ["@charactermagicsystem", 0]
+      },
+      {
+        "addr": "@found",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [0, 1, 255]
+      }
+    ]
+  }
+}

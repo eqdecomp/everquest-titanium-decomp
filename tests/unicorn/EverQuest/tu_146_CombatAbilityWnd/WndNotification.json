@@ -1,0 +1,138 @@
+{
+  "function": "Unknown_004F8AF3_guess::WndNotification",
+  "original": "0x004f8f3d",
+  "sources": ["src/EverQuest/tu_146_CombatAbilityWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@unknown_004f8af3",
+  "args": [
+    {"name": "sender_guess", "type": "ptr"},
+    {"name": "message_guess", "type": "int"},
+    {"name": "data_guess", "type": "int"}
+  ],
+  "ret": "int",
+  "objects": {
+    "unknown_004f8af3": {
+      "size": "0x1b0",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x168", "u32": "@sender"},
+        {"offset": "0x1a4", "u32": 4294967295},
+        {"offset": "0x1ac", "u32": 4294967295}
+      ]
+    },
+    "sender": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": 0, "u32": "@sender_vtable"}]
+    },
+    "sender2": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": 0, "u32": "@sender_vtable"}]
+    },
+    "sender_vtable": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xfc", "u32": "@fn_sink"}]
+    },
+    "fn_sink": {"size": 4},
+    "fn_begin": {"size": 4},
+    "owner": {"size": "0x100", "fill": "zero"},
+    "state": {
+      "size": "0x170",
+      "fill": "zero",
+      "init": [{"offset": 0, "u32": "@state_vtable"}]
+    },
+    "other_state": {
+      "size": "0x170",
+      "fill": "zero",
+      "init": [{"offset": 0, "u32": "@state_vtable"}]
+    },
+    "state_vtable": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xc0", "u32": "@fn_begin"}]
+    },
+    "everquest": {"size": "0x100", "fill": "zero"},
+    "manager": {"size": "0x100", "fill": "zero"},
+    "rep": {"size": "0x20", "fill": "zero"},
+    "lookup": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@owner"},
+    {"addr": "0x00850bbc", "u32": "@other_state"},
+    {"addr": "0x0095d43c", "size": 32, "fill": "zero"},
+    {"addr": "0x00988df0", "u32": "@everquest"},
+    {"addr": "0x00850c24", "u32": "@state"},
+    {"addr": "0x0099d414", "u32": "@manager"},
+    {"addr": "0x00985cc8", "u32": "@lookup"},
+    {"addr": "0x0063f53f", "from_image": "0x0063f53f", "image_size": 1}
+  ],
+  "callees": {
+    "0x004bb039": {"name": "IsUsingDiscipline_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x0040db4e": {"name": "Get_guess", "conv": "thiscall", "args": ["int", "int"], "ret": 7},
+    "0x004bad6a": {"name": "Apply_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x004b06fa": {"name": "Run_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005a2230": {"name": "WndNotification", "conv": "thiscall", "args": ["ptr", "int", "ptr"], "ret": 12},
+    "0x0059dd30": {"name": "IsActive_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x004d22d7": {"name": "GetText_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0", "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]},
+    "0x004f89e0": {"name": "Run_guess", "conv": "thiscall", "args": ["ignore"], "ret": "arg0"},
+    "0x00407d68": {"name": "CXStr_copy", "conv": "thiscall", "args": ["ignore"], "ret": "this"},
+    "0x00571d00": {"name": "CXStr_FreeRep", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x00572300": {"name": "CXStr_ToChar", "conv": "thiscall", "args": [], "ret": "0x0063f53f"},
+    "0x004fd91e": {"name": "Send_guess", "conv": "thiscall", "args": ["int", "int", "int", "cstr", "int"], "ret": 0},
+    "0x004f8aab": {"name": "UseAbilitySlot_guess", "conv": "thiscall", "args": ["int"], "passthrough": true},
+    "0x005f0a00": {"name": "Resolve_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0040cbd6": {"name": "Find_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x004fd36c": {"name": "IsOkToActivate_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "0x00571e00": {"name": "CXStr_from_char", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x0059d960": {
+      "name": "GetScreenRect",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "00000000000000000a00000014000000"}]
+    },
+    "0x004dc02d": {
+      "name": "CenterPoint",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "050000000a000000"}]
+    },
+    "0x005adc20": {"name": "Register_guess", "conv": "thiscall", "args": ["int", "ignore", "ptr"], "ret": 0},
+    "@fn_sink": {"name": "Sink_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "@fn_begin": {"name": "Begin_guess", "conv": "thiscall", "args": ["int", "int"], "ret": 0}
+  },
+  "cases": [
+    {"name": "null sender fallback", "args": [0, 1, 2]},
+    {"name": "primary button", "args": ["@sender", 1, 2], "memory": [{"addr": "@unknown_004f8af3", "offset": "0x15c", "u32": "@sender"}]},
+    {"name": "secondary button", "args": ["@sender", 1, 2], "memory": [{"addr": "@unknown_004f8af3", "offset": "0x164", "u32": "@sender"}]},
+    {"name": "message 20 below threshold", "args": ["@sender2", 20, 9999]},
+    {"name": "message 20 above threshold no index", "args": ["@sender2", 20, 10000]},
+    {"name": "message 20 update", "args": ["@sender2", 20, 10000], "memory": [{"addr": "@unknown_004f8af3", "offset": "0x1ac", "u32": 1}]},
+    {"name": "slot message 1 not selected", "args": ["@sender", 1, 0], "memory": [{"addr": "@state", "offset": "0x15c", "u32": 11}]},
+    {"name": "slot message 1 selected", "args": ["@sender", 1, 0], "memory": [{"addr": "@state", "offset": "0x15c", "u32": 12}, {"addr": "@state", "offset": "0x160", "u32": 7}]},
+    {"name": "slot message 1 selected send", "args": ["@sender", 1, "@rep"], "memory": [{"addr": "@state", "offset": "0x15c", "u32": 12}, {"addr": "@state", "offset": "0x160", "u32": 7}, {"addr": "@state", "offset": "0x168", "u32": "@rep"}, {"addr": "0x0095d43c", "u32": 1}]},
+    {"name": "slot message 23 empty", "args": ["@sender", 23, 0]},
+    {"name": "slot message 23 sends", "args": ["@sender", 23, 0], "memory": [{"addr": "0x0095d43c", "u32": 5}]},
+    {"name": "slot message 1 lookup", "args": ["@sender", 1, 0], "memory": [{"addr": "@state", "offset": "0x15c", "u32": 11}, {"addr": "0x0095d43c", "u32": 5}]},
+    {"name": "slot message 3 disabled", "args": ["@sender", 3, 0]},
+    {"name": "slot message 3 registers", "args": ["@sender", 3, 0], "memory": [{"addr": "@unknown_004f8af3", "offset": "0x1a4", "u32": 12}]},
+    {"name": "unmatched sender fallback", "args": ["@sender2", 0, 0]}
+  ],
+  "fuzz": {
+    "seed": 5214013,
+    "count": 100,
+    "args": [
+      {"choices": ["@sender", "@sender2", 0]},
+      {"range": [0, 25]},
+      {"range": [-1, 11000]}
+    ],
+    "memory": [
+      {"addr": "@unknown_004f8af3", "offset": "0x1a4", "type": "int", "choices": [-1, 0]},
+      {"addr": "@unknown_004f8af3", "offset": "0x1ac", "type": "int", "choices": [-1, 0]},
+      {"addr": "@state", "offset": "0x15c", "type": "int", "choices": [0, 11]}
+    ]
+  }
+}

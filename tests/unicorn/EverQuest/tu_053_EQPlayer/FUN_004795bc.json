@@ -1,0 +1,612 @@
+{
+  "function": "EQPlayerCore_guess::AimAtTarget_guess",
+  "original": "0x004795bc",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {
+      "name": "other",
+      "type": "ptr"
+    },
+    {
+      "name": "output",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "owner": {
+      "size": "0x264",
+      "fill": "random"
+    },
+    "other": {
+      "size": "0x264",
+      "fill": "random"
+    },
+    "output": {
+      "size": "0x40",
+      "fill": "random"
+    },
+    "range": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "angles": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@vtable"
+        }
+      ]
+    },
+    "vtable": {
+      "size": "0x1c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x18",
+          "u32": "@angle_fn"
+        }
+      ]
+    },
+    "angle_fn": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x006410bc",
+      "from_image": "0x006410BC",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00641140",
+      "from_image": "0x00641140",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0064113c",
+      "from_image": "0x0064113C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00647ccc",
+      "from_image": "0x00647CCC",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00647cc8",
+      "from_image": "0x00647CC8",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00641f8c",
+      "from_image": "0x00641F8C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00645ed4",
+      "from_image": "0x00645ED4",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@range"
+    },
+    {
+      "addr": "0x0099e374",
+      "u32": "@angles"
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x030",
+      "f32": 10.0
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x034",
+      "f32": 20.0
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x038",
+      "f32": 0.0
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x04c",
+      "f32": 0.0
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x05c",
+      "f32": 0.0
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x238",
+      "f32": 4.0
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x244",
+      "u8": 0
+    },
+    {
+      "addr": "@other",
+      "offset": "0x030",
+      "f32": 12.0
+    },
+    {
+      "addr": "@other",
+      "offset": "0x034",
+      "f32": 24.0
+    },
+    {
+      "addr": "@other",
+      "offset": "0x038",
+      "f32": 0.0
+    },
+    {
+      "addr": "@other",
+      "offset": "0x03c",
+      "f32": 1.0
+    },
+    {
+      "addr": "@other",
+      "offset": "0x040",
+      "f32": 2.0
+    },
+    {
+      "addr": "@other",
+      "offset": "0x238",
+      "f32": 4.0
+    }
+  ],
+  "callees": {
+    "0x0046e42f": {
+      "name": "angle_from_points_guess",
+      "conv": "cdecl",
+      "args": [
+        "float",
+        "float",
+        "float",
+        "float"
+      ],
+      "ret_float": 0.0
+    },
+    "0x00439d16": {
+      "name": "distance_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr",
+        "float"
+      ],
+      "ret_float": 10.0
+    },
+    "0x0060f60d": {
+      "name": "fabs",
+      "conv": "cdecl",
+      "args": [
+        "double"
+      ],
+      "passthrough": true
+    },
+    "@angle_fn": {
+      "name": "Angle_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "float",
+        "ignore"
+      ],
+      "ret_float": 128.0
+    }
+  },
+  "rewrite_aliases": {
+    "_fabs": "0x0060f60d"
+  },
+  "cases": [
+    {
+      "name": "state flag returns early",
+      "args": [
+        "@other",
+        "@output"
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x244",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "null other returns early",
+      "args": [
+        0,
+        "@output"
+      ]
+    },
+    {
+      "name": "same object returns early",
+      "args": [
+        "@owner",
+        "@output"
+      ]
+    },
+    {
+      "name": "equal headings and output write",
+      "args": [
+        "@other",
+        "@output"
+      ]
+    },
+    {
+      "name": "heading difference below threshold",
+      "args": [
+        "@other",
+        "@output"
+      ],
+      "callees": {
+        "0x0046e42f": {
+          "name": "angle_from_points_guess",
+          "conv": "cdecl",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 79.99
+        }
+      }
+    },
+    {
+      "name": "heading difference exactly 80",
+      "args": [
+        "@other",
+        "@output"
+      ],
+      "callees": {
+        "0x0046e42f": {
+          "name": "angle_from_points_guess",
+          "conv": "cdecl",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 80.0
+        }
+      }
+    },
+    {
+      "name": "heading wraps across 512 high edge",
+      "args": [
+        "@other",
+        "@output"
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x04c",
+          "f32": 0.0
+        }
+      ],
+      "callees": {
+        "0x0046e42f": {
+          "name": "angle_from_points_guess",
+          "conv": "cdecl",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 511.0
+        }
+      }
+    },
+    {
+      "name": "heading wraps across 512 low edge",
+      "args": [
+        "@other",
+        "@output"
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x04c",
+          "f32": 511.0
+        }
+      ]
+    },
+    {
+      "name": "difference just above half turn",
+      "args": [
+        "@other",
+        "@output"
+      ],
+      "callees": {
+        "0x0046e42f": {
+          "name": "angle_from_points_guess",
+          "conv": "cdecl",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 257.0
+        }
+      }
+    },
+    {
+      "name": "difference beyond acceptance",
+      "args": [
+        "@other",
+        "@output"
+      ],
+      "callees": {
+        "0x0046e42f": {
+          "name": "angle_from_points_guess",
+          "conv": "cdecl",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 81.0
+        }
+      }
+    },
+    {
+      "name": "vertical facing exactly 64",
+      "args": [
+        "@other",
+        "@output"
+      ],
+      "callees": {
+        "@angle_fn": {
+          "name": "Angle_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "ignore"
+          ],
+          "ret_float": 64.0
+        }
+      }
+    },
+    {
+      "name": "vertical facing just under 64",
+      "args": [
+        "@other",
+        "@output"
+      ],
+      "callees": {
+        "@angle_fn": {
+          "name": "Angle_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "ignore"
+          ],
+          "ret_float": 64.01
+        }
+      }
+    },
+    {
+      "name": "negative facing from relative height",
+      "args": [
+        "@other",
+        "@output"
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x038",
+          "f32": 10.0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x05c",
+          "f32": -28.0
+        },
+        {
+          "addr": "@other",
+          "offset": "0x038",
+          "f32": 0.0
+        }
+      ],
+      "callees": {
+        "@angle_fn": {
+          "name": "Angle_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "ignore"
+          ],
+          "ret_float": 100.0
+        }
+      }
+    },
+    {
+      "name": "distance clamps to minimum",
+      "args": [
+        "@other",
+        "@output"
+      ],
+      "callees": {
+        "0x00439d16": {
+          "name": "distance_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "ptr",
+            "float"
+          ],
+          "ret_float": 0.0
+        }
+      }
+    },
+    {
+      "name": "null output still updates owner",
+      "args": [
+        "@other",
+        0
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4795628,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@other"
+        ]
+      },
+      {
+        "choices": [
+          "@output"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@owner",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x030",
+        "type": "float",
+        "range": [
+          -64.0,
+          64.0
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x034",
+        "type": "float",
+        "range": [
+          -64.0,
+          64.0
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x038",
+        "type": "float",
+        "range": [
+          -64.0,
+          64.0
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x04c",
+        "type": "float",
+        "range": [
+          0.0,
+          512.0
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x05c",
+        "type": "float",
+        "range": [
+          -128.0,
+          512.0
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x238",
+        "type": "float",
+        "range": [
+          0.0,
+          20.0
+        ]
+      },
+      {
+        "addr": "@other",
+        "offset": "0x030",
+        "type": "float",
+        "range": [
+          -64.0,
+          64.0
+        ]
+      },
+      {
+        "addr": "@other",
+        "offset": "0x034",
+        "type": "float",
+        "range": [
+          -64.0,
+          64.0
+        ]
+      },
+      {
+        "addr": "@other",
+        "offset": "0x038",
+        "type": "float",
+        "range": [
+          -64.0,
+          64.0
+        ]
+      },
+      {
+        "addr": "@other",
+        "offset": "0x03c",
+        "type": "float",
+        "range": [
+          -8.0,
+          8.0
+        ]
+      },
+      {
+        "addr": "@other",
+        "offset": "0x040",
+        "type": "float",
+        "range": [
+          -8.0,
+          8.0
+        ]
+      },
+      {
+        "addr": "@other",
+        "offset": "0x238",
+        "type": "float",
+        "range": [
+          0.0,
+          20.0
+        ]
+      }
+    ]
+  },
+  "_survivors": "L3599: the outer heading != check excludes equal headings before this comparison. L3611: at a difference of exactly 256, the wrapped formula still yields 256, so < and <= have the same result."
+}

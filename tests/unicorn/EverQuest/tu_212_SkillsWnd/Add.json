@@ -1,0 +1,165 @@
+{
+  "function": "SkillRankTextMap_guess::Add_guess",
+  "original": "0x00554a08",
+  "sources": [
+    "src/EverQuest/tu_212_SkillsWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@map",
+  "args": [
+    {"name": "key_guess", "type": "int"},
+    {"name": "id_guess", "type": "int"},
+    {"name": "value_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "map": {"size": "0x10", "fill": "zero"},
+    "entry": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@list"}]
+    },
+    "list": {"size": "0x10", "fill": "zero"},
+    "item0": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [{"offset": "0x4", "u32": 1}]
+    },
+    "item1": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [{"offset": "0x4", "u32": 2}]
+    },
+    "newlist": {"size": "0x10", "fill": "zero"},
+    "newnode": {"size": "0xc", "fill": "zero"}
+  },
+  "memory": [],
+  "callees": {
+    "0x004ff9c9": {
+      "name": "FUN_004ff9c9",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": "@entry"
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": ["@newlist", "@newnode"]
+    },
+    "0x00447c66": {
+      "name": "FUN_00447c66",
+      "conv": "thiscall",
+      "args": ["ignore", "u32"]
+    },
+    "0x004eb905": {
+      "name": "FUN_004eb905",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": ["@item0", "@item1"]
+    },
+    "0x0055419c": {
+      "name": "FUN_0055419c",
+      "conv": "thiscall",
+      "args": ["int", "int", "int"],
+      "ret": "this",
+      "passthrough": true
+    },
+    "0x00571f70": {
+      "name": "FUN_0055419c_guess_member::Initialize_guess",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x0050319b": {
+      "name": "FUN_0050319b",
+      "conv": "thiscall",
+      "args": ["int", "mem:4"]
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "found_first_match",
+      "args": [1, 1, 1],
+      "memory": [{"addr": "@list", "offset": "0x0", "u32": 1}]
+    },
+    {
+      "name": "found_second_match",
+      "args": [1, 1, 1],
+      "memory": [
+        {"addr": "@list", "offset": "0x0", "u32": 2},
+        {"addr": "@item0", "offset": "0x4", "u32": 7},
+        {"addr": "@item1", "offset": "0x4", "u32": 1}
+      ]
+    },
+    {
+      "name": "found_no_match_three_items",
+      "args": [4, 3, 9],
+      "memory": [{"addr": "@list", "offset": "0x0", "u32": 3}]
+    },
+    {
+      "name": "found_empty_list",
+      "args": [5, 1, 9],
+      "memory": [{"addr": "@list", "offset": "0x0", "u32": 0}]
+    },
+    {
+      "name": "found_node_alloc_null",
+      "args": [7, 1, 1],
+      "memory": [{"addr": "@list", "offset": "0x0", "u32": 0}],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": ["u32"],
+          "ret": [0]
+        }
+      }
+    },
+    {
+      "name": "not_found_new_list",
+      "args": [6, 2, 8],
+      "callees": {
+        "0x004ff9c9": {
+          "name": "FUN_004ff9c9",
+          "conv": "thiscall",
+          "args": ["u32"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "not_found_node_alloc_null",
+      "args": [6, 2, 8],
+      "callees": {
+        "0x004ff9c9": {
+          "name": "FUN_004ff9c9",
+          "conv": "thiscall",
+          "args": ["u32"],
+          "ret": 0
+        },
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": ["u32"],
+          "ret": ["@newlist", 0]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5589512,
+    "count": 100,
+    "args": [
+      {},
+      {"choices": [1, 2, 3]},
+      {}
+    ],
+    "memory": [
+      {"addr": "@list", "offset": "0x0", "type": "int", "choices": [0, 1, 2, 3]},
+      {"addr": "@item0", "offset": "0x4", "type": "int", "choices": [1, 2, 3]},
+      {"addr": "@item1", "offset": "0x4", "type": "int", "choices": [1, 2, 3]}
+    ]
+  }
+}

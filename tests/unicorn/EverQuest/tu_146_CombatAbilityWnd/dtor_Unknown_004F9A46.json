@@ -1,0 +1,58 @@
+{
+  "function": "CCombatAbilityWnd_guess::~CCombatAbilityWnd_guess",
+  "original": "0x004f9566",
+  "sources": [
+    "src/EverQuest/tu_146_CombatAbilityWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@unknown_004f9a46",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "unknown_004f9a46": {
+      "size": "0x1b0",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004f949f": {
+      "name": "CCombatAbilityWnd_guess::FreeAbilityMenu_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0050f3f6": {
+      "name": "Unknown_004F924D_child_guess::Run_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x005a3100": {
+      "name": "SidlScreenBase_guess::~SidlScreenBase_guess",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": []
+    },
+    {
+      "name": "zeros",
+      "args": [],
+      "memory": [
+        {"addr": "@unknown_004f9a46", "offset": "0x194", "u32": 0},
+        {"addr": "@unknown_004f9a46", "offset": "0x1a4", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5215590,
+    "count": 50,
+    "args": [],
+    "memory": [
+      {"addr": "@unknown_004f9a46", "offset": "0x0", "type": "int", "choices": [0, 1, -1]},
+      {"addr": "@unknown_004f9a46", "offset": "0x194", "type": "int", "choices": [0, 1, 5]}
+    ]
+  }
+}

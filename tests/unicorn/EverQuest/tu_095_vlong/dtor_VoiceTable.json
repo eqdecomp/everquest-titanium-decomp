@@ -1,0 +1,97 @@
+{
+  "function": "VoiceMacroTable_guess::~VoiceMacroTable_guess",
+  "original": "0x004cbaaf",
+  "sources": [
+    "src/EverQuest/tu_095_vlong.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@voicetable",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "voicetable": {
+      "size": "0x18",
+      "fill": "random"
+    },
+    "c1": {"size": "0x20", "fill": "random"},
+    "c2": {"size": "0x20", "fill": "random"},
+    "e1": {"size": "0x4", "init": [{"offset": "0x0", "u32": "@c1"}]},
+    "e2": {"size": "0x4", "init": [{"offset": "0x0", "u32": 0}]},
+    "e3": {"size": "0x4", "init": [{"offset": "0x0", "u32": "@c2"}]}
+  },
+  "memory": [],
+  "callees": {
+    "0x004466fa": {
+      "name": "Bucket_guess::First_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@e1"
+    },
+    "0x004cb69a": {
+      "name": "CompositeObject_guess::Destroy_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0060d0d5": {
+      "name": "free",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x0042ec1a": {
+      "name": "Bucket_guess::Next_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": ["@e2", "@e3", 0]
+    },
+    "0x0048f513": {
+      "name": "Bucket_guess::Clear_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004c9745": {
+      "name": "Bucket_guess::~Bucket_guess",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "three_entries_one_null",
+      "args": []
+    },
+    {
+      "name": "empty",
+      "args": [],
+      "callees": {
+        "0x004466fa": {"name": "Bucket_guess::First_guess", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "single_null_entry",
+      "args": [],
+      "callees": {
+        "0x004466fa": {"name": "Bucket_guess::First_guess", "conv": "thiscall", "args": [], "ret": "@e2"},
+        "0x0042ec1a": {"name": "Bucket_guess::Next_guess", "conv": "thiscall", "args": ["ptr"], "ret": [0]}
+      }
+    },
+    {
+      "name": "single_entry",
+      "args": [],
+      "callees": {
+        "0x004466fa": {"name": "Bucket_guess::First_guess", "conv": "thiscall", "args": [], "ret": "@e3"},
+        "0x0042ec1a": {"name": "Bucket_guess::Next_guess", "conv": "thiscall", "args": ["ptr"], "ret": [0]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5028527,
+    "count": 50,
+    "args": [],
+    "memory": []
+  }
+}

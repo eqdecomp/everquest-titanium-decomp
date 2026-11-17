@@ -1,0 +1,532 @@
+{
+  "function": "InventoryView_guess::AutoConsume_guess",
+  "original": "0x0041de8e",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@rankowner",
+  "args": [
+    {
+      "name": "mode_guess",
+      "type": "char"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "rankowner": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@offset_holder"
+        },
+        {
+          "offset": "0x24",
+          "u32": "@ranktable_vtbl"
+        }
+      ]
+    },
+    "offset_holder": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 32
+        }
+      ]
+    },
+    "ranktable_vtbl": {
+      "size": "0x44",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x40",
+          "u32": "@candidate_fn"
+        }
+      ]
+    },
+    "outer_entry": {
+      "size": "0x4c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@outer_vtbl"
+        },
+        {
+          "offset": "0x48",
+          "u32": 2
+        }
+      ]
+    },
+    "outer_vtbl": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@release_fn"
+        }
+      ]
+    },
+    "inner_entry": {
+      "size": "0x4c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@inner_vtbl"
+        },
+        {
+          "offset": "0x48",
+          "u32": 2
+        }
+      ]
+    },
+    "inner_vtbl": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@release_fn"
+        }
+      ]
+    },
+    "candidate_fn": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "release_fn": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0040cc50": {
+      "name": "InventorySlots_guess::GetEntry_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": "@outer_entry"
+    },
+    "0x005eccc0": {
+      "name": "ItemInstance_guess::GetItemClass_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005ecc00": {
+      "name": "ItemInstance_guess::GetValue_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 14
+    },
+    "0x0041aa84": {
+      "name": "PropertyProxy_guess::SetArrayValue_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005ecc30": {
+      "name": "ItemInstance_guess::GetCount_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005ec630": {
+      "name": "ItemInstance_guess::GetEntry_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@inner_entry"
+    },
+    "0x005ec660": {
+      "name": "ItemInstance_guess::DeleteSubentry_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x004912b1": {
+      "name": "SendMessage_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "mem:16",
+        "int",
+        "char"
+      ],
+      "ret": 0
+    },
+    "@candidate_fn": {
+      "name": "GetCandidate_guess_vtable",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@release_fn": {
+      "name": "RankEntry_guess::Release_guess_vtable",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "outer_mode_one_decrement",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@outer_entry",
+          "offset": "0x48",
+          "u32": 2
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "outer_mode_zero_delete",
+      "args": [
+        0
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "ItemInstance_guess::GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 15
+        }
+      },
+      "memory": [
+        {
+          "addr": "@outer_entry",
+          "offset": "0x48",
+          "u32": 1
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "outer_release_null",
+      "args": [
+        1
+      ],
+      "callees": {
+        "0x0040cc50": {
+          "name": "InventorySlots_guess::GetEntry_guess",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            "@outer_entry",
+            "@outer_entry",
+            "@outer_entry",
+            "@outer_entry",
+            0
+          ]
+        }
+      },
+      "memory": [
+        {
+          "addr": "@outer_entry",
+          "offset": "0x48",
+          "u32": 1
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "outer_mode_one_miss",
+      "args": [
+        1
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "ItemInstance_guess::GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 15
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "outer_mode_zero_miss",
+      "args": [
+        0
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "empty_table",
+      "args": [
+        1
+      ],
+      "callees": {
+        "0x0040cc50": {
+          "name": "InventorySlots_guess::GetEntry_guess",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "blocked_count_zero",
+      "args": [
+        0
+      ],
+      "callees": {
+        "0x005eccc0": {
+          "name": "ItemInstance_guess::GetItemClass_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            1
+          ]
+        },
+        "0x005ecc30": {
+          "name": "ItemInstance_guess::GetCount_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "blocked_not_one",
+      "args": [
+        0
+      ],
+      "callees": {
+        "0x005eccc0": {
+          "name": "ItemInstance_guess::GetItemClass_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            2,
+            2
+          ]
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "inner_null_then_mode_one_match",
+      "args": [
+        1
+      ],
+      "callees": {
+        "0x005eccc0": {
+          "name": "ItemInstance_guess::GetItemClass_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            1,
+            0
+          ]
+        },
+        "0x005ecc30": {
+          "name": "ItemInstance_guess::GetCount_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            2,
+            2
+          ]
+        },
+        "0x005ec630": {
+          "name": "ItemInstance_guess::GetEntry_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            0,
+            "@inner_entry"
+          ]
+        },
+        "0x005ecc00": {
+          "name": "ItemInstance_guess::GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 14
+        }
+      },
+      "memory": [
+        {
+          "addr": "@inner_entry",
+          "offset": "0x48",
+          "u32": 2
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "inner_blocked",
+      "args": [
+        1
+      ],
+      "callees": {
+        "0x005eccc0": {
+          "name": "ItemInstance_guess::GetItemClass_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            1,
+            1
+          ]
+        },
+        "0x005ecc30": {
+          "name": "ItemInstance_guess::GetCount_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "inner_mode_one_miss",
+      "args": [
+        1
+      ],
+      "callees": {
+        "0x005eccc0": {
+          "name": "ItemInstance_guess::GetItemClass_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            1,
+            0
+          ]
+        },
+        "0x005ecc30": {
+          "name": "ItemInstance_guess::GetCount_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x005ecc00": {
+          "name": "ItemInstance_guess::GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 15
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "inner_mode_zero_delete",
+      "args": [
+        0
+      ],
+      "callees": {
+        "0x005eccc0": {
+          "name": "ItemInstance_guess::GetItemClass_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            1,
+            0
+          ]
+        },
+        "0x005ecc30": {
+          "name": "ItemInstance_guess::GetCount_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x005ecc00": {
+          "name": "ItemInstance_guess::GetValue_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 15
+        }
+      },
+      "memory": [
+        {
+          "addr": "@inner_entry",
+          "offset": "0x48",
+          "u32": 1
+        }
+      ],
+      "expect": {
+        "ret": 1
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4316814,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -1,
+          1
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@outer_entry",
+        "offset": "0x48",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  "_survivors": "L5872: the duplicate mode-zero SetArrayValue receiver is tail-merged into the single shared machine-code call; changing this source expression has no generated-code or runtime effect"
+}

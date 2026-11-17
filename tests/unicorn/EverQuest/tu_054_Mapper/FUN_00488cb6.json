@@ -1,0 +1,723 @@
+{
+  "function": "Mapper_guess::UpdateIdleAnimation_guess",
+  "original": "0x00488cb6",
+  "sources": [
+    "src/EverQuest/tu_054_Mapper.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@mapper",
+  "args": [
+    {
+      "name": "value_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "size": "0x217",
+  "objects": {
+    "mapper": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@mapper_vtable"
+        },
+        {
+          "offset": "0x4",
+          "u32": "@owner"
+        }
+      ]
+    },
+    "owner": {
+      "size": "0x260",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@state"
+        }
+      ]
+    },
+    "state": {
+      "size": "0xf8c",
+      "fill": "random"
+    },
+    "display": {
+      "size": "0x14c",
+      "fill": "random"
+    },
+    "fn_slot2": {
+      "size": "4",
+      "fill": "zero"
+    },
+    "fn_slot14": {
+      "size": "4",
+      "fill": "zero"
+    },
+    "mapper_vtable": {
+      "size": "0x3c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@fn_slot2"
+        },
+        {
+          "offset": "0x38",
+          "u32": "@fn_slot14"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0066d24c",
+      "from_image": "0x0066D24C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00647cbc",
+      "from_image": "0x00647CBC",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0063f4cc",
+      "f32": 0.0
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@display"
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": "@owner"
+    },
+    {
+      "addr": "0x00850ccc",
+      "u32": 1
+    },
+    {
+      "addr": "@state",
+      "offset": "0xad",
+      "u8": 0
+    },
+    {
+      "addr": "@state",
+      "offset": "0x130",
+      "u32": 0
+    },
+    {
+      "addr": "@state",
+      "offset": "0x134",
+      "u32": 1
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf88",
+      "u32": 0
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x58",
+      "f32": 0.0
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x251",
+      "u8": 0
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x25c",
+      "u32": 0
+    },
+    {
+      "addr": "@display",
+      "offset": "0x148",
+      "u32": 0
+    },
+    {
+      "addr": "0x009858c7",
+      "u8": 0
+    }
+  ],
+  "callees": {
+    "0x0047c007": {
+      "name": "Owner_guess::HasPlayerState_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x004657ec": {
+      "name": "number_percent_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 100
+    },
+    "0x004868a4": {
+      "name": "Validator_guess::FUN_004868a4_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "@fn_slot14": {
+      "name": "Mapper_guess::Slot14_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 1
+    },
+    "@fn_slot2": {
+      "name": "Mapper_guess::Slot02_guess",
+      "conv": "thiscall",
+      "args": [
+        "short",
+        "int",
+        "int",
+        "float",
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "entry state flag",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf88",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "has flag",
+      "args": [
+        0
+      ],
+      "callees": {
+        "0x0047c007": {
+          "name": "Has true",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "same tick mode o",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x251",
+          "u8": 111
+        }
+      ]
+    },
+    {
+      "name": "same tick reserved action",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x134",
+          "u32": 128
+        }
+      ]
+    },
+    {
+      "name": "same tick high level",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xad",
+          "u8": 5
+        }
+      ]
+    },
+    {
+      "name": "same tick ordinary",
+      "args": [
+        0
+      ]
+    },
+    {
+      "name": "different tick high level",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 6000
+        },
+        {
+          "addr": "@state",
+          "offset": "0xad",
+          "u8": 5
+        }
+      ]
+    },
+    {
+      "name": "recent tick ordinary",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 1000
+        }
+      ]
+    },
+    {
+      "name": "recent tick reserved",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 1000
+        },
+        {
+          "addr": "@state",
+          "offset": "0x134",
+          "u32": 127
+        }
+      ]
+    },
+    {
+      "name": "old tick mode o",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 6000
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x251",
+          "u8": 111
+        }
+      ]
+    },
+    {
+      "name": "random success",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 6000
+        }
+      ]
+    },
+    {
+      "name": "random low roll",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 6000
+        }
+      ],
+      "callees": {
+        "0x004657ec": {
+          "name": "roll low",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 70
+        }
+      }
+    },
+    {
+      "name": "random threshold edge",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 6000
+        }
+      ],
+      "callees": {
+        "0x004657ec": {
+          "name": "roll edge",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 75
+        }
+      }
+    },
+    {
+      "name": "random slot rejects",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 6000
+        }
+      ],
+      "callees": {
+        "@fn_slot14": {
+          "name": "Slot14 false",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "random disabled",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 6000
+        },
+        {
+          "addr": "0x009858c7",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "negative float mode o",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 1000
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x58",
+          "f32": -1.0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x251",
+          "u8": 111
+        }
+      ]
+    },
+    {
+      "name": "negative float ordinary",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 1000
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x58",
+          "f32": -1.0
+        }
+      ]
+    },
+    {
+      "name": "zero float",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 1000
+        }
+      ]
+    },
+    {
+      "name": "positive float mode o",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 1000
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x58",
+          "f32": 1.0
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x251",
+          "u8": 111
+        }
+      ]
+    },
+    {
+      "name": "positive float ordinary",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 1000
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x58",
+          "f32": 1.0
+        }
+      ]
+    },
+    {
+      "name": "argument low byte zero",
+      "args": [
+        256
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 1000
+        }
+      ]
+    },
+    {
+      "name": "argument low byte nonzero",
+      "args": [
+        255
+      ],
+      "memory": [
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 1000
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x58",
+          "f32": -1.0
+        }
+      ]
+    },
+    {
+      "name": "mode n transform",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf88",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x251",
+          "u8": 110
+        }
+      ]
+    },
+    {
+      "name": "mode n suppress",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf88",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x251",
+          "u8": 110
+        },
+        {
+          "addr": "0x00850ccc",
+          "u32": 0
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4754614,
+    "count": 120,
+    "args": [
+      {
+        "choices": [
+          0,
+          1,
+          -1,
+          255,
+          256,
+          65536
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x0066d24c",
+        "type": "int",
+        "choices": [
+          254,
+          110,
+          111,
+          127,
+          125
+        ]
+      },
+      {
+        "addr": "0x00850ccc",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x009858c7",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0xad",
+        "type": "u8",
+        "choices": [
+          0,
+          4,
+          5,
+          255
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0x130",
+        "type": "int",
+        "choices": [
+          0,
+          100,
+          5000,
+          6000
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0x134",
+        "type": "int",
+        "choices": [
+          1,
+          127,
+          128,
+          129
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0xf88",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x58",
+        "type": "float",
+        "choices": [
+          -1.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x251",
+        "type": "u8",
+        "choices": [
+          0,
+          110,
+          111
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x25c",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@display",
+        "offset": "0x148",
+        "type": "int",
+        "choices": [
+          0,
+          100,
+          1000,
+          5001,
+          6000
+        ]
+      }
+    ]
+  }
+}

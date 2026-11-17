@@ -1,0 +1,219 @@
+{
+  "function": "StateHolder_guess::CheckDeityAlliances_guess",
+  "original": "0x004f0f08",
+  "sources": [
+    "src/EverQuest/tu_142_CharacterSelect.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@stateholder",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "stateholder": {
+      "size": "0x190",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x188", "u32": "@child"}
+      ]
+    },
+    "child": {
+      "size": "0x60",
+      "fill": "random"
+    },
+    "names": {
+      "size": "0x39a10",
+      "fill": "zero"
+    },
+    "strmgr": {
+      "size": "0x20",
+      "fill": "random"
+    },
+    "errmgr": {
+      "size": "0x20",
+      "fill": "random"
+    },
+    "errbase": {
+      "size": "0x200",
+      "fill": "random"
+    },
+    "msgstr": {
+      "size": "0x40",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x00900478", "u32": 4},
+    {"addr": "0x00988df0", "u32": "@names"},
+    {"addr": "0x00905cb0", "u32": "@strmgr"},
+    {"addr": "0x00850b9c", "u32": 0},
+    {"addr": "0x00991e44", "u32": "@errmgr"},
+    {"addr": "@names", "offset": "0x39810", "cstr": "n0"},
+    {"addr": "@names", "offset": "0x39850", "cstr": "n1"},
+    {"addr": "@names", "offset": "0x39890", "cstr": "n2"},
+    {"addr": "@names", "offset": "0x398d0", "cstr": "n3"},
+    {"addr": "@names", "offset": "0x39910", "cstr": "n4"},
+    {"addr": "@names", "offset": "0x39950", "cstr": "n5"},
+    {"addr": "@names", "offset": "0x39990", "cstr": "n6"},
+    {"addr": "@names", "offset": "0x399d0", "cstr": "n7"},
+    {"addr": "@names", "offset": "0x39750", "u32": 1},
+    {"addr": "@names", "offset": "0x39754", "u32": 1},
+    {"addr": "@names", "offset": "0x39758", "u32": 1},
+    {"addr": "@names", "offset": "0x3975c", "u32": 1},
+    {"addr": "@names", "offset": "0x39760", "u32": 1},
+    {"addr": "@names", "offset": "0x39764", "u32": 1},
+    {"addr": "@names", "offset": "0x39768", "u32": 1},
+    {"addr": "@names", "offset": "0x3976c", "u32": 1}
+  ],
+  "callees": {
+    "0x00479908": {
+      "name": "WhatDeityAlliance_guess",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": "arg0"
+    },
+    "0x005dfa00": {
+      "name": "FUN_005dfa00",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": "@msgstr"
+    },
+    "0x00548460": {
+      "name": "FUN_00548460",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "int",
+        "u32",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "not_ready",
+      "args": [],
+      "memory": [
+        {"addr": "0x00900478", "u32": 3}
+      ]
+    },
+    {
+      "name": "all_none",
+      "args": [],
+      "memory": [
+        {"addr": "@names", "offset": "0x39810", "cstr": "<none>"},
+        {"addr": "@names", "offset": "0x39850", "cstr": "<none>"},
+        {"addr": "@names", "offset": "0x39890", "cstr": "<none>"},
+        {"addr": "@names", "offset": "0x398d0", "cstr": "<none>"},
+        {"addr": "@names", "offset": "0x39910", "cstr": "<none>"},
+        {"addr": "@names", "offset": "0x39950", "cstr": "<none>"},
+        {"addr": "@names", "offset": "0x39990", "cstr": "<none>"},
+        {"addr": "@names", "offset": "0x399d0", "cstr": "<none>"}
+      ]
+    },
+    {
+      "name": "all_same",
+      "args": []
+    },
+    {
+      "name": "skip_middle",
+      "args": [],
+      "memory": [
+        {"addr": "@names", "offset": "0x398d0", "cstr": "<none>"}
+      ]
+    },
+    {
+      "name": "zero_then_value",
+      "args": [],
+      "memory": [
+        {"addr": "@names", "offset": "0x39750", "u32": 0}
+      ]
+    },
+    {
+      "name": "diff_second",
+      "args": [],
+      "memory": [
+        {"addr": "@names", "offset": "0x39750", "u32": 2},
+        {"addr": "@names", "offset": "0x39754", "u32": 3}
+      ]
+    },
+    {
+      "name": "diff_second_errbase",
+      "args": [],
+      "memory": [
+        {"addr": "@names", "offset": "0x39750", "u32": 2},
+        {"addr": "@names", "offset": "0x39754", "u32": 3},
+        {"addr": "0x00850b9c", "u32": "@errbase"}
+      ]
+    },
+    {
+      "name": "diff_small_global",
+      "args": [],
+      "memory": [
+        {"addr": "@names", "offset": "0x39750", "u32": 2},
+        {"addr": "@names", "offset": "0x39754", "u32": 3},
+        {"addr": "0x00850b9c", "u32": 64}
+      ]
+    },
+    {
+      "name": "diff_to_zero",
+      "args": [],
+      "memory": [
+        {"addr": "@names", "offset": "0x39750", "u32": 5},
+        {"addr": "@names", "offset": "0x39754", "u32": 0}
+      ]
+    },
+    {
+      "name": "diff_last",
+      "args": [],
+      "memory": [
+        {"addr": "@names", "offset": "0x3976c", "u32": 2}
+      ]
+    },
+    {
+      "name": "skip_then_diff",
+      "args": [],
+      "memory": [
+        {"addr": "@names", "offset": "0x39810", "cstr": "<none>"},
+        {"addr": "@names", "offset": "0x39754", "u32": 4},
+        {"addr": "@names", "offset": "0x39758", "u32": 4},
+        {"addr": "@names", "offset": "0x3975c", "u32": 9}
+      ]
+    },
+    {
+      "name": "zero_lock_error",
+      "args": [],
+      "memory": [
+        {"addr": "@names", "offset": "0x39750", "u32": 0},
+        {"addr": "@names", "offset": "0x39754", "u32": 0},
+        {"addr": "@names", "offset": "0x39758", "u32": 7},
+        {"addr": "@names", "offset": "0x3975c", "u32": 0}
+      ]
+    },
+    {
+      "name": "none_last",
+      "args": [],
+      "memory": [
+        {"addr": "@names", "offset": "0x399d0", "cstr": "<none>"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5181192,
+    "count": 150,
+    "args": [],
+    "memory": [
+      {"addr": "0x00900478", "type": "int", "choices": [3, 4, 4, 4, 5]},
+      {"addr": "@names", "offset": "0x39750", "type": "int", "count": 8, "choices": [0, 1, 2]},
+      {"addr": "@names", "offset": "0x39810", "type": "u8", "count": 8, "stride": 64, "choices": [110, 0]}
+    ]
+  }
+}

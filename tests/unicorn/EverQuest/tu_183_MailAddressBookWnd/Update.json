@@ -1,0 +1,217 @@
+{
+  "function": "CMailAddressBookWndView_guess::UpdateSendButton_guess",
+  "original": "0x0052c14f",
+  "sources": [
+    "src/EverQuest/tu_183_MailAddressBookWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@controller",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "controller": {
+      "size": "0x188",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x164", "u32": "@collection"},
+        {"offset": "0x168", "u32": "@status2"},
+        {"offset": "0x16c", "u32": "@current_source"},
+        {"offset": "0x170", "u32": "@setter1"},
+        {"offset": "0x174", "u32": "@setter2"},
+        {"offset": "0x178", "u32": "@display"},
+        {"offset": "0x17c", "u32": "@status"}
+      ]
+    },
+    "collection": {
+      "size": "0x140",
+      "fill": "zero",
+      "init": [{"offset": "0x120", "u32": "@item_array"}]
+    },
+    "item_array": {"size": "0x50", "fill": "zero"},
+    "item": {"size": "0x4a", "fill": "zero"},
+    "status": {"size": "0x5e", "fill": "zero"},
+    "status2": {"size": "0x5e", "fill": "zero"},
+    "setter1": {"size": "0x4", "fill": "zero"},
+    "setter2": {"size": "0x4", "fill": "zero"},
+    "current_source": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@current_vtable"}]
+    },
+    "display": {
+      "size": "0x5e",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@display_vtable"}]
+    },
+    "current_vtable": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [{"offset": "0x130", "u32": "@fn_current"}]
+    },
+    "fn_current": {"size": "0x4", "fill": "zero"},
+    "display_vtable": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xfc", "u32": "@fn_display"}]
+    },
+    "fn_display": {"size": "0x4", "fill": "zero"},
+    "current_rep": {"size": "0x30", "fill": "zero"},
+    "name_rep": {"size": "0x30", "fill": "zero"},
+    "name_cxstr": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@name_rep"}]
+    },
+    "compare_item": {"size": "0x20", "fill": "zero"},
+    "compare_current": {"size": "0x20", "fill": "zero"},
+    "compare_name": {"size": "0x20", "fill": "zero"},
+    "item_text": {"size": "0x20", "fill": "zero"},
+    "lookup_text": {"size": "0x40", "fill": "zero"},
+    "stringtable": {"size": "0x4", "fill": "zero"},
+    "heap_mem": {"size": "0x1000", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@stringtable"},
+    {"addr": "@collection", "offset": "0x11c", "u32": 0},
+    {"addr": "@collection", "offset": "0x13c", "u32": 0},
+    {"addr": "@item_array", "offset": "0x10", "u32": "@item"},
+    {"addr": "@item_array", "offset": "0x2c", "u32": "@item"},
+    {"addr": "@item", "offset": "0x04", "u32": "@item_text"},
+    {"addr": "@item", "offset": "0x18", "u32": 16},
+    {"addr": "@item", "offset": "0x49", "u8": 0},
+    {"addr": "@current_rep", "offset": "0x00", "u32": 1},
+    {"addr": "@current_rep", "offset": "0x04", "u32": 7},
+    {"addr": "@current_rep", "offset": "0x08", "u32": 6},
+    {"addr": "@current_rep", "offset": "0x14", "cstr": "Source"},
+    {"addr": "@name_rep", "offset": "0x00", "u32": 1},
+    {"addr": "@name_rep", "offset": "0x04", "u32": 7},
+    {"addr": "@name_rep", "offset": "0x08", "u32": 6},
+    {"addr": "@name_rep", "offset": "0x14", "cstr": "Source"},
+    {"addr": "@item_text", "cstr": "Source"},
+    {"addr": "@compare_item", "cstr": "Source"},
+    {"addr": "@compare_current", "cstr": "Source"},
+    {"addr": "@compare_name", "cstr": "Source"},
+    {"addr": "@lookup_text", "cstr": "Lookup"}
+  ],
+  "callees": {
+    "0x00597be0": {"name": "SelectedIndex_guess", "conv": "thiscall", "this": "ignore", "args": [], "ret": 0},
+    "0x00597ed0": {"name": "At_guess", "conv": "thiscall", "this": "ignore", "args": ["int"], "passthrough": true},
+    "0x00597f10": {
+      "name": "Name_guess",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": ["ignore", "int", "int"],
+      "passthrough": true
+    },
+    "@fn_current": {
+      "name": "Current_guess",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "20 07 00 60"}]
+    },
+    "@fn_display": {"name": "Display_guess::Update_guess", "conv": "thiscall", "this": "ignore", "args": ["ignore"]},
+    "0x005dfa00": {"name": "StringTable::getString", "conv": "thiscall", "this": "ignore", "args": ["u32", "ptr"], "ret": "@lookup_text"},
+    "0x00571fc0": {"name": "CXStr::operator=", "conv": "thiscall", "this": "ignore", "args": ["cstr"], "passthrough": true},
+    "0x00572300": {"name": "CXStr::operator char*", "conv": "thiscall", "this": "ignore", "args": [], "passthrough": true},
+    "0x004d95d0": {"name": "CXStrEmpty_guess::IsEmpty_guess", "conv": "thiscall", "this": "ignore", "args": [], "passthrough": true},
+    "0x00574950": {"name": "Compare_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "passthrough": true},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "this": "ignore", "args": ["ptr"]},
+    "0x005b7ea0": {"name": "FlagSetter_guess::Set_guess", "conv": "thiscall", "this": "ignore", "args": ["bool"]},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@heap_mem"}
+  },
+  "cases": [
+    {"name": "first required field null", "args": [], "memory": [{"addr": "@controller", "offset": "0x164", "u32": 0}]},
+    {"name": "status field null", "args": [], "memory": [{"addr": "@controller", "offset": "0x17c", "u32": 0}]},
+    {"name": "null item and empty source", "args": [], "memory": [
+      {"addr": "@item_array", "offset": "0x10", "u32": 0},
+      {"addr": "@collection", "offset": "0x13c", "u32": 0},
+      {"addr": "@current_rep", "offset": "0x08", "u32": 0},
+      {"addr": "@controller", "offset": "0x184", "u8": 1},
+      {"addr": "@controller", "offset": "0x185", "u8": 1}
+    ]},
+    {"name": "equal item source", "args": [], "memory": [
+      {"addr": "@collection", "offset": "0x13c", "u32": 0},
+      {"addr": "@collection", "offset": "0x11c", "u32": 0},
+      {"addr": "@current_rep", "offset": "0x08", "u32": 6},
+      {"addr": "@current_rep", "offset": "0x14", "cstr": "Source"},
+      {"addr": "@item_text", "cstr": "Source"},
+      {"addr": "@compare_item", "cstr": "Source"},
+      {"addr": "@compare_current", "cstr": "Source"},
+      {"addr": "@controller", "offset": "0x184", "u8": 1},
+      {"addr": "@controller", "offset": "0x185", "u8": 0}
+    ]},
+    {"name": "loop continues then exits", "args": [], "memory": [
+      {"addr": "@collection", "offset": "0x13c", "u32": 0},
+      {"addr": "@collection", "offset": "0x11c", "u32": 2},
+      {"addr": "@current_rep", "offset": "0x08", "u32": 6},
+      {"addr": "@current_rep", "offset": "0x14", "cstr": "Source"},
+      {"addr": "@collection", "offset": "0x13c", "u32": 0},
+      {"addr": "@item_text", "cstr": "Other"},
+      {"addr": "@compare_item", "cstr": "Other"},
+      {"addr": "@compare_current", "cstr": "Source"},
+      {"addr": "@name_rep", "offset": "0x08", "u32": 5},
+      {"addr": "@name_rep", "offset": "0x14", "cstr": "Other"},
+      {"addr": "@controller", "offset": "0x184", "u8": 1}
+    ]},
+    {"name": "loop finds a different item", "args": [], "memory": [
+      {"addr": "@collection", "offset": "0x13c", "u32": 0},
+      {"addr": "@collection", "offset": "0x11c", "u32": 1},
+      {"addr": "@current_rep", "offset": "0x08", "u32": 6},
+      {"addr": "@current_rep", "offset": "0x14", "cstr": "Source"},
+      {"addr": "@item_text", "cstr": "Other"},
+      {"addr": "@compare_item", "cstr": "Other"},
+      {"addr": "@compare_current", "cstr": "Source"},
+      {"addr": "@name_rep", "offset": "0x08", "u32": 6},
+      {"addr": "@name_rep", "offset": "0x14", "cstr": "Source"},
+      {"addr": "@item", "offset": "0x49", "u8": 1},
+      {"addr": "@controller", "offset": "0x184", "u8": 1}
+    ]},
+    {"name": "inline item text", "args": [], "memory": [
+      {"addr": "@collection", "offset": "0x13c", "u32": 0},
+      {"addr": "@collection", "offset": "0x11c", "u32": 0},
+      {"addr": "@item", "offset": "0x04", "cstr": "Inline"},
+      {"addr": "@item", "offset": "0x18", "u32": 0},
+      {"addr": "@current_rep", "offset": "0x08", "u32": 6},
+      {"addr": "@compare_item", "cstr": "Source"},
+      {"addr": "@compare_current", "cstr": "Source"},
+      {"addr": "@controller", "offset": "0x184", "u8": 1}
+    ], "callees": {
+      "0x00597ed0": {"name": "At_guess", "conv": "thiscall", "this": "ignore", "args": ["int"], "ret": "@item"}
+    }},
+    {"name": "negative index finds row", "args": [], "memory": [
+      {"addr": "@collection", "offset": "0x11c", "u32": 1},
+      {"addr": "@current_rep", "offset": "0x08", "u32": 6},
+      {"addr": "@current_rep", "offset": "0x14", "cstr": "Source"},
+      {"addr": "@item", "offset": "0x49", "u8": 0},
+      {"addr": "@controller", "offset": "0x184", "u8": 1}
+    ], "callees": {
+      "0x00597be0": {"name": "SelectedIndex_guess", "conv": "thiscall", "this": "ignore", "args": [], "ret": -1},
+      "0x00597ed0": {"name": "At_guess", "conv": "thiscall", "this": "ignore", "args": ["int"], "ret": "@item"},
+      "0x00597f10": {"name": "Name_guess", "conv": "thiscall", "this": "ignore", "args": ["ignore", "int", "int"], "ret": "@name_cxstr", "writes": [{"arg": 0, "offset": 0, "hex": "20 07 00 60"}]}
+    }},
+    {"name": "flag disables search", "args": [], "memory": [
+      {"addr": "@collection", "offset": "0x13c", "u32": 0},
+      {"addr": "@current_rep", "offset": "0x08", "u32": 6},
+      {"addr": "@item_text", "cstr": "Other"},
+      {"addr": "@compare_item", "cstr": "Other"},
+      {"addr": "@compare_current", "cstr": "Source"},
+      {"addr": "@controller", "offset": "0x184", "u8": 0},
+      {"addr": "@controller", "offset": "0x185", "u8": 1}
+    ]}
+  ],
+  "fuzz": {
+    "seed": 5423439,
+    "count": 50,
+    "args": [],
+    "memory": [
+      {"addr": "@collection", "offset": "0x13c", "type": "int", "choices": [-1, 0, 1]},
+      {"addr": "@collection", "offset": "0x11c", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@controller", "offset": "0x184", "type": "u8", "choices": [0, 1]},
+      {"addr": "@controller", "offset": "0x185", "type": "u8", "choices": [0, 1]},
+      {"addr": "@item", "offset": "0x49", "type": "u8", "choices": [0, 1]},
+      {"addr": "@current_rep", "offset": "0x08", "type": "int", "choices": [0, 6]}
+    ]
+  }
+}

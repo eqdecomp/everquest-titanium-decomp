@@ -1,0 +1,103 @@
+{
+  "function": "BuildBlock_guess",
+  "original": "0x0053264a",
+  "sources": [
+    "src/EverQuest/tu_187_MapViewWnd.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "out_guess", "type": "ptr"},
+    {"name": "index_guess", "type": "int"},
+    {"name": "first_guess", "type": "int"},
+    {"name": "second_guess", "type": "int"},
+    {"name": "third_guess", "type": "int"},
+    {"name": "fourth_guess", "type": "int"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "out": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00531c75": {
+      "name": "CRect::NormalizeRect",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {"name": "arm 0 typical", "args": ["@out", 0, 100, 50, 40, 30]},
+    {"name": "arm 1 typical", "args": ["@out", 1, 100, 50, 40, 30]},
+    {"name": "arm 2 typical", "args": ["@out", 2, 100, 50, 40, 30]},
+    {"name": "arm 3 typical", "args": ["@out", 3, 100, 50, 40, 30]},
+    {"name": "arm 4 typical", "args": ["@out", 4, 100, 50, 40, 30]},
+    {"name": "arm 5 typical", "args": ["@out", 5, 100, 50, 40, 30]},
+    {"name": "arm 6 typical", "args": ["@out", 6, 100, 50, 40, 30]},
+    {"name": "arm 7 typical", "args": ["@out", 7, 100, 50, 40, 30]},
+    {"name": "arm 8 typical", "args": ["@out", 8, 100, 50, 40, 30]},
+    {"name": "arm 9 typical", "args": ["@out", 9, 100, 50, 40, 30]},
+    {"name": "arm 10 typical", "args": ["@out", 10, 100, 50, 40, 30]},
+    {"name": "arm 11 typical", "args": ["@out", 11, 100, 50, 40, 30]},
+    {"name": "arm 12 typical", "args": ["@out", 12, 100, 50, 40, 30]},
+    {"name": "arm 13 typical", "args": ["@out", 13, 100, 50, 40, 30]},
+    {"name": "arm 14 typical", "args": ["@out", 14, 100, 50, 40, 30]},
+    {"name": "arm 15 typical", "args": ["@out", 15, 100, 50, 40, 30]},
+    {"name": "arm 16 typical", "args": ["@out", 16, 100, 50, 40, 30]},
+    {"name": "arm 17 typical", "args": ["@out", 17, 100, 50, 40, 30]},
+    {"name": "arm 18 typical", "args": ["@out", 18, 100, 50, 40, 30]},
+    {"name": "arm 19 typical", "args": ["@out", 19, 100, 50, 40, 30]},
+    {"name": "arm 20 typical", "args": ["@out", 20, 100, 50, 40, 30]},
+    {"name": "arm 21 typical", "args": ["@out", 21, 100, 50, 40, 30]},
+    {"name": "arm 22 typical", "args": ["@out", 22, 100, 50, 40, 30]},
+    {"name": "arm 23 typical", "args": ["@out", 23, 100, 50, 40, 30]},
+    {"name": "arm 0 odd negative", "args": ["@out", 0, 3, -9, -7, 5]},
+    {"name": "arm 1 odd negative", "args": ["@out", 1, 3, -9, -7, 5]},
+    {"name": "arm 2 odd negative", "args": ["@out", 2, 3, -9, -7, 5]},
+    {"name": "arm 3 odd negative", "args": ["@out", 3, 3, -9, -7, 5]},
+    {"name": "arm 4 odd negative", "args": ["@out", 4, 3, -9, -7, 5]},
+    {"name": "arm 5 odd negative", "args": ["@out", 5, 3, -9, -7, 5]},
+    {"name": "arm 6 odd negative", "args": ["@out", 6, 3, -9, -7, 5]},
+    {"name": "arm 7 odd negative", "args": ["@out", 7, 3, -9, -7, 5]},
+    {"name": "arm 8 odd negative", "args": ["@out", 8, 3, -9, -7, 5]},
+    {"name": "arm 9 odd negative", "args": ["@out", 9, 3, -9, -7, 5]},
+    {"name": "arm 10 odd negative", "args": ["@out", 10, 3, -9, -7, 5]},
+    {"name": "arm 11 odd negative", "args": ["@out", 11, 3, -9, -7, 5]},
+    {"name": "arm 12 odd negative", "args": ["@out", 12, 3, -9, -7, 5]},
+    {"name": "arm 13 odd negative", "args": ["@out", 13, 3, -9, -7, 5]},
+    {"name": "arm 14 odd negative", "args": ["@out", 14, 3, -9, -7, 5]},
+    {"name": "arm 15 odd negative", "args": ["@out", 15, 3, -9, -7, 5]},
+    {"name": "arm 16 odd negative", "args": ["@out", 16, 3, -9, -7, 5]},
+    {"name": "arm 17 odd negative", "args": ["@out", 17, 3, -9, -7, 5]},
+    {"name": "arm 18 odd negative", "args": ["@out", 18, 3, -9, -7, 5]},
+    {"name": "arm 19 odd negative", "args": ["@out", 19, 3, -9, -7, 5]},
+    {"name": "arm 20 odd negative", "args": ["@out", 20, 3, -9, -7, 5]},
+    {"name": "arm 21 odd negative", "args": ["@out", 21, 3, -9, -7, 5]},
+    {"name": "arm 22 odd negative", "args": ["@out", 22, 3, -9, -7, 5]},
+    {"name": "arm 23 odd negative", "args": ["@out", 23, 3, -9, -7, 5]},
+    {"name": "zero size arm 1", "args": ["@out", 1, 0, 0, 0, 0]},
+    {"name": "zero size arm 9", "args": ["@out", 9, 0, 0, 0, 0]},
+    {"name": "zero size arm 17", "args": ["@out", 17, 0, 0, 0, 0]},
+    {"name": "normalise width and height", "args": ["@out", 5, 10, 20, -30, -40]},
+    {"name": "normalise arm 13", "args": ["@out", 13, 10, 20, -30, -41]},
+    {"name": "default -1", "args": ["@out", -1, 100, 50, 40, 30]},
+    {"name": "default 24", "args": ["@out", 24, 100, 50, 40, 30]},
+    {"name": "default large", "args": ["@out", 1000, 3, -9, -7, 5]}
+  ],
+  "fuzz": {
+    "seed": 5449290,
+    "count": 200,
+    "args": [
+      {"choices": ["@out"]},
+      {"choices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, -1, 1000]},
+      {"range": [-1000, 1000]},
+      {"range": [-1000, 1000]},
+      {"range": [-1000, 1000]},
+      {"range": [-1000, 1000]}
+    ],
+    "memory": []
+  }
+}

@@ -1,0 +1,292 @@
+{
+  "function": "CBarterWnd_guess::UpdateButtons_guess",
+  "original": "0x004dfc22",
+  "sources": [
+    "src/EverQuest/tu_130_BarterWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@big130",
+  "args": [],
+  "ret": "void",
+  "size": "0x1e9",
+  "objects": {
+    "big130": {
+      "size": "0x22c",
+      "fill": "random",
+      "init": [
+        {"offset": "0x160", "u32": "@lookup"},
+        {"offset": "0x164", "u32": "@lookup"},
+        {"offset": "0x168", "u32": "@lookup"},
+        {"offset": "0x16c", "u32": "@lookup"},
+        {"offset": "0x174", "u32": "@toggle174"},
+        {"offset": "0x178", "u32": "@toggle178"},
+        {"offset": "0x17c", "u32": "@toggle17c"},
+        {"offset": "0x190", "u32": "@toggle190"},
+        {"offset": "0x198", "u32": "@toggle198"},
+        {"offset": "0x19c", "u32": "@toggle19c"},
+        {"offset": "0x1a0", "u32": "@toggle1a0"},
+        {"offset": "0x1ac", "u32": "@toggle1ac"},
+        {"offset": "0x1c8", "u32": 0},
+        {"offset": "0x208", "u8": 1}
+      ]
+    },
+    "lookup": {
+      "size": "0x140",
+      "fill": "random"
+    },
+    "toggle174": {
+      "size": "0x80",
+      "fill": "random",
+      "init": [{"offset": 0, "u32": "@vtbl"}]
+    },
+    "toggle178": {
+      "size": "0x80",
+      "fill": "random",
+      "init": [{"offset": 0, "u32": "@vtbl"}]
+    },
+    "toggle17c": {
+      "size": "0x80",
+      "fill": "random",
+      "init": [{"offset": 0, "u32": "@vtbl"}]
+    },
+    "toggle190": {
+      "size": "0x80",
+      "fill": "random",
+      "init": [{"offset": 0, "u32": "@vtbl"}]
+    },
+    "toggle198": {
+      "size": "0x80",
+      "fill": "random",
+      "init": [{"offset": 0, "u32": "@vtbl"}]
+    },
+    "toggle19c": {
+      "size": "0x80",
+      "fill": "random",
+      "init": [{"offset": 0, "u32": "@vtbl"}]
+    },
+    "toggle1a0": {
+      "size": "0x80",
+      "fill": "random",
+      "init": [{"offset": 0, "u32": "@vtbl"}]
+    },
+    "toggle1ac": {
+      "size": "0x80",
+      "fill": "random",
+      "init": [
+        {"offset": 0, "u32": "@vtbl"}
+      ]
+    },
+    "fn_slot48": {
+      "size": 4,
+      "fill": "zero"
+    },
+    "fn_slot63": {
+      "size": 4,
+      "fill": "zero"
+    },
+    "vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xc0", "u32": "@fn_slot48"},
+        {"offset": "0xfc", "u32": "@fn_slot63"}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "0x0079d778", "u8": 0}
+  ],
+  "callees": {
+    "0x00571e00": {
+      "name": "Str_guess::Str_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "keep"
+    },
+    "0x00576e80": {
+      "name": "GetClientTime_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 20
+    },
+    "0x00597be0": {
+      "name": "LookupIndex_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [0, -1, 0, -1, 0]
+    },
+    "0x00571fc0": {
+      "name": "Assign_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "keep"
+    },
+    "0x00571d00": {
+      "name": "Release_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": "keep"
+    },
+    "@fn_slot48": {
+      "name": "Slot48_guess",
+      "conv": "thiscall",
+      "args": ["char", "int"],
+      "ret": "keep"
+    },
+    "@fn_slot63": {
+      "name": "Slot63_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "keep"
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": []
+    },
+    {
+      "name": "all-null-and-time-expired",
+      "args": [],
+      "memory": [
+        {"addr": "@big130", "offset": "0x160", "u32": 0},
+        {"addr": "@big130", "offset": "0x164", "u32": 0},
+        {"addr": "@big130", "offset": "0x168", "u32": 0},
+        {"addr": "@big130", "offset": "0x16c", "u32": 0},
+        {"addr": "@big130", "offset": "0x174", "u32": 0},
+        {"addr": "@big130", "offset": "0x178", "u32": 0},
+        {"addr": "@big130", "offset": "0x17c", "u32": 0},
+        {"addr": "@big130", "offset": "0x190", "u32": 0},
+        {"addr": "@big130", "offset": "0x198", "u32": 0},
+        {"addr": "@big130", "offset": "0x19c", "u32": 0},
+        {"addr": "@big130", "offset": "0x1a0", "u32": 0},
+        {"addr": "@big130", "offset": "0x1ac", "u32": 0},
+        {"addr": "@big130", "offset": "0x1c8", "u32": 100},
+        {"addr": "@big130", "offset": "0x208", "u8": 1}
+      ]
+    },
+    {
+      "name": "exact-time-boundary",
+      "args": [],
+      "memory": [
+        {"addr": "@big130", "offset": "0x1c8", "u32": 15},
+        {"addr": "@big130", "offset": "0x208", "u8": 1}
+      ],
+      "callees": {
+        "0x00576e80": {
+          "name": "GetClientTime_guess",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 20
+        },
+        "0x00597be0": {
+          "name": "LookupIndex_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [0, 0, 0, 0, 0]
+        }
+      }
+    },
+    {
+      "name": "stop-barter",
+      "args": [],
+      "memory": [
+        {"addr": "0x0079d778", "u8": 1},
+        {"addr": "@big130", "offset": "0x1c8", "u32": 100},
+        {"addr": "@big130", "offset": "0x208", "u8": 1}
+      ],
+      "callees": {
+        "0x00576e80": {
+          "name": "GetClientTime_guess",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 0
+        },
+        "0x00597be0": {
+          "name": "LookupIndex_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [-1, -1, 0, 0, -1]
+        }
+      }
+    },
+    {
+      "name": "inactive-mode",
+      "args": [],
+      "memory": [
+        {"addr": "@big130", "offset": "0x1c8", "u32": 0},
+        {"addr": "@big130", "offset": "0x208", "u8": 0}
+      ],
+      "callees": {
+        "0x00597be0": {
+          "name": "LookupIndex_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [-1, 0, -1, -1, 0]
+        }
+      }
+    },
+    {
+      "name": "active-noncanonical",
+      "args": [],
+      "memory": [
+        {"addr": "@big130", "offset": "0x1c8", "u32": 15},
+        {"addr": "@big130", "offset": "0x208", "u8": 2}
+      ]
+    },
+    {
+      "name": "lookup-misses",
+      "args": [],
+      "memory": [
+        {"addr": "@big130", "offset": "0x1c8", "u32": 15},
+        {"addr": "@big130", "offset": "0x208", "u8": 1}
+      ],
+      "callees": {
+        "0x00597be0": {
+          "name": "LookupIndex_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [-1, -1, 0, 0, -1]
+        }
+      }
+    },
+    {
+      "name": "no-lookup-results",
+      "args": [],
+      "memory": [
+        {"addr": "@big130", "offset": "0x1c8", "u32": 15},
+        {"addr": "@big130", "offset": "0x208", "u8": 1}
+      ],
+      "callees": {
+        "0x00597be0": {
+          "name": "LookupIndex_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [-1, 0, -1, 0, -1]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5110818,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@big130", "offset": "0x160", "type": "ptr", "choices": [0, "@lookup"]},
+      {"addr": "@big130", "offset": "0x164", "type": "ptr", "choices": [0, "@lookup"]},
+      {"addr": "@big130", "offset": "0x168", "type": "ptr", "choices": [0, "@lookup"]},
+      {"addr": "@big130", "offset": "0x16c", "type": "ptr", "choices": [0, "@lookup"]},
+      {"addr": "@big130", "offset": "0x174", "type": "ptr", "choices": [0, "@toggle174"]},
+      {"addr": "@big130", "offset": "0x178", "type": "ptr", "choices": [0, "@toggle178"]},
+      {"addr": "@big130", "offset": "0x17c", "type": "ptr", "choices": [0, "@toggle17c"]},
+      {"addr": "@big130", "offset": "0x190", "type": "ptr", "choices": [0, "@toggle190"]},
+      {"addr": "@big130", "offset": "0x198", "type": "ptr", "choices": [0, "@toggle198"]},
+      {"addr": "@big130", "offset": "0x19c", "type": "ptr", "choices": [0, "@toggle19c"]},
+      {"addr": "@big130", "offset": "0x1a0", "type": "ptr", "choices": [0, "@toggle1a0"]},
+      {"addr": "@big130", "offset": "0x1ac", "type": "ptr", "choices": [0, "@toggle1ac"]},
+      {"addr": "@big130", "offset": "0x1c8", "type": "int", "range": [-10, 30]},
+      {"addr": "@big130", "offset": "0x208", "type": "u8", "choices": [0, 1, 2]},
+      {"addr": "0x0079d778", "type": "u8", "choices": [0, 1]}
+    ]
+  }
+}

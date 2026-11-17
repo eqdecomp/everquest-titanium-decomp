@@ -1,0 +1,174 @@
+{
+  "function": "PlayerPathView_guess::LoadSettings_guess",
+  "original": "0x004c1a41",
+  "sources": [
+    "src/EverQuest/tu_082_PathFollower.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@holder",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "holder": {"size": "0x400", "fill": "random",
+               "init": [{"offset": "0x114", "u32": "@renderer"}]},
+    "config": {"size": "0x260", "fill": "random",
+               "init": [{"offset": "0x238", "f32": 2.5}]},
+    "factory": {"size": "0x4", "init": [{"offset": "0x0", "u32": "@factory_vtbl"}]},
+    "factory_vtbl": {"size": "0x4", "init": [{"offset": "0x0", "u32": "@fn_create"}]},
+    "fn_create": {"size": "0x4"},
+    "renderer": {"size": "0x10", "fill": "random", "init": [{"offset": "0x0", "u32": "@renderer_vtbl"}]},
+    "renderer_vtbl": {"size": "0x40", "fill": "zero",
+                      "init": [{"offset": "0x24", "u32": "@fn_reset"}, {"offset": "0x30", "u32": "@fn_additive"}]},
+    "fn_reset": {"size": "0x4"},
+    "fn_additive": {"size": "0x4"},
+    "new_renderer": {"size": "0x10", "fill": "random", "init": [{"offset": "0x0", "u32": "@renderer_vtbl"}]},
+    "shape": {"size": "0x10", "fill": "random", "init": [{"offset": "0x0", "u32": "@shape_vtbl"}]},
+    "shape_vtbl": {"size": "0x20", "fill": "zero",
+                   "init": [{"offset": "0x4", "u32": "@fn_color"}, {"offset": "0x8", "u32": "@fn_scale"},
+                            {"offset": "0xc", "u32": "@fn_twist"}, {"offset": "0x10", "u32": "@fn_texscale"}]},
+    "fn_color": {"size": "0x4"},
+    "fn_scale": {"size": "0x4"},
+    "fn_twist": {"size": "0x4"},
+    "fn_texscale": {"size": "0x4"},
+    "section": {"size": "0x4", "fill": "random"},
+    "strbuf": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@strbuf", "cstr": "SpellEffects\\Tex"},
+    {"addr": "0x00905ce4", "u32": "@config"},
+    {"addr": "0x0099e348", "u32": "@factory"}
+  ],
+  "callees": {
+    "0x00571e00": {"name": "CXStr::CXStr", "conv": "thiscall", "args": ["cstr"], "ret": "this"},
+    "0x00572300": {"name": "CXStr::operator char*", "conv": "thiscall", "args": [], "ret": "@strbuf"},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["ptr"]},
+    "0x005764e0": {"name": "IniReader_guess::IniReader_guess", "conv": "thiscall", "args": ["cstr", "cstr"], "ret": "this"},
+    "0x005761d0": {"name": "IniReader_guess::~IniReader_guess", "conv": "thiscall", "args": []},
+    "0x00575140": {"name": "GetFloat_guess", "conv": "thiscall", "args": ["cstr", "float", "u32"],
+                   "ret_float": [1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5, 15.5,
+                                 16.5, 17.5, 18.5, 19.5, 20.5, 21.5, 22.5, 23.5, 24.5, 25.5, 26.5, 27.5, 28.5,
+                                 29.5, 30.5, 31.5, 32.5, 33.5, 34.5, 35.5, 36.5, 37.5, 38.5, 39.5, 40.5, 41.5,
+                                 42.5, 43.5, 44.5, 45.5, 46.5, 47.5, 48.5, 49.5, 50.5, 51.5, 52.5, 53.5]},
+    "0x00575070": {"name": "GetInt_guess", "conv": "thiscall", "args": ["cstr", "int", "u32"],
+                   "ret": [2, 50, 128, 7, 0, 3, 3, 8, 1, 2, 3, 4, 9, 5, 6, 7, 8]},
+    "0x005750a0": {"name": "GetBool_guess", "conv": "thiscall", "args": ["cstr", "u8", "u32"], "ret": 0},
+    "0x005751e0": {"name": "Read_guess", "conv": "thiscall", "args": ["cstr", "ignore", "u32"],
+                   "writes": [{"arg": 1, "offset": 0, "hex": "a0b0c0d0"}]},
+    "0x00572c10": {"name": "Append_guess", "conv": "thiscall", "args": ["ignore"]},
+    "0x00573b10": {"name": "Compare_guess", "conv": "thiscall", "args": ["ignore", "u32"], "ret": 1},
+    "0x004c0af7": {"name": "FloatRange_guess::Set_guess", "conv": "thiscall", "args": ["float", "float"]},
+    "0x004c0cd8": {"name": "LoadEmitter_guess", "conv": "thiscall", "args": ["ptr", "int"]},
+    "0x004c0dfc": {"name": "FinishEmitter_guess", "conv": "thiscall", "args": ["ptr", "int"]},
+    "0x004c12b4": {"name": "CleanupTable_guess::ReleaseEmitters_guess", "conv": "thiscall", "args": []},
+    "@fn_create": {"name": "Create_guess", "conv": "thiscall", "args": [], "ret": "@new_renderer"},
+    "@fn_reset": {"name": "Reset_guess", "conv": "thiscall", "args": []},
+    "@fn_additive": {"name": "SetAdditive_guess", "conv": "thiscall", "args": ["u8"]},
+    "kernel32.dll!OutputDebugStringA": {"name": "OutputDebugStringA", "conv": "stdcall", "args": ["cstr"]},
+    "0x00575320": {"name": "ReadSections_guess", "conv": "thiscall", "args": ["ptr", "cstr"],
+                   "writes": [{"arg": 0, "offset": 0, "hex": "02000000"}]},
+    "0x004eb924": {"name": "IndexedVector_guess::Get_guess", "conv": "thiscall", "args": ["int"], "ret": "@section"},
+    "0x00574e70": {"name": "SetSection_guess", "conv": "thiscall", "args": ["cstr"]},
+    "0x004c0c3b": {"name": "CreateRingShape_guess", "conv": "thiscall", "args": ["mem:8", "float", "int"], "ret": "@shape"},
+    "@fn_color": {"name": "SetColor_guess", "conv": "thiscall", "args": ["mem:4"]},
+    "@fn_scale": {"name": "SetScale_guess", "conv": "thiscall", "args": ["float"]},
+    "@fn_twist": {"name": "SetTwist_guess", "conv": "thiscall", "args": ["float"]},
+    "@fn_texscale": {"name": "SetTextureScale_guess", "conv": "thiscall", "args": ["float"]},
+    "0x004c1482": {"name": "Collection_guess::Process_guess", "conv": "thiscall", "args": []},
+    "0x005738b0": {"name": "FormatString_guess", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf",
+                   "writes": [{"arg": 0, "offset": 0, "hex": "11223344"}]},
+    "0x004c805f": {"name": "LoadTexture_guess", "conv": "stdcall", "args": ["cstr"], "ret": [0, 7]},
+    "0x0050319b": {"name": "IndexedVector_guess::Insert_guess", "conv": "thiscall", "args": ["int", "mem:4"]},
+    "0x004c1460": {"name": "Collection_guess::Release_guess", "conv": "thiscall", "args": []},
+    "0x004c0c09": {"name": "TargetTable_guess::OpenPlayerPath_guess", "conv": "thiscall", "args": []},
+    "kernel32.dll!GetTickCount": {"name": "GetTickCount", "conv": "stdcall", "args": [], "ret": 123456},
+    "0x004c1715": {"name": "VectorOwner_guess::Clear_guess", "conv": "thiscall", "args": []}
+  },
+  "_survivors": "L1030: alpha is an unsigned char, so clamping it to 255 (with < or <=, or not at all) never changes it; the original's cmp al,0xff clamp is the same no-op. L1071: x < 20 ? x : 20 and x <= 20 ? x : 20 both give 20 at x == 20",
+  "coverage_ok": {
+    "004C20E4-004C20F2": "FreeRep of the \"*NULL*\" temporary: only the CXStr ctor stub sets it, and a stub cannot write its own this",
+    "004C2477-004C2482": "FreeRep of an unused CXStr that is never assigned (always null)",
+    "004C248E-004C2499": "FreeRep of an unused CXStr that is never assigned (always null)",
+    "004C24C8-004C24D3": "FreeRep of the \"SpellEffects\\\\\" prefix: set only by the ctor/append stubs, which cannot write their this",
+    "004C2501-004C250C": "FreeRep of the \"Path\" section name: set only by the CXStr ctor stub, which cannot write its this"
+  },
+  "cases": [
+    {
+      "name": "new_renderer_two_frames_two_shapes",
+      "memory": [{"addr": "@holder", "offset": "0x114", "u32": 0}]
+    },
+    {
+      "name": "no_factory",
+      "memory": [{"addr": "0x0099e348", "u32": 0}],
+      "callees": {
+        "0x00575070": {"name": "GetInt_guess", "conv": "thiscall", "args": ["cstr", "int", "u32"],
+                       "ret": [3, 100, 511, 1000, 5, 5, 30, 30]}
+      }
+    },
+    {
+      "name": "reset_renderer_shapeset_undefined",
+      "callees": {
+        "0x00575070": {"name": "GetInt_guess", "conv": "thiscall", "args": ["cstr", "int", "u32"],
+                       "ret": [1, 2, 254, 3, 1, 1, 20, 20]},
+        "0x005750a0": {"name": "GetBool_guess", "conv": "thiscall", "args": ["cstr", "u8", "u32"], "ret": 1},
+        "0x00573b10": {"name": "Compare_guess", "conv": "thiscall", "args": ["ignore", "u32"], "ret": 0}
+      }
+    },
+    {
+      "name": "single_frame_loaded_no_sections",
+      "callees": {
+        "0x00575070": {"name": "GetInt_guess", "conv": "thiscall", "args": ["cstr", "int", "u32"],
+                       "ret": [0, 0, 255, 0, -1, 19, 19]},
+        "0x00573b10": {"name": "Compare_guess", "conv": "thiscall", "args": ["ignore", "u32"], "ret": -5},
+        "0x00575320": {"name": "ReadSections_guess", "conv": "thiscall", "args": ["ptr", "cstr"],
+                       "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]},
+        "0x004c805f": {"name": "LoadTexture_guess", "conv": "stdcall", "args": ["cstr"], "ret": 9}
+      }
+    },
+    {
+      "name": "single_frame_missing_one_section",
+      "callees": {
+        "0x00575070": {"name": "GetInt_guess", "conv": "thiscall", "args": ["cstr", "int", "u32"],
+                       "ret": [-2, 1, 1, 1, 1, 1, 21, 21, 8, 1, 2, 3, 4]},
+        "0x00575320": {"name": "ReadSections_guess", "conv": "thiscall", "args": ["ptr", "cstr"],
+                       "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]},
+        "0x004c805f": {"name": "LoadTexture_guess", "conv": "stdcall", "args": ["cstr"], "ret": 0}
+      }
+    },
+    {
+      "name": "max_emitters_zero",
+      "memory": [{"addr": "0x0099e348", "u32": 0}],
+      "callees": {
+        "0x00575070": {"name": "GetInt_guess", "conv": "thiscall", "args": ["cstr", "int", "u32"],
+                       "ret": [0, 0, 0, 0, 1, 1, 0]}
+      }
+    },
+    {
+      "name": "max_emitters_negative",
+      "memory": [{"addr": "0x0099e348", "u32": 0}],
+      "callees": {
+        "0x00575070": {"name": "GetInt_guess", "conv": "thiscall", "args": ["cstr", "int", "u32"],
+                       "ret": [0, 0, 0, 0, 1, 1, -4]}
+      }
+    },
+    {
+      "name": "loop_frames_all_loaded",
+      "callees": {
+        "0x00575070": {"name": "GetInt_guess", "conv": "thiscall", "args": ["cstr", "int", "u32"],
+                       "ret": [4, 9, 0, 2, 2, 2, 1, 1, 8, 1, 2, 3, 4, 7, 9, 9, 9, 9]},
+        "0x004c805f": {"name": "LoadTexture_guess", "conv": "stdcall", "args": ["cstr"], "ret": [3, 4, 5, 6]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4987457,
+    "count": 60,
+    "args": [],
+    "memory": [
+      {"addr": "0x0099e348", "type": "u32", "choices": [0, "@factory", "@factory", "@factory"]},
+      {"addr": "@holder", "offset": "0x114", "type": "u32", "choices": [0, "@renderer"]},
+      {"addr": "@holder", "offset": "0x68", "type": "float", "range": [-100.0, 100.0]},
+      {"addr": "@holder", "offset": "0x140", "type": "int", "range": [0, 20]},
+      {"addr": "@config", "offset": "0x238", "type": "float", "range": [-10.0, 10.0]}
+    ]
+  }
+}

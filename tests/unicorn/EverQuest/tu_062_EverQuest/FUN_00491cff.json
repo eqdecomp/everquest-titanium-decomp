@@ -1,0 +1,234 @@
+{
+  "function": "CanShowSpellEffect_guess",
+  "original": "0x00491cff",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "mode_guess",
+      "type": "int"
+    },
+    {
+      "name": "first_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "second_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "bool",
+  "objects": {
+    "first": {
+      "size": "0x260",
+      "fill": "random"
+    },
+    "second": {
+      "size": "0x260",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x0098581c", "u8": 0},
+    {"addr": "0x00905ce4", "u32": 0},
+    {"addr": "@first", "offset": "0x244", "u8": 0},
+    {"addr": "@second", "offset": "0x244", "u8": 0}
+  ],
+  "callees": {
+    "0x004303a6": {
+      "name": "IsMember_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x00485df1": {
+      "name": "MatchesAnyName_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "flags 0 types 0",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x0098581c", "u8": 0}]
+    },
+    {
+      "name": "flags 2 equal",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x0098581c", "u8": 2}]
+    },
+    {
+      "name": "flags 4 contains",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x0098581c", "u8": 4}]
+    },
+    {
+      "name": "flags 8 name",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x0098581c", "u8": 8}]
+    },
+    {
+      "name": "flags 16 match",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x0098581c", "u8": 16}]
+    },
+    {
+      "name": "flags 18 match equal",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x0098581c", "u8": 18}]
+    },
+    {
+      "name": "flags 20 match contains",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x0098581c", "u8": 20}]
+    },
+    {
+      "name": "flags 24 match name",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x0098581c", "u8": 24}]
+    },
+    {
+      "name": "flags 30 all",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x0098581c", "u8": 30}]
+    },
+    {
+      "name": "contains returns 1",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x0098581c", "u8": 14}],
+      "callees": {
+        "0x004303a6": {"name": "FUN_004303a6", "conv": "thiscall", "args": ["cstr"], "ret": 1}
+      }
+    },
+    {
+      "name": "equal returns 1",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x0098581c", "u8": 14}],
+      "callees": {
+        "0x00485df1": {"name": "FUN_00485df1", "conv": "thiscall", "args": ["cstr"], "ret": 1}
+      }
+    },
+    {
+      "name": "both return 1 flags 14",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x0098581c", "u8": 14}],
+      "callees": {
+        "0x004303a6": {"name": "FUN_004303a6", "conv": "thiscall", "args": ["cstr"], "ret": 1},
+        "0x00485df1": {"name": "FUN_00485df1", "conv": "thiscall", "args": ["cstr"], "ret": 1}
+      }
+    },
+    {
+      "name": "contains returns 1 flags 4",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x0098581c", "u8": 4}],
+      "callees": {
+        "0x004303a6": {"name": "FUN_004303a6", "conv": "thiscall", "args": ["cstr"], "ret": 1}
+      }
+    },
+    {
+      "name": "equal returns 1 flags 2",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x0098581c", "u8": 2}],
+      "callees": {
+        "0x00485df1": {"name": "FUN_00485df1", "conv": "thiscall", "args": ["cstr"], "ret": 1}
+      }
+    },
+    {
+      "name": "first state 1 match",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "@first", "offset": "0x244", "u8": 1}, {"addr": "0x0098581c", "u8": 16}]
+    },
+    {
+      "name": "first state 1 no match",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "@first", "offset": "0x244", "u8": 1}, {"addr": "0x0098581c", "u8": 0}]
+    },
+    {
+      "name": "first state 2",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "@first", "offset": "0x244", "u8": 2}]
+    },
+    {
+      "name": "second state 1 match",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "@second", "offset": "0x244", "u8": 1}, {"addr": "0x0098581c", "u8": 16}]
+    },
+    {
+      "name": "second state 2",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "@second", "offset": "0x244", "u8": 2}]
+    },
+    {
+      "name": "both state 1 match",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "@first", "offset": "0x244", "u8": 1}, {"addr": "@second", "offset": "0x244", "u8": 1}, {"addr": "0x0098581c", "u8": 16}]
+    },
+    {
+      "name": "name flag and match",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x0098581c", "u8": 24}, {"addr": "@second", "offset": "0x244", "u8": 0}]
+    },
+    {
+      "name": "player is first",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x00905ce4", "u32": "@first"}, {"addr": "0x0098581c", "u8": 0}]
+    },
+    {
+      "name": "player is second",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x00905ce4", "u32": "@second"}, {"addr": "0x0098581c", "u8": 0}]
+    },
+    {
+      "name": "player is second state 1",
+      "args": [1, "@first", "@second"],
+      "memory": [{"addr": "0x00905ce4", "u32": "@second"}, {"addr": "@second", "offset": "0x244", "u8": 1}, {"addr": "0x0098581c", "u8": 0}]
+    },
+    {
+      "name": "first null",
+      "args": [1, "0x0", "@second"],
+      "memory": [{"addr": "0x0098581c", "u8": 0}]
+    },
+    {
+      "name": "second null",
+      "args": [1, "@first", "0x0"],
+      "memory": [{"addr": "0x0098581c", "u8": 0}]
+    },
+    {
+      "name": "both null",
+      "args": [1, "0x0", "0x0"],
+      "memory": [{"addr": "0x0098581c", "u8": 0}]
+    },
+    {
+      "name": "both null match",
+      "args": [1, "0x0", "0x0"],
+      "memory": [{"addr": "0x0098581c", "u8": 16}]
+    }
+  ],
+  "fuzz": {
+    "seed": 4791551,
+    "count": 200,
+    "args": [
+      {},
+      {
+        "choices": ["@first", "@second", "0x0"]
+      },
+      {
+        "choices": ["@second", "@first", "0x0"]
+      }
+    ],
+    "memory": [
+      {"addr": "0x0098581c", "type": "u8", "range": [0, 31]},
+      {"addr": "@first", "offset": "0x244", "type": "u8", "range": [0, 2]},
+      {"addr": "@second", "offset": "0x244", "type": "u8", "range": [0, 2]},
+      {"addr": "0x00905ce4", "type": "ptr", "choices": ["@first", "@second", "0x0"]}
+    ]
+  }
+}

@@ -1,0 +1,393 @@
+{
+  "function": "EQ_PCView_guess::SaveBandolier_guess",
+  "original": "0x004bec4e",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [
+    {
+      "name": "name",
+      "type": "cstr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "object": {
+      "size": "0x10000",
+      "fill": "zero"
+    },
+    "buf0": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "buf1": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "buf2": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "buf3": {
+      "size": "0x100",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x005f0c30": {
+      "name": "FUN_005f0c30",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": [
+        "@buf0",
+        "@buf0",
+        "@buf1",
+        "@buf1",
+        "@buf2",
+        "@buf2",
+        "@buf3",
+        "@buf3"
+      ]
+    },
+    "0x00574460": {
+      "name": "FUN_00574460",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x004bd3e5": {
+      "name": "CreateBandolier_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "cstr"
+      ]
+    },
+    "0x004649b1": {
+      "name": "token_string_to_client_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "int",
+        "int"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "match_after_empty_slot",
+      "args": [
+        "beta"
+      ],
+      "memory": [
+        {
+          "addr": "@buf0",
+          "cstr": "alpha"
+        },
+        {
+          "addr": "@buf2",
+          "cstr": "beta"
+        }
+      ],
+      "callees": {
+        "0x005f0c30": {
+          "name": "FUN_005f0c30",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@buf0",
+            "@buf0",
+            "@buf1",
+            "@buf1",
+            "@buf2"
+          ]
+        }
+      },
+      "expect": {
+        "ret": 2
+      }
+    },
+    {
+      "name": "match_first_slot",
+      "args": [
+        "beta"
+      ],
+      "memory": [
+        {
+          "addr": "@buf0",
+          "cstr": "beta"
+        },
+        {
+          "addr": "@buf1",
+          "cstr": "gamma"
+        }
+      ],
+      "callees": {
+        "0x005f0c30": {
+          "name": "FUN_005f0c30",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@buf0",
+            "@buf0"
+          ]
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "no_match_all_full",
+      "args": [
+        "zz"
+      ],
+      "memory": [
+        {
+          "addr": "@buf0",
+          "cstr": "a"
+        },
+        {
+          "addr": "@buf1",
+          "cstr": "b"
+        },
+        {
+          "addr": "@buf2",
+          "cstr": "c"
+        },
+        {
+          "addr": "@buf3",
+          "cstr": "d"
+        }
+      ],
+      "expect": {
+        "ret": -1
+      }
+    },
+    {
+      "name": "no_match_last_slot_empty",
+      "args": [
+        "zz"
+      ],
+      "memory": [
+        {
+          "addr": "@buf0",
+          "cstr": "a"
+        },
+        {
+          "addr": "@buf1",
+          "cstr": "b"
+        },
+        {
+          "addr": "@buf2",
+          "cstr": "c"
+        }
+      ],
+      "expect": {
+        "ret": 3
+      }
+    },
+    {
+      "name": "no_match_all_empty",
+      "args": [
+        "zz"
+      ],
+      "memory": [],
+      "callees": {
+        "0x005f0c30": {
+          "name": "FUN_005f0c30",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@buf0",
+            "@buf0",
+            "@buf1",
+            "@buf2",
+            "@buf3"
+          ]
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "empty_name_hits_empty_slot",
+      "args": [
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "@buf0",
+          "cstr": "a"
+        },
+        {
+          "addr": "@buf2",
+          "cstr": "b"
+        },
+        {
+          "addr": "@buf3",
+          "cstr": "c"
+        }
+      ],
+      "callees": {
+        "0x005f0c30": {
+          "name": "FUN_005f0c30",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@buf0",
+            "@buf0",
+            "@buf1",
+            "@buf1"
+          ]
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "match_last_slot",
+      "args": [
+        "zz"
+      ],
+      "memory": [
+        {
+          "addr": "@buf0",
+          "cstr": "a"
+        },
+        {
+          "addr": "@buf1",
+          "cstr": "b"
+        },
+        {
+          "addr": "@buf2",
+          "cstr": "c"
+        },
+        {
+          "addr": "@buf3",
+          "cstr": "zz"
+        }
+      ],
+      "expect": {
+        "ret": 3
+      }
+    },
+    {
+      "name": "null_this_no_match_all_full",
+      "this": "0x0",
+      "args": [
+        "zz"
+      ],
+      "memory": [
+        {
+          "addr": "@buf0",
+          "cstr": "a"
+        },
+        {
+          "addr": "@buf1",
+          "cstr": "b"
+        },
+        {
+          "addr": "@buf2",
+          "cstr": "c"
+        },
+        {
+          "addr": "@buf3",
+          "cstr": "d"
+        }
+      ],
+      "expect": {
+        "ret": -1
+      }
+    },
+    {
+      "name": "null_this_match_first",
+      "this": "0x0",
+      "args": [
+        "beta"
+      ],
+      "memory": [
+        {
+          "addr": "@buf0",
+          "cstr": "beta"
+        }
+      ],
+      "callees": {
+        "0x005f0c30": {
+          "name": "FUN_005f0c30",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@buf0",
+            "@buf0"
+          ]
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4975694,
+    "count": 100,
+    "args": [
+      {}
+    ],
+    "memory": [
+      {
+        "addr": "@buf0",
+        "type": "u8",
+        "range": [
+          0,
+          60
+        ]
+      },
+      {
+        "addr": "@buf1",
+        "type": "u8",
+        "range": [
+          0,
+          60
+        ]
+      },
+      {
+        "addr": "@buf2",
+        "type": "u8",
+        "range": [
+          0,
+          60
+        ]
+      },
+      {
+        "addr": "@buf3",
+        "type": "u8",
+        "range": [
+          0,
+          60
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "function": "CBarterWnd_guess::WndNotification_guess",
+  "original": "0x004e223b",
+  "sources": ["src/EverQuest/tu_130_BarterWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@big130",
+  "args": [
+    {"name": "sender_guess", "type": "ptr"},
+    {"name": "message_guess", "type": "int"},
+    {"name": "data_guess", "type": "ptr"}
+  ],
+  "ret": "int",
+  "objects": {
+    "big130": {"size": "0x228", "fill": "random"},
+    "sender": {"size": "0x100", "fill": "random", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "data": {"size": "0x18", "fill": "random"},
+    "toggle": {"size": "0x60", "fill": "random"},
+    "connection": {"size": "0x80", "fill": "random"},
+    "field15c": {"size": "0x4", "fill": "random"},
+    "poolPointers": {"size": "0x8", "fill": "random"},
+    "chunk": {"size": "0x98", "fill": "random"},
+    "valueCell": {"size": "0x4", "fill": "random"},
+    "fn_gettext": {"size": "0x1", "fill": "random"},
+    "fn_settext": {"size": "0x1", "fill": "random"},
+    "vtbl": {"size": "0x134", "fill": "random", "init": [
+      {"offset": "0xfc", "u32": "@fn_settext"},
+      {"offset": "0x130", "u32": "@fn_gettext"}
+    ]}
+  },
+  "memory": [
+    {"addr": "@big130", "offset": "0x15c", "u32": 0},
+    {"addr": "@big130", "offset": "0x160", "u32": 0},
+    {"addr": "@big130", "offset": "0x16c", "u32": 0},
+    {"addr": "@big130", "offset": "0x170", "u32": 0},
+    {"addr": "@big130", "offset": "0x174", "u32": 0},
+    {"addr": "@big130", "offset": "0x178", "u32": 0},
+    {"addr": "@big130", "offset": "0x17c", "u32": 0},
+    {"addr": "@big130", "offset": "0x180", "u32": 0},
+    {"addr": "@big130", "offset": "0x184", "u32": 0},
+    {"addr": "@big130", "offset": "0x188", "u32": 0},
+    {"addr": "@big130", "offset": "0x18c", "u32": 0},
+    {"addr": "@big130", "offset": "0x190", "u32": 0},
+    {"addr": "@big130", "offset": "0x194", "u32": 0},
+    {"addr": "@big130", "offset": "0x198", "u32": 0},
+    {"addr": "@big130", "offset": "0x19c", "u32": 0},
+    {"addr": "@big130", "offset": "0x1a0", "u32": 0},
+    {"addr": "@big130", "offset": "0x1a4", "u32": 0},
+    {"addr": "@big130", "offset": "0x1a8", "u32": 0},
+    {"addr": "@big130", "offset": "0x1ac", "u32": 0},
+    {"addr": "@big130", "offset": "0x1b0", "u32": 0},
+    {"addr": "@big130", "offset": "0x1b4", "u32": 0},
+    {"addr": "@big130", "offset": "0x1b8", "u32": 0},
+    {"addr": "@big130", "offset": "0x1f4", "u32": 0},
+    {"addr": "@big130", "offset": "0x1f8", "u32": 0},
+    {"addr": "@big130", "offset": "0x1fc", "u32": 0},
+    {"addr": "0x0099d3ec", "u32": "@connection"},
+    {"addr": "0x0079d778", "hex": "00"}
+  ],
+  "callees": {
+    "0x00597be0": {"name": "LookupIndex", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00597ed0": {"name": "GetRecord", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005adf60": {"name": "ConnectionCheck", "conv": "thiscall", "args": [], "ret": 0},
+    "0x004912b1": {"name": "SendMessage", "conv": "cdecl", "args": ["ptr", "int", "mem:16", "int", "char"], "ret": 0},
+    "@fn_gettext": {"name": "GetTextSlot76", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "@fn_settext": {"name": "SetTextSlot63", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x004e2099": {"name": "Post", "conv": "thiscall", "args": ["u32"]},
+    "0x00571d00": {"name": "CXStrFreeRep", "conv": "thiscall", "this": "ignore", "args": ["u32"], "ret": 0},
+    "0x0060aca0": {"name": "CopyCXStr", "conv": "cdecl", "args": ["ignore", "ignore"], "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]},
+    "0x00572300": {"name": "CXStrToChar", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00409c5b": {"name": "SetGlobalText", "conv": "thiscall", "args": ["cstr"]},
+    "0x004e1984": {"name": "Load", "conv": "thiscall", "args": ["int"]},
+    "0x004e1a54": {"name": "Select", "conv": "thiscall", "args": ["int"]},
+    "0x004e1b05": {"name": "ModeFour", "conv": "thiscall", "args": ["int"]},
+    "0x004e1437": {"name": "ModeFive", "conv": "thiscall", "args": ["u32"]},
+    "0x004e1521": {"name": "ModeLow", "conv": "thiscall", "args": ["ptr", "int", "int"]},
+    "0x004e18ae": {"name": "RefreshCount", "conv": "thiscall", "args": []},
+    "0x004e17fd": {"name": "Validate", "conv": "thiscall", "args": []},
+    "0x004dff1f": {"name": "Process", "conv": "thiscall", "args": []},
+    "0x004e1acc": {"name": "ProcessLookup", "conv": "thiscall", "args": []},
+    "0x00571e00": {"name": "CXStrCtor", "conv": "thiscall", "args": ["cstr"], "ret": 0},
+    "0x005a8bf0": {"name": "ApplyText", "conv": "thiscall", "args": ["ptr"]},
+    "0x004e07da": {"name": "PrintActiveLines", "conv": "thiscall", "args": []},
+    "0x00408ff3": {"name": "SetGlobalState", "conv": "thiscall", "args": ["char"]},
+    "0x00574460": {"name": "CompareText", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 0},
+    "0x004e1fe7": {"name": "DispatchValue", "conv": "thiscall", "args": ["int"]},
+    "0x004d22d7": {"name": "EditGetText", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]},
+    "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 12},
+    "0x006220e9": {"name": "_itoa", "conv": "cdecl", "args": ["int", "ptr", "int"], "ret": "0x0099db00"},
+    "0x004dfc22": {"name": "Finish", "conv": "thiscall", "args": []},
+    "0x004e2019": {"name": "Rebuild", "conv": "thiscall", "args": []},
+    "0x005a2230": {"name": "BaseHandle", "conv": "thiscall", "args": ["ptr", "int", "ptr"], "ret": 41}
+  },
+  "rewrite_aliases": {"__itoa": "0x006220e9"},
+  "cases": [
+    {"name": "ordinary message", "args": ["@sender", 2, "@data"]},
+    {"name": "message 3 lookup misses", "args": ["@sender", 3, "@data"], "memory": [{"addr": "@big130", "offset": "0x160", "u32": "@sender"}], "callees": {"0x00597be0": {"name": "LookupIndex", "conv": "thiscall", "args": [], "ret": -1}}},
+    {"name": "message 3 sends record", "args": ["@sender", 3, "@data"], "memory": [
+      {"addr": "@big130", "offset": "0x160", "u32": "@sender"},
+      {"addr": "@big130", "offset": "0x1f4", "u32": 3},
+      {"addr": "@big130", "offset": "0x1f8", "u32": 2},
+      {"addr": "@big130", "offset": "0x1fc", "u32": "@poolPointers"},
+      {"addr": "@poolPointers", "offset": "0x4", "u32": "@chunk"},
+      {"addr": "@chunk", "offset": "0x8c", "u32": 71},
+      {"addr": "@chunk", "offset": "0x94", "u32": 92}
+    ], "callees": {"0x00597be0": {"name": "LookupIndex", "conv": "thiscall", "args": [], "ret": 5}, "0x00597ed0": {"name": "GetRecord", "conv": "thiscall", "args": ["int"], "ret": 5}, "0x005adf60": {"name": "ConnectionCheck", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "message 6 posts enabled text", "args": ["@sender", 6, "@data"], "memory": [
+      {"addr": "@big130", "offset": "0x170", "u32": "@sender"},
+      {"addr": "@big130", "offset": "0x174", "u32": "@toggle"},
+      {"addr": "@toggle", "offset": "0x5d", "hex": "01"}
+    ]},
+    {"name": "message 6 disabled toggle", "args": ["@sender", 6, "@data"], "memory": [
+      {"addr": "@big130", "offset": "0x170", "u32": "@sender"},
+      {"addr": "@big130", "offset": "0x174", "u32": "@toggle"},
+      {"addr": "@toggle", "offset": "0x5d", "hex": "00"}
+    ]},
+    {"name": "message 1 early rebuild", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@big130", "offset": "0x1b8", "u32": "@sender"}]},
+    {"name": "message 1 text toggle", "args": ["@toggle", 1, "@data"], "memory": [
+      {"addr": "@big130", "offset": "0x1b4", "u32": "@toggle"},
+      {"addr": "@big130", "offset": "0x1b0", "u32": "@sender"},
+      {"addr": "@toggle", "offset": "0x5d", "hex": "01"}
+    ], "callees": {"@fn_gettext": {"name": "GetTextSlot76", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]}}},
+    {"name": "message 1 post toggle", "args": ["@toggle", 1, "@data"], "memory": [
+      {"addr": "@big130", "offset": "0x170", "u32": "@sender"},
+      {"addr": "@big130", "offset": "0x174", "u32": "@toggle"},
+      {"addr": "@toggle", "offset": "0x5d", "hex": "01"}
+    ]},
+    {"name": "message 1 load", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@big130", "offset": "0x160", "u32": "@sender"}]},
+    {"name": "message 1 select", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@big130", "offset": "0x16c", "u32": "@sender"}]},
+    {"name": "message 1 mode four", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@big130", "offset": "0x178", "u32": "@sender"}]},
+    {"name": "message 1 mode five", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@big130", "offset": "0x17c", "u32": "@sender"}]},
+    {"name": "message 1 digit three", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@big130", "offset": "0x180", "u32": "@sender"}]},
+    {"name": "message 1 digit two", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@big130", "offset": "0x184", "u32": "@sender"}]},
+    {"name": "message 1 digit one", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@big130", "offset": "0x188", "u32": "@sender"}]},
+    {"name": "message 1 digit zero", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@big130", "offset": "0x18c", "u32": "@sender"}]},
+    {"name": "message 1 refresh count", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@big130", "offset": "0x190", "u32": "@sender"}]},
+    {"name": "message 1 validate", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@big130", "offset": "0x19c", "u32": "@sender"}]},
+    {"name": "message 1 process", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@big130", "offset": "0x1a0", "u32": "@sender"}]},
+    {"name": "message 1 process lookup", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@big130", "offset": "0x198", "u32": "@sender"}]},
+    {"name": "message 1 apply text", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@big130", "offset": "0x15c", "u32": "@field15c"},
+      {"addr": "@big130", "offset": "0x1a8", "u32": "@sender"}
+    ]},
+    {"name": "message 1 print active lines", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@big130", "offset": "0x1a4", "u32": "@sender"}]},
+    {"name": "message 1 set global state on", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@big130", "offset": "0x1ac", "u32": "@sender"}, {"addr": "0x0079d778", "hex": "00"}]},
+    {"name": "message 1 set global state off", "args": ["@sender", 1, "@data"], "memory": [{"addr": "@big130", "offset": "0x1ac", "u32": "@sender"}, {"addr": "0x0079d778", "hex": "01"}]},
+    {"name": "message 14 unrelated", "args": ["@sender", 14, "@data"]},
+    {"name": "message 14 toggles text flag", "args": ["@sender", 14, "@data"], "memory": [
+      {"addr": "@big130", "offset": "0x1b0", "u32": "@sender"},
+      {"addr": "@big130", "offset": "0x1b4", "u32": "@toggle"},
+      {"addr": "@toggle", "offset": "0x5d", "hex": "00"}
+    ]},
+    {"name": "message 14 count clamps below zero", "args": ["@sender", 14, "@data"], "memory": [{"addr": "@big130", "offset": "0x194", "u32": "@sender"}], "callees": {
+      "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": -12},
+      "0x00571e00": {"name": "CXStrCtor", "conv": "thiscall", "this": "ignore", "args": ["cstr"], "ret": 0},
+      "0x00571d00": {"name": "CXStrFreeRep", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": 0}
+    }},
+    {"name": "message 14 count clamps above maximum", "args": ["@sender", 14, "@data"], "memory": [{"addr": "@big130", "offset": "0x194", "u32": "@sender"}], "callees": {
+      "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 1200},
+      "0x00571e00": {"name": "CXStrCtor", "conv": "thiscall", "this": "ignore", "args": ["cstr"], "ret": 0},
+      "0x00571d00": {"name": "CXStrFreeRep", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": 0}
+    }},
+    {"name": "message 14 count boundary", "args": ["@sender", 14, "@data"], "memory": [{"addr": "@big130", "offset": "0x194", "u32": "@sender"}], "callees": {
+      "0x0060e3a3": {"name": "atoi", "conv": "cdecl", "args": ["cstr"], "ret": 999},
+      "0x00571e00": {"name": "CXStrCtor", "conv": "thiscall", "this": "ignore", "args": ["cstr"], "ret": 0},
+      "0x00571d00": {"name": "CXStrFreeRep", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": 0}
+    }},
+    {"name": "message 15", "args": ["@sender", 15, "@data"]},
+    {"name": "message 16 compare", "args": ["@sender", 16, "@data"], "callees": {"0x00574460": {"name": "CompareText", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": -7}}},
+    {"name": "message 31 dispatch", "args": ["@sender", 31, "@data"], "memory": [
+      {"addr": "@data", "offset": "0", "u32": "@valueCell"},
+      {"addr": "@valueCell", "offset": "0", "u32": 1234}
+    ]}
+  ],
+  "fuzz": {
+    "seed": 5120571,
+    "count": 100,
+    "args": [
+      {"choices": ["@sender"]},
+      {"choices": [0, 1, 2, 3, 6, 14, 15, 16, 31, -1, 32]},
+      {"choices": ["@data"]}
+    ],
+    "memory": [
+      {"addr": "@big130", "offset": "0x15c", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x160", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x16c", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x170", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x174", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x178", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x17c", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x180", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x184", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x188", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x18c", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x190", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x194", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x198", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x19c", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x1a0", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x1a4", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x1a8", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x1ac", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x1b0", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x1b4", "type": "int", "choices": [0]},
+      {"addr": "@big130", "offset": "0x1b8", "type": "int", "choices": [0]}
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "function": "DispatchGroupUpdateOperation_guess",
+  "original": "0x00474e01",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "record", "type": "ptr"},
+    {"name": "command", "type": "ptr"}
+  ],
+  "ret": "int",
+  "objects": {
+    "record": {"size": "0x1770", "fill": "random"},
+    "command": {"size": "0xc4", "fill": "zero"},
+    "copy79": {"size": "0x40", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x009859EC", "u32": "@copy79"},
+    {"addr": "@command", "offset": "0x44", "cstr": "alpha"},
+    {"addr": "@command", "offset": "0x84", "cstr": "beta"}
+  ],
+  "callees": {
+    "0x00464ed1": {"name": "ProcessMSG_WLDGROUP_guess", "conv": "cdecl", "args": ["ptr", "cstr"], "ret": 1},
+    "0x004b4102": {"name": "SetGroupLeaderBlock_guess", "conv": "thiscall", "args": ["ptr", "cstr"]},
+    "0x00474d17": {"name": "RemoveGroupMemberByName_guess", "conv": "cdecl", "args": ["ptr", "cstr"], "ret": 1},
+    "0x00464f9e": {"name": "msg_wldgroup4_guess", "conv": "cdecl", "args": ["ptr", "cstr", "cstr"], "ret": 1},
+    "0x00464f44": {"name": "SetGroupMemberNames_guess", "conv": "cdecl", "args": ["ptr", "ptr"], "ret": 1},
+    "0x00451a65": {"name": "ClearGroupMemberNames_guess", "conv": "thiscall", "args": []},
+    "0x00451a7c": {"name": "FUN_00451a7c", "conv": "thiscall", "args": []},
+    "0x004b3ffe": {"name": "FUN_004b3ffe", "conv": "thiscall", "args": ["ptr"]},
+    "0x00464889": {"name": "SetGroupLeaderName_guess", "conv": "thiscall", "args": ["cstr"]}
+  },
+  "cases": [
+    {"name": "kind 0, copy79 set", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 0}, {"addr": "0x009859EC", "u32": "@copy79"}]},
+    {"name": "kind 0, copy79 null", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 0}, {"addr": "0x009859EC", "u32": 0}]},
+    {"name": "kind 1, copy79 set", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 1}, {"addr": "0x009859EC", "u32": "@copy79"}]},
+    {"name": "kind 1, copy79 null", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 1}, {"addr": "0x009859EC", "u32": 0}]},
+    {"name": "kind 3, copy79 set", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 3}, {"addr": "0x009859EC", "u32": "@copy79"}]},
+    {"name": "kind 3, copy79 null", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 3}, {"addr": "0x009859EC", "u32": 0}]},
+    {"name": "kind 7, copy79 set", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 7}, {"addr": "0x009859EC", "u32": "@copy79"}]},
+    {"name": "kind 7, copy79 null", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 7}, {"addr": "0x009859EC", "u32": 0}]},
+    {"name": "kind 5, copy79 set", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 5}, {"addr": "0x009859EC", "u32": "@copy79"}]},
+    {"name": "kind 5, copy79 null", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 5}, {"addr": "0x009859EC", "u32": 0}]},
+    {"name": "kind 6, copy79 set", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 6}, {"addr": "0x009859EC", "u32": "@copy79"}]},
+    {"name": "kind 6, copy79 null", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 6}, {"addr": "0x009859EC", "u32": 0}]},
+    {"name": "kind 8, copy79 set", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 8}, {"addr": "0x009859EC", "u32": "@copy79"}]},
+    {"name": "kind 8, copy79 null", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 8}, {"addr": "0x009859EC", "u32": 0}]},
+    {"name": "kind 9, copy79 set", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 9}, {"addr": "0x009859EC", "u32": "@copy79"}]},
+    {"name": "kind 9, copy79 null", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 9}, {"addr": "0x009859EC", "u32": 0}]},
+    {"name": "kind 10, copy79 set", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 10}, {"addr": "0x009859EC", "u32": "@copy79"}]},
+    {"name": "kind 10, copy79 null", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 10}, {"addr": "0x009859EC", "u32": 0}]},
+    {"name": "kind 2 unknown, copy79 set", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 2}, {"addr": "0x009859EC", "u32": "@copy79"}]},
+    {"name": "kind 4 unknown, copy79 null", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 4}, {"addr": "0x009859EC", "u32": 0}]},
+    {"name": "kind -1 unknown, copy79 set", "args": ["@record", "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": "0xffffffff"}, {"addr": "0x009859EC", "u32": "@copy79"}]},
+    {"name": "null record, kind 0", "args": [0, "@command"],
+     "memory": [{"addr": "@command", "offset": "0x0", "u32": 0}]},
+    {"name": "null pointers", "args": [0, 0]}
+  ],
+  "fuzz": {
+    "seed": 4673025,
+    "count": 150,
+    "args": [
+      {"choices": ["@record", 0]},
+      {"choices": ["@command"]}
+    ],
+    "memory": [
+      {"addr": "@command", "offset": "0x0", "type": "int", "choices": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, -1]},
+      {"addr": "0x009859EC", "type": "ptr", "choices": ["@copy79", 0]}
+    ]
+  }
+}

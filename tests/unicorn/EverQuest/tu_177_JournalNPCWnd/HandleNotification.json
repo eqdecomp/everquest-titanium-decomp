@@ -1,0 +1,219 @@
+{
+  "function": "CJournalNPCWnd_guess::HandleNotification_guess",
+  "_shape": "member window notification callback with journal lists, CXStr temporaries, and three message groups",
+  "original": "0x005254bb",
+  "sources": ["src/EverQuest/tu_177_JournalNPCWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@journalnpcwnd",
+  "args": [
+    {"name": "sender_guess", "type": "ptr"},
+    {"name": "message_guess", "type": "u32"},
+    {"name": "data_pointer_guess", "type": "ptr"}
+  ],
+  "ret": "int",
+  "objects": {
+    "journalnpcwnd": {"size": "0x1f0", "fill": "random", "init": [
+      {"offset": "0x160", "u32": "@journal_data"},
+      {"offset": "0x164", "u32": "@data_action"},
+      {"offset": "0x1a8", "u32": "@stored_rep"}, {"offset": "0x1ac", "u32": 0},
+      {"offset": "0x1c4", "u32": "@delete_npc_button"},
+      {"offset": "0x1c8", "u32": "@delete_text_button"},
+      {"offset": "0x1cc", "u32": "@save_button"},
+      {"offset": "0x1d0", "u32": "@category_button"},
+      {"offset": "0x1d4", "u32": "@enable_button"},
+      {"offset": "0x1d8", "u32": "@search_button"},
+      {"offset": "0x1dc", "u32": "@category_filter"},
+      {"offset": "0x1e0", "u32": "@category_select"},
+      {"offset": "0x1e4", "u32": "@npc_list"},
+      {"offset": "0x1e8", "u32": "@dialog_list"}
+    ]},
+    "sender": {"size": "0x130", "fill": "random"},
+    "data_pointer": {"size": "0x4", "fill": "random"},
+    "journal_data": {"size": "0x818", "fill": "random"},
+    "delete_npc_button": {"size": "0x130", "fill": "random"},
+    "delete_text_button": {"size": "0x130", "fill": "random"},
+    "save_button": {"size": "0x130", "fill": "random"},
+    "category_button": {"size": "0x130", "fill": "random"},
+    "enable_button": {"size": "0x130", "fill": "random"},
+    "search_button": {"size": "0x130", "fill": "random"},
+    "category_filter": {"size": "0x140", "fill": "random"},
+    "category_select": {"size": "0x140", "fill": "random"},
+    "npc_list": {"size": "0x170", "fill": "random"},
+    "dialog_list": {"size": "0x170", "fill": "random"},
+    "name_source": {"size": "0x164", "fill": "random", "init": [
+      {"offset": "0x160", "u32": "@name_table"}
+    ]},
+    "name_table": {"size": "0x810", "fill": "random"},
+    "lookup": {"size": "0x4", "init": [{"offset": 0, "u32": 4660}]},
+    "journal_entry": {"size": "0x44", "fill": "random", "init": [
+      {"offset": "0x40", "u32": 99}
+    ]},
+    "journal_item": {"size": "0x18", "fill": "random", "init": [
+      {"offset": "0x4", "u32": 12}, {"offset": "0x14", "u32": 0}
+    ]},
+    "journal_item_pointer": {"size": "0x4", "init": [
+      {"offset": 0, "u32": "@journal_item"}
+    ]},
+    "list_blocks": {"size": "0xc", "init": [
+      {"offset": 0, "u32": "@list_items"},
+      {"offset": 4, "u32": "@list_items"},
+      {"offset": 8, "u32": "@list_items_other"}
+    ]},
+    "list_items": {"size": "0x10", "init": [
+      {"offset": 0, "u32": 0}, {"offset": 4, "u32": 0},
+      {"offset": 12, "u32": 1}
+    ]},
+    "message_text": {"size": "0x40", "init": [
+      {"offset": 0, "hex": "6f6b00"}
+    ]},
+    "choice_text": {"size": "0x40", "init": [
+      {"offset": 0, "hex": "63617465676f727900"}
+    ]},
+    "event_rep": {"size": "0x8", "fill": "random"},
+    "choice_rep": {"size": "0x8", "fill": "random"},
+    "event_cxstr": {"size": "0x4", "init": [
+      {"offset": 0, "u32": "@event_rep"}
+    ]},
+    "choice_cxstr": {"size": "0x4", "init": [
+      {"offset": 0, "u32": "@choice_rep"}
+    ]},
+    "string_table": {"size": "0x4", "fill": "random"},
+    "everquest": {"size": "0x4", "fill": "random"},
+    "dialog_manager": {"size": "0x4", "fill": "random"},
+    "settings": {"size": "0x4", "init": [
+      {"offset": 0, "u32": "@settings_vtable"}
+    ]},
+    "settings_vtable": {"size": "0x88", "init": [
+      {"offset": "0x84", "u32": "@fn_slot"}
+    ]},
+    "fn_slot": {"size": "0x4"},
+    "stored_rep": {"size": "0x10", "fill": "random", "init": [
+      {"offset": 8, "u32": "@message_text"}
+    ]},
+    "data_action": {"size": "0x4", "fill": "random"},
+    "list_items_other": {"size": "0x10", "init": [
+      {"offset": 0, "u32": 0}, {"offset": 4, "u32": 1}
+    ]}
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@string_table"},
+    {"addr": "0x00988df0", "u32": "@everquest"},
+    {"addr": "0x00850ca8", "u32": "@settings"},
+    {"addr": "0x00850ca4", "u32": "@name_source"},
+    {"addr": "0x00850c80", "u32": "@dialog_manager"}
+  ],
+  "callees": {
+    "0x00524211": {"name": "StoreIniInfo_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005dfa00": {"name": "StringTable::getString", "conv": "thiscall", "args": ["u32", "ptr"], "ret": "@message_text"},
+    "0x004982c6": {"name": "CEverQuest::dsp_chat", "conv": "thiscall", "args": ["cstr", "int", "bool"], "ret": 0},
+    "0x0042f0b1": {"name": "JournalData::Reset", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00525034": {"name": "LoadJournalFiles_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005242e8": {"name": "SaveJournal_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00524281": {"name": "ClearDialogList_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005229ca": {"name": "ClearControls_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00524f87": {"name": "RefreshAll_guess", "conv": "thiscall", "args": ["bool"], "ret": 0},
+    "0x00597be0": {"name": "CListWnd::GetCurSel", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00524d24": {"name": "SelectNpc_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00524892": {"name": "SelectJournalItem_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0047c3af": {"name": "JournalList::Initialize", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0059c3a0": {"name": "ChoiceWnd::GetItemCount", "conv": "thiscall", "args": [], "ret": 1},
+    "0x0042e8f3": {"name": "NameTable::Find", "conv": "thiscall", "args": ["int"], "ret": "@lookup"},
+    "0x0059bb50": {"name": "JournalListWnd::Fill", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "01000000"},
+        {"arg": 0, "offset": 8, "hex": "00000000"},
+        {"arg": 0, "offset": 12, "hex": "00000000"},
+        {"arg": 0, "offset": 16, "hex": "e0210060"}
+      ]},
+    "0x004eb924": {"name": "JournalArray::At", "conv": "thiscall", "args": ["int"], "ret": "@journal_item_pointer"},
+    "0x00524cf0": {"name": "UpdateDialogList_guess", "conv": "thiscall", "args": ["bool"], "ret": 0},
+    "0x00406e7e": {"name": "JournalList::Free", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0059c3b0": {"name": "ChoiceWnd::GetChoice", "conv": "thiscall", "args": ["ignore"], "ret": "@choice_cxstr",
+      "writes": [{"arg": 0, "offset": 0, "hex": "a0220060"}]},
+    "0x00572300": {"name": "CXStr::operator char*", "conv": "thiscall", "this": "ignore", "args": [], "ret": "@choice_text"},
+    "0x0042e929": {"name": "JournalData::FindName", "conv": "thiscall", "args": ["cstr"], "ret": "@lookup"},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "this": "ignore", "args": ["u32"], "ret": 0},
+    "0x00597ed0": {"name": "CListWnd::GetItemData", "conv": "thiscall", "args": ["int"], "ret": "@journal_entry"},
+    "0x0042ee0a": {"name": "JournalData::RemoveEntry", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0},
+    "0x0042edd7": {"name": "JournalData::RemoveName", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00598580": {"name": "CListWnd::ClearAllSel", "conv": "thiscall", "args": [], "ret": 0},
+    "@fn_slot": {"name": "FUN_00850ca8_slot33", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00560e32": {"name": "DialogManager::ShowMessage", "conv": "thiscall", "args": ["ptr", "int", "cstr", "int", "int", "cstr"], "ret": 0},
+    "0x00571f70": {"name": "CXStr::operator=", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x004482fb": {"name": "CXStr::~CXStr", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005244f0": {"name": "SortNpcList_guess", "conv": "thiscall", "args": ["int", "bool"], "ret": 0},
+    "0x00524db8": {"name": "FillLocationList_guess", "conv": "thiscall", "args": ["bool"], "ret": 0},
+    "0x00524580": {"name": "SortDialogList_guess", "conv": "thiscall", "args": ["int", "bool"], "ret": 0},
+    "0x00524b03": {"name": "FillJournalList_guess", "conv": "thiscall", "args": ["bool"], "ret": 0},
+    "0x00560d80": {"name": "DialogManager::GetEventText", "conv": "thiscall", "args": ["ignore"], "ret": "@event_cxstr",
+      "writes": [{"arg": 0, "offset": 0, "hex": "90220060"}]},
+    "0x005bb140": {"name": "CButtonWnd::SetCheck", "conv": "thiscall", "args": ["bool"], "ret": 0},
+    "0x005a2230": {"name": "CSidlScreenWnd::WndNotification", "conv": "thiscall", "args": ["ptr", "u32", "ptr"], "ret": 73}
+  },
+  "cases": [
+    {"name": "enable already set", "args": ["@enable_button", 1, "@data_pointer"], "memory": [
+      {"addr": "@enable_button", "offset": "0x128", "u8": 1}]},
+    {"name": "enable newly set", "args": ["@enable_button", 1, "@data_pointer"], "memory": [
+      {"addr": "@enable_button", "offset": "0x128", "u8": 0}]},
+    {"name": "open log", "args": ["@save_button", 1, "@data_pointer"]},
+    {"name": "select NPC list", "args": ["@npc_list", 1, "@data_pointer"]},
+    {"name": "select dialog list", "args": ["@dialog_list", 1, "@data_pointer"]},
+    {"name": "select category", "args": ["@category_select", 1, "@data_pointer"]},
+    {"name": "category count two", "args": ["@category_select", 1, "@data_pointer"], "callees": {
+      "0x0059c3a0": {"name": "ChoiceWnd::GetItemCount", "conv": "thiscall", "args": [], "ret": 2},
+      "0x0059bb50": {"name": "JournalListWnd::Fill", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+        {"arg": 0, "offset": 0, "hex": "02000000"}, {"arg": 0, "offset": 8, "hex": "03000000"},
+        {"arg": 0, "offset": 12, "hex": "01000000"}, {"arg": 0, "offset": 16, "hex": "e0210060"}]}}},
+    {"name": "category record missing", "args": ["@category_select", 1, "@data_pointer"], "callees": {
+      "0x0042e8f3": {"name": "NameTable::Find", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "empty category filter", "args": ["@category_filter", 1, "@data_pointer"], "callees": {
+      "0x0059c3a0": {"name": "ChoiceWnd::GetItemCount", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "nonempty category filter", "args": ["@category_filter", 1, "@data_pointer"]},
+    {"name": "delete NPC entries", "args": ["@delete_npc_button", 1, "@data_pointer"]},
+    {"name": "delete two NPC entries", "args": ["@delete_npc_button", 1, "@data_pointer"], "callees": {
+      "0x0059bb50": {"name": "JournalListWnd::Fill", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+        {"arg": 0, "offset": 0, "hex": "02000000"}, {"arg": 0, "offset": 8, "hex": "03000000"},
+        {"arg": 0, "offset": 12, "hex": "01000000"}, {"arg": 0, "offset": 16, "hex": "e0210060"}]}}},
+    {"name": "delete dialog entries", "args": ["@delete_text_button", 1, "@data_pointer"]},
+    {"name": "delete two dialog entries", "args": ["@delete_text_button", 1, "@data_pointer"], "callees": {
+      "0x0059bb50": {"name": "JournalListWnd::Fill", "conv": "thiscall", "args": ["ignore"], "ret": 0, "writes": [
+        {"arg": 0, "offset": 0, "hex": "02000000"}, {"arg": 0, "offset": 8, "hex": "03000000"},
+        {"arg": 0, "offset": 12, "hex": "01000000"}, {"arg": 0, "offset": 16, "hex": "e0210060"}]}}},
+    {"name": "category action", "args": ["@category_button", 1, "@data_pointer"]},
+    {"name": "search current text", "args": ["@search_button", 1, "@data_pointer"]},
+    {"name": "search empty text", "args": ["@search_button", 1, "@data_pointer"], "memory": [
+      {"addr": "@journalnpcwnd", "offset": "0x1a8", "u32": 0}]},
+    {"name": "NPC option zero", "args": ["@npc_list", 15, 0], "memory": [
+      {"addr": "@journalnpcwnd", "offset": "0x190", "u32": 7}, {"addr": "@journalnpcwnd", "offset": "0x194", "u8": 0}]},
+    {"name": "NPC option repeats", "args": ["@npc_list", 15, 0], "memory": [
+      {"addr": "@journalnpcwnd", "offset": "0x190", "u32": 0}, {"addr": "@journalnpcwnd", "offset": "0x194", "u8": 1}]},
+    {"name": "NPC option one", "args": ["@npc_list", 15, 1]},
+    {"name": "NPC option other", "args": ["@npc_list", 15, 2]},
+    {"name": "dialog option zero", "args": ["@dialog_list", 15, 0], "memory": [
+      {"addr": "@journalnpcwnd", "offset": "0x198", "u32": 0}, {"addr": "@journalnpcwnd", "offset": "0x19c", "u8": 1}]},
+    {"name": "dialog option one", "args": ["@dialog_list", 15, 1]},
+    {"name": "event text received", "args": ["@sender", 33, "@data_pointer"]},
+    {"name": "event text cleared", "args": ["@sender", 33, 0]},
+    {"name": "event text cleared without search button", "args": ["@sender", 33, 0], "memory": [
+      {"addr": "@journalnpcwnd", "offset": "0x1d8", "u32": 0}]},
+    {"name": "unknown message delegates", "args": ["@sender", 2, "@data_pointer"]},
+    {"name": "unknown message one delegates", "args": ["@sender", 1, "@data_pointer"]}
+  ],
+  "fuzz": {
+    "seed": 5395643,
+    "count": 120,
+    "args": [
+      {"choices": ["@enable_button", "@delete_npc_button", "@delete_text_button", "@save_button", "@category_button", "@search_button", "@category_filter", "@category_select", "@npc_list", "@dialog_list", "@sender"]},
+      {"choices": [0, 1, 15, 33, 34]},
+      {"choices": [0, 1, 2, "@data_pointer"]}
+    ],
+    "memory": [
+      {"addr": "@journalnpcwnd", "offset": "0x190", "type": "u32", "choices": [0, 2, 3]},
+      {"addr": "@journalnpcwnd", "offset": "0x194", "type": "u8", "choices": [0, 1]},
+      {"addr": "@journalnpcwnd", "offset": "0x198", "type": "u32", "choices": [0, 2]},
+      {"addr": "@journalnpcwnd", "offset": "0x19c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@journalnpcwnd", "offset": "0x1a8", "type": "u32", "choices": [0, "@stored_rep"]},
+      {"addr": "@enable_button", "offset": "0x128", "type": "u8", "choices": [0, 1]}
+    ]
+  }
+}

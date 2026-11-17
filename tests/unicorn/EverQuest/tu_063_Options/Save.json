@@ -1,0 +1,207 @@
+{
+  "function": "IniConfig_guess::saveOptions_guess",
+  "original": "0x004aed0e",
+  "sources": [
+    "src/EverQuest/tu_063_Options.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@iniconfig",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "iniconfig": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "valuestr": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "file": {
+      "size": "0x40",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "@valuestr", "cstr": "0.500000"},
+    {"addr": "0x00923D7B", "u8": 0},
+    {"addr": "0x00923788", "u32": 1},
+    {"addr": "0x00923D7A", "u8": 0},
+    {"addr": "0x00924954", "u32": 101},
+    {"addr": "0x0092495C", "u32": 102},
+    {"addr": "0x00924960", "u32": 103},
+    {"addr": "0x00924964", "u32": 104},
+    {"addr": "0x00924968", "u32": 105},
+    {"addr": "0x0092496C", "u32": 106},
+    {"addr": "0x00924974", "u32": 107},
+    {"addr": "0x00924978", "u32": 108},
+    {"addr": "0x0092497C", "u32": 109},
+    {"addr": "0x00924988", "u32": 110},
+    {"addr": "0x00924990", "u32": 111},
+    {"addr": "0x00924994", "u32": 112},
+    {"addr": "0x00924998", "u32": 113},
+    {"addr": "0x0092499C", "u32": 114},
+    {"addr": "0x009249A0", "u32": 115},
+    {"addr": "0x009249AC", "u32": 116},
+    {"addr": "0x009254B0", "u32": 117},
+    {"addr": "0x009254B4", "u32": 118},
+    {"addr": "0x009254BC", "u32": 119},
+    {"addr": "0x00923878", "u8": 120},
+    {"addr": "0x009254CC", "u32": 121},
+    {"addr": "0x00924980", "u32": 122},
+    {"addr": "0x00924950", "f32": 1.25},
+    {"addr": "0x00924984", "u32": 123},
+    {"addr": "0x00985810", "f32": 0.125},
+    {"addr": "0x00985814", "f32": 0.25},
+    {"addr": "0x00985818", "f32": 2.5},
+    {"addr": "0x0098581C", "u32": 124},
+    {"addr": "0x00985820", "f32": 0.375},
+    {"addr": "0x00985824", "f32": 0.625},
+    {"addr": "0x00985828", "f32": 3.5},
+    {"addr": "0x0098582C", "u32": 125},
+    {"addr": "0x00985830", "f32": 0.75},
+    {"addr": "0x00985834", "f32": 0.875},
+    {"addr": "0x00985838", "f32": 4.5},
+    {"addr": "0x0098583C", "u32": 126},
+    {"addr": "0x009249B0", "u32": 7},
+    {"addr": "0x00924970", "u32": 8}
+  ],
+  "callees": {
+    "0x004ae514": {
+      "name": "WriteInt",
+      "conv": "thiscall",
+      "args": ["int", "cstr", "cstr"]
+    },
+    "0x004ae5af": {
+      "name": "WriteIntIfOne",
+      "conv": "thiscall",
+      "args": ["char", "cstr", "cstr"]
+    },
+    "0x004ae55f": {
+      "name": "WriteFloat",
+      "conv": "thiscall",
+      "args": ["float", "cstr", "cstr"]
+    },
+    "0x004aec1a": {
+      "name": "WriteChannels",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x004ae9c6": {
+      "name": "SaveCamera",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr"],
+      "varargs": "printf",
+      "ret": 6,
+      "writes": [{"arg": 0, "offset": 0, "hex": "6b65793000"}]
+    },
+    "0x0060beb0": {
+      "name": "WritePrivateString",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr", "u32", "cstr"],
+      "ret": 1
+    },
+    "0x005738b0": {
+      "name": "CXStr_Printf",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr"],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "00110060"}]
+    },
+    "0x00572300": {
+      "name": "CXStr_char",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@valuestr"
+    },
+    "0x0060e887": {
+      "name": "fopen",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr"],
+      "ret": "@file"
+    },
+    "0x0061030f": {
+      "name": "fseek",
+      "conv": "cdecl",
+      "args": ["u32", "int", "int"],
+      "ret": 0
+    },
+    "0x006101ba": {
+      "name": "fwrite",
+      "conv": "cdecl",
+      "args": ["u32", "u32", "u32", "u32"],
+      "ret": 1
+    },
+    "0x0060e790": {
+      "name": "fclose",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": ["u32"]
+    }
+  },
+  "cases": [
+    {
+      "name": "all saved, file opened",
+      "args": []
+    },
+    {
+      "name": "fopen fails",
+      "args": [],
+      "callees": {
+        "0x0060e887": {"name": "fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 0}
+      }
+    },
+    {
+      "name": "CXStr stays empty, no FreeRep",
+      "args": [],
+      "callees": {
+        "0x005738b0": {"name": "CXStr_Printf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 0}
+      }
+    },
+    {
+      "name": "first gate set",
+      "args": [],
+      "memory": [{"addr": "0x00923D7B", "u8": 1}]
+    },
+    {
+      "name": "second gate zero",
+      "args": [],
+      "memory": [{"addr": "0x00923788", "u32": 0}]
+    },
+    {
+      "name": "third gate set",
+      "args": [],
+      "memory": [{"addr": "0x00923D7A", "u8": 1}]
+    },
+    {
+      "name": "mouse right handed one",
+      "args": [],
+      "memory": [{"addr": "0x00923878", "u8": 1}]
+    }
+  ],
+  "fuzz": {
+    "seed": 4910350,
+    "count": 60,
+    "args": [],
+    "memory": [
+      {"addr": "0x00923D7B", "type": "u8", "choices": [0, 0, 0, 1, 255]},
+      {"addr": "0x00923788", "type": "u32", "choices": [0, 1, 1, 1, 2]},
+      {"addr": "0x00923D7A", "type": "u8", "choices": [0, 0, 0, 1, 128]},
+      {"addr": "0x00924954", "type": "int"},
+      {"addr": "0x00923878", "type": "u8"},
+      {"addr": "0x00985810", "type": "float", "range": [-2.0, 10.0]},
+      {"addr": "0x00924950", "type": "float", "range": [-2.0, 10.0]}
+    ]
+  }
+}

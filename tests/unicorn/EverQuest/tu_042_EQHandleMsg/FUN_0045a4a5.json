@@ -1,0 +1,92 @@
+{
+  "function": "ClearOwnInventoryAndCoins_guess",
+  "original": "0x0045a4a5",
+  "sources": ["src/EverQuest/tu_042_EQHandleMsg.cpp"],
+  "conv": "cdecl",
+  "args": [{"name": "name_guess", "type": "cstr"}],
+  "ret": "void",
+  "objects": {
+    "root": {"size": "0xd30", "fill": "random", "init": [{"offset": "0x8", "u32": "@offset"}]},
+    "offset": {"size": "0x8", "fill": "random", "init": [{"offset": "0x4", "u32": 32}]},
+    "property": {"size": "0x1a8", "fill": "random"},
+    "probe_one": {"size": "0x4", "fill": "random", "init": [{"offset": 0, "u32": "@probe_vtable"}]},
+    "probe_two": {"size": "0x4", "fill": "random", "init": [{"offset": 0, "u32": "@probe_vtable"}]},
+    "probe_three": {"size": "0x4", "fill": "random", "init": [{"offset": 0, "u32": "@probe_vtable"}]},
+    "fn_probe": {"size": "0x4"},
+    "probe_vtable": {"size": "0x8c", "fill": "random", "init": [{"offset": "0x88", "u32": "@fn_probe"}]},
+    "item": {"size": "0x4", "fill": "random", "init": [{"offset": 0, "u32": "@item_vtable"}]},
+    "fn_delete": {"size": "0x4"},
+    "item_vtable": {"size": "0x4", "fill": "random", "init": [{"offset": 0, "u32": "@fn_delete"}]},
+    "state": {"size": "0x11f4", "fill": "random"},
+    "cleanup_owner": {"size": "0x4", "fill": "random"},
+    "finalizer": {"size": "0x4", "fill": "random"},
+    "settings": {"size": "0x12", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@root"},
+    {"addr": "0x00905ce4", "u32": "@property"},
+    {"addr": "0x00850c3c", "u32": "@probe_one"},
+    {"addr": "0x00850ba8", "u32": "@probe_two"},
+    {"addr": "0x00850ba4", "u32": "@probe_three"},
+    {"addr": "0x00850cbc", "u32": "@cleanup_owner"},
+    {"addr": "0x00988df0", "u32": "@finalizer"},
+    {"addr": "0x00905d24", "u32": "@settings"},
+    {"addr": "@property", "offset": "0x120", "cstr": "abc"},
+    {"addr": "@root", "offset": "0xcf0", "u32": "@item"},
+    {"addr": "@root", "offset": "0xcf4", "u32": 0},
+    {"addr": "@root", "offset": "0xcf8", "u32": 0},
+    {"addr": "@root", "offset": "0xcfc", "u32": 0},
+    {"addr": "@root", "offset": "0xd00", "u32": 0},
+    {"addr": "@root", "offset": "0xd04", "u32": 0},
+    {"addr": "@root", "offset": "0xd08", "u32": 0},
+    {"addr": "@root", "offset": "0xd0c", "u32": 0},
+    {"addr": "@root", "offset": "0xd10", "u32": 0},
+    {"addr": "@root", "offset": "0xd14", "u32": 0},
+    {"addr": "@root", "offset": "0xd18", "u32": 0},
+    {"addr": "@root", "offset": "0xd1c", "u32": 0},
+    {"addr": "@root", "offset": "0xd20", "u32": 0},
+    {"addr": "@root", "offset": "0xd24", "u32": 0},
+    {"addr": "@root", "offset": "0xd28", "u32": 0},
+    {"addr": "@root", "offset": "0xd2c", "u32": 0}
+  ],
+  "callees": {
+    "0x0059dd30": {"name": "FUN_0059dd30", "conv": "thiscall", "args": [], "ret": [1, 0, 1]},
+    "@fn_probe": {"name": "ProbeSlot_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "@fn_delete": {"name": "DeleteSlot_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x004faaba": {"name": "FUN_004faaba", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00497f42": {"name": "RefreshWornAppearance_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0040cc50": {
+      "name": "GetInventorySlot_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": ["@item", "@item", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    "0x0041aa84": {"name": "FUN_0041aa84", "conv": "thiscall", "args": ["int", "int"], "ret": 0},
+    "0x00474597": {"name": "UpdateLight_guess", "conv": "cdecl", "args": ["ptr"], "ret": 0},
+    "0x005ec220": {"name": "FUN_005ec220", "conv": "thiscall", "args": [], "ret": "@state"},
+    "0x004912b1": {"name": "FUN_004912b1", "conv": "cdecl", "args": ["ptr", "int", "ptr", "int", "char"], "ret": 0}
+  },
+  "cases": [
+    {"name": "null-root", "args": ["abc"], "memory": [{"addr": "0x00905d00", "u32": 0}]},
+    {"name": "null-property", "args": ["abc"], "memory": [{"addr": "0x00905ce4", "u32": 0}]},
+    {"name": "name-mismatch", "args": ["different"]},
+    {"name": "matched-reset", "args": ["abc"]},
+    {
+      "name": "matched-all-probes",
+      "args": ["abc"],
+      "callees": {
+        "0x0059dd30": {"name": "FUN_0059dd30", "conv": "thiscall", "args": [], "ret": [1, 1, 1]}
+      }
+    }
+  ],
+  "coverage_ok": {
+    "0045A5BF-0045A5C0": "the byte-offset loop stops below 0x40, so the first int3 guard is unreachable",
+    "0045A5DC-0045A5DD": "the byte-offset loop stops below 0x40, so the second int3 guard is unreachable"
+  },
+  "fuzz": {
+    "seed": 4564133,
+    "count": 100,
+    "args": [{"choices": ["abc", "different", ""]}],
+    "memory": []
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "function": "EQ_PCView_guess::IsPlayerRace_guess",
+  "original": "0x004bb181",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [
+    {
+      "name": "value",
+      "type": "int"
+    }
+  ],
+  "ret": "char",
+  "objects": {
+    "object": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {"offset": "0x8", "u32": "@holder"}
+      ]
+    },
+    "holder": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": 256}
+      ]
+    },
+    "lookup": {
+      "size": "0x11b0",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "@lookup", "offset": "0x1198", "u32": 0}
+  ],
+  "callees": {
+    "0x005ec220": {
+      "name": "FUN_005ec220",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@lookup"
+    }
+  },
+  "cases": [
+    {
+      "name": "minus1_lookup_12_boundary",
+      "args": [-1],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 12}]
+    },
+    {
+      "name": "minus1_lookup_13",
+      "args": [-1],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 13}]
+    },
+    {
+      "name": "minus1_lookup_0x80",
+      "args": [-1],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 128}]
+    },
+    {
+      "name": "minus1_lookup_0x82",
+      "args": [-1],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 130}]
+    },
+    {
+      "name": "minus1_lookup_0x81_no",
+      "args": [-1],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 129}]
+    },
+    {
+      "name": "minus1_lookup_0x14a",
+      "args": [-1],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 330}]
+    },
+    {
+      "name": "minus1_lookup_0x14b_no",
+      "args": [-1],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 331}]
+    },
+    {
+      "name": "minus1_lookup_negative",
+      "args": [-1],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 4294967295}]
+    },
+    {
+      "name": "value_12_boundary",
+      "args": [12],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 0}]
+    },
+    {
+      "name": "value_13_no",
+      "args": [13],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 0}]
+    },
+    {
+      "name": "value_0x80",
+      "args": [128],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 0}]
+    },
+    {
+      "name": "value_0x82",
+      "args": [130],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 0}]
+    },
+    {
+      "name": "value_0x81_no",
+      "args": [129],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 0}]
+    },
+    {
+      "name": "value_0x14a",
+      "args": [330],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 0}]
+    },
+    {
+      "name": "value_0x14b_no",
+      "args": [331],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 0}]
+    },
+    {
+      "name": "value_zero",
+      "args": [0],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 0}]
+    },
+    {
+      "name": "value_minus2",
+      "args": [-2],
+      "memory": [{"addr": "@lookup", "offset": "0x1198", "u32": 0}]
+    }
+  ],
+  "fuzz": {
+    "seed": 4960641,
+    "count": 150,
+    "args": [
+      {"range": [-2, 336]}
+    ],
+    "memory": [
+      {"addr": "@lookup", "offset": "0x1198", "type": "int", "range": [-2, 336]}
+    ]
+  }
+}

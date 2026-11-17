@@ -1,0 +1,176 @@
+{
+  "function": "RehashIndex_guess::AllocEntry_guess",
+  "original": "0x0040644a",
+  "sources": ["src/EverQuest/tu_005_AudioTriggersWindow.cpp"],
+  "conv": "thiscall",
+  "this": "@rehashindex",
+  "args": [],
+  "ret": "ptr",
+  "objects": {
+    "rehashindex": {
+      "size": "0x54",
+      "fill": "zero",
+      "init": [{"offset": "0x30", "u32": "@queueTable"}]
+    },
+    "oldChunk": {
+      "size": "0x14",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": 4},
+        {"offset": "0x4", "u32": "@oldElements"},
+        {"offset": "0x8", "u32": 4},
+        {"offset": "0xc", "u8": 1},
+        {"offset": "0x10", "u32": 2}
+      ]
+    },
+    "oldElements": {"size": "0x30", "fill": "zero"},
+    "chunk2": {
+      "size": "0x14",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": 4},
+        {"offset": "0x4", "u32": "@elements2"},
+        {"offset": "0x8", "u32": 4},
+        {"offset": "0xc", "u8": 1},
+        {"offset": "0x10", "u32": 1}
+      ]
+    },
+    "elements2": {"size": "0x30", "fill": "zero"},
+    "freshChunk": {"size": "0x14", "fill": "zero"},
+    "freshElements": {"size": "0x8ca0", "fill": "zero"},
+    "oldSlot": {"size": "4", "fill": "zero", "init": [{"offset": "0", "u32": "@oldChunk"}]},
+    "newSlot": {"size": "4", "fill": "zero", "init": [{"offset": "0", "u32": "@chunk2"}]},
+    "freshSlot": {"size": "4", "fill": "zero", "init": [{"offset": "0", "u32": "@freshChunk"}]},
+    "queueTable": {
+      "size": "0x14",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "u32": "@queueChunk"},
+        {"offset": "4", "u32": "@queueChunk"},
+        {"offset": "8", "u32": "@queueChunk"},
+        {"offset": "0x10", "u32": "@queueChunkAlt"}
+      ]
+    },
+    "queueChunkAlt": {
+      "size": "4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@entryAlt"}]
+    },
+    "queueChunk": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "u32": "@entry"},
+        {"offset": "4", "u32": "@entry"},
+        {"offset": "8", "u32": "@entry"},
+        {"offset": "0xc", "u32": "@entryAlt"}
+      ]
+    },
+    "entry": {"size": "0xc", "fill": "zero"},
+    "entryAlt": {"size": "0xc", "fill": "zero"}
+  },
+  "memory": [],
+  "callees": {
+    "0x0045aee0": {"name": "ResetQueue_guess::SetValue_guess", "conv": "thiscall", "args": ["int"], "ret": "keep"},
+    "0x004eb924": {"name": "ResetOwner_guess::Slot_guess", "conv": "thiscall", "args": ["int"], "ret": "@oldSlot"},
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0},
+    "0x00405fc5": {"name": "EntryPoolBlock_guess::EntryPoolBlock_guess", "conv": "thiscall", "args": ["int"], "ret": "this", "passthrough": true},
+    "0x0050319b": {"name": "ResetOwner_guess::FUN_0050319b_guess", "conv": "thiscall", "args": ["int", "mem:4"], "ret": "keep"},
+    "0x004057bb": {"name": "ElementArray_guess::Get_guess", "conv": "thiscall", "args": ["int"], "ret": "keep", "passthrough": true},
+    "0x00405d8f": {"name": "ElementArray_guess::SetLength_guess", "conv": "thiscall", "args": ["int"], "ret": "keep", "passthrough": true},
+    "0x00405739": {"name": "ElementArray_guess::Reallocate_guess", "conv": "thiscall", "args": ["int"], "ret": "keep", "passthrough": true},
+    "0x0050f3f6": {"name": "CountedArrayBase_guess::Reset_guess", "conv": "thiscall", "args": [], "ret": "keep", "passthrough": true},
+    "0x0060e985": {"name": "operator_new_guess", "conv": "cdecl", "args": ["u32"], "ret": "@freshElements"},
+    "0x0060d682": {"name": "_free_guess", "conv": "cdecl", "args": ["ptr"], "ret": "keep"},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@freshElements"}
+  },
+  "rewrite_aliases": {"??2@YAPAXI@Z": "0x0060d071"},
+  "cases": [
+    {
+      "name": "free-list-pop",
+      "memory": [
+        {"addr": "@rehashindex", "offset": "0x20", "u32": 1},
+        {"addr": "@rehashindex", "offset": "0x28", "u32": 0},
+        {"addr": "@rehashindex", "offset": "0x2c", "u32": 0}
+      ]
+    },
+    {
+      "name": "free-list-mask-index",
+      "memory": [
+        {"addr": "@rehashindex", "offset": "0x20", "u32": 3},
+        {"addr": "@rehashindex", "offset": "0x28", "u32": 1},
+        {"addr": "@rehashindex", "offset": "0x2c", "u32": 0}
+      ]
+    },
+    {
+      "name": "free-list-shift-index",
+      "memory": [
+        {"addr": "@rehashindex", "offset": "0x20", "u32": 3},
+        {"addr": "@rehashindex", "offset": "0x28", "u32": 0},
+        {"addr": "@rehashindex", "offset": "0x2c", "u32": 1}
+      ]
+    },
+    {
+      "name": "current-chunk-has-room",
+      "memory": [
+        {"addr": "@rehashindex", "offset": "0x0", "u32": 1},
+        {"addr": "@rehashindex", "offset": "0x14", "u32": 0},
+        {"addr": "@oldChunk", "offset": "0x10", "u32": 2}
+      ]
+    },
+    {
+      "name": "exhausted-chunk-and-grow-fails",
+      "memory": [
+        {"addr": "@rehashindex", "offset": "0x0", "u32": 1},
+        {"addr": "@rehashindex", "offset": "0x14", "u32": 0},
+        {"addr": "@oldChunk", "offset": "0x10", "u32": 4}
+      ],
+      "callees": {
+        "0x004eb924": {"name": "ResetOwner_guess::Slot_guess", "conv": "thiscall", "args": ["int"], "ret": ["@oldSlot", "@newSlot"]}
+      }
+    },
+    {
+      "name": "grow-below-chunk-limit",
+      "memory": [
+        {"addr": "@rehashindex", "offset": "0x0", "u32": 3},
+        {"addr": "@rehashindex", "offset": "0x14", "u32": 0},
+        {"addr": "@oldChunk", "offset": "0x10", "u32": 4}
+      ],
+      "callees": {
+        "0x004eb924": {"name": "ResetOwner_guess::Slot_guess", "conv": "thiscall", "args": ["int"], "ret": ["@oldSlot", "@newSlot"]}
+      }
+    },
+    {
+      "name": "null-current-slot",
+      "memory": [
+        {"addr": "@rehashindex", "offset": "0x0", "u32": 1},
+        {"addr": "@rehashindex", "offset": "0x14", "u32": 0},
+        {"addr": "@oldSlot", "offset": "0", "u32": 0}
+      ],
+      "callees": {
+        "0x004eb924": {"name": "ResetOwner_guess::Slot_guess", "conv": "thiscall", "args": ["int"], "ret": ["@oldSlot", "@newSlot"]}
+      }
+    },
+    {
+      "name": "first-chunk-growth",
+      "memory": [
+        {"addr": "@rehashindex", "offset": "0x0", "u32": 0},
+        {"addr": "@rehashindex", "offset": "0x14", "u32": 0}
+      ],
+      "callees": {
+        "0x004eb924": {"name": "ResetOwner_guess::Slot_guess", "conv": "thiscall", "args": ["int"], "ret": "@freshSlot"},
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@freshChunk"}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4219978,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@rehashindex", "offset": "0x20", "type": "u32", "choices": [1, 2]},
+      {"addr": "@rehashindex", "offset": "0x28", "type": "u32", "choices": [0, 1]},
+      {"addr": "@rehashindex", "offset": "0x2c", "type": "u32", "choices": [0, 1]}
+    ]
+  }
+}

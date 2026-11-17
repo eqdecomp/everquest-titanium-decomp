@@ -1,0 +1,219 @@
+{
+  "function": "CMerchantWndView_guess::FinishSellingItem_guess",
+  "original": "0x005384e2",
+  "sources": [
+    "src/EverQuest/tu_188_MerchantWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {
+      "name": "msg_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x2c0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x2a4", "f32": 1.5}
+      ]
+    },
+    "msg": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": 99},
+        {"offset": "0x4", "u32": 5},
+        {"offset": "0x8", "u32": 7},
+        {"offset": "0xc", "u32": 1234}
+      ]
+    },
+    "pc": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x8", "u32": "@vbt"}
+      ]
+    },
+    "vbt": {
+      "size": "0x8",
+      "fill": "zero"
+    },
+    "item": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@itemvt"}
+      ]
+    },
+    "sub": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@itemvt"}
+      ]
+    },
+    "outobj": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@itemvt"}
+      ]
+    },
+    "itemvt": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@fn_dtor"},
+        {"offset": "0x28", "u32": "@fn_slot10"}
+      ]
+    },
+    "fn_dtor": {"size": "0x4", "fill": "zero"},
+    "fn_slot10": {"size": "0x4", "fill": "zero"},
+    "res": {"size": "0x10", "fill": "zero"},
+    "spawn": {"size": "0x300", "fill": "random"},
+    "spawn2": {"size": "0x300", "fill": "random"},
+    "strtab": {"size": "0x10", "fill": "zero"},
+    "eq": {"size": "0x10", "fill": "zero"},
+    "snd": {"size": "0x10", "fill": "zero"},
+    "statemgr": {"size": "0x10", "fill": "zero"},
+    "timer": {"size": "0x10", "fill": "zero"},
+    "mgr51": {"size": "0x10", "fill": "zero"},
+    "mgr56": {"size": "0x10", "fill": "zero"},
+    "gstr": {"size": "0x10", "fill": "zero"},
+    "gtext": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x00905d00", "u32": "@pc"},
+    {"addr": "0x00905d10", "u32": 0},
+    {"addr": "0x00905cb0", "u32": "@strtab"},
+    {"addr": "0x00988df0", "u32": "@eq"},
+    {"addr": "0x00851390", "u32": "@snd"},
+    {"addr": "0x00850cbc", "u32": "@statemgr"},
+    {"addr": "0x00905d24", "u32": "@timer"},
+    {"addr": "0x00905ce4", "u32": "@spawn2"},
+    {"addr": "0x009248d0", "u32": 2},
+    {"addr": "0x0092398c", "u32": 3},
+    {"addr": "0x00850cb8", "u32": "@mgr51"},
+    {"addr": "0x00992940", "u32": "@mgr56"},
+    {"addr": "0x007a0000", "size": 64, "fill": "zero"},
+    {"addr": "0x007a0000", "u32": "@itemvt"},
+    {"addr": "@gstr", "cstr": "str"},
+    {"addr": "@gtext", "cstr": "name"}
+  ],
+  "callees": {
+    "0x0040cc50": {"name": "GetFirst_guess", "conv": "thiscall", "args": ["int"], "ret": "@item"},
+    "0x005e0ec0": {"name": "GetTextValue_guess", "conv": "thiscall", "args": [], "ret": "0x1111"},
+    "0x005dfa00": {"name": "StringTable::getString", "conv": "thiscall", "args": ["u32", "u32"], "ret": "@gstr"},
+    "0x00492ec2": {"name": "GetText_guess", "conv": "thiscall", "args": ["u32"], "ret": "@gtext"},
+    "@fn_slot10": {"name": "Item::Slot10_guess", "conv": "thiscall", "args": ["float", "int"], "ret": "@res"},
+    "@fn_dtor": {"name": "Item::scalar_deleting_dtor", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x004b1d1f": {"name": "GetValue2_guess", "conv": "thiscall", "args": [], "ret": "0x4444"},
+    "0x0046da4a": {"name": "FormatMessage_guess", "conv": "cdecl",
+      "args": ["ignore", "int", "u32", "u32", "u32", "u32", "u32", "u32", "u32", "u32", "u32"],
+      "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "4d00"}]},
+    "0x0041a3c5": {"name": "AddMoney_guess", "conv": "thiscall", "args": ["int"]},
+    "0x0044a537": {"name": "PlaySound_guess", "conv": "thiscall", "args": ["int", "int"]},
+    "0x004982c6": {"name": "CEverQuest::dsp_chat", "conv": "thiscall", "args": ["cstr", "int", "bool"]},
+    "0x005eccc0": {"name": "IsContainer_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x004faa17": {"name": "StateManager::CloseContainer_guess", "conv": "thiscall", "args": ["u32", "int"]},
+    "0x005ecc30": {"name": "SlotCount_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005ec630": {"name": "GetSub_guess", "conv": "thiscall", "args": ["int"], "ret": "@sub"},
+    "0x005ec760": {"name": "IsValid_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00434777": {"name": "TakeSlot_guess", "conv": "thiscall", "args": ["int"], "ret": "0x5555"},
+    "0x00464c94": {"name": "Split_guess", "conv": "cdecl", "args": ["u32", "ignore", "int", "int", "ignore"]},
+    "0x0043dd14": {"name": "Timer::UpdateItemSlot_guess", "conv": "thiscall", "args": ["u32", "int", "int", "u32"]},
+    "0x0041aa84": {"name": "ClearSlot_guess", "conv": "thiscall", "args": ["int", "int"]},
+    "0x00464e25": {"name": "SlotToInv_guess", "conv": "cdecl", "args": ["int"], "ret": 88},
+    "0x0048083a": {"name": "Spawn::FUN_0048083a", "conv": "thiscall", "args": ["int", "u32", "int"]},
+    "0x00474597": {"name": "Refresh_guess", "conv": "cdecl", "args": ["u32"]},
+    "0x005ec650": {"name": "TakeSub_guess", "conv": "thiscall", "args": ["int"], "ret": "0x6666"},
+    "0x005ec660": {"name": "DeleteSub_guess", "conv": "thiscall", "args": ["int"]},
+    "0x00576e80": {"name": "Now_guess", "conv": "cdecl", "args": [], "ret": 777},
+    "0x0051b2ae": {"name": "Mgr51::FUN_0051b2ae", "conv": "thiscall", "args": ["int"]},
+    "0x0056875d": {"name": "Mgr56::FUN_0056875d", "conv": "thiscall", "args": []},
+    "0x0060d674": {"name": "__security_check_cookie", "conv": "fastcall", "args": []}
+  },
+  "cases": [
+    {"name": "negative slot, no target", "args": ["@msg"],
+     "memory": [{"addr": "@msg", "offset": "0x4", "u32": -1}]},
+    {"name": "negative slot, target", "args": ["@msg"],
+     "memory": [{"addr": "@msg", "offset": "0x4", "u32": -7}, {"addr": "0x00905d10", "u32": "@spawn"}]},
+    {"name": "slot empty", "args": ["@msg"],
+     "callees": {"0x0040cc50": {"name": "GetFirst_guess", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "slot 0 item invalid, no target", "args": ["@msg"],
+     "memory": [{"addr": "@msg", "offset": "0x4", "u32": 0}]},
+    {"name": "slot item invalid, target, busy 0, wrap index, no mgr56", "args": ["@msg"],
+     "memory": [{"addr": "0x00905d10", "u32": "@spawn"}, {"addr": "0x009248d0", "u32": 0},
+                {"addr": "0x0092398c", "u32": 9}, {"addr": "0x00992940", "u32": 0}]},
+    {"name": "slot 0x15 invalid, deleted item null", "args": ["@msg"],
+     "memory": [{"addr": "@msg", "offset": "0x4", "u32": 21}],
+     "callees": {"0x0040cc50": {"name": "GetFirst_guess", "conv": "thiscall", "args": ["int"],
+                                "ret": ["@item", "@item", "@item", "@item", "@item", "@item", 0]}}},
+    {"name": "slot 0x16 invalid", "args": ["@msg"],
+     "memory": [{"addr": "@msg", "offset": "0x4", "u32": 22}, {"addr": "0x009248d0", "u32": -4}]},
+    {"name": "slot 0x1e valid, out object", "args": ["@msg"],
+     "memory": [{"addr": "@msg", "offset": "0x4", "u32": 30}],
+     "callees": {"0x005ec760": {"name": "IsValid_guess", "conv": "thiscall", "args": [], "ret": 1},
+                 "0x00464c94": {"name": "Split_guess", "conv": "cdecl", "args": ["u32", "ignore", "int", "int", "ignore"],
+                                "writes": [{"arg": 1, "offset": 0, "hex": "00007a00"}]}}},
+    {"name": "slot 3 valid, no out object", "args": ["@msg"],
+     "memory": [{"addr": "@msg", "offset": "0x4", "u32": 3}, {"addr": "0x00905d10", "u32": "@spawn"}],
+     "callees": {"0x005ec760": {"name": "IsValid_guess", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "slot container, empty loop", "args": ["@msg"],
+     "callees": {"0x005eccc0": {"name": "IsContainer_guess", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "slot container, three subs one missing, no target", "args": ["@msg"],
+     "callees": {"0x005eccc0": {"name": "IsContainer_guess", "conv": "thiscall", "args": [], "ret": 1},
+                 "0x005ecc30": {"name": "SlotCount_guess", "conv": "thiscall", "args": [], "ret": 3},
+                 "0x005ec630": {"name": "GetSub_guess", "conv": "thiscall", "args": ["int"],
+                                "ret": ["@sub", "@sub", 0, "@sub", "@sub"]}}},
+    {"name": "slot container, two subs, target", "args": ["@msg"],
+     "memory": [{"addr": "0x00905d10", "u32": "@spawn"}],
+     "callees": {"0x005eccc0": {"name": "IsContainer_guess", "conv": "thiscall", "args": [], "ret": 1},
+                 "0x005ecc30": {"name": "SlotCount_guess", "conv": "thiscall", "args": [], "ret": 2},
+                 "0x005ec760": {"name": "IsValid_guess", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "bag 0x1f, no bag", "args": ["@msg"],
+     "memory": [{"addr": "@msg", "offset": "0x4", "u32": 31}],
+     "callees": {"0x0040cc50": {"name": "GetFirst_guess", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "bag not a container", "args": ["@msg"],
+     "memory": [{"addr": "@msg", "offset": "0x4", "u32": 57}]},
+    {"name": "bag sub missing", "args": ["@msg"],
+     "memory": [{"addr": "@msg", "offset": "0x4", "u32": 58}],
+     "callees": {"0x005eccc0": {"name": "IsContainer_guess", "conv": "thiscall", "args": [], "ret": 1},
+                 "0x005ec630": {"name": "GetSub_guess", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "bag sub invalid, no target", "args": ["@msg"],
+     "memory": [{"addr": "@msg", "offset": "0x4", "u32": 49}],
+     "callees": {"0x005eccc0": {"name": "IsContainer_guess", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "bag sub valid, target, out object", "args": ["@msg"],
+     "memory": [{"addr": "@msg", "offset": "0x4", "u32": 140}, {"addr": "0x00905d10", "u32": "@spawn"}],
+     "callees": {"0x005eccc0": {"name": "IsContainer_guess", "conv": "thiscall", "args": [], "ret": 1},
+                 "0x005ec760": {"name": "IsValid_guess", "conv": "thiscall", "args": [], "ret": 1},
+                 "0x00464c94": {"name": "Split_guess", "conv": "cdecl", "args": ["u32", "ignore", "int", "int", "ignore"],
+                                "writes": [{"arg": 1, "offset": 0, "hex": "00007a00"}]}}},
+    {"name": "bag sub valid, no out object", "args": ["@msg"],
+     "memory": [{"addr": "@msg", "offset": "0x4", "u32": 32}],
+     "callees": {"0x005eccc0": {"name": "IsContainer_guess", "conv": "thiscall", "args": [], "ret": 1},
+                 "0x005ec760": {"name": "IsValid_guess", "conv": "thiscall", "args": [], "ret": 1}}}
+  ],
+  "fuzz": {
+    "seed": 5473506,
+    "count": 100,
+    "args": [
+      {"choices": ["@msg"]}
+    ],
+    "memory": [
+      {"addr": "@msg", "offset": "0x4", "type": "int", "range": [-3, 70]},
+      {"addr": "@msg", "offset": "0x8", "type": "int"},
+      {"addr": "@msg", "offset": "0xc", "type": "int"},
+      {"addr": "@owner", "offset": "0x2a4", "type": "float", "range": [-10.0, 10.0]},
+      {"addr": "0x00905d10", "type": "ptr", "choices": [0, "@spawn"]},
+      {"addr": "0x009248d0", "type": "int", "range": [-3, 3]},
+      {"addr": "0x0092398c", "type": "int", "range": [0, 12]},
+      {"addr": "0x00992940", "type": "ptr", "choices": [0, "@mgr56"]}
+    ]
+  }
+}

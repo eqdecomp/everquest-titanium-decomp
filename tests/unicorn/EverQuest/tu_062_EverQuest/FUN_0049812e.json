@@ -1,0 +1,411 @@
+{
+  "function": "GlobalState_guess::ClickSwitchAtScreenPos_guess",
+  "original": "0x0049812e",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@globalstate",
+  "args": [
+    {
+      "name": "first_guess",
+      "type": "int"
+    },
+    {
+      "name": "second_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "globalstate": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "clock": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "display": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "context": {
+      "size": "0xC290",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@node"
+        },
+        {
+          "offset": "0xC288",
+          "u32": 0
+        }
+      ]
+    },
+    "node": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 256
+        }
+      ]
+    },
+    "source": {
+      "size": "0x25c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x258",
+          "u32": 4951
+        }
+      ]
+    },
+    "callData": {
+      "size": "0x25c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x258",
+          "u32": 9320
+        }
+      ]
+    },
+    "candidate": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "state": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "mode": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "resultMode": {
+      "size": "0x8c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x88",
+          "u32": "@mode"
+        }
+      ]
+    },
+    "resultNull": {
+      "size": "0x8c",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d24",
+      "u32": "@clock"
+    },
+    {
+      "addr": "0x00903e84",
+      "u32": "@display"
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@context"
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": "@source"
+    }
+  ],
+  "callees": {
+    "0x004396df": {
+      "name": "PickActorAt_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "bool",
+        "ignore",
+        "ignore"
+      ],
+      "ret": "@candidate"
+    },
+    "0x00490500": {
+      "name": "FUN_00490500",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": "@state"
+    },
+    "0x0048fbc8": {
+      "name": "GetSwitchDamage_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0041b0de": {
+      "name": "FUN_0041b0de",
+      "conv": "thiscall",
+      "args": [
+        "u8"
+      ],
+      "ret": 85
+    },
+    "0x005ec220": {
+      "name": "FUN_005ec220",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@resultMode"
+    },
+    "0x005eccc0": {
+      "name": "FUN_005eccc0",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005ecc00": {
+      "name": "FUN_005ecc00",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 12
+    },
+    "0x005e0f30": {
+      "name": "FUN_005e0f30",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 68
+    },
+    "0x004906c5": {
+      "name": "UseSwitch_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "int",
+        "int",
+        "ignore"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "candidate_null",
+      "args": [
+        1,
+        2
+      ],
+      "callees": {
+        "0x004396df": {
+          "name": "FUN_004396df",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int",
+            "bool",
+            "ignore",
+            "ignore"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "state_null",
+      "args": [
+        3,
+        4
+      ],
+      "callees": {
+        "0x00490500": {
+          "name": "FUN_00490500",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "state_action_11",
+      "args": [
+        5,
+        6
+      ],
+      "callees": {
+        "0x0048fbc8": {
+          "name": "FUN_0048fbc8",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x0041b0de": {
+          "name": "FUN_0041b0de",
+          "conv": "thiscall",
+          "args": [
+            "u8"
+          ],
+          "ret": 273
+        }
+      }
+    },
+    {
+      "name": "mode_pointer_null",
+      "args": [
+        7,
+        8
+      ],
+      "callees": {
+        "0x005ec220": {
+          "name": "FUN_005ec220",
+          "conv": "thiscall",
+          "args": [],
+          "ret": "@resultNull"
+        }
+      }
+    },
+    {
+      "name": "mode_check_nonzero_data_pointer",
+      "args": [
+        9,
+        10
+      ],
+      "memory": [
+        {
+          "addr": "@context",
+          "offset": "0xC288",
+          "u32": "@callData"
+        }
+      ],
+      "callees": {
+        "0x005eccc0": {
+          "name": "FUN_005eccc0",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x005e0f30": {
+          "name": "FUN_005e0f30",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 819
+        }
+      }
+    },
+    {
+      "name": "mode_id_below_12",
+      "args": [
+        11,
+        12
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "FUN_005ecc00",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 11
+        },
+        "0x005e0f30": {
+          "name": "FUN_005e0f30",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1001
+        }
+      }
+    },
+    {
+      "name": "mode_id_12",
+      "args": [
+        13,
+        14
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "FUN_005ecc00",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 12
+        },
+        "0x005e0f30": {
+          "name": "FUN_005e0f30",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1002
+        },
+        "0x0041b0de": {
+          "name": "FUN_0041b0de",
+          "conv": "thiscall",
+          "args": [
+            "u8"
+          ],
+          "ret": 546
+        }
+      }
+    },
+    {
+      "name": "mode_id_above_12",
+      "args": [
+        15,
+        16
+      ],
+      "callees": {
+        "0x005ecc00": {
+          "name": "FUN_005ecc00",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 13
+        },
+        "0x005e0f30": {
+          "name": "FUN_005e0f30",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1003
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4817198,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -32768,
+          32767
+        ]
+      },
+      {
+        "range": [
+          -32768,
+          32767
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@node",
+        "offset": "0x4",
+        "type": "u32",
+        "choices": [
+          0,
+          4,
+          256,
+          8192
+        ]
+      },
+      {
+        "addr": "@context",
+        "offset": "0xC288",
+        "type": "u32",
+        "choices": [
+          0,
+          "@callData"
+        ]
+      }
+    ]
+  },
+  "_survivors": "L5624: action_guess is already zero from its initial assignment and no statement before this branch writes it."
+}

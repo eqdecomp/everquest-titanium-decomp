@@ -1,0 +1,144 @@
+{
+  "function": "init_mm_guess",
+  "original": "0x0046e370",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "void",
+  "objects": {},
+  "memory": [
+    {
+      "addr": "0x009005C8",
+      "u32": 17
+    },
+    {
+      "addr": "0x009005CC",
+      "u32": 44
+    },
+    {
+      "addr": "0x009005D0",
+      "size": 220,
+      "fill": "random"
+    }
+  ],
+  "callees": {
+    "kernel32.dll!QueryPerformanceCounter": {
+      "name": "QueryPerformanceCounter",
+      "conv": "stdcall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 1,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "7856341200000000"
+        }
+      ]
+    },
+    "0x0046d655": {
+      "name": "FUN_0046d655",
+      "conv": "cdecl",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0040cbb2": {
+      "name": "RandomRange_guess",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x004657a6": {
+      "name": "RandNbr_guess",
+      "conv": "cdecl",
+      "args": [],
+      "passthrough": true
+    },
+    "0x004cc98f": {
+      "name": "rdtsc_elapsed",
+      "conv": "cdecl",
+      "args": [],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "qpc-seed",
+      "args": []
+    },
+    {
+      "name": "mask-to-zero",
+      "args": [],
+      "callees": {
+        "kernel32.dll!QueryPerformanceCounter": {
+          "name": "QueryPerformanceCounter",
+          "conv": "stdcall",
+          "args": [
+            "ignore"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "0000004000000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "mask-to-maximum",
+      "args": [],
+      "callees": {
+        "kernel32.dll!QueryPerformanceCounter": {
+          "name": "QueryPerformanceCounter",
+          "conv": "stdcall",
+          "args": [
+            "ignore"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "ffffffff00000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "qpc-fallback",
+      "args": [],
+      "callees": {
+        "kernel32.dll!QueryPerformanceCounter": {
+          "name": "QueryPerformanceCounter",
+          "conv": "stdcall",
+          "args": [
+            "ignore"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4645744,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "0x009005D0",
+        "size": 220
+      }
+    ]
+  },
+  "_survivors": "L7604: 0x9006a3 gives the same result as 0x9006a4 because the compared next pointer is always 4-byte aligned; L7611: FUN_0040CBB2(5,100) returns 5..100, so > 0 and >= 0 agree for every reachable count."
+}

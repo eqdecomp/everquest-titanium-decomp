@@ -1,0 +1,144 @@
+{
+  "function": "MainOwner_guess::Initialize_guess",
+  "original": "0x00535aa0",
+  "sources": [
+    "src/EverQuest/tu_187_MapViewWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@mainowner",
+  "args": [
+    { "name": "resource_id_guess", "type": "u32" },
+    { "name": "first_point_guess", "type": "ptr" },
+    { "name": "second_point_guess", "type": "ptr" }
+  ],
+  "ret": "void",
+  "objects": {
+    "mainowner": { "size": "0x274", "fill": "random" },
+    "first_point": { "size": "8", "fill": "zero" },
+    "second_point": { "size": "8", "fill": "zero" },
+    "resource_table": { "size": "4", "fill": "zero" },
+    "resource_sink": { "size": "4", "fill": "zero" },
+    "update_target": { "size": "4", "fill": "zero" }
+  },
+  "memory": [
+    { "addr": "0x00905cc0", "u32": "@resource_table" },
+    { "addr": "0x00924470", "u32": 2 },
+    { "addr": "@mainowner", "offset": "0x180", "cstr": "" },
+    { "addr": "@mainowner", "offset": "0x1b0", "u32": 0 },
+    { "addr": "@mainowner", "offset": "0x1b4", "u32": 0 },
+    { "addr": "@mainowner", "offset": "0x1b8", "u32": 0 },
+    { "addr": "@mainowner", "offset": "0x1bc", "u32": 0 },
+    { "addr": "@mainowner", "offset": "0x1c0", "u32": 0 },
+    { "addr": "@mainowner", "offset": "0x1c4", "u32": 0 },
+    { "addr": "@mainowner", "offset": "0x1c8", "u32": 0 },
+    { "addr": "@mainowner", "offset": "0x1d4", "u32": 0 },
+    { "addr": "@first_point", "offset": "0x0", "f32": 1.25 },
+    { "addr": "@first_point", "offset": "0x4", "f32": -2.5 },
+    { "addr": "@second_point", "offset": "0x0", "f32": 5.5 },
+    { "addr": "@second_point", "offset": "0x4", "f32": 8.75 }
+  ],
+  "callees": {
+    "0x00533e0b": { "name": "SaveAllEx_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0 },
+    "0x0043a6bf": { "name": "Get_guess", "conv": "thiscall", "args": ["u32"], "ret": 0 },
+    "0x0046da4a": {
+      "name": "FormatResourceText_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "int", "int", "int", "int", "int", "int", "int", "int", "int"],
+      "ret": 0,
+      "writes": [{ "arg": 0, "offset": 0, "hex": "00" }]
+    },
+    "0x00571e00": { "name": "ResourceText_ctor_guess", "conv": "thiscall", "args": ["cstr"], "ret": "this" },
+    "0x005c0cc0": { "name": "TextSink_Add_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0 },
+    "0x00571d00": { "name": "ResourceText_Release_guess", "conv": "thiscall", "args": ["u32"], "ret": 0 },
+    "0x005f6ed0": { "name": "ResourceTable_Update_guess", "conv": "thiscall", "args": ["u32", "cstr"], "ret": 0 },
+    "0x00532410": { "name": "ClearObject_dtor_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x00534497": { "name": "StopAutoMap_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x005bb140": { "name": "Update_guess", "conv": "thiscall", "args": ["int"], "ret": 0 },
+    "0x00535751": { "name": "ScanAtlas_guess", "conv": "thiscall", "args": [], "ret": 0 },
+    "0x0053572d": { "name": "LoadAllLayers_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0 },
+    "0x00531c94": { "name": "Apply_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 0 }
+  },
+  "cases": [
+    {
+      "name": "empty name and no resource string",
+      "args": [1, "@first_point", "@second_point"],
+      "callees": { "0x0043a6bf": { "conv": "thiscall", "args": ["u32"], "ret": 0 } }
+    },
+    {
+      "name": "nonempty name and no resource string",
+      "args": [1, "@first_point", "@second_point"],
+      "memory": [
+        { "addr": "@mainowner", "offset": "0x180", "cstr": "Nektulos" }
+      ],
+      "callees": { "0x0043a6bf": { "conv": "thiscall", "args": ["u32"], "ret": 0 } }
+    },
+    {
+      "name": "resource string but no sink",
+      "args": [1, "@first_point", "@second_point"],
+      "memory": [
+        { "addr": "@mainowner", "offset": "0x180", "cstr": "Nektulos" }
+      ],
+      "callees": { "0x0043a6bf": { "conv": "thiscall", "args": ["u32"], "ret": 7 } }
+    },
+    {
+      "name": "resource string and sink",
+      "args": [1, "@first_point", "@second_point"],
+      "memory": [
+        { "addr": "@mainowner", "offset": "0x180", "cstr": "Nektulos" },
+        { "addr": "@mainowner", "offset": "0x1d4", "u32": "@resource_sink" }
+      ],
+      "callees": { "0x0043a6bf": { "conv": "thiscall", "args": ["u32"], "ret": 7 } }
+    },
+    {
+      "name": "all update targets and matching viewport",
+      "args": [2, "@first_point", "@second_point"],
+      "memory": [
+        { "addr": "@mainowner", "offset": "0x180", "cstr": "" },
+        { "addr": "@mainowner", "offset": "0x1b0", "u32": "@update_target" },
+        { "addr": "@mainowner", "offset": "0x1b4", "u32": "@update_target" },
+        { "addr": "@mainowner", "offset": "0x1b8", "u32": "@update_target" },
+        { "addr": "@mainowner", "offset": "0x1bc", "u32": "@update_target" },
+        { "addr": "@mainowner", "offset": "0x1c0", "u32": "@update_target" },
+        { "addr": "@mainowner", "offset": "0x1c4", "u32": "@update_target" },
+        { "addr": "@mainowner", "offset": "0x1c8", "u32": "@update_target" }
+      ],
+      "callees": { "0x0043a6bf": { "conv": "thiscall", "args": ["u32"], "ret": 0 } }
+    },
+    {
+      "name": "viewport boundary with negative and positive coordinates",
+      "args": [2, "@first_point", "@second_point"],
+      "memory": [
+        { "addr": "@first_point", "offset": "0x0", "f32": -1.5 },
+        { "addr": "@first_point", "offset": "0x4", "f32": 0.0 },
+        { "addr": "@second_point", "offset": "0x0", "f32": 0.5 },
+        { "addr": "@second_point", "offset": "0x4", "f32": 1.5 }
+      ],
+      "callees": { "0x0043a6bf": { "conv": "thiscall", "args": ["u32"], "ret": 0 } }
+    }
+  ],
+  "fuzz": {
+    "seed": 5462688,
+    "count": 120,
+    "args": [
+      { "range": [0, 4] },
+      { "choices": ["@first_point"] },
+      { "choices": ["@second_point"] }
+    ],
+    "memory": [
+      { "addr": "@first_point", "offset": "0x0", "type": "float", "range": [-100.0, 100.0] },
+      { "addr": "@first_point", "offset": "0x4", "type": "float", "range": [-100.0, 100.0] },
+      { "addr": "@second_point", "offset": "0x0", "type": "float", "range": [-100.0, 100.0] },
+      { "addr": "@second_point", "offset": "0x4", "type": "float", "range": [-100.0, 100.0] },
+      { "addr": "0x00924470", "type": "u32", "choices": [0, 1, 2, 3] },
+      { "addr": "@mainowner", "offset": "0x1b0", "type": "ptr", "choices": [0, "@update_target"] },
+      { "addr": "@mainowner", "offset": "0x1b4", "type": "ptr", "choices": [0, "@update_target"] },
+      { "addr": "@mainowner", "offset": "0x1b8", "type": "ptr", "choices": [0, "@update_target"] },
+      { "addr": "@mainowner", "offset": "0x1bc", "type": "ptr", "choices": [0, "@update_target"] },
+      { "addr": "@mainowner", "offset": "0x1c0", "type": "ptr", "choices": [0, "@update_target"] },
+      { "addr": "@mainowner", "offset": "0x1c4", "type": "ptr", "choices": [0, "@update_target"] },
+      { "addr": "@mainowner", "offset": "0x1c8", "type": "ptr", "choices": [0, "@update_target"] },
+      { "addr": "@mainowner", "offset": "0x1d4", "type": "ptr", "choices": [0, "@resource_sink"] }
+    ]
+  },
+  "_survivors": "L2958: OR 9 is equivalent here because the earlier OR 1 already set bit 0; L2959: deleting the repeated saved_81 = 1 store cannot be observed because no read or call occurs between the identical stores."
+}

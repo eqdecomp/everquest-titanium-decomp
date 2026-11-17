@@ -1,0 +1,256 @@
+{
+  "function": "CTrainWndView_guess::Train_guess",
+  "original": "0x0056b48e",
+  "sources": [
+    "src/EverQuest/tu_234_TributeBenefitWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@sortmanager",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "sortmanager": {
+      "size": "0x7d4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x18c", "u32": "@list"},
+        {"offset": "0x190", "u32": 1},
+        {"offset": "0x194", "u32": 100}
+      ]
+    },
+    "list": {"size": "0x4", "fill": "zero"},
+    "world": {
+      "size": "0x25c",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x120", "cstr": "fixture world text"},
+        {"offset": "0x258", "u32": "0x5151"}
+      ]
+    },
+    "character": {
+      "size": "0xc284",
+      "fill": "zero",
+      "init": [{"offset": "0x8", "u32": "@vbtable"}]
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [{"offset": "0x4", "u32": 0}]
+    },
+    "charinfo": {"size": "0x11fc", "fill": "zero"},
+    "indexed_dispatch": {"size": "0x4", "fill": "zero"},
+    "string_table": {"size": "0x4", "fill": "zero"},
+    "item": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "0x1234"}]
+    },
+    "text": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "cstr": "fixture item text"}]
+    },
+    "connection": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x00905d1c", "u32": "@world"},
+    {"addr": "0x00905d00", "u32": "@character"},
+    {"addr": "0x00988df0", "u32": "@indexed_dispatch"},
+    {"addr": "0x00905cb0", "u32": "@string_table"},
+    {"addr": "0x00905ca0", "u32": "@connection"},
+    {"addr": "0x00851200", "size": 400, "fill": "zero"},
+    {"addr": "0x00851204", "u32": "@item"},
+    {"addr": "0x0085138c", "u32": "@item"}
+  ],
+  "callees": {
+    "0x00597be0": {
+      "name": "GetCurSel_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004bef02": {
+      "name": "BitchCanTrain_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "int"],
+      "ret": 1
+    },
+    "0x0041b0de": {
+      "name": "Check_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 1
+    },
+    "0x004bdad1": {
+      "name": "CostToTrain_guess",
+      "conv": "thiscall",
+      "args": ["int", "float", "int"],
+      "ret": 1
+    },
+    "0x005ec220": {
+      "name": "GetCharInfo2_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@charinfo"
+    },
+    "0x00492ec2": {
+      "name": "CleanText_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "arg0"
+    },
+    "0x0046da4a": {
+      "name": "FormatDisplay_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "cstr", "cstr", "int", "int", "int", "int", "int", "int", "int"],
+      "ret": 0
+    },
+    "0x004982c6": {
+      "name": "DisplayChat_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "int", "bool"],
+      "ret": 0
+    },
+    "0x004bc0d3": {
+      "name": "SpendMoney_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x004912b1": {
+      "name": "EQSendMessage",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "mem:12", "int", "char"],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": ["u32", "ptr"],
+      "ret": "@text"
+    },
+    "0x00492595": {
+      "name": "Name_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@text"
+    },
+    "0x004bc59b": {
+      "name": "AddSkillValue_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 0
+    },
+    "0x0056af2c": {
+      "name": "FillRow_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {"name": "null list", "args": [], "memory": [{"addr": "@sortmanager", "offset": "0x18c", "u32": 0}]},
+    {"name": "null world", "args": [], "memory": [{"addr": "0x00905d1c", "u32": 0}]},
+    {
+      "name": "no selection",
+      "args": [],
+      "callees": {"0x00597be0": {"name": "GetCurSel_guess", "conv": "thiscall", "args": [], "ret": -1}}
+    },
+    {
+      "name": "normal item rejected",
+      "args": [],
+      "callees": {"0x004bef02": {"name": "CheckItem_guess", "conv": "thiscall", "args": ["int", "int", "int"], "ret": 0}}
+    },
+    {
+      "name": "special item rejected",
+      "args": [],
+      "memory": [{"addr": "@sortmanager", "offset": "0x190", "u32": 100}],
+      "callees": {"0x004bef02": {"name": "CheckItem_guess", "conv": "thiscall", "args": ["int", "int", "int"], "ret": 0}}
+    },
+    {
+      "name": "insufficient funds",
+      "args": [],
+      "callees": {
+        "0x0041b0de": {"name": "Check_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+        "0x004bdad1": {"name": "Price_guess", "conv": "thiscall", "args": ["int", "float", "int"], "ret": 1}
+      }
+    },
+    {
+      "name": "normal item free with less funds",
+      "args": [],
+      "memory": [
+        {"addr": "@sortmanager", "offset": "0x190", "u32": 99},
+        {"addr": "@charinfo", "offset": "0x11e0", "u32": 1}
+      ],
+      "callees": {
+        "0x0041b0de": {"name": "Check_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+        "0x004bdad1": {"name": "Price_guess", "conv": "thiscall", "args": ["int", "float", "int"], "ret": 0}
+      }
+    },
+    {
+      "name": "normal item free at equal funds",
+      "args": [],
+      "callees": {
+        "0x0041b0de": {"name": "Check_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+        "0x004bdad1": {"name": "Price_guess", "conv": "thiscall", "args": ["int", "float", "int"], "ret": 0}
+      }
+    },
+    {
+      "name": "checked normal item purchase",
+      "args": [],
+      "memory": [{"addr": "@charinfo", "offset": "0x11d4", "u32": 1}],
+      "callees": {
+        "0x0041b0de": {"name": "Check_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+        "0x004bdad1": {"name": "Price_guess", "conv": "thiscall", "args": ["int", "float", "int"], "ret": 5}
+      }
+    },
+    {
+      "name": "special first item zero flag",
+      "args": [],
+      "memory": [{"addr": "@sortmanager", "offset": "0x190", "u32": 100}],
+      "callees": {"0x004bdad1": {"name": "Price_guess", "conv": "thiscall", "args": ["int", "float", "int"], "ret": 0}}
+    },
+    {
+      "name": "special last item set flag equal funds",
+      "args": [],
+      "memory": [
+        {"addr": "@sortmanager", "offset": "0x190", "u32": 131},
+        {"addr": "@character", "offset": "0x33", "u8": 1},
+        {"addr": "@charinfo", "offset": "0x11e0", "u32": 1}
+      ],
+      "callees": {"0x004bdad1": {"name": "Price_guess", "conv": "thiscall", "args": ["int", "float", "int"], "ret": 1}}
+    },
+    {
+      "name": "special range boundary int3",
+      "args": [],
+      "memory": [{"addr": "@sortmanager", "offset": "0x190", "u32": 132}],
+      "callees": {"0x004bdad1": {"name": "Price_guess", "conv": "thiscall", "args": ["int", "float", "int"], "ret": 0}}
+    },
+    {
+      "name": "money decimal radix boundary",
+      "args": [],
+      "memory": [{"addr": "@charinfo", "offset": "0x11d4", "u32": 1}],
+      "callees": {
+        "0x0041b0de": {"name": "Check_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+        "0x004bdad1": {"name": "Price_guess", "conv": "thiscall", "args": ["int", "float", "int"], "ret": 1050}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5682318,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@sortmanager", "offset": "0x190", "type": "int", "choices": [1, 99, 100, 131]},
+      {"addr": "@sortmanager", "offset": "0x194", "type": "int", "choices": [1, 100]},
+      {"addr": "@character", "offset": "0x14", "type": "u8", "choices": [0, 1]},
+      {"addr": "@character", "offset": "0x33", "type": "u8", "choices": [0, 1]},
+      {"addr": "@charinfo", "offset": "0x11d4", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "@charinfo", "offset": "0x11d8", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "@charinfo", "offset": "0x11dc", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "@charinfo", "offset": "0x11e0", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "@charinfo", "offset": "0x11f8", "type": "int", "choices": [0, 1, 5]}
+    ]
+  }
+}

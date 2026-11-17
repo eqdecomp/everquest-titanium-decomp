@@ -1,0 +1,102 @@
+{
+  "function": "CBazaarWndView_guess::SetPriceForSelectedItem_guess",
+  "original": "0x004e5769",
+  "sources": [
+    "src/EverQuest/tu_132_BazaarWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@wnd",
+  "args": [],
+  "ret": "char",
+  "objects": {
+    "wnd": {"size": "0x5f8", "fill": "random", "init": [{"offset": "0x16c", "u32": "@sel"}]},
+    "sel": {"size": "0x100", "fill": "random", "init": [
+      {"offset": "0x58", "u32": 3}, {"offset": "0x80", "u32": 100}, {"offset": "0x84", "u32": 200}]},
+    "same": {"size": "0x100", "fill": "random", "init": [
+      {"offset": "0x58", "u32": 7}, {"offset": "0x80", "u32": 100}, {"offset": "0x84", "u32": 200}]},
+    "diffa": {"size": "0x100", "fill": "random", "init": [
+      {"offset": "0x58", "u32": 3}, {"offset": "0x80", "u32": 101}, {"offset": "0x84", "u32": 200}]},
+    "diffb": {"size": "0x100", "fill": "random", "init": [
+      {"offset": "0x58", "u32": 9}, {"offset": "0x80", "u32": 100}, {"offset": "0x84", "u32": 201}]},
+    "name": {"size": "0x20", "fill": "zero", "init": [{"offset": 0, "cstr": "Rusty Sword"}]},
+    "money": {"size": "0x20", "fill": "zero", "init": [{"offset": 0, "cstr": " 5p 3g"}]}
+  },
+  "memory": [
+    {"addr": "@wnd", "offset": "0x2e4", "size": 320, "fill": "zero"}
+  ],
+  "callees": {
+    "0x004e53fb": {"name": "GetTotalMoney", "conv": "thiscall", "args": [], "ret": 5300},
+    "0x005e0f30": {"name": "GetKind", "conv": "thiscall", "args": [], "ret": 5},
+    "0x005ec760": {"name": "IsValid", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005ecd20": {"name": "GetItemType", "conv": "thiscall", "args": ["int"], "ret": 17},
+    "0x0044d0d0": {"name": "ValidateItemType", "conv": "cdecl", "args": ["int"], "ret": 1},
+    "0x005e0ec0": {"name": "GetName", "conv": "thiscall", "args": [], "ret": "@name"},
+    "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf",
+                   "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "53303a3100"}]},
+    "0x004e4dc4": {"name": "MoneyText", "conv": "thiscall", "args": ["u32"], "ret": "@money"},
+    "0x0046da4a": {"name": "FormatText", "conv": "cdecl",
+                   "args": ["ignore", "int", "cstr", "cstr", "int", "int", "int", "int", "int", "int", "int"],
+                   "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "464d5400"}]},
+    "0x004e4ca6": {"name": "ShowText", "conv": "thiscall", "args": ["cstr", "int"]},
+    "0x0060beb0": {"name": "WriteSetting", "conv": "cdecl", "args": ["cstr", "cstr", "cstr", "ptr"], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {"name": "selected null", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x16c", "u32": 0}, {"addr": "@wnd", "offset": "0x2e4", "u32": "@same"}],
+     "expect": {"ret": 0}},
+    {"name": "all slots empty", "args": [], "expect": {"ret": 0}},
+    {"name": "same id, sprintf path", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x2e4", "u32": "@same"}], "expect": {"ret": 1}},
+    {"name": "same id, last slot", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x420", "u32": "@same"}], "expect": {"ret": 1}},
+    {"name": "type invalid, copy path", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x2e8", "u32": "@same"}],
+     "callees": {"0x0044d0d0": {"name": "ValidateItemType", "conv": "cdecl", "args": ["int"], "ret": 0}},
+     "expect": {"ret": 1}},
+    {"name": "stack count 0, copy path", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x2e4", "u32": "@same"}, {"addr": "@sel", "offset": "0x58", "u32": 0}],
+     "expect": {"ret": 1}},
+    {"name": "stack count 1", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x2e4", "u32": "@same"}, {"addr": "@sel", "offset": "0x58", "u32": 1}],
+     "expect": {"ret": 1}},
+    {"name": "stack count -1", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x2e4", "u32": "@same"}, {"addr": "@sel", "offset": "0x58", "u32": "0xffffffff"}],
+     "expect": {"ret": 1}},
+    {"name": "diff a, kind differs", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x2e4", "u32": "@diffa"}],
+     "callees": {"0x005e0f30": {"name": "GetKind", "conv": "thiscall", "args": [], "ret": [1, 2, 3, 4]}},
+     "expect": {"ret": 0}},
+    {"name": "diff a, kind and count equal", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x2e4", "u32": "@diffa"}], "expect": {"ret": 1}},
+    {"name": "diff b, count differs, valid", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x2e4", "u32": "@diffb"}], "expect": {"ret": 1}},
+    {"name": "diff b, count differs, not valid", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x2e4", "u32": "@diffb"}],
+     "callees": {"0x005ec760": {"name": "IsValid", "conv": "thiscall", "args": [], "ret": 0}},
+     "expect": {"ret": 0}},
+    {"name": "diff b, second kind differs", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x2e4", "u32": "@diffb"}],
+     "callees": {"0x005e0f30": {"name": "GetKind", "conv": "thiscall", "args": [], "ret": [5, 5, 5, 6]}},
+     "expect": {"ret": 0}},
+    {"name": "mixed slots", "args": [], "memory": [
+      {"addr": "@wnd", "offset": "0x2e4", "u32": "@same"}, {"addr": "@wnd", "offset": "0x384", "u32": "@diffa"},
+      {"addr": "@wnd", "offset": "0x388", "u32": "@diffb"}, {"addr": "@wnd", "offset": "0x420", "u32": "@same"}],
+     "callees": {"0x005ec760": {"name": "IsValid", "conv": "thiscall", "args": [], "ret": 0}},
+     "expect": {"ret": 1}}
+  ],
+  "fuzz": {
+    "seed": 5134185,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {"addr": "@wnd", "offset": "0x16c", "type": "ptr", "choices": ["@sel", "@sel", "@sel", 0]},
+      {"addr": "@wnd", "offset": "0x2e4", "type": "ptr", "count": 80, "choices": [0, 0, 0, "@same", "@diffa", "@diffb"]},
+      {"addr": "@sel", "offset": "0x58", "type": "int", "choices": [-1, 0, 1, 3, 7, 9]},
+      {"addr": "@diffa", "offset": "0x58", "type": "int", "choices": [3, 4]},
+      {"addr": "@diffb", "offset": "0x84", "type": "int", "choices": [200, 201]}
+    ]
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "function": "Searcher_guess::CheckSpellFocusLimits_guess",
+  "original": "0x0040cec4",
+  "sources": ["src/EverQuest/tu_011_SpellFocus.cpp"],
+  "conv": "thiscall",
+  "this": "@searcher",
+  "args": [
+    {"name": "obj", "type": "int"},
+    {"name": "rows", "type": "ptr"},
+    {"name": "flag", "type": "int"}
+  ],
+  "ret": "int",
+  "objects": {
+    "searcher": {"size": "0x100", "fill": "random"},
+    "rows": {"size": "0x150", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@rows", "offset": "0x120", "hex": "00000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000"}
+  ],
+  "callees": {
+    "0x0040cc88": {"name": "FUN_0040cc88", "conv": "thiscall", "args": ["int", "int", "int", "int", "int"], "ret": [60, 30, 0, 100, 45, 80, 20, 10]}
+  },
+  "coverage_ok": {
+    "0040CEE0-0040CEE1": "int3 bounds guard: unreachable, the loop keeps i in 1..11",
+    "0040CEF2-0040CEF3": "int3 bounds guard: unreachable, the loop keeps i in 1..11"
+  },
+  "_survivors": "L331: i >= 12 guard after the loop-top break is unreachable (i is 1..11 here); L332: same guard, int3 unreachable; L337: second bounds guard, i is already below 12; L338: its __debugbreak, unreachable; L341: v == best sets best to the same value, so < and <= are equivalent",
+  "cases": [
+    {
+      "name": "full loop, never 0xfe, last ret repeats 50",
+      "args": [1, "@rows", 1],
+      "callees": {"0x0040cc88": {"name": "FUN_0040cc88", "conv": "thiscall", "args": ["int", "int", "int", "int", "int"], "ret": [50]}}
+    },
+    {
+      "name": "zero on the first call stops the loop",
+      "args": [1, "@rows", 1],
+      "callees": {"0x0040cc88": {"name": "FUN_0040cc88", "conv": "thiscall", "args": ["int", "int", "int", "int", "int"], "ret": [0]}}
+    },
+    {
+      "name": "0xfe at i=3 returns best so far (40)",
+      "args": [1, "@rows", 1],
+      "memory": [
+        {"addr": "@rows", "offset": "0x124", "u32": 5},
+        {"addr": "@rows", "offset": "0x128", "u32": 6},
+        {"addr": "@rows", "offset": "0x12c", "u32": 254}
+      ],
+      "callees": {"0x0040cc88": {"name": "FUN_0040cc88", "conv": "thiscall", "args": ["int", "int", "int", "int", "int"], "ret": [70, 40]}}
+    },
+    {
+      "name": "0xfe at i=1 returns 100 with no call",
+      "args": [1, "@rows", 1],
+      "memory": [{"addr": "@rows", "offset": "0x124", "u32": 254}],
+      "callees": {"0x0040cc88": {"name": "FUN_0040cc88", "conv": "thiscall", "args": ["int", "int", "int", "int", "int"], "ret": [10]}}
+    },
+    {
+      "name": "best goes down then up, ends at 60",
+      "args": [1, "@rows", 1],
+      "callees": {"0x0040cc88": {"name": "FUN_0040cc88", "conv": "thiscall", "args": ["int", "int", "int", "int", "int"], "ret": [90, 120, 60, 100]}}
+    },
+    {
+      "name": "zero on the last call (i=11)",
+      "args": [1, "@rows", 1],
+      "callees": {"0x0040cc88": {"name": "FUN_0040cc88", "conv": "thiscall", "args": ["int", "int", "int", "int", "int"], "ret": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 0]}}
+    },
+    {
+      "name": "0xfe at i=11 after 10 calls",
+      "args": [1, "@rows", 1],
+      "memory": [{"addr": "@rows", "offset": "0x14c", "u32": 254}],
+      "callees": {"0x0040cc88": {"name": "FUN_0040cc88", "conv": "thiscall", "args": ["int", "int", "int", "int", "int"], "ret": [40]}}
+    },
+    {
+      "name": "negative return ends the loop after one call",
+      "args": [1, "@rows", 1],
+      "callees": {"0x0040cc88": {"name": "FUN_0040cc88", "conv": "thiscall", "args": ["int", "int", "int", "int", "int"], "ret": [-5]}}
+    },
+    {
+      "name": "return equal to 100 keeps best at 100",
+      "args": [1, "@rows", 1],
+      "callees": {"0x0040cc88": {"name": "FUN_0040cc88", "conv": "thiscall", "args": ["int", "int", "int", "int", "int"], "ret": [100]}}
+    },
+    {
+      "name": "best of exactly 1 keeps the loop going",
+      "args": [1, "@rows", 1],
+      "callees": {"0x0040cc88": {"name": "FUN_0040cc88", "conv": "thiscall", "args": ["int", "int", "int", "int", "int"], "ret": [1]}}
+    },
+    {
+      "name": "obj zero and flag zero",
+      "args": [0, "@rows", 0],
+      "callees": {"0x0040cc88": {"name": "FUN_0040cc88", "conv": "thiscall", "args": ["int", "int", "int", "int", "int"], "ret": [33]}}
+    }
+  ],
+  "fuzz": {
+    "seed": 4247236,
+    "count": 150,
+    "args": [{"range": [-3, 5]}, {"choices": ["@rows"]}, {"range": [0, 1]}],
+    "memory": [
+      {"addr": "@rows", "offset": "0x124", "type": "int", "choices": [16, 32, 254, 5, 0, -1, 80, 2]},
+      {"addr": "@rows", "offset": "0x128", "type": "int", "choices": [16, 32, 254, 5, 0, -1, 80, 2]},
+      {"addr": "@rows", "offset": "0x12c", "type": "int", "choices": [16, 32, 254, 5, 0, -1, 80, 2]},
+      {"addr": "@rows", "offset": "0x130", "type": "int", "choices": [16, 32, 254, 5, 0, -1, 80, 2]},
+      {"addr": "@rows", "offset": "0x134", "type": "int", "choices": [16, 32, 254, 5, 0, -1, 80, 2]},
+      {"addr": "@rows", "offset": "0x138", "type": "int", "choices": [16, 32, 254, 5, 0, -1, 80, 2]},
+      {"addr": "@rows", "offset": "0x13c", "type": "int", "choices": [16, 32, 254, 5, 0, -1, 80, 2]},
+      {"addr": "@rows", "offset": "0x140", "type": "int", "choices": [16, 32, 254, 5, 0, -1, 80, 2]},
+      {"addr": "@rows", "offset": "0x144", "type": "int", "choices": [16, 32, 254, 5, 0, -1, 80, 2]},
+      {"addr": "@rows", "offset": "0x148", "type": "int", "choices": [16, 32, 254, 5, 0, -1, 80, 2]},
+      {"addr": "@rows", "offset": "0x14c", "type": "int", "choices": [16, 32, 254, 5, 0, -1, 80, 2]},
+      {"addr": "@rows", "offset": "0x30", "type": "int", "range": [-5, 60]},
+      {"addr": "@rows", "offset": "0x34", "type": "int", "range": [-5, 60]},
+      {"addr": "@rows", "offset": "0x38", "type": "int", "range": [-5, 60]},
+      {"addr": "@rows", "offset": "0x3c", "type": "int", "range": [-5, 60]},
+      {"addr": "@rows", "offset": "0x40", "type": "int", "range": [-5, 60]},
+      {"addr": "@rows", "offset": "0x44", "type": "int", "range": [-5, 60]},
+      {"addr": "@rows", "offset": "0x48", "type": "int", "range": [-5, 60]},
+      {"addr": "@rows", "offset": "0x4c", "type": "int", "range": [-5, 60]},
+      {"addr": "@rows", "offset": "0x50", "type": "int", "range": [-5, 60]},
+      {"addr": "@rows", "offset": "0x54", "type": "int", "range": [-5, 60]},
+      {"addr": "@rows", "offset": "0x58", "type": "int", "range": [-5, 60]},
+      {"addr": "@rows", "offset": "0x5c", "type": "int", "range": [-5, 60]}
+    ]
+  }
+}

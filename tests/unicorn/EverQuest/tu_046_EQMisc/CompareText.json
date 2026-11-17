@@ -1,0 +1,107 @@
+{
+  "function": "SetSocial_guess",
+  "original": "0x0046bc70",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "name_guess", "type": "cstr"},
+    {"name": "value_guess", "type": "cstr"},
+    {"name": "type_guess", "type": "char"},
+    {"name": "start_guess", "type": "int"}
+  ],
+  "ret": "int",
+  "objects": {
+    "logmgr": {"size": "0x10", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x0095D4D4", "size": 155640, "fill": "random"},
+    {"addr": "0x0095D45C", "size": 120, "fill": "zero"},
+    {"addr": "0x00850C24", "u32": "@logmgr"}
+  ],
+  "callees": {
+    "0x00621e9c": {
+      "name": "__stricmp",
+      "conv": "cdecl",
+      "args": ["u32", "u32"],
+      "ret": 1
+    },
+    "0x004fd91e": {
+      "name": "FUN_004fd91e",
+      "conv": "thiscall",
+      "args": ["int", "int", "int", "cstr", "int"],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "__stricmp": "0x00621e9c"
+  },
+  "cases": [
+    {
+      "name": "zeros",
+      "args": ["", "", 0, 0],
+      "memory": [{"addr": "0x0095D4D4", "u8": 0}]
+    },
+    {
+      "name": "neg_start_empty0",
+      "args": ["abc", "val", 1, -1],
+      "memory": [{"addr": "0x0095D4D4", "u8": 0}]
+    },
+    {
+      "name": "big_start_empty0",
+      "args": ["abc", "val", 1, 200],
+      "memory": [{"addr": "0x0095D4D4", "u8": 0}]
+    },
+    {
+      "name": "start0_found_by_stricmp_slot2",
+      "args": ["abc", "val", 2, 0],
+      "memory": [
+        {"addr": "0x0095D4D4", "u8": 65},
+        {"addr": "0x0095D4D4", "offset": "0x511", "u8": 65},
+        {"addr": "0x0095D4D4", "offset": "0xA22", "u8": 65}
+      ],
+      "callees": {
+        "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["u32", "u32"], "ret": [1, 1, 0]}
+      }
+    },
+    {
+      "name": "start5_empty_slot5",
+      "args": ["abc", "val", 2, 5],
+      "memory": [{"addr": "0x0095D4D4", "offset": "0x1955", "u8": 0}]
+    },
+    {
+      "name": "start5_stricmp_slot6",
+      "args": ["abc", "val", 2, 5],
+      "memory": [
+        {"addr": "0x0095D4D4", "offset": "0x1955", "u8": 65},
+        {"addr": "0x0095D4D4", "offset": "0x1E66", "u8": 65}
+      ],
+      "callees": {
+        "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["u32", "u32"], "ret": [1, 0]}
+      }
+    },
+    {
+      "name": "start12_page_wrap_empty",
+      "args": ["abc", "val", 2, 12],
+      "memory": [{"addr": "0x0095D4D4", "offset": "0x3CCC", "u8": 0}]
+    },
+    {
+      "name": "start119_last_slot",
+      "args": ["abc", "val", 3, 119],
+      "memory": [{"addr": "0x0095D4D4", "offset": "0x26004", "u8": 0}]
+    }
+  ],
+  "_survivors": "L2293: start == 0 is reset to 0 either way, so < 0 vs <= 0 vs < 1 cannot differ; L2301: after the reset start is 0..119, so slot is 0..11 and slot == 12 never occurs (the < 0xc test is always true)",
+  "fuzz": {
+    "seed": 4635760,
+    "count": 150,
+    "args": [
+      {"choices": ["abc", "ABC", "val", "", "zz"]},
+      {"choices": ["v", "", "Value", "x"]},
+      {"range": [-128, 127]},
+      {"range": [-3, 130]}
+    ],
+    "memory": []
+  }
+}

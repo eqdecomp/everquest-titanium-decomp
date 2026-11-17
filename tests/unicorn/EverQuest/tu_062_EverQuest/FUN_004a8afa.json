@@ -1,0 +1,108 @@
+{
+  "function": "CEverQuest_guess::IFoundMyVehicle_guess",
+  "original": "0x004a8afa",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@ceverquest",
+  "args": [],
+  "ret": "char",
+  "objects": {
+    "ceverquest": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "contextobj": {
+      "size": "0x1000",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x8", "u32": "@node" }
+      ]
+    },
+    "node": {
+      "size": "0x10",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    { "addr": "0x00905D00", "u32": "@contextobj" },
+    { "addr": "0x00905CA0", "size": 16, "fill": "zero" },
+    { "addr": "0x00924675", "u8": 0 },
+    { "addr": "0x00924676", "u8": 0 },
+    { "addr": "@contextobj", "offset": "0xC4", "cstr": "AB" },
+    { "addr": "@contextobj", "offset": "0x1C4", "cstr": "ABC" },
+    { "addr": "@contextobj", "offset": "0x2C4", "cstr": "A" }
+  ],
+  "callees": {
+    "0x0046d655": {
+      "name": "FUN_0046d655",
+      "conv": "cdecl",
+      "args": [],
+      "ret": [1000, 61000, 62001]
+    },
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "ptr", "int", "char"],
+      "ret": 1
+    },
+    "0x004a56b1": {
+      "name": "ProcessMBox_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "kernel32.dll!Sleep": {
+      "name": "Sleep",
+      "conv": "stdcall",
+      "args": ["int"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "empty text sends nothing",
+      "args": [],
+      "memory": [
+        { "addr": "@node", "offset": "0x4", "u32": "0x300" }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "one char, already acknowledged",
+      "args": [],
+      "memory": [
+        { "addr": "@node", "offset": "0x4", "u32": "0x200" },
+        { "addr": "0x00924675", "u8": 1 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "two chars, already acknowledged",
+      "args": [],
+      "memory": [
+        { "addr": "@node", "offset": "0x4", "u32": "0x0" },
+        { "addr": "0x00924675", "u8": 1 }
+      ],
+      "expect": { "ret": 1 }
+    },
+    {
+      "name": "three chars, never acknowledged: sleep then time out at 61001",
+      "args": [],
+      "memory": [
+        { "addr": "@node", "offset": "0x4", "u32": "0x100" }
+      ],
+      "expect": { "ret": 0 }
+    }
+  ],
+  "fuzz": {
+    "seed": 4885242,
+    "count": 100,
+    "args": [],
+    "memory": [
+      { "addr": "@node", "offset": "0x4", "type": "u32", "choices": [0, 256, 512, 768] },
+      { "addr": "0x00924675", "type": "u8", "choices": [0, 1] }
+    ]
+  }
+}

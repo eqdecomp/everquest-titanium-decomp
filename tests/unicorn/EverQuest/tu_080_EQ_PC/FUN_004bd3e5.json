@@ -1,0 +1,505 @@
+{
+  "function": "EQ_PCView_guess::CreateBandolier_guess",
+  "original": "0x004bd3e5",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [
+    {
+      "name": "param_1",
+      "type": "int"
+    },
+    {
+      "name": "param_2",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "object": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@holder"
+        }
+      ]
+    },
+    "holder": {
+      "size": "0x8",
+      "fill": "zero"
+    },
+    "connection": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "candidate": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "recordHost": {
+      "size": "0x68",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x3c",
+          "u32": "@record2"
+        },
+        {
+          "offset": "0x44",
+          "u32": "@record0"
+        },
+        {
+          "offset": "0x48",
+          "u32": "@record1"
+        },
+        {
+          "offset": "0x64",
+          "u32": "@record3"
+        }
+      ]
+    },
+    "record0": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "record1": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "record2": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "record3": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "text0": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "cstr": "field zero"
+        }
+      ]
+    },
+    "text1": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "cstr": "field one"
+        }
+      ]
+    },
+    "text2": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "cstr": "field two"
+        }
+      ]
+    },
+    "text3": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "cstr": "field three"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "from_image": "0x0079ac74",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00850bc8",
+      "u32": "@connection"
+    },
+    {
+      "addr": "0x00905ca0",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x005f0c30": {
+      "name": "FUN_005f0c30",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@candidate"
+    },
+    "0x00574460": {
+      "name": "FUN_00574460",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "ptr"
+      ],
+      "ret": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "0x004baac6": {
+      "name": "ClearBandolierSet_guess",
+      "conv": "thiscall",
+      "args": [],
+      "passthrough": true
+    },
+    "0x005ec220": {
+      "name": "FUN_005ec220",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@recordHost"
+    },
+    "0x005e0f60": {
+      "name": "FUN_005e0f60",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        101,
+        102,
+        103,
+        104
+      ]
+    },
+    "0x005e0f30": {
+      "name": "FUN_005e0f30",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        201,
+        202,
+        203,
+        204
+      ]
+    },
+    "0x005e0ec0": {
+      "name": "FUN_005e0ec0",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        "@text0",
+        "@text1",
+        "@text2",
+        "@text3"
+      ]
+    },
+    "0x005f0c60": {
+      "name": "FUN_005f0c60",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "mem:320"
+      ]
+    },
+    "0x004db2d1": {
+      "name": "FUN_004db2d1",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "mem:40",
+        "int",
+        "int"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "no_match_negative_index",
+      "args": [
+        -1,
+        "no match"
+      ],
+      "callees": {
+        "0x00574460": {
+          "name": "FUN_00574460",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "ptr"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "no_match_upper_boundary",
+      "args": [
+        4,
+        "no match"
+      ],
+      "callees": {
+        "0x00574460": {
+          "name": "FUN_00574460",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "ptr"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "match_first_all_fields_connection",
+      "args": [
+        -1,
+        "first match"
+      ],
+      "callees": {
+        "0x00574460": {
+          "name": "FUN_00574460",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "ptr"
+          ],
+          "ret": [
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "match_second",
+      "args": [
+        7,
+        "second match"
+      ],
+      "callees": {
+        "0x00574460": {
+          "name": "FUN_00574460",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "ptr"
+          ],
+          "ret": [
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "match_third",
+      "args": [
+        7,
+        "third match"
+      ],
+      "callees": {
+        "0x00574460": {
+          "name": "FUN_00574460",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "ptr"
+          ],
+          "ret": [
+            1,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "match_fourth",
+      "args": [
+        7,
+        "fourth match"
+      ],
+      "callees": {
+        "0x00574460": {
+          "name": "FUN_00574460",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "ptr"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "initial_valid_no_match_no_fields_no_connection",
+      "args": [
+        2,
+        "valid original index"
+      ],
+      "memory": [
+        {
+          "addr": "0x00850bc8",
+          "u32": 0
+        },
+        {
+          "addr": "@recordHost",
+          "offset": "0x3c",
+          "u32": 0
+        },
+        {
+          "addr": "@recordHost",
+          "offset": "0x44",
+          "u32": 0
+        },
+        {
+          "addr": "@recordHost",
+          "offset": "0x48",
+          "u32": 0
+        },
+        {
+          "addr": "@recordHost",
+          "offset": "0x64",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00574460": {
+          "name": "FUN_00574460",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "ptr"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "upper_match_long_name",
+      "args": [
+        -1,
+        "0123456789abcdefghijklmnopqrstuv-extra"
+      ],
+      "callees": {
+        "0x00574460": {
+          "name": "FUN_00574460",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "ptr"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4969445,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          -5,
+          -1,
+          0,
+          3,
+          4,
+          8
+        ]
+      },
+      {
+        "choices": [
+          "",
+          "a",
+          "0123456789abcdefghijklmnopqrstuv-extra"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x00850bc8",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@connection"
+        ]
+      },
+      {
+        "addr": "@recordHost",
+        "offset": "0x3c",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@record2"
+        ]
+      },
+      {
+        "addr": "@recordHost",
+        "offset": "0x44",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@record0"
+        ]
+      },
+      {
+        "addr": "@recordHost",
+        "offset": "0x48",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@record1"
+        ]
+      },
+      {
+        "addr": "@recordHost",
+        "offset": "0x64",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@record3"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "function": "DeleteBase_guess::Delete_guess",
+  "original": "0x00425f52",
+  "sources": [
+    "src/EverQuest/tu_018_MailtoLink.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@deletebase",
+  "args": [
+    {
+      "name": "flags_guess",
+      "type": "u8"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "deletebase": {
+      "size": "0x50",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00425ebe": {
+      "name": "FUN_00425ebe",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0060d0d5": {
+      "name": "_free",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        1
+      ]
+    },
+    {
+      "name": "zeros",
+      "args": [
+        0
+      ]
+    },
+    {
+      "name": "other-bit",
+      "args": [
+        2
+      ]
+    },
+    {
+      "name": "all-bits",
+      "args": [
+        255
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4349778,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          0,
+          1,
+          2,
+          255
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

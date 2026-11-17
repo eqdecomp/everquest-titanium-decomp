@@ -1,0 +1,122 @@
+{
+  "function": "Mover_46_guess::Mover_46_guess",
+  "original": "0x0046d713",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@mover",
+  "args": [
+    {
+      "name": "source_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "position_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "mover": {
+      "size": "0x70",
+      "fill": "random"
+    },
+    "source": {
+      "size": "0x18",
+      "fill": "random"
+    },
+    "position": {
+      "size": "0x0c",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0063f4cc",
+      "from_image": "0x0063f4cc",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x00435b13": {
+      "name": "CopyPose_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr"
+      ],
+      "ret": "keep",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "000000000000000000000000"
+        }
+      ]
+    },
+    "0x0046d66e": {
+      "name": "GetRate_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret_float": 2.0
+    }
+  },
+  "cases": [
+    {
+      "name": "positive rate",
+      "args": [
+        "@source",
+        "@position"
+      ]
+    },
+    {
+      "name": "zero rate",
+      "args": [
+        "@source",
+        "@position"
+      ],
+      "callees": {
+        "0x0046d66e": {
+          "name": "GetRate_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret_float": 0.0
+        }
+      }
+    },
+    {
+      "name": "negative rate",
+      "args": [
+        "@source",
+        "@position"
+      ],
+      "callees": {
+        "0x0046d66e": {
+          "name": "GetRate_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret_float": -1.0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4642579,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@source"
+        ]
+      },
+      {
+        "choices": [
+          "@position"
+        ]
+      }
+    ],
+    "memory": []
+  },
+  "_survivors": "L6162: changing the first destination index from 0 to 1 is overwritten by the next assignment to vector_000_guess[1] before GetRate_guess reads the vector."
+}

@@ -1,0 +1,209 @@
+{
+  "function": "CharacterMagicSystem_guess::FindBuffWithEffect_guess",
+  "original": "0x0040e934",
+  "sources": [
+    "src/EverQuest/tu_012_CharacterMagicSystem.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@charactermagicsystem",
+  "args": [
+    {
+      "name": "value_guess",
+      "type": "int"
+    },
+    {
+      "name": "index_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "charactermagicsystem": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "index": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "entry0": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "entry1": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "data0": {
+      "size": "0x200",
+      "fill": "zero"
+    },
+    "data1": {
+      "size": "0x200",
+      "fill": "zero"
+    },
+    "lookup": {
+      "size": "0x10",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "0x00985cc8", "u32": "@lookup"}
+  ],
+  "callees": {
+    "0x0040d933": {
+      "name": "GetMaxBuffs_guess",
+      "conv": "fastcall",
+      "args": ["ptr"],
+      "ret": 2
+    },
+    "0x0040e7ac": {
+      "name": "FUN_0040e7ac",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": ["@entry0", "@entry1"]
+    },
+    "0x0040cbd6": {
+      "name": "GetSpell_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": ["@data0", "@data1"]
+    }
+  },
+  "_survivors": "All equivalent: inside the loop byteOffset only takes 0,4,..,0x2C (12 slots). L1490 byteOffset start 0->1 gives offsets 1..0x2D, still 12 slots, and valueIndex drives the reads; L1491 bound 0x30->0x2F still stops after 0x2C; L1493/L1498 bounds tests (>= -> >, 0x30 -> 0x31/0x2F) can never fire for 0..0x2C; L1494/L1499 deleting __debugbreak removes unreachable traps (dead code)",
+  "coverage_ok": {
+    "0040E979-0040E97A": "bounds int3 in the slot scan: the loop bound (< 0x30) keeps the offset in range",
+    "0040E98C-0040E98D": "bounds int3 in the slot scan: the loop bound (< 0x30) keeps the offset in range"
+  },
+  "cases": [
+    {
+      "name": "state count one: loop runs once",
+      "args": [7, "@index"],
+      "callees": {
+        "0x0040d933": {"name": "FUN_0040d933", "conv": "fastcall", "args": ["ptr"], "ret": 1}
+      },
+      "memory": [
+        {"addr": "@entry0", "offset": "0x0", "u8": 1},
+        {"addr": "@data0", "offset": "0x124", "u32": 7}
+      ]
+    },
+    {
+      "name": "value only past slot 11 is not found",
+      "args": [5, "@index"],
+      "memory": [
+        {"addr": "@entry0", "offset": "0x0", "u8": 1},
+        {"addr": "@data0", "offset": "0x150", "u32": 5}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "found in first entry",
+      "args": [7, "@index"],
+      "memory": [
+        {"addr": "@entry0", "offset": "0x0", "u8": 1},
+        {"addr": "@data0", "offset": "0x120", "u32": 7}
+      ]
+    },
+    {
+      "name": "found in second entry",
+      "args": [7, "@index"],
+      "memory": [
+        {"addr": "@entry0", "offset": "0x0", "u8": 1},
+        {"addr": "@entry1", "offset": "0x0", "u8": 1},
+        {"addr": "@data1", "offset": "0x128", "u32": 7}
+      ]
+    },
+    {
+      "name": "inactive entries: not found",
+      "args": [7, "@index"],
+      "memory": [
+        {"addr": "@entry0", "offset": "0x0", "u8": 0},
+        {"addr": "@entry1", "offset": "0x0", "u8": 0}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "state count zero: no loop",
+      "args": [7, "@index"],
+      "callees": {
+        "0x0040d933": {"name": "FUN_0040d933", "conv": "fastcall", "args": ["ptr"], "ret": 0}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "0xfe stops the slot scan",
+      "args": [7, "@index"],
+      "memory": [
+        {"addr": "@entry0", "offset": "0x0", "u8": 1},
+        {"addr": "@data0", "offset": "0x120", "u32": 254},
+        {"addr": "@data0", "offset": "0x124", "u32": 7}
+      ],
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "value in the last slot (11)",
+      "args": [9, "@index"],
+      "memory": [
+        {"addr": "@entry0", "offset": "0x0", "u8": 1},
+        {"addr": "@data0", "offset": "0x14c", "u32": 9}
+      ]
+    },
+    {
+      "name": "value 0 matches a zeroed slot 0",
+      "args": [0, "@index"],
+      "memory": [
+        {"addr": "@entry0", "offset": "0x0", "u8": 1}
+      ]
+    },
+    {
+      "name": "null data pointer skips the entry",
+      "args": [3, "@index"],
+      "memory": [
+        {"addr": "@entry0", "offset": "0x0", "u8": 1},
+        {"addr": "@entry1", "offset": "0x0", "u8": 0}
+      ],
+      "callees": {
+        "0x0040cbd6": {"name": "FUN_0040cbd6", "conv": "thiscall", "args": ["int"], "ret": [0]}
+      },
+      "expect": {"ret": 0}
+    },
+    {
+      "name": "null index pointer, found",
+      "args": [7, 0],
+      "memory": [
+        {"addr": "@entry0", "offset": "0x0", "u8": 1},
+        {"addr": "@data0", "offset": "0x120", "u32": 7}
+      ]
+    },
+    {
+      "name": "not in any slot of an active entry",
+      "args": [5, "@index"],
+      "memory": [
+        {"addr": "@entry0", "offset": "0x0", "u8": 1}
+      ],
+      "expect": {"ret": 0}
+    }
+  ],
+  "fuzz": {
+    "seed": 4254004,
+    "count": 100,
+    "args": [
+      {
+        "choices": [0, 3, 7, 9]
+      },
+      {
+        "choices": ["@index", 0]
+      }
+    ],
+    "memory": [
+      {"addr": "@entry0", "offset": "0x0", "type": "u8", "choices": [0, 1]},
+      {"addr": "@entry1", "offset": "0x0", "type": "u8", "choices": [0, 1]},
+      {"addr": "@data0", "offset": "0x120", "type": "int", "choices": [254, 7, 9, 0, 3]},
+      {"addr": "@data0", "offset": "0x124", "type": "int", "choices": [254, 7, 9, 0, 3]},
+      {"addr": "@data0", "offset": "0x128", "type": "int", "choices": [254, 7, 9, 0, 3]},
+      {"addr": "@data0", "offset": "0x14c", "type": "int", "choices": [254, 7, 9, 0, 3]},
+      {"addr": "@data1", "offset": "0x120", "type": "int", "choices": [254, 7, 9, 0, 3]},
+      {"addr": "@data1", "offset": "0x128", "type": "int", "choices": [254, 7, 9, 0, 3]}
+    ]
+  }
+}

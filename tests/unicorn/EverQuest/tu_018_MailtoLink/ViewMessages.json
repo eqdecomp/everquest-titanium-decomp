@@ -1,0 +1,127 @@
+{
+  "function": "MailStatusTable_guess::ReportMessages_guess",
+  "_shape": "message formatting loop, iterator search, missing-record early exit, and 0x2004 output cap",
+  "original": "0x00428e9a",
+  "sources": ["src/EverQuest/tu_018_MailtoLink.cpp"],
+  "conv": "thiscall",
+  "this": "@mailstatustable",
+  "args": [
+    {"name": "count_guess", "type": "int"},
+    {"name": "ids_guess", "type": "ptr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "mailstatustable": {"size": "0x60", "fill": "random"},
+    "ids": {"size": "0x400", "fill": "random"},
+    "searchResult": {"size": "0x8", "init": [{"offset": 0, "u32": 0}, {"offset": 4, "u32": 0}]},
+    "entryslot": {"size": "0x4", "init": [{"offset": 0, "u32": "@entry"}]},
+    "appendText": {"size": "0x20", "init": [{"offset": 0, "cstr": "append"}]},
+    "entry": {
+      "size": "0x44", "fill": "random",
+      "init": [
+        {"offset": 0, "u32": 1001},
+        {"offset": 4, "u32": 1700000000},
+        {"offset": "0x10", "hex": "66726f6d00"},
+        {"offset": "0x20", "u32": 4},
+        {"offset": "0x24", "u32": 15},
+        {"offset": "0x2c", "hex": "746f70696300"},
+        {"offset": "0x3c", "u32": 5},
+        {"offset": "0x40", "u32": 15}
+      ]
+    },
+    "message": {
+      "size": "0x1c", "fill": "random",
+      "init": [
+        {"offset": 4, "hex": "626f647900"},
+        {"offset": "0x14", "u32": 4},
+        {"offset": "0x18", "u32": 15}
+      ]
+    },
+    "infoRoot": {
+      "size": "0x60", "fill": "random",
+      "init": [
+        {"offset": 8, "u32": "@infoOffset"},
+        {"offset": "0x48", "hex": "696e666f00"},
+        {"offset": "0x58", "u32": 4},
+        {"offset": "0x5c", "u32": 15}
+      ]
+    },
+    "infoOffset": {
+      "size": "0x8", "init": [{"offset": 4, "u32": 0}]
+    },
+    "dateText": {"size": "0x20", "init": [{"offset": 0, "cstr": "Mon Jan  1 00:00:00 2024\n"}]}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": 305419896},
+    {"addr": "0x00905d00", "u32": "@infoRoot"},
+    {"addr": "0x00641624", "cstr": "separator"},
+    {"addr": "0x0064161c", "cstr": "\\nMSG#"},
+    {"addr": "0x00641588", "cstr": "terminator"},
+    {"addr": "0x00905ca0", "u32": 0},
+    {"addr": "0x0063f558", "u32": 0},
+    {"addr": "@mailstatustable", "offset": "0x30", "u32": 0},
+    {"addr": "@mailstatustable", "offset": "0x34", "u32": 2},
+    {"addr": "@ids", "u32": 1001},
+    {"addr": "@ids", "offset": 4, "u32": 1002}
+  ],
+  "callees": {
+    "0x0060d5a8": {"name": "__EH_prolog", "args": [], "passthrough": true},
+    "0x0060d674": {"name": "__security_check_cookie", "conv": "fastcall", "args": ["u32"]},
+    "0x00427663": {"name": "ostringstream constructor", "conv": "thiscall", "this": "ignore", "args": ["int", "int"], "ret": 0},
+    "0x004257ca": {
+      "name": "CollectionIterator search",
+      "conv": "cdecl",
+      "args": ["ignore", "ptr", "int", "ptr", "int", "int"],
+      "ret": "@searchResult",
+      "writes": [
+        {"addr": "@searchResult", "offset": 0, "hex": "00000000"},
+        {"addr": "@searchResult", "offset": 4, "hex": "00000000"}
+      ]
+    },
+    "0x00491002": {"name": "CollectionIterator::Equals", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": [0]},
+    "0x00425170": {"name": "CollectionIterator::Deref", "conv": "thiscall", "this": "ignore", "args": [], "ret": "@entryslot"},
+    "0x00426786": {"name": "append std::string", "conv": "cdecl", "args": ["ignore", "ptr"], "ret": "@appendText"},
+    "0x0042650a": {"name": "append text", "conv": "cdecl", "args": ["ignore", "cstr"], "ret": "@appendText"},
+    "0x00426c2d": {"name": "stream newline", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": "@appendText"},
+    "0x0060eca3": {"name": "_ctime", "conv": "cdecl", "args": ["ignore"], "ret": "@dateText"},
+    "0x00426a9f": {"name": "Get message text", "conv": "thiscall", "args": ["int"], "ret": [0]},
+    "0x004276d4": {"name": "ostringstream::str", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": 0},
+    "0x00427645": {"name": "string::substr", "conv": "thiscall", "this": "ignore", "args": ["ignore", "u32", "u32"], "ret": 0},
+    "0x0040291e": {"name": "string::_Tidy", "conv": "thiscall", "this": "ignore", "args": ["bool", "u32"], "ret": 0},
+    "0x004912b1": {"name": "send message", "conv": "cdecl", "args": ["ptr", "int", "cstr", "int", "char"], "ret": 0},
+    "0x00425a76": {"name": "stream destructor", "conv": "thiscall", "this": "ignore", "args": [], "ret": 0},
+    "0x00623d8d": {"name": "ios_base destructor", "conv": "thiscall", "this": "ignore", "args": [], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "_ctime": "0x0060eca3",
+    "?_Tidy@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@IAEX_NI@Z": "0x0040291e"
+  },
+  "cases": [
+    {"name": "negative count", "args": [-1, "@ids"]},
+    {"name": "empty count", "args": [0, "@ids"]},
+    {"name": "one message with missing text", "args": [1, "@ids"],
+     "callees": {"0x00491002": {"name": "equals", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": 0},
+                  "0x00426a9f": {"name": "message text", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "one message with text", "args": [1, "@ids"],
+     "callees": {"0x00491002": {"name": "equals", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": 0},
+                  "0x00426a9f": {"name": "message text", "conv": "thiscall", "args": ["int"], "ret": "@message"}}},
+    {"name": "record missing", "args": [1, "@ids"],
+     "callees": {"0x00491002": {"name": "equals", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": 1}}},
+    {"name": "two messages then missing record", "args": [3, "@ids"],
+     "callees": {"0x00491002": {"name": "equals", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": [0, 0, 1]},
+                  "0x00426a9f": {"name": "message text", "conv": "thiscall", "args": ["int"], "ret": [0, "@message"]}},
+     "memory": [{"addr": "@ids", "offset": 8, "u32": 1003}]}
+  ],
+  "fuzz": {
+    "seed": 4361882,
+    "count": 100,
+    "args": [
+      {"choices": [-1, 0, 1, 2, 3]},
+      {"choices": ["@ids"]}
+    ],
+    "memory": [
+      {"addr": "@mailstatustable", "offset": "0x30", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "@mailstatustable", "offset": "0x34", "type": "u32", "choices": [0, 1, 2, 3]}
+    ]
+  }
+}

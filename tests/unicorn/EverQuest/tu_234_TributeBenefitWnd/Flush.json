@@ -1,0 +1,534 @@
+{
+  "function": "CTrainWndView_guess::Flush_guess",
+  "original": "0x0056ab22",
+  "sources": [
+    "src/EverQuest/tu_234_TributeBenefitWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@sortmanager",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "sortmanager": {
+      "size": "0x7d4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x164",
+          "u32": "@state"
+        },
+        {
+          "offset": "0x178",
+          "u32": "@text_control"
+        },
+        {
+          "offset": "0x17c",
+          "u32": "@text_control"
+        },
+        {
+          "offset": "0x180",
+          "u32": "@text_control"
+        },
+        {
+          "offset": "0x184",
+          "u32": "@text_control"
+        },
+        {
+          "offset": "0x188",
+          "u32": "@text_control"
+        },
+        {
+          "offset": "0x18c",
+          "u32": "@list"
+        },
+        {
+          "offset": "0x190",
+          "u32": 5
+        },
+        {
+          "offset": "0x198",
+          "u32": 1234
+        }
+      ]
+    },
+    "charroot": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@vbtable"
+        }
+      ]
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 64
+        }
+      ]
+    },
+    "charinfo": {
+      "size": "0x11fc",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x119c",
+          "u8": 5
+        },
+        {
+          "offset": "0x11a4",
+          "u32": 3
+        },
+        {
+          "offset": "0x11d4",
+          "u32": 1
+        },
+        {
+          "offset": "0x11d8",
+          "u32": 2
+        },
+        {
+          "offset": "0x11dc",
+          "u32": 3
+        },
+        {
+          "offset": "0x11e0",
+          "u32": 4
+        },
+        {
+          "offset": "0x11f8",
+          "u32": 1
+        }
+      ]
+    },
+    "state": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x5d",
+          "u8": 1
+        }
+      ]
+    },
+    "list": {
+      "size": "0x200",
+      "fill": "zero"
+    },
+    "text_control": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": 0,
+          "u32": "@text_vtable"
+        }
+      ]
+    },
+    "text_vtable": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xfc",
+          "u32": "@text_fn"
+        }
+      ]
+    },
+    "text_fn": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "indexed": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d00",
+      "u32": "@charroot"
+    },
+    {
+      "addr": "0x00851200",
+      "size": 400,
+      "fill": "zero"
+    },
+    {
+      "addr": "0x00851214",
+      "u32": "@indexed"
+    },
+    {
+      "addr": "0x0085138c",
+      "u32": "@indexed"
+    },
+    {
+      "addr": "0x0063f53c",
+      "from_image": "0x0063f53c",
+      "image_size": 16
+    }
+  ],
+  "callees": {
+    "0x005ec220": {
+      "name": "GetCharInfo2_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@charinfo"
+    },
+    "0x005738b0": {
+      "name": "FormatNumber_guess",
+      "conv": "cdecl",
+      "args": [
+        "mem:4",
+        "cstr",
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "01000000"
+        }
+      ]
+    },
+    "0x00597be0": {
+      "name": "CListWnd::GetCurSel",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0044a2e4": {
+      "name": "IndexedValue_guess::GetFirst_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 3
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "@text_fn": {
+      "name": "TextControl::SetWindowTextA",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "global-null",
+      "memory": [
+        {
+          "addr": "0x00905d00",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "null-controls",
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x164",
+          "u32": 0
+        },
+        {
+          "addr": "@sortmanager",
+          "offset": "0x178",
+          "u32": 0
+        },
+        {
+          "addr": "@sortmanager",
+          "offset": "0x17c",
+          "u32": 0
+        },
+        {
+          "addr": "@sortmanager",
+          "offset": "0x180",
+          "u32": 0
+        },
+        {
+          "addr": "@sortmanager",
+          "offset": "0x184",
+          "u32": 0
+        },
+        {
+          "addr": "@sortmanager",
+          "offset": "0x188",
+          "u32": 0
+        },
+        {
+          "addr": "@sortmanager",
+          "offset": "0x18c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "no-selection",
+      "callees": {
+        "0x00597be0": {
+          "name": "CListWnd::GetCurSel",
+          "conv": "thiscall",
+          "args": [],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "no-benefits",
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x11f8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "below-threshold",
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x198",
+          "u32": 1235
+        }
+      ]
+    },
+    {
+      "name": "skill-requirement-too-high",
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x198",
+          "u32": 1234
+        },
+        {
+          "addr": "@charinfo",
+          "offset": "0x11a4",
+          "u32": 2
+        }
+      ]
+    },
+    {
+      "name": "ready-at-threshold",
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x198",
+          "u32": 1234
+        }
+      ]
+    },
+    {
+      "name": "skill-id-99",
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 99
+        },
+        {
+          "addr": "@sortmanager",
+          "offset": "0x198",
+          "u32": 1234
+        }
+      ]
+    },
+    {
+      "name": "skill-id-100",
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 100
+        },
+        {
+          "addr": "@sortmanager",
+          "offset": "0x198",
+          "u32": 1234
+        }
+      ]
+    },
+    {
+      "name": "level-one-meets-default-requirement",
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 100
+        },
+        {
+          "addr": "@sortmanager",
+          "offset": "0x198",
+          "u32": 1234
+        },
+        {
+          "addr": "@charinfo",
+          "offset": "0x11a4",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "null-state-on-ready",
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x164",
+          "u32": 0
+        },
+        {
+          "addr": "@sortmanager",
+          "offset": "0x198",
+          "u32": 1234
+        }
+      ]
+    },
+    {
+      "name": "threshold-equal",
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x198",
+          "u32": 1234
+        }
+      ]
+    },
+    {
+      "name": "threshold-one-below",
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x198",
+          "u32": 1233
+        }
+      ]
+    },
+    {
+      "name": "empty-character-level",
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x11a4",
+          "u32": 0
+        },
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 100
+        },
+        {
+          "addr": "@sortmanager",
+          "offset": "0x198",
+          "u32": 1234
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5679906,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@sortmanager",
+        "offset": "0x190",
+        "type": "int",
+        "choices": [
+          5,
+          99,
+          100
+        ]
+      },
+      {
+        "addr": "@sortmanager",
+        "offset": "0x198",
+        "type": "int",
+        "range": [
+          -10,
+          1300
+        ]
+      },
+      {
+        "addr": "@charinfo",
+        "offset": "0x119c",
+        "type": "u8",
+        "choices": [
+          0,
+          5,
+          255
+        ]
+      },
+      {
+        "addr": "@charinfo",
+        "offset": "0x11a4",
+        "type": "int",
+        "range": [
+          -1,
+          10
+        ]
+      },
+      {
+        "addr": "@charinfo",
+        "offset": "0x11d4",
+        "type": "int",
+        "range": [
+          -2,
+          3
+        ]
+      },
+      {
+        "addr": "@charinfo",
+        "offset": "0x11d8",
+        "type": "int",
+        "range": [
+          -2,
+          3
+        ]
+      },
+      {
+        "addr": "@charinfo",
+        "offset": "0x11dc",
+        "type": "int",
+        "range": [
+          -2,
+          3
+        ]
+      },
+      {
+        "addr": "@charinfo",
+        "offset": "0x11e0",
+        "type": "int",
+        "range": [
+          -2,
+          3
+        ]
+      },
+      {
+        "addr": "@charinfo",
+        "offset": "0x11f8",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          5
+        ]
+      }
+    ]
+  }
+}

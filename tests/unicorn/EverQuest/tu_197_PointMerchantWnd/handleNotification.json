@@ -1,0 +1,227 @@
+{
+  "function": "UseableWindow_guess::handleNotification_guess",
+  "original": "0x005477fd",
+  "sources": ["src/EverQuest/tu_197_PointMerchantWnd.cpp"],
+  "size": "0x440",
+  "conv": "thiscall",
+  "this": "@useablewindow",
+  "args": [
+    {"name": "target_arg_guess", "type": "ptr"},
+    {"name": "message_arg_guess", "type": "int"},
+    {"name": "data_arg_guess", "type": "ptr"}
+  ],
+  "ret": "int",
+  "objects": {
+    "useablewindow": {"size": "0x20c", "fill": "zero", "init": [
+      {"offset": "0", "u32": "@window_vtable"},
+      {"offset": "0x1b0", "u32": "@collection"},
+      {"offset": "0x1b8", "u32": "@option"},
+      {"offset": "0x1bc", "u32": "@source"},
+      {"offset": "0x1c0", "u32": "@status_target"},
+      {"offset": "0x1c4", "u32": "@field_callback"},
+      {"offset": "0x1dc", "u32": "@slots"},
+      {"offset": "0x1f4", "u32": "@value_slot"}
+    ]},
+    "option": {"size": "0x129", "fill": "zero", "init": [
+      {"offset": "0x128", "u8": 1}
+    ]},
+    "source": {"size": "0x5e", "fill": "zero"},
+    "status_target": {"size": "0x5e", "fill": "zero"},
+    "collection": {"size": "4", "fill": "zero"},
+    "field_callback": {"size": "4", "fill": "zero"},
+    "other": {"size": "4", "fill": "zero"},
+    "slots": {"size": "4", "fill": "zero", "init": [
+      {"offset": "0", "u32": "@slot"}
+    ]},
+    "slot": {"size": "0x54", "fill": "zero", "init": [
+      {"offset": "0x44", "u32": 5},
+      {"offset": "0x4c", "u32": 1},
+      {"offset": "0x50", "u32": 2}
+    ]},
+    "value_slot": {"size": "4", "fill": "zero", "init": [
+      {"offset": "0", "u32": 1}
+    ]},
+    "payload": {"size": "4", "fill": "zero", "init": [
+      {"offset": "0", "u32": 7}
+    ]},
+    "message_manager": {"size": "4", "fill": "zero"},
+    "display_manager": {"size": "4", "fill": "zero"},
+    "window_vtable": {"size": "0x8c", "fill": "zero", "init": [
+      {"offset": "0x88", "u32": "@fn_slot34"}
+    ]},
+    "fn_slot34": {"size": "4", "fill": "zero"},
+    "string_object": {"size": "0x18", "fill": "zero"},
+    "string_buffer": {"size": "0x40", "fill": "zero", "init": [
+      {"offset": "0", "cstr": "fixture item"}
+    ]},
+    "rendered": {"size": "0x40", "fill": "zero", "init": [
+      {"offset": "0", "cstr": "rendered text"}
+    ]}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x13579bdf"},
+    {"addr": "0x00988df0", "u32": "@display_manager"},
+    {"addr": "0x0099d3ec", "u32": "@message_manager"},
+    {"addr": "0x0099d3f0", "u32": "0x0099d3f4"},
+    {"addr": "0x0099d3f4", "u32": 0}
+  ],
+  "callees": {
+    "0x005455bd": {"name": "applyUseable", "conv": "thiscall", "args": []},
+    "0x00545eee": {"name": "notifyOption", "conv": "thiscall", "args": ["int", "char", "char"]},
+    "0x0047c3af": {"name": "RangeBuffer_ctor", "conv": "thiscall", "args": ["int"]},
+    "0x0059bb50": {"name": "find", "conv": "thiscall", "args": ["ignore"], "writes": [
+      {"arg": 0, "offset": 0, "hex": "00 00 00 00"},
+      {"arg": 0, "offset": 12, "hex": "00 00 00 00"},
+      {"arg": 0, "offset": 16, "hex": "F0 D3 99 00"}
+    ]},
+    "0x00597ed0": {"name": "getValue", "conv": "thiscall", "args": ["int"], "ret": 5},
+    "0x00547728": {"name": "updateQueue", "conv": "thiscall", "args": ["int", "int", "int"]},
+    "0x00546ee3": {"name": "applySlot", "conv": "thiscall", "args": ["int"]},
+    "0x0054571a": {"name": "getAmount", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00545731": {"name": "getRemaining", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr", "int"], "ret": 0},
+    "0x00545701": {"name": "getDetail", "conv": "thiscall", "args": ["int", "int"], "ret": 0},
+    "0x005457a6": {"name": "getToken", "conv": "thiscall", "args": ["int", "int", "int"], "ret": 0},
+    "0x0046da4a": {"name": "buildTokenString", "conv": "cdecl", "args": ["ignore", "int", "cstr", "cstr", "cstr", "cstr", "cstr", "cstr", "cstr", "cstr", "cstr"], "ret": 0, "writes": [
+      {"arg": 0, "offset": 0, "hex": "72 65 6e 64 65 72 65 64 20 74 65 78 74 00"}
+    ]},
+    "0x004982c6": {"name": "show", "conv": "thiscall", "args": ["cstr", "int", "bool"]},
+    "0x00406e7e": {"name": "RangeBuffer_dtor", "conv": "thiscall", "args": []},
+    "0x00597c00": {"name": "getState", "conv": "thiscall", "args": [], "ret": -1},
+    "0x005adf60": {"name": "getMessageFlags", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00597be0": {"name": "getCurrent", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00597f10": {"name": "getString", "conv": "thiscall", "args": ["ignore", "int", "int"], "ret": "@string_object", "writes": [
+      {"arg": 0, "offset": 0, "hex": "F4 D3 99 00"}
+    ]},
+    "0x00572300": {"name": "stringData", "conv": "thiscall", "args": [], "ret": "@string_buffer"},
+    "0x00571d00": {"name": "StringCleanup", "conv": "thiscall", "args": ["ptr"]},
+    "0x004912b1": {"name": "sendMessage", "conv": "cdecl", "args": ["ptr", "int", "mem:72", "int", "char"]},
+    "0x00546d37": {"name": "disableQueue", "conv": "thiscall", "args": ["int"]},
+    "0x005a2230": {"name": "route", "conv": "thiscall", "args": ["ptr", "int", "ptr"], "ret": 4660},
+    "@fn_slot34": {"name": "slot34", "conv": "thiscall", "args": []}
+  },
+  "rewrite_aliases": {"_sprintf": "0x0060d5eb"},
+  "_survivors": "L1896: zero shifted right or left remains zero for every shift count; L1918: same zero-index expression in the second range lookup.",
+  "cases": [
+    {"name": "fallback route", "args": ["@other", 99, "@payload"], "expect": {"ret": 4660}},
+    {"name": "option changed", "args": ["@option", 1, "@payload"], "memory": [
+      {"addr": "@useablewindow", "offset": "0x1e8", "u32": 7},
+      {"addr": "@useablewindow", "offset": "0x1ec", "u8": 1}
+    ], "expect": {"ret": 4660}},
+    {"name": "source collection null", "args": ["@source", 1, "@payload"], "memory": [
+      {"addr": "@useablewindow", "offset": "0x1b0", "u32": 0}
+    ], "expect": {"ret": 4660}},
+    {"name": "source selection empty", "args": ["@source", 1, "@payload"], "expect": {"ret": 4660}},
+    {"name": "source selection populated", "args": ["@source", 1, "@payload"], "memory": [
+      {"addr": "0x0099d3f0", "u32": "0x0099d3f4"}
+    ], "callees": {"0x0059bb50": {"name": "find", "conv": "thiscall", "args": ["ignore"], "writes": [
+      {"arg": 0, "offset": 0, "hex": "01 00 00 00"},
+      {"arg": 0, "offset": 12, "hex": "00 00 00 00"},
+      {"arg": 0, "offset": 16, "hex": "F0 D3 99 00"}
+    ]}}, "expect": {"ret": 4660}},
+    {"name": "status target", "args": ["@status_target", 1, "@payload"], "expect": {"ret": 4660}},
+    {"name": "collection amount low without limit", "args": ["@collection", 1, "@payload"], "callees": {
+      "0x0059bb50": {"name": "find", "conv": "thiscall", "args": ["ignore"], "writes": [
+        {"arg": 0, "offset": 0, "hex": "01 00 00 00"}, {"arg": 0, "offset": 12, "hex": "00 00 00 00"}, {"arg": 0, "offset": 16, "hex": "F0 D3 99 00"}
+      ]},
+      "0x0054571a": {"name": "getAmount", "conv": "thiscall", "args": [], "ret": 4}
+    }, "expect": {"ret": 4660}},
+    {"name": "collection amount low and limit low", "args": ["@collection", 1, "@payload"], "memory": [
+      {"addr": "@slot", "offset": "0x48", "u32": 1}
+    ], "callees": {
+      "0x0059bb50": {"name": "find", "conv": "thiscall", "args": ["ignore"], "writes": [
+        {"arg": 0, "offset": 0, "hex": "01 00 00 00"}, {"arg": 0, "offset": 12, "hex": "00 00 00 00"}, {"arg": 0, "offset": 16, "hex": "F0 D3 99 00"}
+      ]},
+      "0x0054571a": {"name": "getAmount", "conv": "thiscall", "args": [], "ret": 2},
+      "0x00545731": {"name": "getRemaining", "conv": "thiscall", "args": ["int"], "ret": 1}
+    }, "expect": {"ret": 4660}},
+    {"name": "collection amount low and limit enough", "args": ["@collection", 1, "@payload"], "memory": [
+      {"addr": "@slot", "offset": "0x48", "u32": 1}
+    ], "callees": {
+      "0x0059bb50": {"name": "find", "conv": "thiscall", "args": ["ignore"], "writes": [
+        {"arg": 0, "offset": 0, "hex": "01 00 00 00"}, {"arg": 0, "offset": 12, "hex": "00 00 00 00"}, {"arg": 0, "offset": 16, "hex": "F0 D3 99 00"}
+      ]},
+      "0x0054571a": {"name": "getAmount", "conv": "thiscall", "args": [], "ret": 2},
+      "0x00545731": {"name": "getRemaining", "conv": "thiscall", "args": ["int"], "ret": 5}
+    }, "expect": {"ret": 4660}},
+    {"name": "collection amount enough and limit low", "args": ["@collection", 1, "@payload"], "memory": [
+      {"addr": "@slot", "offset": "0x48", "u32": 1}
+    ], "callees": {
+      "0x0059bb50": {"name": "find", "conv": "thiscall", "args": ["ignore"], "writes": [
+        {"arg": 0, "offset": 0, "hex": "01 00 00 00"}, {"arg": 0, "offset": 12, "hex": "00 00 00 00"}, {"arg": 0, "offset": 16, "hex": "F0 D3 99 00"}
+      ]},
+      "0x0054571a": {"name": "getAmount", "conv": "thiscall", "args": [], "ret": 5},
+      "0x00545731": {"name": "getRemaining", "conv": "thiscall", "args": ["int"], "ret": 1}
+    }, "expect": {"ret": 4660}},
+    {"name": "collection allowed", "args": ["@collection", 1, "@payload"], "callees": {
+      "0x0059bb50": {"name": "find", "conv": "thiscall", "args": ["ignore"], "writes": [
+        {"arg": 0, "offset": 0, "hex": "01 00 00 00"}, {"arg": 0, "offset": 12, "hex": "00 00 00 00"}, {"arg": 0, "offset": 16, "hex": "F0 D3 99 00"}
+      ]},
+      "0x0054571a": {"name": "getAmount", "conv": "thiscall", "args": [], "ret": 5}
+    }, "expect": {"ret": 4660}},
+    {"name": "field callback", "args": ["@field_callback", 1, "@payload"], "expect": {"ret": 4660}},
+    {"name": "message 15 wrong target", "args": ["@other", 15, 0], "expect": {"ret": 0}},
+    {"name": "toggle first flag on", "args": ["@collection", 15, 0], "expect": {"ret": 0}},
+    {"name": "toggle first flag off", "args": ["@collection", 15, 0], "memory": [
+      {"addr": "@useablewindow", "offset": "0x168", "u8": 1}
+    ], "expect": {"ret": 0}},
+    {"name": "toggle second flag", "args": ["@collection", 15, 1], "expect": {"ret": 0}},
+    {"name": "toggle third flag", "args": ["@collection", 15, 2], "expect": {"ret": 0}},
+    {"name": "invalid toggle value", "args": ["@collection", 15, 4], "expect": {"ret": 0}},
+    {"name": "message 3 wrong target", "args": ["@other", 3, "@payload"], "expect": {"ret": 4660}},
+    {"name": "message 3 collection missing", "args": [0, 3, "@payload"], "memory": [
+      {"addr": "@useablewindow", "offset": "0x1b0", "u32": 0}
+    ], "expect": {"ret": 0}},
+    {"name": "message 3 state below", "args": ["@collection", 3, "@payload"], "callees": {
+      "0x00597c00": {"name": "getState", "conv": "thiscall", "args": [], "ret": -1}
+    }, "expect": {"ret": 0}},
+    {"name": "message 3 flags clear", "args": ["@collection", 3, "@payload"], "callees": {
+      "0x00597c00": {"name": "getState", "conv": "thiscall", "args": [], "ret": 0},
+      "0x005adf60": {"name": "getMessageFlags", "conv": "thiscall", "args": [], "ret": 0}
+    }, "expect": {"ret": 0}},
+    {"name": "message 3 flags set", "args": ["@collection", 3, "@payload"], "callees": {
+      "0x00597c00": {"name": "getState", "conv": "thiscall", "args": [], "ret": 2},
+      "0x005adf60": {"name": "getMessageFlags", "conv": "thiscall", "args": [], "ret": 1}
+    }, "expect": {"ret": 0}},
+    {"name": "message 3 state above", "args": ["@collection", 3, "@payload"], "callees": {
+      "0x00597c00": {"name": "getState", "conv": "thiscall", "args": [], "ret": 3}
+    }, "expect": {"ret": 0}},
+    {"name": "message 31 disable", "args": ["@other", 31, "@payload"], "memory": [
+      {"addr": "@useablewindow", "offset": "0x204", "u32": 0}
+    ], "expect": {"ret": 0}},
+    {"name": "message 31 apply", "args": ["@other", 31, "@payload"], "memory": [
+      {"addr": "@useablewindow", "offset": "0x204", "u32": 1},
+      {"addr": "@value_slot", "offset": 0, "u32": 1}
+    ], "expect": {"ret": 0}},
+    {"name": "message 31 empty slot", "args": ["@other", 31, "@payload"], "memory": [
+      {"addr": "@useablewindow", "offset": "0x204", "u32": 1},
+      {"addr": "@value_slot", "offset": 0, "u32": 0}
+    ], "expect": {"ret": 4660}},
+    {"name": "message 31 unrelated state", "args": ["@other", 31, "@payload"], "memory": [
+      {"addr": "@useablewindow", "offset": "0x204", "u32": 2}
+    ], "expect": {"ret": 4660}},
+    {"name": "message 10 vtable callback", "args": ["@other", 10, "@payload"], "expect": {"ret": 4660}},
+    {"name": "message boundary 9", "args": ["@other", 9, "@payload"], "expect": {"ret": 4660}},
+    {"name": "message boundary 32", "args": ["@other", 32, "@payload"], "expect": {"ret": 4660}}
+  ],
+  "fuzz": {
+    "seed": 5535741,
+    "count": 100,
+    "args": [
+      {"choices": ["@option", "@source", "@status_target", "@collection", "@field_callback", "@other"]},
+      {"choices": [0, 1, 2, 3, 9, 10, 15, 30, 31, 32]},
+      {"choices": ["@payload"]}
+    ],
+    "memory": [
+      {"addr": "@useablewindow", "offset": "0x1e8", "type": "u32", "choices": [0, 1, 5]},
+      {"addr": "@useablewindow", "offset": "0x1ec", "type": "u8", "choices": [0, 1]},
+      {"addr": "@useablewindow", "offset": "0x204", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "@option", "offset": "0x128", "type": "u8", "choices": [0, 1]},
+      {"addr": "@source", "offset": "0x5d", "type": "u8", "choices": [0, 1]},
+      {"addr": "@slot", "offset": "0x44", "type": "u32", "choices": [0, 1, 5]},
+      {"addr": "@slot", "offset": "0x48", "type": "u32", "choices": [0, 1]},
+      {"addr": "@value_slot", "offset": 0, "type": "u32", "choices": [0, 1]},
+      {"addr": "@payload", "offset": 0, "type": "u32", "choices": [0, 7]}
+    ]
+  }
+}

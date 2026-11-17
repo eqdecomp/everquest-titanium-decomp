@@ -1,0 +1,226 @@
+{
+  "function": "CPetInfoWndView_guess::LayoutBuffIcons_guess",
+  "original": "0x00541a90",
+  "sources": [
+    "src/EverQuest/tu_193_PetInfoWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@data",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "data": {
+      "size": "0x288",
+      "fill": "random",
+      "init": [
+        {"offset": "0x18c", "u32": "@container"},
+        {"offset": "0x210", "u32": "@cell"},
+        {"offset": "0x214", "u32": "@cell"},
+        {"offset": "0x218", "u32": "@cell"},
+        {"offset": "0x21c", "u32": "@cell"},
+        {"offset": "0x220", "u32": "@cell"},
+        {"offset": "0x224", "u32": "@cell"},
+        {"offset": "0x228", "u32": "@cell"},
+        {"offset": "0x22c", "u32": "@cell"},
+        {"offset": "0x230", "u32": "@cell"},
+        {"offset": "0x234", "u32": "@cell"},
+        {"offset": "0x238", "u32": "@cell"},
+        {"offset": "0x23c", "u32": "@cell"},
+        {"offset": "0x240", "u32": "@cell"},
+        {"offset": "0x244", "u32": "@cell"},
+        {"offset": "0x248", "u32": "@cell"},
+        {"offset": "0x24c", "u32": "@cell"},
+        {"offset": "0x250", "u32": "@cell"},
+        {"offset": "0x254", "u32": "@cell"},
+        {"offset": "0x258", "u32": "@cell"},
+        {"offset": "0x25c", "u32": "@cell"},
+        {"offset": "0x260", "u32": "@cell"},
+        {"offset": "0x264", "u32": "@cell"},
+        {"offset": "0x268", "u32": "@cell"},
+        {"offset": "0x26c", "u32": "@cell"},
+        {"offset": "0x270", "u32": "@cell"},
+        {"offset": "0x274", "u32": "@cell"},
+        {"offset": "0x278", "u32": "@cell"},
+        {"offset": "0x27c", "u32": "@cell"},
+        {"offset": "0x280", "u32": "@cell"},
+        {"offset": "0x284", "u32": "@cell"}
+      ]
+    },
+    "container": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {"offset": "0", "u32": "@vtbl"}
+      ]
+    },
+    "vtbl": {
+      "size": "0xe4",
+      "fill": "random",
+      "init": [
+        {"offset": "0xe0", "u32": "@fn"}
+      ]
+    },
+    "fn": {
+      "size": "0x4"
+    },
+    "cell": {
+      "size": "0x4c",
+      "fill": "random",
+      "init": [
+        {"offset": "0x3c", "u32": 0},
+        {"offset": "0x40", "u32": 0},
+        {"offset": "0x44", "u32": 1},
+        {"offset": "0x48", "u32": 2}
+      ]
+    },
+    "rect_a": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {"offset": "0", "u32": 0},
+        {"offset": "4", "u32": 0},
+        {"offset": "8", "u32": 100},
+        {"offset": "0xc", "u32": 0}
+      ]
+    },
+    "rect_b": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {"offset": "0", "u32": 0},
+        {"offset": "4", "u32": 0},
+        {"offset": "8", "u32": 0},
+        {"offset": "0xc", "u32": 100}
+      ]
+    }
+  },
+  "callees": {
+    "@fn": {
+      "name": "GetRect_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": [
+        "@rect_a",
+        "@rect_b"
+      ]
+    },
+    "0x0059fa70": {
+      "name": "Place_guess",
+      "conv": "stdcall",
+      "args": [
+        "mem:8"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "null_container",
+      "args": [],
+      "memory": [
+        {"addr": "@data", "offset": "0x18c", "u32": 0}
+      ]
+    },
+    {
+      "name": "null_first_cell",
+      "args": [],
+      "memory": [
+        {"addr": "@data", "offset": "0x210", "u32": 0}
+      ]
+    },
+    {
+      "name": "empty_tail",
+      "args": [],
+      "memory": [
+        {"addr": "@data", "offset": "0x214", "u32": 0},
+        {"addr": "@data", "offset": "0x218", "u32": 0},
+        {"addr": "@data", "offset": "0x21c", "u32": 0},
+        {"addr": "@data", "offset": "0x220", "u32": 0},
+        {"addr": "@data", "offset": "0x224", "u32": 0},
+        {"addr": "@data", "offset": "0x228", "u32": 0},
+        {"addr": "@data", "offset": "0x22c", "u32": 0},
+        {"addr": "@data", "offset": "0x230", "u32": 0},
+        {"addr": "@data", "offset": "0x234", "u32": 0},
+        {"addr": "@data", "offset": "0x238", "u32": 0},
+        {"addr": "@data", "offset": "0x23c", "u32": 0},
+        {"addr": "@data", "offset": "0x240", "u32": 0},
+        {"addr": "@data", "offset": "0x244", "u32": 0},
+        {"addr": "@data", "offset": "0x248", "u32": 0},
+        {"addr": "@data", "offset": "0x24c", "u32": 0},
+        {"addr": "@data", "offset": "0x250", "u32": 0},
+        {"addr": "@data", "offset": "0x254", "u32": 0},
+        {"addr": "@data", "offset": "0x258", "u32": 0},
+        {"addr": "@data", "offset": "0x25c", "u32": 0},
+        {"addr": "@data", "offset": "0x260", "u32": 0},
+        {"addr": "@data", "offset": "0x264", "u32": 0},
+        {"addr": "@data", "offset": "0x268", "u32": 0},
+        {"addr": "@data", "offset": "0x26c", "u32": 0},
+        {"addr": "@data", "offset": "0x270", "u32": 0},
+        {"addr": "@data", "offset": "0x274", "u32": 0},
+        {"addr": "@data", "offset": "0x278", "u32": 0},
+        {"addr": "@data", "offset": "0x27c", "u32": 0},
+        {"addr": "@data", "offset": "0x280", "u32": 0},
+        {"addr": "@data", "offset": "0x284", "u32": 0}
+      ]
+    },
+    {
+      "name": "normal_no_wrap",
+      "args": []
+    },
+    {
+      "name": "rollover",
+      "args": [],
+      "memory": [
+        {"addr": "@rect_b", "offset": "0xc", "u32": 5}
+      ]
+    },
+    {
+      "name": "column_bound_return",
+      "args": [],
+      "memory": [
+        {"addr": "@rect_a", "offset": "8", "u32": 0},
+        {"addr": "@rect_b", "offset": "0xc", "u32": 0}
+      ]
+    },
+    {
+      "name": "row_bound_return",
+      "args": [],
+      "memory": [
+        {"addr": "@cell", "offset": "0x40", "u32": 1},
+        {"addr": "@cell", "offset": "0x44", "u32": 0},
+        {"addr": "@cell", "offset": "0x48", "u32": 0},
+        {"addr": "@rect_a", "offset": "8", "u32": 100},
+        {"addr": "@rect_b", "offset": "0xc", "u32": "0xfffffffe"}
+      ]
+    },
+    {
+      "name": "column_bound_equal",
+      "args": [],
+      "memory": [
+        {"addr": "@rect_a", "offset": "8", "u32": 2},
+        {"addr": "@rect_b", "offset": "0xc", "u32": 0}
+      ]
+    },
+    {
+      "name": "rollover_nonzero_top",
+      "args": [],
+      "memory": [
+        {"addr": "@rect_b", "offset": "4", "u32": 2},
+        {"addr": "@rect_b", "offset": "0xc", "u32": 7}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5511824,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@data", "offset": "0x18c", "type": "ptr", "choices": [0, "@container"]},
+      {"addr": "@data", "offset": "0x210", "type": "ptr", "count": 30, "choices": [0, "@cell"]},
+      {"addr": "@cell", "offset": "0x3c", "type": "int", "count": 4, "range": [-3, 4]}
+    ]
+  },
+  "_survivors": "L470: the stack starts zeroed, so deleting column = 0 cannot be observed; L472: the stack starts zeroed, so deleting i = 0 cannot be observed"
+}

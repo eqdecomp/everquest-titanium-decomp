@@ -1,0 +1,69 @@
+{
+  "function": "MailAddressRecord_guess::Diff_guess",
+  "original": "0x0042cbea",
+  "sources": [
+    "src/EverQuest/tu_018_MailtoLink.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@self",
+  "args": [
+    {"name": "result_guess", "type": "ptr"},
+    {"name": "other_guess", "type": "ptr"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "self": {"size": "0x4c", "fill": "random"},
+    "other": {"size": "0x4c", "fill": "random"},
+    "result": {"size": "0xc", "fill": "random"},
+    "arrA": {"size": "0x70", "fill": "random"},
+    "arrB": {"size": "0x70", "fill": "random"},
+    "cntA": {"size": "0x4", "fill": "zero"},
+    "cntB": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@self", "offset": "0x20", "u32": "@arrA"}, {"addr": "@self", "offset": "0x24", "u32": "@arrA"},
+    {"addr": "@other", "offset": "0x20", "u32": "@arrB"}, {"addr": "@other", "offset": "0x24", "u32": "@arrB"}],
+  "callees": {
+    "0x0042610d": {"name": "map_ctor", "conv": "thiscall", "args": []},
+    "0x0042c050": {"name": "map_subscript", "conv": "thiscall", "args": ["ptr"],
+                   "ret": ["@cntA", "@cntB", "@cntA", "@cntB", "@cntA", "@cntB", "@cntA", "@cntB"]},
+    "0x0042c0c6": {"name": "map_copy_ctor", "conv": "thiscall", "args": ["ignore"]},
+    "0x0042bdbe": {"name": "map_tidy", "conv": "thiscall", "args": []}
+  },
+  "rewrite_aliases": {
+    "?_Init@?$_Tree@V?$_Tmap_traits@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HU?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@std@@@2@$0A@@std@@@std@@IAEXXZ": "0x0042610D",
+    "??0?$_Tree@V?$_Tmap_traits@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HU?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@std@@@2@$0A@@std@@@std@@QAE@ABV01@@Z": "0x0042C0C6",
+    "??A?$map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HU?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@std@@@2@@std@@QAEAAHABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@@Z": "0x0042C050"
+  },
+  "cases": [
+    {"name": "both empty", "args": ["@result", "@other"],
+     "memory": [
+       {"addr": "@self", "offset": "0x20", "u32": "@arrA"}, {"addr": "@self", "offset": "0x24", "u32": "@arrA"},
+       {"addr": "@other", "offset": "0x20", "u32": "@arrB"}, {"addr": "@other", "offset": "0x24", "u32": "@arrB"}]},
+    {"name": "self one", "args": ["@result", "@other"],
+     "memory": [
+       {"addr": "@self", "offset": "0x20", "u32": "@arrA"}, {"addr": "@self", "offset": "0x24", "u32": "@arrA+0x1c"},
+       {"addr": "@other", "offset": "0x20", "u32": "@arrB"}, {"addr": "@other", "offset": "0x24", "u32": "@arrB"}]},
+    {"name": "other one", "args": ["@result", "@other"],
+     "memory": [
+       {"addr": "@self", "offset": "0x20", "u32": "@arrA"}, {"addr": "@self", "offset": "0x24", "u32": "@arrA"},
+       {"addr": "@other", "offset": "0x20", "u32": "@arrB"}, {"addr": "@other", "offset": "0x24", "u32": "@arrB+0x1c"}]},
+    {"name": "three and two", "args": ["@result", "@other"],
+     "memory": [
+       {"addr": "@self", "offset": "0x20", "u32": "@arrA"}, {"addr": "@self", "offset": "0x24", "u32": "@arrA+0x54"},
+       {"addr": "@other", "offset": "0x20", "u32": "@arrB"}, {"addr": "@other", "offset": "0x24", "u32": "@arrB+0x38"}]},
+    {"name": "two and four", "args": ["@result", "@other"],
+     "memory": [
+       {"addr": "@self", "offset": "0x20", "u32": "@arrA+0x1c"}, {"addr": "@self", "offset": "0x24", "u32": "@arrA+0x54"},
+       {"addr": "@other", "offset": "0x20", "u32": "@arrB"}, {"addr": "@other", "offset": "0x24", "u32": "@arrB+0x70"}]}
+  ],
+  "fuzz": {
+    "seed": 4377578,
+    "count": 60,
+    "args": [{"choices": ["@result"]}, {"choices": ["@other"]}],
+    "memory": [
+      {"addr": "@self", "offset": "0x24", "type": "u32", "choices": ["@arrA", "@arrA+0x1c", "@arrA+0x38", "@arrA+0x54", "@arrA+0x70"]},
+      {"addr": "@other", "offset": "0x24", "type": "u32", "choices": ["@arrB", "@arrB+0x1c", "@arrB+0x38"]}
+    ]
+  }
+}

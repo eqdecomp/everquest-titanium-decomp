@@ -1,0 +1,94 @@
+{
+  "function": "TakeItemsFromSlots_guess",
+  "original": "0x004b8165",
+  "sources": ["src/EverQuest/tu_077_ItemMoveQueue.cpp"],
+  "conv": "cdecl",
+  "args": [
+    {"name": "holder_guess", "type": "ptr"},
+    {"name": "lookup_guess", "type": "ptr"},
+    {"name": "table_guess", "type": "ptr"},
+    {"name": "flag_guess", "type": "char"}
+  ],
+  "ret": "int",
+  "objects": {
+    "holder": {"size": "0xc290", "fill": "zero"},
+    "lookup": {"size": "0x20", "fill": "zero"},
+    "table": {"size": "0x20", "fill": "zero"},
+    "row": {"size": "0x24", "fill": "zero"},
+    "slot": {"size": "0x10", "fill": "zero"},
+    "target": {"size": "0x60", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "vtbl": {"size": "0x20", "fill": "zero",
+             "init": [{"offset": "4", "u32": "@fn_slot1"}, {"offset": "0x10", "u32": "@fn_slot4"}]},
+    "value": {"size": "0x60", "fill": "zero"},
+    "fn_slot1": {"size": "4"},
+    "fn_slot4": {"size": "4"}
+  },
+  "memory": [
+    {"addr": "@lookup", "u32": 1},
+    {"addr": "@row", "offset": "0x10", "u32": 10},
+    {"addr": "@target", "offset": "0x48", "u32": 10},
+    {"addr": "@slot", "u32": "@target"}
+  ],
+  "callees": {
+    "0x004b7470": {"name": "T3_ctor", "conv": "thiscall", "args": [], "ret": "keep"},
+    "0x004b748c": {"name": "Lookup_Get", "conv": "thiscall", "args": ["int"], "ret": "@row"},
+    "0x004b76a6": {"name": "Probe_FUN_004b76a6", "conv": "thiscall", "args": ["ptr"], "ret": "@slot"},
+    "0x005ec760": {"name": "Target_IsValid", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005ecd80": {"name": "Target_Set700", "conv": "thiscall", "args": ["u32"], "ret": "keep"},
+    "0x004b7724": {"name": "Table_SetWide", "conv": "thiscall", "args": ["int", "mem:56"], "ret": "keep"},
+    "@fn_slot1": {"name": "Target_Slot01", "conv": "thiscall", "args": [], "ret": "@value"},
+    "@fn_slot4": {"name": "Target_Slot04", "conv": "thiscall", "args": ["int"], "ret": 1}
+  },
+  "cases": [
+    {"name": "typical: e == field48, path A", "args": ["@holder", "@lookup", "@table", 0],
+     "expect": {"ret": 0}},
+    {"name": "zero count", "args": ["@holder", "@lookup", "@table", 0],
+     "memory": [{"addr": "@lookup", "u32": 0}], "expect": {"ret": 0}},
+    {"name": "null holder", "args": [0, "@lookup", "@table", 0], "expect": {"ret": 0}},
+    {"name": "slot null from probe", "args": ["@holder", "@lookup", "@table", 0],
+     "callees": {"0x004b76a6": {"name": "Probe_FUN_004b76a6", "conv": "thiscall", "args": ["ptr"], "ret": 0}},
+     "expect": {"ret": 1}},
+    {"name": "slot holds null", "args": ["@holder", "@lookup", "@table", 0],
+     "memory": [{"addr": "@slot", "u32": 0}], "expect": {"ret": 1}},
+    {"name": "flag set, slot04 false", "args": ["@holder", "@lookup", "@table", 1],
+     "callees": {"@fn_slot4": {"name": "Target_Slot04", "conv": "thiscall", "args": ["int"], "ret": 0}},
+     "expect": {"ret": 3}},
+    {"name": "flag set, slot04 true, e == field48", "args": ["@holder", "@lookup", "@table", 1],
+     "expect": {"ret": 0}},
+    {"name": "e != field48, IsValid false, path A", "args": ["@holder", "@lookup", "@table", 0],
+     "memory": [{"addr": "@row", "offset": "0x10", "u32": 3}],
+     "callees": {"0x005ec760": {"name": "Target_IsValid", "conv": "thiscall", "args": [], "ret": 0}},
+     "expect": {"ret": 0}},
+    {"name": "field48 <= e, valid: return 1", "args": ["@holder", "@lookup", "@table", 0],
+     "memory": [{"addr": "@target", "offset": "0x48", "u32": 4}], "expect": {"ret": 1}},
+    {"name": "field48 == e - 1: return 1", "args": ["@holder", "@lookup", "@table", 0],
+     "memory": [{"addr": "@target", "offset": "0x48", "u32": 9}], "expect": {"ret": 1}},
+    {"name": "field48 > e: path B", "args": ["@holder", "@lookup", "@table", 0],
+     "memory": [{"addr": "@row", "offset": "0x10", "u32": 3}], "expect": {"ret": 0}},
+    {"name": "field48 == e + 1: path B", "args": ["@holder", "@lookup", "@table", 0],
+     "memory": [{"addr": "@row", "offset": "0x10", "u32": 9}],
+     "callees": {"0x005ec760": {"name": "Target_IsValid", "conv": "thiscall", "args": [], "ret": 1}},
+     "expect": {"ret": 0}},
+    {"name": "two entries, path B twice", "args": ["@holder", "@lookup", "@table", 0],
+     "memory": [{"addr": "@lookup", "u32": 2}, {"addr": "@row", "offset": "0x10", "u32": 3}],
+     "expect": {"ret": 0}},
+    {"name": "two entries, path A then slot null", "args": ["@holder", "@lookup", "@table", 0],
+     "memory": [{"addr": "@lookup", "u32": 2}], "expect": {"ret": 1}}
+  ],
+  "_survivors": "L1170: field48 == e takes the branch above, so this else-branch never sees equal values and < and <= agree",
+  "fuzz": {
+    "seed": 4948325,
+    "count": 150,
+    "args": [
+      {"choices": ["@holder", 0]},
+      {"choices": ["@lookup"]},
+      {"choices": ["@table"]},
+      {"choices": [0, 1]}
+    ],
+    "memory": [
+      {"addr": "@lookup", "offset": "0", "type": "int", "range": [0, 3]},
+      {"addr": "@row", "offset": "0x10", "type": "int", "range": [0, 12]},
+      {"addr": "@target", "offset": "0x48", "type": "int", "range": [0, 12]}
+    ]
+  }
+}

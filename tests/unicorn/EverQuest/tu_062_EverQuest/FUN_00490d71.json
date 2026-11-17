@@ -1,0 +1,288 @@
+{
+  "function": "BufferHolder_guess::GetOrCreateCachedItem_guess",
+  "original": "0x00490d71",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@bufferholder",
+  "args": [
+    {
+      "name": "key_guess",
+      "type": "int"
+    },
+    {
+      "name": "name_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "bufferholder": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "found": {
+      "size": "0x18",
+      "fill": "zero"
+    },
+    "source": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@source_vtable"
+        }
+      ]
+    },
+    "source_vtable": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@fn_slot0"
+        }
+      ]
+    },
+    "fn_slot0": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "item": {
+      "size": "0x18",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    }
+  ],
+  "callees": {
+    "0x00490d40": {
+      "name": "FindCachedItem_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x004b232e": {
+      "name": "FUN_004b232e",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@item"
+    },
+    "0x00490c38": {
+      "name": "InitData_guess::InitData_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x0051ea25": {
+      "name": "BuildItemDescription_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "ptr",
+        "int"
+      ],
+      "ret": "arg0"
+    },
+    "0x00571f70": {
+      "name": "CXStr::operator=",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "this"
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x005e0f60": {
+      "name": "ItemSource_guess::FUN_005e0f60_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1000
+    },
+    "0x005e0ec0": {
+      "name": "ItemSource_guess::FUN_005e0ec0_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00571fc0": {
+      "name": "CXStr::operator=(const char*)",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "this"
+    },
+    "0x005ecb20": {
+      "name": "ItemSource_guess::FUN_005ecb20_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 2
+    },
+    "0x005e3850": {
+      "name": "ItemSource_guess::FUN_005e3850_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "u32"
+      ]
+    },
+    "@fn_slot0": {
+      "name": "ItemSource_guess::Slot00_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00447c66": {
+      "name": "BufferHolder_guess::Insert_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "null-name",
+      "args": [
+        11,
+        0
+      ]
+    },
+    {
+      "name": "existing-item",
+      "args": [
+        11,
+        "abc"
+      ],
+      "callees": {
+        "0x00490d40": {
+          "name": "FUN_00490d40",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@found"
+        }
+      }
+    },
+    {
+      "name": "missing-source",
+      "args": [
+        11,
+        "abc"
+      ],
+      "callees": {
+        "0x00490d40": {
+          "name": "FUN_00490d40",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x004b232e": {
+          "name": "FUN_004b232e",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "creates-item",
+      "args": [
+        11,
+        "abc"
+      ],
+      "callees": {
+        "0x00490d40": {
+          "name": "FUN_00490d40",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x004b232e": {
+          "name": "FUN_004b232e",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": "@source"
+        },
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": "@item"
+        }
+      }
+    },
+    {
+      "name": "empty-name",
+      "args": [
+        -1,
+        ""
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4787569,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -1,
+          100
+        ]
+      },
+      {
+        "choices": [
+          0,
+          "",
+          "name"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "function": "EntryList_guess::EntryList_guess",
+  "original": "0x00403c0c",
+  "sources": [
+    "src/EverQuest/tu_002_ProgressionData.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@entrylist",
+  "args": [
+    {
+      "name": "other",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "entrylist": {
+      "size": "0x30",
+      "fill": "random"
+    },
+    "other": {
+      "size": "0x30",
+      "fill": "random",
+      "init": [{"offset": "0x4", "u32": "@othersent"}]
+    },
+    "othersent": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@othernode1"}]
+    },
+    "othernode1": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@othernode2"}]
+    },
+    "othernode2": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@othersent"}]
+    },
+    "emptyother": {
+      "size": "0x30",
+      "fill": "random",
+      "init": [{"offset": "0x4", "u32": "@emptysent"}]
+    },
+    "emptysent": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@emptysent"}]
+    },
+    "newnode": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@newnode"}, {"offset": "0x4", "u32": "@newnode"}]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00402a97": {
+      "name": "FUN_00402a97",
+      "conv": "cdecl",
+      "args": [],
+      "ret": "@newnode"
+    },
+    "0x00403aac": {
+      "name": "FUN_00403aac",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "two source nodes",
+      "args": [
+        "@other"
+      ]
+    },
+    {
+      "name": "empty source list",
+      "args": [
+        "@emptyother"
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4209676,
+    "count": 60,
+    "args": [
+      {
+        "choices": [
+          "@other"
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "function": "EQPlayer_guess::RefreshNameSprite_guess",
+  "original": "0x0047d776",
+  "sources": ["src/EverQuest/tu_053_EQPlayer.cpp"],
+  "conv": "thiscall",
+  "this": "@eqplayer",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "eqplayer": {"size": "0x348", "fill": "random"},
+    "manager": {"size": "0x2d60", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00905d24", "u32": "@manager"}
+  ],
+  "callees": {
+    "0x0047cf7c": {"name": "SetNameSpriteState", "conv": "thiscall", "args": ["ptr"], "ret": 0}
+  },
+  "cases": [
+    {"name": "type and secondary flag set", "args": [], "memory": [
+      {"addr": "@eqplayer", "offset": "0x244", "u8": 1},
+      {"addr": "@manager", "offset": "0x2d5d", "u8": 0},
+      {"addr": "@manager", "offset": "0x2d5e", "u8": 1}
+    ]},
+    {"name": "type set and secondary flag clear returns", "args": [], "memory": [
+      {"addr": "@eqplayer", "offset": "0x244", "u8": 1},
+      {"addr": "@manager", "offset": "0x2d5d", "u8": 1},
+      {"addr": "@manager", "offset": "0x2d5e", "u8": 0}
+    ]},
+    {"name": "zero type and primary flag set", "args": [], "memory": [
+      {"addr": "@eqplayer", "offset": "0x244", "u8": 0},
+      {"addr": "@manager", "offset": "0x2d5d", "u8": 1},
+      {"addr": "@manager", "offset": "0x2d5e", "u8": 1}
+    ]},
+    {"name": "zero type and primary flag clear returns", "args": [], "memory": [
+      {"addr": "@eqplayer", "offset": "0x244", "u8": 0},
+      {"addr": "@manager", "offset": "0x2d5d", "u8": 0},
+      {"addr": "@manager", "offset": "0x2d5e", "u8": 1}
+    ]},
+    {"name": "high nonzero bytes", "args": [], "memory": [
+      {"addr": "@eqplayer", "offset": "0x244", "u8": 255},
+      {"addr": "@manager", "offset": "0x2d5d", "u8": 0},
+      {"addr": "@manager", "offset": "0x2d5e", "u8": 128}
+    ]}
+  ],
+  "fuzz": {
+    "seed": 4708214,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@eqplayer", "offset": "0x244", "type": "u8", "choices": [0, 0, 1, 127, 128, 255]},
+      {"addr": "@manager", "offset": "0x2d5d", "type": "u8", "choices": [0, 0, 1, 127, 128, 255]},
+      {"addr": "@manager", "offset": "0x2d5e", "type": "u8", "choices": [0, 0, 1, 127, 128, 255]}
+    ]
+  }
+}

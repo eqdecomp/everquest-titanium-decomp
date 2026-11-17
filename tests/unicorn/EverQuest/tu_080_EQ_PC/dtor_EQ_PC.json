@@ -1,0 +1,20 @@
+{
+  "function": "EQ_PC_guess::~EQ_PC_guess",
+  "original": "0x004bf9ad",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@pcobject+0xc384",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "pcobject": {"size": "0xc4d0", "fill": "random"}
+  },
+  "callees": {
+    "0x004be9dc": {"name": "PcBase_guess::~PcBase_guess", "conv": "thiscall", "args": [], "ret": 0}
+  },
+  "cases": [
+    {"name": "runs-pcbase-dtor", "args": []}
+  ]
+}

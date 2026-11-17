@@ -1,0 +1,120 @@
+{
+  "function": "do_assist_guess",
+  "original": "0x0046abc4",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "unused_guess", "type": "int"},
+    {"name": "text_guess", "type": "cstr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "str": {"size": "0x10", "fill": "random"},
+    "lookup": {"size": "0x10", "fill": "random"},
+    "gctx": {"size": "0x10", "fill": "random"},
+    "svc": {"size": "0x10", "fill": "random"},
+    "part": {"size": "0x10", "fill": "random", "init": [{"offset": "0x4", "u32": 0}]},
+    "holder": {"size": "0xc3a0", "fill": "random",
+               "init": [{"offset": "0xc284", "u32": "@part"}, {"offset": "0xc38c", "u8": "0x40"}]},
+    "local": {"size": "0x260", "fill": "random", "init": [{"offset": "0x258", "u32": "0x1111"}]},
+    "other": {"size": "0x260", "fill": "random", "init": [{"offset": "0x258", "u32": "0x2222"}]},
+    "role": {"size": "0x260", "fill": "random", "init": [{"offset": "0x258", "u32": "0x3333"}]}
+  },
+  "memory": [
+    {"addr": "0x00905D10", "u32": 0},
+    {"addr": "0x00905D1C", "u32": 0},
+    {"addr": "0x00905D14", "u32": 0},
+    {"addr": "0x00905CB0", "u32": "@lookup"},
+    {"addr": "0x009247C0", "u32": 7},
+    {"addr": "0x00988DF0", "u32": "@gctx"},
+    {"addr": "0x009859EC", "u32": "@svc"},
+    {"addr": "0x00905D00", "u32": "@holder"},
+    {"addr": "0x00905CE4", "u32": "@local"},
+    {"addr": "0x00905D04", "u32": "@other"}
+  ],
+  "callees": {
+    "0x00466244": {"name": "allowslashcommand_guess", "conv": "cdecl", "args": [], "ret": 1},
+    "0x005dfa00": {"name": "FUN_005dfa00", "conv": "thiscall", "args": ["int", "int"], "ret": "@str"},
+    "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 1, 1, 1]},
+    "0x00498436": {"name": "FUN_00498436", "conv": "thiscall", "args": ["u32"]},
+    "0x0060beb0": {"name": "FUN_0060beb0", "conv": "cdecl", "args": ["cstr", "cstr", "cstr", "cstr"], "ret": 0},
+    "0x004b424f": {"name": "FUN_004b424f", "conv": "thiscall", "args": ["int"], "ret": "@role"},
+    "0x004912b1": {"name": "FUN_004912b1", "conv": "cdecl", "args": ["u32", "int", "mem:4", "int", "int"], "ret": 0},
+    "0x00576fa0": {"name": "FUN_00576fa0", "conv": "cdecl", "args": ["ignore", "cstr", "int"], "ret": 0,
+                   "writes": [{"arg": 0, "offset": 0, "hex": "41424300"}]},
+    "0x00492f68": {"name": "DoPercentConvert_guess", "conv": "thiscall", "args": ["mem:4", "int"]},
+    "0x0047981d": {"name": "FindPlayerByPartialDisplayName_guess", "conv": "cdecl", "args": ["mem:4", "int"], "ret": "@other"},
+    "0x004982c6": {"name": "FUN_004982c6", "conv": "thiscall", "args": ["u32", "int", "int"]}
+  },
+  "rewrite_aliases": {
+    "__stricmp": "0x00621e9c"
+  },
+  "cases": [
+    {"name": "gate_closed", "args": [1, "abc"],
+     "callees": {"0x00466244": {"name": "FUN_00466244", "conv": "cdecl", "args": [], "ret": 0}}},
+    {"name": "busy_d10", "args": [1, "abc"], "memory": [{"addr": "0x00905D10", "u32": 1}]},
+    {"name": "busy_d1c", "args": [1, "abc"], "memory": [{"addr": "0x00905D1C", "u32": 2}]},
+    {"name": "busy_d14", "args": [1, "abc"], "memory": [{"addr": "0x00905D14", "u32": 3}]},
+    {"name": "empty_no_target", "args": [1, ""], "memory": [{"addr": "0x00905D04", "u32": 0}]},
+    {"name": "empty_self_target", "args": [1, ""], "memory": [{"addr": "0x00905D04", "u32": "@local"}]},
+    {"name": "empty_other_target", "args": [1, ""]},
+    {"name": "attack_on", "args": [1, "on"],
+     "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [0, 1, 1, 1, 1]},
+                 "0x0047981d": {"name": "FUN_0047981d", "conv": "cdecl", "args": ["mem:4", "int"], "ret": 0}}},
+    {"name": "attack_off", "args": [1, "off"],
+     "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 0, 1, 1, 1]},
+                 "0x0047981d": {"name": "FUN_0047981d", "conv": "cdecl", "args": ["mem:4", "int"], "ret": 0}}},
+    {"name": "role0_sent", "args": [1, "r0"],
+     "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 0, 1, 1]}}},
+    {"name": "role0_no_service", "args": [1, "r0"], "memory": [{"addr": "0x009859EC", "u32": 0}],
+     "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 0, 1, 1]}}},
+    {"name": "role0_flag_clear", "args": [1, "r0"], "memory": [{"addr": "@holder", "offset": "0xc38c", "u8": "0xbf"}],
+     "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 0, 1, 1]}}},
+    {"name": "role0_none", "args": [1, "r0"],
+     "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 0, 1, 1]},
+                 "0x004b424f": {"name": "FUN_004b424f", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "role1_sent_index3", "args": [1, "r1"],
+     "memory": [{"addr": "@part", "offset": "0x4", "u32": 3}, {"addr": "@holder", "offset": "0xc38c", "u8": 0},
+                {"addr": "@holder", "offset": "0xc38f", "u8": "0x40"}],
+     "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 1, 0, 1]}}},
+    {"name": "role1_no_service", "args": [1, "r1"], "memory": [{"addr": "0x009859EC", "u32": 0}],
+     "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 1, 0, 1]}}},
+    {"name": "role1_flag_clear", "args": [1, "r1"], "memory": [{"addr": "@holder", "offset": "0xc38c", "u8": "0xbf"}],
+     "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 1, 0, 1]}}},
+    {"name": "role1_none", "args": [1, "r1"],
+     "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 1, 0, 1]},
+                 "0x004b424f": {"name": "FUN_004b424f", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "role2_sent", "args": [1, "r2"],
+     "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 1, 1, 0]}}},
+    {"name": "role2_no_service", "args": [1, "r2"], "memory": [{"addr": "0x009859EC", "u32": 0}],
+     "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 1, 1, 0]}}},
+    {"name": "role2_flag_clear", "args": [1, "r2"], "memory": [{"addr": "@holder", "offset": "0xc38c", "u8": "0xbf"}],
+     "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 1, 1, 0]}}},
+    {"name": "role2_none", "args": [1, "r2"],
+     "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [1, 1, 1, 1, 0]},
+                 "0x004b424f": {"name": "FUN_004b424f", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "name_is_self", "args": [1, "me"],
+     "callees": {"0x0047981d": {"name": "FUN_0047981d", "conv": "cdecl", "args": ["mem:4", "int"], "ret": "@local"}}},
+    {"name": "name_is_other", "args": [1, "bob"]},
+    {"name": "all_match", "args": [1, "x"],
+     "callees": {"0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "u32"], "ret": [0, 0, 0, 0, 0]}}}
+  ],
+  "fuzz": {
+    "seed": 4631492,
+    "count": 100,
+    "args": [
+      {},
+      {"choices": ["", "abc", "x"]}
+    ],
+    "memory": [
+      {"addr": "0x00905D10", "type": "u32", "choices": [0, 0, 0, 1]},
+      {"addr": "0x00905D1C", "type": "u32", "choices": [0, 0, 0, 1]},
+      {"addr": "0x00905D14", "type": "u32", "choices": [0, 0, 0, 1]},
+      {"addr": "0x00905D04", "type": "u32", "choices": [0, "@local", "@other"]},
+      {"addr": "0x009859EC", "type": "u32", "choices": [0, "@svc"]},
+      {"addr": "@holder", "offset": "0xc38c", "type": "u8", "choices": [0, 64, 255, 191]}
+    ]
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "function": "MusicInstance_guess::Play_guess",
+  "original": "0x004c5892",
+  "sources": [
+    "src/EverQuest/tu_087_SoundManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@sequenceobject",
+  "args": [
+    {
+      "name": "params_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "sequenceobject": {
+      "size": "0x20",
+      "fill": "random",
+      "init": [
+        {"offset": "0x8", "u32": "@owner"},
+        {"offset": "0xc", "u32": "@file"},
+        {"offset": "0x18", "u32": 119}
+      ]
+    },
+    "owner": {
+      "size": "0x20",
+      "fill": "random",
+      "init": [
+        {"offset": "0x10", "u32": 4660}
+      ]
+    },
+    "file": {
+      "size": "0x214",
+      "fill": "random",
+      "init": [
+        {"offset": "0x208", "u32": "@sounddata"}
+      ]
+    },
+    "sounddata": {
+      "size": "0x40",
+      "fill": "random"
+    },
+    "params": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "f32": 0.5},
+        {"offset": "0x4", "u32": 100},
+        {"offset": "0x8", "u32": 2},
+        {"offset": "0xc", "u32": 3}
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {
+    "mss32.dll!_AIL_allocate_sequence_handle@4": {
+      "name": "_AIL_allocate_sequence_handle@4",
+      "conv": "stdcall",
+      "args": ["int"],
+      "ret": 20480
+    },
+    "mss32.dll!_AIL_init_sequence@12": {
+      "name": "_AIL_init_sequence@12",
+      "conv": "stdcall",
+      "args": ["int", "ptr", "int"],
+      "ret": 1
+    },
+    "mss32.dll!_AIL_set_sequence_loop_count@8": {
+      "name": "_AIL_set_sequence_loop_count@8",
+      "conv": "stdcall",
+      "args": ["int", "int"],
+      "ret": 0
+    },
+    "mss32.dll!_AIL_set_sequence_volume@12": {
+      "name": "_AIL_set_sequence_volume@12",
+      "conv": "stdcall",
+      "args": ["int", "int", "int"],
+      "ret": 0
+    },
+    "mss32.dll!_AIL_release_sequence_handle@4": {
+      "name": "_AIL_release_sequence_handle@4",
+      "conv": "stdcall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "mss32.dll!_AIL_start_sequence@4": {
+      "name": "_AIL_start_sequence@4",
+      "conv": "stdcall",
+      "args": ["int"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "nonnull, init ok",
+      "args": ["@params"]
+    },
+    {
+      "name": "nonnull, init fails",
+      "args": ["@params"],
+      "callees": {
+        "mss32.dll!_AIL_init_sequence@12": {
+          "name": "_AIL_init_sequence@12",
+          "conv": "stdcall",
+          "args": ["int", "ptr", "int"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "null params, init ok",
+      "args": [0]
+    },
+    {
+      "name": "null params, init fails",
+      "args": [0],
+      "callees": {
+        "mss32.dll!_AIL_init_sequence@12": {
+          "name": "_AIL_init_sequence@12",
+          "conv": "stdcall",
+          "args": ["int", "ptr", "int"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "no handle, driver set, alloc ok",
+      "args": ["@params"],
+      "memory": [
+        {"addr": "@sequenceobject", "offset": "0x18", "u32": 0}
+      ]
+    },
+    {
+      "name": "no handle, driver set, alloc fails",
+      "args": ["@params"],
+      "memory": [
+        {"addr": "@sequenceobject", "offset": "0x18", "u32": 0}
+      ],
+      "callees": {
+        "mss32.dll!_AIL_allocate_sequence_handle@4": {
+          "name": "_AIL_allocate_sequence_handle@4",
+          "conv": "stdcall",
+          "args": ["int"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "no handle, no driver",
+      "args": ["@params"],
+      "memory": [
+        {"addr": "@sequenceobject", "offset": "0x18", "u32": 0},
+        {"addr": "@owner", "offset": "0x10", "u32": 0}
+      ]
+    },
+    {
+      "name": "no file",
+      "args": ["@params"],
+      "memory": [
+        {"addr": "@sequenceobject", "offset": "0xc", "u32": 0}
+      ]
+    },
+    {
+      "name": "no handle, no file",
+      "args": ["@params"],
+      "memory": [
+        {"addr": "@sequenceobject", "offset": "0x18", "u32": 0},
+        {"addr": "@sequenceobject", "offset": "0xc", "u32": 0}
+      ]
+    },
+    {
+      "name": "no handle, null params, alloc ok",
+      "args": [0],
+      "memory": [
+        {"addr": "@sequenceobject", "offset": "0x18", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5003410,
+    "count": 120,
+    "args": [
+      {
+        "choices": ["@params", 0]
+      }
+    ],
+    "memory": [
+      {"addr": "@sequenceobject", "offset": "0x18", "type": "u32", "choices": [0, 119]},
+      {"addr": "@sequenceobject", "offset": "0xc", "type": "ptr", "choices": ["@file", 0]},
+      {"addr": "@owner", "offset": "0x10", "type": "u32", "choices": [0, 4660]},
+      {"addr": "@params", "offset": "0x0", "type": "float", "range": [-1.0, 2.0]},
+      {"addr": "@params", "offset": "0x4", "type": "int", "range": [0, 500]},
+      {"addr": "@params", "offset": "0x8", "type": "int", "range": [-2, 5]},
+      {"addr": "@params", "offset": "0xc", "type": "int", "range": [0, 8]}
+    ]
+  }
+}

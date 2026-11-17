@@ -1,0 +1,149 @@
+{
+  "function": "get_melee_range",
+  "original": "0x0046595a",
+  "sources": ["src/EverQuest/tu_046_EQMisc.cpp"],
+  "conv": "cdecl",
+  "args": [
+    {"name": "first_guess", "type": "ptr"},
+    {"name": "second_guess", "type": "ptr"}
+  ],
+  "ret": "float",
+  "objects": {
+    "first": {
+      "size": "0x23c",
+      "fill": "random",
+      "init": [
+        {"offset": "0x1a0", "f32": 1.0},
+        {"offset": "0x1a8", "u32": "@first_source"},
+        {"offset": "0x238", "f32": 0.0}
+      ]
+    },
+    "second": {
+      "size": "0x23c",
+      "fill": "random",
+      "init": [
+        {"offset": "0x1a0", "f32": 1.0},
+        {"offset": "0x1a8", "u32": "@second_source"},
+        {"offset": "0x238", "f32": 0.0}
+      ]
+    },
+    "first_source": {"size": "0xc8", "fill": "random"},
+    "second_source": {"size": "0xc8", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00641f98", "from_image": "0x00641f98", "image_size": 4},
+    {"addr": "0x00646050", "from_image": "0x00646050", "image_size": 4},
+    {"addr": "0x006410b4", "from_image": "0x006410b4", "image_size": 4},
+    {"addr": "0x00644804", "from_image": "0x00644804", "image_size": 4}
+  ],
+  "callees": {
+    "0x0047c2d4": {
+      "name": "FUN_0047c2d4",
+      "conv": "thiscall",
+      "args": [],
+      "ret_float": [8.0, 10.0]
+    },
+    "0x0060f60d": {
+      "name": "_fabs",
+      "conv": "cdecl",
+      "args": ["double"],
+      "ret_float": 0.5
+    }
+  },
+  "rewrite_aliases": {"_fabs": "0x0060f60d"},
+  "cases": [
+    {"name": "null first", "args": [0, "@second"]},
+    {"name": "null second", "args": ["@first", 0]},
+    {
+      "name": "null first source",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "@first", "offset": "0x1a8", "u32": 0}]
+    },
+    {
+      "name": "null second source",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "@second", "offset": "0x1a8", "u32": 0}]
+    },
+    {
+      "name": "minimum clamp",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "@first", "offset": "0x238", "f32": 0.5}],
+      "callees": {
+        "0x0047c2d4": {"name": "FUN_0047c2d4", "conv": "thiscall", "args": [], "ret_float": [8.0, 10.0]},
+        "0x0060f60d": {"name": "_fabs", "conv": "cdecl", "args": ["double"], "ret_float": 0.5}
+      }
+    },
+    {
+      "name": "above minimum",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "@first", "offset": "0x238", "f32": 3.0}],
+      "callees": {
+        "0x0047c2d4": {"name": "FUN_0047c2d4", "conv": "thiscall", "args": [], "ret_float": [16.0, 16.0]},
+        "0x0060f60d": {"name": "_fabs", "conv": "cdecl", "args": ["double"], "ret_float": 3.0}
+      }
+    },
+    {
+      "name": "below maximum",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "@first", "offset": "0x238", "f32": 56.5}],
+      "callees": {
+        "0x0047c2d4": {"name": "FUN_0047c2d4", "conv": "thiscall", "args": [], "ret_float": [8.0, 10.0]},
+        "0x0060f60d": {"name": "_fabs", "conv": "cdecl", "args": ["double"], "ret_float": 56.5}
+      }
+    },
+    {
+      "name": "at maximum",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "@first", "offset": "0x238", "f32": 59.0}],
+      "callees": {
+        "0x0047c2d4": {"name": "FUN_0047c2d4", "conv": "thiscall", "args": [], "ret_float": [8.0, 10.0]},
+        "0x0060f60d": {"name": "_fabs", "conv": "cdecl", "args": ["double"], "ret_float": 59.0}
+      }
+    },
+    {
+      "name": "above maximum",
+      "args": ["@first", "@second"],
+      "memory": [{"addr": "@first", "offset": "0x238", "f32": 59.5}],
+      "callees": {
+        "0x0047c2d4": {"name": "FUN_0047c2d4", "conv": "thiscall", "args": [], "ret_float": [8.0, 10.0]},
+        "0x0060f60d": {"name": "_fabs", "conv": "cdecl", "args": ["double"], "ret_float": 59.5}
+      }
+    },
+    {
+      "name": "unordered scale",
+      "args": ["@first", "@second"],
+      "memory": [
+        {"addr": "@first", "offset": "0x1a0", "f32": 1.0},
+        {"addr": "@first_source", "offset": "0xc4", "hex": "0000c07f"},
+        {"addr": "@second", "offset": "0x1a0", "f32": 1.0},
+        {"addr": "@second_source", "offset": "0xc4", "f32": 1.0},
+        {"addr": "@first", "offset": "0x238", "f32": 0.0},
+        {"addr": "@second", "offset": "0x238", "f32": 0.0}
+      ],
+      "callees": {
+        "0x0047c2d4": {"name": "FUN_0047c2d4", "conv": "thiscall", "args": [], "passthrough": true},
+        "0x0060f60d": {"name": "_fabs", "conv": "cdecl", "args": ["double"], "ret_float": 0.0}
+      }
+    },
+    {
+      "name": "high scales",
+      "args": ["@first", "@second"],
+      "callees": {
+        "0x0047c2d4": {"name": "FUN_0047c2d4", "conv": "thiscall", "args": [], "ret_float": [100.0, 100.0]},
+        "0x0060f60d": {"name": "_fabs", "conv": "cdecl", "args": ["double"], "ret_float": 0.0}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4610394,
+    "count": 100,
+    "args": [{"choices": ["@first"]}, {"choices": ["@second"]}],
+    "memory": [
+      {"addr": "@first", "offset": "0x1a8", "type": "ptr", "choices": [0, "@first_source"]},
+      {"addr": "@second", "offset": "0x1a8", "type": "ptr", "choices": [0, "@second_source"]},
+      {"addr": "@first", "offset": "0x238", "type": "float", "range": [-100.0, 100.0]},
+      {"addr": "@second", "offset": "0x238", "type": "float", "range": [-100.0, 100.0]}
+    ]
+  },
+  "_survivors": "L797: at equality the result is already 14, so assigning 14 is unobservable; L802: at equality the result is already 75, so assigning 75 is unobservable."
+}

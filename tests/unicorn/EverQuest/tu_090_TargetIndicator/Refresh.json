@@ -1,0 +1,466 @@
+{
+  "function": "RefreshOwner_guess::UpdateTargetRing_guess",
+  "original": "0x004c8537",
+  "sources": [
+    "src/EverQuest/tu_090_TargetIndicator.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@refreshowner",
+  "args": [
+    {
+      "name": "arg",
+      "type": "u32"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "refreshowner": {
+      "size": "0x30",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u8": 1
+        },
+        {
+          "offset": "0x4",
+          "u32": "@value"
+        },
+        {
+          "offset": "0x18",
+          "u32": "@elements"
+        },
+        {
+          "offset": "0x20",
+          "u32": 2
+        },
+        {
+          "offset": "0x2c",
+          "u32": "@resource"
+        }
+      ]
+    },
+    "value": {
+      "size": "0x3c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x30",
+          "f32": 1.25
+        },
+        {
+          "offset": "0x34",
+          "f32": -2.5
+        },
+        {
+          "offset": "0x38",
+          "f32": 3.75
+        }
+      ]
+    },
+    "previous": {
+      "size": "0x3c",
+      "fill": "zero"
+    },
+    "classifier": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "clock": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "elements": {
+      "size": "0x408",
+      "fill": "zero"
+    },
+    "resource": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@vtable"
+        }
+      ]
+    },
+    "vtable": {
+      "size": "0x2c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x28",
+          "u32": "@fn"
+        }
+      ]
+    },
+    "fn": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d00",
+      "u32": "@classifier"
+    },
+    {
+      "addr": "0x00905d04",
+      "u32": "@value"
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@clock"
+    },
+    {
+      "addr": "0x006410bc",
+      "from_image": "0x006410BC",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "kernel32.dll!GetTickCount": {
+      "name": "GetTickCount",
+      "conv": "stdcall",
+      "args": [],
+      "ret": 1234
+    },
+    "0x004bc20b": {
+      "name": "Classify_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x004c8113": {
+      "name": "ResetRing_guess",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "ptr"
+      ]
+    },
+    "0x00439f26": {
+      "name": "GetFloorHeight_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "float",
+        "float"
+      ],
+      "ret_float": 0.25
+    },
+    "0x004c81c4": {
+      "name": "Place_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr",
+        "mem:12",
+        "ptr"
+      ]
+    },
+    "0x004c8340": {
+      "name": "Update_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "bool"
+      ]
+    },
+    "0x004c818c": {
+      "name": "ReleaseSlot_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "@fn": {
+      "name": "SetActive_guess",
+      "conv": "thiscall",
+      "args": [
+        "char"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "global-value-null",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905d04",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "owner-disabled",
+      "args": [
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@refreshowner",
+          "offset": "0x0",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "state-zero",
+      "args": [
+        2
+      ],
+      "callees": {
+        "0x004bc20b": {
+          "name": "Classify_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "state-one",
+      "args": [
+        3
+      ],
+      "callees": {
+        "0x004bc20b": {
+          "name": "Classify_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "state-two",
+      "args": [
+        4
+      ],
+      "callees": {
+        "0x004bc20b": {
+          "name": "Classify_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr"
+          ],
+          "ret": 2
+        }
+      }
+    },
+    {
+      "name": "state-three",
+      "args": [
+        5
+      ],
+      "callees": {
+        "0x004bc20b": {
+          "name": "Classify_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr"
+          ],
+          "ret": 3
+        }
+      }
+    },
+    {
+      "name": "state-four",
+      "args": [
+        6
+      ],
+      "callees": {
+        "0x004bc20b": {
+          "name": "Classify_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr"
+          ],
+          "ret": 4
+        }
+      }
+    },
+    {
+      "name": "state-five",
+      "args": [
+        7
+      ],
+      "callees": {
+        "0x004bc20b": {
+          "name": "Classify_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr"
+          ],
+          "ret": 5
+        }
+      }
+    },
+    {
+      "name": "state-six-unchanged",
+      "args": [
+        8
+      ],
+      "callees": {
+        "0x004bc20b": {
+          "name": "Classify_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr"
+          ],
+          "ret": 6
+        }
+      }
+    },
+    {
+      "name": "state-six-changed",
+      "args": [
+        9
+      ],
+      "memory": [
+        {
+          "addr": "@refreshowner",
+          "offset": "0x4",
+          "u32": "@previous"
+        }
+      ],
+      "callees": {
+        "0x004bc20b": {
+          "name": "Classify_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr"
+          ],
+          "ret": 6
+        }
+      }
+    },
+    {
+      "name": "changed-normal",
+      "args": [
+        10
+      ],
+      "memory": [
+        {
+          "addr": "@refreshowner",
+          "offset": "0x4",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x004bc20b": {
+          "name": "Classify_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr"
+          ],
+          "ret": 2
+        }
+      }
+    },
+    {
+      "name": "unknown-classification-keeps-state",
+      "args": [
+        11
+      ],
+      "callees": {
+        "0x004bc20b": {
+          "name": "Classify_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr"
+          ],
+          "ret": 7
+        }
+      }
+    },
+    {
+      "name": "null-resource",
+      "args": [
+        12
+      ],
+      "memory": [
+        {
+          "addr": "@refreshowner",
+          "offset": "0x2c",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x004bc20b": {
+          "name": "Classify_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "changed-null-resource",
+      "args": [
+        13
+      ],
+      "memory": [
+        {
+          "addr": "@refreshowner",
+          "offset": "0x4",
+          "u32": 0
+        },
+        {
+          "addr": "@refreshowner",
+          "offset": "0x2c",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x004bc20b": {
+          "name": "Classify_guess",
+          "conv": "thiscall",
+          "args": [
+            "ptr"
+          ],
+          "ret": 3
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5014839,
+    "count": 100,
+    "args": [
+      {}
+    ],
+    "memory": [
+      {
+        "addr": "@refreshowner",
+        "offset": "0x0",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@refreshowner",
+        "offset": "0x4",
+        "type": "ptr",
+        "choices": [
+          "@value",
+          "@previous"
+        ]
+      }
+    ]
+  }
+}

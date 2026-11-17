@@ -1,0 +1,70 @@
+{
+  "function": "MemChecker0",
+  "original": "0x004b6c04",
+  "sources": [
+    "src/EverQuest/tu_074_ModDatIni.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "data",
+      "type": "cstr"
+    },
+    {
+      "name": "length",
+      "type": "int"
+    }
+  ],
+  "ret": "u32",
+  "objects": {},
+  "memory": [],
+  "callees": {},
+  "cases": [
+    {
+      "name": "typical",
+      "args": ["abc", 3]
+    },
+    {
+      "name": "empty_zero_length",
+      "args": ["", 0]
+    },
+    {
+      "name": "one_byte",
+      "args": ["a", 1]
+    },
+    {
+      "name": "negative_length",
+      "args": ["abc", -1]
+    },
+    {
+      "name": "length_shorter_than_string",
+      "args": ["abcdef", 3]
+    },
+    {
+      "name": "alphabet",
+      "args": ["abcdefghijklmnopqrstuvwxyz", 26]
+    },
+    {
+      "name": "high_bytes_sign_extended",
+      "args": ["éÿ\u0001\u0080zz", 4]
+    }
+  ],
+  "fuzz": {
+    "seed": 4942852,
+    "count": 150,
+    "args": [
+      {
+        "choices": ["abcdefgh", "hello world", "éÿ\u0001\u0080zz", "\u0080\u0081þÿ\u0000\u0001\u0002\u0003"]
+      },
+      {
+        "range": [-1, 8]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x0078E418",
+        "size": 1024
+      }
+    ]
+  }
+}

@@ -1,0 +1,644 @@
+{
+  "function": "CMerchantWnd_guess::RefreshItemList_guess",
+  "original": "0x005377dc",
+  "sources": [
+    "src/EverQuest/tu_188_MerchantWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@merchantwnd",
+  "args": [],
+  "ret": "void",
+  "size": "0x370",
+  "objects": {
+    "merchantwnd": {
+      "size": "0x2d4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x164",
+          "u32": "@item0"
+        },
+        {
+          "offset": "0x168",
+          "u32": "@item1"
+        },
+        {
+          "offset": "0x2cc",
+          "u32": "@itemlist"
+        }
+      ]
+    },
+    "itemlist": {
+      "size": "0x140",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@listvtbl"
+        }
+      ]
+    },
+    "listvtbl": {
+      "size": "0x140",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x100",
+          "u32": "@fn_slot64"
+        },
+        {
+          "offset": "0x130",
+          "u32": "@fn_slot76"
+        },
+        {
+          "offset": "0x138",
+          "u32": "@fn_slot78"
+        }
+      ]
+    },
+    "item0": {
+      "size": "0x88",
+      "fill": "zero"
+    },
+    "item1": {
+      "size": "0x88",
+      "fill": "zero"
+    },
+    "fn_slot64": {
+      "size": "0x1",
+      "fill": "zero"
+    },
+    "fn_slot76": {
+      "size": "0x1",
+      "fill": "zero"
+    },
+    "fn_slot78": {
+      "size": "0x1",
+      "fill": "zero"
+    },
+    "resolver": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "itemtext": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "displaytext": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00991910",
+      "u32": "@resolver"
+    },
+    {
+      "addr": "0x0099db00",
+      "size": 32,
+      "fill": "zero"
+    },
+    {
+      "addr": "0x0063f53f",
+      "cstr": "Item"
+    },
+    {
+      "addr": "0x0064da6c",
+      "from_image": "0x0064DA6C",
+      "image_size": 3
+    },
+    {
+      "addr": "@itemlist",
+      "offset": "0x10c",
+      "u32": 7
+    },
+    {
+      "addr": "@itemlist",
+      "offset": "0x11c",
+      "u32": 2
+    },
+    {
+      "addr": "@item0",
+      "offset": "0x80",
+      "u32": 17
+    },
+    {
+      "addr": "@item0",
+      "offset": "0x84",
+      "u32": 0
+    },
+    {
+      "addr": "@item1",
+      "offset": "0x80",
+      "u32": 22
+    },
+    {
+      "addr": "@item1",
+      "offset": "0x84",
+      "u32": 0
+    },
+    {
+      "addr": "@itemtext",
+      "cstr": "item name"
+    },
+    {
+      "addr": "@displaytext",
+      "cstr": "display name"
+    }
+  ],
+  "callees": {
+    "0x00597be0": {
+      "name": "GetCurSel",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00597ed0": {
+      "name": "GetItemData",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "@fn_slot64": {
+      "name": "ListSlot64",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "@fn_slot76": {
+      "name": "ListSlot76",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_slot78": {
+      "name": "ListSlot78",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00571e00": {
+      "name": "CXStrCtor",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x0059b9d0": {
+      "name": "AddString",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "u32",
+        "u32",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "CXStrFreeRep",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x005e0f60": {
+      "name": "GetItemTextSource",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@itemtext"
+    },
+    "0x004ffbe9": {
+      "name": "ResolveItemText",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "@displaytext"
+    },
+    "0x0059b2e0": {
+      "name": "SetCellColor",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x005e0ec0": {
+      "name": "GetItemName",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@itemtext"
+    },
+    "0x0059b360": {
+      "name": "SetItemText",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x005dfcf0": {
+      "name": "GetItemValue",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 5
+    },
+    "0x006220e9": {
+      "name": "_itoa",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ptr",
+        "int"
+      ],
+      "ret": "0x0099db00",
+      "writes": [
+        {
+          "addr": "0x0099db00",
+          "hex": "3000"
+        }
+      ]
+    },
+    "0x005dfce0": {
+      "name": "GetItemDuration",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1234567
+    },
+    "0x00597c20": {
+      "name": "SetCurSel",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9"
+  },
+  "coverage_ok": {
+    "00537903-0053790E": "CXStrCtor is stubbed and the harness cannot write through this to make the temporary rep pointer nonzero",
+    "00537999-005379A4": "CXStrCtor is stubbed and the harness cannot write through this to make the temporary rep pointer nonzero",
+    "005379E9-005379F4": "CXStrCtor is stubbed and the harness cannot write through this to make the temporary rep pointer nonzero",
+    "00537A38-00537A43": "CXStrCtor is stubbed and the harness cannot write through this to make the temporary rep pointer nonzero",
+    "00537A7F-00537A8A": "CXStrCtor is stubbed and the harness cannot write through this to make the temporary rep pointer nonzero",
+    "00537A96-00537AA1": "CXStrCtor is stubbed and the harness cannot write through this to make the temporary rep pointer nonzero"
+  },
+  "_survivors": "L809: when ItemsCount is zero, >= 0 enters a body whose inner loop immediately exits, so no observable call or write changes",
+  "cases": [
+    {
+      "name": "null_item_list",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@merchantwnd",
+          "offset": "0x2b0",
+          "u8": 1
+        },
+        {
+          "addr": "@merchantwnd",
+          "offset": "0x2cc",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "empty_list_and_no_selection",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@merchantwnd",
+          "offset": "0x2b0",
+          "u8": 1
+        },
+        {
+          "addr": "@merchantwnd",
+          "offset": "0x164",
+          "u32": 0
+        },
+        {
+          "addr": "@merchantwnd",
+          "offset": "0x168",
+          "u32": 0
+        },
+        {
+          "addr": "@itemlist",
+          "offset": "0x11c",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00597be0": {
+          "name": "GetCurSel",
+          "conv": "thiscall",
+          "args": [],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "loop_boundary_sentinel",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@merchantwnd",
+          "offset": "0x164",
+          "u32": 0
+        },
+        {
+          "addr": "@merchantwnd",
+          "offset": "0x168",
+          "u32": 0
+        },
+        {
+          "addr": "@merchantwnd",
+          "offset": "0x2a4",
+          "u32": "@item0"
+        },
+        {
+          "addr": "@itemlist",
+          "offset": "0x11c",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00597be0": {
+          "name": "GetCurSel",
+          "conv": "thiscall",
+          "args": [],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "value_one_boundary",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@itemlist",
+          "offset": "0x11c",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00597be0": {
+          "name": "GetCurSel",
+          "conv": "thiscall",
+          "args": [],
+          "ret": -1
+        },
+        "0x005dfcf0": {
+          "name": "GetItemValue",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "selected_row_restored_after_mismatch",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@merchantwnd",
+          "offset": "0x2b0",
+          "u8": 1
+        },
+        {
+          "addr": "@itemlist",
+          "offset": "0x11c",
+          "u32": 2
+        },
+        {
+          "addr": "@item0",
+          "offset": "0x80",
+          "u32": 17
+        },
+        {
+          "addr": "@item0",
+          "offset": "0x84",
+          "u32": 0
+        },
+        {
+          "addr": "@item1",
+          "offset": "0x80",
+          "u32": 22
+        },
+        {
+          "addr": "@item1",
+          "offset": "0x84",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00597ed0": {
+          "name": "GetItemData",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            0,
+            1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "selected_index_is_empty",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@merchantwnd",
+          "offset": "0x2b0",
+          "u8": 1
+        },
+        {
+          "addr": "@merchantwnd",
+          "offset": "0x164",
+          "u32": 0
+        },
+        {
+          "addr": "@itemlist",
+          "offset": "0x11c",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x00597be0": {
+          "name": "GetCurSel",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "nonpositive_value_and_negative_duration",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@merchantwnd",
+          "offset": "0x2b0",
+          "u8": 1
+        },
+        {
+          "addr": "@itemlist",
+          "offset": "0x11c",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00597be0": {
+          "name": "GetCurSel",
+          "conv": "thiscall",
+          "args": [],
+          "ret": -1
+        },
+        "0x005dfcf0": {
+          "name": "GetItemValue",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        },
+        "0x005dfce0": {
+          "name": "GetItemDuration",
+          "conv": "thiscall",
+          "args": [],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "duration_thousand_boundary",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@merchantwnd",
+          "offset": "0x2b0",
+          "u8": 1
+        },
+        {
+          "addr": "@itemlist",
+          "offset": "0x11c",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00597be0": {
+          "name": "GetCurSel",
+          "conv": "thiscall",
+          "args": [],
+          "ret": -1
+        },
+        "0x005dfce0": {
+          "name": "GetItemDuration",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1000
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5470172,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@merchantwnd",
+        "offset": "0x164",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@item0",
+          "@item1"
+        ]
+      },
+      {
+        "addr": "@merchantwnd",
+        "offset": "0x168",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@item0",
+          "@item1"
+        ]
+      },
+      {
+        "addr": "@merchantwnd",
+        "offset": "0x2cc",
+        "type": "ptr",
+        "choices": [
+          "@itemlist",
+          0
+        ]
+      },
+      {
+        "addr": "@itemlist",
+        "offset": "0x10c",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          7,
+          2147483647
+        ]
+      },
+      {
+        "addr": "@itemlist",
+        "offset": "0x11c",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          80
+        ]
+      },
+      {
+        "addr": "@item0",
+        "offset": "0x80",
+        "type": "i64",
+        "choices": [
+          -1,
+          0,
+          1,
+          17,
+          2147483647,
+          2147483648
+        ]
+      },
+      {
+        "addr": "@item1",
+        "offset": "0x80",
+        "type": "i64",
+        "choices": [
+          -1,
+          0,
+          1,
+          22,
+          2147483647,
+          2147483648
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "function": "AutojoinChannel_guess::~AutojoinChannel_guess",
+  "original": "0x004245d4",
+  "sources": ["src/EverQuest/tu_016_AutojoinList.cpp"],
+  "conv": "thiscall",
+  "this": "@owner4245d4",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "owner4245d4": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0", "u32": 0}]
+    },
+    "entry": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": "0", "u32": "@item"}]
+    },
+    "item": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": "0", "u32": "@vtable"}]
+    },
+    "fn_slot": {"size": "0x4", "fill": "random"},
+    "vtable": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": "0", "u32": "@fn_slot"}]
+    }
+  },
+  "memory": [
+    {"addr": "@owner4245d4", "offset": "0x4", "u32": 0}
+  ],
+  "callees": {
+    "0x004eb924": {
+      "name": "Get_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": ["@entry", "@entry", "@entry", "@entry"]
+    },
+    "0x0050f3f6": {
+      "name": "CollectionDtor_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004482fb": {
+      "name": "CXStrDtor_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "@fn_slot": {
+      "name": "Dispose_guess",
+      "conv": "thiscall",
+      "args": ["u8"]
+    }
+  },
+  "cases": [
+    {
+      "name": "negative count skips loop",
+      "args": [],
+      "memory": [{"addr": "@owner4245d4", "offset": "0x4", "u32": -1}]
+    },
+    {
+      "name": "zero count skips loop",
+      "args": [],
+      "memory": [{"addr": "@owner4245d4", "offset": "0x4", "u32": 0}]
+    },
+    {
+      "name": "one null item",
+      "args": [],
+      "memory": [
+        {"addr": "@owner4245d4", "offset": "0x4", "u32": 1},
+        {"addr": "@entry", "offset": "0", "u32": 0}
+      ]
+    },
+    {
+      "name": "one live item",
+      "args": [],
+      "memory": [{"addr": "@owner4245d4", "offset": "0x4", "u32": 1}]
+    },
+    {
+      "name": "four live items",
+      "args": [],
+      "memory": [{"addr": "@owner4245d4", "offset": "0x4", "u32": 4}]
+    }
+  ],
+  "fuzz": {
+    "seed": 4343252,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@owner4245d4", "offset": "0x4", "type": "u32", "choices": [-1, 0, 1, 2, 4]},
+      {"addr": "@entry", "offset": "0", "type": "ptr", "choices": [0, "@item"]}
+    ]
+  }
+}

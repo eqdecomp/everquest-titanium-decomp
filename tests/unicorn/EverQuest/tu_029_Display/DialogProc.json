@@ -1,0 +1,140 @@
+{
+  "function": "DialogProc_guess",
+  "original": "0x00435995",
+  "sources": [
+    "src/EverQuest/tu_029_Display.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "window",
+      "type": "ptr"
+    },
+    {
+      "name": "message",
+      "type": "u32"
+    },
+    {
+      "name": "wparam",
+      "type": "short"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "window": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "textlookup": {
+      "size": "0x20",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x0085039C", "u32": "0x7a0000"},
+    {"addr": "0x008503A0", "u32": "0x7a0010"},
+    {"addr": "0x00905CB0", "u32": "@textlookup"},
+    {"addr": "0x7a0000", "cstr": "Login"},
+    {"addr": "0x7a0010", "cstr": "Password"},
+    {"addr": "0x7a0200", "cstr": "Default text"}
+  ],
+  "callees": {
+    "0x005dfa00": {
+      "name": "FUN_005dfa00",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": "0x7a0200"
+    },
+    "user32.dll!GetDlgItem": {
+      "name": "GetDlgItem",
+      "conv": "stdcall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": [4096, 8192]
+    },
+    "user32.dll!SetWindowTextA": {
+      "name": "SetWindowTextA",
+      "conv": "stdcall",
+      "args": [
+        "u32",
+        "cstr"
+      ],
+      "ret": 1
+    },
+    "user32.dll!EndDialog": {
+      "name": "EndDialog",
+      "conv": "stdcall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "init both strings set",
+      "args": ["@window", 272, 0]
+    },
+    {
+      "name": "init value0 null uses lookup 0x61c",
+      "args": ["@window", 272, 0],
+      "memory": [{"addr": "0x0085039C", "u32": 0}]
+    },
+    {
+      "name": "init value1 null uses lookup 0x61d",
+      "args": ["@window", 272, 0],
+      "memory": [{"addr": "0x008503A0", "u32": 0}]
+    },
+    {
+      "name": "init both null use lookup",
+      "args": ["@window", 272, 0],
+      "memory": [{"addr": "0x0085039C", "u32": 0}, {"addr": "0x008503A0", "u32": 0}]
+    },
+    {
+      "name": "init null window",
+      "args": [0, 272, 0]
+    },
+    {
+      "name": "command 1 ends dialog",
+      "args": ["@window", 273, 1]
+    },
+    {
+      "name": "command other id not ended",
+      "args": ["@window", 273, 2]
+    },
+    {
+      "name": "command 0 not ended",
+      "args": ["@window", 273, 0]
+    },
+    {
+      "name": "unknown message",
+      "args": ["@window", 16, 1]
+    }
+  ],
+  "fuzz": {
+    "seed": 4413845,
+    "count": 150,
+    "args": [
+      {
+        "choices": ["@window", 0]
+      },
+      {
+        "choices": [272, 273, 16, 0, 1]
+      },
+      {
+        "range": [-2, 3]
+      }
+    ],
+    "memory": [
+      {"addr": "0x0085039C", "type": "u32", "choices": [0, "0x7a0000", "0x7a0010"]},
+      {"addr": "0x008503A0", "type": "u32", "choices": [0, "0x7a0000", "0x7a0010"]},
+      {"addr": "0x00905CB0", "type": "u32", "choices": ["@textlookup"]}
+    ]
+  }
+}

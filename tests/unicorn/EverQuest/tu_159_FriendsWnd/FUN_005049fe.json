@@ -1,0 +1,148 @@
+{
+  "function": "CFriendsWnd_guess::Draw",
+  "original": "0x005049fe",
+  "sources": ["src/EverQuest/tu_159_FriendsWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@gaugewnd",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "gaugewnd": {
+      "size": "0x188",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@wnd_vtbl"},
+        {"offset": "0x74", "u32": 0},
+        {"offset": "0x11c", "u32": 0},
+        {"offset": "0x120", "u32": 4286578688},
+        {"offset": "0x124", "u32": 4290822336},
+        {"offset": "0x128", "u8": 1},
+        {"offset": "0x134", "u32": 20},
+        {"offset": "0x138", "u32": 30},
+        {"offset": "0x13c", "hex": "0000003f"},
+        {"offset": "0x144", "u32": 900},
+        {"offset": "0x148", "u32": 0},
+        {"offset": "0x158", "u32": "@texture"},
+        {"offset": "0x15c", "u32": "@texture"},
+        {"offset": "0x160", "u32": "@texture"},
+        {"offset": "0x164", "u32": "@texture"},
+        {"offset": "0x168", "u32": "@texture"},
+        {"offset": "0x16c", "u32": "@texture"},
+        {"offset": "0x170", "u32": "@list"}
+      ]
+    },
+    "fn_rect": {"size": "0x1", "fill": "zero"},
+    "fn_set_text": {"size": "0x1", "fill": "zero"},
+    "fn_draw_text": {"size": "0x1", "fill": "zero"},
+    "fn_release": {"size": "0x1", "fill": "zero"},
+    "wnd_vtbl": {
+      "size": "0xe8",
+      "fill": "zero",
+      "init": [{"offset": "0xe4", "u32": "@fn_rect"}]
+    },
+    "texture": {
+      "size": "0x2c",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x24", "u32": 12},
+        {"offset": "0x28", "u32": 8}
+      ]
+    },
+    "list": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@list_vtbl"}]
+    },
+    "list_vtbl": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": "@fn_set_text"},
+        {"offset": "0xc", "u32": "@fn_draw_text"}
+      ]
+    },
+    "manager": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@manager_vtbl"}]
+    },
+    "manager_vtbl": {
+      "size": "0x7c",
+      "fill": "zero",
+      "init": [{"offset": "0x78", "u32": "@fn_release"}]
+    }
+  },
+  "memory": [
+    {"addr": "0x0099e364", "u32": "@manager"},
+    {"addr": "0x00642d70", "hex": "0000803f"},
+    {"addr": "0x0064a0c0", "hex": "0000803f"},
+    {"addr": "0x00640e20", "hex": "0000803f"},
+    {"addr": "0x0063f53f", "cstr": "GaugeWnd"},
+    {"addr": "0x007a0000", "size": 24, "fill": "zero"}
+  ],
+  "callees": {
+    "0x0059d6c0": {"name": "GetClientClipRect_guess", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": 0},
+    "0x005598bc": {"name": "GetGaugeValueFromEQ", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": 0},
+    "kernel32.dll!GetTickCount": {"name": "GetTickCount", "conv": "stdcall", "args": [], "ret": [1000, 1100]},
+    "0x0060f81e": {"name": "GaugeDelta_guess", "conv": "cdecl", "args": ["int"], "ret": 1000},
+    "0x00573b10": {"name": "Compare_guess", "conv": "thiscall", "this": "ignore", "args": ["ignore", "int"], "ret": 0},
+    "0x005b1910": {"name": "Draw_guess", "conv": "thiscall", "this": "ptr", "args": ["mem:16", "ignore", "u32", "u32"], "ret": 0},
+    "0x005046a2": {"name": "CalcFillRect", "conv": "thiscall", "this": "ptr", "args": ["ignore", "ignore", "int"], "ret": 0},
+    "0x0050445a": {"name": "Intersect_guess", "conv": "thiscall", "this": "ignore", "args": ["ignore", "ignore"], "ret": 0},
+    "0x005046fe": {"name": "CalcLinesFillRect", "conv": "thiscall", "this": "ptr", "args": ["ignore", "ignore", "int"], "ret": 0},
+    "0x005c0c30": {"name": "GaugeLog_guess", "conv": "cdecl", "args": ["cstr"], "varargs": "printf", "ret": 0},
+    "0x004d95d0": {"name": "IsEmpty_guess", "conv": "thiscall", "this": "ignore", "args": [], "ret": [1, 0]},
+    "0x00571f70": {
+      "name": "CXStr::operator=",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [{"addr": "@gaugewnd", "offset": 320, "hex": "00000000"}]
+    },
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "this": "ignore", "args": ["ptr"], "ret": 0},
+    "0x004d911a": {"name": "Normalize_guess", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": 0},
+    "@fn_rect": {"name": "GetRect_guess", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": 0, "writes": [{"arg": 0, "offset": 0, "hex": "0c000000000000006400000064000000"}]},
+    "@fn_set_text": {"name": "SetText_guess", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": 0},
+    "@fn_draw_text": {"name": "DrawText_guess", "conv": "thiscall", "this": "ignore", "args": ["int", "ignore", "ignore", "int", "int", "int"], "ret": 0},
+    "@fn_release": {"name": "Release_guess", "conv": "thiscall", "this": "ignore", "args": ["ptr"], "ret": 0}
+  },
+  "cases": [
+    {"name": "state-minus-one", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -1}}},
+    {"name": "state-minus-two", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -2}, "0x005b1910": {"name": "Draw_guess", "conv": "thiscall", "this": "ptr", "args": ["ignore", "ignore", "ignore", "ignore"], "ret": [0, 0, 0, 0, 0]}, "0x004d95d0": {"name": "IsEmpty_guess", "conv": "thiscall", "this": "ignore", "args": [], "ret": [1, 0]}}},
+    {"name": "state-below-minus-nine", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -10}, "0x005b1910": {"name": "Draw_guess", "conv": "thiscall", "this": "ptr", "args": ["ignore", "ignore", "ignore", "ignore"], "ret": [0, 0, 0, 0, 0, 0]}, "0x004d95d0": {"name": "IsEmpty_guess", "conv": "thiscall", "this": "ignore", "args": [], "ret": [1, 0]}}},
+    {"name": "state-nonnegative", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": 4}, "0x005b1910": {"name": "Draw_guess", "conv": "thiscall", "this": "ptr", "args": ["ignore", "ignore", "ignore", "ignore"], "ret": [0, 0, 0, 0, 0, 0]}, "0x004d95d0": {"name": "IsEmpty_guess", "conv": "thiscall", "this": "ignore", "args": [], "ret": [1, 0]}}},
+    {"name": "state-between-negative-ranges", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -5}}},
+    {"name": "invalid-query", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -2, "writes": [{"arg": 2, "offset": 0, "hex": "00"}]}}},
+    {"name": "no-text-callback", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": 0}, "0x004d95d0": {"name": "IsEmpty_guess", "conv": "thiscall", "this": "ignore", "args": [], "ret": [0, 1]}}},
+    {"name": "nonempty-query-string", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": 0, "writes": [{"arg": 1, "offset": 0, "hex": "00007a00"}]}, "0x00571f70": {"name": "CXStr::operator=", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": 0, "writes": [{"addr": "@gaugewnd", "offset": 320, "hex": "00007a00"}]}, "0x004d95d0": {"name": "IsEmpty_guess", "conv": "thiscall", "this": "ignore", "args": [], "ret": [1, 0]}}},
+    {"name": "no-animation-fields", "args": [], "memory": [{"addr": "@gaugewnd", "offset": "0x158", "u32": 0}, {"addr": "@gaugewnd", "offset": "0x15c", "u32": 0}, {"addr": "@gaugewnd", "offset": "0x160", "u32": 0}, {"addr": "@gaugewnd", "offset": "0x164", "u32": 0}, {"addr": "@gaugewnd", "offset": "0x168", "u32": 0}, {"addr": "@gaugewnd", "offset": "0x16c", "u32": 0}], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -2}}},
+    {"name": "disabled-secondary-layer", "args": [], "memory": [{"addr": "@gaugewnd", "offset": "0x128", "u8": 0}], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": 0}}},
+    {"name": "negative-amount-zero", "args": [], "memory": [{"addr": "0x00642d70", "hex": "00000000"}, {"addr": "0x0064a0c0", "hex": "00000000"}, {"addr": "0x00640e20", "hex": "00000000"}], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -10, "writes": [{"arg": 2, "offset": 0, "hex": "00"}]}}},
+    {"name": "negative-amount-one", "args": [], "memory": [{"addr": "0x00642d70", "hex": "00000000"}, {"addr": "0x0064a0c0", "hex": "0000803f"}, {"addr": "0x00640e20", "hex": "0000803f"}], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -10, "writes": [{"arg": 2, "offset": 0, "hex": "00"}]}}},
+    {"name": "negative-fill-pointer-one", "args": [], "memory": [{"addr": "@gaugewnd", "offset": "0x15c", "u32": 1}, {"addr": "0x00642d70", "hex": "00000000"}, {"addr": "0x0064a0c0", "hex": "0000803f"}, {"addr": "0x00640e20", "hex": "0000803f"}], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -10, "writes": [{"arg": 2, "offset": 0, "hex": "00"}]}}},
+    {"name": "positive-fill-pointer-one", "args": [], "memory": [{"addr": "@gaugewnd", "offset": "0x15c", "u32": 1}], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": 4, "writes": [{"arg": 2, "offset": 0, "hex": "00"}]}}},
+    {"name": "error-base-texture", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -2}, "0x005b1910": {"name": "Draw_guess", "conv": "thiscall", "this": "ptr", "args": ["ignore", "ignore", "ignore", "ignore"], "ret": [-1]}}},
+    {"name": "error-second-texture", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -2}, "0x005b1910": {"name": "Draw_guess", "conv": "thiscall", "this": "ptr", "args": ["ignore", "ignore", "ignore", "ignore"], "ret": [0, -1]}}},
+    {"name": "error-third-texture", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -2}, "0x005b1910": {"name": "Draw_guess", "conv": "thiscall", "this": "ptr", "args": ["ignore", "ignore", "ignore", "ignore"], "ret": [0, 0, -1]}}},
+    {"name": "error-minus-two-fill", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -2}, "0x005b1910": {"name": "Draw_guess", "conv": "thiscall", "this": "ptr", "args": ["ignore", "ignore", "ignore", "ignore"], "ret": [0, 0, 0, -1]}}},
+    {"name": "error-minus-two-overlay", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -2}, "0x005b1910": {"name": "Draw_guess", "conv": "thiscall", "this": "ptr", "args": ["ignore", "ignore", "ignore", "ignore"], "ret": [0, 0, 0, 0, -1]}}},
+    {"name": "error-negative-fill", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -10}, "0x005b1910": {"name": "Draw_guess", "conv": "thiscall", "this": "ptr", "args": ["ignore", "ignore", "ignore", "ignore"], "ret": [0, 0, 0, -1]}}},
+    {"name": "error-negative-overlay", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -10}, "0x005b1910": {"name": "Draw_guess", "conv": "thiscall", "this": "ptr", "args": ["ignore", "ignore", "ignore", "ignore"], "ret": [0, 0, 0, 0, -1]}}},
+    {"name": "error-negative-layer", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": -10}, "0x005b1910": {"name": "Draw_guess", "conv": "thiscall", "this": "ptr", "args": ["ignore", "ignore", "ignore", "ignore"], "ret": [0, 0, 0, 0, 0, -1]}}},
+    {"name": "error-positive-fill", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": 4}, "0x005b1910": {"name": "Draw_guess", "conv": "thiscall", "this": "ptr", "args": ["ignore", "ignore", "ignore", "ignore"], "ret": [0, 0, 0, -1]}}},
+    {"name": "error-positive-overlay", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": 4}, "0x005b1910": {"name": "Draw_guess", "conv": "thiscall", "this": "ptr", "args": ["ignore", "ignore", "ignore", "ignore"], "ret": [0, 0, 0, 0, -1]}}},
+    {"name": "error-positive-layer", "args": [], "callees": {"0x005598bc": {"name": "QueryGaugeValue_guess", "conv": "cdecl", "args": ["ptr", "ignore", "ignore"], "ret": 4}, "0x005b1910": {"name": "Draw_guess", "conv": "thiscall", "this": "ptr", "args": ["ignore", "ignore", "ignore", "ignore"], "ret": [0, 0, 0, 0, 0, -1]}}}
+  ],
+  "fuzz": {
+    "seed": 5261822,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@gaugewnd", "offset": "0x128", "type": "u8", "choices": [0, 1]},
+      {"addr": "@gaugewnd", "offset": "0x13c", "type": "float", "choices": [-10.0, 0.0, 0.5, 10.0]},
+      {"addr": "@gaugewnd", "offset": "0x158", "type": "u32", "choices": [0, "@texture"]},
+      {"addr": "@gaugewnd", "offset": "0x168", "type": "u32", "choices": [0, "@texture"]}
+    ]
+  }
+}

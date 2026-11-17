@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "client": "titanium",
+  "source": "function-extent audit A; proven by extent.check_fragments",
+  "note": "Export function starts that are really a tail of the function before (Ghidra split it). The head reaches the fragment and nothing else does; compare, the fixture harness and the context tools drop the fragment from the function starts so the head's extent runs on into it.",
+  "fragments": [
+    {"fragment": "0x00402A4B", "head": "0x00402967", "kind": "branch", "evidence": "4 jcc/jmp from the head past Catch@00402a28; the catch continuation 0x402A46 falls in"},
+    {"fragment": "0x00402C49", "head": "0x00402BC3", "kind": "branch", "evidence": "jmp over Catch@00402c22"},
+    {"fragment": "0x00403510", "head": "0x00403448", "kind": "branch", "evidence": "4 jmps over Catch@004034ef to the shared exit"},
+    {"fragment": "0x004DEB6D", "head": "0x004DEB5A", "kind": "fallthrough", "evidence": "head ends mid-flow at cmp eax,ebx; no callers"},
+    {"fragment": "0x0054F91A", "head": "0x0054F8FA", "kind": "fallthrough", "evidence": "head ends mid-flow at cmp eax,ebx; no callers"},
+    {"fragment": "0x00426622", "head": "0x0042650A", "kind": "branch", "evidence": "2 jcc/jmp over Catch@00426601"},
+    {"fragment": "0x00426743", "head": "0x00426654", "kind": "branch", "evidence": "4 jcc/jmp over Catch@00426720"},
+    {"fragment": "0x004268C4", "head": "0x00426786", "kind": "branch", "evidence": "2 jcc/jmp over Catch@004268a1"},
+    {"fragment": "0x00426BFB", "head": "0x00426B42", "kind": "branch", "evidence": "3 jcc/jmp over Catch@00426bd8"},
+    {"fragment": "0x00426CE6", "head": "0x00426C2D", "kind": "branch", "evidence": "3 jcc/jmp over Catch@00426cc3"},
+    {"fragment": "0x00426D8C", "head": "0x00426D18", "kind": "branch", "evidence": "2 jcc/jmp over Catch@00426d69"}
+  ]
+}

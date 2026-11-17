@@ -1,0 +1,501 @@
+{
+  "function": "GlobalState_guess::Who_guess",
+  "original": "0x0049c800",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@globalstate",
+  "args": [
+    {
+      "name": "args_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "max_insns": 2000000,
+  "objects": {
+    "globalstate": {"size": "0x100", "fill": "random"},
+    "gs2": {"size": "0x100", "fill": "random"},
+    "stab": {"size": "0x40", "fill": "random"},
+    "zmgr": {"size": "0x40", "fill": "random"},
+    "strs": {"size": "0x20", "fill": "zero", "init": [{"offset": 0, "hex": "53545200"}]},
+    "gname": {"size": "0x20", "fill": "zero", "init": [{"offset": 0, "hex": "476c6400"}]},
+    "nm": {"size": "0x20", "fill": "zero", "init": [{"offset": 0, "hex": "4e6d00"}]},
+    "node": {"size": "0x10", "fill": "zero", "init": [{"offset": 4, "u32": "0x10"}]},
+    "ctx": {"size": "0xc290", "fill": "zero", "init": [
+      {"offset": 8, "u32": "@node"},
+      {"offset": "0x54", "hex": "53656c6600"}
+    ]},
+    "me": {"size": "0x290", "fill": "zero", "init": [
+      {"offset": "0x204", "u32": "0x00070019"},
+      {"offset": "0x288", "u32": "0xffffffff"}
+    ]},
+    "a1": {"size": "0x1080", "fill": "zero"},
+    "a2": {"size": "0x1080", "fill": "zero"},
+    "a3": {"size": "0x1080", "fill": "zero"},
+    "a4": {"size": "0x1080", "fill": "zero"},
+    "a5": {"size": "0x1080", "fill": "zero"},
+    "p1": {"size": "0x290", "fill": "zero", "init": [
+      {"offset": "0x120", "hex": "503100"}, {"offset": "0x1a8", "u32": "@a1"}, {"offset": "0x214", "u32": "@p2"},
+      {"offset": "0x24c", "u8": 5}, {"offset": "0x252", "u8": 1}, {"offset": "0x288", "u32": "0xffffffff"}
+    ]},
+    "p2": {"size": "0x290", "fill": "zero", "init": [
+      {"offset": "0x120", "hex": "503200"}, {"offset": "0x1a8", "u32": "@a2"}, {"offset": "0x214", "u32": "@p3"},
+      {"offset": "0x24c", "u8": 5}, {"offset": "0x252", "u8": 1}, {"offset": "0x288", "u32": "0xffffffff"}
+    ]},
+    "p3": {"size": "0x290", "fill": "zero", "init": [
+      {"offset": "0x120", "hex": "503300"}, {"offset": "0x1a8", "u32": "@a3"}, {"offset": "0x214", "u32": "@p4"},
+      {"offset": "0x24c", "u8": 5}, {"offset": "0x252", "u8": 1}, {"offset": "0x288", "u32": "0xffffffff"}
+    ]},
+    "p4": {"size": "0x290", "fill": "zero", "init": [
+      {"offset": "0x120", "hex": "503400"}, {"offset": "0x1a8", "u32": "@a4"}, {"offset": "0x214", "u32": "@p5"},
+      {"offset": "0x24c", "u8": 5}, {"offset": "0x252", "u8": 1}, {"offset": "0x288", "u32": "0xffffffff"}
+    ]},
+    "p5": {"size": "0x290", "fill": "zero", "init": [
+      {"offset": "0x120", "hex": "503500"}, {"offset": "0x1a8", "u32": "@a5"}, {"offset": "0x214", "u32": 0},
+      {"offset": "0x24c", "u8": 5}, {"offset": "0x252", "u8": 1}, {"offset": "0x288", "u32": "0xffffffff"}
+    ]}
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@stab"},
+    {"addr": "0x00905ce4", "u32": "@me"},
+    {"addr": "0x00905d00", "u32": "@ctx"},
+    {"addr": "0x00905cc4", "u32": "@p1"},
+    {"addr": "0x00988df0", "u32": "@gs2"},
+    {"addr": "0x00905cc0", "u32": "@zmgr"}
+  ],
+  "callees": {
+    "0x0042dd82": {"name": "NextToken", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": "arg0",
+      "writes": [
+        {"arg": 1, "call": 0, "offset": 0, "hex": "743000"},
+        {"arg": 1, "call": 1, "offset": 0, "hex": "743100"},
+        {"arg": 1, "call": 2, "offset": 0, "hex": "743200"},
+        {"arg": 1, "call": 3, "offset": 0, "hex": "743300"}
+      ]},
+    "0x005dfa00": {"name": "getString", "conv": "thiscall", "args": ["int", "int"], "ret": "@strs"},
+    "0x00574950": {"name": "TextMatch", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 1},
+    "0x005744b0": {"name": "TextMatchN", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": 1},
+    "0x0060f3dc": {"name": "_isdigit", "conv": "cdecl", "args": ["int"], "ret": 0},
+    "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [9, 5]},
+    "0x0040ac55": {"name": "GuildName", "conv": "thiscall", "args": ["int"], "ret": "@gname"},
+    "0x004982c6": {"name": "DspChat", "conv": "thiscall", "args": ["cstr", "int", "bool"]},
+    "0x00491e5b": {"name": "GetClassDesc", "conv": "thiscall", "args": ["int"], "ret": "@strs"},
+    "0x00419601": {"name": "ClassName", "conv": "thiscall", "args": ["int"], "ret": "@strs"},
+    "0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 0, 1, 0, 0]},
+    "0x0049273d": {"name": "GetRaceDesc", "conv": "thiscall", "args": ["u32"], "ret": "@strs"},
+    "0x004195b8": {"name": "RaceName", "conv": "thiscall", "args": ["int"], "ret": "@strs"},
+    "0x00574830": {"name": "IsNumber", "conv": "cdecl", "args": ["cstr", "int"], "ret": 1},
+    "0x0040a79b": {"name": "FindGuild", "conv": "thiscall", "args": ["cstr"], "ret": -1},
+    "0x004912b1": {"name": "SendMessage", "conv": "cdecl", "args": ["u32", "int", "mem:152", "int", "char"], "ret": 1},
+    "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf",
+      "writes": [{"arg": 0, "offset": 0, "hex": "4c494e4500"}], "ret": 4},
+    "0x00492ec2": {"name": "FUN_00492ec2", "conv": "thiscall", "args": ["cstr"], "ret": "@nm"},
+    "0x0041bf2b": {"name": "ClassLabel", "conv": "thiscall", "args": ["int", "int", "int"], "ret": "@strs"},
+    "0x005fa1c0": {"name": "ZoneName", "conv": "thiscall", "args": ["u16", "ignore", "int"],
+      "writes": [{"arg": 1, "offset": 0, "hex": "5a4f4e4500"}]},
+    "0x0046da4a": {"name": "FormatText", "conv": "cdecl",
+      "args": ["ignore", "int", "cstr", "u32", "int", "int", "int", "int", "int", "int", "int"],
+      "writes": [{"arg": 0, "offset": 0, "hex": "464f4f5400"}]}
+  },
+  "rewrite_aliases": {
+    "_isdigit": "0x0060f3dc",
+    "__strnicmp": "0x0062202c",
+    "_sprintf": "0x0060d5eb",
+    "?DspChat_guess@GlobalState_guess@@QAEXPBDH_N@Z": "0x004982c6"
+  },
+  "_survivors": "L8069: the token row stride only moves stack buffers (their addresses are compared as <stack>); the tokenizer gets the literal 0x80 and tokens are short, so contents and calls are unchanged; L8206: the emulated stack starts zeroed, so deleting list_guess[0] = 0 leaves the buffer empty before the first strlen/strcpy anyway",
+  "coverage_ok": {
+    "0049CADB-0049CAE8": "mode 1 is never set: no token assigns 1 to the mode",
+    "0049CB2A-0049CB37": "mode 1 is never set: no token assigns 1 to the mode",
+    "0049D146-0049D153": "mode 1 is never set: no token assigns 1 to the mode"
+  },
+  "cases": [
+    {
+      "name": "A_mode3_filter_send",
+      "args": ["who"],
+      "callees": {
+        "0x0042dd82": {"name": "NextToken", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": "arg0",
+          "writes": [
+            {"arg": 1, "call": 0, "offset": 0, "hex": "743000"},
+            {"arg": 1, "call": 1, "offset": 0, "hex": "743100"},
+            {"arg": 1, "call": 2, "offset": 0, "hex": "743200"},
+            {"arg": 1, "call": 3, "offset": 0, "hex": "743300"},
+            {"arg": 1, "call": 4, "offset": 0, "hex": "743400"},
+            {"arg": 1, "call": 5, "offset": 0, "hex": "743500"}
+          ]},
+        "0x00574950": {"name": "TextMatch", "conv": "cdecl", "args": ["cstr", "cstr"],
+          "ret": [1,0, 1,1,1,1,0, 1,1,1,1,1,1,1,1,1,0,1,1, 1,1,1,1,1,1,1,1,1,1,0,1, 1]},
+        "0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 1, 0, 1, 0]},
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [10, 20]}
+      }
+    },
+    {
+      "name": "B_mode0_display_all",
+      "args": [""],
+      "callees": {
+        "0x0042dd82": {"name": "NextToken", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": "arg0"}
+      },
+      "memory": [
+        {"addr": "@p1", "offset": "0x288", "u32": 5},
+        {"addr": "@p1", "offset": "0x26c", "u32": 1},
+        {"addr": "@p1", "offset": "0x1b2", "u8": 1},
+        {"addr": "@p1", "offset": "0x1b4", "u8": 1},
+        {"addr": "@a1", "offset": "0x106c", "u32": 1},
+        {"addr": "@p1", "offset": "0x24c", "u8": 33},
+        {"addr": "@p1", "offset": "0x252", "u8": 7},
+        {"addr": "@p1", "offset": "0x260", "u32": 128},
+        {"addr": "@p2", "offset": "0x264", "u32": 1},
+        {"addr": "@p2", "offset": "0x288", "u32": 5},
+        {"addr": "@p2", "offset": "0x1b2", "u8": 1},
+        {"addr": "@p2", "offset": "0x24f", "u8": 1},
+        {"addr": "@a2", "offset": "0x1074", "u32": 1},
+        {"addr": "@p3", "offset": "0x244", "u8": 1},
+        {"addr": "@p4", "offset": "0x256", "u8": 1},
+        {"addr": "@p4", "offset": "0x264", "u32": 1},
+        {"addr": "@p5", "offset": "0x256", "u8": 1},
+        {"addr": "@p5", "offset": "0x264", "u32": 2},
+        {"addr": "@p5", "offset": "0x288", "u32": 9}
+      ]
+    },
+    {
+      "name": "B2_mode0_anon2_gm0",
+      "args": [""],
+      "callees": {
+        "0x0042dd82": {"name": "NextToken", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": "arg0"}
+      },
+      "memory": [
+        {"addr": "@p1", "offset": "0x264", "u32": 2},
+        {"addr": "@p1", "offset": "0x288", "u32": 4},
+        {"addr": "@p2", "offset": "0x1b2", "u8": 1},
+        {"addr": "@a2", "offset": "0x106c", "u32": 2},
+        {"addr": "@a2", "offset": "0x1074", "u32": 2},
+        {"addr": "@p3", "offset": "0x244", "u8": 2}
+      ]
+    },
+    {
+      "name": "C_mode2_guild",
+      "args": ["x"],
+      "callees": {
+        "0x0042dd82": {"name": "NextToken", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": "arg0",
+          "writes": [
+            {"arg": 1, "call": 0, "offset": 0, "hex": "743000"},
+            {"arg": 1, "call": 1, "offset": 0, "hex": "743100"},
+            {"arg": 1, "call": 2, "offset": 0, "hex": "6775696c64373700"}
+          ]},
+        "0x00574950": {"name": "TextMatch", "conv": "cdecl", "args": ["cstr", "cstr"],
+          "ret": [0, 1,1,1,1,1,1,1,1,1,1,1,0, 1]},
+        "0x005744b0": {"name": "TextMatchN", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": 0},
+        "0x0060f3dc": {"name": "_isdigit", "conv": "cdecl", "args": ["int"], "ret": [0, 4]},
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [77]},
+        "0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [0, 1]}
+      },
+      "memory": [
+        {"addr": "@me", "offset": "0x288", "u32": 42},
+        {"addr": "@p1", "offset": "0x288", "u32": 77},
+        {"addr": "@p1", "offset": "0x244", "u8": 2},
+        {"addr": "@p1", "offset": "0x24c", "u8": 40},
+        {"addr": "@p1", "offset": "0x252", "u8": 9},
+        {"addr": "@p1", "offset": "0x260", "u32": 6},
+        {"addr": "@p2", "offset": "0x288", "u32": 7},
+        {"addr": "@p2", "offset": "0x244", "u8": 2},
+        {"addr": "@p3", "offset": "0x288", "u32": 77},
+        {"addr": "@p3", "offset": "0x244", "u8": 1},
+        {"addr": "@p4", "offset": "0x288", "u32": 77},
+        {"addr": "@p4", "offset": "0x244", "u8": 3},
+        {"addr": "@p5", "offset": "0x288", "u32": 77}
+      ]
+    },
+    {
+      "name": "C2_mode2_self_guild",
+      "args": ["x"],
+      "callees": {
+        "0x0042dd82": {"name": "NextToken", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": "arg0",
+          "writes": [
+            {"arg": 1, "call": 0, "offset": 0, "hex": "743000"},
+            {"arg": 1, "call": 1, "offset": 0, "hex": "743100"}
+          ]},
+        "0x00574950": {"name": "TextMatch", "conv": "cdecl", "args": ["cstr", "cstr"],
+          "ret": [0, 1,1,1,1,1,1,1,1,1,1,1,0, 1]},
+        "0x005744b0": {"name": "TextMatchN", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": 1},
+        "0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [1, 0]}
+      },
+      "memory": [
+        {"addr": "@me", "offset": "0x288", "u32": 0},
+        {"addr": "@p1", "offset": "0x288", "u32": 0},
+        {"addr": "@p1", "offset": "0x244", "u8": 2},
+        {"addr": "@p2", "offset": "0x288", "u32": 0},
+        {"addr": "@p2", "offset": "0x244", "u8": 2},
+        {"addr": "@p3", "offset": "0x288", "u32": 1},
+        {"addr": "@p4", "offset": "0x288", "u32": 0},
+        {"addr": "@p4", "offset": "0x244", "u8": 1}
+      ]
+    },
+    {
+      "name": "D_mode0_lfg_gm0_name",
+      "args": ["y"],
+      "callees": {
+        "0x0042dd82": {"name": "NextToken", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": "arg0",
+          "writes": [
+            {"arg": 1, "call": 0, "offset": 0, "hex": "743000"},
+            {"arg": 1, "call": 1, "offset": 0, "hex": "743100"},
+            {"arg": 1, "call": 2, "offset": 0, "hex": "743200"},
+            {"arg": 1, "call": 3, "offset": 0, "hex": "743300"},
+            {"arg": 1, "call": 4, "offset": 0, "hex": "626f6200"}
+          ]},
+        "0x00574950": {"name": "TextMatch", "conv": "cdecl", "args": ["cstr", "cstr"],
+          "ret": [1,1,1,1,1,0, 1,1,1,1,1,1,1,1,0, 1,1,1,1,1,1,1,1,1,1,1,0, 1]},
+        "0x00574830": {"name": "IsNumber", "conv": "cdecl", "args": ["cstr", "int"], "ret": 0},
+        "0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [0, 0, 0, 0, 1, 1, 1]}
+      },
+      "memory": [
+        {"addr": "@p2", "offset": "0x1b4", "u8": 1},
+        {"addr": "@p3", "offset": "0x252", "u8": 2},
+        {"addr": "@p3", "offset": "0x1a8", "u32": 0},
+        {"addr": "@p4", "offset": "0x256", "u8": 1},
+        {"addr": "@p5", "offset": "0x1b4", "u8": 1},
+        {"addr": "@p5", "offset": "0x264", "u32": 1}
+      ]
+    },
+    {
+      "name": "E_class_exhausted_race_last",
+      "args": ["z"],
+      "callees": {
+        "0x0042dd82": {"name": "NextToken", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": "arg0",
+          "writes": [
+            {"arg": 1, "call": 0, "offset": 0, "hex": "743000"},
+            {"arg": 1, "call": 1, "offset": 0, "hex": "743100"}
+          ]},
+        "0x00574950": {"name": "TextMatch", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1, 0, 1]},
+        "0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,
+          0]}
+      }
+    },
+    {
+      "name": "F_race_exhausted_find_levels",
+      "args": ["w"],
+      "callees": {
+        "0x0042dd82": {"name": "NextToken", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": "arg0",
+          "writes": [
+            {"arg": 1, "call": 0, "offset": 0, "hex": "743000"},
+            {"arg": 1, "call": 1, "offset": 0, "hex": "743100"},
+            {"arg": 1, "call": 2, "offset": 0, "hex": "743200"},
+            {"arg": 1, "call": 3, "offset": 0, "hex": "743300"},
+            {"arg": 1, "call": 4, "offset": 0, "hex": "743400"},
+            {"arg": 1, "call": 5, "offset": 0, "hex": "743500"}
+          ]},
+        "0x00574950": {"name": "TextMatch", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,
+          0, 1]},
+        "0x00574830": {"name": "IsNumber", "conv": "cdecl", "args": ["cstr", "int"], "ret": [0, 1, 1, 1]},
+        "0x0040a79b": {"name": "FindGuild", "conv": "thiscall", "args": ["cstr"], "ret": [9, -1]},
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [1, 2]},
+        "0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [
+          0,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+          1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]}
+      }
+    },
+    {
+      "name": "G_mode0_trader_level_equal",
+      "args": ["v"],
+      "callees": {
+        "0x0042dd82": {"name": "NextToken", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": "arg0",
+          "writes": [
+            {"arg": 1, "call": 0, "offset": 0, "hex": "743000"},
+            {"arg": 1, "call": 1, "offset": 0, "hex": "743100"},
+            {"arg": 1, "call": 2, "offset": 0, "hex": "743200"},
+            {"arg": 1, "call": 3, "offset": 0, "hex": "743300"}
+          ]},
+        "0x00574950": {"name": "TextMatch", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1,1,1,1,1,1,1,1,1,0,1]},
+        "0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [0, 0, 1]},
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [12]}
+      },
+      "memory": [
+        {"addr": "@p1", "offset": "0x24c", "u8": 12},
+        {"addr": "@p2", "offset": "0x24c", "u8": 12},
+        {"addr": "@a2", "offset": "0x106c", "u32": 1},
+        {"addr": "@p3", "offset": "0x252", "u8": 2},
+        {"addr": "@p3", "offset": "0x24c", "u8": 12},
+        {"addr": "@p3", "offset": "0x1a8", "u32": 0},
+        {"addr": "@p4", "offset": "0x24c", "u8": 11},
+        {"addr": "@a4", "offset": "0x106c", "u32": 1},
+        {"addr": "@p5", "offset": "0x24c", "u8": 13},
+        {"addr": "@a5", "offset": "0x106c", "u32": 1}
+      ]
+    },
+    {
+      "name": "H_mode0_buyer_level_zero_first",
+      "args": ["u"],
+      "callees": {
+        "0x0042dd82": {"name": "NextToken", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": "arg0",
+          "writes": [
+            {"arg": 1, "call": 0, "offset": 0, "hex": "743000"},
+            {"arg": 1, "call": 1, "offset": 0, "hex": "743100"},
+            {"arg": 1, "call": 2, "offset": 0, "hex": "743200"},
+            {"arg": 1, "call": 3, "offset": 0, "hex": "743300"},
+            {"arg": 1, "call": 4, "offset": 0, "hex": "743400"}
+          ]},
+        "0x00574950": {"name": "TextMatch", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1,1,1,1,1,1,1,1,1,1,0,1]},
+        "0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "int"], "ret": [0, 0, 1]},
+        "0x0060e3a3": {"name": "_atol", "conv": "cdecl", "args": ["cstr"], "ret": [0, 5]}
+      },
+      "memory": [
+        {"addr": "@a2", "offset": "0x1074", "u32": 1},
+        {"addr": "@p3", "offset": "0x24c", "u8": 6},
+        {"addr": "@a3", "offset": "0x1074", "u32": 1},
+        {"addr": "@p4", "offset": "0x24c", "u8": 4},
+        {"addr": "@a4", "offset": "0x1074", "u32": 1},
+        {"addr": "@p5", "offset": "0x26c", "u32": 1},
+        {"addr": "@a5", "offset": "0x1074", "u32": 1}
+      ]
+    },
+    {
+      "name": "I_friends_list",
+      "args": ["f"],
+      "callees": {
+        "0x0042dd82": {"name": "NextToken", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": "arg0",
+          "writes": [
+            {"arg": 1, "call": 0, "offset": 0, "hex": "743000"},
+            {"arg": 1, "call": 1, "offset": 0, "hex": "743100"}
+          ]},
+        "0x00574950": {"name": "TextMatch", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1,0, 1,1,1,1,1,1,1,0, 1]},
+        "0x004912b1": {"name": "SendMessage", "conv": "cdecl", "args": ["u32", "int", "cstr", "int", "char"], "ret": 1}
+      },
+      "memory": [
+        {"addr": "0x0095a1b4", "hex": "616c69636500"},
+        {"addr": "0x0095a234", "hex": "61766572797665727976657279766572796c6f6e6700"},
+        {"addr": "0x0095a274", "hex": "626f6200"},
+        {"addr": "0x0095a2b4", "hex": "6162636465666768696a6b6c6d6e6f00"},
+        {"addr": "0x0095a2f4", "hex": "6162636465666768696a6b6c6d6e6f7000"},
+        {"addr": "0x0095ba74", "hex": "7a656400"}
+      ]
+    },
+    {
+      "name": "J_friends_empty_c28",
+      "args": ["g"],
+      "callees": {
+        "0x0042dd82": {"name": "NextToken", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": "arg0",
+          "writes": [
+            {"arg": 1, "call": 0, "offset": 0, "hex": "743000"},
+            {"arg": 1, "call": 1, "offset": 0, "hex": "743100"}
+          ]},
+        "0x00574950": {"name": "TextMatch", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1,0, 1,1,1,1,1,1,0, 1]},
+        "0x004912b1": {"name": "SendMessage", "conv": "cdecl", "args": ["u32", "int", "cstr", "int", "char"], "ret": 1}
+      }
+    },
+    {
+      "name": "J2_mode3_b2c_c2f_friends_one",
+      "args": ["h"],
+      "callees": {
+        "0x0042dd82": {"name": "NextToken", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": "arg0",
+          "writes": [
+            {"arg": 1, "call": 0, "offset": 0, "hex": "743000"},
+            {"arg": 1, "call": 1, "offset": 0, "hex": "743100"},
+            {"arg": 1, "call": 2, "offset": 0, "hex": "743200"}
+          ]},
+        "0x00574950": {"name": "TextMatch", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1,1,0, 1,1,1,0, 1,1,1,1,1,1,0, 1]},
+        "0x004912b1": {"name": "SendMessage", "conv": "cdecl", "args": ["u32", "int", "cstr", "int", "char"], "ret": 1}
+      },
+      "memory": [
+        {"addr": "0x0095a1f4", "hex": "6f6e6500"}
+      ]
+    },
+    {
+      "name": "K_no_players",
+      "args": [""],
+      "callees": {
+        "0x0042dd82": {"name": "NextToken", "conv": "cdecl", "args": ["cstr", "ignore", "int"], "ret": "arg0"}
+      },
+      "memory": [
+        {"addr": "0x00905cc4", "u32": 0}
+      ]
+    },
+    {
+      "name": "L_default_filters",
+      "args": ["d"]
+    }
+  ],
+  "fuzz": {
+    "seed": 4835328,
+    "count": 120,
+    "args": [
+      {"choices": ["a"]}
+    ],
+    "memory": [
+      {"addr": "@p1", "offset": "0x252", "type": "u8", "choices": [1, 2, 3]},
+      {"addr": "@p1", "offset": "0x260", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@p1", "offset": "0x24c", "type": "u8", "choices": [4, 5, 9, 10]},
+      {"addr": "@p1", "offset": "0x264", "type": "u32", "choices": [0, 0, 1, 2]},
+      {"addr": "@p1", "offset": "0x256", "type": "u8", "choices": [0, 1]},
+      {"addr": "@p1", "offset": "0x244", "type": "u8", "choices": [0, 0, 1]},
+      {"addr": "@p1", "offset": "0x26c", "type": "u32", "choices": [0, 1]},
+      {"addr": "@p1", "offset": "0x1b2", "type": "u8", "choices": [0, 1]},
+      {"addr": "@p1", "offset": "0x24f", "type": "u8", "choices": [0, 1]},
+      {"addr": "@p1", "offset": "0x1b4", "type": "u8", "choices": [0, 1]},
+      {"addr": "@p1", "offset": "0x288", "type": "u32", "choices": ["0xffffffff", 3]},
+      {"addr": "@a1", "offset": "0x106c", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "@a1", "offset": "0x1074", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "@p2", "offset": "0x252", "type": "u8", "choices": [1, 2, 3]},
+      {"addr": "@p2", "offset": "0x260", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@p2", "offset": "0x24c", "type": "u8", "choices": [4, 5, 9, 10]},
+      {"addr": "@p2", "offset": "0x264", "type": "u32", "choices": [0, 0, 1, 2]},
+      {"addr": "@p2", "offset": "0x256", "type": "u8", "choices": [0, 1]},
+      {"addr": "@p2", "offset": "0x244", "type": "u8", "choices": [0, 0, 1]},
+      {"addr": "@p2", "offset": "0x26c", "type": "u32", "choices": [0, 1]},
+      {"addr": "@p2", "offset": "0x1b2", "type": "u8", "choices": [0, 1]},
+      {"addr": "@p2", "offset": "0x24f", "type": "u8", "choices": [0, 1]},
+      {"addr": "@p2", "offset": "0x1b4", "type": "u8", "choices": [0, 1]},
+      {"addr": "@p2", "offset": "0x288", "type": "u32", "choices": ["0xffffffff", 3]},
+      {"addr": "@a2", "offset": "0x106c", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "@a2", "offset": "0x1074", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "@p3", "offset": "0x252", "type": "u8", "choices": [1, 2, 3]},
+      {"addr": "@p3", "offset": "0x260", "type": "int", "choices": [0, 1, 2]},
+      {"addr": "@p3", "offset": "0x24c", "type": "u8", "choices": [4, 5, 9, 10]},
+      {"addr": "@p3", "offset": "0x264", "type": "u32", "choices": [0, 0, 1, 2]},
+      {"addr": "@p3", "offset": "0x256", "type": "u8", "choices": [0, 1]},
+      {"addr": "@p3", "offset": "0x26c", "type": "u32", "choices": [0, 1]},
+      {"addr": "@p3", "offset": "0x288", "type": "u32", "choices": ["0xffffffff", 3]}
+    ]
+  }
+}

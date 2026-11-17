@@ -1,0 +1,420 @@
+{
+  "function": "EQPlayerFunctionView_guess::FireRangedItem_guess",
+  "original": "0x00481b3a",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@eqplayerfunctionview",
+  "args": [
+    {
+      "name": "param",
+      "type": "int"
+    }
+  ],
+  "ret": "char",
+  "objects": {
+    "eqplayerfunctionview": {
+      "size": "0x348",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x218",
+          "u32": "@pcview"
+        }
+      ]
+    },
+    "pcview": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@vbtable"
+        }
+      ]
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 252
+        }
+      ]
+    },
+    "profile1": {
+      "size": "0x68",
+      "fill": "random",
+      "init": [
+        { "offset": "0x3c", "u32": "@text1" },
+        { "offset": "0x44", "u32": "@text2" },
+        { "offset": "0x48", "u32": "@text3" },
+        { "offset": "0x64", "u32": "@text4" }
+      ]
+    },
+    "profile2": {
+      "size": "0x68",
+      "fill": "random",
+      "init": [
+        { "offset": "0x3c", "u32": 0 },
+        { "offset": "0x44", "u32": "@text2" },
+        { "offset": "0x48", "u32": "@text3" },
+        { "offset": "0x64", "u32": "@text4" }
+      ]
+    },
+    "text1": { "size": "0x20", "fill": "random" },
+    "text2": { "size": "0x20", "fill": "random" },
+    "text3": { "size": "0x20", "fill": "random" },
+    "text4": { "size": "0x20", "fill": "random" },
+    "msg": { "size": "0x20", "fill": "random" }
+  },
+  "memory": [
+    { "addr": "@msg", "cstr": "fixture text" }
+  ],
+  "callees": {
+    "0x005ec220": {
+      "name": "GetCharInfo2_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@profile1"
+    },
+    "0x0047f36c": {
+      "name": "HandleAmmo_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004753f0": {
+      "name": "DoMissileHit_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "ptr", "u8"]
+    },
+    "0x0048083a": {
+      "name": "UpdateItemSlot_guess",
+      "conv": "thiscall",
+      "args": ["int", "ptr", "int"]
+    },
+    "0x005e0f00": {
+      "name": "GetText_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@msg"
+    },
+    "0x005ecc00": {
+      "name": "GetState_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 19
+    }
+  },
+  "cases": [
+    {
+      "name": "initial primary null",
+      "args": [1],
+      "memory": [
+        { "addr": "@profile1", "offset": "0x3c", "u32": 0 }
+      ]
+    },
+    {
+      "name": "state zero secondary null",
+      "args": [1],
+      "callees": {
+        "0x005ec220": {
+          "name": "GetCharInfo2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": ["@profile1", "@profile2"]
+        }
+      }
+    },
+    {
+      "name": "state zero parameter null",
+      "args": [0],
+      "callees": {
+        "0x005ec220": {
+          "name": "GetCharInfo2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": ["@profile1", "@profile1"]
+        }
+      }
+    },
+    {
+      "name": "state zero action",
+      "args": [1],
+      "callees": {
+        "0x005ec220": {
+          "name": "GetCharInfo2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": ["@profile1", "@profile1", "@profile1"]
+        }
+      }
+    },
+    {
+      "name": "unknown state",
+      "args": [1],
+      "callees": {
+        "0x0047f36c": {
+          "name": "FUN_0047f36c_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 3
+        }
+      }
+    },
+    {
+      "name": "state one missing second item",
+      "args": [1],
+      "memory": [
+        { "addr": "@profile1", "offset": "0x64", "u32": 0 }
+      ],
+      "callees": {
+        "0x0047f36c": {
+          "name": "FUN_0047f36c_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x005ec220": {
+          "name": "GetCharInfo2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": ["@profile1", "@profile1"]
+        }
+      }
+    },
+    {
+      "name": "state one parameter null",
+      "args": [0],
+      "callees": {
+        "0x0047f36c": {
+          "name": "FUN_0047f36c_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x005ec220": {
+          "name": "GetCharInfo2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": ["@profile1", "@profile1", "@profile1"]
+        }
+      }
+    },
+    {
+      "name": "state one action",
+      "args": [1],
+      "callees": {
+        "0x0047f36c": {
+          "name": "FUN_0047f36c_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x005ec220": {
+          "name": "GetCharInfo2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": ["@profile1", "@profile1", "@profile1", "@profile1", "@profile1"]
+        }
+      }
+    },
+    {
+      "name": "state one final empty text",
+      "args": [1],
+      "memory": [
+        { "addr": "@profile2", "offset": "0x48", "u32": 0 }
+      ],
+      "callees": {
+        "0x0047f36c": {
+          "name": "FUN_0047f36c_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x005ec220": {
+          "name": "GetCharInfo2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": ["@profile1", "@profile1", "@profile1", "@profile2", "@profile2"]
+        }
+      }
+    },
+    {
+      "name": "state one final alternate text",
+      "args": [1],
+      "callees": {
+        "0x0047f36c": {
+          "name": "FUN_0047f36c_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x005ec220": {
+          "name": "GetCharInfo2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": ["@profile1", "@profile1", "@profile1", "@profile2", "@profile2", "@profile2"]
+        }
+      }
+    },
+    {
+      "name": "state two secondary null",
+      "args": [1],
+      "callees": {
+        "0x0047f36c": {
+          "name": "FUN_0047f36c_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 2
+        },
+        "0x005ec220": {
+          "name": "GetCharInfo2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": ["@profile1", "@profile2"]
+        }
+      }
+    },
+    {
+      "name": "state two wrong value",
+      "args": [1],
+      "callees": {
+        "0x0047f36c": {
+          "name": "FUN_0047f36c_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 2
+        },
+        "0x005ec220": {
+          "name": "GetCharInfo2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": ["@profile1", "@profile1"]
+        },
+        "0x005ecc00": {
+          "name": "GetState_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 12
+        }
+      }
+    },
+    {
+      "name": "state two parameter null",
+      "args": [0],
+      "callees": {
+        "0x0047f36c": {
+          "name": "FUN_0047f36c_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 2
+        },
+        "0x005ec220": {
+          "name": "GetCharInfo2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": ["@profile1", "@profile1"]
+        }
+      }
+    },
+    {
+      "name": "state two primary text null",
+      "args": [1],
+      "memory": [
+        { "addr": "@profile1", "offset": "0x44", "u32": 0 }
+      ],
+      "callees": {
+        "0x0047f36c": {
+          "name": "FUN_0047f36c_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 2
+        },
+        "0x005ec220": {
+          "name": "GetCharInfo2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": ["@profile1", "@profile1", "@profile1", "@profile1", "@profile1", "@profile1", "@profile1"]
+        }
+      }
+    },
+    {
+      "name": "state two primary text present",
+      "args": [1],
+      "callees": {
+        "0x0047f36c": {
+          "name": "FUN_0047f36c_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 2
+        },
+        "0x005ec220": {
+          "name": "GetCharInfo2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": ["@profile1", "@profile1", "@profile1", "@profile1", "@profile1", "@profile1", "@profile1", "@profile1"]
+        }
+      }
+    },
+    {
+      "name": "state two final empty text",
+      "args": [1],
+      "memory": [
+        { "addr": "@profile1", "offset": "0x44", "u32": 0 },
+        { "addr": "@profile2", "offset": "0x48", "u32": 0 }
+      ],
+      "callees": {
+        "0x0047f36c": {
+          "name": "FUN_0047f36c_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 2
+        },
+        "0x005ec220": {
+          "name": "GetCharInfo2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": ["@profile1", "@profile1", "@profile1", "@profile1", "@profile1", "@profile2", "@profile2"]
+        }
+      }
+    },
+    {
+      "name": "state two final alternate text",
+      "args": [1],
+      "memory": [
+        { "addr": "@profile1", "offset": "0x44", "u32": 0 }
+      ],
+      "callees": {
+        "0x0047f36c": {
+          "name": "FUN_0047f36c_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 2
+        },
+        "0x005ec220": {
+          "name": "GetCharInfo2_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": ["@profile1", "@profile1", "@profile1", "@profile1", "@profile1", "@profile2", "@profile2", "@profile2"]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4725562,
+    "count": 100,
+    "args": [
+      { "choices": [0, 1, -1] }
+    ],
+    "memory": [
+      { "addr": "@profile1", "offset": "0x3c", "type": "ptr", "choices": [0, "@text1", "@text2"] },
+      { "addr": "@profile1", "offset": "0x44", "type": "ptr", "choices": [0, "@text2", "@text3"] },
+      { "addr": "@profile1", "offset": "0x48", "type": "ptr", "choices": [0, "@text3", "@text4"] },
+      { "addr": "@profile1", "offset": "0x64", "type": "ptr", "choices": [0, "@text4", "@text1"] }
+    ]
+  }
+}

@@ -1,0 +1,639 @@
+{
+  "function": "BuffWindow_guess::HandleMessage_guess",
+  "original": "0x00529eea",
+  "sources": [
+    "src/EverQuest/tu_180_LFGuildWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@buffwindow",
+  "args": [
+    {
+      "name": "unused_guess",
+      "type": "int"
+    },
+    {
+      "name": "message_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "unused2_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "buffwindow": {
+      "size": "0x800",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@vtable"
+        }
+      ]
+    },
+    "message": {
+      "size": "0x26c",
+      "fill": "random"
+    },
+    "records": {
+      "size": "0x200",
+      "fill": "random"
+    },
+    "vtable": {
+      "size": "0xc4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0xc0",
+          "u32": "@fn"
+        }
+      ]
+    },
+    "fn": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "localized": {
+      "size": "0x40",
+      "fill": "random"
+    },
+    "stringtable": {
+      "size": "0x20",
+      "fill": "random"
+    },
+    "everquest": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": 305419896
+    },
+    {
+      "addr": "0x0099db00",
+      "hex": "00"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@stringtable"
+    },
+    {
+      "addr": "0x00792eec",
+      "u32": 256
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@everquest"
+    },
+    {
+      "addr": "@localized",
+      "cstr": "Localized"
+    }
+  ],
+  "callees": {
+    "0x00529ba2": {
+      "name": "ResetOwnerA_guess::Reset_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0060e985": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@records"
+    },
+    "0x0060e2b9": {
+      "name": "eh_vector_constructor_iterator",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32",
+        "ignore",
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x004657fb": {
+      "name": "FilterBadWords_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x00571fc0": {
+      "name": "CXStr_assign_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x00527e0f": {
+      "name": "RecordOwner_guess::Populate_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x006220e9": {
+      "name": "__itoa",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ptr",
+        "int"
+      ],
+      "ret": "arg1"
+    },
+    "0x0046da4a": {
+      "name": "FUN_0046da4a",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "cstr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x00529bfc": {
+      "name": "ResetOwnerB_guess::Reset_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "StringTable_guess::Lookup_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": "@localized"
+    },
+    "0x00527c19": {
+      "name": "RecordTable_guess::Populate_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004982c6": {
+      "name": "CEverQuest::dsp_chat",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ],
+      "ret": 0
+    },
+    "0x005296fa": {
+      "name": "FUN_005296fa",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0052947b": {
+      "name": "TimerState_guess::Refresh_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn": {
+      "name": "TimerTarget_guess::Slot48_guess",
+      "conv": "thiscall",
+      "args": [
+        "bool",
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9"
+  },
+  "cases": [
+    {
+      "name": "type0-copy-no-refresh",
+      "args": [
+        0,
+        "@message",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@buffwindow",
+          "offset": "0x5c",
+          "u8": 0
+        },
+        {
+          "addr": "@message",
+          "offset": "0x0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "type0-copy-refresh",
+      "args": [
+        0,
+        "@message",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@buffwindow",
+          "offset": "0x5c",
+          "u8": 1
+        },
+        {
+          "addr": "@message",
+          "offset": "0x0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "type1-copy-no-step",
+      "args": [
+        0,
+        "@message",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@buffwindow",
+          "offset": "0x5c",
+          "u8": 0
+        },
+        {
+          "addr": "@message",
+          "offset": "0x0",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "type1-copy-step",
+      "args": [
+        0,
+        "@message",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@buffwindow",
+          "offset": "0x5c",
+          "u8": 1
+        },
+        {
+          "addr": "@message",
+          "offset": "0x0",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "type2-default",
+      "args": [
+        0,
+        "@message",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@message",
+          "offset": "0x0",
+          "u32": 2
+        }
+      ]
+    },
+    {
+      "name": "type5-default",
+      "args": [
+        0,
+        "@message",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@message",
+          "offset": "0x0",
+          "u32": 5
+        }
+      ]
+    },
+    {
+      "name": "type6-virtual-call",
+      "args": [
+        0,
+        "@message",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@message",
+          "offset": "0x0",
+          "u32": 6
+        }
+      ]
+    },
+    {
+      "name": "type3-empty-null-allocation",
+      "args": [
+        0,
+        "@message",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@message",
+          "offset": "0x0",
+          "u32": 3
+        },
+        {
+          "addr": "@message",
+          "offset": "0x8",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0060e985": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "type3-one-key-minus-one",
+      "args": [
+        0,
+        "@message",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@message",
+          "offset": "0x0",
+          "u32": 3
+        },
+        {
+          "addr": "@message",
+          "offset": "0x8",
+          "u32": 1
+        },
+        {
+          "addr": "@message",
+          "offset": "0xc",
+          "hex": "416c706861002a0000000000000007000000ffffffff4175726100"
+        }
+      ]
+    },
+    {
+      "name": "type3-key-low-clamped",
+      "args": [
+        0,
+        "@message",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@message",
+          "offset": "0x0",
+          "u32": 3
+        },
+        {
+          "addr": "@message",
+          "offset": "0x8",
+          "u32": 1
+        },
+        {
+          "addr": "@message",
+          "offset": "0xc",
+          "hex": "416c706861002a0000000000000007000000feffffff4175726100"
+        }
+      ]
+    },
+    {
+      "name": "type3-key-high-boundary",
+      "args": [
+        0,
+        "@message",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@message",
+          "offset": "0x0",
+          "u32": 3
+        },
+        {
+          "addr": "@message",
+          "offset": "0x8",
+          "u32": 1
+        },
+        {
+          "addr": "@message",
+          "offset": "0xc",
+          "hex": "416c706861002a0000000000000007000000170000004175726100"
+        }
+      ]
+    },
+    {
+      "name": "type3-key-high-clamped",
+      "args": [
+        0,
+        "@message",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@message",
+          "offset": "0x0",
+          "u32": 3
+        },
+        {
+          "addr": "@message",
+          "offset": "0x8",
+          "u32": 1
+        },
+        {
+          "addr": "@message",
+          "offset": "0xc",
+          "hex": "416c706861002a0000000000000007000000180000004175726100"
+        }
+      ]
+    },
+    {
+      "name": "type3-two-records",
+      "args": [
+        0,
+        "@message",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@message",
+          "offset": "0x0",
+          "u32": 3
+        },
+        {
+          "addr": "@message",
+          "offset": "0x8",
+          "u32": 2
+        },
+        {
+          "addr": "@message",
+          "offset": "0xc",
+          "hex": "416c706861002a000000000000000700000017000000417572610042657461002b0000000000000008000000ffffffff4275666600"
+        }
+      ]
+    },
+    {
+      "name": "type4-empty-null-allocation",
+      "args": [
+        0,
+        "@message",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@message",
+          "offset": "0x0",
+          "u32": 4
+        },
+        {
+          "addr": "@message",
+          "offset": "0x8",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0060e985": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "type4-one-record",
+      "args": [
+        0,
+        "@message",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@message",
+          "offset": "0x0",
+          "u32": 4
+        },
+        {
+          "addr": "@message",
+          "offset": "0x8",
+          "u32": 1
+        },
+        {
+          "addr": "@message",
+          "offset": "0xc",
+          "hex": "4669726500110000005370656c6c00"
+        }
+      ]
+    },
+    {
+      "name": "type4-two-records",
+      "args": [
+        0,
+        "@message",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@message",
+          "offset": "0x0",
+          "u32": 4
+        },
+        {
+          "addr": "@message",
+          "offset": "0x8",
+          "u32": 2
+        },
+        {
+          "addr": "@message",
+          "offset": "0xc",
+          "hex": "4669726500110000005370656c6c00496365001300000046726f737400"
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5414634,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          -1,
+          1
+        ]
+      },
+      {
+        "choices": [
+          "@message"
+        ]
+      },
+      {
+        "range": [
+          -1,
+          1
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@message",
+        "offset": "0x0",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          2,
+          5,
+          6
+        ]
+      },
+      {
+        "addr": "@buffwindow",
+        "offset": "0x5c",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "_survivors": "L1433: clamping key -1 to -1 stores the same value as leaving it unchanged."
+}

@@ -1,0 +1,87 @@
+{
+  "function": "AdjustedObject_guess::Delete_guess",
+  "original": "0x0042ab96",
+  "sources": [
+    "src/EverQuest/tu_018_MailtoLink.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@adjustedobject+0x60",
+  "args": [
+    {
+      "name": "flags_guess",
+      "type": "u8"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "adjustedobject": {
+      "size": "0x61",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0042a426": {
+      "name": "FUN_0042a426",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "keep"
+    },
+    "0x00401c6c": {
+      "name": "FUN_00401c6c_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "keep"
+    },
+    "0x0060d0d5": {
+      "name": "operator delete",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "?DestroyPart_guess@AdjustedObject_guess@@QAEXXZ": "0x0042a426"
+  },
+  "cases": [
+    {
+      "name": "delete flag set",
+      "args": [
+        1
+      ]
+    },
+    {
+      "name": "delete flag clear",
+      "args": [
+        0
+      ]
+    },
+    {
+      "name": "other bit only",
+      "args": [
+        2
+      ]
+    },
+    {
+      "name": "all bits",
+      "args": [
+        255
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4369302,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          0,
+          255
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

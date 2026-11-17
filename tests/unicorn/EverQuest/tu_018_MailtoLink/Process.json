@@ -1,0 +1,131 @@
+{
+  "function": "BodyRequestOwner_guess::RequestBody_guess",
+  "_shape": "deque find by id, map lookup, getbody request through ostringstream or error chat, then a 12-byte record passed to Attach and deleted",
+  "original": "0x00428a6e",
+  "sources": ["src/EverQuest/tu_018_MailtoLink.cpp"],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {"name": "key_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x40", "fill": "random",
+      "init": [
+        {"offset": "0x30", "u32": 3},
+        {"offset": "0x34", "u32": 5},
+        {"offset": "0x3c", "u32": 4660}
+      ]
+    },
+    "searchResult": {"size": "0x8", "fill": "random"},
+    "entry": {"size": "0x44", "fill": "random"},
+    "entryslot": {"size": "0x4", "init": [{"offset": 0, "u32": "@entry"}]},
+    "streamObj": {"size": "0x80", "fill": "random"},
+    "mailhost": {"size": "0x840", "fill": "random", "init": [{"offset": "0x834", "u32": "@sender"}]},
+    "sender": {"size": "0x10", "fill": "random"},
+    "strtable": {"size": "0x10", "fill": "random"},
+    "chatText": {"size": "0x20", "init": [{"offset": 0, "cstr": "not connected"}]},
+    "longBody": {"size": "0x40", "init": [{"offset": 0, "cstr": "[getbody 77 with a long tail"}]},
+    "record": {"size": "0xc", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": 305419896},
+    {"addr": "0x00988df0", "u32": "@mailhost"},
+    {"addr": "0x00905cb0", "u32": "@strtable"},
+    {"addr": "0x0063f558", "u32": 0},
+    {"addr": "0x0099db60", "cstr": "[getbody 77 with a long tail"}
+  ],
+  "callees": {
+    "0x0060d5a8": {"name": "__EH_prolog", "args": [], "passthrough": true},
+    "0x0060d674": {"name": "__security_check_cookie", "conv": "fastcall", "args": ["u32"]},
+    "0x004257ca": {
+      "name": "find in deque",
+      "conv": "cdecl",
+      "args": ["ignore", "ptr", "int", "ptr", "int", "int"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "0000000006000000"}]
+    },
+    "0x00491002": {"name": "iterator equals", "conv": "thiscall", "this": "ignore", "args": ["mem:8"], "ret": 0},
+    "0x00425170": {"name": "iterator deref", "conv": "thiscall", "this": "ignore", "args": [], "ret": "@entryslot"},
+    "0x00402505": {"name": "string::_Eos", "conv": "thiscall", "this": "ignore", "args": ["u32"], "ret": 0},
+    "0x00425f18": {
+      "name": "map find",
+      "conv": "thiscall",
+      "args": ["ignore", "mem:4"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "34120000"}]
+    },
+    "0x00427663": {"name": "ostringstream ctor", "conv": "thiscall", "this": "ignore", "args": ["int", "int"], "ret": "this"},
+    "0x004263d1": {"name": "operator<< char", "conv": "cdecl", "args": ["ignore", "int"], "ret": "@streamObj"},
+    "0x0042650a": {"name": "operator<< text", "conv": "cdecl", "args": ["ptr", "cstr"], "ret": "@streamObj"},
+    "0x00426c2d": {"name": "operator<< unsigned", "conv": "thiscall", "args": ["u32"], "ret": "@streamObj"},
+    "0x004276d4": {
+      "name": "ostringstream::str",
+      "conv": "thiscall", "this": "ignore",
+      "args": ["ignore"],
+      "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 4, "hex": "5b676574626f6479203737000000000000"},
+        {"arg": 0, "offset": 20,"hex": "0b000000"},
+        {"arg": 0, "offset": 24,"hex": "0f000000"}
+      ]
+    },
+    "0x005ff560": {"name": "sender send", "conv": "thiscall", "args": ["cstr"], "ret": 0},
+    "0x0040291e": {"name": "string::_Tidy", "conv": "thiscall", "this": "ignore", "args": ["bool", "u32"], "ret": 0},
+    "0x00425a76": {"name": "ostringstream dtor", "conv": "thiscall", "this": "ignore", "args": [], "ret": 0},
+    "0x00623d8d": {"name": "ios_base dtor", "conv": "thiscall", "this": "ignore", "args": [], "ret": 0},
+    "0x005dfa00": {"name": "getString", "conv": "thiscall", "args": ["int", "int"], "ret": "@chatText"},
+    "0x004982c6": {"name": "dsp_chat", "conv": "thiscall", "args": ["cstr", "int", "int"], "ret": 0},
+    "0x0060d071": {"name": "operator new", "conv": "cdecl", "args": ["u32"], "ret": "@record"},
+    "0x00402d37": {"name": "Attach", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x0060d0d5": {"name": "operator delete", "conv": "cdecl", "args": ["ptr"], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {"name": "not found", "args": [77],
+     "callees": {"0x00491002": {"name": "equals", "conv": "thiscall", "this": "ignore", "args": ["mem:8"], "ret": 1}}},
+    {"name": "found, already cached (map hit)", "args": [77],
+     "memory": [{"addr": "@owner", "offset": "0x3c", "u32": 22136}]},
+    {"name": "found, not cached, no sender", "args": [77],
+     "memory": [{"addr": "@mailhost", "offset": "0x834", "u32": 0}]},
+    {"name": "found, not cached, sender, short body", "args": [77]},
+    {"name": "found, not cached, sender, long body", "args": [77],
+     "callees": {"0x004276d4": {
+       "name": "str long", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": "arg0",
+       "writes": [
+         {"arg": 0, "offset": 4, "hex": "60db9900"},
+         {"arg": 0, "offset": 20,"hex": "1c000000"},
+         {"arg": 0, "offset": 24,"hex": "1f000000"}
+       ]}}},
+    {"name": "found, boundary capacity 16", "args": [77],
+     "callees": {"0x004276d4": {
+       "name": "str cap16", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": "arg0",
+       "writes": [
+         {"arg": 0, "offset": 4, "hex": "60db9900"},
+         {"arg": 0, "offset": 20,"hex": "1c000000"},
+         {"arg": 0, "offset": 24,"hex": "10000000"}
+       ]}}},
+    {"name": "new fails", "args": [-5],
+     "callees": {"0x0060d071": {"name": "new null", "conv": "cdecl", "args": ["u32"], "ret": 0}}},
+    {"name": "new fails, map hit", "args": [9],
+     "memory": [{"addr": "@owner", "offset": "0x3c", "u32": 1}],
+     "callees": {"0x0060d071": {"name": "new null", "conv": "cdecl", "args": ["u32"], "ret": 0}}}
+  ],
+  "_survivors": "L1240: dsp_chat's third parameter is bool, so 2 converts to true and still pushes 1",
+  "fuzz": {
+    "seed": 4360814,
+    "count": 100,
+    "args": [
+      {"choices": [0, 1, 77, -1, 2147483647]}
+    ],
+    "memory": [
+      {"addr": "@owner", "offset": "0x30", "type": "u32", "choices": [0, 3, 100]},
+      {"addr": "@owner", "offset": "0x34", "type": "u32", "choices": [0, 5, 7]},
+      {"addr": "@owner", "offset": "0x3c", "type": "u32", "choices": [4660, 1, 0]},
+      {"addr": "@mailhost", "offset": "0x834", "type": "u32", "choices": [0, "@sender"]}
+    ]
+  }
+}

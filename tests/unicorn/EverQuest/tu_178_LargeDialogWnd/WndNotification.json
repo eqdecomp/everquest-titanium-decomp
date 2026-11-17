@@ -1,0 +1,688 @@
+{
+  "function": "Object_005261bf_guess::WndNotification_guess",
+  "original": "0x00526574",
+  "sources": [
+    "src/EverQuest/tu_178_LargeDialogWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object_005261bf",
+  "args": [
+    {
+      "name": "sender",
+      "type": "ptr"
+    },
+    {
+      "name": "message",
+      "type": "u32"
+    },
+    {
+      "name": "data",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "object_005261bf": {
+      "size": "0x184",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@vtbl"
+        },
+        {
+          "offset": "0x160",
+          "u32": "@ok"
+        },
+        {
+          "offset": "0x164",
+          "u32": "@yes"
+        },
+        {
+          "offset": "0x168",
+          "u32": "@no"
+        },
+        {
+          "offset": "0x16c",
+          "u32": "@mute"
+        },
+        {
+          "offset": "0x170",
+          "u32": "@replay"
+        },
+        {
+          "offset": "0x174",
+          "u32": "@slider"
+        },
+        {
+          "offset": "0x178",
+          "u32": "@label"
+        },
+        {
+          "offset": "0x180",
+          "u8": 0
+        }
+      ]
+    },
+    "yes": {
+      "size": "0x130",
+      "fill": "random"
+    },
+    "no": {
+      "size": "0x130",
+      "fill": "random"
+    },
+    "ok": {
+      "size": "0x130",
+      "fill": "random"
+    },
+    "mute": {
+      "size": "0x130",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x128",
+          "u8": 0
+        }
+      ]
+    },
+    "replay": {
+      "size": "0x130",
+      "fill": "random"
+    },
+    "slider": {
+      "size": "0x130",
+      "fill": "random"
+    },
+    "label": {
+      "size": "0x130",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@label_vtbl"
+        }
+      ]
+    },
+    "other": {
+      "size": "0x130",
+      "fill": "random"
+    },
+    "data": {
+      "size": "0x130",
+      "fill": "random"
+    },
+    "sound": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "vtbl": {
+      "size": "0x130",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xc0",
+          "u32": "@fn_slot48"
+        },
+        {
+          "offset": "0x120",
+          "u32": "@fn_slot72"
+        },
+        {
+          "offset": "0x124",
+          "u32": "@fn_slot73"
+        },
+        {
+          "offset": "0x128",
+          "u32": "@fn_slot74"
+        },
+        {
+          "offset": "0x12c",
+          "u32": "@fn_slot75"
+        }
+      ]
+    },
+    "label_vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xfc",
+          "u32": "@fn_slot63"
+        }
+      ]
+    },
+    "fn_slot48": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_slot63": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_slot72": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_slot73": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_slot74": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_slot75": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00851390",
+      "u32": "@sound"
+    },
+    {
+      "addr": "0x00640038",
+      "from_image": "0x00640038",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x0052613b": {
+      "name": "Object_0052613b_guess::GetMp3Volume_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret_float": 0.75
+    },
+    "0x0044a5c6": {
+      "name": "SoundObject_guess::ReplayMp3_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ],
+      "ret": 0
+    },
+    "0x005bb140": {
+      "name": "CButtonWnd::SetCheck",
+      "conv": "thiscall",
+      "args": [
+        "bool"
+      ],
+      "ret": 0
+    },
+    "0x0044a5fe": {
+      "name": "SoundObject_guess::SetMp3Volume_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ],
+      "ret": 0
+    },
+    "0x005738b0": {
+      "name": "FormatString_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr",
+        "int",
+        "char"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "01000000"
+        }
+      ]
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x005a2230": {
+      "name": "CSidlScreenWnd::WndNotification",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 305419896
+    },
+    "@fn_slot48": {
+      "name": "CXWnd::Slot48_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "@fn_slot63": {
+      "name": "CXWnd::Slot63_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:4"
+      ],
+      "ret": 0
+    },
+    "@fn_slot72": {
+      "name": "LargeDialog::Slot72_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_slot73": {
+      "name": "LargeDialog::Slot73_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_slot74": {
+      "name": "LargeDialog::Slot74_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_slot75": {
+      "name": "LargeDialog::Slot75_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "null sender forwards",
+      "args": [
+        0,
+        1,
+        "@data"
+      ],
+      "expect": {
+        "ret": 305419896
+      }
+    },
+    {
+      "name": "yes button",
+      "args": [
+        "@yes",
+        1,
+        "@data"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "no button",
+      "args": [
+        "@no",
+        1,
+        "@data"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "ok button",
+      "args": [
+        "@ok",
+        1,
+        "@data"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "replay with sound object",
+      "args": [
+        "@replay",
+        1,
+        "@data"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "replay with null sound object",
+      "args": [
+        "@replay",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "0x00851390",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "mute checked",
+      "args": [
+        "@mute",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@mute",
+          "offset": "0x128",
+          "u8": 1
+        },
+        {
+          "addr": "@object_005261bf",
+          "offset": "0x180",
+          "u8": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "mute unchecked",
+      "args": [
+        "@mute",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@mute",
+          "offset": "0x128",
+          "u8": 0
+        },
+        {
+          "addr": "@object_005261bf",
+          "offset": "0x180",
+          "u8": 1
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "mute with null sound object",
+      "args": [
+        "@mute",
+        1,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "@mute",
+          "offset": "0x128",
+          "u8": 0
+        },
+        {
+          "addr": "0x00851390",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "unknown message one forwards",
+      "args": [
+        "@other",
+        1,
+        "@data"
+      ],
+      "expect": {
+        "ret": 305419896
+      }
+    },
+    {
+      "name": "slider with label and text cleanup",
+      "args": [
+        "@slider",
+        14,
+        "@data"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "slider without label or text allocation",
+      "args": [
+        "@slider",
+        14,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@object_005261bf",
+          "offset": "0x178",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x005738b0": {
+          "name": "FormatString_guess",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr",
+            "int",
+            "char"
+          ],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "slider with null sound pointer",
+      "args": [
+        "@slider",
+        14,
+        "@data"
+      ],
+      "memory": [
+        {
+          "addr": "0x00851390",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "message fourteen with unrelated sender",
+      "args": [
+        "@other",
+        14,
+        "@data"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "message ten notifies then forwards",
+      "args": [
+        "@other",
+        10,
+        "@data"
+      ],
+      "expect": {
+        "ret": 305419896
+      }
+    },
+    {
+      "name": "other message forwards",
+      "args": [
+        "@other",
+        13,
+        "@data"
+      ],
+      "expect": {
+        "ret": 305419896
+      }
+    },
+    {
+      "name": "message fifteen forwards",
+      "args": [
+        "@other",
+        15,
+        "@data"
+      ],
+      "expect": {
+        "ret": 305419896
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5399924,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@yes",
+          "@no",
+          "@ok",
+          "@replay",
+          "@mute",
+          "@slider",
+          "@other",
+          "@data",
+          0
+        ]
+      },
+      {
+        "choices": [
+          0,
+          1,
+          10,
+          14,
+          42
+        ]
+      },
+      {
+        "choices": [
+          "@data",
+          0,
+          1
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@object_005261bf",
+        "offset": "0x160",
+        "type": "ptr",
+        "choices": [
+          "@ok",
+          "@other",
+          0
+        ]
+      },
+      {
+        "addr": "@object_005261bf",
+        "offset": "0x164",
+        "type": "ptr",
+        "choices": [
+          "@yes",
+          "@other",
+          0
+        ]
+      },
+      {
+        "addr": "@object_005261bf",
+        "offset": "0x168",
+        "type": "ptr",
+        "choices": [
+          "@no",
+          "@other",
+          0
+        ]
+      },
+      {
+        "addr": "@object_005261bf",
+        "offset": "0x16c",
+        "type": "ptr",
+        "choices": [
+          "@mute",
+          "@other",
+          0
+        ]
+      },
+      {
+        "addr": "@object_005261bf",
+        "offset": "0x170",
+        "type": "ptr",
+        "choices": [
+          "@replay",
+          "@other",
+          0
+        ]
+      },
+      {
+        "addr": "@object_005261bf",
+        "offset": "0x174",
+        "type": "ptr",
+        "choices": [
+          "@slider",
+          "@other",
+          0
+        ]
+      },
+      {
+        "addr": "@object_005261bf",
+        "offset": "0x178",
+        "type": "ptr",
+        "choices": [
+          "@label",
+          0
+        ]
+      },
+      {
+        "addr": "@object_005261bf",
+        "offset": "0x180",
+        "type": "bool",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@mute",
+        "offset": "0x128",
+        "type": "bool",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00851390",
+        "type": "ptr",
+        "choices": [
+          "@sound",
+          0
+        ]
+      }
+    ]
+  }
+}

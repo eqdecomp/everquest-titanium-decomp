@@ -1,0 +1,303 @@
+{
+  "function": "CAltStorageWnd_guess::Refresh_guess",
+  "original": "0x004d8515",
+  "sources": [
+    "src/EverQuest/tu_105_AltStorageWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@altstoragewnd",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "altstoragewnd": {
+      "size": "0x190",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x160", "u32": "@element0" },
+        { "offset": "0x17c", "u32": "@countlabel" },
+        { "offset": "0x188", "u32": "@itemlist" }
+      ]
+    },
+    "itemlist": {
+      "size": "0x170",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@listvtbl" },
+        { "offset": "0x11c", "u32": 1 }
+      ]
+    },
+    "listvtbl": {
+      "size": "0x13c",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x100", "u32": "@fn_restore" },
+        { "offset": "0x130", "u32": "@fn_begin" },
+        { "offset": "0x138", "u32": "@fn_end" }
+      ]
+    },
+    "countlabel": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@labelvtbl" }
+      ]
+    },
+    "labelvtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        { "offset": "0xfc", "u32": "@fn_settext" }
+      ]
+    },
+    "fn_begin": { "size": "0x4" },
+    "fn_end": { "size": "0x4" },
+    "fn_restore": { "size": "0x4" },
+    "fn_settext": { "size": "0x4" },
+    "element0": {
+      "size": "0x58",
+      "fill": "zero"
+    },
+    "element1": {
+      "size": "0x58",
+      "fill": "zero"
+    },
+    "nametable": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "heap0": { "size": "0x1000", "fill": "zero" },
+    "heap1": { "size": "0x1000", "fill": "zero" },
+    "heap2": { "size": "0x1000", "fill": "zero" },
+    "heap3": { "size": "0x1000", "fill": "zero" },
+    "heap4": { "size": "0x1000", "fill": "zero" },
+    "heap5": { "size": "0x1000", "fill": "zero" },
+    "heap6": { "size": "0x1000", "fill": "zero" },
+    "heap7": { "size": "0x1000", "fill": "zero" },
+    "heap8": { "size": "0x1000", "fill": "zero" },
+    "heap9": { "size": "0x1000", "fill": "zero" },
+    "heap10": { "size": "0x1000", "fill": "zero" },
+    "heap11": { "size": "0x1000", "fill": "zero" },
+    "heap12": { "size": "0x1000", "fill": "zero" },
+    "heap13": { "size": "0x1000", "fill": "zero" },
+    "heap14": { "size": "0x1000", "fill": "zero" },
+    "heap15": { "size": "0x1000", "fill": "zero" }
+  },
+  "memory": [
+    { "addr": "@altstoragewnd", "offset": "0x15c", "u32": 2 },
+    { "addr": "@altstoragewnd", "offset": "0x16c", "u8": 1 },
+    { "addr": "@element0", "cstr": "Alpha item" },
+    { "addr": "@element0", "offset": "0x40", "u32": 101 },
+    { "addr": "@element0", "offset": "0x48", "u32": 11 },
+    { "addr": "@element0", "offset": "0x50", "u32": 3 },
+    { "addr": "@element1", "cstr": "Beta item" },
+    { "addr": "@element1", "offset": "0x40", "u32": 202 },
+    { "addr": "@element1", "offset": "0x48", "u32": 22 },
+    { "addr": "@element1", "offset": "0x50", "u32": 7 },
+    { "addr": "0x0063f53f", "from_image": "0x0063f53f", "image_size": 16 },
+    { "addr": "0x00991910", "u32": "@nametable" },
+    { "addr": "0x0099db00", "size": 16, "fill": "zero" }
+  ],
+  "callees": {
+    "0x00597be0": {
+      "name": "GetCurSel_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": -1
+    },
+    "0x00597ed0": {
+      "name": "GetItemData_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": [0, 0]
+    },
+    "0x004d83f4": {
+      "name": "GetItem_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": ["@element0", "@element0", "@element0", "@element1", "@element1", "@element1"]
+    },
+    "@fn_begin": {
+      "name": "BeginUpdate_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00571e00": {
+      "name": "CXStr_ctor_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "passthrough": true
+    },
+    "0x0059b9d0": {
+      "name": "AddString_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "int", "int", "int"],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "CXStr_dtor_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "passthrough": true
+    },
+    "0x004ffbe9": {
+      "name": "LookupName_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "0x0063f53f"
+    },
+    "0x0059b2e0": {
+      "name": "SetItemRef_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "ptr"]
+    },
+    "0x0059b360": {
+      "name": "SetItemText_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "ignore"]
+    },
+    "0x006220e9": {
+      "name": "_itoa",
+      "conv": "cdecl",
+      "args": ["int", "ptr", "int"],
+      "passthrough": true
+    },
+    "@fn_end": {
+      "name": "EndUpdate_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00597c20": {
+      "name": "SetCurSel_guess",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "@fn_restore": {
+      "name": "RestorePos_guess",
+      "conv": "thiscall",
+      "args": ["u32"]
+    },
+    "@fn_settext": {
+      "name": "SetText_guess",
+      "conv": "thiscall",
+      "args": ["ignore"]
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": ["@heap0", "@heap1", "@heap2", "@heap3", "@heap4", "@heap5", "@heap6", "@heap7", "@heap8", "@heap9", "@heap10", "@heap11", "@heap12", "@heap13", "@heap14", "@heap15"]
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 1
+    }
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9"
+  },
+  "cases": [
+    {
+      "name": "null item list",
+      "args": [],
+      "memory": [
+        { "addr": "@altstoragewnd", "offset": "0x16c", "u8": 77 },
+        { "addr": "@altstoragewnd", "offset": "0x17c", "u32": 0 },
+        { "addr": "@altstoragewnd", "offset": "0x188", "u32": 0 }
+      ]
+    },
+    {
+      "name": "empty list",
+      "args": [],
+      "memory": [
+        { "addr": "@altstoragewnd", "offset": "0x15c", "u32": 0 },
+        { "addr": "@altstoragewnd", "offset": "0x16c", "u8": 55 },
+        { "addr": "@itemlist", "offset": "0x11c", "u32": 0 },
+        { "addr": "@altstoragewnd", "offset": "0x17c", "u32": 0 }
+      ]
+    },
+    {
+      "name": "one row without prior selection",
+      "args": [],
+      "memory": [
+        { "addr": "@altstoragewnd", "offset": "0x15c", "u32": 1 },
+        { "addr": "@itemlist", "offset": "0x11c", "u32": 0 },
+        { "addr": "@altstoragewnd", "offset": "0x17c", "u32": 0 }
+      ]
+    },
+    {
+      "name": "restore matching selection and set count label",
+      "args": [],
+      "memory": [
+        { "addr": "@altstoragewnd", "offset": "0x15c", "u32": 1 },
+        { "addr": "@itemlist", "offset": "0x11c", "u32": 1 },
+        { "addr": "@altstoragewnd", "offset": "0x17c", "u32": "@countlabel" }
+      ],
+      "callees": {
+        "0x00597be0": {
+          "name": "GetCurSel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        },
+        "0x00597ed0": {
+          "name": "GetItemData_guess",
+          "conv": "thiscall",
+          "args": ["int"],
+          "ret": [0, 0]
+        },
+        "0x004d83f4": {
+          "name": "GetItem_guess",
+          "conv": "thiscall",
+          "args": ["int"],
+          "ret": ["@element0", "@element0", "@element0", "@element0", "@element0"]
+        }
+      }
+    },
+    {
+      "name": "selected row not found after refresh",
+      "args": [],
+      "memory": [
+        { "addr": "@altstoragewnd", "offset": "0x15c", "u32": 2 },
+        { "addr": "@itemlist", "offset": "0x11c", "u32": 1 },
+        { "addr": "@altstoragewnd", "offset": "0x17c", "u32": 0 }
+      ],
+      "callees": {
+        "0x00597be0": {
+          "name": "GetCurSel_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        },
+        "0x00597ed0": {
+          "name": "GetItemData_guess",
+          "conv": "thiscall",
+          "args": ["int"],
+          "ret": [0, 1]
+        },
+        "0x004d83f4": {
+          "name": "GetItem_guess",
+          "conv": "thiscall",
+          "args": ["int"],
+          "ret": ["@element0", "@element0", "@element0", "@element1", "@element1", "@element1", "@element1", "@element1"]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5080341,
+    "count": 100,
+    "args": [],
+    "memory": [
+      { "addr": "@altstoragewnd", "offset": "0x15c", "type": "int", "choices": [0, 1, 2] },
+      { "addr": "@altstoragewnd", "offset": "0x16c", "type": "u8", "choices": [0, 1, 255] },
+      { "addr": "@itemlist", "offset": "0x11c", "type": "int", "choices": [0, 1] },
+      { "addr": "@element0", "offset": "0x48", "type": "u32", "range": [0, 1000] },
+      { "addr": "@element0", "offset": "0x50", "type": "int", "range": [-5, 100] },
+      { "addr": "@element1", "offset": "0x48", "type": "u32", "range": [0, 1000] },
+      { "addr": "@element1", "offset": "0x50", "type": "int", "range": [-5, 100] }
+    ]
+  },
+  "_todo": []
+}

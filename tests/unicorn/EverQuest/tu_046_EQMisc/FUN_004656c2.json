@@ -1,0 +1,136 @@
+{
+  "function": "calculateFileCRC32_guess",
+  "original": "0x004656c2",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "path",
+      "type": "cstr"
+    },
+    {
+      "name": "result",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "result": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "buf": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "file": {
+      "size": "0x40",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x006104f0": {
+      "name": "__stat",
+      "conv": "cdecl",
+      "args": ["cstr", "ignore"],
+      "ret": 0,
+      "writes": [{"arg": 1, "offset": 20, "hex": "00010000"}]
+    },
+    "kernel32.dll!GlobalAlloc": {
+      "name": "GlobalAlloc",
+      "conv": "stdcall",
+      "args": ["u32", "u32"],
+      "ret": "@buf"
+    },
+    "0x0060e887": {
+      "name": "_fopen",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr"],
+      "ret": "@file"
+    },
+    "0x00611d51": {
+      "name": "_fread",
+      "conv": "cdecl",
+      "args": ["ptr", "u32", "u32", "ptr"],
+      "ret": 1
+    },
+    "0x0060e790": {
+      "name": "_fclose",
+      "conv": "cdecl",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "kernel32.dll!GlobalFree": {
+      "name": "GlobalFree",
+      "conv": "stdcall",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x004b6c04": {
+      "name": "MemChecker0",
+      "conv": "cdecl",
+      "args": ["ptr", "u32"],
+      "ret": 4660
+    }
+  },
+  "rewrite_aliases": {
+    "__stat": "0x006104f0",
+    "_fopen": "0x0060e887",
+    "_fread": "0x00611d51",
+    "_fclose": "0x0060e790"
+  },
+  "cases": [
+    {
+      "name": "typical: file read",
+      "args": ["abc", "@result"]
+    },
+    {
+      "name": "stat fails",
+      "args": ["missing", "@result"],
+      "callees": {
+        "0x006104f0": {"name": "__stat", "conv": "cdecl", "args": ["cstr", "ignore"], "ret": -1}
+      }
+    },
+    {
+      "name": "fopen fails",
+      "args": ["locked", "@result"],
+      "callees": {
+        "0x0060e887": {"name": "_fopen", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 0}
+      }
+    },
+    {
+      "name": "fread short",
+      "args": ["short", "@result"],
+      "callees": {
+        "0x00611d51": {"name": "_fread", "conv": "cdecl", "args": ["ptr", "u32", "u32", "ptr"], "ret": 0}
+      }
+    },
+    {
+      "name": "fread returns 2",
+      "args": ["two", "@result"],
+      "callees": {
+        "0x00611d51": {"name": "_fread", "conv": "cdecl", "args": ["ptr", "u32", "u32", "ptr"], "ret": 2}
+      }
+    },
+    {
+      "name": "empty path",
+      "args": ["", "@result"]
+    }
+  ],
+  "fuzz": {
+    "seed": 4609730,
+    "count": 100,
+    "args": [
+      {
+        "choices": ["abc", "a longer file name.dat", "x"]
+      },
+      {
+        "choices": ["@result"]
+      }
+    ],
+    "memory": []
+  }
+}

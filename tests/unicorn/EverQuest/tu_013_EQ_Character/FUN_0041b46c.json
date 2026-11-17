@@ -1,0 +1,661 @@
+{
+  "function": "ProcessDrunkenness_guess",
+  "original": "0x0041b46c",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@costowner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "costowner": {
+      "size": "0x0c",
+      "fill": "random"
+    },
+    "offset": {
+      "size": "0x08",
+      "fill": "random"
+    },
+    "candidate_fn": {
+      "size": "0x04",
+      "fill": "zero"
+    },
+    "dynamic_vtable": {
+      "size": "0x44",
+      "fill": "zero"
+    },
+    "candidate": {
+      "size": "0xc290",
+      "fill": "random"
+    },
+    "candidate_vbtable": {
+      "size": "0x08",
+      "fill": "zero"
+    },
+    "request": {
+      "size": "0x1ac",
+      "fill": "random"
+    },
+    "request_tail": {
+      "size": "0x160",
+      "fill": "random"
+    },
+    "entity": {
+      "size": "0x1ac",
+      "fill": "random"
+    },
+    "threshold": {
+      "size": "0x98",
+      "fill": "random"
+    },
+    "lookup": {
+      "size": "0x107c",
+      "fill": "random"
+    },
+    "lookup_alt": {
+      "size": "0x107c",
+      "fill": "random"
+    },
+    "controller": {
+      "size": "0x04",
+      "fill": "zero"
+    },
+    "scale": {
+      "size": "0x44",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@costowner",
+      "offset": "0x04",
+      "u32": "@offset"
+    },
+    {
+      "addr": "@costowner",
+      "offset": "0x08",
+      "u32": "@entity"
+    },
+    {
+      "addr": "@offset",
+      "offset": "0x04",
+      "u32": 32
+    },
+    {
+      "addr": "@costowner",
+      "offset": "0x24",
+      "u32": "@dynamic_vtable"
+    },
+    {
+      "addr": "@dynamic_vtable",
+      "offset": "0x40",
+      "u32": "@candidate_fn"
+    },
+    {
+      "addr": "@candidate",
+      "offset": "0x08",
+      "u32": "@candidate_vbtable"
+    },
+    {
+      "addr": "@candidate_vbtable",
+      "offset": "0x04",
+      "u32": 32
+    },
+    {
+      "addr": "@candidate",
+      "offset": "0xc288",
+      "u32": "@request"
+    },
+    {
+      "addr": "@request",
+      "offset": "0x1a8",
+      "u32": "@request_tail"
+    },
+    {
+      "addr": "@request_tail",
+      "offset": "0x15c",
+      "u32": 1
+    },
+    {
+      "addr": "@entity",
+      "offset": "0x1a8",
+      "u32": "@threshold"
+    },
+    {
+      "addr": "@threshold",
+      "offset": "0x88",
+      "u32": "0xffffffff"
+    },
+    {
+      "addr": "@threshold",
+      "offset": "0x90",
+      "u32": 0
+    },
+    {
+      "addr": "@threshold",
+      "offset": "0x94",
+      "f32": 0.0
+    },
+    {
+      "addr": "@entity",
+      "offset": "0x3c",
+      "f32": 0.0
+    },
+    {
+      "addr": "@entity",
+      "offset": "0x40",
+      "f32": 0.0
+    },
+    {
+      "addr": "@lookup",
+      "offset": "0x1078",
+      "u32": 100
+    },
+    {
+      "addr": "@lookup_alt",
+      "offset": "0x1078",
+      "u32": 400
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@controller"
+    },
+    {
+      "addr": "0x00850ccc",
+      "u32": 0
+    },
+    {
+      "addr": "0x009254fc",
+      "u32": "@scale"
+    },
+    {
+      "addr": "@scale",
+      "offset": "0x40",
+      "f32": 17.0
+    },
+    {
+      "addr": "0x00640038",
+      "from_image": "0x00640038",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0064108c",
+      "from_image": "0x0064108C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0063f4cc",
+      "f32": 0.0
+    },
+    {
+      "addr": "0x00641088",
+      "from_image": "0x00641088",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "@candidate_fn": {
+      "name": "GetCandidate_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@candidate"
+    },
+    "0x005ed550": {
+      "name": "GetValue_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        1,
+        50,
+        200,
+        50,
+        60,
+        80,
+        110,
+        113,
+        110
+      ]
+    },
+    "0x005ed570": {
+      "name": "SetValue_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x005ec220": {
+      "name": "Find_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@lookup"
+    },
+    "0x0040e934": {
+      "name": "FindBuffWithEffect_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 113
+    },
+    "0x00411f2f": {
+      "name": "RemovePCAffect_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x004649b1": {
+      "name": "UpdateCostMessage_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "int",
+        "int"
+      ]
+    },
+    "0x00438fc2": {
+      "name": "SetShortTimer_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x00438fdf": {
+      "name": "Clear_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004392de": {
+      "name": "Reset_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x00440f51": {
+      "name": "Apply_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "all-positive-branches",
+      "args": []
+    },
+    {
+      "name": "null-candidate",
+      "args": [],
+      "callees": {
+        "@candidate_fn": {
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "null-request",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@candidate",
+          "offset": "0xc288",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x005ed550": {
+          "ret": [
+            1,
+            10,
+            39,
+            70,
+            80,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "name": "zero-current-value",
+      "args": [],
+      "callees": {
+        "0x005ed550": {
+          "ret": [
+            0,
+            70,
+            99,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "name": "null-request-tail",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x1a8",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x005ed550": {
+          "ret": [
+            1,
+            10,
+            20,
+            40,
+            70,
+            80,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "name": "threshold-exactly-40",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@candidate",
+          "offset": "0xc288",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x005ed550": {
+          "ret": [
+            1,
+            20,
+            40,
+            69,
+            99,
+            69,
+            80,
+            99
+          ]
+        }
+      }
+    },
+    {
+      "name": "threshold-exactly-70",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@candidate",
+          "offset": "0xc288",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x005ed550": {
+          "ret": [
+            1,
+            20,
+            40,
+            69,
+            99,
+            70,
+            80,
+            99
+          ]
+        }
+      }
+    },
+    {
+      "name": "threshold-exactly-100",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@candidate",
+          "offset": "0xc288",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x005ed550": {
+          "ret": [
+            1,
+            20,
+            40,
+            69,
+            99,
+            69,
+            80,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "name": "lookup-cap-and-equal",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@candidate",
+          "offset": "0xc288",
+          "u32": "@request"
+        },
+        {
+          "addr": "@lookup",
+          "offset": "0x1078",
+          "u32": 300
+        }
+      ],
+      "callees": {
+        "0x005ed550": {
+          "ret": [
+            1,
+            20,
+            150,
+            40,
+            69,
+            70,
+            80,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "name": "lookup-cap-above",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@candidate",
+          "offset": "0xc288",
+          "u32": "@request"
+        },
+        {
+          "addr": "@lookup",
+          "offset": "0x1078",
+          "u32": 302
+        }
+      ],
+      "callees": {
+        "0x005ed550": {
+          "ret": [
+            1,
+            20,
+            151,
+            40,
+            69,
+            70,
+            80,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "name": "lookup-cap-boundary-recheck",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@lookup",
+          "offset": "0x1078",
+          "u32": 202
+        }
+      ],
+      "callees": {
+        "0x005ed550": {
+          "ret": [
+            1,
+            20,
+            150,
+            40,
+            69,
+            70,
+            80,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "name": "lookup-recheck-arithmetic",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@lookup",
+          "offset": "0x1078",
+          "u32": 100
+        },
+        {
+          "addr": "@lookup_alt",
+          "offset": "0x1078",
+          "u32": 100
+        }
+      ],
+      "callees": {
+        "0x005ec220": {
+          "ret": [
+            "@lookup",
+            "@lookup_alt"
+          ]
+        },
+        "0x005ed550": {
+          "ret": [
+            1,
+            20,
+            50,
+            40,
+            69,
+            0,
+            80,
+            100
+          ]
+        }
+      }
+    },
+    {
+      "name": "final-value-99",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x1a8",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x005ed550": {
+          "ret": [
+            1,
+            10,
+            40,
+            40,
+            72,
+            69,
+            99
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4306028,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@candidate",
+        "offset": "0xc288",
+        "type": "ptr",
+        "choices": [
+          "@request",
+          0
+        ]
+      },
+      {
+        "addr": "@request",
+        "offset": "0x1a8",
+        "type": "ptr",
+        "choices": [
+          "@request_tail",
+          0
+        ]
+      },
+      {
+        "addr": "@request_tail",
+        "offset": "0x15c",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@lookup",
+        "offset": "0x1078",
+        "type": "int",
+        "choices": [
+          -20,
+          0,
+          1,
+          100,
+          200,
+          300,
+          302,
+          1000
+        ]
+      },
+      {
+        "addr": "@threshold",
+        "offset": "0x88",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@entity",
+        "offset": "0x3c",
+        "type": "float",
+        "choices": [
+          0.0,
+          0.001,
+          1.0
+        ]
+      },
+      {
+        "addr": "@entity",
+        "offset": "0x40",
+        "type": "float",
+        "choices": [
+          0.0,
+          0.001,
+          1.0
+        ]
+      }
+    ]
+  }
+}

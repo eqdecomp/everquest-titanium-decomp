@@ -1,0 +1,158 @@
+{
+  "function": "CTaskSelectWnd_guess::LoadTasks_guess",
+  "original": "0x0055c13b",
+  "sources": [
+    "src/EverQuest/tu_221_TaskSelectWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@zone",
+  "args": [
+    {
+      "name": "message_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "zone": {
+      "size": "0x64A00",
+      "fill": "zero"
+    },
+    "message": {
+      "size": "0x1000",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0055bd1a": {
+      "name": "Clear_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00574310": {
+      "name": "CopyBuffer_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ptr", "u32"]
+    },
+    "0x0055bf0e": {
+      "name": "Fill_guess",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "count zero",
+      "args": ["@message"],
+      "memory": [
+        {"addr": "@message", "offset": "0x0", "u32": 0}
+      ]
+    },
+    {
+      "name": "count negative",
+      "args": ["@message"],
+      "memory": [
+        {"addr": "@message", "offset": "0x0", "u32": -1}
+      ]
+    },
+    {
+      "name": "one task no records",
+      "args": ["@message"],
+      "memory": [
+        {"addr": "@message", "offset": "0x0", "u32": 1},
+        {"addr": "@message", "offset": "0x4", "u32": 1},
+        {"addr": "@message", "offset": "0x8", "u32": 42},
+        {"addr": "@message", "offset": "0xc", "u32": 7},
+        {"addr": "@message", "offset": "0x10", "u32": 0},
+        {"addr": "@message", "offset": "0x14", "u32": 2},
+        {"addr": "@message", "offset": "0x18", "cstr": "row text"},
+        {"addr": "@message", "offset": "0x21", "cstr": "info"},
+        {"addr": "@message", "offset": "0x26", "u32": 0}
+      ]
+    },
+    {
+      "name": "one task two records",
+      "args": ["@message"],
+      "memory": [
+        {"addr": "@message", "offset": "0x0", "u32": 1},
+        {"addr": "@message", "offset": "0x4", "u32": 3},
+        {"addr": "@message", "offset": "0x8", "u32": 42},
+        {"addr": "@message", "offset": "0xc", "u32": 7},
+        {"addr": "@message", "offset": "0x10", "u32": 0},
+        {"addr": "@message", "offset": "0x14", "u32": 2},
+        {"addr": "@message", "offset": "0x18", "cstr": "row text"},
+        {"addr": "@message", "offset": "0x21", "cstr": "info"},
+        {"addr": "@message", "offset": "0x26", "u32": 2},
+        {"addr": "@message", "offset": "0x2a", "u32": 3},
+        {"addr": "@message", "offset": "0x2e", "u32": 11},
+        {"addr": "@message", "offset": "0x32", "u32": 12},
+        {"addr": "@message", "offset": "0x36", "cstr": "a"},
+        {"addr": "@message", "offset": "0x38", "cstr": "bb"},
+        {"addr": "@message", "offset": "0x3b", "u32": 1},
+        {"addr": "@message", "offset": "0x3f", "u32": 2},
+        {"addr": "@message", "offset": "0x43", "u32": 3},
+        {"addr": "@message", "offset": "0x47", "u32": 4},
+        {"addr": "@message", "offset": "0x4b", "cstr": "ccc"},
+        {"addr": "@message", "offset": "0x4f", "u32": 19},
+        {"addr": "@message", "offset": "0x53", "u32": 21},
+        {"addr": "@message", "offset": "0x57", "u32": 22},
+        {"addr": "@message", "offset": "0x5b", "cstr": ""},
+        {"addr": "@message", "offset": "0x5c", "cstr": ""},
+        {"addr": "@message", "offset": "0x5d", "u32": 5},
+        {"addr": "@message", "offset": "0x61", "u32": 6},
+        {"addr": "@message", "offset": "0x65", "u32": 7},
+        {"addr": "@message", "offset": "0x69", "u32": 8},
+        {"addr": "@message", "offset": "0x6d", "cstr": ""}
+      ]
+    },
+    {
+      "name": "one task one record",
+      "args": ["@message"],
+      "memory": [
+        {"addr": "@message", "offset": "0x0", "u32": 1},
+        {"addr": "@message", "offset": "0x4", "u32": 3},
+        {"addr": "@message", "offset": "0x8", "u32": 42},
+        {"addr": "@message", "offset": "0xc", "u32": 7},
+        {"addr": "@message", "offset": "0x10", "u32": 0},
+        {"addr": "@message", "offset": "0x14", "u32": 2},
+        {"addr": "@message", "offset": "0x18", "cstr": "row text"},
+        {"addr": "@message", "offset": "0x21", "cstr": "info"},
+        {"addr": "@message", "offset": "0x26", "u32": 1},
+        {"addr": "@message", "offset": "0x2a", "u32": 3},
+        {"addr": "@message", "offset": "0x2e", "u32": 11},
+        {"addr": "@message", "offset": "0x32", "u32": 12},
+        {"addr": "@message", "offset": "0x36", "cstr": "a"},
+        {"addr": "@message", "offset": "0x38", "cstr": "bb"},
+        {"addr": "@message", "offset": "0x3b", "u32": 1},
+        {"addr": "@message", "offset": "0x3f", "u32": 2},
+        {"addr": "@message", "offset": "0x43", "u32": 3},
+        {"addr": "@message", "offset": "0x47", "u32": 4},
+        {"addr": "@message", "offset": "0x4b", "cstr": "ccc"}
+      ]
+    },
+    {
+      "name": "forty one tasks zeroed",
+      "args": ["@message"],
+      "memory": [
+        {"addr": "@message", "offset": "0x0", "u32": 41}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5620027,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@message"
+        ]
+      }
+    ],
+    "memory": [
+      {"addr": "@message", "offset": "0x0", "type": "int", "choices": [-1, 0, 1, 2, 3, 39, 40, 41]},
+      {"addr": "@message", "offset": "0x4", "type": "int", "choices": [0, 1, 2, 3]},
+      {"addr": "@message", "offset": "0x8", "type": "int", "choices": [0, 42]}
+    ]
+  }
+}

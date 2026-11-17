@@ -1,0 +1,308 @@
+{
+  "function": "CGemsGameWndView_guess::CheckAndProcessMatchingCells_guess",
+  "original": "0x005053ab",
+  "sources": [
+    "src/EverQuest/tu_160_GemsGameWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {
+      "name": "x",
+      "type": "int"
+    },
+    {
+      "name": "y",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "size": "0x428",
+  "objects": {
+    "owner": {
+      "size": "0x4488",
+      "fill": "zero"
+    },
+    "allocator": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "clock": {
+      "size": "0x14c",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905ce4",
+      "u32": "@allocator"
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@clock"
+    }
+  ],
+  "callees": {
+    "0x00505324": {
+      "name": "ProcessGemMatch_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x00479ee8": {
+      "name": "PlaySound_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "inactive_start",
+      "args": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "isolated_cell",
+      "args": [
+        4,
+        4
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x8c8",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "vertical_run",
+      "args": [
+        4,
+        4
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x8c8",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x968",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0xa08",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "horizontal_run",
+      "args": [
+        4,
+        4
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x8c8",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x8d8",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x8e8",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "diagonal_rising_right",
+      "args": [
+        4,
+        4
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x8c8",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x838",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x958",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "diagonal_falling_right",
+      "args": [
+        4,
+        4
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x8c8",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x818",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x978",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "top_left_boundary",
+      "args": [
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x608",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "bottom_right_boundary",
+      "args": [
+        9,
+        11
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0xd78",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "top_neighbor_up",
+      "args": [
+        4,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x6e8",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x648",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "out_of_board_up_neighbor",
+      "args": [
+        4,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x648",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x5a8",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "diagonal_right_edge",
+      "args": [
+        8,
+        4
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x908",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x878",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x998",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "final_diagonal_pair",
+      "args": [
+        4,
+        4
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x8c8",
+          "u32": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x818",
+          "u32": 1
+        }
+      ]
+    }
+  ],
+  "_survivors": "L342: first reset fields are overwritten by later resets; the scripted 00505324 call compares only its count arg; L344: same as L342; L364: up-scan target is overwritten by later resets and the case count is 2, so the scripted callee does not read records; L365: same as L364; L381: second-reset leftovers are cleared by later resets; the scripted call compares only its count arg; L444: record 21 is never populated (maximum run count is 12), prior resets clear it and counts never read it",
+  "fuzz": {
+    "seed": 5264299,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          0,
+          9
+        ]
+      },
+      {
+        "range": [
+          0,
+          11
+        ]
+      }
+    ]
+  }
+}

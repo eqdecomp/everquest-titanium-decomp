@@ -1,0 +1,117 @@
+{
+  "function": "Table_guess::GrowWide_guess",
+  "original": "0x004b75aa",
+  "sources": [
+    "src/EverQuest/tu_077_ItemMoveQueue.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@table",
+  "args": [
+    {
+      "name": "wanted_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "table": {
+      "size": "0x20",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": 3},
+        {"offset": "0xc", "u32": 2},
+        {"offset": "0x10", "u32": "@oldtbl"},
+        {"offset": "0x14", "u32": 2},
+        {"offset": "0x18", "u32": 1}
+      ]
+    },
+    "oldtbl": {"size": "0x40", "fill": "random"},
+    "newbuf": {"size": "0x100", "fill": "random"},
+    "blk1": {"size": "0x80", "fill": "random"},
+    "blk2": {"size": "0x80", "fill": "random"},
+    "blk3": {"size": "0x80", "fill": "random"},
+    "blk4": {"size": "0x80", "fill": "random"},
+    "blk5": {"size": "0x80", "fill": "random"},
+    "blk6": {"size": "0x80", "fill": "random"}
+  },
+  "memory": [],
+  "_survivors": "L993: copying one extra slot (<=) writes newBlocks[count], which the block loop always overwrites next (wanted > count there, also on alloc failure), and the extra read of the old table is unobservable",
+  "rewrite_aliases": {"??_H@YGXPAXIHP6EPAX0@Z@Z": "0x00401000"},
+  "rewrite_data_aliases": {"??0T3_guess@@QAE@XZ": "0x004b7470"},
+  "callees": {
+    "0x0051da09": {
+      "name": "Table_guess::RoundUp_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 4
+    },
+    "0x0060e985": {
+      "name": "operator new[]",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": ["@newbuf", "@blk1", "@blk2", "@blk3", "@blk4", "@blk5", "@blk6"]
+    },
+    "0x00401000": {
+      "name": "`vector_constructor_iterator'",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "int", "u32"],
+      "ret": 0
+    },
+    "0x0060d682": {
+      "name": "_free",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x004b73ee": {
+      "name": "PointerList_guess::Clear_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00405492": {
+      "name": "Table_guess::Fail_guess",
+      "conv": "thiscall",
+      "args": [],
+      "noreturn": true
+    }
+  },
+  "cases": [
+    {"name": "flag off", "args": [5],
+     "memory": [{"addr": "@table", "offset": "0x18", "u32": 0}]},
+    {"name": "wanted zero", "args": [0]},
+    {"name": "wanted negative", "args": [-1]},
+    {"name": "rounds to count (no grow)", "args": [1],
+     "callees": {"0x0051da09": {"name": "RoundUp", "conv": "thiscall", "args": ["int"], "ret": 2}}},
+    {"name": "rounds below count", "args": [1],
+     "callees": {"0x0051da09": {"name": "RoundUp", "conv": "thiscall", "args": ["int"], "ret": 1}}},
+    {"name": "grow by one", "args": [5],
+     "callees": {"0x0051da09": {"name": "RoundUp", "conv": "thiscall", "args": ["int"], "ret": 3}}},
+    {"name": "grow by two", "args": [7]},
+    {"name": "grow from empty", "args": [7],
+     "memory": [{"addr": "@table", "offset": "0x14", "u32": 0}]},
+    {"name": "grow copy one", "args": [7],
+     "memory": [{"addr": "@table", "offset": "0x14", "u32": 1}]},
+    {"name": "block size zero", "args": [7],
+     "memory": [{"addr": "@table", "offset": "0x4", "u32": 0}]},
+    {"name": "pointer array alloc fails", "args": [7],
+     "callees": {"0x0060e985": {"name": "operator new[]", "conv": "cdecl", "args": ["u32"], "ret": 0}}},
+    {"name": "first block alloc fails", "args": [7],
+     "callees": {"0x0060e985": {"name": "operator new[]", "conv": "cdecl", "args": ["u32"], "ret": ["@newbuf", 0]}}},
+    {"name": "second block alloc fails", "args": [7],
+     "callees": {"0x0060e985": {"name": "operator new[]", "conv": "cdecl", "args": ["u32"], "ret": ["@newbuf", "@blk1", 0]}}},
+    {"name": "flag off, wanted zero", "args": [0],
+     "memory": [{"addr": "@table", "offset": "0x18", "u32": 0}]}
+  ],
+  "fuzz": {
+    "seed": 4945322,
+    "count": 150,
+    "args": [
+      {"range": [-2, 9]}
+    ],
+    "memory": [
+      {"addr": "@table", "offset": "0x14", "type": "int", "range": [0, 5]},
+      {"addr": "@table", "offset": "0x4", "type": "int", "range": [0, 6]},
+      {"addr": "@table", "offset": "0x18", "type": "u32", "choices": [0, 1, 256]}
+    ]
+  }
+}

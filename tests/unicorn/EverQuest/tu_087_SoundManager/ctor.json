@@ -1,0 +1,738 @@
+{
+  "function": "SlideShow_guess::SlideShow_guess",
+  "original": "0x004c4c83",
+  "sources": [
+    "src/EverQuest/tu_087_SoundManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@slideshow",
+  "args": [
+    {
+      "name": "name_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "ptr",
+  "size": "0x31e",
+  "objects": {
+    "slideshow": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "slidefile": {
+      "size": "0x1000c",
+      "fill": "zero"
+    },
+    "item": {
+      "size": "0x60",
+      "fill": "zero"
+    },
+    "manager": {
+      "size": "0x8",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x00851390",
+      "u32": "@manager"
+    }
+  ],
+  "callees": {
+    "0x0060d071": {
+      "name": "operator new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@slidefile"
+    },
+    "0x00576bd0": {
+      "name": "TextFileReader_guess::TextFileReader_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "u32"
+      ],
+      "ret": "this"
+    },
+    "0x00576d10": {
+      "name": "TextFileReader_guess::IsOpen_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x00576c60": {
+      "name": "TextFileReader_guess::GetCount_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": -1
+    },
+    "0x00576f80": {
+      "name": "TextFileReader_guess::ReadInteger_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00576f50": {
+      "name": "TextFileReader_guess::ReadString_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "u32"
+      ],
+      "ret": "keep"
+    },
+    "0x0060e590": {
+      "name": "FindToken_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x004c4a12": {
+      "name": "SlideShowEventText_guess::SlideShowEventText_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "int",
+        "u32",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": "this"
+    },
+    "0x004c48fe": {
+      "name": "SlideShowEventAudio_guess::SlideShowEventAudio_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": "this"
+    },
+    "0x004c46a9": {
+      "name": "SlideShowEventImage_guess::SlideShowEventImage_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": "this"
+    },
+    "0x004c4c08": {
+      "name": "LinkList_guess::Insert_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "keep"
+    },
+    "0x00576c50": {
+      "name": "TextFileReader_guess::Close_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "keep"
+    },
+    "0x0060d0d5": {
+      "name": "operator delete",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "ret": "keep"
+    },
+    "0x00574110": {
+      "name": "LogFailure_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr"
+      ],
+      "ret": "keep"
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "file allocation fails",
+      "args": [
+        "slides.txt"
+      ],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        },
+        "0x00576d10": {
+          "name": "TextFileReader_guess::IsOpen_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "file is not open",
+      "args": [
+        "slides.txt"
+      ],
+      "callees": {
+        "0x00576d10": {
+          "name": "TextFileReader_guess::IsOpen_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "empty list",
+      "args": [
+        "slides.txt"
+      ]
+    },
+    {
+      "name": "count zero then end",
+      "args": [
+        "slides.txt"
+      ],
+      "callees": {
+        "0x00576c60": {
+          "name": "TextFileReader_guess::GetCount_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            0,
+            -1
+          ]
+        }
+      }
+    },
+    {
+      "name": "count negative then end",
+      "args": [
+        "slides.txt"
+      ],
+      "callees": {
+        "0x00576c60": {
+          "name": "TextFileReader_guess::GetCount_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            -2,
+            -1
+          ]
+        }
+      }
+    },
+    {
+      "name": "image item",
+      "args": [
+        "slides.txt"
+      ],
+      "callees": {
+        "0x0060d071": {
+          "ret": [
+            "@slidefile",
+            "@item"
+          ]
+        },
+        "0x00576c60": {
+          "name": "TextFileReader_guess::GetCount_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            -1
+          ]
+        },
+        "0x00576f50": {
+          "name": "TextFileReader_guess::ReadString_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "u32"
+          ],
+          "writes": [
+            {
+              "call": 0,
+              "arg": 0,
+              "hex": "696d61676500"
+            },
+            {
+              "call": 1,
+              "arg": 0,
+              "hex": "696d672e706e6700"
+            }
+          ]
+        },
+        "0x00576f80": {
+          "name": "TextFileReader_guess::ReadInteger_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "0x0060e590": {
+          "name": "FindToken_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": [
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "image payload left untouched",
+      "args": [
+        "slides.txt"
+      ],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            "@slidefile",
+            "@item"
+          ]
+        },
+        "0x00576c60": {
+          "name": "TextFileReader_guess::GetCount_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            -1
+          ]
+        },
+        "0x00576f50": {
+          "name": "TextFileReader_guess::ReadString_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "u32"
+          ],
+          "writes": [
+            {
+              "call": 0,
+              "arg": 0,
+              "hex": "696d61676500"
+            }
+          ]
+        },
+        "0x00576f80": {
+          "name": "TextFileReader_guess::ReadInteger_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "0x0060e590": {
+          "name": "FindToken_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": [
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "audio item disabled",
+      "args": [
+        "slides.txt"
+      ],
+      "memory": [
+        {
+          "addr": "@manager",
+          "offset": "0x4",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00576c60": {
+          "name": "TextFileReader_guess::GetCount_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            -1
+          ]
+        },
+        "0x00576f50": {
+          "name": "TextFileReader_guess::ReadString_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "u32"
+          ],
+          "writes": [
+            {
+              "call": 0,
+              "arg": 0,
+              "hex": "617564696f00"
+            },
+            {
+              "call": 1,
+              "arg": 0,
+              "hex": "747261636b2e77617600"
+            }
+          ]
+        },
+        "0x00576f80": {
+          "name": "TextFileReader_guess::ReadInteger_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "0x0060e590": {
+          "name": "FindToken_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "audio item enabled",
+      "args": [
+        "slides.txt"
+      ],
+      "memory": [
+        {
+          "addr": "@manager",
+          "offset": "0x4",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            "@slidefile",
+            "@item"
+          ]
+        },
+        "0x00576c60": {
+          "name": "TextFileReader_guess::GetCount_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            -1
+          ]
+        },
+        "0x00576f50": {
+          "name": "TextFileReader_guess::ReadString_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "u32"
+          ],
+          "writes": [
+            {
+              "call": 0,
+              "arg": 0,
+              "hex": "617564696f00"
+            },
+            {
+              "call": 1,
+              "arg": 0,
+              "hex": "747261636b2e77617600"
+            }
+          ]
+        },
+        "0x00576f80": {
+          "name": "TextFileReader_guess::ReadInteger_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "0x0060e590": {
+          "name": "FindToken_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": [
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "text item",
+      "args": [
+        "slides.txt"
+      ],
+      "callees": {
+        "0x0060d071": {
+          "ret": [
+            "@slidefile",
+            "@item"
+          ]
+        },
+        "0x00576c60": {
+          "name": "TextFileReader_guess::GetCount_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            -1
+          ]
+        },
+        "0x00576f50": {
+          "name": "TextFileReader_guess::ReadString_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "u32"
+          ],
+          "writes": [
+            {
+              "call": 0,
+              "arg": 0,
+              "hex": "7465787400"
+            },
+            {
+              "call": 1,
+              "arg": 0,
+              "hex": "7469746c652e74787400"
+            }
+          ]
+        },
+        "0x00576f80": {
+          "name": "TextFileReader_guess::ReadInteger_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            3,
+            100,
+            200,
+            17,
+            34,
+            51,
+            4,
+            5,
+            6
+          ]
+        },
+        "0x0060e590": {
+          "name": "FindToken_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "unknown item type",
+      "args": [
+        "slides.txt"
+      ],
+      "callees": {
+        "0x00576c60": {
+          "name": "TextFileReader_guess::GetCount_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            -1
+          ]
+        },
+        "0x00576f50": {
+          "name": "TextFileReader_guess::ReadString_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "u32"
+          ],
+          "writes": [
+            {
+              "call": 0,
+              "arg": 0,
+              "hex": "766964656f00"
+            }
+          ]
+        },
+        "0x00576f80": {
+          "name": "TextFileReader_guess::ReadInteger_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            3,
+            4,
+            5
+          ]
+        },
+        "0x0060e590": {
+          "name": "FindToken_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "item allocation fails",
+      "args": [
+        "slides.txt"
+      ],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            "@slidefile",
+            0
+          ]
+        },
+        "0x00576c60": {
+          "name": "TextFileReader_guess::GetCount_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            -1
+          ]
+        },
+        "0x00576f50": {
+          "name": "TextFileReader_guess::ReadString_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore",
+            "u32"
+          ],
+          "writes": [
+            {
+              "call": 0,
+              "arg": 0,
+              "hex": "696d61676500"
+            },
+            {
+              "call": 1,
+              "arg": 0,
+              "hex": "696d672e706e6700"
+            }
+          ]
+        },
+        "0x00576f80": {
+          "name": "TextFileReader_guess::ReadInteger_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "0x0060e590": {
+          "name": "FindToken_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": [
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5000323,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "slides.txt",
+          "album.txt",
+          ""
+        ]
+      }
+    ],
+    "memory": []
+  },
+  "_survivors": "L1429: deleting text_guess[0] is unobservable because the fixture stack starts zeroed, even when ReadString writes nothing; L1434: the default blue byte is overwritten by the type-2 reads before use, and other item types do not pass color"
+}

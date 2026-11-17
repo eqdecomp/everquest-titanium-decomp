@@ -1,0 +1,119 @@
+{
+  "function": "EntryOwner_guess::Reset_guess",
+  "original": "0x0042af8e",
+  "_survivors": "L1498: the loop never changes begin or count (the callees write nothing), so re-storing the end index gives the same value; the store is kept for the original's bytes",
+  "sources": [
+    "src/EverQuest/tu_018_MailtoLink.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@entryowner",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "entryowner": {
+      "size": "0x60",
+      "fill": "random"
+    },
+    "slot_a": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "slot_b": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "@entryowner", "offset": "0x30", "u32": 0},
+    {"addr": "@entryowner", "offset": "0x34", "u32": 2}
+  ],
+  "callees": {
+    "0x00425196": {
+      "name": "CollectionIterator_NotEqual",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "passthrough": true
+    },
+    "0x00425170": {
+      "name": "CollectionIterator_Deref",
+      "conv": "thiscall",
+      "args": [],
+      "ret": ["@slot_a", "@slot_b"]
+    },
+    "0x00425ea1": {
+      "name": "DualStringOwner_Release",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0060d0d5": {
+      "name": "_free",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x004260bd": {
+      "name": "EntryArray_Destroy",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0042aabd": {
+      "name": "EntryHolder_Clear",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "empty",
+      "memory": [{"addr": "@entryowner", "offset": "0x34", "u32": 0}],
+      "args": []
+    },
+    {
+      "name": "two_entries",
+      "memory": [
+        {"addr": "@slot_a", "u32": 4096},
+        {"addr": "@slot_b", "u32": 8192}
+      ],
+      "args": []
+    },
+    {
+      "name": "null_first_entry",
+      "memory": [
+        {"addr": "@slot_a", "u32": 0},
+        {"addr": "@slot_b", "u32": 8192}
+      ],
+      "args": []
+    },
+    {
+      "name": "null_second_entry",
+      "memory": [
+        {"addr": "@slot_a", "u32": 4096},
+        {"addr": "@slot_b", "u32": 0}
+      ],
+      "args": []
+    },
+    {
+      "name": "nonzero_begin",
+      "memory": [
+        {"addr": "@entryowner", "offset": "0x30", "u32": 4},
+        {"addr": "@entryowner", "offset": "0x34", "u32": 2},
+        {"addr": "@slot_a", "u32": 4096},
+        {"addr": "@slot_b", "u32": 8192}
+      ],
+      "args": []
+    }
+  ],
+  "fuzz": {
+    "seed": 4370318,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@entryowner", "offset": "0x34", "type": "u32", "choices": [0, 1, 2]},
+      {"addr": "@slot_a", "type": "u32", "choices": [0, 4096]},
+      {"addr": "@slot_b", "type": "u32", "choices": [0, 8192]}
+    ]
+  }
+}

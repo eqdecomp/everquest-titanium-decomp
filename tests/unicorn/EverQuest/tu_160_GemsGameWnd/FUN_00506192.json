@@ -1,0 +1,162 @@
+{
+  "function": "CGemsGameWndView_guess::TryMoveColumnCell_guess",
+  "original": "0x00506192",
+  "sources": [
+    "src/EverQuest/tu_160_GemsGameWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {"name": "sourceX", "type": "int"},
+    {"name": "sourceY", "type": "int"},
+    {"name": "destX", "type": "int"},
+    {"name": "destY", "type": "int"},
+    {"name": "move", "type": "char"}
+  ],
+  "ret": "char",
+  "objects": {
+    "owner": {
+      "size": "0x4488",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {},
+  "cases": [
+    {
+      "name": "destX_negative",
+      "args": [0, 0, -1, 0, 1],
+      "memory": [{"addr": "@owner", "offset": "0x608", "u32": 4294967295}]
+    },
+    {
+      "name": "destY_negative",
+      "args": [0, 0, 0, -1, 1],
+      "memory": [{"addr": "@owner", "offset": "0x608", "u32": 4294967295}]
+    },
+    {
+      "name": "destX_10",
+      "args": [0, 0, 10, 0, 1],
+      "memory": [{"addr": "@owner", "offset": "0x608", "u32": 4294967295}]
+    },
+    {
+      "name": "destY_12",
+      "args": [0, 0, 0, 12, 1],
+      "memory": [{"addr": "@owner", "offset": "0x608", "u32": 4294967295}]
+    },
+    {
+      "name": "destX_9_destY_11_free_no_move",
+      "args": [0, 0, 9, 11, 0],
+      "memory": [{"addr": "@owner", "offset": "0xd78", "u32": 4294967295}]
+    },
+    {
+      "name": "destX_9_destY_11_free_move",
+      "args": [1, 1, 9, 11, 1],
+      "memory": [
+        {"addr": "@owner", "offset": "0xd78", "u32": 4294967295},
+        {"addr": "@owner", "offset": "0x6b8", "u32": 7},
+        {"addr": "@owner", "offset": "0x6bc", "u32": 11},
+        {"addr": "@owner", "offset": "0x6c0", "u32": 9},
+        {"addr": "@owner", "offset": "0x6c4", "u32": 13}
+      ]
+    },
+    {
+      "name": "dest_zero_origin_free_move",
+      "args": [5, 5, 0, 0, 1],
+      "memory": [
+        {"addr": "@owner", "offset": "0x608", "u32": 4294967295},
+        {"addr": "@owner", "offset": "0x978", "u32": 3},
+        {"addr": "@owner", "offset": "0x97c", "u32": 4},
+        {"addr": "@owner", "offset": "0x980", "u32": 6},
+        {"addr": "@owner", "offset": "0x984", "u32": 8}
+      ]
+    },
+    {
+      "name": "dest_occupied_no_pad_no_move",
+      "args": [1, 1, 2, 3, 0],
+      "memory": [
+        {"addr": "@owner", "offset": "0x808", "u32": 5},
+        {"addr": "@owner", "offset": "0x814", "u32": 0}
+      ]
+    },
+    {
+      "name": "dest_occupied_no_pad_move",
+      "args": [1, 1, 2, 3, 1],
+      "memory": [
+        {"addr": "@owner", "offset": "0x808", "u32": 5},
+        {"addr": "@owner", "offset": "0x814", "u32": 0}
+      ]
+    },
+    {
+      "name": "dest_occupied_with_pad_moves",
+      "args": [1, 1, 2, 3, 1],
+      "memory": [
+        {"addr": "@owner", "offset": "0x808", "u32": 5},
+        {"addr": "@owner", "offset": "0x814", "u32": 1},
+        {"addr": "@owner", "offset": "0x6b8", "u32": 7},
+        {"addr": "@owner", "offset": "0x6bc", "u32": 11},
+        {"addr": "@owner", "offset": "0x6c0", "u32": 9},
+        {"addr": "@owner", "offset": "0x6c4", "u32": 13}
+      ]
+    },
+    {
+      "name": "dest_state_zero_pad_zero",
+      "args": [1, 1, 2, 3, 1],
+      "memory": [
+        {"addr": "@owner", "offset": "0x808", "u32": 0},
+        {"addr": "@owner", "offset": "0x814", "u32": 0}
+      ]
+    },
+    {
+      "name": "dest_state_minus_one_pad_zero_move",
+      "args": [1, 1, 2, 3, 1],
+      "memory": [
+        {"addr": "@owner", "offset": "0x808", "u32": 4294967295},
+        {"addr": "@owner", "offset": "0x814", "u32": 0},
+        {"addr": "@owner", "offset": "0x6b8", "u32": 7},
+        {"addr": "@owner", "offset": "0x6bc", "u32": 11},
+        {"addr": "@owner", "offset": "0x6c0", "u32": 9},
+        {"addr": "@owner", "offset": "0x6c4", "u32": 13}
+      ]
+    },
+    {
+      "name": "dest_state_minus_two_no_move",
+      "args": [1, 1, 2, 3, 0],
+      "memory": [
+        {"addr": "@owner", "offset": "0x808", "u32": 4294967294},
+        {"addr": "@owner", "offset": "0x814", "u32": 0}
+      ]
+    },
+    {
+      "name": "same_slot_move",
+      "args": [2, 3, 2, 3, 1],
+      "memory": [
+        {"addr": "@owner", "offset": "0x808", "u32": 4294967295},
+        {"addr": "@owner", "offset": "0x814", "u32": 0},
+        {"addr": "@owner", "offset": "0x810", "u32": 21},
+        {"addr": "@owner", "offset": "0x80c", "u32": 22}
+      ]
+    },
+    {
+      "name": "move_byte_two",
+      "args": [1, 1, 2, 3, 2],
+      "memory": [
+        {"addr": "@owner", "offset": "0x808", "u32": 4294967295},
+        {"addr": "@owner", "offset": "0x814", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5267858,
+    "count": 150,
+    "args": [
+      {"range": [-2, 12]},
+      {"range": [-2, 14]},
+      {"range": [-2, 12]},
+      {"range": [-2, 14]},
+      {"choices": [0, 1, 2]}
+    ],
+    "memory": [
+      {"addr": "@owner", "offset": "0x608", "type": "int", "choices": [-2, -1, 0, 1, 5], "count": 4000, "stride": 4}
+    ]
+  }
+}

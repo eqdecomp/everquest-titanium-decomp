@@ -1,0 +1,158 @@
+{
+  "function": "CGuildBankWndView_guess::UpdateItem_guess",
+  "original": "0x0050d80a",
+  "sources": [
+    "src/EverQuest/tu_165_GuildBankWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@resetstate",
+  "args": [
+    {
+      "name": "value_guess",
+      "type": "u32"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "resetstate": {
+      "size": "0xbec0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x15c", "u32": "@list1"},
+        {"offset": "0x17c", "u32": "@list2"},
+        {"offset": "0xbeb4", "u32": 7}
+      ]
+    },
+    "list1": {
+      "size": "0x140",
+      "fill": "random",
+      "init": [{"offset": "0x11c", "u32": 0}]
+    },
+    "list2": {
+      "size": "0x140",
+      "fill": "random",
+      "init": [{"offset": "0x11c", "u32": 0}]
+    },
+    "entry": {
+      "size": "0xdc",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0050c873": {
+      "name": "GetItem_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": "@entry"
+    },
+    "0x0050c68f": {
+      "name": "IsDepositAreaSlot_guess",
+      "conv": "cdecl",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x00597ed0": {
+      "name": "FUN_00597ed0",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": [11, 22, 33]
+    },
+    "0x0050c840": {
+      "name": "MarkListDirty_guess",
+      "conv": "thiscall",
+      "args": ["int"]
+    },
+    "0x0050d553": {
+      "name": "FUN_0050d553",
+      "conv": "thiscall",
+      "args": ["ptr", "int", "ptr", "bool"]
+    },
+    "0x0050d73e": {
+      "name": "FUN_0050d73e",
+      "conv": "thiscall",
+      "args": ["u32"]
+    }
+  },
+  "cases": [
+    {
+      "name": "first list empty: mark",
+      "args": [5]
+    },
+    {
+      "name": "first list match first entry",
+      "args": [11],
+      "memory": [{"addr": "@list1", "offset": "0x11c", "u32": 3}]
+    },
+    {
+      "name": "first list match third entry",
+      "args": [33],
+      "memory": [{"addr": "@list1", "offset": "0x11c", "u32": 3}]
+    },
+    {
+      "name": "first list no match: mark",
+      "args": [99],
+      "memory": [{"addr": "@list1", "offset": "0x11c", "u32": 3}]
+    },
+    {
+      "name": "first list count negative: mark",
+      "args": [11],
+      "memory": [{"addr": "@list1", "offset": "0x11c", "u32": -1}]
+    },
+    {
+      "name": "first list pointer null: nothing",
+      "args": [11],
+      "memory": [
+        {"addr": "@list1", "offset": "0x11c", "u32": 3},
+        {"addr": "@resetstate", "offset": "0x15c", "u32": 0}
+      ]
+    },
+    {
+      "name": "second list match second entry",
+      "args": [22],
+      "callees": {
+        "0x0050c68f": {"name": "IsDepositAreaSlot_guess", "conv": "cdecl", "args": ["int"], "ret": 1}
+      },
+      "memory": [{"addr": "@list2", "offset": "0x11c", "u32": 2}]
+    },
+    {
+      "name": "second list no match: mark",
+      "args": [99],
+      "callees": {
+        "0x0050c68f": {"name": "IsDepositAreaSlot_guess", "conv": "cdecl", "args": ["int"], "ret": 1}
+      },
+      "memory": [{"addr": "@list2", "offset": "0x11c", "u32": 2}]
+    },
+    {
+      "name": "second list pointer null: nothing",
+      "args": [22],
+      "callees": {
+        "0x0050c68f": {"name": "IsDepositAreaSlot_guess", "conv": "cdecl", "args": ["int"], "ret": 1}
+      },
+      "memory": [
+        {"addr": "@list2", "offset": "0x11c", "u32": 2},
+        {"addr": "@resetstate", "offset": "0x17c", "u32": 0}
+      ]
+    },
+    {
+      "name": "select null: match passes null entry",
+      "args": [11],
+      "callees": {
+        "0x0050c873": {"name": "FUN_0050c873", "conv": "thiscall", "args": ["u32"], "ret": 0}
+      },
+      "memory": [{"addr": "@list1", "offset": "0x11c", "u32": 3}]
+    }
+  ],
+  "_survivors": "L949: deleting packed_guess.whole = value_guess leaves the stack slot holding the value pushed for the Select call (the stack starts zeroed and the slot is reused), so the flag callee still sees the same argument; the emulator cannot tell the two apart",
+  "fuzz": {
+    "seed": 5298186,
+    "count": 100,
+    "args": [
+      {"choices": [0, 5, 11, 22, 33, 99, 4294967295]}
+    ],
+    "memory": [
+      {"addr": "@list1", "offset": "0x11c", "type": "int", "choices": [-1, 0, 1, 2, 3, 4]},
+      {"addr": "@resetstate", "offset": "0xbeb4", "type": "u32", "choices": [0, 11, 22, 33, 99]}
+    ]
+  }
+}

@@ -1,0 +1,626 @@
+{
+  "function": "DisconnectOwner_guess::GetZoneInfoFromNetwork",
+  "original": "0x004a8193",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@disconnectowner",
+  "args": [
+    {
+      "name": "name_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "disconnectowner": {
+      "size": "0x39404",
+      "fill": "zero"
+    },
+    "manager": {
+      "size": "0x58",
+      "fill": "zero"
+    },
+    "connection": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "gstate": {
+      "size": "0xb58",
+      "fill": "zero"
+    },
+    "context": {
+      "size": "0xc284",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x08",
+          "u32": "@contextnode"
+        }
+      ]
+    },
+    "contextnode": {
+      "size": "0x08",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x04",
+          "u32": 0
+        }
+      ]
+    },
+    "actor": {
+      "size": "0x25c",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x00905c00",
+      "u32": 0
+    },
+    {
+      "addr": "0x00923d24",
+      "u32": 0
+    },
+    {
+      "addr": "0x0079dbd8",
+      "u32": "@manager"
+    },
+    {
+      "addr": "0x00905ca0",
+      "u32": "@connection"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@gstate"
+    },
+    {
+      "addr": "0x00923798",
+      "u8": 1
+    },
+    {
+      "addr": "0x00905cc4",
+      "u32": "@actor"
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": 0
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@context"
+    },
+    {
+      "addr": "0x00905cfc",
+      "u32": 0
+    },
+    {
+      "addr": "0x00905cf8",
+      "u32": 0
+    },
+    {
+      "addr": "0x00923d7b",
+      "u8": 0
+    },
+    {
+      "addr": "0x00923794",
+      "u32": 0
+    },
+    {
+      "addr": "@disconnectowner",
+      "offset": "0x0b54",
+      "u32": 4
+    },
+    {
+      "addr": "@context",
+      "offset": "0x44",
+      "cstr": "localplayer"
+    }
+  ],
+  "callees": {
+    "0x004b6c04": {
+      "name": "MemChecker0",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x0040be64": {
+      "name": "FUN_0040be64",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x00574110": {
+      "name": "FUN_00574110",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "varargs": "printf"
+    },
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "ignore",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0046d655": {
+      "name": "FUN_0046d655",
+      "conv": "cdecl",
+      "args": [],
+      "ret": [
+        0,
+        180001
+      ]
+    },
+    "0x00464681": {
+      "name": "EnableAllCommands_guess",
+      "conv": "cdecl",
+      "args": []
+    },
+    "0x0046468a": {
+      "name": "DisableCommand_guess",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ]
+    },
+    "0x00464696": {
+      "name": "DisableAllCommands_guess",
+      "conv": "cdecl",
+      "args": []
+    },
+    "0x00464675": {
+      "name": "EnableCommand_guess",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ]
+    },
+    "0x004a56b1": {
+      "name": "ProcessMBox_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x00496932": {
+      "name": "CheckCharSelectDisconnect_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "u32",
+        "char"
+      ],
+      "ret": 0
+    },
+    "0x0047c88e": {
+      "name": "GetSpawnByName_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "kernel32.dll!Sleep": {
+      "name": "Sleep",
+      "conv": "stdcall",
+      "args": [
+        "u32"
+      ]
+    },
+    "0x004932ab": {
+      "name": "DisplayScreen_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ]
+    },
+    "0x0042500c": {
+      "name": "FUN_0042500c",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    }
+  },
+  "coverage_ok": {
+    "004A8255-004A82F8": "The global state is set to 4 immediately before this dispatch, so cases 1, 2, and 5 cannot run.",
+    "004A83EC-004A8425": "The global state is set to 0xFD immediately before this dispatch, so cases 1, 2, and 5 cannot run.",
+    "004A8464-004A84D1": "The global state is set to 0xFF immediately before this dispatch, so case 2 cannot run.",
+    "004A84EA-004A8521": "The global state is set to 0xFF before the final dispatch, so case 2 cannot run.",
+    "004A857B-004A85E2": "The global state is set to 0xFF before the final dispatch, so cases 5 and 1 cannot run."
+  },
+  "cases": [
+    {
+      "name": "owner-not-ready",
+      "args": [
+        "hero"
+      ],
+      "memory": [
+        {
+          "addr": "@disconnectowner",
+          "offset": "0x0b54",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "disconnect-request",
+      "args": [
+        "hero"
+      ],
+      "memory": [
+        {
+          "addr": "0x00923d7b",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "timeout",
+      "args": [
+        "hero"
+      ]
+    },
+    {
+      "name": "timeout-boundary",
+      "args": [
+        "hero"
+      ],
+      "callees": {
+        "0x0046d655": {
+          "name": "FUN_0046d655",
+          "conv": "cdecl",
+          "args": [],
+          "ret": [
+            100,
+            180100,
+            180101
+          ]
+        }
+      }
+    },
+    {
+      "name": "one-readiness-global-zero",
+      "args": [
+        "hero"
+      ],
+      "callees": {
+        "0x004912b1": {
+          "name": "FUN_004912b1",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "int",
+            "ignore",
+            "int",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "addr": "0x00905c00",
+              "hex": "01000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "connection-check-returns-true",
+      "args": [
+        "hero"
+      ],
+      "memory": [
+        {
+          "addr": "0x00923798",
+          "u8": 0
+        }
+      ],
+      "callees": {
+        "0x00496932": {
+          "name": "FUN_00496932",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "u32",
+            "char"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "loop-state-changes",
+      "args": [
+        "hero"
+      ],
+      "callees": {
+        "0x004a56b1": {
+          "name": "FUN_004a56b1",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1,
+          "writes": [
+            {
+              "addr": "@disconnectowner+0x0b54",
+              "hex": "00000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "local-player-direct-lookup",
+      "args": [
+        "hero"
+      ],
+      "callees": {
+        "0x004912b1": {
+          "name": "FUN_004912b1",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "int",
+            "ignore",
+            "int",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "addr": "0x00905c00",
+              "hex": "01000000"
+            },
+            {
+              "addr": "0x00923d24",
+              "hex": "01000000"
+            }
+          ]
+        },
+        "0x0047c88e": {
+          "name": "FUN_0047c88e",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": "@actor"
+        }
+      }
+    },
+    {
+      "name": "local-player-context-fallback",
+      "args": [
+        "hero"
+      ],
+      "memory": [
+        {
+          "addr": "@contextnode",
+          "offset": "0x04",
+          "u32": 4
+        },
+        {
+          "addr": "@context",
+          "offset": "0x44",
+          "cstr": "xxxxlocalplayer"
+        }
+      ],
+      "callees": {
+        "0x004912b1": {
+          "name": "FUN_004912b1",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "int",
+            "ignore",
+            "int",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "addr": "0x00905c00",
+              "hex": "01000000"
+            },
+            {
+              "addr": "0x00923d24",
+              "hex": "01000000"
+            }
+          ]
+        },
+        "0x0047c88e": {
+          "name": "FUN_0047c88e",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            0,
+            "@actor"
+          ]
+        }
+      }
+    },
+    {
+      "name": "local-player-indexed-write",
+      "args": [
+        "hero"
+      ],
+      "memory": [
+        {
+          "addr": "@contextnode",
+          "offset": "0x04",
+          "u32": 4
+        }
+      ],
+      "callees": {
+        "0x004912b1": {
+          "name": "FUN_004912b1",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "int",
+            "ignore",
+            "int",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "addr": "0x00905c00",
+              "hex": "01000000"
+            },
+            {
+              "addr": "0x00923d24",
+              "hex": "01000000"
+            }
+          ]
+        },
+        "0x0047c88e": {
+          "name": "FUN_0047c88e",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": "@actor"
+        }
+      }
+    },
+    {
+      "name": "local-player-lookup-null",
+      "args": [
+        "hero"
+      ],
+      "callees": {
+        "0x004912b1": {
+          "name": "FUN_004912b1",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "int",
+            "ignore",
+            "int",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "addr": "0x00905c00",
+              "hex": "01000000"
+            },
+            {
+              "addr": "0x00923d24",
+              "hex": "01000000"
+            }
+          ]
+        },
+        "0x0047c88e": {
+          "name": "FUN_0047c88e",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": [
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "local-player-context-null-fault",
+      "args": [
+        "hero"
+      ],
+      "memory": [
+        {
+          "addr": "0x00905d00",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x004912b1": {
+          "name": "FUN_004912b1",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "int",
+            "ignore",
+            "int",
+            "int"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "addr": "0x00905c00",
+              "hex": "01000000"
+            },
+            {
+              "addr": "0x00923d24",
+              "hex": "01000000"
+            }
+          ]
+        },
+        "0x0047c88e": {
+          "name": "FUN_0047c88e",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4882835,
+    "count": 60,
+    "args": [
+      {}
+    ],
+    "memory": [
+      {
+        "addr": "@disconnectowner",
+        "offset": "0x0b54",
+        "type": "int",
+        "choices": [
+          3,
+          4
+        ]
+      },
+      {
+        "addr": "0x00923798",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00923d7b",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "_survivors": "L3440: initial state is set to 4 immediately before this dispatch; case 5 is unreachable; L3442: same unreachable initial case 5; L3452: initial state is 4, so case 2 is unreachable; L3455: initial state is 4, so case 1 is unreachable; L3457: same unreachable initial case 1; L3502: state is set to 0xFD immediately before this dispatch, so case 5 is unreachable; L3505: same unreachable 0xFD case 5; L3545: state is set to 0xFF immediately before this dispatch, so case 5 is unreachable."
+}

@@ -1,0 +1,542 @@
+{
+  "function": "do_memspellset_guess",
+  "original": "0x00472fd0",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "unused_guess",
+      "type": "int"
+    },
+    {
+      "name": "text_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "player": {
+      "size": "0xc388",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@vbtable"
+        }
+      ]
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "0xc37c"
+        }
+      ]
+    },
+    "manager": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "lookup": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "context": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "error_message": {
+      "size": "0x20",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d00",
+      "u32": "@player"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@lookup"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@context"
+    },
+    {
+      "addr": "0x00850c30",
+      "u32": "@manager"
+    },
+    {
+      "addr": "@error_message",
+      "cstr": "Command unavailable"
+    },
+    {
+      "addr": "0x00984828",
+      "cstr": "alpha"
+    },
+    {
+      "addr": "0x00984868",
+      "cstr": "beta"
+    },
+    {
+      "addr": "0x009848a8",
+      "cstr": "gamma"
+    },
+    {
+      "addr": "0x009848e8",
+      "cstr": "delta"
+    },
+    {
+      "addr": "0x00984928",
+      "cstr": "epsilon"
+    },
+    {
+      "addr": "0x00984968",
+      "cstr": "zeta"
+    },
+    {
+      "addr": "0x009849a8",
+      "cstr": "eta"
+    },
+    {
+      "addr": "0x009849e8",
+      "cstr": "theta"
+    },
+    {
+      "addr": "0x00984a28",
+      "cstr": "iota"
+    },
+    {
+      "addr": "0x00984a68",
+      "cstr": "kappa"
+    },
+    {
+      "addr": "0x00984aa8",
+      "cstr": "outside"
+    },
+    {
+      "addr": "0x00984841",
+      "u8": 1
+    },
+    {
+      "addr": "0x00984881",
+      "u8": 1
+    },
+    {
+      "addr": "0x009848c1",
+      "u8": 1
+    },
+    {
+      "addr": "0x00984901",
+      "u8": 1
+    },
+    {
+      "addr": "0x00984941",
+      "u8": 1
+    },
+    {
+      "addr": "0x00984981",
+      "u8": 1
+    },
+    {
+      "addr": "0x009849c1",
+      "u8": 1
+    },
+    {
+      "addr": "0x00984a01",
+      "u8": 1
+    },
+    {
+      "addr": "0x00984a41",
+      "u8": 1
+    },
+    {
+      "addr": "0x00984a81",
+      "u8": 1
+    },
+    {
+      "addr": "0x00984ac1",
+      "u8": 1
+    }
+  ],
+  "callees": {
+    "0x00466244": {
+      "name": "allowslashcommand_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 1
+    },
+    "0x004167e2": {
+      "name": "FUN_004167e2",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004658dd": {
+      "name": "is_number_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 1
+    },
+    "0x0060e3a3": {
+      "name": "_atol",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 1
+    },
+    "0x005dfa00": {
+      "name": "FUN_005dfa00",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": "@error_message"
+    },
+    "0x004982c6": {
+      "name": "Show_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ]
+    },
+    "0x0062202c": {
+      "name": "__strnicmp",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x00557cd8": {
+      "name": "Select_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "__strnicmp": "0x0062202c"
+  },
+  "cases": [
+    {
+      "name": "first-gate",
+      "args": [
+        1,
+        "alpha"
+      ],
+      "callees": {
+        "0x00466244": {
+          "name": "FUN_00466244",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "status-gate",
+      "args": [
+        1,
+        "alpha"
+      ],
+      "callees": {
+        "0x00466244": {
+          "name": "FUN_00466244",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 1
+        },
+        "0x004167e2": {
+          "name": "FUN_004167e2",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "null-text",
+      "args": [
+        1,
+        0
+      ]
+    },
+    {
+      "name": "empty-text",
+      "args": [
+        1,
+        ""
+      ]
+    },
+    {
+      "name": "numeric-low-boundary",
+      "args": [
+        1,
+        "0"
+      ],
+      "callees": {
+        "0x004658dd": {
+          "name": "FUN_004658dd",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        },
+        "0x0060e3a3": {
+          "name": "_atol",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "numeric-first-slot",
+      "args": [
+        1,
+        "1"
+      ],
+      "callees": {
+        "0x004658dd": {
+          "name": "FUN_004658dd",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        },
+        "0x0060e3a3": {
+          "name": "_atol",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "numeric-last-slot",
+      "args": [
+        1,
+        "10"
+      ],
+      "callees": {
+        "0x004658dd": {
+          "name": "FUN_004658dd",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        },
+        "0x0060e3a3": {
+          "name": "_atol",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 10
+        }
+      }
+    },
+    {
+      "name": "numeric-high-boundary",
+      "args": [
+        1,
+        "11"
+      ],
+      "callees": {
+        "0x004658dd": {
+          "name": "FUN_004658dd",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        },
+        "0x0060e3a3": {
+          "name": "_atol",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 11
+        }
+      }
+    },
+    {
+      "name": "numeric-disabled-slot",
+      "args": [
+        1,
+        "1"
+      ],
+      "callees": {
+        "0x004658dd": {
+          "name": "FUN_004658dd",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        },
+        "0x0060e3a3": {
+          "name": "_atol",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        }
+      },
+      "memory": [
+        {
+          "addr": "0x00984841",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "numeric-without-manager",
+      "args": [
+        1,
+        "1"
+      ],
+      "memory": [
+        {
+          "addr": "0x00850c30",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "named-first-slot",
+      "args": [
+        1,
+        "alpha"
+      ],
+      "callees": {
+        "0x004658dd": {
+          "name": "FUN_004658dd",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        },
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "named-second-slot",
+      "args": [
+        1,
+        "beta"
+      ],
+      "callees": {
+        "0x004658dd": {
+          "name": "FUN_004658dd",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        },
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": 0
+        }
+      },
+      "memory": [
+        {
+          "addr": "0x00984841",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "named-no-match",
+      "args": [
+        1,
+        "missing"
+      ],
+      "callees": {
+        "0x004658dd": {
+          "name": "FUN_004658dd",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        },
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": [
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4665296,
+    "count": 100,
+    "args": [
+      {},
+      {}
+    ],
+    "memory": [
+      {
+        "addr": "0x00984841",
+        "type": "u8",
+        "count": 10,
+        "stride": "0x40",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "_survivors": "L6194: the end address is compared only against 0x40-aligned entries, so decrementing it by one stops on the same iteration"
+}

@@ -1,0 +1,447 @@
+{
+  "function": "ModeDispatch_guess::SetCompensationCoin_guess",
+  "original": "0x004e1521",
+  "sources": [
+    "src/EverQuest/tu_130_BarterWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@modedispatch",
+  "args": [
+    {
+      "name": "control_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "digit_guess",
+      "type": "int"
+    },
+    {
+      "name": "value_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "modedispatch": {
+      "size": "0x214",
+      "fill": "zero"
+    },
+    "control": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@control_vtbl"
+        }
+      ]
+    },
+    "control_vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xe4",
+          "u32": "@fn_get_rect"
+        },
+        {
+          "offset": "0xfc",
+          "u32": "@fn_set_text"
+        }
+      ]
+    },
+    "fn_get_rect": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_set_text": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "rect": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 2
+        },
+        {
+          "offset": "0x4",
+          "u32": 4
+        },
+        {
+          "offset": "0x8",
+          "u32": 12
+        },
+        {
+          "offset": "0xc",
+          "u32": 20
+        }
+      ]
+    },
+    "callback": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00850c3c",
+      "u32": "@callback"
+    },
+    {
+      "addr": "@modedispatch",
+      "offset": "0x168",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "@fn_get_rect": {
+      "name": "GetRect_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "@rect"
+    },
+    "@fn_set_text": {
+      "name": "SetText_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x004d9160": {
+      "name": "FUN_004d9160",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "0x004dc02d": {
+      "name": "CenterPoint",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "passthrough": true
+    },
+    "0x0054d976": {
+      "name": "Open_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "int",
+        "int",
+        "int",
+        "char"
+      ],
+      "ret": 0
+    },
+    "0x006220e9": {
+      "name": "_itoa",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ptr",
+        "int"
+      ],
+      "ret": "0x0099db00"
+    },
+    "0x00571e00": {
+      "name": "CXStr_ctor_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "this",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00db9900"
+        }
+      ]
+    },
+    "0x00571d00": {
+      "name": "CXStr_release_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x004e049e": {
+      "name": "Update_guess",
+      "conv": "thiscall",
+      "args": [
+        "bool"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "null control skips dialog",
+      "args": [
+        0,
+        2,
+        -1
+      ],
+      "memory": [
+        {
+          "addr": "@modedispatch",
+          "offset": "0x1cc",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "dialog uses control rectangle",
+      "args": [
+        "@control",
+        3,
+        -1
+      ],
+      "memory": [
+        {
+          "addr": "@modedispatch",
+          "offset": "0x1cc",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "mode zero and saturation",
+      "args": [
+        "@control",
+        0,
+        1000000
+      ],
+      "memory": [
+        {
+          "addr": "@modedispatch",
+          "offset": "0x1cc",
+          "u32": 0
+        },
+        {
+          "addr": "@modedispatch",
+          "offset": "0x180",
+          "u32": "@control"
+        },
+        {
+          "addr": "@modedispatch",
+          "offset": "0x210",
+          "u32": 999
+        }
+      ]
+    },
+    {
+      "name": "mode one preserves low digits",
+      "args": [
+        "@control",
+        0,
+        5
+      ],
+      "memory": [
+        {
+          "addr": "@modedispatch",
+          "offset": "0x1cc",
+          "u32": 1
+        },
+        {
+          "addr": "@modedispatch",
+          "offset": "0x184",
+          "u32": "@control"
+        },
+        {
+          "addr": "@modedispatch",
+          "offset": "0x210",
+          "u32": 123456
+        }
+      ]
+    },
+    {
+      "name": "mode two preserves units",
+      "args": [
+        "@control",
+        0,
+        6
+      ],
+      "memory": [
+        {
+          "addr": "@modedispatch",
+          "offset": "0x1cc",
+          "u32": 2
+        },
+        {
+          "addr": "@modedispatch",
+          "offset": "0x188",
+          "u32": "@control"
+        },
+        {
+          "addr": "@modedispatch",
+          "offset": "0x210",
+          "u32": 987654321
+        }
+      ]
+    },
+    {
+      "name": "mode three replaces units",
+      "args": [
+        "@control",
+        0,
+        8
+      ],
+      "memory": [
+        {
+          "addr": "@modedispatch",
+          "offset": "0x1cc",
+          "u32": 3
+        },
+        {
+          "addr": "@modedispatch",
+          "offset": "0x18c",
+          "u32": "@control"
+        },
+        {
+          "addr": "@modedispatch",
+          "offset": "0x210",
+          "u32": 12345
+        }
+      ]
+    },
+    {
+      "name": "unsupported mode leaves value",
+      "args": [
+        0,
+        0,
+        9
+      ],
+      "memory": [
+        {
+          "addr": "@modedispatch",
+          "offset": "0x1cc",
+          "u32": 4
+        },
+        {
+          "addr": "@modedispatch",
+          "offset": "0x210",
+          "u32": 42
+        }
+      ]
+    },
+    {
+      "name": "negative digit in mode zero",
+      "args": [
+        0,
+        0,
+        -2
+      ],
+      "memory": [
+        {
+          "addr": "@modedispatch",
+          "offset": "0x1cc",
+          "u32": 0
+        },
+        {
+          "addr": "@modedispatch",
+          "offset": "0x210",
+          "u32": 999
+        }
+      ]
+    },
+    {
+      "name": "unsupported mode at cap boundary",
+      "args": [
+        0,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@modedispatch",
+          "offset": "0x1cc",
+          "u32": 4
+        },
+        {
+          "addr": "@modedispatch",
+          "offset": "0x210",
+          "u32": 1000000000
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5117217,
+    "count": 120,
+    "args": [
+      {
+        "choices": [
+          "@control",
+          0
+        ]
+      },
+      {
+        "range": [
+          -4,
+          4
+        ]
+      },
+      {
+        "choices": [
+          -1,
+          0,
+          1,
+          9,
+          10,
+          99,
+          999,
+          1000,
+          1000000
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@modedispatch",
+        "offset": "0x1cc",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "addr": "@modedispatch",
+        "offset": "0x180",
+        "type": "ptr",
+        "count": 4,
+        "choices": [
+          0,
+          "@control"
+        ]
+      },
+      {
+        "addr": "@modedispatch",
+        "offset": "0x210",
+        "type": "u32",
+        "range": [
+          0,
+          4294967295
+        ]
+      }
+    ]
+  },
+  "_survivors": "L1353: rect_guess.left_guess = 0 is unobservable: the stack starts zeroed, and a non-null control's rectangle copy overwrites the field before it is used."
+}

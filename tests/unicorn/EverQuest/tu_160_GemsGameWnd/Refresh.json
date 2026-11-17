@@ -1,0 +1,271 @@
+{
+  "function": "CGemsGameWnd_guess::Refresh_guess",
+  "original": "0x005057d3",
+  "sources": [
+    "src/EverQuest/tu_160_GemsGameWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@gemsgamewnd",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "gemsgamewnd": {
+      "size": "0xec0",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xe04", "u32": "@child"},
+        {"offset": "0xe08", "u32": "@child"},
+        {"offset": "0xe0c", "u32": "@child"},
+        {"offset": "0xe10", "u32": "@child"},
+        {"offset": "0xe14", "u32": "@child"},
+        {"offset": "0xe18", "u32": "@child"},
+        {"offset": "0xe1c", "u32": "@child"},
+        {"offset": "0xe20", "u32": "@child"},
+        {"offset": "0xe24", "u32": "@child"},
+        {"offset": "0xe28", "u32": "@child"},
+        {"offset": "0xe2c", "u32": "@child"},
+        {"offset": "0xe30", "u32": "@child"},
+        {"offset": "0xe34", "u32": "@child"},
+        {"offset": "0xe38", "u32": "@child"},
+        {"offset": "0xe3c", "u32": "@child"},
+        {"offset": "0xe40", "u32": "@child"},
+        {"offset": "0xe44", "u32": "@child"},
+        {"offset": "0xe48", "u32": "@child"},
+        {"offset": "0xe4c", "u32": "@child"},
+        {"offset": "0xe50", "u32": "@child"},
+        {"offset": "0xe54", "u32": "@child"},
+        {"offset": "0xe58", "u32": "@child"},
+        {"offset": "0xe5c", "u32": "@child"},
+        {"offset": "0xe60", "u32": "@child"},
+        {"offset": "0xe64", "u32": "@child"},
+        {"offset": "0xe68", "u32": "@child"},
+        {"offset": "0xe6c", "u32": "@child"},
+        {"offset": "0xe70", "u32": "@child"},
+        {"offset": "0xe74", "u32": "@child"},
+        {"offset": "0xe78", "u32": "@child"},
+        {"offset": "0xe7c", "u32": "@child"},
+        {"offset": "0xe80", "u32": "@child"},
+        {"offset": "0xe84", "u32": "@child"},
+        {"offset": "0xe88", "u32": "@child"},
+        {"offset": "0xe8c", "u32": "@child"},
+        {"offset": "0xe90", "u32": "@child"},
+        {"offset": "0xe94", "u32": "@child"},
+        {"offset": "0xe98", "u32": "@child"},
+        {"offset": "0xe9c", "u32": "@child"},
+        {"offset": "0xea0", "u32": "@child"},
+        {"offset": "0xea8", "u32": "@child"},
+        {"offset": "0xeb0", "u32": "@child"},
+        {"offset": "0xeb4", "u32": "@child"},
+        {"offset": "0xeb8", "u32": "@child"},
+        {"offset": "0xebc", "u32": "@child"}
+      ]
+    },
+    "child": {
+      "size": "0x80",
+      "fill": "zero",
+      "init": [
+        {"offset": "0", "u32": "@child_vtbl"}
+      ]
+    },
+    "child_vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xc0", "u32": "@fn_show"},
+        {"offset": "0xfc", "u32": "@fn_text"}
+      ]
+    },
+    "fn_show": {"size": "4"},
+    "fn_text": {"size": "4"},
+    "strrep": {"size": "0x1000", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@gemsgamewnd", "offset": "0x15c", "u8": 1},
+    {"addr": "@gemsgamewnd", "offset": "0x160", "u32": 0},
+    {"addr": "@gemsgamewnd", "offset": "0x438", "u32": 1234},
+    {"addr": "@gemsgamewnd", "offset": "0x43c", "u32": 12},
+    {"addr": "@gemsgamewnd", "offset": "0x5dc", "u32": 0},
+    {"addr": "@gemsgamewnd", "offset": "0x5e0", "u32": 10},
+    {"addr": "@gemsgamewnd", "offset": "0x5e4", "f32": 0.0},
+    {"addr": "@gemsgamewnd", "offset": "0x5cc", "u32": 0},
+    {"addr": "@gemsgamewnd", "offset": "0xdb4", "u32": 255},
+    {"addr": "@gemsgamewnd", "offset": "0x168", "u32": 101},
+    {"addr": "@gemsgamewnd", "offset": "0x16c", "u32": 1},
+    {"addr": "@gemsgamewnd", "offset": "0x170", "cstr": "Ada"},
+    {"addr": "@gemsgamewnd", "offset": "0x1b0", "u32": 82},
+    {"addr": "@gemsgamewnd", "offset": "0x1b4", "u32": 2},
+    {"addr": "@gemsgamewnd", "offset": "0x1b8", "cstr": "Bert"},
+    {"addr": "@gemsgamewnd", "offset": "0x1f8", "u32": 63},
+    {"addr": "@gemsgamewnd", "offset": "0x1fc", "u32": 3},
+    {"addr": "@gemsgamewnd", "offset": "0x200", "cstr": "Cy"},
+    {"addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4},
+    {"addr": "0x00640fec", "from_image": "0x00640fec", "image_size": 4},
+    {"addr": "0x0064a0c0", "from_image": "0x0064a0c0", "image_size": 4}
+  ],
+  "callees": {
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": ["ptr", "cstr"],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x00571e00": {
+      "name": "CXStr_construct_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "passthrough": true
+    },
+    "0x00571d00": {
+      "name": "CXStr_release_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "passthrough": true
+    },
+    "0x0059d860": {
+      "name": "GetRect_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 1,
+      "writes": [
+        {"arg": 0, "hex": "000000000000000032000000c8000000"}
+      ]
+    },
+    "0x004d9160": {
+      "name": "CopyRect_guess",
+      "conv": "thiscall",
+      "args": ["ptr", "int"],
+      "ret": "this",
+      "writes": [
+        {"arg": 0, "offset": 16, "hex": "000000000000000032000000c8000000"}
+      ]
+    },
+    "0x0059fa70": {
+      "name": "SetPos_guess",
+      "conv": "thiscall",
+      "args": ["mem:8"],
+      "ret": 0
+    },
+    "@fn_show": {
+      "name": "SetShow_guess",
+      "conv": "thiscall",
+      "args": ["bool", "int"],
+      "ret": 0
+    },
+    "@fn_text": {
+      "name": "SetText_guess",
+      "conv": "thiscall",
+      "args": ["mem:4"],
+      "ret": 0
+    },
+    "kernel32.dll!HeapAlloc": {
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": "@strrep"
+    },
+    "kernel32.dll!HeapFree": {
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 1
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "null_ui_state0",
+      "args": [],
+      "objects": {
+        "gemsgamewnd": {"size": "0xec0", "fill": "zero"}
+      }
+    },
+    {
+      "name": "state0_controls_and_color",
+      "args": [],
+      "memory": [
+        {"addr": "@gemsgamewnd", "offset": "0x160", "u32": 0},
+        {"addr": "@gemsgamewnd", "offset": "0x5dc", "u32": 0},
+        {"addr": "@gemsgamewnd", "offset": "0x5e4", "f32": 0.0}
+      ]
+    },
+    {
+      "name": "state1_next_hidden",
+      "args": [],
+      "memory": [
+        {"addr": "@gemsgamewnd", "offset": "0x160", "u32": 1},
+        {"addr": "@gemsgamewnd", "offset": "0x5cc", "u32": 28},
+        {"addr": "@gemsgamewnd", "offset": "0x5dc", "u32": 9}
+      ]
+    },
+    {
+      "name": "state1_special_hidden",
+      "args": [],
+      "memory": [
+        {"addr": "@gemsgamewnd", "offset": "0x160", "u32": 1},
+        {"addr": "@gemsgamewnd", "offset": "0x5cc", "u32": 4294967295},
+        {"addr": "@gemsgamewnd", "offset": "0x5dc", "u32": 9}
+      ]
+    },
+    {
+      "name": "state1_next_and_special_shown",
+      "args": [],
+      "memory": [
+        {"addr": "@gemsgamewnd", "offset": "0x160", "u32": 1},
+        {"addr": "@gemsgamewnd", "offset": "0x5cc", "u32": 0},
+        {"addr": "@gemsgamewnd", "offset": "0x5dc", "u32": 9}
+      ]
+    },
+    {
+      "name": "state3_large_wave",
+      "args": [],
+      "memory": [
+        {"addr": "@gemsgamewnd", "offset": "0x160", "u32": 3},
+        {"addr": "@gemsgamewnd", "offset": "0x5dc", "u32": 10}
+      ]
+    },
+    {
+      "name": "state4_game_over",
+      "args": [],
+      "memory": [
+        {"addr": "@gemsgamewnd", "offset": "0x160", "u32": 4},
+        {"addr": "@gemsgamewnd", "offset": "0x5dc", "u32": -1}
+      ]
+    },
+    {
+      "name": "state5_slide_and_timer_no_wrap",
+      "args": [],
+      "memory": [
+        {"addr": "@gemsgamewnd", "offset": "0x160", "u32": 5},
+        {"addr": "@gemsgamewnd", "offset": "0x5dc", "u32": 2},
+        {"addr": "@gemsgamewnd", "offset": "0x5e0", "u32": 10},
+        {"addr": "@gemsgamewnd", "offset": "0x5e4", "f32": 0.0}
+      ]
+    },
+    {
+      "name": "state5_slide_reset_and_timer_wrap",
+      "args": [],
+      "memory": [
+        {"addr": "@gemsgamewnd", "offset": "0x160", "u32": 5},
+        {"addr": "@gemsgamewnd", "offset": "0x5dc", "u32": 2},
+        {"addr": "@gemsgamewnd", "offset": "0x5e0", "u32": 50},
+        {"addr": "@gemsgamewnd", "offset": "0x5e4", "f32": 10.9}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5265363,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@gemsgamewnd", "offset": "0x160", "type": "int", "choices": [0, 1, 2, 3, 4, 5]},
+      {"addr": "@gemsgamewnd", "offset": "0x5cc", "type": "int", "choices": [-1, 0, 28, 103]},
+      {"addr": "@gemsgamewnd", "offset": "0x5dc", "type": "int", "choices": [-1, 0, 2, 9, 10]},
+      {"addr": "@gemsgamewnd", "offset": "0x5e0", "type": "int", "choices": [-120, 0, 10, 50, 100]},
+      {"addr": "@gemsgamewnd", "offset": "0x5e4", "type": "float", "choices": [0.0, 1.0, 9.9, 10.8]},
+      {"addr": "@gemsgamewnd", "offset": "0x438", "type": "int", "choices": [-1, 0, 1234, 99999]},
+      {"addr": "@gemsgamewnd", "offset": "0x43c", "type": "int", "choices": [0, 1, 12, 99]}
+    ]
+  },
+  "_survivors": "L960: deleting showFlag = 0 leaves an uninitialized local; the fixture harness zeroes the stack, so ++showFlag still produces 1."
+}

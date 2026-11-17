@@ -1,0 +1,100 @@
+{
+  "function": "Handle_OP_MemorizeSpell_guess",
+  "original": "0x00458ed8",
+  "sources": ["src/EverQuest/tu_042_EQHandleMsg.cpp"],
+  "conv": "cdecl",
+  "args": [
+    {"name": "operation_guess", "type": "int"},
+    {"name": "index_guess", "type": "int"},
+    {"name": "value_guess", "type": "int"},
+    {"name": "amount_guess", "type": "int"}
+  ],
+  "ret": "int",
+  "objects": {
+    "root": {"size": "0xc400", "fill": "random", "init": [{"offset": "0x8", "u32": "@rootMeta"}]},
+    "rootMeta": {"size": "0x8", "fill": "random", "init": [{"offset": "0x4", "u32": "0xc300"}]},
+    "dispatch": {"size": "0x1ac", "fill": "random", "init": [{"offset": "0x1a8", "u32": "@state"}]},
+    "state": {"size": "0x1070", "fill": "random", "init": [{"offset": "0x1048", "u32": "@record"}, {"offset": "0xfa0", "u32": 0}]},
+    "settings": {"size": "0x14c", "fill": "random", "init": [{"offset": "0x148", "u32": 1000}]},
+    "lookup": {"size": "0x10", "fill": "random"},
+    "receiver": {"size": "0x10", "fill": "random"},
+    "spell": {"size": "0x10", "fill": "random"},
+    "record": {"size": "0x238", "fill": "random", "init": [{"offset": "0x18", "u32": 20}, {"offset": "0x1c", "u32": 40000}, {"offset": "0x54", "u32": 0}]},
+    "recordOther": {"size": "0x238", "fill": "random", "init": [{"offset": "0x18", "u32": 17}, {"offset": "0x1c", "u32": 60000}, {"offset": "0x54", "u32": 0}]},
+    "slot": {"size": "0x4", "fill": "random", "init": [{"offset": "0x0", "u32": "@record"}]},
+    "slotOther": {"size": "0x4", "fill": "random", "init": [{"offset": "0x0", "u32": "@recordOther"}]},
+    "charInfo": {"size": "0x11a0", "fill": "random", "init": [{"offset": "0x119c", "u32": 8}]}
+  },
+  "memory": [
+    {"addr": "0x00905ce4", "u32": "@dispatch"},
+    {"addr": "0x00905d00", "u32": "@root"},
+    {"addr": "0x00905d24", "u32": "@settings"},
+    {"addr": "0x00985cc8", "u32": "@lookup"},
+    {"addr": "0x00850c2c", "u32": "@receiver"},
+    {"addr": "0x009248d0", "u32": 1},
+    {"addr": "0x00850c30", "u32": "@spell"}
+  ],
+  "callees": {
+    "0x004b76a6": {"name": "ProbeTable_Find", "conv": "thiscall", "args": ["ptr"], "ret": "@slot"},
+    "0x005e05b0": {"name": "LookupValue_Duration", "conv": "thiscall", "args": [], "ret": 1},
+    "0x0044d0d0": {"name": "CheckValue", "conv": "cdecl", "args": ["int"], "ret": 1},
+    "0x0040cbd6": {"name": "LookupValue_Find", "conv": "thiscall", "args": ["int"], "ret": "@record"},
+    "0x004106a3": {"name": "CommandContext_GetValue", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 5},
+    "0x005ec220": {"name": "IndexedLookup_Find", "conv": "thiscall", "args": [], "ret": "@charInfo"},
+    "0x004828de": {"name": "DispatchTarget_Next", "conv": "thiscall", "args": [], "ret": 5},
+    "0x0040f8a0": {"name": "CommandContext_Handle", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x004ecb56": {"name": "TargetReceiver_Select", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x004ec497": {"name": "TargetReceiver_Update", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x004586a5": {"name": "IndexedOwner_SetF30", "conv": "thiscall", "args": ["u32", "u32"], "ret": 0},
+    "0x0055712b": {"name": "SpellBook_Apply", "conv": "thiscall", "args": ["int", "int"], "ret": 0},
+    "0x005581de": {"name": "SpellBook_Set", "conv": "thiscall", "args": ["int", "int"], "ret": 0}
+  },
+  "cases": [
+    {"name": "operation_minus_one_decrements", "args": [-1, 0, 0, 0], "memory": [{"addr": "0x009248d0", "u32": 2}], "expect": {"ret": 1}},
+    {"name": "operation_minus_one_clamps", "args": [-1, 0, 0, 0], "memory": [{"addr": "0x009248d0", "u32": 0}], "expect": {"ret": 1}},
+    {"name": "operation_minus_one_negative_count", "args": [-1, 0, 0, 0], "memory": [{"addr": "0x009248d0", "u32": -1}], "expect": {"ret": 1}},
+    {"name": "operation_zero_calls_set", "args": [0, 2, 41, 0], "memory": [{"addr": "0x009248d0", "u32": 2}], "expect": {"ret": 1}},
+    {"name": "operation_zero_null_spellbook", "args": [0, 2, 41, 0], "memory": [{"addr": "0x00850c30", "u32": 0}, {"addr": "0x009248d0", "u32": 0}], "expect": {"ret": 1}},
+    {"name": "operation_zero_negative_count", "args": [0, 2, 41, 0], "memory": [{"addr": "0x009248d0", "u32": -1}], "expect": {"ret": 1}},
+    {"name": "operation_one_calls_apply", "args": [1, 3, 42, 0], "memory": [{"addr": "0x009248d0", "u32": 2}], "expect": {"ret": 1}},
+    {"name": "operation_one_null_spellbook", "args": [1, 3, 42, 0], "memory": [{"addr": "0x00850c30", "u32": 0}], "expect": {"ret": 1}},
+    {"name": "operation_one_count_clamps", "args": [1, 3, 42, 0], "memory": [{"addr": "0x009248d0", "u32": 0}], "expect": {"ret": 1}},
+    {"name": "operation_two_calls_receiver", "args": [2, 3, 0, 0], "expect": {"ret": 1}},
+    {"name": "operation_two_count_clamps", "args": [2, 3, 0, 0], "memory": [{"addr": "0x009248d0", "u32": 0}], "expect": {"ret": 1}},
+    {"name": "operation_two_nulls", "args": [2, 3, 0, 0], "memory": [{"addr": "0x00850c2c", "u32": 0}, {"addr": "0x00905d00", "u32": 0}], "expect": {"ret": 1}},
+    {"name": "operation_two_calls_indexed_owner", "args": [2, 2, 0, 0], "memory": [{"addr": "0x00850c2c", "u32": 0}], "expect": {"ret": 1}},
+    {"name": "unknown_operation", "args": [4, 0, 0, 0], "expect": {"ret": 1}},
+    {"name": "operation_three_null_current", "args": [3, 10, 7, 0], "memory": [{"addr": "0x00905ce4", "u32": 0}], "expect": {"ret": 1}},
+    {"name": "operation_three_null_state", "args": [3, 10, 7, 0], "memory": [{"addr": "@dispatch", "offset": "0x1a8", "u32": 0}], "expect": {"ret": 1}},
+    {"name": "operation_three_null_record_and_root", "args": [3, 10, 7, 0], "memory": [{"addr": "@state", "offset": "0x1048", "u32": 0}, {"addr": "0x00905d00", "u32": 0}], "expect": {"ret": 1}},
+    {"name": "operation_three_probe_missing", "args": [3, 10, 7, 0], "callees": {"0x004b76a6": {"name": "ProbeTable_Find", "conv": "thiscall", "args": ["ptr"], "ret": 0}}, "expect": {"ret": 1}},
+    {"name": "operation_three_probe_mismatch", "args": [3, 10, 7, 0], "callees": {"0x004b76a6": {"name": "ProbeTable_Find", "conv": "thiscall", "args": ["ptr"], "ret": "@slotOther"}}, "expect": {"ret": 1}},
+    {"name": "operation_three_duration_disabled", "args": [3, 10, 7, 0], "memory": [{"addr": "@state", "offset": "0xfa0", "u32": 1}], "expect": {"ret": 1}},
+    {"name": "operation_three_duration_zero", "args": [3, 10, 7, 0], "callees": {"0x005e05b0": {"name": "LookupValue_Duration", "conv": "thiscall", "args": [], "ret": 0}}, "expect": {"ret": 1}},
+    {"name": "operation_three_index_ten", "args": [3, 10, 7, 0], "expect": {"ret": 1}},
+    {"name": "operation_three_check_value_false", "args": [3, 8, 7, 3], "callees": {"0x0044d0d0": {"name": "CheckValue", "conv": "cdecl", "args": ["int"], "ret": 0}}, "expect": {"ret": 1}},
+    {"name": "operation_three_lookup_missing", "args": [3, 8, 7, 3], "callees": {"0x0040cbd6": {"name": "LookupValue_Find", "conv": "thiscall", "args": ["int"], "ret": 0}}, "expect": {"ret": 1}},
+    {"name": "operation_three_index_nine", "args": [3, 9, 7, 3], "expect": {"ret": 1}},
+    {"name": "operation_three_index_eight_charinfo_not_eight", "args": [3, 8, 7, 3], "memory": [{"addr": "@charInfo", "offset": "0x119c", "u32": 0}], "expect": {"ret": 1}},
+    {"name": "operation_three_index_eight_next_zero", "args": [3, 8, 7, 3], "callees": {"0x004828de": {"name": "DispatchTarget_Next", "conv": "thiscall", "args": [], "ret": 0}}, "expect": {"ret": 1}},
+    {"name": "operation_three_index_eight_next_one", "args": [3, 8, 7, 3], "expect": {"ret": 1}},
+    {"name": "operation_three_index_eight_next_ten", "args": [3, 8, 7, 3], "callees": {"0x004828de": {"name": "DispatchTarget_Next", "conv": "thiscall", "args": [], "ret": 10}}, "expect": {"ret": 1}},
+    {"name": "operation_three_index_zero", "args": [3, 0, 7, 3], "expect": {"ret": 1}}
+  ],
+  "fuzz": {
+    "seed": 4558552,
+    "count": 100,
+    "args": [
+      {"choices": [-1, 0, 1, 2, 3, 4]},
+      {"choices": [0, 1, 8, 9, 10]},
+      {"range": [-2, 5]},
+      {"range": [-1, 50000]}
+    ],
+    "memory": [
+      {"addr": "@state", "offset": "0xfa0", "type": "int", "choices": [0, 1]},
+      {"addr": "@record", "offset": "0x18", "type": "int", "choices": [0, 20, 40000]},
+      {"addr": "@record", "offset": "0x1c", "type": "int", "choices": [0, 1000, 40000]},
+      {"addr": "@charInfo", "offset": "0x119c", "type": "u8", "choices": [0, 8]}
+    ]
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "function": "NetworkOwner_guess::AddComment_guess",
+  "original": "0x0056137c",
+  "sources": ["src/EverQuest/tu_226_TicketWindow.cpp"],
+  "conv": "thiscall",
+  "this": "@networkowner",
+  "args": [{"name": "text_guess", "type": "ptr"}],
+  "ret": "void",
+  "size": "0xf3",
+  "objects": {
+    "networkowner": {
+      "size": "0x5c8",
+      "fill": "zero",
+      "init": [{"offset": "0x5c4", "u32": "@networkcontext"}]
+    },
+    "networkcontext": {
+      "size": "0x120",
+      "fill": "zero",
+      "init": [{"offset": "0x11c", "u32": 1}]
+    },
+    "payload": {
+      "size": "0xc",
+      "fill": "zero",
+      "init": [{"offset": "0x8", "u32": 1}]
+    },
+    "buildpayload": {"size": "0xc", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x007a0000", "cstr": "42"},
+    {"addr": "0x007a0100", "cstr": "fixture message"}
+  ],
+  "callees": {
+    "0x00597f10": {
+      "name": "NetworkContext_guess::BuildText_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "int", "int"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]
+    },
+    "0x00572300": {
+      "name": "TextTemp_guess::GetText_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": ["0x007a0000", "0x007a0100"]
+    },
+    "0x0060e3a3": {
+      "name": "_atol",
+      "conv": "cdecl",
+      "args": ["cstr"],
+      "ret": 42
+    },
+    "0x00571d00": {
+      "name": "TextTemp_guess::Release_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": "keep"
+    },
+    "0x004912b1": {
+      "name": "SendPayload_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "mem:0xfac", "int", "char"],
+      "ret": 0
+    },
+    "0x0060d674": {
+      "name": "__security_check_cookie",
+      "conv": "fastcall",
+      "args": ["u32"],
+      "ret": "keep"
+    }
+  },
+  "cases": [
+    {
+      "name": "context_count_zero_skips_send",
+      "args": ["@payload"],
+      "memory": [{"addr": "@networkcontext", "offset": "0x11c", "u32": 0}]
+    },
+    {
+      "name": "null_payload_skips_send",
+      "args": [0],
+      "memory": [{"addr": "@networkcontext", "offset": "0x11c", "u32": 1}]
+    },
+    {
+      "name": "payload_count_zero_skips_send",
+      "args": ["@payload"],
+      "memory": [
+        {"addr": "@networkcontext", "offset": "0x11c", "u32": 1},
+        {"addr": "@payload", "offset": "0x8", "u32": 0}
+      ]
+    },
+    {
+      "name": "payload_count_negative_skips_send",
+      "args": ["@payload"],
+      "memory": [
+        {"addr": "@networkcontext", "offset": "0x11c", "u32": 1},
+        {"addr": "@payload", "offset": "0x8", "u32": -1}
+      ]
+    },
+    {
+      "name": "send_packet_and_release_both_values",
+      "args": ["@payload"],
+      "memory": [
+        {"addr": "@networkcontext", "offset": "0x11c", "u32": 1},
+        {"addr": "@payload", "offset": "0x8", "u32": 1}
+      ]
+    },
+    {
+      "name": "send_packet_without_releasing_empty_temporary",
+      "args": ["@payload"],
+      "memory": [
+        {"addr": "@networkcontext", "offset": "0x11c", "u32": 1},
+        {"addr": "@payload", "offset": "0x8", "u32": 2}
+      ],
+      "callees": {
+        "0x00597f10": {
+          "name": "NetworkContext_guess::BuildText_guess",
+          "conv": "thiscall",
+          "args": ["ignore", "int", "int"],
+          "ret": "arg0",
+          "writes": [{"arg": 0, "offset": 0, "hex": "00000000"}]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 561377,
+    "count": 100,
+    "args": [{"choices": [0, "@payload"]}],
+    "memory": [
+      {"addr": "@networkcontext", "offset": "0x11c", "type": "int", "choices": [-2, -1, 0, 1, 2]},
+      {"addr": "@payload", "offset": "0x8", "type": "int", "choices": [-2, -1, 0, 1, 2]}
+    ]
+  }
+}

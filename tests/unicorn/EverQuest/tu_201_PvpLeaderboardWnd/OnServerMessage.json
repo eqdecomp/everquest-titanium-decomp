@@ -1,0 +1,213 @@
+{
+  "function": "CPvpLeaderboardWndView_guess::OnServerMessage_guess",
+  "original": "0x0054b657",
+  "sources": [
+    "src/EverQuest/tu_201_PvpLeaderboardWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [
+    {"name": "sender", "type": "ptr"},
+    {"name": "message", "type": "int"},
+    {"name": "data", "type": "ptr"},
+    {"name": "length", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "object": {
+      "size": "0x188",
+      "fill": "random",
+      "init": [
+        {"offset": "0x168", "u32": "@list"},
+        {"offset": "0x16c", "u32": "@lblrank"},
+        {"offset": "0x170", "u32": "@lblname"},
+        {"offset": "0x174", "u32": "@lblkills"},
+        {"offset": "0x178", "u32": "@lbldeaths"},
+        {"offset": "0x17c", "u32": "@lblpoints"},
+        {"offset": "0x180", "u32": "@lblinfamy"}
+      ]
+    },
+    "sender": {"size": "0x10", "fill": "random"},
+    "list": {"size": "0x140", "fill": "random", "init": [{"offset": 0, "u32": "@listvtbl"}]},
+    "listvtbl": {"size": "0x134", "fill": "zero", "init": [{"offset": "0x130", "u32": "@fn_clearlist"}]},
+    "fn_clearlist": {"size": "0x1", "fill": "zero"},
+    "lblvtbl": {"size": "0x100", "fill": "zero", "init": [{"offset": "0xfc", "u32": "@fn_settext"}]},
+    "fn_settext": {"size": "0x1", "fill": "zero"},
+    "lblrank": {"size": "0x10", "fill": "zero", "init": [{"offset": 0, "u32": "@lblvtbl"}]},
+    "lblname": {"size": "0x10", "fill": "zero", "init": [{"offset": 0, "u32": "@lblvtbl"}]},
+    "lblkills": {"size": "0x10", "fill": "zero", "init": [{"offset": 0, "u32": "@lblvtbl"}]},
+    "lbldeaths": {"size": "0x10", "fill": "zero", "init": [{"offset": 0, "u32": "@lblvtbl"}]},
+    "lblpoints": {"size": "0x10", "fill": "zero", "init": [{"offset": 0, "u32": "@lblvtbl"}]},
+    "lblinfamy": {"size": "0x10", "fill": "zero", "init": [{"offset": 0, "u32": "@lblvtbl"}]},
+    "dialog": {"size": "0x10", "fill": "zero", "init": [{"offset": 0, "u32": "@dlgvtbl"}]},
+    "dlgvtbl": {"size": "0x100", "fill": "zero", "init": [{"offset": "0xfc", "u32": "@fn_dlgtext"}]},
+    "fn_dlgtext": {"size": "0x1", "fill": "zero"},
+    "pool": {"size": "0x10", "fill": "random"},
+    "everquest": {"size": "0x10", "fill": "random"},
+    "pc": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x8", "u32": "@pcvbtbl"},
+        {"offset": "0x54", "cstr": "Hero"}
+      ]
+    },
+    "pcvbtbl": {"size": "0x8", "fill": "zero", "init": [{"offset": "0x4", "u32": "0x10"}]},
+    "racename": {"size": "0x10", "fill": "zero", "init": [{"offset": 0, "cstr": "Gnome"}]},
+    "classname": {"size": "0x10", "fill": "zero", "init": [{"offset": 0, "cstr": "Wizard"}]},
+    "guildname": {"size": "0x20", "fill": "zero", "init": [{"offset": 0, "cstr": "Knights"}]},
+    "dlgtext": {"size": "0x20", "fill": "zero", "init": [{"offset": 0, "cstr": "dialog text"}]},
+    "string_storage": {"size": "0x100", "fill": "zero"},
+    "board": {
+      "size": "0x1f58",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": 0},
+        {"offset": "0x4", "u32": 11},
+        {"offset": "0x8", "u32": 22},
+        {"offset": "0xc", "u32": 3},
+        {"offset": "0x10", "u32": 44},
+        {"offset": "0x14", "u32": 55},
+        {"offset": "0x18", "cstr": "Alpha"},
+        {"offset": "0x58", "u32": 10},
+        {"offset": "0x5c", "u32": 1},
+        {"offset": "0x60", "u32": 50},
+        {"offset": "0x64", "u32": 9},
+        {"offset": "0x68", "cstr": "Hero"},
+        {"offset": "0xa8", "u32": 8},
+        {"offset": "0xac", "u32": 2},
+        {"offset": "0xb0", "u32": 40},
+        {"offset": "0xb4", "u32": 8},
+        {"offset": "0xb8", "cstr": "Gamma"},
+        {"offset": "0xf8", "u32": 8},
+        {"offset": "0xfc", "u32": 4},
+        {"offset": "0x100", "u32": 40},
+        {"offset": "0x104", "u32": 8},
+        {"offset": "0x108", "cstr": "Delta"},
+        {"offset": "0x148", "u32": 8},
+        {"offset": "0x14c", "u32": 5},
+        {"offset": "0x150", "u32": 30},
+        {"offset": "0x154", "u32": 7},
+        {"offset": "0x1a8", "cstr": "Eps"},
+        {"offset": "0x1e8", "u32": 30},
+        {"offset": "0x1ec", "u32": 6},
+        {"offset": "0x1f0", "u32": 8},
+        {"offset": "0x1f4", "u32": 7},
+        {"offset": "0x1f08", "cstr": "Last"},
+        {"offset": "0x1f48", "u32": 1},
+        {"offset": "0x1f4c", "u32": 1},
+        {"offset": "0x1f50", "u32": 1},
+        {"offset": "0x1f54", "u32": 1}
+      ]
+    },
+    "info": {
+      "size": "0xa8",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "cstr": "Hero"},
+        {"offset": "0x40", "cstr": "Smith"},
+        {"offset": "0x8c", "u32": 5}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@pc"},
+    {"addr": "0x00988df0", "u32": "@everquest"},
+    {"addr": "0x00991e44", "u32": "@pool"}
+  ],
+  "callees": {
+    "@fn_settext": {"name": "SetWindowText_guess", "conv": "thiscall", "args": ["mem:4"], "ret": 0},
+    "@fn_dlgtext": {"name": "DialogSetWindowText_guess", "conv": "thiscall", "args": ["mem:4"], "ret": 0},
+    "@fn_clearlist": {"name": "DeleteAll_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0040ac55": {"name": "GuildList_guess::GetName_guess", "conv": "thiscall", "args": ["int"], "ret": "@guildname"},
+    "0x00491e5b": {"name": "GetClassDesc", "conv": "thiscall", "args": ["int"], "ret": "@classname"},
+    "0x0049273d": {"name": "GetRaceDesc", "conv": "thiscall", "args": ["int"], "ret": "@racename"},
+    "0x005738b0": {"name": "FormatCXStr_guess", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "efbeadde"}]},
+    "0x00572300": {"name": "CXStr::operator char*", "conv": "thiscall", "args": [], "ret": "@dlgtext"},
+    "0x00548460": {"name": "Activate", "conv": "thiscall", "args": ["int", "int", "cstr", "int", "int", "int", "int"], "ret": 0},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["u32"], "ret": 0},
+    "0x0060d5eb": {"name": "_sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 1,
+      "writes": [{"arg": 0, "offset": 0, "hex": "5300"}]},
+    "0x00571e00": {"name": "CXStr_ctor", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["ptr", "u32", "u32"], "ret": "@string_storage"},
+    "0x00598580": {"name": "ClearAllSel", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0059b9d0": {"name": "AddString", "conv": "thiscall", "args": ["mem:4", "u32", "u32", "u32"], "ret": 0},
+    "0x0059b360": {"name": "SetItemText", "conv": "thiscall", "args": ["int", "int", "mem:4"], "ret": 0},
+    "0x0059b3e0": {"name": "SetItemColor", "conv": "thiscall", "args": ["int", "int", "u32"], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {"name": "other message", "args": ["@sender", 0, "@board", "0xa8"]},
+    {"name": "info wrong length", "args": ["@sender", "0x246a", "@info", "0xa7"]},
+    {"name": "info no guild no dialog", "args": ["@sender", "0x246a", "@info", "0xa8"],
+      "memory": [{"addr": "@info", "offset": "0x8c", "u32": "0xffffffff"}]},
+    {"name": "info guild dialog", "args": ["@sender", "0x246a", "@info", "0xa8"],
+      "callees": {"0x00548460": {"name": "Activate", "conv": "thiscall", "args": ["int", "int", "cstr", "int", "int", "int", "int"], "ret": "@dialog"}}},
+    {"name": "info no guild dialog", "args": ["@sender", "0x246a", "@info", "0xa8"],
+      "memory": [{"addr": "@info", "offset": "0x8c", "u32": "0xffffffff"}],
+      "callees": {"0x00548460": {"name": "Activate", "conv": "thiscall", "args": ["int", "int", "cstr", "int", "int", "int", "int"], "ret": "@dialog"}}},
+    {"name": "board sort 0 rank 3", "args": ["@sender", "0x1a59", "@board", 0]},
+    {"name": "board sort 0 no rank", "args": ["@sender", "0x1a59", "@board", 0],
+      "memory": [{"addr": "@board", "offset": "0xc", "u32": 0}]},
+    {"name": "board sort 1", "args": ["@sender", "0x1a59", "@board", 0],
+      "memory": [{"addr": "@board", "offset": "0x0", "u32": 1}]},
+    {"name": "board sort 2", "args": ["@sender", "0x1a59", "@board", 0],
+      "memory": [{"addr": "@board", "offset": "0x0", "u32": 2}]},
+    {"name": "board sort 3", "args": ["@sender", "0x1a59", "@board", 0],
+      "memory": [{"addr": "@board", "offset": "0x0", "u32": 3}]},
+    {"name": "board no controls", "args": ["@sender", "0x1a59", "@board", 0],
+      "memory": [
+        {"addr": "@object", "offset": "0x168", "u32": 0},
+        {"addr": "@object", "offset": "0x16c", "u32": 0},
+        {"addr": "@object", "offset": "0x170", "u32": 0},
+        {"addr": "@object", "offset": "0x174", "u32": 0},
+        {"addr": "@object", "offset": "0x178", "u32": 0},
+        {"addr": "@object", "offset": "0x17c", "u32": 0},
+        {"addr": "@object", "offset": "0x180", "u32": 0}
+      ]},
+    {"name": "board list only", "args": ["@sender", "0x1a59", "@board", 0],
+      "memory": [
+        {"addr": "@object", "offset": "0x170", "u32": 0},
+        {"addr": "@object", "offset": "0x174", "u32": 0},
+        {"addr": "@object", "offset": "0x178", "u32": 0},
+        {"addr": "@object", "offset": "0x17c", "u32": 0},
+        {"addr": "@object", "offset": "0x180", "u32": 0}
+      ]}
+  ],
+  "fuzz": {
+    "seed": 5551703,
+    "count": 120,
+    "args": [
+      {"choices": ["@sender"]},
+      {"choices": [0, "0x1a59", "0x246a", "0x1a5a", "0x2469"]},
+      {"choices": ["@board"]},
+      {"choices": ["0xa8", "0xa7", 0]}
+    ],
+    "memory": [
+      {"addr": "@board", "offset": "0x0", "type": "int", "choices": [0, 1, 2, 3]},
+      {"addr": "@board", "offset": "0xc", "type": "int", "choices": [0, 1, 7]},
+      {"addr": "@board", "offset": "0x58", "type": "int", "choices": [8, 10, 30, 40]},
+      {"addr": "@board", "offset": "0x60", "type": "int", "choices": [8, 10, 30, 40]},
+      {"addr": "@board", "offset": "0x64", "type": "int", "choices": [8, 10, 30, 40]},
+      {"addr": "@board", "offset": "0xa8", "type": "int", "choices": [8, 10, 30, 40]},
+      {"addr": "@board", "offset": "0xb0", "type": "int", "choices": [8, 10, 30, 40]},
+      {"addr": "@board", "offset": "0xb4", "type": "int", "choices": [8, 10, 30, 40]},
+      {"addr": "@board", "offset": "0xf8", "type": "int", "choices": [8, 10, 30, 40]},
+      {"addr": "@board", "offset": "0x100", "type": "int", "choices": [8, 10, 30, 40]},
+      {"addr": "@board", "offset": "0x104", "type": "int", "choices": [8, 10, 30, 40]},
+      {"addr": "@board", "offset": "0x148", "type": "int", "choices": [8, 30, 40, -999]},
+      {"addr": "@board", "offset": "0x150", "type": "int", "choices": [8, 30, 40, -999]},
+      {"addr": "@board", "offset": "0x154", "type": "int", "choices": [8, 30, 40, -999]},
+      {"addr": "@object", "offset": "0x168", "type": "ptr", "choices": ["0x0", "@list"], "p": 0.3},
+      {"addr": "@object", "offset": "0x16c", "type": "ptr", "choices": ["0x0", "@lblrank"], "p": 0.3},
+      {"addr": "@object", "offset": "0x170", "type": "ptr", "choices": ["0x0", "@lblname"], "p": 0.3},
+      {"addr": "@object", "offset": "0x174", "type": "ptr", "choices": ["0x0", "@lblkills"], "p": 0.3},
+      {"addr": "@object", "offset": "0x178", "type": "ptr", "choices": ["0x0", "@lbldeaths"], "p": 0.3},
+      {"addr": "@object", "offset": "0x17c", "type": "ptr", "choices": ["0x0", "@lblpoints"], "p": 0.3},
+      {"addr": "@object", "offset": "0x180", "type": "ptr", "choices": ["0x0", "@lblinfamy"], "p": 0.3}
+    ]
+  }
+}

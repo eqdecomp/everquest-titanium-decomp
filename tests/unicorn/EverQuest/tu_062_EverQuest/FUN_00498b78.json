@@ -1,0 +1,675 @@
+{
+  "function": "GlobalState_guess::InterpretCmd",
+  "_shape": "chat command interpreter: whitespace skip, ';'/'[' branches, word parse, command table lookup, context gate, channel switch",
+  "original": "0x00498b78",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@globalstate",
+  "args": [
+    {
+      "name": "target_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "text_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "globalstate": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "target": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "resetowner": {
+      "size": "0x300",
+      "fill": "random"
+    },
+    "context": {
+      "size": "0xc300",
+      "fill": "random",
+      "init": [
+        {"offset": 8, "u32": "@contextnode"}
+      ]
+    },
+    "contextnode": {
+      "size": "0x8",
+      "init": [
+        {"offset": 4, "u32": 0}
+      ]
+    },
+    "stringtable": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "name0": {
+      "size": "0x10",
+      "init": [{"offset": 0, "hex": "2f73617900"}]
+    },
+    "text0": {
+      "size": "0x10",
+      "init": [{"offset": 0, "hex": "2f73617900"}]
+    },
+    "name1": {
+      "size": "0x10",
+      "init": [{"offset": 0, "hex": "2f77686f00"}]
+    },
+    "text1": {
+      "size": "0x10",
+      "init": [{"offset": 0, "hex": "2f77686f00"}]
+    },
+    "alias0": {
+      "size": "0x10",
+      "init": [{"offset": 0, "hex": "2f616c69617300"}]
+    },
+    "str_text": {
+      "size": "0x40",
+      "init": [{"offset": 0, "hex": "7465787400"}]
+    },
+    "rest_text": {
+      "size": "0x40",
+      "init": [{"offset": 0, "hex": "7265737400"}]
+    },
+    "handler0": {"size": "0x4"},
+    "handler1": {"size": "0x4"}
+  },
+  "memory": [
+    {"addr": "0x00905ce4", "u32": "@resetowner"},
+    {"addr": "0x00905cb0", "u32": "@stringtable"},
+    {"addr": "0x00988df0", "u32": "@globalstate"},
+    {"addr": "0x00905d00", "u32": 0},
+    {"addr": "0x0095a174", "u8": 0},
+    {"addr": "0x009237ec", "u8": 0},
+    {"addr": "0x009237f4", "cstr": "Chan"},
+    {"addr": "0x006450b8", "u32": 2},
+    {"addr": "0x0078a0c8", "offset": "0x00", "u32": 0},
+    {"addr": "0x0078a0c8", "offset": "0x04", "u32": "@name0"},
+    {"addr": "0x0078a0c8", "offset": "0x08", "u32": "@text0"},
+    {"addr": "0x0078a0c8", "offset": "0x0c", "u32": "@handler0"},
+    {"addr": "0x0078a0c8", "offset": "0x10", "u32": 0},
+    {"addr": "0x0078a0c8", "offset": "0x14", "u32": 0},
+    {"addr": "0x0078a0c8", "offset": "0x18", "u8": 0},
+    {"addr": "0x0078a0c8", "offset": "0x1c", "u32": 1},
+    {"addr": "0x0078a0c8", "offset": "0x20", "u32": "@name1"},
+    {"addr": "0x0078a0c8", "offset": "0x24", "u32": "@text1"},
+    {"addr": "0x0078a0c8", "offset": "0x28", "u32": "@handler1"},
+    {"addr": "0x0078a0c8", "offset": "0x2c", "u32": 0},
+    {"addr": "0x0078a0c8", "offset": "0x30", "u32": 0},
+    {"addr": "0x0078a0c8", "offset": "0x34", "u8": 0},
+    {"addr": "@resetowner", "offset": "0x256", "u8": 0},
+    {"addr": "@context", "offset": "0x104", "u8": 0}
+  ],
+  "callees": {
+    "0x00574860": {
+      "name": "FUN_00574860",
+      "conv": "cdecl",
+      "args": ["cstr", "ignore"],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": ["u32", "ignore"],
+      "ret": "@str_text"
+    },
+    "0x00498436": {
+      "name": "CEverQuest::dsp_chat",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": 0
+    },
+    "0x00466b46": {
+      "name": "do_chat_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ignore"],
+      "ret": 0
+    },
+    "0x00466be3": {
+      "name": "SendMailChannelText_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ignore"],
+      "ret": 0
+    },
+    "0x00574800": {
+      "name": "FUN_00574800",
+      "conv": "cdecl",
+      "args": ["cstr", "ignore"],
+      "ret": 1
+    },
+    "0x00574830": {
+      "name": "FUN_00574830",
+      "conv": "cdecl",
+      "args": ["cstr", "ignore"],
+      "ret": 0
+    },
+    "0x0042dd82": {
+      "name": "GrabFirstWord_guess",
+      "conv": "cdecl",
+      "args": ["cstr", "ignore", "int"],
+      "ret": "@rest_text",
+      "writes": [{"arg": 1, "offset": 0, "hex": "7465737400"}]
+    },
+    "0x00571e00": {
+      "name": "CXStr::CXStr",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "0x005722d0": {
+      "name": "CXStr::Unique",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x00573f00": {
+      "name": "CXStr::Compare",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": ["ignore", "int", "int"],
+      "ret": 0
+    },
+    "0x00492f52": {
+      "name": "ClearChatText_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x004658ac": {
+      "name": "IsStringPrefix_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "ignore"],
+      "ret": 1
+    },
+    "0x00467976": {
+      "name": "do_ooc_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ignore"],
+      "ret": 0
+    },
+    "0x00417e07": {
+      "name": "Cur_HP",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": ["int"],
+      "ret": 1
+    },
+    "0x00467955": {
+      "name": "do_auction_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ignore"],
+      "ret": 0
+    },
+    "0x004678d8": {
+      "name": "do_gsay_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ignore"],
+      "ret": 0
+    },
+    "0x00466990": {
+      "name": "do_guildsay_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ignore"],
+      "ret": 0
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr", "ignore", "ignore"],
+      "ret": 0
+    },
+    "0x00467997": {
+      "name": "do_tell_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ignore"],
+      "ret": 0
+    },
+    "0x00476411": {
+      "name": "SayToTarget_guess",
+      "conv": "cdecl",
+      "args": ["ptr", "ignore"],
+      "ret": 0
+    },
+    "0x0042ff95": {
+      "name": "RaidSay_guess",
+      "conv": "thiscall",
+      "this": "ignore",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "0x004982c6": {
+      "name": "CEverQuest::dsp_chat",
+      "conv": "thiscall",
+      "args": ["cstr", "int", "bool"],
+      "ret": 0
+    },
+    "@handler0": {
+      "name": "handler0",
+      "conv": "cdecl",
+      "args": ["ptr", "ignore"],
+      "ret": 0
+    },
+    "@handler1": {
+      "name": "handler1",
+      "conv": "cdecl",
+      "args": ["ptr", "ignore"],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {
+      "name": "null target",
+      "args": [0, "abc"]
+    },
+    {
+      "name": "null reset owner",
+      "args": ["@target", "abc"],
+      "memory": [{"addr": "0x00905ce4", "u32": 0}]
+    },
+    {
+      "name": "empty text",
+      "args": ["@target", ""]
+    },
+    {
+      "name": "semicolon off",
+      "args": ["@target", ";hello"]
+    },
+    {
+      "name": "semicolon on",
+      "args": ["@target", ";hello"],
+      "memory": [{"addr": "0x0095a174", "u8": 1}]
+    },
+    {
+      "name": "bracket off",
+      "args": ["@target", "[hello"]
+    },
+    {
+      "name": "bracket on",
+      "args": ["@target", "[hello"],
+      "memory": [{"addr": "0x0095a174", "u8": 1}]
+    },
+    {
+      "name": "whitespace semicolon",
+      "args": ["@target", "  ;hello"],
+      "callees": {
+        "0x00574860": {
+          "name": "FUN_00574860",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore"],
+          "ret": [1, 1, 0],
+          "writes": [{"arg": 1, "offset": 0, "hex": "01000000", "call": [0, 1]}]
+        }
+      }
+    },
+    {
+      "name": "slash command matched",
+      "args": ["@target", "/say hello"],
+      "callees": {
+        "0x0042dd82": {
+          "name": "FUN_0042dd82",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore", "int"],
+          "ret": "@rest_text",
+          "writes": [{"arg": 1, "offset": 0, "hex": "2f73617900"}]
+        }
+      }
+    },
+    {
+      "name": "name only match second loop",
+      "args": ["@target", "/say hello"],
+      "memory": [
+        {"addr": "0x0078a0c8", "offset": "0x08", "u32": "@alias0"}
+      ],
+      "callees": {
+        "0x0042dd82": {
+          "name": "FUN_0042dd82",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore", "int"],
+          "ret": "@rest_text",
+          "writes": [{"arg": 1, "offset": 0, "hex": "2f73617900"}]
+        },
+        "0x004658ac": {
+          "name": "FUN_004658ac",
+          "conv": "cdecl",
+          "args": ["ignore", "ignore"],
+          "ret": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "name": "slash second entry",
+      "args": ["@target", "/who"],
+      "callees": {
+        "0x0042dd82": {
+          "name": "FUN_0042dd82",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore", "int"],
+          "ret": "@rest_text",
+          "writes": [{"arg": 1, "offset": 0, "hex": "2f77686f00"}]
+        },
+        "0x004658ac": {
+          "name": "FUN_004658ac",
+          "conv": "cdecl",
+          "args": ["ignore", "ignore"],
+          "ret": [0, 1]
+        }
+      }
+    },
+    {
+      "name": "slash command restricted",
+      "args": ["@target", "/say hello"],
+      "memory": [
+        {"addr": "0x0078a0c8", "offset": "0x10", "u32": 1}
+      ],
+      "callees": {
+        "0x0042dd82": {
+          "name": "FUN_0042dd82",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore", "int"],
+          "ret": "@rest_text",
+          "writes": [{"arg": 1, "offset": 0, "hex": "2f73617900"}]
+        },
+        "0x004658ac": {
+          "name": "FUN_004658ac",
+          "conv": "cdecl",
+          "args": ["ignore", "ignore"],
+          "ret": [1, 1]
+        }
+      }
+    },
+    {
+      "name": "slash command override",
+      "args": ["@target", "/say hello"],
+      "memory": [
+        {"addr": "0x0078a0c8", "offset": "0x10", "u32": 1},
+        {"addr": "@resetowner", "offset": "0x256", "u8": 1}
+      ],
+      "callees": {
+        "0x0042dd82": {
+          "name": "FUN_0042dd82",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore", "int"],
+          "ret": "@rest_text",
+          "writes": [{"arg": 1, "offset": 0, "hex": "2f73617900"}]
+        }
+      }
+    },
+    {
+      "name": "slash second entry restricted",
+      "args": ["@target", "/who"],
+      "memory": [
+        {"addr": "0x0078a0c8", "offset": "0x2c", "u32": 1}
+      ],
+      "callees": {
+        "0x0042dd82": {
+          "name": "FUN_0042dd82",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore", "int"],
+          "ret": "@rest_text",
+          "writes": [{"arg": 1, "offset": 0, "hex": "2f77686f00"}]
+        },
+        "0x004658ac": {
+          "name": "FUN_004658ac",
+          "conv": "cdecl",
+          "args": ["ignore", "ignore"],
+          "ret": [0, 1, 0, 1]
+        }
+      }
+    },
+    {
+      "name": "context denies",
+      "args": ["@target", "/say hello"],
+      "memory": [
+        {"addr": "0x00905d00", "u32": "@context"},
+        {"addr": "@context", "offset": "0x104", "u8": 0}
+      ],
+      "callees": {
+        "0x0042dd82": {
+          "name": "FUN_0042dd82",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore", "int"],
+          "ret": "@rest_text",
+          "writes": [{"arg": 1, "offset": 0, "hex": "2f73617900"}]
+        },
+        "0x00417e07": {
+          "name": "FUN_00417e07",
+          "conv": "thiscall",
+          "this": "ignore",
+          "args": ["int"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "context state three",
+      "args": ["@target", "/say hello"],
+      "memory": [
+        {"addr": "0x00905d00", "u32": "@context"},
+        {"addr": "@context", "offset": "0x104", "u8": 3}
+      ],
+      "callees": {
+        "0x0042dd82": {
+          "name": "FUN_0042dd82",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore", "int"],
+          "ret": "@rest_text",
+          "writes": [{"arg": 1, "offset": 0, "hex": "2f73617900"}]
+        }
+      }
+    },
+    {
+      "name": "context state four flags allow",
+      "args": ["@target", "/say hello"],
+      "memory": [
+        {"addr": "0x00905d00", "u32": "@context"},
+        {"addr": "@context", "offset": "0x104", "u8": 4},
+        {"addr": "0x0078a0c8", "offset": "0x18", "u8": 1}
+      ],
+      "callees": {
+        "0x0042dd82": {
+          "name": "FUN_0042dd82",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore", "int"],
+          "ret": "@rest_text",
+          "writes": [{"arg": 1, "offset": 0, "hex": "2f73617900"}]
+        }
+      }
+    },
+    {
+      "name": "context allows",
+      "args": ["@target", "/say hello"],
+      "memory": [
+        {"addr": "0x00905d00", "u32": "@context"},
+        {"addr": "@context", "offset": "0x104", "u8": 0}
+      ],
+      "callees": {
+        "0x0042dd82": {
+          "name": "FUN_0042dd82",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore", "int"],
+          "ret": "@rest_text",
+          "writes": [{"arg": 1, "offset": 0, "hex": "2f73617900"}]
+        }
+      }
+    },
+    {
+      "name": "command mode compare equal",
+      "args": ["@target", "/say hello"],
+      "memory": [{"addr": "0x0095a174", "u8": 1}],
+      "callees": {
+        "0x0042dd82": {
+          "name": "FUN_0042dd82",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore", "int"],
+          "ret": "@rest_text",
+          "writes": [{"arg": 1, "offset": 0, "hex": "2f73617900"}]
+        }
+      }
+    },
+    {
+      "name": "command mode compare differs",
+      "args": ["@target", "/say hello"],
+      "memory": [{"addr": "0x0095a174", "u8": 1}],
+      "callees": {
+        "0x0042dd82": {
+          "name": "FUN_0042dd82",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore", "int"],
+          "ret": "@rest_text",
+          "writes": [{"arg": 1, "offset": 0, "hex": "2f73617900"}]
+        },
+        "0x00573f00": {
+          "name": "CXStr::Compare",
+          "conv": "thiscall",
+          "this": "ignore",
+          "args": ["ignore", "int", "int"],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "single char word",
+      "args": ["@target", "x hello"],
+      "callees": {
+        "0x00574800": {
+          "name": "FUN_00574800",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore"],
+          "ret": 0
+        },
+        "0x00574830": {
+          "name": "FUN_00574830",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "single char word whitespace",
+      "args": ["@target", "x   hello"],
+      "callees": {
+        "0x00574800": {
+          "name": "FUN_00574800",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore"],
+          "ret": 0
+        },
+        "0x00574830": {
+          "name": "FUN_00574830",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore"],
+          "ret": 0
+        },
+        "0x00574860": {
+          "name": "FUN_00574860",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore"],
+          "ret": [0, 1, 1, 0],
+          "writes": [{"arg": 1, "offset": 0, "hex": "01000000", "call": [1, 2]}]
+        }
+      }
+    },
+    {
+      "name": "channel zero",
+      "args": ["@target", "hello"]
+    },
+    {
+      "name": "channel two",
+      "args": ["@target", "hello"],
+      "memory": [{"addr": "0x009237ec", "u8": 2}]
+    },
+    {
+      "name": "channel four",
+      "args": ["@target", "hello"],
+      "memory": [{"addr": "0x009237ec", "u8": 4}]
+    },
+    {
+      "name": "channel five",
+      "args": ["@target", "hello"],
+      "memory": [{"addr": "0x009237ec", "u8": 5}]
+    },
+    {
+      "name": "channel seven",
+      "args": ["@target", "hello"],
+      "memory": [{"addr": "0x009237ec", "u8": 7}]
+    },
+    {
+      "name": "channel fifteen",
+      "args": ["@target", "hello"],
+      "memory": [{"addr": "0x009237ec", "u8": 15}]
+    },
+    {
+      "name": "channel nineteen",
+      "args": ["@target", "hello"],
+      "memory": [{"addr": "0x009237ec", "u8": 19}]
+    },
+    {
+      "name": "channel twenty",
+      "args": ["@target", "hello"],
+      "memory": [{"addr": "0x009237ec", "u8": 20}]
+    },
+    {
+      "name": "channel default",
+      "args": ["@target", "hello"],
+      "memory": [{"addr": "0x009237ec", "u8": 1}]
+    },
+    {
+      "name": "slash full line",
+      "args": ["@target", "say hello"],
+      "callees": {
+        "0x00574800": {
+          "name": "FUN_00574800",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore"],
+          "ret": 0
+        },
+        "0x00574830": {
+          "name": "FUN_00574830",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore"],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4819832,
+    "count": 120,
+    "args": [
+      {
+        "choices": [0, "@target"]
+      },
+      {}
+    ],
+    "memory": [
+      {"addr": "0x0095a174", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x009237ec", "type": "u8", "choices": [0, 1, 2, 4, 5, 7, 15, 19, 20]},
+      {"addr": "0x00905ce4", "type": "u32", "choices": [0, "@resetowner"]},
+      {"addr": "0x00905d00", "type": "u32", "choices": [0, "@context"]},
+      {"addr": "@resetowner", "offset": "0x256", "type": "u8", "choices": [0, 1]},
+      {"addr": "@context", "offset": "0x104", "type": "u8", "choices": [0, 3, 4]},
+      {"addr": "0x0078a0c8", "offset": "0x10", "type": "u32", "choices": [0, 1]},
+      {"addr": "0x0078a0c8", "offset": "0x18", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x0078a0c8", "offset": "0x2c", "type": "u32", "choices": [0, 1]},
+      {"addr": "0x0078a0c8", "offset": "0x34", "type": "u8", "choices": [0, 1]}
+    ]
+  }
+}

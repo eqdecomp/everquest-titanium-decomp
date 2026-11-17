@@ -1,0 +1,562 @@
+{
+  "function": "do_discipline_guess",
+  "original": "0x0046fc1b",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "unused_guess",
+      "type": "int"
+    },
+    {
+      "name": "name_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "size": "0x2e3",
+  "objects": {
+    "character": {
+      "size": "0xc288",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@vbtable"
+        }
+      ]
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 0
+        }
+      ]
+    },
+    "charinfo": {
+      "size": "0x11a0",
+      "fill": "zero"
+    },
+    "lookup": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "entry": {
+      "size": "0x20c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 77
+        },
+        {
+          "offset": "0x1c0",
+          "u32": 4660
+        },
+        {
+          "offset": "0x208",
+          "u32": "@entry_name"
+        }
+      ]
+    },
+    "entry_name": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "string_table": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "everquest": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "error_text": {
+      "size": "0x40",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@character"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@string_table"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@everquest"
+    },
+    {
+      "addr": "0x00985cc8",
+      "u32": "@lookup"
+    },
+    {
+      "addr": "@charinfo",
+      "offset": "0x119c",
+      "u8": 1
+    },
+    {
+      "addr": "@entry_name",
+      "cstr": "abc"
+    },
+    {
+      "addr": "@error_text",
+      "cstr": "fixture text"
+    }
+  ],
+  "callees": {
+    "0x005ec220": {
+      "name": "GetCharInfo2",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@charinfo"
+    },
+    "0x005dfa00": {
+      "name": "GetString",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": "@error_text"
+    },
+    "0x00498436": {
+      "name": "dsp_chat_one_arg",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ]
+    },
+    "0x005f0a00": {
+      "name": "GetTimerId",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0040cbd6": {
+      "name": "GetTimerEntry",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x004bac08": {
+      "name": "GetTimerExpiration",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x00576e80": {
+      "name": "GetClientTime",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 100
+    },
+    "0x006220e9": {
+      "name": "__itoa",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ignore",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x0046dc2e": {
+      "name": "BuildTimerText",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "int",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x00467441": {
+      "name": "ReplaceTokens",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr",
+        "ignore",
+        "int",
+        "int"
+      ]
+    },
+    "0x004982c6": {
+      "name": "dsp_chat_color",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ]
+    },
+    "0x0062202c": {
+      "name": "__strnicmp",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "u32"
+      ],
+      "ret": 1
+    },
+    "0x004bb39d": {
+      "name": "RemoveTimer",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9",
+    "__strnicmp": "0x0062202c"
+  },
+  "cases": [
+    {
+      "name": "unsupported_state",
+      "args": [
+        0,
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x119c",
+          "u8": 2
+        }
+      ]
+    },
+    {
+      "name": "empty_search_full_loop",
+      "args": [
+        0,
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "@charinfo",
+          "offset": "0x119c",
+          "u8": 16
+        }
+      ]
+    },
+    {
+      "name": "entry_missing",
+      "args": [
+        0,
+        ""
+      ],
+      "callees": {
+        "0x005f0a00": {
+          "name": "GetTimerId",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1,
+            1,
+            0
+          ]
+        },
+        "0x0040cbd6": {
+          "name": "GetTimerEntry",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "expired_at_boundary",
+      "args": [
+        0,
+        ""
+      ],
+      "callees": {
+        "0x005f0a00": {
+          "name": "GetTimerId",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1,
+            1,
+            0
+          ]
+        },
+        "0x0040cbd6": {
+          "name": "GetTimerEntry",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@entry"
+        },
+        "0x004bac08": {
+          "name": "GetTimerExpiration",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 100
+        },
+        "0x00576e80": {
+          "name": "GetClientTime",
+          "conv": "cdecl",
+          "args": [],
+          "ret": 100
+        }
+      }
+    },
+    {
+      "name": "future_under_one_hour",
+      "args": [
+        0,
+        ""
+      ],
+      "callees": {
+        "0x005f0a00": {
+          "name": "GetTimerId",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1,
+            1,
+            0
+          ]
+        },
+        "0x0040cbd6": {
+          "name": "GetTimerEntry",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@entry"
+        },
+        "0x004bac08": {
+          "name": "GetTimerExpiration",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            3700,
+            3700
+          ]
+        },
+        "0x00576e80": {
+          "name": "GetClientTime",
+          "conv": "cdecl",
+          "args": [],
+          "ret": [
+            1000,
+            1000
+          ]
+        }
+      }
+    },
+    {
+      "name": "future_over_one_hour",
+      "args": [
+        0,
+        ""
+      ],
+      "callees": {
+        "0x005f0a00": {
+          "name": "GetTimerId",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1,
+            1,
+            0
+          ]
+        },
+        "0x0040cbd6": {
+          "name": "GetTimerEntry",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@entry"
+        },
+        "0x004bac08": {
+          "name": "GetTimerExpiration",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            10000,
+            10000
+          ]
+        },
+        "0x00576e80": {
+          "name": "GetClientTime",
+          "conv": "cdecl",
+          "args": [],
+          "ret": [
+            1000,
+            1000
+          ]
+        }
+      }
+    },
+    {
+      "name": "search_match",
+      "args": [
+        0,
+        "a"
+      ],
+      "callees": {
+        "0x005f0a00": {
+          "name": "GetTimerId",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1,
+            1
+          ]
+        },
+        "0x0040cbd6": {
+          "name": "GetTimerEntry",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@entry"
+        },
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "search_mismatch",
+      "args": [
+        0,
+        "x"
+      ],
+      "callees": {
+        "0x005f0a00": {
+          "name": "GetTimerId",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1,
+            1,
+            0
+          ]
+        },
+        "0x0040cbd6": {
+          "name": "GetTimerEntry",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@entry"
+        },
+        "0x0062202c": {
+          "name": "__strnicmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr",
+            "u32"
+          ],
+          "ret": 1
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4652059,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          0,
+          1,
+          -1
+        ]
+      },
+      {
+        "choices": [
+          "",
+          "a",
+          "abc",
+          "xyz"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@charinfo",
+        "offset": "0x119c",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          15,
+          16
+        ]
+      }
+    ]
+  }
+}

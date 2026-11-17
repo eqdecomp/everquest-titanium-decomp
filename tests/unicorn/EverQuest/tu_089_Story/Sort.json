@@ -1,0 +1,174 @@
+{
+  "function": "MusicPlayer_guess::Sort_guess",
+  "original": "0x004c7314",
+  "sources": [
+    "src/EverQuest/tu_089_Story.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@counter",
+  "args": [
+    {
+      "name": "mode",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "counter": {
+      "size": "0x100",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": 1},
+        {"offset": "0x18", "u32": 0},
+        {"offset": "0x1c", "u32": 3},
+        {"offset": "0xc", "u32": "@stream"},
+        {"offset": "0x20", "u32": "@entry0"},
+        {"offset": "0x24", "u32": "@entry1"},
+        {"offset": "0x28", "u32": "@entry2"},
+        {"offset": "0x2c", "u32": "@entry3"}
+      ]
+    },
+    "stream": {
+      "size": "0xb0",
+      "fill": "random"
+    },
+    "entry0": {"size": "0x10", "fill": "random"},
+    "entry1": {"size": "0x10", "fill": "random"},
+    "entry2": {"size": "0x10", "fill": "random"},
+    "entry3": {"size": "0x10", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x0060f5eb": {
+      "name": "_rand",
+      "conv": "cdecl",
+      "args": [],
+      "ret": [7, 3, 9, 1]
+    },
+    "0x0060ee40": {
+      "name": "_qsort",
+      "conv": "cdecl",
+      "args": [
+        "u32",
+        "u32",
+        "u32",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x004c5275": {
+      "name": "FUN_004c5275",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x004c70ce": {
+      "name": "FUN_004c70ce",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "_rand": "0x0060f5eb",
+    "_qsort": "0x0060ee40"
+  },
+  "rewrite_data_aliases": {
+    "?CompareOrder_guess@@YAHPBX0@Z": "0x004C5E77",
+    "?CompareRandom_guess@@YAHPBX0@Z": "0x004C5E8A"
+  },
+  "cases": [
+    {
+      "name": "order_found",
+      "args": [0]
+    },
+    {
+      "name": "order_status0_resets",
+      "args": [0],
+      "callees": {"0x004c5275": {"name": "FUN_004c5275", "conv": "thiscall", "args": [], "ret": 0}}
+    },
+    {
+      "name": "order_status2_resets",
+      "args": [0],
+      "callees": {"0x004c5275": {"name": "FUN_004c5275", "conv": "thiscall", "args": [], "ret": 2}}
+    },
+    {
+      "name": "order_empty",
+      "args": [0],
+      "memory": [{"addr": "@counter", "offset": "0x1c", "u32": 0}]
+    },
+    {
+      "name": "order_negative_limit",
+      "args": [0],
+      "memory": [{"addr": "@counter", "offset": "0x1c", "u32": 4294967295}]
+    },
+    {
+      "name": "order_index3_limit2_not_found",
+      "args": [0],
+      "memory": [{"addr": "@counter", "offset": "0x4", "u32": 3}, {"addr": "@counter", "offset": "0x1c", "u32": 2}]
+    },
+    {
+      "name": "order_index0_limit1",
+      "args": [0],
+      "memory": [{"addr": "@counter", "offset": "0x4", "u32": 0}, {"addr": "@counter", "offset": "0x1c", "u32": 1}]
+    },
+    {
+      "name": "random_full",
+      "args": [1],
+      "memory": [{"addr": "@counter", "offset": "0x1c", "u32": 4}]
+    },
+    {
+      "name": "random_limit1_status0",
+      "args": [1],
+      "memory": [{"addr": "@counter", "offset": "0x1c", "u32": 1}],
+      "callees": {"0x004c5275": {"name": "FUN_004c5275", "conv": "thiscall", "args": [], "ret": 0}}
+    },
+    {
+      "name": "random_empty",
+      "args": [1],
+      "memory": [{"addr": "@counter", "offset": "0x1c", "u32": 0}]
+    },
+    {
+      "name": "random_index3_limit2_not_found",
+      "args": [1],
+      "memory": [{"addr": "@counter", "offset": "0x4", "u32": 3}, {"addr": "@counter", "offset": "0x1c", "u32": 2}]
+    },
+    {
+      "name": "random_index3_limit4_status2",
+      "args": [1],
+      "memory": [{"addr": "@counter", "offset": "0x4", "u32": 3}, {"addr": "@counter", "offset": "0x1c", "u32": 4}],
+      "callees": {"0x004c5275": {"name": "FUN_004c5275", "conv": "thiscall", "args": [], "ret": 2}}
+    },
+    {
+      "name": "no_sort_mode2",
+      "args": [2]
+    },
+    {
+      "name": "no_sort_mode_negative",
+      "args": [-1]
+    },
+    {
+      "name": "no_sort_status0_resets",
+      "args": [2],
+      "callees": {"0x004c5275": {"name": "FUN_004c5275", "conv": "thiscall", "args": [], "ret": 0}}
+    },
+    {
+      "name": "no_sort_empty",
+      "args": [2],
+      "memory": [{"addr": "@counter", "offset": "0x1c", "u32": 0}]
+    }
+  ],
+  "_survivors": "L265: doSort is only tested for truth, 2 and 1 are the same; L271: limit > 0 here (the count <= 0 early return ran first), so >= 0 is the same; L278: count already holds limit_guess and the random loop writes only entry objects, never the counter's limit field, so the reassignment is equal",
+  "fuzz": {
+    "seed": 5010196,
+    "count": 200,
+    "args": [
+      {"choices": [0, 1, 2, -1, 3]}
+    ],
+    "memory": [
+      {"addr": "@counter", "offset": "0x1c", "type": "int", "range": [-2, 4]},
+      {"addr": "@counter", "offset": "0x4", "type": "int", "range": [0, 3]}
+    ]
+  }
+}

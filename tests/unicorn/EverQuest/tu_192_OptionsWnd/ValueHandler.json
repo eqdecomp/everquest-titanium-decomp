@@ -1,0 +1,114 @@
+{
+  "function": "Route_guess::MousePageWndNotification_guess",
+  "original": "0x0053ca86",
+  "sources": ["src/EverQuest/tu_192_OptionsWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@route",
+  "args": [
+    {"name": "wnd_guess", "type": "int"},
+    {"name": "msg_guess", "type": "int"},
+    {"name": "info_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "objects": {
+    "route": {
+      "size": "0xAE4",
+      "fill": "random",
+      "init": [
+        {"offset": "0x2B8", "u32": "@inverse"},
+        {"offset": "0x2BC", "u32": "@lookSpring"},
+        {"offset": "0x2C0", "u32": "@mouseActive"},
+        {"offset": "0x2C4", "u32": "@wheelZoom"},
+        {"offset": "0x2C8", "u32": "@rightHanded"},
+        {"offset": "0x2CC", "u32": "0x223344"},
+        {"offset": "0x2D0", "u32": "@slider"}
+      ]
+    },
+    "inverse": {"size": "0x129", "fill": "zero"},
+    "lookSpring": {"size": "0x129", "fill": "zero"},
+    "mouseActive": {"size": "0x129", "fill": "zero"},
+    "wheelZoom": {"size": "0x129", "fill": "zero"},
+    "rightHanded": {"size": "0x129", "fill": "zero"},
+    "ini": {"size": "0x4", "fill": "zero"},
+    "slider": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@sliderVtable"}]
+    },
+    "sliderVtable": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xFC", "u32": "@setText"}]
+    },
+    "setText": {"size": "0x4"}
+  },
+  "memory": [
+    {"addr": "0x00988DF0", "u32": "@ini"}
+  ],
+  "callees": {
+    "0x004ae514": {
+      "name": "IniSettings_SetInt",
+      "conv": "thiscall",
+      "args": ["int", "cstr", "cstr"],
+      "ret": 0
+    },
+    "0x004ae5af": {
+      "name": "IniSettings_SetBool",
+      "conv": "thiscall",
+      "args": ["bool", "cstr", "cstr"],
+      "ret": 0
+    },
+    "0x005738b0": {
+      "name": "FormatString",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr", "int", "int"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "00007000"}]
+    },
+    "0x00571d00": {
+      "name": "Str_Release",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "@setText": {
+      "name": "Slider_SetText",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {"name": "inverse_off", "args": ["@inverse", 1, 0], "memory": [{"addr": "@inverse", "offset": "0x128", "u8": 0}]},
+    {"name": "inverse_on", "args": ["@inverse", 1, 0], "memory": [{"addr": "@inverse", "offset": "0x128", "u8": 1}]},
+    {"name": "look_spring_on", "args": ["@lookSpring", 1, 0], "memory": [{"addr": "@lookSpring", "offset": "0x128", "u8": 1}]},
+    {"name": "mouse_active_off", "args": ["@mouseActive", 1, 0], "memory": [{"addr": "@mouseActive", "offset": "0x128", "u8": 0}]},
+    {"name": "wheel_zoom_on", "args": ["@wheelZoom", 1, 0], "memory": [{"addr": "@wheelZoom", "offset": "0x128", "u8": 1}]},
+    {"name": "right_handed_on", "args": ["@rightHanded", 1, 0], "memory": [{"addr": "@rightHanded", "offset": "0x128", "u8": 1}]},
+    {"name": "unmatched_click", "args": ["0x12345678", 1, 9]},
+    {"name": "other_message", "args": ["@inverse", 2, 9]},
+    {"name": "sensitivity_six", "args": ["0x223344", 14, 6]},
+    {"name": "sensitivity_seven", "args": ["0x223344", 14, 7]},
+    {"name": "sensitivity_negative", "args": ["0x223344", 14, -1]},
+    {"name": "sensitivity_overflow", "args": ["0x223344", 14, 2147483647]},
+    {"name": "sensitivity_null_slider", "args": ["0x223344", 14, 8], "memory": [{"addr": "@route", "offset": "0x2D0", "u32": 0}]},
+    {"name": "sensitivity_wrong_window", "args": ["0x223345", 14, 8]}
+  ],
+  "fuzz": {
+    "seed": 5491334,
+    "count": 120,
+    "args": [
+      {"choices": ["@inverse", "@lookSpring", "@mouseActive", "@wheelZoom", "@rightHanded", "0x223344", "0x12345678"]},
+      {"choices": [0, 1, 2, 14]},
+      {"choices": [-2147483648, -1, 0, 6, 7, 8, 100, 21474836, 2147483647]}
+    ],
+    "memory": [
+      {"addr": "@inverse", "offset": "0x128", "type": "u8", "choices": [0, 1]},
+      {"addr": "@lookSpring", "offset": "0x128", "type": "u8", "choices": [0, 1]},
+      {"addr": "@mouseActive", "offset": "0x128", "type": "u8", "choices": [0, 1]},
+      {"addr": "@wheelZoom", "offset": "0x128", "type": "u8", "choices": [0, 1]},
+      {"addr": "@rightHanded", "offset": "0x128", "type": "u8", "choices": [0, 1]},
+      {"addr": "@route", "offset": "0x2D0", "type": "ptr", "choices": ["@slider", "0x0"]}
+    ]
+  }
+}

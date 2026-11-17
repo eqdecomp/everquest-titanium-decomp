@@ -1,0 +1,745 @@
+{
+  "function": "Weather_guess::FadeStep_guess",
+  "original": "0x004c344b",
+  "sources": [
+    "src/EverQuest/tu_084_Weather.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@window",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "window": {
+      "size": "0x30",
+      "fill": "zero"
+    },
+    "display": {
+      "size": "0x150",
+      "fill": "zero"
+    },
+    "manager": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "state": {
+      "size": "0x110",
+      "fill": "zero"
+    },
+    "offset": {
+      "size": "0x8",
+      "fill": "zero"
+    },
+    "strings": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "message": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "text": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d24",
+      "u32": "@display"
+    },
+    {
+      "addr": "0x00851390",
+      "u32": "@manager"
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@state"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@strings"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@message"
+    },
+    {
+      "addr": "@state",
+      "offset": "0x8",
+      "u32": "@offset"
+    },
+    {
+      "addr": "@offset",
+      "offset": "0x4",
+      "u32": 0
+    },
+    {
+      "addr": "@display",
+      "offset": "0x12c",
+      "f32": 100
+    },
+    {
+      "addr": "@display",
+      "offset": "0x130",
+      "f32": 1000
+    },
+    {
+      "addr": "@display",
+      "offset": "0x134",
+      "u8": 17
+    },
+    {
+      "addr": "@display",
+      "offset": "0x135",
+      "u8": 34
+    },
+    {
+      "addr": "@display",
+      "offset": "0x136",
+      "u8": 51
+    },
+    {
+      "addr": "@display",
+      "offset": "0x148",
+      "u32": 10
+    },
+    {
+      "addr": "@state",
+      "offset": "0x108",
+      "u32": 72
+    },
+    {
+      "addr": "@state",
+      "offset": "0x10c",
+      "u32": 72
+    },
+    {
+      "addr": "@text",
+      "cstr": "fixture message"
+    }
+  ],
+  "callees": {
+    "0x0044affc": {
+      "name": "EmitterSetWind_guess",
+      "conv": "thiscall",
+      "args": [
+        "char"
+      ]
+    },
+    "0x0044b014": {
+      "name": "FUN_0044b014",
+      "conv": "thiscall",
+      "args": [
+        "char"
+      ]
+    },
+    "0x005dfa00": {
+      "name": "FUN_005dfa00",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "@text"
+    },
+    "0x00498436": {
+      "name": "FUN_00498436",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ]
+    },
+    "0x0044104c": {
+      "name": "SetFogState_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "float",
+        "float",
+        "int",
+        "int",
+        "int"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "count guard",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x14",
+          "u32": 0
+        },
+        {
+          "addr": "@window",
+          "offset": "0x1c",
+          "u32": 11
+        },
+        {
+          "addr": "@display",
+          "offset": "0x148",
+          "u32": 10
+        }
+      ]
+    },
+    {
+      "name": "zero flag animation",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x14",
+          "u32": 0
+        },
+        {
+          "addr": "@window",
+          "offset": "0x1c",
+          "u32": 5
+        },
+        {
+          "addr": "@window",
+          "offset": "0x24",
+          "f32": 1.5
+        },
+        {
+          "addr": "@window",
+          "offset": "0x28",
+          "f32": 2.25
+        },
+        {
+          "addr": "@window",
+          "offset": "0x6",
+          "u8": 0
+        },
+        {
+          "addr": "@display",
+          "offset": "0x12c",
+          "f32": 99
+        },
+        {
+          "addr": "@display",
+          "offset": "0x130",
+          "f32": 999
+        }
+      ]
+    },
+    {
+      "name": "delta update and clamp",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x14",
+          "u32": 0
+        },
+        {
+          "addr": "@window",
+          "offset": "0x1c",
+          "u32": 5
+        },
+        {
+          "addr": "@window",
+          "offset": "0x6",
+          "u8": 1
+        },
+        {
+          "addr": "@display",
+          "offset": "0x12c",
+          "f32": 196
+        },
+        {
+          "addr": "@display",
+          "offset": "0x130",
+          "f32": 1936
+        }
+      ]
+    },
+    {
+      "name": "delta below lower bounds",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x14",
+          "u32": 0
+        },
+        {
+          "addr": "@window",
+          "offset": "0x1c",
+          "u32": 5
+        },
+        {
+          "addr": "@window",
+          "offset": "0x6",
+          "u8": 1
+        },
+        {
+          "addr": "@display",
+          "offset": "0x12c",
+          "f32": 99
+        },
+        {
+          "addr": "@display",
+          "offset": "0x130",
+          "f32": 999
+        }
+      ]
+    },
+    {
+      "name": "existing delta lower bounds",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x14",
+          "u32": 1
+        },
+        {
+          "addr": "@window",
+          "offset": "0x1c",
+          "u32": 5
+        },
+        {
+          "addr": "@window",
+          "offset": "0x6",
+          "u8": 1
+        },
+        {
+          "addr": "@window",
+          "offset": "0x24",
+          "f32": 5
+        },
+        {
+          "addr": "@window",
+          "offset": "0x28",
+          "f32": 5
+        },
+        {
+          "addr": "@display",
+          "offset": "0x12c",
+          "f32": 101
+        },
+        {
+          "addr": "@display",
+          "offset": "0x130",
+          "f32": 1001
+        }
+      ]
+    },
+    {
+      "name": "exact lower bounds",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x14",
+          "u32": 1
+        },
+        {
+          "addr": "@window",
+          "offset": "0x1c",
+          "u32": 5
+        },
+        {
+          "addr": "@window",
+          "offset": "0x6",
+          "u8": 1
+        },
+        {
+          "addr": "@window",
+          "offset": "0x24",
+          "f32": 0
+        },
+        {
+          "addr": "@window",
+          "offset": "0x28",
+          "f32": 0
+        },
+        {
+          "addr": "@display",
+          "offset": "0x12c",
+          "f32": 100
+        },
+        {
+          "addr": "@display",
+          "offset": "0x130",
+          "f32": 1000
+        }
+      ]
+    },
+    {
+      "name": "equality boundaries with negative deltas",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x14",
+          "u32": 1
+        },
+        {
+          "addr": "@window",
+          "offset": "0x1c",
+          "u32": 5
+        },
+        {
+          "addr": "@window",
+          "offset": "0x6",
+          "u8": 1
+        },
+        {
+          "addr": "@window",
+          "offset": "0x24",
+          "f32": -5
+        },
+        {
+          "addr": "@window",
+          "offset": "0x28",
+          "f32": -10
+        },
+        {
+          "addr": "@display",
+          "offset": "0x12c",
+          "f32": 100
+        },
+        {
+          "addr": "@display",
+          "offset": "0x130",
+          "f32": 1000
+        }
+      ]
+    },
+    {
+      "name": "turn off zero mode",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x00",
+          "u32": 0
+        },
+        {
+          "addr": "@window",
+          "offset": "0x14",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x6",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "turn off one mode",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x00",
+          "u32": 1
+        },
+        {
+          "addr": "@window",
+          "offset": "0x14",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x6",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "turn off unknown mode",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x00",
+          "u32": 2
+        },
+        {
+          "addr": "@window",
+          "offset": "0x14",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x6",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "turn on without state",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x00",
+          "u32": 0
+        },
+        {
+          "addr": "@window",
+          "offset": "0x14",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x6",
+          "u8": 1
+        },
+        {
+          "addr": "0x00905d00",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "turn on with state 0x48",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x00",
+          "u32": 0
+        },
+        {
+          "addr": "@window",
+          "offset": "0x14",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x6",
+          "u8": 1
+        },
+        {
+          "addr": "@state",
+          "offset": "0x108",
+          "u32": 72
+        }
+      ]
+    },
+    {
+      "name": "turn on with other state",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x00",
+          "u32": 0
+        },
+        {
+          "addr": "@window",
+          "offset": "0x14",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x6",
+          "u8": 1
+        },
+        {
+          "addr": "@state",
+          "offset": "0x108",
+          "u32": 73
+        }
+      ]
+    },
+    {
+      "name": "turn on one mode",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x00",
+          "u32": 1
+        },
+        {
+          "addr": "@window",
+          "offset": "0x14",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x6",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "turn on unknown mode",
+      "args": [],
+      "memory": [
+        {
+          "addr": "@window",
+          "offset": "0x00",
+          "u32": 2
+        },
+        {
+          "addr": "@window",
+          "offset": "0x14",
+          "u32": 256
+        },
+        {
+          "addr": "@window",
+          "offset": "0x6",
+          "u8": 1
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4994123,
+    "count": 120,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@window",
+        "offset": "0x00",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@window",
+        "offset": "0x06",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@window",
+        "offset": "0x14",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          4,
+          255,
+          256,
+          260
+        ]
+      },
+      {
+        "addr": "@window",
+        "offset": "0x1c",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          5,
+          10,
+          11
+        ]
+      },
+      {
+        "addr": "@window",
+        "offset": "0x24",
+        "type": "float",
+        "choices": [
+          0.0,
+          1.5,
+          5.0,
+          20.25
+        ]
+      },
+      {
+        "addr": "@window",
+        "offset": "0x28",
+        "type": "float",
+        "choices": [
+          0.0,
+          2.25,
+          5.0,
+          20.5
+        ]
+      },
+      {
+        "addr": "@display",
+        "offset": "0x12c",
+        "type": "float",
+        "choices": [
+          0.0,
+          99.0,
+          100.0,
+          100.5,
+          101.0,
+          196.0
+        ]
+      },
+      {
+        "addr": "@display",
+        "offset": "0x130",
+        "type": "float",
+        "choices": [
+          0.0,
+          999.0,
+          1000.0,
+          1000.5,
+          1001.0,
+          1936.0
+        ]
+      },
+      {
+        "addr": "@display",
+        "offset": "0x148",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          5,
+          10,
+          11
+        ]
+      },
+      {
+        "addr": "0x00905d00",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@state"
+        ]
+      },
+      {
+        "addr": "@offset",
+        "offset": "0x4",
+        "type": "int",
+        "choices": [
+          0,
+          4
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0x108",
+        "type": "u32",
+        "choices": [
+          0,
+          72,
+          73
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0x10c",
+        "type": "u32",
+        "choices": [
+          0,
+          72,
+          73
+        ]
+      }
+    ]
+  }
+}

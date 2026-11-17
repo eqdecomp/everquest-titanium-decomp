@@ -1,0 +1,99 @@
+{
+  "function": "AAWndConfirmCallback_guess::OnTrainConfirm_guess",
+  "original": "0x004d0a7a",
+  "sources": [
+    "src/EverQuest/tu_098_AAWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@book+0x15c",
+  "args": [
+    {
+      "name": "event_guess",
+      "type": "int"
+    },
+    {
+      "name": "flags_guess",
+      "type": "u8"
+    },
+    {
+      "name": "data_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "book": {
+      "size": "0x1384",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004d0a0e": {
+      "name": "CAAWndView_guess::SendTrainAbility_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "flag_zero",
+      "args": [
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "flag_bit_one",
+      "args": [
+        7,
+        1,
+        9
+      ]
+    },
+    {
+      "name": "flag_bit_three",
+      "args": [
+        -5,
+        4,
+        12
+      ]
+    },
+    {
+      "name": "unselected_bit",
+      "args": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "name": "both_selected_bits",
+      "args": [
+        0,
+        5,
+        0
+      ]
+    },
+    {
+      "name": "byte_max",
+      "args": [
+        -1,
+        255,
+        0
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5048954,
+    "count": 100,
+    "args": [
+      {},
+      {},
+      {}
+    ],
+    "memory": []
+  }
+}

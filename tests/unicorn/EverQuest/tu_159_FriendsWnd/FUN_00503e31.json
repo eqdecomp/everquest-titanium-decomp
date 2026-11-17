@@ -1,0 +1,155 @@
+{
+  "function": "CFriendsWndView_guess::UpdateButtons_guess",
+  "original": "0x00503e31",
+  "sources": [
+    "src/EverQuest/tu_159_FriendsWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@gaugerowhost",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "gaugerowhost": {
+      "size": "0x188",
+      "fill": "random",
+      "init": [
+        { "offset": "0x164", "u32": "@flag164" },
+        { "offset": "0x168", "u32": "@flag168" },
+        { "offset": "0x170", "u32": "@rows170" },
+        { "offset": "0x17c", "u32": "@flag17c" },
+        { "offset": "0x184", "u32": "@rows184" }
+      ]
+    },
+    "flag164": {
+      "size": "0x5e",
+      "fill": "random"
+    },
+    "flag168": {
+      "size": "0x5e",
+      "fill": "random"
+    },
+    "flag17c": {
+      "size": "0x5e",
+      "fill": "random"
+    },
+    "rows170": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "rows184": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0047c3af": {
+      "name": "FUN_0047c3af",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x0059bb50": {
+      "name": "FUN_0059bb50",
+      "conv": "thiscall",
+      "args": [
+        "mem:4"
+      ],
+      "ret": 0,
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "07000000", "call": 0 },
+        { "arg": 0, "offset": 0, "hex": "fdffffff", "call": 1 }
+      ]
+    },
+    "0x00406e7e": {
+      "name": "FUN_00406e7e",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "all_fields_positive_and_negative",
+      "args": []
+    },
+    {
+      "name": "all_null",
+      "args": [],
+      "memory": [
+        { "addr": "@gaugerowhost", "offset": "0x164", "u32": 0 },
+        { "addr": "@gaugerowhost", "offset": "0x168", "u32": 0 },
+        { "addr": "@gaugerowhost", "offset": "0x170", "u32": 0 },
+        { "addr": "@gaugerowhost", "offset": "0x17c", "u32": 0 },
+        { "addr": "@gaugerowhost", "offset": "0x184", "u32": 0 }
+      ]
+    },
+    {
+      "name": "rows_without_flags",
+      "args": [],
+      "memory": [
+        { "addr": "@gaugerowhost", "offset": "0x164", "u32": 0 },
+        { "addr": "@gaugerowhost", "offset": "0x168", "u32": 0 },
+        { "addr": "@gaugerowhost", "offset": "0x17c", "u32": 0 }
+      ]
+    },
+    {
+      "name": "zero_boundary",
+      "args": [],
+      "callees": {
+        "0x0059bb50": {
+          "name": "FUN_0059bb50",
+          "conv": "thiscall",
+          "args": ["mem:4"],
+          "ret": 0,
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "00000000", "call": 0 },
+            { "arg": 0, "offset": 0, "hex": "00000000", "call": 1 }
+          ]
+        }
+      }
+    },
+    {
+      "name": "one_boundary",
+      "args": [],
+      "callees": {
+        "0x0059bb50": {
+          "name": "FUN_0059bb50",
+          "conv": "thiscall",
+          "args": ["mem:4"],
+          "ret": 0,
+          "writes": [
+            { "arg": 0, "offset": 0, "hex": "01000000", "call": 0 },
+            { "arg": 0, "offset": 0, "hex": "01000000", "call": 1 }
+          ]
+        }
+      }
+    },
+    {
+      "name": "first_only",
+      "args": [],
+      "memory": [
+        { "addr": "@gaugerowhost", "offset": "0x184", "u32": 0 }
+      ]
+    },
+    {
+      "name": "second_only",
+      "args": [],
+      "memory": [
+        { "addr": "@gaugerowhost", "offset": "0x170", "u32": 0 }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5258801,
+    "count": 100,
+    "args": [],
+    "memory": [
+      { "addr": "@gaugerowhost", "offset": "0x164", "type": "u32", "choices": [0, "@flag164"] },
+      { "addr": "@gaugerowhost", "offset": "0x168", "type": "u32", "choices": [0, "@flag168"] },
+      { "addr": "@gaugerowhost", "offset": "0x170", "type": "u32", "choices": [0, "@rows170"] },
+      { "addr": "@gaugerowhost", "offset": "0x17c", "type": "u32", "choices": [0, "@flag17c"] },
+      { "addr": "@gaugerowhost", "offset": "0x184", "type": "u32", "choices": [0, "@rows184"] }
+    ]
+  }
+}

@@ -1,0 +1,992 @@
+{
+  "function": "CharacterMagicSystem_guess::ReapplyBuffEffects_guess",
+  "original": "0x0041377f",
+  "sources": [
+    "src/EverQuest/tu_012_CharacterMagicSystem.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@charactermagicsystem",
+  "args": [
+    {
+      "name": "mode_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "charactermagicsystem": {
+      "size": "0x138ac",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@offset_holder"
+        },
+        {
+          "offset": "0x8",
+          "u32": "@state"
+        },
+        {
+          "offset": "0xc",
+          "u8": 0
+        }
+      ]
+    },
+    "offset_holder": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 0
+        }
+      ]
+    },
+    "state": {
+      "size": "0x288",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@state_data"
+        },
+        {
+          "offset": "0x244",
+          "u8": 0
+        }
+      ]
+    },
+    "state_data": {
+      "size": "0x158",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x154",
+          "u8": 0
+        }
+      ]
+    },
+    "entry": {
+      "size": "0x14",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u8": 1
+        },
+        {
+          "offset": "0x1",
+          "u8": 5
+        },
+        {
+          "offset": "0x4",
+          "u32": 123
+        }
+      ]
+    },
+    "entry2": {
+      "size": "0x14",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u8": 1
+        },
+        {
+          "offset": "0x1",
+          "u8": 7
+        },
+        {
+          "offset": "0x4",
+          "u32": 456
+        }
+      ]
+    },
+    "lookup": {
+      "size": "0x4c",
+      "fill": "random"
+    },
+    "spell": {
+      "size": "0x270",
+      "fill": "random"
+    },
+    "spell2": {
+      "size": "0x270",
+      "fill": "random"
+    },
+    "result": {
+      "size": "0x11b0",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x11a4",
+          "u32": 50
+        },
+        {
+          "offset": "0x1118",
+          "u32": 11
+        },
+        {
+          "offset": "0x1134",
+          "u32": 22
+        }
+      ]
+    },
+    "session": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00923798",
+      "u8": 0
+    },
+    {
+      "addr": "0x00985cc8",
+      "u32": "@lookup"
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@session"
+    }
+  ],
+  "callees": {
+    "0x00410fdb": {
+      "name": "ApplyMovementModifier_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x0040d933": {
+      "name": "GetMaxBuffs_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0040e7ac": {
+      "name": "FUN_0040e7ac",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@entry"
+    },
+    "0x0044d0d0": {
+      "name": "FUN_0044d0d0",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0040cbd6": {
+      "name": "GetSpell_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@spell"
+    },
+    "0x0044e77b": {
+      "name": "FindAffectSlot_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0044e79f": {
+      "name": "IsIllusion_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005ec220": {
+      "name": "FUN_005ec220",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@result"
+    },
+    "0x0040f339": {
+      "name": "CalcAffectChange_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "u8",
+        "int",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x0040ed8c": {
+      "name": "FUN_0040ed8c",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "int",
+        "ptr",
+        "int"
+      ]
+    },
+    "0x0040db99": {
+      "name": "FUN_0040db99",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00440f51": {
+      "name": "FUN_00440f51",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x004106a3": {
+      "name": "FUN_004106a3",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "bool",
+        "int",
+        "int"
+      ],
+      "ret": -1
+    },
+    "0x00411f2f": {
+      "name": "RemovePCAffect_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "null state",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@charactermagicsystem",
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "state disabled",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x244",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "missing state data",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x1a8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "global guard",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00923798",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "empty count",
+      "args": [
+        0
+      ],
+      "callees": {
+        "0x0040d933": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        },
+        "0x004106a3": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "bool",
+            "int",
+            "int"
+          ],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "inactive entry",
+      "args": [
+        0
+      ],
+      "callees": {
+        "0x0040d933": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            1
+          ]
+        },
+        "0x0040e7ac": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@entry"
+        },
+        "0x004106a3": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "bool",
+            "int",
+            "int"
+          ],
+          "ret": -1
+        }
+      },
+      "memory": [
+        {
+          "addr": "@entry",
+          "offset": "0x0",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "invalid id",
+      "args": [
+        0
+      ],
+      "callees": {
+        "0x0040d933": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            1
+          ]
+        },
+        "0x0040e7ac": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@entry"
+        },
+        "0x0044d0d0": {
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x004106a3": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "bool",
+            "int",
+            "int"
+          ],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "missing spell data",
+      "args": [
+        0
+      ],
+      "callees": {
+        "0x0040d933": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            1
+          ]
+        },
+        "0x0040e7ac": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@entry"
+        },
+        "0x0044d0d0": {
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x0040cbd6": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x004106a3": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "bool",
+            "int",
+            "int"
+          ],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "mode 1 removes filtered entry",
+      "args": [
+        1
+      ],
+      "callees": {
+        "0x0040d933": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            1
+          ]
+        },
+        "0x0040e7ac": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@entry"
+        },
+        "0x0044d0d0": {
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x0040cbd6": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@spell"
+        },
+        "0x0044e77b": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x0044e79f": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        },
+        "0x004106a3": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "bool",
+            "int",
+            "int"
+          ],
+          "ret": -1
+        },
+        "0x00411f2f": {
+          "conv": "thiscall",
+          "args": [
+            "ptr"
+          ]
+        }
+      }
+    },
+    {
+      "name": "mode 1 activates and processes effects",
+      "args": [
+        1
+      ],
+      "callees": {
+        "0x0040d933": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            1
+          ]
+        },
+        "0x0040e7ac": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@entry"
+        },
+        "0x0044d0d0": {
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x0040cbd6": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@spell"
+        },
+        "0x0044e77b": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1,
+            2,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "0x0044e79f": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x005ec220": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": "@result"
+        },
+        "0x0040f339": {
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "u8",
+            "int",
+            "ptr"
+          ],
+          "ret": [
+            3,
+            4
+          ]
+        },
+        "0x0040ed8c": {
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int",
+            "int",
+            "ptr",
+            "int"
+          ]
+        },
+        "0x004106a3": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "bool",
+            "int",
+            "int"
+          ],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "mode 1 rejects all filter ids",
+      "args": [
+        1
+      ],
+      "callees": {
+        "0x0040d933": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            1
+          ]
+        },
+        "0x0040e7ac": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@entry"
+        },
+        "0x0044d0d0": {
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x0040cbd6": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@spell"
+        },
+        "0x0044e77b": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "0x004106a3": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "bool",
+            "int",
+            "int"
+          ],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "mode 2 and general effects",
+      "args": [
+        2
+      ],
+      "callees": {
+        "0x0040d933": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            2,
+            2,
+            2
+          ]
+        },
+        "0x0040e7ac": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@entry",
+            "@entry2"
+          ]
+        },
+        "0x0044d0d0": {
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1,
+            1
+          ]
+        },
+        "0x0040cbd6": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            "@spell",
+            "@spell2"
+          ]
+        },
+        "0x0044e77b": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            1,
+            1,
+            2,
+            1,
+            1
+          ]
+        },
+        "0x0044e79f": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x005ec220": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": "@result"
+        },
+        "0x0040f339": {
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "u8",
+            "int",
+            "ptr"
+          ],
+          "ret": [
+            5,
+            6,
+            7
+          ]
+        },
+        "0x0040ed8c": {
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int",
+            "int",
+            "ptr",
+            "int"
+          ]
+        },
+        "0x0040db99": {
+          "conv": "thiscall",
+          "args": []
+        },
+        "0x00440f51": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ]
+        },
+        "0x004106a3": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "bool",
+            "int",
+            "int"
+          ],
+          "ret": -1
+        }
+      },
+      "memory": [
+        {
+          "addr": "@entry2",
+          "offset": "0x0",
+          "u8": 1
+        },
+        {
+          "addr": "@entry2",
+          "offset": "0x1",
+          "u8": 9
+        },
+        {
+          "addr": "@entry2",
+          "offset": "0x4",
+          "u32": 456
+        }
+      ]
+    },
+    {
+      "name": "mode zero effects and second final call",
+      "args": [
+        0
+      ],
+      "callees": {
+        "0x0040d933": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            1,
+            1
+          ]
+        },
+        "0x0040e7ac": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@entry"
+        },
+        "0x0044d0d0": {
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x0040cbd6": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": "@spell"
+        },
+        "0x0044e77b": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1,
+            2,
+            0,
+            1,
+            1,
+            2,
+            1,
+            1
+          ]
+        },
+        "0x005ec220": {
+          "conv": "thiscall",
+          "args": [],
+          "ret": "@result"
+        },
+        "0x0040f339": {
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "u8",
+            "int",
+            "ptr"
+          ],
+          "ret": [
+            4,
+            5,
+            6
+          ]
+        },
+        "0x0040db99": {
+          "conv": "thiscall",
+          "args": []
+        },
+        "0x00440f51": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ]
+        },
+        "0x004106a3": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "bool",
+            "int",
+            "int"
+          ],
+          "ret": [
+            0,
+            -1
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4274047,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@state",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0x1a8",
+        "type": "ptr",
+        "choices": [
+          "@state_data",
+          "0x0"
+        ]
+      },
+      {
+        "addr": "@entry",
+        "offset": "0x0",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00923798",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "_todo": []
+}

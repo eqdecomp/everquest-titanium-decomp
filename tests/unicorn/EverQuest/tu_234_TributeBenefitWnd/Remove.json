@@ -1,0 +1,1337 @@
+{
+  "function": "CTrainWndView_guess::FillRow_guess",
+  "original": "0x0056af2c",
+  "sources": [
+    "src/EverQuest/tu_234_TributeBenefitWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@sortmanager",
+  "args": [
+    {
+      "name": "index_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "sortmanager": {
+      "size": "0x800",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x18c",
+          "u32": "@listwnd"
+        }
+      ]
+    },
+    "listwnd": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "charroot": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@vbtable"
+        }
+      ]
+    },
+    "vbtable": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 4294967288
+        }
+      ]
+    },
+    "charinfo": {
+      "size": "0x1200",
+      "fill": "zero"
+    },
+    "indexed": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 17
+        }
+      ]
+    },
+    "dispatch": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "indexeddispatch": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "itemname": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "stringrep": {
+      "size": "0x40",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@sortmanager",
+      "offset": "0x190",
+      "u32": 3
+    },
+    {
+      "addr": "@sortmanager",
+      "offset": "0x19c",
+      "u32": 105
+    },
+    {
+      "addr": "@sortmanager",
+      "offset": "0x7c4",
+      "f32": 1.25
+    },
+    {
+      "addr": "@charroot",
+      "offset": "0x10",
+      "u8": 0
+    },
+    {
+      "addr": "@charroot",
+      "offset": "0x11",
+      "u8": 0
+    },
+    {
+      "addr": "@charroot",
+      "offset": "0x12",
+      "u8": 0
+    },
+    {
+      "addr": "@charroot",
+      "offset": "0x13",
+      "u8": 0
+    },
+    {
+      "addr": "@charroot",
+      "offset": "0x14",
+      "u8": 0
+    },
+    {
+      "addr": "@charroot",
+      "offset": "0x15",
+      "u8": 100
+    },
+    {
+      "addr": "@charroot",
+      "offset": "0x16",
+      "u8": 200
+    },
+    {
+      "addr": "@charinfo",
+      "offset": "0x119c",
+      "u8": 1
+    },
+    {
+      "addr": "@charinfo",
+      "offset": "0x11a4",
+      "u32": 10
+    },
+    {
+      "addr": "@itemname",
+      "cstr": "Skill"
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@charroot"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@dispatch"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@indexeddispatch"
+    },
+    {
+      "addr": "0x00851200",
+      "size": "0x190",
+      "fill": "zero"
+    },
+    {
+      "addr": "0x0085120c",
+      "u32": "@indexed"
+    },
+    {
+      "addr": "0x0085138c",
+      "u32": "@indexed"
+    },
+    {
+      "addr": "0x00796220",
+      "u32": 10
+    },
+    {
+      "addr": "0x007961c8",
+      "size": "0x28",
+      "fill": "zero"
+    },
+    {
+      "addr": "0x007961c8",
+      "offset": "0x0",
+      "u32": 0
+    },
+    {
+      "addr": "0x007961c8",
+      "offset": "0x4",
+      "u32": 10
+    },
+    {
+      "addr": "0x007961c8",
+      "offset": "0x8",
+      "u32": 20
+    },
+    {
+      "addr": "0x007961c8",
+      "offset": "0xc",
+      "u32": 30
+    },
+    {
+      "addr": "0x007961c8",
+      "offset": "0x10",
+      "u32": 40
+    },
+    {
+      "addr": "0x007961c8",
+      "offset": "0x14",
+      "u32": 50
+    },
+    {
+      "addr": "0x007961c8",
+      "offset": "0x18",
+      "u32": 60
+    },
+    {
+      "addr": "0x007961c8",
+      "offset": "0x1c",
+      "u32": 70
+    },
+    {
+      "addr": "0x007961c8",
+      "offset": "0x20",
+      "u32": 80
+    },
+    {
+      "addr": "0x007961c8",
+      "offset": "0x24",
+      "from_image": "0x007961EC",
+      "image_size": 4
+    },
+    {
+      "addr": "0x007961f4",
+      "size": "0x2c",
+      "fill": "zero"
+    },
+    {
+      "addr": "0x007961f4",
+      "offset": "0x0",
+      "u32": 1000
+    },
+    {
+      "addr": "0x007961f4",
+      "offset": "0x4",
+      "u32": 1001
+    },
+    {
+      "addr": "0x007961f4",
+      "offset": "0x8",
+      "u32": 1002
+    },
+    {
+      "addr": "0x007961f4",
+      "offset": "0xc",
+      "u32": 1003
+    },
+    {
+      "addr": "0x007961f4",
+      "offset": "0x10",
+      "u32": 1004
+    },
+    {
+      "addr": "0x007961f4",
+      "offset": "0x14",
+      "u32": 1005
+    },
+    {
+      "addr": "0x007961f4",
+      "offset": "0x18",
+      "u32": 1006
+    },
+    {
+      "addr": "0x007961f4",
+      "offset": "0x1c",
+      "u32": 1007
+    },
+    {
+      "addr": "0x007961f4",
+      "offset": "0x20",
+      "u32": 1008
+    },
+    {
+      "addr": "0x007961f4",
+      "offset": "0x24",
+      "u32": 1009
+    },
+    {
+      "addr": "0x007961f4",
+      "offset": "0x28",
+      "u32": 1010
+    },
+    {
+      "addr": "0x0099db00",
+      "cstr": "17"
+    },
+    {
+      "addr": "0x006410a8",
+      "cstr": ""
+    },
+    {
+      "addr": "0x0063f53c",
+      "from_image": "0x0063F53C",
+      "image_size": 3
+    },
+    {
+      "addr": "0x0063f53f",
+      "cstr": "|"
+    },
+    {
+      "addr": "0x0064da6c",
+      "cstr": "0"
+    },
+    {
+      "addr": "0x0079ac74",
+      "u32": 1
+    }
+  ],
+  "callees": {
+    "0x0056a9d3": {
+      "name": "lookup_guess",
+      "conv": "stdcall",
+      "args": [
+        "int"
+      ],
+      "ret": "@itemname"
+    },
+    "0x00571fc0": {
+      "name": "cxstr_assign_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "keep",
+      "passthrough": true
+    },
+    "0x0056ae31": {
+      "name": "key_guess",
+      "conv": "stdcall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0059b360": {
+      "name": "set_item_text_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "mem:4"
+      ]
+    },
+    "0x005ec220": {
+      "name": "get_char_info2_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@charinfo"
+    },
+    "0x0044a335": {
+      "name": "has_language_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": [
+        1,
+        1
+      ]
+    },
+    "0x0044a2e4": {
+      "name": "get_language_value_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": [
+        20,
+        30
+      ]
+    },
+    "0x006220e9": {
+      "name": "__itoa",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ptr",
+        "int"
+      ],
+      "ret": "0x0099db00"
+    },
+    "0x0046da4a": {
+      "name": "format_display_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "cstr",
+        "ptr",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x005738b0": {
+      "name": "format_number_guess",
+      "conv": "cdecl",
+      "args": [
+        "mem:4",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "get_string_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "@itemname"
+    },
+    "0x00571d00": {
+      "name": "cxstr_free_rep_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": "keep",
+      "passthrough": true
+    },
+    "0x00571e00": {
+      "name": "cxstr_construct_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "keep",
+      "passthrough": true
+    },
+    "0x004bdad1": {
+      "name": "calculate_guess",
+      "conv": "thiscall",
+      "args": [
+        "bool",
+        "float",
+        "int"
+      ],
+      "ret": 7
+    },
+    "0x0040e722": {
+      "name": "lookup_table_get_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00492595": {
+      "name": "indexed_dispatch_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@itemname"
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": "@stringrep"
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "null-list",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x18c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "zero-key-high-language-value",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 3
+        },
+        {
+          "addr": "@charinfo",
+          "offset": "0x11a4",
+          "u32": 10
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0040e722": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0044a335": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1
+          ]
+        },
+        "0x0044a2e4": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            20,
+            30
+          ]
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 12345
+        }
+      }
+    },
+    {
+      "name": "zero-key-known-low-value",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 3
+        },
+        {
+          "addr": "@charinfo",
+          "offset": "0x11a4",
+          "u32": 10
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0040e722": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0044a335": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1,
+            1
+          ]
+        },
+        "0x0044a2e4": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1
+          ]
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "zero-key-language-value-equals-maximum",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 3
+        },
+        {
+          "addr": "@charinfo",
+          "offset": "0x11a4",
+          "u32": 10
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0040e722": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0044a335": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1,
+            1
+          ]
+        },
+        "0x0044a2e4": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            10
+          ]
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "zero-key-no-language",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 3
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0040e722": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0044a335": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            0,
+            0
+          ]
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "zero-key-fallback-has-language",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 3
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0040e722": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0044a335": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            0,
+            1
+          ]
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "zero-key-fallback-empty",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 3
+        },
+        {
+          "addr": "@charinfo",
+          "offset": "0x11a4",
+          "u32": 10
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0040e722": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x0044a335": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1,
+            0
+          ]
+        },
+        "0x0044a2e4": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": [
+            1
+          ]
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 12
+        }
+      }
+    },
+    {
+      "name": "positive-key-known-language",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 3
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 50
+        },
+        "0x0040e722": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 50
+        },
+        "0x0044a335": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 27
+        }
+      }
+    },
+    {
+      "name": "positive-key-unknown-language",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 3
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 50
+        },
+        "0x0040e722": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 50
+        },
+        "0x0044a335": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "language-limit-equality",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 3
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 10
+        },
+        "0x0040e722": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 10
+        },
+        "0x0044a335": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "language-limit-next-value",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 3
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 11
+        },
+        "0x0040e722": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 11
+        },
+        "0x0044a335": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 12
+        }
+      }
+    },
+    {
+      "name": "negative-key-low-id",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 99
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": -1
+        },
+        "0x0040e722": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": -1
+        },
+        "0x0044a335": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 1234
+        }
+      }
+    },
+    {
+      "name": "low-id-level-100-no-special-index",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 99
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 100
+        },
+        "0x0040e722": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 100
+        },
+        "0x0044a335": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "high-id-zero-key",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 100
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "high-id-special-level-100",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 105
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 100
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 27
+        }
+      }
+    },
+    {
+      "name": "high-id-no-language-limit",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 106
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 200
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "empty-language-table",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 105
+        },
+        {
+          "addr": "0x00796220",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 100
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "digit-loop-truncation",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@sortmanager",
+          "offset": "0x190",
+          "u32": 105
+        }
+      ],
+      "callees": {
+        "0x0056ae31": {
+          "conv": "stdcall",
+          "args": [
+            "int"
+          ],
+          "ret": 100
+        },
+        "0x004bdad1": {
+          "conv": "thiscall",
+          "args": [
+            "bool",
+            "float",
+            "int"
+          ],
+          "ret": 12345
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5680940,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@sortmanager",
+        "offset": "0x190",
+        "type": "int",
+        "choices": [
+          3,
+          99,
+          100,
+          104,
+          105,
+          106
+        ]
+      },
+      {
+        "addr": "@charinfo",
+        "offset": "0x119c",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          9
+        ]
+      },
+      {
+        "addr": "@charinfo",
+        "offset": "0x11a4",
+        "type": "int",
+        "choices": [
+          0,
+          10,
+          30
+        ]
+      },
+      {
+        "addr": "0x00796220",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          10
+        ]
+      }
+    ]
+  }
+}

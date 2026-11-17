@@ -1,0 +1,150 @@
+{
+  "function": "SetInventoryItemValue98_guess",
+  "original": "0x0045a74b",
+  "sources": [
+    "src/EverQuest/tu_042_EQHandleMsg.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "argument_guess",
+      "type": "u32"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "root": {
+      "size": "0xC360",
+      "fill": "random",
+      "init": [
+        {"offset": "0x8", "u32": "@offs"}
+      ]
+    },
+    "offs": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": 0}
+      ]
+    },
+    "V": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "S": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "arg": {
+      "size": "0xC",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": 7},
+        {"offset": "0x4", "u32": 0},
+        {"offset": "0x8", "u32": 42}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@root"}
+  ],
+  "callees": {
+    "0x0040cc50": {
+      "name": "IndexedOwner45A74B_Get",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": ["@V", 0]
+    },
+    "0x005eccc0": {
+      "name": "Value45A74B_Check",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005e0f30": {
+      "name": "Value45A74B_GetId",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 7
+    },
+    "0x005ec630": {
+      "name": "Value45A74B_GetAt",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@S"
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": ["@arg"]
+    },
+    {
+      "name": "no_owner_value",
+      "args": ["@arg"],
+      "callees": {
+        "0x0040cc50": {"name": "IndexedOwner45A74B_Get", "conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    },
+    {
+      "name": "outer_check_fails",
+      "args": ["@arg"],
+      "callees": {
+        "0x005eccc0": {"name": "Value45A74B_Check", "conv": "thiscall", "args": [], "ret": 1}
+      }
+    },
+    {
+      "name": "full_index_loop",
+      "args": ["@arg"],
+      "callees": {
+        "0x0040cc50": {"name": "IndexedOwner45A74B_Get", "conv": "thiscall", "args": ["int"], "ret": [0, "@V"]}
+      }
+    },
+    {
+      "name": "inner_null",
+      "args": ["@arg"],
+      "callees": {
+        "0x005ec630": {"name": "Value45A74B_GetAt", "conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    },
+    {
+      "name": "inner_check_fails",
+      "args": ["@arg"],
+      "callees": {
+        "0x005eccc0": {"name": "Value45A74B_Check", "conv": "thiscall", "args": [], "ret": [0, 1]}
+      }
+    },
+    {
+      "name": "outer_id_miss_inner_hit",
+      "args": ["@arg"],
+      "callees": {
+        "0x005e0f30": {"name": "Value45A74B_GetId", "conv": "thiscall", "args": [], "ret": [3, 7]}
+      }
+    },
+    {
+      "name": "outer_id_hit_inner_miss",
+      "args": ["@arg"],
+      "callees": {
+        "0x005e0f30": {"name": "Value45A74B_GetId", "conv": "thiscall", "args": [], "ret": [7, 3]}
+      }
+    },
+    {
+      "name": "all_ids_miss",
+      "args": ["@arg"],
+      "callees": {
+        "0x005e0f30": {"name": "Value45A74B_GetId", "conv": "thiscall", "args": [], "ret": 3}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4564811,
+    "count": 120,
+    "args": [
+      {"choices": ["@arg"]}
+    ],
+    "memory": [
+      {"addr": "@arg", "offset": "0x0", "type": "int", "choices": [7, 3, 0]},
+      {"addr": "@arg", "offset": "0x8", "type": "int", "range": [-8, 64]}
+    ]
+  }
+}

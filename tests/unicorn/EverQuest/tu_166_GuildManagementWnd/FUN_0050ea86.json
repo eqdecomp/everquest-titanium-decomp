@@ -1,0 +1,125 @@
+{
+  "function": "GuildMgmtWnd_guess::UpdateGuildName_guess",
+  "original": "0x0050ea86",
+  "sources": [
+    "src/EverQuest/tu_166_GuildManagementWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "bool",
+  "objects": {
+    "owner": {
+      "size": "0x410",
+      "fill": "random",
+      "init": [
+        {"offset": "0x164", "u32": "@receiver"}
+      ]
+    },
+    "receiver": {
+      "size": "0x20",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@vtbl"}
+      ]
+    },
+    "vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xfc", "u32": "@fn"}
+      ]
+    },
+    "fn": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "sel": {
+      "size": "0x300",
+      "fill": "zero"
+    },
+    "name": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "0x00905CE4", "u32": "@sel"},
+    {"addr": "@sel", "offset": "0x288", "u32": 4294967295},
+    {"addr": "@name", "cstr": "Hello"}
+  ],
+  "callees": {
+    "0x0060d5a8": {
+      "name": "EH_prolog_guess",
+      "conv": "cdecl",
+      "args": [],
+      "passthrough": true
+    },
+    "0x0040ac55": {
+      "name": "FUN_0040ac55",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@name"
+    },
+    "0x00571e00": {
+      "name": "CXStr_ctor_guess",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": "this"
+    },
+    "0x00571d00": {
+      "name": "CXStr_dtor_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "@fn": {
+      "name": "Slot63_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "no_selection_uses_empty_string",
+      "args": []
+    },
+    {
+      "name": "selection_looks_up_name",
+      "args": [],
+      "memory": [
+        {"addr": "@sel", "offset": "0x288", "u32": 3}
+      ]
+    },
+    {
+      "name": "no_receiver",
+      "args": [],
+      "objects": {
+        "owner": {"size": "0x410", "fill": "random", "init": [{"offset": "0x164", "u32": 0}]}
+      }
+    },
+    {
+      "name": "no_selection_global",
+      "args": [],
+      "memory": [
+        {"addr": "0x00905CE4", "u32": 0}
+      ]
+    },
+    {
+      "name": "zero_selection_index",
+      "args": [],
+      "memory": [
+        {"addr": "@sel", "offset": "0x288", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5302918,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@sel", "offset": "0x288", "type": "int", "choices": [4294967295, 0, 1, 7, 255]}
+    ]
+  }
+}

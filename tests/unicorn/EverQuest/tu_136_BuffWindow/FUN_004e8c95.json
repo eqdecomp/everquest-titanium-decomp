@@ -1,0 +1,151 @@
+{
+  "function": "CBuffWindowView_guess::PostDraw_guess",
+  "original": "0x004e8c95",
+  "_survivors": "L443: CopyTo (native 0x4d9160) overwrites every field of boundsB before any read, so the zero store is unobservable; L445: same, field_0 of boundsB; L446: CopyTo overwrites every field of boundsA before the read, so the zero store is unobservable; L472: the harness stack starts zeroed, so x = 0 cannot be seen (on a real stack x would be garbage)",
+  "sources": [
+    "src/EverQuest/tu_136_BuffWindow.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@wnd",
+  "args": [],
+  "ret": "int",
+  "objects": {
+    "wnd": {
+      "size": "0x250",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@vt_wnd"}
+      ]
+    },
+    "vt_wnd": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xe4", "u32": "@gq_wnd"}
+      ]
+    },
+    "vt_child": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xe4", "u32": "@gq_child"}
+      ]
+    },
+    "c0": {"size": "0x100", "fill": "zero", "init": [{"offset": "0x0", "u32": "@vt_child"}]},
+    "c1": {"size": "0x100", "fill": "zero", "init": [{"offset": "0x0", "u32": "@vt_child"}]},
+    "c2": {"size": "0x100", "fill": "zero", "init": [{"offset": "0x0", "u32": "@vt_child"}]},
+    "c3": {"size": "0x100", "fill": "zero", "init": [{"offset": "0x0", "u32": "@vt_child"}]},
+    "c4": {"size": "0x100", "fill": "zero", "init": [{"offset": "0x0", "u32": "@vt_child"}]},
+    "c5": {"size": "0x100", "fill": "zero", "init": [{"offset": "0x0", "u32": "@vt_child"}]},
+    "gq_wnd": {"size": "0x4"},
+    "gq_child": {"size": "0x4"},
+    "qa": {"size": "0x10", "fill": "random"},
+    "qb": {"size": "0x10", "fill": "random"},
+    "state": {"size": "0x10", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0099D3EC", "u32": "@state"},
+    {"addr": "@wnd", "offset": "0x5c", "u8": 1},
+    {"addr": "@wnd", "offset": "0x62", "u8": 1},
+    {"addr": "@wnd", "offset": "0x1cc", "u32": "@c0"},
+    {"addr": "@wnd", "offset": "0x1d0", "u32": "@c1"},
+    {"addr": "@wnd", "offset": "0x1d4", "u32": "@c2"},
+    {"addr": "@wnd", "offset": "0x1d8", "u32": "@c3"},
+    {"addr": "@wnd", "offset": "0x1dc", "u32": "@c4"},
+    {"addr": "@wnd", "offset": "0x1e0", "u32": "@c5"},
+    {"addr": "@wnd", "offset": "0x248", "u32": 3},
+    {"addr": "@qa", "offset": "0x0", "u32": 0},
+    {"addr": "@qa", "offset": "0x4", "u32": 0},
+    {"addr": "@qa", "offset": "0x8", "u32": 100},
+    {"addr": "@qa", "offset": "0xc", "u32": 100},
+    {"addr": "@qb", "offset": "0x0", "u32": 0},
+    {"addr": "@qb", "offset": "0x4", "u32": 0},
+    {"addr": "@qb", "offset": "0x8", "u32": 9},
+    {"addr": "@qb", "offset": "0xc", "u32": 9}
+  ],
+  "callees": {
+    "0x005adf60": {
+      "name": "FUN_005adf60",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 4
+    },
+    "@gq_wnd": {
+      "name": "GetQuad_wnd",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "@qa"
+    },
+    "@gq_child": {
+      "name": "GetQuad_child",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "@qb"
+    },
+    "0x005a02f0": {
+      "name": "FUN_005a02f0",
+      "conv": "thiscall",
+      "args": ["mem:8"],
+      "ret": 0
+    },
+    "0x004d9160": {
+      "name": "FUN_004d9160",
+      "conv": "thiscall",
+      "args": ["ptr", "ptr"],
+      "passthrough": true
+    },
+    "0x004d911a": {
+      "name": "FUN_004d911a",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {"name": "typical: 10x10 grid, three children"},
+    {"name": "state mask 8 proceeds",
+     "callees": {"0x005adf60": {"name": "FUN_005adf60", "conv": "thiscall", "args": [], "ret": 8}}},
+    {"name": "state mask clear returns 0",
+     "callees": {"0x005adf60": {"name": "FUN_005adf60", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "field 0x62 zero returns 0",
+     "memory": [{"addr": "@wnd", "offset": "0x62", "u8": 0}]},
+    {"name": "field 0x5c zero returns 0",
+     "memory": [{"addr": "@wnd", "offset": "0x5c", "u8": 0}]},
+    {"name": "first child null skips grid",
+     "memory": [{"addr": "@wnd", "offset": "0x1cc", "u32": 0}]},
+    {"name": "second child null is skipped",
+     "memory": [{"addr": "@wnd", "offset": "0x1d0", "u32": 0}]},
+    {"name": "no children (count 0)",
+     "memory": [{"addr": "@wnd", "offset": "0x248", "u32": 0}]},
+    {"name": "count 1 breaks after first child",
+     "memory": [{"addr": "@wnd", "offset": "0x248", "u32": 1}]},
+    {"name": "rows zero (A height negative)",
+     "memory": [{"addr": "@qa", "offset": "0x4", "u32": 50}, {"addr": "@qa", "offset": "0xc", "u32": 0}]},
+    {"name": "zero step (child too narrow for columns)",
+     "memory": [{"addr": "@qb", "offset": "0x8", "u32": 0}]},
+    {"name": "zero columns divides by zero",
+     "memory": [{"addr": "@qa", "offset": "0x8", "u32": 5}]},
+    {"name": "grid 2x2 smaller than six children",
+     "memory": [{"addr": "@qa", "offset": "0x8", "u32": 20}, {"addr": "@qa", "offset": "0xc", "u32": 20},
+                {"addr": "@qb", "offset": "0x8", "u32": 9}, {"addr": "@qb", "offset": "0xc", "u32": 9},
+                {"addr": "@wnd", "offset": "0x248", "u32": 6}]}
+  ],
+  "fuzz": {
+    "seed": 5147797,
+    "count": 150,
+    "args": [],
+    "memory": [
+      {"addr": "@wnd", "offset": "0x62", "type": "u8", "choices": [0, 1]},
+      {"addr": "@wnd", "offset": "0x5c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@wnd", "offset": "0x248", "type": "int", "range": [0, 6]},
+      {"addr": "@qa", "offset": "0x0", "type": "int", "range": [0, 20]},
+      {"addr": "@qa", "offset": "0x4", "type": "int", "range": [0, 20]},
+      {"addr": "@qa", "offset": "0x8", "type": "int", "range": [0, 120]},
+      {"addr": "@qa", "offset": "0xc", "type": "int", "range": [0, 120]},
+      {"addr": "@qb", "offset": "0x0", "type": "int", "range": [0, 10]},
+      {"addr": "@qb", "offset": "0x4", "type": "int", "range": [0, 10]},
+      {"addr": "@qb", "offset": "0x8", "type": "int", "range": [0, 30]},
+      {"addr": "@qb", "offset": "0xc", "type": "int", "range": [0, 30]}
+    ]
+  }
+}

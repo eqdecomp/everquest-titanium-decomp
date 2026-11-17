@@ -1,0 +1,90 @@
+{
+  "function": "CBuffWindowDtorView_guess::~CBuffWindowDtorView_guess",
+  "original": "0x004e8a3c",
+  "sources": [
+    "src/EverQuest/tu_136_BuffWindow.cpp"
+  ],
+  "_survivors": "L419: field_248 > 0 vs >= 0 is equivalent: a count of 0 runs the loop zero times either way",
+  "conv": "thiscall",
+  "this": "@thing",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "thing": {
+      "size": "0x250",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x124", "u32": "@texset"},
+        {"offset": "0x168", "u32": "@gem0"},
+        {"offset": "0x16c", "u32": "@gem1"},
+        {"offset": "0x170", "u32": "@gem2"},
+        {"offset": "0x174", "u32": "@gem3"},
+        {"offset": "0x1cc", "u32": "@wnd0"},
+        {"offset": "0x1d0", "u32": "@wnd1"},
+        {"offset": "0x1d4", "u32": "@wnd2"},
+        {"offset": "0x1d8", "u32": "@wnd3"},
+        {"offset": "0x248", "u32": 4}
+      ]
+    },
+    "texset": {"size": "0x64", "fill": "zero"},
+    "gem0": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "gem1": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "gem2": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "gem3": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "u32": "@vtbl"}]},
+    "vtbl": {"size": "0x10", "fill": "zero", "init": [{"offset": "0", "u32": "@fn_slot0"}]},
+    "fn_slot0": {"size": "0x1"},
+    "wnd0": {"size": "0x170", "fill": "random"},
+    "wnd1": {"size": "0x170", "fill": "random"},
+    "wnd2": {"size": "0x170", "fill": "random"},
+    "wnd3": {"size": "0x170", "fill": "random"}
+  },
+  "memory": [],
+  "callees": {
+    "0x005a3100": {
+      "name": "CSidlScreenWnd::~CSidlScreenWnd",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_slot0": {
+      "name": "SpellGemSink::scalar_deleting_dtor",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {"name": "typical four live", "args": []},
+    {"name": "no texset", "args": [],
+     "memory": [{"addr": "@thing", "offset": "0x124", "u32": 0}]},
+    {"name": "count zero", "args": [],
+     "memory": [{"addr": "@thing", "offset": "0x248", "u32": 0}]},
+    {"name": "count negative", "args": [],
+     "memory": [{"addr": "@thing", "offset": "0x248", "u32": -1}]},
+    {"name": "count one", "args": [],
+     "memory": [{"addr": "@thing", "offset": "0x248", "u32": 1}]},
+    {"name": "all wnd null", "args": [],
+     "memory": [{"addr": "@thing", "offset": "0x1cc", "u32": 0},
+                {"addr": "@thing", "offset": "0x1d0", "u32": 0},
+                {"addr": "@thing", "offset": "0x1d4", "u32": 0},
+                {"addr": "@thing", "offset": "0x1d8", "u32": 0}]},
+    {"name": "mixed wnd null", "args": [],
+     "memory": [{"addr": "@thing", "offset": "0x1d0", "u32": 0},
+                {"addr": "@thing", "offset": "0x1d8", "u32": 0}]},
+    {"name": "null gem with live wnd", "args": [],
+     "memory": [{"addr": "@thing", "offset": "0x16c", "u32": 0}]}
+  ],
+  "fuzz": {
+    "seed": 5147196,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@thing", "offset": "0x124", "type": "int", "choices": [0, "@texset"]},
+      {"addr": "@thing", "offset": "0x248", "type": "int", "choices": [-1, 0, 1, 2, 3, 4, 6]},
+      {"addr": "@thing", "offset": "0x1cc", "type": "int", "choices": [0, "@wnd0"]},
+      {"addr": "@thing", "offset": "0x1d0", "type": "int", "choices": [0, "@wnd1"]},
+      {"addr": "@thing", "offset": "0x1d4", "type": "int", "choices": [0, "@wnd2"]},
+      {"addr": "@thing", "offset": "0x1d8", "type": "int", "choices": [0, "@wnd3"]}
+    ]
+  }
+}

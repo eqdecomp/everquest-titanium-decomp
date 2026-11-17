@@ -1,0 +1,271 @@
+{
+  "function": "EQSwitch_guess::UseSwitch_guess",
+  "original": "0x004906c5",
+  "sources": ["src/EverQuest/tu_060_EQSwitch.cpp"],
+  "conv": "thiscall",
+  "this": "@record",
+  "args": [
+    {"name": "string_id_guess", "type": "u32"},
+    {"name": "value_guess", "type": "int"},
+    {"name": "amount_guess", "type": "int"},
+    {"name": "range_guess", "type": "float"}
+  ],
+  "ret": "void",
+  "objects": {
+    "record": {"size": "0x25c", "fill": "zero"},
+    "lookup": {"size": "0x25c", "fill": "zero"},
+    "alternate": {"size": "0x25c", "fill": "zero"},
+    "collection": {"size": "0x18", "fill": "zero"},
+    "entry": {"size": "0x25c", "fill": "zero"},
+    "manager": {"size": "0x4", "fill": "zero"},
+    "mode_state": {"size": "0xb58", "fill": "zero"},
+    "actor": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@actor_vtable"}]
+    },
+    "actor_vtable": {
+      "size": "0x3c",
+      "fill": "zero",
+      "init": [{"offset": "0x38", "u32": "@actor_height"}]
+    },
+    "actor_height": {"size": "0x1", "fill": "zero"},
+    "sink": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@record", "offset": "0x22", "u8": 57},
+    {"addr": "@record", "offset": "0x23", "u8": 0},
+    {"addr": "@record", "offset": "0x4d", "u8": 0},
+    {"addr": "@record", "offset": "0x4e", "u8": 0},
+    {"addr": "@record", "offset": "0x50", "u8": 0},
+    {"addr": "@record", "offset": "0x62", "u16": 65535},
+    {"addr": "@record", "offset": "0x64", "u16": 0},
+    {"addr": "@record", "offset": "0x66", "u16": 0},
+    {"addr": "@record", "offset": "0x68", "hex": "ffffffffffff"},
+    {"addr": "@record", "offset": "0xc0", "u8": 1},
+    {"addr": "@record", "offset": "0xc2", "u8": 1},
+    {"addr": "@lookup", "offset": "0x244", "u8": 1},
+    {"addr": "@alternate", "offset": "0x244", "u8": 1},
+    {"addr": "@collection", "offset": "0", "u32": 0},
+    {"addr": "@mode_state", "offset": "0xb54", "u32": 1},
+    {"addr": "0x00905ce4", "u32": "@lookup"},
+    {"addr": "0x00905cf8", "u32": "@lookup"},
+    {"addr": "0x00905d24", "u32": "@manager"},
+    {"addr": "0x00988df0", "u32": "@mode_state"},
+    {"addr": "0x00923884", "u32": 0},
+    {"addr": "0x00923798", "u8": 0},
+    {"addr": "0x00903e84", "u32": "@collection"},
+    {"addr": "0x00905ca0", "hex": "00000000"},
+    {"addr": "0x006410bc", "from_image": "0x006410bc", "image_size": 4},
+    {"addr": "0x00640038", "from_image": "0x00640038", "image_size": 4},
+    {"addr": "0x00644368", "from_image": "0x00644368", "image_size": 4}
+  ],
+  "callees": {
+    "0x0048fbc8": {"name": "GetSwitchDamage_guess", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x00401b28": {"name": "FUN_00401b28", "conv": "cdecl", "args": ["u32"], "ret": 0},
+    "0x00490117": {"name": "IsTrapWithoutSkill_guess", "conv": "thiscall", "args": ["int"], "passthrough": true},
+    "0x0048f790": {"name": "DistanceTo_guess", "conv": "thiscall", "args": ["int"], "passthrough": true},
+    "0x00439c41": {
+      "name": "TrueDistance_guess",
+      "conv": "thiscall",
+      "args": ["float", "float", "float", "float", "float", "float", "float"],
+      "ret_float": 0.0
+    },
+    "0x004649b1": {"name": "token_string_to_client_guess", "conv": "cdecl", "args": ["ptr", "int", "int", "int"]},
+    "0x004395e2": {"name": "Manager_guess::PlaySoundAtLocation_guess", "conv": "thiscall", "args": ["float", "float", "float", "int"]},
+    "0x0046d655": {"name": "FUN_0046d655", "conv": "cdecl", "args": [], "ret": 0},
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "mem:16", "int", "int"]
+    },
+    "0x0049002c": {
+      "name": "SwitchWasOpened_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "ptr", "ignore"],
+      "passthrough": true
+    },
+    "0x0048fc2e": {
+      "name": "FUN_0048fc2e",
+      "conv": "thiscall",
+      "args": ["char", "int", "int"],
+      "passthrough": true
+    },
+    "0x00490341": {"name": "IsCombinationSet_guess", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x00490547": {
+      "name": "FUN_00490547",
+      "conv": "thiscall",
+      "args": ["u32", "char"],
+      "passthrough": true
+    },
+    "0x00435b55": {"name": "FUN_00435b55", "conv": "stdcall", "args": ["int"], "passthrough": true},
+    "0x00610884": {"name": "FUN_00610884", "conv": "cdecl", "args": ["double"], "passthrough": true},
+    "@actor_height": {"name": "actor_height", "conv": "thiscall", "args": [], "ret_float": 10.0}
+  },
+  "cases": [
+    {"name": "kind 0x36 exits", "args": [1, 1, 1, 0.0], "memory": [{"addr": "@record", "offset": "0x22", "u8": 54}]},
+    {"name": "kind 0x37 exits", "args": [1, 1, 1, 0.0], "memory": [{"addr": "@record", "offset": "0x22", "u8": 55}]},
+    {"name": "kind 0x38 exits", "args": [1, 1, 1, 0.0], "memory": [{"addr": "@record", "offset": "0x22", "u8": 56}]},
+    {"name": "field c0 off", "args": [1, 1, 1, 0.0], "memory": [{"addr": "@record", "offset": "0xc0", "u8": 0}]},
+    {"name": "field c2 off", "args": [1, 1, 1, 0.0], "memory": [{"addr": "@record", "offset": "0xc2", "u8": 0}]},
+    {"name": "zero-count state 2 exits", "args": [1, 1, 1, 0.0], "memory": [{"addr": "@record", "offset": "0x23", "u8": 2}]},
+    {"name": "zero-count state 3 exits", "args": [1, 1, 1, 0.0], "memory": [{"addr": "@record", "offset": "0x23", "u8": 3}]},
+    {"name": "state 1 with field 66 -2 exits", "args": [1, 1, 1, 0.0], "memory": [{"addr": "@record", "offset": "0x23", "u8": 1}, {"addr": "@record", "offset": "0x66", "u16": 65534}]},
+    {"name": "kind 0x69 skips zero-count state gate", "args": [0, 1, 1, 0.0], "memory": [{"addr": "@record", "offset": "0x22", "u8": 105}, {"addr": "@record", "offset": "0x23", "u8": 2}]},
+    {"name": "positive-count kind rejects amount zero", "args": [1, 1, 0, 0.0], "memory": [{"addr": "@record", "offset": "0x22", "u8": 115}], "callees": {"0x00401b28": {"ret": "@lookup"}}},
+    {"name": "amount clamps at 0xfe", "args": [0, 1, 255, 0.0]},
+    {
+      "name": "clamped amount decides state change",
+      "args": [0, 2, 255, 0.0],
+      "memory": [
+        {"addr": "@record", "offset": "0x22", "u8": 0},
+        {"addr": "@record", "offset": "0x50", "u8": 253},
+        {"addr": "@record", "offset": "0x62", "u16": 1},
+        {"addr": "@record", "offset": "0x66", "u16": 0}
+      ]
+    },
+    {"name": "null lookup still changes state", "args": [0, 1, 1, 0.0]},
+    {
+      "name": "alternate lookup replaces selected pointer and id",
+      "args": [7, 7, 5, 0.0],
+      "memory": [
+        {"addr": "0x00905cf8", "u32": "@alternate"},
+        {"addr": "@alternate", "offset": "0x258", "u32": 99}
+      ],
+      "callees": {"0x00401b28": {"ret": "@lookup"}}
+    },
+    {
+      "name": "lookup with distance under threshold",
+      "args": [1, 1, 5, 0.0],
+      "memory": [{"addr": "@lookup", "offset": "0x244", "u8": 0}],
+      "callees": {
+        "0x00401b28": {"ret": "@lookup"},
+        "0x00439c41": {"name": "FUN_00439c41", "conv": "thiscall", "args": ["float", "float", "float", "float", "float", "float", "float"], "ret_float": 10.0}
+      }
+    },
+    {
+      "name": "far lookup with no sink returns",
+      "args": [1, 1, 5, 0.0],
+      "memory": [{"addr": "@lookup", "offset": "0x244", "u8": 0}],
+      "callees": {
+        "0x00401b28": {"ret": "@lookup"},
+        "0x00439c41": {"name": "FUN_00439c41", "conv": "thiscall", "args": ["float", "float", "float", "float", "float", "float", "float"], "ret_float": 100.0}
+      }
+    },
+    {
+      "name": "far lookup with sink notifies",
+      "args": [1, 1, 5, 0.0],
+      "memory": [
+        {"addr": "@lookup", "offset": "0x244", "u8": 0},
+        {"addr": "@lookup", "offset": "0x218", "u32": "@sink"}
+      ],
+      "callees": {
+        "0x00401b28": {"ret": "@lookup"},
+        "0x00439c41": {"name": "FUN_00439c41", "conv": "thiscall", "args": ["float", "float", "float", "float", "float", "float", "float"], "ret_float": 100.0}
+      }
+    },
+    {
+      "name": "actor height virtual call",
+      "args": [1, 1, 5, 0.0],
+      "memory": [
+        {"addr": "@record", "offset": "0x90", "u32": "@actor"},
+        {"addr": "@lookup", "offset": "0x244", "u8": 0},
+        {"addr": "@lookup", "offset": "0x218", "u32": "@sink"}
+      ],
+      "callees": {
+        "0x00401b28": {"ret": "@lookup"},
+        "0x00439c41": {"name": "FUN_00439c41", "conv": "thiscall", "args": ["float", "float", "float", "float", "float", "float", "float"], "ret_float": 30.0}
+      }
+    },
+    {
+      "name": "state flag and nonzero id return",
+      "args": [7, 1, 5, 0.0],
+      "memory": [{"addr": "@record", "offset": "0x4e", "u8": 1}],
+      "callees": {"0x00401b28": {"ret": "@lookup"}}
+    },
+    {
+      "name": "unequal pair skips loop",
+      "args": [0, 1, 5, 0.0],
+      "memory": [
+        {"addr": "@record", "offset": "0x4e", "u8": 1},
+        {"addr": "@record", "offset": "0x56", "hex": "0000000000"},
+        {"addr": "@record", "offset": "0x5b", "hex": "0100000000"}
+      ]
+    },
+    {
+      "name": "matching entry toggles then recursive early return",
+      "args": [0, 1, 5, 0.0],
+      "memory": [
+        {"addr": "@record", "offset": "0x4e", "u8": 1},
+        {"addr": "@record", "offset": "0x56", "hex": "0000000000"},
+        {"addr": "@record", "offset": "0x5b", "hex": "0000000000"},
+        {"addr": "@record", "offset": "0x68", "hex": "01ffffffff"},
+        {"addr": "@record", "offset": "0x51", "hex": "0000000000"},
+        {"addr": "@collection", "offset": "0", "u32": 1},
+        {"addr": "@collection", "offset": "4", "u32": "@entry"},
+        {"addr": "@entry", "offset": "0x01", "u8": 1},
+        {"addr": "@entry", "offset": "0x22", "u8": 54},
+        {"addr": "@entry", "offset": "0x4f", "u8": 0}
+      ]
+    },
+    {
+      "name": "flagged entry and nonzero state index toggles",
+      "args": [0, 1, 5, 0.0],
+      "memory": [
+        {"addr": "@record", "offset": "0x4e", "u8": 1},
+        {"addr": "@record", "offset": "0x56", "hex": "0000000000"},
+        {"addr": "@record", "offset": "0x5b", "hex": "0000000000"},
+        {"addr": "@record", "offset": "0x68", "hex": "01ffffffff"},
+        {"addr": "@record", "offset": "0x51", "hex": "0100000000"},
+        {"addr": "@collection", "offset": "0", "u32": 1},
+        {"addr": "@collection", "offset": "4", "u32": "@entry"},
+        {"addr": "@entry", "offset": "0x01", "u8": 1},
+        {"addr": "@entry", "offset": "0x22", "u8": 54},
+        {"addr": "@entry", "offset": "0x4d", "u8": 1},
+        {"addr": "@entry", "offset": "0x4f", "u8": 0}
+      ]
+    },
+    {
+      "name": "mode off sends 16 byte message",
+      "args": [123, 7, 255, 0.0],
+      "memory": [
+        {"addr": "@mode_state", "offset": "0xb54", "u32": 0},
+        {"addr": "0x00923884", "u32": 0},
+        {"addr": "0x00923798", "u8": 0}
+      ]
+    },
+    {
+      "name": "mode off and global flag suppresses message",
+      "args": [123, 7, 42, 0.0],
+      "memory": [
+        {"addr": "@mode_state", "offset": "0xb54", "u32": 0},
+        {"addr": "0x00923884", "u32": 0},
+        {"addr": "0x00923798", "u8": 1}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4785861,
+    "count": 100,
+    "args": [
+      {"choices": [0, 1, 7, 123]},
+      {"choices": [-1, 0, 1, 7]},
+      {"choices": [-1, 0, 1, 254, 255, 256]},
+      {"choices": [-1.0, 0.0, 1.0, 25.0, 100.0]}
+    ],
+    "memory": [
+      {"addr": "@record", "offset": "0x22", "type": "u8", "choices": [0, 54, 55, 56, 57, 105, 106, 107, 115, 130, 152]},
+      {"addr": "@record", "offset": "0x23", "type": "u8", "choices": [0, 1, 2, 3]},
+      {"addr": "@record", "offset": "0x4d", "type": "u8", "choices": [0, 1]},
+      {"addr": "@record", "offset": "0x4e", "type": "u8", "choices": [0, 1]},
+      {"addr": "@record", "offset": "0x62", "type": "u16", "choices": [65535, 1, 7]},
+      {"addr": "@record", "offset": "0x66", "type": "u16", "choices": [65534, 65535, 0, 1]},
+      {"addr": "@record", "offset": "0xc0", "type": "u8", "choices": [0, 1]},
+      {"addr": "@record", "offset": "0xc2", "type": "u8", "choices": [0, 1]},
+      {"addr": "@mode_state", "offset": "0xb54", "type": "int", "choices": [0, 1]},
+      {"addr": "0x00923884", "type": "int", "choices": [0, 1]},
+      {"addr": "0x00923798", "type": "u8", "choices": [0, 1]}
+    ]
+  },
+  "_survivors": "L1063: for amount == 0xfe, the mutated condition only adds a same-value store to the stack argument slot, which the harness excludes from observable writes."
+}

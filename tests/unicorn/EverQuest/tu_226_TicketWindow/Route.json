@@ -1,0 +1,419 @@
+{
+  "function": "TicketCommentWnd_guess::WndNotification_guess",
+  "original": "0x005610b1",
+  "sources": [
+    "src/EverQuest/tu_226_TicketWindow.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@routeowner",
+  "args": [
+    {
+      "name": "text_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "first_guess",
+      "type": "int"
+    },
+    {
+      "name": "second_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "size": "0xa9",
+  "objects": {
+    "routeowner": {
+      "size": "0x168",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@route_vtbl"
+        },
+        {
+          "offset": "0x15c",
+          "u32": "@other"
+        },
+        {
+          "offset": "0x160",
+          "u32": "@other2"
+        },
+        {
+          "offset": "0x164",
+          "u32": "@source"
+        }
+      ]
+    },
+    "text": {
+      "size": "0xc",
+      "fill": "random"
+    },
+    "other": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "other2": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "source": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@source_vtbl"
+        }
+      ]
+    },
+    "netowner": {
+      "size": "0x5c8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x5c4",
+          "u32": "@context"
+        }
+      ]
+    },
+    "context": {
+      "size": "0x120",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x11c",
+          "u32": 0
+        }
+      ]
+    },
+    "fn_slot34": {
+      "size": "0x4"
+    },
+    "fn_invoke": {
+      "size": "0x4"
+    },
+    "fn_slot63": {
+      "size": "0x4"
+    },
+    "route_vtbl": {
+      "size": "0x8c",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x88",
+          "u32": "@fn_slot34"
+        }
+      ]
+    },
+    "source_vtbl": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xfc",
+          "u32": "@fn_slot63"
+        },
+        {
+          "offset": "0x130",
+          "u32": "@fn_invoke"
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x009928a8",
+      "u32": "@netowner"
+    }
+  ],
+  "callees": {
+    "0x0056137c": {
+      "name": "AddComment_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x00571e00": {
+      "name": "TextTemp_ctor_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "keep"
+    },
+    "0x00571d00": {
+      "name": "TextTemp_release_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": "keep"
+    },
+    "@fn_slot34": {
+      "name": "RouteOwner_slot34_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_invoke": {
+      "name": "RouteSource_invoke_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00 00 00 00"
+        }
+      ]
+    },
+    "@fn_slot63": {
+      "name": "RouteSource_slot63_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:4"
+      ],
+      "ret": "keep"
+    }
+  },
+  "cases": [
+    {
+      "name": "matches field 0x160",
+      "args": [
+        "@text",
+        1,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@routeowner",
+          "offset": "0x160",
+          "u32": "@text"
+        },
+        {
+          "addr": "@routeowner",
+          "offset": "0x15c",
+          "u32": "@other"
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "matches neither field",
+      "args": [
+        "@text",
+        0,
+        0
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "matches field 0x15c with no network owner",
+      "args": [
+        "@text",
+        1,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@routeowner",
+          "offset": "0x15c",
+          "u32": "@text"
+        },
+        {
+          "addr": "@routeowner",
+          "offset": "0x160",
+          "u32": "@other2"
+        },
+        {
+          "addr": "0x009928a8",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "matches field 0x15c with no source",
+      "args": [
+        "@text",
+        1,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@routeowner",
+          "offset": "0x15c",
+          "u32": "@text"
+        },
+        {
+          "addr": "@routeowner",
+          "offset": "0x160",
+          "u32": "@other2"
+        },
+        {
+          "addr": "@routeowner",
+          "offset": "0x164",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "routes nonnull text",
+      "args": [
+        "@text",
+        1,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@routeowner",
+          "offset": "0x15c",
+          "u32": "@text"
+        },
+        {
+          "addr": "@routeowner",
+          "offset": "0x160",
+          "u32": "@other2"
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "routes a nonempty Invoke result",
+      "args": [
+        "@text",
+        1,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@routeowner",
+          "offset": "0x15c",
+          "u32": "@text"
+        },
+        {
+          "addr": "@routeowner",
+          "offset": "0x160",
+          "u32": "@other2"
+        }
+      ],
+      "callees": {
+        "@fn_invoke": {
+          "name": "RouteSource_invoke_guess",
+          "conv": "thiscall",
+          "args": [
+            "ignore"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "00 01 00 60"
+            }
+          ]
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "routes null text",
+      "args": [
+        0,
+        1,
+        1
+      ],
+      "memory": [
+        {
+          "addr": "@routeowner",
+          "offset": "0x15c",
+          "u32": 0
+        },
+        {
+          "addr": "@routeowner",
+          "offset": "0x160",
+          "u32": "@other2"
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5640369,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@text",
+          "@other",
+          "@other2",
+          0
+        ]
+      },
+      {},
+      {}
+    ],
+    "memory": [
+      {
+        "addr": "@routeowner",
+        "offset": "0x15c",
+        "type": "ptr",
+        "choices": [
+          "@text",
+          "@other",
+          "@other2",
+          0
+        ]
+      },
+      {
+        "addr": "@routeowner",
+        "offset": "0x160",
+        "type": "ptr",
+        "choices": [
+          "@text",
+          "@other",
+          "@other2",
+          0
+        ]
+      },
+      {
+        "addr": "@routeowner",
+        "offset": "0x164",
+        "type": "ptr",
+        "choices": [
+          "@source",
+          0
+        ]
+      },
+      {
+        "addr": "0x009928a8",
+        "type": "ptr",
+        "choices": [
+          "@netowner",
+          0
+        ]
+      }
+    ]
+  }
+}

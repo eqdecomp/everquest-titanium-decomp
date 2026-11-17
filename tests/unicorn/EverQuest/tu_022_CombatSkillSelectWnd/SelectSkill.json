@@ -1,0 +1,128 @@
+{
+  "function": "SkillNotifyWnd_guess::ShowAbilityDescription_guess",
+  "original": "0x0042d54f",
+  "sources": [
+    "src/EverQuest/tu_022_CombatSkillSelectWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@skillnotifywnd",
+  "args": [
+    {
+      "name": "skill_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "_survivors": "L917: the harness starts the stack zeroed, so the struct's flags slot already holds 0 and deleting the store cannot be seen",
+  "objects": {
+    "skillnotifywnd": {
+      "size": "0x180",
+      "fill": "random"
+    },
+    "receiver": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "first": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "second": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "@skillnotifywnd", "offset": "0x16c", "u32": "@receiver"},
+    {"addr": "0x00905d00", "u32": "@first"},
+    {"addr": "0x00985cc8", "u32": "@second"},
+    {"addr": "0x0079ac74", "u32": 305419896}
+  ],
+  "callees": {
+    "0x0042d3b0": {
+      "name": "LookupValue",
+      "conv": "stdcall",
+      "args": ["int"],
+      "ret": [3]
+    },
+    "0x005f0a00": {
+      "name": "FirstManager::GetValue",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": [3]
+    },
+    "0x0040cbd6": {
+      "name": "SecondManager::Lookup",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": [7]
+    },
+    "0x00475855": {
+      "name": "FormatText",
+      "conv": "cdecl",
+      "args": ["ignore", "int"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "00"}]
+    },
+    "0x00571e00": {
+      "name": "ParseContext::Parse",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": 0,
+      "writes": [{"addr": "0x00985cd0", "hex": "02000000"}]
+    },
+    "0x005a8b00": {
+      "name": "Receiver::Apply",
+      "conv": "thiscall",
+      "args": ["int", "int", "int"],
+      "ret": 0,
+      "writes": [{"addr": "0x00985ccc", "hex": "01000000"}]
+    }
+  },
+  "cases": [
+    {
+      "name": "index_found_lookup",
+      "args": [5]
+    },
+    {
+      "name": "index_zero_no_lookup",
+      "args": [5],
+      "callees": {
+        "0x005f0a00": {"name": "FirstManager::GetValue", "conv": "thiscall", "args": ["int"], "ret": [0]}
+      }
+    },
+    {
+      "name": "index_negative_no_lookup",
+      "args": [5],
+      "callees": {
+        "0x005f0a00": {"name": "FirstManager::GetValue", "conv": "thiscall", "args": ["int"], "ret": [-1]}
+      }
+    },
+    {
+      "name": "lookup_returns_zero",
+      "args": [5],
+      "callees": {
+        "0x0040cbd6": {"name": "SecondManager::Lookup", "conv": "thiscall", "args": ["int"], "ret": [0]}
+      }
+    },
+    {
+      "name": "skill_zero",
+      "args": [0]
+    },
+    {
+      "name": "receiver_null_no_calls",
+      "args": [5],
+      "memory": [
+        {"addr": "@skillnotifywnd", "offset": "0x16c", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4379983,
+    "count": 100,
+    "args": [
+      {"range": [-4, 30]}
+    ],
+    "memory": []
+  }
+}

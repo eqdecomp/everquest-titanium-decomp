@@ -1,0 +1,178 @@
+{
+  "function": "EverQuestReport_guess::Consider",
+  "original": "0x0049beb8",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@everquestreport",
+  "args": [
+    {
+      "name": "player_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "report_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "everquestreport": {
+      "size": "0x3A1C8",
+      "fill": "random"
+    },
+    "player": {
+      "size": "0x348",
+      "fill": "random"
+    },
+    "report": {
+      "size": "0x1C",
+      "fill": "random"
+    },
+    "zonechar": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "strtable": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "text": {
+      "size": "0x40",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "0x00905CB0", "u32": "@strtable"},
+    {"addr": "0x00905D00", "u32": "@zonechar"},
+    {"addr": "@text", "cstr": "report line"}
+  ],
+  "callees": {
+    "0x005dfa00": {
+      "name": "FUN_005dfa00",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": "@text"
+    },
+    "0x004982c6": {
+      "name": "FUN_004982c6",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ]
+    },
+    "0x0049b9a6": {
+      "name": "PrintAssessment_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "ptr",
+        "ptr"
+      ],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "null player",
+      "args": [
+        0,
+        "@report"
+      ]
+    },
+    {
+      "name": "null player, null report",
+      "args": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "type 0 goes to 0049b9a6",
+      "args": [
+        "@player",
+        "@report"
+      ],
+      "memory": [
+        {"addr": "@player", "offset": "0x244", "u8": 0}
+      ]
+    },
+    {
+      "name": "type 1 goes to 0049b9a6",
+      "args": [
+        "@player",
+        "@report"
+      ],
+      "memory": [
+        {"addr": "@player", "offset": "0x244", "u8": 1}
+      ]
+    },
+    {
+      "name": "type 2 is the chat path",
+      "args": [
+        "@player",
+        "@report"
+      ],
+      "memory": [
+        {"addr": "@player", "offset": "0x244", "u8": 2}
+      ]
+    },
+    {
+      "name": "type 255 is the chat path",
+      "args": [
+        "@player",
+        "@report"
+      ],
+      "memory": [
+        {"addr": "@player", "offset": "0x244", "u8": 255}
+      ]
+    },
+    {
+      "name": "type 1, null report",
+      "args": [
+        "@player",
+        0
+      ],
+      "memory": [
+        {"addr": "@player", "offset": "0x244", "u8": 1}
+      ]
+    },
+    {
+      "name": "type 2, null report",
+      "args": [
+        "@player",
+        0
+      ],
+      "memory": [
+        {"addr": "@player", "offset": "0x244", "u8": 2}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4832952,
+    "count": 120,
+    "args": [
+      {
+        "choices": [
+          "@player",
+          0
+        ]
+      },
+      {
+        "choices": [
+          "@report",
+          0
+        ]
+      }
+    ],
+    "memory": [
+      {"addr": "@player", "offset": "0x244", "type": "u8", "choices": [0, 1, 2, 3, 100, 255]}
+    ]
+  }
+}

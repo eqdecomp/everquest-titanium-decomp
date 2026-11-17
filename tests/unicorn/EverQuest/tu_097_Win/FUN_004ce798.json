@@ -1,0 +1,1515 @@
+{
+  "function": "eqWndProc",
+  "original": "0x004ce798",
+  "sources": [
+    "src/EverQuest/tu_097_Win.cpp"
+  ],
+  "conv": "stdcall",
+  "args": [
+    {
+      "name": "window_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "message_guess",
+      "type": "u32"
+    },
+    {
+      "name": "wParam_guess",
+      "type": "u32"
+    },
+    {
+      "name": "lParam_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "lparam": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "message_state": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "client": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "state": {
+      "size": "0x8",
+      "fill": "random"
+    },
+    "input_state": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "config84": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@config_vtable"
+        }
+      ]
+    },
+    "config80": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@config_vtable"
+        }
+      ]
+    },
+    "config_vtable": {
+      "size": "0x24",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x08",
+          "u32": "@config_slot2"
+        },
+        {
+          "offset": "0x1c",
+          "u32": "@config_slot7"
+        },
+        {
+          "offset": "0x20",
+          "u32": "@config_slot8"
+        }
+      ]
+    },
+    "config_slot7": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "config_slot8": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "config_slot2": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "state_dispatch": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@dispatch_vtable"
+        }
+      ]
+    },
+    "dispatch_vtable": {
+      "size": "0x64",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x60",
+          "u32": "@dispatch_slot24"
+        }
+      ]
+    },
+    "dispatch_slot24": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0099d3f8",
+      "u32": "@message_state"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": 1
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@client"
+    },
+    {
+      "addr": "0x0099e38c",
+      "u32": "@state"
+    },
+    {
+      "addr": "0x00988c74",
+      "u8": 0
+    },
+    {
+      "addr": "0x00988c75",
+      "u8": 0
+    },
+    {
+      "addr": "0x00988c76",
+      "u8": 0
+    },
+    {
+      "addr": "0x00988c88",
+      "u32": 640
+    },
+    {
+      "addr": "0x0099d3ec",
+      "u32": "@state"
+    },
+    {
+      "addr": "0x00988c8c",
+      "u32": 480
+    },
+    {
+      "addr": "0x00988c84",
+      "u32": "@config84"
+    },
+    {
+      "addr": "0x00988c80",
+      "u32": "@config80"
+    },
+    {
+      "addr": "0x009889bc",
+      "u32": 1
+    },
+    {
+      "addr": "0x00790118",
+      "u32": 0
+    },
+    {
+      "addr": "0x00850c14",
+      "u32": "@input_state"
+    },
+    {
+      "addr": "0x00923d2c",
+      "u8": 0
+    },
+    {
+      "addr": "0x00923d2d",
+      "u8": 0
+    },
+    {
+      "addr": "0x00923d2e",
+      "u8": 0
+    },
+    {
+      "addr": "0x00923d74",
+      "u32": 1
+    },
+    {
+      "addr": "0x0099e364",
+      "u32": "@state_dispatch"
+    },
+    {
+      "addr": "@state",
+      "offset": "0x4",
+      "u8": 0
+    }
+  ],
+  "callees": {
+    "0x005acfb0": {
+      "name": "FUN_005acfb0",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005ad310": {
+      "name": "FUN_005ad310",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    },
+    "0x0043745d": {
+      "name": "FUN_0043745d",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005b0230": {
+      "name": "FUN_005b0230",
+      "conv": "thiscall",
+      "args": [
+        "mem:8"
+      ]
+    },
+    "user32.dll!SetForegroundWindow": {
+      "name": "SetForegroundWindow",
+      "conv": "stdcall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 1
+    },
+    "user32.dll!SetFocus": {
+      "name": "SetFocus",
+      "conv": "stdcall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x004ccb85": {
+      "name": "FlushKeyboard_guess",
+      "conv": "cdecl",
+      "args": [],
+      "ret": 0
+    },
+    "0x004ce72d": {
+      "name": "ReinitMouse_guess",
+      "conv": "cdecl",
+      "args": []
+    },
+    "0x00469215": {
+      "name": "do_quit_guess",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "cstr"
+      ]
+    },
+    "user32.dll!ValidateRect": {
+      "name": "ValidateRect",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "ptr"
+      ],
+      "ret": 1
+    },
+    "@config_slot7": {
+      "name": "config_slot7",
+      "conv": "stdcall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "@config_slot8": {
+      "name": "config_slot8",
+      "conv": "stdcall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "@config_slot2": {
+      "name": "config_slot2",
+      "conv": "stdcall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x005ba4d0": {
+      "name": "FUN_005ba4d0",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "ptr",
+        "u32",
+        "u32",
+        "u32"
+      ]
+    },
+    "0x005ba250": {
+      "name": "FUN_005ba250",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004ccbfc": {
+      "name": "HandleKeyUp_guess",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x004ce4ac": {
+      "name": "HandleKeyDown_guess",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x0053f1f4": {
+      "name": "FUN_0053f1f4",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00609dc0": {
+      "name": "FUN_00609dc0",
+      "conv": "stdcall",
+      "args": [
+        "u32",
+        "u32"
+      ]
+    },
+    "0x00461979": {
+      "name": "IsChineseOrJapaneseLanguage_guess",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": 1
+    },
+    "0x00609f80": {
+      "name": "FUN_00609f80",
+      "conv": "stdcall",
+      "args": [
+        "ignore"
+      ]
+    },
+    "0x00445243": {
+      "name": "RealRender_World_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "@dispatch_slot24": {
+      "name": "dispatch_slot24",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "user32.dll!DefWindowProcA": {
+      "name": "DefWindowProcA",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32",
+        "ptr"
+      ],
+      "ret": 4951
+    }
+  },
+  "cases": [
+    {
+      "name": "message-state-short-circuit",
+      "args": [
+        1,
+        "0x2",
+        0,
+        "@lparam"
+      ],
+      "callees": {
+        "0x005acfb0": {
+          "name": "FUN_005acfb0",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x005ad310": {
+          "name": "FUN_005ad310",
+          "conv": "thiscall",
+          "args": [
+            "u32",
+            "u32",
+            "ptr"
+          ],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "message-state-continue",
+      "args": [
+        1,
+        "0x2",
+        0,
+        "@lparam"
+      ],
+      "callees": {
+        "0x005acfb0": {
+          "name": "FUN_005acfb0",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1
+        },
+        "0x005ad310": {
+          "name": "FUN_005ad310",
+          "conv": "thiscall",
+          "args": [
+            "u32",
+            "u32",
+            "ptr"
+          ],
+          "ret": 1
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "cleanup-null",
+      "args": [
+        1,
+        "0x333",
+        0,
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "0x00988df0",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "null-message-state",
+      "args": [
+        1,
+        "0x777",
+        0,
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "0x0099d3f8",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "client-disabled-4642",
+      "args": [
+        1,
+        "0x4642",
+        "0x4242",
+        "@lparam"
+      ],
+      "callees": {
+        "0x0043745d": {
+          "name": "FUN_0043745d",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "client-disabled-4643",
+      "args": [
+        1,
+        "0x4643",
+        "0x4243",
+        "@lparam"
+      ],
+      "callees": {
+        "0x0043745d": {
+          "name": "FUN_0043745d",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "client-disabled-4643-mismatch",
+      "args": [
+        1,
+        "0x4643",
+        0,
+        "@lparam"
+      ],
+      "callees": {
+        "0x0043745d": {
+          "name": "FUN_0043745d",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "client-disabled-mismatch",
+      "args": [
+        1,
+        "0x4642",
+        0,
+        "@lparam"
+      ],
+      "callees": {
+        "0x0043745d": {
+          "name": "FUN_0043745d",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "client-disabled-other",
+      "args": [
+        1,
+        "0x4444",
+        0,
+        "@lparam"
+      ],
+      "callees": {
+        "0x0043745d": {
+          "name": "FUN_0043745d",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "wm-destroy",
+      "args": [
+        1,
+        "0x2",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "wm-size",
+      "args": [
+        1,
+        "0x5",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "wm-activate-inactive",
+      "args": [
+        1,
+        "0x6",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "wm-activate-active",
+      "args": [
+        1,
+        "0x6",
+        1,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "wm-paint",
+      "args": [
+        1,
+        "0xf",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "wm-close",
+      "args": [
+        1,
+        "0x10",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "wm-activateapp-inactive",
+      "args": [
+        1,
+        "0x1c",
+        0,
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x4",
+          "u8": 1
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "wm-activateapp-null-config",
+      "args": [
+        1,
+        "0x1c",
+        0,
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "0x00988c84",
+          "u32": 0
+        },
+        {
+          "addr": "0x00988c80",
+          "u32": 0
+        },
+        {
+          "addr": "@state",
+          "offset": "0x4",
+          "u8": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "wm-activateapp-active-resume",
+      "args": [
+        1,
+        "0x1c",
+        1,
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "0x00988c74",
+          "u8": 1
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "low-unknown-0x20",
+      "args": [
+        1,
+        "0x20",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "low-common-0x50",
+      "args": [
+        1,
+        "0x50",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "input-null",
+      "args": [
+        1,
+        "0x51",
+        0,
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "0x00850c14",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "input-call",
+      "args": [
+        1,
+        "0x51",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "keydown-bit30",
+      "args": [
+        1,
+        "0x100",
+        65,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "keydown",
+      "args": [
+        1,
+        "0x100",
+        65,
+        "0x009889bc"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "syskeydown",
+      "args": [
+        1,
+        "0x104",
+        65,
+        "0x009889bc"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "keyup",
+      "args": [
+        1,
+        "0x101",
+        65,
+        "0x009889bc"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "syskeyup",
+      "args": [
+        1,
+        "0x105",
+        65,
+        "0x009889bc"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "range-before-0x10d",
+      "args": [
+        1,
+        "0x10c",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "range-first-0x10d",
+      "args": [
+        1,
+        "0x10d",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "range-last-0x10f",
+      "args": [
+        1,
+        "0x10f",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "range-after-0x10f",
+      "args": [
+        1,
+        "0x110",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "wm-command-0x111",
+      "args": [
+        1,
+        "0x111",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "syscommand-filtered",
+      "args": [
+        1,
+        "0x112",
+        "0xf090",
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x4",
+          "u8": 1
+        },
+        {
+          "addr": "0x00790118",
+          "from_image": "0x00790118",
+          "image_size": 4
+        }
+      ],
+      "callees": {
+        "0x00461979": {
+          "name": "FUN_00461979",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "syscommand-state-filter",
+      "args": [
+        1,
+        "0x112",
+        1,
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x4",
+          "u8": 1
+        }
+      ],
+      "callees": {
+        "0x00461979": {
+          "name": "FUN_00461979",
+          "conv": "cdecl",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "syscommand-minimize",
+      "args": [
+        1,
+        "0x112",
+        "0xf100",
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "0x00790118",
+          "from_image": "0x00790118",
+          "image_size": 4
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "syscommand-maximize",
+      "args": [
+        1,
+        "0x112",
+        "0xf150",
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "0x00790118",
+          "from_image": "0x00790118",
+          "image_size": 4
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "syscommand-state-off",
+      "args": [
+        1,
+        "0x112",
+        1,
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x4",
+          "u8": 0
+        }
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "syscommand-default",
+      "args": [
+        1,
+        "0x112",
+        1,
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "0x00790118",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "left-down-already-active",
+      "args": [
+        1,
+        "0x201",
+        0,
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "0x00790118",
+          "from_image": "0x00790118",
+          "image_size": 4
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "left-down-activate",
+      "args": [
+        1,
+        "0x201",
+        0,
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "0x00790118",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "move-state-active",
+      "args": [
+        1,
+        "0x216",
+        0,
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x4",
+          "u8": 1
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "move-state-inactive",
+      "args": [
+        1,
+        "0x216",
+        0,
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x4",
+          "u8": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "power-query",
+      "args": [
+        1,
+        "0x218",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": "0x424d5144"
+      }
+    },
+    {
+      "name": "power-query-nonzero",
+      "args": [
+        1,
+        "0x218",
+        1,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "enter-size-move-active",
+      "args": [
+        1,
+        "0x231",
+        0,
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x4",
+          "u8": 1
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "enter-size-move-inactive",
+      "args": [
+        1,
+        "0x231",
+        0,
+        "@lparam"
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x4",
+          "u8": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "range-before-0x281",
+      "args": [
+        1,
+        "0x280",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "range-first-0x281",
+      "args": [
+        1,
+        "0x281",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "range-last-0x286",
+      "args": [
+        1,
+        "0x286",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "range-after-0x286",
+      "args": [
+        1,
+        "0x287",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "common-0x290",
+      "args": [
+        1,
+        "0x290",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "common-0x291",
+      "args": [
+        1,
+        "0x291",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "high-0x292-default",
+      "args": [
+        1,
+        "0x292",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    },
+    {
+      "name": "app-message-4642",
+      "args": [
+        1,
+        "0x4642",
+        "0x4242",
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "app-message-4642-mismatch",
+      "args": [
+        1,
+        "0x4642",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "app-message-4643",
+      "args": [
+        1,
+        "0x4643",
+        "0x4243",
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "app-message-4643-mismatch",
+      "args": [
+        1,
+        "0x4643",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "app-message-4644",
+      "args": [
+        1,
+        "0x4644",
+        "0x4244",
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "app-message-4644-mismatch",
+      "args": [
+        1,
+        "0x4644",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "app-message-4645",
+      "args": [
+        1,
+        "0x4645",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "app-message-f000",
+      "args": [
+        1,
+        "0xf000",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "app-message-f010",
+      "args": [
+        1,
+        "0xf010",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "app-message-f011-default",
+      "args": [
+        1,
+        "0xf011",
+        0,
+        "@lparam"
+      ],
+      "expect": {
+        "ret": 4951
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5040024,
+    "count": 200,
+    "args": [
+      {
+        "choices": [
+          1
+        ]
+      },
+      {
+        "choices": [
+          "0x2",
+          "0x5",
+          "0x6",
+          "0xf",
+          "0x10",
+          "0x1c",
+          "0x20",
+          "0x50",
+          "0x51",
+          "0x100",
+          "0x101",
+          "0x104",
+          "0x105",
+          "0x10c",
+          "0x10d",
+          "0x10f",
+          "0x110",
+          "0x111",
+          "0x112",
+          "0x201",
+          "0x216",
+          "0x218",
+          "0x231",
+          "0x280",
+          "0x281",
+          "0x286",
+          "0x287",
+          "0x290",
+          "0x291",
+          "0x292",
+          "0x4642",
+          "0x4643",
+          "0x4644",
+          "0x4645",
+          "0xf000",
+          "0xf010",
+          "0xf011"
+        ]
+      },
+      {
+        "choices": [
+          0,
+          1,
+          "0x4242",
+          "0x4243",
+          "0x4244",
+          "0xf090",
+          "0xf100",
+          "0xf150"
+        ]
+      },
+      {
+        "choices": [
+          "@lparam",
+          "0x009889bc"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x0099d3f8",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@message_state"
+        ]
+      },
+      {
+        "addr": "0x00988df0",
+        "type": "ptr",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0x4",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00790118",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00988c74",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00923d2c",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00923d2d",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "0x00923d2e",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "_survivors": "L1540: the flag != 1 path immediately writes the same status value again; the only path where this is the sole write depends on CCB85's nested state transition, which the fixture cannot make equivalent on both sides."
+}

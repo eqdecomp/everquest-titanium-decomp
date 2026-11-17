@@ -1,0 +1,314 @@
+{
+  "function": "RecordOwner_guess::AddSearchResult_guess",
+  "original": "0x004e36b3",
+  "sources": [
+    "src/EverQuest/tu_131_BazaarSearchWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@recordowner",
+  "args": [
+    {
+      "name": "label_guess",
+      "type": "cstr"
+    },
+    {
+      "name": "value_guess",
+      "type": "u32"
+    },
+    {
+      "name": "detail_guess",
+      "type": "cstr"
+    },
+    {
+      "name": "value_88_guess",
+      "type": "int"
+    },
+    {
+      "name": "format_arg_guess",
+      "type": "int"
+    },
+    {
+      "name": "value_90_guess",
+      "type": "int"
+    },
+    {
+      "name": "value_94_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "recordowner": {
+      "size": "0x3ce4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x3ce0",
+          "u32": "@listwnd"
+        }
+      ]
+    },
+    "listwnd": {
+      "size": "0x140",
+      "fill": "zero"
+    },
+    "textheap0": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "textheap1": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "textheap2": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "textheap3": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "textheap4": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "textheap5": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "textheap6": {
+      "size": "0x1000",
+      "fill": "zero"
+    },
+    "textheap7": {
+      "size": "0x1000",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0063f53c",
+      "from_image": "0x0063f53c",
+      "image_size": 64
+    }
+  ],
+  "callees": {
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "u32"
+      ],
+      "ret": [
+        "@textheap0",
+        "@textheap1",
+        "@textheap2",
+        "@textheap3",
+        "@textheap4",
+        "@textheap5",
+        "@textheap6",
+        "@textheap7"
+      ]
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 1
+    },
+    "0x0060e450": {
+      "name": "CopyString_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x00571fc0": {
+      "name": "CXStrAssign_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "passthrough": true
+    },
+    "0x0059b9d0": {
+      "name": "CListWndAddString_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "u32",
+        "u32",
+        "ptr"
+      ],
+      "ret": 37
+    },
+    "0x004e35a6": {
+      "name": "MoneyText_guess::FormatMoney_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "passthrough": true
+    },
+    "0x0059b360": {
+      "name": "CListWndSetItemText_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "ignore"
+      ]
+    },
+    "0x00571d00": {
+      "name": "CXStrDestroy_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "passthrough": true
+    },
+    "0x005738b0": {
+      "name": "FormatString_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "ptr",
+        "int"
+      ],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "count-zero-format-disabled",
+      "args": [
+        "",
+        0,
+        "",
+        0,
+        0,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@listwnd",
+          "offset": "0x11c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "valid-formatted-row",
+      "args": [
+        "Bronze Shield",
+        12345,
+        "Worn but sturdy",
+        11,
+        7,
+        13,
+        17
+      ],
+      "memory": [
+        {
+          "addr": "@listwnd",
+          "offset": "0x11c",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "last-valid-row",
+      "args": [
+        "Last row",
+        999999,
+        "Boundary detail",
+        -1,
+        0,
+        2,
+        3
+      ],
+      "memory": [
+        {
+          "addr": "@listwnd",
+          "offset": "0x11c",
+          "u32": 99
+        }
+      ]
+    },
+    {
+      "name": "capacity-boundary",
+      "args": [
+        "No row",
+        4,
+        "No detail",
+        5,
+        6,
+        7,
+        8
+      ],
+      "memory": [
+        {
+          "addr": "@listwnd",
+          "offset": "0x11c",
+          "u32": 100
+        }
+      ]
+    },
+    {
+      "name": "above-capacity",
+      "args": [
+        "No row",
+        4,
+        "No detail",
+        5,
+        6,
+        7,
+        8
+      ],
+      "memory": [
+        {
+          "addr": "@listwnd",
+          "offset": "0x11c",
+          "u32": 101
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5125811,
+    "count": 100,
+    "args": [
+      {},
+      {},
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "memory": [
+      {
+        "addr": "@listwnd",
+        "offset": "0x11c",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          98,
+          99,
+          100,
+          101
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,546 @@
+{
+  "function": "EverQuestActionView_guess::GuildInvite_guess",
+  "original": "0x0049bf15",
+  "sources": [
+    "src/EverQuest/tu_062_EverQuest.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@everquestactionview",
+  "args": [
+    {
+      "name": "name_guess",
+      "type": "cstr"
+    },
+    {
+      "name": "action_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "everquestactionview": {
+      "size": "0x3a1c8",
+      "fill": "zero"
+    },
+    "charData": {
+      "size": "0xc4d0",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@vbtable"
+        }
+      ]
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 0
+        }
+      ]
+    },
+    "stringtable": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "connection": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "target": {
+      "size": "0x348",
+      "fill": "zero"
+    },
+    "current": {
+      "size": "0x348",
+      "fill": "zero"
+    },
+    "lookup": {
+      "size": "0x348",
+      "fill": "zero"
+    },
+    "chattext": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": 305419896
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@charData"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@stringtable"
+    },
+    {
+      "addr": "0x00905ca0",
+      "u32": "@connection"
+    },
+    {
+      "addr": "0x00905d04",
+      "u32": "@target"
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": "@current"
+    },
+    {
+      "addr": "0x00900478",
+      "u32": 0
+    },
+    {
+      "addr": "@charData",
+      "offset": "0x44",
+      "cstr": "Current"
+    },
+    {
+      "addr": "@charData",
+      "offset": "0xe0c",
+      "u32": 1
+    },
+    {
+      "addr": "@charData",
+      "offset": "0xe10",
+      "u8": 2
+    },
+    {
+      "addr": "@target",
+      "offset": "0x120",
+      "cstr": "Target"
+    },
+    {
+      "addr": "@target",
+      "offset": "0x244",
+      "u8": 0
+    },
+    {
+      "addr": "@target",
+      "offset": "0x256",
+      "u8": 0
+    },
+    {
+      "addr": "@current",
+      "offset": "0x120",
+      "cstr": "Current"
+    },
+    {
+      "addr": "@lookup",
+      "offset": "0x244",
+      "u8": 0
+    },
+    {
+      "addr": "@lookup",
+      "offset": "0x256",
+      "u8": 1
+    }
+  ],
+  "callees": {
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "ptr"
+      ],
+      "ret": "@chattext"
+    },
+    "0x004982c6": {
+      "name": "CEverQuest::dsp_chat",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int",
+        "bool"
+      ]
+    },
+    "0x00621e9c": {
+      "name": "_stricmp",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr"
+      ],
+      "ret": 1
+    },
+    "0x0047c88e": {
+      "name": "GetSpawnByName_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": "@lookup"
+    },
+    "0x0046da4a": {
+      "name": "FUN_0046da4a",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "u32",
+        "cstr",
+        "cstr",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32",
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "u32",
+        "mem:136",
+        "u32",
+        "char"
+      ],
+      "ret": 0
+    },
+    "0x0047994f": {
+      "name": "NotOnSameDeity_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00498436": {
+      "name": "CEverQuest::dsp_chat_one",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "__stricmp": "0x00621e9c"
+  },
+  "cases": [
+    {
+      "name": "no connection",
+      "args": [
+        "Target",
+        "o"
+      ],
+      "memory": [
+        {
+          "addr": "@charData",
+          "offset": "0xe0c",
+          "u32": 4294967295
+        }
+      ]
+    },
+    {
+      "name": "inactive state",
+      "args": [
+        "Target",
+        "o"
+      ],
+      "memory": [
+        {
+          "addr": "@charData",
+          "offset": "0xe0c",
+          "u32": 1
+        },
+        {
+          "addr": "@charData",
+          "offset": "0xe10",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "empty name without target",
+      "args": [
+        "",
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "0x00905d04",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "target is blocked",
+      "args": [
+        "",
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "@target",
+          "offset": "0x244",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "target is current player",
+      "args": [
+        "",
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "0x00905d04",
+          "u32": "@current"
+        }
+      ]
+    },
+    {
+      "name": "target action rejected",
+      "args": [
+        "o",
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "0x00900478",
+          "u32": 4
+        }
+      ],
+      "callees": {
+        "0x0047994f": {
+          "name": "FUN_0047994f",
+          "conv": "thiscall",
+          "args": [
+            "ptr",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "empty name accepted",
+      "args": [
+        "",
+        ""
+      ]
+    },
+    {
+      "name": "target action accepted",
+      "args": [
+        "o",
+        ""
+      ]
+    },
+    {
+      "name": "target action unavailable",
+      "args": [
+        "o",
+        ""
+      ],
+      "memory": [
+        {
+          "addr": "@charData",
+          "offset": "0xe10",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "look at target",
+      "args": [
+        "l",
+        ""
+      ]
+    },
+    {
+      "name": "same name",
+      "args": [
+        "current",
+        "x"
+      ],
+      "callees": {
+        "0x00621e9c": {
+          "name": "_stricmp",
+          "conv": "cdecl",
+          "args": [
+            "cstr",
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "long name starts with o",
+      "args": [
+        "other",
+        "x"
+      ]
+    },
+    {
+      "name": "unknown name",
+      "args": [
+        "Hero",
+        "x"
+      ],
+      "callees": {
+        "0x0047c88e": {
+          "name": "FUN_0047c88e",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "restricted result",
+      "args": [
+        "Hero",
+        "x"
+      ],
+      "memory": [
+        {
+          "addr": "@lookup",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@lookup",
+          "offset": "0x256",
+          "u8": 0
+        }
+      ]
+    },
+    {
+      "name": "normal request",
+      "args": [
+        "Hero",
+        "x"
+      ]
+    },
+    {
+      "name": "action unavailable",
+      "args": [
+        "Hero",
+        "o"
+      ],
+      "memory": [
+        {
+          "addr": "@charData",
+          "offset": "0xe10",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "normal action accepted",
+      "args": [
+        "Hero",
+        "o"
+      ]
+    },
+    {
+      "name": "action word too long",
+      "args": [
+        "Hero",
+        "oo"
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4833045,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "",
+          "o",
+          "l",
+          "Hero",
+          "Rogue",
+          "Bob",
+          "Target"
+        ]
+      },
+      {
+        "choices": [
+          "",
+          "o",
+          "x",
+          "oo",
+          "look"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@charData",
+        "offset": "0xe0c",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@charData",
+        "offset": "0xe10",
+        "type": "u8",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "0x00900478",
+        "type": "int",
+        "choices": [
+          0,
+          4
+        ]
+      },
+      {
+        "addr": "@target",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@lookup",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@lookup",
+        "offset": "0x256",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

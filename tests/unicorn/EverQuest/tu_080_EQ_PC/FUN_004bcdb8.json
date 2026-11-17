@@ -1,0 +1,178 @@
+{
+  "function": "PcProfileView_guess::HasLoreItem_guess",
+  "original": "0x004bcdb8",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@rankprofile",
+  "args": [
+    {
+      "name": "value_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "rankprofile": {
+      "size": "0xdc8",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x8", "u32": "@holder"},
+        {"offset": "0x10c", "u32": "@node"}
+      ]
+    },
+    "holder": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": 256}
+      ]
+    },
+    "node": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "eff1": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": "@eff2"}
+      ]
+    },
+    "eff2": {
+      "size": "0x10",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00601ef0": {
+      "name": "FUN_00601ef0",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1
+    },
+    "0x005d99d0": {
+      "name": "FUN_005d99d0",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@eff1"
+    },
+    "0x005fe6d0": {
+      "name": "FUN_005fe6d0",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x005dfd50": {
+      "name": "FUN_005dfd50",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "zero param",
+      "args": [0]
+    },
+    {
+      "name": "param check fails",
+      "args": [1],
+      "callees": {
+        "0x00601ef0": {"name": "FUN_00601ef0", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "empty list and arrays",
+      "args": [1],
+      "memory": [
+        {"addr": "@rankprofile", "offset": "0x10c", "u32": 0}
+      ]
+    },
+    {
+      "name": "list effect matches",
+      "args": [1],
+      "callees": {
+        "0x005fe6d0": {"name": "FUN_005fe6d0", "conv": "thiscall", "args": ["u32"], "ret": 1}
+      }
+    },
+    {
+      "name": "list effects no match",
+      "args": [1]
+    },
+    {
+      "name": "two nodes no match",
+      "args": [1],
+      "objects": {
+        "node": {
+          "size": "0x10",
+          "fill": "zero",
+          "init": [
+            {"offset": "0xc", "u32": "@node2"}
+          ]
+        },
+        "node2": {
+          "size": "0x10",
+          "fill": "zero"
+        }
+      }
+    },
+    {
+      "name": "cf0 slot matches",
+      "args": [1],
+      "memory": [
+        {"addr": "@rankprofile", "offset": "0x10c", "u32": 0},
+        {"addr": "@rankprofile", "offset": "0xcf8", "u32": "@eff1"}
+      ],
+      "callees": {
+        "0x005dfd50": {"name": "FUN_005dfd50", "conv": "thiscall", "args": ["u32"], "ret": 1}
+      }
+    },
+    {
+      "name": "cf0 slot no match",
+      "args": [1],
+      "memory": [
+        {"addr": "@rankprofile", "offset": "0x10c", "u32": 0},
+        {"addr": "@rankprofile", "offset": "0xcf8", "u32": "@eff1"}
+      ]
+    },
+    {
+      "name": "d38 slot matches",
+      "args": [1],
+      "memory": [
+        {"addr": "@rankprofile", "offset": "0x10c", "u32": 0},
+        {"addr": "@rankprofile", "offset": "0xd4c", "u32": "@eff1"}
+      ],
+      "callees": {
+        "0x005dfd50": {"name": "FUN_005dfd50", "conv": "thiscall", "args": ["u32"], "ret": 1}
+      }
+    },
+    {
+      "name": "d38 slot no match",
+      "args": [1],
+      "memory": [
+        {"addr": "@rankprofile", "offset": "0x10c", "u32": 0},
+        {"addr": "@rankprofile", "offset": "0xd4c", "u32": "@eff1"}
+      ]
+    }
+  ],
+  "_survivors": "L2339: int3 bounds trap is unreachable (loop stops at 16); L2347: 36 -> 37 guard unreachable (loop stops at 36)",
+  "coverage_ok": {
+    "004BCE0B-004BCE0C": "dead: the loop bound (index < 16) makes the int3 bounds trap unreachable",
+    "004BCE34-004BCE35": "dead: the loop bound (index < 36) makes the int3 bounds trap unreachable"
+  },
+  "fuzz": {
+    "seed": 4967864,
+    "count": 100,
+    "args": [
+      {}
+    ],
+    "memory": []
+  }
+}

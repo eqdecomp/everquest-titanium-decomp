@@ -1,0 +1,235 @@
+{
+  "function": "Player_48BA76_guess::Handle_48B42B_guess",
+  "original": "0x0048b42b",
+  "sources": [
+    "src/EverQuest/tu_055_Movement.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@player",
+  "args": [
+    { "name": "message_guess", "type": "cstr" },
+    { "name": "value_guess", "type": "int" },
+    { "name": "state_guess", "type": "ptr" }
+  ],
+  "ret": "char",
+  "objects": {
+    "player": {
+      "size": "0x268",
+      "fill": "zero"
+    },
+    "other_player": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "state": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "0x12345678" }
+      ]
+    },
+    "manager": {
+      "size": "0xc284",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    { "addr": "0x00905ce4", "u32": "@other_player" },
+    { "addr": "0x00905d00", "u32": "@manager" },
+    { "addr": "@player", "offset": "0x260", "u32": "0x6c" }
+  ],
+  "callees": {
+    "0x0048bb4e": {
+      "name": "IsControlledPlayer_guess",
+      "conv": "fastcall",
+      "args": ["u32"],
+      "ret": 1
+    },
+    "0x0040e934": {
+      "name": "Window_48B42B_guess::FindBuffWithEffect_guess",
+      "conv": "thiscall",
+      "args": ["int", "mem:4"],
+      "ret": 0
+    },
+    "0x00411f2f": {
+      "name": "Window_48B42B_guess::RemovePCAffect_guess",
+      "conv": "thiscall",
+      "args": ["ptr"]
+    },
+    "0x00489fda": {
+      "name": "State_48995D_guess::Forward_489FDA_guess",
+      "conv": "thiscall",
+      "args": ["cstr", "int", "ptr", "ptr", "ptr", "ptr", "ptr", "ptr"],
+      "ret": 0,
+      "writes": [
+        { "arg": 2, "offset": 0, "hex": "0000803f000000400000404000008040" },
+        { "arg": 4, "offset": 0, "hex": "78563412" }
+      ]
+    },
+    "0x00572300": {
+      "name": "TeleportLogger_489CC2_guess::GetValue_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x0048aaa6": {
+      "name": "Player_48BA76_guess::WarpPlayer_guess",
+      "conv": "thiscall",
+      "args": ["u32", "float", "float", "float", "float", "ptr", "int"],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "TeleportLogger_489CC2_guess::Release_guess",
+      "conv": "thiscall",
+      "args": ["u32"]
+    }
+  },
+  "cases": [
+    {
+      "name": "noncurrent target false",
+      "args": ["abc", 1, "@state"],
+      "callees": {
+        "0x0048bb4e": {
+          "name": "FUN_0048bb4e",
+          "conv": "fastcall",
+          "args": ["u32"],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "race below boundary",
+      "args": ["abc", -1, "@state"],
+      "memory": [
+        { "addr": "@player", "offset": "0x260", "u32": "0x6b" }
+      ]
+    },
+    {
+      "name": "race at boundary calls manager",
+      "args": ["abc", -1, "@state"],
+      "memory": [
+        { "addr": "@player", "offset": "0x260", "u32": "0x6c" }
+      ]
+    },
+    {
+      "name": "race above boundary",
+      "args": ["abc", -1, "@state"],
+      "memory": [
+        { "addr": "@player", "offset": "0x260", "u32": "0x6d" }
+      ]
+    },
+    {
+      "name": "current parser false empty cleanup",
+      "args": ["", -1, "@state"],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@player" }
+      ],
+      "callees": {
+        "0x00489fda": {
+          "name": "State_48995D_guess::Forward_489FDA_guess",
+          "conv": "thiscall",
+          "args": ["cstr", "int", "ptr", "ptr", "ptr", "ptr", "ptr", "ptr"],
+          "ret": 0,
+          "writes": [
+            { "arg": 2, "offset": 0, "hex": "0000803f000000400000404000008040" },
+            { "arg": 4, "offset": 0, "hex": "00000000" }
+          ]
+        }
+      },
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "current parser false leaves initialized logger alone",
+      "args": ["plain", 0, "@state"],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@player" }
+      ],
+      "callees": {
+        "0x00489fda": {
+          "name": "State_48995D_guess::Forward_489FDA_guess",
+          "conv": "thiscall",
+          "args": ["cstr", "int", "ptr", "ptr", "ptr", "ptr", "ptr", "ptr"],
+          "ret": 0,
+          "writes": [
+            { "arg": 2, "offset": 0, "hex": "0000803f000000400000404000008040" }
+          ]
+        }
+      },
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "current parser false releases handle",
+      "args": ["x", 0, "@state"],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@player" }
+      ],
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "validation false releases handle",
+      "args": ["valid", -1, "@state"],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@player" }
+      ],
+      "callees": {
+        "0x00489fda": {
+          "name": "State_48995D_guess::Forward_489FDA_guess",
+          "conv": "thiscall",
+          "args": ["cstr", "int", "ptr", "ptr", "ptr", "ptr", "ptr", "ptr"],
+          "ret": 1,
+          "writes": [
+            { "arg": 2, "offset": 0, "hex": "0000803f000000400000404000008040" },
+            { "arg": 4, "offset": 0, "hex": "78563412" }
+          ]
+        },
+        "0x0048aaa6": {
+          "name": "Player_48BA76_guess::Check_48AAA6_guess",
+          "conv": "thiscall",
+          "args": ["u32", "float", "float", "float", "float", "ptr", "int"],
+          "ret": 0
+        }
+      },
+      "expect": { "ret": 0 }
+    },
+    {
+      "name": "validation true releases handle",
+      "args": ["valid", -1, "@state"],
+      "memory": [
+        { "addr": "0x00905ce4", "u32": "@player" }
+      ],
+      "callees": {
+        "0x00489fda": {
+          "name": "State_48995D_guess::Forward_489FDA_guess",
+          "conv": "thiscall",
+          "args": ["cstr", "int", "ptr", "ptr", "ptr", "ptr", "ptr", "ptr"],
+          "ret": 1,
+          "writes": [
+            { "arg": 2, "offset": 0, "hex": "0000803f000000400000404000008040" },
+            { "arg": 4, "offset": 0, "hex": "78563412" }
+          ]
+        },
+        "0x0048aaa6": {
+          "name": "Player_48BA76_guess::Check_48AAA6_guess",
+          "conv": "thiscall",
+          "args": ["u32", "float", "float", "float", "float", "ptr", "int"],
+          "ret": 1
+        }
+      },
+      "expect": { "ret": 1 }
+    }
+  ],
+  "fuzz": {
+    "seed": 4764715,
+    "count": 100,
+    "args": [
+      {},
+      {},
+      { "choices": ["@state"] }
+    ],
+    "memory": [
+      { "addr": "0x00905ce4", "type": "ptr", "choices": ["@player", "@other_player"] },
+      { "addr": "@player", "offset": "0x260", "type": "int", "choices": [107, 108, 109] },
+      { "addr": "@state", "offset": "0x0", "type": "u32", "range": [0, 2147483647] }
+    ]
+  }
+}

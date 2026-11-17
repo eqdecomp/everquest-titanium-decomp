@@ -1,0 +1,86 @@
+{
+  "function": "FindPlayerByPartialDisplayName_guess",
+  "original": "0x0047981d",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "text", "type": "cstr"},
+    {"name": "ignored", "type": "ptr"}
+  ],
+  "ret": "ptr",
+  "objects": {
+    "ignored": {"size": "0x348", "fill": "zero"},
+    "sink": {"size": "0xb58", "fill": "zero"},
+    "node1": {"size": "0x348", "fill": "zero", "init": [{"offset": "0x214", "u32": "@node2"}]},
+    "node2": {"size": "0x348", "fill": "zero", "init": [{"offset": "0x214", "u32": "@node3"}]},
+    "node3": {"size": "0x348", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905cc4", "u32": "@node1"},
+    {"addr": "0x00988df0", "u32": "@sink"},
+    {"addr": "@node1", "offset": "0x120", "cstr": "abcdef"},
+    {"addr": "@node2", "offset": "0x120", "cstr": "abcd"},
+    {"addr": "@node3", "offset": "0x120", "cstr": "xx"}
+  ],
+  "callees": {
+    "0x00492ec2": {"name": "NameTextEq_GetDisplayName", "conv": "thiscall", "args": ["cstr"], "ret": "arg0"},
+    "0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "u32"], "ret": [0, 1, 0]}
+  },
+  "rewrite_aliases": {
+    "__strnicmp": "0x0062202c"
+  },
+  "_survivors": "L7184: shortest is read only when result != 0, and result is set only together with shortest, so its initial 0 cannot be observed",
+  "cases": [
+    {"name": "empty_text", "args": ["", "@ignored"], "expect": {"ret": 0}},
+    {"name": "empty_list", "args": ["abc", "@ignored"],
+      "memory": [{"addr": "0x00905cc4", "u32": 0}], "expect": {"ret": 0}},
+    {"name": "single_match", "args": ["abc", "@ignored"],
+      "memory": [{"addr": "@node1", "offset": "0x214", "u32": 0}],
+      "callees": {"0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "u32"], "ret": [0]}}},
+    {"name": "single_match_ignored", "args": ["abc", "@node1"],
+      "memory": [{"addr": "@node1", "offset": "0x214", "u32": 0}],
+      "callees": {"0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "u32"], "ret": [0]}},
+      "expect": {"ret": 0}},
+    {"name": "single_mismatch", "args": ["abc", "@ignored"],
+      "memory": [{"addr": "@node1", "offset": "0x214", "u32": 0}],
+      "callees": {"0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "u32"], "ret": [1]}},
+      "expect": {"ret": 0}},
+    {"name": "null_ignored_single", "args": ["abc", 0],
+      "memory": [{"addr": "@node1", "offset": "0x214", "u32": 0}],
+      "callees": {"0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "u32"], "ret": [0]}}},
+    {"name": "shorter_second_wins", "args": ["abc", "@ignored"],
+      "memory": [{"addr": "@node1", "offset": "0x120", "cstr": "abcdefgh"}],
+      "callees": {"0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "u32"], "ret": [0, 0, 1]}}},
+    {"name": "longer_second_loses", "args": ["abc", "@ignored"],
+      "memory": [{"addr": "@node1", "offset": "0x120", "cstr": "abcd"}, {"addr": "@node2", "offset": "0x120", "cstr": "abcdefgh"}],
+      "callees": {"0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "u32"], "ret": [0, 0, 1]}}},
+    {"name": "equal_length_keeps_first", "args": ["abc", "@ignored"],
+      "memory": [{"addr": "@node1", "offset": "0x120", "cstr": "abcd"}, {"addr": "@node2", "offset": "0x120", "cstr": "wxyz"}],
+      "callees": {"0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "u32"], "ret": [0, 0, 1]}}},
+    {"name": "mismatch_then_match", "args": ["abc", "@ignored"],
+      "memory": [{"addr": "@node1", "offset": "0x120", "cstr": "xyz"}],
+      "callees": {"0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "u32"], "ret": [1, 0, 1]}}},
+    {"name": "ignored_shorter_skipped", "args": ["abc", "@node2"],
+      "memory": [{"addr": "@node1", "offset": "0x120", "cstr": "abcdef"}, {"addr": "@node2", "offset": "0x120", "cstr": "abc"}],
+      "callees": {"0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "u32"], "ret": [0, 0, 1]}}},
+    {"name": "all_mismatch", "args": ["abc", "@ignored"],
+      "callees": {"0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "u32"], "ret": [1, 1, 1]}},
+      "expect": {"ret": 0}},
+    {"name": "match_all_three_pick_shortest", "args": ["abc", "@ignored"],
+      "memory": [{"addr": "@node1", "offset": "0x120", "cstr": "abcdef"}, {"addr": "@node3", "offset": "0x120", "cstr": "abc"}],
+      "callees": {"0x0062202c": {"name": "__strnicmp", "conv": "cdecl", "args": ["cstr", "cstr", "u32"], "ret": [0, 0, 0]}}}
+  ],
+  "fuzz": {
+    "seed": 4691997,
+    "count": 100,
+    "args": [
+      {"choices": ["abc", "ABC", "xyz", "", "abcdef", "x"]},
+      {"choices": ["@ignored", "@node1", "@node2", 0]}
+    ],
+    "memory": [
+      {"addr": "0x00905cc4", "type": "ptr", "choices": ["@node1", "@node2", 0]}
+    ]
+  }
+}

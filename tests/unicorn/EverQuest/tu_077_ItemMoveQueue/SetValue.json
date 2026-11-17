@@ -1,0 +1,56 @@
+{
+  "function": "ItemLocationView_guess::SetFromSlotId_guess",
+  "original": "0x004b7215",
+  "sources": [
+    "src/EverQuest/tu_077_ItemMoveQueue.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@valuerecord",
+  "args": [
+    {
+      "name": "value_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "valuerecord": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {},
+  "cases": [
+    {"name": "negative_small", "args": [-1]},
+    {"name": "negative_large", "args": [-2147483648]},
+    {"name": "zero", "args": [0]},
+    {"name": "band0_mid", "args": [30]},
+    {"name": "band0_first_base_only", "args": [31]},
+    {"name": "band0_two_digits", "args": [32]},
+    {"name": "band0_high", "args": [1999]},
+    {"name": "band1_low", "args": [2000]},
+    {"name": "band1_high", "args": [2499]},
+    {"name": "band2_low", "args": [2500]},
+    {"name": "band2_high", "args": [2999]},
+    {"name": "band3_low", "args": [3000]},
+    {"name": "band3_high", "args": [3999]},
+    {"name": "band4_low", "args": [4000]},
+    {"name": "band4_high", "args": [4999]},
+    {"name": "gap_5000", "args": [5000]},
+    {"name": "gap_9999", "args": [9999]},
+    {"name": "band5_low", "args": [10000]},
+    {"name": "band5_high", "args": [10035]},
+    {"name": "past_band5", "args": [10036]},
+    {"name": "large", "args": [2147483647]}
+  ],
+  "fuzz": {
+    "seed": 4944405,
+    "count": 200,
+    "args": [
+      {}
+    ],
+    "memory": []
+  },
+  "_survivors": "L678: lower bound 4000 of band 4 is redundant; band 3 (value < 4000) is tested first, so 3999 never reaches band 4 and the change is equivalent"
+}

@@ -1,0 +1,254 @@
+{
+  "function": "CRaid_guess::HandleFullRaid_guess",
+  "original": "0x004316a1",
+  "sources": ["src/EverQuest/tu_025_Raid.cpp"],
+  "conv": "thiscall",
+  "this": "@everquestobject",
+  "args": [{"name": "data", "type": "int"}],
+  "ret": "void",
+  "objects": {
+    "everquestobject": {"size": "0x5ab9", "fill": "zero"},
+    "packet0": {
+      "size": "0x400", "fill": "zero",
+      "init": [
+        {"offset": "0x4", "cstr": "prefix"},
+        {"offset": "0x15f", "u32": 10},
+        {"offset": "0x163", "u32": 0},
+        {"offset": "0x167", "u32": 3},
+        {"offset": "0x16b", "u32": 0},
+        {"offset": "0x16f", "cstr": "group"},
+        {"offset": "0x175", "cstr": "Leader"}
+      ]
+    },
+    "packetSlots2": {
+      "size": "0x400", "fill": "zero",
+      "init": [
+        {"offset": "0x4", "cstr": "prefix"},
+        {"offset": "0x15f", "u32": 10},
+        {"offset": "0x163", "u32": 0},
+        {"offset": "0x167", "u32": 3},
+        {"offset": "0x16b", "u32": 2},
+        {"offset": "0x16f", "cstr": "first"},
+        {"offset": "0x175", "cstr": "second"},
+        {"offset": "0x17c", "cstr": "group"},
+        {"offset": "0x182", "cstr": "Leader"}
+      ]
+    },
+    "packet1": {
+      "size": "0x400", "fill": "zero",
+      "init": [
+        {"offset": "0x4", "cstr": "prefix"},
+        {"offset": "0x15f", "u32": 10},
+        {"offset": "0x163", "u32": 1},
+        {"offset": "0x167", "u32": 12345},
+        {"offset": "0x16b", "cstr": "Alice"},
+        {"offset": "0x171", "cstr": "value"},
+        {"offset": "0x177", "u8": 5},
+        {"offset": "0x178", "u8": 42},
+        {"offset": "0x179", "u8": 1},
+        {"offset": "0x17a", "u8": 1},
+        {"offset": "0x17b", "u8": 0},
+        {"offset": "0x17c", "u8": 1},
+        {"offset": "0x17d", "u8": 1},
+        {"offset": "0x17e", "u32": 3},
+        {"offset": "0x182", "u32": 1},
+        {"offset": "0x186", "cstr": "slot"},
+        {"offset": "0x18b", "cstr": "Group"},
+        {"offset": "0x191", "cstr": "Captain"},
+        {"offset": "0x199", "u8": 1}
+      ]
+    },
+    "packetInactive": {
+      "size": "0x400", "fill": "zero",
+      "init": [
+        {"offset": "0x4", "cstr": "prefix"},
+        {"offset": "0x15f", "u32": 10},
+        {"offset": "0x163", "u32": 1},
+        {"offset": "0x167", "u32": 54321},
+        {"offset": "0x16b", "cstr": "Bob"},
+        {"offset": "0x16f", "cstr": "other"},
+        {"offset": "0x175", "u8": 2},
+        {"offset": "0x176", "u8": 20},
+        {"offset": "0x177", "u8": 0},
+        {"offset": "0x178", "u8": 0},
+        {"offset": "0x179", "u8": 1},
+        {"offset": "0x17a", "u8": 0},
+        {"offset": "0x17b", "u8": 0},
+        {"offset": "0x17c", "u32": 1},
+        {"offset": "0x180", "u32": 0},
+        {"offset": "0x184", "cstr": "group"},
+        {"offset": "0x18a", "cstr": "Leader"}
+      ]
+    },
+    "packetNegative": {
+      "size": "0x400", "fill": "zero",
+      "init": [
+        {"offset": "0x4", "cstr": "prefix"},
+        {"offset": "0x15f", "u32": 10},
+        {"offset": "0x163", "u32": "0xffffffff"},
+        {"offset": "0x167", "u32": 2},
+        {"offset": "0x16b", "u32": "0xffffffff"},
+        {"offset": "0x16f", "cstr": "group"},
+        {"offset": "0x175", "cstr": "Leader"}
+      ]
+    },
+    "packet72": {
+      "size": "0x1000", "fill": "zero",
+      "init": [
+        {"offset": "0x4", "cstr": "prefix"},
+        {"offset": "0x15f", "u32": 10},
+        {"offset": "0x163", "u32": 72},
+        {"offset": "0x50f", "u32": 3},
+        {"offset": "0x513", "u32": 0},
+        {"offset": "0x517", "cstr": "Group"},
+        {"offset": "0x51d", "cstr": "Leader"}
+      ]
+    },
+    "ownerRoot": {
+      "size": "0xc300", "fill": "zero",
+      "init": [
+        {"offset": "0x8", "u32": "@ownerLink"},
+        {"offset": "0x44", "cstr": "Owner"}
+      ]
+    },
+    "ownerLink": {"size": "0x8", "fill": "zero", "init": [{"offset": "0x4", "u32": 0}]},
+    "ownerFlag": {"size": "0x4", "fill": "zero"},
+    "optional": {"size": "0x4", "fill": "zero"},
+    "lookup": {"size": "0x4", "fill": "zero"},
+    "messages": {"size": "0x4", "fill": "zero"},
+    "className": {"size": "0x40", "fill": "zero", "init": [{"offset": "0", "cstr": "Warrior"}]},
+    "message": {"size": "0x40", "fill": "zero", "init": [{"offset": "0", "cstr": "message"}]}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4},
+    {"addr": "0x00905ce4", "u32": "@ownerFlag"},
+    {"addr": "0x00985808", "u8": 1},
+    {"addr": "0x00985845", "u8": 2},
+    {"addr": "0x00985885", "u8": 3},
+    {"addr": "0x00850bf0", "u32": "@optional"},
+    {"addr": "0x00905d00", "u32": "@ownerRoot"},
+    {"addr": "0x0063f53f", "from_image": "0x0063f53f", "image_size": 1},
+    {"addr": "0x00905cb0", "u32": "@lookup"},
+    {"addr": "0x00988df0", "u32": "@messages"}
+  ],
+  "callees": {
+    "0x00479ea3": {"name": "OwnerFlag_guess::IsGroupInvitePending_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00479eb0": {"name": "OwnerFlag_guess::SetGroupInvitePending_guess", "conv": "thiscall", "args": ["int"]},
+    "0x004303f6": {"name": "ReportRosterChanges_guess", "conv": "thiscall", "args": ["ptr"]},
+    "0x0054fec9": {"name": "Reset_guess", "conv": "thiscall", "args": []},
+    "0x004315f6": {"name": "ResetRaid_guess", "conv": "thiscall", "args": []},
+    "0x00430338": {"name": "CopyPrefix_guess", "conv": "thiscall", "args": ["ptr"]},
+    "0x00433d68": {"name": "ReadBigEndianUInt32_guess", "conv": "cdecl", "args": ["ptr"], "ret": [10, 0, 3, 0]},
+    "0x0060e450": {"name": "CopyText_guess", "conv": "cdecl", "args": ["ptr", "cstr"], "passthrough": true},
+    "0x006220e9": {"name": "ConvertInteger_guess", "conv": "cdecl", "args": ["int", "ptr", "int"], "passthrough": true},
+    "0x00419631": {"name": "KunarkClass_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": "@className"},
+    "0x00550aac": {"name": "AddPlayer_guess", "conv": "thiscall", "args": ["cstr", "cstr", "cstr", "cstr", "cstr", "int", "int", "u8", "cstr"]},
+    "0x0054e1d9": {"name": "SetPlayerCount_guess", "conv": "thiscall", "args": ["int"]},
+    "0x00430680": {"name": "UpdateOptionsWindow_guess", "conv": "thiscall", "args": []},
+    "0x0043074f": {"name": "UpdateAverageLevel_guess", "conv": "thiscall", "args": []},
+    "0x0043144b": {"name": "SetRaidLeader_guess", "conv": "thiscall", "args": ["cstr"]},
+    "0x0055011d": {"name": "Refresh_guess", "conv": "thiscall", "args": []},
+    "0x00574950": {"name": "CompareRecord_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 1},
+    "0x00430366": {"name": "FindMemberIndex_guess", "conv": "thiscall", "args": ["cstr"], "ret": -1},
+    "0x005511db": {"name": "SetMemberRankText_guess", "conv": "thiscall", "args": ["ptr", "cstr", "int"]},
+    "0x0054ed28": {"name": "SetMotd_guess", "conv": "thiscall", "args": ["cstr"]},
+    "0x005dfa00": {"name": "Lookup_guess", "conv": "thiscall", "args": ["int", "int"], "ret": "@message"},
+    "0x004982c6": {"name": "ShowWithOptions_guess", "conv": "thiscall", "args": ["cstr", "int", "bool"]}
+  },
+  "rewrite_aliases": {"__itoa": "0x006220e9"},
+  "cases": [
+    {
+      "name": "empty-no-service-no-message",
+      "args": ["@packet0"],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e4", "u32": 4},
+        {"addr": "0x00850bf0", "u32": 0}
+      ],
+      "callees": {
+        "0x00479ea3": {"name": "OwnerFlag_guess::IsGroupInvitePending_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x00574950": {"name": "CompareRecord_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 1},
+        "0x00433d68": {"name": "ReadCount_guess", "conv": "cdecl", "args": ["ptr"], "ret": [10, 0, 3, 0]}
+      }
+    },
+    {
+      "name": "two-slots",
+      "args": ["@packetSlots2"],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e4", "u32": 4},
+        {"addr": "0x00850bf0", "u32": 0}
+      ],
+      "callees": {
+        "0x00479ea3": {"name": "OwnerFlag_guess::IsGroupInvitePending_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x00574950": {"name": "CompareRecord_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 1},
+        "0x00433d68": {"name": "ReadCount_guess", "conv": "cdecl", "args": ["ptr"], "ret": [10, 0, 3, 2]}
+      }
+    },
+    {
+      "name": "active-record-reset-match-and-message",
+      "args": ["@packet1"],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e4", "u32": 0},
+        {"addr": "0x00985808", "u8": 1},
+        {"addr": "0x00985845", "u8": 2},
+        {"addr": "0x00985885", "u8": 3},
+        {"addr": "0x00850bf0", "u32": "@optional"}
+      ],
+      "callees": {
+        "0x00479ea3": {"name": "OwnerFlag_guess::IsGroupInvitePending_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x00574950": {"name": "CompareRecord_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 0},
+        "0x00430366": {"name": "FindTextIndex_guess", "conv": "thiscall", "args": ["cstr"], "ret": 0},
+        "0x00433d68": {"name": "ReadCount_guess", "conv": "cdecl", "args": ["ptr"], "ret": [10, 1, 12345, 3, 1]}
+      }
+    },
+    {
+      "name": "inactive-record-and-search-miss",
+      "args": ["@packetInactive"],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e4", "u32": 4},
+        {"addr": "0x00850bf0", "u32": "@optional"}
+      ],
+      "callees": {
+        "0x00479ea3": {"name": "OwnerFlag_guess::IsGroupInvitePending_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x00574950": {"name": "CompareRecord_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 1},
+        "0x00430366": {"name": "FindTextIndex_guess", "conv": "thiscall", "args": ["cstr"], "ret": -1},
+        "0x00433d68": {"name": "ReadCount_guess", "conv": "cdecl", "args": ["ptr"], "ret": [10, 1, 54321, 1, 0]}
+      }
+    },
+    {
+      "name": "negative-record-and-slot-counts",
+      "args": ["@packetNegative"],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e4", "u32": 0},
+        {"addr": "0x00850bf0", "u32": 0}
+      ],
+      "callees": {
+        "0x00479ea3": {"name": "OwnerFlag_guess::IsGroupInvitePending_guess", "conv": "thiscall", "args": [], "ret": 1},
+        "0x00574950": {"name": "CompareRecord_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 1},
+        "0x00433d68": {"name": "ReadCount_guess", "conv": "cdecl", "args": ["ptr"], "ret": [10, -1, 2, -1]}
+      }
+    },
+    {
+      "name": "full-72-record-loop",
+      "args": ["@packet72"],
+      "memory": [
+        {"addr": "@everquestobject", "offset": "0x55e4", "u32": 4},
+        {"addr": "0x00850bf0", "u32": "@optional"}
+      ],
+      "callees": {
+        "0x00479ea3": {"name": "OwnerFlag_guess::IsGroupInvitePending_guess", "conv": "thiscall", "args": [], "ret": 0},
+        "0x00574950": {"name": "CompareRecord_guess", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": 0},
+        "0x00430366": {"name": "FindTextIndex_guess", "conv": "thiscall", "args": ["cstr"], "ret": -1},
+        "0x00433d68": {"name": "ReadCount_guess", "conv": "cdecl", "args": ["ptr"], "ret": [10, 72, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4404897,
+    "count": 100,
+    "args": [{"choices": ["@packet0"]}],
+    "memory": [
+      {"addr": "@everquestobject", "offset": "0x55e4", "type": "u32", "choices": [0, 4, 5]},
+      {"addr": "0x00850bf0", "type": "ptr", "choices": [0, "@optional"]}
+    ]
+  }
+}

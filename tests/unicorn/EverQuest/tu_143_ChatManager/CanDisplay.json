@@ -1,0 +1,321 @@
+{
+  "function": "Selector_guess::FindTellWindow_guess",
+  "original": "0x004f25bc",
+  "sources": [
+    "src/EverQuest/tu_143_ChatManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@selector",
+  "args": [
+    {
+      "name": "input_guess",
+      "type": "cstr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "selector": {
+      "size": "0x240",
+      "fill": "random"
+    },
+    "chat0": {
+      "size": "0x264",
+      "fill": "random"
+    },
+    "chat1": {
+      "size": "0x264",
+      "fill": "random"
+    },
+    "wrong": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "match": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0xa55a1234"
+    },
+    {
+      "addr": "@wrong",
+      "cstr": "Zzzz"
+    },
+    {
+      "addr": "@match",
+      "cstr": "M"
+    }
+  ],
+  "callees": {
+    "0x0060e963": {
+      "name": "_toupper",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": 77
+    },
+    "0x00611f39": {
+      "name": "_tolower",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": 97
+    },
+    "0x004d22d7": {
+      "name": "GetName_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "01000000"
+        },
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "00000000",
+          "call": 1
+        }
+      ]
+    },
+    "0x00572300": {
+      "name": "GetText_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        "@wrong",
+        "@match"
+      ]
+    },
+    "0x00571d00": {
+      "name": "Release_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "_toupper": "0x0060e963",
+    "_tolower": "0x00611f39"
+  },
+  "cases": [
+    {
+      "name": "null-empty",
+      "args": [
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@selector",
+          "offset": "0x80",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "one-character-empty",
+      "args": [
+        "m"
+      ],
+      "memory": [
+        {
+          "addr": "@selector",
+          "offset": "0x80",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "long-empty",
+      "args": [
+        "maaa"
+      ],
+      "memory": [
+        {
+          "addr": "@selector",
+          "offset": "0x80",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "null-slot",
+      "args": [
+        "maaa"
+      ],
+      "memory": [
+        {
+          "addr": "@selector",
+          "offset": "0x80",
+          "u32": 1
+        },
+        {
+          "addr": "@selector",
+          "offset": "0x00",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "inactive-slot",
+      "args": [
+        "maaa"
+      ],
+      "memory": [
+        {
+          "addr": "@selector",
+          "offset": "0x80",
+          "u32": 1
+        },
+        {
+          "addr": "@selector",
+          "offset": "0x00",
+          "u32": "@chat0"
+        },
+        {
+          "addr": "@chat0",
+          "offset": "0x1b5",
+          "u8": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "name-mismatch",
+      "args": [
+        "maaa"
+      ],
+      "memory": [
+        {
+          "addr": "@selector",
+          "offset": "0x80",
+          "u32": 1
+        },
+        {
+          "addr": "@selector",
+          "offset": "0x00",
+          "u32": "@chat0"
+        },
+        {
+          "addr": "@chat0",
+          "offset": "0x1b5",
+          "u8": 1
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "match-after-mismatch",
+      "args": [
+        "m"
+      ],
+      "memory": [
+        {
+          "addr": "@selector",
+          "offset": "0x80",
+          "u32": 2
+        },
+        {
+          "addr": "@selector",
+          "offset": "0x00",
+          "u32": "@chat0"
+        },
+        {
+          "addr": "@selector",
+          "offset": "0x04",
+          "u32": "@chat1"
+        },
+        {
+          "addr": "@chat0",
+          "offset": "0x1b5",
+          "u8": 1
+        },
+        {
+          "addr": "@chat1",
+          "offset": "0x1b5",
+          "u8": 1
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5187004,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "m",
+          "maaa"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@selector",
+        "offset": "0x80",
+        "type": "int",
+        "range": [
+          0,
+          2
+        ]
+      },
+      {
+        "addr": "@selector",
+        "offset": "0x00",
+        "type": "ptr",
+        "count": 2,
+        "stride": 4,
+        "choices": [
+          0,
+          "@chat0",
+          "@chat1"
+        ]
+      },
+      {
+        "addr": "@chat0",
+        "offset": "0x1b5",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@chat1",
+        "offset": "0x1b5",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

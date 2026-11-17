@@ -1,0 +1,95 @@
+{
+  "function": "Callback_guess::~Callback_guess",
+  "original": "0x004eca52",
+  "sources": [
+    "src/EverQuest/tu_140_CastSpellWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@callback",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "callback": {
+      "size": "0x1b4",
+      "fill": "random"
+    },
+    "dispatcher": {
+      "size": "0x20",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "@callback", "offset": "0x1a0", "u32": 3},
+    {"addr": "0x0099d414", "u32": "@dispatcher"}
+  ],
+  "callees": {
+    "0x004ec711": {
+      "name": "Callback_guess::Clear_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005ad7f0": {
+      "name": "Dispatcher_guess::ReleaseIndex_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 0
+    },
+    "0x0050f3f6": {
+      "name": "Array_guess::Clear_guess (member dtor)",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005a3100": {
+      "name": "CSidlScreenWnd::~CSidlScreenWnd (base dtor)",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "index held, dispatcher set: release it",
+      "args": []
+    },
+    {
+      "name": "no index: no release",
+      "args": [],
+      "memory": [
+        {"addr": "@callback", "offset": "0x1a0", "u32": -1}
+      ]
+    },
+    {
+      "name": "dispatcher null: no release",
+      "args": [],
+      "memory": [
+        {"addr": "0x0099d414", "u32": 0}
+      ]
+    },
+    {
+      "name": "index zero, dispatcher set",
+      "args": [],
+      "memory": [
+        {"addr": "@callback", "offset": "0x1a0", "u32": 0}
+      ]
+    },
+    {
+      "name": "index zero, dispatcher null",
+      "args": [],
+      "memory": [
+        {"addr": "@callback", "offset": "0x1a0", "u32": 0},
+        {"addr": "0x0099d414", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5163602,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@callback", "offset": "0x1a0", "type": "int", "choices": [-1, 0, 1, 2, 3, 7, 64]},
+      {"addr": "0x0099d414", "type": "ptr", "choices": [0, "@dispatcher"]}
+    ]
+  }
+}

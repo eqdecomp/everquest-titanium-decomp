@@ -1,0 +1,68 @@
+{
+  "function": "KeyLookupOwner_guess::CheckChatText_guess",
+  "original": "0x004063f2",
+  "sources": ["src/EverQuest/tu_005_AudioTriggersWindow.cpp"],
+  "conv": "thiscall",
+  "this": "@keylookupowner",
+  "args": [{"name": "value", "type": "cstr"}],
+  "ret": "void",
+  "objects": {
+    "keylookupowner": {
+      "size": "0x18",
+      "fill": "zero",
+      "init": [{"offset": "0x4", "u32": "@node"}]
+    },
+    "node": {"size": "0x18", "fill": "zero"},
+    "node2": {"size": "0x18", "fill": "zero"}
+  },
+  "memory": [],
+  "callees": {
+    "0x00571e00": {
+      "name": "FUN_00571e00",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "keep"
+    },
+    "0x004062b4": {
+      "name": "PlayIfMatches_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "FUN_00571d00",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "keep"
+    }
+  },
+  "cases": [
+    {"name": "empty-list", "args": ["empty"], "memory": [
+      {"addr": "@keylookupowner", "offset": "0x4", "u32": 0}
+    ]},
+    {"name": "one-node-no-match", "args": ["plain"], "memory": [
+      {"addr": "@keylookupowner", "offset": "0x4", "u32": "@node"},
+      {"addr": "@node", "offset": "0x4", "u32": 0}
+    ]},
+    {"name": "one-node-match", "args": ["match"], "memory": [
+      {"addr": "@keylookupowner", "offset": "0x4", "u32": "@node"},
+      {"addr": "@node", "offset": "0x4", "u32": 0}
+    ], "callees": {"0x004062b4": {
+      "name": "FUN_004062b4", "conv": "thiscall", "args": ["ptr"], "ret": 1
+    }}},
+    {"name": "two-nodes", "args": ["two"], "memory": [
+      {"addr": "@keylookupowner", "offset": "0x4", "u32": "@node"},
+      {"addr": "@node", "offset": "0x4", "u32": "@node2"},
+      {"addr": "@node2", "offset": "0x4", "u32": 0}
+    ]}
+  ],
+  "fuzz": {
+    "seed": 4219890,
+    "count": 100,
+    "args": [{}],
+    "memory": [
+      {"addr": "@keylookupowner", "offset": "0x4", "type": "ptr", "choices": [0, "@node"]},
+      {"addr": "@node", "offset": "0x4", "type": "ptr", "choices": [0]}
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "function": "CBarterMerchantWnd_guess::Poll_guess",
+  "original": "0x004ddad1",
+  "sources": ["src/EverQuest/tu_128_BarterMerchantWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@controller",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "controller": {"size": "0x1a0", "fill": "random"},
+    "list": {"size": "0x140", "fill": "zero"},
+    "button": {"size": "0x100", "fill": "zero"},
+    "char_data": {"size": "0x100", "fill": "zero"},
+    "blocks": {"size": "8", "fill": "zero", "init": [{"offset": "0", "u32": "@rows"}, {"offset": "4", "u32": "@rows2"}]},
+    "rows": {"size": "0xe00", "fill": "random"},
+    "rows2": {"size": "0xe00", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "@controller", "offset": "0x164", "u32": "@list"},
+    {"addr": "@controller", "offset": "0x168", "u32": "@button"},
+    {"addr": "@controller", "offset": "0x178", "u32": 2},
+    {"addr": "@controller", "offset": "0x180", "u32": 31},
+    {"addr": "@controller", "offset": "0x184", "u32": 5},
+    {"addr": "@controller", "offset": "0x188", "u32": "@blocks"},
+    {"addr": "0x00905d00", "u32": "@char_data"},
+    {"addr": "0x009248d0", "u32": 0}
+  ],
+  "callees": {
+    "0x00597be0": {"name": "CListWnd_GetCurSel", "conv": "thiscall", "args": [], "ret": 1},
+    "0x0047c3af": {"name": "PowerTable_init", "conv": "thiscall", "args": ["int"]},
+    "0x004b85ae": {"name": "FindItemsById_guess", "conv": "cdecl", "args": ["ptr", "int", "int", "u32", "ignore", "int"], "ret": 1},
+    "0x004b73ee": {"name": "ArrayTable_destroy", "conv": "thiscall", "args": []}
+  },
+  "cases": [
+    {"name": "busy_flag_set", "args": [], "memory": [{"addr": "0x009248d0", "u32": 1}]},
+    {"name": "no_list", "args": [], "memory": [{"addr": "@controller", "offset": "0x164", "u32": 0}]},
+    {"name": "no_selection", "args": [], "callees": {"0x00597be0": {"name": "CListWnd_GetCurSel", "conv": "thiscall", "args": [], "ret": -1}}},
+    {"name": "selection_past_end", "args": [], "callees": {"0x00597be0": {"name": "CListWnd_GetCurSel", "conv": "thiscall", "args": [], "ret": 2}}},
+    {"name": "first_row_loaded", "args": [], "callees": {"0x00597be0": {"name": "CListWnd_GetCurSel", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "last_row_loaded", "args": [], "callees": {"0x00597be0": {"name": "CListWnd_GetCurSel", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "load_fails", "args": [], "callees": {"0x004b85ae": {"name": "LoadItem_guess", "conv": "cdecl", "args": ["ptr", "int", "int", "u32", "ignore", "int"], "ret": 0}}},
+    {"name": "second_block", "args": [], "memory": [{"addr": "@controller", "offset": "0x178", "u32": 40}], "callees": {"0x00597be0": {"name": "CListWnd_GetCurSel", "conv": "thiscall", "args": [], "ret": 37}}},
+    {"name": "no_button", "args": [], "memory": [{"addr": "@controller", "offset": "0x168", "u32": 0}]},
+    {"name": "neighbour_byte_set", "args": [], "memory": [{"addr": "0x009248cf", "u8": 1}, {"addr": "0x009248d0", "u32": 0}]}
+  ],
+  "fuzz": {
+    "seed": 5102289,
+    "count": 60,
+    "args": [],
+    "memory": [
+      {"addr": "0x009248d0", "type": "int", "choices": [0, 0, 1]},
+      {"addr": "@controller", "offset": "0x178", "type": "int", "choices": [0, 1, 2, 3, 40]}
+    ]
+  }
+}

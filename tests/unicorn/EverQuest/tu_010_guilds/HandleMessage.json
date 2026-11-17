@@ -1,0 +1,336 @@
+{
+  "function": "GuildManagement_guess::HandleMessage_guess",
+  "original": "0x0040b8cb",
+  "sources": [
+    "src/EverQuest/tu_010_guilds.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@guildmanagement",
+  "args": [
+    {
+      "name": "connection",
+      "type": "ptr"
+    },
+    {
+      "name": "messageId",
+      "type": "u32"
+    },
+    {
+      "name": "data",
+      "type": "ptr"
+    },
+    {
+      "name": "size",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "guildmanagement": {
+      "size": "0x179b8",
+      "fill": "random",
+      "init": [
+        {"offset": "0x48", "u32": 0},
+        {"offset": "0x17994", "u8": 0},
+        {"offset": "0x179b4", "u8": 0}
+      ]
+    },
+    "data": {
+      "size": "0x17748",
+      "fill": "random",
+      "init": [
+        {"offset": 0, "hex": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"}
+      ]
+    },
+    "connection": {"size": "0x4", "fill": "random"},
+    "everquest": {"size": "0x4", "fill": "random"},
+    "manager": {"size": "0xa0", "fill": "random"},
+    "record": {"size": "0x4c", "fill": "random"},
+    "node1": {
+      "size": "0x274",
+      "fill": "random",
+      "init": [
+        {"offset": 0, "u32": 0},
+        {"offset": "0x10", "hex": "416c70686100"}
+      ]
+    },
+    "node2": {
+      "size": "0x274",
+      "fill": "random",
+      "init": [
+        {"offset": 0, "u32": "@node1"},
+        {"offset": "0x10", "hex": "4265746100"}
+      ]
+    },
+    "source": {"size": "0x10", "fill": "random"},
+    "other": {"size": "0x10", "fill": "random"},
+    "lookupglobal": {
+      "size": "0x100",
+      "fill": "random",
+      "init": [
+        {"offset": 8, "u32": "@offset"},
+        {"offset": "0x44", "hex": "506c617965723100"}
+      ]
+    },
+    "offset": {"size": "0x8", "fill": "random", "init": [{"offset": 4, "u32": 0}]}
+  },
+  "memory": [
+    {"addr": "0x00988df0", "u32": "@everquest"},
+    {"addr": "0x00905ce4", "u32": "@source"},
+    {"addr": "0x00905d00", "u32": "@lookupglobal"},
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x0063f53f", "hex": "00"}
+  ],
+  "callees": {
+    "0x0040b213": {"name": "Handle", "conv": "thiscall", "args": ["ptr"]},
+    "0x0040b175": {"name": "ConvertRequest", "conv": "thiscall", "args": ["ptr"]},
+    "0x0040a977": {"name": "ClearRecord", "conv": "thiscall", "args": ["ptr"]},
+    "0x0040af04": {"name": "Load", "conv": "thiscall", "args": ["ptr"]},
+    "0x00495250": {"name": "GetManager", "conv": "thiscall", "args": [], "ret": "@manager"},
+    "0x0040aa28": {"name": "FindNode", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x0040a9f1": {"name": "ClearAudio", "conv": "thiscall", "args": ["ptr"]},
+    "0x0040b242": {"name": "ConvertAndDispatch", "conv": "thiscall", "args": ["ptr"]},
+    "0x00401b28": {"name": "LookupSource", "conv": "cdecl", "args": ["u32"], "ret": 0},
+    "0x0040a918": {"name": "AddFromRequest", "conv": "thiscall", "args": ["ptr", "int"]},
+    "0x0040b079": {"name": "RemoveMember", "conv": "thiscall", "args": ["ptr", "int"]},
+    "0x0040b1aa": {"name": "UpdateRequest", "conv": "thiscall", "args": ["ptr"]},
+    "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr", "ignore", "ignore", "ignore"], "ret": 0},
+    "0x004912b1": {"name": "Send", "conv": "cdecl", "args": ["ignore", "int", "ignore", "int", "char"], "ret": 0},
+    "0x00403631": {"name": "StringCtor", "conv": "thiscall", "this": "ignore", "args": ["cstr"], "ret": 0},
+    "0x0040b88b": {"name": "PushBack", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": 0},
+    "0x0040291e": {"name": "StringTidy", "conv": "thiscall", "this": "ignore", "args": ["int", "u32"], "ret": 0},
+    "0x0040ab88": {"name": "VectorSize", "conv": "thiscall", "this": "ignore", "args": [], "ret": 0},
+    "0x0040b7b2": {"name": "VectorCopy", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": 0},
+    "0x0042ba5e": {"name": "RecordCtor", "conv": "thiscall", "this": "ignore", "args": ["ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "ignore", "int"], "ret": 0},
+    "0x0042bf38": {"name": "ListAdd", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x0040b867": {"name": "RecordDtor", "conv": "thiscall", "this": "ignore", "args": [], "ret": 0},
+    "0x00428534": {"name": "ListFind", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": 0},
+    "0x0042bf49": {"name": "ListRemove", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x0040b540": {"name": "VectorTidy", "conv": "thiscall", "this": "ignore", "args": [], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "?sprintf@@YAHPADPBDZZ": "0x0060d5eb",
+    "?Tidy_guess@GuildString_guess@@QAEX_NI@Z": "0x0040291e"
+  },
+  "cases": [
+    {
+      "name": "4cc7 negative index",
+      "args": ["@connection", "0x4cc7", "@data", 1],
+      "memory": [{"addr": "@data", "offset": 0, "u32": "0xffffffff"}]
+    },
+    {
+      "name": "4cc7 index 0x5dc",
+      "args": ["@connection", "0x4cc7", "@data", 1],
+      "memory": [{"addr": "@data", "offset": 0, "u32": "0x5dc"}]
+    },
+    {
+      "name": "4cc7 index 5",
+      "args": ["@connection", "0x4cc7", "@data", 1],
+      "memory": [
+        {"addr": "@data", "offset": 0, "u32": 5},
+        {"addr": "@data", "offset": 4, "hex": "4e616d653500"}
+      ]
+    },
+    {
+      "name": "4cc7 last index",
+      "args": ["@connection", "0x4cc7", "@data", 1],
+      "memory": [
+        {"addr": "@data", "offset": 0, "u32": "0x5db"},
+        {"addr": "@data", "offset": 4, "hex": "4c61737400"}
+      ]
+    },
+    {
+      "name": "2ec9 index 0",
+      "args": ["@connection", "0x2ec9", "@data", 1],
+      "memory": [
+        {"addr": "@data", "offset": 0, "u32": 0},
+        {"addr": "@data", "offset": 4, "hex": "5a656400"}
+      ]
+    },
+    {
+      "name": "f4d not found",
+      "args": ["@connection", "0xf4d", "@data", 1]
+    },
+    {
+      "name": "f4d value zero",
+      "args": ["@connection", "0xf4d", "@data", 1],
+      "callees": {
+        "0x0040aa28": {"name": "FindNode", "conv": "thiscall", "args": ["ptr"], "ret": "@node1"}
+      },
+      "memory": [
+        {"addr": "@data", "offset": "0x44", "u32": 0},
+        {"addr": "@data", "offset": "0x48", "u32": 0}
+      ]
+    },
+    {
+      "name": "f4d value nonzero",
+      "args": ["@connection", "0xf4d", "@data", 1],
+      "callees": {
+        "0x0040aa28": {"name": "FindNode", "conv": "thiscall", "args": ["ptr"], "ret": "@node1"}
+      },
+      "memory": [
+        {"addr": "@data", "offset": "0x44", "u32": 3},
+        {"addr": "@data", "offset": "0x48", "u32": 7}
+      ]
+    },
+    {
+      "name": "147d guild names load, no everquest",
+      "args": ["@connection", "0x147d", "@data", 1],
+      "memory": [
+        {"addr": "@data", "offset": 0, "hex": "41004200"},
+        {"addr": "0x00988df0", "u32": 0}
+      ]
+    },
+    {
+      "name": "147d guild names load, tail empty",
+      "args": ["@connection", "0x147d", "@data", 1],
+      "memory": [
+        {"addr": "@data", "offset": 0, "hex": "41004200"}
+      ]
+    },
+    {
+      "name": "18b7 ignores message",
+      "args": ["@connection", "0x18b7", "@data", 1]
+    },
+    {
+      "name": "3230 clear record",
+      "args": ["@connection", "0x3230", "@data", 1],
+      "memory": [{"addr": "@data", "offset": 0, "u32": 3}]
+    },
+    {
+      "name": "32cf convert request",
+      "args": ["@connection", "0x32cf", "@data", 1],
+      "memory": [{"addr": "@data", "offset": 4, "u32": 9}]
+    },
+    {
+      "name": "461a handle request",
+      "args": ["@connection", "0x461a", "@data", 1],
+      "memory": [{"addr": "@data", "offset": 4, "u32": 9}]
+    },
+    {
+      "name": "6957 exact size",
+      "args": ["@connection", "0x6957", "@data", "0x17740"],
+      "memory": [{"addr": "@data", "offset": "0x40", "hex": "0102030405060708"}]
+    },
+    {
+      "name": "6957 sizes differ no player",
+      "args": ["@connection", "0x6957", "@data", 256],
+      "memory": [{"addr": "0x00905d00", "u32": 0}]
+    },
+    {
+      "name": "6957 sizes differ with player",
+      "args": ["@connection", "0x6957", "@data", 256],
+      "callees": {
+        "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr", "cstr", "u32", "int", "int"], "ret": 0}
+      }
+    },
+    {
+      "name": "6966 update request",
+      "args": ["@connection", "0x6966", "@data", 1],
+      "memory": [{"addr": "@data", "offset": 8, "u32": 5}]
+    },
+    {
+      "name": "712a manager null",
+      "args": ["@connection", "0x712a", "@data", 1],
+      "callees": {
+        "0x00495250": {"name": "GetManager", "conv": "thiscall", "args": [], "ret": 0}
+      }
+    },
+    {
+      "name": "754e add request, no members",
+      "args": ["@connection", "0x754e", "@data", 1],
+      "memory": [{"addr": "@data", "offset": 8, "u32": 5}]
+    },
+    {
+      "name": "7c32 bad size",
+      "args": ["@connection", "0x7c32", "@data", 7]
+    },
+    {
+      "name": "7c32 zero id, null source",
+      "args": ["@connection", "0x7c32", "@data", 8],
+      "memory": [
+        {"addr": "@data", "offset": 0, "u32": 0},
+        {"addr": "0x00905ce4", "u32": 0}
+      ]
+    },
+    {
+      "name": "7c32 zero id, tail",
+      "args": ["@connection", "0x7c32", "@data", 8],
+      "memory": [{"addr": "@data", "offset": 0, "u32": 0}]
+    },
+    {
+      "name": "7c32 id lookup match",
+      "args": ["@connection", "0x7c32", "@data", 8],
+      "callees": {
+        "0x00401b28": {"name": "LookupSource", "conv": "cdecl", "args": ["u32"], "ret": "@source"},
+        "0x0040ab88": {"name": "VectorSize", "conv": "thiscall", "this": "ignore", "args": [], "ret": 1}
+      },
+      "memory": [
+        {"addr": "@data", "offset": 0, "u32": "0x1234"},
+        {"addr": "@guildmanagement", "offset": "0x48", "u32": "@node1"}
+      ]
+    },
+    {
+      "name": "7c32 id lookup null",
+      "args": ["@connection", "0x7c32", "@data", 8],
+      "callees": {
+        "0x00401b28": {"name": "LookupSource", "conv": "cdecl", "args": ["u32"], "ret": 0}
+      },
+      "memory": [{"addr": "@data", "offset": 0, "u32": "0x1234"}]
+    },
+    {
+      "name": "7c32 id lookup other",
+      "args": ["@connection", "0x7c32", "@data", 8],
+      "callees": {
+        "0x00401b28": {"name": "LookupSource", "conv": "cdecl", "args": ["u32"], "ret": "@other"}
+      },
+      "memory": [{"addr": "@data", "offset": 0, "u32": "0x1234"}]
+    },
+    {
+      "name": "7c59 one member",
+      "args": ["@connection", "0x7c59", "@data", 1],
+      "callees": {
+        "0x0040ab88": {"name": "VectorSize", "conv": "thiscall", "this": "ignore", "args": [], "ret": 1}
+      },
+      "memory": [{"addr": "@guildmanagement", "offset": "0x48", "u32": "@node1"}]
+    },
+    {
+      "name": "7c59 two members",
+      "args": ["@connection", "0x7c59", "@data", 1],
+      "callees": {
+        "0x0040ab88": {"name": "VectorSize", "conv": "thiscall", "this": "ignore", "args": [], "ret": 2}
+      },
+      "memory": [{"addr": "@guildmanagement", "offset": "0x48", "u32": "@node2"}]
+    },
+    {
+      "name": "7c59 remove existing guild entry",
+      "args": ["@connection", "0x7c59", "@data", 1],
+      "callees": {
+        "0x00428534": {"name": "ListFind", "conv": "thiscall", "this": "ignore", "args": ["ignore"], "ret": "@record"}
+      }
+    },
+    {
+      "name": "unknown message",
+      "args": ["@connection", "0x1234", "@data", 1]
+    }
+  ],
+  "fuzz": {
+    "seed": 4241611,
+    "count": 80,
+    "args": [
+      {"choices": ["@connection"]},
+      {"choices": [19655, 11977, 3917, 5245, 6327, 12848, 13007, 17946, 26967, 26982, 28970, 30030, 31794, 31833, 4660]},
+      {"choices": ["@data"]},
+      {"choices": [0, 1, 4, 7, 8, 256, 96064]}
+    ],
+    "memory": [
+      {"addr": "@data", "offset": 0, "type": "u32", "choices": [0, 1, 5, 1499, 1500, 4294967295]},
+      {"addr": "@data", "offset": "0x44", "type": "u32", "choices": [0, 1, 7]},
+      {"addr": "@data", "offset": "0x48", "type": "u32", "choices": [0, 3]},
+      {"addr": "@guildmanagement", "offset": "0x48", "type": "u32", "choices": [0, "@node1", "@node2"]},
+      {"addr": "0x00988df0", "type": "u32", "choices": [0, "@everquest"]},
+      {"addr": "0x00905ce4", "type": "u32", "choices": [0, "@source"]},
+      {"addr": "0x00905d00", "type": "u32", "choices": [0, "@lookupglobal"]}
+    ]
+  }
+}

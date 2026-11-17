@@ -1,0 +1,155 @@
+{
+  "function": "CSoulmarkWndView_guess::FillFields_guess",
+  "original": "0x00555c1e",
+  "sources": ["src/EverQuest/tu_214_SoulmarkWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@soulmarkwnd",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "soulmarkwnd": {
+      "size": "0x1900",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x15c", "u32": "@list"},
+        {"offset": "0x160", "u32": "@wnd_name"},
+        {"offset": "0x164", "u32": "@wnd_second"},
+        {"offset": "0x168", "u32": "@wnd_env"},
+        {"offset": "0x16c", "u32": "@wnd_gmid"},
+        {"offset": "0x170", "u32": "@wnd_date"},
+        {"offset": "0x174", "u32": "@wnd_remove"},
+        {"offset": "0x178", "u32": "@wnd_edit"},
+        {"offset": "0x17c", "u32": "@wnd_marktext"}
+      ]
+    },
+    "list": {"size": "0x100", "fill": "zero"},
+    "wnd_vt": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xfc", "u32": "@fn_settext"}]
+    },
+    "fn_settext": {"size": "0x4"},
+    "wnd_name": {"size": "0x100", "fill": "zero", "init": [{"offset": "0x0", "u32": "@wnd_vt"}]},
+    "wnd_second": {"size": "0x100", "fill": "zero", "init": [{"offset": "0x0", "u32": "@wnd_vt"}]},
+    "wnd_env": {"size": "0x100", "fill": "zero", "init": [{"offset": "0x0", "u32": "@wnd_vt"}]},
+    "wnd_gmid": {"size": "0x100", "fill": "zero", "init": [{"offset": "0x0", "u32": "@wnd_vt"}]},
+    "wnd_date": {"size": "0x100", "fill": "zero", "init": [{"offset": "0x0", "u32": "@wnd_vt"}]},
+    "wnd_remove": {"size": "0x100", "fill": "zero", "init": [{"offset": "0x0", "u32": "@wnd_vt"}]},
+    "wnd_edit": {"size": "0x100", "fill": "zero", "init": [{"offset": "0x0", "u32": "@wnd_vt"}]},
+    "wnd_marktext": {"size": "0x100", "fill": "zero", "init": [{"offset": "0x0", "u32": "@wnd_vt"}]},
+    "label": {"size": "0x20", "fill": "zero"},
+    "ctime_buf": {"size": "0x20", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@soulmarkwnd", "offset": "0x390", "cstr": "Alice"},
+    {"addr": "@soulmarkwnd", "offset": "0x3d0", "cstr": "Pine"},
+    {"addr": "@soulmarkwnd", "offset": "0x3f0", "cstr": "Tunare"},
+    {"addr": "@soulmarkwnd", "offset": "0x430", "u8": 1},
+    {"addr": "@soulmarkwnd", "offset": "0x450", "u32": 1700000000},
+    {"addr": "@soulmarkwnd", "offset": "0x454", "u32": 1},
+    {"addr": "@soulmarkwnd", "offset": "0x458", "cstr": "hello"},
+    {"addr": "@label", "cstr": "Warning"},
+    {"addr": "@ctime_buf", "cstr": "Wed Nov 15 22:13:20 2023\n"}
+  ],
+  "callees": {
+    "0x00597be0": {"name": "GetCurSel_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00597ed0": {"name": "GetItemData_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00571e00": {"name": "CXStr_ctor", "conv": "thiscall", "args": ["cstr"], "ret": "keep"},
+    "0x00571d00": {"name": "CXStr_dtor", "conv": "thiscall", "args": ["u32"], "ret": "keep"},
+    "0x0060eca3": {"name": "_ctime", "conv": "cdecl", "args": ["u32"], "ret": "@ctime_buf"},
+    "0x005a40f0": {
+      "name": "ColorTag_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "int"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]
+    },
+    "0x00572c10": {"name": "CXStr_append_cxstr", "conv": "thiscall", "args": ["ignore"], "ret": "keep"},
+    "0x00572e00": {"name": "CXStr_append_cstr", "conv": "thiscall", "args": ["cstr"], "ret": "keep"},
+    "0x005dfa00": {"name": "StringTable_getString", "conv": "thiscall", "args": ["u32", "u32"], "ret": "@label"},
+    "0x00407d68": {
+      "name": "CXStr_copy",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "keep",
+      "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]
+    },
+    "0x005a8b00": {"name": "CStmlWnd_SetSTMLText", "conv": "thiscall", "args": ["ignore", "u32", "u32"], "ret": "keep"},
+    "@fn_settext": {
+      "name": "CXWnd_SetText_slot63",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": "keep",
+      "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]
+    }
+  },
+  "rewrite_aliases": {
+    "_ctime": "0x0060eca3"
+  },
+  "_survivors": "L420: SetSTMLText's flag parameter is a bool, so 2 converts to true and pushes the same 1 (equivalent mutant)",
+  "cases": [
+    {
+      "name": "no-selection-returns",
+      "args": [],
+      "callees": {"0x00597be0": {"conv": "thiscall", "args": [], "ret": -1}}
+    },
+    {
+      "name": "index0-kind0-disables-and-returns",
+      "args": [],
+      "memory": [{"addr": "@soulmarkwnd", "offset": "0x454", "u32": 0}]
+    },
+    {
+      "name": "index0-kind1-plain-text",
+      "args": []
+    },
+    {
+      "name": "index0-kind2-red-and-id-3741-table",
+      "args": [],
+      "memory": [{"addr": "@soulmarkwnd", "offset": "0x454", "u32": 2}]
+    },
+    {
+      "name": "index0-kind3-green-not-two",
+      "args": [],
+      "memory": [{"addr": "@soulmarkwnd", "offset": "0x454", "u32": 3}]
+    },
+    {
+      "name": "index0-kind-negative-nonzero",
+      "args": [],
+      "memory": [{"addr": "@soulmarkwnd", "offset": "0x454", "u32": 4294967295}]
+    },
+    {
+      "name": "index3-kind2-record-offset",
+      "args": [],
+      "memory": [
+        {"addr": "@soulmarkwnd", "offset": "0x8e8", "cstr": "Bob"},
+        {"addr": "@soulmarkwnd", "offset": "0x928", "cstr": "Oak"},
+        {"addr": "@soulmarkwnd", "offset": "0x948", "cstr": "Kunark"},
+        {"addr": "@soulmarkwnd", "offset": "0x988", "u8": 2},
+        {"addr": "@soulmarkwnd", "offset": "0x9a8", "u32": 0},
+        {"addr": "@soulmarkwnd", "offset": "0x9ac", "u32": 2},
+        {"addr": "@soulmarkwnd", "offset": "0x9b0", "cstr": "bye"}
+      ],
+      "callees": {"0x00597ed0": {"conv": "thiscall", "args": ["int"], "ret": 3}}
+    },
+    {
+      "name": "index11-kind1-last-slot",
+      "args": [],
+      "memory": [
+        {"addr": "@soulmarkwnd", "offset": "0x1728", "cstr": "Zed"},
+        {"addr": "@soulmarkwnd", "offset": "0x17ec", "u32": 1},
+        {"addr": "@soulmarkwnd", "offset": "0x17f0", "cstr": "end"}
+      ],
+      "callees": {"0x00597ed0": {"conv": "thiscall", "args": ["int"], "ret": 11}}
+    }
+  ],
+  "fuzz": {
+    "seed": 5594142,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@soulmarkwnd", "offset": "0x454", "type": "u32", "choices": [0, 1, 2, 3, 4294967295]},
+      {"addr": "@soulmarkwnd", "offset": "0x430", "type": "u8", "choices": [0, 1, 255]},
+      {"addr": "@soulmarkwnd", "offset": "0x450", "type": "u32", "choices": [0, 1700000000]}
+    ]
+  }
+}

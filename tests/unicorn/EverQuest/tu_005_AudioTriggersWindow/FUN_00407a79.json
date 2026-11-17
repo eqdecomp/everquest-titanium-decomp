@@ -1,0 +1,235 @@
+{
+  "function": "CAudioTriggersWindowView_guess::SwapListRow_guess",
+  "original": "0x00407a79",
+  "sources": [
+    "src/EverQuest/tu_005_AudioTriggersWindow.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner407",
+  "args": [
+    {
+      "name": "delta",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "owner407": {
+      "size": "0x190",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x188",
+          "u32": "@pool"
+        },
+        {
+          "offset": "0x18c",
+          "u32": 7
+        }
+      ]
+    },
+    "pool": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "callees": {
+    "0x00597ed0": {
+      "name": "Pool407_guess::Item_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": [193, 211]
+    },
+    "0x00597f10": {
+      "name": "Pool407_guess::Get_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "int", "int"],
+      "ret": "arg0",
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "00000000", "call": 0},
+        {"arg": 0, "offset": 0, "hex": "00000000", "call": 1},
+        {"arg": 0, "offset": 0, "hex": "00000000", "call": 2},
+        {"arg": 0, "offset": 0, "hex": "00000000", "call": 3}
+      ]
+    },
+    "0x0059b360": {
+      "name": "Pool407_guess::Set_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "ignore"],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "Str_guess::Release_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x00598620": {
+      "name": "Pool407_guess::Bind_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 0
+    },
+    "0x0047c3af": {
+      "name": "ArrayClass2_guess::Initialize_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x004073cb": {
+      "name": "ArrayClass2_guess::SetAt_guess",
+      "conv": "thiscall",
+      "args": ["int", "mem:4"],
+      "ret": 0
+    },
+    "0x00598580": {
+      "name": "Pool407_guess::Flush_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0059b280": {
+      "name": "Pool407_guess::Adopt_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "0x00406e7e": {
+      "name": "ArrayClass2_guess::Clear_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "zero outputs",
+      "args": [0],
+      "memory": [
+        {"addr": "@owner407", "offset": "0x18c", "u32": 0}
+      ]
+    },
+    {
+      "name": "all releases",
+      "args": [1],
+      "memory": [
+        {"addr": "@owner407", "offset": "0x18c", "u32": 7}
+      ],
+      "callees": {
+        "0x00597f10": {
+          "name": "Pool407_guess::Get_guess",
+          "conv": "thiscall",
+          "args": ["ignore", "int", "int"],
+          "ret": "arg0",
+          "writes": [
+            {"arg": 0, "offset": 0, "hex": "11000060", "call": 0},
+            {"arg": 0, "offset": 0, "hex": "22000060", "call": 1},
+            {"arg": 0, "offset": 0, "hex": "33000060", "call": 2},
+            {"arg": 0, "offset": 0, "hex": "44000060", "call": 3}
+          ]
+        }
+      }
+    },
+    {
+      "name": "first temporary release",
+      "args": [-1],
+      "callees": {
+        "0x00597f10": {
+          "name": "Pool407_guess::Get_guess",
+          "conv": "thiscall",
+          "args": ["ignore", "int", "int"],
+          "ret": "arg0",
+          "writes": [
+            {"arg": 0, "offset": 0, "hex": "00000000", "call": 0},
+            {"arg": 0, "offset": 0, "hex": "00000000", "call": 1},
+            {"arg": 0, "offset": 0, "hex": "55000060", "call": 2},
+            {"arg": 0, "offset": 0, "hex": "00000000", "call": 3}
+          ]
+        }
+      }
+    },
+    {
+      "name": "second temporary release",
+      "args": [2],
+      "callees": {
+        "0x00597f10": {
+          "name": "Pool407_guess::Get_guess",
+          "conv": "thiscall",
+          "args": ["ignore", "int", "int"],
+          "ret": "arg0",
+          "writes": [
+            {"arg": 0, "offset": 0, "hex": "00000000", "call": 0},
+            {"arg": 0, "offset": 0, "hex": "00000000", "call": 1},
+            {"arg": 0, "offset": 0, "hex": "00000000", "call": 2},
+            {"arg": 0, "offset": 0, "hex": "66000060", "call": 3}
+          ]
+        }
+      }
+    },
+    {
+      "name": "first saved string cleanup",
+      "args": [0],
+      "callees": {
+        "0x00597f10": {
+          "name": "Pool407_guess::Get_guess",
+          "conv": "thiscall",
+          "args": ["ignore", "int", "int"],
+          "ret": "arg0",
+          "writes": [
+            {"arg": 0, "offset": 0, "hex": "77000060", "call": 0},
+            {"arg": 0, "offset": 0, "hex": "00000000", "call": 1},
+            {"arg": 0, "offset": 0, "hex": "00000000", "call": 2},
+            {"arg": 0, "offset": 0, "hex": "00000000", "call": 3}
+          ]
+        }
+      }
+    },
+    {
+      "name": "second saved string cleanup",
+      "args": [0],
+      "callees": {
+        "0x00597f10": {
+          "name": "Pool407_guess::Get_guess",
+          "conv": "thiscall",
+          "args": ["ignore", "int", "int"],
+          "ret": "arg0",
+          "writes": [
+            {"arg": 0, "offset": 0, "hex": "00000000", "call": 0},
+            {"arg": 0, "offset": 0, "hex": "88000060", "call": 1},
+            {"arg": 0, "offset": 0, "hex": "00000000", "call": 2},
+            {"arg": 0, "offset": 0, "hex": "00000000", "call": 3}
+          ]
+        }
+      }
+    },
+    {
+      "name": "positive index overflow",
+      "args": [1],
+      "memory": [
+        {"addr": "@owner407", "offset": "0x18c", "u32": 2147483647}
+      ]
+    },
+    {
+      "name": "negative index overflow",
+      "args": [-1],
+      "memory": [
+        {"addr": "@owner407", "offset": "0x18c", "u32": -2147483648}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4225657,
+    "count": 100,
+    "args": [
+      {"choices": [-2147483648, -3, -1, 0, 1, 4, 2147483647]}
+    ],
+    "memory": [
+      {
+        "addr": "@owner407",
+        "offset": "0x18c",
+        "type": "int",
+        "choices": [-2147483648, -1, 0, 5, 2147483647]
+      }
+    ]
+  }
+}

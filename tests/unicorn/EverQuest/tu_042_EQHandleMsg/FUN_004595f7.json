@@ -1,0 +1,222 @@
+{
+  "function": "Handle_OP_SpecialMesg_guess",
+  "original": "0x004595f7",
+  "sources": [
+    "src/EverQuest/tu_042_EQHandleMsg.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    { "name": "mode_guess", "type": "int" },
+    { "name": "channel_guess", "type": "u32" },
+    { "name": "text_guess", "type": "cstr" },
+    { "name": "x_guess", "type": "int" },
+    { "name": "y_guess", "type": "int" },
+    { "name": "z_guess", "type": "int" },
+    { "name": "spawnId_guess", "type": "int" },
+    { "name": "source_guess", "type": "cstr" },
+    { "name": "messageType_guess", "type": "int" },
+    { "name": "color_guess", "type": "int" }
+  ],
+  "ret": "void",
+  "size": "0x1e1",
+  "coverage_ok": {
+    "004596A3-004596A4": "The identical 32-entry channel bound is checked earlier; out-of-range categories fault at 00459636 first."
+  },
+  "objects": {
+    "character": {
+      "size": "0xc4d0",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x8", "u32": "@vbtable" },
+        { "offset": "0xc288", "u32": "@spawn" }
+      ]
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x4", "u32": "0xc37c" }
+      ]
+    },
+    "spawn": {
+      "size": "0x348",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x258", "u32": 7 }
+      ]
+    },
+    "everquest": { "size": "0x8", "fill": "zero" },
+    "string_table": { "size": "0x8", "fill": "zero" },
+    "renderer": { "size": "0x8", "fill": "zero" },
+    "localized": { "size": "0x40", "fill": "zero" },
+    "channel_name": { "size": "0x40", "fill": "zero" }
+  },
+  "memory": [
+    { "addr": "0x0079ac74", "u32": "0x12345678" },
+    { "addr": "0x00905d00", "u32": "@character" },
+    { "addr": "0x00988df0", "u32": "@everquest" },
+    { "addr": "0x00905cb0", "u32": "@string_table" },
+    { "addr": "0x00923d74", "u32": 0 },
+    { "addr": "0x00850ca4", "u32": "@renderer" },
+    { "addr": "@character", "offset": "0xc390", "size": 32, "fill": "zero" },
+    { "addr": "@localized", "cstr": "localized" },
+    { "addr": "@channel_name", "cstr": "channel" }
+  ],
+  "callees": {
+    "0x00492595": {
+      "name": "ChannelTextResolver::Resolve",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@channel_name"
+    },
+    "0x0046da4a": {
+      "name": "FormatNotice",
+      "conv": "cdecl",
+      "args": ["ignore", "int", "cstr", "cstr", "cstr", "u32", "u32", "u32", "u32", "u32", "u32"],
+      "ret": 0,
+      "writes": [
+        { "arg": 0, "offset": 0, "hex": "666f726d617474656400" }
+      ]
+    },
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": ["u32", "u32"],
+      "ret": "@localized"
+    },
+    "0x00478f73": {
+      "name": "ConvertChannelText",
+      "conv": "cdecl",
+      "args": ["cstr", "ignore", "u32"],
+      "ret": 0,
+      "writes": [
+        { "arg": 1, "offset": 0, "hex": "636f6e76657274656400" }
+      ]
+    },
+    "0x004982c6": {
+      "name": "CEverQuest::dsp_chat",
+      "conv": "thiscall",
+      "args": ["cstr", "int", "bool"]
+    },
+    "0x00524fc6": {
+      "name": "AddDialogEntry_guess",
+      "conv": "thiscall",
+      "args": ["cstr", "float", "float", "float", "cstr"]
+    }
+  },
+  "cases": [
+    {
+      "name": "mode_zero_channel_zero_copy",
+      "args": [0, 0, "plain text", 10, 20, 30, 7, "source", 0, 4]
+    },
+    {
+      "name": "channel_byte_24_translates_and_mode_two_formats",
+      "args": [2, 1, "chat text", 10, 20, 30, 7, "source", 2, 5],
+      "memory": [
+        { "addr": "@character", "offset": "0xc391", "u8": 24 },
+        { "addr": "0x00923d74", "u32": 0 }
+      ]
+    },
+    {
+      "name": "channel_byte_25_formats_and_mode_three_matches_spawn",
+      "args": [3, 2, "chat text", 10, 20, 30, 7, "source", 1, 5],
+      "memory": [
+        { "addr": "@character", "offset": "0xc392", "u8": 25 },
+        { "addr": "0x00923d74", "u32": 1 }
+      ]
+    },
+    {
+      "name": "channel_conversion_flag_suppresses_sound",
+      "args": [2, 3, "chat text", 10, 20, 30, 7, "source", 2, 5],
+      "memory": [
+        { "addr": "@character", "offset": "0xc393", "u8": 25 },
+        { "addr": "0x00923d74", "u32": 0 }
+      ],
+      "callees": {
+        "0x00478f73": {
+          "name": "ConvertChannelText",
+          "conv": "cdecl",
+          "args": ["cstr", "ignore", "u32"],
+          "ret": 1,
+          "writes": [
+            { "arg": 1, "offset": 0, "hex": "636f6e76657274656400" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "mode_two_without_channel",
+      "args": [2, 0, "chat text", 10, 20, 30, 7, "source", 0, 5]
+    },
+    {
+      "name": "mode_three_without_channel",
+      "args": [3, 0, "chat text", 10, 20, 30, 7, "source", 0, 5]
+    },
+    {
+      "name": "mode_four_without_channel",
+      "args": [4, 0, "chat text", 10, 20, 30, 7, "source", 0, 5]
+    },
+    {
+      "name": "default_mode_without_channel",
+      "args": [1, 0, "chat text", 10, 20, 30, 7, "source", 0, 5]
+    },
+    {
+      "name": "default_mode_with_channel_and_text_type_two",
+      "args": [1, 4, "chat text", 10, 20, 30, 7, "source", 2, 5],
+      "memory": [
+        { "addr": "@character", "offset": "0xc394", "u8": 24 },
+        { "addr": "0x00923d74", "u32": 1 }
+      ]
+    },
+    {
+      "name": "message_type_one_spawn_mismatch",
+      "args": [0, 0, "chat text", 10, 20, 30, 9, "source", 1, 5]
+    },
+    {
+      "name": "empty_text_suppresses_sound",
+      "args": [0, 0, "", 10, 20, 30, 7, "source", 2, 5]
+    },
+    {
+      "name": "disabled_sound_target",
+      "args": [0, 0, "chat text", 10, 20, 30, 7, "source", 2, 5],
+      "memory": [
+        { "addr": "0x00850ca4", "u32": 0 }
+      ]
+    },
+    {
+      "name": "channel_31_valid_boundary",
+      "args": [0, 31, "chat text", 10, 20, 30, 7, "source", 0, 5],
+      "memory": [
+        { "addr": "@character", "offset": "0xc3af", "u8": 25 },
+        { "addr": "0x00923d74", "u32": 1 }
+      ]
+    },
+    {
+      "name": "channel_32_bounds_break",
+      "args": [0, 32, "chat text", 10, 20, 30, 7, "source", 0, 5]
+    }
+  ],
+  "fuzz": {
+    "seed": 4560375,
+    "count": 120,
+    "args": [
+      { "choices": [0, 1, 2, 3, 4, 5] },
+      { "range": [0, 31] },
+      { "choices": ["", "x", "short text", "a longer chat message"] },
+      { "range": [-1000, 1000] },
+      { "range": [-1000, 1000] },
+      { "range": [-1000, 1000] },
+      { "range": [0, 16] },
+      { "choices": ["", "source", "source text"] },
+      { "choices": [0, 1, 2, 3] },
+      { "range": [0, 255] }
+    ],
+    "memory": [
+      { "addr": "@character", "offset": "0xc390", "type": "u8", "count": 32, "range": [0, 40] },
+      { "addr": "0x00923d74", "type": "int", "choices": [0, 1] },
+      { "addr": "0x00850ca4", "type": "ptr", "choices": [0, "@renderer"] },
+      { "addr": "@spawn", "offset": "0x258", "type": "u32", "range": [0, 16] }
+    ]
+  },
+  "_survivors": "L4995: the alternate out-of-range lookup follows __debugbreak and cannot run after its int3; L5009: the second bounds check is unreachable for categories >= 32 because the first bounds check already traps, and it is equivalent below 32; L5013: the alternate out-of-range lookup follows __debugbreak and cannot run after its int3"
+}

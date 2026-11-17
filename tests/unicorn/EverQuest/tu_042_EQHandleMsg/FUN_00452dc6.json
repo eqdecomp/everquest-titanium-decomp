@@ -1,0 +1,105 @@
+{
+  "function": "Handle_OP_YellForHelp_guess",
+  "original": "0x00452dc6",
+  "sources": ["src/EverQuest/tu_042_EQHandleMsg.cpp"],
+  "conv": "cdecl",
+  "args": [{"name": "argument_guess", "type": "ptr"}],
+  "ret": "void",
+  "objects": {
+    "argument": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "u32": 7}]},
+    "position": {"size": "0x50", "fill": "zero", "init": [
+      {"offset": "0x30", "f32": 10.0}, {"offset": "0x34", "f32": 20.0},
+      {"offset": "0x38", "f32": 30.0}, {"offset": "0x4c", "f32": 100.0}
+    ]},
+    "target": {"size": "0x1a8", "fill": "zero", "init": [
+      {"offset": "0x30", "f32": 40.0}, {"offset": "0x34", "f32": 50.0},
+      {"offset": "0x38", "f32": 60.0}, {"offset": "0x120", "cstr": "target"}
+    ]},
+    "settings": {"size": "0x4", "fill": "zero"},
+    "display": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905ce4", "u32": "@position"},
+    {"addr": "0x00905d24", "u32": "@settings"},
+    {"addr": "0x00988df0", "u32": "@display"},
+    {"addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4},
+    {"addr": "0x0063f4cc", "from_image": "0x0063f4cc", "image_size": 4},
+    {"addr": "0x0064112c", "from_image": "0x0064112c", "image_size": 4},
+    {"addr": "0x00641120", "from_image": "0x00641120", "image_size": 4},
+    {"addr": "0x00641140", "from_image": "0x00641140", "image_size": 4},
+    {"addr": "0x00641128", "from_image": "0x00641128", "image_size": 4},
+    {"addr": "0x00641124", "from_image": "0x00641124", "image_size": 4}
+  ],
+  "callees": {
+    "0x00401b28": {"name": "ResolveDispatch_guess", "conv": "cdecl", "args": ["u32"], "ret": "@target"},
+    "0x0046e42f": {"name": "get_bearing_guess", "conv": "cdecl", "args": ["float", "float", "float", "float"], "ret_float": 50.0},
+    "0x00439c41": {"name": "TrueDistance_guess", "conv": "thiscall", "args": ["float", "float", "float", "float", "float", "float", "float"], "ret_float": 0.0},
+    "0x00436628": {"name": "HeadingDiff_guess", "conv": "thiscall", "args": ["float", "float", "mem:4"], "ret_float": 16.0, "writes": [{"arg": 2, "offset": 0, "hex": "0000803f"}]},
+    "0x00492ec2": {"name": "GetText_guess", "conv": "thiscall", "args": ["cstr"], "ret": "arg0"},
+    "0x0046da4a": {"name": "FormatNotice_guess", "conv": "cdecl", "args": ["ignore", "int", "cstr", "cstr", "cstr", "int", "int", "int", "int", "int", "int"], "ret": 0},
+    "0x004982c6": {"name": "Display453F72_guess", "conv": "thiscall", "args": ["cstr", "int", "bool"], "ret": 0}
+  },
+  "cases": [
+    {"name": "null dispatch", "args": ["@argument"], "callees": {
+      "0x00401b28": {"name": "ResolveDispatch_guess", "conv": "cdecl", "args": ["u32"], "ret": 0}
+    }},
+    {"name": "null position", "args": ["@argument"], "memory": [{"addr": "0x00905ce4", "u32": 0}]},
+    {"name": "angle zero", "args": ["@argument"], "callees": {
+      "0x00436628": {"name": "FUN_00436628_guess", "conv": "thiscall", "args": ["float", "float", "mem:4"], "ret_float": 0.0, "writes": [{"arg": 2, "offset": 0, "hex": "0000803f"}]}
+    }},
+    {"name": "angle 32", "args": ["@argument"], "callees": {
+      "0x00436628": {"name": "FUN_00436628_guess", "conv": "thiscall", "args": ["float", "float", "mem:4"], "ret_float": 32.0, "writes": [{"arg": 2, "offset": 0, "hex": "0000803f"}]}
+    }},
+    {"name": "angle 32 to 96 side true", "args": ["@argument"], "callees": {
+      "0x00436628": {"name": "FUN_00436628_guess", "conv": "thiscall", "args": ["float", "float", "mem:4"], "ret_float": 64.0, "writes": [{"arg": 2, "offset": 0, "hex": "0000803f"}]}
+    }},
+    {"name": "angle 32 to 96 side false", "args": ["@argument"], "callees": {
+      "0x00436628": {"name": "FUN_00436628_guess", "conv": "thiscall", "args": ["float", "float", "mem:4"], "ret_float": 64.0, "writes": [{"arg": 2, "offset": 0, "hex": "000080bf"}]}
+    }},
+    {"name": "angle 96", "args": ["@argument"], "callees": {
+      "0x00436628": {"name": "FUN_00436628_guess", "conv": "thiscall", "args": ["float", "float", "mem:4"], "ret_float": 96.0, "writes": [{"arg": 2, "offset": 0, "hex": "0000803f"}]}
+    }},
+    {"name": "angle 96 to 160 side false", "args": ["@argument"], "callees": {
+      "0x00436628": {"name": "FUN_00436628_guess", "conv": "thiscall", "args": ["float", "float", "mem:4"], "ret_float": 128.0, "writes": [{"arg": 2, "offset": 0, "hex": "000080bf"}]}
+    }},
+    {"name": "angle 160 side true", "args": ["@argument"], "callees": {
+      "0x00436628": {"name": "FUN_00436628_guess", "conv": "thiscall", "args": ["float", "float", "mem:4"], "ret_float": 160.0, "writes": [{"arg": 2, "offset": 0, "hex": "0000803f"}]}
+    }},
+    {"name": "angle 160 to 224 side true", "args": ["@argument"], "callees": {
+      "0x00436628": {"name": "FUN_00436628_guess", "conv": "thiscall", "args": ["float", "float", "mem:4"], "ret_float": 192.0, "writes": [{"arg": 2, "offset": 0, "hex": "0000803f"}]}
+    }},
+    {"name": "angle 160 to 224 side false", "args": ["@argument"], "callees": {
+      "0x00436628": {"name": "FUN_00436628_guess", "conv": "thiscall", "args": ["float", "float", "mem:4"], "ret_float": 192.0, "writes": [{"arg": 2, "offset": 0, "hex": "000080bf"}]}
+    }},
+    {"name": "angle 224", "args": ["@argument"], "callees": {
+      "0x00436628": {"name": "FUN_00436628_guess", "conv": "thiscall", "args": ["float", "float", "mem:4"], "ret_float": 224.0, "writes": [{"arg": 2, "offset": 0, "hex": "0000803f"}]}
+    }},
+    {"name": "angle 224 to 256", "args": ["@argument"], "callees": {
+      "0x00436628": {"name": "FUN_00436628_guess", "conv": "thiscall", "args": ["float", "float", "mem:4"], "ret_float": 240.0, "writes": [{"arg": 2, "offset": 0, "hex": "0000803f"}]}
+    }},
+    {"name": "angle 256", "args": ["@argument"], "callees": {
+      "0x00436628": {"name": "FUN_00436628_guess", "conv": "thiscall", "args": ["float", "float", "mem:4"], "ret_float": 256.0, "writes": [{"arg": 2, "offset": 0, "hex": "0000803f"}]}
+    }},
+    {"name": "angle above 256", "args": ["@argument"], "callees": {
+      "0x00436628": {"name": "FUN_00436628_guess", "conv": "thiscall", "args": ["float", "float", "mem:4"], "ret_float": 272.0, "writes": [{"arg": 2, "offset": 0, "hex": "0000803f"}]}
+    }},
+    {"name": "angle 224 side false", "args": ["@argument"], "callees": {
+      "0x00436628": {"name": "FUN_00436628_guess", "conv": "thiscall", "args": ["float", "float", "mem:4"], "ret_float": 224.0, "writes": [{"arg": 2, "offset": 0, "hex": "000080bf"}]}
+    }},
+    {"name": "negative angle", "args": ["@argument"], "callees": {
+      "0x00436628": {"name": "FUN_00436628_guess", "conv": "thiscall", "args": ["float", "float", "mem:4"], "ret_float": -1.0, "writes": [{"arg": 2, "offset": 0, "hex": "0000803f"}]}
+    }}
+  ],
+  "fuzz": {
+    "seed": 4533702,
+    "count": 100,
+    "args": [{"choices": ["@argument"]}],
+    "memory": [
+      {"addr": "@position", "offset": "0x30", "type": "float", "count": 3, "range": [-100.0, 100.0]},
+      {"addr": "@position", "offset": "0x4c", "type": "float", "range": [-360.0, 360.0]},
+      {"addr": "@target", "offset": "0x30", "type": "float", "count": 3, "range": [-100.0, 100.0]},
+      {"addr": "0x00905ce4", "type": "u32", "choices": ["@position", 0]}
+    ]
+  },
+  "_survivors": "L1344: the <= 32 arm is equivalent to < 32 here; this side-false branch is reached only when angle < 0 or angle > 32, so equality at 32 cannot reach it."
+}

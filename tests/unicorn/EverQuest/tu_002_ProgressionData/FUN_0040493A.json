@@ -1,0 +1,100 @@
+{
+  "function": "FUN_0040493A_guess",
+  "original": "0x0040493a",
+  "sources": [
+    "src/EverQuest/tu_002_ProgressionData.cpp"
+  ],
+  "conv": "stdcall",
+  "args": [
+    {
+      "name": "a_guess",
+      "type": "int"
+    },
+    {
+      "name": "b_guess",
+      "type": "int"
+    },
+    {
+      "name": "c_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "heap": {
+      "size": "0x58",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@heap"
+    },
+    "0x004047b4": {
+      "name": "FUN_004047b4",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32",
+        "u32"
+      ],
+      "ret": "keep"
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "zeros",
+      "args": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "allocation returns null: no constructor call",
+      "args": [
+        7,
+        8,
+        9
+      ],
+      "callees": {
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4213050,
+    "count": 100,
+    "args": [
+      {},
+      {},
+      {}
+    ],
+    "memory": []
+  },
+  "_survivors": "L1576: the catch(...) handler body (result = 0) runs only when operator new throws; the emulator's operator_new stub never throws (FIXTURES.md item 4), and the original's handler is not in its 82 bytes"
+}

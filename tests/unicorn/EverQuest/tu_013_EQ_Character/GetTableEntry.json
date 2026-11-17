@@ -1,0 +1,104 @@
+{
+  "function": "GetTableEntry_guess",
+  "original": "0x00417355",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "stdcall",
+  "args": [
+    {
+      "name": "value_guess",
+      "type": "int"
+    },
+    {
+      "name": "column_guess",
+      "type": "u8"
+    }
+  ],
+  "ret": "char",
+  "objects": {},
+  "callees": {
+    "0x004167b2": {
+      "name": "FUN_004167b2",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "passthrough": true
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00695FE9",
+      "size": "0x200",
+      "fill": "random"
+    }
+  ],
+  "cases": [
+    {
+      "name": "mapped_row_zero",
+      "args": [
+        -1,
+        0
+      ]
+    },
+    {
+      "name": "row_one",
+      "args": [
+        0,
+        6
+      ]
+    },
+    {
+      "name": "row_twelve",
+      "args": [
+        11,
+        7
+      ]
+    },
+    {
+      "name": "row_thirteen",
+      "args": [
+        126,
+        0
+      ]
+    },
+    {
+      "name": "row_fourteen",
+      "args": [
+        128,
+        1
+      ]
+    },
+    {
+      "name": "row_fifteen",
+      "args": [
+        328,
+        6
+      ]
+    },
+    {
+      "name": "row_sixteen",
+      "args": [
+        13,
+        255
+      ]
+    },
+    {
+      "name": "default_mapping_boundary",
+      "args": [
+        12,
+        2
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4289365,
+    "count": 100,
+    "args": [
+      {},
+      {}
+    ],
+    "memory": []
+  }
+}

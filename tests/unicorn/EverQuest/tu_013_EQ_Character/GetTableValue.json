@@ -1,0 +1,173 @@
+{
+  "function": "TableSelector_guess::CheckClass_guess",
+  "original": "0x00416e9c",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@tableselector",
+  "args": [
+    {
+      "name": "kind_guess",
+      "type": "int"
+    },
+    {
+      "name": "column_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "char",
+  "objects": {
+    "tableselector": {
+      "size": "0x1",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00694F50",
+      "size": 272,
+      "fill": "random"
+    }
+  ],
+  "callees": {
+    "0x00576670": {
+      "name": "HasArchive_guess",
+      "conv": "cdecl",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x004167b2": {
+      "name": "MapLookupValue_guess",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "passthrough": true
+    }
+  },
+  "cases": [
+    {
+      "name": "negative_direct_mapping",
+      "args": [
+        -1,
+        0
+      ]
+    },
+    {
+      "name": "mapping_below_boundary",
+      "args": [
+        11,
+        15
+      ]
+    },
+    {
+      "name": "mapping_at_boundary",
+      "args": [
+        12,
+        15
+      ]
+    },
+    {
+      "name": "mapping_special_128",
+      "args": [
+        127,
+        4
+      ]
+    },
+    {
+      "name": "mapping_special_130",
+      "args": [
+        129,
+        10
+      ]
+    },
+    {
+      "name": "mapping_special_330",
+      "args": [
+        329,
+        3
+      ]
+    },
+    {
+      "name": "archive_absent_column_4",
+      "args": [
+        2,
+        4
+      ],
+      "callees": {
+        "0x00576670": {
+          "name": "HasArchive_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "archive_present_column_10",
+      "args": [
+        2,
+        10
+      ],
+      "callees": {
+        "0x00576670": {
+          "name": "HasArchive_guess",
+          "conv": "cdecl",
+          "args": [
+            "cstr"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "other_column_for_kind_2",
+      "args": [
+        2,
+        3
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4288156,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          -1,
+          0,
+          1,
+          2,
+          3,
+          10,
+          11,
+          12,
+          127,
+          129,
+          329
+        ]
+      },
+      {
+        "choices": [
+          0,
+          3,
+          4,
+          9,
+          10,
+          15
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x00694F50",
+        "size": 272
+      }
+    ]
+  }
+}

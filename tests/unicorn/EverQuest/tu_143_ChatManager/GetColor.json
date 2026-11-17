@@ -1,0 +1,66 @@
+{
+  "function": "ColorTable_guess::GetRGBAFromIndex",
+  "original": "0x004f2bbe",
+  "sources": [
+    "src/EverQuest/tu_143_ChatManager.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@colortable",
+  "args": [
+    {
+      "name": "value",
+      "type": "int"
+    }
+  ],
+  "ret": "u32",
+  "objects": {
+    "colortable": {
+      "size": "0x10",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00438ba7": {
+      "name": "GetColorData",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": 1193046
+    }
+  },
+  "cases": [
+    {"name": "zero", "args": [0]},
+    {"name": "two", "args": [2]},
+    {"name": "four", "args": [4]},
+    {"name": "five", "args": [5]},
+    {"name": "six", "args": [6]},
+    {"name": "seven", "args": [7]},
+    {"name": "ten", "args": [10]},
+    {"name": "twelve", "args": [12]},
+    {"name": "thirteen", "args": [13]},
+    {"name": "fourteen", "args": [14]},
+    {"name": "fifteen", "args": [15]},
+    {"name": "sixteen", "args": [16]},
+    {"name": "eighteen", "args": [18]},
+    {"name": "twenty", "args": [20]},
+    {"name": "one_default", "args": [1]},
+    {"name": "three_default", "args": [3]},
+    {"name": "eleven_default", "args": [11]},
+    {"name": "nineteen_default", "args": [19]},
+    {"name": "twentyone_default", "args": [21]},
+    {"name": "negative_default", "args": [-1]},
+    {"name": "boundary_ff", "args": [255]},
+    {"name": "above_ff_callee_zero", "args": [256], "callees": {"0x00438ba7": {"name": "GetColorData", "conv": "cdecl", "args": ["int"], "ret": 0}}},
+    {"name": "above_ff_callee_nonzero", "args": [257], "callees": {"0x00438ba7": {"name": "GetColorData", "conv": "cdecl", "args": ["int"], "ret": 1193046}}}
+  ],
+  "fuzz": {
+    "seed": 5188542,
+    "count": 150,
+    "args": [
+      {"range": [-8, 600]}
+    ],
+    "memory": []
+  }
+}

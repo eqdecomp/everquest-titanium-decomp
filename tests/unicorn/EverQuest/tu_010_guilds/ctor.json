@@ -1,0 +1,38 @@
+{
+  "function": "Config_guess::Config_guess",
+  "original": "0x0040bd15",
+  "sources": [
+    "src/EverQuest/tu_010_guilds.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@config",
+  "args": [],
+  "ret": "ptr",
+  "objects": {
+    "config": {
+      "size": "0x170",
+      "fill": "random",
+      "init": [
+        {"offset": 0, "u32": 305419896}
+      ]
+    }
+  },
+  "memory": [],
+  "callees": {},
+  "cases": [
+    {
+      "name": "typical",
+      "args": []
+    },
+    {
+      "name": "zeros",
+      "args": []
+    }
+  ],
+  "fuzz": {
+    "seed": 4242709,
+    "count": 100,
+    "args": [],
+    "memory": []
+  }
+}

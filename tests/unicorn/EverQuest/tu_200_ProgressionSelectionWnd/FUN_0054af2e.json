@@ -1,0 +1,490 @@
+{
+  "function": "CProgressionSelectionWndCallbackView_guess::HandleEvent_guess",
+  "original": "0x0054af2e",
+  "sources": [
+    "src/EverQuest/tu_200_ProgressionSelectionWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@callback_0054af2e",
+  "args": [
+    {
+      "name": "enabled_guess",
+      "type": "int"
+    },
+    {
+      "name": "event_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "size": "0xfc",
+  "objects": {
+    "callback_0054af2e": {
+      "size": "0x18",
+      "fill": "random"
+    },
+    "event": {
+      "size": "0xc",
+      "fill": "random"
+    },
+    "list1": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "list2": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "list3": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@callback_0054af2e",
+      "offset": "0xc",
+      "u32": "@list1"
+    },
+    {
+      "addr": "@callback_0054af2e",
+      "offset": "0x10",
+      "u32": "@list2"
+    },
+    {
+      "addr": "@callback_0054af2e",
+      "offset": "0x14",
+      "u32": "@list3"
+    },
+    {
+      "addr": "@event",
+      "offset": "0x0",
+      "u32": 2
+    },
+    {
+      "addr": "@event",
+      "offset": "0x4",
+      "u32": 0
+    },
+    {
+      "addr": "@event",
+      "offset": "0x8",
+      "u32": 0
+    }
+  ],
+  "callees": {
+    "0x00597be0": {
+      "name": "FUN_00597be0",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        1,
+        2
+      ]
+    },
+    "0x00597ed0": {
+      "name": "FUN_00597ed0",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": [
+        -7,
+        51
+      ]
+    },
+    "0x0054957d": {
+      "name": "ShowSelectedEquipment_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x005496d3": {
+      "name": "ShowSelectedAbility_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0054af10": {
+      "name": "ShowTemplate_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "u8"
+      ],
+      "ret": 0
+    },
+    "0x00549db0": {
+      "name": "Open_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "disabled",
+      "args": [
+        0,
+        "@event"
+      ]
+    },
+    {
+      "name": "null event",
+      "args": [
+        1,
+        0
+      ]
+    },
+    {
+      "name": "unknown kind",
+      "args": [
+        1,
+        "@event"
+      ]
+    },
+    {
+      "name": "kind zero",
+      "args": [
+        1,
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "kind one byte argument",
+      "args": [
+        1,
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 1
+        },
+        {
+          "addr": "@event",
+          "offset": "0x4",
+          "u32": 305419896
+        },
+        {
+          "addr": "@event",
+          "offset": "0x8",
+          "u32": 171
+        }
+      ]
+    },
+    {
+      "name": "kind three match with negative absolute value",
+      "args": [
+        1,
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 3
+        },
+        {
+          "addr": "@event",
+          "offset": "0x4",
+          "u32": 7
+        },
+        {
+          "addr": "@event",
+          "offset": "0x8",
+          "u32": 51
+        }
+      ]
+    },
+    {
+      "name": "kind three first mismatch",
+      "args": [
+        1,
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 3
+        },
+        {
+          "addr": "@event",
+          "offset": "0x4",
+          "u32": 8
+        },
+        {
+          "addr": "@event",
+          "offset": "0x8",
+          "u32": 51
+        }
+      ]
+    },
+    {
+      "name": "kind three second mismatch",
+      "args": [
+        1,
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 3
+        },
+        {
+          "addr": "@event",
+          "offset": "0x4",
+          "u32": 7
+        },
+        {
+          "addr": "@event",
+          "offset": "0x8",
+          "u32": 52
+        }
+      ]
+    },
+    {
+      "name": "kind three null first list",
+      "args": [
+        1,
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 3
+        },
+        {
+          "addr": "@callback_0054af2e",
+          "offset": "0xc",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "kind three null second list",
+      "args": [
+        1,
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 3
+        },
+        {
+          "addr": "@callback_0054af2e",
+          "offset": "0x14",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "kind four match",
+      "args": [
+        1,
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 4
+        },
+        {
+          "addr": "@event",
+          "offset": "0x4",
+          "u32": 7
+        },
+        {
+          "addr": "@event",
+          "offset": "0x8",
+          "u32": 51
+        }
+      ]
+    },
+    {
+      "name": "kind four first mismatch",
+      "args": [
+        1,
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 4
+        },
+        {
+          "addr": "@event",
+          "offset": "0x4",
+          "u32": 8
+        },
+        {
+          "addr": "@event",
+          "offset": "0x8",
+          "u32": 51
+        }
+      ]
+    },
+    {
+      "name": "kind four second mismatch",
+      "args": [
+        1,
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 4
+        },
+        {
+          "addr": "@event",
+          "offset": "0x4",
+          "u32": 7
+        },
+        {
+          "addr": "@event",
+          "offset": "0x8",
+          "u32": 52
+        }
+      ]
+    },
+    {
+      "name": "kind four null first list",
+      "args": [
+        1,
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 4
+        },
+        {
+          "addr": "@callback_0054af2e",
+          "offset": "0xc",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "kind four null second list",
+      "args": [
+        1,
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 4
+        },
+        {
+          "addr": "@callback_0054af2e",
+          "offset": "0x10",
+          "u32": 0
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5549870,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "choices": [
+          "@event",
+          0
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@event",
+        "offset": "0x0",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "addr": "@event",
+        "offset": "0x4",
+        "type": "int",
+        "range": [
+          -10,
+          100
+        ]
+      },
+      {
+        "addr": "@event",
+        "offset": "0x8",
+        "type": "int",
+        "range": [
+          -10,
+          100
+        ]
+      },
+      {
+        "addr": "@callback_0054af2e",
+        "offset": "0xc",
+        "type": "ptr",
+        "choices": [
+          "@list1",
+          "@list2",
+          "@list3",
+          0
+        ]
+      },
+      {
+        "addr": "@callback_0054af2e",
+        "offset": "0x10",
+        "type": "ptr",
+        "choices": [
+          "@list1",
+          "@list2",
+          "@list3",
+          0
+        ]
+      },
+      {
+        "addr": "@callback_0054af2e",
+        "offset": "0x14",
+        "type": "ptr",
+        "choices": [
+          "@list1",
+          "@list2",
+          "@list3",
+          0
+        ]
+      }
+    ]
+  },
+  "_survivors": "L1390: x < 1 adds only x == 0, whose negation is unchanged; L1401: the same zero case in the other branch is unobservable."
+}

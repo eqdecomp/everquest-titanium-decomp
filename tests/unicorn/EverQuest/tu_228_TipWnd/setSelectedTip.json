@@ -1,0 +1,156 @@
+{
+  "function": "OptionsWindow_guess::AddContextTip_guess",
+  "original": "0x005646d1",
+  "sources": ["src/EverQuest/tu_228_TipWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@window",
+  "args": [{"name": "value", "type": "int"}],
+  "ret": "void",
+  "coverage_ok": {"005647D4-005647D6": "null-rep arm of the alloc read: only reached after length != 0, which already needs a live rep"},
+  "_survivors": "L549: empty[1] = 0 instead of empty[0] cannot be seen, the emulated stack starts zeroed so empty[0] is 0 either way; L567: the null-rep value of the alloc read is unreachable, the length test before it already required a non-null rep",
+  "objects": {
+    "window": {
+      "size": "0x1cc",
+      "fill": "random",
+      "init": [
+        {"offset": "0x15c", "u32": "@container"},
+        {"offset": "0x168", "u32": "@selector"},
+        {"offset": "0x17c", "u32": 3},
+        {"offset": "0x180", "u32": "@category_data"},
+        {"offset": "0x184", "u32": 4},
+        {"offset": "0x18c", "u32": 3},
+        {"offset": "0x190", "u32": "@text_data"},
+        {"offset": "0x194", "u32": 4}
+      ]
+    },
+    "category_data": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": 4},
+        {"offset": "0x4", "u32": 1},
+        {"offset": "0x8", "u32": 2},
+        {"offset": "0xc", "u32": 6}
+      ]
+    },
+    "text_data": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@text0"},
+        {"offset": "0x4", "u32": "@text1"},
+        {"offset": "0x8", "u32": "@text2"},
+        {"offset": "0xc", "u32": "@text3"}
+      ]
+    },
+    "text0": {"size": "0x20", "fill": "zero", "init": [{"offset": "0", "cstr": "first tip"}]},
+    "text1": {"size": "0x20", "fill": "zero", "init": [{"offset": "0", "cstr": "second tip"}]},
+    "text2": {"size": "0x20", "fill": "zero"},
+    "text3": {"size": "0x20", "fill": "zero", "init": [{"offset": "0", "cstr": "fourth tip"}]},
+    "container": {
+      "size": "0x80",
+      "fill": "zero",
+      "init": [{"offset": "0x74", "u32": "@rep"}]
+    },
+    "rep": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": 5},
+        {"offset": "0x4", "u32": 32},
+        {"offset": "0x8", "u32": 11},
+        {"offset": "0xc", "u32": 0},
+        {"offset": "0x14", "cstr": "current tip"}
+      ]
+    },
+    "selector": {"size": "4", "fill": "zero"},
+    "new0": {"size": "0x100", "fill": "zero"},
+    "new1": {"size": "0x100", "fill": "zero"},
+    "heap0": {"size": "0x100", "fill": "zero"},
+    "heap1": {"size": "0x100", "fill": "zero"},
+    "heap2": {"size": "0x100", "fill": "zero"},
+    "heap3": {"size": "0x100", "fill": "zero"},
+    "heap4": {"size": "0x100", "fill": "zero"},
+    "heap5": {"size": "0x100", "fill": "zero"},
+    "heap6": {"size": "0x100", "fill": "zero"},
+    "heap7": {"size": "0x100", "fill": "zero"},
+    "heap8": {"size": "0x100", "fill": "zero"},
+    "heap9": {"size": "0x100", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x007948b4", "from_image": "0x007948b4", "image_size": 704}
+  ],
+  "callees": {
+    "0x004eb924": {"name": "Array_guess::at_guess", "conv": "thiscall", "args": ["int"], "passthrough": true},
+    "0x00564298": {"name": "Array_guess::DeleteElement_guess", "conv": "thiscall", "args": ["int"]},
+    "0x00564487": {"name": "Array_guess::insert_guess", "conv": "thiscall", "args": ["int", "mem:4"]},
+    "0x00571e00": {"name": "CXStr::CXStr", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "0x00572e00": {"name": "CXStr::operator+=", "conv": "thiscall", "args": ["cstr"], "passthrough": true},
+    "0x005a9060": {"name": "TipContainer_guess::setPage_guess", "conv": "thiscall", "args": ["ignore", "int", "int"], "ret": 0},
+    "0x005ac670": {"name": "TipContainer_guess::refresh_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x004d22d7": {"name": "TipContainer_guess::getText_guess", "conv": "thiscall", "args": ["ignore"], "passthrough": true},
+    "0x0060e985": {"name": "operator new[]", "conv": "cdecl", "args": ["u32"], "ret": ["@new0", "@new1"]},
+    "0x00572300": {"name": "CXStr::operator char*", "conv": "thiscall", "args": [], "passthrough": true},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["ptr"], "passthrough": true},
+    "0x0059c3e0": {"name": "CComboWnd_guess::reset_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0059c8d0": {"name": "CComboWnd_guess::add_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0},
+    "0x00564397": {"name": "HelpTips_guess::ShowHistoryEntry_guess", "conv": "thiscall", "args": ["int"]},
+    "kernel32.dll!HeapAlloc": {"name": "HeapAlloc", "conv": "stdcall", "args": ["u32", "u32", "u32"], "ret": ["@heap0", "@heap1", "@heap2", "@heap3", "@heap4", "@heap5", "@heap6", "@heap7", "@heap8", "@heap9"]},
+    "kernel32.dll!HeapFree": {"name": "HeapFree", "conv": "stdcall", "args": ["u32", "u32", "ptr"], "ret": 1}
+  },
+  "cases": [
+    {"name": "found first, existing text kept", "args": [4]},
+    {"name": "found second", "args": [1]},
+    {"name": "found third, empty text replaced by current page text", "args": [2]},
+    {"name": "not found, text from current page", "args": [3]},
+    {"name": "not found, value zero", "args": [0]},
+    {"name": "fourth entry is beyond count", "args": [6]},
+    {"name": "count four finds fourth entry", "args": [6],
+     "memory": [{"addr": "@window", "offset": "0x17c", "u32": 4}, {"addr": "@window", "offset": "0x18c", "u32": 4}]},
+    {"name": "empty arrays", "args": [1],
+     "memory": [{"addr": "@window", "offset": "0x17c", "u32": 0}, {"addr": "@window", "offset": "0x18c", "u32": 0}]},
+    {"name": "one entry, match", "args": [4],
+     "memory": [{"addr": "@window", "offset": "0x17c", "u32": 1}]},
+    {"name": "one entry, no match", "args": [1],
+     "memory": [{"addr": "@window", "offset": "0x17c", "u32": 1}]},
+    {"name": "no container, not found: table name copied", "args": [3],
+     "memory": [{"addr": "@window", "offset": "0x15c", "u32": 0}]},
+    {"name": "no container, found with text", "args": [1],
+     "memory": [{"addr": "@window", "offset": "0x15c", "u32": 0}]},
+    {"name": "no container, found with empty text", "args": [2],
+     "memory": [{"addr": "@window", "offset": "0x15c", "u32": 0}]},
+    {"name": "no selector", "args": [3],
+     "memory": [{"addr": "@window", "offset": "0x168", "u32": 0}]},
+    {"name": "no container and no selector", "args": [5],
+     "memory": [{"addr": "@window", "offset": "0x15c", "u32": 0}, {"addr": "@window", "offset": "0x168", "u32": 0}]},
+    {"name": "current text length zero: table name copied", "args": [3],
+     "memory": [{"addr": "@rep", "offset": "0x8", "u32": 0}]},
+    {"name": "current text length one", "args": [3],
+     "memory": [{"addr": "@rep", "offset": "0x8", "u32": 1}]},
+    {"name": "current rep null", "args": [3],
+     "memory": [{"addr": "@container", "offset": "0x74", "u32": 0}]},
+    {"name": "current rep null, found with text", "args": [1],
+     "memory": [{"addr": "@container", "offset": "0x74", "u32": 0}]},
+    {"name": "current text empty but length set: both allocations", "args": [3],
+     "memory": [{"addr": "@rep", "offset": "0x14", "u8": 0}]},
+    {"name": "alloc field drives allocation size", "args": [2],
+     "memory": [{"addr": "@rep", "offset": "0x4", "u32": 100}]},
+    {"name": "alloc field zero", "args": [2],
+     "memory": [{"addr": "@rep", "offset": "0x4", "u32": 0}]}
+  ],
+  "fuzz": {
+    "seed": 5654225,
+    "count": 120,
+    "args": [{"choices": [0, 1, 2, 3, 4, 5, 6, 7]}],
+    "memory": [
+      {"addr": "@window", "offset": "0x15c", "type": "ptr", "choices": [0, "@container", "@container"]},
+      {"addr": "@window", "offset": "0x168", "type": "ptr", "choices": [0, "@selector", "@selector"]},
+      {"addr": "@window", "offset": "0x17c", "type": "u32", "choices": [0, 1, 2, 3]},
+      {"addr": "@category_data", "offset": "0x0", "type": "u32", "count": 3, "choices": [0, 1, 2, 3, 4, 5, 6, 7]},
+      {"addr": "@container", "offset": "0x74", "type": "ptr", "choices": [0, "@rep", "@rep", "@rep"]},
+      {"addr": "@rep", "offset": "0x4", "type": "u32", "choices": [0, 16, 32, 100]},
+      {"addr": "@rep", "offset": "0x8", "type": "u32", "choices": [0, 1, 11]},
+      {"addr": "@rep", "offset": "0x14", "type": "u8", "choices": [0, 99, 99]}
+    ]
+  }
+}

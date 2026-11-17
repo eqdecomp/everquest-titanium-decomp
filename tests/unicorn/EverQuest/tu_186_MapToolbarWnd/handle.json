@@ -1,0 +1,189 @@
+{
+  "function": "CMapToolbarWnd_guess::WndNotification_guess",
+  "original": "0x00531244",
+  "sources": ["src/EverQuest/tu_186_MapToolbarWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@toolbar",
+  "args": [
+    {"name": "sender", "type": "u32"},
+    {"name": "code", "type": "u32"},
+    {"name": "data", "type": "u32"}
+  ],
+  "ret": "int",
+  "objects": {
+    "result_rep": {"size": "0x80", "fill": "zero", "init": [{"offset": "0x14", "cstr": "Fixture line"}]},
+    "dialog_text": {"size": "0x40", "fill": "zero", "init": [{"offset": "0", "cstr": "Clear map or layer"}]},
+    "toolbar": {
+      "size": "0x1a0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x160", "u32": "0x1001"},
+        {"offset": "0x164", "u32": "0x1002"},
+        {"offset": "0x168", "u32": "0x1003"},
+        {"offset": "0x16c", "u32": "0x1004"},
+        {"offset": "0x170", "u32": "0x1005"},
+        {"offset": "0x174", "u32": "0x1006"},
+        {"offset": "0x178", "u32": "@map_button"},
+        {"offset": "0x17c", "u32": "0x1007"},
+        {"offset": "0x180", "u32": "0x1008"},
+        {"offset": "0x184", "u32": "0x1009"},
+        {"offset": "0x188", "u32": "0x100a"},
+        {"offset": "0x18c", "u32": "0x100b"},
+        {"offset": "0x190", "u32": "0x100c"},
+        {"offset": "0x194", "u32": "0x100d"},
+        {"offset": "0x198", "u32": "0x100e"}
+      ]
+    },
+    "state": {
+      "size": "0x250",
+      "fill": "random",
+      "init": [
+        {"offset": "0x180", "cstr": "MapName"},
+        {"offset": "0x248", "u32": "@node"},
+        {"offset": "0x24c", "u32": "@record"}
+      ]
+    },
+    "active": {
+      "size": "0x250",
+      "fill": "random",
+      "init": [
+        {"offset": "0x160", "u32": "0x2001"},
+        {"offset": "0x164", "u32": "0x2002"},
+        {"offset": "0x168", "u32": "@target"}
+      ]
+    },
+    "camera": {
+      "size": "0x240",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x30", "f32": -12.5},
+        {"offset": "0x34", "f32": 48.25},
+        {"offset": "0x38", "f32": 91.0},
+        {"offset": "0x23c", "f32": 7.0}
+      ]
+    },
+    "record": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x14", "u8": "0x33"},
+        {"offset": "0x15", "u8": "0x22"},
+        {"offset": "0x16", "u8": "0x11"},
+        {"offset": "0x18", "u32": "0x2002"},
+        {"offset": "0x1c", "u32": "@old_text"}
+      ]
+    },
+    "input": {"size": "0xc", "fill": "zero", "init": [{"offset": "0x8", "u32": 12}]},
+    "old_text": {"size": "0x40", "fill": "zero", "init": [{"offset": "0", "cstr": "Old label"}]},
+    "new_text": {"size": "0x80", "fill": "zero"},
+    "map_button": {"size": "0x129", "fill": "zero", "init": [{"offset": "0x128", "u8": 1}]},
+    "node": {"size": "0x8", "fill": "zero", "init": [{"offset": "0x4", "u32": "0x3001"}]},
+    "owner": {"size": "0x160", "fill": "zero"},
+    "dialog": {"size": "0x4", "fill": "zero"},
+    "capability": {"size": "0x4", "fill": "zero"},
+    "notification": {"size": "0x4", "fill": "zero"},
+    "string_table": {"size": "0x4", "fill": "zero"},
+    "everquest": {"size": "0x3a1c8", "fill": "zero"},
+    "target": {"size": "0x8", "fill": "zero", "init": [{"offset": "0", "u32": "@vtable"}, {"offset": "0x4", "u32": "@vtable"}]},
+    "vtable": {"size": "0x200", "fill": "zero", "init": [{"offset":"0x0","u32":"@fn_slot3"},{"offset":"0x4","u32":"@fn_slot3"},{"offset":"0x8","u32":"@fn_slot3"},{"offset":"0xc","u32":"@fn_slot3"},{"offset":"0x10","u32":"@fn_slot3"},{"offset":"0x14","u32":"@fn_slot3"},{"offset":"0x18","u32":"@fn_slot3"},{"offset":"0x1c","u32":"@fn_slot3"},{"offset":"0x20","u32":"@fn_slot3"},{"offset":"0x24","u32":"@fn_slot3"},{"offset":"0x28","u32":"@fn_slot3"},{"offset":"0x2c","u32":"@fn_slot3"},{"offset":"0x30","u32":"@fn_slot3"},{"offset":"0x34","u32":"@fn_slot3"},{"offset":"0x38","u32":"@fn_slot3"},{"offset":"0x3c","u32":"@fn_slot3"},{"offset":"0x40","u32":"@fn_slot3"},{"offset":"0x44","u32":"@fn_slot3"},{"offset":"0x48","u32":"@fn_slot3"},{"offset":"0x4c","u32":"@fn_slot3"},{"offset":"0x50","u32":"@fn_slot3"},{"offset":"0x54","u32":"@fn_slot3"},{"offset":"0x58","u32":"@fn_slot3"},{"offset":"0x5c","u32":"@fn_slot3"},{"offset":"0x60","u32":"@fn_slot3"},{"offset":"0x64","u32":"@fn_slot3"},{"offset":"0x68","u32":"@fn_slot3"},{"offset":"0x6c","u32":"@fn_slot3"},{"offset":"0x70","u32":"@fn_slot3"},{"offset":"0x74","u32":"@fn_slot3"},{"offset":"0x78","u32":"@fn_slot3"},{"offset":"0x7c","u32":"@fn_slot3"},{"offset":"0x80","u32":"@fn_slot3"},{"offset":"0x84","u32":"@fn_slot3"},{"offset":"0x88","u32":"@fn_slot3"},{"offset":"0x8c","u32":"@fn_slot3"},{"offset":"0x90","u32":"@fn_slot3"},{"offset":"0x94","u32":"@fn_slot3"},{"offset":"0x98","u32":"@fn_slot3"},{"offset":"0x9c","u32":"@fn_slot3"},{"offset":"0xa0","u32":"@fn_slot3"},{"offset":"0xa4","u32":"@fn_slot3"},{"offset":"0xa8","u32":"@fn_slot3"},{"offset":"0xac","u32":"@fn_slot3"},{"offset":"0xb0","u32":"@fn_slot3"},{"offset":"0xb4","u32":"@fn_slot3"},{"offset":"0xb8","u32":"@fn_slot3"},{"offset":"0xbc","u32":"@fn_slot3"},{"offset":"0xc0","u32":"@fn_slot3"},{"offset":"0xc4","u32":"@fn_slot3"},{"offset":"0xc8","u32":"@fn_slot3"},{"offset":"0xcc","u32":"@fn_slot3"},{"offset":"0xd0","u32":"@fn_slot3"},{"offset":"0xd4","u32":"@fn_slot3"},{"offset":"0xd8","u32":"@fn_slot3"},{"offset":"0xdc","u32":"@fn_slot3"},{"offset":"0xe0","u32":"@fn_slot3"},{"offset":"0xe4","u32":"@fn_slot3"},{"offset":"0xe8","u32":"@fn_slot3"},{"offset":"0xec","u32":"@fn_slot3"},{"offset":"0xf0","u32":"@fn_slot3"},{"offset":"0xf4","u32":"@fn_slot3"},{"offset":"0xf8","u32":"@fn_slot3"},{"offset":"0xfc","u32":"@fn_slot3"},{"offset":"0x100","u32":"@fn_slot3"},{"offset":"0x104","u32":"@fn_slot3"},{"offset":"0x108","u32":"@fn_slot3"},{"offset":"0x10c","u32":"@fn_slot3"},{"offset":"0x110","u32":"@fn_slot3"},{"offset":"0x114","u32":"@fn_slot3"},{"offset":"0x118","u32":"@fn_slot3"},{"offset":"0x11c","u32":"@fn_slot3"},{"offset":"0x120","u32":"@fn_slot3"},{"offset":"0x124","u32":"@fn_slot3"},{"offset":"0x128","u32":"@fn_slot3"},{"offset":"0x12c","u32":"@fn_slot3"},{"offset":"0x130","u32":"@fn_slot3"},{"offset":"0x134","u32":"@fn_slot3"},{"offset":"0x138","u32":"@fn_slot3"},{"offset":"0x13c","u32":"@fn_slot3"},{"offset":"0x140","u32":"@fn_slot3"},{"offset":"0x144","u32":"@fn_slot3"},{"offset":"0x148","u32":"@fn_slot3"},{"offset":"0x14c","u32":"@fn_slot3"},{"offset":"0x150","u32":"@fn_slot3"},{"offset":"0x154","u32":"@fn_slot3"},{"offset":"0x158","u32":"@fn_slot3"},{"offset":"0x15c","u32":"@fn_slot3"},{"offset":"0x160","u32":"@fn_slot3"},{"offset":"0x164","u32":"@fn_slot3"},{"offset":"0x168","u32":"@fn_slot3"},{"offset":"0x16c","u32":"@fn_slot3"},{"offset":"0x170","u32":"@fn_slot3"},{"offset":"0x174","u32":"@fn_slot3"},{"offset":"0x178","u32":"@fn_slot3"},{"offset":"0x17c","u32":"@fn_slot3"},{"offset":"0x180","u32":"@fn_slot3"},{"offset":"0x184","u32":"@fn_slot3"},{"offset":"0x188","u32":"@fn_slot3"},{"offset":"0x18c","u32":"@fn_slot3"},{"offset":"0x190","u32":"@fn_slot3"},{"offset":"0x194","u32":"@fn_slot3"},{"offset":"0x198","u32":"@fn_slot3"},{"offset":"0x19c","u32":"@fn_slot3"},{"offset":"0x1a0","u32":"@fn_slot3"},{"offset":"0x1a4","u32":"@fn_slot3"},{"offset":"0x1a8","u32":"@fn_slot3"},{"offset":"0x1ac","u32":"@fn_slot3"},{"offset":"0x1b0","u32":"@fn_slot3"},{"offset":"0x1b4","u32":"@fn_slot3"},{"offset":"0x1b8","u32":"@fn_slot3"},{"offset":"0x1bc","u32":"@fn_slot3"},{"offset":"0x1c0","u32":"@fn_slot3"},{"offset":"0x1c4","u32":"@fn_slot3"},{"offset":"0x1c8","u32":"@fn_slot3"},{"offset":"0x1cc","u32":"@fn_slot3"},{"offset":"0x1d0","u32":"@fn_slot3"},{"offset":"0x1d4","u32":"@fn_slot3"},{"offset":"0x1d8","u32":"@fn_slot3"},{"offset":"0x1dc","u32":"@fn_slot3"},{"offset":"0x1e0","u32":"@fn_slot3"},{"offset":"0x1e4","u32":"@fn_slot3"},{"offset":"0x1e8","u32":"@fn_slot3"},{"offset":"0x1ec","u32":"@fn_slot3"},{"offset":"0x1f0","u32":"@fn_slot3"},{"offset":"0x1f4","u32":"@fn_slot3"},{"offset":"0x1f8","u32":"@fn_slot3"},{"offset":"0x1fc","u32":"@fn_slot3"}]},
+    "fn_slot3": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "from_image": "0x0079ac74", "image_size": 4},
+    {"addr": "0x00643f7c", "from_image": "0x00643f7c", "image_size": 4},
+    {"addr": "0x00850bfc", "u32": "@state"},
+    {"addr": "0x00850c04", "u32": "@active"},
+    {"addr": "0x00905ce4", "u32": "@camera"},
+    {"addr": "0x00991cd4", "u32": "@record"},
+    {"addr": "0x00991cd8", "u8": 0},
+    {"addr": "0x00991cd9", "u8": 0},
+    {"addr": "0x00988df0", "u32": "@everquest"},
+    {"addr": "0x0099d3ec", "u32": "@capability"},
+    {"addr": "0x00905cb0", "u32": "@string_table"},
+    {"addr": "0x00850c00", "u32": "@owner"},
+    {"addr": "0x00991e44", "u32": "@dialog"},
+    {"addr": "0x00850c0c", "u32": "@notification"}
+  ],
+  "callees": {
+    "0x0059dd30": {"name": "ready_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x00532dec": {"name": "show_guess", "conv": "thiscall", "args": ["ptr"]},
+    "0x00532da1": {"name": "hide_guess", "conv": "thiscall", "args": ["int"]},
+    "0x00532d83": {"name": "toggle_guess", "conv": "thiscall", "args": ["ptr"]},
+    "0x005311cf": {"name": "GetLabelText_guess", "conv": "thiscall", "args": ["ptr"], "ret": "arg0", "writes": [{"arg": 0, "offset": 0, "hex": "00006000"}]},
+    "@fn_slot3": {
+      "name": "target_slot4c",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": "arg0",
+      "writes": [{"arg": 0, "offset": 0, "hex": "00006000"}]
+    },
+    "0x00572300": {"name": "CXStr_conversion", "conv": "thiscall", "args": [], "ret": "@result_rep+0x14"},
+    "0x005344fb": {"name": "create_line_guess", "conv": "thiscall", "args": ["float", "float", "float", "ptr", "ptr", "cstr"]},
+    "0x0060d0d5": {"name": "operator_delete", "conv": "cdecl", "args": ["ptr"]},
+    "0x0060e985": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@new_text"},
+    "0x00533644": {"name": "set_record_guess", "conv": "thiscall", "args": ["ptr"]},
+    "0x00571d00": {"name": "CXStr_FreeRep", "conv": "thiscall", "args": ["u32"]},
+    "0x0053245b": {"name": "start_line_guess", "conv": "thiscall", "args": ["float", "float", "float"]},
+    "0x00533455": {"name": "end_line_guess", "conv": "thiscall", "args": ["float", "float", "float"]},
+    "0x00532499": {"name": "RemoveSelectedLines_guess", "conv": "thiscall", "args": []},
+    "0x0053354e": {"name": "remove_line_guess", "conv": "thiscall", "args": ["float", "float", "float"]},
+    "0x004ff7d2": {"name": "Activate_guess", "conv": "thiscall", "args": ["ptr", "ptr", "u32", "u32"]},
+    "0x00532543": {"name": "SetLabelPosition_guess", "conv": "thiscall", "args": ["ptr", "float", "float", "float"]},
+    "0x005324ed": {"name": "RemoveSelectedLabel_guess", "conv": "thiscall", "args": []},
+    "0x00533e0b": {"name": "normalize_guess", "conv": "thiscall", "args": ["ptr"]},
+    "0x0060e963": {"name": "toupper", "conv": "cdecl", "args": ["int"], "ret": 77},
+    "0x0046da4a": {"name": "format_text_guess", "conv": "cdecl", "args": ["ptr", "u32", "cstr", "int", "int", "int", "int", "int", "int", "int", "int"]},
+    "0x00498436": {"name": "dsp_chat", "conv": "thiscall", "args": ["cstr"]},
+    "0x005adf60": {"name": "flags_guess", "conv": "thiscall", "args": [], "ret": 2},
+    "0x00532f60": {"name": "JoinAtIntersect_guess", "conv": "thiscall", "args": ["bool"]},
+    "0x005dfa00": {"name": "getString", "conv": "thiscall", "args": ["u32", "ptr"], "ret": "@dialog_text"},
+    "0x00548460": {"name": "show_dialog_guess", "conv": "thiscall", "args": ["ptr", "int", "cstr", "int", "int", "int", "int"]},
+    "0x00532d71": {"name": "get_current_guess", "conv": "thiscall", "args": [], "ret": "0x11223344"},
+    "0x00532e34": {"name": "get_next_guess", "conv": "thiscall", "args": [], "ret": "0x55667788"},
+    "0x004f898e": {"name": "notify_guess", "conv": "thiscall", "args": ["ptr", "u32"]},
+    "0x00533238": {"name": "StartAutoMap_guess", "conv": "thiscall", "args": []},
+    "0x00534497": {"name": "StopAutoMap_guess", "conv": "thiscall", "args": []},
+    "0x005a2230": {"name": "dispatch_base_guess", "conv": "thiscall", "args": ["u32", "u32", "u32"], "ret": 0}
+  },
+  "rewrite_aliases": {"_toupper": "0x0060e963"},
+  "cases": [
+    {"name": "not_ready", "args": [0, 32, 1], "callees": {"0x0059dd30": {"ret": 0}}},
+    {"name": "no_state", "args": [0, 32, 1], "memory": [{"addr": "0x00850bfc", "u32": 0}]},
+    {"name": "label_toggle", "args": [0, 32, 1], "memory": [{"addr": "0x00991cd9", "u8": 0}]},
+    {"name": "label_show_then_hide", "args": [0, 32, 2], "memory": [{"addr": "0x00991cd9", "u8": 1}]},
+    {"name": "other_code_dispatch", "args": [0, 2, 0]},
+    {"name": "code6_no_active", "args": [0, 6, 0], "memory": [{"addr": "0x00850c04", "u32": 0}]},
+    {"name": "code6_sender_mismatch", "args": ["0x7777", 6, 0]},
+    {"name": "code6_create_line", "args": ["@active", 6, 0], "memory": [{"addr": "0x00991cd8", "u8": 0}]},
+    {"name": "code6_replace_label", "args": ["@active", 6, "@input"], "memory": [{"addr": "0x00991cd8", "u8": 1}]},
+    {"name": "start_line", "args": ["0x1001", 1, 0]},
+    {"name": "end_line", "args": ["0x1002", 1, 0]},
+    {"name": "remove_line_add_point", "args": ["0x1004", 1, 0]},
+    {"name": "add_point_remove_line", "args": ["0x1003", 1, 0]},
+    {"name": "add_label", "args": ["0x1007", 1, 0]},
+    {"name": "edit_label", "args": ["0x1008", 1, 0]},
+    {"name": "edit_label_without_record", "args": ["0x1008", 1, 0], "memory": [{"addr": "@state", "offset": "0x24c", "u32": 0}]},
+    {"name": "move_label", "args": ["0x1009", 1, 0]},
+    {"name": "move_label_without_record", "args": ["0x1009", 1, 0], "memory": [{"addr": "@state", "offset": "0x24c", "u32": 0}]},
+    {"name": "remove_label", "args": ["0x100a", 1, 0]},
+    {"name": "save_map", "args": ["0x100e", 1, 0]},
+    {"name": "join_intersect", "args": ["0x1006", 1, 0]},
+    {"name": "clear_layer", "args": ["0x100d", 1, 0]},
+    {"name": "clear_map", "args": ["0x100c", 1, 0], "memory": [{"addr": "0x00850c00", "u32": 0}]},
+    {"name": "set_current_color", "args": ["0x100b", 1, 0]},
+    {"name": "change_color_no_node", "args": ["0x1005", 1, 0], "memory": [{"addr": "@state", "offset": "0x248", "u32": 0}]},
+    {"name": "change_color_with_node", "args": ["0x1005", 1, 0]},
+    {"name": "auto_map_checked", "args": ["@map_button", 1, 0]},
+    {"name": "auto_map_unchecked", "args": ["@map_button", 1, 0], "memory": [{"addr": "@map_button", "offset": "0x128", "u8": 0}]},
+    {"name": "unmatched_button", "args": ["0xdead", 1, 0]}
+  ],
+  "fuzz": {
+    "seed": 5444164,
+    "count": 100,
+    "args": [
+      {"range": [0, 4294967295]},
+      {"choices": [0, 1, 2, 6, 32, 33]},
+      {"range": [0, 4294967295]}
+    ]
+  }
+}

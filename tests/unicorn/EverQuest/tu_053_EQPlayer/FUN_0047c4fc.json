@@ -1,0 +1,986 @@
+{
+  "function": "EQPlayerView_guess::FollowPlayerAI_guess",
+  "original": "0x0047c4fc",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@eqplayerview",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "eqplayerview": {
+      "size": "0x348",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@actorinfo"
+        }
+      ]
+    },
+    "actorinfo": {
+      "size": "0x10c0",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0xfe8",
+          "u32": "@target"
+        }
+      ]
+    },
+    "target": {
+      "size": "0x284",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x120",
+          "cstr": "mount-name"
+        },
+        {
+          "offset": "0x160",
+          "cstr": "mount display name"
+        }
+      ]
+    },
+    "currentplayer": {
+      "size": "0x348",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@currentinfo"
+        }
+      ]
+    },
+    "currentinfo": {
+      "size": "0x10c0",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0xfe8",
+          "u32": "@currenttarget"
+        }
+      ]
+    },
+    "currenttarget": {
+      "size": "0x284",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x120",
+          "cstr": "current-mount"
+        },
+        {
+          "offset": "0x160",
+          "cstr": "current display name"
+        }
+      ]
+    },
+    "headingmath": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "textsink": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x1234abcd"
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@headingmath"
+    },
+    {
+      "addr": "0x00905cf8",
+      "u32": "@eqplayerview"
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": "@eqplayerview"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@textsink"
+    },
+    {
+      "addr": "0x00641f90",
+      "from_image": "0x00641F90",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00644368",
+      "from_image": "0x00644368",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0063f4d0",
+      "from_image": "0x0063F4D0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00642650",
+      "from_image": "0x00642650",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00641f8c",
+      "from_image": "0x00641F8C",
+      "image_size": 4
+    },
+    {
+      "addr": "0x006410cc",
+      "from_image": "0x006410CC",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0063f4cc",
+      "f32": 0.0
+    },
+    {
+      "addr": "0x00640e28",
+      "from_image": "0x00640E28",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0063fda0",
+      "from_image": "0x0063FDA0",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00923860",
+      "u8": 7
+    },
+    {
+      "addr": "0x009237b4",
+      "u8": 9
+    },
+    {
+      "addr": "@target",
+      "offset": "0x251",
+      "u8": 97
+    },
+    {
+      "addr": "@target",
+      "offset": "0x238",
+      "f32": 0.0
+    },
+    {
+      "addr": "@target",
+      "offset": "0x48",
+      "f32": 2.0
+    },
+    {
+      "addr": "@eqplayerview",
+      "offset": "0x30",
+      "f32": 0.0
+    },
+    {
+      "addr": "@eqplayerview",
+      "offset": "0x34",
+      "f32": 0.0
+    },
+    {
+      "addr": "@eqplayerview",
+      "offset": "0x38",
+      "f32": 0.0
+    },
+    {
+      "addr": "@eqplayerview",
+      "offset": "0x48",
+      "f32": 1.0
+    },
+    {
+      "addr": "@eqplayerview",
+      "offset": "0x4c",
+      "f32": 90.0
+    },
+    {
+      "addr": "@eqplayerview",
+      "offset": "0x238",
+      "f32": 1.0
+    },
+    {
+      "addr": "@target",
+      "offset": "0x30",
+      "f32": 1.0
+    },
+    {
+      "addr": "@target",
+      "offset": "0x34",
+      "f32": 2.0
+    },
+    {
+      "addr": "@target",
+      "offset": "0x38",
+      "f32": 3.0
+    },
+    {
+      "addr": "@currenttarget",
+      "offset": "0x160",
+      "cstr": "current display name"
+    }
+  ],
+  "callees": {
+    "0x00439c41": {
+      "name": "HeadingMath_guess::TrueDistance_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "float",
+        "float",
+        "float",
+        "float",
+        "float",
+        "float"
+      ],
+      "ret_float": 50.0
+    },
+    "0x0046da4a": {
+      "name": "FUN_0046da4a",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "cstr",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "4f4b00"
+        }
+      ]
+    },
+    "0x00498436": {
+      "name": "TextSink_guess::dsp_chat",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ]
+    },
+    "0x00479482": {
+      "name": "EQPlayer_guess::TurnOffAutoFollow_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0046e42f": {
+      "name": "get_bearing_guess",
+      "conv": "cdecl",
+      "args": [
+        "float",
+        "float",
+        "float",
+        "float"
+      ],
+      "ret_float": 120.0
+    },
+    "0x00476167": {
+      "name": "CastRay",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "float",
+        "float",
+        "float"
+      ],
+      "ret": 1
+    },
+    "0x00436628": {
+      "name": "HeadingMath_guess::HeadingDiff_guess",
+      "conv": "thiscall",
+      "args": [
+        "float",
+        "float",
+        "mem:4"
+      ],
+      "ret_float": 2.0,
+      "writes": [
+        {
+          "arg": 2,
+          "offset": 0,
+          "hex": "000080bf"
+        }
+      ]
+    },
+    "0x004365db": {
+      "name": "HeadingMath_guess::FixHeading_guess",
+      "conv": "thiscall",
+      "args": [
+        "float"
+      ],
+      "ret_float": 90.0
+    }
+  },
+  "cases": [
+    {
+      "name": "null actor info",
+      "memory": [
+        {
+          "addr": "@eqplayerview",
+          "offset": "0x1a8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "null target",
+      "memory": [
+        {
+          "addr": "@actorinfo",
+          "offset": "0xfe8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "x text",
+      "memory": [
+        {
+          "addr": "@target",
+          "offset": "0x251",
+          "u8": 120
+        }
+      ]
+    },
+    {
+      "name": "near distance",
+      "callees": {
+        "0x00439c41": {
+          "name": "HeadingMath_guess::FUN_00439c41_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 10.0
+        }
+      }
+    },
+    {
+      "name": "height boundary at distance fifteen",
+      "memory": [
+        {
+          "addr": "@eqplayerview",
+          "offset": "0x48",
+          "f32": 0.0
+        }
+      ],
+      "callees": {
+        "0x00439c41": {
+          "name": "HeadingMath_guess::FUN_00439c41_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 15.0
+        }
+      }
+    },
+    {
+      "name": "equal heading with negative angular delta",
+      "memory": [
+        {
+          "addr": "@eqplayerview",
+          "offset": "0x4c",
+          "f32": 90.0
+        }
+      ],
+      "callees": {
+        "0x00439c41": {
+          "name": "HeadingMath_guess::FUN_00439c41_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 20.0
+        },
+        "0x0046e42f": {
+          "name": "FUN_0046e42f",
+          "conv": "cdecl",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 90.0
+        },
+        "0x00436628": {
+          "name": "HeadingMath_guess::FUN_00436628_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "mem:4"
+          ],
+          "ret_float": 1.0,
+          "writes": [
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "000080bf"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "zero angular delta below target",
+      "memory": [
+        {
+          "addr": "@eqplayerview",
+          "offset": "0x4c",
+          "f32": 90.0
+        }
+      ],
+      "callees": {
+        "0x00439c41": {
+          "name": "HeadingMath_guess::FUN_00439c41_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 20.0
+        },
+        "0x0046e42f": {
+          "name": "FUN_0046e42f",
+          "conv": "cdecl",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 120.0
+        },
+        "0x00436628": {
+          "name": "HeadingMath_guess::FUN_00436628_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "mem:4"
+          ],
+          "ret_float": 1.0,
+          "writes": [
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "height plus thirty equals distance",
+      "memory": [
+        {
+          "addr": "@eqplayerview",
+          "offset": "0x48",
+          "f32": 0.0
+        }
+      ],
+      "callees": {
+        "0x00439c41": {
+          "name": "HeadingMath_guess::FUN_00439c41_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 31.0
+        },
+        "0x00476167": {
+          "name": "FUN_00476167",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "invisible speed comparison true",
+      "memory": [
+        {
+          "addr": "@eqplayerview",
+          "offset": "0x48",
+          "f32": 1.0
+        }
+      ],
+      "callees": {
+        "0x00439c41": {
+          "name": "HeadingMath_guess::FUN_00439c41_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 20.0
+        },
+        "0x00476167": {
+          "name": "FUN_00476167",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "invisible speed comparison false",
+      "memory": [
+        {
+          "addr": "@eqplayerview",
+          "offset": "0x48",
+          "f32": 0.0
+        }
+      ],
+      "callees": {
+        "0x00439c41": {
+          "name": "HeadingMath_guess::FUN_00439c41_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 20.0
+        },
+        "0x00476167": {
+          "name": "FUN_00476167",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "step below one",
+      "memory": [
+        {
+          "addr": "@eqplayerview",
+          "offset": "0x4c",
+          "f32": 90.0
+        }
+      ],
+      "callees": {
+        "0x00439c41": {
+          "name": "HeadingMath_guess::FUN_00439c41_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 20.0
+        },
+        "0x00436628": {
+          "name": "HeadingMath_guess::FUN_00436628_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "mem:4"
+          ],
+          "ret_float": 0.5,
+          "writes": [
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "000080bf"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "step one subtracts",
+      "memory": [
+        {
+          "addr": "@eqplayerview",
+          "offset": "0x4c",
+          "f32": 90.0
+        }
+      ],
+      "callees": {
+        "0x00439c41": {
+          "name": "HeadingMath_guess::FUN_00439c41_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 20.0
+        },
+        "0x00436628": {
+          "name": "HeadingMath_guess::FUN_00436628_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "mem:4"
+          ],
+          "ret_float": 1.0,
+          "writes": [
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "000080bf"
+            }
+          ]
+        },
+        "0x004365db": {
+          "name": "HeadingMath_guess::FUN_004365db_guess",
+          "conv": "thiscall",
+          "args": [
+            "float"
+          ],
+          "ret_float": 89.0
+        }
+      }
+    },
+    {
+      "name": "step four adds at distance boundary",
+      "memory": [
+        {
+          "addr": "@eqplayerview",
+          "offset": "0x4c",
+          "f32": 90.0
+        }
+      ],
+      "callees": {
+        "0x00439c41": {
+          "name": "HeadingMath_guess::FUN_00439c41_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 200.0
+        },
+        "0x00436628": {
+          "name": "HeadingMath_guess::FUN_00436628_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "mem:4"
+          ],
+          "ret_float": 4.0,
+          "writes": [
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "0000803f"
+            }
+          ]
+        },
+        "0x004365db": {
+          "name": "HeadingMath_guess::FUN_004365db_guess",
+          "conv": "thiscall",
+          "args": [
+            "float"
+          ],
+          "ret_float": 94.0
+        }
+      }
+    },
+    {
+      "name": "step 128 uses four",
+      "callees": {
+        "0x00439c41": {
+          "name": "HeadingMath_guess::FUN_00439c41_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 50.0
+        },
+        "0x00436628": {
+          "name": "HeadingMath_guess::FUN_00436628_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "mem:4"
+          ],
+          "ret_float": 128.0,
+          "writes": [
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "0000803f"
+            }
+          ]
+        },
+        "0x004365db": {
+          "name": "HeadingMath_guess::FUN_004365db_guess",
+          "conv": "thiscall",
+          "args": [
+            "float"
+          ],
+          "ret_float": 94.0
+        }
+      }
+    },
+    {
+      "name": "step 129 reverses",
+      "memory": [
+        {
+          "addr": "@eqplayerview",
+          "offset": "0x4c",
+          "f32": 130.0
+        }
+      ],
+      "callees": {
+        "0x00439c41": {
+          "name": "HeadingMath_guess::FUN_00439c41_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 120.0
+        },
+        "0x00436628": {
+          "name": "HeadingMath_guess::FUN_00436628_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "mem:4"
+          ],
+          "ret_float": 129.0,
+          "writes": [
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "0000803f"
+            }
+          ]
+        },
+        "0x004365db": {
+          "name": "HeadingMath_guess::FUN_004365db_guess",
+          "conv": "thiscall",
+          "args": [
+            "float"
+          ],
+          "ret_float": 121.0
+        }
+      }
+    },
+    {
+      "name": "far distance uses current target",
+      "memory": [
+        {
+          "addr": "0x00905cf8",
+          "u32": "@currentplayer"
+        }
+      ],
+      "callees": {
+        "0x00439c41": {
+          "name": "HeadingMath_guess::FUN_00439c41_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 201.0
+        }
+      }
+    },
+    {
+      "name": "far distance falls back when current has no actor info",
+      "memory": [
+        {
+          "addr": "0x00905cf8",
+          "u32": "@currentplayer"
+        },
+        {
+          "addr": "@currentplayer",
+          "offset": "0x1a8",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x00439c41": {
+          "name": "HeadingMath_guess::FUN_00439c41_guess",
+          "conv": "thiscall",
+          "args": [
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float",
+            "float"
+          ],
+          "ret_float": 250.0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4703484,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {
+        "addr": "@target",
+        "offset": "0x251",
+        "type": "u8",
+        "choices": [
+          97,
+          120
+        ]
+      },
+      {
+        "addr": "@target",
+        "offset": "0x238",
+        "type": "float",
+        "choices": [
+          -1.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "addr": "@target",
+        "offset": "0x48",
+        "type": "float",
+        "choices": [
+          0.0,
+          1.0,
+          2.0
+        ]
+      },
+      {
+        "addr": "@eqplayerview",
+        "offset": "0x48",
+        "type": "float",
+        "choices": [
+          0.0,
+          1.0,
+          2.0
+        ]
+      },
+      {
+        "addr": "@eqplayerview",
+        "offset": "0x4c",
+        "type": "float",
+        "choices": [
+          0.0,
+          90.0,
+          120.0,
+          180.0
+        ]
+      },
+      {
+        "addr": "@eqplayerview",
+        "offset": "0x238",
+        "type": "float",
+        "choices": [
+          0.0,
+          1.0,
+          2.0
+        ]
+      }
+    ]
+  }
+}

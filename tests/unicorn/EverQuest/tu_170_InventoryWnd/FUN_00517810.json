@@ -1,0 +1,316 @@
+{
+  "function": "CInventoryWndView_guess::ClickedCrystalButton_guess",
+  "original": "0x00517810",
+  "sources": [
+    "src/EverQuest/tu_170_InventoryWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@clientobject",
+  "args": [
+    {
+      "name": "kind",
+      "type": "int"
+    },
+    {
+      "name": "value",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "clientobject": {
+      "size": "0x268",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x21c",
+          "u32": "@good_window"
+        },
+        {
+          "offset": "0x220",
+          "u32": "@evil_window"
+        }
+      ]
+    },
+    "slotpool": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "root": {
+      "size": "0xfb8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xfac",
+          "u32": 37
+        },
+        {
+          "offset": "0xfb4",
+          "u32": 49
+        }
+      ]
+    },
+    "clientstate": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "good_window": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@good_vtbl"
+        }
+      ]
+    },
+    "evil_window": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": "@evil_vtbl"
+        }
+      ]
+    },
+    "good_vtbl": {
+      "size": "0xe8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xe4",
+          "u32": "@fn_good"
+        }
+      ]
+    },
+    "evil_vtbl": {
+      "size": "0xe8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xe4",
+          "u32": "@fn_evil"
+        }
+      ]
+    },
+    "fn_good": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "fn_evil": {
+      "size": "0x4",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00991e44",
+      "u32": "@slotpool"
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@root"
+    },
+    {
+      "addr": "0x00850c3c",
+      "u32": "@clientstate"
+    }
+  ],
+  "callees": {
+    "0x005481cf": {
+      "name": "Attach_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ],
+      "ret": 7
+    },
+    "0x00548225": {
+      "name": "ExpireAt_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x004912b1": {
+      "name": "SendMessage_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "mem:8",
+        "int",
+        "char"
+      ],
+      "ret": 0
+    },
+    "0x00516c58": {
+      "name": "UpdateAlignment_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004d9160": {
+      "name": "CopyTo_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x004dc02d": {
+      "name": "CenterPoint",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "passthrough": true
+    },
+    "0x0054d976": {
+      "name": "ShowInventory_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "int",
+        "int",
+        "int",
+        "char"
+      ],
+      "ret": 0
+    },
+    "@fn_good": {
+      "name": "GetGoodRect_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "01000000020000000a00000014000000"
+        }
+      ]
+    },
+    "@fn_evil": {
+      "name": "GetEvilRect_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "0300000004000000"
+        }
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "message_on_zero",
+      "args": [
+        4,
+        0
+      ]
+    },
+    {
+      "name": "good_points_boundary",
+      "args": [
+        4,
+        -1
+      ]
+    },
+    {
+      "name": "evil_points_negative",
+      "args": [
+        5,
+        -2
+      ]
+    },
+    {
+      "name": "unknown_kind",
+      "args": [
+        6,
+        -1
+      ]
+    },
+    {
+      "name": "good_points_null",
+      "args": [
+        4,
+        -1
+      ],
+      "memory": [
+        {
+          "addr": "@clientobject",
+          "offset": "0x21c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "evil_points_null",
+      "args": [
+        5,
+        -1
+      ],
+      "memory": [
+        {
+          "addr": "@clientobject",
+          "offset": "0x220",
+          "u32": 0
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5339150,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          -1,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "range": [
+          -3,
+          2
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@clientobject",
+        "offset": "0x21c",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@good_window"
+        ]
+      },
+      {
+        "addr": "@clientobject",
+        "offset": "0x220",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@evil_window"
+        ]
+      }
+    ]
+  },
+  "_survivors": "L884: CopyTo overwrites rect on nonnull-button paths; otherwise the emulator's uninitialized stack is zeroed, so removing the initialization is unobservable."
+}

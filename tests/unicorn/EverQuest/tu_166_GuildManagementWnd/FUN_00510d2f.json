@@ -1,0 +1,236 @@
+{
+  "function": "GuildMgmtWnd_guess::Clear_guess",
+  "original": "0x00510D2F",
+  "sources": ["src/EverQuest/tu_166_GuildManagementWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [],
+  "ret": "void",
+  "size": "0x2ab",
+  "objects": {
+    "owner": {"size": "0x40c", "fill": "zero"},
+    "member_list": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@list_vtbl"}]
+    },
+    "notes_list": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@list_vtbl"}]
+    },
+    "tribute_list": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@list_vtbl"}]
+    },
+    "text_receiver": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@text_vtbl"}]
+    },
+    "stml": {"size": "0x4", "fill": "zero"},
+    "button": {"size": "0x4", "fill": "zero"},
+    "fn_list": {"size": "0x4"},
+    "fn_text": {"size": "0x4"},
+    "list_vtbl": {
+      "size": "0x134",
+      "fill": "zero",
+      "init": [{"offset": "0x130", "u32": "@fn_list"}]
+    },
+    "text_vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [{"offset": "0xfc", "u32": "@fn_text"}]
+    },
+    "heap0": {"size": "0x100", "fill": "zero"},
+    "heap1": {"size": "0x100", "fill": "zero"},
+    "heap2": {"size": "0x100", "fill": "zero"},
+    "heap3": {"size": "0x100", "fill": "zero"},
+    "heap4": {"size": "0x100", "fill": "zero"},
+    "heap5": {"size": "0x100", "fill": "zero"},
+    "heap6": {"size": "0x100", "fill": "zero"},
+    "heap7": {"size": "0x100", "fill": "zero"},
+    "heap8": {"size": "0x100", "fill": "zero"},
+    "heap9": {"size": "0x100", "fill": "zero"},
+    "heap10": {"size": "0x100", "fill": "zero"},
+    "heap11": {"size": "0x100", "fill": "zero"},
+    "heap12": {"size": "0x100", "fill": "zero"},
+    "heap13": {"size": "0x100", "fill": "zero"},
+    "heap14": {"size": "0x100", "fill": "zero"},
+    "heap15": {"size": "0x100", "fill": "zero"},
+    "heap16": {"size": "0x100", "fill": "zero"},
+    "heap17": {"size": "0x100", "fill": "zero"},
+    "heap18": {"size": "0x100", "fill": "zero"},
+    "heap19": {"size": "0x100", "fill": "zero"},
+    "heap20": {"size": "0x100", "fill": "zero"},
+    "heap21": {"size": "0x100", "fill": "zero"},
+    "heap22": {"size": "0x100", "fill": "zero"},
+    "heap23": {"size": "0x100", "fill": "zero"},
+    "heap24": {"size": "0x100", "fill": "zero"},
+    "heap25": {"size": "0x100", "fill": "zero"},
+    "heap26": {"size": "0x100", "fill": "zero"},
+    "heap27": {"size": "0x100", "fill": "zero"},
+    "heap28": {"size": "0x100", "fill": "zero"},
+    "heap29": {"size": "0x100", "fill": "zero"},
+    "heap30": {"size": "0x100", "fill": "zero"},
+    "heap31": {"size": "0x100", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@owner", "offset": "0x16c", "u32": "@member_list"},
+    {"addr": "@owner", "offset": "0x194", "u32": "@notes_list"},
+    {"addr": "@owner", "offset": "0x1a8", "u32": "@tribute_list"},
+    {"addr": "@owner", "offset": "0x198", "u32": "@text_receiver"},
+    {"addr": "@owner", "offset": "0x1a0", "u32": "@text_receiver"},
+    {"addr": "@owner", "offset": "0x164", "u32": "@text_receiver"},
+    {"addr": "@owner", "offset": "0x174", "u32": "@text_receiver"},
+    {"addr": "@owner", "offset": "0x17c", "u32": "@stml"},
+    {"addr": "@owner", "offset": "0x170", "u32": "@text_receiver"},
+    {"addr": "@owner", "offset": "0x1b0", "u32": "@text_receiver"},
+    {"addr": "@owner", "offset": "0x190", "u32": "@button"},
+    {"addr": "@owner", "offset": "0x3f8", "u8": 0},
+    {"addr": "0x0063f53f", "from_image": "0x0063f53f", "image_size": 1},
+    {"addr": "0x0091d484", "from_image": "0x0091d484", "image_size": 64},
+    {"addr": "0x0091d684", "from_image": "0x0091d684", "image_size": 64},
+    {"addr": "0x0091d483", "cstr": "X"},
+    {"addr": "0x0091d484", "cstr": "Y"}
+  ],
+  "callees": {
+    "0x0050f3f6": {
+      "name": "FUN_0050f3f6",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00598580": {
+      "name": "FUN_00598580",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00571e00": {
+      "name": "FUN_00571e00",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "passthrough": true
+    },
+    "0x00571d00": {
+      "name": "FUN_00571d00",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "passthrough": true
+    },
+    "@fn_list": {
+      "name": "list callback",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_text": {
+      "name": "text callback",
+      "conv": "thiscall",
+      "args": ["mem:4"],
+      "ret": 0
+    },
+    "0x0060aca0": {
+      "name": "FUN_0060aca0",
+      "conv": "cdecl",
+      "args": ["ignore", "ignore"],
+      "passthrough": true
+    },
+    "0x00407d68": {
+      "name": "FUN_00407d68",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "passthrough": true
+    },
+    "0x005a8b00": {
+      "name": "FUN_005a8b00",
+      "conv": "thiscall",
+      "args": ["ignore", "int", "int"],
+      "ret": 0
+    },
+    "0x005bb140": {
+      "name": "FUN_005bb140",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "0x0050f414": {
+      "name": "SavePersonalNotes_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00510373": {
+      "name": "LoadPersonalNotes_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0050e2d2": {
+      "name": "UpdateButtons_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": ["@heap0", "@heap1", "@heap2", "@heap3", "@heap4", "@heap5", "@heap6", "@heap7", "@heap8", "@heap9", "@heap10", "@heap11", "@heap12", "@heap13", "@heap14", "@heap15", "@heap16", "@heap17", "@heap18", "@heap19", "@heap20", "@heap21", "@heap22", "@heap23", "@heap24", "@heap25", "@heap26", "@heap27", "@heap28", "@heap29", "@heap30", "@heap31"]
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {"name": "all_fields_set", "args": []},
+    {
+      "name": "all_fields_null",
+      "args": [],
+      "memory": [
+        {"addr": "@owner", "offset": "0x16c", "u32": 0},
+        {"addr": "@owner", "offset": "0x194", "u32": 0},
+        {"addr": "@owner", "offset": "0x1a8", "u32": 0},
+        {"addr": "@owner", "offset": "0x198", "u32": 0},
+        {"addr": "@owner", "offset": "0x1a0", "u32": 0},
+        {"addr": "@owner", "offset": "0x164", "u32": 0},
+        {"addr": "@owner", "offset": "0x174", "u32": 0},
+        {"addr": "@owner", "offset": "0x17c", "u32": 0},
+        {"addr": "@owner", "offset": "0x170", "u32": 0},
+        {"addr": "@owner", "offset": "0x1b0", "u32": 0},
+        {"addr": "@owner", "offset": "0x190", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5311791,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@owner", "offset": "0x16c", "type": "ptr", "choices": [0, "@member_list"]},
+      {"addr": "@owner", "offset": "0x194", "type": "ptr", "choices": [0, "@notes_list"]},
+      {"addr": "@owner", "offset": "0x1a8", "type": "ptr", "choices": [0, "@tribute_list"]},
+      {"addr": "@owner", "offset": "0x198", "type": "ptr", "choices": [0, "@text_receiver"]},
+      {"addr": "@owner", "offset": "0x1a0", "type": "ptr", "choices": [0, "@text_receiver"]},
+      {"addr": "@owner", "offset": "0x164", "type": "ptr", "choices": [0, "@text_receiver"]},
+      {"addr": "@owner", "offset": "0x174", "type": "ptr", "choices": [0, "@text_receiver"]},
+      {"addr": "@owner", "offset": "0x17c", "type": "ptr", "choices": [0, "@stml"]},
+      {"addr": "@owner", "offset": "0x170", "type": "ptr", "choices": [0, "@text_receiver"]},
+      {"addr": "@owner", "offset": "0x1b0", "type": "ptr", "choices": [0, "@text_receiver"]},
+      {"addr": "@owner", "offset": "0x190", "type": "ptr", "choices": [0, "@button"]}
+    ]
+  }
+}
+
+
+
+
+
+
+
+

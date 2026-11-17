@@ -1,0 +1,463 @@
+{
+  "function": "CostChanceOwnerView_guess::CanDoubleAttack_guess",
+  "original": "0x0041ee86",
+  "sources": [
+    "src/EverQuest/tu_013_EQ_Character.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@costchanceownerview",
+  "args": [
+    {
+      "name": "first_guess",
+      "type": "int"
+    },
+    {
+      "name": "second_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "char",
+  "objects": {
+    "costchanceownerview": {
+      "size": "0x288",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@vbtable"
+        },
+        {
+          "offset": "0x8",
+          "u32": "@entity"
+        }
+      ]
+    },
+    "entity": {
+      "size": "0x288",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@threshold"
+        }
+      ]
+    },
+    "threshold": {
+      "size": "0x1064",
+      "fill": "random"
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": 32
+        }
+      ]
+    },
+    "lookup_result": {
+      "size": "0x11a8",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "@threshold",
+      "offset": "0x1034",
+      "u32": 0
+    },
+    {
+      "addr": "@lookup_result",
+      "offset": "0x119c",
+      "u8": 6
+    },
+    {
+      "addr": "@lookup_result",
+      "offset": "0x11a4",
+      "u32": 30
+    }
+  ],
+  "callees": {
+    "0x005ec220": {
+      "name": "LookupService_guess::Find_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@lookup_result"
+    },
+    "0x0041b0de": {
+      "name": "LookupGate_guess::HasSkill_guess",
+      "conv": "thiscall",
+      "args": [
+        "u8"
+      ],
+      "ret": 0
+    },
+    "0x004106a3": {
+      "name": "CostOwner_guess::TotalSpellAffects_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": [
+        1,
+        0,
+        0
+      ]
+    },
+    "0x0041ace9": {
+      "name": "CostOwner_guess::Skill_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 20
+    },
+    "0x0040cbb2": {
+      "name": "RandomRange_guess",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 1
+    }
+  },
+  "cases": [
+    {
+      "name": "state_7_active_threshold",
+      "args": [0, 0],
+      "memory": [
+        {
+          "addr": "@lookup_result",
+          "offset": "0x119c",
+          "u8": 7
+        },
+        {
+          "addr": "@threshold",
+          "offset": "0x1034",
+          "u32": 1
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "state_4_active_threshold",
+      "args": [0, 0],
+      "memory": [
+        {
+          "addr": "@lookup_result",
+          "offset": "0x119c",
+          "u8": 4
+        },
+        {
+          "addr": "@threshold",
+          "offset": "0x1034",
+          "u32": 1
+        }
+      ],
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "state_7_inactive_threshold_random_zero",
+      "args": [0, 0],
+      "memory": [
+        {
+          "addr": "@lookup_result",
+          "offset": "0x119c",
+          "u8": 7
+        },
+        {
+          "addr": "@threshold",
+          "offset": "0x1034",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x004106a3": {
+          "name": "CostOwner_guess::TotalSpellAffects_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int",
+            "int",
+            "int"
+          ],
+          "ret": [
+            0
+          ]
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "random_path_then_common_zero",
+      "args": [0, 0],
+      "callees": {
+        "0x004106a3": {
+          "name": "CostOwner_guess::TotalSpellAffects_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int",
+            "int",
+            "int"
+          ],
+          "ret": [
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "dispatch_path_equal_boundary",
+      "args": [0, 0],
+      "memory": [
+        {
+          "addr": "@lookup_result",
+          "offset": "0x11a4",
+          "u32": 30
+        }
+      ],
+      "callees": {
+        "0x0041b0de": {
+          "name": "LookupGate_guess::HasSkill_guess",
+          "conv": "thiscall",
+          "args": [
+            "u8"
+          ],
+          "ret": 1
+        },
+        "0x004106a3": {
+          "name": "CostOwner_guess::TotalSpellAffects_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int",
+            "int",
+            "int"
+          ],
+          "ret": [
+            0,
+            0
+          ]
+        },
+        "0x0041ace9": {
+          "name": "CostOwner_guess::GetKindValue_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 20
+        },
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 50
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "bonus_equal_boundary",
+      "args": [0, 0],
+      "memory": [
+        {
+          "addr": "@lookup_result",
+          "offset": "0x11a4",
+          "u32": 40
+        }
+      ],
+      "callees": {
+        "0x0041b0de": {
+          "name": "LookupGate_guess::HasSkill_guess",
+          "conv": "thiscall",
+          "args": [
+            "u8"
+          ],
+          "ret": 1
+        },
+        "0x004106a3": {
+          "name": "CostOwner_guess::TotalSpellAffects_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int",
+            "int",
+            "int"
+          ],
+          "ret": [
+            10,
+            20
+          ]
+        },
+        "0x0041ace9": {
+          "name": "CostOwner_guess::GetKindValue_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 10
+        },
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 120
+        }
+      },
+      "expect": {
+        "ret": 1
+      }
+    },
+    {
+      "name": "bonus_over_boundary",
+      "args": [0, 0],
+      "memory": [
+        {
+          "addr": "@lookup_result",
+          "offset": "0x11a4",
+          "u32": 40
+        }
+      ],
+      "callees": {
+        "0x0041b0de": {
+          "name": "LookupGate_guess::HasSkill_guess",
+          "conv": "thiscall",
+          "args": [
+            "u8"
+          ],
+          "ret": 1
+        },
+        "0x004106a3": {
+          "name": "CostOwner_guess::TotalSpellAffects_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int",
+            "int",
+            "int"
+          ],
+          "ret": [
+            10,
+            20
+          ]
+        },
+        "0x0041ace9": {
+          "name": "CostOwner_guess::GetKindValue_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 10
+        },
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 121
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    },
+    {
+      "name": "negative_random_scale",
+      "args": [0, 0],
+      "callees": {
+        "0x004106a3": {
+          "name": "CostOwner_guess::TotalSpellAffects_guess",
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int",
+            "int",
+            "int"
+          ],
+          "ret": [
+            -1,
+            -1,
+            0
+          ]
+        }
+      },
+      "expect": {
+        "ret": 0
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4320902,
+    "count": 100,
+    "args": [
+      {},
+      {}
+    ],
+    "memory": [
+      {
+        "addr": "@lookup_result",
+        "offset": "0x119c",
+        "type": "u8",
+        "choices": [
+          4,
+          6,
+          7
+        ]
+      },
+      {
+        "addr": "@threshold",
+        "offset": "0x1034",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@costchanceownerview",
+        "offset": "0x8",
+        "type": "ptr",
+        "choices": [
+          "@entity",
+          0
+        ]
+      },
+      {
+        "addr": "@entity",
+        "offset": "0x1a8",
+        "type": "ptr",
+        "choices": [
+          "@threshold",
+          0
+        ]
+      }
+    ]
+  }
+}

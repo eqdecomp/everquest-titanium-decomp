@@ -1,0 +1,123 @@
+{
+  "function": "UpdateItemSlot_guess",
+  "original": "0x0043dd14",
+  "size": "0x21e",
+  "sources": ["src/EverQuest/tu_029_Display.cpp"],
+  "conv": "stdcall",
+  "args": [
+    {"name": "p1", "type": "ptr"},
+    {"name": "p2", "type": "int"},
+    {"name": "p3", "type": "ptr"},
+    {"name": "p4", "type": "ptr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "root": {
+      "size": "0xc28c",
+      "fill": "random",
+      "init": [
+        {"offset": "0x8", "u32": "@link"},
+        {"offset": "0xc288", "u32": "@session"}
+      ]
+    },
+    "link": {"size": "0x8", "fill": "zero", "init": [{"offset": "0x4", "u32": 0}]},
+    "session": {"size": "0x255", "fill": "random", "init": [
+      {"offset": "0x244", "u8": 0},
+      {"offset": "0x254", "u8": 0}
+    ]},
+    "slot": {"size": "0x120d", "fill": "random", "init": [{"offset": "0x120c", "u8": 0}]},
+    "record1": {"size": "0x20", "fill": "zero"},
+    "record2": {"size": "0x20", "fill": "zero"},
+    "text": {"size": "0x20", "fill": "zero", "init": [{"offset": "0", "cstr": "ID00000240"}]},
+    "short_text": {"size": "0x8", "fill": "zero", "init": [{"offset": "0", "cstr": "ID"}]}
+  },
+  "memory": [{"addr": "0x0079ac74", "u32": "0x12345678"}],
+  "callees": {
+    "0x00464afb": {"name": "GetMaterialSlotFromInvSlot_guess", "conv": "cdecl", "args": ["int"], "ret": 1},
+    "0x005e0da0": {"name": "DirRecord_Count_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005e0b90": {"name": "DirRecord_Value_guess", "conv": "thiscall", "args": [], "ret": 100},
+    "0x005e0f00": {"name": "DirRecord_Text_guess", "conv": "thiscall", "args": [], "ret": "@text"},
+    "0x0060e3a3": {"name": "atol", "conv": "cdecl", "args": ["mem:9"], "ret": 0},
+    "0x0043da4a": {"name": "IndexAccessor_GetValue_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005ec220": {"name": "GetCharInfo2_guess", "conv": "thiscall", "args": [], "ret": "@slot"},
+    "0x00479e02": {"name": "LegalPlayerRace_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "0x004845d8": {"name": "HandleMaterialEx_guess", "conv": "thiscall", "args": ["int", "int", "int", "int", "int"], "ret": 0}
+  },
+  "cases": [
+    {"name": "upper_valid_boundary", "args": ["@root", 21, 0, 0]},
+    {"name": "upper_invalid_boundary", "args": ["@root", 22, 0, 0]},
+    {"name": "null_root", "args": [0, 1, 0, 0]},
+    {"name": "null_session", "args": ["@root", 1, 0, 0], "memory": [{"addr": "@root", "offset": "0xc288", "u32": 0}]},
+    {"name": "invalid_lookup", "args": ["@root", 1, 0, 0], "callees": {"0x00464afb": {"name": "FUN_00464afb_guess", "conv": "cdecl", "args": ["int"], "ret": -1}}},
+    {"name": "equal_null_records", "args": ["@root", 1, 0, 0]},
+    {"name": "changed_second_record", "args": ["@root", 1, 0, "@record2"], "callees": {
+      "0x005e0da0": {"name": "DirRecord_Count_guess", "conv": "thiscall", "args": [], "ret": 1},
+      "0x005e0b90": {"name": "DirRecord_Value_guess", "conv": "thiscall", "args": [], "ret": 200}
+    }},
+    {"name": "count_positive_lookup_override", "args": ["@root", 1, "@record1", 0], "callees": {
+      "0x005e0da0": {"name": "DirRecord_Count_guess", "conv": "thiscall", "args": [], "ret": [1, 1]},
+      "0x005e0b90": {"name": "DirRecord_Value_guess", "conv": "thiscall", "args": [], "ret": 10},
+      "0x0043da4a": {"name": "IndexAccessor_GetValue_guess", "conv": "thiscall", "args": ["int"], "ret": [1, 99]}
+    }},
+    {"name": "atol_below_threshold", "args": ["@root", 1, "@record1", 0], "callees": {
+      "0x005e0da0": {"name": "DirRecord_Count_guess", "conv": "thiscall", "args": [], "ret": 0},
+      "0x005e0b90": {"name": "DirRecord_Value_guess", "conv": "thiscall", "args": [], "ret": 100},
+      "0x0060e3a3": {"name": "atol", "conv": "cdecl", "args": ["mem:9"], "ret": 239}
+    }},
+    {"name": "atol_at_threshold", "args": ["@root", 1, "@record1", 0], "callees": {
+      "0x005e0da0": {"name": "DirRecord_Count_guess", "conv": "thiscall", "args": [], "ret": 0},
+      "0x005e0b90": {"name": "DirRecord_Value_guess", "conv": "thiscall", "args": [], "ret": 100},
+      "0x0060e3a3": {"name": "atol", "conv": "cdecl", "args": ["mem:9"], "ret": 240},
+      "0x0043da4a": {"name": "IndexAccessor_GetValue_guess", "conv": "thiscall", "args": ["int"], "ret": [1, 99]}
+    }},
+    {"name": "slot_zero_parse_first_record", "args": ["@root", 1, "@record1", 0], "callees": {
+      "0x00464afb": {"name": "FUN_00464afb_guess", "conv": "cdecl", "args": ["int"], "ret": 0},
+      "0x0060e3a3": {"name": "atol", "conv": "cdecl", "args": ["mem:9"], "ret": [240, 240]}
+    }},
+    {"name": "slot_zero_parse_second_record", "args": ["@root", 1, 0, "@record2"], "callees": {
+      "0x00464afb": {"name": "FUN_00464afb_guess", "conv": "cdecl", "args": ["int"], "ret": 0},
+      "0x0060e3a3": {"name": "atol", "conv": "cdecl", "args": ["mem:9"], "ret": 240},
+      "0x005e0b90": {"name": "DirRecord_Value_guess", "conv": "thiscall", "args": [], "ret": 100}
+    }},
+    {"name": "slot_zero_text_null_after_copy", "args": ["@root", 1, "@record1", 0], "callees": {
+      "0x00464afb": {"name": "FUN_00464afb_guess", "conv": "cdecl", "args": ["int"], "ret": 0},
+      "0x005e0f00": {"name": "DirRecord_Text_guess", "conv": "thiscall", "args": [], "ret": ["@text", 0]},
+      "0x0060e3a3": {"name": "atol", "conv": "cdecl", "args": ["mem:9"], "ret": 0}
+    }},
+    {"name": "slot_zero_short_text", "args": ["@root", 1, "@record1", 0], "callees": {
+      "0x00464afb": {"name": "FUN_00464afb_guess", "conv": "cdecl", "args": ["int"], "ret": 0},
+      "0x005e0f00": {"name": "DirRecord_Text_guess", "conv": "thiscall", "args": [], "ret": "@short_text"},
+      "0x0060e3a3": {"name": "atol", "conv": "cdecl", "args": ["mem:9"], "ret": 0}
+    }},
+    {"name": "dirty_when_both_states_ff", "args": ["@root", 1, 0, "@record2"], "memory": [
+      {"addr": "@session", "offset": "0x254", "u8": 255},
+      {"addr": "@slot", "offset": "0x120c", "u8": 255}
+    ], "callees": {"0x005e0da0": {"name": "DirRecord_Count_guess", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "dirty_when_slot_state_ff", "args": ["@root", 1, 0, "@record2"], "memory": [
+      {"addr": "@session", "offset": "0x254", "u8": 0},
+      {"addr": "@slot", "offset": "0x120c", "u8": 255}
+    ], "callees": {"0x005e0da0": {"name": "DirRecord_Count_guess", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "dirty_flag_already_set", "args": ["@root", 1, 0, "@record2"], "memory": [
+      {"addr": "@session", "offset": "0x244", "u8": 1}
+    ], "callees": {"0x005e0da0": {"name": "DirRecord_Count_guess", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "dirty_reset_returns_zero", "args": ["@root", 1, 0, "@record2"], "callees": {
+      "0x005e0da0": {"name": "DirRecord_Count_guess", "conv": "thiscall", "args": [], "ret": 1},
+      "0x00479e02": {"name": "FUN_00479e02_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+    }}
+  ],
+  "fuzz": {
+    "seed": 4447508,
+    "count": 100,
+    "args": [
+      {"choices": [0, "@root"]},
+      {"range": [-3, 30]},
+      {"choices": [0, "@record1"]},
+      {"choices": [0, "@record2"]}
+    ],
+    "memory": [
+      {"addr": "@session", "offset": "0x244", "type": "u8", "choices": [0, 1, 255]},
+      {"addr": "@session", "offset": "0x254", "type": "u8", "choices": [0, 1, 255]},
+      {"addr": "@slot", "offset": "0x120c", "type": "u8", "choices": [0, 255]}
+    ]
+  }
+}

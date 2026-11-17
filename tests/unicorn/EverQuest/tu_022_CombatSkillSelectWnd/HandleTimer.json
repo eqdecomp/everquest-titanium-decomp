@@ -1,0 +1,207 @@
+{
+  "function": "SkillNotifyWnd_guess::CompareTimeCells_guess",
+  "original": "0x0042d4c7",
+  "sources": [
+    "src/EverQuest/tu_022_CombatSkillSelectWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@skillnotifywnd",
+  "args": [
+    {
+      "name": "data_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "skillnotifywnd": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "data": {
+      "size": "0x18",
+      "fill": "random"
+    },
+    "text1": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "text2": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00572300": {
+      "name": "TimeText::GetText",
+      "conv": "thiscall",
+      "args": [],
+      "ret": ["@text1", "@text2"]
+    },
+    "0x00610837": {
+      "name": "sscanf",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr"],
+      "varargs": "printf",
+      "ret": [3, 3],
+      "writes": [
+        {"arg": 2, "offset": 0, "hex": "01000000", "call": 0},
+        {"arg": 3, "offset": 0, "hex": "02000000", "call": 0},
+        {"arg": 4, "offset": 0, "hex": "03000000", "call": 0},
+        {"arg": 2, "offset": 0, "hex": "00000000", "call": 1},
+        {"arg": 3, "offset": 0, "hex": "01000000", "call": 1},
+        {"arg": 4, "offset": 0, "hex": "00000000", "call": 1}
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "_sscanf": "0x00610837"
+  },
+  "cases": [
+    {
+      "name": "typical_first_later",
+      "args": ["@data"]
+    },
+    {
+      "name": "first_earlier",
+      "args": ["@data"],
+      "callees": {
+        "0x00610837": {
+          "name": "sscanf",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr"],
+          "varargs": "printf",
+          "ret": [3, 3],
+          "writes": [
+            {"arg": 2, "offset": 0, "hex": "00000000", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "00000000", "call": 0},
+            {"arg": 4, "offset": 0, "hex": "05000000", "call": 0},
+            {"arg": 2, "offset": 0, "hex": "00000000", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "01000000", "call": 1},
+            {"arg": 4, "offset": 0, "hex": "00000000", "call": 1}
+          ]
+        }
+      }
+    },
+    {
+      "name": "equal_times",
+      "args": ["@data"],
+      "callees": {
+        "0x00610837": {
+          "name": "sscanf",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr"],
+          "varargs": "printf",
+          "ret": [3, 3],
+          "writes": [
+            {"arg": 2, "offset": 0, "hex": "00000000", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "01000000", "call": 0},
+            {"arg": 4, "offset": 0, "hex": "00000000", "call": 0},
+            {"arg": 2, "offset": 0, "hex": "00000000", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "01000000", "call": 1},
+            {"arg": 4, "offset": 0, "hex": "00000000", "call": 1}
+          ]
+        }
+      }
+    },
+    {
+      "name": "hour_wraps_into_later",
+      "args": ["@data"],
+      "callees": {
+        "0x00610837": {
+          "name": "sscanf",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr"],
+          "varargs": "printf",
+          "ret": [3, 3],
+          "writes": [
+            {"arg": 2, "offset": 0, "hex": "02000000", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "00000000", "call": 0},
+            {"arg": 4, "offset": 0, "hex": "00000000", "call": 0},
+            {"arg": 2, "offset": 0, "hex": "01000000", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "3b000000", "call": 1},
+            {"arg": 4, "offset": 0, "hex": "3b000000", "call": 1}
+          ]
+        }
+      }
+    },
+    {
+      "name": "zeros",
+      "args": ["@data"],
+      "callees": {
+        "0x00610837": {
+          "name": "sscanf",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr"],
+          "varargs": "printf",
+          "ret": [3, 3],
+          "writes": [
+            {"arg": 2, "offset": 0, "hex": "00000000", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "00000000", "call": 0},
+            {"arg": 4, "offset": 0, "hex": "00000000", "call": 0},
+            {"arg": 2, "offset": 0, "hex": "00000000", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "00000000", "call": 1},
+            {"arg": 4, "offset": 0, "hex": "00000000", "call": 1}
+          ]
+        }
+      }
+    },
+    {
+      "name": "equal_nonzero_parts",
+      "args": ["@data"],
+      "callees": {
+        "0x00610837": {
+          "name": "sscanf",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr"],
+          "varargs": "printf",
+          "ret": [3, 3],
+          "writes": [
+            {"arg": 2, "offset": 0, "hex": "01000000", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "1e000000", "call": 0},
+            {"arg": 4, "offset": 0, "hex": "0f000000", "call": 0},
+            {"arg": 2, "offset": 0, "hex": "01000000", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "1e000000", "call": 1},
+            {"arg": 4, "offset": 0, "hex": "0f000000", "call": 1}
+          ]
+        }
+      }
+    },
+    {
+      "name": "one_second_later",
+      "args": ["@data"],
+      "callees": {
+        "0x00610837": {
+          "name": "sscanf",
+          "conv": "cdecl",
+          "args": ["cstr", "cstr"],
+          "varargs": "printf",
+          "ret": [3, 3],
+          "writes": [
+            {"arg": 2, "offset": 0, "hex": "01000000", "call": 0},
+            {"arg": 3, "offset": 0, "hex": "1e000000", "call": 0},
+            {"arg": 4, "offset": 0, "hex": "10000000", "call": 0},
+            {"arg": 2, "offset": 0, "hex": "01000000", "call": 1},
+            {"arg": 3, "offset": 0, "hex": "1e000000", "call": 1},
+            {"arg": 4, "offset": 0, "hex": "0f000000", "call": 1}
+          ]
+        }
+      }
+    },
+    {
+      "name": "null pointers",
+      "args": [0]
+    }
+  ],
+  "fuzz": {
+    "seed": 4379847,
+    "count": 100,
+    "args": [
+      {
+        "choices": ["@data", 0]
+      }
+    ],
+    "memory": []
+  }
+}

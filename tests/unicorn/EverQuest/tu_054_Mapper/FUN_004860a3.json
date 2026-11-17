@@ -1,0 +1,3166 @@
+{
+  "function": "Mapper_guess::PlayAnimationSound_guess",
+  "original": "0x004860a3",
+  "sources": [
+    "src/EverQuest/tu_054_Mapper.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@mapper",
+  "args": [
+    {
+      "name": "prev_guess",
+      "type": "int"
+    },
+    {
+      "name": "cur_guess",
+      "type": "int"
+    },
+    {
+      "name": "a_guess",
+      "type": "int"
+    },
+    {
+      "name": "b_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "mapper": {
+      "size": "0x14",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "@owner"
+        }
+      ]
+    },
+    "owner": {
+      "size": "0x278",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@state"
+        }
+      ]
+    },
+    "state": {
+      "size": "0xf80",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x12c",
+          "u32": "@tables"
+        }
+      ]
+    },
+    "player": {
+      "size": "0x278",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@pstate"
+        }
+      ]
+    },
+    "pstate": {
+      "size": "0xf80",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x15c",
+          "u32": 0
+        }
+      ]
+    },
+    "tables": {
+      "size": "0x30",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x2c",
+          "u32": "@rows"
+        }
+      ]
+    },
+    "rows": {
+      "size": "0x300",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x24",
+          "u32": "@row"
+        },
+        {
+          "offset": "0x38",
+          "u32": "@row"
+        },
+        {
+          "offset": "0xb0",
+          "u32": "@row"
+        },
+        {
+          "offset": "0xc4",
+          "u32": "@row"
+        }
+      ]
+    },
+    "row": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0xa0",
+          "u32": "0x1f"
+        },
+        {
+          "offset": "0xa4",
+          "u32": "0x20"
+        },
+        {
+          "offset": "0xb8",
+          "u32": "0x123"
+        }
+      ]
+    },
+    "display": {
+      "size": "0x14c",
+      "fill": "random"
+    },
+    "snd": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0066d248",
+      "from_image": "0x0066D248",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00905ce4",
+      "u32": "@player"
+    },
+    {
+      "addr": "0x00905d24",
+      "u32": "@display"
+    },
+    {
+      "addr": "0x00851390",
+      "u32": "@snd"
+    },
+    {
+      "addr": "@display",
+      "offset": "0x148",
+      "u32": 10000
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x1b1",
+      "u8": 0
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x244",
+      "u8": 0
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x251",
+      "u8": 0
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x260",
+      "u32": 1
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x270",
+      "u32": 0
+    },
+    {
+      "addr": "@owner",
+      "offset": "0x274",
+      "u32": 0
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf20",
+      "u32": "0x41"
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf24",
+      "u32": "0x42"
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf28",
+      "u32": "0x43"
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf2c",
+      "u32": "0x44"
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf48",
+      "u32": "0x45"
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf4c",
+      "u32": "0x46"
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf50",
+      "u32": "0x47"
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf58",
+      "u32": "0x48"
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf5c",
+      "u32": "0x49"
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf60",
+      "u32": "0x4a"
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf64",
+      "u32": "0x4b"
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf68",
+      "u32": 0
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf70",
+      "u32": 7
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf74",
+      "u32": 0
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf78",
+      "u32": 1
+    },
+    {
+      "addr": "@state",
+      "offset": "0xf7c",
+      "u32": 1
+    }
+  ],
+  "callees": {
+    "0x00479f75": {
+      "name": "SetCurrentLoopSound_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x00479e02": {
+      "name": "LegalPlayerRace_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0040cbb2": {
+      "name": "RandomRange_guess",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 2
+    },
+    "0x00479ee8": {
+      "name": "PlaySound_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x0044a516": {
+      "name": "IsMuted_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "same_92_returns",
+      "args": [
+        146,
+        146,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "same_unhandled",
+      "args": [
+        112,
+        112,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "cur_6e_returns",
+      "args": [
+        0,
+        110,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "cur_4f_returns",
+      "args": [
+        0,
+        79,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "cur_below_offset",
+      "args": [
+        0,
+        78,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "cur_fe_returns",
+      "args": [
+        0,
+        254,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "cur_4f_returns_row",
+      "args": [
+        0,
+        79,
+        1,
+        2
+      ],
+      "memory": [
+        {
+          "addr": "@rows",
+          "offset": "0x0",
+          "u32": "@row"
+        }
+      ]
+    },
+    {
+      "name": "cur_fe_returns_row",
+      "args": [
+        0,
+        254,
+        1,
+        2
+      ],
+      "memory": [
+        {
+          "addr": "@rows",
+          "offset": "0x2bc",
+          "u32": "@row"
+        }
+      ]
+    },
+    {
+      "name": "cur_6e_returns_row",
+      "args": [
+        0,
+        110,
+        1,
+        2
+      ],
+      "memory": [
+        {
+          "addr": "@rows",
+          "offset": "0x7c",
+          "u32": "@row"
+        }
+      ]
+    },
+    {
+      "name": "race_7f_returns",
+      "args": [
+        0,
+        112,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x260",
+          "u32": 127
+        }
+      ]
+    },
+    {
+      "name": "player_68_timer_500",
+      "args": [
+        104,
+        104,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        },
+        {
+          "addr": "@state",
+          "offset": "0xf74",
+          "u32": 9500
+        }
+      ]
+    },
+    {
+      "name": "player_68_timer_501",
+      "args": [
+        104,
+        104,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        },
+        {
+          "addr": "@state",
+          "offset": "0xf74",
+          "u32": 9499
+        }
+      ]
+    },
+    {
+      "name": "player_6a_timer_flag",
+      "args": [
+        106,
+        106,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x1b1",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "player_7d_timer",
+      "args": [
+        125,
+        125,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ]
+    },
+    {
+      "name": "player_69_timer",
+      "args": [
+        105,
+        105,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ]
+    },
+    {
+      "name": "player_7e_timer",
+      "args": [
+        126,
+        126,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ]
+    },
+    {
+      "name": "player_6a_timer_rolls_3",
+      "args": [
+        106,
+        106,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 3
+        }
+      }
+    },
+    {
+      "name": "player_80_226",
+      "args": [
+        128,
+        128,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        },
+        {
+          "addr": "@state",
+          "offset": "0xf74",
+          "u32": 9450
+        }
+      ]
+    },
+    {
+      "name": "player_80_227",
+      "args": [
+        128,
+        128,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        },
+        {
+          "addr": "@state",
+          "offset": "0xf74",
+          "u32": 9449
+        }
+      ]
+    },
+    {
+      "name": "player_80_227_race",
+      "args": [
+        128,
+        128,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        },
+        {
+          "addr": "@state",
+          "offset": "0xf74",
+          "u32": 9449
+        }
+      ],
+      "callees": {
+        "0x00479e02": {
+          "name": "CheckRace_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "player_7f_258",
+      "args": [
+        127,
+        127,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        },
+        {
+          "addr": "@state",
+          "offset": "0xf74",
+          "u32": 9400
+        }
+      ]
+    },
+    {
+      "name": "player_7f_259",
+      "args": [
+        127,
+        127,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        },
+        {
+          "addr": "@state",
+          "offset": "0xf74",
+          "u32": 9399
+        }
+      ]
+    },
+    {
+      "name": "player_7f_259_race",
+      "args": [
+        127,
+        127,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        },
+        {
+          "addr": "@state",
+          "offset": "0xf74",
+          "u32": 9399
+        }
+      ],
+      "callees": {
+        "0x00479e02": {
+          "name": "CheckRace_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "player_unhandled_same",
+      "args": [
+        96,
+        96,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ]
+    },
+    {
+      "name": "npc_7d_timer_500",
+      "args": [
+        125,
+        125,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf74",
+          "u32": 9500
+        }
+      ]
+    },
+    {
+      "name": "npc_7d_timer_501",
+      "args": [
+        125,
+        125,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf74",
+          "u32": 9499
+        }
+      ]
+    },
+    {
+      "name": "npc_7e_timer",
+      "args": [
+        126,
+        126,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "npc_7e_timer_flag",
+      "args": [
+        126,
+        126,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x1b1",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "npc_68_same_nothing",
+      "args": [
+        104,
+        104,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "npc_80_race_226",
+      "args": [
+        128,
+        128,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf74",
+          "u32": 9450
+        }
+      ],
+      "callees": {
+        "0x00479e02": {
+          "name": "CheckRace_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "npc_80_race_227",
+      "args": [
+        128,
+        128,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf74",
+          "u32": 9449
+        }
+      ],
+      "callees": {
+        "0x00479e02": {
+          "name": "CheckRace_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "npc_80_norace_f5c",
+      "args": [
+        128,
+        128,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "npc_80_norace_no_f5c",
+      "args": [
+        128,
+        128,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf5c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "npc_7f_race_258",
+      "args": [
+        127,
+        127,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf74",
+          "u32": 9400
+        }
+      ],
+      "callees": {
+        "0x00479e02": {
+          "name": "CheckRace_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "npc_7f_race_259",
+      "args": [
+        127,
+        127,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf74",
+          "u32": 9399
+        }
+      ],
+      "callees": {
+        "0x00479e02": {
+          "name": "CheckRace_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "npc_7f_norace_f5c",
+      "args": [
+        127,
+        127,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "npc_7f_norace_no_f5c",
+      "args": [
+        127,
+        127,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf5c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "chg_6a_player_roll0",
+      "args": [
+        0,
+        106,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "chg_6a_player_roll1",
+      "args": [
+        0,
+        106,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chg_6a_player_roll2",
+      "args": [
+        0,
+        106,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ]
+    },
+    {
+      "name": "chg_6a_player_roll4",
+      "args": [
+        0,
+        106,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 4
+        }
+      }
+    },
+    {
+      "name": "chg_6a_player_muted",
+      "args": [
+        0,
+        106,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ],
+      "callees": {
+        "0x0044a516": {
+          "name": "IsMuted_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chg_6a_flag",
+      "args": [
+        0,
+        106,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x1b1",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "chg_6a_npc_other",
+      "args": [
+        0,
+        106,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_6a_npc_zero",
+      "args": [
+        0,
+        106,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf60",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "chg_6a_npc_5f",
+      "args": [
+        0,
+        106,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf60",
+          "u32": "0x5f"
+        }
+      ]
+    },
+    {
+      "name": "chg_68_player_roll0",
+      "args": [
+        0,
+        104,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "chg_68_player_roll1",
+      "args": [
+        0,
+        104,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chg_69_player_roll2",
+      "args": [
+        0,
+        105,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ]
+    },
+    {
+      "name": "chg_69_player_roll3",
+      "args": [
+        0,
+        105,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 3
+        }
+      }
+    },
+    {
+      "name": "chg_69_player_roll4",
+      "args": [
+        0,
+        105,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 4
+        }
+      }
+    },
+    {
+      "name": "chg_68_flag",
+      "args": [
+        0,
+        104,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x1b1",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "chg_68_npc_other",
+      "args": [
+        0,
+        104,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_68_npc_zero",
+      "args": [
+        0,
+        104,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf5c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "chg_68_npc_5d",
+      "args": [
+        0,
+        104,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf5c",
+          "u32": "0x5d"
+        }
+      ]
+    },
+    {
+      "name": "chg_7f_race",
+      "args": [
+        0,
+        127,
+        0,
+        0
+      ],
+      "callees": {
+        "0x00479e02": {
+          "name": "CheckRace_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chg_7f_norace",
+      "args": [
+        0,
+        127,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_80_race",
+      "args": [
+        0,
+        128,
+        0,
+        0
+      ],
+      "callees": {
+        "0x00479e02": {
+          "name": "CheckRace_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chg_80_norace",
+      "args": [
+        0,
+        128,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_6f_roll49",
+      "args": [
+        0,
+        111,
+        0,
+        0
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 49
+        }
+      }
+    },
+    {
+      "name": "chg_6f_roll50",
+      "args": [
+        0,
+        111,
+        0,
+        0
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 50
+        }
+      }
+    },
+    {
+      "name": "chg_7b",
+      "args": [
+        0,
+        123,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_7c",
+      "args": [
+        0,
+        124,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_7d",
+      "args": [
+        0,
+        125,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_7d_flag",
+      "args": [
+        0,
+        125,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x1b1",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "chg_7e_off",
+      "args": [
+        0,
+        126,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_7e_on",
+      "args": [
+        0,
+        126,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf68",
+          "u32": 5
+        }
+      ]
+    },
+    {
+      "name": "chg_7e_flag",
+      "args": [
+        0,
+        126,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x1b1",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "chg_79_other",
+      "args": [
+        0,
+        121,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_79_3c",
+      "args": [
+        0,
+        121,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x260",
+          "u32": "0x3c"
+        }
+      ]
+    },
+    {
+      "name": "chg_79_16f",
+      "args": [
+        0,
+        121,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x260",
+          "u32": "0x16f"
+        }
+      ]
+    },
+    {
+      "name": "chg_79_flag",
+      "args": [
+        0,
+        121,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x1b1",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "chg_6d",
+      "args": [
+        0,
+        109,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_6d_flag",
+      "args": [
+        0,
+        109,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x1b1",
+          "u8": 1
+        }
+      ]
+    },
+    {
+      "name": "chg_91",
+      "args": [
+        0,
+        145,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_92_plain",
+      "args": [
+        0,
+        146,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_92_x",
+      "args": [
+        0,
+        146,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x251",
+          "u8": 120
+        }
+      ]
+    },
+    {
+      "name": "chg_92_274_pos",
+      "args": [
+        0,
+        146,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x274",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "chg_92_274_neg",
+      "args": [
+        0,
+        146,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x274",
+          "u32": "0xffffffff"
+        }
+      ]
+    },
+    {
+      "name": "chg_92_244_40",
+      "args": [
+        0,
+        146,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x270",
+          "u32": 64
+        }
+      ]
+    },
+    {
+      "name": "chg_92_244_41",
+      "args": [
+        0,
+        146,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x244",
+          "u8": 1
+        },
+        {
+          "addr": "@owner",
+          "offset": "0x270",
+          "u32": 65
+        }
+      ]
+    },
+    {
+      "name": "chg_5f",
+      "args": [
+        0,
+        95,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_52",
+      "args": [
+        0,
+        82,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_52_f78_5",
+      "args": [
+        0,
+        82,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 5
+        }
+      ]
+    },
+    {
+      "name": "chg_56",
+      "args": [
+        0,
+        86,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_56_f78_5",
+      "args": [
+        0,
+        86,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 5
+        }
+      ]
+    },
+    {
+      "name": "chg_58_row",
+      "args": [
+        0,
+        88,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "chg_58_row_1f",
+      "args": [
+        0,
+        88,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_58_row_20",
+      "args": [
+        0,
+        88,
+        0,
+        1
+      ]
+    },
+    {
+      "name": "chg_58_row_zero",
+      "args": [
+        0,
+        88,
+        2,
+        3
+      ]
+    },
+    {
+      "name": "chg_58_no_tables",
+      "args": [
+        0,
+        88,
+        1,
+        2
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0x12c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "chg_5d_row",
+      "args": [
+        0,
+        93,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "chg_51_roll1",
+      "args": [
+        0,
+        81,
+        0,
+        0
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chg_51_f78_5",
+      "args": [
+        0,
+        81,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 5
+        }
+      ]
+    },
+    {
+      "name": "chg_51_f78_other",
+      "args": [
+        0,
+        81,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_51_f78_other_82",
+      "args": [
+        0,
+        81,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf50",
+          "u32": "0x82"
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chg_51_f78_0_have",
+      "args": [
+        0,
+        81,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chg_50_f78_0_r1",
+      "args": [
+        0,
+        80,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_50_f78_0_r2",
+      "args": [
+        0,
+        80,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_50_f78_0_r3",
+      "args": [
+        0,
+        80,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_50_f78_0_r4",
+      "args": [
+        0,
+        80,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_50_f78_0_r5",
+      "args": [
+        0,
+        80,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            5
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_50_f78_0_r6",
+      "args": [
+        0,
+        80,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            6
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_50_player",
+      "args": [
+        0,
+        80,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ]
+    },
+    {
+      "name": "chg_50_race_31",
+      "args": [
+        0,
+        80,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x260",
+          "u32": "0x31"
+        }
+      ]
+    },
+    {
+      "name": "chg_50_race_7a",
+      "args": [
+        0,
+        80,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x260",
+          "u32": "0x7a"
+        }
+      ]
+    },
+    {
+      "name": "chg_53_5",
+      "args": [
+        0,
+        83,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf7c",
+          "u32": 5
+        }
+      ]
+    },
+    {
+      "name": "chg_53_3",
+      "args": [
+        0,
+        83,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf7c",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "chg_53_0",
+      "args": [
+        0,
+        83,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf7c",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "chg_53_1",
+      "args": [
+        0,
+        83,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_5b_3",
+      "args": [
+        0,
+        91,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf7c",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "chg_5b_1",
+      "args": [
+        0,
+        91,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_5c_roll1",
+      "args": [
+        0,
+        92,
+        0,
+        0
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chg_5c_player",
+      "args": [
+        0,
+        92,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ]
+    },
+    {
+      "name": "chg_5c_f78_5",
+      "args": [
+        0,
+        92,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 5
+        }
+      ]
+    },
+    {
+      "name": "chg_5c_f78_other",
+      "args": [
+        0,
+        92,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_5c_f78_other_82",
+      "args": [
+        0,
+        92,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf50",
+          "u32": "0x82"
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chg_5c_f78_0_have",
+      "args": [
+        0,
+        92,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chg_5c_f78_0_r1",
+      "args": [
+        0,
+        92,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_5c_f78_0_r2",
+      "args": [
+        0,
+        92,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_5c_f78_0_r3",
+      "args": [
+        0,
+        92,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_5c_f78_0_r4",
+      "args": [
+        0,
+        92,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_5c_f78_0_r5",
+      "args": [
+        0,
+        92,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            5
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_5c_f78_0_r6",
+      "args": [
+        0,
+        92,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            6
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_5d",
+      "args": [
+        0,
+        93,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_5e_roll1",
+      "args": [
+        0,
+        94,
+        0,
+        0
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chg_5e_player",
+      "args": [
+        0,
+        94,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ]
+    },
+    {
+      "name": "chg_5e_f78_other",
+      "args": [
+        0,
+        94,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_5e_f78_other_82",
+      "args": [
+        0,
+        94,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf50",
+          "u32": "0x82"
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chg_5e_f78_0_have",
+      "args": [
+        0,
+        94,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            1,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_5e_f78_0_r1",
+      "args": [
+        0,
+        94,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_5e_f78_0_r2",
+      "args": [
+        0,
+        94,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_5e_f78_0_r3",
+      "args": [
+        0,
+        94,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_5e_f78_0_r5",
+      "args": [
+        0,
+        94,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            5
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_5e_f78_0_r6",
+      "args": [
+        0,
+        94,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@state",
+          "offset": "0xf78",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0040cbb2": {
+          "name": "RandomRange_guess",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "int"
+          ],
+          "ret": [
+            2,
+            6
+          ]
+        }
+      }
+    },
+    {
+      "name": "chg_60",
+      "args": [
+        0,
+        96,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_65",
+      "args": [
+        0,
+        101,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_85",
+      "args": [
+        0,
+        133,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_86",
+      "args": [
+        0,
+        134,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_87",
+      "args": [
+        0,
+        135,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_66",
+      "args": [
+        0,
+        102,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_67",
+      "args": [
+        0,
+        103,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_70_nothing",
+      "args": [
+        0,
+        112,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "chg_60_player",
+      "args": [
+        0,
+        96,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ]
+    },
+    {
+      "name": "chg_60_player_muted",
+      "args": [
+        0,
+        96,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ],
+      "callees": {
+        "0x0044a516": {
+          "name": "IsMuted_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chg_70_player_zero",
+      "args": [
+        0,
+        112,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905ce4",
+          "u32": "@owner"
+        }
+      ]
+    },
+    {
+      "name": "chg_60_followed",
+      "args": [
+        0,
+        96,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@pstate",
+          "offset": "0x15c",
+          "u32": "@owner"
+        }
+      ]
+    },
+    {
+      "name": "chg_60_followed_muted",
+      "args": [
+        0,
+        96,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@pstate",
+          "offset": "0x15c",
+          "u32": "@owner"
+        }
+      ],
+      "callees": {
+        "0x0044a516": {
+          "name": "IsMuted_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        }
+      }
+    },
+    {
+      "name": "chg_70_followed_zero",
+      "args": [
+        0,
+        112,
+        0,
+        0
+      ],
+      "memory": [
+        {
+          "addr": "@pstate",
+          "offset": "0x15c",
+          "u32": "@owner"
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4743331,
+    "count": 200,
+    "args": [
+      {
+        "choices": [
+          0,
+          80,
+          81,
+          82,
+          92,
+          104,
+          106,
+          125,
+          126,
+          127,
+          128,
+          146
+        ]
+      },
+      {
+        "choices": [
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          86,
+          88,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          109,
+          110,
+          111,
+          112,
+          121,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          133,
+          134,
+          135,
+          145,
+          146,
+          254
+        ]
+      },
+      {
+        "range": [
+          0,
+          3
+        ]
+      },
+      {
+        "range": [
+          0,
+          3
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x00905ce4",
+        "type": "u32",
+        "choices": [
+          "@player",
+          "@owner"
+        ]
+      },
+      {
+        "addr": "@pstate",
+        "offset": "0x15c",
+        "type": "u32",
+        "choices": [
+          0,
+          "@owner"
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x1b1",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x244",
+        "type": "u8",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x251",
+        "type": "u8",
+        "choices": [
+          0,
+          120
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x260",
+        "type": "int",
+        "choices": [
+          1,
+          49,
+          60,
+          122,
+          127,
+          367
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x270",
+        "type": "int",
+        "choices": [
+          0,
+          64,
+          65
+        ]
+      },
+      {
+        "addr": "@owner",
+        "offset": "0x274",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0x12c",
+        "type": "u32",
+        "choices": [
+          0,
+          "@tables"
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0xf50",
+        "type": "int",
+        "choices": [
+          0,
+          31,
+          71,
+          130
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0xf5c",
+        "type": "int",
+        "choices": [
+          0,
+          73,
+          93
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0xf60",
+        "type": "int",
+        "choices": [
+          0,
+          74,
+          95
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0xf68",
+        "type": "int",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0xf74",
+        "type": "u32",
+        "choices": [
+          0,
+          9399,
+          9400,
+          9449,
+          9450,
+          9499,
+          9500,
+          10001
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0xf78",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          5
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0xf7c",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          3,
+          5
+        ]
+      }
+    ]
+  }
+}

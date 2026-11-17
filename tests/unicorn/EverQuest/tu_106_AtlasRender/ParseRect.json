@@ -1,0 +1,463 @@
+{
+  "function": "AtlasRender_guess::ParseRect_guess",
+  "original": "0x004d924f",
+  "sources": [
+    "src/EverQuest/tu_106_AtlasRender.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@cleanupowner",
+  "args": [
+    {
+      "name": "bounds_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "image_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "message_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "cleanupowner": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "bounds": {
+      "size": "0x20",
+      "fill": "random"
+    },
+    "image": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "message": {
+      "size": "0x8",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0064eeac",
+      "from_image": "0x0064eeac",
+      "image_size": 32
+    },
+    {
+      "addr": "0x00646ea4",
+      "from_image": "0x00646ea4",
+      "image_size": 8
+    },
+    {
+      "addr": "0x00641098",
+      "from_image": "0x00641098",
+      "image_size": 4
+    }
+  ],
+  "callees": {
+    "0x005dda20": {
+      "name": "GetIntAttribute_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "ignore"
+      ],
+      "ret": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "writes": [
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "64000000",
+          "call": 0
+        },
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "32000000",
+          "call": 1
+        },
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "0a000000",
+          "call": 2
+        },
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "14000000",
+          "call": 3
+        }
+      ]
+    },
+    "0x00572e00": {
+      "name": "Append_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": "this"
+    },
+    "0x0042e3d9": {
+      "name": "Concat_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr",
+        "mem:4"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "01000000"
+        }
+      ]
+    },
+    "0x004b1357": {
+      "name": "Join_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "mem:4",
+        "cstr"
+      ],
+      "ret": "arg0",
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "02000000"
+        }
+      ]
+    },
+    "0x00572c10": {
+      "name": "AppendText_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:4"
+      ],
+      "ret": "this"
+    },
+    "0x00571d00": {
+      "name": "CXStr_release",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "all four attributes read",
+      "args": [
+        "@bounds",
+        "@image",
+        "@message"
+      ]
+    },
+    {
+      "name": "negative and large values",
+      "args": [
+        "@bounds",
+        "@image",
+        "@message"
+      ],
+      "callees": {
+        "0x005dda20": {
+          "name": "GetIntAttribute_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "fbffffff",
+              "call": 0
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "ffffff7f",
+              "call": 1
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "9cffffff",
+              "call": 2
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "03000000",
+              "call": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "null element still read",
+      "args": [
+        "@bounds",
+        0,
+        "@message"
+      ]
+    },
+    {
+      "name": "CX fails",
+      "args": [
+        "@bounds",
+        "@image",
+        "@message"
+      ],
+      "callees": {
+        "0x005dda20": {
+          "name": "GetIntAttribute_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": [
+            1,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "CY fails",
+      "args": [
+        "@bounds",
+        "@image",
+        "@message"
+      ],
+      "callees": {
+        "0x005dda20": {
+          "name": "GetIntAttribute_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": [
+            0,
+            1,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "X fails",
+      "args": [
+        "@bounds",
+        "@image",
+        "@message"
+      ],
+      "callees": {
+        "0x005dda20": {
+          "name": "GetIntAttribute_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": [
+            0,
+            0,
+            -1,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "Y fails",
+      "args": [
+        "@bounds",
+        "@image",
+        "@message"
+      ],
+      "callees": {
+        "0x005dda20": {
+          "name": "GetIntAttribute_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": [
+            0,
+            0,
+            0,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "name": "all four fail",
+      "args": [
+        "@bounds",
+        "@image",
+        "@message"
+      ],
+      "callees": {
+        "0x005dda20": {
+          "name": "GetIntAttribute_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "CX and Y fail",
+      "args": [
+        "@bounds",
+        "@image",
+        "@message"
+      ],
+      "callees": {
+        "0x005dda20": {
+          "name": "GetIntAttribute_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": [
+            1,
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "failure with empty helper results",
+      "args": [
+        "@bounds",
+        "@image",
+        "@message"
+      ],
+      "callees": {
+        "0x005dda20": {
+          "name": "GetIntAttribute_guess",
+          "conv": "thiscall",
+          "args": [
+            "cstr",
+            "ignore"
+          ],
+          "ret": [
+            0,
+            1,
+            1,
+            0
+          ]
+        },
+        "0x0042e3d9": {
+          "name": "Concat_guess",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "cstr",
+            "mem:4"
+          ],
+          "ret": "arg0",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        },
+        "0x004b1357": {
+          "name": "Join_guess",
+          "conv": "cdecl",
+          "args": [
+            "ignore",
+            "mem:4",
+            "cstr"
+          ],
+          "ret": "arg0",
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5083727,
+    "count": 60,
+    "args": [
+      {
+        "choices": [
+          "@bounds",
+          "@bounds+0x10"
+        ]
+      },
+      {
+        "choices": [
+          "@image",
+          0
+        ]
+      },
+      {
+        "choices": [
+          "@message",
+          "@message+0x4"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@bounds",
+        "offset": "0x0",
+        "type": "int",
+        "choices": [
+          0,
+          1,
+          -1,
+          12345
+        ]
+      }
+    ]
+  },
+  "coverage_ok": {
+    "004D93AD-004D93B7": "Release of the local error string needs Append_guess to make it non-empty; the callee is stubbed and the fixture schema cannot write through its ECX object pointer."
+  }
+}

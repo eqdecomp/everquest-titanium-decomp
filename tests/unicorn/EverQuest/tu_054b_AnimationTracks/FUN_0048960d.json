@@ -1,0 +1,1147 @@
+{
+  "function": "Mapper_guess::FUN_0048960d_guess",
+  "original": "0x0048960d",
+  "sources": [
+    "src/EverQuest/tu_054b_AnimationTracks.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@mapper",
+  "args": [
+    {
+      "name": "first_guess",
+      "type": "u16"
+    },
+    {
+      "name": "unused_guess",
+      "type": "int"
+    },
+    {
+      "name": "flag_guess",
+      "type": "char"
+    },
+    {
+      "name": "scale_guess",
+      "type": "float"
+    },
+    {
+      "name": "final_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "char",
+  "objects": {
+    "mapper": {
+      "size": "0x14",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@mapper_vtbl"
+        },
+        {
+          "offset": "0x4",
+          "u32": "@owner"
+        }
+      ]
+    },
+    "fn_index": {
+      "size": "0x4"
+    },
+    "mapper_vtbl": {
+      "size": "0x14",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x10",
+          "u32": "@fn_index"
+        }
+      ]
+    },
+    "owner": {
+      "size": "0x254",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x1a8",
+          "u32": "@state"
+        },
+        {
+          "offset": "0x252",
+          "u8": 0
+        }
+      ]
+    },
+    "state": {
+      "size": "0x150",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x12c",
+          "u32": "@picktables"
+        },
+        {
+          "offset": "0x134",
+          "u32": 10
+        },
+        {
+          "offset": "0x138",
+          "u32": 11
+        },
+        {
+          "offset": "0x13c",
+          "u32": 12
+        },
+        {
+          "offset": "0x140",
+          "u32": 13
+        },
+        {
+          "offset": "0x144",
+          "u32": 14
+        },
+        {
+          "offset": "0x148",
+          "u32": 15
+        },
+        {
+          "offset": "0x14c",
+          "u32": 16
+        }
+      ]
+    },
+    "picktables": {
+      "size": "0x30",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x2c",
+          "u32": "@arrays"
+        }
+      ]
+    },
+    "arrays": {
+      "size": "0x70",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "@values"
+        },
+        {
+          "offset": "0x60",
+          "u32": "@values"
+        },
+        {
+          "offset": "0x64",
+          "u32": "@values"
+        },
+        {
+          "offset": "0x68",
+          "u32": "@values"
+        }
+      ]
+    },
+    "values": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0",
+          "u32": 17
+        },
+        {
+          "offset": "0x10",
+          "u32": 34
+        },
+        {
+          "offset": "0x14",
+          "u32": 51
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00647ca8",
+      "from_image": "0x00647CA8",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0066d248",
+      "from_image": "0x0066D248",
+      "image_size": 4
+    },
+    {
+      "addr": "0x0069304c",
+      "u32": 0
+    },
+    {
+      "addr": "0x00692530",
+      "size": 944,
+      "fill": "zero"
+    }
+  ],
+  "callees": {
+    "0x0047c007": {
+      "name": "Owner_guess::HasPlayerState_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x00488bd6": {
+      "name": "FUN_00488bd6",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "ignore",
+        "ignore"
+      ],
+      "ret": 1,
+      "writes": [
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "00000000"
+        },
+        {
+          "arg": 2,
+          "offset": 0,
+          "hex": "00000000"
+        }
+      ]
+    },
+    "0x00485e69": {
+      "name": "PickRandomVariant_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x004891e9": {
+      "name": "FUN_004891e9",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "char"
+      ],
+      "ret": [
+        5,
+        6
+      ]
+    },
+    "0x00488128": {
+      "name": "FUN_00488128",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "float"
+      ]
+    },
+    "0x00488377": {
+      "name": "FUN_00488377",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "float"
+      ]
+    },
+    "0x00488676": {
+      "name": "FUN_00488676",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "int",
+        "float"
+      ]
+    },
+    "0x004860a3": {
+      "name": "PlayAnimationSound_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int",
+        "int"
+      ]
+    },
+    "@fn_index": {
+      "name": "Mapper_guess::Index_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "validation_false_returns_early",
+      "args": [
+        1,
+        0,
+        0,
+        0.0,
+        0
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "0x00488bd6": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ignore",
+            "ignore"
+          ],
+          "ret": 0,
+          "writes": []
+        }
+      }
+    },
+    {
+      "name": "owner_mode_has_false",
+      "args": [
+        7,
+        0,
+        0,
+        1.5,
+        10
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x252",
+          "u8": 62
+        },
+        {
+          "addr": "0x00692530",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "@fn_index": {
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            1,
+            4,
+            3,
+            0,
+            2,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "owner_mode_has_true_dispatches_88128",
+      "args": [
+        7,
+        0,
+        1,
+        1.5,
+        10
+      ],
+      "memory": [
+        {
+          "addr": "@owner",
+          "offset": "0x252",
+          "u8": 62
+        },
+        {
+          "addr": "0x00692530",
+          "u32": 1
+        },
+        {
+          "addr": "0x00692554",
+          "u32": 2
+        }
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "0x0047c007": {
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 1
+        },
+        "@fn_index": {
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            1,
+            4,
+            3,
+            1,
+            2,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "remap_42_to_41_and_clear_flag",
+      "args": [
+        7,
+        0,
+        1,
+        0.5,
+        2
+      ],
+      "memory": [
+        {
+          "addr": "0x00692530",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "@fn_index": {
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            42,
+            4,
+            3,
+            0,
+            2,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "kind_41_boundary",
+      "args": [
+        7,
+        0,
+        1,
+        0.5,
+        2
+      ],
+      "memory": [
+        {
+          "addr": "0x00692530",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "@fn_index": {
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            41,
+            4,
+            3,
+            0,
+            2,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "kind_43_boundary",
+      "args": [
+        7,
+        0,
+        1,
+        0.5,
+        2
+      ],
+      "memory": [
+        {
+          "addr": "0x00692530",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "@fn_index": {
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            43,
+            4,
+            3,
+            0,
+            2,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "set_flag_for_kind_26_row_25",
+      "args": [
+        7,
+        0,
+        0,
+        2.0,
+        3
+      ],
+      "memory": [
+        {
+          "addr": "0x006928b4",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "0x00488bd6": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ignore",
+            "ignore"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "19000000"
+            },
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        },
+        "@fn_index": {
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            26,
+            4,
+            3,
+            0,
+            2,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "kind_26_row_24_does_not_set_flag",
+      "args": [
+        7,
+        0,
+        0,
+        2.0,
+        3
+      ],
+      "memory": [
+        {
+          "addr": "0x00692890",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "0x00488bd6": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ignore",
+            "ignore"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "18000000"
+            },
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        },
+        "@fn_index": {
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            26,
+            4,
+            3,
+            0,
+            2,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "kind_26_row_26_does_not_set_flag",
+      "args": [
+        7,
+        0,
+        0,
+        2.0,
+        3
+      ],
+      "memory": [
+        {
+          "addr": "0x006928d8",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "0x00488bd6": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ignore",
+            "ignore"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "1a000000"
+            },
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        },
+        "@fn_index": {
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            26,
+            4,
+            3,
+            0,
+            2,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "dispatch_88128",
+      "args": [
+        1,
+        0,
+        1,
+        1.5,
+        20
+      ],
+      "memory": [
+        {
+          "addr": "0x00692530",
+          "u32": 1
+        },
+        {
+          "addr": "0x00692554",
+          "u32": 2
+        }
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "@fn_index": {
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            1,
+            4,
+            3,
+            1,
+            2,
+            0
+          ]
+        },
+        "0x004891e9": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int",
+            "int",
+            "int",
+            "int",
+            "int",
+            "char"
+          ],
+          "ret": [
+            5,
+            6
+          ]
+        }
+      }
+    },
+    {
+      "name": "dispatch_88676_after_kind_check_false",
+      "args": [
+        1,
+        0,
+        0,
+        0.0,
+        20
+      ],
+      "memory": [
+        {
+          "addr": "0x00692530",
+          "u32": 1
+        },
+        {
+          "addr": "0x00692554",
+          "from_image": "0x00692554",
+          "image_size": 4
+        }
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "@fn_index": {
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            1,
+            4,
+            3,
+            0,
+            2,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "dispatch_88377",
+      "args": [
+        1,
+        0,
+        1,
+        0.75,
+        30
+      ],
+      "memory": [
+        {
+          "addr": "0x00692530",
+          "u32": 2
+        }
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "@fn_index": {
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            1,
+            4,
+            3,
+            0,
+            2,
+            0
+          ]
+        },
+        "0x004891e9": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int",
+            "int",
+            "int",
+            "int",
+            "int",
+            "char"
+          ],
+          "ret": [
+            5,
+            6
+          ]
+        }
+      }
+    },
+    {
+      "name": "dispatch_88676",
+      "args": [
+        1,
+        0,
+        1,
+        0.75,
+        30
+      ],
+      "memory": [
+        {
+          "addr": "0x00692530",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "@fn_index": {
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            1,
+            4,
+            3,
+            0,
+            2,
+            0
+          ]
+        },
+        "0x004891e9": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "int",
+            "int",
+            "int",
+            "int",
+            "int",
+            "char"
+          ],
+          "ret": [
+            5,
+            6
+          ]
+        }
+      }
+    },
+    {
+      "name": "id_times_four_selects_value_four",
+      "args": [
+        1,
+        0,
+        0,
+        0.25,
+        30
+      ],
+      "memory": [
+        {
+          "addr": "0x00692530",
+          "u32": 0
+        }
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "0x00488bd6": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ignore",
+            "ignore"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "00000000"
+            },
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "01000000"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "row_stride_times_nine_kind_one",
+      "args": [
+        1,
+        0,
+        0,
+        0.25,
+        30
+      ],
+      "memory": [
+        {
+          "addr": "0x00692530",
+          "u32": 0
+        },
+        {
+          "addr": "0x00692554",
+          "u32": 2
+        },
+        {
+          "addr": "0x006928b4",
+          "u32": 1
+        }
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "0x00488bd6": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ignore",
+            "ignore"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "19000000"
+            },
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        },
+        "@fn_index": {
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            1,
+            4,
+            3,
+            1,
+            2,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "row_stride_times_nine_kind_two",
+      "args": [
+        1,
+        0,
+        0,
+        0.25,
+        30
+      ],
+      "memory": [
+        {
+          "addr": "0x00692530",
+          "u32": 0
+        },
+        {
+          "addr": "0x006928b4",
+          "from_image": "0x006928B4",
+          "image_size": 4
+        }
+      ],
+      "expect": {
+        "ret": 0
+      },
+      "callees": {
+        "0x00488bd6": {
+          "conv": "thiscall",
+          "args": [
+            "int",
+            "ignore",
+            "ignore"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "19000000"
+            },
+            {
+              "arg": 2,
+              "offset": 0,
+              "hex": "00000000"
+            }
+          ]
+        },
+        "@fn_index": {
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            1,
+            4,
+            3,
+            0,
+            2,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4757005,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          0,
+          1,
+          7,
+          41,
+          42,
+          43,
+          145,
+          65535
+        ]
+      },
+      {
+        "range": [
+          -2,
+          2
+        ]
+      },
+      {
+        "choices": [
+          0,
+          1,
+          2,
+          127,
+          -1
+        ]
+      },
+      {
+        "range": [
+          -2.0,
+          2.0
+        ]
+      },
+      {
+        "choices": [
+          -1,
+          0,
+          1,
+          255,
+          65535
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@owner",
+        "offset": "0x252",
+        "type": "u8",
+        "choices": [
+          0,
+          62
+        ]
+      },
+      {
+        "addr": "0x00692530",
+        "type": "int",
+        "count": 236,
+        "choices": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "addr": "@state",
+        "offset": "0x134",
+        "type": "int",
+        "count": 7,
+        "choices": [
+          0,
+          1,
+          2,
+          3,
+          41,
+          42,
+          79
+        ]
+      }
+    ]
+  }
+}

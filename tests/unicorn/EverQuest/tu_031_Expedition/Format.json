@@ -1,0 +1,438 @@
+{
+  "function": "AltAdvManager_guess::GetAbilityReqs_guess",
+  "original": "0x00447d5b",
+  "sources": [
+    "src/EverQuest/tu_031_Expedition.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@tableview",
+  "args": [
+    {
+      "name": "destination_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "dataAddress_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "tableview": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "destination": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "input": {
+      "size": "0x34",
+      "fill": "zero"
+    },
+    "result": {
+      "size": "0x34",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x10",
+          "u32": 77
+        },
+        {
+          "offset": "0x20",
+          "u32": 1
+        },
+        {
+          "offset": "0x30",
+          "u32": 1
+        }
+      ]
+    },
+    "lookup": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "stringtable": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "format": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "cstr": "No known description"
+        }
+      ]
+    },
+    "text": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "from_image": "0x0064DC54",
+          "image_size": 12
+        }
+      ]
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d00",
+      "u32": 1
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@lookup"
+    },
+    {
+      "addr": "0x00850398",
+      "u32": "@stringtable"
+    },
+    {
+      "addr": "0x0099dae0",
+      "size": 64,
+      "fill": "zero"
+    },
+    {
+      "addr": "0x0099db00",
+      "size": 64,
+      "fill": "zero"
+    }
+  ],
+  "callees": {
+    "0x005dfa00": {
+      "name": "StringLookup_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ],
+      "ret": "@format"
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "4e6f206b6e6f776e206465736372697074696f6e00"
+        }
+      ]
+    },
+    "0x006220e9": {
+      "name": "_itoa",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ptr",
+        "int"
+      ],
+      "ret": "0x0099db00"
+    },
+    "0x00447d07": {
+      "name": "TableViewRead_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@result"
+    },
+    "0x004355f7": {
+      "name": "StringTableGetString_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": "@text"
+    },
+    "0x0046da4a": {
+      "name": "BuildEventMessage_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "int",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr",
+        "cstr"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "6f6b00"
+        }
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb",
+    "__itoa": "0x006220e9"
+  },
+  "cases": [
+    {
+      "name": "global disabled",
+      "args": [
+        "@destination",
+        0
+      ],
+      "memory": [
+        {
+          "addr": "0x00905d00",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "null input",
+      "args": [
+        "@destination",
+        0
+      ]
+    },
+    {
+      "name": "category minus one",
+      "args": [
+        "@destination",
+        "@input"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "offset": "0x28",
+          "u32": 4294967295
+        }
+      ]
+    },
+    {
+      "name": "category minus two",
+      "args": [
+        "@destination",
+        "@input"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "offset": "0x18",
+          "u32": 24
+        },
+        {
+          "addr": "@input",
+          "offset": "0x28",
+          "u32": 4294967294
+        }
+      ]
+    },
+    {
+      "name": "category minus three",
+      "args": [
+        "@destination",
+        "@input"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "offset": "0x2c",
+          "u32": 31
+        },
+        {
+          "addr": "@input",
+          "offset": "0x28",
+          "u32": 4294967293
+        }
+      ]
+    },
+    {
+      "name": "category zero",
+      "args": [
+        "@destination",
+        "@input"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "offset": "0x18",
+          "u32": 12
+        },
+        {
+          "addr": "@input",
+          "offset": "0x28",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "positive special result",
+      "args": [
+        "@destination",
+        "@input"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "offset": "0x2c",
+          "u32": 15
+        },
+        {
+          "addr": "@input",
+          "offset": "0x28",
+          "u32": 1
+        },
+        {
+          "addr": "@input",
+          "offset": "0x30",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "positive general result",
+      "args": [
+        "@destination",
+        "@input"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "offset": "0x18",
+          "u32": 42
+        },
+        {
+          "addr": "@input",
+          "offset": "0x28",
+          "u32": 1
+        },
+        {
+          "addr": "@input",
+          "offset": "0x30",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x006220e9": {
+          "name": "_itoa",
+          "conv": "cdecl",
+          "args": [
+            "int",
+            "ptr",
+            "int"
+          ],
+          "ret": [
+            "0x0099dae0",
+            "0x0099db00"
+          ]
+        }
+      }
+    },
+    {
+      "name": "positive scan limit",
+      "args": [
+        "@destination",
+        "@input"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "offset": "0x28",
+          "u32": 2
+        }
+      ],
+      "callees": {
+        "0x00447d07": {
+          "name": "TableViewRead_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4488539,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@destination"
+        ]
+      },
+      {
+        "choices": [
+          "@input"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x00905d00",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@input",
+        "offset": "0x18",
+        "type": "int",
+        "choices": [
+          -5,
+          0,
+          1,
+          42
+        ]
+      },
+      {
+        "addr": "@input",
+        "offset": "0x28",
+        "type": "int",
+        "choices": [
+          -3,
+          -2,
+          -1,
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@input",
+        "offset": "0x2c",
+        "type": "int",
+        "choices": [
+          0,
+          9,
+          31
+        ]
+      },
+      {
+        "addr": "@input",
+        "offset": "0x30",
+        "type": "int",
+        "choices": [
+          0,
+          3
+        ]
+      }
+    ]
+  }
+}

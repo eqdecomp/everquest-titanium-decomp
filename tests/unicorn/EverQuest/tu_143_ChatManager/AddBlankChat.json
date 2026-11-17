@@ -1,0 +1,278 @@
+{
+  "function": "Selector_guess::AddBlankChat_guess",
+  "original": "0x004f5c21",
+  "sources": ["src/EverQuest/tu_143_ChatManager.cpp"],
+  "conv": "thiscall",
+  "this": "@selector",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "selector": {
+      "size": "0x240",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@receiver"},
+        {"offset": "0x238", "u32": "0x12"},
+        {"offset": "0x23c", "u32": "0x34"}
+      ]
+    },
+    "chat": {
+      "size": "0x268",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@chat_vtbl"}]
+    },
+    "chat_vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xc0", "u32": "@fn_slot_c0"},
+        {"offset": "0xfc", "u32": "@fn_slot_fc"}
+      ]
+    },
+    "receiver": {"size": "0x10", "fill": "zero"},
+    "text": {"size": "0x20", "fill": "zero"},
+    "stringtable": {"size": "0x10", "fill": "zero"},
+    "heapblock": {"size": "0x10000", "fill": "zero"},
+    "fn_slot_fc": {"size": "0x1", "fill": "zero"},
+    "fn_slot_c0": {"size": "0x1", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@stringtable"},
+    {"addr": "0x0063fe10", "from_image": "0x0063fe10", "image_size": 64}
+  ],
+  "callees": {
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": ["@chat", "@heapblock"]
+    },
+    "0x004f68b3": {
+      "name": "Chat_constructor",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "this"
+    },
+    "0x005724c0": {
+      "name": "CXStr_Format",
+      "conv": "thiscall",
+      "args": ["int", "int", "int"],
+      "passthrough": true
+    },
+    "0x00571e00": {
+      "name": "CXStr_constructor",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "passthrough": true
+    },
+    "kernel32.dll!HeapAlloc": {
+      "name": "HeapAlloc",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "u32"],
+      "ret": "@heapblock"
+    },
+    "kernel32.dll!HeapFree": {
+      "name": "HeapFree",
+      "conv": "stdcall",
+      "args": ["ptr", "u32", "ptr"],
+      "ret": 1
+    },
+    "0x005dfa00": {
+      "name": "StringTable_getString",
+      "conv": "thiscall",
+      "args": ["u32", "u32"],
+      "ret": "@text"
+    },
+    "0x0042e3d9": {
+      "name": "WrapCXStr",
+      "conv": "cdecl",
+      "args": ["ignore", "ptr", "ignore"],
+      "passthrough": true
+    },
+    "0x004d9090": {
+      "name": "CombineCXStr",
+      "conv": "cdecl",
+      "args": ["ignore", "ignore", "ignore"],
+      "passthrough": true
+    },
+    "0x00571d00": {
+      "name": "CXStr_Release",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "passthrough": true
+    },
+    "0x00572300": {
+      "name": "CXStr_charptr",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@text"
+    },
+    "0x005a1d40": {
+      "name": "EnableIniStorage",
+      "conv": "thiscall",
+      "args": ["int", "cstr"]
+    },
+    "0x004f3120": {
+      "name": "Selector_Attach",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 7
+    },
+    "0x004f6a90": {
+      "name": "Receiver_ShowText",
+      "conv": "thiscall",
+      "args": ["ignore", "int"]
+    },
+    "@fn_slot_fc": {
+      "name": "Value_Slot63",
+      "conv": "thiscall",
+      "args": ["ignore"]
+    },
+    "@fn_slot_c0": {
+      "name": "Value_Slot48",
+      "conv": "thiscall",
+      "args": ["int", "int"]
+    }
+  },
+  "rewrite_aliases": {"??2@YAPAXI@Z": "0x0060d071"},
+  "cases": [
+    {
+      "name": "append_after_three",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x80", "u32": 3},
+        {"addr": "@selector", "offset": "0x4", "u32": 256},
+        {"addr": "@selector", "offset": "0x8", "u32": 512}
+      ]
+    },
+    {
+      "name": "fill_first_hole",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x80", "u32": 5},
+        {"addr": "@selector", "offset": "0x4", "u32": 256},
+        {"addr": "@selector", "offset": "0x8", "u32": 0},
+        {"addr": "@selector", "offset": "0xc", "u32": 768},
+        {"addr": "@selector", "offset": "0x10", "u32": 1024}
+      ]
+    },
+    {
+      "name": "single_entry_count_one",
+      "args": [],
+      "memory": [{"addr": "@selector", "offset": "0x80", "u32": 1}]
+    },
+    {
+      "name": "hole_at_index_one",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x80", "u32": 2},
+        {"addr": "@selector", "offset": "0x4", "u32": 0}
+      ]
+    },
+    {
+      "name": "append_at_slot_31",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x80", "u32": 31},
+        {"addr": "@selector", "offset": "0x4", "u32": 256},
+        {"addr": "@selector", "offset": "0x8", "u32": 256},
+        {"addr": "@selector", "offset": "0xc", "u32": 256},
+        {"addr": "@selector", "offset": "0x10", "u32": 256},
+        {"addr": "@selector", "offset": "0x14", "u32": 256},
+        {"addr": "@selector", "offset": "0x18", "u32": 256},
+        {"addr": "@selector", "offset": "0x1c", "u32": 256},
+        {"addr": "@selector", "offset": "0x20", "u32": 256},
+        {"addr": "@selector", "offset": "0x24", "u32": 256},
+        {"addr": "@selector", "offset": "0x28", "u32": 256},
+        {"addr": "@selector", "offset": "0x2c", "u32": 256},
+        {"addr": "@selector", "offset": "0x30", "u32": 256},
+        {"addr": "@selector", "offset": "0x34", "u32": 256},
+        {"addr": "@selector", "offset": "0x38", "u32": 256},
+        {"addr": "@selector", "offset": "0x3c", "u32": 256},
+        {"addr": "@selector", "offset": "0x40", "u32": 256},
+        {"addr": "@selector", "offset": "0x44", "u32": 256},
+        {"addr": "@selector", "offset": "0x48", "u32": 256},
+        {"addr": "@selector", "offset": "0x4c", "u32": 256},
+        {"addr": "@selector", "offset": "0x50", "u32": 256},
+        {"addr": "@selector", "offset": "0x54", "u32": 256},
+        {"addr": "@selector", "offset": "0x58", "u32": 256},
+        {"addr": "@selector", "offset": "0x5c", "u32": 256},
+        {"addr": "@selector", "offset": "0x60", "u32": 256},
+        {"addr": "@selector", "offset": "0x64", "u32": 256},
+        {"addr": "@selector", "offset": "0x68", "u32": 256},
+        {"addr": "@selector", "offset": "0x6c", "u32": 256},
+        {"addr": "@selector", "offset": "0x70", "u32": 256},
+        {"addr": "@selector", "offset": "0x74", "u32": 256},
+        {"addr": "@selector", "offset": "0x78", "u32": 256}
+      ]
+    },
+    {
+      "name": "full_table_reports_error",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x80", "u32": 32},
+        {"addr": "@selector", "offset": "0x4", "u32": 256},
+        {"addr": "@selector", "offset": "0x8", "u32": 256},
+        {"addr": "@selector", "offset": "0xc", "u32": 256},
+        {"addr": "@selector", "offset": "0x10", "u32": 256},
+        {"addr": "@selector", "offset": "0x14", "u32": 256},
+        {"addr": "@selector", "offset": "0x18", "u32": 256},
+        {"addr": "@selector", "offset": "0x1c", "u32": 256},
+        {"addr": "@selector", "offset": "0x20", "u32": 256},
+        {"addr": "@selector", "offset": "0x24", "u32": 256},
+        {"addr": "@selector", "offset": "0x28", "u32": 256},
+        {"addr": "@selector", "offset": "0x2c", "u32": 256},
+        {"addr": "@selector", "offset": "0x30", "u32": 256},
+        {"addr": "@selector", "offset": "0x34", "u32": 256},
+        {"addr": "@selector", "offset": "0x38", "u32": 256},
+        {"addr": "@selector", "offset": "0x3c", "u32": 256},
+        {"addr": "@selector", "offset": "0x40", "u32": 256},
+        {"addr": "@selector", "offset": "0x44", "u32": 256},
+        {"addr": "@selector", "offset": "0x48", "u32": 256},
+        {"addr": "@selector", "offset": "0x4c", "u32": 256},
+        {"addr": "@selector", "offset": "0x50", "u32": 256},
+        {"addr": "@selector", "offset": "0x54", "u32": 256},
+        {"addr": "@selector", "offset": "0x58", "u32": 256},
+        {"addr": "@selector", "offset": "0x5c", "u32": 256},
+        {"addr": "@selector", "offset": "0x60", "u32": 256},
+        {"addr": "@selector", "offset": "0x64", "u32": 256},
+        {"addr": "@selector", "offset": "0x68", "u32": 256},
+        {"addr": "@selector", "offset": "0x6c", "u32": 256},
+        {"addr": "@selector", "offset": "0x70", "u32": 256},
+        {"addr": "@selector", "offset": "0x74", "u32": 256},
+        {"addr": "@selector", "offset": "0x78", "u32": 256},
+        {"addr": "@selector", "offset": "0x7c", "u32": 256}
+      ]
+    },
+    {
+      "name": "zero_just_past_end_is_not_a_hole",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x80", "u32": 3},
+        {"addr": "@selector", "offset": "0x4", "u32": 256},
+        {"addr": "@selector", "offset": "0x8", "u32": 512},
+        {"addr": "@selector", "offset": "0xc", "u32": 0}
+      ]
+    },
+    {
+      "name": "operator_new_returns_null_faults_same_as_original",
+      "args": [],
+      "memory": [
+        {"addr": "@selector", "offset": "0x80", "u32": 3},
+        {"addr": "@selector", "offset": "0x4", "u32": 256},
+        {"addr": "@selector", "offset": "0x8", "u32": 512}
+      ],
+      "callees": {
+        "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": 0}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5200929,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@selector", "offset": "0x80", "type": "int", "choices": [1, 2, 3, 5, 31, 32]}
+    ]
+  }
+}

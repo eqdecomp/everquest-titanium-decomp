@@ -1,0 +1,115 @@
+{
+  "function": "Elem_guess::Animate_guess",
+  "original": "0x004c8340",
+  "sources": ["src/EverQuest/tu_090_TargetIndicator.cpp"],
+  "conv": "thiscall",
+  "this": "@elem",
+  "args": [
+    {"name": "resource", "type": "ptr"},
+    {"name": "flag", "type": "char"}
+  ],
+  "ret": "void",
+  "objects": {
+    "elem": {
+      "size": "0xb0",
+      "fill": "random"
+    },
+    "resource": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@resource_vtable"}]
+    },
+    "resource_vtable": {
+      "size": "0x1c",
+      "fill": "zero",
+      "init": [{"offset": "0x18", "u32": "@fn_slot6"}]
+    },
+    "fn_slot6": {"size": "0x4", "fill": "zero"},
+    "slots": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@resource2"}]
+    },
+    "resource2": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "@elem", "offset": "0x04", "u32": 2},
+    {"addr": "@elem", "offset": "0x14", "u32": 0},
+    {"addr": "@elem", "offset": "0x18", "u32": 0},
+    {"addr": "@elem", "offset": "0x1c", "u32": 1000},
+    {"addr": "@elem", "offset": "0x24", "f32": 0.5},
+    {"addr": "@elem", "offset": "0x28", "f32": 2.0},
+    {"addr": "@elem", "offset": "0x30", "f32": 0.25},
+    {"addr": "@elem", "offset": "0x34", "f32": 4.0},
+    {"addr": "@elem", "offset": "0x4c", "f32": 0.125},
+    {"addr": "@elem", "offset": "0x50", "f32": 8.0},
+    {"addr": "@elem", "offset": "0x54", "f32": 10.0},
+    {"addr": "@elem", "offset": "0x58", "f32": 50.0},
+    {"addr": "@elem", "offset": "0x64", "f32": 5.0},
+    {"addr": "@elem", "offset": "0x98", "f32": 3.0},
+    {"addr": "@elem", "offset": "0x9c", "f32": 0.5},
+    {"addr": "@elem", "offset": "0xa4", "u32": 900}
+  ],
+  "callees": {
+    "kernel32.dll!GetTickCount": {
+      "name": "GetTickCount",
+      "conv": "stdcall",
+      "args": [],
+      "ret": [1000, 1500]
+    },
+    "0x004eb924": {
+      "name": "ResourceList_guess::At_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@slots"
+    },
+    "0x004c0af7": {
+      "name": "FloatRangeRef_guess::Set_guess",
+      "conv": "thiscall",
+      "args": ["float", "float"]
+    },
+    "@fn_slot6": {
+      "name": "Resource_guess::Slot06_guess",
+      "conv": "thiscall",
+      "args": ["ptr"]
+    }
+  },
+  "cases": [
+    {"name": "bump on flag, interval 0", "args": ["@resource", 1], "memory": [{"addr": "@elem", "offset": "0x18", "u32": 0}]},
+    {"name": "no bump on flag 0, interval 0", "args": ["@resource", 0]},
+    {"name": "bump wraps to 0, interval 0", "args": ["@resource", 1], "memory": [{"addr": "@elem", "offset": "0x18", "u32": 1}]},
+    {"name": "index past count, no bump", "args": ["@resource", 0], "memory": [{"addr": "@elem", "offset": "0x18", "u32": 5}]},
+    {"name": "count 0", "args": ["@resource", 1], "memory": [{"addr": "@elem", "offset": "0x04", "u32": 0}]},
+    {"name": "count 1 wraps", "args": ["@resource", 1], "memory": [{"addr": "@elem", "offset": "0x04", "u32": 1}]},
+    {"name": "interval, elapsed above: bump", "args": ["@resource", 0], "memory": [{"addr": "@elem", "offset": "0x14", "u32": 100}]},
+    {"name": "interval, elapsed below: no bump", "args": ["@resource", 1], "memory": [{"addr": "@elem", "offset": "0x14", "u32": 600}]},
+    {"name": "interval, elapsed equal: no bump", "args": ["@resource", 1], "memory": [{"addr": "@elem", "offset": "0x14", "u32": 500}]},
+    {"name": "interval, bump wraps", "args": ["@resource", 0], "memory": [{"addr": "@elem", "offset": "0x14", "u32": 100}, {"addr": "@elem", "offset": "0x18", "u32": 1}]},
+    {"name": "interval, index past count, no bump", "args": ["@resource", 0], "memory": [{"addr": "@elem", "offset": "0x14", "u32": 600}, {"addr": "@elem", "offset": "0x18", "u32": 7}]},
+    {"name": "interval, last tick after now (negative elapsed)", "args": ["@resource", 0], "memory": [{"addr": "@elem", "offset": "0x14", "u32": 100}, {"addr": "@elem", "offset": "0x1c", "u32": 2000}]},
+    {"name": "tickA4 after now (negative delta)", "args": ["@resource", 1], "memory": [{"addr": "@elem", "offset": "0xa4", "u32": 1100}]},
+    {"name": "delta zero", "args": ["@resource", 1], "memory": [{"addr": "@elem", "offset": "0xa4", "u32": 1000}]},
+    {"name": "value above low", "args": ["@resource", 1]},
+    {"name": "value below low", "args": ["@resource", 1], "memory": [{"addr": "@elem", "offset": "0xa4", "u32": 990}]},
+    {"name": "value equal to low", "args": ["@resource", 1], "memory": [{"addr": "@elem", "offset": "0xa4", "u32": 986}]},
+    {"name": "elapsed zero", "args": ["@resource", 1], "memory": [{"addr": "@elem", "offset": "0x1c", "u32": 1500}]},
+    {"name": "resource pointer kept in slot", "args": ["@resource", 1], "callees": {"0x004eb924": {"name": "ResourceList_guess::At_guess", "conv": "thiscall", "args": ["int"], "ret": "@slots"}}}
+  ],
+  "fuzz": {
+    "seed": 5014336,
+    "count": 200,
+    "args": [
+      {"choices": ["@resource"]},
+      {"choices": [0, 1, 2, 255]}
+    ],
+    "memory": [
+      {"addr": "@elem", "offset": "0x04", "type": "u32", "range": [0, 4]},
+      {"addr": "@elem", "offset": "0x14", "type": "u32", "choices": [0, 0, 50, 100, 500, 600]},
+      {"addr": "@elem", "offset": "0x18", "type": "u32", "range": [0, 6]},
+      {"addr": "@elem", "offset": "0x1c", "type": "u32", "range": [900, 2100]},
+      {"addr": "@elem", "offset": "0xa4", "type": "u32", "range": [900, 1100]},
+      {"addr": "@elem", "offset": "0x54", "type": "float", "range": [-20.0, 60.0]},
+      {"addr": "@elem", "offset": "0x98", "type": "float", "range": [-50.0, 50.0]}
+    ]
+  }
+}

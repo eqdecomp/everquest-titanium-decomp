@@ -1,0 +1,70 @@
+{
+  "function": "EQPlayerCore_guess::ModifyAttackSpeed_guess",
+  "original": "0x0047f01e",
+  "sources": [
+    "src/EverQuest/tu_053_EQPlayer.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {"name": "delay", "type": "int"},
+    {"name": "ranged", "type": "int"}
+  ],
+  "ret": "u32",
+  "objects": {
+    "owner": {
+      "size": "0x290",
+      "fill": "random",
+      "init": [{"offset": "0x218", "u32": "@ctx"}]
+    },
+    "ctx": {
+      "size": "0x110",
+      "fill": "zero",
+      "init": [{"offset": "0x4", "u32": "@vbtbl"}]
+    },
+    "vbtbl": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [{"offset": "0x4", "u32": 256}]
+    },
+    "cell": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {"addr": "0x0063f4d8", "from_image": "0x0063f4d8", "image_size": 4},
+    {"addr": "0x00640038", "from_image": "0x00640038", "image_size": 4},
+    {"addr": "0x00648108", "from_image": "0x00648108", "image_size": 4}
+  ],
+  "callees": {
+    "0x004106a3": {"name": "Execute_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 2},
+    "0x0040cc50": {"name": "GetInventorySlot_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x005eccc0": {"name": "IsActive_guess", "conv": "thiscall", "args": [], "ret": 1},
+    "0x005eccf0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 2},
+    "0x005e0e00": {"name": "GetDuration_guess", "conv": "thiscall", "args": [], "ret": 5}
+  },
+  "cases": [
+    {"name": "no delay", "args": [0, 0]},
+    {"name": "no delay, ranged", "args": [0, 1]},
+    {"name": "no speed, no check", "args": [100, 0], "callees": {"0x004106a3": {"name": "Execute_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 0}}},
+    {"name": "speed, no check", "args": [100, 0], "callees": {"0x004106a3": {"name": "Execute_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 4}}},
+    {"name": "negative delay, no check", "args": [-100, 0]},
+    {"name": "ranged, no cell", "args": [5000, 1]},
+    {"name": "ranged, cell inactive", "args": [5000, 1], "callees": {"0x0040cc50": {"name": "GetWeapon_guess", "conv": "thiscall", "args": ["int"], "ret": "@cell"}, "0x005eccc0": {"name": "IsActive_guess", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "ranged, state not 2", "args": [5000, 1], "callees": {"0x0040cc50": {"name": "GetWeapon_guess", "conv": "thiscall", "args": ["int"], "ret": "@cell"}, "0x005eccf0": {"name": "GetState_guess", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "ranged, duration 0", "args": [5000, 1], "callees": {"0x0040cc50": {"name": "GetWeapon_guess", "conv": "thiscall", "args": ["int"], "ret": "@cell"}, "0x005e0e00": {"name": "GetDuration_guess", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "ranged, cell found", "args": [5000, 1], "callees": {"0x0040cc50": {"name": "GetWeapon_guess", "conv": "thiscall", "args": ["int"], "ret": "@cell"}}},
+    {"name": "ranged, cell found, big delay", "args": [2000000000, 1], "callees": {"0x0040cc50": {"name": "GetWeapon_guess", "conv": "thiscall", "args": ["int"], "ret": "@cell"}, "0x005e0e00": {"name": "GetDuration_guess", "conv": "thiscall", "args": [], "ret": 1}}},
+    {"name": "ranged, cell found, negative delay", "args": [-100, 1], "callees": {"0x0040cc50": {"name": "GetWeapon_guess", "conv": "thiscall", "args": ["int"], "ret": "@cell"}}},
+    {"name": "ranged, cell found, speed 0","args": [5000, 1], "callees": {"0x0040cc50": {"name": "GetWeapon_guess", "conv": "thiscall", "args": ["int"], "ret": "@cell"}, "0x004106a3": {"name": "Execute_guess", "conv": "thiscall", "args": ["int", "int", "int", "int"], "ret": 0}}}
+  ],
+  "fuzz": {
+    "seed": 4714526,
+    "count": 200,
+    "args": [
+      {"range": [-100000, 2000000000]},
+      {"range": [0, 2]}
+    ]
+  }
+}

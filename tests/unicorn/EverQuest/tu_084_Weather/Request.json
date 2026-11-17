@@ -1,0 +1,169 @@
+{
+  "function": "Weather_guess::SetWeather_guess",
+  "original": "0x004c37be",
+  "sources": [
+    "src/EverQuest/tu_084_Weather.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@window",
+  "args": [
+    {
+      "name": "value_guess",
+      "type": "int"
+    },
+    {
+      "name": "flag_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "_survivors": "L447: flag == 0 is taken by the first branch, so `flag > 0` and `flag >= 0` are the same test",
+  "objects": {
+    "window": {
+      "size": "0x100",
+      "fill": "random",
+      "init": [
+        {"offset": "0x2c", "u32": "@cb"}
+      ]
+    },
+    "cb": {
+      "size": "0x40",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@vtbl"}
+      ]
+    },
+    "vtbl": {
+      "size": "0x60",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x4", "u32": "@fn_slot1"},
+        {"offset": "0xc", "u32": "@fn_slot3"},
+        {"offset": "0x18", "u32": "@fn_slot6"},
+        {"offset": "0x1c", "u32": "@fn_slot7"},
+        {"offset": "0x28", "u32": "@fn_slot10"},
+        {"offset": "0x2c", "u32": "@fn_slot11"}
+      ]
+    },
+    "display": {
+      "size": "0x160",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x118", "u32": "@clock"}
+      ]
+    },
+    "clock": {
+      "size": "0x20",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@clock_vtbl"}
+      ]
+    },
+    "clock_vtbl": {
+      "size": "0x80",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x5c", "u32": "@fn_clock23"},
+        {"offset": "0x60", "u32": "@fn_clock24"}
+      ]
+    },
+    "fn_slot1": {"size": "0x4", "fill": "zero"},
+    "fn_slot3": {"size": "0x4", "fill": "zero"},
+    "fn_slot6": {"size": "0x4", "fill": "zero"},
+    "fn_slot7": {"size": "0x4", "fill": "zero"},
+    "fn_slot10": {"size": "0x4", "fill": "zero"},
+    "fn_slot11": {"size": "0x4", "fill": "zero"},
+    "fn_clock23": {"size": "0x4", "fill": "zero"},
+    "fn_clock24": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905d24", "u32": "@display"}
+  ],
+  "callees": {
+    "0x004c3325": {
+      "name": "Ensure_default",
+      "conv": "cdecl",
+      "args": ["cstr"]
+    },
+    "0x004c3700": {
+      "name": "StopWeather_guess",
+      "conv": "thiscall",
+      "args": ["int", "char"]
+    },
+    "0x004c375f": {
+      "name": "Init_guess",
+      "conv": "thiscall",
+      "args": ["int", "char"]
+    },
+    "0x0046d655": {
+      "name": "GetTick",
+      "conv": "stdcall",
+      "args": ["int"],
+      "ret": 1234
+    },
+    "@fn_slot1": {"conv": "thiscall", "args": ["int"]},
+    "@fn_slot3": {"conv": "thiscall", "args": ["float", "int"]},
+    "@fn_slot6": {"conv": "thiscall", "args": ["mem:12"]},
+    "@fn_slot7": {"conv": "thiscall", "args": ["int"]},
+    "@fn_slot10": {"conv": "thiscall", "args": ["int"]},
+    "@fn_slot11": {"conv": "thiscall", "args": ["int", "int"]},
+    "@fn_clock23": {"conv": "thiscall", "args": [], "ret": 111},
+    "@fn_clock24": {"conv": "thiscall", "args": [], "ret": 222}
+  },
+  "cases": [
+    {
+      "name": "flag0_window_idle",
+      "args": [5, 0],
+      "memory": [{"addr": "@window", "offset": "0x0", "u32": 255}]
+    },
+    {
+      "name": "flag0_window_active",
+      "args": [5, 0],
+      "memory": [{"addr": "@window", "offset": "0x0", "u32": 2}]
+    },
+    {
+      "name": "flag1_window_idle",
+      "args": [7, 1],
+      "memory": [{"addr": "@window", "offset": "0x0", "u32": 255}]
+    },
+    {
+      "name": "flag1_same_value",
+      "args": [7, 1],
+      "memory": [{"addr": "@window", "offset": "0x0", "u32": 7}]
+    },
+    {
+      "name": "flag1_other_value",
+      "args": [7, 1],
+      "memory": [{"addr": "@window", "offset": "0x0", "u32": 3}]
+    },
+    {
+      "name": "flag_negative_idle",
+      "args": [7, -1],
+      "memory": [{"addr": "@window", "offset": "0x0", "u32": 255}]
+    },
+    {
+      "name": "flag2_idle",
+      "args": [0, 2],
+      "memory": [{"addr": "@window", "offset": "0x0", "u32": 255}]
+    },
+    {
+      "name": "null_callback",
+      "args": [1, 0],
+      "memory": [
+        {"addr": "@window", "offset": "0x0", "u32": 255},
+        {"addr": "@window", "offset": "0x2c", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4995006,
+    "count": 200,
+    "args": [
+      {"range": [-4, 300]},
+      {"range": [-3, 3]}
+    ],
+    "memory": [
+      {"addr": "@window", "offset": "0x0", "type": "u32", "choices": [0, 1, 2, 3, 7, 255, 256]}
+    ]
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "function": "GetCastingProgress_guess",
+  "original": "0x005596b0",
+  "sources": [
+    "src/EverQuest/tu_217_UiHelpers.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [],
+  "ret": "u32",
+  "_survivors": "L793: (int)result < 1 vs < 0 is equivalent: a zero result is stored as 0 either way; L796: (int)result >= 1000 vs > 1000 is equivalent: 1000 is stored as 1000 either way",
+  "objects": {
+    "vm": {
+      "size": "0x1b0",
+      "fill": "zero",
+      "init": [{"offset": "0x1a8", "u32": "@data"}]
+    },
+    "data": {
+      "size": "0x1060",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xd8", "u32": 1000},
+        {"offset": "0xf98", "u32": 4660},
+        {"offset": "0x1048", "u32": "@dur"}
+      ]
+    },
+    "dur": {"size": "0x10", "fill": "zero"},
+    "other2": {"size": "0x10", "fill": "zero"},
+    "findslot": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "u32": "@dur"}]},
+    "findother": {"size": "0x4", "fill": "zero", "init": [{"offset": "0x0", "u32": "@other2"}]},
+    "owner": {
+      "size": "0xc2d0",
+      "fill": "random",
+      "init": [{"offset": "0x8", "u32": "@idx"}]
+    },
+    "idx": {"size": "0x8", "fill": "zero", "init": [{"offset": "0x4", "u32": 64}]},
+    "lookup": {"size": "0x4", "fill": "zero"},
+    "entry": {"size": "0x20", "fill": "zero", "init": [{"offset": "0x14", "u32": 400}]},
+    "clock": {"size": "0x150", "fill": "zero", "init": [{"offset": "0x148", "u32": 100}]},
+    "mode": {"size": "0x11a0", "fill": "zero", "init": [{"offset": "0x119c", "u8": 3}]}
+  },
+  "memory": [
+    {"addr": "0x00905ce4", "u32": "@vm"},
+    {"addr": "0x00905d00", "u32": "@owner"},
+    {"addr": "0x00985cc8", "u32": "@lookup"},
+    {"addr": "0x00905d24", "u32": "@clock"}
+  ],
+  "callees": {
+    "0x0044d0d0": {"name": "FUN_0044d0d0", "conv": "cdecl", "args": ["int"], "ret": 1},
+    "0x0040cbd6": {"name": "GetSpell_guess", "conv": "thiscall", "args": ["int"], "ret": "@entry"},
+    "0x005ec220": {"name": "FUN_005ec220", "conv": "thiscall", "args": [], "ret": "@mode"},
+    "0x004b76a6": {"name": "GetInventorySlot_guess", "conv": "thiscall", "args": ["ptr"], "ret": ["@findslot", "@findslot"]},
+    "0x005e0d70": {"name": "FUN_005e0d70", "conv": "thiscall", "args": [], "ret": 400}
+  },
+  "cases": [
+    {"name": "typical", "args": []},
+    {"name": "no_value_manager", "args": [], "memory": [{"addr": "0x00905ce4", "u32": 0}]},
+    {"name": "spell_invalid", "args": [], "callees": {
+      "0x0044d0d0": {"name": "FUN_0044d0d0", "conv": "cdecl", "args": ["int"], "ret": 0}}},
+    {"name": "no_owner", "args": [], "memory": [{"addr": "0x00905d00", "u32": 0}]},
+    {"name": "no_entry", "args": [], "callees": {
+      "0x0040cbd6": {"name": "FUN_0040cbd6", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "mode8_d8_zero", "args": [], "memory": [
+      {"addr": "@mode", "offset": "0x119c", "u8": 8},
+      {"addr": "@data", "offset": "0xd8", "u32": 0}]},
+    {"name": "mode8_d8_set", "args": [], "memory": [
+      {"addr": "@mode", "offset": "0x119c", "u8": 8}]},
+    {"name": "mode8_d8_zero_clock0", "args": [], "memory": [
+      {"addr": "@mode", "offset": "0x119c", "u8": 8},
+      {"addr": "@data", "offset": "0xd8", "u32": 0},
+      {"addr": "@clock", "offset": "0x148", "u32": 0}]},
+    {"name": "mode8_d8_one", "args": [], "memory": [
+      {"addr": "@mode", "offset": "0x119c", "u8": 8},
+      {"addr": "@data", "offset": "0xd8", "u32": 1},
+      {"addr": "@clock", "offset": "0x148", "u32": 0}]},
+    {"name": "clock_past_end", "args": [], "memory": [
+      {"addr": "@clock", "offset": "0x148", "u32": 2000}]},
+    {"name": "entry_zero_dur_zero", "args": [], "memory": [
+      {"addr": "@entry", "offset": "0x14", "u32": 0},
+      {"addr": "@data", "offset": "0x1048", "u32": 0}]},
+    {"name": "entry_zero_dur_set", "args": [], "memory": [
+      {"addr": "@entry", "offset": "0x14", "u32": 0}]},
+    {"name": "dur_null_uses_entry", "args": [], "memory": [
+      {"addr": "@data", "offset": "0x1048", "u32": 0}]},
+    {"name": "find_null", "args": [], "callees": {
+      "0x004b76a6": {"name": "FUN_004b76a6", "conv": "thiscall", "args": ["ptr"], "ret": [0, 0]}}},
+    {"name": "find_mismatch", "args": [], "callees": {
+      "0x004b76a6": {"name": "FUN_004b76a6", "conv": "thiscall", "args": ["ptr"], "ret": ["@findother", "@findother"]}}},
+    {"name": "duration_zero_from_getduration", "args": [], "callees": {
+      "0x005e0d70": {"name": "FUN_005e0d70", "conv": "thiscall", "args": [], "ret": 0}}},
+    {"name": "duration_zero_from_entry", "args": [], "memory": [
+      {"addr": "@entry", "offset": "0x14", "u32": 0}],
+      "callees": {
+        "0x004b76a6": {"name": "FUN_004b76a6", "conv": "thiscall", "args": ["ptr"], "ret": [0, 0]}}},
+    {"name": "clamp_high", "args": [], "memory": [
+      {"addr": "@entry", "offset": "0x14", "u32": 1}],
+      "callees": {
+        "0x004b76a6": {"name": "FUN_004b76a6", "conv": "thiscall", "args": ["ptr"], "ret": [0, 0]}}},
+    {"name": "clamp_low", "args": [], "memory": [
+      {"addr": "@data", "offset": "0xd8", "u32": 2147483647},
+      {"addr": "@entry", "offset": "0x14", "u32": 1},
+      {"addr": "@data", "offset": "0x1048", "u32": 0}]}
+  ],
+  "fuzz": {
+    "seed": 5609136,
+    "count": 200,
+    "args": [],
+    "memory": [
+      {"addr": "@mode", "offset": "0x119c", "type": "u8", "choices": [0, 3, 8]},
+      {"addr": "@data", "offset": "0xd8", "type": "u32", "range": [0, 4000]},
+      {"addr": "@clock", "offset": "0x148", "type": "u32", "range": [0, 4000]},
+      {"addr": "@entry", "offset": "0x14", "type": "u32", "range": [0, 100]}
+    ]
+  }
+}

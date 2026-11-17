@@ -1,0 +1,134 @@
+{
+  "function": "List_guess::~List_guess",
+  "original": "0x004eb1b2",
+  "sources": [
+    "src/EverQuest/tu_138_CascadeWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@list",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "list": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "vtbl": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [{"offset": "0x4", "u32": "@fn_slot01"}]
+    },
+    "fn_slot01": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "obj1": {
+      "size": "0x60",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@vtbl"}]
+    },
+    "obj2": {
+      "size": "0x60",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@vtbl"}]
+    },
+    "cur1": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@obj1"}]
+    },
+    "cur2": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@obj2"}]
+    },
+    "cur_null": {
+      "size": "0x8",
+      "fill": "zero"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004ead18": {
+      "name": "ClearAll_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x004466fa": {
+      "name": "First_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x0042ec1a": {
+      "name": "Next_guess",
+      "conv": "thiscall",
+      "args": ["ptr"],
+      "ret": 0
+    },
+    "0x004c9745": {
+      "name": "Release_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_slot01": {
+      "name": "Slot01_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "empty list",
+      "args": []
+    },
+    {
+      "name": "one node with object",
+      "args": [],
+      "callees": {
+        "0x004466fa": {"name": "First_guess", "conv": "thiscall", "args": [], "ret": "@cur1"},
+        "0x0042ec1a": {"name": "Next_guess", "conv": "thiscall", "args": ["ptr"], "ret": [0]},
+        "@fn_slot01": {"name": "Slot01_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    },
+    {
+      "name": "one node with null object",
+      "args": [],
+      "callees": {
+        "0x004466fa": {"name": "First_guess", "conv": "thiscall", "args": [], "ret": "@cur_null"},
+        "0x0042ec1a": {"name": "Next_guess", "conv": "thiscall", "args": ["ptr"], "ret": [0]},
+        "@fn_slot01": {"name": "Slot01_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    },
+    {
+      "name": "two nodes with objects",
+      "args": [],
+      "callees": {
+        "0x004466fa": {"name": "First_guess", "conv": "thiscall", "args": [], "ret": "@cur1"},
+        "0x0042ec1a": {"name": "Next_guess", "conv": "thiscall", "args": ["ptr"], "ret": ["@cur2", 0]},
+        "@fn_slot01": {"name": "Slot01_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    },
+    {
+      "name": "null node then object node",
+      "args": [],
+      "callees": {
+        "0x004466fa": {"name": "First_guess", "conv": "thiscall", "args": [], "ret": "@cur_null"},
+        "0x0042ec1a": {"name": "Next_guess", "conv": "thiscall", "args": ["ptr"], "ret": ["@cur2", 0]},
+        "@fn_slot01": {"name": "Slot01_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5157298,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@cur1", "offset": "0x0", "type": "ptr", "choices": ["@obj1", "@obj2", 0]},
+      {"addr": "@cur2", "offset": "0x0", "type": "ptr", "choices": ["@obj1", "@obj2", 0]}
+    ]
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "function": "CTributeMasterWnd_guess::RefreshStatus_guess",
+  "original": "0x0056d6ef",
+  "sources": [
+    "src/EverQuest/tu_235_TributeMasterWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@target",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "target": {
+      "size": "0x1c0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x160", "u32": "@helper"},
+        {"offset": "0x164", "u32": "@state"},
+        {"offset": "0x174", "u32": "@widget174"},
+        {"offset": "0x178", "u32": "@widget178"}
+      ]
+    },
+    "helper": {"size": "0x140", "fill": "random"},
+    "state": {"size": "0x140", "fill": "random"},
+    "widget174": {"size": "0x80", "fill": "random"},
+    "widget178": {"size": "0x80", "fill": "random"},
+    "slot": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x00", "u32": "@entry"}]
+    },
+    "entry": {"size": "0x60", "fill": "random"},
+    "rec": {"size": "0x60", "fill": "random"},
+    "cand": {
+      "size": "0xe88",
+      "fill": "random",
+      "init": [{"offset": "0x08", "u32": "@holder"}]
+    },
+    "holder": {"size": "0x10", "fill": "random"},
+    "lr": {"size": "0x11a8", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00905d00", "u32": "@cand"},
+    {"addr": "@target", "offset": "0x198", "u32": 2},
+    {"addr": "@target", "offset": "0x164", "u32": "@state"},
+    {"addr": "@entry", "offset": "0x40", "u32": 1},
+    {"addr": "@entry", "offset": "0x44", "u32": 10},
+    {"addr": "@entry", "offset": "0x4c", "u32": 3},
+    {"addr": "@entry", "offset": "0x50", "u32": 1},
+    {"addr": "@rec", "offset": "0x0c", "u32": 3},
+    {"addr": "@rec", "offset": "0x10", "u32": 5},
+    {"addr": "@rec", "offset": "0x38", "u32": 4},
+    {"addr": "@lr", "offset": "0x11a4", "u32": 6},
+    {"addr": "@cand", "offset": "0xe80", "u32": 100},
+    {"addr": "@cand", "offset": "0xe84", "u32": 0}
+  ],
+  "callees": {
+    "0x004eb924": {
+      "name": "Lookup_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@slot"
+    },
+    "0x00434ae0": {
+      "name": "Find_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@rec"
+    },
+    "0x005ec220": {
+      "name": "Service_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@lr"
+    },
+    "0x00435150": {
+      "name": "GetUpkeep_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 1000
+    },
+    "0x0059b3e0": {
+      "name": "SetValue_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "u32"]
+    },
+    "0x00597be0": {
+      "name": "NextIndex_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [0, 1, -1, 2, 0, 1, -1, 0, 2, 1, -1, 0]
+    }
+  },
+  "cases": [
+    {"name": "typical", "args": []},
+    {
+      "name": "no_state",
+      "args": [],
+      "memory": [{"addr": "@target", "offset": "0x164", "u32": 0}]
+    },
+    {
+      "name": "empty",
+      "args": [],
+      "memory": [{"addr": "@target", "offset": "0x198", "u32": 0}]
+    },
+    {
+      "name": "null_entry",
+      "args": [],
+      "memory": [{"addr": "@slot", "offset": "0x00", "u32": 0}]
+    },
+    {
+      "name": "no_helper",
+      "args": [],
+      "memory": [{"addr": "@target", "offset": "0x160", "u32": 0}]
+    },
+    {
+      "name": "no_widgets",
+      "args": [],
+      "memory": [
+        {"addr": "@target", "offset": "0x174", "u32": 0},
+        {"addr": "@target", "offset": "0x178", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5691119,
+    "count": 150,
+    "args": [],
+    "memory": [
+      {"addr": "@target", "offset": "0x198", "type": "int", "range": [0, 3]},
+      {"addr": "@entry", "offset": "0x40", "type": "int", "range": [0, 3]},
+      {"addr": "@entry", "offset": "0x44", "type": "int", "range": [-20, 60]},
+      {"addr": "@entry", "offset": "0x4c", "type": "int", "range": [0, 5]},
+      {"addr": "@entry", "offset": "0x50", "type": "int", "range": [-1, 3]},
+      {"addr": "@rec", "offset": "0x0c", "type": "int", "range": [0, 4]},
+      {"addr": "@rec", "offset": "0x10", "type": "int", "range": [-10, 10]},
+      {"addr": "@rec", "offset": "0x14", "type": "int", "range": [-10, 10]},
+      {"addr": "@rec", "offset": "0x18", "type": "int", "range": [-10, 10]},
+      {"addr": "@rec", "offset": "0x1c", "type": "int", "range": [-10, 10]},
+      {"addr": "@rec", "offset": "0x38", "type": "int", "range": [-10, 20]},
+      {"addr": "@rec", "offset": "0x3c", "type": "int", "range": [-10, 20]},
+      {"addr": "@rec", "offset": "0x40", "type": "int", "range": [-10, 20]},
+      {"addr": "@rec", "offset": "0x44", "type": "int", "range": [-10, 20]},
+      {"addr": "@lr", "offset": "0x11a4", "type": "int", "range": [-10, 10]},
+      {"addr": "@cand", "offset": "0xe80", "type": "u32", "range": [0, 200]},
+      {"addr": "@cand", "offset": "0xe84", "type": "int", "range": [-1, 1]},
+      {"addr": "@holder", "offset": "0x04", "type": "int", "choices": [0, 4, 8, 16, 32]}
+    ]
+  }
+}

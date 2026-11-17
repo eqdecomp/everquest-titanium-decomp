@@ -1,0 +1,105 @@
+{
+  "function": "Tick_0056e7_guess::MarkHeldBenefit_guess",
+  "original": "0x0056d647",
+  "sources": [
+    "src/EverQuest/tu_235_TributeMasterWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@tick_0056e7",
+  "args": [
+    {"name": "record_guess", "type": "ptr"},
+    {"name": "index_guess", "type": "int"}
+  ],
+  "ret": "void",
+  "_ret_note": "void: the caller reads no EAX after the call (0/1 call sites); the original's EAX at RET is the loop index, not a result",
+  "objects": {
+    "tick_0056e7": {
+      "size": "0x1d4",
+      "fill": "random",
+      "init": [
+        {"offset": "0x198", "u32": 2}
+      ]
+    },
+    "record": {
+      "size": "0x60",
+      "fill": "random"
+    },
+    "slot": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@row"}
+      ]
+    },
+    "row": {
+      "size": "0x60",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004eb924": {
+      "name": "Container_Lookup",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@slot"
+    }
+  },
+  "cases": [
+    {"name": "match, slot 1 of 3 advances", "args": ["@record", 1], "memory": [
+      {"addr": "@record", "offset": "0x0", "u32": 7},
+      {"addr": "@record", "offset": "0x0c", "u32": 3},
+      {"addr": "@row", "offset": "0x4c", "u32": 7},
+      {"addr": "@tick_0056e7", "offset": "0x198", "u32": 1}]},
+    {"name": "match, count zero, slot stays", "args": ["@record", 0], "memory": [
+      {"addr": "@record", "offset": "0x0", "u32": 7},
+      {"addr": "@record", "offset": "0x0c", "u32": 0},
+      {"addr": "@row", "offset": "0x4c", "u32": 7},
+      {"addr": "@tick_0056e7", "offset": "0x198", "u32": 1}]},
+    {"name": "no match leaves row alone", "args": ["@record", 2], "memory": [
+      {"addr": "@record", "offset": "0x0", "u32": 7},
+      {"addr": "@record", "offset": "0x0c", "u32": 4},
+      {"addr": "@row", "offset": "0x4c", "u32": 9},
+      {"addr": "@tick_0056e7", "offset": "0x198", "u32": 2}]},
+    {"name": "empty list does nothing", "args": ["@record", 0], "memory": [
+      {"addr": "@record", "offset": "0x0", "u32": 7},
+      {"addr": "@record", "offset": "0x0c", "u32": 3},
+      {"addr": "@row", "offset": "0x4c", "u32": 7},
+      {"addr": "@tick_0056e7", "offset": "0x198", "u32": 0}]},
+    {"name": "last slot does not advance", "args": ["@record", 4], "memory": [
+      {"addr": "@record", "offset": "0x0", "u32": 7},
+      {"addr": "@record", "offset": "0x0c", "u32": 5},
+      {"addr": "@row", "offset": "0x4c", "u32": 7},
+      {"addr": "@tick_0056e7", "offset": "0x198", "u32": 1}]},
+    {"name": "single-entry record", "args": ["@record", 0], "memory": [
+      {"addr": "@record", "offset": "0x0", "u32": 7},
+      {"addr": "@record", "offset": "0x0c", "u32": 1},
+      {"addr": "@row", "offset": "0x4c", "u32": 7},
+      {"addr": "@tick_0056e7", "offset": "0x198", "u32": 1}]},
+    {"name": "three rows, same match each pass", "args": ["@record", 3], "memory": [
+      {"addr": "@record", "offset": "0x0", "u32": 7},
+      {"addr": "@record", "offset": "0x0c", "u32": 5},
+      {"addr": "@row", "offset": "0x4c", "u32": 7},
+      {"addr": "@tick_0056e7", "offset": "0x198", "u32": 3}]},
+    {"name": "two rows, no match", "args": ["@record", 2], "memory": [
+      {"addr": "@record", "offset": "0x0", "u32": 7},
+      {"addr": "@record", "offset": "0x0c", "u32": 4},
+      {"addr": "@row", "offset": "0x4c", "u32": 5},
+      {"addr": "@tick_0056e7", "offset": "0x198", "u32": 2}]}
+  ],
+  "fuzz": {
+    "seed": 5690951,
+    "count": 100,
+    "args": [
+      {"choices": ["@record"]},
+      {"range": [0, 4]}
+    ],
+    "memory": [
+      {"addr": "@record", "offset": "0x0", "type": "int", "choices": [5, 7, 9]},
+      {"addr": "@record", "offset": "0x0c", "type": "int", "range": [0, 5]},
+      {"addr": "@row", "offset": "0x4c", "type": "int", "choices": [5, 7, 9]},
+      {"addr": "@tick_0056e7", "offset": "0x198", "type": "int", "range": [0, 3]}
+    ]
+  },
+  "_survivors": "L942: index_guess = slot is a write to the parameter that the function never reads again (the loop uses the local slot), so deleting it is equivalent"
+}

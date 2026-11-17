@@ -1,0 +1,178 @@
+{
+  "function": "MoveItemQty_guess",
+  "original": "0x00464c94",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "firstAddress", "type": "ptr"},
+    {"name": "secondAddress", "type": "ptr"},
+    {"name": "amount", "type": "int"}
+  ],
+  "ret": "int",
+  "objects": {
+    "cellA": {
+      "size": "0x8", "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@obj1"}]
+    },
+    "cellB": {
+      "size": "0x8", "fill": "zero",
+      "init": [{"offset": "0x0", "u32": "@obj2"}]
+    },
+    "obj1": {
+      "size": "0x60", "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@vtbl"}]
+    },
+    "obj2": {
+      "size": "0x60", "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@vtbl"}]
+    },
+    "newobj": {
+      "size": "0x60", "fill": "random",
+      "init": [
+        {"offset": "0x0", "u32": "@vtbl"},
+        {"offset": "0x48", "u32": 2}
+      ]
+    },
+    "vtbl": {
+      "size": "0x8", "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@fn_slot0"},
+        {"offset": "0x4", "u32": "@fn_slot1"}
+      ]
+    },
+    "fn_slot0": {"size": "0x4", "fill": "zero"},
+    "fn_slot1": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [],
+  "callees": {
+    "0x005ecd80": {"name": "Adjust_guess", "conv": "thiscall", "args": ["int"]},
+    "0x005ec760": {"name": "IsValid_guess", "conv": "thiscall", "args": [], "ret": [1, 1]},
+    "0x005e0f30": {"name": "GetKind_guess", "conv": "thiscall", "args": [], "ret": [5, 5]},
+    "@fn_slot0": {"name": "Release_guess", "conv": "thiscall", "args": ["int"]},
+    "@fn_slot1": {"name": "Create_guess", "conv": "thiscall", "args": [], "ret": "@newobj"}
+  },
+  "cases": [
+    {
+      "name": "both live, counts stay positive",
+      "args": ["@cellA", "@cellB", 2],
+      "memory": [
+        {"addr": "@obj1", "offset": "0x48", "u32": 5},
+        {"addr": "@obj2", "offset": "0x48", "u32": 1}
+      ]
+    },
+    {
+      "name": "first count reaches zero",
+      "args": ["@cellA", "@cellB", 2],
+      "memory": [
+        {"addr": "@obj1", "offset": "0x48", "u32": 2},
+        {"addr": "@obj2", "offset": "0x48", "u32": 1}
+      ]
+    },
+    {
+      "name": "first count stays at one",
+      "args": ["@cellA", "@cellB", 2],
+      "memory": [
+        {"addr": "@obj1", "offset": "0x48", "u32": 3},
+        {"addr": "@obj2", "offset": "0x48", "u32": 1}
+      ]
+    },
+    {
+      "name": "second count reaches zero after add",
+      "args": ["@cellA", "@cellB", -2],
+      "memory": [
+        {"addr": "@obj1", "offset": "0x48", "u32": 5},
+        {"addr": "@obj2", "offset": "0x48", "u32": 2}
+      ]
+    },
+    {
+      "name": "second count negative after add",
+      "args": ["@cellA", "@cellB", -3],
+      "memory": [
+        {"addr": "@obj1", "offset": "0x48", "u32": 5},
+        {"addr": "@obj2", "offset": "0x48", "u32": 1}
+      ]
+    },
+    {
+      "name": "amount zero",
+      "args": ["@cellA", "@cellB", 0],
+      "memory": [
+        {"addr": "@obj1", "offset": "0x48", "u32": 5},
+        {"addr": "@obj2", "offset": "0x48", "u32": 1}
+      ]
+    },
+    {
+      "name": "first not valid",
+      "args": ["@cellA", "@cellB", 2],
+      "callees": {
+        "0x005ec760": {"name": "IsValid_guess", "conv": "thiscall", "args": [], "ret": [0]}
+      },
+      "memory": [
+        {"addr": "@obj1", "offset": "0x48", "u32": 5},
+        {"addr": "@obj2", "offset": "0x48", "u32": 1}
+      ]
+    },
+    {
+      "name": "second not valid",
+      "args": ["@cellA", "@cellB", 2],
+      "callees": {
+        "0x005ec760": {"name": "IsValid_guess", "conv": "thiscall", "args": [], "ret": [1, 0]}
+      },
+      "memory": [
+        {"addr": "@obj1", "offset": "0x48", "u32": 5},
+        {"addr": "@obj2", "offset": "0x48", "u32": 1}
+      ]
+    },
+    {
+      "name": "kinds differ",
+      "args": ["@cellA", "@cellB", 2],
+      "callees": {
+        "0x005e0f30": {"name": "GetKind_guess", "conv": "thiscall", "args": [], "ret": [5, 6]}
+      },
+      "memory": [
+        {"addr": "@obj1", "offset": "0x48", "u32": 5},
+        {"addr": "@obj2", "offset": "0x48", "u32": 1}
+      ]
+    },
+    {
+      "name": "create: first survives, new object survives",
+      "args": ["@cellA", "@cellB", 2],
+      "memory": [
+        {"addr": "@cellB", "u32": 0},
+        {"addr": "@obj1", "offset": "0x48", "u32": 5}
+      ]
+    },
+    {
+      "name": "create: first count reaches zero",
+      "args": ["@cellA", "@cellB", 2],
+      "memory": [
+        {"addr": "@cellB", "u32": 0},
+        {"addr": "@obj1", "offset": "0x48", "u32": 2}
+      ]
+    },
+    {
+      "name": "create: new object count zero",
+      "args": ["@cellA", "@cellB", 2],
+      "memory": [
+        {"addr": "@cellB", "u32": 0},
+        {"addr": "@obj1", "offset": "0x48", "u32": 5},
+        {"addr": "@newobj", "offset": "0x48", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4607124,
+    "count": 150,
+    "args": [
+      {"choices": ["@cellA"]},
+      {"choices": ["@cellB"]},
+      {"range": [-4, 8]}
+    ],
+    "memory": [
+      {"addr": "@obj1", "offset": "0x48", "type": "int", "range": [-2, 8]},
+      {"addr": "@obj2", "offset": "0x48", "type": "int", "range": [-2, 8]},
+      {"addr": "@newobj", "offset": "0x48", "type": "int", "range": [-1, 4]}
+    ]
+  }
+}

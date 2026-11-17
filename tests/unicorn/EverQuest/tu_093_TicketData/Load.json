@@ -1,0 +1,558 @@
+{
+  "function": "IdMap_guess::Load_guess",
+  "original": "0x004c9815",
+  "sources": [
+    "src/EverQuest/tu_093_TicketData.cpp"
+  ],
+  "size": "0x27b",
+  "conv": "thiscall",
+  "this": "@bucket",
+  "args": [
+    {
+      "name": "cursor_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "bucket": {
+      "size": "0x10",
+      "fill": "random"
+    },
+    "stream": {
+      "size": "0x400",
+      "fill": "random"
+    },
+    "owner": {
+      "size": "0x1048",
+      "fill": "random"
+    },
+    "new_owner": {
+      "size": "0x1048",
+      "fill": "random"
+    },
+    "pair": {
+      "size": "0x8",
+      "fill": "random"
+    },
+    "pair1": {
+      "size": "0x8",
+      "fill": "random"
+    },
+    "pair2": {
+      "size": "0x8",
+      "fill": "random"
+    },
+    "entry": {
+      "size": "0x44",
+      "fill": "random"
+    },
+    "entry1": {
+      "size": "0x44",
+      "fill": "random"
+    },
+    "entry2": {
+      "size": "0x44",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x004b2056": {
+      "name": "ReadInt_guess",
+      "conv": "cdecl",
+      "args": [
+        "u32",
+        "ignore",
+        "u32"
+      ],
+      "ret": 1,
+      "writes": [
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "11110000",
+          "call": 0
+        },
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "00000000",
+          "call": 13
+        },
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "00000000",
+          "call": 14
+        }
+      ]
+    },
+    "0x004c9733": {
+      "name": "IdMap_guess::GetValue_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": "@owner"
+    },
+    "0x0060d071": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x004c9757": {
+      "name": "TaskTemplate_guess::TaskTemplate_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "this"
+    },
+    "0x00447c66": {
+      "name": "IdMap_guess::Insert_guess",
+      "conv": "thiscall",
+      "args": [
+        "mem:4",
+        "u32"
+      ]
+    },
+    "0x005769e0": {
+      "name": "ReadText_guess",
+      "conv": "cdecl",
+      "args": [
+        "u32",
+        "ignore",
+        "u32",
+        "u32",
+        "u32"
+      ],
+      "ret": 1,
+      "writes": [
+        {
+          "arg": 1,
+          "offset": 0,
+          "hex": "00"
+        }
+      ]
+    },
+    "0x004c96d5": {
+      "name": "TaskTemplate_guess::GetFrom1028_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": "@pair"
+    },
+    "0x004c96ed": {
+      "name": "TaskTemplate_guess::InsertAt1028_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ]
+    },
+    "0x004c9704": {
+      "name": "TaskTemplate_guess::GetFrom1038_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": "@entry"
+    },
+    "0x004c971c": {
+      "name": "TaskTemplate_guess::InsertAt1038_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {
+      "name": "existing owner with empty tables",
+      "args": [
+        "@stream"
+      ]
+    },
+    {
+      "name": "existing entries and one item in each table",
+      "args": [
+        "@stream"
+      ],
+      "callees": {
+        "0x004b2056": {
+          "name": "ReadInt_guess",
+          "conv": "cdecl",
+          "args": [
+            "u32",
+            "ignore",
+            "u32"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "11110000",
+              "call": 0
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "01000000",
+              "call": 13
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "22220000",
+              "call": 14
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "33330000",
+              "call": 15
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "01000000",
+              "call": 16
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "44440000",
+              "call": 17
+            }
+          ]
+        },
+        "0x004c96d5": {
+          "name": "TaskTemplate_guess::GetFrom1028_guess",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": "@pair"
+        },
+        "0x004c9704": {
+          "name": "TaskTemplate_guess::GetFrom1038_guess",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": "@entry"
+        }
+      }
+    },
+    {
+      "name": "new owner and two items in each table",
+      "args": [
+        "@stream+0x8"
+      ],
+      "callees": {
+        "0x004b2056": {
+          "name": "ReadInt_guess",
+          "conv": "cdecl",
+          "args": [
+            "u32",
+            "ignore",
+            "u32"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "11110000",
+              "call": 0
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "02000000",
+              "call": 13
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "22220000",
+              "call": 14
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "11110000",
+              "call": 15
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "33330000",
+              "call": 16
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "22220000",
+              "call": 17
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "02000000",
+              "call": 18
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "44440000",
+              "call": 19
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "55550000",
+              "call": 20
+            }
+          ]
+        },
+        "0x004c9733": {
+          "name": "IdMap_guess::GetValue_guess",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        },
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": [
+            "@new_owner",
+            "@pair1",
+            "@pair2",
+            "@entry1",
+            "@entry2"
+          ]
+        },
+        "0x004c96d5": {
+          "name": "TaskTemplate_guess::GetFrom1028_guess",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        },
+        "0x004c9704": {
+          "name": "TaskTemplate_guess::GetFrom1038_guess",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "negative counts skip both tables",
+      "args": [
+        "@stream+0x20"
+      ],
+      "callees": {
+        "0x004b2056": {
+          "name": "ReadInt_guess",
+          "conv": "cdecl",
+          "args": [
+            "u32",
+            "ignore",
+            "u32"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "11110000",
+              "call": 0
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "ffffffff",
+              "call": 13
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "ffffffff",
+              "call": 14
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "owner allocation returns null",
+      "args": [
+        "@stream"
+      ],
+      "callees": {
+        "0x004c9733": {
+          "name": "IdMap_guess::GetValue_guess",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        },
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "pair allocation returns null",
+      "args": [
+        "@stream"
+      ],
+      "callees": {
+        "0x004b2056": {
+          "name": "ReadInt_guess",
+          "conv": "cdecl",
+          "args": [
+            "u32",
+            "ignore",
+            "u32"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "11110000",
+              "call": 0
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "01000000",
+              "call": 13
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "22220000",
+              "call": 14
+            }
+          ]
+        },
+        "0x004c96d5": {
+          "name": "TaskTemplate_guess::GetFrom1028_guess",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        },
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "entry allocation returns null",
+      "args": [
+        "@stream"
+      ],
+      "callees": {
+        "0x004b2056": {
+          "name": "ReadInt_guess",
+          "conv": "cdecl",
+          "args": [
+            "u32",
+            "ignore",
+            "u32"
+          ],
+          "ret": 1,
+          "writes": [
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "11110000",
+              "call": 0
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "00000000",
+              "call": 13
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "01000000",
+              "call": 14
+            },
+            {
+              "arg": 1,
+              "offset": 0,
+              "hex": "33330000",
+              "call": 15
+            }
+          ]
+        },
+        "0x004c9704": {
+          "name": "TaskTemplate_guess::GetFrom1038_guess",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        },
+        "0x0060d071": {
+          "name": "operator_new",
+          "conv": "cdecl",
+          "args": [
+            "u32"
+          ],
+          "ret": 0
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5019669,
+    "count": 80,
+    "args": [
+      {
+        "choices": [
+          "@stream",
+          "@stream+0x8",
+          "@stream+0x20"
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

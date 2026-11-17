@@ -1,0 +1,2 @@
+address,name,confidence,source,note
+00612944,_except_handler3,high,libfence,"libcmt.lib exsup3.obj __except_handler3: 230 bytes equal outside 20 relocation bytes (t19); inside the export's 0x0061274D"

@@ -1,0 +1,150 @@
+{
+  "function": "TertiaryBase_guess::Slot01_guess",
+  "original": "0x00518bd0",
+  "sources": [
+    "src/EverQuest/tu_170_InventoryWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@tertiarybase",
+  "args": [
+    {
+      "name": "dispatcher",
+      "type": "ptr"
+    },
+    {
+      "name": "event",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "tertiarybase": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "dispatcher": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "event": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079c120",
+      "u32": "@dispatcher"
+    }
+  ],
+  "callees": {
+    "0x005188f4": {
+      "name": "FUN_005188f4",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "matching dispatcher and event two calls",
+      "args": [
+        "@dispatcher",
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 2
+        }
+      ]
+    },
+    {
+      "name": "dispatcher mismatch short circuits",
+      "args": [
+        0,
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 2
+        }
+      ]
+    },
+    {
+      "name": "matching dispatcher event one",
+      "args": [
+        "@dispatcher",
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "matching dispatcher event three",
+      "args": [
+        "@dispatcher",
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "matching dispatcher zero event",
+      "args": [
+        "@dispatcher",
+        "@event"
+      ],
+      "memory": [
+        {
+          "addr": "@event",
+          "offset": "0x0",
+          "u32": 0
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5344208,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@dispatcher",
+          0
+        ]
+      },
+      {
+        "choices": [
+          "@event"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@event",
+        "offset": "0x0",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          2,
+          3,
+          4294967295
+        ]
+      }
+    ]
+  }
+}

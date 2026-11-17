@@ -1,0 +1,159 @@
+{
+  "function": "CharacterMagicSystem_guess::StopSpellCast_guess",
+  "original": "0x0040f06d",
+  "sources": [
+    "src/EverQuest/tu_012_CharacterMagicSystem.cpp"
+  ],
+  "size": "0x2cc",
+  "conv": "thiscall",
+  "this": "@charactermagicsystem",
+  "args": [
+    {
+      "name": "first_guess",
+      "type": "char"
+    },
+    {
+      "name": "second_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "charactermagicsystem": {
+      "size": "0x138ac",
+      "fill": "random"
+    },
+    "offset_holder": {
+      "size": "0x8",
+      "fill": "random"
+    },
+    "state_a": {
+      "size": "0x1ac",
+      "fill": "random"
+    },
+    "state_b": {
+      "size": "0x1050",
+      "fill": "random"
+    },
+    "result": {
+      "size": "0x11a0",
+      "fill": "random"
+    },
+    "lookup": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "spell": {
+      "size": "0x20",
+      "fill": "random"
+    },
+    "check_full": {
+      "size": "0x20",
+      "fill": "random"
+    },
+    "check_empty": {
+      "size": "0x20",
+      "fill": "random"
+    },
+    "string_table": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "message_router": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "format": {
+      "size": "0x40",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "0x0079ac74", "u32": "0x12345678"},
+    {"addr": "0x00985cc8", "u32": "@lookup"},
+    {"addr": "0x009248d4", "u32": 2},
+    {"addr": "0x009248d0", "u32": 1},
+    {"addr": "0x00923798", "u8": 0},
+    {"addr": "0x00923884", "u32": 0},
+    {"addr": "0x00924684", "u32": 7},
+    {"addr": "0x00905cb0", "u32": "@string_table"},
+    {"addr": "0x00988df0", "u32": "@message_router"},
+    {"addr": "@charactermagicsystem", "offset": "0x4", "u32": "@offset_holder"},
+    {"addr": "@offset_holder", "offset": "0x4", "u32": 0},
+    {"addr": "@charactermagicsystem", "offset": "0x8", "u32": "@state_a"},
+    {"addr": "@state_a", "offset": "0x1a8", "u32": "@state_b"},
+    {"addr": "@state_b", "offset": "0xd8", "u32": 3},
+    {"addr": "@state_b", "offset": "0xe8", "u32": 10},
+    {"addr": "@state_b", "offset": "0xec", "u32": 11},
+    {"addr": "@state_b", "offset": "0xf0", "u32": 12},
+    {"addr": "@state_b", "offset": "0xf4", "u32": 13},
+    {"addr": "@state_b", "offset": "0xf8", "u32": 14},
+    {"addr": "@state_b", "offset": "0xfc", "u32": 15},
+    {"addr": "@state_b", "offset": "0x100", "u32": 16},
+    {"addr": "@state_b", "offset": "0x104", "u32": 17},
+    {"addr": "@state_b", "offset": "0x108", "u32": 18},
+    {"addr": "@state_b", "offset": "0x110", "u32": 19},
+    {"addr": "@state_b", "offset": "0xf98", "u32": 42},
+    {"addr": "@state_b", "offset": "0xf9c", "u8": 2},
+    {"addr": "@state_b", "offset": "0xfa0", "u32": 4},
+    {"addr": "@state_b", "offset": "0x1044", "u8": 0},
+    {"addr": "@state_b", "offset": "0x1048", "u32": 0},
+    {"addr": "@state_b", "offset": "0x104c", "u8": 0},
+    {"addr": "@result", "offset": "0x119c", "u8": 7},
+    {"addr": "@spell", "offset": "0x14", "u32": 101},
+    {"addr": "@spell", "offset": "0x1c", "u32": 1},
+    {"addr": "@check_full", "offset": "0x1c", "u32": 1},
+    {"addr": "@check_empty", "offset": "0x1c", "u32": 0},
+    {"addr": "@format", "cstr": "Fixture message"}
+  ],
+  "callees": {
+    "0x0044d0d0": {"name": "spell_valid_guess", "conv": "cdecl", "args": ["int"], "ret": [1]},
+    "0x0040cbd6": {"name": "lookup_spell_guess", "conv": "thiscall", "args": ["int"], "ret": ["@spell"]},
+    "0x005ec220": {"name": "resolve_result_guess", "conv": "thiscall", "args": [], "ret": "@result"},
+    "0x0040db0b": {"name": "CanAffect_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0},
+    "0x004912b1": {"name": "send_message_guess", "conv": "cdecl", "args": ["ptr", "int", "ptr", "int", "int"]},
+    "0x0040e705": {"name": "read_magic_guess", "conv": "thiscall", "args": ["u32"], "ret": [100, 100, 101, 101, 102, 102, 103, 103, 104, 104, 105, 105, 106, 106, 107, 107, 108, 108]},
+    "0x005dfa00": {"name": "get_message_guess", "conv": "thiscall", "args": ["int", "int"], "ret": "@format"},
+    "0x0060d5eb": {"name": "sprintf", "conv": "cdecl", "args": ["ignore", "cstr"], "varargs": "printf", "ret": 0, "writes": [{"arg": 0, "hex": "46697874757265206d65737361676500"}]},
+    "0x0060ca90": {"name": "check_timer_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+    "0x004982c6": {"name": "show_message_guess", "conv": "thiscall", "args": ["cstr", "int", "bool"]}
+  },
+  "rewrite_aliases": {
+    "_sprintf": "0x0060d5eb"
+  },
+  "cases": [
+    {"name": "null this", "this": "0x0", "args": [0, 42]},
+    {"name": "null state", "args": [0, 42], "memory": [{"addr": "@charactermagicsystem", "offset": "0x8", "u32": 0}]},
+    {"name": "level eight early return", "args": [0, 42], "memory": [{"addr": "@result", "offset": "0x119c", "u8": 8}, {"addr": "@spell", "offset": "0x14", "u32": 100}], "callees": {"0x0040db0b": {"name": "CanAffect_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0}}},
+    {"name": "level eight reset matching target", "args": [1, 42], "memory": [{"addr": "@result", "offset": "0x119c", "u8": 8}, {"addr": "@state_b", "offset": "0x104c", "u8": 1}, {"addr": "@state_b", "offset": "0x1048", "u32": 0}, {"addr": "@state_b", "offset": "0xf98", "u32": 42}, {"addr": "0x009248d4", "u32": 0}, {"addr": "0x009248d0", "u32": 0}], "callees": {"0x0040db0b": {"name": "CanAffect_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0}}},
+    {"name": "level eight reset keeps different target", "args": [0, 42], "memory": [{"addr": "@result", "offset": "0x119c", "u8": 8}, {"addr": "@state_b", "offset": "0x104c", "u8": 1}, {"addr": "@state_b", "offset": "0x1048", "u32": 0}, {"addr": "@state_b", "offset": "0xf98", "u32": 99}], "callees": {"0x0040db0b": {"name": "CanAffect_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0}}},
+    {"name": "non-eight no-reset sends", "args": [0, 42], "callees": {"0x0040db0b": {"name": "CanAffect_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0}}},
+    {"name": "non-eight no-reset suppresses send", "args": [0, 42], "memory": [{"addr": "0x00923798", "u8": 1}], "callees": {"0x0040db0b": {"name": "CanAffect_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0}}},
+    {"name": "reset loop and display", "args": [1, 42], "callees": {"0x0040db0b": {"name": "CanAffect_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 1}, "0x0044d0d0": {"name": "spell_valid_guess", "conv": "cdecl", "args": ["int"], "ret": [1, 1, 0, 1, 1, 0, 1, 1, 1, 1]}, "0x0040cbd6": {"name": "lookup_spell_guess", "conv": "thiscall", "args": ["int"], "ret": ["@spell", "@check_full", "@check_empty", 0, "@check_full", "@check_empty", "@check_full", "@check_full", "@check_full"]}, "0x0060ca90": {"name": "check_timer_guess", "conv": "thiscall", "args": ["int"], "ret": 0}}},
+    {"name": "reset loop suppresses display", "args": [0, 42], "callees": {"0x0040db0b": {"name": "CanAffect_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 1}, "0x0060ca90": {"name": "check_timer_guess", "conv": "thiscall", "args": ["int"], "ret": 1}}},
+    {"name": "invalid spell skips main block", "args": [0, 42], "callees": {"0x0044d0d0": {"name": "spell_valid_guess", "conv": "cdecl", "args": ["int"], "ret": 0}, "0x0040db0b": {"name": "CanAffect_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0}}},
+    {"name": "validity predicate true with invalid spell", "args": [1, 42], "callees": {"0x0044d0d0": {"name": "spell_valid_guess", "conv": "cdecl", "args": ["int"], "ret": 0}, "0x0040db0b": {"name": "CanAffect_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 1}}}
+  ],
+  "fuzz": {
+    "seed": 4255853,
+    "count": 120,
+    "args": [
+      {"choices": [0, 1, 2, -1]},
+      {"choices": [0, 42, 43, 99, 1000]}
+    ],
+    "memory": [
+      {"addr": "@charactermagicsystem", "offset": "0x8", "type": "ptr", "choices": ["@state_a", 0]},
+      {"addr": "@state_a", "offset": "0x1a8", "type": "ptr", "choices": ["@state_b", 0]},
+      {"addr": "@result", "offset": "0x119c", "type": "u8", "choices": [0, 7, 8, 9]},
+      {"addr": "@state_b", "offset": "0x104c", "type": "u8", "choices": [0, 1]},
+      {"addr": "@state_b", "offset": "0x1048", "type": "int", "choices": [0, 1]},
+      {"addr": "@state_b", "offset": "0xf98", "type": "int", "choices": [0, 42, 99]},
+      {"addr": "@spell", "offset": "0x14", "type": "int", "choices": [0, 100, 101, 200]},
+      {"addr": "0x009248d4", "type": "int", "choices": [-2, 0, 1, 2]},
+      {"addr": "0x009248d0", "type": "int", "choices": [-2, 0, 1, 2]},
+      {"addr": "0x00923798", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00923884", "type": "int", "choices": [0, 1]}
+    ]
+  },
+  "_survivors": "L1061: reset_guess is only tested for nonzero, so 1 and 2 have identical behavior"
+}

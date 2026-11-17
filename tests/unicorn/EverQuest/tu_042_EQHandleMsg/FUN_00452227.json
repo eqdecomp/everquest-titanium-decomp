@@ -1,0 +1,132 @@
+{
+  "function": "MoveToSafePoint_guess",
+  "original": "0x00452227",
+  "sources": ["src/EverQuest/tu_042_EQHandleMsg.cpp"],
+  "size": "0x160",
+  "conv": "cdecl",
+  "args": [],
+  "ret": "u32",
+  "objects": {
+    "current": {
+      "size": "0x278",
+      "fill": "random",
+      "init": [{"offset": "0x1a8", "u32": "@current_state"}]
+    },
+    "current_state": {"size": "0x15c", "fill": "random"},
+    "other": {
+      "size": "0x278",
+      "fill": "random",
+      "init": [{"offset": "0x1a8", "u32": "@other_state"}]
+    },
+    "other_state": {"size": "0x15c", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "0x00905ce4", "u32": "@current"},
+    {"addr": "0x00905cf8", "u32": "@other"},
+    {"addr": "0x00923bcc", "f32": 12.5},
+    {"addr": "0x00923bd0", "f32": -4.25},
+    {"addr": "0x00923bd4", "f32": 8.75},
+    {"addr": "0x0063f4d0", "from_image": "0x0063f4d0", "image_size": 4},
+    {"addr": "0x00640ea0", "from_image": "0x00640ea0", "image_size": 4},
+    {"addr": "@current", "offset": "0x238", "f32": 2.5},
+    {"addr": "@other", "offset": "0x238", "f32": -1.25},
+    {"addr": "@current_state", "offset": "0x158", "u32": 0},
+    {"addr": "@other_state", "offset": "0x158", "u32": 0}
+  ],
+  "callees": {
+    "0x0048a0fc": {
+      "name": "GetFloorHeightAt_guess",
+      "conv": "thiscall",
+      "args": ["float", "float", "float", "int"],
+      "ret_float": 5.5
+    },
+    "0x0048a945": {
+      "name": "Update_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "current inactive, other null",
+      "args": [],
+      "memory": [
+        {"addr": "@current_state", "offset": "0x158", "u32": 0},
+        {"addr": "0x00905cf8", "u32": 0}
+      ]
+    },
+    {
+      "name": "current inactive, other is current",
+      "args": [],
+      "memory": [
+        {"addr": "@current_state", "offset": "0x158", "u32": 0},
+        {"addr": "0x00905cf8", "u32": "@current"}
+      ]
+    },
+    {
+      "name": "current active, sentinel height",
+      "args": [],
+      "memory": [
+        {"addr": "@current_state", "offset": "0x158", "u32": 1},
+        {"addr": "0x00905cf8", "u32": 0}
+      ],
+      "callees": {
+        "0x0048a0fc": {
+          "name": "GetHeight_guess",
+          "conv": "thiscall",
+          "args": ["float", "float", "float", "int"],
+          "ret_float": -9.999999884841548e26
+        }
+      }
+    },
+    {
+      "name": "current updates, distinct other inactive",
+      "args": [],
+      "memory": [
+        {"addr": "@current_state", "offset": "0x158", "u32": 1},
+        {"addr": "@other_state", "offset": "0x158", "u32": 0},
+        {"addr": "0x00905cf8", "u32": "@other"}
+      ]
+    },
+    {
+      "name": "both active, sentinel heights",
+      "args": [],
+      "memory": [
+        {"addr": "@current_state", "offset": "0x158", "u32": 1},
+        {"addr": "@other_state", "offset": "0x158", "u32": 1},
+        {"addr": "0x00905cf8", "u32": "@other"}
+      ],
+      "callees": {
+        "0x0048a0fc": {
+          "name": "GetHeight_guess",
+          "conv": "thiscall",
+          "args": ["float", "float", "float", "int"],
+          "ret_float": -9.999999884841548e26
+        }
+      }
+    },
+    {
+      "name": "both active, finite heights",
+      "args": [],
+      "memory": [
+        {"addr": "@current_state", "offset": "0x158", "u32": 1},
+        {"addr": "@other_state", "offset": "0x158", "u32": 1},
+        {"addr": "0x00905cf8", "u32": "@other"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4530727,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@current_state", "offset": "0x158", "type": "int", "choices": [0, 1]},
+      {"addr": "@other_state", "offset": "0x158", "type": "int", "choices": [0, 1]},
+      {"addr": "0x00905cf8", "type": "ptr", "choices": ["0x0", "@current", "@other"]},
+      {"addr": "0x00923bcc", "type": "float", "range": [-20.0, 20.0]},
+      {"addr": "0x00923bd0", "type": "float", "range": [-20.0, 20.0]},
+      {"addr": "0x00923bd4", "type": "float", "range": [-20.0, 20.0]}
+    ]
+  }
+}

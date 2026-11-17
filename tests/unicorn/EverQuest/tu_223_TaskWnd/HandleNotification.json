@@ -1,0 +1,359 @@
+{
+  "function": "CTaskWnd_guess::HandleNotification_guess",
+  "original": "0x00560556",
+  "sources": ["src/EverQuest/tu_223_TaskWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@destructtarget",
+  "args": [
+    {"name": "sender_guess", "type": "ptr"},
+    {"name": "message_guess", "type": "int"},
+    {"name": "data_guess", "type": "int"}
+  ],
+  "ret": "int",
+  "objects": {
+    "destructtarget": {"size": "0x890", "fill": "random"},
+    "sender": {"size": "0x60", "fill": "random"},
+    "taskList": {"size": "0x140", "fill": "random"},
+    "questList": {"size": "0x140", "fill": "random"},
+    "memberList": {"size": "0x140", "fill": "random"},
+    "buttonA": {"size": "0x60", "fill": "random"},
+    "buttonB": {"size": "0x60", "fill": "random"},
+    "history": {"size": "0x2824", "fill": "random"},
+    "task": {"size": "0x2824", "fill": "random"},
+    "record": {"size": "0x8", "fill": "random"},
+    "recordOwner": {"size": "0x4", "fill": "random"},
+    "playerInfo": {"size": "0x248", "fill": "random"},
+    "parent": {"size": "0x160", "fill": "random"},
+    "pool": {"size": "0x4", "fill": "random"},
+    "stringtable": {"size": "0x4", "fill": "random"},
+    "everquest": {"size": "0x4", "fill": "random"},
+    "manager": {"size": "0x4", "fill": "random"},
+    "window": {"size": "0x60", "fill": "random", "init": [{"offset": 0, "u32": "@vtbl"}]},
+    "vtbl": {"size": "0xc4", "fill": "random", "init": [{"offset": "0xc0", "u32": "@fn"}]},
+    "fn": {"size": "0x1", "fill": "random"},
+    "blocks": {"size": "0x4", "fill": "random", "init": [{"offset": 0, "u32": "@selectedValue"}]},
+    "selectedValue": {"size": "0x4", "fill": "random"},
+    "cxstr": {"size": "0x4", "fill": "random", "init": [{"offset": 0, "u32": "@rep"}]},
+    "rep": {"size": "0x20", "fill": "random"},
+    "memberName": {"size": "0x20", "fill": "random"},
+    "errorText": {"size": "0x20", "fill": "random"},
+    "rawText": {"size": "0x40", "fill": "random"}
+  },
+  "memory": [
+    {"addr": "@destructtarget", "offset": "0x168", "u32": 0},
+    {"addr": "@destructtarget", "offset": "0x16c", "u32": 0},
+    {"addr": "@destructtarget", "offset": "0x174", "u32": 0},
+    {"addr": "@destructtarget", "offset": "0x178", "u32": 0},
+    {"addr": "@destructtarget", "offset": "0x184", "u32": 0},
+    {"addr": "@destructtarget", "offset": "0x194", "u32": 0},
+    {"addr": "@destructtarget", "offset": "0x198", "u32": 0},
+    {"addr": "@destructtarget", "offset": "0x19c", "u32": 0},
+    {"addr": "@destructtarget", "offset": "0x1a0", "u32": 0},
+    {"addr": "@destructtarget", "offset": "0x840", "u32": 0},
+    {"addr": "@destructtarget", "offset": "0x844", "u32": 0},
+    {"addr": "@task", "offset": "0x4", "cstr": "TaskName"},
+    {"addr": "@task", "offset": "0x2820", "u32": 1},
+    {"addr": "@playerInfo", "offset": "0x120", "cstr": "PlayerName"},
+    {"addr": "@selectedValue", "u32": 2},
+    {"addr": "@memberName", "cstr": "MemberName"},
+    {"addr": "@rep", "offset": "0x14", "cstr": "MemberName"},
+    {"addr": "@errorText", "cstr": "Error message"},
+    {"addr": "@rawText", "cstr": "task text"},
+    {"addr": "0x0063f53f", "cstr": ""},
+    {"addr": "0x0079ac74", "u32": 305419896},
+    {"addr": "0x00905d00", "u32": "@recordOwner"},
+    {"addr": "0x00992858", "u32": "@parent"},
+    {"addr": "0x00991e44", "u32": "@pool"},
+    {"addr": "0x0099283c", "u32": "@window"},
+    {"addr": "0x00905d04", "u32": "@playerInfo"},
+    {"addr": "0x00905cb0", "u32": "@stringtable"},
+    {"addr": "0x00988df0", "u32": "@everquest"},
+    {"addr": "0x0099d3ec", "u32": "@manager"}
+  ],
+  "callees": {
+    "0x00597be0": {"name": "CListWnd::GetCurSel", "conv": "thiscall", "args": [], "ret": 0},
+    "0x00597ed0": {"name": "CListWnd::GetItemData", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00597c20": {"name": "CListWnd::SetCurSel", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0055e2e6": {
+      "name": "GetValues_guess", "conv": "thiscall", "args": ["int", "ignore", "ignore"], "ret": 0,
+      "writes": [
+        {"arg": 1, "offset": 0, "hex": "00000000"},
+        {"arg": 2, "offset": 0, "hex": "00000000"}
+      ]
+    },
+    "0x00432d17": {"name": "GetRecord_guess", "conv": "thiscall", "args": ["ptr", "int", "int"], "ret": "@record"},
+    "0x004322d2": {"name": "GetTask_guess", "conv": "thiscall", "args": ["int", "int", "char"], "ret": "@task"},
+    "0x0055ed77": {"name": "UpdateTask_guess", "conv": "thiscall", "args": ["ptr", "ptr"], "ret": 0},
+    "0x0055e9ed": {"name": "ShowTask_guess", "conv": "thiscall", "args": ["ptr", "int"], "ret": 0},
+    "0x0043233f": {"name": "GetHistory_guess", "conv": "thiscall", "args": ["int"], "ret": "@history"},
+    "0x0055f192": {"name": "FillQuestHistory_guess", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x004912b1": {"name": "EQSendMessage", "conv": "cdecl", "args": ["ptr", "int", "ignore", "int", "int"], "ret": 0},
+    "0x0046da4a": {
+      "name": "FormatText_guess", "conv": "cdecl",
+      "args": ["ignore", "int", "cstr", "int", "int", "int", "int", "int", "int", "int", "int"], "ret": 0
+    },
+    "0x00548460": {"name": "CConfirmationDialogPool_guess::Activate", "conv": "thiscall", "args": ["ptr", "int", "ignore", "int", "int", "int", "int"], "ret": 0},
+    "0x005dfa00": {"name": "StringTable::getString", "conv": "thiscall", "args": ["u32", "ptr"], "ret": "@errorText"},
+    "0x004982c6": {"name": "CEverQuest::dsp_chat", "conv": "thiscall", "args": ["cstr", "int", "bool"], "ret": 0},
+    "0x0047c3af": {"name": "SelectionItems_guess::SelectionItems_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x0059bb50": {
+      "name": "GetSelectedItems_guess", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "00000000"},
+        {"arg": 0, "offset": 12, "hex": "00000000"},
+        {"arg": 0, "offset": 16, "hex": "58928900"}
+      ]
+    },
+    "0x00597f10": {
+      "name": "CListWnd::GetItemText", "conv": "thiscall", "args": ["ignore", "int", "int"], "ret": "@cxstr",
+      "writes": [{"arg": 0, "offset": 0, "hex": "58928900"}]
+    },
+    "0x00572300": {"name": "CXStr::operator char*", "conv": "thiscall", "args": [], "ret": "@memberName"},
+    "0x00571d00": {"name": "CXStr::FreeRep", "conv": "thiscall", "args": ["ptr"], "ret": 0},
+    "0x00406e7e": {"name": "SelectionItems_guess::~SelectionItems_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0055f9a0": {"name": "Sort_guess", "conv": "thiscall", "args": [], "ret": 0},
+    "0x0046d3a3": {"name": "ParseItemLink_guess", "conv": "cdecl", "args": ["cstr", "ignore"], "ret": 1},
+    "0x005adf60": {"name": "CXWndManager::GetKeyboardFlags", "conv": "thiscall", "args": [], "ret": 0},
+    "0x005a2230": {"name": "CSidlScreenWnd::WndNotification", "conv": "thiscall", "args": ["ptr", "u32", "u32"], "ret": 77},
+    "@fn": {"name": "WindowVtable48_guess::SetMonsterDisplay_guess", "conv": "thiscall", "args": ["bool", "int"], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "task list: invalid current row",
+      "args": ["@taskList", 1, 0],
+      "memory": [{"addr": "@destructtarget", "offset": "0x16c", "u32": "@taskList"}],
+      "callees": {
+        "0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": 3},
+        "0x00597ed0": {"name": "GetItemData", "conv": "thiscall", "args": ["int"], "ret": 1073741824}
+      }
+    },
+    {
+      "name": "task list: current row and enabled buttons",
+      "args": ["@taskList", 1, 0],
+      "memory": [
+        {"addr": "@destructtarget", "offset": "0x16c", "u32": "@taskList"},
+        {"addr": "@destructtarget", "offset": "0x174", "u32": "@buttonA"},
+        {"addr": "@destructtarget", "offset": "0x178", "u32": "@buttonB"}
+      ],
+      "callees": {
+        "0x0055e2e6": {"name": "GetValues", "conv": "thiscall", "args": ["int", "ignore", "ignore"], "ret": 1,
+          "writes": [{"arg": 1, "offset": 0, "hex": "02000000"}, {"arg": 2, "offset": 0, "hex": "05000000"}]}
+      }
+    },
+    {
+      "name": "quest list: sentinel row sends selected index",
+      "args": ["@questList", 1, 0],
+      "memory": [
+        {"addr": "@destructtarget", "offset": "0x184", "u32": "@questList"},
+        {"addr": "@history", "offset": "0x2819", "u32": 0}
+      ],
+      "callees": {
+        "0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": 1},
+        "0x00597ed0": {"name": "GetItemData", "conv": "thiscall", "args": ["int"], "ret": 1073741824},
+        "0x004912b1": {"name": "EQSendMessage", "conv": "cdecl", "args": ["ptr", "int", "mem:4", "int", "int"], "ret": 0}
+      }
+    },
+    {
+      "name": "quest list: loaded history",
+      "args": ["@questList", 1, 0],
+      "memory": [
+        {"addr": "@destructtarget", "offset": "0x184", "u32": "@questList"},
+        {"addr": "@history", "offset": "0x2819", "u32": 1}
+      ],
+      "callees": {"0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": 2}}
+    },
+    {
+      "name": "abandon task: activate dialog",
+      "args": ["@sender", 1, 0],
+      "memory": [
+        {"addr": "@destructtarget", "offset": "0x16c", "u32": "@taskList"},
+        {"addr": "@destructtarget", "offset": "0x174", "u32": "@sender"}
+      ],
+      "callees": {
+        "0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": 0},
+        "0x0055e2e6": {"name": "GetValues", "conv": "thiscall", "args": ["int", "ignore", "ignore"], "ret": 1,
+          "writes": [{"arg": 1, "offset": 0, "hex": "00000000"}, {"arg": 2, "offset": 0, "hex": "01000000"}]}
+      }
+    },
+    {
+      "name": "abandon task: zero text ID",
+      "args": ["@sender", 1, 0],
+      "memory": [
+        {"addr": "@destructtarget", "offset": "0x16c", "u32": "@taskList"},
+        {"addr": "@destructtarget", "offset": "0x174", "u32": "@sender"}
+      ],
+      "callees": {
+        "0x00597be0": {"name": "GetCurSel", "conv": "thiscall", "args": [], "ret": 0},
+        "0x0055e2e6": {"name": "GetValues", "conv": "thiscall", "args": ["int", "ignore", "ignore"], "ret": 1,
+          "writes": [{"arg": 1, "offset": 0, "hex": "01000000"}, {"arg": 2, "offset": 0, "hex": "00000000"}]}
+      }
+    },
+    {
+      "name": "monster button: hidden",
+      "args": ["@sender", 1, 0],
+      "memory": [
+        {"addr": "@destructtarget", "offset": "0x178", "u32": "@sender"},
+        {"addr": "@window", "offset": "0x5c", "u32": 0}
+      ]
+    },
+    {
+      "name": "monster button: shown",
+      "args": ["@sender", 1, 0],
+      "memory": [
+        {"addr": "@destructtarget", "offset": "0x178", "u32": "@sender"},
+        {"addr": "@window", "offset": "0x5c", "u32": 1}
+      ]
+    },
+    {
+      "name": "add player: unavailable",
+      "args": ["@sender", 1, 0],
+      "memory": [
+        {"addr": "@destructtarget", "offset": "0x198", "u32": "@sender"},
+        {"addr": "@playerInfo", "offset": "0x244", "u32": 1}
+      ]
+    },
+    {
+      "name": "add player: send invite",
+      "args": ["@sender", 1, 0],
+      "memory": [
+        {"addr": "@destructtarget", "offset": "0x198", "u32": "@sender"},
+        {"addr": "@playerInfo", "offset": "0x244", "u32": 0}
+      ],
+      "callees": {"0x004912b1": {"name": "EQSendMessage", "conv": "cdecl", "args": ["ptr", "int", "mem:72", "int", "int"], "ret": 0}}
+    },
+    {
+      "name": "remove player: send selected member",
+      "args": ["@sender", 1, 0],
+      "memory": [
+        {"addr": "@destructtarget", "offset": "0x194", "u32": "@memberList"},
+        {"addr": "@destructtarget", "offset": "0x19c", "u32": "@sender"},
+        {"addr": "0x00992858", "u32": "@blocks"}
+      ],
+      "callees": {
+        "0x0059bb50": {"name": "GetSelectedItems", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+          "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}, {"arg": 0, "offset": 12, "hex": "00000000"}, {"arg": 0, "offset": 16, "hex": "58928900"}]},
+        "0x004912b1": {"name": "EQSendMessage", "conv": "cdecl", "args": ["ptr", "int", "mem:72", "int", "int"], "ret": 0}
+      }
+    },
+    {
+      "name": "remove player: no single selection",
+      "args": ["@sender", 1, 0],
+      "memory": [
+        {"addr": "@destructtarget", "offset": "0x194", "u32": "@memberList"},
+        {"addr": "@destructtarget", "offset": "0x19c", "u32": "@sender"}
+      ]
+    },
+    {
+      "name": "make leader: send selected member",
+      "args": ["@sender", 1, 0],
+      "memory": [
+        {"addr": "@destructtarget", "offset": "0x194", "u32": "@memberList"},
+        {"addr": "@destructtarget", "offset": "0x1a0", "u32": "@sender"},
+        {"addr": "0x00992858", "u32": "@blocks"}
+      ],
+      "callees": {
+        "0x0059bb50": {"name": "GetSelectedItems", "conv": "thiscall", "args": ["ignore"], "ret": 0,
+          "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}, {"arg": 0, "offset": 12, "hex": "00000000"}, {"arg": 0, "offset": 16, "hex": "58928900"}]},
+        "0x004912b1": {"name": "EQSendMessage", "conv": "cdecl", "args": ["ptr", "int", "mem:72", "int", "int"], "ret": 0}
+      }
+    },
+    {
+      "name": "make leader: no single selection",
+      "args": ["@sender", 1, 0],
+      "memory": [
+        {"addr": "@destructtarget", "offset": "0x194", "u32": "@memberList"},
+        {"addr": "@destructtarget", "offset": "0x1a0", "u32": "@sender"}
+      ]
+    },
+    {
+      "name": "sort: mode zero toggles direction",
+      "args": ["@taskList", 15, 1],
+      "memory": [
+        {"addr": "@destructtarget", "offset": "0x16c", "u32": "@taskList"},
+        {"addr": "@destructtarget", "offset": "0x840", "u32": 0},
+        {"addr": "@destructtarget", "offset": "0x844", "u32": 1}
+      ]
+    },
+    {
+      "name": "sort: mode one",
+      "args": ["@taskList", 15, 2],
+      "memory": [
+        {"addr": "@destructtarget", "offset": "0x16c", "u32": "@taskList"},
+        {"addr": "@destructtarget", "offset": "0x840", "u32": 0},
+        {"addr": "@destructtarget", "offset": "0x844", "u32": 0}
+      ]
+    },
+    {
+      "name": "sort: unchanged mode toggles direction",
+      "args": ["@taskList", 15, 3],
+      "memory": [
+        {"addr": "@destructtarget", "offset": "0x16c", "u32": "@taskList"},
+        {"addr": "@destructtarget", "offset": "0x840", "u32": 1},
+        {"addr": "@destructtarget", "offset": "0x844", "u32": 0}
+      ]
+    },
+    {
+      "name": "task text: parser rejects input",
+      "args": ["@sender", 27, "@rawText"],
+      "memory": [{"addr": "@destructtarget", "offset": "0x168", "u32": "@sender"}]
+    },
+    {
+      "name": "task text: send without keyboard flag",
+      "args": ["@sender", 27, "@rawText"],
+      "memory": [{"addr": "@destructtarget", "offset": "0x168", "u32": "@sender"}],
+      "callees": {
+        "0x0046d3a3": {"name": "ParseTaskText", "conv": "cdecl", "args": ["cstr", "ignore"], "ret": 0,
+          "writes": [{"arg": 1, "offset": 28, "hex": "04000000"}]},
+        "0x004912b1": {"name": "EQSendMessage", "conv": "cdecl", "args": ["ptr", "int", "mem:44", "int", "int"], "ret": 0}
+      }
+    },
+    {
+      "name": "task text: send with keyboard flag",
+      "args": ["@sender", 27, "@rawText"],
+      "memory": [{"addr": "@destructtarget", "offset": "0x168", "u32": "@sender"}],
+      "callees": {
+        "0x0046d3a3": {"name": "ParseTaskText", "conv": "cdecl", "args": ["cstr", "ignore"], "ret": 0,
+          "writes": [{"arg": 1, "offset": 28, "hex": "04000000"}]},
+        "0x005adf60": {"name": "GetKeyboardFlags", "conv": "thiscall", "args": [], "ret": 1},
+        "0x004912b1": {"name": "EQSendMessage", "conv": "cdecl", "args": ["ptr", "int", "mem:44", "int", "int"], "ret": 0}
+      }
+    },
+    {
+      "name": "task text: wrong sender falls back",
+      "args": ["@sender", 27, "@rawText"]
+    },
+    {
+      "name": "unknown message falls back",
+      "args": ["@sender", 0, 0]
+    },
+    {
+      "name": "message one with unrelated sender",
+      "args": ["@sender", 1, 0]
+    },
+    {
+      "name": "null sender compared without dereference",
+      "args": [0, 1, 0]
+    }
+  ],
+  "fuzz": {
+    "seed": 5637462,
+    "count": 100,
+    "args": [
+      {"choices": ["@sender", "@taskList", "@questList"]},
+      {"choices": [0, 1, 15, 27]},
+      {"choices": [0, 1, 2, 3]}
+    ],
+    "memory": [
+      {"addr": "@destructtarget", "offset": "0x16c", "type": "u32", "choices": [0, "@taskList"]},
+      {"addr": "@destructtarget", "offset": "0x184", "type": "u32", "choices": [0, "@questList"]},
+      {"addr": "@destructtarget", "offset": "0x168", "type": "u32", "choices": [0, "@sender"]},
+      {"addr": "@destructtarget", "offset": "0x174", "type": "u32", "choices": [0, "@sender"]},
+      {"addr": "@destructtarget", "offset": "0x178", "type": "u32", "choices": [0, "@sender"]},
+      {"addr": "@destructtarget", "offset": "0x198", "type": "u32", "choices": [0, "@sender"]},
+      {"addr": "@destructtarget", "offset": "0x19c", "type": "u32", "choices": [0, "@sender"]},
+      {"addr": "@destructtarget", "offset": "0x1a0", "type": "u32", "choices": [0, "@sender"]},
+      {"addr": "@destructtarget", "offset": "0x840", "type": "int", "choices": [-1, 0, 1]},
+      {"addr": "@destructtarget", "offset": "0x844", "type": "u8", "choices": [0, 1]}
+    ]
+  }
+}

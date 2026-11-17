@@ -1,0 +1,173 @@
+{
+  "function": "CCharacterSelectView_guess::CCharacterSelectView_guess",
+  "original": "0x004f116c",
+  "sources": [
+    "src/EverQuest/tu_142_CharacterSelect.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@cc",
+  "args": [
+    {
+      "name": "parent_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "cc": {
+      "size": "0x200",
+      "fill": "random",
+      "init": [
+        {"offset": "0x124", "u32": "@sidl"}
+      ]
+    },
+    "parent": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "sidl": {
+      "size": "0x64",
+      "fill": "zero"
+    },
+    "modeobj": {
+      "size": "0x164",
+      "fill": "random"
+    },
+    "vtbl": {
+      "size": "0xc4",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xc0", "u32": "@fn"}
+      ]
+    },
+    "fn": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "btn_tutorial": {
+      "size": "0x100",
+      "fill": "random",
+      "init": [
+        {"offset": "0", "u32": "@vtbl"}
+      ]
+    },
+    "btn_gohome": {
+      "size": "0x100",
+      "fill": "random",
+      "init": [
+        {"offset": "0", "u32": "@vtbl"}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "@sidl", "offset": "0x60", "u32": 16},
+    {"addr": "0x00923d66", "u8": 0},
+    {"addr": "0x0079ac74", "u32": 305419896}
+  ],
+  "callees": {
+    "0x00571e00": {
+      "name": "CXStr::CXStr(const char*)",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "this"
+    },
+    "0x005a3900": {
+      "name": "CSidlScreenWnd::CSidlScreenWnd(CXWnd*, const CXStr&)",
+      "conv": "thiscall",
+      "args": ["u32", "ignore"],
+      "ret": "this"
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep helper",
+      "conv": "thiscall",
+      "args": ["u32"]
+    },
+    "0x005a25b0": {
+      "name": "CSidlScreenWnd::CreateChildrenFromSidl",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x005a1e10": {
+      "name": "CSidlScreenWnd::GetChildItem",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": ["0x10000001", "0x10000002", "0x10000003", "0x10000004", "0x10000005", "@btn_tutorial", "@btn_gohome", "0x10000008", "0x10000009", "0x1000000a", "0x1000000b", "0x1000000c", "0x1000000d", "0x1000000e", "0x1000000f"]
+    },
+    "0x0060d5eb": {
+      "name": "sprintf",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr", "int"],
+      "ret": 0
+    },
+    "0x005a1d40": {
+      "name": "CSidlScreenWnd::EnableIniStorage",
+      "conv": "thiscall",
+      "args": ["int", "u32"]
+    },
+    "0x004f0c7f": {
+      "name": "CCharacterSelectView_guess::Initialize_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0060d071": {
+      "name": "operator new",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": "@modeobj"
+    },
+    "0x004fffd0": {
+      "name": "ExploreMode_guess::ExploreMode_guess(int)",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "this"
+    },
+    "@fn": {
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 0
+    }
+  },
+  "_survivors": "L754: the children zeroing loop is repeated at L759 and writes the same slots; any one-loop mutant (bounds, <=, >=, 9 slots, deleted body) leaves the other loop to produce identical memory, so the survivors are equivalent. L759: same loop, same reason. L760: deleted body of the repeated loop, the first loop writes the same zeros.",
+  "cases": [
+    {
+      "name": "sidl-present-dialog-off",
+      "args": ["@parent"]
+    },
+    {
+      "name": "sidl-absent-dialog-off",
+      "args": ["@parent"],
+      "memory": [
+        {"addr": "@cc", "offset": "0x124", "u32": 0}
+      ]
+    },
+    {
+      "name": "sidl-present-dialog-on",
+      "args": ["@parent"],
+      "memory": [
+        {"addr": "0x00923d66", "u8": 1}
+      ]
+    },
+    {
+      "name": "sidl-absent-dialog-on",
+      "args": ["@parent"],
+      "memory": [
+        {"addr": "0x00923d66", "u8": 1},
+        {"addr": "@cc", "offset": "0x124", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5181804,
+    "count": 100,
+    "args": [
+      {
+        "choices": ["@parent"]
+      }
+    ],
+    "memory": [
+      {"addr": "@cc", "offset": "0x124", "type": "ptr", "choices": [0, "@sidl"]},
+      {"addr": "0x00923d66", "type": "u8", "choices": [0, 1]},
+      {"addr": "@sidl", "offset": "0x60", "type": "u32", "choices": [0, 1, 2048, 305419896]}
+    ]
+  }
+}

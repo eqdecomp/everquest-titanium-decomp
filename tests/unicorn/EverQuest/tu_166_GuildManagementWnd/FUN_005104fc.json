@@ -1,0 +1,106 @@
+{
+  "function": "GuildMgmtWnd_guess::SetPersonalNote_guess",
+  "original": "0x005104fc",
+  "sources": ["src/EverQuest/tu_166_GuildManagementWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {"name": "key", "type": "cstr"},
+    {"name": "value", "type": "cstr"}
+  ],
+  "ret": "void",
+  "objects": {
+    "owner": {
+      "size": "0x40c",
+      "fill": "zero",
+      "init": [{"offset": "0x1e4", "u32": 2}, {"offset": "0x1f4", "u32": 0}]
+    },
+    "slots": {
+      "size": "0x10",
+      "fill": "zero",
+      "init": [
+        {"offset": "0x0", "u32": "@entry0"},
+        {"offset": "0x4", "u32": "@entry1"},
+        {"offset": "0x8", "u32": "@entry2"}
+      ]
+    },
+    "entry0": {"size": "0x148", "fill": "zero", "init": [{"offset": "0x4", "u32": 8738}]},
+    "entry1": {"size": "0x148", "fill": "zero", "init": [{"offset": "0x4", "u32": 8738}]},
+    "entry2": {"size": "0x148", "fill": "zero", "init": [{"offset": "0x4", "u32": 8738}]},
+    "newentry": {"size": "0x148", "fill": "zero"}
+  },
+  "memory": [],
+  "callees": {
+    "0x00574890": {"name": "FUN_00574890", "conv": "cdecl", "args": ["cstr"], "ret": 4369},
+    "0x004eb924": {
+      "name": "FUN_004eb924",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": ["@slots", "@slots+0x4", "@slots+0x8"]
+    },
+    "0x0060d071": {"name": "operator_new", "conv": "cdecl", "args": ["u32"], "ret": "@newentry"},
+    "0x0060ecbc": {"name": "FID_conflict:__time32", "conv": "cdecl", "args": ["u32"], "ret": 1712345678},
+    "0x0050319b": {"name": "FUN_0050319b", "conv": "thiscall", "args": ["int", "ignore"], "ret": 0}
+  },
+  "rewrite_aliases": {
+    "??2@YAPAXI@Z": "0x0060d071"
+  },
+  "cases": [
+    {"name": "new-empty-list", "args": ["abc", "xyz"]},
+    {"name": "zeros-new-empty-list", "args": ["", ""]},
+    {
+      "name": "match-first",
+      "args": ["abc", "xyz"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x1f4", "u32": 1},
+        {"addr": "@entry0", "offset": "0x4", "u32": 4369}
+      ]
+    },
+    {
+      "name": "match-second",
+      "args": ["abc", "xyz"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x1f4", "u32": 2},
+        {"addr": "@entry1", "offset": "0x4", "u32": 4369}
+      ]
+    },
+    {
+      "name": "match-third",
+      "args": ["abc", "xyz"],
+      "memory": [
+        {"addr": "@owner", "offset": "0x1f4", "u32": 3},
+        {"addr": "@entry2", "offset": "0x4", "u32": 4369}
+      ]
+    },
+    {
+      "name": "zeros-match-first",
+      "args": ["", ""],
+      "memory": [
+        {"addr": "@owner", "offset": "0x1f4", "u32": 1},
+        {"addr": "@entry0", "offset": "0x4", "u32": 4369}
+      ]
+    },
+    {
+      "name": "no-match-two",
+      "args": ["abc", "xyz"],
+      "memory": [{"addr": "@owner", "offset": "0x1f4", "u32": 2}]
+    },
+    {
+      "name": "no-match-three",
+      "args": ["abc", "xyz"],
+      "memory": [{"addr": "@owner", "offset": "0x1f4", "u32": 3}]
+    }
+  ],
+  "fuzz": {
+    "seed": 5309692,
+    "count": 100,
+    "args": [{}, {}],
+    "memory": [
+      {"addr": "@owner", "offset": "0x1f4", "type": "int", "choices": [0, 1, 2, 3]},
+      {"addr": "@owner", "offset": "0x1e4", "type": "int", "choices": [0, 1, 2, 3]},
+      {"addr": "@entry0", "offset": "0x4", "type": "int", "choices": [4369, 8738]},
+      {"addr": "@entry1", "offset": "0x4", "type": "int", "choices": [4369, 8738]},
+      {"addr": "@entry2", "offset": "0x4", "type": "int", "choices": [4369, 8738]}
+    ]
+  }
+}

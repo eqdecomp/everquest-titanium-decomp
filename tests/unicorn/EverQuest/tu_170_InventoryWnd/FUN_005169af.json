@@ -1,0 +1,276 @@
+{
+  "function": "CInventoryWndView_guess::FillEvolvingItemList_guess",
+  "original": "0x005169af",
+  "sources": [
+    "src/EverQuest/tu_170_InventoryWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@clientobject",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "clientobject": {
+      "size": "0x268",
+      "fill": "random",
+      "init": [
+        { "offset": "0x238", "u32": "@itemlist" }
+      ]
+    },
+    "itemlist": {
+      "size": "0x300",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x0", "u32": "@listvt" }
+      ]
+    },
+    "listvt": {
+      "size": "0x140",
+      "fill": "zero",
+      "init": [
+        { "offset": "0x100", "u32": "@fn_restore" },
+        { "offset": "0x130", "u32": "@fn_begin" },
+        { "offset": "0x138", "u32": "@fn_end" }
+      ]
+    },
+    "fn_restore": { "size": "0x4" },
+    "fn_begin": { "size": "0x4" },
+    "fn_end": { "size": "0x4" },
+    "root": {
+      "size": "0x10",
+      "fill": "zero"
+    },
+    "entry": {
+      "size": "0x80",
+      "fill": "zero"
+    },
+    "nameproc": { "size": "0x4", "fill": "zero" },
+    "strtable": { "size": "0x4", "fill": "zero" },
+    "str_name": { "size": "0x20", "fill": "zero" },
+    "str_desc": { "size": "0x20", "fill": "zero" },
+    "str_proc": { "size": "0x20", "fill": "zero" },
+    "str_status": { "size": "0x20", "fill": "zero" }
+  },
+  "memory": [
+    { "addr": "0x00905d00", "u32": "@root" },
+    { "addr": "0x00991910", "u32": "@nameproc" },
+    { "addr": "0x00905cb0", "u32": "@strtable" },
+    { "addr": "@str_name", "cstr": "Sword of Doom" },
+    { "addr": "@str_desc", "cstr": "A short blade" },
+    { "addr": "@str_proc", "cstr": "Processed name" },
+    { "addr": "@str_status", "cstr": "Status text" },
+    { "addr": "@entry", "offset": "0x60", "u8": 1 },
+    { "addr": "@entry", "offset": "0x68", "u32": 42 },
+    { "addr": "@entry", "offset": "0x70", "f64": 50.0 },
+    { "addr": "@entry", "offset": "0x78", "u8": 1 },
+    { "addr": "@itemlist", "offset": "0x10c", "u32": 5 },
+    { "addr": "@itemlist", "offset": "0x11c", "u32": 2 }
+  ],
+  "callees": {
+    "0x00597be0": {
+      "name": "CListWnd::GetCurSel",
+      "conv": "thiscall",
+      "args": [],
+      "ret": -1
+    },
+    "0x00597ed0": {
+      "name": "CListWnd::GetItemData",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": [7, 9, 7, 4]
+    },
+    "0x0041de16": {
+      "name": "ItemArray::Get",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": "@entry"
+    },
+    "0x00571e00": {
+      "name": "CXStr::CXStr",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "keep"
+    },
+    "0x00571d00": {
+      "name": "CXStr::FreeRep",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x0059b9d0": {
+      "name": "CListWnd::AddString",
+      "conv": "thiscall",
+      "args": ["ignore", "u32", "u32", "u32"],
+      "ret": 1
+    },
+    "0x005e0f60": {
+      "name": "ItemEntry::GetName",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@str_name"
+    },
+    "0x005e0ec0": {
+      "name": "ItemEntry::GetDescription",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@str_desc"
+    },
+    "0x004ffbe9": {
+      "name": "NameProcessor::Process",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "@str_proc"
+    },
+    "0x0059b2e0": {
+      "name": "CListText::SetItemText_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "cstr"],
+      "ret": 0
+    },
+    "0x0059b360": {
+      "name": "CListWnd::SetItemText",
+      "conv": "thiscall",
+      "args": ["int", "int", "ignore"],
+      "ret": 0
+    },
+    "0x006220e9": {
+      "name": "_itoa",
+      "conv": "cdecl",
+      "args": ["int", "ignore", "int"],
+      "ret": "arg1"
+    },
+    "0x005738b0": {
+      "name": "FormatString_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr"],
+      "varargs": "printf"
+    },
+    "0x005dfa00": {
+      "name": "StringTable::getString",
+      "conv": "thiscall",
+      "args": ["u32", "u32"],
+      "ret": "@str_status"
+    },
+    "0x00571fc0": {
+      "name": "CXStr::operator=",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "this"
+    },
+    "0x00597c20": {
+      "name": "CListWnd::SetCurSel",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    },
+    "@fn_begin": {
+      "name": "CListWnd::BeginUpdate",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_end": {
+      "name": "CListWnd::EndUpdate",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_restore": {
+      "name": "CListWnd::RestorePosition",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9"
+  },
+  "coverage_ok": {
+    "00516A62-00516A6D": "CXStr temp dtor FreeRep branch: the scripted CXStr ctor cannot store a non-null rep into the stack temporary (write to this is not expressible), so the Ptr != 0 path never runs",
+    "00516AC4-00516ACF": "same CXStr temp dtor FreeRep branch (description temporary)",
+    "00516B10-00516B1B": "same CXStr temp dtor FreeRep branch (value temporary)",
+    "00516B9A-00516BA5": "same CXStr temp dtor FreeRep branch (percentage temporary)"
+  },
+  "cases": [
+    {
+      "name": "null_list_does_nothing",
+      "args": [],
+      "memory": [
+        { "addr": "@clientobject", "offset": "0x238", "u32": 0 }
+      ]
+    },
+    {
+      "name": "no_selection_visible_entry_special",
+      "args": []
+    },
+    {
+      "name": "selection_found_second_row",
+      "args": [],
+      "memory": [
+        { "addr": "@itemlist", "offset": "0x11c", "u32": 3 }
+      ],
+      "callees": {
+        "0x00597be0": { "name": "CListWnd::GetCurSel", "conv": "thiscall", "args": [], "ret": 2 }
+      }
+    },
+    {
+      "name": "selection_not_in_list",
+      "args": [],
+      "callees": {
+        "0x00597be0": { "name": "CListWnd::GetCurSel", "conv": "thiscall", "args": [], "ret": 0 },
+        "0x00597ed0": { "name": "CListWnd::GetItemData", "conv": "thiscall", "args": ["int"], "ret": [3, 9, 8, 4] }
+      }
+    },
+    {
+      "name": "entry_null_no_rows",
+      "args": [],
+      "memory": [
+        { "addr": "@itemlist", "offset": "0x11c", "u32": 0 }
+      ],
+      "callees": {
+        "0x0041de16": { "name": "ItemArray::Get", "conv": "thiscall", "args": ["int"], "ret": 0 }
+      }
+    },
+    {
+      "name": "entry_invisible_skipped",
+      "args": [],
+      "memory": [
+        { "addr": "@entry", "offset": "0x60", "u8": 0 }
+      ]
+    },
+    {
+      "name": "special_zero_uses_empty_string",
+      "args": [],
+      "memory": [
+        { "addr": "@entry", "offset": "0x78", "u8": 0 }
+      ]
+    },
+    {
+      "name": "negative_percent_and_zero_value",
+      "args": [],
+      "memory": [
+        { "addr": "@entry", "offset": "0x70", "f64": -5.5 },
+        { "addr": "@entry", "offset": "0x68", "u32": 0 }
+      ]
+    },
+    {
+      "name": "restore_position_nine",
+      "args": [],
+      "memory": [
+        { "addr": "@itemlist", "offset": "0x10c", "u32": 9 }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 5169175,
+    "count": 120,
+    "args": [],
+    "memory": [
+      { "addr": "@entry", "offset": "0x60", "type": "u8", "choices": [0, 1] },
+      { "addr": "@entry", "offset": "0x68", "type": "int", "range": [-5, 1000] },
+      { "addr": "@entry", "offset": "0x70", "type": "double", "range": [-10.0, 120.0] },
+      { "addr": "@entry", "offset": "0x78", "type": "u8", "choices": [0, 1, 2] },
+      { "addr": "@itemlist", "offset": "0x11c", "type": "int", "range": [0, 3] },
+      { "addr": "@itemlist", "offset": "0x10c", "type": "int", "range": [-3, 9] }
+    ]
+  }
+}

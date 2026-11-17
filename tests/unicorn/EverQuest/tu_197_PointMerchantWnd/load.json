@@ -1,0 +1,281 @@
+{
+  "function": "Applier_guess::load_guess",
+  "original": "0x0054620c",
+  "sources": [
+    "src/EverQuest/tu_197_PointMerchantWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@applier",
+  "args": [
+    {
+      "name": "arg_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "applier": {
+      "size": "0x1E8",
+      "fill": "random",
+      "init": [
+        {"offset": "0x1B0", "u32": "@list"},
+        {"offset": "0x1B8", "u32": "@selection"}
+      ]
+    },
+    "list": {"size": "0x200", "fill": "random"},
+    "selection": {"size": "0x140", "fill": "random"},
+    "clientstate": {"size": "0x280", "fill": "random"},
+    "rows": {"size": "0xFA0", "fill": "zero"},
+    "rowpool": {"size": "0x60", "fill": "zero"},
+    "text_a": {"size": "0x20", "fill": "zero"},
+    "text_b": {"size": "0x20", "fill": "zero"},
+    "name1": {"size": "0x40", "fill": "zero"},
+    "name2": {"size": "0x40", "fill": "zero"},
+    "empty": {"size": "0x40", "fill": "zero"},
+    "rep": {"size": "0x100", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905CE4", "u32": "@clientstate"},
+    {"addr": "@clientstate", "offset": "0x252", "u8": 1},
+    {"addr": "@clientstate", "offset": "0x260", "u32": 128},
+    {"addr": "@selection", "offset": "0x128", "u8": 1},
+    {"addr": "@text_a", "cstr": "Bow"},
+    {"addr": "@text_b", "cstr": "Sword"},
+    {"addr": "@name1", "cstr": "Bow"},
+    {"addr": "@name2", "cstr": "Sword"}
+  ],
+  "callees": {
+    "0x005454b8": {
+      "name": "clear_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0060f317": {
+      "name": "_malloc",
+      "conv": "cdecl",
+      "args": ["u32"],
+      "ret": ["@rows", "@rowpool"]
+    },
+    "0x00576d80": {
+      "name": "readNumber_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "int"],
+      "ret": [1, 7, 5, 32, 0, 0, -1, -1]
+    },
+    "0x00576e00": {
+      "name": "readText_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "int"],
+      "ret": ["@name1", "@empty"]
+    },
+    "0x00571e00": {
+      "name": "CXStr_ctor_guess",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "passthrough": true
+    },
+    "0x0059b9d0": {
+      "name": "AddString_guess",
+      "conv": "thiscall",
+      "args": ["ignore", "int", "int", "int"]
+    },
+    "kernel32.dll!HeapAlloc": {
+      "conv": "stdcall",
+      "args": ["u32", "u32", "u32"],
+      "ret": "@rep"
+    },
+    "0x00571d00": {
+      "name": "FreeRep_guess",
+      "conv": "thiscall",
+      "args": ["u32"]
+    },
+    "0x00571fc0": {
+      "name": "CXStr_assign_guess",
+      "conv": "thiscall",
+      "args": ["cstr"]
+    },
+    "0x0059b360": {
+      "name": "SetItemText_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "ignore"]
+    },
+    "0x00545701": {
+      "name": "dispatch5_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": ["@text_a"]
+    },
+    "0x005738b0": {
+      "name": "format_guess",
+      "conv": "cdecl",
+      "args": ["ignore", "cstr", "int"]
+    },
+    "0x00598620": {
+      "name": "SetItemData_guess",
+      "conv": "thiscall",
+      "args": ["int", "int"]
+    },
+    "0x0054571a": {
+      "name": "dispatch11_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [0]
+    },
+    "0x00545731": {
+      "name": "dispatch3_guess",
+      "conv": "thiscall",
+      "args": ["int"],
+      "ret": [0]
+    },
+    "0x0059b3e0": {
+      "name": "setColor_guess",
+      "conv": "thiscall",
+      "args": ["int", "int", "u32"]
+    },
+    "0x00545eee": {
+      "name": "notifyOption_guess",
+      "conv": "thiscall",
+      "args": ["int", "u8", "u8"]
+    }
+  },
+  "rewrite_aliases": {
+    "_malloc": "0x0060f317"
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [1]
+    },
+    {
+      "name": "list_null",
+      "args": [1],
+      "memory": [{"addr": "@applier", "offset": "0x1B0", "u32": 0}]
+    },
+    {
+      "name": "no_rows",
+      "args": [1],
+      "callees": {
+        "0x00576d80": {"name": "readNumber_guess", "conv": "cdecl", "args": ["ignore", "int"], "ret": [1]},
+        "0x00576e00": {"name": "readText_guess", "conv": "cdecl", "args": ["ignore", "int"], "ret": ["@empty"]}
+      }
+    },
+    {
+      "name": "two_rows",
+      "args": [1],
+      "callees": {
+        "0x00576d80": {"name": "readNumber_guess", "conv": "cdecl", "args": ["ignore", "int"],
+                       "ret": [1, 7, 5, 32, 0, 0, -1, -1, 8, 6, 16, 0, 0, -1, -1]},
+        "0x00576e00": {"name": "readText_guess", "conv": "cdecl", "args": ["ignore", "int"],
+                       "ret": ["@name1", "@name2", "@empty"]},
+        "0x00545701": {"name": "dispatch5_guess", "conv": "thiscall", "args": ["int", "int"],
+                       "ret": ["@text_a", "@text_b"]},
+        "0x0054571a": {"name": "dispatch11_guess", "conv": "thiscall", "args": [], "ret": [0, 0]},
+        "0x00545731": {"name": "dispatch3_guess", "conv": "thiscall", "args": ["int"], "ret": [0, 0]}
+      }
+    },
+    {
+      "name": "no_color",
+      "args": [1],
+      "callees": {
+        "0x0054571a": {"name": "dispatch11_guess", "conv": "thiscall", "args": [], "ret": [100]},
+        "0x00545731": {"name": "dispatch3_guess", "conv": "thiscall", "args": ["int"], "ret": [100]}
+      }
+    },
+    {
+      "name": "color_second_clause",
+      "args": [1],
+      "callees": {
+        "0x0054571a": {"name": "dispatch11_guess", "conv": "thiscall", "args": [], "ret": [100]},
+        "0x00545731": {"name": "dispatch3_guess", "conv": "thiscall", "args": ["int"], "ret": [0]}
+      }
+    },
+    {
+      "name": "flag54_zero",
+      "args": [1],
+      "callees": {
+        "0x00576d80": {"name": "readNumber_guess", "conv": "cdecl", "args": ["ignore", "int"],
+                       "ret": [1, 7, 5, 32, 0, 0, 0, -1]}
+      }
+    },
+    {
+      "name": "flag58_zero",
+      "args": [1],
+      "callees": {
+        "0x00576d80": {"name": "readNumber_guess", "conv": "cdecl", "args": ["ignore", "int"],
+                       "ret": [1, 7, 5, 32, 0, 0, -1, 0]}
+      }
+    },
+    {
+      "name": "class_82",
+      "args": [1],
+      "memory": [{"addr": "@clientstate", "offset": "0x260", "u32": 130}]
+    },
+    {
+      "name": "class_14a",
+      "args": [1],
+      "memory": [{"addr": "@clientstate", "offset": "0x260", "u32": 330}]
+    },
+    {
+      "name": "class_other",
+      "args": [1],
+      "memory": [{"addr": "@clientstate", "offset": "0x260", "u32": 3}]
+    },
+    {
+      "name": "selection_null",
+      "args": [1],
+      "memory": [{"addr": "@applier", "offset": "0x1B8", "u32": 0}]
+    },
+    {
+      "name": "selection_value0",
+      "args": [1],
+      "memory": [{"addr": "@selection", "offset": "0x128", "u8": 0}]
+    },
+    {
+      "name": "bit_class_80",
+      "args": [1],
+      "memory": [{"addr": "@clientstate", "offset": "0x260", "u32": 128}],
+      "callees": {"0x00576d80": {"name": "readNumber_guess", "conv": "cdecl", "args": ["ignore", "int"],
+                                 "ret": [1, 7, 5, 32, 0, 0, 4096, -1]}}
+    },
+    {
+      "name": "bit_class_82",
+      "args": [1],
+      "memory": [{"addr": "@clientstate", "offset": "0x260", "u32": 130}],
+      "callees": {"0x00576d80": {"name": "readNumber_guess", "conv": "cdecl", "args": ["ignore", "int"],
+                                 "ret": [1, 7, 5, 32, 0, 0, 8192, -1]}}
+    },
+    {
+      "name": "bit_class_14a",
+      "args": [1],
+      "memory": [{"addr": "@clientstate", "offset": "0x260", "u32": 330}],
+      "callees": {"0x00576d80": {"name": "readNumber_guess", "conv": "cdecl", "args": ["ignore", "int"],
+                                 "ret": [1, 7, 5, 32, 0, 0, 16384, -1]}}
+    },
+    {
+      "name": "bit_class_other",
+      "args": [1],
+      "memory": [{"addr": "@clientstate", "offset": "0x260", "u32": 3}],
+      "callees": {"0x00576d80": {"name": "readNumber_guess", "conv": "cdecl", "args": ["ignore", "int"],
+                                 "ret": [1, 7, 5, 32, 0, 0, 4, -1]}}
+    },
+    {
+      "name": "race_2_bit",
+      "args": [1],
+      "memory": [{"addr": "@clientstate", "offset": "0x252", "u8": 2}],
+      "callees": {"0x00576d80": {"name": "readNumber_guess", "conv": "cdecl", "args": ["ignore", "int"],
+                                 "ret": [1, 7, 5, 32, 0, 0, -1, 2]}}
+    }
+  ],
+  "fuzz": {
+    "seed": 5530124,
+    "count": 100,
+    "args": [
+      {"range": [0, 3]}
+    ],
+    "memory": [
+      {"addr": "@clientstate", "offset": "0x260", "type": "int", "choices": [128, 130, 330, 3, 7]},
+      {"addr": "@clientstate", "offset": "0x252", "type": "u8", "range": [1, 8]},
+      {"addr": "@selection", "offset": "0x128", "type": "u8", "range": [0, 255]}
+    ]
+  }
+}

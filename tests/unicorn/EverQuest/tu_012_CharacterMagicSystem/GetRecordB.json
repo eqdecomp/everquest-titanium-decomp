@@ -1,0 +1,61 @@
+{
+  "function": "MagicRecordTable_guess::GetRecordB_guess",
+  "original": "0x0040e687",
+  "sources": [
+    "src/EverQuest/tu_012_CharacterMagicSystem.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@magicrecordtable",
+  "args": [
+    {
+      "name": "index_guess",
+      "type": "u32"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "magicrecordtable": {
+      "size": "0x550",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {},
+  "_survivors": "L1223: `>=` -> `>` and `35` -> `36` only change behaviour at index 35, where the original hits the int3 trap; a case cannot expect a trap, and no caller passes 35; L1224: deleting the trap statement, same reason",
+  "coverage_ok": {
+    "0040E690-0040E691": "bounds trap (int3) for index >= 35; the fixture only runs valid indexes"
+  },
+  "cases": [
+    {
+      "name": "first",
+      "args": [
+        0
+      ]
+    },
+    {
+      "name": "typical",
+      "args": [
+        1
+      ]
+    },
+    {
+      "name": "last",
+      "args": [
+        34
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4253319,
+    "count": 100,
+    "args": [
+      {
+        "range": [
+          0,
+          34
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

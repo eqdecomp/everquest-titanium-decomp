@@ -1,0 +1,656 @@
+{
+  "function": "DispatchRegion_guess::Handle_guess",
+  "original": "0x00530f6d",
+  "sources": [
+    "src/EverQuest/tu_185_MailWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@dispatchregion",
+  "args": [
+    {
+      "name": "token_guess",
+      "type": "int"
+    },
+    {
+      "name": "request_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "dispatchregion": {
+      "size": "0x58",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x18",
+          "u32": "@items_first"
+        },
+        {
+          "offset": "0x34",
+          "u32": "@target_first"
+        },
+        {
+          "offset": "0x38",
+          "u32": "@items_second"
+        },
+        {
+          "offset": "0x54",
+          "u32": "@target_second"
+        }
+      ]
+    },
+    "request": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 1
+        },
+        {
+          "offset": "0x4",
+          "u32": "@data"
+        },
+        {
+          "offset": "0x8",
+          "u32": 1
+        }
+      ]
+    },
+    "data": {
+      "size": "0xc",
+      "fill": "random",
+      "init": [
+        {
+          "offset": "0x0",
+          "u32": 42
+        },
+        {
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    },
+    "items_first": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "items_second": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "target_first": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "target_second": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "service": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "value": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "result": {
+      "size": "0x4",
+      "fill": "random"
+    },
+    "value_text": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x12345678"
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@service"
+    },
+    {
+      "addr": "0x0063f53f",
+      "cstr": ""
+    },
+    {
+      "addr": "0x00658534",
+      "from_image": "0x00658534",
+      "image_size": 5
+    },
+    {
+      "addr": "0x006584f0",
+      "cstr": "fallback"
+    }
+  ],
+  "callees": {
+    "0x00495250": {
+      "name": "DispatchService_call_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": [
+        42,
+        "@value",
+        "@result",
+        "@result",
+        "@result"
+      ]
+    },
+    "0x0052fab0": {
+      "name": "Prepare_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0052fbb7": {
+      "name": "Refresh_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x005309d5": {
+      "name": "Rebuild_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0052f636": {
+      "name": "FirstPass_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0052f741": {
+      "name": "SecondPass_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x00597be0": {
+      "name": "Current_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00597ed0": {
+      "name": "At_guess",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 42
+    },
+    "0x00426a9f": {
+      "name": "Value_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@value_text"
+    },
+    "0x00403631": {
+      "name": "basic_string_ctor",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x0042886c": {
+      "name": "Apply_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore",
+        "ignore"
+      ],
+      "ret": 0
+    },
+    "0x0052f0e2": {
+      "name": "Show_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "ptr",
+        "ignore",
+        "ignore",
+        "bool"
+      ]
+    },
+    "0x00428c37": {
+      "name": "Check_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "int",
+        "int"
+      ]
+    },
+    "0x0040291e": {
+      "name": "_Tidy",
+      "conv": "thiscall",
+      "args": [
+        "bool",
+        "u32"
+      ]
+    },
+    "0x00571e00": {
+      "name": "CXStr_ctor",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ]
+    },
+    "0x005a8b00": {
+      "name": "Set_guess",
+      "conv": "thiscall",
+      "args": [
+        "ignore",
+        "int",
+        "int"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "global disabled",
+      "args": [
+        42,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "0x00988df0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "token mismatch",
+      "args": [
+        43,
+        "@request"
+      ]
+    },
+    {
+      "name": "null request",
+      "args": [
+        42,
+        0
+      ]
+    },
+    {
+      "name": "action two",
+      "args": [
+        42,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x0",
+          "u32": 2
+        }
+      ]
+    },
+    {
+      "name": "action three",
+      "args": [
+        42,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x0",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "action zero",
+      "args": [
+        42,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "action one null data",
+      "args": [
+        42,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x4",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "first list null",
+      "args": [
+        42,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "0x00988df0",
+          "u32": "@service"
+        },
+        {
+          "addr": "@request",
+          "offset": "0x0",
+          "u32": 1
+        },
+        {
+          "addr": "@dispatchregion",
+          "offset": "0x18",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "first target null",
+      "args": [
+        42,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x0",
+          "u32": 1
+        },
+        {
+          "addr": "@dispatchregion",
+          "offset": "0x34",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "negative current",
+      "args": [
+        42,
+        "@request"
+      ],
+      "callees": {
+        "0x00597be0": {
+          "name": "Current_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": -1
+        }
+      }
+    },
+    {
+      "name": "item mismatch",
+      "args": [
+        42,
+        "@request"
+      ],
+      "callees": {
+        "0x00597ed0": {
+          "name": "At_guess",
+          "conv": "thiscall",
+          "args": [
+            "u32"
+          ],
+          "ret": 43
+        }
+      }
+    },
+    {
+      "name": "requesting status",
+      "args": [
+        42,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x8",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "unavailable status",
+      "args": [
+        42,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "mode two show and check",
+      "args": [
+        42,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x8",
+          "u32": 2
+        },
+        {
+          "addr": "@data",
+          "offset": "0x8",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "mode two no value",
+      "args": [
+        42,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x8",
+          "u32": 2
+        },
+        {
+          "addr": "@data",
+          "offset": "0x8",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x00426a9f": {
+          "name": "Value_guess",
+          "conv": "thiscall",
+          "args": [
+            "int"
+          ],
+          "ret": 0
+        }
+      }
+    },
+    {
+      "name": "mode two other type",
+      "args": [
+        42,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x8",
+          "u32": 2
+        },
+        {
+          "addr": "@data",
+          "offset": "0x8",
+          "u32": 2
+        }
+      ]
+    },
+    {
+      "name": "second list mode two",
+      "args": [
+        42,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x8",
+          "u32": 2
+        },
+        {
+          "addr": "@data",
+          "offset": "0x8",
+          "u32": 3
+        }
+      ]
+    },
+    {
+      "name": "nonempty resolved body",
+      "args": [
+        42,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@request",
+          "offset": "0x8",
+          "u32": 2
+        },
+        {
+          "addr": "@data",
+          "offset": "0x8",
+          "u32": 2
+        }
+      ],
+      "callees": {
+        "0x00495250": {
+          "name": "DispatchService_call_guess",
+          "conv": "thiscall",
+          "args": [],
+          "ret": [
+            42,
+            "@value",
+            "@result",
+            "@result",
+            "@result"
+          ],
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 20,
+              "hex": "01000000",
+              "call": 2
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5443437,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          0,
+          41,
+          42,
+          43
+        ]
+      },
+      {
+        "choices": [
+          0,
+          "@request"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@request",
+        "offset": "0x0",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "addr": "@request",
+        "offset": "0x4",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@data"
+        ]
+      },
+      {
+        "addr": "@request",
+        "offset": "0x8",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "addr": "@data",
+        "offset": "0x0",
+        "type": "u32",
+        "choices": [
+          40,
+          42,
+          43
+        ]
+      },
+      {
+        "addr": "@data",
+        "offset": "0x8",
+        "type": "u32",
+        "choices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  }
+}

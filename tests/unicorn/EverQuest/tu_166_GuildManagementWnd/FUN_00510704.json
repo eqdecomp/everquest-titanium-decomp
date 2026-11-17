@@ -1,0 +1,555 @@
+{
+  "function": "GuildMgmtWnd_guess::WndNotification_guess",
+  "original": "0x00510704",
+  "sources": [
+    "src/EverQuest/tu_166_GuildManagementWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner",
+  "args": [
+    {
+      "name": "sender",
+      "type": "ptr"
+    },
+    {
+      "name": "message",
+      "type": "u32"
+    },
+    {
+      "name": "data",
+      "type": "ptr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "owner": {
+      "size": "0x40c",
+      "fill": "random"
+    },
+    "sender": {
+      "size": "0x200",
+      "fill": "random"
+    },
+    "data": {
+      "size": "0x100",
+      "fill": "random"
+    },
+    "list": {
+      "size": "0x130",
+      "fill": "random"
+    },
+    "member": {
+      "size": "0x274",
+      "fill": "random"
+    },
+    "control0": {
+      "size": "0x110",
+      "fill": "random",
+      "init": [{"offset": "0", "u32": "@control_vtable"}]
+    },
+    "control1": {
+      "size": "0x110",
+      "fill": "random",
+      "init": [{"offset": "0x10c", "u32": 37}]
+    },
+    "control_vtable": {
+      "size": "0x104",
+      "fill": "random",
+      "init": [{"offset": "0x100", "u32": "@fn_control"}]
+    },
+    "fn_control": {
+      "size": "0x1",
+      "fill": "zero"
+    },
+    "fn_text_130_a": {"size": "0x1", "fill": "zero"},
+    "fn_text_130_b": {"size": "0x1", "fill": "zero"},
+    "fn_text_130_c": {"size": "0x1", "fill": "zero"},
+    "fn_text_fc_a": {"size": "0x1", "fill": "zero"},
+    "fn_text_fc_b": {"size": "0x1", "fill": "zero"},
+    "text_receiver": {
+      "size": "0x4",
+      "fill": "random",
+      "init": [{"offset": "0", "u32": "@text_vtable"}]
+    },
+    "text_vtable": {
+      "size": "0x134",
+      "fill": "random",
+      "init": [
+        {"offset": "0xfc", "u32": "@fn_text_fc_a"},
+        {"offset": "0x130", "u32": "@fn_text_130_a"}
+      ]
+    },
+    "copy_buffer": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "selection": {
+      "size": "0x28c",
+      "fill": "random"
+    },
+    "section": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {"addr": "@owner", "offset": "0x15c", "u32": 0},
+    {"addr": "@owner", "offset": "0x168", "u32": 0},
+    {"addr": "@owner", "offset": "0x16c", "u32": 0},
+    {"addr": "@owner", "offset": "0x174", "u32": 0},
+    {"addr": "@owner", "offset": "0x178", "u32": 0},
+    {"addr": "@owner", "offset": "0x180", "u32": 0},
+    {"addr": "@owner", "offset": "0x184", "u32": 0},
+    {"addr": "@owner", "offset": "0x188", "u32": 0},
+    {"addr": "@owner", "offset": "0x18c", "u32": 0},
+    {"addr": "@owner", "offset": "0x190", "u32": 0},
+    {"addr": "@owner", "offset": "0x194", "u32": 0},
+    {"addr": "@owner", "offset": "0x198", "u32": 0},
+    {"addr": "@owner", "offset": "0x19c", "u32": 0},
+    {"addr": "@owner", "offset": "0x1a0", "u32": 0},
+    {"addr": "@owner", "offset": "0x1a4", "u32": 0},
+    {"addr": "@owner", "offset": "0x1a8", "u32": 0},
+    {"addr": "@owner", "offset": "0x1ac", "u32": 0},
+    {"addr": "@owner", "offset": "0x1b4", "u32": 0},
+    {"addr": "@owner", "offset": "0x1b8", "u32": 0},
+    {"addr": "@owner", "offset": "0x1c0", "u32": 0},
+    {"addr": "@owner", "offset": "0x1c4", "u8": 0},
+    {"addr": "@owner", "offset": "0x1dc", "u32": 0},
+    {"addr": "@owner", "offset": "0x1e0", "u32": 0},
+    {"addr": "@owner", "offset": "0x400", "u32": 0},
+    {"addr": "@owner", "offset": "0x404", "u32": 0},
+    {"addr": "@owner", "offset": "0x408", "u32": 0},
+    {"addr": "@section", "offset": "0", "cstr": "Guild"},
+    {"addr": "0x0079ac74", "u32": "0xcafebabe"},
+    {"addr": "0x00905ce4", "u32": "@selection"}
+  ],
+  "callees": {
+    "0x005a2230": {
+      "name": "FUN_005a2230",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "u32",
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x0050ef1b": {
+      "name": "DumpList_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "cstr"
+      ]
+    },
+    "0x005101b6": {
+      "name": "SortMembers_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "char"
+      ]
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x00572300": {
+      "name": "FUN_00572300",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@section"
+    },
+    "0x0060bf20": {
+      "name": "FUN_0060bf20",
+      "conv": "cdecl",
+      "args": [
+        "cstr",
+        "cstr",
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x00466980": {
+      "name": "do_guildleader_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "ignore"
+      ]
+    },
+    "0x00466955": {
+      "name": "do_guildremove_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "ignore"
+      ]
+    },
+    "0x0040ae42": {
+      "name": "SendGuildBankerFlags_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "u32",
+        "u8"
+      ]
+    },
+    "0x00466918": {
+      "name": "do_guildinvite_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "ignore"
+      ]
+    },
+    "0x0040ad67": {
+      "name": "SendGuildDemote_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x00571f70": {
+      "name": "FUN_00571f70",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x00571d00": {
+      "name": "FUN_00571d00",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x0040acbf": {
+      "name": "SendGuildPublicNote_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "cstr"
+      ]
+    },
+    "0x0060e985": {
+      "name": "operator_new",
+      "conv": "cdecl",
+      "args": [
+        "u32"
+      ],
+      "ret": "@copy_buffer"
+    },
+    "0x004666e3": {
+      "name": "do_guildmotd_guess",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ]
+    },
+    "0x0060d682": {
+      "name": "_free",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ]
+    },
+    "0x005104fc": {
+      "name": "SetPersonalNote_guess",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "cstr"
+      ]
+    },
+    "0x0050f9d2": {
+      "name": "UpdateNoteRow_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int"
+      ]
+    },
+    "0x0050f414": {
+      "name": "SavePersonalNotes_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0040ab34": {
+      "name": "FUN_0040ab34",
+      "conv": "thiscall",
+      "args": [
+        "cstr",
+        "int"
+      ]
+    },
+    "0x00597be0": {
+      "name": "FUN_00597be0",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "0x00597ed0": {
+      "name": "FUN_00597ed0",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": "@member"
+    },
+    "0x0050ea43": {
+      "name": "FindMemberRow_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    },
+    "0x00597c20": {
+      "name": "FUN_00597c20",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x00571e00": {
+      "name": "FUN_00571e00",
+      "conv": "thiscall",
+      "args": [
+        "cstr"
+      ],
+      "ret": 0
+    },
+    "0x005bb140": {
+      "name": "FUN_005bb140",
+      "conv": "thiscall",
+      "args": [
+        "u32"
+      ],
+      "ret": 0
+    },
+    "0x0050e2d2": {
+      "name": "UpdateButtons_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 0
+    },
+    "@fn_control": {
+      "name": "control_dispatch",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "@fn_text_130_a": {
+      "name": "text_slot_130_a",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [{"arg": 0, "offset": 0, "hex": "01000000"}]
+    },
+    "@fn_text_130_b": {
+      "name": "text_slot_130_b",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "@fn_text_130_c": {
+      "name": "text_slot_130_c",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "@fn_text_fc_a": {
+      "name": "text_slot_fc_a",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    },
+    "@fn_text_fc_b": {
+      "name": "text_slot_fc_b",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0
+    }
+  },
+  "rewrite_aliases": {
+    "_sprintf_guess": "0x0060d5eb"
+  },
+  "cases": [
+    {"name": "unmatched message 1", "args": ["@sender", 1, "@data"]},
+    {"name": "subwindow controls", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x1b8", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x400", "u32": "@control0"},
+      {"addr": "@owner", "offset": "0x404", "u32": "@control1"},
+      {"addr": "@data", "offset": "0", "u32": 0},
+      {"addr": "@data", "offset": "4", "u32": 1}
+    ]},
+    {"name": "member list selected with zero controls", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x16c", "u32": "@sender"},
+      {"addr": "@sender", "offset": "0x11c", "u32": 1},
+      {"addr": "@member", "offset": "0x10", "cstr": "Alice"},
+      {"addr": "@member", "offset": "0x64", "cstr": "Public"},
+      {"addr": "@member", "offset": "0x164", "cstr": "Personal"}
+    ]},
+    {"name": "member list banker low bit clear", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x16c", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x190", "u32": "@sender"},
+      {"addr": "@sender", "offset": "0x11c", "u32": 1},
+      {"addr": "@member", "offset": "0x54", "u32": 2},
+      {"addr": "@member", "offset": "0x10", "cstr": "Alice"}
+    ]},
+    {"name": "member list control update", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x16c", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x15c", "u32": 1},
+      {"addr": "@owner", "offset": "0x400", "u32": "@control0"},
+      {"addr": "@sender", "offset": "0x11c", "u32": 1},
+      {"addr": "@member", "offset": "0x10", "cstr": "Alice"},
+      {"addr": "@member", "offset": "0x64", "cstr": "Public"},
+      {"addr": "@member", "offset": "0x164", "cstr": "Personal"}
+    ]},
+    {"name": "member list public receiver", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x16c", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x198", "u32": "@text_receiver"},
+      {"addr": "@sender", "offset": "0x11c", "u32": 1},
+      {"addr": "@member", "offset": "0x10", "cstr": "Alice"},
+      {"addr": "@member", "offset": "0x64", "cstr": "Public"}
+    ]},
+    {"name": "member list personal receiver", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x16c", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x1a0", "u32": "@text_receiver"},
+      {"addr": "@sender", "offset": "0x11c", "u32": 1},
+      {"addr": "@member", "offset": "0x10", "cstr": "Alice"},
+      {"addr": "@member", "offset": "0x164", "cstr": "Personal"}
+    ]},
+    {"name": "member list button update", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x190", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x1dc", "u32": "@member"},
+      {"addr": "@member", "offset": "0x54", "u32": 1}
+    ]},
+    {"name": "notes list selected", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x194", "u32": "@sender"},
+      {"addr": "@sender", "offset": "0x11c", "u32": 1},
+      {"addr": "@member", "offset": "0x10", "cstr": "Alice"},
+      {"addr": "@member", "offset": "0x64", "cstr": "Public"},
+      {"addr": "@member", "offset": "0x164", "cstr": "Personal"}
+    ]},
+    {"name": "tribute list selected", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x1a8", "u32": "@sender"},
+      {"addr": "@sender", "offset": "0x11c", "u32": 1},
+      {"addr": "@member", "offset": "0x10", "cstr": "Alice"},
+      {"addr": "@member", "offset": "0x64", "cstr": "Public"},
+      {"addr": "@member", "offset": "0x164", "cstr": "Personal"}
+    ]},
+    {"name": "dump button", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x168", "u32": "@sender"}
+    ]},
+    {"name": "show offline", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x1b4", "u32": "@sender"},
+      {"addr": "@sender", "offset": "0x128", "u8": 1}
+    ]},
+    {"name": "make leader", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x180", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x1dc", "u32": "@member"},
+      {"addr": "@member", "offset": "0x10", "cstr": "Alice"}
+    ]},
+    {"name": "remove member", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x18c", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x1dc", "u32": "@member"},
+      {"addr": "@member", "offset": "0x10", "cstr": "Alice"}
+    ]},
+    {"name": "banker button", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x190", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x1dc", "u32": "@member"}
+    ]},
+    {"name": "promote member", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x184", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x1dc", "u32": "@member"},
+      {"addr": "@member", "offset": "0x10", "cstr": "Alice"}
+    ]},
+    {"name": "demote member", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x188", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x1dc", "u32": "@member"},
+      {"addr": "@member", "offset": "0x10", "cstr": "Alice"}
+    ]},
+    {"name": "update public text with null control", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x19c", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x198", "u32": "@text_receiver"},
+      {"addr": "@owner", "offset": "0x1dc", "u32": "@member"},
+      {"addr": "@owner", "offset": "0x1e0", "u32": 1},
+      {"addr": "@member", "offset": "0x10", "cstr": "Alice"}
+    ]},
+    {"name": "update motd text", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x178", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x174", "u32": "@text_receiver"},
+      {"addr": "@owner", "offset": "0x1e0", "u32": 1}
+    ]},
+    {"name": "update personal text", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x1a4", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x1a0", "u32": "@text_receiver"},
+      {"addr": "@owner", "offset": "0x1dc", "u32": "@member"},
+      {"addr": "@member", "offset": "0x10", "cstr": "Alice"},
+      {"addr": "@member", "offset": "0x164", "cstr": "Personal"}
+    ]},
+    {"name": "opt out", "args": ["@sender", 1, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x1ac", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x1dc", "u32": "@member"},
+      {"addr": "@member", "offset": "0x10", "cstr": "Alice"}
+    ]},
+    {"name": "notes sort sentinel", "args": ["@sender", 15, "0xfffffffA"], "memory": [
+      {"addr": "@owner", "offset": "0x194", "u32": "@sender"}
+    ]},
+    {"name": "tribute sort sentinel", "args": ["@sender", 15, "0xfffffff8"], "memory": [
+      {"addr": "@owner", "offset": "0x1a8", "u32": "@sender"}
+    ]},
+    {"name": "member sort sentinel", "args": ["@sender", 15, "0xffffffff"], "memory": [
+      {"addr": "@owner", "offset": "0x16c", "u32": "@sender"}
+    ]},
+    {"name": "notes sort ascending", "args": ["@sender", 15, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x194", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x1c0", "u32": 0},
+      {"addr": "@owner", "offset": "0x1c4", "u8": 0}
+    ]},
+    {"name": "notes sort same key", "args": ["@sender", 15, "@data"], "memory": [
+      {"addr": "@owner", "offset": "0x194", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x1c0", "u32": 5},
+      {"addr": "@owner", "offset": "0x1c4", "u8": 0}
+    ]},
+    {"name": "member sort same key", "args": ["@sender", 15, 5], "memory": [
+      {"addr": "@owner", "offset": "0x16c", "u32": "@sender"},
+      {"addr": "@owner", "offset": "0x1c0", "u32": 5},
+      {"addr": "@owner", "offset": "0x1c4", "u8": 0}
+    ]},
+    {"name": "no sender sort", "args": ["@sender", 15, "@data"]},
+    {"name": "close message", "args": ["@sender", 14, "@data"]},
+    {"name": "default message", "args": ["@sender", 0, "@data"]}
+  ],
+  "fuzz": {
+    "seed": 5310212,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@sender"
+        ]
+      },
+      {"range": [0, 16]},
+      {
+        "choices": [
+          "@data"
+        ]
+      }
+    ],
+    "memory": []
+  },
+  "_survivors": ""
+}

@@ -1,0 +1,287 @@
+{
+  "function": "Owner2_guess::EnableNewTicket_guess",
+  "original": "0x00561515",
+  "sources": [
+    "src/EverQuest/tu_226_TicketWindow.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@owner2",
+  "args": [
+    {
+      "name": "enabled_guess",
+      "type": "char"
+    }
+  ],
+  "ret": "void",
+  "_survivors": "L1627: Show_guess takes bool parameters, so the literal 2 converts to true and the same `push 1` is compiled; no input can tell 1 from 2",
+  "objects": {
+    "owner2": {
+      "size": "0x5f0",
+      "fill": "random",
+      "init": [
+        {"offset": "0x594", "u32": "@cell_a"},
+        {"offset": "0x598", "u32": "@cell_b"},
+        {"offset": "0x5ac", "u32": "@cell_c"},
+        {"offset": "0x5b0", "u32": "@cell_d"},
+        {"offset": "0x5b4", "u32": "@cell_e"},
+        {"offset": "0x5b8", "u32": "@cell_f"},
+        {"offset": "0x5bc", "u32": "@cell_g"},
+        {"offset": "0x5ec", "u8": 0},
+        {"offset": "0x5ed", "u8": 0},
+        {"offset": "0x5ef", "u8": 0}
+      ]
+    },
+    "cell_a": {"size": "0x60", "fill": "random", "init": [{"offset": "0x0", "u32": "@cell_vtbl"}]},
+    "cell_b": {"size": "0x60", "fill": "random", "init": [{"offset": "0x0", "u32": "@cell_vtbl"}]},
+    "cell_c": {"size": "0x60", "fill": "random", "init": [{"offset": "0x0", "u32": "@cell_vtbl"}]},
+    "cell_d": {"size": "0x60", "fill": "random", "init": [{"offset": "0x0", "u32": "@cell_vtbl"}]},
+    "cell_e": {"size": "0x60", "fill": "random", "init": [{"offset": "0x0", "u32": "@cell_vtbl"}]},
+    "cell_f": {"size": "0x60", "fill": "random", "init": [{"offset": "0x0", "u32": "@cell_vtbl"}]},
+    "cell_g": {"size": "0x60", "fill": "random", "init": [{"offset": "0x0", "u32": "@cell_vtbl"}]},
+    "fn_show": {"size": "0x4"},
+    "fn_settext": {"size": "0x4"},
+    "cell_vtbl": {
+      "size": "0x100",
+      "fill": "zero",
+      "init": [
+        {"offset": "0xc0", "u32": "@fn_show"},
+        {"offset": "0xfc", "u32": "@fn_settext"}
+      ]
+    },
+    "strtable": {"size": "0x10", "fill": "random"},
+    "message": {"size": "0x20", "fill": "zero", "init": [{"offset": "0x0", "cstr": "ticket text"}]}
+  },
+  "memory": [
+    {"addr": "0x00905cb0", "u32": "@strtable"}
+  ],
+  "callees": {
+    "0x00571e00": {
+      "name": "CXStr_ctor",
+      "conv": "thiscall",
+      "args": ["cstr"],
+      "ret": "this"
+    },
+    "0x00571d00": {
+      "name": "CXStr_FreeRep",
+      "conv": "thiscall",
+      "args": ["u32"],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "StringTable_getString",
+      "conv": "thiscall",
+      "args": ["u32", "u32"],
+      "ret": "@message"
+    },
+    "@fn_show": {
+      "name": "Cell_Show_guess",
+      "conv": "thiscall",
+      "args": ["u32", "u32"],
+      "ret": 0
+    },
+    "@fn_settext": {
+      "name": "Cell_SetText_guess",
+      "conv": "thiscall",
+      "args": ["ignore"],
+      "ret": 0,
+      "writes": [
+        {"arg": 0, "offset": 0, "hex": "40 30 20 10"}
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "enable, everything present",
+      "args": [1]
+    },
+    {
+      "name": "enable with a value other than 1",
+      "args": [2]
+    },
+    {
+      "name": "enable with 0x80",
+      "args": [-128]
+    },
+    {
+      "name": "disable, 5ec clear, 5ed clear: string 0x2284",
+      "args": [0]
+    },
+    {
+      "name": "disable, 5ec set: string 0x2283",
+      "args": [0],
+      "memory": [
+        {"addr": "@owner2", "offset": "0x5ec", "u8": 1},
+        {"addr": "@owner2", "offset": "0x5ed", "u8": 1}
+      ]
+    },
+    {
+      "name": "disable, 5ec clear, 5ed set: no string",
+      "args": [0],
+      "memory": [
+        {"addr": "@owner2", "offset": "0x5ed", "u8": 1}
+      ]
+    },
+    {
+      "name": "disable, 5ec set to 0x80",
+      "args": [0],
+      "memory": [
+        {"addr": "@owner2", "offset": "0x5ec", "u8": 128}
+      ]
+    },
+    {
+      "name": "disable, 5ed set to 0x80",
+      "args": [0],
+      "memory": [
+        {"addr": "@owner2", "offset": "0x5ed", "u8": 128}
+      ]
+    },
+    {
+      "name": "enable, no comments box: only the four flags",
+      "args": [1],
+      "memory": [
+        {"addr": "@owner2", "offset": "0x5b4", "u32": 0}
+      ]
+    },
+    {
+      "name": "disable, no comments box",
+      "args": [0],
+      "memory": [
+        {"addr": "@owner2", "offset": "0x5b4", "u32": 0}
+      ]
+    },
+    {
+      "name": "enable, no submit button",
+      "args": [1],
+      "memory": [
+        {"addr": "@owner2", "offset": "0x598", "u32": 0}
+      ]
+    },
+    {
+      "name": "disable, no submit button",
+      "args": [0],
+      "memory": [
+        {"addr": "@owner2", "offset": "0x598", "u32": 0}
+      ]
+    },
+    {
+      "name": "enable, no topic combobox",
+      "args": [1],
+      "memory": [
+        {"addr": "@owner2", "offset": "0x5ac", "u32": 0}
+      ]
+    },
+    {
+      "name": "enable, no subtopic combobox",
+      "args": [1],
+      "memory": [
+        {"addr": "@owner2", "offset": "0x5b0", "u32": 0}
+      ]
+    },
+    {
+      "name": "enable, no new-ticket button",
+      "args": [1],
+      "memory": [
+        {"addr": "@owner2", "offset": "0x594", "u32": 0}
+      ]
+    },
+    {
+      "name": "enable, no instructions box",
+      "args": [1],
+      "memory": [
+        {"addr": "@owner2", "offset": "0x5b8", "u32": 0}
+      ]
+    },
+    {
+      "name": "enable, no begin button",
+      "args": [1],
+      "memory": [
+        {"addr": "@owner2", "offset": "0x5bc", "u32": 0}
+      ]
+    },
+    {
+      "name": "disable, no begin button",
+      "args": [0],
+      "memory": [
+        {"addr": "@owner2", "offset": "0x5bc", "u32": 0}
+      ]
+    },
+    {
+      "name": "enable, only the comments box",
+      "args": [1],
+      "memory": [
+        {"addr": "@owner2", "offset": "0x594", "u32": 0},
+        {"addr": "@owner2", "offset": "0x598", "u32": 0},
+        {"addr": "@owner2", "offset": "0x5ac", "u32": 0},
+        {"addr": "@owner2", "offset": "0x5b0", "u32": 0},
+        {"addr": "@owner2", "offset": "0x5b8", "u32": 0},
+        {"addr": "@owner2", "offset": "0x5bc", "u32": 0}
+      ]
+    },
+    {
+      "name": "enable, string left empty: no FreeRep",
+      "args": [1],
+      "callees": {
+        "@fn_settext": {
+          "name": "Cell_SetText_guess",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": 0,
+          "writes": [
+            {"arg": 0, "offset": 0, "hex": "00 00 00 00"}
+          ]
+        }
+      }
+    },
+    {
+      "name": "disable 0x2284, strings left empty: no FreeRep",
+      "args": [0],
+      "callees": {
+        "@fn_settext": {
+          "name": "Cell_SetText_guess",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": 0,
+          "writes": [
+            {"arg": 0, "offset": 0, "hex": "00 00 00 00"}
+          ]
+        }
+      }
+    },
+    {
+      "name": "disable 0x2283, strings left empty: no FreeRep",
+      "args": [0],
+      "memory": [
+        {"addr": "@owner2", "offset": "0x5ec", "u8": 1}
+      ],
+      "callees": {
+        "@fn_settext": {
+          "name": "Cell_SetText_guess",
+          "conv": "thiscall",
+          "args": ["ignore"],
+          "ret": 0,
+          "writes": [
+            {"arg": 0, "offset": 0, "hex": "00 00 00 00"}
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 5641493,
+    "count": 150,
+    "args": [
+      {"choices": [0, 0, 0, 1, 1, 2, 7, -1, -128]}
+    ],
+    "memory": [
+      {"addr": "@owner2", "offset": "0x594", "type": "ptr", "choices": ["@cell_a", "@cell_a", 0]},
+      {"addr": "@owner2", "offset": "0x598", "type": "ptr", "choices": ["@cell_b", "@cell_b", 0]},
+      {"addr": "@owner2", "offset": "0x5ac", "type": "ptr", "choices": ["@cell_c", "@cell_c", 0]},
+      {"addr": "@owner2", "offset": "0x5b0", "type": "ptr", "choices": ["@cell_d", "@cell_d", 0]},
+      {"addr": "@owner2", "offset": "0x5b4", "type": "ptr", "choices": ["@cell_e", "@cell_e", "@cell_e", 0]},
+      {"addr": "@owner2", "offset": "0x5b8", "type": "ptr", "choices": ["@cell_f", "@cell_f", 0]},
+      {"addr": "@owner2", "offset": "0x5bc", "type": "ptr", "choices": ["@cell_g", "@cell_g", 0]},
+      {"addr": "@owner2", "offset": "0x5ec", "type": "u8", "choices": [0, 0, 1, 255]},
+      {"addr": "@owner2", "offset": "0x5ed", "type": "u8", "choices": [0, 0, 1, 255]}
+    ]
+  }
+}

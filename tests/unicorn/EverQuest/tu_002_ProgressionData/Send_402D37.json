@@ -1,0 +1,82 @@
+{
+  "function": "DispatchOwner_guess::Send_402D37_guess",
+  "original": "0x00402d37",
+  "sources": [
+    "src/EverQuest/tu_002_ProgressionData.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@dispatchowner",
+  "args": [
+    {
+      "name": "record_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "dispatchowner": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x4", "u32": "@listhead"}]
+    },
+    "listhead": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@node1"}]
+    },
+    "node1": {
+      "size": "0x10",
+      "fill": "random",
+      "init": [{"offset": "0x0", "u32": "@listhead"}]
+    },
+    "record": {
+      "size": "0x100",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00402cf2": {
+      "name": "InvokeEach_guess",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "one node",
+      "args": [
+        "@record"
+      ]
+    },
+    {
+      "name": "empty list",
+      "args": [
+        "@record"
+      ],
+      "memory": [
+        {"addr": "@listhead", "offset": "0x0", "u32": "@listhead"}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4205879,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@record"
+        ]
+      }
+    ],
+    "memory": [
+      {"addr": "@listhead", "offset": "0x0", "type": "ptr", "choices": ["@node1", "@listhead"]}
+    ]
+  }
+}

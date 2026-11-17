@@ -1,0 +1,80 @@
+{
+  "function": "OldPlayerAnimationSetView_guess::CanInterrupt_guess",
+  "original": "0x00450a17",
+  "sources": ["src/EverQuest/tu_039_EQAnimate.cpp"],
+  "conv": "thiscall",
+  "this": "@obj",
+  "args": [
+    {"name": "requested", "type": "int"},
+    {"name": "anim", "type": "int"},
+    {"name": "extra", "type": "u8"}
+  ],
+  "ret": "char",
+  "objects": {
+    "obj": {"size": "0x14", "fill": "zero", "init": [
+      {"offset": "0", "u32": "@vtbl"},
+      {"offset": "0x4", "u32": "@player"}
+    ]},
+    "vtbl": {"size": "0x40", "fill": "zero", "init": [
+      {"offset": "0x38", "u32": "@fn_special"}
+    ]},
+    "player": {"size": "0x278", "fill": "random", "init": [
+      {"offset": "0x1a8", "u32": "@actor"},
+      {"offset": "0x252", "u8": 1}
+    ]},
+    "actor": {"size": "0x164", "fill": "random", "init": [
+      {"offset": "0x134", "u32": 5}
+    ]},
+    "fn_special": {"size": "0x4"}
+  },
+  "memory": [
+    {"addr": "0x00900388", "size": 128, "fill": "zero"},
+    {"addr": "0x00900388", "u8": 1},
+    {"addr": "0x0090038a", "u8": 1},
+    {"addr": "0x00900388", "u8": 0}
+  ],
+  "callees": {
+    "0x004500f1": {"name": "IsIdleAnimation_guess", "conv": "stdcall", "args": ["int"], "ret": 0},
+    "@fn_special": {"name": "IsSpecial_guess", "conv": "thiscall", "args": ["int"], "ret": 0}
+  },
+  "cases": [
+    {"name": "class3e_req0f", "args": [15, 5, 0], "memory": [{"addr": "@player", "offset": "0x252", "u8": 62}]},
+    {"name": "class3e_req0f_special", "args": [15, 5, 0], "memory": [{"addr": "@player", "offset": "0x252", "u8": 62}],
+     "callees": {"@fn_special": {"name": "IsSpecial_guess", "conv": "thiscall", "args": ["int"], "ret": 1}}},
+    {"name": "class3e_req0f_extra1", "args": [15, 5, 1], "memory": [{"addr": "@player", "offset": "0x252", "u8": 62}]},
+    {"name": "class1_req0f_extra0", "args": [15, 5, 0]},
+    {"name": "req4a_extra0", "args": [74, 5, 0]},
+    {"name": "req4e_extra0", "args": [78, 5, 0]},
+    {"name": "req10_extra0", "args": [16, 5, 0]},
+    {"name": "req21_extra0", "args": [33, 5, 0]},
+    {"name": "req2c_extra0", "args": [44, 5, 0]},
+    {"name": "req4a_extra1", "args": [74, 5, 1]},
+    {"name": "req20_extra2", "args": [32, 5, 2]},
+    {"name": "req20_extra1_allowed", "args": [32, 5, 1],
+     "callees": {"0x004500f1": {"name": "FUN_004500f1", "conv": "stdcall", "args": ["int"], "ret": 1}}},
+    {"name": "req20_extra0_special_allowed", "args": [32, 5, 0],
+     "callees": {"@fn_special": {"name": "IsSpecial_guess", "conv": "thiscall", "args": ["int"], "ret": 1},
+                 "0x004500f1": {"name": "FUN_004500f1", "conv": "stdcall", "args": ["int"], "ret": 1}}},
+    {"name": "req20_extra0_special_only", "args": [32, 5, 0],
+     "callees": {"@fn_special": {"name": "IsSpecial_guess", "conv": "thiscall", "args": ["int"], "ret": 1}}},
+    {"name": "req20_extra0_low_anim", "args": [32, 7, 0]},
+    {"name": "extra0_high_anim_eq", "args": [32, 80, 0], "memory": [{"addr": "@actor", "offset": "0x134", "u32": 80}]},
+    {"name": "extra0_high_anim_ne", "args": [32, 81, 0], "memory": [{"addr": "@actor", "offset": "0x134", "u32": 80}]},
+    {"name": "extra0_anim_low_eq", "args": [3, 3, 0], "memory": [{"addr": "@actor", "offset": "0x134", "u32": 3}]},
+    {"name": "extra1_dat_on", "args": [32, 7, 1], "memory": [{"addr": "@actor", "offset": "0x134", "u32": 2}]},
+    {"name": "extra1_dat_off", "args": [32, 7, 1], "memory": [{"addr": "@actor", "offset": "0x134", "u32": 3}]},
+    {"name": "extra1_equal_dat_on", "args": [32, 4, 1], "memory": [{"addr": "@actor", "offset": "0x134", "u32": 4},
+                                                              {"addr": "0x00900388", "u8": 1}]},
+    {"name": "extra1_high_anim", "args": [32, 7, 1], "memory": [{"addr": "@actor", "offset": "0x134", "u32": 80}]},
+    {"name": "extra1_high_anim_eq", "args": [32, 80, 1], "memory": [{"addr": "@actor", "offset": "0x134", "u32": 80}]}
+  ],
+  "fuzz": {
+    "seed": 4539001,
+    "count": 200,
+    "args": [{"choices": [0, 15, 16, 32, 33, 44, 74, 78, 9, 1]}, {"range": [0, 90]}, {"choices": [0, 1, 2]}],
+    "memory": [
+      {"addr": "@player", "offset": "0x252", "type": "u8", "choices": [1, 8, 62], "p": 0.4},
+      {"addr": "@actor", "offset": "0x134", "type": "int", "choices": [0, 2, 3, 4, 5, 78, 79, 80, 90], "p": 0.8}
+    ]
+  }
+}

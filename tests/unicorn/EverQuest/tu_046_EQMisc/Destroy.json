@@ -1,0 +1,84 @@
+{
+  "function": "DestroyedObject_648BE_guess::Destroy_guess",
+  "original": "0x004648be",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@destroyedobject_648be",
+  "args": [
+    {
+      "name": "flags_guess",
+      "type": "u8"
+    }
+  ],
+  "ret": "ptr",
+  "objects": {
+    "destroyedobject_648be": {
+      "size": "0x4",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "rewrite_data_aliases": {
+    "??_7DestroyedObject_648BE_guess@@6B@": "0x00645e5c"
+  },
+  "callees": {
+    "0x0060d0d5": {
+      "name": "operator delete",
+      "conv": "cdecl",
+      "args": [
+        "ptr"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": [
+        1
+      ]
+    },
+    {
+      "name": "zeros",
+      "args": [
+        0
+      ]
+    },
+    {
+      "name": "bit zero clear",
+      "args": [
+        2
+      ]
+    },
+    {
+      "name": "multiple bits",
+      "args": [
+        3
+      ]
+    },
+    {
+      "name": "high bits",
+      "args": [
+        255
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4606142,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          0,
+          1,
+          2,
+          3,
+          255
+        ]
+      }
+    ],
+    "memory": []
+  }
+}

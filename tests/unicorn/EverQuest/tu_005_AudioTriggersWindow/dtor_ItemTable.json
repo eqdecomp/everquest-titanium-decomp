@@ -1,0 +1,57 @@
+{
+  "function": "ItemTable_guess::~ItemTable_guess",
+  "original": "0x00406622",
+  "sources": [
+    "src/EverQuest/tu_005_AudioTriggersWindow.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@itemtable",
+  "args": [],
+  "ret": "void",
+  "objects": {
+    "itemtable": {
+      "size": "0x3c",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x00406545": {
+      "name": "FreeBlocks_guess",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x004b73ee": {
+      "name": "FUN_004b73ee",
+      "conv": "thiscall",
+      "args": []
+    },
+    "0x0050f3f6": {
+      "name": "FUN_0050f3f6",
+      "conv": "thiscall",
+      "args": []
+    }
+  },
+  "cases": [
+    {
+      "name": "typical",
+      "args": []
+    },
+    {
+      "name": "zeros",
+      "args": [],
+      "memory": [
+        {"addr": "@itemtable", "offset": "0x0", "u32": 0},
+        {"addr": "@itemtable", "offset": "0x20", "u32": 0}
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4220450,
+    "count": 50,
+    "args": [],
+    "memory": [
+      {"addr": "@itemtable", "offset": "0x0", "type": "int", "choices": [0, 1, -1, 7]}
+    ]
+  }
+}

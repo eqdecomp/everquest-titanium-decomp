@@ -1,0 +1,102 @@
+{
+  "function": "EQ_PCView_guess::IsAGroupMember_guess",
+  "original": "0x004bb226",
+  "sources": [
+    "src/EverQuest/tu_080_EQ_PC.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@object",
+  "args": [
+    {
+      "name": "name",
+      "type": "cstr"
+    }
+  ],
+  "ret": "int",
+  "objects": {
+    "object": {
+      "size": "0x1900",
+      "fill": "random",
+      "init": [
+        {"offset": "0x8", "u32": "@holder"}
+      ]
+    },
+    "holder": {
+      "size": "0x8",
+      "fill": "random",
+      "init": [
+        {"offset": "0x4", "u32": 256}
+      ]
+    }
+  },
+  "memory": [
+    {"addr": "@object", "offset": "0x144", "cstr": "Zed"},
+    {"addr": "@object", "offset": "0x15b0", "cstr": "Abe"},
+    {"addr": "@object", "offset": "0x15f0", "cstr": "Bob"},
+    {"addr": "@object", "offset": "0x1630", "cstr": "Cal"},
+    {"addr": "@object", "offset": "0x1670", "cstr": "Dan"},
+    {"addr": "@object", "offset": "0x16b0", "cstr": "Eve"},
+    {"addr": "@object", "offset": "0x16f0", "cstr": "Fay"}
+  ],
+  "callees": {
+    "0x00621e9c": {
+      "name": "__stricmp",
+      "conv": "cdecl",
+      "args": ["cstr", "cstr"],
+      "ret": 1
+    }
+  },
+  "rewrite_aliases": {
+    "__stricmp": "0x00621e9c"
+  },
+  "cases": [
+    {
+      "name": "empty_string",
+      "args": [""]
+    },
+    {
+      "name": "own_name_match",
+      "args": ["Zed"],
+      "callees": {
+        "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [0]}
+      }
+    },
+    {
+      "name": "table_slot0_match",
+      "args": ["Abe"],
+      "callees": {
+        "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1, 0]}
+      }
+    },
+    {
+      "name": "table_slot1_match",
+      "args": ["Bob"],
+      "callees": {
+        "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1, 1, 0]}
+      }
+    },
+    {
+      "name": "table_slot5_match_last",
+      "args": ["Fay"],
+      "callees": {
+        "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1, 1, 1, 1, 1, 1, 0]}
+      }
+    },
+    {
+      "name": "no_match_anywhere",
+      "args": ["Nope"],
+      "callees": {
+        "0x00621e9c": {"name": "__stricmp", "conv": "cdecl", "args": ["cstr", "cstr"], "ret": [1]}
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4960806,
+    "count": 120,
+    "args": [
+      {"choices": ["Zed", "Abe", "Bob", "Fay", "Nope", ""]}
+    ],
+    "memory": []
+  },
+  "_survivors": "L1162: `<` -> `<=` and `0x10` -> `0x11` differ only for name == 0x10, which the original dereferences (unmapped, faults) and a cstr case arg (heap pointer) cannot reach without faulting"
+}

@@ -1,0 +1,628 @@
+{
+  "function": "FormatSpellDescription_guess",
+  "original": "0x00475855",
+  "size": "0x356",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "output_guess",
+      "type": "ptr"
+    },
+    {
+      "name": "table_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "output": {
+      "size": "0x400",
+      "fill": "random"
+    },
+    "table": {
+      "size": "0x190",
+      "fill": "zero"
+    },
+    "input": {
+      "size": "0x100",
+      "fill": "zero"
+    },
+    "manager": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "holder": {
+      "size": "0xc400",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@vbtable"
+        }
+      ]
+    },
+    "vbtable": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "0xc344"
+        }
+      ]
+    },
+    "charinfo": {
+      "size": "0x11a8",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "from_image": "0x0079ac74",
+      "image_size": 4
+    },
+    {
+      "addr": "0x00850398",
+      "u32": "@manager"
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@holder"
+    },
+    {
+      "addr": "@input",
+      "cstr": "#1@c"
+    }
+  ],
+  "callees": {
+    "0x004355f7": {
+      "name": "DatabaseStringManager::GetString_guess",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": "@input"
+    },
+    "0x005ec220": {
+      "name": "CharProfile::GetCharInfo2_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "@charinfo"
+    },
+    "0x0040ebc3": {
+      "name": "CommandContext::SpellDuration_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ptr",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "30 00"
+        }
+      ]
+    },
+    "0x0044e755": {
+      "name": "Table::GetSpellLevelNeeded_guess",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0040f339": {
+      "name": "CommandContext::CalcAffectChange_guess",
+      "conv": "thiscall",
+      "args": [
+        "ptr",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x0060f81e": {
+      "name": "FUN_0060f81e_guess",
+      "conv": "cdecl",
+      "args": [
+        "int"
+      ],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "empty string",
+      "args": [
+        "@output",
+        "@table"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "cstr": ""
+        }
+      ]
+    },
+    {
+      "name": "ordinary characters",
+      "args": [
+        "@output",
+        "@table"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "cstr": "Plain text!"
+        }
+      ]
+    },
+    {
+      "name": "digit hash value",
+      "args": [
+        "@output",
+        "@table"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "cstr": "a#1b"
+        },
+        {
+          "addr": "@table",
+          "offset": "0x30",
+          "u32": 25
+        },
+        {
+          "addr": "@table",
+          "offset": "0x120",
+          "u32": 1
+        }
+      ]
+    },
+    {
+      "name": "hash uppercase A and fallback",
+      "args": [
+        "@output",
+        "@table"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "cstr": "#A"
+        },
+        {
+          "addr": "@table",
+          "offset": "0x54",
+          "u32": 5
+        },
+        {
+          "addr": "@table",
+          "offset": "0xf0",
+          "u32": "0x7b"
+        },
+        {
+          "addr": "@table",
+          "offset": "0x144",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "hash zero without fallback",
+      "args": [
+        "@output",
+        "@table"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "cstr": "#a"
+        },
+        {
+          "addr": "@table",
+          "offset": "0x15c",
+          "u32": "0x7c"
+        }
+      ]
+    },
+    {
+      "name": "hash uppercase B state 0x4f",
+      "args": [
+        "@output",
+        "@table"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "cstr": "#B"
+        },
+        {
+          "addr": "@table",
+          "offset": "0x148",
+          "u32": "0x4f"
+        }
+      ]
+    },
+    {
+      "name": "hash uppercase C state 0x14e",
+      "args": [
+        "@output",
+        "@table"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "cstr": "#C"
+        },
+        {
+          "addr": "@table",
+          "offset": "0x14c",
+          "u32": "0x14e"
+        }
+      ]
+    },
+    {
+      "name": "at lowercase c state 0x4f",
+      "args": [
+        "@output",
+        "@table"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "cstr": "@c"
+        },
+        {
+          "addr": "@table",
+          "offset": "0x11c",
+          "u32": 31
+        },
+        {
+          "addr": "@table",
+          "offset": "0x14c",
+          "u32": "0x4f"
+        }
+      ]
+    },
+    {
+      "name": "at lowercase b state 0x14e",
+      "args": [
+        "@output",
+        "@table"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "cstr": "@b"
+        },
+        {
+          "addr": "@table",
+          "offset": "0x148",
+          "u32": "0x14e"
+        }
+      ]
+    },
+    {
+      "name": "invalid codes consumed",
+      "args": [
+        "@output",
+        "@table"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "cstr": "#0 #D"
+        }
+      ]
+    },
+    {
+      "name": "percent Y uppercase",
+      "args": [
+        "@output",
+        "@table"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "cstr": "%Y"
+        },
+        {
+          "addr": "@charinfo",
+          "offset": "0x11a4",
+          "u32": 17
+        }
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "20 30 3a 30 30 3a 30 30 00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "percent y lowercase",
+      "args": [
+        "@output",
+        "@table"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "cstr": "%y"
+        }
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "20 30 3a 30 30 3a 30 30 00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "percent Z uppercase",
+      "args": [
+        "@output",
+        "@table"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "cstr": "%Z"
+        },
+        {
+          "addr": "@table",
+          "offset": "0x24",
+          "u32": 0
+        }
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "20 30 3a 30 30 3a 30 30 00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "percent z lowercase",
+      "args": [
+        "@output",
+        "@table"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "cstr": "%z"
+        }
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "20 30 3a 30 30 3a 30 30 00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "percent Z nonzero time",
+      "args": [
+        "@output",
+        "@table"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "cstr": "%Z"
+        },
+        {
+          "addr": "@table",
+          "offset": "0x24",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "20 30 3a 30 30 3a 30 36 00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "unknown percent code",
+      "args": [
+        "@output",
+        "@table"
+      ],
+      "memory": [
+        {
+          "addr": "@input",
+          "cstr": "%x"
+        }
+      ],
+      "callees": {
+        "0x0060d5eb": {
+          "name": "_sprintf",
+          "conv": "cdecl",
+          "args": [
+            "ptr",
+            "cstr"
+          ],
+          "varargs": "printf",
+          "ret": 0,
+          "writes": [
+            {
+              "arg": 0,
+              "offset": 0,
+              "hex": "20 30 3a 30 30 3a 30 30 00"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4675669,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@output"
+        ]
+      },
+      {
+        "choices": [
+          "@table"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@table",
+        "offset": "0x30",
+        "type": "int",
+        "count": 12,
+        "choices": [
+          -7,
+          0,
+          1,
+          88
+        ]
+      },
+      {
+        "addr": "@table",
+        "offset": "0x90",
+        "type": "int",
+        "count": 12,
+        "choices": [
+          -7,
+          0,
+          1,
+          88
+        ]
+      },
+      {
+        "addr": "@table",
+        "offset": "0xf0",
+        "type": "int",
+        "count": 12,
+        "choices": [
+          0,
+          "0x7b",
+          "0x7c"
+        ]
+      },
+      {
+        "addr": "@table",
+        "offset": "0x120",
+        "type": "int",
+        "count": 12,
+        "choices": [
+          0,
+          1,
+          "0x4f",
+          "0x14e"
+        ]
+      }
+    ]
+  },
+  "coverage_ok": {
+    "004759DF-004759E0": "index 0..11 only; parser codes cannot exceed the 12-entry table",
+    "004759ED-004759EE": "index 0..11 only; parser codes cannot exceed the 12-entry table",
+    "004759FC-004759FD": "index 0..11 only; parser codes cannot exceed the 12-entry table",
+    "00475A0B-00475A0C": "index 0..11 only; parser codes cannot exceed the 12-entry table",
+    "00475A75-00475A76": "index 0..11 only; parser codes cannot exceed the 12-entry table",
+    "00475A89-00475A8A": "index 0..11 only; parser codes cannot exceed the 12-entry table",
+    "00475A9D-00475A9E": "index 0..11 only; parser codes cannot exceed the 12-entry table",
+    "00475AAB-00475AAC": "index 0..11 only; parser codes cannot exceed the 12-entry table",
+    "00475ABC-00475ABD": "index 0..11 only; parser codes cannot exceed the 12-entry table",
+    "00475ACB-00475ACC": "index 0..11 only; parser codes cannot exceed the 12-entry table",
+    "00475ADA-00475ADB": "index 0..11 only; parser codes cannot exceed the 12-entry table",
+    "00475B04-00475B05": "index 0..11 only; parser codes cannot exceed the 12-entry table",
+    "00475B14-00475B15": "index 0..11 only; parser codes cannot exceed the 12-entry table",
+    "00475B24-00475B25": "index 0..11 only; parser codes cannot exceed the 12-entry table"
+  }
+}

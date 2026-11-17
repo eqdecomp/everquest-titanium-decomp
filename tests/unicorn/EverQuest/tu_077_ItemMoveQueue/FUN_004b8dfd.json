@@ -1,0 +1,310 @@
+{
+  "function": "DrawNetStatus",
+  "original": "0x004b8dfd",
+  "sources": [
+    "src/EverQuest/tu_077_ItemMoveQueue.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "x_guess",
+      "type": "u16"
+    },
+    {
+      "name": "y_guess",
+      "type": "u16"
+    },
+    {
+      "name": "request_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "request": {
+      "size": "0x228",
+      "fill": "random"
+    },
+    "clock": {
+      "size": "0x54",
+      "fill": "random"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x00905d24",
+      "u32": 1
+    },
+    {
+      "addr": "0x0079ac74",
+      "u32": 305419896
+    },
+    {
+      "addr": "0x0079dbd8",
+      "u32": "@clock"
+    },
+    {
+      "addr": "@clock",
+      "offset": "0x50",
+      "u32": 1000
+    },
+    {
+      "addr": "0x00985c30",
+      "hex": "b80b000000000000"
+    }
+  ],
+  "callees": {
+    "0x005e5200": {
+      "name": "FUN_005e5200",
+      "conv": "thiscall",
+      "args": [
+        "ignore"
+      ],
+      "ret": 0,
+      "writes": [
+        {
+          "arg": 0,
+          "offset": 0,
+          "hex": "d007000000000000"
+        },
+        {
+          "arg": 0,
+          "offset": 8,
+          "hex": "e803000000000000"
+        },
+        {
+          "arg": 0,
+          "offset": 112,
+          "hex": "7b000000"
+        }
+      ]
+    },
+    "0x004b8b52": {
+      "name": "GetIdleTime_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": 500
+    },
+    "0x0060d5eb": {
+      "name": "_sprintf",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "cstr"
+      ],
+      "varargs": "printf",
+      "ret": 0
+    },
+    "0x0043c3e0": {
+      "name": "WriteTextHD2",
+      "conv": "cdecl",
+      "args": [
+        "ignore",
+        "int",
+        "int",
+        "int"
+      ],
+      "ret": 0
+    },
+    "0x004b8bb1": {
+      "name": "DrawNetGraph_guess",
+      "conv": "cdecl",
+      "args": [
+        "u16",
+        "u16",
+        "u16",
+        "u16",
+        "float",
+        "int"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "name": "disabled",
+      "args": [
+        65535,
+        65535,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "0x00905d24",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "elapsed-negative-and-coordinate-overflow",
+      "args": [
+        65535,
+        65520,
+        "@request"
+      ],
+      "callees": {
+        "0x004b8b52": {
+          "name": "FUN_004b8b52",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 400
+        }
+      }
+    },
+    {
+      "name": "elapsed-zero-and-zero-delta",
+      "args": [
+        12,
+        34,
+        "@request"
+      ],
+      "callees": {
+        "0x004b8b52": {
+          "name": "FUN_004b8b52",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 500
+        }
+      }
+    },
+    {
+      "name": "elapsed-one-and-positive-delta",
+      "args": [
+        100,
+        200,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "0x00985c30",
+          "hex": "980b000000000000"
+        }
+      ],
+      "callees": {
+        "0x004b8b52": {
+          "name": "FUN_004b8b52",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 501
+        }
+      }
+    },
+    {
+      "name": "negative-delta-and-ratio-zero",
+      "args": [
+        300,
+        400,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "0x00985c30",
+          "hex": "d80b000000000000"
+        }
+      ],
+      "callees": {
+        "0x004b8b52": {
+          "name": "FUN_004b8b52",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 1500
+        }
+      }
+    },
+    {
+      "name": "sub-step-delta-truncates-to-zero",
+      "args": [
+        500,
+        600,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "0x00985c30",
+          "hex": "ae0b000000000000"
+        }
+      ]
+    },
+    {
+      "name": "delta-31-tests-divisor-boundary",
+      "args": [
+        550,
+        650,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "0x00985c30",
+          "hex": "990b000000000000"
+        }
+      ]
+    },
+    {
+      "name": "interval-one",
+      "args": [
+        700,
+        800,
+        "@request"
+      ],
+      "memory": [
+        {
+          "addr": "@clock",
+          "offset": "0x50",
+          "u32": 1
+        }
+      ],
+      "callees": {
+        "0x004b8b52": {
+          "name": "FUN_004b8b52",
+          "conv": "thiscall",
+          "args": [],
+          "ret": 501
+        }
+      }
+    }
+  ],
+  "fuzz": {
+    "seed": 4951549,
+    "count": 100,
+    "args": [
+      {},
+      {},
+      {
+        "choices": [
+          "@request"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "0x00905d24",
+        "type": "u32",
+        "choices": [
+          0,
+          1
+        ]
+      },
+      {
+        "addr": "@clock",
+        "offset": "0x50",
+        "type": "int",
+        "choices": [
+          1,
+          1000,
+          2000
+        ]
+      },
+      {
+        "addr": "0x00985c30",
+        "type": "u64",
+        "choices": [
+          2968,
+          2984,
+          3000,
+          3016,
+          3032
+        ]
+      }
+    ]
+  },
+  "_survivors": "L1280: elapsed_guess == 0; assigning 0 for <= instead of < leaves the value unchanged."
+}

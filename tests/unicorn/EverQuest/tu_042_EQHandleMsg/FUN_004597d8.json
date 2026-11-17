@@ -1,0 +1,480 @@
+{
+  "function": "Handle_OP_SkillUpdate_guess",
+  "original": "0x004597d8",
+  "sources": [
+    "src/EverQuest/tu_042_EQHandleMsg.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {
+      "name": "argument_guess",
+      "type": "ptr"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "argument": {
+      "size": "0x8",
+      "fill": "zero"
+    },
+    "root": {
+      "size": "0x80",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x8",
+          "u32": "@offset"
+        }
+      ]
+    },
+    "offset": {
+      "size": "0x8",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0x4",
+          "u32": "0x20"
+        }
+      ]
+    },
+    "display": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "catalog": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "handler": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "processor": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "notifier": {
+      "size": "0x4",
+      "fill": "zero"
+    },
+    "id0": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "0x2349"
+        }
+      ]
+    },
+    "id99": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [
+        {
+          "offset": "0",
+          "u32": "0x234a"
+        }
+      ]
+    },
+    "localized": {
+      "size": "0x20",
+      "fill": "zero"
+    },
+    "indexed": {
+      "size": "0x20",
+      "fill": "zero"
+    }
+  },
+  "memory": [
+    {
+      "addr": "0x0079ac74",
+      "u32": "0x13572468"
+    },
+    {
+      "addr": "0x00905d00",
+      "u32": "@root"
+    },
+    {
+      "addr": "0x0099db00",
+      "cstr": ""
+    },
+    {
+      "addr": "0x00988df0",
+      "u32": "@display"
+    },
+    {
+      "addr": "0x00905cb0",
+      "u32": "@catalog"
+    },
+    {
+      "addr": "0x00851200",
+      "u32": "@id0"
+    },
+    {
+      "addr": "0x0085138c",
+      "u32": "@id99"
+    },
+    {
+      "addr": "0x00850bb4",
+      "u32": "@handler"
+    },
+    {
+      "addr": "0x00850bb0",
+      "u32": "@processor"
+    },
+    {
+      "addr": "0x00992940",
+      "u32": "@notifier"
+    },
+    {
+      "addr": "@localized",
+      "cstr": "Localized entry"
+    },
+    {
+      "addr": "@indexed",
+      "cstr": "Indexed entry"
+    }
+  ],
+  "callees": {
+    "0x006220e9": {
+      "name": "__itoa",
+      "conv": "cdecl",
+      "args": [
+        "int",
+        "ptr",
+        "int"
+      ],
+      "passthrough": true
+    },
+    "0x00492595": {
+      "name": "ResolveIndexedText",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": "@indexed"
+    },
+    "0x0040e722": {
+      "name": "GetIndexedValue",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ],
+      "ret": [
+        42,
+        77
+      ]
+    },
+    "0x0041aa6a": {
+      "name": "SetIndexedValue",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ]
+    },
+    "0x005dfa00": {
+      "name": "GetLocalizedText",
+      "conv": "thiscall",
+      "args": [
+        "u32",
+        "u32"
+      ],
+      "ret": "@localized"
+    },
+    "0x0046da4a": {
+      "name": "FormatNotice",
+      "conv": "cdecl",
+      "args": [
+        "mem:256",
+        "int",
+        "cstr",
+        "cstr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr",
+        "ptr"
+      ]
+    },
+    "0x004982c6": {
+      "name": "DisplayNotice",
+      "conv": "thiscall",
+      "args": [
+        "mem:256",
+        "int",
+        "bool"
+      ]
+    },
+    "0x00554e07": {
+      "name": "HandleUpdate",
+      "conv": "thiscall",
+      "args": [
+        "int"
+      ]
+    },
+    "0x0056b400": {
+      "name": "ApplyUpdate",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ]
+    },
+    "0x00567e44": {
+      "name": "NotifyUpdate",
+      "conv": "thiscall",
+      "args": [
+        "int",
+        "int"
+      ]
+    }
+  },
+  "rewrite_aliases": {
+    "__itoa": "0x006220e9"
+  },
+  "coverage_ok": {
+    "00459830-00459831": "unreachable int3 after the 0 <= index < 32 guard",
+    "00459852-00459853": "unreachable int3 after the 0 <= index < 32 guard",
+    "0045986a-0045986b": "unreachable int3 after the 0 <= index < 32 guard"
+  },
+  "cases": [
+    {
+      "name": "root pointer is null",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "0x00905d00",
+          "u32": 0
+        },
+        {
+          "addr": "@argument",
+          "offset": "0",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "negative index",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@argument",
+          "offset": "0",
+          "u32": -1
+        }
+      ]
+    },
+    {
+      "name": "index zero and all callbacks",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@argument",
+          "offset": "0",
+          "u32": 0
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x4",
+          "u32": "0x12345678"
+        }
+      ]
+    },
+    {
+      "name": "index 99 with callbacks disabled",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@argument",
+          "offset": "0",
+          "u32": 99
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x4",
+          "u32": "0x87654321"
+        },
+        {
+          "addr": "0x00850bb4",
+          "u32": 0
+        },
+        {
+          "addr": "0x00850bb0",
+          "u32": 0
+        },
+        {
+          "addr": "0x00992940",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "index 100 changes first byte and notifies",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@argument",
+          "offset": "0",
+          "u32": 100
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x4",
+          "u32": "0x123456fe"
+        },
+        {
+          "addr": "@root",
+          "offset": "0x34",
+          "u8": "0x45"
+        }
+      ]
+    },
+    {
+      "name": "index 131 changes last byte with callbacks disabled",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@argument",
+          "offset": "0",
+          "u32": 131
+        },
+        {
+          "addr": "@argument",
+          "offset": "0x4",
+          "u32": "0xabcdef80"
+        },
+        {
+          "addr": "@root",
+          "offset": "0x53",
+          "u8": "0xa5"
+        },
+        {
+          "addr": "0x00850bb4",
+          "u32": 0
+        },
+        {
+          "addr": "0x00850bb0",
+          "u32": 0
+        },
+        {
+          "addr": "0x00992940",
+          "u32": 0
+        }
+      ]
+    },
+    {
+      "name": "index 132 is out of range",
+      "args": [
+        "@argument"
+      ],
+      "memory": [
+        {
+          "addr": "@argument",
+          "offset": "0",
+          "u32": 132
+        }
+      ]
+    }
+  ],
+  "fuzz": {
+    "seed": 4560856,
+    "count": 100,
+    "args": [
+      {
+        "choices": [
+          "@argument"
+        ]
+      }
+    ],
+    "memory": [
+      {
+        "addr": "@argument",
+        "offset": "0",
+        "type": "int",
+        "choices": [
+        -1,
+        0,
+        99,
+        100,
+        131,
+        132
+        ]
+      },
+      {
+        "addr": "@argument",
+        "offset": "0x4",
+        "type": "int",
+        "choices": [
+          -1,
+          0,
+          1,
+          127,
+          128,
+          255,
+          "0x12345678"
+        ]
+      },
+      {
+        "addr": "@root",
+        "offset": "0x34",
+        "type": "u8",
+        "count": 32,
+        "choices": [
+          0,
+          1,
+          127,
+          128,
+          255
+        ]
+      },
+      {
+        "addr": "0x00905d00",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@root"
+        ]
+      },
+      {
+        "addr": "0x00850bb4",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@handler"
+        ]
+      },
+      {
+        "addr": "0x00850bb0",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@processor"
+        ]
+      },
+      {
+        "addr": "0x00992940",
+        "type": "ptr",
+        "choices": [
+          0,
+          "@notifier"
+        ]
+      }
+    ]
+  }
+}

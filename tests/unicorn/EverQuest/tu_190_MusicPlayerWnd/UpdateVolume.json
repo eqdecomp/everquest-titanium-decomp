@@ -1,0 +1,77 @@
+{
+  "function": "Handler_guess::UpdateVolume_guess",
+  "original": "0x0053a16d",
+  "sources": ["src/EverQuest/tu_190_MusicPlayerWnd.cpp"],
+  "conv": "thiscall",
+  "this": "@handler",
+  "args": [],
+  "ret": "bool",
+  "objects": {
+    "handler": {
+      "size": "0x3a0",
+      "fill": "zero",
+      "init": [{"offset": "0x18c", "u32": "@slider"}]
+    },
+    "manager": {
+      "size": "0x4",
+      "fill": "zero",
+      "init": [{"offset": "0", "u32": "@processor"}]
+    },
+    "processor": {"size": "0x4", "fill": "zero"},
+    "slider": {"size": "0x4", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00851390", "u32": "@manager"},
+    {"addr": "0x00641080", "from_image": "0x00641080", "image_size": 8},
+    {"addr": "0x006410a0", "from_image": "0x006410a0", "image_size": 8}
+  ],
+  "callees": {
+    "0x004c5ef6": {"name": "GetAudioValue_guess", "conv": "thiscall", "args": [], "ret_float": 42.75},
+    "0x005bcd10": {"name": "SetValueFromAudio_guess", "conv": "thiscall", "args": ["int"], "ret": 0},
+    "0x00539c60": {"name": "UpdateSongList_guess", "conv": "thiscall", "args": [], "ret": 0}
+  },
+  "cases": [
+    {
+      "name": "processor_null",
+      "args": [],
+      "memory": [{"addr": "@manager", "offset": "0", "u32": 0}],
+      "expect": {"ret": false}
+    },
+    {
+      "name": "slider_null",
+      "args": [],
+      "memory": [{"addr": "@handler", "offset": "0x18c", "u32": 0}],
+      "expect": {"ret": true}
+    },
+    {"name": "slider_value", "args": [], "expect": {"ret": true}},
+    {
+      "name": "slider_zero_value",
+      "args": [],
+      "expect": {"ret": true},
+      "callees": {
+        "0x004c5ef6": {"name": "GetAudioValue_guess", "conv": "thiscall", "args": [], "ret_float": 0.0}
+      }
+    },
+    {"name": "rounding_005", "args": [], "expect": {"ret": true}, "callees": {"0x004c5ef6": {"name": "GetAudioValue_guess", "conv": "thiscall", "args": [], "ret_float": 0.005}}},
+    {"name": "rounding_015", "args": [], "expect": {"ret": true}, "callees": {"0x004c5ef6": {"name": "GetAudioValue_guess", "conv": "thiscall", "args": [], "ret_float": 0.015}}},
+    {"name": "rounding_025", "args": [], "expect": {"ret": true}, "callees": {"0x004c5ef6": {"name": "GetAudioValue_guess", "conv": "thiscall", "args": [], "ret_float": 0.025}}},
+    {"name": "rounding_045", "args": [], "expect": {"ret": true}, "callees": {"0x004c5ef6": {"name": "GetAudioValue_guess", "conv": "thiscall", "args": [], "ret_float": 0.045}}},
+    {"name": "rounding_125", "args": [], "expect": {"ret": true}, "callees": {"0x004c5ef6": {"name": "GetAudioValue_guess", "conv": "thiscall", "args": [], "ret_float": 0.125}}},
+    {"name": "rounding_half", "args": [], "expect": {"ret": true}, "callees": {"0x004c5ef6": {"name": "GetAudioValue_guess", "conv": "thiscall", "args": [], "ret_float": 0.5}}},
+    {"name": "rounding_one_half", "args": [], "expect": {"ret": true}, "callees": {"0x004c5ef6": {"name": "GetAudioValue_guess", "conv": "thiscall", "args": [], "ret_float": 1.5}}},
+    {"name": "rounding_two_half", "args": [], "expect": {"ret": true}, "callees": {"0x004c5ef6": {"name": "GetAudioValue_guess", "conv": "thiscall", "args": [], "ret_float": 2.5}}},
+    {"name": "rounding_ten_half", "args": [], "expect": {"ret": true}, "callees": {"0x004c5ef6": {"name": "GetAudioValue_guess", "conv": "thiscall", "args": [], "ret_float": 10.5}}},
+    {"name": "rounding_twenty", "args": [], "expect": {"ret": true}, "callees": {"0x004c5ef6": {"name": "GetAudioValue_guess", "conv": "thiscall", "args": [], "ret_float": 20.0}}},
+    {"name": "rounding_negative_005", "args": [], "expect": {"ret": true}, "callees": {"0x004c5ef6": {"name": "GetAudioValue_guess", "conv": "thiscall", "args": [], "ret_float": -0.005}}},
+    {"name": "rounding_negative_025", "args": [], "expect": {"ret": true}, "callees": {"0x004c5ef6": {"name": "GetAudioValue_guess", "conv": "thiscall", "args": [], "ret_float": -0.025}}}
+  ],
+  "fuzz": {
+    "seed": 5480813,
+    "count": 100,
+    "args": [],
+    "memory": [
+      {"addr": "@manager", "offset": "0", "type": "ptr", "choices": [0, "@processor"]},
+      {"addr": "@handler", "offset": "0x18c", "type": "ptr", "choices": [0, "@slider"]}
+    ]
+  }
+}

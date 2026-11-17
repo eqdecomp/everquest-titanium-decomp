@@ -1,0 +1,105 @@
+{
+  "function": "RebuildCallback_guess::OnConfirmationResult_guess",
+  "original": "0x0053f760",
+  "sources": [
+    "src/EverQuest/tu_192_OptionsWnd.cpp"
+  ],
+  "conv": "thiscall",
+  "this": "@rebuildcallback+0x15c",
+  "args": [
+    {
+      "name": "event_guess",
+      "type": "int"
+    },
+    {
+      "name": "flags_guess",
+      "type": "u8"
+    },
+    {
+      "name": "unused_guess",
+      "type": "int"
+    }
+  ],
+  "ret": "void",
+  "objects": {
+    "rebuildcallback": {
+      "size": "0x15d",
+      "fill": "random"
+    }
+  },
+  "memory": [],
+  "callees": {
+    "0x0053d0b9": {
+      "name": "RestoreDefaultColors_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "keep"
+    },
+    "0x0053f451": {
+      "name": "RestoreDefaultKeys_guess",
+      "conv": "thiscall",
+      "args": [],
+      "ret": "keep"
+    }
+  },
+  "cases": [
+    {
+      "name": "unmatched-before",
+      "args": [
+        99,
+        5,
+        0
+      ]
+    },
+    {
+      "name": "event-100-mask-clear",
+      "args": [
+        100,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "event-100-bit-zero",
+      "args": [100, 1, 17]
+    },
+    {
+      "name": "event-100-bit-two",
+      "args": [100, 4, 18]
+    },
+    {
+      "name": "event-100-unmatched-bit",
+      "args": [100, 2, 19]
+    },
+    {
+      "name": "event-101-mask-clear",
+      "args": [101, 0, 20]
+    },
+    {
+      "name": "event-101-bit-zero",
+      "args": [101, 1, 21]
+    },
+    {
+      "name": "event-101-bit-two",
+      "args": [101, 4, 22]
+    },
+    {
+      "name": "event-101-both-bits",
+      "args": [101, 5, 23]
+    },
+    {
+      "name": "unmatched-after",
+      "args": [102, 5, 24]
+    }
+  ],
+  "fuzz": {
+    "seed": 5502816,
+    "count": 100,
+    "args": [
+      {"choices": [99, 100, 101, 102]},
+      {"range": [0, 256]},
+      {"range": [-1000, 1000]}
+    ],
+    "memory": []
+  }
+}

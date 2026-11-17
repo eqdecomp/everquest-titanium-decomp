@@ -1,0 +1,107 @@
+{
+  "function": "do_consider_guess",
+  "original": "0x00466a73",
+  "sources": [
+    "src/EverQuest/tu_046_EQMisc.cpp"
+  ],
+  "conv": "cdecl",
+  "args": [
+    {"name": "session_arg", "type": "int"},
+    {"name": "text_guess", "type": "cstr"}
+  ],
+  "ret": "void",
+  "_survivors": "L1648: the initial value of error_id is never read: the send paths return before the report, and the error paths assign it first",
+  "objects": {
+    "plain": {"size": "0x260", "fill": "random"},
+    "lvl1": {"size": "0x260", "fill": "random"},
+    "lvl2": {"size": "0x260", "fill": "random"},
+    "lvl2flag": {"size": "0x260", "fill": "random"},
+    "flagged": {"size": "0x260", "fill": "random"},
+    "conn": {"size": "0x260", "fill": "random"},
+    "tlookup": {"size": "0x10", "fill": "random"},
+    "gc": {"size": "0x100", "fill": "random"},
+    "world": {"size": "0x10", "fill": "random"},
+    "msg": {"size": "0x40", "fill": "zero"}
+  },
+  "memory": [
+    {"addr": "0x00905CE4", "u32": "@conn"},
+    {"addr": "0x00905CB0", "u32": "@tlookup"},
+    {"addr": "0x00988DF0", "u32": "@gc"},
+    {"addr": "0x009928E0", "u32": "@world"},
+    {"addr": "0x00905D04", "u32": "@lvl2"},
+    {"addr": "@msg", "cstr": "text"},
+    {"addr": "@conn", "offset": "0x258", "u32": 305419896},
+    {"addr": "@plain", "offset": "0x244", "u8": 0},
+    {"addr": "@plain", "offset": "0x1b6", "u8": 0},
+    {"addr": "@plain", "offset": "0x258", "u32": 286331153},
+    {"addr": "@lvl1", "offset": "0x244", "u8": 1},
+    {"addr": "@lvl1", "offset": "0x1b6", "u8": 0},
+    {"addr": "@lvl1", "offset": "0x258", "u32": 572662306},
+    {"addr": "@lvl2", "offset": "0x244", "u8": 2},
+    {"addr": "@lvl2", "offset": "0x1b6", "u8": 0},
+    {"addr": "@lvl2", "offset": "0x258", "u32": 858993460},
+    {"addr": "@lvl2flag", "offset": "0x244", "u8": 2},
+    {"addr": "@lvl2flag", "offset": "0x1b6", "u8": 1},
+    {"addr": "@lvl2flag", "offset": "0x258", "u32": 1145324612},
+    {"addr": "@flagged", "offset": "0x244", "u8": 0},
+    {"addr": "@flagged", "offset": "0x1b6", "u8": 1},
+    {"addr": "@flagged", "offset": "0x258", "u32": 1431655765}
+  ],
+  "callees": {
+    "0x004912b1": {
+      "name": "FUN_004912b1",
+      "conv": "cdecl",
+      "args": ["ptr", "int", "mem:8", "int", "char"],
+      "ret": 0
+    },
+    "0x005dfa00": {
+      "name": "FUN_005dfa00",
+      "conv": "thiscall",
+      "args": ["u32", "u32"],
+      "ret": "@msg"
+    },
+    "0x00498436": {
+      "name": "FUN_00498436",
+      "conv": "thiscall",
+      "args": ["cstr"]
+    },
+    "0x00564e7e": {
+      "name": "FUN_00564e7e",
+      "conv": "thiscall",
+      "args": ["int", "int"],
+      "ret": 0
+    }
+  },
+  "cases": [
+    {"name": "level0_send", "args": ["@plain", "abc"]},
+    {"name": "level1_send", "args": ["@lvl1", "abc"]},
+    {"name": "level2_send", "args": ["@lvl2", "abc"]},
+    {"name": "level2_flag_send", "args": ["@lvl2flag", "abc"]},
+    {"name": "flagged_error", "args": ["@flagged", "abc"]},
+    {"name": "plain_no_world", "args": ["@plain", "abc"],
+     "memory": [{"addr": "0x009928E0", "u32": 0}]},
+    {"name": "null_session_error", "args": [0, "abc"],
+     "memory": [{"addr": "0x00905D04", "u32": 0}]},
+    {"name": "null_session_empty_text", "args": [0, ""],
+     "memory": [{"addr": "0x00905D04", "u32": 0}]},
+    {"name": "null_session_incoming_flagged", "args": [0, "x"],
+     "memory": [{"addr": "0x00905D04", "u32": "@flagged"}]},
+    {"name": "empty_text_uses_incoming", "args": ["@plain", ""]},
+    {"name": "empty_text_no_incoming", "args": ["@flagged", ""],
+     "memory": [{"addr": "0x00905D04", "u32": 0}]}
+  ],
+  "fuzz": {
+    "seed": 4614771,
+    "count": 150,
+    "args": [
+      {"choices": ["@plain", "@lvl1", "@lvl2", "@lvl2flag", "@flagged", 0]},
+      {"choices": ["", "a", "abc", "xyz"]}
+    ],
+    "memory": [
+      {"addr": "@plain", "offset": "0x244", "type": "u8", "choices": [0, 1, 2, 3]},
+      {"addr": "@plain", "offset": "0x1b6", "type": "u8", "choices": [0, 1]},
+      {"addr": "0x00905D04", "type": "ptr", "choices": ["@plain", "@lvl2", "@flagged", 0]},
+      {"addr": "0x009928E0", "type": "ptr", "choices": ["@world", 0]}
+    ]
+  }
+}
